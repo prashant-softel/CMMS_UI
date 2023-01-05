@@ -1,0 +1,4 @@
+enum ButtonIndicator{
+  left,
+  right
+}

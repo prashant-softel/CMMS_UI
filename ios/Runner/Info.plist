@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>${APP_DISPLAY_NAME}</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${APP_DISPLAY_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Instrucko</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb595815525317050</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.867081091588-s25jghivlk0se6rn38ofo9cf0q7lpdrg</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<true/>
+	<key>FacebookAppID</key>
+	<string>595815525317050</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<true/>
+	<key>FacebookClientToken</key>
+	<string>db5768520cd143d89e581d4e05707062</string>
+	<key>FacebookDisplayName</key>
+	<string>Instrucko</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.instrucko</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>MyApp does not need this permission</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo to use for your profile photo</string>
+	<key>NSContactsUsageDescription</key>
+	<string>My app does not need this permission</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app required location permission to optimize the search as per your locality</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app required location permission to optimize the search as per your locality</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app required location permission to optimize the search as per your locality</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app required location permission to optimize the search as per your locality</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires this permission in order to record the videos then post them over</string>
+	<key>NSMotionUsageDescription</key>
+	<string>MyApp does not need this permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To help you choose appropriate profile photo from your library</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>MyApp does not need this permission</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
+	<key>branch_key</key>
+	<string>key_live_ec79RxJylki5zaPQevoHDjmiFviOCQwX</string>
+	<key>branch_universal_link_domains</key>
+	<array>
+		<string>instrucko.test.app.link</string>
+		<string>instrucko-alternate.test.app.link</string>
+		<string>instrucko-alternate.app.link</string>
+		<string>instrucko.app.link</string>
+	</array>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+</dict>
+</plist>
