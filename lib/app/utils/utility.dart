@@ -18,7 +18,6 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:location/location.dart' show Location;
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -358,47 +357,6 @@ abstract class Utility {
     }
   }
 
-  /// calculate percentage
-  static int getPercentageValue(int propotionateValue, int totalValue) =>
-      ((propotionateValue / totalValue) * 100).round();
-
-  /// Get current location and update the view.
-  static Future<LocationDataLocal?> getCurrentLocation() async {
-    var currentLocation = Location();
-    final res = await currentLocation.hasPermission();
-    printILog('res $res');
-
-    if (res != PermissionStatus.granted) {
-      await currentLocation.requestPermission();
-    } else {
-      var location = await currentLocation.getLocation();
-      printLog('Lat: ${location.latitude} , Lng: ${location.longitude}');
-      double? lat = location.latitude ?? 0.0;
-      double? longi = location.longitude ?? 0.0;
-      var locationDetails = await getAddressThroughLatLng(lat, longi);
-      return getLocationData(
-        locationDetails,
-        lat,
-        longi,
-      );
-    }
-    return null;
-  }
-
-  /// Get current location in string.
-  static Future<LocationDataLocal> getCurrentLocationAndSave() async {
-    var position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
-    var locationDetails =
-        await getAddressThroughLatLng(position.latitude, position.longitude);
-    return getLocationData(
-      locationDetails,
-      position.latitude,
-      position.longitude,
-    );
-  }
-
   /// Get current lat long of the device.
   static Future<Position> getCurrentLatLng() async =>
       await Geolocator.getCurrentPosition(
@@ -421,30 +379,6 @@ abstract class Utility {
       return null;
     }
   }
-
-  /// Get all location details from the address object.
-  ///
-  /// [locationDetails] : the location details got from geocoder.
-  static LocationDataLocal getLocationData(
-    Placemark? locationDetails,
-    double lat,
-    double long,
-  ) =>
-      LocationDataLocal(
-        placeName: locationDetails?.name == 'Unnamed Road'
-            ? locationDetails?.subLocality ?? ''
-            : locationDetails?.name ?? '',
-        addressLine1: locationDetails?.subLocality ?? '',
-        addressLine2: locationDetails?.administrativeArea ?? '',
-        area: locationDetails?.locality == ''
-            ? locationDetails?.subLocality ?? ''
-            : locationDetails?.locality ?? '',
-        city: locationDetails?.subAdministrativeArea ?? '',
-        postalCode: locationDetails?.postalCode ?? '',
-        country: locationDetails?.country ?? '',
-        latitude: lat,
-        longitude: long,
-      );
 
   static String getFormatedDate(String date) {
     var date = DateTime.parse('2018-04-10T04:00:00.000Z');

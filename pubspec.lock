@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  auto_size_text:
-    dependency: transitive
-    description:
-      name: auto_size_text
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   badges:
     dependency: "direct main"
     description:
@@ -302,13 +295,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  diffutil_dart:
-    dependency: transitive
-    description:
-      name: diffutil_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0+1"
   dio:
     dependency: "direct main"
     description:
@@ -510,20 +496,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  flutter_chat_types:
-    dependency: transitive
-    description:
-      path: chat_types
-      relative: true
-    source: path
-    version: "3.1.2"
-  flutter_chat_ui:
-    dependency: "direct main"
-    description:
-      path: chat_module
-      relative: true
-    source: path
-    version: "1.3.3"
   flutter_facebook_auth:
     dependency: "direct main"
     description:
@@ -545,13 +517,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
-  flutter_holo_date_picker:
-    dependency: "direct main"
-    description:
-      path: flutter_holo_date_picker-master
-      relative: true
-    source: path
-    version: "1.0.3"
   flutter_html:
     dependency: "direct main"
     description:
@@ -1325,13 +1290,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
-  photo_view:
-    dependency: transitive
-    description:
-      name: photo_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.12.0"
   pin_code_fields:
     dependency: "direct main"
     description:

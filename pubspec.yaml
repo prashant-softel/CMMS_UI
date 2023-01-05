@@ -32,11 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_branch_sdk: ^6.4.0
-  flutter_chat_ui:
-    path: chat_module
   flutter_facebook_auth: ^4.4.0+1
-  flutter_holo_date_picker:
-    path: flutter_holo_date_picker-master
   flutter_html: ^3.0.0-alpha.5
   flutter_launcher_icons: ^0.10.0
   flutter_parsed_text: ^2.2.1
