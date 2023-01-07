@@ -80,8 +80,8 @@ android {
     productFlavors{
        prod{
             dimension "app"
-            resValue "string","app_name","instrucko"
-            applicationIdSuffix ".instrucko"
+            resValue "string","app_name","cmms"
+            applicationIdSuffix ".cmms"
             minSdkVersion 26
             versionName "2.0.4"
             multiDexEnabled=true
@@ -93,8 +93,8 @@ android {
         }
         dev{
             dimension "app"
-            resValue "string","app_name","instrucko Dev"
-            applicationIdSuffix ".instrucko.devapp"
+            resValue "string","app_name","cmms Dev"
+            applicationIdSuffix ".cmms.devapp"
             minSdkVersion 26
             versionName "2.0.4"
             multiDexEnabled=true

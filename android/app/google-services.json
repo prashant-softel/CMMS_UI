@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "3950124460",
-    "project_id": "instrucko-dev",
-    "storage_bucket": "instrucko-dev.appspot.com"
+    "project_id": "cmms-dev",
+    "storage_bucket": "cmms-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:3950124460:android:4a28378ee18eaabdd7ae09",
         "android_client_info": {
-          "package_name": "com.instrucko.devapp"
+          "package_name": "com.cmms.devapp"
         }
       },
       "oauth_client": [

@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "867081091588",
-    "project_id": "instrucko-f4808",
-    "storage_bucket": "instrucko-f4808.appspot.com"
+    "project_id": "cmms-f4808",
+    "storage_bucket": "cmms-f4808.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:867081091588:android:751223b938223b574dd351",
         "android_client_info": {
-          "package_name": "com.instrucko"
+          "package_name": "com.cmms"
         }
       },
       "oauth_client": [

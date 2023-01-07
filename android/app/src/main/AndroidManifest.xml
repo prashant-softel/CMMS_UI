@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.instrucko">
+    package="com.cmms">
     <queries>
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
@@ -96,7 +96,7 @@
             <intent-filter>
                 <!-- If utilizing $deeplink_path please explicitly declare your hosts, or utilize a
                 wildcard(*) -->
-                <data android:scheme="instrucko" android:host="open" />
+                <data android:scheme="cmms" android:host="open" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -107,10 +107,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="instrucko.app.link" />
+                <data android:scheme="https" android:host="cmms.app.link" />
                 <!-- example-alternate domain is required for App Links when the Journeys/Web SDK
                 and Deepviews are used inside your website.  -->
-                <data android:scheme="https" android:host="instrucko-alternate.app.link" />
+                <data android:scheme="https" android:host="cmms-alternate.app.link" />
             </intent-filter>
             <!-- Branch App Links - Test App -->
             <intent-filter android:autoVerify="true">

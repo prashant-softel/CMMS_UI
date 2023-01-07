@@ -17,7 +17,7 @@ abstract class AppConstants {
       ? '9937d9981e7c0dada35cdadeebb1c337'
       : 'effe55d665fe14e98b787e303715ec5c';
   static String appStoreId = '1632440837';
-  static String androidPackageName = 'com.instrucko';
+  static String androidPackageName = 'com.cmms';
 }
 
 AppFlavor? appFlavor;

@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>Instrucko</string>
+				<string>cmms</string>
 			</array>
 		</dict>
 		<dict>
@@ -58,12 +58,12 @@
 	<key>FacebookClientToken</key>
 	<string>db5768520cd143d89e581d4e05707062</string>
 	<key>FacebookDisplayName</key>
-	<string>Instrucko</string>
+	<string>cmms</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>com.instrucko</string>
+		<string>com.cmms</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -117,10 +117,10 @@
 	<string>key_live_ec79RxJylki5zaPQevoHDjmiFviOCQwX</string>
 	<key>branch_universal_link_domains</key>
 	<array>
-		<string>instrucko.test.app.link</string>
-		<string>instrucko-alternate.test.app.link</string>
-		<string>instrucko-alternate.app.link</string>
-		<string>instrucko.app.link</string>
+		<string>cmms.test.app.link</string>
+		<string>cmms-alternate.test.app.link</string>
+		<string>cmms-alternate.app.link</string>
+		<string>cmms.app.link</string>
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>

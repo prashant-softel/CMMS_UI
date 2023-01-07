@@ -6,7 +6,7 @@
 /// Will be ignored for test since all are static values and would not change.
 abstract class AssetConstants {
   static const String splashLogo = 'assets/images/splash_logo.svg';
-  static const String logoInstrucko = 'assets/images/logo_instrucko.svg';
+  static const String logocmms = 'assets/images/logo_cmms.svg';
   static const String splashLogoGif = 'assets/images/splash_gif.gif';
   static const String sketchIcon = 'assets/icons/sketch_pen.svg';
   static const String eye = 'assets/images/eye.svg';
@@ -80,11 +80,11 @@ abstract class AssetConstants {
   static const String walletVector = 'assets/icons/wallet_vector.svg';
   static const String check = 'assets/images/bluecircle.svg';
   static const String uncheck = 'assets/images/circle.svg';
-  static const String instruckoLogo = 'assets/icons/instrucko_logo.png';
+  static const String cmmsLogo = 'assets/icons/cmms_logo.png';
   static const String varifiedBadge = 'assets/icons/verified_clipart.svg';
   static const String homeTutorClipart = 'assets/icons/60_sec_home.svg';
   static const String searchIcon = 'assets/icons/search.svg';
-  static const String instruckoLogo2 = 'assets/icons/instrucko_logo.svg';
+  static const String cmmsLogo2 = 'assets/icons/cmms_logo.svg';
   static const String postLockIcon = 'assets/icons/lock-icon.svg';
   static const String verifyPhoneClipart =
       'assets/images/verify_phone_clipart.png';
@@ -146,8 +146,8 @@ abstract class AssetConstants {
       'assets/icons/notificationsCircle.svg';
   static const String unicornDonut = 'assets/icons/unicorn_donut.svg';
   static const String timerWatch = 'assets/icons/watch.svg';
-  static const String instruckoLinearLoader60sec =
-      'assets/icons/instrucko_linear_loader_60sec.gif';
+  static const String cmmsLinearLoader60sec =
+      'assets/icons/cmms_linear_loader_60sec.gif';
   static const String walletRecharged = 'assets/images/wallet_recharged.svg';
   static const String pinkWallet = 'assets/icons/pink_wallet.svg';
   static const String indianFlag = 'assets/icons/indian_flag.svg';

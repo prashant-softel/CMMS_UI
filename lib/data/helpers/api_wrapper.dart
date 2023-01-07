@@ -13,8 +13,8 @@ import 'package:http/http.dart' as http;
 /// API WRAPPER to call all the APIs and handle the error status codes
 class ApiWrapper {
   final String _baseUrl = (appFlavor == AppFlavor.PROD)
-      ? 'https://api.instrucko.in/v1/'
-      : 'https://dev-api.instrucko.in/v1/';
+      ? 'https://api.cmms.in/v1/'
+      : 'https://dev-api.cmms.in/v1/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(String url, Request request, dynamic data,

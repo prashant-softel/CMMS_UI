@@ -10,8 +10,8 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:instrucko.app.link</string>
-		<string>applinks:instrucko-alternate.app.link</string>
+		<string>applinks:cmms.app.link</string>
+		<string>applinks:cmms-alternate.app.link</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array/>

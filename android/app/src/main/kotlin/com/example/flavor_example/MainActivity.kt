@@ -1,4 +1,4 @@
-package com.instrucko
+package com.cmms
 
 import io.flutter.embedding.android.FlutterActivity
 

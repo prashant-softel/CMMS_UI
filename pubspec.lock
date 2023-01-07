@@ -1505,13 +1505,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
-  story:
-    dependency: "direct main"
-    description:
-      path: story_module
-      relative: true
-    source: path
-    version: "0.8.0"
   story_view:
     dependency: "direct main"
     description:

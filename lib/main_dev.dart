@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   var config = AppConfig()
-    ..appTitle = 'Instrucko'
+    ..appTitle = 'cmms'
     ..themeMode = ThemeMode.light
     ..flavoredApp = 1;
   mainCommon(config);

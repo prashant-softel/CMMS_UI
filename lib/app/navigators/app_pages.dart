@@ -1,5 +1,6 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/app.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -16,5 +17,13 @@ class AppPages {
 
   static const initial = Routes.splash;
 
-  static final pages = <GetPage<dynamic>>[];
+  static final pages = <GetPage<dynamic>>[
+    GetPage<SplashScreen>(
+      name: _Paths.splash,
+      transitionDuration: transitionDuration,
+      page: SplashScreen.new,
+      binding: SplashBinding(),
+      transition: Transition.cupertino,
+    ),
+  ];
 }
