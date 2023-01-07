@@ -66,9 +66,9 @@ Future<void> initMixpanel() async {
 Future<void> initPlatformState() async {
   var oneSignalId = '';
   if (appFlavor == AppFlavor.PROD) {
-    oneSignalId = '98077668-43ef-4d72-a9fe-7ea4feaeb176';
+    oneSignalId = '';
   } else {
-    oneSignalId = '5776f0e0-eeb2-4e77-93a5-b0c9d921f800';
+    oneSignalId = '';
   }
   await OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
   await OneSignal.shared.setAppId(oneSignalId);
