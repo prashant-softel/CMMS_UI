@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/state.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -145,4 +148,21 @@ class Repository {
   }
 
   Mixpanel? mixPanel;
+
+  Future<List<CountryState?>?> getStateList(int countryCode) async {
+    try {
+      final res = await _dataRepository.getStateList(countryCode);
+
+      if (!res.hasError) {
+        return stateFromJson(res.data);
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+      await _deviceRepository.getStateList(countryCode);
+      return null;
+    }
+  }
 }

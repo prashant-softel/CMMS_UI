@@ -1,5 +1,6 @@
 // coverage:ignore-file
 import 'package:cmms/data/data.dart';
+import 'package:cmms/domain/domain.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -60,4 +61,15 @@ class ConnectHelper {
   String get deviceOs => GetPlatform.isAndroid
       ? '${androidDeviceInfo?.version.codename}'
       : '${iosDeviceInfo?.systemVersion}';
+
+  Future<ResponseModel> getStateList(int countryCode) async =>
+      await apiWrapper.makeRequest(
+        'Utils/GetStateList?country_id=$countryCode',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+        },
+      );
 }

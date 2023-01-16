@@ -1,13 +1,31 @@
+import 'package:cmms/app/Splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  SplashScreen({super.key});
+
+  final controller = Get.find<SplashController>();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text('${'hello'.tr}'),
+        ),
+        body: SingleChildScrollView(
+          child: Obx(
+            () => Column(
+              children: [
+                ...List.generate(
+                  controller.stateList.length,
+                  (index) => ListTile(
+                    title: Text('${controller.stateList[index]?.id}'),
+                    subtitle: Text('${controller.stateList[index]?.name}'),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       );
 }

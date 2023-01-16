@@ -59,4 +59,8 @@ class DataRepository extends DomainRepository {
   void deleteAllSecuredValues() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<ResponseModel> getStateList(int countryCode) async =>
+      await connectHelper.getStateList(countryCode);
 }

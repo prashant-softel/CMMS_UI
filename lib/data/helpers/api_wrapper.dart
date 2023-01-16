@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 class ApiWrapper {
   final String _baseUrl = (appFlavor == AppFlavor.PROD)
       ? 'https://api.cmms.in/v1/'
-      : 'https://dev-api.cmms.in/v1/';
+      : 'http://3.111.196.218/CMMS_API/api/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(String url, Request request, dynamic data,

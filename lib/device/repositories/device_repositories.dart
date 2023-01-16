@@ -92,4 +92,9 @@ class DeviceRepository extends DomainRepository {
   void deleteAllSecuredValues() {
     _flutterSecureStorage.deleteAll();
   }
+
+  @override
+  Future<ResponseModel> getStateList(int countryCode) {
+    throw UnimplementedError();
+  }
 }

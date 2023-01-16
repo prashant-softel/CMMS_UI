@@ -42,4 +42,5 @@ abstract class DomainRepository {
 
   //=============
 
+  Future<ResponseModel> getStateList(int countryCode);
 }
