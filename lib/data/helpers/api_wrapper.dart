@@ -20,7 +20,7 @@ class ApiWrapper {
   Future<ResponseModel> makeRequest(String url, Request request, dynamic data,
       bool isLoading, Map<String, String> headers) async {
     /// To see whether the network is available or not
-    if (await Utility.isNetworkAvailable()) {
+    if ((!GetPlatform.isWeb) ? await Utility.isNetworkAvailable() : true) {
       switch (request) {
 
         /// Method to make the Get type request

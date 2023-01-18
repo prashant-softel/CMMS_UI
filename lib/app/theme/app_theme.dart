@@ -26,7 +26,11 @@ ThemeData themeData(BuildContext context) => ThemeData(
       primaryColor: const Color.fromRGBO(23, 166, 221, 1),
       secondaryHeaderColor: const Color.fromRGBO(23, 166, 221, 1),
       fontFamily: 'Poppins',
-
+      textTheme: TextTheme(
+        displaySmall: TextStyle(
+          color: Colors.white,
+        ),
+      ),
       brightness: Brightness.light,
       scaffoldBackgroundColor: ColorsValue.whiteColor,
       colorScheme: ColorScheme.light(
@@ -101,6 +105,11 @@ ThemeData darkThemeData(BuildContext context) => ThemeData(
         ),
         actionsIconTheme: IconThemeData(
           color: Colors.white,
+        ),
+      ),
+      textTheme: TextTheme(
+        displaySmall: TextStyle(
+          color: Colors.black,
         ),
       ),
       secondaryHeaderColor: const Color.fromRGBO(23, 166, 221, 1),

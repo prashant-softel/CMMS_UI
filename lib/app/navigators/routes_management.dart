@@ -7,11 +7,6 @@ import 'package:get/get.dart';
 ///
 /// Will be ignored for test since all are static values and would not change.
 abstract class RouteManagement {
-  /// Go to Login Screen
-  static void goOffLogin() {
-    Get.offNamed<void>(Routes.login);
-  }
-
   /// Go off all Home Screen
   static void goOffAllHomScreen() {
     Get.offAllNamed<void>(Routes.home);

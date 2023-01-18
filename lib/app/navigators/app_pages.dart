@@ -15,7 +15,7 @@ part 'app_routes.dart';
 class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
-  static const initial = Routes.splash;
+  static const initial = Routes.home;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -23,6 +23,13 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: SplashScreen.new,
       binding: SplashBinding(),
+      transition: Transition.cupertino,
+    ),
+    GetPage<HomeScreen>(
+      name: _Paths.home,
+      transitionDuration: transitionDuration,
+      page: HomeScreen.new,
+      binding: HomeBinding(),
       transition: Transition.cupertino,
     ),
   ];
