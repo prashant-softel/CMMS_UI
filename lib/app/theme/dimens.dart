@@ -577,6 +577,12 @@ abstract class Dimens {
     sixteen,
     sixteen,
   );
+  static EdgeInsets edgeInsets0_0_16_0 = EdgeInsets.fromLTRB(
+    zero,
+    zero,
+    sixteen,
+    zero,
+  );
 
   static EdgeInsets edgeInsets56_336_56_336 = EdgeInsets.fromLTRB(
     fiftySix,

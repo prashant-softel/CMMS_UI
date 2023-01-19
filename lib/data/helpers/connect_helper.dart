@@ -2,7 +2,6 @@
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 /// The helper class which will connect to the world to get the data.
@@ -11,7 +10,7 @@ class ConnectHelper {
     _init();
   }
 
-  late Dio _dio;
+  // late Dio _dio;
 
   /// Api wrapper initialization
   final apiWrapper = ApiWrapper();
@@ -35,7 +34,7 @@ class ConnectHelper {
     } else {
       iosDeviceInfo = await deviceinfo.iosInfo;
     }
-    _dio = Dio();
+    // _dio = Dio();
   }
 
   // coverage:ignore-end

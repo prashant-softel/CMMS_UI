@@ -12,6 +12,7 @@ class TranslationsFile extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en': {
           'hello': 'CMMS',
+          'inventory': 'Inventory',
           'inventoryList': 'Inventory List',
           'retireAsset': 'Retire Asset',
           'exportAsset': 'Export Asset',
@@ -23,6 +24,13 @@ class TranslationsFile extends Translations {
           'catergory': 'Category',
           'assetFacilityName': 'Asset Facility Name',
           'action': 'Action',
+          'requirementRejected': 'Requirement Rejected',
+          'requirementAccepted': 'Requirement Accepted',
+          'listView': 'List View',
+          'treeView': 'Tree View',
+          'mapView': 'Map View',
+          'columnVisibility': 'Column Visibility',
+          'search': 'Search',
         },
       };
 }
