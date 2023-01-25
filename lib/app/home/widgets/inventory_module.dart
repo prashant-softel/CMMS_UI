@@ -105,7 +105,7 @@ class InventoryModule extends StatelessWidget {
                     'qwerty',
                     'poiuyt',
                     '3456789',
-                    '567'
+                    'Actions',
                   ],
                   ...List.generate(
                       8,
@@ -118,12 +118,12 @@ class InventoryModule extends StatelessWidget {
                             'qwerty',
                             'poiuyt',
                             '3456789',
-                            '567'
+                            'Actions'
                           ]),
                 ].map(
                   (record) {
                     return TableViewRow(
-                      height: 70,
+                      height: 130,
                       cells: record.map(
                         (value) {
                           return TableViewCell(
@@ -170,7 +170,42 @@ class InventoryModule extends StatelessWidget {
                                         ],
                                       );
                                     })
-                                  : Text(value.toString()),
+                                  : value == 'Actions'
+                                      ? Wrap(
+                                          children: [
+                                            TableActionButton(
+                                              color: Colors.green,
+                                              icon: Icons.visibility,
+                                              label: 'View',
+                                              onPress: () {},
+                                            ),
+                                            TableActionButton(
+                                              color: Colors.blue,
+                                              icon: Icons.edit,
+                                              label: 'Edit',
+                                              onPress: () {},
+                                            ),
+                                            TableActionButton(
+                                              color: Colors.red,
+                                              icon: Icons.delete,
+                                              label: 'Delete',
+                                              onPress: () {},
+                                            ),
+                                            TableActionButton(
+                                              color: Colors.green,
+                                              icon: Icons.visibility,
+                                              label: 'Approve Request',
+                                              onPress: () {},
+                                            ),
+                                            TableActionButton(
+                                              color: Colors.red,
+                                              icon: Icons.visibility,
+                                              label: 'Reject Request',
+                                              onPress: () {},
+                                            ),
+                                          ],
+                                        )
+                                      : Text(value.toString()),
                             ),
                           );
                         },

@@ -31,6 +31,7 @@ class TranslationsFile extends Translations {
           'mapView': 'Map View',
           'columnVisibility': 'Column Visibility',
           'search': 'Search',
+          'addInventory': 'Add Inventory',
         },
       };
 }
