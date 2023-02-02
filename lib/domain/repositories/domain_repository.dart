@@ -43,4 +43,23 @@ abstract class DomainRepository {
   //=============
 
   Future<ResponseModel> getStateList(int countryCode);
+
+  Future<void> generateToken();
+
+  Future<void> getInventoryList({
+    required bool isLoading,
+    required String auth,
+  });
+
+  Future<ResponseModel> getBlockList({
+    required bool isLoading,
+    required String facilityId,
+    required String auth,
+  });
+
+  Future<ResponseModel> getEquipmentList({
+    required bool isLoading,
+    required String facilityId,
+    required String auth,
+  });
 }

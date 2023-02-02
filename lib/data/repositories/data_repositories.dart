@@ -63,4 +63,42 @@ class DataRepository extends DomainRepository {
   @override
   Future<ResponseModel> getStateList(int countryCode) async =>
       await connectHelper.getStateList(countryCode);
+
+  @override
+  Future<ResponseModel> generateToken() async {
+    return await connectHelper.generateToken();
+  }
+
+  @override
+  Future<ResponseModel> getInventoryList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryList(
+        isLoading: isLoading, auth: auth);
+  }
+
+  @override
+  Future<ResponseModel> getBlockList({
+    required bool isLoading,
+    required String facilityId,
+    required String auth,
+  }) async {
+    return await connectHelper.getBlockList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      auth: auth,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getEquipmentList(
+          {required bool isLoading,
+          required String facilityId,
+          required String auth}) async =>
+      await connectHelper.getEquipmentList(
+        isLoading: isLoading,
+        facilityId: facilityId,
+        auth: auth,
+      );
 }

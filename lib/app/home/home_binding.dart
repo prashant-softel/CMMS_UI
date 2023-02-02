@@ -10,7 +10,9 @@ class HomeBinding extends Bindings {
       () => HomeController(
         Get.put(
           HomePresenter(
-            HomeUsecase(),
+            HomeUsecase(
+              Get.find(),
+            ),
           ),
         ),
       ),

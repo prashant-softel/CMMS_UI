@@ -157,6 +157,60 @@ class ApiWrapper {
                   data: '{"message":"Request timed out"}', hasError: true);
             }
           }
+        case Request.postMultiparts:
+
+          /// Method to make the Delete type request
+          {
+            var uri = _baseUrl + url;
+
+            try {
+              if (isLoading) Utility.showLoader();
+
+              final request =
+                  await http.MultipartRequest('POST', Uri.parse(uri));
+              request.fields.addAll(data);
+
+              http.Response response =
+                  await http.Response.fromStream(await request.send());
+
+              if (isLoading) Utility.closeDialog();
+
+              Utility.printILog(uri);
+              Utility.printLog(response.body);
+              return returnResponse(response);
+            } on TimeoutException catch (_) {
+              if (isLoading) Utility.closeDialog();
+              return ResponseModel(
+                  data: '{"message":"Request timed out"}', hasError: true);
+            }
+          }
+        case Request.getMultiparts:
+
+          /// Method to make the Delete type request
+          {
+            var uri = _baseUrl + url;
+
+            try {
+              if (isLoading) Utility.showLoader();
+
+              final request = await http.Request('GET', Uri.parse(uri));
+
+              request.headers.addAll(headers);
+
+              http.Response response =
+                  await http.Response.fromStream(await request.send());
+
+              if (isLoading) Utility.closeDialog();
+
+              Utility.printILog(uri);
+              Utility.printLog(response.body);
+              return returnResponse(response);
+            } on TimeoutException catch (_) {
+              if (isLoading) Utility.closeDialog();
+              return ResponseModel(
+                  data: '{"message":"Request timed out"}', hasError: true);
+            }
+          }
         case Request.awsUpload:
 
           /// Method to make the Put type request

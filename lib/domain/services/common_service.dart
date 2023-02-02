@@ -2,7 +2,7 @@
 
 import 'dart:async';
 // import 'package:connectivity/connectivity.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+
 // import 'package:cmms/app/app.dart';
 import 'package:get/get.dart';
 
@@ -19,12 +19,12 @@ class CommonService extends GetxService {
   /// initialize Device plugin
   Future<CommonService> init() async {
     onInit();
-    deviceInfoPlugin = DeviceInfoPlugin();
+    // deviceInfoPlugin = DeviceInfoPlugin();
     return this;
   }
 
   /// initialize Device plugin
-  var deviceInfoPlugin = DeviceInfoPlugin();
+  // var deviceInfoPlugin = DeviceInfoPlugin();
 
   // @override
   // void onInit() {

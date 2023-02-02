@@ -5,7 +5,9 @@
 /// RequestType
 enum Request {
   get,
+  getMultiparts,
   post,
+  postMultiparts,
   put,
   patch,
   delete,

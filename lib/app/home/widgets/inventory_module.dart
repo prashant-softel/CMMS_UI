@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class InventoryModule extends StatelessWidget {
-  const InventoryModule({super.key});
+  InventoryModule({super.key});
+
+  final _controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,70 @@ class InventoryModule extends StatelessWidget {
       length: 3,
       child: Column(
         children: [
-          CustomAppBar(),
+          CustomAppBar(
+            title: 'inventoryList'.tr,
+            action: Row(
+              children: [
+                ActionButton(
+                  icon: Icons.download,
+                  lable: 'exportAsset'.tr,
+                  onPress: () {},
+                  color: Colors.blue,
+                ),
+                Dimens.boxWidth10,
+                ActionButton(
+                  icon: Icons.upload,
+                  lable: 'importAsset'.tr,
+                  onPress: () {
+                    // var file = "assets/files/Fixed Asset Imports.xlsx";
+                    // var bytes = File(file).readAsBytesSync();
+                    // var excel = Excel.decodeBytes(bytes);
+
+                    // for (var table in excel.tables.keys) {
+                    //   print(table); //sheet Name
+                    //   print(excel.tables[table]?.maxCols);
+                    //   print(excel.tables[table]?.maxRows);
+                    //   for (var row in excel.tables[table]!.rows) {
+                    //     print("QWERTY $row");
+                    //   }
+                    // }
+                  },
+                  color: Colors.blue,
+                ),
+                Dimens.boxWidth10,
+                ActionButton(
+                  icon: Icons.add,
+                  lable: 'addAsset'.tr,
+                  onPress: () {
+                    Get.to(() => AddInventory());
+                  },
+                  color: Colors.blue,
+                ),
+                Dimens.boxWidth10,
+                ActionButton(
+                  icon: Icons.close,
+                  lable: 'retireAsset'.tr,
+                  onPress: () async {
+                    // ByteData data = await rootBundle
+                    //     .load("assets/files/Fixed Asset Imports.xlsx");
+                    // var bytes = data.buffer
+                    //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
+                    // var excel = Excel.decodeBytes(bytes);
+
+                    // for (var table in excel.tables.keys) {
+                    //   print(table); //sheet Name
+                    //   print(excel.tables[table]?.maxCols);
+                    //   print(excel.tables[table]?.maxRows);
+                    //   for (var row in excel.tables[table]!.rows) {
+                    //     print("QWERTY $row");
+                    //   }
+                    // }
+                  },
+                  color: Colors.red,
+                ),
+              ],
+            ),
+          ),
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
@@ -81,139 +146,142 @@ class InventoryModule extends StatelessWidget {
                 ),
               ),
               margin: Dimens.edgeInsets16,
-              child: ScrollableTableView(
-                columns: [
-                  'assetName'.tr,
-                  'serialNo'.tr,
-                  'parrentAsset'.tr,
-                  'catergory'.tr,
-                  'assetFacilityName'.tr,
-                  'action'.tr,
-                ].map((column) {
-                  return TableViewColumn(
-                    minWidth: 1100 / 6,
-                    label: column,
-                  );
-                }).toList(),
-                rows: [
-                  [
-                    AssetName(
-                      'Demo_Inv_1_qwert',
-                      2,
-                    ),
-                    1,
-                    'qwerty',
-                    'poiuyt',
-                    '3456789',
-                    'Actions',
-                  ],
-                  ...List.generate(
-                      8,
-                      (index) => [
+              child: GetBuilder<HomeController>(
+                  id: 'inventory_list',
+                  builder: (_controller) {
+                    return ScrollableTableView(
+                      columns: [
+                        'assetName'.tr,
+                        'serialNo'.tr,
+                        'parrentAsset'.tr,
+                        'catergory'.tr,
+                        'assetFacilityName'.tr,
+                        'action'.tr,
+                      ].map((column) {
+                        return TableViewColumn(
+                          minWidth: 1100 / 6,
+                          label: column,
+                        );
+                      }).toList(),
+                      rows: [
+                        ...List.generate(
+                          _controller.inventoryList.length,
+                          (index) => [
                             AssetName(
-                              'Demo_Inv_1_qwert',
+                              '${_controller.inventoryList[index].name}',
                               1,
                             ),
-                            1,
-                            'qwerty',
-                            'poiuyt',
-                            '3456789',
+                            index + 1,
+                            '${_controller.inventoryList[index].parentName}',
+                            '${_controller.inventoryList[index].categoryName}',
+                            '${_controller.inventoryList[index].operatorName}',
                             'Actions'
-                          ]),
-                ].map(
-                  (record) {
-                    return TableViewRow(
-                      height: 130,
-                      cells: record.map(
-                        (value) {
-                          return TableViewCell(
-                            child: GestureDetector(
-                              onTap: () {
-                                print('${value} $record');
-                              },
-                              child: value.runtimeType.toString() == 'AssetName'
-                                  ? Builder(builder: (context) {
-                                      final val = value as AssetName;
-                                      return Column(
-                                        children: [
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Padding(
-                                              padding: Dimens.edgeInsets8,
-                                              child: Text('${val.name}'),
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Container(
-                                              padding: Dimens.edgeInsets8_2_8_2,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    val.requirementStatus == 1
-                                                        ? Colors.red
-                                                        : Colors.green,
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              child: Text(
-                                                val.name == 1
-                                                    ? 'requirementRejected'.tr
-                                                    : 'requirementAccepted'.tr,
-                                                style: Styles.white10.copyWith(
-                                                  color: Colors.white,
+                          ],
+                        ),
+                      ].map(
+                        (record) {
+                          return TableViewRow(
+                            height: 130,
+                            cells: record.map(
+                              (value) {
+                                return TableViewCell(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      print('${value} $record');
+                                    },
+                                    child: value.runtimeType.toString() ==
+                                            'AssetName'
+                                        ? Builder(builder: (context) {
+                                            final val = value as AssetName;
+                                            return Column(
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding: Dimens.edgeInsets8,
+                                                    child: Text('${val.name}'),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
-                                          Dimens.boxHeight10,
-                                        ],
-                                      );
-                                    })
-                                  : value == 'Actions'
-                                      ? Wrap(
-                                          children: [
-                                            TableActionButton(
-                                              color: Colors.green,
-                                              icon: Icons.visibility,
-                                              label: 'View',
-                                              onPress: () {},
-                                            ),
-                                            TableActionButton(
-                                              color: Colors.blue,
-                                              icon: Icons.edit,
-                                              label: 'Edit',
-                                              onPress: () {},
-                                            ),
-                                            TableActionButton(
-                                              color: Colors.red,
-                                              icon: Icons.delete,
-                                              label: 'Delete',
-                                              onPress: () {},
-                                            ),
-                                            TableActionButton(
-                                              color: Colors.green,
-                                              icon: Icons.visibility,
-                                              label: 'Approve Request',
-                                              onPress: () {},
-                                            ),
-                                            TableActionButton(
-                                              color: Colors.red,
-                                              icon: Icons.visibility,
-                                              label: 'Reject Request',
-                                              onPress: () {},
-                                            ),
-                                          ],
-                                        )
-                                      : Text(value.toString()),
-                            ),
+                                                Spacer(),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: Container(
+                                                    padding: Dimens
+                                                        .edgeInsets8_2_8_2,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          val.requirementStatus ==
+                                                                  1
+                                                              ? Colors.red
+                                                              : Colors.green,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                    ),
+                                                    child: Text(
+                                                      val.name == 1
+                                                          ? 'requirementRejected'
+                                                              .tr
+                                                          : 'requirementAccepted'
+                                                              .tr,
+                                                      style: Styles.white10
+                                                          .copyWith(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Dimens.boxHeight10,
+                                              ],
+                                            );
+                                          })
+                                        : value == 'Actions'
+                                            ? Wrap(
+                                                children: [
+                                                  TableActionButton(
+                                                    color: Colors.green,
+                                                    icon: Icons.visibility,
+                                                    label: 'View',
+                                                    onPress: () {},
+                                                  ),
+                                                  TableActionButton(
+                                                    color: Colors.blue,
+                                                    icon: Icons.edit,
+                                                    label: 'Edit',
+                                                    onPress: () {},
+                                                  ),
+                                                  TableActionButton(
+                                                    color: Colors.red,
+                                                    icon: Icons.delete,
+                                                    label: 'Delete',
+                                                    onPress: () {},
+                                                  ),
+                                                  TableActionButton(
+                                                    color: Colors.green,
+                                                    icon: Icons.visibility,
+                                                    label: 'Approve Request',
+                                                    onPress: () {},
+                                                  ),
+                                                  TableActionButton(
+                                                    color: Colors.red,
+                                                    icon: Icons.visibility,
+                                                    label: 'Reject Request',
+                                                    onPress: () {},
+                                                  ),
+                                                ],
+                                              )
+                                            : Text(value.toString()),
+                                  ),
+                                );
+                              },
+                            ).toList(),
                           );
                         },
                       ).toList(),
                     );
-                  },
-                ).toList(),
-              ),
+                  }),
             ),
           ),
         ],

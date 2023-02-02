@@ -97,4 +97,31 @@ class DeviceRepository extends DomainRepository {
   Future<ResponseModel> getStateList(int countryCode) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> generateToken() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> getInventoryList({required bool isLoading, required auth}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ResponseModel> getBlockList({
+    required bool isLoading,
+    required String facilityId,
+    required String auth,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ResponseModel> getEquipmentList(
+      {required bool isLoading,
+      required String facilityId,
+      required String auth}) {
+    throw UnimplementedError();
+  }
 }
