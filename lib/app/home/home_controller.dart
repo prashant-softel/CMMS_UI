@@ -29,13 +29,35 @@ class HomeController extends GetxController {
 
   ///
 
+  var inventoryColumnVisibility = <String>[];
+
   @override
   void onInit() async {
+    print('Onint ');
     await homePresenter.generateToken();
+    Future.delayed(Duration(milliseconds: 500), () async {
+      getInventoryList();
+    });
     super.onInit();
   }
 
-  void getInventoryList() async {
+  void onInitializeData() {
+    inventoryColumnVisibility.add('plantName'.tr);
+    inventoryColumnVisibility.add('assetName'.tr);
+    inventoryColumnVisibility.add('assetDescription'.tr);
+    inventoryColumnVisibility.add('serialNo'.tr);
+    inventoryColumnVisibility.add('parentAsset'.tr);
+    inventoryColumnVisibility.add('catergory'.tr);
+    inventoryColumnVisibility.add('assetFacilityName'.tr);
+    inventoryColumnVisibility.add('assetType'.tr);
+    inventoryColumnVisibility.add('assetStatus'.tr);
+    inventoryColumnVisibility.add('assetCustomerName'.tr);
+    inventoryColumnVisibility.add('assetOwnerName'.tr);
+    inventoryColumnVisibility.add('assetOperatorName'.tr);
+    inventoryColumnVisibility.add('action'.tr);
+  }
+
+  Future<void> getInventoryList() async {
     final list = await homePresenter.getInventoryList(
       isLoading: false,
       categoryId: categoryId,
@@ -76,4 +98,31 @@ class HomeController extends GetxController {
 
     update(['block_field']);
   }
+}
+
+/// Custom business object class which contains properties to hold the detailed
+/// information about the employee which will be rendered in datagrid.
+class Inventory {
+  /// Creates the employee class with required details.
+  Inventory({
+    required this.asset,
+    required this.name,
+    required this.serialNo,
+    required this.parentAsset,
+    required this.category,
+  });
+
+  final String name;
+
+  final String serialNo;
+  final String parentAsset;
+  final String category;
+  final AssetName asset;
+}
+
+class AssetName {
+  final String name;
+  final int requirementStatus;
+
+  AssetName(this.name, this.requirementStatus);
 }

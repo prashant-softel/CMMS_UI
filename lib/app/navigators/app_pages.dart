@@ -1,6 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/home_view.dart';
 import 'package:get/get.dart';
 
 import '../add_job/add_job_binding.dart';
@@ -38,10 +39,10 @@ class AppPages {
       binding: SplashBinding(),
       transition: Transition.cupertino,
     ),
-    GetPage<HomeScreen>(
+    GetPage<HomeView>(
       name: _Paths.home,
       transitionDuration: transitionDuration,
-      page: HomeScreen.new,
+      page: HomeView.new,
       binding: HomeBinding(),
       transition: Transition.cupertino,
     ),
