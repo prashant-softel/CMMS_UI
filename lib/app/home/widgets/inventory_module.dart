@@ -102,37 +102,74 @@ class InventoryModule extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    margin: Dimens.edgeInsets16_16_0_0,
-                    padding: Dimens.edgeInsets16_8_16_8,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                    child: Text(
-                      'columnVisibility'.tr,
-                      style: Styles.white12.copyWith(
-                        color: Colors.white,
+                  Padding(
+                    padding: Dimens.edgeInsets16_10,
+                    child: PopupMenuButton<String>(
+                      offset: Offset(0, 45),
+                      tooltip: '',
+                      constraints: BoxConstraints(
+                        maxHeight: Dimens.fourHundred,
+                        minWidth: Dimens.hundred,
+                        maxWidth: Dimens.twoHundredFifteen,
                       ),
+                      onSelected: (String val) {},
+                      child: Container(
+                        padding: Dimens.edgeInsets16_8_16_8,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'columnVisibility'.tr,
+                            style: Styles.white12.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      itemBuilder: (c) => _controller.inventoryColumnVisibility
+                          .map(
+                            (e) => PopupMenuItem<String>(
+                              onTap: () {
+                                e.isSelected = !e.isSelected;
+                                _controller
+                                    .buildSelectedInventoryColumnVisibility();
+                              },
+                              value: e.text,
+                              child: Container(
+                                height: Dimens.thirtyFive,
+                                width: Get.width,
+                                padding: Dimens.edgeInsets6_0_6_0,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                ),
+                                child: Row(
+                                  children: [
+                                    _controller.checkSelectedColumnVisibility(
+                                            columnName: e.text)
+                                        ? Icon(
+                                            Icons.check,
+                                            color: ColorsValue.whiteColor,
+                                            size: Dimens.fourteen,
+                                          )
+                                        : Dimens.box0,
+                                    Expanded(
+                                      child: Center(
+                                        child: Text(
+                                          e.text,
+                                          style: Styles.white12.copyWith(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
-                  ),
-                  PopupMenuButton<String>(
-                    tooltip: '',
-                    offset: const Offset(0, 36),
-                    // shape: const TooltipMenuShape(),
-                    constraints: BoxConstraints(
-                      minWidth: Dimens.hundred,
-                      maxWidth: Dimens.twoHundred,
-                    ),
-                    padding: Dimens.edgeInsets4,
-                    onSelected: (String val) {},
-                    itemBuilder: (c) => _controller.inventoryColumnVisibility
-                        .map((e) => PopupMenuItem<String>(
-                            value: e,
-                            child: PopupMenuWidget(
-                              showIcon: true,
-                              title: e,
-                            )))
-                        .toList(),
                   ),
                   Container(
                     width: 200,
@@ -158,6 +195,7 @@ class InventoryModule extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
+                  width: Get.width,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.grey.withOpacity(.2),
@@ -165,38 +203,118 @@ class InventoryModule extends StatelessWidget {
                   ),
                   margin: Dimens.edgeInsets16,
                   child: ScrollableTableView(
-                    columns: [
-                      'assetName'.tr,
-                      'serialNo'.tr,
-                      'parrentAsset'.tr,
-                      'catergory'.tr,
-                      'assetFacilityName'.tr,
-                      'action'.tr,
-                    ].map((column) {
+                    columns:
+                        // [
+                        //   'assetName'.tr,
+                        //   'serialNo'.tr,
+                        //   'parentAsset'.tr,
+                        //   'catergory'.tr,
+                        //   'assetFacilityName'.tr,
+                        //   'action'.tr,
+                        // ]
+                        _controller.selectedInventoryColumnVisibility
+                            .map((column) {
                       return TableViewColumn(
-                        minWidth: 1100 / 6,
-                        label: column,
+                        minWidth: Get.width /
+                            _controller
+                                .selectedInventoryColumnVisibility.length,
+                        label: column.text,
                       );
                     }).toList(),
                     rows: [
                       ...List.generate(
                         _controller.inventoryList.length,
                         (index) => [
-                          AssetName(
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'plantName'.tr))
+                            '-',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetName'.tr))
+                            // AssetName(
                             '${_controller.inventoryList[index].name}',
-                            1,
-                          ),
-                          index + 1,
-                          '${_controller.inventoryList[index].parentName}',
-                          '${_controller.inventoryList[index].categoryName}',
-                          '${_controller.inventoryList[index].operatorName}',
+                          //   1,
+                          // ),
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetDescription'.tr))
+                            '${_controller.inventoryList[index].description}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'serialNo'.tr))
+                            '${_controller.inventoryList[index].serialNumber}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'parentAsset'.tr))
+                            '${_controller.inventoryList[index].parentName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'category'.tr))
+                            '${_controller.inventoryList[index].categoryName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetFacilityName'.tr))
+                            '${_controller.inventoryList[index].blockName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetType'.tr))
+                            '${_controller.inventoryList[index].type}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetStatus'.tr))
+                            '${_controller.inventoryList[index].status}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetCustomerName'.tr))
+                            '${_controller.inventoryList[index].customerName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetOwnerName'.tr))
+                            '${_controller.inventoryList[index].ownerName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetOperatorName'.tr))
+                            '${_controller.inventoryList[index].operatorName}',
                           'Actions'
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].blockName.text))
+                          //   '${_controller.dynamicInventoryList[index].blockName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].name.text))
+                          //   AssetName(
+                          //     '${_controller.dynamicInventoryList[index].name.value}',
+                          //     1,
+                          //   ),
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].serialNumber.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].parentName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].categoryName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].operatorName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .description.text))
+                          //   '${_controller.dynamicInventoryList[index].description.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .customerName.text))
+                          //   '${_controller.dynamicInventoryList[index].customerName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].ownerName.text))
+                          //   '${_controller.dynamicInventoryList[index].ownerName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].parentName.text))
+                          //   '${_controller.dynamicInventoryList[index].parentName.value}',
+                          // 'Actions'
                         ],
                       ),
                     ].map(
                       (record) {
                         return TableViewRow(
-                          height: 130,
+                          height: 100,
                           cells: record.map(
                             (value) {
                               return TableViewCell(
@@ -205,7 +323,7 @@ class InventoryModule extends StatelessWidget {
                                     print('${value} $record');
                                   },
                                   child: value.runtimeType.toString() ==
-                                          'AssetName'
+                                          'AssetNamess'
                                       ? Builder(builder: (context) {
                                           final val = value as AssetName;
                                           return Column(
