@@ -72,31 +72,44 @@ class ConnectHelper {
         },
       );
 
-  Future<ResponseModel> generateToken() async => await apiWrapper.makeRequest(
-        'Token/Authenticate',
-        Request.postMultiparts,
-        {
-          'user_name': 'khushru.mistry@softel.com',
-          'password': '/bS4BMO+fOLSPh0oK2qP0A=='
-        },
-        true,
-        {
-          'Content-Type': 'application/json',
-        },
-      );
+  Future<ResponseModel> generateToken() async {
+    var response = await apiWrapper.makeRequest(
+      'Token/Authenticate',
+      Request.postMultiparts,
+      {
+        'user_name': 'khushru.mistry@softel.com',
+        'password': '/bS4BMO+fOLSPh0oK2qP0A=='
+      },
+      true,
+      {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    // print('Response Authenticate ${response.data}');
+
+    return response;
+  }
+
   Future<ResponseModel> getInventoryList({
     required bool isLoading,
     required String auth,
-  }) async =>
-      await apiWrapper.makeRequest(
-        'Inventory/GetInventoryList',
-        Request.getMultiparts,
-        null,
-        isLoading,
-        {
-          'Authorization': 'Bearer $auth',
-        },
-      );
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    // print('Response ${response.data}');
+
+    return response;
+  }
+
   Future<ResponseModel> getBlockList({
     required bool isLoading,
     required String facilityId,
