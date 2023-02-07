@@ -238,6 +238,11 @@ abstract class Styles {
     fontSize: Dimens.twelve,
   );
 
+  static TextStyle white12TextAlignCenter = TextStyle(
+    // color: ColorsValue.whiteColor,
+    fontSize: Dimens.twelve,
+  );
+
   static TextStyle whiteBold12 = TextStyle(
     // color: ColorsValue.whiteColor,
     fontWeight: FontWeight.bold,

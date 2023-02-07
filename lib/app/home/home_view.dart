@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                       border: Border.all(color: Colors.grey.withOpacity(.3)),
                     ),
                     constraints: BoxConstraints(
-                      maxWidth: 1100,
+                      maxWidth: Get.width,
                     ),
                     child: InventoryModule(),
                   ),

@@ -16,43 +16,43 @@ class InventoryModel {
     required this.id,
     required this.name,
     required this.description,
-    this.type,
+    required this.type,
     required this.categoryName,
     required this.blockName,
     required this.parentName,
-    this.serialNumber,
-    this.customerName,
+    required this.serialNumber,
+    required this.customerName,
     required this.ownerName,
     required this.operatorName,
     required this.status,
   });
 
   int id;
-  String name;
-  String description;
-  dynamic type;
-  String categoryName;
-  String blockName;
-  String parentName;
-  dynamic serialNumber;
-  dynamic customerName;
-  String ownerName;
-  String operatorName;
-  String status;
+  String? name;
+  String? description;
+  String? type;
+  String? categoryName;
+  String? blockName;
+  String? parentName;
+  String? serialNumber;
+  String? customerName;
+  String? ownerName;
+  String? operatorName;
+  String? status;
 
   factory InventoryModel.fromJson(Map<String, dynamic> json) => InventoryModel(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        type: json["type"],
-        categoryName: json["category_name"],
-        blockName: json["block_name"],
-        parentName: json["parent_name"],
-        serialNumber: json["serial_number"],
-        customerName: json["customer_name"],
-        ownerName: json["owner_name"],
-        operatorName: json["operator_name"],
-        status: json["status"],
+        id: json["id"] as int? ?? 0,
+        name: json["name"] as String? ?? '',
+        description: json["description"] as String? ?? '',
+        type: json["type"] as String? ?? '',
+        categoryName: json["category_name"] as String? ?? '',
+        blockName: json["block_name"] as String? ?? '',
+        parentName: json["parent_name"] as String? ?? '',
+        serialNumber: json["serial_number"] as String? ?? '',
+        customerName: json["customer_name"] as String? ?? '',
+        ownerName: json["owner_name"] as String? ?? '',
+        operatorName: json["operator_name"] as String? ?? '',
+        status: json["status"] as String? ?? '',
       );
 
   Map<String, dynamic> toJson() => {
