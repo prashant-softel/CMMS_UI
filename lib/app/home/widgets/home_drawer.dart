@@ -24,7 +24,7 @@ class HomeDrawer extends StatelessWidget {
             title: Text('inventory'.tr),
           ),
           ListTile(
-            leading: Icon(Icons.warning_amber),
+            leading: Icon(Icons.security),
             title: Text('Warrenty'),
           ),
           Spacer(),
