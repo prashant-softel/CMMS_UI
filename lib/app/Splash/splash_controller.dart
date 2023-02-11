@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
+
+import '../../domain/models/state.dart';
 
 class SplashController extends GetxController {
   SplashController(this.splashPresenter);
@@ -18,7 +19,7 @@ class SplashController extends GetxController {
     final res = await splashPresenter.getStateList(countryCode);
 
     if (res != null) {
-      stateList.value = res;
+      //stateList.value = res;
     }
   }
 }

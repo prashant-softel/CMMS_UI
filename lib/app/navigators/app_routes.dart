@@ -6,9 +6,17 @@ part of 'app_pages.dart';
 abstract class Routes {
   static const splash = _Paths.splash;
   static const home = _Paths.home;
+  static const jobList = _Paths.jobList;
+  static const jobDetails = _Paths.jobDetails;
+  static const addJob = _Paths.addJob;
+  static const facility = _Paths.facility;
 }
 
 abstract class _Paths {
   static const splash = '/splash-screen';
   static const home = '/home-screen';
+  static const jobList = '/job-list-screen';
+  static const jobDetails = '/job-details-screen';
+  static const addJob = '/add-job-screen';
+  static const facility = '/facility';
 }

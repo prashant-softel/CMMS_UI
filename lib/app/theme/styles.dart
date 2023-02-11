@@ -76,7 +76,7 @@ abstract class Styles {
       fontWeight: FontWeight.w500);
 
   static TextStyle black15 = TextStyle(
-    // color: ColorsValue.blackColor,
+    color: ColorsValue.blackColor,
     fontSize: Dimens.fifteen,
   );
 
@@ -87,7 +87,7 @@ abstract class Styles {
   );
 
   static TextStyle black16 = TextStyle(
-    // color: ColorsValue.blackColor,
+    color: ColorsValue.blackColor,
     fontSize: Dimens.sixteen,
   );
 
@@ -533,6 +533,10 @@ abstract class Styles {
     // color: ColorsValue.greyColor,
     fontSize: Dimens.ten,
   );
+  static TextStyle greyLight10 = TextStyle(
+    color: ColorsValue.greyLightColor,
+    fontSize: Dimens.ten,
+  );
 
   static TextStyle greyBold10 = TextStyle(
     // color: ColorsValue.greyColor,
@@ -645,7 +649,16 @@ abstract class Styles {
     // color: ColorsValue.redColor,
     fontSize: Dimens.fifteen,
   );
-
+  static TextStyle navyBlue12 = TextStyle(
+    color: ColorsValue.navyBlueColor,
+    fontWeight: FontWeight.normal,
+    fontSize: Dimens.twelve,
+  );
+  static TextStyle navyBlue13 = TextStyle(
+    color: ColorsValue.navyBlueColor,
+    fontWeight: FontWeight.normal,
+    fontSize: Dimens.thirteen,
+  );
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /// non common styles

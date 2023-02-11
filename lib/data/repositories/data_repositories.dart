@@ -101,4 +101,59 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId,
         auth: auth,
       );
+
+  Future<ResponseModel> getJobList({
+    required String auth,
+    int? facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getJobList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getFacilityList() async =>
+      await connectHelper.getFacilityList();
+
+  Future<ResponseModel> getBlocksList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getBlocksList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getInventoryCategoryList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getInventoryCategoryList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getJobDetails({
+    required String auth,
+    int? jobId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getJobDetails(
+        auth: auth,
+        jobId: jobId ?? 0,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
 }
