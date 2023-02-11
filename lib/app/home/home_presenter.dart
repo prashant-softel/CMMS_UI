@@ -14,7 +14,7 @@ class HomePresenter {
     return homeUsecase.getInventoryList(isLoading: isLoading);
   }
 
-  Future<List<Block>> getBlockList({
+  Future<List<BlockModel>> getBlockList({
     required bool isLoading,
     required String facilityId,
   }) async {
@@ -24,7 +24,7 @@ class HomePresenter {
     );
   }
 
-  Future<List<Equipment>> getEquipmentList({
+  Future<List<EquipmentModel>> getEquipmentList({
     required bool isLoading,
     required String facilityId,
   }) async {

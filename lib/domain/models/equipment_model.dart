@@ -4,14 +4,14 @@
 
 import 'dart:convert';
 
-List<Equipment> equipmentFromJson(String str) =>
-    List<Equipment>.from(json.decode(str).map((x) => Equipment.fromJson(x)));
+List<EquipmentModel> equipmentFromJson(String str) => List<EquipmentModel>.from(
+    json.decode(str).map((x) => EquipmentModel.fromJson(x)));
 
-String equipmentToJson(List<Equipment> data) =>
+String equipmentToJson(List<EquipmentModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Equipment {
-  Equipment({
+class EquipmentModel {
+  EquipmentModel({
     this.id,
     this.facilityId,
     this.categoryId,
@@ -23,7 +23,7 @@ class Equipment {
   int? categoryId;
   String? name;
 
-  factory Equipment.fromJson(Map<String, dynamic> json) => Equipment(
+  factory EquipmentModel.fromJson(Map<String, dynamic> json) => EquipmentModel(
         id: json["id"],
         facilityId: json["facilityId"],
         categoryId: json["categoryId"],

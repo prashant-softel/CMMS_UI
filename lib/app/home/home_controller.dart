@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +8,8 @@ class HomeController extends GetxController {
   HomePresenter homePresenter;
 
   var inventoryList = <InventoryList>[];
-  var blockList = <Block>[];
-  var equipmentList = <Equipment>[];
+  var blockList = <BlockModel>[];
+  var equipmentList = <EquipmentModel>[];
 
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
@@ -23,8 +21,8 @@ class HomeController extends GetxController {
   final enterMultiplierTextController = TextEditingController();
   final assetDescpTextController = TextEditingController();
 
-  var selectedBlock = Block();
-  var selectedEquipment = Equipment();
+  var selectedBlock = BlockModel();
+  var selectedEquipment = EquipmentModel();
 
   @override
   void onInit() async {
@@ -57,14 +55,14 @@ class HomeController extends GetxController {
     update(['equipment_list']);
   }
 
-  void onSelectEquipment(Equipment equipment) {
+  void onSelectEquipment(EquipmentModel equipment) {
     selectedEquipment = equipment;
     parentEquipmentTextController.text = selectedEquipment.name ?? '';
 
     update(['equipment_list']);
   }
 
-  void onSelectBlock(Block block) {
+  void onSelectBlock(BlockModel block) {
     selectedBlock = block;
     blockTextController.text = selectedBlock.name ?? '';
 

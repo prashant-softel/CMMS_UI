@@ -3,13 +3,16 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cmms/app/utils/utils.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
-import 'package:cmms/domain/models/inventory_list.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
-import 'package:cmms/domain/models/state.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+
+import '../models/state.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -206,7 +209,7 @@ class Repository {
     }
   }
 
-  Future<List<Block>> getBlockList({
+  Future<List<BlockModel>> getBlockList({
     required bool isLoading,
     required String facilityId,
   }) async {
@@ -220,7 +223,7 @@ class Repository {
       );
 
       if (!res.hasError) {
-        return blockFromJson(res.data);
+        return blockModelFromJson(res.data);
       }
       return [];
     } catch (error) {
@@ -229,7 +232,7 @@ class Repository {
     }
   }
 
-  Future<List<Equipment>> getEquipmentList({
+  Future<List<EquipmentModel>> getEquipmentList({
     required bool isLoading,
     required String facilityId,
   }) async {
@@ -251,4 +254,169 @@ class Repository {
       return [];
     }
   }
+
+  ///
+  Future<List<JobModel?>?> getJobList(
+    String auth,
+    int? facilityId,
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getJobList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonJobModels = jsonDecode(res.data);
+        final List<JobModel> _jobModelList = jsonJobModels
+            .map<JobModel>(
+                (m) => JobModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        print(_jobModelList.runtimeType);
+
+        return _jobModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<FacilityModel?>?> getFacilityList() async {
+    try {
+      //final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getFacilityList();
+
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<FacilityModel> _facilityModelList = jsonFacilityModels
+            .map<FacilityModel>(
+                (m) => FacilityModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _facilityModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<BlockModel?>?> getBlocksList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBlocksList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+        facilityId: facilityId ?? 0,
+      );
+
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<BlockModel> _blockModelList = jsonFacilityModels
+            .map<BlockModel>(
+                (m) => BlockModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _blockModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+      //await _deviceRepository.getFacilityList();
+      return [];
+    }
+  }
+
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryCategoryList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+        facilityId: facilityId ?? 0,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryCategoryModels = jsonDecode(res.data);
+        final List<InventoryCategoryModel> _inventoryCategoryModelList =
+            jsonInventoryCategoryModels
+                .map<InventoryCategoryModel>(
+                  (m) => InventoryCategoryModel.fromJson(
+                      Map<String, dynamic>.from(m)),
+                )
+                .toList();
+
+        return _inventoryCategoryModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<JobDetailsModel>> getJobDetails(
+    String? auth,
+    int jobId,
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getJobDetails(
+        auth: auth,
+        jobId: jobId,
+        userId: userId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonJobDetailsModels = jsonDecode(res.data);
+        final List<JobDetailsModel> _jobDetailsModelList = jsonJobDetailsModels
+            .map<JobDetailsModel>(
+              (m) => JobDetailsModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _jobDetailsModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  ///
 }
