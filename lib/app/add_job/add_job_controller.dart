@@ -132,7 +132,7 @@ class AddJobController extends GetxController {
         parentName: workArea.parentName,
         ownerName: workArea.ownerName,
         operatorName: workArea.operatorName,
-        status: workArea.status,
+        status: workArea.status, type: '', serialNumber: '', customerName: '',
       );
       workAreaList.add(_workArea);
     }

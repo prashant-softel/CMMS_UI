@@ -32,8 +32,6 @@ class HomeController extends GetxController {
   var inventoryColumnVisibility = <ColumnAvailability>[];
   var selectedInventoryColumnVisibility = <ColumnAvailability>[];
 
-  var inventoryColumnVisibility = <ColumnAvailability>[];
-  var selectedInventoryColumnVisibility = <ColumnAvailability>[];
 
   @override
   void onInit() async {
