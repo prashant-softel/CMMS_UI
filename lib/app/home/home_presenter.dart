@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 
+import '../../domain/models/inventory_model.dart';
+
 class HomePresenter {
   HomePresenter(this.homeUsecase);
   HomeUsecase homeUsecase;
@@ -8,10 +10,16 @@ class HomePresenter {
     return homeUsecase.generateToken();
   }
 
-  Future<List<InventoryList>> getInventoryList({
+  Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
+    required int facilityId,
+    required int categoryId,
   }) async {
-    return homeUsecase.getInventoryList(isLoading: isLoading);
+    return homeUsecase.getInventoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      categoryId: categoryId,
+    );
   }
 
   Future<List<BlockModel>> getBlockList({

@@ -104,7 +104,7 @@ abstract class Styles {
   );
 
   static TextStyle blackBold16 = TextStyle(
-    // color: ColorsValue.blackColor,
+    color: ColorsValue.blackColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.sixteen,
   );

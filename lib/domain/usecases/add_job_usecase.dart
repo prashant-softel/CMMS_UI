@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -26,6 +27,17 @@ class AddJobUsecase {
     bool? isLoading,
   }) async =>
       await repository.getInventoryCategoryList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssignedToList(
         auth,
         facilityId,
         isLoading,

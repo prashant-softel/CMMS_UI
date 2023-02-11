@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:get/get.dart';
 
+import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../home/home_presenter.dart';
 import 'add_job_presenter.dart';
@@ -24,6 +25,7 @@ class AddJobController extends GetxController {
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
 
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isBlockSelected = false.obs;
@@ -37,8 +39,12 @@ class AddJobController extends GetxController {
   Rx<String> selectedEquipmentCategory = ''.obs;
   Rx<bool> isEquipmentCategorySelected = false.obs;
   //
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = false.obs;
+  //
 
   int facilityId = 45;
+  int categoryId = 5;
   var breakdownTime;
 
   ///
@@ -48,7 +54,10 @@ class AddJobController extends GetxController {
     await getBlocksList();
     await getEquipmentList(facilityId: facilityId.toString());
     await getInventoryCategoryList(facilityId.toString());
-    await getInventoryList(facilityId: facilityId.toString());
+    await getInventoryList(
+      facilityId: facilityId,
+      categoryId: categoryId,
+    );
     super.onInit();
   }
 
@@ -59,6 +68,19 @@ class AddJobController extends GetxController {
     if (_blockList != null) {
       for (var block in _blockList) {
         blockList.add(block);
+      }
+      update(["jobList"]);
+      selectedBlock.value = blockList[0]?.name ?? '';
+    }
+  }
+
+  Future<void> getAssignedToList() async {
+    final _assignedToList =
+        await addJobPresenter.getAssignedToList(facilityId: facilityId);
+
+    if (_assignedToList != null) {
+      for (var block in _assignedToList) {
+        assignedToList.add(block);
       }
       update(["jobList"]);
       selectedBlock.value = blockList[0]?.name ?? '';
@@ -92,9 +114,12 @@ class AddJobController extends GetxController {
   }
 
   Future<void> getInventoryList({
-    required String facilityId,
+    required int facilityId,
+    required int categoryId,
   }) async {
     final _workAreaList = await homePresenter.getInventoryList(
+      facilityId: facilityId,
+      categoryId: categoryId,
       isLoading: true,
     );
     for (var workArea in _workAreaList) {

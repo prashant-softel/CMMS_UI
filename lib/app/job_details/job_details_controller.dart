@@ -21,7 +21,7 @@ class JobDetailsController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
-  int jobId = 0;
+  int jobId = 3158;
   int userId = 36;
   var breakdownTime;
 
@@ -35,6 +35,7 @@ class JobDetailsController extends GetxController {
   }
 
   Future<void> getJobDetails(int jobId) async {
+    jobId = 3158;
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
         await jobDetailsPresenter.getJobDetails(jobId: jobId);

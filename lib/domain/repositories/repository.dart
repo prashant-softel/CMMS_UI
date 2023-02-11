@@ -6,12 +6,14 @@ import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../models/inventory_model.dart';
 import '../models/state.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -188,19 +190,23 @@ class Repository {
     }
   }
 
-  Future<List<InventoryList>> getInventoryList({
+  Future<List<InventoryModel>> getInventoryList({
+    required int facilityId,
+    required int categoryId,
     required bool isLoading,
   }) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.getInventoryList(
+        facilityId: facilityId,
+        categoryId: categoryId,
         isLoading: isLoading,
         auth: auth,
       );
 
       if (!res.hasError) {
-        return inventoryListFromJson(res.data);
+        return inventoryModelFromJson(res.data);
       }
       return [];
     } catch (error) {
@@ -414,6 +420,39 @@ class Repository {
       }
     } catch (error) {
       log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<EmployeeModel?>?> getAssignedToList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAssignedToList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+        facilityId: facilityId ?? 0,
+      );
+
+      if (!res.hasError) {
+        final jsonEmployeeModels = jsonDecode(res.data);
+        final List<EmployeeModel> _employeeModelList = jsonEmployeeModels
+            .map<EmployeeModel>(
+              (m) => EmployeeModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _employeeModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
       return [];
     }
   }

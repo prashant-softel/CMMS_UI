@@ -89,9 +89,11 @@ class ConnectHelper {
   Future<ResponseModel> getInventoryList({
     required bool isLoading,
     required String auth,
+    required int facilityId,
+    required int categoryId,
   }) async =>
       await apiWrapper.makeRequest(
-        'Inventory/GetInventoryList',
+        'Inventory/GetInventoryList?facilityId=$facilityId&categoryId=$categoryId',
         Request.getMultiparts,
         null,
         isLoading,
@@ -156,7 +158,7 @@ class ConnectHelper {
     int? jobId,
     int? userId,
   }) async {
-    jobId = 3158;
+    //jobId = 3158;
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobDetail?job_id=$jobId',
       Request.get,
@@ -213,4 +215,25 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
+  Future<ResponseModel> getAssignedToList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetEmployeeList?facilityId=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  ///
 }

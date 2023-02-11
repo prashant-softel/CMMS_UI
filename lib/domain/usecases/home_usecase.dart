@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 
+import '../models/inventory_model.dart';
+
 class HomeUsecase {
   final Repository _repository;
 
@@ -9,10 +11,16 @@ class HomeUsecase {
     return _repository.generateToken();
   }
 
-  Future<List<InventoryList>> getInventoryList({
+  Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
+    required int facilityId,
+    required int categoryId,
   }) async {
-    return _repository.getInventoryList(isLoading: isLoading);
+    return _repository.getInventoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      categoryId: categoryId,
+    );
   }
 
   Future<List<BlockModel>> getBlockList({

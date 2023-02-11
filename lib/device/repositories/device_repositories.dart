@@ -104,7 +104,12 @@ class DeviceRepository extends DomainRepository {
   }
 
   @override
-  Future<void> getInventoryList({required bool isLoading, required auth}) {
+  Future<void> getInventoryList({
+    required bool isLoading,
+    required auth,
+    required int facilityId,
+    required int categoryId,
+  }) {
     throw UnimplementedError();
   }
 

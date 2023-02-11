@@ -7,7 +7,8 @@ class HomeController extends GetxController {
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
 
-  var inventoryList = <InventoryList>[];
+  ///
+  var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
 
@@ -23,16 +24,23 @@ class HomeController extends GetxController {
 
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
+  int facilityId = 45;
+  int categoryId = 5;
+
+  ///
 
   @override
   void onInit() async {
     await homePresenter.generateToken();
-
     super.onInit();
   }
 
   void getInventoryList() async {
-    final list = await homePresenter.getInventoryList(isLoading: false);
+    final list = await homePresenter.getInventoryList(
+      isLoading: false,
+      categoryId: categoryId,
+      facilityId: facilityId,
+    );
     inventoryList = list;
     update(['inventory_list']);
   }

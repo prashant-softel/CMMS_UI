@@ -71,11 +71,17 @@ class DataRepository extends DomainRepository {
 
   @override
   Future<ResponseModel> getInventoryList({
+    required int facilityId,
+    required int categoryId,
     required bool isLoading,
     required String auth,
   }) async {
     return await connectHelper.getInventoryList(
-        isLoading: isLoading, auth: auth);
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+      categoryId: categoryId,
+    );
   }
 
   @override
@@ -151,6 +157,19 @@ class DataRepository extends DomainRepository {
       await connectHelper.getJobDetails(
         auth: auth,
         jobId: jobId ?? 0,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getAssignedToList({
+    required String auth,
+    int? facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAssignedToList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
         userId: userId,
         isLoading: isLoading ?? false,
       );
