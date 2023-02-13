@@ -1,6 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/warranty/warranty.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -30,6 +31,13 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: HomeScreen.new,
       binding: HomeBinding(),
+      transition: Transition.cupertino,
+    ),
+    GetPage<WarrentyScreen>(
+      name: _Paths.warranty,
+      transitionDuration: transitionDuration,
+      page: WarrentyScreen.new,
+      binding: WarrantyBinding(),
       transition: Transition.cupertino,
     ),
   ];

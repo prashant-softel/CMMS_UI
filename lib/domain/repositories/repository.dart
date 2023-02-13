@@ -5,9 +5,7 @@ import 'dart:developer';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
-import 'package:cmms/domain/models/inventory_list.dart';
 import 'package:cmms/domain/models/models.dart';
-import 'package:cmms/domain/models/state.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 

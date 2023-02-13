@@ -6,9 +6,11 @@ part of 'app_pages.dart';
 abstract class Routes {
   static const splash = _Paths.splash;
   static const home = _Paths.home;
+  static const warranty = _Paths.warranty;
 }
 
 abstract class _Paths {
   static const splash = '/splash-screen';
   static const home = '/home-screen';
+  static const warranty = '/warranty-screen';
 }

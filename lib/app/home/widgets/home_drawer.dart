@@ -1,4 +1,4 @@
-import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +25,10 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.security),
-            title: Text('Warrenty'),
+            title: Text('warrenty'.tr),
+            onTap: () {
+              RouteManagement.goToWarrantyScreen();
+            },
           ),
           Spacer(),
           ListTile(

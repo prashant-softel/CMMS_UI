@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';

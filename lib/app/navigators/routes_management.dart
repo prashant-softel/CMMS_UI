@@ -11,4 +11,9 @@ abstract class RouteManagement {
   static void goOffAllHomScreen() {
     Get.offAllNamed<void>(Routes.home);
   }
+
+  /// Go to warranty tab
+  static void goToWarrantyScreen() {
+    Get.toNamed<void>(Routes.warranty);
+  }
 }
