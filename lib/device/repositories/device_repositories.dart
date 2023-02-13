@@ -129,4 +129,46 @@ class DeviceRepository extends DomainRepository {
       required String auth}) {
     throw UnimplementedError();
   }
+
+  Future<ResponseModel> getInventoryTypeList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ResponseModel> getInventoryCategoryList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ResponseModel> getInventoryStatusList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ResponseModel> getBusinessList(
+      {required int businessType,
+      required bool isLoading,
+      required String auth}) {
+    throw UnimplementedError();
+  }
+
+  Future<ResponseModel> addInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  }) {
+    throw UnimplementedError();
+  }
 }

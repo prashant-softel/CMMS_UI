@@ -1,6 +1,5 @@
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:get/get.dart';
 
@@ -132,7 +131,14 @@ class AddJobController extends GetxController {
         parentName: workArea.parentName,
         ownerName: workArea.ownerName,
         operatorName: workArea.operatorName,
-        status: workArea.status, type: '', serialNumber: '', customerName: '',
+        status: workArea.status,
+        type: '',
+        serialNumber: '',
+        customerName: '',
+        calibrationDueDate: '',
+        facilityName: '',
+        specialTool: 0,
+        warrantyId: 0,
       );
       workAreaList.add(_workArea);
     }

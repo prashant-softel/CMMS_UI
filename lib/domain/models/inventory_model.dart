@@ -15,58 +15,74 @@ class InventoryModel {
   InventoryModel({
     required this.id,
     required this.name,
+    required this.facilityName,
+    required this.blockName,
     required this.description,
     required this.type,
     required this.categoryName,
-    required this.blockName,
     required this.parentName,
-    required this.serialNumber,
     required this.customerName,
     required this.ownerName,
     required this.operatorName,
+    required this.serialNumber,
+    required this.specialTool,
+    required this.warrantyId,
+    required this.calibrationDueDate,
     required this.status,
   });
 
-  int id;
+  int? id;
   String? name;
+  String? facilityName;
+  String? blockName;
   String? description;
   String? type;
   String? categoryName;
-  String? blockName;
   String? parentName;
-  String? serialNumber;
   String? customerName;
   String? ownerName;
   String? operatorName;
+  String? serialNumber;
+  int? specialTool;
+  int? warrantyId;
+  String? calibrationDueDate;
   String? status;
 
   factory InventoryModel.fromJson(Map<String, dynamic> json) => InventoryModel(
         id: json["id"] as int? ?? 0,
         name: json["name"] as String? ?? '',
+        facilityName: json["facilityName"] as String? ?? '',
+        blockName: json["blockName"] as String? ?? '',
         description: json["description"] as String? ?? '',
         type: json["type"] as String? ?? '',
-        categoryName: json["category_name"] as String? ?? '',
-        blockName: json["block_name"] as String? ?? '',
-        parentName: json["parent_name"] as String? ?? '',
-        serialNumber: json["serial_number"] as String? ?? '',
-        customerName: json["customer_name"] as String? ?? '',
-        ownerName: json["owner_name"] as String? ?? '',
-        operatorName: json["operator_name"] as String? ?? '',
+        categoryName: json["categoryName"] as String? ?? '',
+        parentName: json["parentName"] as String? ?? '',
+        customerName: json["customerName"] as String? ?? '',
+        ownerName: json["ownerName"] as String? ?? '',
+        operatorName: json["operatorName"] as String? ?? '',
+        serialNumber: json["serialNumber"] as String? ?? '',
+        specialTool: json["specialTool"] as int? ?? 0,
+        warrantyId: json["warrantyId"] as int? ?? 0,
+        calibrationDueDate: json["calibrationDueDate"] as String? ?? '',
         status: json["status"] as String? ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "facilityName": facilityName,
+        "blockName": blockName,
         "description": description,
         "type": type,
-        "category_name": categoryName,
-        "block_name": blockName,
-        "parent_name": parentName,
-        "serial_number": serialNumber,
-        "customer_name": customerName,
-        "owner_name": ownerName,
-        "operator_name": operatorName,
+        "categoryName": categoryName,
+        "parentName": parentName,
+        "customerName": customerName,
+        "ownerName": ownerName,
+        "operatorName": operatorName,
+        "serialNumber": serialNumber,
+        "specialTool": specialTool,
+        "warrantyId": warrantyId,
+        "calibrationDueDate": calibrationDueDate,
         "status": status,
       };
 }

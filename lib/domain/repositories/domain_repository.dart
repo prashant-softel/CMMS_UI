@@ -64,4 +64,34 @@ abstract class DomainRepository {
     required String facilityId,
     required String auth,
   });
+
+  Future<ResponseModel> getInventoryTypeList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  });
+
+  Future<ResponseModel> getInventoryCategoryList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  });
+
+  Future<ResponseModel> getInventoryStatusList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  });
+
+  Future<ResponseModel> getBusinessList({
+    required int businessType,
+    required bool isLoading,
+    required String auth,
+  });
+
+  Future<ResponseModel> addInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  });
 }

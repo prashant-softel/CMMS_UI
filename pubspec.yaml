@@ -101,6 +101,8 @@ dependencies:
   visibility_detector: ^0.3.3
   wakelock: ^0.6.1+2
   webview_flutter: ^3.0.4
+  dropdown_button2: ^1.9.2
+  syncfusion_flutter_datepicker: ^20.4.49
 
 
 dev_dependencies:

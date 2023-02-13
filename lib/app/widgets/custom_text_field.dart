@@ -4,29 +4,30 @@ import '../theme/theme.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key? key,
+    // Key? key,
     this.label,
     this.maxLine = 1,
     this.width,
     this.textController,
     this.readOnly = false,
     this.onTap,
-  }) : super(key: key);
+    this.errorText,
+  });
 
   final String? label;
   final int? maxLine;
   final double? width;
   final bool readOnly;
   final Function()? onTap;
-
   final TextEditingController? textController;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: Dimens.edgeInsets16,
       constraints: BoxConstraints(
-        maxWidth: width ?? 400,
+        maxWidth: width ?? 420,
         minWidth: 100,
       ),
       child: Row(
@@ -38,22 +39,32 @@ class CustomTextField extends StatelessWidget {
           Dimens.boxWidth10,
           Expanded(
             child: Container(
-              child: TextFormField(
-                onTap: onTap,
-                readOnly: readOnly,
-                controller: textController,
-                maxLines: maxLine,
-                decoration: InputDecoration(
-                  contentPadding: Dimens.edgeInsets16_0_16_0,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: .2),
-                    borderRadius: BorderRadius.circular(2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    onTap: onTap,
+                    readOnly: readOnly,
+                    controller: textController,
+                    maxLines: maxLine,
+                    decoration: InputDecoration(
+                      contentPadding: Dimens.edgeInsets16_0_16_0,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: .2),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: .2),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: .2),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
+                  if (errorText == null)
+                    Text(
+                      errorText ?? 'Error text',
+                      style: Styles.red12.copyWith(color: ColorsValue.redColor),
+                    ),
+                ],
               ),
             ),
           ),

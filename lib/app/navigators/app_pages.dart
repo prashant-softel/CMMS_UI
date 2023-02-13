@@ -29,7 +29,7 @@ class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
   //static const initial = Routes.home;
-  static const initial = Routes.jobList;
+  static const initial = Routes.home;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(

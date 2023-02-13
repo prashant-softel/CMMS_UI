@@ -321,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  dropdown_button2:
+    dependency: "direct main"
+    description:
+      name: dropdown_button2
+      sha256: "580bfe26a91e822a95d96e227ac02c1e14a7d5eea32501d0fbc6fe8d5c5606e5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.2"
   email_validator:
     dependency: "direct main"
     description:
@@ -1709,6 +1717,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.1"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: b5cb2525beb38fae36a363f72f8a2db92ed3995d6f0695968412cc6836e3a7b7
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.49"
+  syncfusion_flutter_datepicker:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_datepicker
+      sha256: "61b2ea99d45a8ecf9f01ea0ea614bf3f5a247432765fc9d3d04fc78abb66362e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.49"
   synchronized:
     dependency: transitive
     description:

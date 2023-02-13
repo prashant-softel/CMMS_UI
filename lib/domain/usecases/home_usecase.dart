@@ -1,6 +1,5 @@
 import 'package:cmms/domain/domain.dart';
-
-import '../models/inventory_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 
 class HomeUsecase {
   final Repository _repository;
@@ -40,6 +39,56 @@ class HomeUsecase {
     return _repository.getEquipmentList(
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+  Future<List<InventoryTypeModel>> getInventoryTypeList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return _repository.getInventoryTypeList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<InventoryCategoryModel>> getInventoryCategoryList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return _repository.getInventoryCategoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<InventoryTypeModel>> getInventoryStatusList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return _repository.getInventoryStatusList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<BusinessModel>> getBusinessList({
+    required bool isLoading,
+    required int businessType,
+  }) async {
+    return _repository.getBusinessList(
+      isLoading: isLoading,
+      businessType: businessType,
+    );
+  }
+
+  Future<ResponseModel> addInventory({
+    required AddInventoryRequestModel requestBody,
+    required bool isLoading,
+  }) async {
+    return _repository.addInventory(
+      requestBody: requestBody,
+      isLoading: isLoading,
     );
   }
 }

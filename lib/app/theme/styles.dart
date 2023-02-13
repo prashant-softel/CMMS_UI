@@ -737,4 +737,22 @@ abstract class Styles {
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle textDark14 = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: Dimens.fourteen,
+    color: ColorsValue.whiteColor,
+  );
+
+  static BoxDecoration cardLikeDecoration = BoxDecoration(
+    boxShadow: [
+      BoxShadow(
+          color: ColorsValue.primaryColor.withOpacity(0.15),
+          offset: const Offset(1, 1),
+          blurRadius: 16.0)
+    ],
+    border: Border.all(width: Dimens.one, color: Colors.transparent),
+    color: ColorsValue.whiteColor,
+    borderRadius: BorderRadius.circular(10),
+  );
 }

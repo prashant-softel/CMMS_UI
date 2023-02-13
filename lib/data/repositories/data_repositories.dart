@@ -136,17 +136,17 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> getInventoryCategoryList({
-    String? auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
-    return await connectHelper.getInventoryCategoryList(
-      auth: auth,
-      isLoading: isLoading,
-      facilityId: facilityId,
-    );
-  }
+  // Future<ResponseModel> getInventoryCategoryList({
+  //   String? auth,
+  //   bool? isLoading,
+  //   int? facilityId,
+  // }) async {
+  //   return await connectHelper.getInventoryCategoryList(
+  //     auth: auth,
+  //     isLoading: isLoading,
+  //     facilityId: facilityId,
+  //   );
+  // }
 
   Future<ResponseModel> getJobDetails({
     required String auth,
@@ -173,6 +173,69 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading ?? false,
       );
+
+  @override
+  Future<ResponseModel> getInventoryTypeList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getInventoryCategoryList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getInventoryStatusList({
+    required int facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getBusinessList(
+      {required int businessType,
+      required bool isLoading,
+      required String auth}) async {
+    return await connectHelper.getBusinessList(
+      isLoading: isLoading,
+      auth: auth,
+      businessType: businessType,
+    );
+  }
+
+  Future<ResponseModel> addInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  }) async {
+    return await connectHelper.addInventory(
+      isLoading: isLoading,
+      auth: auth,
+      requestBody: requestBody,
+    );
+  }
 
   ///
 }

@@ -13,7 +13,6 @@ import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
-import '../models/inventory_model.dart';
 import '../models/state.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -354,40 +353,40 @@ class Repository {
     }
   }
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecureValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryCategoryList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-        facilityId: facilityId ?? 0,
-      );
+  // Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
+  //   String? auth,
+  //   int? facilityId,
+  //   bool? isLoading,
+  // ) async {
+  //   try {
+  //     final auth = await getSecureValue(LocalKeys.authToken);
+  //     final res = await _dataRepository.getInventoryCategoryList(
+  //       auth: auth,
+  //       isLoading: isLoading ?? false,
+  //       facilityId: facilityId ?? 0,
+  //     );
 
-      if (!res.hasError) {
-        final jsonInventoryCategoryModels = jsonDecode(res.data);
-        final List<InventoryCategoryModel> _inventoryCategoryModelList =
-            jsonInventoryCategoryModels
-                .map<InventoryCategoryModel>(
-                  (m) => InventoryCategoryModel.fromJson(
-                      Map<String, dynamic>.from(m)),
-                )
-                .toList();
+  //     if (!res.hasError) {
+  //       final jsonInventoryCategoryModels = jsonDecode(res.data);
+  //       final List<InventoryCategoryModel> _inventoryCategoryModelList =
+  //           jsonInventoryCategoryModels
+  //               .map<InventoryCategoryModel>(
+  //                 (m) => InventoryCategoryModel.fromJson(
+  //                     Map<String, dynamic>.from(m)),
+  //               )
+  //               .toList();
 
-        return _inventoryCategoryModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
-        return null;
-      }
-    } catch (error) {
-      log(error.toString());
+  //       return _inventoryCategoryModelList;
+  //     } else {
+  //       Utility.showDialog('Something Went Wrong!!');
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
 
-      return [];
-    }
-  }
+  //     return [];
+  //   }
+  // }
 
   Future<List<JobDetailsModel>> getJobDetails(
     String? auth,
@@ -454,6 +453,120 @@ class Repository {
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<List<InventoryTypeModel>> getInventoryTypeList({
+    required int facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getInventoryTypeList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        return inventoryTypeModelFromJson(res.data);
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryCategoryModel>> getInventoryCategoryList({
+    required int facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getInventoryCategoryList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        return inventoryCategoryModelFromJson(res.data);
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryTypeModel>> getInventoryStatusList({
+    required int facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getInventoryStatusList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        return inventoryTypeModelFromJson(res.data);
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<BusinessModel>> getBusinessList({
+    required int businessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getBusinessList(
+        businessType: businessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        return businessModelFromJson(res.data);
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<ResponseModel> addInventory({
+    required AddInventoryRequestModel requestBody,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.addInventory(
+        requestBody: requestBody,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        return res;
+      }
+      return res;
+    } catch (error) {
+      log(error.toString());
+      return {} as ResponseModel;
     }
   }
 

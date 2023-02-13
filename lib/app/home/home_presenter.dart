@@ -1,6 +1,5 @@
 import 'package:cmms/domain/domain.dart';
-
-import '../../domain/models/inventory_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 
 class HomePresenter {
   HomePresenter(this.homeUsecase);
@@ -39,6 +38,56 @@ class HomePresenter {
     return homeUsecase.getEquipmentList(
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+  Future<List<InventoryTypeModel>> getInventoryTypeList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return homeUsecase.getInventoryTypeList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<InventoryCategoryModel>> getInventoryCategoryList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return homeUsecase.getInventoryCategoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<InventoryTypeModel>> getInventoryStatusList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return homeUsecase.getInventoryStatusList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<BusinessModel>> getBusinessList({
+    required bool isLoading,
+    required int businessType,
+  }) async {
+    return homeUsecase.getBusinessList(
+      isLoading: isLoading,
+      businessType: businessType,
+    );
+  }
+
+  Future<ResponseModel> addInventory({
+    required AddInventoryRequestModel requestBody,
+    required bool isLoading,
+  }) async {
+    return homeUsecase.addInventory(
+      requestBody: requestBody,
+      isLoading: isLoading,
     );
   }
 }

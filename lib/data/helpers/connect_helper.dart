@@ -113,6 +113,7 @@ class ConnectHelper {
 
     return response;
   }
+
   Future<ResponseModel> getBlockList({
     required bool isLoading,
     required String facilityId,
@@ -213,20 +214,20 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
-  Future<ResponseModel> getInventoryCategoryList({
-    String? auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async =>
-      await apiWrapper.makeRequest(
-        'Inventory/GetInventoryCategoryList',
-        Request.getMultiparts,
-        null,
-        isLoading ?? true,
-        {
-          'Authorization': 'Bearer $auth',
-        },
-      );
+  // Future<ResponseModel> getInventoryCategoryList({
+  //   String? auth,
+  //   bool? isLoading,
+  //   int? facilityId,
+  // }) async =>
+  //     await apiWrapper.makeRequest(
+  //       'Inventory/GetInventoryCategoryList',
+  //       Request.getMultiparts,
+  //       null,
+  //       isLoading ?? true,
+  //       {
+  //         'Authorization': 'Bearer $auth',
+  //       },
+  //     );
 
   Future<ResponseModel> getAssignedToList({
     required String auth,
@@ -245,6 +246,96 @@ class ConnectHelper {
     );
 
     return responseModel;
+  }
+
+  Future<ResponseModel> getInventoryTypeList({
+    required bool isLoading,
+    required String auth,
+    required int facilityId,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryTypeList?facilityId=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('Response GetInventoryTypeList ${response.data}');
+    return response;
+  }
+
+  Future<ResponseModel> getInventoryCategoryList({
+    required bool isLoading,
+    required String auth,
+    required int facilityId,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryCategoryList?facilityId=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('Response GetInventoryCategoryList ${response.data}');
+    return response;
+  }
+
+  Future<ResponseModel> getInventoryStatusList({
+    required bool isLoading,
+    required String auth,
+    required int facilityId,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryStatusList?facilityId=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('Response GetInventoryStatusList ${response.data}');
+    return response;
+  }
+
+  Future<ResponseModel> getBusinessList({
+    required bool isLoading,
+    required String auth,
+    required int businessType,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessList?businessType=$businessType',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('Response GetBusinessList ${response.data}');
+    return response;
+  }
+
+  Future<ResponseModel> addInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'api/Inventory/AddInventory',
+      Request.postMultiparts,
+      requestBody,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('Response AddInventory ${response.data}');
+    return response;
   }
 
   ///

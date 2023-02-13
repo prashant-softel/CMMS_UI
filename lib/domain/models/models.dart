@@ -9,3 +9,6 @@ export 'equipment_model.dart';
 export 'job_model.dart';
 export 'job_details_model.dart';
 export 'block_model.dart';
+export 'inventory_type_model.dart';
+export 'add_inventory_request_model.dart';
+export 'business_model.dart';

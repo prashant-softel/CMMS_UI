@@ -21,16 +21,16 @@ class AddJobUsecase {
         isLoading,
       );
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+  // Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+  //   String? auth,
+  //   int? facilityId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.getInventoryCategoryList(
+  //       auth,
+  //       facilityId,
+  //       isLoading,
+  //     );
 
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
@@ -42,6 +42,16 @@ class AddJobUsecase {
         facilityId,
         isLoading,
       );
+
+  Future<List<InventoryCategoryModel>> getInventoryCategoryList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return repository.getInventoryCategoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
 
   ///
 }
