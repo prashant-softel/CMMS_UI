@@ -9,6 +9,8 @@ class ConnectHelper {
   ConnectHelper() {
     _init();
   }
+  String token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJLaHVzaHJ1Lm1pc3RyeUBzb2Z0ZWwuY29tIiwibmJmIjoxNjc1NjY4NjUzLCJleHAiOjE2NzU2NzA0NTMsImlhdCI6MTY3NTY2ODY1M30.lV9fU4PiidsMcfbn9gw3DngH4Iiv97tUxuWDJrYbPQA';
 
   // late Dio _dio;
 
@@ -72,31 +74,45 @@ class ConnectHelper {
         },
       );
 
-  Future<ResponseModel> generateToken() async => await apiWrapper.makeRequest(
-        'Token/Authenticate',
-        Request.postMultiparts,
-        {
-          'user_name': 'khushru.mistry@softel.com',
-          'password': '/bS4BMO+fOLSPh0oK2qP0A=='
-        },
-        true,
-        {
-          'Content-Type': 'application/json',
-        },
-      );
+  Future<ResponseModel> generateToken() async {
+    var response = await apiWrapper.makeRequest(
+      'Token/Authenticate',
+      Request.postMultiparts,
+      {
+        'user_name': 'khushru.mistry@softel.com',
+        'password': '/bS4BMO+fOLSPh0oK2qP0A=='
+      },
+      true,
+      {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    // print('Response Authenticate ${response.data}');
+
+    return response;
+  }
+
   Future<ResponseModel> getInventoryList({
     required bool isLoading,
     required String auth,
-  }) async =>
-      await apiWrapper.makeRequest(
-        'Inventory/GetInventoryList',
-        Request.getMultiparts,
-        null,
-        isLoading,
-        {
-          'Authorization': 'Bearer $auth',
-        },
-      );
+    required int facilityId,
+    required int categoryId,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facilityId=$facilityId&categoryId=$categoryId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    // print('Response ${response.data}');
+
+    return response;
+  }
   Future<ResponseModel> getBlockList({
     required bool isLoading,
     required String facilityId,
@@ -125,4 +141,111 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
+  ///
+
+  Future<ResponseModel> getJobList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/GetJobList?facility_id=$facilityId&userId=$userId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        //'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getJobDetails({
+    required String auth,
+    bool? isLoading,
+    int? jobId,
+    int? userId,
+  }) async {
+    //jobId = 3158;
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/GetJobDetail?job_id=$jobId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getFacilityList() async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetFacilityList',
+      Request.get,
+      null,
+      true,
+      {
+        //'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getBlocksList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'CMMS/GetBlockList?facility_id=$facilityId',
+        Request.getMultiparts,
+        null,
+        isLoading ?? true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getInventoryCategoryList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetInventoryCategoryList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
+  Future<ResponseModel> getAssignedToList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetEmployeeList?facilityId=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  ///
 }

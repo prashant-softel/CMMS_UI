@@ -1,10 +1,12 @@
 import 'package:cmms/domain/domain.dart';
 
+import '../../domain/models/state.dart';
+
 class SplashPresenter {
-  SplashPresenter(this.splasUsecase);
-  SplasUsecase splasUsecase;
+  SplashPresenter(this.splashUsecase);
+  SplashUsecase splashUsecase;
 
   Future<List<CountryState?>?> getStateList(int countryCode) async {
-    return await splasUsecase.getStateList(countryCode);
+    return await splashUsecase.getStateList(countryCode);
   }
 }

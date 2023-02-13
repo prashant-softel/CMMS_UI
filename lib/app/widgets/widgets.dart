@@ -12,3 +12,6 @@ export 'try_again_widget.dart';
 export 'action_button.dart';
 export 'body_custom_app_bar.dart';
 export 'table_action_button.dart';
+export 'add_photo_widget.dart';
+export 'custom_text_field.dart';
+export 'popup_menu_widget.dart';

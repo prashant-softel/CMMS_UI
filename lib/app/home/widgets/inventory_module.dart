@@ -7,283 +7,416 @@ class InventoryModule extends StatelessWidget {
   InventoryModule({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        children: [
-          CustomAppBar(
-            title: 'inventoryList'.tr,
-            action: Row(
-              children: [
-                ActionButton(
-                  icon: Icons.download,
-                  lable: 'exportAsset'.tr,
-                  onPress: () {},
-                  color: Colors.blue,
-                ),
-                Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.upload,
-                  lable: 'importAsset'.tr,
-                  onPress: () {
-                    // var file = "assets/files/Fixed Asset Imports.xlsx";
-                    // var bytes = File(file).readAsBytesSync();
-                    // var excel = Excel.decodeBytes(bytes);
+  Widget build(BuildContext context) => GetBuilder<HomeController>(
+        id: 'inventory_list',
+        builder: (_controller) => DefaultTabController(
+          length: 3,
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: 'inventoryList'.tr,
+                action: Row(
+                  children: [
+                    ActionButton(
+                      icon: Icons.download,
+                      lable: 'exportAsset'.tr,
+                      onPress: () {},
+                      color: Colors.blue,
+                    ),
+                    Dimens.boxWidth10,
+                    ActionButton(
+                      icon: Icons.upload,
+                      lable: 'importAsset'.tr,
+                      onPress: () {
+                        // var file = "assets/files/Fixed Asset Imports.xlsx";
+                        // var bytes = File(file).readAsBytesSync();
+                        // var excel = Excel.decodeBytes(bytes);
 
-                    // for (var table in excel.tables.keys) {
-                    //   print(table); //sheet Name
-                    //   print(excel.tables[table]?.maxCols);
-                    //   print(excel.tables[table]?.maxRows);
-                    //   for (var row in excel.tables[table]!.rows) {
-                    //     print("QWERTY $row");
-                    //   }
-                    // }
-                  },
-                  color: Colors.blue,
-                ),
-                Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.add,
-                  lable: 'addAsset'.tr,
-                  onPress: () {
-                    Get.to(() => AddInventory());
-                  },
-                  color: Colors.blue,
-                ),
-                Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.close,
-                  lable: 'retireAsset'.tr,
-                  onPress: () async {
-                    // ByteData data = await rootBundle
-                    //     .load("assets/files/Fixed Asset Imports.xlsx");
-                    // var bytes = data.buffer
-                    //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
-                    // var excel = Excel.decodeBytes(bytes);
+                        // for (var table in excel.tables.keys) {
+                        //   print(table); //sheet Name
+                        //   print(excel.tables[table]?.maxCols);
+                        //   print(excel.tables[table]?.maxRows);
+                        //   for (var row in excel.tables[table]!.rows) {
+                        //     print("QWERTY $row");
+                        //   }
+                        // }
+                      },
+                      color: Colors.blue,
+                    ),
+                    Dimens.boxWidth10,
+                    ActionButton(
+                      icon: Icons.add,
+                      lable: 'addAsset'.tr,
+                      onPress: () {
+                        Get.to(() => AddInventory());
+                      },
+                      color: Colors.blue,
+                    ),
+                    Dimens.boxWidth10,
+                    ActionButton(
+                      icon: Icons.close,
+                      lable: 'retireAsset'.tr,
+                      onPress: () async {
+                        // ByteData data = await rootBundle
+                        //     .load("assets/files/Fixed Asset Imports.xlsx");
+                        // var bytes = data.buffer
+                        //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
+                        // var excel = Excel.decodeBytes(bytes);
 
-                    // for (var table in excel.tables.keys) {
-                    //   print(table); //sheet Name
-                    //   print(excel.tables[table]?.maxCols);
-                    //   print(excel.tables[table]?.maxRows);
-                    //   for (var row in excel.tables[table]!.rows) {
-                    //     print("QWERTY $row");
-                    //   }
-                    // }
-                  },
-                  color: Colors.red,
+                        // for (var table in excel.tables.keys) {
+                        //   print(table); //sheet Name
+                        //   print(excel.tables[table]?.maxCols);
+                        //   print(excel.tables[table]?.maxRows);
+                        //   for (var row in excel.tables[table]!.rows) {
+                        //     print("QWERTY $row");
+                        //   }
+                        // }
+                      },
+                      color: Colors.red,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              width: 400,
-              child: TabBar(
-                tabs: [
-                  CustomTabBar(
-                    label: 'listView'.tr,
-                    icon: Icons.menu,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: 400,
+                  child: TabBar(
+                    tabs: [
+                      CustomTabBar(
+                        label: 'listView'.tr,
+                        icon: Icons.menu,
+                      ),
+                      CustomTabBar(
+                        label: 'treeView'.tr,
+                        icon: Icons.account_tree_sharp,
+                      ),
+                      CustomTabBar(
+                        label: 'mapView'.tr,
+                        icon: Icons.location_on,
+                      ),
+                    ],
                   ),
-                  CustomTabBar(
-                    label: 'treeView'.tr,
-                    icon: Icons.account_tree_sharp,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: Dimens.edgeInsets16_10,
+                    child: PopupMenuButton<String>(
+                      offset: Offset(0, 45),
+                      tooltip: '',
+                      constraints: BoxConstraints(
+                        maxHeight: Dimens.fourHundred,
+                        minWidth: Dimens.hundred,
+                        maxWidth: Dimens.twoHundredFifteen,
+                      ),
+                      onSelected: (String val) {},
+                      child: Container(
+                        padding: Dimens.edgeInsets16_8_16_8,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'columnVisibility'.tr,
+                            style: Styles.white12.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      itemBuilder: (c) => _controller.inventoryColumnVisibility
+                          .map(
+                            (e) => PopupMenuItem<String>(
+                              onTap: () {
+                                e.isSelected = !e.isSelected;
+                                _controller
+                                    .buildSelectedInventoryColumnVisibility();
+                              },
+                              value: e.text,
+                              child: Container(
+                                height: Dimens.thirtyFive,
+                                width: Get.width,
+                                padding: Dimens.edgeInsets6_0_6_0,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                ),
+                                child: Row(
+                                  children: [
+                                    _controller.checkSelectedColumnVisibility(
+                                            columnName: e.text)
+                                        ? Icon(
+                                            Icons.check,
+                                            color: ColorsValue.whiteColor,
+                                            size: Dimens.fourteen,
+                                          )
+                                        : Dimens.box0,
+                                    Expanded(
+                                      child: Center(
+                                        child: Text(
+                                          e.text,
+                                          style: Styles.white12.copyWith(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
-                  CustomTabBar(
-                    label: 'mapView'.tr,
-                    icon: Icons.location_on,
+                  Container(
+                    width: 200,
+                    height: 40,
+                    margin: Dimens.edgeInsets0_0_16_0,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        contentPadding: Dimens.edgeInsets10_0_0_0,
+                        hintText: 'search'.tr,
+                        hintStyle: Styles.grey12,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: Dimens.edgeInsets16_16_0_0,
-                padding: Dimens.edgeInsets16_8_16_8,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text(
-                  'columnVisibility'.tr,
-                  style: Styles.white12.copyWith(
-                    color: Colors.white,
+              Expanded(
+                child: Container(
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(.2),
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                width: 200,
-                height: 40,
-                margin: Dimens.edgeInsets0_0_16_0,
-                child: TextField(
-                  decoration: InputDecoration(
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    contentPadding: Dimens.edgeInsets10_0_0_0,
-                    hintText: 'search'.tr,
-                    hintStyle: Styles.grey12,
+                  margin: Dimens.edgeInsets16,
+                  child: ScrollableTableView(
+                    columns:
+                        // [
+                        //   'assetName'.tr,
+                        //   'serialNo'.tr,
+                        //   'parentAsset'.tr,
+                        //   'catergory'.tr,
+                        //   'assetFacilityName'.tr,
+                        //   'action'.tr,
+                        // ]
+                        _controller.selectedInventoryColumnVisibility
+                            .map((column) {
+                      return TableViewColumn(
+                        minWidth: Get.width /
+                            _controller
+                                .selectedInventoryColumnVisibility.length,
+                        label: column.text,
+                      );
+                    }).toList(),
+                    rows: [
+                      ...List.generate(
+                        _controller.inventoryList.length,
+                        (index) => [
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'plantName'.tr))
+                            '-',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetName'.tr))
+                            // AssetName(
+                            '${_controller.inventoryList[index].name}',
+                          //   1,
+                          // ),
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetDescription'.tr))
+                            '${_controller.inventoryList[index].description}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'serialNo'.tr))
+                            '${_controller.inventoryList[index].serialNumber}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'parentAsset'.tr))
+                            '${_controller.inventoryList[index].parentName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'category'.tr))
+                            '${_controller.inventoryList[index].categoryName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetFacilityName'.tr))
+                            '${_controller.inventoryList[index].blockName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetType'.tr))
+                            '${_controller.inventoryList[index].type}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetStatus'.tr))
+                            '${_controller.inventoryList[index].status}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetCustomerName'.tr))
+                            '${_controller.inventoryList[index].customerName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetOwnerName'.tr))
+                            '${_controller.inventoryList[index].ownerName}',
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'assetOperatorName'.tr))
+                            '${_controller.inventoryList[index].operatorName}',
+                          'Actions'
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].blockName.text))
+                          //   '${_controller.dynamicInventoryList[index].blockName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].name.text))
+                          //   AssetName(
+                          //     '${_controller.dynamicInventoryList[index].name.value}',
+                          //     1,
+                          //   ),
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].serialNumber.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].parentName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].categoryName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .serialNumber.text))
+                          //   '${_controller.dynamicInventoryList[index].operatorName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .description.text))
+                          //   '${_controller.dynamicInventoryList[index].description.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller.dynamicInventoryList[index]
+                          //         .customerName.text))
+                          //   '${_controller.dynamicInventoryList[index].customerName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].ownerName.text))
+                          //   '${_controller.dynamicInventoryList[index].ownerName.value}',
+                          // if (_controller.buildSelectedInventoryList(
+                          //     data: _controller
+                          //         .dynamicInventoryList[index].parentName.text))
+                          //   '${_controller.dynamicInventoryList[index].parentName.value}',
+                          // 'Actions'
+                        ],
+                      ),
+                    ].map(
+                      (record) {
+                        return TableViewRow(
+                          height: 100,
+                          cells: record.map(
+                            (value) {
+                              return TableViewCell(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    print('${value} $record');
+                                  },
+                                  child: value.runtimeType.toString() ==
+                                          'AssetNamess'
+                                      ? Builder(builder: (context) {
+                                          final val = value as AssetName;
+                                          return Column(
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Padding(
+                                                  padding: Dimens.edgeInsets8,
+                                                  child: Text('${val.name}'),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Container(
+                                                  padding:
+                                                      Dimens.edgeInsets8_2_8_2,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        val.requirementStatus ==
+                                                                1
+                                                            ? Colors.red
+                                                            : Colors.green,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                  ),
+                                                  child: Text(
+                                                    val.name == 1
+                                                        ? 'requirementRejected'
+                                                            .tr
+                                                        : 'requirementAccepted'
+                                                            .tr,
+                                                    style:
+                                                        Styles.white10.copyWith(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Dimens.boxHeight10,
+                                            ],
+                                          );
+                                        })
+                                      : value == 'Actions'
+                                          ? Wrap(
+                                              children: [
+                                                TableActionButton(
+                                                  color: Colors.green,
+                                                  icon: Icons.visibility,
+                                                  label: 'View',
+                                                  onPress: () {},
+                                                ),
+                                                TableActionButton(
+                                                  color: Colors.blue,
+                                                  icon: Icons.edit,
+                                                  label: 'Edit',
+                                                  onPress: () {},
+                                                ),
+                                                TableActionButton(
+                                                  color: Colors.red,
+                                                  icon: Icons.delete,
+                                                  label: 'Delete',
+                                                  onPress: () {},
+                                                ),
+                                                TableActionButton(
+                                                  color: Colors.green,
+                                                  icon: Icons.visibility,
+                                                  label: 'Approve Request',
+                                                  onPress: () {},
+                                                ),
+                                                TableActionButton(
+                                                  color: Colors.red,
+                                                  icon: Icons.visibility,
+                                                  label: 'Reject Request',
+                                                  onPress: () {},
+                                                ),
+                                              ],
+                                            )
+                                          : Text(value.toString()),
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        );
+                      },
+                    ).toList(),
                   ),
                 ),
               ),
             ],
           ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.withOpacity(.2),
-                ),
-              ),
-              margin: Dimens.edgeInsets16,
-              child: GetBuilder<HomeController>(
-                  id: 'inventory_list',
-                  builder: (_controller) {
-                    return ScrollableTableView(
-                      columns: [
-                        'assetName'.tr,
-                        'serialNo'.tr,
-                        'parrentAsset'.tr,
-                        'catergory'.tr,
-                        'assetFacilityName'.tr,
-                        'action'.tr,
-                      ].map((column) {
-                        return TableViewColumn(
-                          minWidth: 1100 / 6,
-                          label: column,
-                        );
-                      }).toList(),
-                      rows: [
-                        ...List.generate(
-                          _controller.inventoryList.length,
-                          (index) => [
-                            AssetName(
-                              '${_controller.inventoryList[index].name}',
-                              1,
-                            ),
-                            index + 1,
-                            '${_controller.inventoryList[index].parentName}',
-                            '${_controller.inventoryList[index].categoryName}',
-                            '${_controller.inventoryList[index].operatorName}',
-                            'Actions'
-                          ],
-                        ),
-                      ].map(
-                        (record) {
-                          return TableViewRow(
-                            height: 130,
-                            cells: record.map(
-                              (value) {
-                                return TableViewCell(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      print('${value} $record');
-                                    },
-                                    child: value.runtimeType.toString() ==
-                                            'AssetName'
-                                        ? Builder(builder: (context) {
-                                            final val = value as AssetName;
-                                            return Column(
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: Dimens.edgeInsets8,
-                                                    child: Text('${val.name}'),
-                                                  ),
-                                                ),
-                                                Spacer(),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.centerRight,
-                                                  child: Container(
-                                                    padding: Dimens
-                                                        .edgeInsets8_2_8_2,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          val.requirementStatus ==
-                                                                  1
-                                                              ? Colors.red
-                                                              : Colors.green,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                    ),
-                                                    child: Text(
-                                                      val.name == 1
-                                                          ? 'requirementRejected'
-                                                              .tr
-                                                          : 'requirementAccepted'
-                                                              .tr,
-                                                      style: Styles.white10
-                                                          .copyWith(
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Dimens.boxHeight10,
-                                              ],
-                                            );
-                                          })
-                                        : value == 'Actions'
-                                            ? Wrap(
-                                                children: [
-                                                  TableActionButton(
-                                                    color: Colors.green,
-                                                    icon: Icons.visibility,
-                                                    label: 'View',
-                                                    onPress: () {},
-                                                  ),
-                                                  TableActionButton(
-                                                    color: Colors.blue,
-                                                    icon: Icons.edit,
-                                                    label: 'Edit',
-                                                    onPress: () {},
-                                                  ),
-                                                  TableActionButton(
-                                                    color: Colors.red,
-                                                    icon: Icons.delete,
-                                                    label: 'Delete',
-                                                    onPress: () {},
-                                                  ),
-                                                  TableActionButton(
-                                                    color: Colors.green,
-                                                    icon: Icons.visibility,
-                                                    label: 'Approve Request',
-                                                    onPress: () {},
-                                                  ),
-                                                  TableActionButton(
-                                                    color: Colors.red,
-                                                    icon: Icons.visibility,
-                                                    label: 'Reject Request',
-                                                    onPress: () {},
-                                                  ),
-                                                ],
-                                              )
-                                            : Text(value.toString()),
-                                  ),
-                                );
-                              },
-                            ).toList(),
-                          );
-                        },
-                      ).toList(),
-                    );
-                  }),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }

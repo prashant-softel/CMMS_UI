@@ -46,6 +46,8 @@ abstract class ColorsValue {
     blueColorHex,
   );
 
+  static const Color navyBlueColor = Color.fromARGB(255, 7, 63, 115);
+
   // static const Color bluedarkColor = Color(
   //     bluedarkColorHex
   // );
@@ -156,7 +158,7 @@ abstract class ColorsValue {
     yellowColorHex,
   );
 
-  static const Color greyLightColo = Color(greyLightColoHex);
+  static const Color greyLightColour = Color(greyLightColourHex);
 
   static const Color loginPlaceholderFontColor = Color(
     loginPlaceholderFontColorHex,
@@ -191,6 +193,7 @@ abstract class ColorsValue {
   static const int redColorHex = 0xffcf000f;
   static const int orangeColorHex = 0xfff0541e;
   static const int blueColorHex = 0xff2196f3;
+  static const int navyBlueColorHex = 0xff073763;
   static const int darkBlueColorHex = 0xff1B53F4;
   static const int skyBlueColorHex = 0xff63c0df;
   static const int greyColorHex = 0xff363636;
@@ -205,7 +208,7 @@ abstract class ColorsValue {
   ///
   static const int facebookButtonColorHex = 0xff3B5998;
   static const int iconColorHex = 0xff606060;
-  static const int greyLightColorHex = 0xff1C1C1C;
+  static const int greyLightColorHex = 0xffB3B3B3;
   static const int purpleColorHex = 0xffB000F0;
   static const int lightGreyColorWithOpacityHex35 = 0x59C9CCD1;
   static const int lightGreyColorHex = 0xffC9CCD1;
@@ -224,7 +227,7 @@ abstract class ColorsValue {
   static const int lightGreyTextColorHex = 0xff808080;
   static const int pinkColorHex = 0xffF31B82;
   static const int greyBorderColorHex = 0xffF2F2F2;
-  static const int greyLightColoHex = 0xffCFCFCF;
+  static const int greyLightColourHex = 0xffCFCFCF;
   static const int redColorDarkHex = 0xffEB5757;
   static const int lightBlueishColorHex = 0xffEFF3FB;
   static const int shadowColorHex = 0xffDDE3F8;

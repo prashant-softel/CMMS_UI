@@ -1,17 +1,14 @@
-// To parse this JSON data, do
-//
-//     final block = blockFromJson(jsonString);
-
 import 'dart:convert';
 
-List<Block> blockFromJson(String str) =>
-    List<Block>.from(json.decode(str).map((x) => Block.fromJson(x)));
+///
+List<BlockModel> blockModelFromJson(String str) =>
+    List<BlockModel>.from(json.decode(str).map((x) => BlockModel.fromJson(x)));
 
-String blockToJson(List<Block> data) =>
+String blockModelToJson(List<BlockModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Block {
-  Block({
+class BlockModel {
+  BlockModel({
     this.id,
     this.name,
     this.address,
@@ -29,7 +26,7 @@ class Block {
   String? country;
   int? pin;
 
-  factory Block.fromJson(Map<String, dynamic> json) => Block(
+  factory BlockModel.fromJson(Map<String, dynamic> json) => BlockModel(
         id: json["id"],
         name: json["name"],
         address: json["address"],
@@ -48,4 +45,6 @@ class Block {
         "country": country,
         "pin": pin,
       };
+
+  ///
 }

@@ -10,7 +10,7 @@ class SplashBinding extends Bindings {
       () => SplashController(
         Get.put(
           SplashPresenter(
-            SplasUsecase(
+            SplashUsecase(
               Get.find(),
             ),
           ),

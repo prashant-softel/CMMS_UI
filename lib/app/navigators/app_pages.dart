@@ -2,7 +2,20 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/warranty/warranty.dart';
+import 'package:cmms/app/home/home_view.dart';
 import 'package:get/get.dart';
+
+import '../add_job/add_job_binding.dart';
+import '../add_job/views/add_job_screen.dart';
+
+import '../facility/facility_binding.dart';
+import '../facility/facility_view.dart';
+import '../job_details/job_details_binding.dart';
+import '../job_details/views/job_details_screen.dart';
+import '../job_list/job_list_binding.dart';
+import '../job_list/views/job_list_screen.dart';
+
+// coverage:ignore-file
 
 part 'app_routes.dart';
 
@@ -16,7 +29,8 @@ part 'app_routes.dart';
 class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
-  static const initial = Routes.home;
+  //static const initial = Routes.home;
+  static const initial = Routes.jobList;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -26,10 +40,10 @@ class AppPages {
       binding: SplashBinding(),
       transition: Transition.cupertino,
     ),
-    GetPage<HomeScreen>(
+    GetPage<HomeView>(
       name: _Paths.home,
       transitionDuration: transitionDuration,
-      page: HomeScreen.new,
+      page: HomeView.new,
       binding: HomeBinding(),
       transition: Transition.cupertino,
     ),
@@ -39,6 +53,28 @@ class AppPages {
       page: WarrentyScreen.new,
       binding: WarrantyBinding(),
       transition: Transition.cupertino,
+    ),
+    GetPage<dynamic>(
+      name: _Paths.jobList,
+      page: JobListScreen.new,
+      binding: JobListBinding(),
+      transition: Transition.cupertino,
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addJob,
+      page: AddJobScreen.new,
+      binding: AddJobBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.jobDetails,
+      page: JobDetailsScreen.new,
+      binding: JobDetailsBinding(),
+      transition: Transition.cupertino,
+    ),
+    GetPage<dynamic>(
+      name: _Paths.facility,
+      page: FacilityView.new,
+      binding: FacilityBinding(),
     ),
   ];
 }

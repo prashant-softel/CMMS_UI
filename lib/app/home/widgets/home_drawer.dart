@@ -8,20 +8,20 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 250,
+      width: 60,
       child: Column(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.amber,
-            ),
-            child: Center(
-              child: Text('CMMS'),
-            ),
-          ),
+          // DrawerHeader(
+          //   decoration: BoxDecoration(
+          //     color: Colors.amber,
+          //   ),
+          //   child: Center(
+          //     child: Text('CMMS'),
+          //   ),
+          // ),
           ListTile(
             leading: Icon(Icons.wysiwyg_outlined),
-            title: Text('inventory'.tr),
+            // title: Text('inventory'.tr),
           ),
           ListTile(
             leading: Icon(Icons.security),
@@ -36,12 +36,12 @@ class HomeDrawer extends StatelessWidget {
               Icons.logout,
               color: Colors.red,
             ),
-            title: Text(
-              'Logout',
-              style: Styles.red15.copyWith(
-                color: Colors.red,
-              ),
-            ),
+            // title: Text(
+            //   'Logout',
+            //   style: Styles.red15.copyWith(
+            //     color: Colors.red,
+            //   ),
+            // ),
           ),
         ],
       ),

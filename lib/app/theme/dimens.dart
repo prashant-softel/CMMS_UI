@@ -266,6 +266,10 @@ abstract class Dimens {
     vertical: Dimens.fourteen,
   );
 
+  static EdgeInsets edgeInsets05_10 = EdgeInsets.symmetric(
+    horizontal: Dimens.five,
+    vertical: Dimens.ten,
+  );
   static EdgeInsets edgeInsets16_0_16_10 = EdgeInsets.fromLTRB(
     sixteen,
     zero,
@@ -481,6 +485,13 @@ abstract class Dimens {
     five,
     zero,
     zero,
+  );
+
+  static EdgeInsets edgeInsets8_4_8_4 = EdgeInsets.fromLTRB(
+    eight,
+    four,
+    eight,
+    four,
   );
 
   static EdgeInsets edgeInsets16_8_16_8 = EdgeInsets.fromLTRB(
