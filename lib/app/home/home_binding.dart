@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/warranty/warranty.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,17 @@ class HomeBinding extends Bindings {
       () => HomeController(
         Get.put(
           HomePresenter(
+            HomeUsecase(
+              Get.find(),
+            ),
+          ),
+        ),
+      ),
+    );
+    Get.lazyPut(
+      () => WarrantyController(
+        Get.put(
+          WarrantyPresenter(
             HomeUsecase(
               Get.find(),
             ),

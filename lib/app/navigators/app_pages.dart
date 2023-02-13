@@ -2,7 +2,6 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/warranty/warranty.dart';
-import 'package:cmms/app/home/home_view.dart';
 import 'package:get/get.dart';
 
 import '../add_job/add_job_binding.dart';
@@ -30,7 +29,7 @@ class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
   //static const initial = Routes.home;
-  static const initial = Routes.jobList;
+  static const initial = Routes.warranty;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -40,10 +39,10 @@ class AppPages {
       binding: SplashBinding(),
       transition: Transition.cupertino,
     ),
-    GetPage<HomeView>(
+    GetPage<HomeScreen>(
       name: _Paths.home,
       transitionDuration: transitionDuration,
-      page: HomeView.new,
+      page: HomeScreen.new,
       binding: HomeBinding(),
       transition: Transition.cupertino,
     ),
