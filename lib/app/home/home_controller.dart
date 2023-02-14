@@ -283,7 +283,7 @@ class HomeController extends GetxController {
     update(['warranty_tab', 'manufacturer_tab']);
   }
 
-  Future<ResponseModel> addInventory({
+  Future<void> addInventory({
     required int blockId,
     required String assetName,
     required int parentEqipId,
@@ -302,26 +302,26 @@ class HomeController extends GetxController {
     required int warrantyUsageId,
     required String expireDate,
   }) async {
-    var requestBody = AddInventoryRequestModel(
-      blockId: blockId,
-      name: assetName,
-      description: assetDes,
-      typeId: typeId,
-      categoryId: categoryId,
-      statusId: statusId,
-      serialNumber: serialNo,
-      parentId: parentEqipId,
-      calibrationFrequency: caliFreq,
-      calibrationFrequencyType: caliFreqType,
-      calibrationReminderDays: caliRemainderDays,
-      calibrationFirstDueDate: caliRemainderFirstDate,
-      calibrationLastDate: lastCaliDate,
-    );
+    // var requestBody = AddInventoryRequestModel(
+    //   blockId: blockId,
+    //   name: assetName,
+    //   description: assetDes,
+    //   typeId: typeId,
+    //   categoryId: categoryId,
+    //   statusId: statusId,
+    //   serialNumber: serialNo,
+    //   parentId: parentEqipId,
+    //   calibrationFrequency: caliFreq,
+    //   calibrationFrequencyType: caliFreqType,
+    //   calibrationReminderDays: caliRemainderDays,
+    //   calibrationFirstDueDate: caliRemainderFirstDate,
+    //   calibrationLastDate: lastCaliDate, acCapacity: null,
+    // );
 
-    var response = await homePresenter.addInventory(
-      requestBody: requestBody,
-      isLoading: true,
-    );
+    // var response = await homePresenter.addInventory(
+    //   requestBody: requestBody,
+    //   isLoading: true,
+    // );
   }
 }
 
