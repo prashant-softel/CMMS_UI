@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/warranty/warranty.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,17 +22,21 @@ class HomeController extends GetxController {
   final assetNameTextController = TextEditingController();
   final enterMultiplierTextController = TextEditingController();
   final assetDescpTextController = TextEditingController();
+  final pages = <Widget>[
+    InventoryModule(),
+    WarrentyScreen(),
+  ];
 
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
   int categoryId = 5;
+  var currentBottomBarIndex = 0;
 
   ///
 
   var inventoryColumnVisibility = <ColumnAvailability>[];
   var selectedInventoryColumnVisibility = <ColumnAvailability>[];
-
 
   @override
   void onInit() async {

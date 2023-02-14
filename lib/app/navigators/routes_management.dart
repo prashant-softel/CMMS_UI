@@ -16,4 +16,9 @@ abstract class RouteManagement {
   static void goToWarrantyScreen() {
     Get.toNamed<void>(Routes.warranty);
   }
+
+  /// Go to warranty tab
+  static void goToNewWarrantyScreen() {
+    Get.toNamed<void>(Routes.newWarrantyClaim);
+  }
 }

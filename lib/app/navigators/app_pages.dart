@@ -1,6 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/warranty/add_new_warranty_view.dart';
 import 'package:cmms/app/warranty/warranty.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +30,7 @@ class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
   //static const initial = Routes.home;
-  static const initial = Routes.warranty;
+  static const initial = Routes.home;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -74,6 +75,13 @@ class AppPages {
       name: _Paths.facility,
       page: FacilityView.new,
       binding: FacilityBinding(),
+    ),
+    GetPage<NewWarrantyClaim>(
+      name: _Paths.warranty,
+      transitionDuration: transitionDuration,
+      page: NewWarrantyClaim.new,
+      binding: WarrantyBinding(),
+      transition: Transition.cupertino,
     ),
   ];
 }

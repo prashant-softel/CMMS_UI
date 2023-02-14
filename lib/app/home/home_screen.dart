@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/warranty/warranty.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +31,11 @@ class HomeScreen extends StatelessWidget {
                     constraints: BoxConstraints(
                       maxWidth: Get.width,
                     ),
-                    child: InventoryModule(),
+                    child:
+                        _controller.pages[_controller.currentBottomBarIndex] ==
+                                0
+                            ? InventoryModule()
+                            : WarrentyScreen(),
                   ),
                 ),
               ),

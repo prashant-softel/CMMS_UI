@@ -48,7 +48,8 @@ class WarrentyScreen extends StatelessWidget {
                     icon: Icons.add,
                     lable: 'addWarrantyClaim'.tr,
                     onPress: () {
-                      // Get.to(() => AddInventory());
+                      RouteManagement.goToNewWarrantyScreen();
+                      print('ssss');
                     },
                     color: Colors.blue,
                   ),

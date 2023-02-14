@@ -11,6 +11,7 @@ abstract class Routes {
   static const jobDetails = _Paths.jobDetails;
   static const addJob = _Paths.addJob;
   static const facility = _Paths.facility;
+  static const newWarrantyClaim = _Paths.newWarrantyClaim;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const jobDetails = '/job-details-screen';
   static const addJob = '/add-job-screen';
   static const facility = '/facility';
+  static const newWarrantyClaim = '/newWarrantyClaim';
 }

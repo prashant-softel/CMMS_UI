@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  HomeDrawer({super.key});
 
+  final _homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,12 +23,16 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.wysiwyg_outlined),
             // title: Text('inventory'.tr),
+            onTap: () {
+              _homeController.currentBottomBarIndex = 0;
+            },
           ),
           ListTile(
             leading: Icon(Icons.security),
-            title: Text('warrenty'.tr),
+            // title: Text('warrenty'.tr),
             onTap: () {
-              RouteManagement.goToWarrantyScreen();
+              _homeController.currentBottomBarIndex = 1;
+              // RouteManagement.goToWarrantyScreen();
             },
           ),
           Spacer(),
