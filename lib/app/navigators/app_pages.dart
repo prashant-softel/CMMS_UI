@@ -77,7 +77,7 @@ class AppPages {
       binding: FacilityBinding(),
     ),
     GetPage<NewWarrantyClaim>(
-      name: _Paths.warranty,
+      name: _Paths.newWarrantyClaim,
       transitionDuration: transitionDuration,
       page: NewWarrantyClaim.new,
       binding: WarrantyBinding(),

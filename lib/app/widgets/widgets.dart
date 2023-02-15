@@ -15,3 +15,6 @@ export 'table_action_button.dart';
 export 'add_photo_widget.dart';
 export 'custom_text_field.dart';
 export 'popup_menu_widget.dart';
+export 'custom_title.dart';
+export 'custom_text_field.dart';
+export 'custom_title_textField.dart';

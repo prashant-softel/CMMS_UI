@@ -31,27 +31,42 @@ class CustomTextField extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 100,
-            child: Text('$label'),
-          ),
+          if (label != null)
+            Container(
+              width: 100,
+              child: Text('$label'),
+            ),
           Dimens.boxWidth10,
           Expanded(
             child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade200,
+                    spreadRadius: 10,
+                    blurRadius: 20,
+                  ),
+                ],
+              ),
               child: TextFormField(
                 onTap: onTap,
                 readOnly: readOnly,
                 controller: textController,
                 maxLines: maxLine,
+                cursorColor: Colors.blueAccent,
                 decoration: InputDecoration(
                   contentPadding: Dimens.edgeInsets16_0_16_0,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: .2),
-                    borderRadius: BorderRadius.circular(2),
+                    borderSide: BorderSide(width: 1, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: .2),
-                    borderRadius: BorderRadius.circular(2),
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Colors.grey.shade300,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
               ),

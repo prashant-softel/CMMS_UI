@@ -57,6 +57,16 @@ class TranslationsFile extends Translations {
           'assetOwnerName': 'Asset Owner Name',
           'assetOperatorName': 'Asset Operator Name',
           'action': 'Action',
+          'newWarrantyClaim': 'New Warranty Claim',
+          'warrantyClaimTitle': 'Warranty Claim Title',
+          'warrantyBriefDescription': 'Warranty Brief Description',
+          'equipmentName': 'Equipment Name',
+          'affectedParts': 'Affected Parts',
+          'failureDate&Time': 'Failure Date & Time',
+          'approximateDailyLoss': 'Approximate Daily Loss',
+          'equipmentSrNo': 'Equipment Sr. No.',
+          'manufacturersName': 'Manufacturers Name',
+          'orderContractReferenceNumber': 'Order/Contract\nReference Number',
         },
       };
 }
