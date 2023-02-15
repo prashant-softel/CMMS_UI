@@ -664,6 +664,13 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
     fontSize: Dimens.thirteen,
   );
+
+  static TextStyle snackBarTitleStyle = TextStyle(
+    fontWeight: FontWeight.normal,
+    color: ColorsValue.whiteColor,
+    fontSize: 0.1,
+  );
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /// non common styles

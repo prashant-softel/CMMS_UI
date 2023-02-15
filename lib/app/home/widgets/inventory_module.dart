@@ -48,6 +48,33 @@ class InventoryModule extends StatelessWidget {
                       icon: Icons.add,
                       lable: 'addAsset'.tr,
                       onPress: () {
+                        _controller.viewInventory = false;
+                        _controller.serialNoTc.clear();
+                        _controller.enterMultiplierTc.clear();
+                        _controller.assetDescriptionTc.clear();
+                        _controller.calibrationFrequencyTc.clear();
+                        _controller.lastCalibrationDateTc.clear();
+                        _controller.calibrationRemainderInTc.clear();
+                        _controller.expireDateTc.clear();
+                        _controller.certificationNumberTc.clear();
+                        _controller.descriptionTc.clear();
+                        _controller.modelTc.clear();
+                        _controller.parentEquipmentsTc.clear();
+                        _controller.costTc.clear();
+                        _controller.blockDropdownValue = null;
+
+                        _controller.parentEquipmentDropdownValue = null;
+                        _controller.inventoryCategoryDropdownValue = null;
+                        _controller.inventoryStatusDropdownValue = null;
+                        _controller.inventoryTypeDropdownValue = null;
+                        _controller.calibrationDropdownValue = null;
+                        _controller.warrantyTypeDropdownValue = null;
+                        _controller.warrantyProviderDropdownValue = null;
+                        _controller.warrantyUsageDropdownValue = null;
+                        _controller.manufacturerDropdownValue = null;
+                        _controller.supplierDropdownValue = null;
+                        _controller.currencyDropdownValue = null;
+                        _controller.update(['add_inventory']);
                         Get.to(() => AddInventory());
                       },
                       color: Colors.blue,
@@ -230,10 +257,7 @@ class InventoryModule extends StatelessWidget {
                             '-',
                           if (_controller.buildSelectedInventoryList(
                               data: 'assetName'.tr))
-                            // AssetName(
                             '${_controller.inventoryList[index].name}',
-                          //   1,
-                          // ),
                           if (_controller.buildSelectedInventoryList(
                               data: 'assetDescription'.tr))
                             '${_controller.inventoryList[index].description}',
@@ -265,50 +289,6 @@ class InventoryModule extends StatelessWidget {
                               data: 'assetOperatorName'.tr))
                             '${_controller.inventoryList[index].operatorName}',
                           'Actions'
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller
-                          //         .dynamicInventoryList[index].blockName.text))
-                          //   '${_controller.dynamicInventoryList[index].blockName.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller
-                          //         .dynamicInventoryList[index].name.text))
-                          //   AssetName(
-                          //     '${_controller.dynamicInventoryList[index].name.value}',
-                          //     1,
-                          //   ),
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller.dynamicInventoryList[index]
-                          //         .serialNumber.text))
-                          //   '${_controller.dynamicInventoryList[index].serialNumber.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller.dynamicInventoryList[index]
-                          //         .serialNumber.text))
-                          //   '${_controller.dynamicInventoryList[index].parentName.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller.dynamicInventoryList[index]
-                          //         .serialNumber.text))
-                          //   '${_controller.dynamicInventoryList[index].categoryName.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller.dynamicInventoryList[index]
-                          //         .serialNumber.text))
-                          //   '${_controller.dynamicInventoryList[index].operatorName.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller.dynamicInventoryList[index]
-                          //         .description.text))
-                          //   '${_controller.dynamicInventoryList[index].description.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller.dynamicInventoryList[index]
-                          //         .customerName.text))
-                          //   '${_controller.dynamicInventoryList[index].customerName.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller
-                          //         .dynamicInventoryList[index].ownerName.text))
-                          //   '${_controller.dynamicInventoryList[index].ownerName.value}',
-                          // if (_controller.buildSelectedInventoryList(
-                          //     data: _controller
-                          //         .dynamicInventoryList[index].parentName.text))
-                          //   '${_controller.dynamicInventoryList[index].parentName.value}',
-                          // 'Actions'
                         ],
                       ),
                     ].map(
@@ -320,10 +300,11 @@ class InventoryModule extends StatelessWidget {
                               return TableViewCell(
                                 child: GestureDetector(
                                   onTap: () {
+                                    print('SOme');
                                     print('${value} $record');
                                   },
                                   child: value.runtimeType.toString() ==
-                                          'AssetNamess'
+                                          'AssetNames'
                                       ? Builder(builder: (context) {
                                           final val = value as AssetName;
                                           return Column(
@@ -376,7 +357,11 @@ class InventoryModule extends StatelessWidget {
                                                   color: Colors.green,
                                                   icon: Icons.visibility,
                                                   label: 'View',
-                                                  onPress: () {},
+                                                  onPress: () {
+                                                    // print('Clicked');
+                                                    // _controller.inventoryDetails(
+                                                    //     inventoryId: );
+                                                  },
                                                 ),
                                                 TableActionButton(
                                                   color: Colors.blue,

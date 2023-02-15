@@ -548,7 +548,29 @@ class Repository {
     }
   }
 
-  Future<ResponseModel> addInventory({
+  // Future<CommonResponseModel> addInventory({
+  //   required Map<String, dynamic> requestBody,
+  //   required bool isLoading,
+  // }) async {
+  //   try {
+  //     final auth = await getSecureValue(LocalKeys.authToken);
+  //     log(auth);
+  //     final res = await _dataRepository.addInventory(
+  //       requestBody: requestBody,
+  //       isLoading: isLoading,
+  //       auth: auth,
+  //     );
+  //     if (!res.hasError) {
+  //       return res;
+  //     }
+  //     return res;
+  //   } catch (error) {
+  //     log(error.toString());
+  //     return {} as dynamic;
+  //   }
+  // }
+
+  Future<CommonResponseModel> addInventory({
     required AddInventoryRequestModel requestBody,
     required bool isLoading,
   }) async {
@@ -560,13 +582,37 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
+
       if (!res.hasError) {
-        return res;
+        return commonResponseModelFromJson(res.data);
       }
-      return res;
+      return CommonResponseModel();
     } catch (error) {
       log(error.toString());
-      return {} as ResponseModel;
+      return CommonResponseModel();
+    }
+  }
+
+  Future<List<InventoryDetailsModel>> inventoryDetails({
+    required int inventoryId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.inventoryDetails(
+        inventoryId: inventoryId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        return inventoryDetailsModelFromJson(res.data);
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
     }
   }
 

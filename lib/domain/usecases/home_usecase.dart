@@ -82,12 +82,22 @@ class HomeUsecase {
     );
   }
 
-  Future<ResponseModel> addInventory({
+  Future<CommonResponseModel> addInventory({
     required AddInventoryRequestModel requestBody,
     required bool isLoading,
   }) async {
     return _repository.addInventory(
       requestBody: requestBody,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<InventoryDetailsModel>> inventoryDetails({
+    required int inventoryId,
+    required bool isLoading,
+  }) async {
+    return _repository.inventoryDetails(
+      inventoryId: inventoryId,
       isLoading: isLoading,
     );
   }

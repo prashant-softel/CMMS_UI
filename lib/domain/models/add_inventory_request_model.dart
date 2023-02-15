@@ -9,35 +9,35 @@ String addInventoryRequestModelToJson(List<AddInventoryRequestModel> data) =>
 
 class AddInventoryRequestModel {
   AddInventoryRequestModel({
-    required this.name,
-    required this.description,
-    required this.typeId,
-    required this.statusId,
-    required this.facilityId,
-    required this.blockId,
-    required this.parentId,
-    required this.categoryId,
-    required this.acCapacity,
-    required this.dcCapacity,
-    required this.serialNumber,
-    required this.multiplier,
-    required this.calibrationFrequency,
-    required this.calibrationFrequencyType,
-    required this.calibrationReminderDays,
-    required this.calibrationFirstDueDate,
-    required this.calibrationLastDate,
-    required this.customerId,
-    required this.ownerId,
-    required this.operatorId,
-    required this.manufacturerId,
-    required this.supplierId,
-    required this.model,
-    required this.stockCount,
-    required this.moduleQuantity,
-    required this.cost,
-    required this.currency,
+    this.name,
+    this.description,
+    this.typeId,
+    this.statusId,
+    this.facilityId,
+    this.blockId,
+    this.parentId,
+    this.categoryId,
+    this.acCapacity,
+    this.dcCapacity,
+    this.serialNumber,
+    this.multiplier,
+    this.calibrationFrequency,
+    this.calibrationFrequencyType,
+    this.calibrationReminderDays,
+    this.calibrationFirstDueDate,
+    this.calibrationLastDate,
+    this.customerId,
+    this.ownerId,
+    this.operatorId,
+    this.manufacturerId,
+    this.supplierId,
+    this.model,
+    this.stockCount,
+    this.moduleQuantity,
+    this.cost,
+    this.currency,
     this.attachments,
-    required this.lstWarrantyDetail,
+    this.lstWarrantyDetail,
   });
 
   String? name;
@@ -68,7 +68,7 @@ class AddInventoryRequestModel {
   int? cost;
   String? currency;
   dynamic attachments;
-  List<LstWarrantyDetail> lstWarrantyDetail;
+  List<LstWarrantyDetail>? lstWarrantyDetail;
 
   factory AddInventoryRequestModel.fromJson(Map<String, dynamic> json) =>
       AddInventoryRequestModel(
@@ -136,27 +136,27 @@ class AddInventoryRequestModel {
         "currency": currency,
         "attachments": attachments,
         "lstWarrantyDetail":
-            List<dynamic>.from(lstWarrantyDetail.map((x) => x.toJson())),
+            List<dynamic>.from(lstWarrantyDetail!.map((x) => x.toJson())),
       };
 }
 
 class LstWarrantyDetail {
   LstWarrantyDetail({
-    required this.warrantyType,
+    this.warrantyType,
     this.warrantyDescription,
-    required this.warrrantyTermType,
-    required this.expiryDate,
-    required this.meterLimit,
-    required this.meterUnit,
-    required this.warrantyProviderId,
+    this.warrrantyTermType,
+    this.expiryDate,
+    this.meterLimit,
+    this.meterUnit,
+    this.warrantyProviderId,
     this.certificateNumber,
-    required this.warrantyStatus,
+    this.warrantyStatus,
   });
 
   int? warrantyType;
   String? warrantyDescription;
   int? warrrantyTermType;
-  DateTime expiryDate;
+  String? expiryDate;
   int? meterLimit;
   int? meterUnit;
   int? warrantyProviderId;
@@ -168,7 +168,7 @@ class LstWarrantyDetail {
         warrantyType: json["warranty_type"] as int? ?? 0,
         warrantyDescription: json["warranty_description"] as String? ?? '',
         warrrantyTermType: json["warrranty_term_type"] as int? ?? 0,
-        expiryDate: DateTime.parse(json["expiry_date"]),
+        expiryDate: json["expiry_date"] as String? ?? '',
         meterLimit: json["meter_limit"] as int? ?? 0,
         meterUnit: json["meter_unit"] as int? ?? 0,
         warrantyProviderId: json["warranty_provider_Id"] as int? ?? 0,
@@ -180,8 +180,7 @@ class LstWarrantyDetail {
         "warranty_type": warrantyType,
         "warranty_description": warrantyDescription,
         "warrranty_term_type": warrrantyTermType,
-        "expiry_date":
-            "${expiryDate.year.toString().padLeft(4, '0')}-${expiryDate.month.toString().padLeft(2, '0')}-${expiryDate.day.toString().padLeft(2, '0')}",
+        "expiry_date": expiryDate,
         "meter_limit": meterLimit,
         "meter_unit": meterUnit,
         "warranty_provider_Id": warrantyProviderId,

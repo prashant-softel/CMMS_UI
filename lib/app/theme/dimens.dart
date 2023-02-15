@@ -1300,6 +1300,9 @@ abstract class Dimens {
     zero,
   );
 
+  static EdgeInsets edgeInsets08Width = EdgeInsets.fromLTRB(
+      Dimens.percentWidth(0.8), Dimens.twenty, Dimens.twenty, 0);
+
   static EdgeInsets edgeInsets0_5_20_5 =
       EdgeInsets.fromLTRB(zero, five, twenty, five);
 

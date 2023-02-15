@@ -94,4 +94,10 @@ abstract class DomainRepository {
     required String auth,
     required AddInventoryRequestModel requestBody,
   });
+
+  Future<ResponseModel> inventoryDetails({
+    required int inventoryId,
+    required bool isLoading,
+    required String auth,
+  });
 }

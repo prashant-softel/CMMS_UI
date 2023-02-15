@@ -802,4 +802,59 @@ abstract class Utility {
     //   snackPosition: SnackPosition.BOTTOM,
     // );
   }
+
+  static void showErrorSnackBar(String messageText) {
+    var context = Get.context;
+    // ScaffoldMessenger.of(context!).hideCurrentSnackBar();
+    Get.closeAllSnackbars();
+    Get.snackbar(
+      '',
+      '',
+      padding: Dimens.edgeInsets12,
+      margin: Dimens.edgeInsets08Width,
+      animationDuration: const Duration(milliseconds: 1500),
+      backgroundColor: ColorsValue.redColor,
+      borderRadius: Dimens.six,
+      isDismissible: true,
+      snackPosition:
+          GetPlatform.isMobile ? SnackPosition.BOTTOM : SnackPosition.TOP,
+      titleText: Text(
+        '',
+        // PolyglotTranslationMain.errorMessage.capitalizeFirst.toString(),
+        style: Styles.snackBarTitleStyle,
+      ),
+      messageText: Text(
+        messageText,
+        style: Styles.white14,
+      ),
+      // behavior: SnackBarBehavior.floating,
+    );
+  }
+
+  static void showSuccessSnackBar(String messageText) {
+    var context = Get.context;
+    Get.closeAllSnackbars();
+    Get.snackbar(
+      '',
+      '',
+      padding: Dimens.edgeInsets12,
+      margin: Dimens.edgeInsets08Width,
+      animationDuration: const Duration(milliseconds: 1500),
+      backgroundColor: ColorsValue.greenColor,
+      borderRadius: Dimens.six,
+      isDismissible: true,
+      snackPosition:
+          GetPlatform.isMobile ? SnackPosition.BOTTOM : SnackPosition.TOP,
+      titleText: Text(
+        '',
+        // PolyglotTranslationMain.successMessage.capitalizeFirst.toString(),
+        style: Styles.snackBarTitleStyle,
+      ),
+      messageText: Text(
+        messageText,
+        style: Styles.white14,
+      ),
+      // behavior: SnackBarBehavior.floating,
+    );
+  }
 }

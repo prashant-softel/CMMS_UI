@@ -171,4 +171,12 @@ class DeviceRepository extends DomainRepository {
   }) {
     throw UnimplementedError();
   }
+
+  Future<ResponseModel> inventoryDetails({
+    required int inventoryId,
+    required bool isLoading,
+    required String auth,
+  }) {
+    throw UnimplementedError();
+  }
 }

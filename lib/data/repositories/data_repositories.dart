@@ -230,11 +230,27 @@ class DataRepository extends DomainRepository {
     required String auth,
     required AddInventoryRequestModel requestBody,
   }) async {
-    return await connectHelper.addInventory(
+    var response = await connectHelper.addInventory(
       isLoading: isLoading,
       auth: auth,
       requestBody: requestBody,
     );
+    print('Response add inventory ${response.data}');
+    return response;
+  }
+
+  Future<ResponseModel> inventoryDetails({
+    required int inventoryId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    var response = await connectHelper.inventoryDetails(
+      isLoading: isLoading,
+      auth: auth,
+      id: inventoryId,
+    );
+    print('Response add inventory ${response.data}');
+    return response;
   }
 
   ///

@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CalibrationTabWidget extends StatelessWidget {
@@ -25,9 +26,15 @@ class CalibrationTabWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomTextField(
-                        label: 'Calibration Frequency: ',
+                        readOnly: controller.viewInventory,
+                        numberTextField: true,
+                        label: 'Calibration Frequency: *',
                         textController: controller.calibrationFrequencyTc,
                         width: 300,
+                        errorText:
+                            controller.calibrationFrequencyTc.text.isNotEmpty
+                                ? null
+                                : 'This field is required.',
                       ),
                       Container(
                         width: 100,
@@ -71,13 +78,15 @@ class CalibrationTabWidget extends StatelessWidget {
                     ],
                   ),
                   CustomTextField(
+                    numberTextField: true,
+                    readOnly: true,
                     onTap: () {
                       controller.openLastCalibrationDatePicker =
                           !controller.openLastCalibrationDatePicker;
                       controller.update(['calibration_tab']);
                     },
                     textController: controller.lastCalibrationDateTc,
-                    label: 'Last calibration date: ',
+                    label: 'Last calibration date: *',
                   ),
                 ],
               ),
@@ -92,9 +101,15 @@ class CalibrationTabWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CustomTextField(
-                            label: 'Calibration remainder In: ',
+                            readOnly: controller.viewInventory,
+                            numberTextField: true,
+                            label: 'Calibration remainder In: *',
                             textController: controller.calibrationRemainderInTc,
                             width: 300,
+                            errorText: controller
+                                    .calibrationFrequencyTc.text.isNotEmpty
+                                ? null
+                                : 'This field is required.',
                           ),
                           Container(
                             width: 100,
@@ -119,7 +134,7 @@ class CalibrationTabWidget extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Calibration cirtificate'),
+                            Text('Calibration certificate'),
                             Dimens.boxWidth10,
                             ActionButton(
                               lable: 'Upload certification file',
@@ -148,6 +163,11 @@ class CalibrationTabWidget extends StatelessWidget {
                           controller: DateRangePickerController(),
                           selectionChanges: (p0) {
                             print('po valu ${p0.value.toString()}');
+                            controller.lastCalibrationDateTc.text =
+                                DateFormat('yyyy-MM-dd').format(p0.value);
+                            controller.openLastCalibrationDatePicker =
+                                !controller.openLastCalibrationDatePicker;
+                            controller.update(['calibration_tab']);
                           },
                         ),
                       ),

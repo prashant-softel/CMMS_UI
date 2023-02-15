@@ -74,12 +74,13 @@ class ConnectHelper {
         },
       );
 
+//  khushru.mistry@softel.com
   Future<ResponseModel> generateToken() async {
     var response = await apiWrapper.makeRequest(
       'Token/Authenticate',
       Request.postMultiparts,
       {
-        'user_name': 'khushru.mistry@softel.com',
+        'user_name': 'khushru.mistry@softeltech.in',
         'password': '/bS4BMO+fOLSPh0oK2qP0A=='
       },
       true,
@@ -316,7 +317,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    // print('Response GetBusinessList ${response.data}');
+    print('Response GetBusinessList ${response.data}');
     return response;
   }
 
@@ -326,15 +327,76 @@ class ConnectHelper {
     required AddInventoryRequestModel requestBody,
   }) async {
     var response = await apiWrapper.makeRequest(
-      'api/Inventory/AddInventory',
-      Request.postMultiparts,
-      requestBody,
+      'Inventory/AddInventory',
+      Request.post,
+      // [
+      //   {
+      //     "name": "sd",
+      //     "description": "d",
+      //     "typeId": 3,
+      //     "statusId": 4,
+      //     "facilityId": 0,
+      //     "blockId": 75,
+      //     "parentId": 13623,
+      //     "categoryId": 3,
+      //     "acCapacity": 2000,
+      //     "dcCapacity": 5000,
+      //     "serialNumber": "ss",
+      //     "multiplier": 1,
+      //     "calibrationFrequency": 12,
+      //     "calibrationFrequencyType": 2,
+      //     "calibrationReminderDays": 12,
+      //     "calibrationFirstDueDate": "2023-02-16",
+      //     "calibrationLastDate": "2023-02-14",
+      //     "customerId": 5,
+      //     "ownerId": 0,
+      //     "operatorId": 0,
+      //     "manufacturerId": 20,
+      //     "supplierId": 25,
+      //     "model": "swe3",
+      //     "stockCount": 0,
+      //     "moduleQuantity": 0,
+      //     "cost": 123,
+      //     "currency": "USD",
+      //     "attachments": null,
+      //     "lstWarrantyDetail": [
+      //       {
+      //         "warranty_type": 2,
+      //         "warranty_description": "s1w",
+      //         "warrranty_term_type": 20,
+      //         "expiry_date": "2023-02-08",
+      //         "meter_limit": 0,
+      //         "meter_unit": 0,
+      //         "warranty_provider_Id": 20,
+      //         "certificate_number": "dw",
+      //         "warranty_status": 1
+      //       }
+      //     ]
+      //   }
+      // ],
+      [requestBody],
+      isLoading,
+      {'Authorization': 'Bearer $auth', 'Content-type': 'application/json'},
+    );
+    // print('Response AddInventory ${response.data}');
+    return response;
+  }
+
+  Future<ResponseModel> inventoryDetails({
+    required bool isLoading,
+    required String auth,
+    required int id,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryDetails?id=$id',
+      Request.getMultiparts,
+      null,
       isLoading,
       {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('Response AddInventory ${response.data}');
+    print('Response GetBusinessList ${response.data}');
     return response;
   }
 

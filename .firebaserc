@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cmms-df918"
-  }
+    "default": "cmms-e205b",
+    "development": "cmms-e205b"
+  },
+  "targets": {},
+  "etags": {}
 }

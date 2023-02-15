@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/home_view.dart';
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,10 +16,12 @@ class HomeController extends GetxController {
   var warrantyTypeDropdownList = <DropdownModel>[];
   var warrantyUsageDropdownList = <DropdownModel>[];
   var warrantyProviderDropdownList = <DropdownModel>[];
-  // var manufacturerDropdownList = <DropdownModel>[];
-  // var supplierDropdownList = <DropdownModel>[];
+  var manufacturerDropdownList = <DropdownModel>[];
+  var supplierDropdownList = <DropdownModel>[];
   var currencyDropdownList = <DropdownModel>[];
   var businessList = <BusinessModel>[];
+
+  var blockDropDownList = <DropdownModel>[];
 
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
@@ -35,7 +37,7 @@ class HomeController extends GetxController {
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
   int categoryId = 5;
-  int businessType = 8;
+  int businessType = 5;
 
   bool openExpiryDatePicker = false;
   bool openLastCalibrationDatePicker = false;
@@ -46,18 +48,18 @@ class HomeController extends GetxController {
   var inventoryColumnVisibility = <ColumnAvailability>[];
   var selectedInventoryColumnVisibility = <ColumnAvailability>[];
 
-  int? blockDropdownValue;
-  String? parentEquipmentDropdownValue;
-  int? typeDropdownValue;
-  int? categoryDropdownValue;
-  int? statusDropdownValue;
+  DropdownModel? blockDropdownValue;
+  DropdownModel? parentEquipmentDropdownValue;
+  DropdownModel? inventoryTypeDropdownValue;
+  DropdownModel? inventoryCategoryDropdownValue;
+  DropdownModel? inventoryStatusDropdownValue;
   int? calibrationDropdownValue;
-  int? warrantyTypeDropdownValue;
-  int? warrantyUsageDropdownValue;
-  int? warrantyProviderDropdownValue;
-  int? manufacturerDropdownValue;
-  int? supplierDropdownValue;
-  int? currencyDropdownValue;
+  DropdownModel? warrantyTypeDropdownValue;
+  DropdownModel? warrantyProviderDropdownValue;
+  DropdownModel? warrantyUsageDropdownValue;
+  DropdownModel? manufacturerDropdownValue;
+  DropdownModel? supplierDropdownValue;
+  DropdownModel? currencyDropdownValue;
 
   @override
   void onInit() async {
@@ -80,13 +82,13 @@ class HomeController extends GetxController {
   // - Calibration Tab
   var calibrationFrequencyTc = TextEditingController();
   var calibrationRemainderInTc = TextEditingController();
-  var calibrationDaysTc = TextEditingController();
+  // var calibrationDaysTc = TextEditingController();
   var lastCalibrationDateTc = TextEditingController();
 
   // warranty Tab
   var expireDateTc = TextEditingController();
   var descriptionTc = TextEditingController();
-  var calibrationNumberTc = TextEditingController();
+  var certificationNumberTc = TextEditingController();
 
   // purchasing Tab
   var modelTc = TextEditingController();
@@ -141,7 +143,7 @@ class HomeController extends GetxController {
     // warrantyProviderDropdownList.add(DropdownModel(id: 0, name: 'Default'));
     // manufacturerDropdownList.add(DropdownModel(id: 0, name: 'Manufacturer 1'));
     // supplierDropdownList.add(DropdownModel(id: 0, name: 'Supplier 1'));
-    currencyDropdownList.add(DropdownModel(id: 0, name: 'Currency 1'));
+    currencyDropdownList.add(DropdownModel(id: 0, name: 'USD'));
   }
 
   void buildSelectedInventoryColumnVisibility() {
@@ -166,7 +168,7 @@ class HomeController extends GetxController {
   }
 
   var dynamicInventoryList = <InventoryListModel>[];
-  var parentEquipmentList = <String>[];
+  var parentEquipmentList = <DropdownModel>[];
 
   Future<void> getInventoryList() async {
     final list = await homePresenter.getInventoryList(
@@ -176,9 +178,9 @@ class HomeController extends GetxController {
     );
     inventoryList = list;
 
-    var someTempList = <String>[];
+    var someTempList = <DropdownModel>[];
     for (var i in inventoryList) {
-      someTempList.add(i.parentName ?? '');
+      someTempList.add(DropdownModel(id: i.id, name: i.parentName ?? ''));
     }
 
     parentEquipmentList = someTempList.toSet().toList();
@@ -191,6 +193,11 @@ class HomeController extends GetxController {
     final list = await homePresenter.getBlockList(
         isLoading: false, facilityId: facilityId);
     blockList = list;
+
+    for (var i in blockList) {
+      blockDropDownList.add(DropdownModel(id: i.id, name: i.name));
+    }
+
     update(['add_inventory']);
   }
 
@@ -230,9 +237,13 @@ class HomeController extends GetxController {
     return boolVal;
   }
 
-  var inventoryTypeList = <InventoryTypeModel>[];
-  var inventoryCategoryList = <InventoryCategoryModel>[];
-  var inventoryStatusList = <InventoryTypeModel>[];
+  var inventoryTypeDropdownList = <DropdownModel>[];
+  var inventoryCategoryDropdownList = <DropdownModel>[];
+  var inventoryStatusDropdownList = <DropdownModel>[];
+
+  // var inventoryTypeList = <InventoryTypeModel>[];
+  // var inventoryCategoryList = <InventoryCategoryModel>[];
+  // var inventoryStatusList = <InventoryTypeModel>[];
 
   Future<void> getInventoryTypeList({
     required bool isLoading,
@@ -242,7 +253,10 @@ class HomeController extends GetxController {
       isLoading: isLoading,
       facilityId: facilityId,
     );
-    inventoryTypeList = response;
+
+    for (var i in response) {
+      inventoryTypeDropdownList.add(DropdownModel(id: i.id, name: i.name));
+    }
     update(['add_inventory']);
   }
 
@@ -254,7 +268,9 @@ class HomeController extends GetxController {
       isLoading: isLoading,
       facilityId: facilityId,
     );
-    inventoryCategoryList = response;
+    for (var i in response) {
+      inventoryCategoryDropdownList.add(DropdownModel(id: i.id, name: i.name));
+    }
     update(['add_inventory']);
   }
 
@@ -266,7 +282,9 @@ class HomeController extends GetxController {
       isLoading: isLoading,
       facilityId: facilityId,
     );
-    inventoryStatusList = response;
+    for (var i in response) {
+      inventoryStatusDropdownList.add(DropdownModel(id: i.id, name: i.name));
+    }
     update(['add_inventory']);
   }
 
@@ -280,6 +298,11 @@ class HomeController extends GetxController {
     );
 
     businessList = response;
+    for (var i in businessList) {
+      warrantyProviderDropdownList.add(DropdownModel(id: i.id, name: i.name));
+      manufacturerDropdownList.add(DropdownModel(id: i.id, name: i.name));
+      supplierDropdownList.add(DropdownModel(id: i.id, name: i.name));
+    }
     update(['warranty_tab', 'manufacturer_tab']);
   }
 
@@ -292,6 +315,7 @@ class HomeController extends GetxController {
     required int statusId,
     required String serialNo,
     required String assetDes,
+    required int multiplier,
     required int caliFreq,
     required int caliFreqType,
     required int caliRemainderDays,
@@ -301,27 +325,145 @@ class HomeController extends GetxController {
     required int warrantyProviderId,
     required int warrantyUsageId,
     required String expireDate,
+    required String warrantyCertification,
+    required String warrantyDescription,
+    required int manufacturerId,
+    required int supplierId,
+    required String currency,
+    required String manufacturerModel,
+    required int manufacturerCost,
+    required String manufacturerParentEquipmentNo,
   }) async {
-    // var requestBody = AddInventoryRequestModel(
-    //   blockId: blockId,
-    //   name: assetName,
-    //   description: assetDes,
-    //   typeId: typeId,
-    //   categoryId: categoryId,
-    //   statusId: statusId,
-    //   serialNumber: serialNo,
-    //   parentId: parentEqipId,
-    //   calibrationFrequency: caliFreq,
-    //   calibrationFrequencyType: caliFreqType,
-    //   calibrationReminderDays: caliRemainderDays,
-    //   calibrationFirstDueDate: caliRemainderFirstDate,
-    //   calibrationLastDate: lastCaliDate, acCapacity: null,
-    // );
+    // var requestBody2 = <String, dynamic>{
+    //   "name": assetName,
+    //   "description": assetDes,
+    //   "typeId": typeId,
+    //   "statusId": statusId,
+    //   "facilityId": facilityId,
+    //   "blockId": blockId,
+    //   "parentId": parentEqipId,
+    //   "categoryId": categoryId,
+    //   "acCapacity": null,
+    //   "dcCapacity": null,
+    //   "serialNumber": serialNo,
+    //   "multiplier": multiplier,
+    //   "calibrationFrequency": caliFreq,
+    //   "calibrationFrequencyType": caliFreqType,
+    //   "calibrationReminderDays": caliRemainderDays,
+    //   "calibrationFirstDueDate": caliRemainderFirstDate,
+    //   "calibrationLastDate": lastCaliDate,
+    //   "customerId": null,
+    //   "ownerId": null,
+    //   "operatorId": null,
+    //   "manufacturerId": manufacturerId,
+    //   "supplierId": supplierId,
+    //   "model": manufacturerModel,
+    //   "stockCount": null,
+    //   "moduleQuantity": 0,
+    //   "cost": manufacturerCost,
+    //   "currency": currency,
+    //   "attachments": null,
+    //   "lstWarrantyDetail": [
+    //     <String, dynamic>{
+    //       "warranty_type": warrantyTypeId,
+    //       "warranty_description": warrantyDescription,
+    //       "warrranty_term_type": null,
+    //       "expiry_date": expireDate,
+    //       "meter_limit": 0,
+    //       "meter_unit": 0,
+    //       "warranty_provider_Id": warrantyProviderId,
+    //       "certificate_number": warrantyCertification,
+    //       "warranty_status": 1,
+    //     }
+    //   ]
+    //  LstWarrantyDetail(
+    // expiryDate: expireDate,
+    // warrantyDescription: warrantyDescription,
+    // warrantyProviderId: warrantyProviderId,
+    // certificateNumber: warrantyCertification,
+    // warrantyType: warrantyTypeId,
+    // warrrantyTermType: warrantyProviderId,
+    // warrantyStatus: 1,
+    // meterLimit: 0,
+    // meterUnit: 0,
+    // ),
+    // };
 
-    // var response = await homePresenter.addInventory(
-    //   requestBody: requestBody,
-    //   isLoading: true,
-    // );
+    var requestBody = AddInventoryRequestModel(
+      blockId: blockId,
+      name: assetName,
+      description: assetDes,
+      typeId: typeId,
+      categoryId: categoryId,
+      statusId: statusId,
+      serialNumber: serialNo,
+      parentId: parentEqipId,
+      calibrationFrequency: caliFreq,
+      calibrationFrequencyType: caliFreqType,
+      calibrationReminderDays: caliRemainderDays,
+      calibrationFirstDueDate: caliRemainderFirstDate,
+      calibrationLastDate: lastCaliDate,
+      acCapacity: 2000,
+      cost: manufacturerCost,
+      currency: currency,
+      customerId: 5,
+      dcCapacity: 5000,
+      facilityId: 0,
+      manufacturerId: manufacturerId,
+      model: manufacturerModel,
+      multiplier: multiplier,
+      supplierId: supplierId,
+      moduleQuantity: 0,
+      operatorId: 0,
+      ownerId: 0,
+      stockCount: 0,
+      attachments: null,
+      lstWarrantyDetail: [
+        LstWarrantyDetail(
+          expiryDate: expireDate,
+          warrantyDescription: warrantyDescription,
+          warrantyProviderId: warrantyProviderId,
+          certificateNumber: warrantyCertification,
+          warrantyType: warrantyTypeId,
+          warrrantyTermType: warrantyProviderId,
+          warrantyStatus: 1,
+          meterLimit: 0,
+          meterUnit: 0,
+        ),
+      ],
+    );
+
+    try {
+      await homePresenter.addInventory(
+        requestBody: requestBody,
+        isLoading: true,
+      );
+      Utility.showSuccessSnackBar('The inventory added successfully');
+      getInventoryList();
+      Get.to(() => HomeView());
+      print('Response ');
+    } catch (e) {
+      Utility.showSuccessSnackBar('Failed to add the inventory. Please check.');
+
+      Utility.printELog(e.toString());
+    }
+  }
+
+  var inventoryDetailsList = <InventoryDetailsModel>[];
+  bool viewInventory = false;
+
+  Future<void> inventoryDetails({required int inventoryId}) async {
+    try {
+      var response = await homePresenter.inventoryDetails(
+          inventoryId: inventoryId, isLoading: false);
+      inventoryDetailsList = response;
+      viewInventory = true;
+      Get.to(() => AddInventory());
+
+      update(['add_inventory']);
+    } catch (e) {
+      Utility.printELog(e.toString());
+    }
   }
 }
 
@@ -348,8 +490,9 @@ class Inventory {
 class AssetName {
   final String name;
   final int requirementStatus;
+  final int id;
 
-  AssetName(this.name, this.requirementStatus);
+  AssetName(this.name, this.requirementStatus, this.id);
 }
 
 class ColumnAvailability {

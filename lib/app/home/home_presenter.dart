@@ -81,12 +81,22 @@ class HomePresenter {
     );
   }
 
-  Future<ResponseModel> addInventory({
+  Future<CommonResponseModel> addInventory({
     required AddInventoryRequestModel requestBody,
     required bool isLoading,
   }) async {
     return homeUsecase.addInventory(
       requestBody: requestBody,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<InventoryDetailsModel>> inventoryDetails({
+    required int inventoryId,
+    required bool isLoading,
+  }) async {
+    return homeUsecase.inventoryDetails(
+      inventoryId: inventoryId,
       isLoading: isLoading,
     );
   }

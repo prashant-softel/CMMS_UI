@@ -1,8 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/calibration_tab_widget.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:cmms/app/home/widgets/dropdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AddInventory extends StatelessWidget {
   AddInventory({super.key});
@@ -40,7 +41,9 @@ class AddInventory extends StatelessWidget {
                           child: Column(
                             children: [
                               CustomAppBar(
-                                title: 'addInventory'.tr,
+                                title: controller.viewInventory
+                                    ? 'View Inventory'
+                                    : 'addInventory'.tr,
                                 action: ActionButton(
                                   icon: Icons.menu,
                                   lable: 'Inventory List',
@@ -53,493 +56,102 @@ class AddInventory extends StatelessWidget {
                               Dimens.boxHeight10,
                               Wrap(
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: Dimens.edgeInsets16,
-                                        constraints: BoxConstraints(
-                                          maxWidth: 420,
-                                          minWidth: 100,
-                                        ),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 100,
-                                              child: Text('Block: *'),
-                                            ),
-                                            Dimens.boxWidth10,
-                                            Expanded(
-                                              child: Container(
-                                                // padding: Dimens.edgeInsets10_0_10_0,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .hintColor
-                                                        .withOpacity(0.3),
-                                                  ),
-                                                ),
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton2(
-                                                    hint: Text(
-                                                      'Select Block',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Theme.of(context)
-                                                            .hintColor,
-                                                      ),
-                                                    ),
-                                                    items: controller.blockList
-                                                        .map((item) =>
-                                                            DropdownMenuItem<
-                                                                int>(
-                                                              value: item.id,
-                                                              child: Text(
-                                                                item.name ?? '',
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                ),
-                                                              ),
-                                                            ))
-                                                        .toList(),
-                                                    value: controller
-                                                        .blockDropdownValue,
-                                                    onChanged: (value) {
-                                                      controller
-                                                              .blockDropdownValue =
-                                                          value;
-                                                      controller.update(
-                                                          ['add_inventory']);
-                                                    },
-                                                    buttonPadding:
-                                                        EdgeInsets.only(
-                                                            left: 8),
-                                                    buttonHeight: 40,
-                                                    buttonWidth: 140,
-                                                    itemHeight: 40,
-                                                    dropdownWidth: 200,
-                                                    dropdownMaxHeight: 300,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  CustomDropdownWidget(
+                                    title: 'Block: *',
+                                    dropdownTitle: 'Select Block',
+                                    dropdownList: controller.blockDropDownList,
+                                    dropDownValue:
+                                        controller.blockDropdownValue,
+                                    onChangeDropdown: (val) {
+                                      controller.blockDropdownValue = val;
+                                      controller.update(['add_inventory']);
+                                    },
+                                    errorText:
+                                        controller.blockDropdownValue != null
+                                            ? null
+                                            : 'This field is required.',
                                   ),
-                                  Container(
-                                    margin: Dimens.edgeInsets16,
-                                    constraints: BoxConstraints(
-                                      maxWidth: 420,
-                                      minWidth: 100,
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          child: Text('Parent Equipment *'),
-                                        ),
-                                        Dimens.boxWidth10,
-                                        Expanded(
-                                          child: Container(
-                                            // padding: Dimens.edgeInsets10_0_10_0,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                color: Theme.of(context)
-                                                    .hintColor
-                                                    .withOpacity(0.3),
-                                              ),
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton2(
-                                                hint: Text(
-                                                  'Select Equipment',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                ),
-                                                items: controller
-                                                    .parentEquipmentList
-                                                    .map((item) =>
-                                                        DropdownMenuItem<
-                                                            String>(
-                                                          value: item,
-                                                          child: Text(
-                                                            item,
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ))
-                                                    .toList(),
-                                                value: controller
-                                                    .parentEquipmentDropdownValue,
-                                                onChanged: (value) {
-                                                  controller
-                                                          .parentEquipmentDropdownValue =
-                                                      value;
-                                                  controller.update(
-                                                      ['add_inventory']);
-                                                },
-                                                buttonPadding:
-                                                    EdgeInsets.only(left: 8),
-                                                buttonHeight: 40,
-                                                buttonWidth: 140,
-                                                itemHeight: 40,
-                                                dropdownWidth: 200,
-                                                dropdownMaxHeight: 300,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  CustomDropdownWidget(
+                                    title: 'Parent Equipment: *',
+                                    dropdownTitle: 'Select Equipment',
+                                    dropdownList:
+                                        controller.parentEquipmentList,
+                                    dropDownValue:
+                                        controller.parentEquipmentDropdownValue,
+                                    onChangeDropdown: (val) {
+                                      controller.parentEquipmentDropdownValue =
+                                          val;
+                                      controller.update(['add_inventory']);
+                                    },
+                                    errorText: controller
+                                                .parentEquipmentDropdownValue !=
+                                            null
+                                        ? null
+                                        : 'This field is required.',
                                   ),
-
-                                  // CustomTextField(
-                                  //   label: 'Parent Equipment *',
-                                  //   textController: controller
-                                  //       .parentEquipmentTextController,
-                                  //   readOnly: true,
-                                  //   onTap: () {
-                                  //     controller.getEquipmentList(
-                                  //         facilityId: '45');
-                                  //     Get.defaultDialog(
-                                  //       title: 'Equipment List',
-                                  //       content: Builder(
-                                  //         builder: (context) {
-                                  //           if (controller
-                                  //               .equipmentList.isEmpty) {
-                                  //             return CircularProgressIndicator
-                                  //                 .adaptive();
-                                  //           }
-                                  //           return Container(
-                                  //             height: Get.height * .4,
-                                  //             decoration: BoxDecoration(
-                                  //               borderRadius:
-                                  //                   BorderRadius.circular(8),
-                                  //             ),
-                                  //             child: SingleChildScrollView(
-                                  //               child: Column(
-                                  //                 children: [
-                                  //                   ...List.generate(
-                                  //                     controller
-                                  //                         .equipmentList.length,
-                                  //                     (index) => ListTile(
-                                  //                       onTap: () {
-                                  //                         controller
-                                  //                             .onSelectEquipment(
-                                  //                                 controller
-                                  //                                         .equipmentList[
-                                  //                                     index]);
-                                  //                         Get.back();
-                                  //                       },
-                                  //                       title: Text(
-                                  //                           '${controller.equipmentList[index].name}'),
-                                  //                     ),
-                                  //                   ).toList(),
-                                  //                 ],
-                                  //               ),
-                                  //             ),
-                                  //           );
-                                  //         },
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // ),
-
-                                  Container(
-                                    margin: Dimens.edgeInsets16,
-                                    constraints: BoxConstraints(
-                                      maxWidth: 420,
-                                      minWidth: 100,
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          child: Text('Type *'),
-                                        ),
-                                        Dimens.boxWidth10,
-                                        Expanded(
-                                          child: Container(
-                                            // padding: Dimens.edgeInsets10_0_10_0,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                color: Theme.of(context)
-                                                    .hintColor
-                                                    .withOpacity(0.3),
-                                              ),
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton2(
-                                                hint: Text(
-                                                  'Select Type',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                ),
-                                                items: controller
-                                                    .inventoryTypeList
-                                                    .map((item) =>
-                                                        DropdownMenuItem<int>(
-                                                          value: item.id,
-                                                          child: Text(
-                                                            item.name ?? '',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ))
-                                                    .toList(),
-                                                value: controller
-                                                    .typeDropdownValue,
-                                                onChanged: (value) {
-                                                  controller.typeDropdownValue =
-                                                      value;
-                                                  controller.update(
-                                                      ['add_inventory']);
-                                                },
-                                                buttonPadding:
-                                                    EdgeInsets.only(left: 8),
-                                                buttonHeight: 40,
-                                                buttonWidth: 140,
-                                                itemHeight: 40,
-                                                dropdownWidth: 200,
-                                                dropdownMaxHeight: 300,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  CustomDropdownWidget(
+                                    title: 'Type *',
+                                    dropdownTitle: 'Select Type',
+                                    dropdownList:
+                                        controller.inventoryTypeDropdownList,
+                                    dropDownValue:
+                                        controller.inventoryTypeDropdownValue,
+                                    onChangeDropdown: (val) {
+                                      controller.inventoryTypeDropdownValue =
+                                          val;
+                                      controller.update(['add_inventory']);
+                                    },
+                                    errorText:
+                                        controller.inventoryTypeDropdownValue !=
+                                                null
+                                            ? null
+                                            : 'This field is required.',
                                   ),
-
-                                  // Wrap(
-                                  //   children: [
-                                  //     CustomTextField(
-                                  //       label: 'Type *',
-                                  //       textController:
-                                  //           controller.typeTextController,
-                                  //     ),
-                                  //     Container(
-                                  //       margin: Dimens.edgeInsets16,
-                                  //       width: 100,
-                                  //       color: Colors.black,
-                                  //       child: ActionButton(
-                                  //         lable: 'Add',
-                                  //         onPress: () {},
-                                  //         icon: Icons.add,
-                                  //         color: Colors.blue,
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
-                                  Container(
-                                    margin: Dimens.edgeInsets16,
-                                    constraints: BoxConstraints(
-                                      maxWidth: 420,
-                                      minWidth: 100,
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          child: Text('Category *'),
-                                        ),
-                                        Dimens.boxWidth10,
-                                        Expanded(
-                                          child: Container(
-                                            // padding: Dimens.edgeInsets10_0_10_0,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                color: Theme.of(context)
-                                                    .hintColor
-                                                    .withOpacity(0.3),
-                                              ),
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton2(
-                                                hint: Text(
-                                                  'Select Category',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                ),
-                                                items: controller
-                                                    .inventoryCategoryList
-                                                    .map((item) =>
-                                                        DropdownMenuItem<int>(
-                                                          value: item.id,
-                                                          child: Text(
-                                                            item.name,
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ))
-                                                    .toList(),
-                                                value: controller
-                                                    .categoryDropdownValue,
-                                                onChanged: (value) {
-                                                  controller
-                                                          .categoryDropdownValue =
-                                                      value;
-                                                  controller.update(
-                                                      ['add_inventory']);
-                                                },
-                                                buttonPadding:
-                                                    EdgeInsets.only(left: 8),
-                                                buttonHeight: 40,
-                                                buttonWidth: 140,
-                                                itemHeight: 40,
-                                                dropdownWidth: 200,
-                                                dropdownMaxHeight: 300,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  CustomDropdownWidget(
+                                    title: 'Category *',
+                                    dropdownTitle: 'Select Category',
+                                    dropdownList: controller
+                                        .inventoryCategoryDropdownList,
+                                    dropDownValue: controller
+                                        .inventoryCategoryDropdownValue,
+                                    onChangeDropdown: (val) {
+                                      controller
+                                          .inventoryCategoryDropdownValue = val;
+                                      controller.update(['add_inventory']);
+                                    },
+                                    errorText: controller
+                                                .inventoryCategoryDropdownValue !=
+                                            null
+                                        ? null
+                                        : 'This field is required.',
                                   ),
-                                  // Wrap(
-                                  //   children: [
-                                  //     CustomTextField(
-                                  //       label: 'Category *',
-                                  //       textController:
-                                  //           controller.categoryTextController,
-                                  //     ),
-                                  //     Container(
-                                  //       margin: Dimens.edgeInsets16,
-                                  //       width: 100,
-                                  //       color: Colors.black,
-                                  //       child: ActionButton(
-                                  //         lable: 'Add',
-                                  //         onPress: () {},
-                                  //         icon: Icons.add,
-                                  //         color: Colors.blue,
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
-
-                                  // CustomTextField(
-                                  //   label: 'Status',
-                                  //   textController:
-                                  //       controller.statusTextController,
-                                  // ),
-                                  Container(
-                                    margin: Dimens.edgeInsets16,
-                                    constraints: BoxConstraints(
-                                      maxWidth: 420,
-                                      minWidth: 100,
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          child: Text('Status *'),
-                                        ),
-                                        Dimens.boxWidth10,
-                                        Expanded(
-                                          child: Container(
-                                            // padding: Dimens.edgeInsets10_0_10_0,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                color: Theme.of(context)
-                                                    .hintColor
-                                                    .withOpacity(0.3),
-                                              ),
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton2(
-                                                hint: Text(
-                                                  'Select Status',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                ),
-                                                items: controller
-                                                    .inventoryStatusList
-                                                    .map((item) =>
-                                                        DropdownMenuItem<int>(
-                                                          value: item.id,
-                                                          child: Text(
-                                                            item.name ?? '',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ))
-                                                    .toList(),
-                                                value: controller
-                                                    .statusDropdownValue,
-                                                onChanged: (value) {
-                                                  controller
-                                                          .statusDropdownValue =
-                                                      value;
-                                                  controller.update(
-                                                      ['add_inventory']);
-                                                },
-                                                buttonPadding:
-                                                    EdgeInsets.only(left: 8),
-                                                buttonHeight: 40,
-                                                buttonWidth: 140,
-                                                itemHeight: 40,
-                                                dropdownWidth: 200,
-                                                dropdownMaxHeight: 300,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  CustomDropdownWidget(
+                                    title: 'Status *',
+                                    dropdownTitle: 'Select Status',
+                                    dropdownList:
+                                        controller.inventoryStatusDropdownList,
+                                    dropDownValue:
+                                        controller.inventoryStatusDropdownValue,
+                                    onChangeDropdown: (val) {
+                                      controller.inventoryStatusDropdownValue =
+                                          val;
+                                      controller.update(['add_inventory']);
+                                    },
+                                    errorText: controller
+                                                .inventoryStatusDropdownValue !=
+                                            null
+                                        ? null
+                                        : 'This field is required.',
                                   ),
-
                                   CustomTextField(
+                                    readOnly: controller.viewInventory,
                                     label: 'Asset Name: *',
+                                    numberTextField: false,
                                     textController: controller.assetNameTc,
+                                    errorText:
+                                        controller.assetNameTc.text.isNotEmpty
+                                            ? null
+                                            : 'This Field is required.',
                                     // controller.assetNameTextController,
                                   ),
                                   Row(
@@ -547,13 +159,26 @@ class AddInventory extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomTextField(
+                                        readOnly: controller.viewInventory,
+
                                         label: 'Serial No.',
+                                        numberTextField: false,
                                         textController: controller.serialNoTc,
+                                        // errorText: controller
+                                        //         .serialNoTc.text.isNotEmpty
+                                        //     ? null
+                                        //     : 'This Field is required.',
                                       ),
                                       CustomTextField(
+                                        readOnly: controller.viewInventory,
+                                        numberTextField: true,
                                         label: 'Enter Multiplier: ',
                                         textController:
                                             controller.enterMultiplierTc,
+                                        // errorText: controller.enterMultiplierTc
+                                        //         .text.isNotEmpty
+                                        //     ? null
+                                        //     : 'This Field is required.',
                                       ),
                                     ],
                                   ),
@@ -563,6 +188,8 @@ class AddInventory extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: CustomTextField(
+                                          readOnly: controller.viewInventory,
+                                          numberTextField: false,
                                           label: 'Asset Description: ',
                                           maxLine: 6,
                                           textController:
@@ -633,7 +260,125 @@ class AddInventory extends StatelessWidget {
                               ),
                               Dimens.boxHeight15,
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (controller.blockDropdownValue != null &&
+                                      controller
+                                              .parentEquipmentDropdownValue !=
+                                          null &&
+                                      controller
+                                              .inventoryTypeDropdownValue !=
+                                          null &&
+                                      controller.inventoryCategoryDropdownValue !=
+                                          null &&
+                                      controller
+                                              .inventoryStatusDropdownValue !=
+                                          null &&
+                                      controller.assetNameTc.text.isNotEmpty &&
+                                      controller
+                                              .warrantyTypeDropdownValue !=
+                                          null &&
+                                      controller
+                                              .warrantyProviderDropdownValue !=
+                                          null &&
+                                      controller
+                                              .warrantyUsageDropdownValue !=
+                                          null &&
+                                      controller.expireDateTc.text.isNotEmpty &&
+                                      controller.certificationNumberTc.text
+                                          .isNotEmpty &&
+                                      controller
+                                          .descriptionTc.text.isNotEmpty &&
+                                      controller
+                                              .manufacturerDropdownValue !=
+                                          null &&
+                                      controller
+                                              .supplierDropdownValue !=
+                                          null &&
+                                      controller.currencyDropdownValue !=
+                                          null &&
+                                      controller.modelTc.text.isNotEmpty &&
+                                      controller
+                                          .parentEquipmentsTc.text.isNotEmpty &&
+                                      controller.costTc.text.isNotEmpty &&
+                                      controller.calibrationFrequencyTc.text
+                                          .isNotEmpty &&
+                                      controller.calibrationRemainderInTc.text
+                                          .isNotEmpty &&
+                                      controller.lastCalibrationDateTc.text
+                                          .isNotEmpty) {
+                                    controller.addInventory(
+                                      blockId:
+                                          controller.blockDropdownValue?.id ??
+                                              0,
+                                      assetName: controller.assetNameTc.text,
+                                      parentEqipId: controller
+                                              .parentEquipmentDropdownValue
+                                              ?.id ??
+                                          0,
+                                      typeId: controller
+                                              .inventoryTypeDropdownValue?.id ??
+                                          0,
+                                      categoryId: controller
+                                              .inventoryCategoryDropdownValue
+                                              ?.id ??
+                                          0,
+                                      statusId: controller
+                                              .inventoryStatusDropdownValue
+                                              ?.id ??
+                                          0,
+                                      serialNo: controller.serialNoTc.text,
+                                      assetDes:
+                                          controller.assetDescriptionTc.text,
+                                      multiplier: int.parse(
+                                          controller.enterMultiplierTc.text),
+                                      caliFreq: int.parse(controller
+                                          .calibrationFrequencyTc.text),
+                                      caliFreqType:
+                                          controller.calibrationDropdownValue ??
+                                              0,
+                                      caliRemainderDays: int.parse(controller
+                                          .calibrationRemainderInTc.text),
+                                      caliRemainderFirstDate:
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(DateTime.now()),
+                                      lastCaliDate:
+                                          controller.lastCalibrationDateTc.text,
+                                      warrantyTypeId: controller
+                                              .warrantyTypeDropdownValue?.id ??
+                                          0,
+                                      warrantyProviderId: controller
+                                              .warrantyProviderDropdownValue
+                                              ?.id ??
+                                          0,
+                                      warrantyUsageId: controller
+                                              .warrantyUsageDropdownValue?.id ??
+                                          0,
+                                      expireDate: controller.expireDateTc.text,
+                                      warrantyCertification:
+                                          controller.certificationNumberTc.text,
+                                      warrantyDescription:
+                                          controller.descriptionTc.text,
+                                      manufacturerId: controller
+                                              .manufacturerDropdownValue?.id ??
+                                          0,
+                                      supplierId: controller
+                                              .supplierDropdownValue?.id ??
+                                          0,
+                                      currency: controller
+                                              .currencyDropdownValue?.name ??
+                                          '',
+                                      manufacturerCost:
+                                          int.parse(controller.costTc.text),
+                                      manufacturerModel:
+                                          controller.modelTc.text,
+                                      manufacturerParentEquipmentNo:
+                                          controller.parentEquipmentsTc.text,
+                                    );
+                                  } else {
+                                    Utility.showErrorSnackBar(
+                                        'Some fields are missing.PLease check');
+                                  }
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(

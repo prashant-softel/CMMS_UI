@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/theme.dart';
 
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.errorText,
+    this.numberTextField = false,
   });
 
   final String? label;
@@ -21,6 +23,7 @@ class CustomTextField extends StatelessWidget {
   final Function()? onTap;
   final TextEditingController? textController;
   final String? errorText;
+  final bool numberTextField;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +61,14 @@ class CustomTextField extends StatelessWidget {
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
+                    inputFormatters: numberTextField
+                        ? [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d{0,2}'))
+                          ]
+                        : null,
                   ),
-                  if (errorText == null)
+                  if (errorText != null)
                     Text(
                       errorText ?? 'Error text',
                       style: Styles.red12.copyWith(color: ColorsValue.redColor),
