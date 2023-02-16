@@ -53,7 +53,7 @@ class HomeController extends GetxController {
   DropdownModel? inventoryTypeDropdownValue;
   DropdownModel? inventoryCategoryDropdownValue;
   DropdownModel? inventoryStatusDropdownValue;
-  int? calibrationDropdownValue;
+  DropdownModel? calibrationFrequencyDropdownValue;
   DropdownModel? warrantyTypeDropdownValue;
   DropdownModel? warrantyProviderDropdownValue;
   DropdownModel? warrantyUsageDropdownValue;
@@ -62,17 +62,23 @@ class HomeController extends GetxController {
   DropdownModel? currencyDropdownValue;
 
   @override
-  void onInit() async {
+  void onInit() {
     print('Onint ');
 
-    await homePresenter.generateToken();
     Future.delayed(Duration(milliseconds: 500), () async {
-      getInventoryList();
-      getBlockList('45');
-      getInventoryTypeList(isLoading: false, facilityId: facilityId);
-      getInventoryCategoryList(isLoading: false, facilityId: facilityId);
-      getInventoryStatusList(isLoading: false, facilityId: facilityId);
-      getBusinessList(isLoading: false, businessType: businessType);
+      homePresenter.generateToken();
+    }).whenComplete(() {
+      Future.delayed(Duration(milliseconds: 500), () async {
+        await getInventoryList();
+        await getBlockList('45');
+        await getInventoryTypeList(isLoading: false, facilityId: facilityId);
+        await getInventoryCategoryList(
+            isLoading: false, facilityId: facilityId);
+        await getInventoryStatusList(isLoading: false, facilityId: facilityId);
+        await getBusinessList(isLoading: false, businessType: businessType);
+        await getManufacturerList(isLoading: false, businessType: businessType);
+        await getSupplierList(isLoading: false, businessType: businessType);
+      });
     });
 
     super.onInit();
@@ -102,6 +108,8 @@ class HomeController extends GetxController {
   var assetDescriptionTc = TextEditingController();
 
   void onInitializeData() {
+    inventoryColumnVisibility
+        .add(ColumnAvailability(text: 'id', value: null, isSelected: true));
     inventoryColumnVisibility
         .add(ColumnAvailability(text: 'plantName'.tr, value: null));
     inventoryColumnVisibility.add(ColumnAvailability(
@@ -156,10 +164,12 @@ class HomeController extends GetxController {
     update(['inventory_list']);
   }
 
+  var changeListCheck = false;
+
   bool buildSelectedInventoryList({required String data}) {
     var boolVal = false;
     for (var i in selectedInventoryColumnVisibility) {
-      print('parent data $data ${i.text}');
+      // print('parent data $data ${i.text}');
       if (i.text == data) {
         boolVal = true;
       }
@@ -189,7 +199,7 @@ class HomeController extends GetxController {
     update(['inventory_list', 'add_inventory']);
   }
 
-  void getBlockList(String facilityId) async {
+  Future<void> getBlockList(String facilityId) async {
     final list = await homePresenter.getBlockList(
         isLoading: false, facilityId: facilityId);
     blockList = list;
@@ -201,7 +211,7 @@ class HomeController extends GetxController {
     update(['add_inventory']);
   }
 
-  void getEquipmentList({
+  Future<void> getEquipmentList({
     required String facilityId,
   }) async {
     final list = await homePresenter.getEquipmentList(
@@ -266,7 +276,7 @@ class HomeController extends GetxController {
   }) async {
     var response = await homePresenter.getInventoryCategoryList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      facilityId: 45,
     );
     for (var i in response) {
       inventoryCategoryDropdownList.add(DropdownModel(id: i.id, name: i.name));
@@ -283,6 +293,7 @@ class HomeController extends GetxController {
       facilityId: facilityId,
     );
     for (var i in response) {
+      print('response name ${i.status}');
       inventoryStatusDropdownList.add(DropdownModel(id: i.id, name: i.name));
     }
     update(['add_inventory']);
@@ -300,13 +311,44 @@ class HomeController extends GetxController {
     businessList = response;
     for (var i in businessList) {
       warrantyProviderDropdownList.add(DropdownModel(id: i.id, name: i.name));
-      manufacturerDropdownList.add(DropdownModel(id: i.id, name: i.name));
-      supplierDropdownList.add(DropdownModel(id: i.id, name: i.name));
+      // manufacturerDropdownList.add(DropdownModel(id: i.id, name: i.name));
+      // supplierDropdownList.add(DropdownModel(id: i.id, name: i.name));
     }
     update(['warranty_tab', 'manufacturer_tab']);
   }
 
+  Future<void> getManufacturerList({
+    required bool isLoading,
+    required int businessType,
+  }) async {
+    var response = await homePresenter.getBusinessList(
+      isLoading: isLoading,
+      businessType: 8,
+    );
+
+    for (var i in response) {
+      manufacturerDropdownList.add(DropdownModel(id: i.id, name: i.name));
+      update(['manufacturer_tab']);
+    }
+  }
+
+  Future<void> getSupplierList({
+    required bool isLoading,
+    required int businessType,
+  }) async {
+    var response = await homePresenter.getBusinessList(
+      isLoading: isLoading,
+      businessType: 5,
+    );
+
+    for (var i in response) {
+      supplierDropdownList.add(DropdownModel(id: i.id, name: i.name));
+      update(['manufacturer_tab']);
+    }
+  }
+
   Future<void> addInventory({
+    required bool toAddOrUpdate,
     required int blockId,
     required String assetName,
     required int parentEqipId,
@@ -390,6 +432,7 @@ class HomeController extends GetxController {
     // };
 
     var requestBody = AddInventoryRequestModel(
+      id: toAddOrUpdate ? null : selectedInventoryId,
       blockId: blockId,
       name: assetName,
       description: assetDes,
@@ -451,19 +494,119 @@ class HomeController extends GetxController {
 
   var inventoryDetailsList = <InventoryDetailsModel>[];
   bool viewInventory = false;
+  bool editInventory = false;
 
-  Future<void> inventoryDetails({required int inventoryId}) async {
+  Future<void> inventoryDetails(
+      {required int inventoryId, required bool viewOrEdit}) async {
     try {
       var response = await homePresenter.inventoryDetails(
           inventoryId: inventoryId, isLoading: false);
       inventoryDetailsList = response;
-      viewInventory = true;
+
+      if (viewOrEdit) {
+        viewInventory = true;
+        editInventory = false;
+      } else {
+        editInventory = true;
+      }
+      viewInventoryListData(inventoryDetailsList.first);
+
       Get.to(() => AddInventory());
 
       update(['add_inventory']);
     } catch (e) {
       Utility.printELog(e.toString());
     }
+  }
+
+  int? selectedInventoryId;
+  void viewInventoryListData(InventoryDetailsModel inventory) {
+    selectedInventoryId = inventory.id;
+    for (var i in blockDropDownList) {
+      if (i.name == inventory.blockName) {
+        blockDropdownValue = i;
+      }
+    }
+    for (var i in parentEquipmentList) {
+      if (i.name == inventory.parentName) {
+        parentEquipmentDropdownValue = i;
+      }
+    }
+    for (var i in inventoryTypeDropdownList) {
+      if (i.name == inventory.type) {
+        inventoryTypeDropdownValue = i;
+      }
+    }
+    for (var i in inventoryCategoryDropdownList) {
+      if (i.name == inventory.categoryName) {
+        inventoryCategoryDropdownValue = i;
+      }
+    }
+    for (var i in inventoryStatusDropdownList) {
+      if (i.name == inventory.status) {
+        inventoryStatusDropdownValue = i;
+      }
+    }
+
+    for (var i in calibrationFrequencyDropdownList) {
+      if (i.name == inventory.calibrationFreqType) {
+        calibrationFrequencyDropdownValue = i;
+      }
+    }
+
+    for (var i in warrantyTypeDropdownList) {
+      if (i.name == inventory.warrantyTypeName) {
+        warrantyTypeDropdownValue = i;
+      }
+    }
+
+    for (var i in warrantyProviderDropdownList) {
+      if (i.name == inventory.warrantyProviderName) {
+        warrantyProviderDropdownValue = i;
+      }
+    }
+
+    for (var i in warrantyUsageDropdownList) {
+      if (i.name == inventory.warrrantyTermTypeName) {
+        warrantyUsageDropdownValue = i;
+      }
+    }
+
+    for (var i in manufacturerDropdownList) {
+      if (i.name == inventory.manufacturerName) {
+        manufacturerDropdownValue = i;
+      }
+    }
+
+    for (var i in supplierDropdownList) {
+      if (i.name == inventory.supplierName) {
+        supplierDropdownValue = i;
+      }
+    }
+
+    for (var i in currencyDropdownList) {
+      if (i.name == inventory.currency) {
+        currencyDropdownValue = i;
+      }
+    }
+
+    assetNameTc.text = inventory.name ?? '';
+    serialNoTc.text = inventory.serialNumber ?? '';
+    enterMultiplierTc.text = inventory.mutliplier?.toString() ?? '0';
+    assetDescriptionTc.text = inventory.description ?? '';
+    calibrationFrequencyTc.text = inventory.calibrationFrequency ?? '';
+    lastCalibrationDateTc.text =
+        inventory.calibrationLastDate?.split('T')[0] ?? '';
+    calibrationRemainderInTc.text =
+        inventory.calibrationReminderDays?.toString() ?? '';
+    expireDateTc.text = ' ';
+    certificationNumberTc.text = ' ';
+    descriptionTc.text = ' ';
+    modelTc.text = inventory.model ?? '';
+    parentEquipmentsTc.text = inventory.parentName ?? '';
+    costTc.text = inventory.cost?.toString() ?? '';
+
+    update(['add_inventory']);
   }
 }
 

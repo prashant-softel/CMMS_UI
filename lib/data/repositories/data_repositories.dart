@@ -193,7 +193,7 @@ class DataRepository extends DomainRepository {
     required bool isLoading,
     required String auth,
   }) async {
-    return await connectHelper.getInventoryTypeList(
+    return await connectHelper.getInventoryCategoryList(
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
@@ -206,7 +206,7 @@ class DataRepository extends DomainRepository {
     required bool isLoading,
     required String auth,
   }) async {
-    return await connectHelper.getInventoryTypeList(
+    return await connectHelper.getInventoryStatusList(
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,

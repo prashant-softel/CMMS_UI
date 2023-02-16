@@ -9,6 +9,7 @@ String addInventoryRequestModelToJson(List<AddInventoryRequestModel> data) =>
 
 class AddInventoryRequestModel {
   AddInventoryRequestModel({
+    this.id,
     this.name,
     this.description,
     this.typeId,
@@ -40,6 +41,7 @@ class AddInventoryRequestModel {
     this.lstWarrantyDetail,
   });
 
+  int? id;
   String? name;
   String? description;
   int? typeId;
@@ -72,6 +74,7 @@ class AddInventoryRequestModel {
 
   factory AddInventoryRequestModel.fromJson(Map<String, dynamic> json) =>
       AddInventoryRequestModel(
+        id: json["id"] as int? ?? 0,
         name: json["name"] as String? ?? '',
         description: json["description"] as String? ?? '',
         typeId: json["typeId"] as int? ?? 0,
@@ -107,6 +110,7 @@ class AddInventoryRequestModel {
       );
 
   Map<String, dynamic> toJson() => {
+        if (id != null) 'id': id,
         "name": name,
         "description": description,
         "typeId": typeId,

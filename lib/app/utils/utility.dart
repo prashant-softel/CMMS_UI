@@ -804,7 +804,7 @@ abstract class Utility {
   }
 
   static void showErrorSnackBar(String messageText) {
-    var context = Get.context;
+    // var context = Get.context;
     // ScaffoldMessenger.of(context!).hideCurrentSnackBar();
     Get.closeAllSnackbars();
     Get.snackbar(
@@ -832,7 +832,7 @@ abstract class Utility {
   }
 
   static void showSuccessSnackBar(String messageText) {
-    var context = Get.context;
+    // var context = Get.context;
     Get.closeAllSnackbars();
     Get.snackbar(
       '',

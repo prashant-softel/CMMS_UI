@@ -164,6 +164,8 @@ abstract class ColorsValue {
     loginPlaceholderFontColorHex,
   );
 
+  static const darkNavyBlue = Color(0xff0C2D48);
+
   static const Color pinkColor = Color(
     pinkColorHex,
   );

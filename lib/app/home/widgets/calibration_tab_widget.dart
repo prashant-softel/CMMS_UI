@@ -48,7 +48,7 @@ class CalibrationTabWidget extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
+                            child: DropdownButton<DropdownModel>(
                               hint: Text(
                                 'Select',
                                 style: TextStyle(
@@ -56,19 +56,21 @@ class CalibrationTabWidget extends StatelessWidget {
                                   color: Theme.of(context).hintColor,
                                 ),
                               ),
-                              value: controller.calibrationDropdownValue,
+                              value:
+                                  controller.calibrationFrequencyDropdownValue,
                               items: controller.calibrationFrequencyDropdownList
                                   .map(
                                     (e) => DropdownMenuItem(
                                       child: Text(
                                         e.name ?? '',
                                       ),
-                                      value: e.id,
+                                      value: e,
                                     ),
                                   )
                                   .toList(),
                               onChanged: (val) {
-                                controller.calibrationDropdownValue = val;
+                                controller.calibrationFrequencyDropdownValue =
+                                    val;
                                 controller.update(['calibration_tab']);
                               },
                             ),
@@ -107,7 +109,7 @@ class CalibrationTabWidget extends StatelessWidget {
                             textController: controller.calibrationRemainderInTc,
                             width: 300,
                             errorText: controller
-                                    .calibrationFrequencyTc.text.isNotEmpty
+                                    .calibrationRemainderInTc.text.isNotEmpty
                                 ? null
                                 : 'This field is required.',
                           ),

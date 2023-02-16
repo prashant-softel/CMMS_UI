@@ -307,6 +307,7 @@ class AddInventory extends StatelessWidget {
                                       controller.lastCalibrationDateTc.text
                                           .isNotEmpty) {
                                     controller.addInventory(
+                                      toAddOrUpdate: true,
                                       blockId:
                                           controller.blockDropdownValue?.id ??
                                               0,
@@ -333,9 +334,10 @@ class AddInventory extends StatelessWidget {
                                           controller.enterMultiplierTc.text),
                                       caliFreq: int.parse(controller
                                           .calibrationFrequencyTc.text),
-                                      caliFreqType:
-                                          controller.calibrationDropdownValue ??
-                                              0,
+                                      caliFreqType: controller
+                                              .calibrationFrequencyDropdownValue
+                                              ?.id ??
+                                          0,
                                       caliRemainderDays: int.parse(controller
                                           .calibrationRemainderInTc.text),
                                       caliRemainderFirstDate:

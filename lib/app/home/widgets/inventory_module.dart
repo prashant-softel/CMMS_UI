@@ -48,6 +48,7 @@ class InventoryModule extends StatelessWidget {
                       icon: Icons.add,
                       lable: 'addAsset'.tr,
                       onPress: () {
+                        _controller.editInventory = false;
                         _controller.viewInventory = false;
                         _controller.serialNoTc.clear();
                         _controller.enterMultiplierTc.clear();
@@ -67,7 +68,7 @@ class InventoryModule extends StatelessWidget {
                         _controller.inventoryCategoryDropdownValue = null;
                         _controller.inventoryStatusDropdownValue = null;
                         _controller.inventoryTypeDropdownValue = null;
-                        _controller.calibrationDropdownValue = null;
+                        _controller.calibrationFrequencyDropdownValue = null;
                         _controller.warrantyTypeDropdownValue = null;
                         _controller.warrantyProviderDropdownValue = null;
                         _controller.warrantyUsageDropdownValue = null;
@@ -157,11 +158,13 @@ class InventoryModule extends StatelessWidget {
                       itemBuilder: (c) => _controller.inventoryColumnVisibility
                           .map(
                             (e) => PopupMenuItem<String>(
-                              onTap: () {
-                                e.isSelected = !e.isSelected;
-                                _controller
-                                    .buildSelectedInventoryColumnVisibility();
-                              },
+                              onTap: e.text == 'id'
+                                  ? null
+                                  : () {
+                                      e.isSelected = !e.isSelected;
+                                      _controller
+                                          .buildSelectedInventoryColumnVisibility();
+                                    },
                               value: e.text,
                               child: Container(
                                 height: Dimens.thirtyFive,
@@ -230,17 +233,8 @@ class InventoryModule extends StatelessWidget {
                   ),
                   margin: Dimens.edgeInsets16,
                   child: ScrollableTableView(
-                    columns:
-                        // [
-                        //   'assetName'.tr,
-                        //   'serialNo'.tr,
-                        //   'parentAsset'.tr,
-                        //   'catergory'.tr,
-                        //   'assetFacilityName'.tr,
-                        //   'action'.tr,
-                        // ]
-                        _controller.selectedInventoryColumnVisibility
-                            .map((column) {
+                    columns: _controller.selectedInventoryColumnVisibility
+                        .map((column) {
                       return TableViewColumn(
                         minWidth: Get.width /
                             _controller
@@ -252,6 +246,9 @@ class InventoryModule extends StatelessWidget {
                       ...List.generate(
                         _controller.inventoryList.length,
                         (index) => [
+                          if (_controller.buildSelectedInventoryList(
+                              data: 'id'))
+                            '${_controller.inventoryList[index].id}',
                           if (_controller.buildSelectedInventoryList(
                               data: 'plantName'.tr))
                             '-',
@@ -288,13 +285,13 @@ class InventoryModule extends StatelessWidget {
                           if (_controller.buildSelectedInventoryList(
                               data: 'assetOperatorName'.tr))
                             '${_controller.inventoryList[index].operatorName}',
-                          'Actions'
+                          'Actions',
                         ],
                       ),
                     ].map(
                       (record) {
                         return TableViewRow(
-                          height: 100,
+                          height: 120,
                           cells: record.map(
                             (value) {
                               return TableViewCell(
@@ -303,93 +300,113 @@ class InventoryModule extends StatelessWidget {
                                     print('SOme');
                                     print('${value} $record');
                                   },
-                                  child: value.runtimeType.toString() ==
-                                          'AssetNames'
-                                      ? Builder(builder: (context) {
-                                          final val = value as AssetName;
-                                          return Column(
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Padding(
-                                                  padding: Dimens.edgeInsets8,
-                                                  child: Text('${val.name}'),
-                                                ),
-                                              ),
-                                              Spacer(),
-                                              Align(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: Container(
-                                                  padding:
-                                                      Dimens.edgeInsets8_2_8_2,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        val.requirementStatus ==
-                                                                1
-                                                            ? Colors.red
-                                                            : Colors.green,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                  ),
-                                                  child: Text(
-                                                    val.name == 1
-                                                        ? 'requirementRejected'
-                                                            .tr
-                                                        : 'requirementAccepted'
-                                                            .tr,
-                                                    style:
-                                                        Styles.white10.copyWith(
-                                                      color: Colors.white,
+                                  child: value.runtimeType.toString() == 'id'
+                                      ? Container()
+                                      : value.runtimeType.toString() ==
+                                              'AssetNames'
+                                          ? Builder(builder: (context) {
+                                              final val = value as AssetName;
+                                              return Column(
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Padding(
+                                                      padding:
+                                                          Dimens.edgeInsets8,
+                                                      child:
+                                                          Text('${val.name}'),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Dimens.boxHeight10,
-                                            ],
-                                          );
-                                        })
-                                      : value == 'Actions'
-                                          ? Wrap(
-                                              children: [
-                                                TableActionButton(
-                                                  color: Colors.green,
-                                                  icon: Icons.visibility,
-                                                  label: 'View',
-                                                  onPress: () {
-                                                    // print('Clicked');
-                                                    // _controller.inventoryDetails(
-                                                    //     inventoryId: );
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color: Colors.blue,
-                                                  icon: Icons.edit,
-                                                  label: 'Edit',
-                                                  onPress: () {},
-                                                ),
-                                                TableActionButton(
-                                                  color: Colors.red,
-                                                  icon: Icons.delete,
-                                                  label: 'Delete',
-                                                  onPress: () {},
-                                                ),
-                                                TableActionButton(
-                                                  color: Colors.green,
-                                                  icon: Icons.visibility,
-                                                  label: 'Approve Request',
-                                                  onPress: () {},
-                                                ),
-                                                TableActionButton(
-                                                  color: Colors.red,
-                                                  icon: Icons.visibility,
-                                                  label: 'Reject Request',
-                                                  onPress: () {},
-                                                ),
-                                              ],
-                                            )
-                                          : Text(value.toString()),
+                                                  Spacer(),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    child: Container(
+                                                      padding: Dimens
+                                                          .edgeInsets8_2_8_2,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            val.requirementStatus ==
+                                                                    1
+                                                                ? Colors.red
+                                                                : Colors.green,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                      ),
+                                                      child: Text(
+                                                        val.name == 1
+                                                            ? 'requirementRejected'
+                                                                .tr
+                                                            : 'requirementAccepted'
+                                                                .tr,
+                                                        style: Styles.white10
+                                                            .copyWith(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                ],
+                                              );
+                                            })
+                                          : value == 'Actions'
+                                              ? Wrap(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color: Colors.green,
+                                                      icon: Icons.visibility,
+                                                      label: 'View',
+                                                      onPress: () {
+                                                        print(value);
+                                                        print(record);
+
+                                                        _controller
+                                                            .inventoryDetails(
+                                                                inventoryId: int
+                                                                    .parse(record
+                                                                        .first),
+                                                                viewOrEdit:
+                                                                    true);
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Colors.blue,
+                                                      icon: Icons.edit,
+                                                      label: 'Edit',
+                                                      onPress: () {
+                                                        _controller
+                                                            .inventoryDetails(
+                                                                inventoryId: int
+                                                                    .parse(record
+                                                                        .first),
+                                                                viewOrEdit:
+                                                                    false);
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Colors.red,
+                                                      icon: Icons.delete,
+                                                      label: 'Delete',
+                                                      onPress: () {},
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Colors.green,
+                                                      icon: Icons.visibility,
+                                                      label: 'Approve Request',
+                                                      onPress: () {},
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Colors.red,
+                                                      icon: Icons.visibility,
+                                                      label: 'Reject Request',
+                                                      onPress: () {},
+                                                    ),
+                                                  ],
+                                                )
+                                              : Text(value.toString()),
                                 ),
                               );
                             },

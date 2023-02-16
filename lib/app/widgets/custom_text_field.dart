@@ -46,12 +46,16 @@ class CustomTextField extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
+                    keyboardType: maxLine != null
+                        ? TextInputType.multiline
+                        : TextInputType.none,
+                    maxLines: null,
                     onTap: onTap,
                     readOnly: readOnly,
                     controller: textController,
-                    maxLines: maxLine,
+                    // maxLines: maxLine,
                     decoration: InputDecoration(
-                      contentPadding: Dimens.edgeInsets16_0_16_0,
+                      contentPadding: Dimens.edgeInsets16_4_16_4,
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: .2),
                         borderRadius: BorderRadius.circular(2),
