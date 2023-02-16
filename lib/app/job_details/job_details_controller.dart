@@ -1,8 +1,10 @@
 import 'package:cmms/app/facility/facility_presenter.dart';
+
 import 'package:get/get.dart';
 
 import '../../domain/models/job_details_model.dart';
 import '../home/home_presenter.dart';
+import '../navigators/app_pages.dart';
 import 'job_details_presenter.dart';
 
 class JobDetailsController extends GetxController {
@@ -18,9 +20,11 @@ class JobDetailsController extends GetxController {
 
   ///
   RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
+  RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+
   int jobId = 3158;
   int userId = 36;
   var breakdownTime;
@@ -44,6 +48,19 @@ class JobDetailsController extends GetxController {
       jobDetailsModel.value = _jobDetailsList[0];
       update(["jobDetailsModel"]);
     }
+
+    associatedPermitList?.value =
+        jobDetailsModel.value?.lstAssociatedPermit ?? [];
+
+    // for (AssociatedPermit associatedPermit in associatedPermitList?.value ?? []) {
+    //   associatedPermit.ptwStatus =
+    // }
+
+    //print(jsonPTWModels);
+  }
+
+  editJob() {
+    Get.toNamed(Routes.addJob);
   }
 
   ///

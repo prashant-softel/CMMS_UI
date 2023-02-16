@@ -108,7 +108,7 @@ class DeviceRepository extends DomainRepository {
     required bool isLoading,
     required auth,
     required int facilityId,
-    required int categoryId,
+    required String categoryIds,
   }) {
     throw UnimplementedError();
   }

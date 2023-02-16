@@ -9,7 +9,7 @@ import '../add_job/views/add_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
 import '../job_details/job_details_binding.dart';
-import '../job_details/views/job_details_screen.dart';
+import '../job_details/views/mobile/job_details_screen.dart';
 import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 

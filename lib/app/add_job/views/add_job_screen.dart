@@ -1,21 +1,25 @@
+import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../job_list/job_list_controller.dart';
 import '../../theme/colors_value.dart';
 import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
 import '../add_job_controller.dart';
+import 'widgets/dropdown.dart';
 
 class AddJobScreen extends GetView<AddJobController> {
   AddJobScreen({Key? key}) : super(key: key);
 
   ///
-  final JobListController jobController = Get.find();
+  final JobListController jobListController = Get.find();
 
   ///
   @override
   Widget build(BuildContext context) {
     ///
+
     final ButtonStyle saveButtonStyle = ElevatedButton.styleFrom(
       textStyle: TextStyle(fontSize: Dimens.fourteen),
       backgroundColor: ColorsValue.navyBlueColor,
@@ -75,20 +79,20 @@ class AddJobScreen extends GetView<AddJobController> {
                         child: DropdownButton(
                           dropdownColor: ColorsValue.whiteColor,
                           isExpanded: true,
-                          value: jobController.selectedFacility.value,
+                          value: controller.selectedFacility.value,
                           icon: const Icon(Icons.arrow_downward),
                           elevation: 50,
                           style: const TextStyle(color: Colors.black),
                           onChanged: (String? selectedValue) {
-                            jobController.isFacilitySelected.value = true;
-                            jobController.selectedFacility.value =
+                            controller.isFacilitySelected.value = true;
+                            controller.selectedFacility.value =
                                 selectedValue ?? '';
                           },
-                          items: jobController.facilityList
-                              .map<DropdownMenuItem<String>>((block) {
+                          items: controller.facilityList
+                              .map<DropdownMenuItem<String>>((facility) {
                             return DropdownMenuItem<String>(
-                              value: block?.name ?? '',
-                              child: Text(block?.name ?? ''),
+                              value: facility?.name ?? '',
+                              child: Text(facility?.name ?? ''),
                             );
                           }).toList(),
                         ),
@@ -136,54 +140,14 @@ class AddJobScreen extends GetView<AddJobController> {
                               ),
                             ),
                             Dimens.boxHeight5,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: ColorsValue.whiteColor,
-                                    offset: const Offset(0.0, 0.0),
-                                    blurRadius: 0.0,
-                                    spreadRadius: 0.0,
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: ColorsValue.whiteColor,
-                                  isExpanded: true,
-                                  value: controller.selectedBlock.value,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 50,
-                                  style: const TextStyle(color: Colors.black),
-                                  onChanged: (String? selectedValue) {
-                                    controller.isBlockSelected.value = true;
-                                    controller.selectedBlock.value =
-                                        selectedValue ?? '';
-                                  },
-                                  items: controller.blockList
-                                      .map<DropdownMenuItem<String>>((block) {
-                                    return DropdownMenuItem<String>(
-                                      value: block?.name ?? '',
-                                      child: Text(block?.name ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
+                            DropdownWidget(
+                              dropdownList: controller.blockList,
+                              isValueSelected: controller.isBlockSelected.value,
+                              selectedValue: controller.selectedBlock.value,
                             ),
                             Dimens.boxHeight20,
 
-                            /// EQUIPMENT CATEGORIES DropDown
+                            ///MULTISELECT CONTROL Equipment Categories
                             Align(
                               alignment: Alignment.centerLeft,
                               child: RichText(
@@ -225,43 +189,31 @@ class AddJobScreen extends GetView<AddJobController> {
                                 color: ColorsValue.whiteColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: ColorsValue.whiteColor,
-                                  isExpanded: true,
-                                  value: controller
-                                      .selectedEquipmentCategory.value,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 50,
-                                  style: const TextStyle(
-                                    color: ColorsValue.blackColor,
-                                  ),
-                                  onChanged: (String? selectedValue) {
-                                    controller.isEquipmentCategorySelected
-                                        .value = true;
-                                    controller.selectedEquipmentCategory.value =
-                                        selectedValue ?? '';
-                                  },
-                                  items: controller.equipmentCategoryList
-                                      .map<DropdownMenuItem<String>>(
-                                          (equipmentCategory) {
-                                    return DropdownMenuItem<String>(
-                                      value: equipmentCategory?.name ?? '',
-                                      child:
-                                          Text(equipmentCategory?.name ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
+                              child: MultiSelectDialogField(
+                                decoration: BoxDecoration(border: Border()),
+                                buttonIcon: Icon(Icons.arrow_drop_down),
+                                items: controller.equipmentCategoryList.value
+                                    .map(
+                                      (e) => MultiSelectItem<
+                                              InventoryCategoryModel?>(
+                                          e, e?.name ?? ''),
+                                    )
+                                    .toList(),
+                                onConfirm: (selectedOptionsList) => {
+                                  controller.equipmentCategoriesSelected(
+                                      selectedOptionsList)
+                                },
+                                chipDisplay: MultiSelectChipDisplay(),
                               ),
                             ),
                             Dimens.boxHeight20,
 
-                            /// WORK AREA DropDown
+                            /// WORK AREA (= EQUIPMENTS) DropDown
                             Align(
                               alignment: Alignment.centerLeft,
                               child: RichText(
                                 text: TextSpan(
-                                    text: 'Work Area: ',
+                                    text: 'Work Area / Equipments: ',
                                     style: Styles.blackBold16,
                                     children: [
                                       TextSpan(
@@ -287,102 +239,34 @@ class AddJobScreen extends GetView<AddJobController> {
                                     ),
                                     blurRadius: 5.0,
                                     spreadRadius: 1.0,
-                                  ), //BoxShadow
+                                  ),
                                   BoxShadow(
                                     color: ColorsValue.whiteColor,
                                     offset: const Offset(0.0, 0.0),
                                     blurRadius: 0.0,
                                     spreadRadius: 0.0,
-                                  ), //BoxShadow
+                                  ),
                                 ],
                                 color: ColorsValue.whiteColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: ColorsValue.whiteColor,
-                                  isExpanded: true,
-                                  value: controller.selectedWorkArea.value,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 50,
-                                  style: const TextStyle(color: Colors.black),
-                                  onChanged: (String? selectedValue) {
-                                    controller.isWorkAreaSelected.value = true;
-                                    controller.selectedWorkArea.value =
-                                        selectedValue ?? '';
-                                  },
-                                  items: controller.workAreaList
-                                      .map<DropdownMenuItem<String>>(
-                                          (workArea) {
-                                    return DropdownMenuItem<String>(
-                                      value: workArea?.name ?? '',
-                                      child: Text(workArea?.name ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
+                              child: MultiSelectDialogField(
+                                decoration: BoxDecoration(border: Border()),
+                                buttonIcon: Icon(Icons.arrow_drop_down),
+                                items: controller.workAreaList.value
+                                    .map((e) =>
+                                        MultiSelectItem(e, e?.name ?? ''))
+                                    .toList(),
+                                onConfirm: (selectedOptionsList) => {
+                                  controller
+                                      .workAreasSelected(selectedOptionsList)
+                                },
+                                chipDisplay: MultiSelectChipDisplay(),
                               ),
                             ),
                             Dimens.boxHeight20,
 
-                            /// STATUS
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: RichText(
-                                text: TextSpan(
-                                    text: 'Status: ',
-                                    style: Styles.blackBold16,
-                                    children: [
-                                      TextSpan(
-                                        text: '*',
-                                        style: TextStyle(
-                                          color: ColorsValue.orangeColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ]),
-                              ),
-                            ),
-                            Dimens.boxHeight5,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ), //BoxShadow
-                                  BoxShadow(
-                                    color: ColorsValue.whiteColor,
-                                    offset: const Offset(0.0, 0.0),
-                                    blurRadius: 0.0,
-                                    spreadRadius: 0.0,
-                                  ), //BoxShadow
-                                ],
-                                color: ColorsValue.greyLightColour,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: TextField(
-                                enabled: false,
-                                autofocus: false,
-                                decoration: InputDecoration(
-                                  fillColor: ColorsValue.greyLightColour,
-                                  filled: true,
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                                  border: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                ),
-                              ),
-                            ),
-                            Dimens.boxHeight20,
-
-                            /// WORK TYPE DropDown
+                            /// WORK TYPE  DropDown
                             Align(
                               alignment: Alignment.centerLeft,
                               child: RichText(
@@ -401,52 +285,11 @@ class AddJobScreen extends GetView<AddJobController> {
                               ),
                             ),
                             Dimens.boxHeight5,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: ColorsValue.whiteColor,
-                                    offset: const Offset(0.0, 0.0),
-                                    blurRadius: 0.0,
-                                    spreadRadius: 0.0,
-                                  ),
-                                ],
-                                color: ColorsValue.whiteColor,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: ColorsValue.whiteColor,
-                                  isExpanded: true,
-                                  value: controller.selectedEquipment.value,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 50,
-                                  style: const TextStyle(color: Colors.black),
-                                  onChanged: (String? selectedValue) {
-                                    controller.isEquipmentSelected.value = true;
-                                    controller.selectedEquipment.value =
-                                        selectedValue ?? '';
-                                  },
-                                  items: controller.equipmentList
-                                      .map<DropdownMenuItem<String>>(
-                                          (equipment) {
-                                    return DropdownMenuItem<String>(
-                                      value: equipment?.name ?? '',
-                                      child: Text(equipment?.name ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
+                            DropdownWidget(
+                              dropdownList: controller.equipmentList,
+                              isValueSelected:
+                                  controller.isEquipmentSelected.value,
+                              selectedValue: controller.selectedEquipment.value,
                             ),
                             Dimens.boxHeight20,
 
@@ -458,63 +301,18 @@ class AddJobScreen extends GetView<AddJobController> {
                                     text: 'Tools Required To Work Type: ',
                                     style: Styles.blackBold16,
                                     children: [
-                                      TextSpan(
-                                        text: '*',
-                                        style: TextStyle(
-                                          color: ColorsValue.orangeColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      //TODO: ADD DROPDOWN
                                     ]),
                               ),
                             ),
                             Dimens.boxHeight5,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: ColorsValue.whiteColor,
-                                    offset: const Offset(0.0, 0.0),
-                                    blurRadius: 0.0,
-                                    spreadRadius: 0.0,
-                                  ),
-                                ],
-                                color: ColorsValue.whiteColor,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: ColorsValue.whiteColor,
-                                  isExpanded: true,
-                                  value: controller.selectedEquipment.value,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 50,
-                                  style: const TextStyle(color: Colors.black),
-                                  onChanged: (String? selectedValue) {
-                                    controller.isEquipmentSelected.value = true;
-                                    controller.selectedEquipment.value =
-                                        selectedValue ?? '';
-                                  },
-                                  items: controller.equipmentList
-                                      .map<DropdownMenuItem<String>>(
-                                          (equipment) {
-                                    return DropdownMenuItem<String>(
-                                      value: equipment?.name ?? '',
-                                      child: Text(equipment?.name ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
+                            DropdownWidget(
+                              dropdownList:
+                                  controller.toolsRequiredToWorkTypeList,
+                              isValueSelected: controller
+                                  .isToolRequiredToWorkTypeSelected.value,
+                              selectedValue: controller
+                                  .selectedToolRequiredToWorkType.value,
                             ),
                             Dimens.boxHeight20,
 
@@ -537,52 +335,12 @@ class AddJobScreen extends GetView<AddJobController> {
                               ),
                             ),
                             Dimens.boxHeight5,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: ColorsValue.whiteColor,
-                                    offset: const Offset(0.0, 0.0),
-                                    blurRadius: 0.0,
-                                    spreadRadius: 0.0,
-                                  ),
-                                ],
-                                color: ColorsValue.whiteColor,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: ColorsValue.whiteColor,
-                                  isExpanded: true,
-                                  value: controller.selectedEquipment.value,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 50,
-                                  style: const TextStyle(color: Colors.black),
-                                  onChanged: (String? selectedValue) {
-                                    controller.isEquipmentSelected.value = true;
-                                    controller.selectedEquipment.value =
-                                        selectedValue ?? '';
-                                  },
-                                  items: controller.equipmentList
-                                      .map<DropdownMenuItem<String>>(
-                                          (equipment) {
-                                    return DropdownMenuItem<String>(
-                                      value: equipment?.name ?? '',
-                                      child: Text(equipment?.name ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
+                            DropdownWidget(
+                              dropdownList: controller.assignedToList,
+                              isValueSelected:
+                                  controller.isAssignedToSelected.value,
+                              selectedValue:
+                                  controller.selectedAssignedTo.value,
                             ),
                             Dimens.boxHeight20,
 
@@ -629,6 +387,7 @@ class AddJobScreen extends GetView<AddJobController> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: TextField(
+                                controller: controller.jobTitleCtrlr,
                                 autofocus: false,
                                 decoration: InputDecoration(
                                   fillColor: ColorsValue.whiteColor,
@@ -686,6 +445,7 @@ class AddJobScreen extends GetView<AddJobController> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: TextField(
+                                controller: controller.jobDescriptionCtrlr,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 5,
                                 autofocus: false,

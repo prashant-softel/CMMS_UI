@@ -9,11 +9,12 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
-import '../models/inventory_model.dart';
+import '../models/add_job_model.dart';
 import '../models/state.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -192,7 +193,7 @@ class Repository {
 
   Future<List<InventoryModel>> getInventoryList({
     required int facilityId,
-    required int categoryId,
+    required String categoryIds,
     required bool isLoading,
   }) async {
     try {
@@ -200,7 +201,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getInventoryList(
         facilityId: facilityId,
-        categoryId: categoryId,
+        categoryIds: categoryIds,
         isLoading: isLoading,
         auth: auth,
       );
@@ -454,6 +455,60 @@ class Repository {
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList(
+    String? auth,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getToolsRequiredToWorkTypeList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonEmployeeModels = jsonDecode(res.data);
+        final List<ToolsModel> _employeeModelList = jsonEmployeeModels
+            .map<ToolsModel>(
+              (m) => ToolsModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _employeeModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<void> saveJob(
+    AddJobModel? job,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.saveJob(
+        auth: auth,
+        job: job,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        //TODO
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
     }
   }
 

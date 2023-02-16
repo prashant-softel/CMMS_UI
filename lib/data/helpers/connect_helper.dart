@@ -4,6 +4,8 @@ import 'package:cmms/domain/domain.dart';
 
 import 'package:get/get.dart';
 
+import '../../domain/models/add_job_model.dart';
+
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
   ConnectHelper() {
@@ -78,7 +80,7 @@ class ConnectHelper {
         'Token/Authenticate',
         Request.postMultiparts,
         {
-          'user_name': 'khushru.mistry@softel.com',
+          'user_name': 'khushru.mistry@softeltech.in',
           'password': '/bS4BMO+fOLSPh0oK2qP0A=='
         },
         true,
@@ -90,17 +92,20 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     required int facilityId,
-    required int categoryId,
-  }) async =>
-      await apiWrapper.makeRequest(
-        'Inventory/GetInventoryList?facilityId=$facilityId&categoryId=$categoryId',
-        Request.getMultiparts,
-        null,
-        isLoading,
-        {
-          'Authorization': 'Bearer $auth',
-        },
-      );
+    required String categoryIds,
+  }) async {
+    //var categoryId = 5;
+    return await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facilityId=$facilityId&categoryIds=$categoryIds',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+  }
+
   Future<ResponseModel> getBlockList({
     required bool isLoading,
     required String facilityId,
@@ -223,9 +228,44 @@ class ConnectHelper {
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetEmployeeList?facilityId=$facilityId',
+      'CMMS/GetEmployeeList?facility_id=$facilityId',
       Request.get,
       null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getToolsRequiredToWorkTypeList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/GetMasterToolList',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveJob({
+    required String auth,
+    AddJobModel? job,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/CreateNewJob',
+      Request.post,
+      job,
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',

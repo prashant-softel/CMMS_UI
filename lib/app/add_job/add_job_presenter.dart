@@ -1,7 +1,9 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_job_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 
 import '../../domain/models/inventory_category_model.dart';
+import '../../domain/models/tools_model.dart';
 
 class AddJobPresenter {
   AddJobPresenter(this.addJobUsecase);
@@ -19,6 +21,8 @@ class AddJobPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+
+  ///
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
@@ -29,6 +33,8 @@ class AddJobPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+
+  ///
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
@@ -39,6 +45,26 @@ class AddJobPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+
+  ///
+  Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
+    required bool isLoading,
+  }) async {
+    return addJobUsecase.getToolsRequiredToWorkTypeList(
+      isLoading: isLoading,
+    );
+  }
+
+  ///
+  Future<void> saveJob({
+    AddJobModel? job,
+    required bool isLoading,
+  }) async {
+    return addJobUsecase.saveJob(
+      job: job,
+      isLoading: isLoading,
+    );
+  }
 
   ///
 }

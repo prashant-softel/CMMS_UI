@@ -48,7 +48,7 @@ abstract class DomainRepository {
 
   Future<void> getInventoryList({
     required int facilityId,
-    required int categoryId,
+    required String categoryIds,
     required bool isLoading,
     required String auth,
   });

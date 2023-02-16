@@ -2,7 +2,9 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
+import '../models/add_job_model.dart';
 import '../models/block_model.dart';
+import '../models/tools_model.dart';
 
 class AddJobUsecase {
   AddJobUsecase(this.repository);
@@ -40,6 +42,26 @@ class AddJobUsecase {
       await repository.getAssignedToList(
         auth,
         facilityId,
+        isLoading,
+      );
+
+  ///
+  Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await repository.getToolsRequiredToWorkTypeList(
+        auth,
+        isLoading,
+      );
+
+  ///
+  Future<void> saveJob({
+    AddJobModel? job,
+    bool? isLoading,
+  }) async =>
+      await repository.saveJob(
+        job,
         isLoading,
       );
 

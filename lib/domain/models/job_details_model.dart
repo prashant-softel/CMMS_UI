@@ -42,9 +42,9 @@ class JobDetailsModel {
   String? jobDescription;
   dynamic breaKdownTime;
   int? currentPtwId;
-  List<LstCMequipmentCatList>? lstCMequipmentCatList;
-  List<LstCMworkingAreaNameList>? lstCMworkingAreaNameList;
-  List<LstAssociatedPermit>? lstAssociatedPermit;
+  List<CMequipmentCatList>? lstCMequipmentCatList;
+  List<CMworkingAreaNameList>? lstCMworkingAreaNameList;
+  List<AssociatedPermit>? lstAssociatedPermit;
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
@@ -60,15 +60,15 @@ class JobDetailsModel {
         jobDescription: json["job_description"],
         breaKdownTime: json["breaKdownTime"],
         currentPtwId: json["current_ptwId"],
-        lstCMequipmentCatList: List<LstCMequipmentCatList>.from(
+        lstCMequipmentCatList: List<CMequipmentCatList>.from(
             json["lstCMequipmentCatList"]
-                .map((x) => LstCMequipmentCatList.fromJson(x))),
-        lstCMworkingAreaNameList: List<LstCMworkingAreaNameList>.from(
+                .map((x) => CMequipmentCatList.fromJson(x))),
+        lstCMworkingAreaNameList: List<CMworkingAreaNameList>.from(
             json["lstCMworkingAreaNameList"]
-                .map((x) => LstCMworkingAreaNameList.fromJson(x))),
-        lstAssociatedPermit: List<LstAssociatedPermit>.from(
+                .map((x) => CMworkingAreaNameList.fromJson(x))),
+        lstAssociatedPermit: List<AssociatedPermit>.from(
             json["lstAssociatedPermit"]
-                .map((x) => LstAssociatedPermit.fromJson(x))),
+                .map((x) => AssociatedPermit.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,8 +93,8 @@ class JobDetailsModel {
       };
 }
 
-class LstAssociatedPermit {
-  LstAssociatedPermit({
+class AssociatedPermit {
+  AssociatedPermit({
     required this.jobId,
     required this.sitePermitNo,
     this.permitTypeName,
@@ -110,8 +110,8 @@ class LstAssociatedPermit {
   DateTime issueAt;
   int ptwStatus;
 
-  factory LstAssociatedPermit.fromJson(Map<String, dynamic> json) =>
-      LstAssociatedPermit(
+  factory AssociatedPermit.fromJson(Map<String, dynamic> json) =>
+      AssociatedPermit(
         jobId: json["jobId"],
         sitePermitNo: json["sitePermitNo"],
         permitTypeName: json["permitTypeName"],
@@ -130,8 +130,8 @@ class LstAssociatedPermit {
       };
 }
 
-class LstCMequipmentCatList {
-  LstCMequipmentCatList({
+class CMequipmentCatList {
+  CMequipmentCatList({
     required this.equipmentCatId,
     required this.equipmentCatName,
   });
@@ -139,8 +139,8 @@ class LstCMequipmentCatList {
   int equipmentCatId;
   String equipmentCatName;
 
-  factory LstCMequipmentCatList.fromJson(Map<String, dynamic> json) =>
-      LstCMequipmentCatList(
+  factory CMequipmentCatList.fromJson(Map<String, dynamic> json) =>
+      CMequipmentCatList(
         equipmentCatId: json["equipmentCat_id"],
         equipmentCatName: json["equipmentCat_name"],
       );
@@ -151,8 +151,8 @@ class LstCMequipmentCatList {
       };
 }
 
-class LstCMworkingAreaNameList {
-  LstCMworkingAreaNameList({
+class CMworkingAreaNameList {
+  CMworkingAreaNameList({
     required this.workingAreaId,
     required this.workingAreaName,
   });
@@ -160,8 +160,8 @@ class LstCMworkingAreaNameList {
   int workingAreaId;
   String workingAreaName;
 
-  factory LstCMworkingAreaNameList.fromJson(Map<String, dynamic> json) =>
-      LstCMworkingAreaNameList(
+  factory CMworkingAreaNameList.fromJson(Map<String, dynamic> json) =>
+      CMworkingAreaNameList(
         workingAreaId: json["workingArea_id"],
         workingAreaName: json["workingArea_name"],
       );

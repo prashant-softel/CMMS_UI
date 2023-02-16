@@ -23,6 +23,7 @@ class JobListScreen extends GetView<JobListController> {
           Obx(
         () => //
             Container(
+          width: double.infinity,
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: Column(children: [
             /// DropDown

@@ -25,7 +25,7 @@ class HomeController extends GetxController {
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
-  int categoryId = 5;
+  String categoryIds = '';
 
   ///
 
@@ -38,7 +38,7 @@ class HomeController extends GetxController {
   void getInventoryList() async {
     final list = await homePresenter.getInventoryList(
       isLoading: false,
-      categoryId: categoryId,
+      categoryIds: categoryIds,
       facilityId: facilityId,
     );
     inventoryList = list;

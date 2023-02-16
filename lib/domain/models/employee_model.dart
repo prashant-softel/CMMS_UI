@@ -13,28 +13,28 @@ String employeeModelToJson(List<EmployeeModel> data) =>
 
 class EmployeeModel {
   EmployeeModel({
-    required this.id,
+    this.id,
     this.loginId,
-    required this.name,
-    required this.birthdate,
-    required this.gender,
-    required this.mobileNumber,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.pin,
+    this.name,
+    this.birthdate,
+    this.gender,
+    this.mobileNumber,
+    this.city,
+    this.state,
+    this.country,
+    this.pin,
   });
 
-  int id;
+  int? id;
   dynamic loginId;
-  String name;
-  DateTime birthdate;
-  Gender gender;
-  String mobileNumber;
-  String city;
-  String state;
-  Country country;
-  int pin;
+  String? name;
+  DateTime? birthdate;
+  Gender? gender;
+  String? mobileNumber;
+  String? city;
+  String? state;
+  Country? country;
+  int? pin;
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
         id: json["id"],
@@ -53,7 +53,7 @@ class EmployeeModel {
         "id": id,
         "login_id": loginId,
         "name": name,
-        "birthdate": birthdate.toIso8601String(),
+        "birthdate": birthdate?.toIso8601String(),
         "gender": genderValues.reverse[gender],
         "mobileNumber": mobileNumber,
         "city": city,

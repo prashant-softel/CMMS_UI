@@ -1,8 +1,8 @@
-import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 
 import '../home/home_presenter.dart';
+import '../job_list/job_list_presenter.dart';
 import 'add_job_controller.dart';
 import 'add_job_presenter.dart';
 
@@ -16,8 +16,8 @@ class AddJobBinding extends Bindings {
             Get.find(),
           ),
         ),
-        FacilityPresenter(
-          FacilityUsecase(
+        JobListPresenter(
+          JobListUsecase(
             Get.find(),
           ),
         ),

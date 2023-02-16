@@ -11,8 +11,8 @@ import '../navigators/app_pages.dart';
 class JobListController extends GetxController {
   ///
   JobListController(
-      this.jobPresenter, this.facilityPresenter, this.homePresenter);
-  JobListPresenter jobPresenter;
+      this.jobListPresenter, this.facilityPresenter, this.homePresenter);
+  JobListPresenter jobListPresenter;
   HomePresenter homePresenter;
   FacilityPresenter facilityPresenter;
 
@@ -42,7 +42,7 @@ class JobListController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await jobPresenter.getFacilityList();
+    final _facilityList = await jobListPresenter.getFacilityList();
 
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -54,8 +54,8 @@ class JobListController extends GetxController {
 
   Future<void> getJobList(int facilityId) async {
     jobList?.value = <JobModel>[];
-    final _jobList =
-        await jobPresenter.getJobList(facilityId: facilityId, userId: userId);
+    final _jobList = await jobListPresenter.getJobList(
+        facilityId: facilityId, userId: userId);
 
     if (_jobList != null) {
       for (var job in _jobList) {

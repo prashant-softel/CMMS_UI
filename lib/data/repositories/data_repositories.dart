@@ -1,6 +1,8 @@
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 
+import '../../domain/models/add_job_model.dart';
+
 /// Repositories (retrieve data, heavy processing etc..)
 class DataRepository extends DomainRepository {
   /// [connectHelper] : A connection helper which will connect to the
@@ -72,7 +74,7 @@ class DataRepository extends DomainRepository {
   @override
   Future<ResponseModel> getInventoryList({
     required int facilityId,
-    required int categoryId,
+    required String categoryIds,
     required bool isLoading,
     required String auth,
   }) async {
@@ -80,7 +82,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
-      categoryId: categoryId,
+      categoryIds: categoryIds,
     );
   }
 
@@ -171,6 +173,27 @@ class DataRepository extends DomainRepository {
         auth: auth,
         facilityId: facilityId ?? 0,
         userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getToolsRequiredToWorkTypeList({
+    required String auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getToolsRequiredToWorkTypeList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
+  Future<ResponseModel> saveJob({
+    required String auth,
+    AddJobModel? job,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveJob(
+        auth: auth,
+        job: job,
         isLoading: isLoading ?? false,
       );
 

@@ -1,7 +1,5 @@
 import 'package:cmms/domain/domain.dart';
 
-import '../models/inventory_model.dart';
-
 class HomeUsecase {
   final Repository _repository;
 
@@ -14,12 +12,12 @@ class HomeUsecase {
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int facilityId,
-    required int categoryId,
+    required String categoryIds,
   }) async {
     return _repository.getInventoryList(
       isLoading: isLoading,
       facilityId: facilityId,
-      categoryId: categoryId,
+      categoryIds: categoryIds,
     );
   }
 
