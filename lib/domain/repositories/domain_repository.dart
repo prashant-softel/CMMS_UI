@@ -100,4 +100,11 @@ abstract class DomainRepository {
     required bool isLoading,
     required String auth,
   });
+
+    Future<ResponseModel> updateInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  });
+
 }

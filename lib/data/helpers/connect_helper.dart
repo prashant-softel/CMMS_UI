@@ -400,5 +400,69 @@ class ConnectHelper {
     return response;
   }
 
+
+
+    Future<ResponseModel> updateInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventory',
+      Request.post,
+      // [
+      //   {
+      //     "name": "sd",
+      //     "description": "d",
+      //     "typeId": 3,
+      //     "statusId": 4,
+      //     "facilityId": 0,
+      //     "blockId": 75,
+      //     "parentId": 13623,
+      //     "categoryId": 3,
+      //     "acCapacity": 2000,
+      //     "dcCapacity": 5000,
+      //     "serialNumber": "ss",
+      //     "multiplier": 1,
+      //     "calibrationFrequency": 12,
+      //     "calibrationFrequencyType": 2,
+      //     "calibrationReminderDays": 12,
+      //     "calibrationFirstDueDate": "2023-02-16",
+      //     "calibrationLastDate": "2023-02-14",
+      //     "customerId": 5,
+      //     "ownerId": 0,
+      //     "operatorId": 0,
+      //     "manufacturerId": 20,
+      //     "supplierId": 25,
+      //     "model": "swe3",
+      //     "stockCount": 0,
+      //     "moduleQuantity": 0,
+      //     "cost": 123,
+      //     "currency": "USD",
+      //     "attachments": null,
+      //     "lstWarrantyDetail": [
+      //       {
+      //         "warranty_type": 2,
+      //         "warranty_description": "s1w",
+      //         "warrranty_term_type": 20,
+      //         "expiry_date": "2023-02-08",
+      //         "meter_limit": 0,
+      //         "meter_unit": 0,
+      //         "warranty_provider_Id": 20,
+      //         "certificate_number": "dw",
+      //         "warranty_status": 1
+      //       }
+      //     ]
+      //   }
+      // ],
+      [requestBody],
+      isLoading,
+      {'Authorization': 'Bearer $auth', 'Content-type': 'application/json'},
+    );
+    // print('Response AddInventory ${response.data}');
+    return response;
+  }
+
+
   ///
 }

@@ -179,4 +179,13 @@ class DeviceRepository extends DomainRepository {
   }) {
     throw UnimplementedError();
   }
+
+    Future<ResponseModel> updateInventory({
+    required bool isLoading,
+    required String auth,
+    required AddInventoryRequestModel requestBody,
+  }) {
+    throw UnimplementedError();
+  }
+
 }

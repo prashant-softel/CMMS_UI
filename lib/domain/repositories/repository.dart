@@ -616,5 +616,29 @@ class Repository {
     }
   }
 
+
+   Future<CommonResponseModel> updateInventory({
+    required AddInventoryRequestModel requestBody,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.updateInventory(
+        requestBody: requestBody,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        return commonResponseModelFromJson(res.data);
+      }
+      return CommonResponseModel();
+    } catch (error) {
+      log(error.toString());
+      return CommonResponseModel();
+    }
+  }
+
   ///
 }

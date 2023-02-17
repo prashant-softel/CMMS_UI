@@ -101,4 +101,15 @@ class HomeUsecase {
       isLoading: isLoading,
     );
   }
+  
+
+    Future<CommonResponseModel> updateInventory({
+    required AddInventoryRequestModel requestBody,
+    required bool isLoading,
+  }) async {
+    return _repository.updateInventory(
+      requestBody: requestBody,
+      isLoading: isLoading,
+    );
+  }
 }

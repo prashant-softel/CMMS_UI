@@ -323,7 +323,7 @@ class HomeController extends GetxController {
   }) async {
     var response = await homePresenter.getBusinessList(
       isLoading: isLoading,
-      businessType: 8,
+      businessType: 2,
     );
 
     for (var i in response) {
@@ -477,11 +477,20 @@ class HomeController extends GetxController {
     );
 
     try {
-      await homePresenter.addInventory(
+      if(toAddOrUpdate){
+ await homePresenter.addInventory(
         requestBody: requestBody,
         isLoading: true,
       );
       Utility.showSuccessSnackBar('The inventory added successfully');
+      }else{
+       await homePresenter.updateInventory(
+        requestBody: requestBody,
+        isLoading: true,
+      );
+      Utility.showSuccessSnackBar('The inventory updated successfully');
+      }
+     
       getInventoryList();
       Get.to(() => HomeView());
       print('Response ');

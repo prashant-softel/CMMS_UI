@@ -41,9 +41,11 @@ class AddInventory extends StatelessWidget {
                           child: Column(
                             children: [
                               CustomAppBar(
-                                title: controller.viewInventory
-                                    ? 'View Inventory'
-                                    : 'addInventory'.tr,
+                                title: controller.editInventory
+                                    ? 'Edit Inventory'
+                                    : controller.viewInventory
+                                        ? 'View Inventory'
+                                        : 'addInventory'.tr,
                                 action: ActionButton(
                                   icon: Icons.menu,
                                   lable: 'Inventory List',

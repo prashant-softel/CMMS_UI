@@ -100,4 +100,15 @@ class HomePresenter {
       isLoading: isLoading,
     );
   }
+
+
+  Future<CommonResponseModel> updateInventory({
+    required AddInventoryRequestModel requestBody,
+    required bool isLoading,
+  }) async {
+    return homeUsecase.updateInventory(
+      requestBody: requestBody,
+      isLoading: isLoading,
+    );
+  }
 }
