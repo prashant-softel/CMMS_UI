@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.textController,
     this.readOnly = false,
     this.onTap,
+    this.suffix,
   }) : super(key: key);
 
   final String? label;
@@ -18,13 +19,14 @@ class CustomTextField extends StatelessWidget {
   final double? width;
   final bool readOnly;
   final Function()? onTap;
+  final Widget? suffix;
 
   final TextEditingController? textController;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: Dimens.edgeInsets16,
+      margin: Dimens.edgeInsets16_0_16_0,
       constraints: BoxConstraints(
         maxWidth: width ?? 400,
         minWidth: 100,
@@ -56,19 +58,20 @@ class CustomTextField extends StatelessWidget {
                 maxLines: maxLine,
                 cursorColor: Colors.blueAccent,
                 decoration: InputDecoration(
-                  contentPadding: Dimens.edgeInsets16_0_16_0,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Colors.blueAccent),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: Colors.grey.shade300,
+                    contentPadding: Dimens.edgeInsets16_0_16_0,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    suffixIcon: suffix ?? null),
               ),
             ),
           ),

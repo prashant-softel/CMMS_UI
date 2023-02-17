@@ -67,6 +67,7 @@ class TranslationsFile extends Translations {
           'equipmentSrNo': 'Equipment Sr. No.',
           'manufacturersName': 'Manufacturers Name',
           'orderContractReferenceNumber': 'Order/Contract\nReference Number',
+          'severity': 'Severity',
         },
       };
 }
