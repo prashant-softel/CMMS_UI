@@ -95,8 +95,8 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                   ),
                                   JobDetailMultiValueField(
                                     title: 'Equipment Categories',
-                                    values: controller.jobDetailsModel.value
-                                        ?.lstCMequipmentCatList
+                                    values: controller
+                                        .jobDetailsModel.value?.equipmentCatList
                                         ?.map((item) => (item.equipmentCatName))
                                         .toList() as List<String>,
                                   ),
@@ -159,14 +159,14 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                     value: controller
                                             .jobDetailsModel
                                             .value
-                                            ?.lstCMworkingAreaNameList?[0]
+                                            ?.workingAreaNameList?[0]
                                             .workingAreaName ??
                                         "",
                                   ),
                                   JobDetailMultiValueField(
                                     title: 'Work Type',
                                     values: controller.jobDetailsModel.value
-                                        ?.lstCMworkingAreaNameList
+                                        ?.workingAreaNameList
                                         ?.map((item) => (item.workingAreaName))
                                         .toList() as List<String>,
                                   ),
@@ -175,7 +175,7 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                     value: controller
                                             .jobDetailsModel
                                             .value
-                                            ?.lstAssociatedPermit
+                                            ?.associatedPermit
                                             ?.first
                                             .sitePermitNo
                                             .toString() ??

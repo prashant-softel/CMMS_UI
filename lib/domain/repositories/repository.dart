@@ -408,11 +408,11 @@ class Repository {
 
       if (!res.hasError) {
         final jsonJobDetailsModels = jsonDecode(res.data);
-        final List<JobDetailsModel> _jobDetailsModelList = jsonJobDetailsModels
-            .map<JobDetailsModel>(
-              (m) => JobDetailsModel.fromJson(Map<String, dynamic>.from(m)),
-            )
-            .toList();
+
+        final JobDetailsModel _jobDetailsModel =
+            jobDetailsModelFromJson(res.data);
+        List<JobDetailsModel> _jobDetailsModelList = [];
+        _jobDetailsModelList.add(_jobDetailsModel);
 
         return _jobDetailsModelList;
       } else {

@@ -18,6 +18,7 @@ class JobModel {
       jobDetails: json['jobDetails'],
       workType: json['workType'],
       raisedBy: json['raisedBy'],
+      raisedByName: json['raisedByName'],
       breakdownTime: json['breakdownTime'] == null
           ? null
           : DateTime.parse(json['breakdownTime'] as String),
@@ -40,6 +41,7 @@ class JobModel {
     this.jobDetails,
     this.workType,
     this.raisedBy,
+    this.raisedByName,
     this.breakdownTime,
     this.breakdownType,
     this.permitId,
@@ -58,7 +60,8 @@ class JobModel {
   dynamic description;
   String? jobDetails;
   String? workType;
-  String? raisedBy;
+  int? raisedBy;
+  String? raisedByName;
   DateTime? breakdownTime;
   String? breakdownType;
   int? permitId;
@@ -78,14 +81,13 @@ class JobModel {
         'jobDetails': jobDetails,
         'workType': workType,
         'raisedBy': raisedBy,
+        'raisedByName': raisedByName,
         'breakdownTime': breakdownTime,
-        // "${breaKdownTime!.year.toString().padLeft(4, '0')}-${breaKdownTime!.month.toString().padLeft(2, '0')}-${breaKdownTime!.day.toString().padLeft(2, '0')}",
         'breakdownType': breakdownType,
         'permitId': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
         'facility_id': facilityId,
-
         'status': statusValues.reverse[status],
       };
 }

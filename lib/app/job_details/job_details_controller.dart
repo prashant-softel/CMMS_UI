@@ -49,14 +49,7 @@ class JobDetailsController extends GetxController {
       update(["jobDetailsModel"]);
     }
 
-    associatedPermitList?.value =
-        jobDetailsModel.value?.lstAssociatedPermit ?? [];
-
-    // for (AssociatedPermit associatedPermit in associatedPermitList?.value ?? []) {
-    //   associatedPermit.ptwStatus =
-    // }
-
-    //print(jsonPTWModels);
+    associatedPermitList?.value = jobDetailsModel.value?.associatedPermit ?? [];
   }
 
   editJob() {
