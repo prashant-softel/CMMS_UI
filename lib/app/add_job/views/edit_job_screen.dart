@@ -9,8 +9,8 @@ import '../../theme/styles.dart';
 import '../add_job_controller.dart';
 import 'widgets/dropdown.dart';
 
-class AddJobScreen extends GetView<AddJobController> {
-  AddJobScreen({Key? key}) : super(key: key);
+class EditJobScreen extends GetView<AddJobController> {
+  EditJobScreen({Key? key}) : super(key: key);
 
   ///
   final JobListController jobListController = Get.find();
@@ -55,6 +55,7 @@ class AddJobScreen extends GetView<AddJobController> {
                       dropdownList: controller.facilityList,
                       isValueSelected: controller.isFacilitySelected.value,
                       selectedValue: controller.selectedFacility.value,
+                      isEditable: false,
                     ),
                   ),
                 ]),

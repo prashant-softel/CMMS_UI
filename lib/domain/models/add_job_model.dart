@@ -82,6 +82,9 @@ class AssetsId {
       };
 }
 
-AssetsId addAssetsIdFromJson(String str) => AssetsId.fromJson(json.decode(str));
+AssetsId addAssetsIdFromJson(String str) {
+  var assetsId = AssetsId.fromJson(json.decode(str));
+  return assetsId;
+}
 
 String addAssetsIdToJson(AssetsId data) => json.encode(data.toJson());

@@ -1,6 +1,8 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../theme/colors_value.dart';
+import '../../add_job_controller.dart';
 
 class DropdownWidget extends StatelessWidget {
   DropdownWidget({
@@ -8,16 +10,17 @@ class DropdownWidget extends StatelessWidget {
     this.selectedValue,
     this.isValueSelected,
     this.dropdownList,
+    this.isEditable,
   });
 
   String? selectedValue;
   bool? isValueSelected;
   final List? dropdownList;
+  final bool? isEditable;
 
   @override
   Widget build(BuildContext context) {
-    ///
-    //final AddJobController addJobController = Get.find();
+    final AddJobController addJobController = Get.find();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
@@ -43,6 +46,7 @@ class DropdownWidget extends StatelessWidget {
       ),
       child: //
           DropdownSearch<String>(
+        enabled: isEditable ?? true,
         dropdownButtonProps: DropdownButtonProps(
           icon: Icon(
             Icons.arrow_drop_down,
@@ -76,7 +80,11 @@ class DropdownWidget extends StatelessWidget {
             hintText: "Select",
           ),
         ),
-        onChanged: print,
+        onChanged: (String? _selectedValue) {
+          isValueSelected = true;
+          selectedValue = _selectedValue ?? '';
+          addJobController.valueChanged(dropdownList, selectedValue);
+        },
         selectedItem: selectedValue,
       ),
 

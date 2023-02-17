@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,7 @@ class AddJobController extends GetxController {
   Rx<String> selectedEquipment = ''.obs;
   Rx<bool> isEquipmentSelected = false.obs;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
-  RxList<EquipmentModel?> selectedEquipmentList = <EquipmentModel>[].obs;
-  RxList<int?> selectedEquipmentIdList = <int>[].obs;
+
   //
   Rx<String> selectedWorkArea = ''.obs;
   Rx<bool> isWorkAreaSelected = false.obs;
@@ -80,7 +80,6 @@ class AddJobController extends GetxController {
     await getFacilityList();
     await getBlocksList(facilityId);
     await getAssignedToList();
-    //await getEquipmentList(facilityId: facilityId.toString());
     await getInventoryCategoryList(facilityId.toString());
 
     super.onInit();
@@ -93,9 +92,9 @@ class AddJobController extends GetxController {
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
-      if (facilityList.isNotEmpty) {
-        selectedFacility.value = facilityList[0]?.name ?? '';
-      }
+      // if (facilityList.isNotEmpty) {
+      //   selectedFacility.value = facilityList[0]?.name ?? '';
+      // }
     }
   }
 
@@ -108,9 +107,6 @@ class AddJobController extends GetxController {
         blockList.add(block);
       }
       update(["jobList"]);
-      if (blockList.isNotEmpty) {
-        selectedBlock.value = blockList[0]?.name ?? '';
-      }
     }
   }
 
@@ -163,9 +159,7 @@ class AddJobController extends GetxController {
 
   Future<void> getInventoryList({
     required int facilityId,
-    //required List<int> categoryIds,
   }) async {
-    workAreaList.value = [];
     categoryIds = selectedEquipmentCategoryIdList.value;
     String lststrCategoryIds = categoryIds.join(', ').toString();
     final _workAreaList = await homePresenter.getInventoryList(
@@ -173,51 +167,33 @@ class AddJobController extends GetxController {
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
+    workAreaList.value = _workAreaList;
 
-    for (var workArea in _workAreaList) {
-      var _workArea = InventoryModel(
-        id: workArea.id,
-        name: workArea.name,
-        description: workArea.description,
-        categoryName: workArea.categoryName,
-        blockName: workArea.blockName,
-        parentName: workArea.parentName,
-        ownerName: workArea.ownerName,
-        operatorName: workArea.operatorName,
-        status: workArea.status,
-      );
-      workAreaList.add(_workArea);
-    }
     update(["workAreaList"]);
     //selectedWorkArea.value = workAreaList[0]?.name ?? '';
   }
 
   Future<void> saveJob() async {
     {
-      int facilityIndex = facilityList.value
-          .indexWhere((x) => x?.name == selectedFacility.value);
-      int selectedFacilityId = blockList[facilityIndex]?.id ?? 0;
-      int _facilityId = selectedFacilityId;
-      int _blockId = selectedBlockId;
+      //
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
       List<AssetsId> assetIds = [];
-      int _assignedToId = selectedAssignedToId;
-      for (var _selectedEquipment in selectedEquipmentList) {
-        var selectedAssetIds = [];
-        var json = {
-          "assetId": _selectedEquipment?.id,
-          "categoryIds": _selectedEquipment?.categoryId,
-        };
-        //assetIds.add();
+
+      for (var _selectedWorkArea in selectedWorkAreaList) {
+        var json = '{"asset_id": ${_selectedWorkArea?.id},'
+            '"category_ids": ${_selectedWorkArea?.categoryId}}';
+
+        AssetsId _assetId = addAssetsIdFromJson(json);
+        assetIds.add(_assetId);
       }
 
       AddJobModel addJobModel = AddJobModel(
-        facilityId: _facilityId,
-        blockId: _blockId,
+        facilityId: selectedFacilityId,
+        blockId: selectedBlockId,
         permitId: _permitId,
-        assignedId: 135,
+        assignedId: selectedAssignedToId,
         title: _title,
         description: _description,
         status: 2,
@@ -237,8 +213,8 @@ class AddJobController extends GetxController {
       case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          int selectedFacilityId = blockList[facilityIndex]?.id ?? 0;
-          print(selectedFacilityId);
+          selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
+
           getBlocksList(selectedFacilityId);
         }
         break;
@@ -246,8 +222,7 @@ class AddJobController extends GetxController {
       case RxList<BlockModel>:
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
-          int selectedBlockId = blockList[blockIndex]?.id ?? 0;
-          print(selectedBlockId);
+          selectedBlockId = blockList[blockIndex]?.id ?? 0;
         }
         break;
       case RxList<EquipmentModel>:
@@ -281,8 +256,7 @@ class AddJobController extends GetxController {
         {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
-          int selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          print(selectedAssignedToId);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
         }
         break;
       default:
@@ -301,11 +275,8 @@ class AddJobController extends GetxController {
     getInventoryList(facilityId: facilityId);
   }
 
-  void workAreasSelected(selectedWorkAreas) {
-    selectedWorkAreaIdList.value = [];
-    for (var _selectedWorkArea in selectedWorkAreas) {
-      selectedWorkAreaIdList.add(_selectedWorkArea.id);
-    }
+  void workAreasSelected(_selectedWorkAreaList) {
+    selectedWorkAreaList.value = _selectedWorkAreaList.cast<InventoryModel>();
   }
 
   ///

@@ -207,7 +207,8 @@ class Repository {
       );
 
       if (!res.hasError) {
-        return inventoryModelFromJson(res.data);
+        var inventoryList = inventoryModelFromJson(res.data);
+        return inventoryList;
       }
       return [];
     } catch (error) {

@@ -3,7 +3,6 @@ import 'package:cmms/app/job_details/views/widgets/ptw.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../domain/models/job_model.dart';
-import '../../../theme/colors_value.dart';
 import '../../../theme/dimens.dart';
 import '../widgets/job_detail_field.dart';
 import '../widgets/job_detail_multi_value_field.dart';
@@ -18,7 +17,7 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
 
     final ButtonStyle editButtonStyle = ElevatedButton.styleFrom(
       textStyle: TextStyle(fontSize: Dimens.fourteen),
-      backgroundColor: ColorsValue.navyBlueColor,
+      backgroundColor: Color(0xffc4a278),
     );
     return Scaffold(
       appBar: AppBar(
@@ -171,18 +170,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                         ?.map((item) => (item.workingAreaName))
                                         .toList() as List<String>,
                                   ),
-
-                                  // Wrap(children: [
-                                  //   for (var _equipmentCategory in controller
-                                  //           .jobDetailsModel
-                                  //           .value
-                                  //           ?.lstCMequipmentCatList ??
-                                  //       [])
-                                  //     MultiSelectWidget(
-                                  //       equipmentCategory: _equipmentCategory,
-                                  //     ),
-                                  // ]),
-
                                   JobDetailField(
                                     title: 'Site Permit No.',
                                     value: controller
@@ -214,11 +201,19 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                   ),
 
                   /// SAVE BUTTON
-                  ElevatedButton(
-                    style: editButtonStyle,
-                    onPressed: () => controller.editJob(),
-                    child: const Text('Edit'),
-                  ),
+                  if (controller.jobDetailsModel.value?.assignedId == null ||
+                      controller.jobDetailsModel.value?.assignedId == 0)
+                    ElevatedButton(
+                      style: editButtonStyle,
+                      onPressed: () => controller.editJob(),
+                      child: Text(
+                        (controller.jobDetailsModel.value?.assignedId == null ||
+                                controller.jobDetailsModel.value?.assignedId ==
+                                    0)
+                            ? 'Assign'
+                            : 'Re-Assign',
+                      ),
+                    ),
                 ]),
           ),
         ),
