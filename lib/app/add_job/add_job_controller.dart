@@ -8,8 +8,8 @@ import '../../domain/models/add_job_model.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
-import '../home/home_presenter.dart';
 import '../job_list/job_list_presenter.dart';
+import '../navigators/app_pages.dart';
 import 'add_job_presenter.dart';
 
 class AddJobController extends GetxController {
@@ -201,41 +201,16 @@ class AddJobController extends GetxController {
         assetsIds: assetIds,
         workTypeIds: selectedWorkAreaIdList,
       );
-      //var jobJson = addJobModel.toJson();
       var jobJsonString = addJobModelToJson(addJobModel);
-
-      //var jsonJob = json.decode(jobJsonString);
 
       String? response = await addJobPresenter.saveJob(
         job: jobJsonString,
         isLoading: true,
       );
-      if (response.isNotEmpty) {}
-    }
-  }
-
-  String MapToJson(List<Map<String, dynamic>> map) {
-    String res = "[";
-
-    for (var s in map) {
-      res += "{";
-
-      for (String k in s.keys) {
-        res += '"';
-        res += k;
-        res += '":"';
-        res += s[k].toString();
-        res += '",';
+      if (response.isNotEmpty) {
+        showAlertDialog();
       }
-      res = res.substring(0, res.length - 1);
-
-      res += "},";
-      res = res.substring(0, res.length - 1);
     }
-
-    res += "]";
-
-    return res;
   }
 
   void valueChanged(list, value) {
@@ -307,6 +282,64 @@ class AddJobController extends GetxController {
 
   void workAreasSelected(_selectedWorkAreaList) {
     selectedWorkAreaList.value = _selectedWorkAreaList.cast<InventoryModel>();
+  }
+
+  /// Show alert dialog
+  static void showAlertDialog({
+    String? message,
+    String? title,
+    Function()? onPress,
+  }) async {
+    await Get.dialog<void>(
+      AlertDialog(
+        title: Text('Job Added'),
+        content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+
+          return SizedBox(
+            height: height / 5,
+            width: width,
+            child: Column(
+              children: [
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: Styles.greenElevatedButtonStyle,
+                        onPressed: () => () {
+                          Get.toNamed(Routes.jobList);
+                        },
+                        child: const Text('Job List'),
+                      ),
+                    ),
+                    Dimens.boxWidth10,
+                    Expanded(
+                      child: ElevatedButton(
+                        style: Styles.yellowElevatedButtonStyle,
+                        onPressed: () => () {},
+                        child: const Text('View Job'),
+                      ),
+                    ),
+                    Dimens.boxWidth10,
+                    Expanded(
+                      child: ElevatedButton(
+                        style: Styles.redElevatedButtonStyle,
+                        onPressed: () => () {},
+                        child: const Text('Add New Job'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }),
+        actions: [],
+      ),
+    );
   }
 
   ///

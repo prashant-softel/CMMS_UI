@@ -732,4 +732,19 @@ abstract class Styles {
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w400,
   );
+
+  static ButtonStyle greenElevatedButtonStyle = ElevatedButton.styleFrom(
+    textStyle: TextStyle(fontSize: Dimens.fourteen),
+    backgroundColor: Color.fromARGB(255, 96, 205, 76),
+  );
+  static ButtonStyle yellowElevatedButtonStyle = ElevatedButton.styleFrom(
+    textStyle: TextStyle(fontSize: Dimens.fourteen),
+    backgroundColor: Color.fromARGB(255, 237, 219, 51),
+  );
+  static ButtonStyle redElevatedButtonStyle = ElevatedButton.styleFrom(
+    textStyle: TextStyle(fontSize: Dimens.fourteen),
+    backgroundColor: Color.fromARGB(255, 233, 164, 143),
+  );
+
+  ///
 }
