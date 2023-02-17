@@ -4,8 +4,6 @@ import 'package:cmms/domain/domain.dart';
 
 import 'package:get/get.dart';
 
-import '../../domain/models/add_job_model.dart';
-
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
   ConnectHelper() {
@@ -259,7 +257,7 @@ class ConnectHelper {
 
   Future<ResponseModel> saveJob({
     required String auth,
-    AddJobModel? job,
+    job,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(

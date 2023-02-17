@@ -14,7 +14,6 @@ import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
-import '../models/add_job_model.dart';
 import '../models/state.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -491,7 +490,7 @@ class Repository {
   }
 
   Future<void> saveJob(
-    AddJobModel? job,
+    job,
     bool? isLoading,
   ) async {
     try {
@@ -504,6 +503,7 @@ class Repository {
 
       if (!res.hasError) {
         //TODO
+        print('success');
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return null;

@@ -201,8 +201,10 @@ class AddJobController extends GetxController {
         assetsIds: assetIds,
         workTypeIds: selectedWorkAreaIdList,
       );
+      //var jobJson = addJobModel.toJson();
+      var jobJson = addJobModelToJson(addJobModel);
       await addJobPresenter.saveJob(
-        job: addJobModel,
+        job: jobJson,
         isLoading: true,
       );
     }

@@ -1,8 +1,6 @@
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 
-import '../../domain/models/add_job_model.dart';
-
 /// Repositories (retrieve data, heavy processing etc..)
 class DataRepository extends DomainRepository {
   /// [connectHelper] : A connection helper which will connect to the
@@ -188,7 +186,7 @@ class DataRepository extends DomainRepository {
   ///
   Future<ResponseModel> saveJob({
     required String auth,
-    AddJobModel? job,
+    job,
     bool? isLoading,
   }) async =>
       await connectHelper.saveJob(

@@ -2,7 +2,6 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-import '../models/add_job_model.dart';
 import '../models/block_model.dart';
 import '../models/tools_model.dart';
 
@@ -57,7 +56,7 @@ class AddJobUsecase {
 
   ///
   Future<void> saveJob({
-    AddJobModel? job,
+    job,
     bool? isLoading,
   }) async =>
       await repository.saveJob(
