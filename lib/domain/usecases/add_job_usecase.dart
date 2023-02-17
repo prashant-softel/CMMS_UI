@@ -55,7 +55,7 @@ class AddJobUsecase {
       );
 
   ///
-  Future<void> saveJob({
+  Future<String> saveJob({
     job,
     bool? isLoading,
   }) async =>

@@ -173,7 +173,7 @@ class AddJobController extends GetxController {
     //selectedWorkArea.value = workAreaList[0]?.name ?? '';
   }
 
-  Future<void> saveJob() async {
+  void saveJob() async {
     {
       //
       int _permitId = selectedPermitId;
@@ -202,12 +202,40 @@ class AddJobController extends GetxController {
         workTypeIds: selectedWorkAreaIdList,
       );
       //var jobJson = addJobModel.toJson();
-      var jobJson = addJobModelToJson(addJobModel);
-      await addJobPresenter.saveJob(
-        job: jobJson,
+      var jobJsonString = addJobModelToJson(addJobModel);
+
+      //var jsonJob = json.decode(jobJsonString);
+
+      String? response = await addJobPresenter.saveJob(
+        job: jobJsonString,
         isLoading: true,
       );
+      if (response.isNotEmpty) {}
     }
+  }
+
+  String MapToJson(List<Map<String, dynamic>> map) {
+    String res = "[";
+
+    for (var s in map) {
+      res += "{";
+
+      for (String k in s.keys) {
+        res += '"';
+        res += k;
+        res += '":"';
+        res += s[k].toString();
+        res += '",';
+      }
+      res = res.substring(0, res.length - 1);
+
+      res += "},";
+      res = res.substring(0, res.length - 1);
+    }
+
+    res += "]";
+
+    return res;
   }
 
   void valueChanged(list, value) {

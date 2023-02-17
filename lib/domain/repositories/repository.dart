@@ -489,7 +489,7 @@ class Repository {
     }
   }
 
-  Future<void> saveJob(
+  Future<String> saveJob(
     job,
     bool? isLoading,
   ) async {
@@ -502,14 +502,18 @@ class Repository {
       );
 
       if (!res.hasError) {
-        //TODO
-        print('success');
+        if (res.errorCode == 200)
+          //var strResponse = res.data;
+          //print('success');
+          return 'Success';
       } else {
         Utility.showDialog('Something Went Wrong!!');
-        return null;
+        //return '';
       }
+      return '';
     } catch (error) {
       log(error.toString());
+      return '';
     }
   }
 

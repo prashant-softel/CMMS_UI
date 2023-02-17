@@ -1,4 +1,5 @@
 // coverage:ignore-file
+
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 
@@ -263,11 +264,14 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/CreateNewJob',
+      'Job/CreateNewJob?job=$job',
       Request.post,
       job,
       isLoading ?? true,
       {
+        'Content-Type': 'application/json',
+        // 'Accept-Encoding': 'gzip, deflate, br',
+        // 'Connection': 'keep-alive',
         'Authorization': 'Bearer $auth',
       },
     );

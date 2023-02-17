@@ -12,9 +12,10 @@ import 'package:http/http.dart' as http;
 
 /// API WRAPPER to call all the APIs and handle the error status codes
 class ApiWrapper {
-  final String _baseUrl = (appFlavor == AppFlavor.PROD)
-      ? 'https://api.cmms.in/v1/'
-      : 'http://3.111.196.218/CMMS_API/api/';
+  final String _baseUrl = //(appFlavor == AppFlavor.PROD)
+      //? 'https://api.cmms.in/v1/'
+      //:
+      'http://3.111.196.218/CMMS_API/api/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(String url, Request request, dynamic data,
@@ -22,7 +23,6 @@ class ApiWrapper {
     /// To see whether the network is available or not
     if ((!GetPlatform.isWeb) ? await Utility.isNetworkAvailable() : true) {
       switch (request) {
-
         /// Method to make the Get type request
         case Request.get:
           {
@@ -59,7 +59,7 @@ class ApiWrapper {
               final response = await http
                   .post(
                     Uri.parse(uri),
-                    body: jsonEncode(data),
+                    body: data,
                     headers: headers,
                   )
                   .timeout(const Duration(seconds: 120));

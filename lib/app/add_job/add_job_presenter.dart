@@ -55,7 +55,7 @@ class AddJobPresenter {
   }
 
   ///
-  Future<void> saveJob({
+  Future<String> saveJob({
     job,
     required bool isLoading,
   }) async {
