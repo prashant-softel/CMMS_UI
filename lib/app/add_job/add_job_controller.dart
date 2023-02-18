@@ -292,44 +292,50 @@ class AddJobController extends GetxController {
   }) async {
     await Get.dialog<void>(
       AlertDialog(
-        title: Text('Job Added'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        ),
+        insetPadding: Dimens.edgeInsets10_0_10_0,
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          'Job Added',
+          textAlign: TextAlign.center,
+        ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
           var width = MediaQuery.of(context).size.width;
 
-          return SizedBox(
-            height: height / 5,
-            width: width,
+          return Container(
+            padding: Dimens.edgeInsets05_0_5_0,
+            height: height / 6,
+            width: double.infinity,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Divider(
+                  color: ColorsValue.greyLightColour,
+                  thickness: 1,
+                ),
                 Spacer(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: Styles.greenElevatedButtonStyle,
-                        onPressed: () => () {
-                          Get.toNamed(Routes.jobList);
-                        },
-                        child: const Text('Job List'),
-                      ),
+                    ElevatedButton(
+                      style: Styles.greenElevatedButtonStyle,
+                      onPressed: () => Get.offAndToNamed(Routes.jobList),
+                      child: const Text('Job List'),
                     ),
                     Dimens.boxWidth10,
-                    Expanded(
-                      child: ElevatedButton(
-                        style: Styles.yellowElevatedButtonStyle,
-                        onPressed: () => () {},
-                        child: const Text('View Job'),
-                      ),
+                    ElevatedButton(
+                      style: Styles.yellowElevatedButtonStyle,
+                      onPressed: () => Get.offAndToNamed(Routes.jobDetails),
+                      child: const Text('View Job'),
                     ),
                     Dimens.boxWidth10,
-                    Expanded(
-                      child: ElevatedButton(
-                        style: Styles.redElevatedButtonStyle,
-                        onPressed: () => () {},
-                        child: const Text('Add New Job'),
-                      ),
+                    ElevatedButton(
+                      style: Styles.redElevatedButtonStyle,
+                      onPressed: () => Get.offAndToNamed(Routes.addJob),
+                      child: const Text(' Add New Job '),
                     ),
                   ],
                 ),
