@@ -12,11 +12,13 @@ class HomeUsecase {
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int facilityId,
+    int? blockId,
     required String categoryIds,
   }) async {
     return _repository.getInventoryList(
       isLoading: isLoading,
       facilityId: facilityId,
+      blockId: blockId,
       categoryIds: categoryIds,
     );
   }

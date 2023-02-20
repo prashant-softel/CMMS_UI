@@ -26,7 +26,6 @@ class AddJobScreen extends GetView<AddJobController> {
 
     ///
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Add Job'),
         centerTitle: true,
@@ -246,8 +245,8 @@ class AddJobScreen extends GetView<AddJobController> {
                             Dimens.boxHeight5,
                             DropdownWidget(
                               dropdownList: controller.equipmentList,
-                              isValueSelected:
-                                  controller.isEquipmentSelected.value,
+                              //isValueSelected:
+                              //controller.isEquipmentSelected.value,
                               selectedValue: controller.selectedEquipment.value,
                             ),
                             Dimens.boxHeight20,
@@ -267,8 +266,8 @@ class AddJobScreen extends GetView<AddJobController> {
                             DropdownWidget(
                               dropdownList:
                                   controller.toolsRequiredToWorkTypeList,
-                              isValueSelected: controller
-                                  .isToolRequiredToWorkTypeSelected.value,
+                              //isValueSelected: controller
+                              //.isToolRequiredToWorkTypeSelected.value,
                               selectedValue: controller
                                   .selectedToolRequiredToWorkType.value,
                             ),
@@ -293,6 +292,7 @@ class AddJobScreen extends GetView<AddJobController> {
                               ),
                             ),
                             Dimens.boxHeight5,
+
                             DropdownWidget(
                               dropdownList: controller.assignedToList,
                               isValueSelected:
@@ -322,7 +322,6 @@ class AddJobScreen extends GetView<AddJobController> {
                             ),
                             Dimens.boxHeight5,
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -355,7 +354,37 @@ class AddJobScreen extends GetView<AddJobController> {
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
+                                  focusedErrorBorder:
+                                      controller.isJobTitleInvalid.value
+                                          ? OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              borderSide: BorderSide(
+                                                color: ColorsValue.redColorDark,
+                                              ),
+                                            )
+                                          : InputBorder.none,
+                                  errorBorder:
+                                      controller.isJobTitleInvalid.value
+                                          ? OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              borderSide: BorderSide(
+                                                color: ColorsValue.redColorDark,
+                                              ),
+                                            )
+                                          : null,
+                                  errorText: controller.isJobTitleInvalid.value
+                                      ? "Required field"
+                                      : null,
                                 ),
+                                onChanged: (value) {
+                                  if (value.trim().length > 3) {
+                                    controller.isJobTitleInvalid.value = false;
+                                  } else {
+                                    controller.isJobTitleInvalid.value = true;
+                                  }
+                                },
                               ),
                             ),
                             Dimens.boxHeight20,
@@ -380,7 +409,6 @@ class AddJobScreen extends GetView<AddJobController> {
                             ),
                             Dimens.boxHeight5,
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -414,7 +442,40 @@ class AddJobScreen extends GetView<AddJobController> {
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
+                                  focusedErrorBorder:
+                                      controller.isJobDescriptionInvalid.value
+                                          ? OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              borderSide: BorderSide(
+                                                color: ColorsValue.redColorDark,
+                                              ),
+                                            )
+                                          : InputBorder.none,
+                                  errorBorder:
+                                      controller.isJobDescriptionInvalid.value
+                                          ? OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              borderSide: BorderSide(
+                                                color: ColorsValue.redColorDark,
+                                              ),
+                                            )
+                                          : null,
+                                  errorText:
+                                      controller.isJobDescriptionInvalid.value
+                                          ? "Required field"
+                                          : null,
                                 ),
+                                onChanged: (value) {
+                                  if (value.trim().length > 3) {
+                                    controller.isJobDescriptionInvalid.value =
+                                        false;
+                                  } else {
+                                    controller.isJobDescriptionInvalid.value =
+                                        true;
+                                  }
+                                },
                               ),
                             ),
                             Dimens.boxHeight10,

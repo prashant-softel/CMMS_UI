@@ -28,9 +28,10 @@ class CardWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'Current Status: ',
+                            '${jobModel?.id ?? 0}',
                             style: const TextStyle(
-                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              color: ColorsValue.navyBlueColor,
                             ),
                           ),
                         ),

@@ -91,6 +91,7 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     required int facilityId,
+    int? blockId,
     required String categoryIds,
   }) async {
     //var categoryId = 5;
@@ -150,7 +151,6 @@ class ConnectHelper {
       null,
       isLoading ?? true,
       {
-        //'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
@@ -164,7 +164,6 @@ class ConnectHelper {
     int? jobId,
     int? userId,
   }) async {
-    //jobId = 3158;
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobDetail?job_id=$jobId',
       Request.get,
@@ -185,7 +184,6 @@ class ConnectHelper {
       null,
       true,
       {
-        //'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
     );
@@ -207,6 +205,7 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
   Future<ResponseModel> getInventoryCategoryList({
     String? auth,
     bool? isLoading,

@@ -26,21 +26,21 @@ class AddJobController extends GetxController {
   //
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
-  Rx<bool> isFacilitySelected = false.obs;
+  Rx<bool> isFacilitySelected = true.obs;
   int selectedFacilityId = 0;
   //
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
-  Rx<bool> isBlockSelected = false.obs;
+  Rx<bool> isBlockSelected = true.obs;
   int selectedBlockId = 0;
   //
   Rx<String> selectedEquipment = ''.obs;
-  Rx<bool> isEquipmentSelected = false.obs;
+  Rx<bool> isEquipmentSelected = true.obs;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
 
   //
   Rx<String> selectedWorkArea = ''.obs;
-  Rx<bool> isWorkAreaSelected = false.obs;
+  Rx<bool> isWorkAreaSelected = true.obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
@@ -56,7 +56,7 @@ class AddJobController extends GetxController {
   //
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
-  Rx<bool> isAssignedToSelected = false.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
   //
   Rx<String> selectedToolRequiredToWorkType = ''.obs;
@@ -69,6 +69,9 @@ class AddJobController extends GetxController {
   int selectedPermitId = 0;
   int facilityId = 45;
   List<int> categoryIds = [];
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isJobTitleInvalid = false.obs;
+  Rx<bool> isJobDescriptionInvalid = false.obs;
   var breakdownTime;
   var jobDescriptionCtrlr = TextEditingController();
   var jobTitleCtrlr = TextEditingController();
@@ -159,11 +162,13 @@ class AddJobController extends GetxController {
 
   Future<void> getInventoryList({
     required int facilityId,
+    required int blockId,
   }) async {
     categoryIds = selectedEquipmentCategoryIdList.value;
     String lststrCategoryIds = categoryIds.join(', ').toString();
     final _workAreaList = await homePresenter.getInventoryList(
       facilityId: facilityId,
+      blockId: blockId,
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
@@ -173,8 +178,39 @@ class AddJobController extends GetxController {
     //selectedWorkArea.value = workAreaList[0]?.name ?? '';
   }
 
+  void checkForm() {
+    if (selectedFacility.value == '') {
+      isFacilitySelected.value = false;
+    }
+    if (selectedBlock.value == '') {
+      isBlockSelected.value = false;
+    }
+    if (selectedAssignedTo.value == '') {
+      isAssignedToSelected.value = false;
+    }
+    if (jobTitleCtrlr.text.trim().length < 3) {
+      isJobTitleInvalid.value = true;
+    }
+    if (jobDescriptionCtrlr.text.trim().length < 3) {
+      isJobDescriptionInvalid.value = true;
+    }
+    if (isAssignedToSelected.value == false ||
+        isFacilitySelected.value == false ||
+        isBlockSelected.value == false ||
+        isJobTitleInvalid.value == true ||
+        isJobDescriptionInvalid == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   void saveJob() async {
     {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       //
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
@@ -219,7 +255,10 @@ class AddJobController extends GetxController {
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-
+          if (selectedFacilityId != 0) {
+            isFacilitySelected.value = true;
+          }
+          selectedFacility.value = value;
           getBlocksList(selectedFacilityId);
         }
         break;
@@ -228,6 +267,11 @@ class AddJobController extends GetxController {
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
+          if (selectedBlockId != 0) {
+            isBlockSelected.value = true;
+          }
+          selectedBlock.value = value;
+          getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
         }
         break;
       case RxList<EquipmentModel>:
@@ -262,6 +306,10 @@ class AddJobController extends GetxController {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
           selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
         }
         break;
       default:
@@ -277,7 +325,7 @@ class AddJobController extends GetxController {
     for (var _selectedCategory in selectedEquipmentCategories) {
       selectedEquipmentCategoryIdList.add(_selectedCategory.id);
     }
-    getInventoryList(facilityId: facilityId);
+    getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
   }
 
   void workAreasSelected(_selectedWorkAreaList) {
@@ -303,44 +351,42 @@ class AddJobController extends GetxController {
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
+          //var width = MediaQuery.of(context).size.width;
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: height / 6,
             width: double.infinity,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Divider(
-                  color: ColorsValue.greyLightColour,
-                  thickness: 1,
-                ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      style: Styles.greenElevatedButtonStyle,
-                      onPressed: () => Get.offAndToNamed(Routes.jobList),
-                      child: const Text('Job List'),
-                    ),
-                    Dimens.boxWidth10,
-                    ElevatedButton(
-                      style: Styles.yellowElevatedButtonStyle,
-                      onPressed: () => Get.offAndToNamed(Routes.jobDetails),
-                      child: const Text('View Job'),
-                    ),
-                    Dimens.boxWidth10,
-                    ElevatedButton(
-                      style: Styles.redElevatedButtonStyle,
-                      onPressed: () => Get.offAndToNamed(Routes.addJob),
-                      child: const Text(' Add New Job '),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Divider(
+                    color: ColorsValue.greyLightColour,
+                    thickness: 1,
+                  ),
+                  Spacer(),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          style: Styles.greenElevatedButtonStyle,
+                          onPressed: () => Get.offAndToNamed(Routes.jobList),
+                          child: const Text('Job List'),
+                        ),
+                        Dimens.boxWidth10,
+                        ElevatedButton(
+                          style: Styles.yellowElevatedButtonStyle,
+                          onPressed: () => Get.offAndToNamed(Routes.jobDetails),
+                          child: const Text('View Job'),
+                        ),
+                        Dimens.boxWidth10,
+                        ElevatedButton(
+                          style: Styles.redElevatedButtonStyle,
+                          onPressed: () => Get.offAndToNamed(Routes.addJob),
+                          child: const Text('Add New Job'),
+                        ),
+                      ]),
+                ]),
           );
         }),
         actions: [],

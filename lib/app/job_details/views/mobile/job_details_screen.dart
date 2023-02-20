@@ -2,7 +2,6 @@ import 'package:cmms/app/job_details/job_details_controller.dart';
 import 'package:cmms/app/job_details/views/widgets/ptw.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../domain/models/job_model.dart';
 import '../../../theme/dimens.dart';
 import '../widgets/job_detail_field.dart';
 import '../widgets/job_detail_multi_value_field.dart';
@@ -63,18 +62,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                             .toString() ??
                                         '',
                                   ),
-                                  // Row(children: [
-                                  //   Icon(
-                                  //     Icons.calendar_month_rounded,
-                                  //     color: ColorsValue.greyLightColor,
-                                  //   ),
-                                  //   Text(
-                                  //     controller.jobDetailsModel.value
-                                  //             ?.breaKdownTime ??
-                                  //         '',
-                                  //   ),
-                                  // ]),
-                                  //Dimens.boxHeight10,
                                   JobDetailField(
                                     title: 'Assigned To',
                                     value: controller.jobDetailsModel.value
@@ -100,7 +87,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                         ?.map((item) => (item.equipmentCatName))
                                         .toList() as List<String>,
                                   ),
-
                                   JobDetailField(
                                     title: 'Breakdown Type',
                                     value: "",
@@ -130,11 +116,14 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                 children: [
                                   JobDetailField(
                                     title: 'Current Status',
-                                    value: JobStatus
-                                        .values[controller.jobDetailsModel.value
-                                                ?.status ??
-                                            0]
-                                        .name,
+                                    value: controller.jobDetailsModel.value
+                                            ?.statusShort ??
+                                        '',
+                                    // value: JobStatus
+                                    //     .values[controller.jobDetailsModel.value
+                                    //             ?.status ??
+                                    //         0]
+                                    //     .name,
                                   ),
                                   JobDetailField(
                                     title: 'Raised By',

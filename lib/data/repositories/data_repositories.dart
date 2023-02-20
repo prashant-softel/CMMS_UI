@@ -72,6 +72,7 @@ class DataRepository extends DomainRepository {
   @override
   Future<ResponseModel> getInventoryList({
     required int facilityId,
+    int? blockId,
     required String categoryIds,
     required bool isLoading,
     required String auth,
@@ -80,6 +81,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
+      blockId: blockId,
       categoryIds: categoryIds,
     );
   }

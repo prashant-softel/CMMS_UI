@@ -11,11 +11,13 @@ class HomePresenter {
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int facilityId,
+    int? blockId,
     required String categoryIds,
   }) async {
     return homeUsecase.getInventoryList(
       isLoading: isLoading,
       facilityId: facilityId,
+      blockId: blockId,
       categoryIds: categoryIds,
     );
   }

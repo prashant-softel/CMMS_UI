@@ -192,6 +192,7 @@ class Repository {
 
   Future<List<InventoryModel>> getInventoryList({
     required int facilityId,
+    int? blockId,
     required String categoryIds,
     required bool isLoading,
   }) async {
@@ -200,6 +201,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getInventoryList(
         facilityId: facilityId,
+        blockId: blockId,
         categoryIds: categoryIds,
         isLoading: isLoading,
         auth: auth,
@@ -502,10 +504,9 @@ class Repository {
       );
 
       if (!res.hasError) {
-        if (res.errorCode == 200)
-          //var strResponse = res.data;
-          //print('success');
+        if (res.errorCode == 200) {
           return 'Success';
+        }
       } else {
         Utility.showDialog('Something Went Wrong!!');
         //return '';
