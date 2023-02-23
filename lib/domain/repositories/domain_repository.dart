@@ -59,6 +59,12 @@ abstract class DomainRepository {
     required String auth,
   });
 
+  Future<ResponseModel> getWorkTypeList({
+    required bool isLoading,
+    String? categoryIds,
+    //String auth,
+  });
+
   Future<ResponseModel> getEquipmentList({
     required bool isLoading,
     required String facilityId,

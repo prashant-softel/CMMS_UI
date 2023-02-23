@@ -10,6 +10,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -191,7 +192,7 @@ class Repository {
   }
 
   Future<List<InventoryModel>> getInventoryList({
-    required int facilityId,
+    required int? facilityId,
     int? blockId,
     required String categoryIds,
     required bool isLoading,
@@ -210,6 +211,30 @@ class Repository {
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<WorkTypeModel>> getWorkTypeList(
+    bool? isLoading,
+    String? categoryIds,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getWorkTypeList(
+        categoryIds: categoryIds,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        var workTypeList = workTypeModelFromJson(res.data);
+        return workTypeList;
       }
       return [];
     } catch (error) {

@@ -39,7 +39,7 @@ class JobDetailsController extends GetxController {
   }
 
   Future<void> getJobDetails(int jobId) async {
-    jobId = 3158;
+    //jobId = 3158;
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
         await jobDetailsPresenter.getJobDetails(jobId: jobId);
@@ -52,8 +52,8 @@ class JobDetailsController extends GetxController {
     associatedPermitList?.value = jobDetailsModel.value?.associatedPermit ?? [];
   }
 
-  editJob() {
-    Get.toNamed(Routes.addJob);
+  void editJob() {
+    Get.toNamed(Routes.editJob, arguments: jobId);
   }
 
   ///

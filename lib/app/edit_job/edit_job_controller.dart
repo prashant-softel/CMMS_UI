@@ -4,29 +4,37 @@ import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../domain/models/add_job_model.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
+import '../job_details/job_details_presenter.dart';
 import '../job_list/job_list_presenter.dart';
 import '../navigators/app_pages.dart';
-import 'add_job_presenter.dart';
 
-class AddJobController extends GetxController {
+import 'edit_job_presenter.dart';
+
+class EditJobController extends GetxController {
   ///
-  AddJobController(
-      this.addJobPresenter, this.jobListPresenter, this.homePresenter);
-  AddJobPresenter addJobPresenter;
+  EditJobController(
+    this.editJobPresenter,
+    this.homePresenter,
+    this.jobListPresenter,
+    this.jobDetailsPresenter,
+  );
+  EditJobPresenter editJobPresenter;
   HomePresenter homePresenter;
   JobListPresenter jobListPresenter;
+  JobDetailsPresenter jobDetailsPresenter;
 
   ///
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
+  RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
+  RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
 
   //
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<String> selectedFacility = ''.obs;
+  Rx<String> selectedFacilityName = ''.obs;
   Rx<bool> isFacilitySelected = true.obs;
   int selectedFacilityId = 0;
   //
@@ -58,6 +66,7 @@ class AddJobController extends GetxController {
       <InventoryCategoryModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
+  RxList<String?> selectedEquipmentCategoryNameList = <String>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   //
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
@@ -84,55 +93,72 @@ class AddJobController extends GetxController {
   var jobTitleCtrlr = TextEditingController();
   var breakdownTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  var jobId = 0;
 
   ///
   @override
   void onInit() async {
     await homePresenter.generateToken();
+    jobId = Get.arguments;
+    await getJobDetails(jobId);
     await getFacilityList();
+    await getBlocksList(selectedFacilityId);
+    await getInventoryCategoryList(selectedFacilityId.toString());
     await getAssignedToList();
     super.onInit();
   }
 
+  Future<void> getJobDetails(int jobId) async {
+    //jobId = 3158;
+    jobDetailsList?.value = <JobDetailsModel>[];
+    final _jobDetailsList =
+        await jobDetailsPresenter.getJobDetails(jobId: jobId);
+
+    if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
+      jobDetailsModel.value = _jobDetailsList[0];
+      update(["jobDetailsModel"]);
+      // Fill Job Title and Job Description
+      jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
+      jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
+    }
+
+    associatedPermitList?.value = jobDetailsModel.value?.associatedPermit ?? [];
+  }
+
   Future<void> getFacilityList() async {
-    facilityList.value = [];
-    blockList.value = [];
     final _facilityList = await jobListPresenter.getFacilityList();
-    selectedFacilityId = Get.arguments;
+    //selectedFacilityId = Get.arguments;
     if (_facilityList != null) {
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
-      int facilityIndex =
-          facilityList.indexWhere((x) => x?.id == selectedFacilityId);
-      if (facilityIndex > -1) {
-        selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
-        getBlocksList(selectedFacilityId);
-      }
+      selectedFacilityName.value = jobDetailsModel.value?.facilityName ?? '';
+      selectedFacilityId = jobDetailsModel.value?.facilityId ?? 0;
     }
   }
 
   Future<void> getBlocksList(int _facilityId) async {
-    blockList.value = [];
     final _blockList =
-        await addJobPresenter.getBlocksList(facilityId: _facilityId);
+        await editJobPresenter.getBlocksList(facilityId: _facilityId);
 
     if (_blockList != null) {
       for (var block in _blockList) {
         blockList.add(block);
       }
+      selectedBlock.value = jobDetailsModel.value?.blockName ?? '';
     }
   }
 
   Future<void> getAssignedToList() async {
     final _assignedToList =
-        await addJobPresenter.getAssignedToList(facilityId: facilityId);
+        await editJobPresenter.getAssignedToList(facilityId: facilityId);
 
     if (_assignedToList != null) {
       for (var block in _assignedToList) {
         assignedToList.add(block);
       }
-      update(["assignedToList"]);
+      selectedAssignedTo.value = jobDetailsModel.value?.assignedName ?? '';
     }
   }
 
@@ -148,7 +174,7 @@ class AddJobController extends GetxController {
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-    final list = await addJobPresenter.getToolsRequiredToWorkTypeList(
+    final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
       isLoading: true,
       workTypeIds: workTypeIds,
     );
@@ -158,14 +184,28 @@ class AddJobController extends GetxController {
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = [];
+    selectedEquipmentCategoryList.value = [];
+    selectedEquipmentCategoryNameList.value = [];
+    //
     final _equipmentCategoryList =
-        await addJobPresenter.getInventoryCategoryList(
+        await editJobPresenter.getInventoryCategoryList(
       isLoading: true,
     );
     if (_equipmentCategoryList != null) {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
       }
+      //selectedEquipmentCategoryList = equipmentCategoryList;
+      if (jobDetailsModel.value?.equipmentCatList != null)
+        for (var equipCat in jobDetailsModel.value?.equipmentCatList ?? []) {
+          InventoryCategoryModel equipmentCategory = InventoryCategoryModel(
+            id: equipCat.equipmentCatId,
+            name: equipCat.equipmentCatName,
+          );
+          //equipmentCategoriesSelected.value.add();
+          selectedEquipmentCategoryList.value.add(equipmentCategory);
+          selectedEquipmentCategoryNameList.value.add(equipmentCategory.name);
+        }
     }
   }
 
@@ -191,18 +231,15 @@ class AddJobController extends GetxController {
     List<int>? categoryIds,
   }) async {
     String lststrCategoryIds = categoryIds?.join(', ').toString() ?? '';
-    final _workTypeList = await addJobPresenter.getWorkTypeList(
+    final _workTypeList = await editJobPresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
     workTypeList.value = _workTypeList ?? [];
-
-    //update(["workAreaList"]);
-    //selectedWorkArea.value = workAreaList[0]?.name ?? '';
   }
 
   void checkForm() {
-    if (selectedFacility.value == '') {
+    if (selectedFacilityName.value == '') {
       isFacilitySelected.value = false;
     }
     if (selectedBlock.value == '') {
@@ -262,7 +299,7 @@ class AddJobController extends GetxController {
       );
       var jobJsonString = addJobModelToJson(addJobModel);
 
-      String? response = await addJobPresenter.saveJob(
+      String? response = await editJobPresenter.saveJob(
         job: jobJsonString,
         isLoading: true,
       );
@@ -281,7 +318,7 @@ class AddJobController extends GetxController {
           if (selectedFacilityId != 0) {
             isFacilitySelected.value = true;
           }
-          selectedFacility.value = value;
+          selectedFacilityName.value = value;
           getBlocksList(selectedFacilityId);
         }
         break;
@@ -343,17 +380,23 @@ class AddJobController extends GetxController {
     }
   }
 
-  void equipmentCategoriesSelected(_selectedEquipmentCategories) {
+  void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
     selectedEquipmentCategoryIdList.value = [];
-    for (var _selectedCategory in _selectedEquipmentCategories) {
-      selectedEquipmentCategoryIdList.add(_selectedCategory.id);
+    for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
+      selectedEquipmentCategoryIdList.add(_selectedCategoryId);
     }
     getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
     getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList.value);
   }
 
-  void workAreasSelected(_selectedWorkAreaList) {
-    selectedWorkAreaList.value = _selectedWorkAreaList.cast<InventoryModel>();
+  void workAreasSelected(_selectedWorkAreaIdsList) {
+    selectedWorkAreaList.value = [];
+    for (var selectedWorkAreaId in _selectedWorkAreaIdsList) {
+      int workAreaIndex =
+          workAreaList.indexWhere((x) => x?.id == selectedWorkAreaId);
+      var workArea = workAreaList[workAreaIndex];
+      selectedWorkAreaList.add(workArea);
+    }
   }
 
   void workTypesSelected(_selectedWorkTypesList) {

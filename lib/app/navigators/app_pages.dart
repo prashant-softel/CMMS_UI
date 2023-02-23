@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
 
+import '../edit_job/edit_job_binding.dart';
+import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
 import '../job_details/job_details_binding.dart';
@@ -55,6 +57,11 @@ class AppPages {
       name: _Paths.addJob,
       page: AddJobScreen.new,
       binding: AddJobBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.editJob,
+      page: EditJobScreen.new,
+      binding: EditJobBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.jobDetails,

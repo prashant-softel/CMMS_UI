@@ -28,15 +28,13 @@ class JobDetailMultiValueField extends StatelessWidget {
                     title,
                     style: Styles.greyLight10,
                   ),
-                  Wrap(
-                    children: [
-                      for (var value in values ?? [])
-                        Text(
-                          ((values.length > 1) ? ' ' : '') + value,
-                          style: Styles.navyBlue12,
-                        ),
-                    ],
-                  ),
+                  Wrap(children: [
+                    for (var value in values ?? [])
+                      Text(
+                        ((values.length > 1) ? ' ' : '') + value,
+                        style: Styles.navyBlue12,
+                      ),
+                  ]),
                   Dimens.boxHeight10,
                 ]),
           ),

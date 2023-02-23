@@ -26,6 +26,39 @@ class JobListScreen extends GetView<JobListController> {
           width: double.infinity,
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: Column(children: [
+            //DateFilterWidget(),
+            IconButton(
+              onPressed: () async {
+                final DateTime? picked = await showDatePicker(
+                  context: context,
+                  initialDate: controller.startDate.value,
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2201),
+                  builder: (context, child) {
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        textTheme: const TextTheme(
+                          bodyLarge: TextStyle(fontSize: 24.0),
+                          bodyMedium: TextStyle(fontSize: 24.0),
+                        ),
+                        textButtonTheme: TextButtonThemeData(
+                          style: TextButton.styleFrom(
+                            foregroundColor:
+                                ColorsValue.blueColor, // button text color
+                          ),
+                        ),
+                      ),
+                      child: child!,
+                    );
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.calendar_today,
+                color: ColorsValue.navyBlueColor,
+              ),
+            ),
+
             /// DropDown
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0),

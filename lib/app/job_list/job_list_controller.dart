@@ -23,22 +23,24 @@ class JobListController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
   int facilityId = 45;
-  int userId = 36;
+  int userId = 35;
   var breakdownTime;
+  Rx<DateTime> startDate = DateTime.now().obs;
+  Rx<DateTime> endDate = DateTime.now().obs;
 
   ///
   @override
   void onInit() async {
     await homePresenter.generateToken();
-    await getJobList(facilityId);
+    await getJobList(facilityId, userId);
     getFacilityList();
     super.onInit();
   }
 
   void switchFacility(String? facilityName) {
-    int? _facilityId =
+    facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getJobList(_facilityId);
+    getJobList(facilityId, userId);
   }
 
   Future<void> getFacilityList() async {
@@ -52,7 +54,7 @@ class JobListController extends GetxController {
     }
   }
 
-  Future<void> getJobList(int facilityId) async {
+  Future<void> getJobList(int facilityId, int userId) async {
     jobList?.value = <JobModel>[];
     final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId, userId: userId);
@@ -66,7 +68,7 @@ class JobListController extends GetxController {
   }
 
   Future<void> addJob() async {
-    Get.toNamed(Routes.addJob);
+    Get.toNamed(Routes.addJob, arguments: facilityId);
   }
 
   void showJobDetails(int jobId) {

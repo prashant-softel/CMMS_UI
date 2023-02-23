@@ -90,13 +90,13 @@ class ConnectHelper {
   Future<ResponseModel> getInventoryList({
     required bool isLoading,
     required String auth,
-    required int facilityId,
+    int? facilityId,
     int? blockId,
     required String categoryIds,
   }) async {
-    //var categoryId = 5;
-    return await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?facilityId=$facilityId&categoryIds=$categoryIds',
+    //blockId = 72;
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?linkedToBlockId=$blockId&categoryIds=$categoryIds&status=1',
       Request.getMultiparts,
       null,
       isLoading,
@@ -104,6 +104,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
   }
 
   Future<ResponseModel> getBlockList({
@@ -143,8 +144,8 @@ class ConnectHelper {
     int? facilityId,
     int? userId,
   }) async {
-    facilityId = 45;
-    userId = 36;
+    // facilityId = 45;
+    userId = 35;
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobList?facility_id=$facilityId&userId=$userId',
       Request.get,
@@ -165,7 +166,7 @@ class ConnectHelper {
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobDetail?job_id=$jobId',
+      'Job/GetJobDetails?job_id=$jobId',
       Request.get,
       null,
       isLoading ?? true,
@@ -240,12 +241,31 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getWorkTypeList({
+    String? categoryIds,
+    bool? isLoading,
+    String? auth,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/GetJobWorkTypeList?categoryIds=$categoryIds',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getToolsRequiredToWorkTypeList({
     required String auth,
+    String? workTypeIds,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetMasterToolList',
+      'JobWorkType/GetMasterToolList?worktypeIds=$workTypeIds',
       Request.get,
       null,
       isLoading ?? true,
@@ -269,8 +289,6 @@ class ConnectHelper {
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
-        // 'Accept-Encoding': 'gzip, deflate, br',
-        // 'Connection': 'keep-alive',
         'Authorization': 'Bearer $auth',
       },
     );

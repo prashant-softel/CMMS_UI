@@ -6,8 +6,8 @@ import 'package:cmms/domain/repositories/repository.dart';
 import '../models/block_model.dart';
 import '../models/tools_model.dart';
 
-class AddJobUsecase {
-  AddJobUsecase(this.repository);
+class EditJobUsecase {
+  EditJobUsecase(this.repository);
   Repository repository;
 
   ///

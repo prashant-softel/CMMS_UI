@@ -11,7 +11,7 @@ class HomeUsecase {
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
-    required int facilityId,
+    required int? facilityId,
     int? blockId,
     required String categoryIds,
   }) async {

@@ -1,10 +1,10 @@
 import 'package:cmms/app/job_details/job_details_controller.dart';
-import 'package:cmms/app/job_details/views/widgets/ptw.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/dimens.dart';
 import '../widgets/job_detail_field.dart';
 import '../widgets/job_detail_multi_value_field.dart';
+import '../widgets/ptw.dart';
 
 class JobDetailsScreen extends GetView<JobDetailsController> {
   JobDetailsScreen({super.key});
@@ -89,7 +89,9 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                   ),
                                   JobDetailField(
                                     title: 'Breakdown Type',
-                                    value: "",
+                                    value: controller.jobDetailsModel.value
+                                            ?.breakdownType ??
+                                        '',
                                   ),
                                   JobDetailField(
                                     title: 'Permit ID',
@@ -100,8 +102,8 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                   ),
                                   JobDetailField(
                                     title: 'Standard Action',
-                                    value: controller
-                                            .jobDetailsModel.value?.workType ??
+                                    value: controller.jobDetailsModel.value
+                                            ?.standardAction ??
                                         "",
                                   ),
                                 ]),
@@ -119,16 +121,11 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                     value: controller.jobDetailsModel.value
                                             ?.statusShort ??
                                         '',
-                                    // value: JobStatus
-                                    //     .values[controller.jobDetailsModel.value
-                                    //             ?.status ??
-                                    //         0]
-                                    //     .name,
                                   ),
                                   JobDetailField(
                                     title: 'Raised By',
-                                    value: controller
-                                            .jobDetailsModel.value?.workType ??
+                                    value: controller.jobDetailsModel.value
+                                            ?.createdByName ??
                                         "",
                                   ),
                                   JobDetailField(
@@ -154,9 +151,9 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                   ),
                                   JobDetailMultiValueField(
                                     title: 'Work Type',
-                                    values: controller.jobDetailsModel.value
-                                        ?.workingAreaNameList
-                                        ?.map((item) => (item.workingAreaName))
+                                    values: controller
+                                        .jobDetailsModel.value?.workType
+                                        ?.map((item) => (item))
                                         .toList() as List<String>,
                                   ),
                                   JobDetailField(
@@ -174,6 +171,29 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                           ),
                         ]),
                   ),
+
+                  /// SAVE BUTTON
+                  if (controller.jobDetailsModel.value?.statusShort
+                          ?.toLowerCase() ==
+                      "created") ...[
+                    ElevatedButton(
+                      style: editButtonStyle,
+                      onPressed: () => controller.editJob(),
+                      child: Text('Assign'),
+                    )
+                  ] else if (controller.jobDetailsModel.value?.statusShort
+                          ?.toLowerCase() ==
+                      "assigned") ...[
+                    ElevatedButton(
+                      style: editButtonStyle,
+                      onPressed: () => controller.editJob(),
+                      child: Text(
+                        'Re-Assign',
+                      ),
+                    )
+                  ],
+
+                  //Spacer(),
                   Padding(
                     padding: Dimens.edgeInsets10_0_10_0,
                     child: Column(children: [
@@ -188,21 +208,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                         PTWCardWidget(associatedPermit: associatedPermit),
                     ]),
                   ),
-
-                  /// SAVE BUTTON
-                  if (controller.jobDetailsModel.value?.assignedId == null ||
-                      controller.jobDetailsModel.value?.assignedId == 0)
-                    ElevatedButton(
-                      style: editButtonStyle,
-                      onPressed: () => controller.editJob(),
-                      child: Text(
-                        (controller.jobDetailsModel.value?.assignedId == null ||
-                                controller.jobDetailsModel.value?.assignedId ==
-                                    0)
-                            ? 'Assign'
-                            : 'Re-Assign',
-                      ),
-                    ),
                 ]),
           ),
         ),

@@ -10,7 +10,8 @@ class JobModel {
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
       id: json['id'],
       userId: json['userId'],
-      plantName: json['plantName'],
+      facilityId: json['facility_id'],
+      facilityName: json['facilityName'],
       jobDate: DateTime.parse(json['jobDate']),
       equipmentCat: json['equipmentCat'],
       workingArea: json['workingArea'],
@@ -26,14 +27,14 @@ class JobModel {
       permitId: json['permitId'] == null ? null : json['permitId'],
       assignedToName: json['assignedToName'],
       assignedToId: json['assignedToId'],
-      facilityId: json['facility_id'],
-      status: JobStatus.values.firstWhere((x) => x.index == json['status'])
-      //status: statusValues.map[json['status']]!,
-      );
+      status: JobStatus.values.firstWhere((x) => x.index == json['status']));
+
+  ///
   JobModel({
     this.id,
     this.userId,
-    this.plantName,
+    this.facilityId,
+    this.facilityName,
     this.jobDate,
     this.equipmentCat,
     this.workingArea,
@@ -47,13 +48,13 @@ class JobModel {
     this.permitId,
     this.assignedToName,
     this.assignedToId,
-    this.facilityId,
     this.status,
   });
 
   int? id;
   int? userId;
-  String? plantName;
+  int? facilityId;
+  String? facilityName;
   DateTime? jobDate;
   String? equipmentCat;
   String? workingArea;
@@ -64,16 +65,17 @@ class JobModel {
   String? raisedByName;
   DateTime? breakdownTime;
   String? breakdownType;
-  int? permitId;
+  String? permitId;
   String? assignedToName;
   int? assignedToId;
-  int? facilityId;
+
   JobStatus? status;
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
-        'plantName': plantName,
+        'facility_id': facilityId,
+        'facilityName': facilityName,
         'jobDate': jobDate?.toIso8601String(),
         'equipmentCat': equipmentCat,
         'workingArea': workingArea,
@@ -87,7 +89,6 @@ class JobModel {
         'permitId': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
-        'facility_id': facilityId,
         'status': statusValues.reverse[status],
       };
 }

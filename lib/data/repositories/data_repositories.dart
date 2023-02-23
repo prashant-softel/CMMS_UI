@@ -71,7 +71,7 @@ class DataRepository extends DomainRepository {
 
   @override
   Future<ResponseModel> getInventoryList({
-    required int facilityId,
+    int? facilityId,
     int? blockId,
     required String categoryIds,
     required bool isLoading,
@@ -82,6 +82,19 @@ class DataRepository extends DomainRepository {
       auth: auth,
       facilityId: facilityId,
       blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getWorkTypeList({
+    String? categoryIds,
+    bool? isLoading,
+    String? auth,
+  }) async {
+    return await connectHelper.getWorkTypeList(
+      isLoading: isLoading,
+      auth: auth,
       categoryIds: categoryIds,
     );
   }
@@ -178,10 +191,12 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getToolsRequiredToWorkTypeList({
     required String auth,
+    String? workTypeIds,
     bool? isLoading,
   }) async =>
       await connectHelper.getToolsRequiredToWorkTypeList(
         auth: auth,
+        workTypeIds: workTypeIds,
         isLoading: isLoading ?? false,
       );
 

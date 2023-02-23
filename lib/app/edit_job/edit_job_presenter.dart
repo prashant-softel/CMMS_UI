@@ -4,10 +4,11 @@ import 'package:cmms/domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
+import '../../domain/usecases/edit_job_usecase.dart';
 
-class AddJobPresenter {
-  AddJobPresenter(this.addJobUsecase);
-  AddJobUsecase addJobUsecase;
+class EditJobPresenter {
+  EditJobPresenter(this.editJobUsecase);
+  EditJobUsecase editJobUsecase;
 
   ///
 
@@ -16,7 +17,7 @@ class AddJobPresenter {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await addJobUsecase.getBlocksList(
+      await editJobUsecase.getBlocksList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
@@ -29,7 +30,7 @@ class AddJobPresenter {
     String? categoryIds,
     bool? isLoading,
   }) async =>
-      await addJobUsecase.getWorkTypeList(
+      await editJobUsecase.getWorkTypeList(
         categoryIds: categoryIds,
         isLoading: isLoading ?? false,
       );
@@ -40,7 +41,7 @@ class AddJobPresenter {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await addJobUsecase.getInventoryCategoryList(
+      await editJobUsecase.getInventoryCategoryList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
@@ -52,7 +53,7 @@ class AddJobPresenter {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await addJobUsecase.getAssignedToList(
+      await editJobUsecase.getAssignedToList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
@@ -63,7 +64,7 @@ class AddJobPresenter {
     String? workTypeIds,
     bool? isLoading,
   }) async {
-    return addJobUsecase.getToolsRequiredToWorkTypeList(
+    return editJobUsecase.getToolsRequiredToWorkTypeList(
       workTypeIds: workTypeIds,
       isLoading: isLoading,
     );
@@ -74,7 +75,7 @@ class AddJobPresenter {
     job,
     required bool isLoading,
   }) async {
-    return addJobUsecase.saveJob(
+    return editJobUsecase.saveJob(
       job: job,
       isLoading: isLoading,
     );

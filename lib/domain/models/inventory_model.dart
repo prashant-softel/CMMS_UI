@@ -69,7 +69,9 @@ class InventoryModel {
         serialNumber: json["serialNumber"],
         specialTool: json["specialTool"],
         warrantyId: json["warrantyId"],
-        calibrationDueDate: DateTime.parse(json["calibrationDueDate"]),
+        calibrationDueDate: json['calibrationDueDate'] == null
+            ? null
+            : DateTime.parse(json['calibrationDueDate'] as String),
         status: json["status"],
       );
 

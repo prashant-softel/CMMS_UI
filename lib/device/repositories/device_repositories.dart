@@ -129,4 +129,15 @@ class DeviceRepository extends DomainRepository {
       required String auth}) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<ResponseModel> getWorkTypeList({
+    bool? isLoading,
+    String? categoryIds,
+    String? auth,
+  }) {
+    throw UnimplementedError();
+  }
+
+  ///
 }
