@@ -215,7 +215,7 @@ class EditJobScreen extends GetView<EditJobController> {
                               child: MultiSelectDialogField(
                                 decoration: BoxDecoration(border: Border()),
                                 buttonIcon: Icon(Icons.arrow_drop_down),
-                                items: controller.workAreaList.value
+                                items: controller.workAreaList
                                     .map(
                                       (equipment) => MultiSelectItem(
                                         equipment?.id,

@@ -10,8 +10,6 @@ class ConnectHelper {
   ConnectHelper() {
     _init();
   }
-  String token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJLaHVzaHJ1Lm1pc3RyeUBzb2Z0ZWwuY29tIiwibmJmIjoxNjc1NjY4NjUzLCJleHAiOjE2NzU2NzA0NTMsImlhdCI6MTY3NTY2ODY1M30.lV9fU4PiidsMcfbn9gw3DngH4Iiv97tUxuWDJrYbPQA';
 
   // late Dio _dio;
 
@@ -178,14 +176,17 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getFacilityList() async {
+  Future<ResponseModel> getFacilityList({
+    String? auth,
+    bool? isLoading,
+  }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CMMS/GetFacilityList',
       Request.get,
       null,
       true,
       {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer $auth',
       },
     );
 

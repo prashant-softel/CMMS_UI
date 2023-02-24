@@ -204,7 +204,7 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                         ),
                       ),
                       for (var associatedPermit
-                          in controller.associatedPermitList?.value ?? [])
+                          in controller.associatedPermitList ?? [])
                         PTWCardWidget(associatedPermit: associatedPermit),
                     ]),
                   ),

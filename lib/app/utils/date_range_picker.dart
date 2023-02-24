@@ -22,8 +22,6 @@ class _DateRangePickerState extends State<DateRangePicker> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance
-    //     .addPostFrameCallback((_) => widget.callback!(endOfWeek));
   }
 
   @override
@@ -110,7 +108,5 @@ class _DateRangePickerState extends State<DateRangePicker> {
         );
       },
     );
-
-    ;
   }
 }

@@ -6,7 +6,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class InventoryModule extends StatelessWidget {
   InventoryModule({super.key});
 
-  final _controller = Get.find<HomeController>();
+  //final _controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {

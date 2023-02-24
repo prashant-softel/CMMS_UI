@@ -328,8 +328,8 @@ class Repository {
 
   Future<List<FacilityModel?>?> getFacilityList() async {
     try {
-      //final auth = await getSecureValue(LocalKeys.authToken);
-      final res = await _dataRepository.getFacilityList();
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getFacilityList(auth: auth);
 
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);

@@ -136,8 +136,14 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getFacilityList() async =>
-      await connectHelper.getFacilityList();
+  Future<ResponseModel> getFacilityList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getFacilityList(
+        auth: auth,
+        isLoading: isLoading,
+      );
 
   Future<ResponseModel> getBlocksList({
     String? auth,
