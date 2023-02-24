@@ -84,7 +84,7 @@ class EditJobController extends GetxController {
   int selectedPermitId = 0;
   int facilityId = 45;
   int blockId = 72;
-  List<int> categoryIds = [];
+  List<int> categoryIds = <int>[];
   Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isJobTitleInvalid = false.obs;
   Rx<bool> isJobDescriptionInvalid = false.obs;
@@ -123,12 +123,13 @@ class EditJobController extends GetxController {
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
     }
 
-    associatedPermitList?.value = jobDetailsModel.value?.associatedPermit ?? [];
+    associatedPermitList?.value =
+        jobDetailsModel.value?.associatedPermit ?? <AssociatedPermit>[];
   }
 
   Future<void> getFacilityList() async {
     final _facilityList = await jobListPresenter.getFacilityList();
-    //selectedFacilityId = Get.arguments;
+
     if (_facilityList != null) {
       for (var facility in _facilityList) {
         facilityList.add(facility);
@@ -178,14 +179,14 @@ class EditJobController extends GetxController {
       isLoading: true,
       workTypeIds: workTypeIds,
     );
-    toolsRequiredToWorkTypeList?.value = list ?? [];
+    toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
     update(['toolsRequiredToWorkTypeList']);
   }
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
-    equipmentCategoryList.value = [];
-    selectedEquipmentCategoryList.value = [];
-    selectedEquipmentCategoryNameList.value = [];
+    equipmentCategoryList.value = <InventoryCategoryModel>[];
+    selectedEquipmentCategoryList.value = <InventoryCategoryModel>[];
+    selectedEquipmentCategoryNameList.value = <String>[];
     //
     final _equipmentCategoryList =
         await editJobPresenter.getInventoryCategoryList(
@@ -235,7 +236,7 @@ class EditJobController extends GetxController {
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
-    workTypeList.value = _workTypeList ?? [];
+    workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
   }
 
   void checkForm() {
@@ -275,7 +276,7 @@ class EditJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
-      List<AssetsId> assetIds = [];
+      List<AssetsId> assetIds = <AssetsId>[];
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
         var json = '{"asset_id": ${_selectedWorkArea?.id},'
@@ -381,7 +382,7 @@ class EditJobController extends GetxController {
   }
 
   void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
-    selectedEquipmentCategoryIdList.value = [];
+    selectedEquipmentCategoryIdList.value = <int>[];
     for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
       selectedEquipmentCategoryIdList.add(_selectedCategoryId);
     }
@@ -390,7 +391,7 @@ class EditJobController extends GetxController {
   }
 
   void workAreasSelected(_selectedWorkAreaIdsList) {
-    selectedWorkAreaList.value = [];
+    selectedWorkAreaList.value = <InventoryModel>[];
     for (var selectedWorkAreaId in _selectedWorkAreaIdsList) {
       int workAreaIndex =
           workAreaList.indexWhere((x) => x?.id == selectedWorkAreaId);
@@ -401,7 +402,7 @@ class EditJobController extends GetxController {
 
   void workTypesSelected(_selectedWorkTypesList) {
     selectedWorkTypeList.value = _selectedWorkTypesList.cast<WorkTypeModel>();
-    selectedWorkTypeIdList.value = [];
+    selectedWorkTypeIdList.value = <int>[];
     for (var _selectedWorkType in _selectedWorkTypesList) {
       selectedWorkTypeIdList.add(_selectedWorkType.id);
     }
@@ -425,12 +426,11 @@ class EditJobController extends GetxController {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Job Added',
+          'Job Saved',
           textAlign: TextAlign.center,
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-          //var width = MediaQuery.of(context).size.width;
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,

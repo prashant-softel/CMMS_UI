@@ -26,7 +26,6 @@ class DropdownWidget extends GetView<AddJobController> {
         Obx(
       () => //
           Container(
-        //padding: EdgeInsets.symmetric(horizontal: 10.0),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -102,29 +101,6 @@ class DropdownWidget extends GetView<AddJobController> {
           },
           selectedItem: selectedValue,
         ),
-
-        //     DropdownButtonHideUnderline(
-        //   child: DropdownButton(
-        //     dropdownColor: ColorsValue.whiteColor,
-        //     isExpanded: true,
-        //     value: selectedValue,
-        //     hint: Text("Select"),
-        //     icon: const Icon(Icons.arrow_downward),
-        //     elevation: 50,
-        //     style: const TextStyle(color: Colors.black),
-        //     onChanged: (String? _selectedValue) {
-        //       isValueSelected = true;
-        //       selectedValue = _selectedValue ?? '';
-        //       addJobController.valueChanged(dropdownList, selectedValue);
-        //     },
-        //     items: dropdownList?.map<DropdownMenuItem<String>>((model) {
-        //       return DropdownMenuItem<String>(
-        //         value: model?.name ?? '',
-        //         child: Text(model?.name ?? ''),
-        //       );
-        //     }).toList(),
-        //   ),
-        // ),
       ),
     );
   }

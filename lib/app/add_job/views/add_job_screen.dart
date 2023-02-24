@@ -520,15 +520,7 @@ class AddJobScreen extends GetView<AddJobController> {
                                 text: TextSpan(
                                     text: 'Breakdown Time: ',
                                     style: Styles.blackBold16,
-                                    children: [
-                                      // TextSpan(
-                                      //   text: '*',
-                                      //   style: TextStyle(
-                                      //     color: ColorsValue.orangeColor,
-                                      //     fontWeight: FontWeight.bold,
-                                      //   ),
-                                      // ),
-                                    ]),
+                                    children: []),
                               ),
                             ),
                             Dimens.boxHeight5,
@@ -555,11 +547,8 @@ class AddJobScreen extends GetView<AddJobController> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: TextField(
-                                //focusNode: AlwaysDisabledFocusNode(),
-                                //controller: _textEditingController,
                                 onTap: () {
                                   pickDateTime(context);
-                                  //_selectDate(context);
                                 },
                                 controller: controller.breakdownTimeCtrlr,
                                 autofocus: false,

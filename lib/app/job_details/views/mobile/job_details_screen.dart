@@ -82,10 +82,15 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                   ),
                                   JobDetailMultiValueField(
                                     title: 'Equipment Categories',
-                                    values: controller
-                                        .jobDetailsModel.value?.equipmentCatList
-                                        ?.map((item) => (item.equipmentCatName))
-                                        .toList() as List<String>,
+                                    values: (controller.jobDetailsModel.value
+                                                ?.equipmentCatList !=
+                                            null)
+                                        ? controller.jobDetailsModel.value
+                                            ?.equipmentCatList
+                                            ?.map((item) =>
+                                                (item.equipmentCatName))
+                                            .toList() as List<String>
+                                        : [],
                                   ),
                                   JobDetailField(
                                     title: 'Breakdown Type',
@@ -151,10 +156,14 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                                   ),
                                   JobDetailMultiValueField(
                                     title: 'Work Type',
-                                    values: controller
-                                        .jobDetailsModel.value?.workType
-                                        ?.map((item) => (item))
-                                        .toList() as List<String>,
+                                    values: (controller.jobDetailsModel.value
+                                                ?.workType !=
+                                            null)
+                                        ? controller
+                                            .jobDetailsModel.value?.workType
+                                            ?.map((item) => (item))
+                                            .toList() as List<String>
+                                        : [],
                                   ),
                                   JobDetailField(
                                     title: 'Site Permit No.',

@@ -4,7 +4,6 @@ import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../domain/models/add_job_model.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
@@ -75,7 +74,7 @@ class AddJobController extends GetxController {
   int selectedPermitId = 0;
   int facilityId = 45;
   int blockId = 72;
-  List<int> categoryIds = [];
+  List<int> categoryIds = <int>[];
   Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isJobTitleInvalid = false.obs;
   Rx<bool> isJobDescriptionInvalid = false.obs;
@@ -95,8 +94,8 @@ class AddJobController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    facilityList.value = [];
-    blockList.value = [];
+    facilityList.value = <FacilityModel>[];
+    blockList.value = <BlockModel>[];
     final _facilityList = await jobListPresenter.getFacilityList();
     selectedFacilityId = Get.arguments;
     if (_facilityList != null) {
@@ -113,7 +112,7 @@ class AddJobController extends GetxController {
   }
 
   Future<void> getBlocksList(int _facilityId) async {
-    blockList.value = [];
+    blockList.value = <BlockModel>[];
     final _blockList =
         await addJobPresenter.getBlocksList(facilityId: _facilityId);
 
@@ -121,6 +120,7 @@ class AddJobController extends GetxController {
       for (var block in _blockList) {
         blockList.add(block);
       }
+      update(["blockList"]);
     }
   }
 
@@ -152,12 +152,12 @@ class AddJobController extends GetxController {
       isLoading: true,
       workTypeIds: workTypeIds,
     );
-    toolsRequiredToWorkTypeList?.value = list ?? [];
+    toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
     update(['toolsRequiredToWorkTypeList']);
   }
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
-    equipmentCategoryList.value = [];
+    equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList =
         await addJobPresenter.getInventoryCategoryList(
       isLoading: true,
@@ -184,7 +184,6 @@ class AddJobController extends GetxController {
     workAreaList.value = _workAreaList;
 
     update(["workAreaList"]);
-    //selectedWorkArea.value = workAreaList[0]?.name ?? '';
   }
 
   Future<void> getWorkTypeList({
@@ -195,10 +194,7 @@ class AddJobController extends GetxController {
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
-    workTypeList.value = _workTypeList ?? [];
-
-    //update(["workAreaList"]);
-    //selectedWorkArea.value = workAreaList[0]?.name ?? '';
+    workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
   }
 
   void checkForm() {
@@ -238,7 +234,7 @@ class AddJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
-      List<AssetsId> assetIds = [];
+      List<AssetsId> assetIds = <AssetsId>[];
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
         var json = '{"asset_id": ${_selectedWorkArea?.id},'
@@ -344,7 +340,7 @@ class AddJobController extends GetxController {
   }
 
   void equipmentCategoriesSelected(_selectedEquipmentCategories) {
-    selectedEquipmentCategoryIdList.value = [];
+    selectedEquipmentCategoryIdList.value = <int>[];
     for (var _selectedCategory in _selectedEquipmentCategories) {
       selectedEquipmentCategoryIdList.add(_selectedCategory.id);
     }
@@ -358,7 +354,7 @@ class AddJobController extends GetxController {
 
   void workTypesSelected(_selectedWorkTypesList) {
     selectedWorkTypeList.value = _selectedWorkTypesList.cast<WorkTypeModel>();
-    selectedWorkTypeIdList.value = [];
+    selectedWorkTypeIdList.value = <int>[];
     for (var _selectedWorkType in _selectedWorkTypesList) {
       selectedWorkTypeIdList.add(_selectedWorkType.id);
     }
