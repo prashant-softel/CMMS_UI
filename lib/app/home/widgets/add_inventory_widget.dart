@@ -308,76 +308,159 @@ class AddInventory extends StatelessWidget {
                                           .isNotEmpty &&
                                       controller.lastCalibrationDateTc.text
                                           .isNotEmpty) {
-                                    controller.addInventory(
-                                      toAddOrUpdate: true,
-                                      blockId:
-                                          controller.blockDropdownValue?.id ??
-                                              0,
-                                      assetName: controller.assetNameTc.text,
-                                      parentEqipId: controller
-                                              .parentEquipmentDropdownValue
-                                              ?.id ??
-                                          0,
-                                      typeId: controller
-                                              .inventoryTypeDropdownValue?.id ??
-                                          0,
-                                      categoryId: controller
-                                              .inventoryCategoryDropdownValue
-                                              ?.id ??
-                                          0,
-                                      statusId: controller
-                                              .inventoryStatusDropdownValue
-                                              ?.id ??
-                                          0,
-                                      serialNo: controller.serialNoTc.text,
-                                      assetDes:
-                                          controller.assetDescriptionTc.text,
-                                      multiplier: int.parse(
-                                          controller.enterMultiplierTc.text),
-                                      caliFreq: int.parse(controller
-                                          .calibrationFrequencyTc.text),
-                                      caliFreqType: controller
-                                              .calibrationFrequencyDropdownValue
-                                              ?.id ??
-                                          0,
-                                      caliRemainderDays: int.parse(controller
-                                          .calibrationRemainderInTc.text),
-                                      caliRemainderFirstDate:
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(DateTime.now()),
-                                      lastCaliDate:
-                                          controller.lastCalibrationDateTc.text,
-                                      warrantyTypeId: controller
-                                              .warrantyTypeDropdownValue?.id ??
-                                          0,
-                                      warrantyProviderId: controller
-                                              .warrantyProviderDropdownValue
-                                              ?.id ??
-                                          0,
-                                      warrantyUsageId: controller
-                                              .warrantyUsageDropdownValue?.id ??
-                                          0,
-                                      expireDate: controller.expireDateTc.text,
-                                      warrantyCertification:
-                                          controller.certificationNumberTc.text,
-                                      warrantyDescription:
-                                          controller.descriptionTc.text,
-                                      manufacturerId: controller
-                                              .manufacturerDropdownValue?.id ??
-                                          0,
-                                      supplierId: controller
-                                              .supplierDropdownValue?.id ??
-                                          0,
-                                      currency: controller
-                                              .currencyDropdownValue?.name ??
-                                          '',
-                                      manufacturerCost:
-                                          int.parse(controller.costTc.text),
-                                      manufacturerModel:
-                                          controller.modelTc.text,
-                                      manufacturerParentEquipmentNo:
-                                          controller.parentEquipmentsTc.text,
-                                    );
+                                    if (controller.editInventory) {
+                                      controller.addInventory(
+                                        toAddOrUpdate: false,
+                                        blockId:
+                                            controller.blockDropdownValue?.id ??
+                                                0,
+                                        assetName: controller.assetNameTc.text,
+                                        parentEqipId: controller
+                                                .parentEquipmentDropdownValue
+                                                ?.id ??
+                                            0,
+                                        typeId: controller
+                                                .inventoryTypeDropdownValue
+                                                ?.id ??
+                                            0,
+                                        categoryId: controller
+                                                .inventoryCategoryDropdownValue
+                                                ?.id ??
+                                            0,
+                                        statusId: controller
+                                                .inventoryStatusDropdownValue
+                                                ?.id ??
+                                            0,
+                                        serialNo: controller.serialNoTc.text,
+                                        assetDes:
+                                            controller.assetDescriptionTc.text,
+                                        multiplier: int.parse(
+                                            controller.enterMultiplierTc.text),
+                                        caliFreq: int.parse(controller
+                                            .calibrationFrequencyTc.text),
+                                        caliFreqType: controller
+                                                .calibrationFrequencyDropdownValue
+                                                ?.id ??
+                                            0,
+                                        caliRemainderDays: int.parse(controller
+                                            .calibrationRemainderInTc.text),
+                                        caliRemainderFirstDate:
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(DateTime.now()),
+                                        lastCaliDate: controller
+                                            .lastCalibrationDateTc.text,
+                                        warrantyTypeId: controller
+                                                .warrantyTypeDropdownValue
+                                                ?.id ??
+                                            0,
+                                        warrantyProviderId: controller
+                                                .warrantyProviderDropdownValue
+                                                ?.id ??
+                                            0,
+                                        warrantyUsageId: controller
+                                                .warrantyUsageDropdownValue
+                                                ?.id ??
+                                            0,
+                                        expireDate:
+                                            controller.expireDateTc.text,
+                                        warrantyCertification: controller
+                                            .certificationNumberTc.text,
+                                        warrantyDescription:
+                                            controller.descriptionTc.text,
+                                        manufacturerId: controller
+                                                .manufacturerDropdownValue
+                                                ?.id ??
+                                            0,
+                                        supplierId: controller
+                                                .supplierDropdownValue?.id ??
+                                            0,
+                                        currency: controller
+                                                .currencyDropdownValue?.name ??
+                                            '',
+                                        manufacturerCost:
+                                            int.parse(controller.costTc.text),
+                                        manufacturerModel:
+                                            controller.modelTc.text,
+                                        manufacturerParentEquipmentNo:
+                                            controller.parentEquipmentsTc.text,
+                                      );
+                                    } else {
+                                      controller.addInventory(
+                                        toAddOrUpdate: true,
+                                        blockId:
+                                            controller.blockDropdownValue?.id ??
+                                                0,
+                                        assetName: controller.assetNameTc.text,
+                                        parentEqipId: controller
+                                                .parentEquipmentDropdownValue
+                                                ?.id ??
+                                            0,
+                                        typeId: controller
+                                                .inventoryTypeDropdownValue
+                                                ?.id ??
+                                            0,
+                                        categoryId: controller
+                                                .inventoryCategoryDropdownValue
+                                                ?.id ??
+                                            0,
+                                        statusId: controller
+                                                .inventoryStatusDropdownValue
+                                                ?.id ??
+                                            0,
+                                        serialNo: controller.serialNoTc.text,
+                                        assetDes:
+                                            controller.assetDescriptionTc.text,
+                                        multiplier: int.parse(
+                                            controller.enterMultiplierTc.text),
+                                        caliFreq: int.parse(controller
+                                            .calibrationFrequencyTc.text),
+                                        caliFreqType: controller
+                                                .calibrationFrequencyDropdownValue
+                                                ?.id ??
+                                            0,
+                                        caliRemainderDays: int.parse(controller
+                                            .calibrationRemainderInTc.text),
+                                        caliRemainderFirstDate:
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(DateTime.now()),
+                                        lastCaliDate: controller
+                                            .lastCalibrationDateTc.text,
+                                        warrantyTypeId: controller
+                                                .warrantyTypeDropdownValue
+                                                ?.id ??
+                                            0,
+                                        warrantyProviderId: controller
+                                                .warrantyProviderDropdownValue
+                                                ?.id ??
+                                            0,
+                                        warrantyUsageId: controller
+                                                .warrantyUsageDropdownValue
+                                                ?.id ??
+                                            0,
+                                        expireDate:
+                                            controller.expireDateTc.text,
+                                        warrantyCertification: controller
+                                            .certificationNumberTc.text,
+                                        warrantyDescription:
+                                            controller.descriptionTc.text,
+                                        manufacturerId: controller
+                                                .manufacturerDropdownValue
+                                                ?.id ??
+                                            0,
+                                        supplierId: controller
+                                                .supplierDropdownValue?.id ??
+                                            0,
+                                        currency: controller
+                                                .currencyDropdownValue?.name ??
+                                            '',
+                                        manufacturerCost:
+                                            int.parse(controller.costTc.text),
+                                        manufacturerModel:
+                                            controller.modelTc.text,
+                                        manufacturerParentEquipmentNo:
+                                            controller.parentEquipmentsTc.text,
+                                      );
+                                    }
                                   } else {
                                     Utility.showErrorSnackBar(
                                         'Some fields are missing.PLease check');

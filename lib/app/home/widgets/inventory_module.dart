@@ -48,6 +48,7 @@ class InventoryModule extends StatelessWidget {
                       icon: Icons.add,
                       lable: 'addAsset'.tr,
                       onPress: () {
+                        _controller.isAddOrUpdateInventory = true;
                         _controller.editInventory = false;
                         _controller.viewInventory = false;
                         _controller.serialNoTc.clear();
@@ -377,6 +378,9 @@ class InventoryModule extends StatelessWidget {
                                                       icon: Icons.edit,
                                                       label: 'Edit',
                                                       onPress: () {
+                                                        _controller
+                                                                .isAddOrUpdateInventory =
+                                                            false;
                                                         _controller
                                                             .inventoryDetails(
                                                                 inventoryId: int

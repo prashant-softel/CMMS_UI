@@ -63,7 +63,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    print('Onint ');
+    // print('Onint ');
 
     Future.delayed(Duration(milliseconds: 500), () async {
       homePresenter.generateToken();
@@ -181,6 +181,8 @@ class HomeController extends GetxController {
   var parentEquipmentList = <DropdownModel>[];
 
   Future<void> getInventoryList() async {
+    selectedInventoryColumnVisibility.clear();
+    inventoryList.clear();
     final list = await homePresenter.getInventoryList(
       isLoading: false,
       categoryId: categoryId,
@@ -293,7 +295,7 @@ class HomeController extends GetxController {
       facilityId: facilityId,
     );
     for (var i in response) {
-      print('response name ${i.status}');
+      // print('response name ${i.status}');
       inventoryStatusDropdownList.add(DropdownModel(id: i.id, name: i.name));
     }
     update(['add_inventory']);
@@ -346,6 +348,8 @@ class HomeController extends GetxController {
       update(['manufacturer_tab']);
     }
   }
+
+  bool isAddOrUpdateInventory = false;
 
   Future<void> addInventory({
     required bool toAddOrUpdate,
@@ -477,23 +481,23 @@ class HomeController extends GetxController {
     );
 
     try {
-      if(toAddOrUpdate){
- await homePresenter.addInventory(
-        requestBody: requestBody,
-        isLoading: true,
-      );
-      Utility.showSuccessSnackBar('The inventory added successfully');
-      }else{
-       await homePresenter.updateInventory(
-        requestBody: requestBody,
-        isLoading: true,
-      );
-      Utility.showSuccessSnackBar('The inventory updated successfully');
+      if (toAddOrUpdate) {
+        await homePresenter.addInventory(
+          requestBody: requestBody,
+          isLoading: true,
+        );
+        Utility.showSuccessSnackBar('The inventory added successfully');
+      } else {
+        await homePresenter.updateInventory(
+          requestBody: requestBody,
+          isLoading: true,
+        );
+        Utility.showSuccessSnackBar('The inventory updated successfully');
       }
-     
+
       getInventoryList();
       Get.to(() => HomeView());
-      print('Response ');
+      // print('Response ');
     } catch (e) {
       Utility.showSuccessSnackBar('Failed to add the inventory. Please check.');
 
