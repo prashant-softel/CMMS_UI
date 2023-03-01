@@ -64,7 +64,7 @@ class EditJobUsecase {
       );
 
   ///
-  Future<String> saveJob({
+  Future<Map<String, dynamic>> saveJob({
     job,
     bool? isLoading,
   }) async =>

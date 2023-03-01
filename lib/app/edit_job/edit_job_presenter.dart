@@ -4,7 +4,6 @@ import 'package:cmms/domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
-import '../../domain/usecases/edit_job_usecase.dart';
 
 class EditJobPresenter {
   EditJobPresenter(this.editJobUsecase);
@@ -71,7 +70,7 @@ class EditJobPresenter {
   }
 
   ///
-  Future<String> saveJob({
+  Future<Map<String, dynamic>> saveJob({
     job,
     required bool isLoading,
   }) async {

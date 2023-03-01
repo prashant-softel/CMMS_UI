@@ -18,7 +18,7 @@ class EditJobScreen extends GetView<EditJobController> {
   ///
   @override
   Widget build(BuildContext context) {
-    var _initialValue = controller.selectedEquipmentCategoryList.value;
+    //var _initialValue = controller.selectedEquipmentCategoryList.value;
 
     ///
     final ButtonStyle saveButtonStyle = ElevatedButton.styleFrom(
@@ -150,10 +150,13 @@ class EditJobScreen extends GetView<EditJobController> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: MultiSelectDialogField(
-                                initialValue: _initialValue,
+                                initialValue: //[
+                                    //
+                                    controller
+                                        .selectedEquipmentCategoryList.value,
                                 decoration: BoxDecoration(border: Border()),
                                 buttonIcon: Icon(Icons.arrow_drop_down),
-                                items: controller.equipmentCategoryList.value
+                                items: controller.equipmentCategoryList
                                     .map(
                                       (equipmentCategory) => MultiSelectItem(
                                         equipmentCategory?.id,

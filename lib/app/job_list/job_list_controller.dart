@@ -3,6 +3,7 @@ import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/block_model.dart';
 import '../home/home_presenter.dart';
@@ -27,13 +28,20 @@ class JobListController extends GetxController {
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
+  late PaginationController paginationController;
+  RxList<String> jobListTableColumns = <String>[].obs;
 
   ///
   @override
   void onInit() async {
+    paginationController = PaginationController(
+      rowCount: jobList?.length ?? 0,
+      rowsPerPage: 10,
+    );
     await homePresenter.generateToken();
+    await getFacilityList();
     await getJobList(facilityId, userId);
-    getFacilityList();
+
     super.onInit();
   }
 
@@ -49,8 +57,11 @@ class JobListController extends GetxController {
     if (_facilityList != null) {
       for (var facility in _facilityList) {
         facilityList.add(facility);
+        //jobListTableColumns.add()
       }
-      selectedFacility.value = facilityList[0]?.name ?? '';
+      if (facilityList.isNotEmpty) {
+        selectedFacility.value = facilityList[0]?.name ?? '';
+      }
     }
   }
 
@@ -60,10 +71,18 @@ class JobListController extends GetxController {
         facilityId: facilityId, userId: userId);
 
     if (_jobList != null) {
-      for (var job in _jobList) {
+      for (JobModel? job in _jobList) {
         jobList?.add(job);
       }
-      update(["jobList"]);
+
+      if (jobList != null && jobList!.isNotEmpty) {
+        JobModel? job = jobList![0];
+        var jobJson = job?.toJson();
+        jobListTableColumns.value = <String>[];
+        for (var key in jobJson?.keys.toList() ?? []) {
+          jobListTableColumns.add(key);
+        }
+      }
     }
   }
 

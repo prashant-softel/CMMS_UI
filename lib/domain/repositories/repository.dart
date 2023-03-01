@@ -105,15 +105,14 @@ class Repository {
 
   /// Get the secure value for the [key].
   /// [key] : The key whose value is needed.
-  Future<String> getSecureValue(String key) {
+  Future<String> getSecureValue(String key) async {
+    var _value = '';
     try {
-      return _deviceRepository.getSecuredValue(
-        key,
-      );
+      _value = await _deviceRepository.getSecuredValue(key);
+      return _value;
     } catch (_) {
-      return _dataRepository.getSecuredValue(
-        key,
-      );
+      _value = await _dataRepository.getSecuredValue(key);
+      return _value;
     }
   }
 
@@ -434,7 +433,7 @@ class Repository {
       );
 
       if (!res.hasError) {
-        final jsonJobDetailsModels = jsonDecode(res.data);
+        //final jsonJobDetailsModels = jsonDecode(res.data);
 
         final JobDetailsModel _jobDetailsModel =
             jobDetailsModelFromJson(res.data);
@@ -516,7 +515,7 @@ class Repository {
     }
   }
 
-  Future<String> saveJob(
+  Future<Map<String, dynamic>> saveJob(
     job,
     bool? isLoading,
   ) async {
@@ -530,16 +529,17 @@ class Repository {
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          return 'Success';
+          var responseMap = json.decode(res.data);
+          return responseMap;
         }
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString());
         //return '';
       }
-      return '';
+      return Map();
     } catch (error) {
       log(error.toString());
-      return '';
+      return Map();
     }
   }
 

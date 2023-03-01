@@ -70,7 +70,7 @@ class AddJobPresenter {
   }
 
   ///
-  Future<String> saveJob({
+  Future<Map<String, dynamic>?> saveJob({
     job,
     required bool isLoading,
   }) async {

@@ -203,9 +203,10 @@ class EditJobController extends GetxController {
             id: equipCat.equipmentCatId,
             name: equipCat.equipmentCatName,
           );
-          //equipmentCategoriesSelected.value.add();
-          selectedEquipmentCategoryList.value.add(equipmentCategory);
-          selectedEquipmentCategoryNameList.value.add(equipmentCategory.name);
+
+          selectedEquipmentCategoryList.add(equipmentCategory);
+          print(selectedEquipmentCategoryList[0]);
+          selectedEquipmentCategoryNameList.add(equipmentCategory.name);
         }
     }
   }
@@ -300,7 +301,7 @@ class EditJobController extends GetxController {
       );
       var jobJsonString = addJobModelToJson(addJobModel);
 
-      String? response = await editJobPresenter.saveJob(
+      Map<String, dynamic>? response = await editJobPresenter.saveJob(
         job: jobJsonString,
         isLoading: true,
       );

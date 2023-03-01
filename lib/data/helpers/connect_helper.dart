@@ -73,7 +73,10 @@ class ConnectHelper {
         },
       );
 
-  Future<ResponseModel> generateToken() async => await apiWrapper.makeRequest(
+  Future<ResponseModel> generateToken() async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    try {
+      response = await apiWrapper.makeRequest(
         'Token/Authenticate',
         Request.postMultiparts,
         {
@@ -83,8 +86,17 @@ class ConnectHelper {
         true,
         {
           'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
         },
       );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
   Future<ResponseModel> getInventoryList({
     required bool isLoading,
     required String auth,
@@ -180,17 +192,22 @@ class ConnectHelper {
     String? auth,
     bool? isLoading,
   }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetFacilityList',
-      Request.get,
-      null,
-      true,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    try {
+      response = await apiWrapper.makeRequest(
+        'CMMS/GetFacilityList',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
 
-    return responseModel;
+    return response;
   }
 
   Future<ResponseModel> getBlocksList({

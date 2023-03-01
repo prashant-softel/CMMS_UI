@@ -10,6 +10,7 @@
             "type": "dart",
             "program": "lib/main_dev.dart",
             "args": [
+                "--web-enable-expression-evaluation",
                 "--flavor",
                 "dev"
             ]

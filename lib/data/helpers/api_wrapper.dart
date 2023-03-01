@@ -18,8 +18,13 @@ class ApiWrapper {
       'http://3.111.196.218/CMMS_API/api/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
-  Future<ResponseModel> makeRequest(String url, Request request, dynamic data,
-      bool isLoading, Map<String, String> headers) async {
+  Future<ResponseModel> makeRequest(
+    String url,
+    Request request,
+    dynamic data,
+    bool isLoading,
+    Map<String, String> headers,
+  ) async {
     /// To see whether the network is available or not
     if ((!GetPlatform.isWeb) ? await Utility.isNetworkAvailable() : true) {
       switch (request) {
@@ -33,6 +38,7 @@ class ApiWrapper {
             try {
               final response = await http
                   .get(
+                    //Uri.https(_baseUrl, url),
                     Uri.parse(uri),
                     headers: headers,
                   )

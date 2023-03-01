@@ -66,7 +66,8 @@ class DataRepository extends DomainRepository {
 
   @override
   Future<ResponseModel> generateToken() async {
-    return await connectHelper.generateToken();
+    var response = await connectHelper.generateToken();
+    return response;
   }
 
   @override

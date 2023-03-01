@@ -1,10 +1,12 @@
 import 'package:cmms/app/job_list/job_list_controller.dart';
+import 'package:cmms/domain/models/job_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../theme/colors_value.dart';
 import '../../utils/responsive.dart';
 import 'mobile/card_widget.dart';
+import 'web/table_view.dart';
 
 class JobListScreen extends GetView<JobListController> {
   JobListScreen({Key? key}) : super(key: key);
@@ -96,13 +98,16 @@ class JobListScreen extends GetView<JobListController> {
             ///ListView
             if (Responsive.isMobile(context))
               Expanded(
-                //height: double.maxFinite,
                 child: ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: controller.jobList?.length,
+                    itemCount: controller.jobList != null
+                        ? controller.jobList?.length
+                        : 0,
                     itemBuilder: (context, index) {
-                      final jobModel = controller.jobList?[index];
+                      final jobModel = (controller.jobList != null)
+                          ? controller.jobList![index]
+                          : JobModel();
                       return GestureDetector(
                         onTap: () =>
                             controller.showJobDetails(jobModel?.id ?? 0),
@@ -114,15 +119,8 @@ class JobListScreen extends GetView<JobListController> {
                     }),
               ),
 
-            // if (Responsive.isDesktop(context))
-            // ListView.builder(
-            //     shrinkWrap: true,
-            //     itemCount: controller.jobList?.value.length,
-            //     itemBuilder: (context, index) {
-            //       final jobModel = controller.jobList?.value[index];
-            //       return //
-            //           CardWidget(jobModel: jobModel);
-            //     }),
+            if (Responsive.isDesktop(context))
+              Expanded(child: JobListScreenWeb())
           ]),
         ),
       ),

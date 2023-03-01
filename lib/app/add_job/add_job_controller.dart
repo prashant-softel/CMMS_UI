@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
@@ -22,7 +24,7 @@ class AddJobController extends GetxController {
 
   ///
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
-
+  HtmlEscape htmlEscape = HtmlEscape();
   //
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
@@ -90,6 +92,7 @@ class AddJobController extends GetxController {
     await homePresenter.generateToken();
     await getFacilityList();
     await getAssignedToList();
+
     super.onInit();
   }
 
@@ -232,8 +235,9 @@ class AddJobController extends GetxController {
       }
       //
       int _permitId = selectedPermitId;
-      String _title = jobTitleCtrlr.text.trim();
-      String _description = jobDescriptionCtrlr.text.trim();
+      String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
+      String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
+
       List<AssetsId> assetIds = <AssetsId>[];
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
@@ -258,12 +262,14 @@ class AddJobController extends GetxController {
       );
       var jobJsonString = addJobModelToJson(addJobModel);
 
-      String? response = await addJobPresenter.saveJob(
+      Map<String, dynamic>? responseMapJobCreated =
+          await addJobPresenter.saveJob(
         job: jobJsonString,
         isLoading: true,
       );
-      if (response.isNotEmpty) {
-        showAlertDialog();
+      if (responseMapJobCreated != null) {
+        var _jobId = responseMapJobCreated["id"];
+        showAlertDialog(jobId: _jobId);
       }
     }
   }
@@ -366,6 +372,7 @@ class AddJobController extends GetxController {
 
   /// Show alert dialog
   static void showAlertDialog({
+    int? jobId,
     String? message,
     String? title,
     Function()? onPress,
@@ -397,6 +404,11 @@ class AddJobController extends GetxController {
                     thickness: 1,
                   ),
                   Spacer(),
+                  Text(
+                    'Job ID: Job$jobId',
+                    style: Styles.black16W400,
+                  ),
+                  Spacer(),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -408,7 +420,10 @@ class AddJobController extends GetxController {
                         Dimens.boxWidth10,
                         ElevatedButton(
                           style: Styles.yellowElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.jobDetails),
+                          onPressed: () => Get.offAndToNamed(
+                            Routes.jobDetails,
+                            arguments: jobId,
+                          ),
                           child: const Text('View Job'),
                         ),
                         Dimens.boxWidth10,

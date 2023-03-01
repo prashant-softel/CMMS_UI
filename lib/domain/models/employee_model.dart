@@ -26,60 +26,58 @@ class EmployeeModel {
   });
 
   int? id;
-  dynamic loginId;
+  int? loginId;
   String? name;
   DateTime? birthdate;
-  Gender? gender;
+  String? gender;
   String? mobileNumber;
   String? city;
   String? state;
-  Country? country;
+  String? country;
   int? pin;
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
-        id: json["id"],
-        loginId: json["login_id"],
+        id: json["id"] == null ? null : json["id"],
+        loginId: json["login_id"] == null ? null : json["login_id"],
         name: json["name"],
-        birthdate: DateTime.parse(json["birthdate"]),
-        gender: genderValues.map[json["gender"]]!,
+        birthdate: (json["birthdate"] == null)
+            ? null
+            : DateTime.parse(json["birthdate"] as String),
+        gender: json["gender"] == null ? null : json["gender"],
+        //genderValues.map?[json["gender"] == null ? null : json["gender"]]!,
         mobileNumber: json["mobileNumber"],
         city: json["city"],
         state: json["state"],
-        country: countryValues.map[json["country"]]!,
+        country: json["country"]!,
         pin: json["pin"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "login_id": loginId,
+        "login_id": loginId ?? 0,
         "name": name,
         "birthdate": birthdate?.toIso8601String(),
         "gender": genderValues.reverse[gender],
         "mobileNumber": mobileNumber,
         "city": city,
         "state": state,
-        "country": countryValues.reverse[country],
+        "country": country,
         "pin": pin,
       };
 }
 
-enum Country { INDIA }
+enum Gender { MALE, FEMALE }
 
-final countryValues = EnumValues({"India": Country.INDIA});
-
-enum Gender { MALE, GENDER_MALE }
-
-final genderValues =
-    EnumValues({"Male": Gender.GENDER_MALE, "male": Gender.MALE});
+final genderValues = EnumValues({"male": Gender.MALE, "female": Gender.FEMALE});
 
 class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
+  Map<String, T>? map;
+  late Map<T, String>? reverseMap;
 
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
+    reverseMap = map?.map((k, v) => MapEntry(v, k));
+    return reverseMap ?? Map<T, String>();
   }
 }
