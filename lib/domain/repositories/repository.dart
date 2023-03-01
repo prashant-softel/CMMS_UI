@@ -616,11 +616,11 @@ class Repository {
     }
   }
 
-
-   Future<CommonResponseModel> updateInventory({
+  Future<CommonResponseModel> updateInventory({
     required AddInventoryRequestModel requestBody,
     required bool isLoading,
   }) async {
+    print('Gone to repo');
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
       log(auth);

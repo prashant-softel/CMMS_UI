@@ -309,8 +309,9 @@ class AddInventory extends StatelessWidget {
                                       controller.lastCalibrationDateTc.text
                                           .isNotEmpty) {
                                     if (controller.editInventory) {
-                                      controller.addInventory(
-                                        toAddOrUpdate: false,
+                                      controller.updateInventory(
+                                        inventoryId:
+                                            controller.selectedInventoryId ?? 0,
                                         blockId:
                                             controller.blockDropdownValue?.id ??
                                                 0,
@@ -386,7 +387,6 @@ class AddInventory extends StatelessWidget {
                                       );
                                     } else {
                                       controller.addInventory(
-                                        toAddOrUpdate: true,
                                         blockId:
                                             controller.blockDropdownValue?.id ??
                                                 0,

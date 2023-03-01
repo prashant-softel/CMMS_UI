@@ -177,12 +177,12 @@ class HomeController extends GetxController {
     return boolVal;
   }
 
-  var dynamicInventoryList = <InventoryListModel>[];
   var parentEquipmentList = <DropdownModel>[];
 
   Future<void> getInventoryList() async {
     selectedInventoryColumnVisibility.clear();
     inventoryList.clear();
+    parentEquipmentList.clear();
     final list = await homePresenter.getInventoryList(
       isLoading: false,
       categoryId: categoryId,
@@ -352,7 +352,6 @@ class HomeController extends GetxController {
   bool isAddOrUpdateInventory = false;
 
   Future<void> addInventory({
-    required bool toAddOrUpdate,
     required int blockId,
     required String assetName,
     required int parentEqipId,
@@ -380,63 +379,7 @@ class HomeController extends GetxController {
     required int manufacturerCost,
     required String manufacturerParentEquipmentNo,
   }) async {
-    // var requestBody2 = <String, dynamic>{
-    //   "name": assetName,
-    //   "description": assetDes,
-    //   "typeId": typeId,
-    //   "statusId": statusId,
-    //   "facilityId": facilityId,
-    //   "blockId": blockId,
-    //   "parentId": parentEqipId,
-    //   "categoryId": categoryId,
-    //   "acCapacity": null,
-    //   "dcCapacity": null,
-    //   "serialNumber": serialNo,
-    //   "multiplier": multiplier,
-    //   "calibrationFrequency": caliFreq,
-    //   "calibrationFrequencyType": caliFreqType,
-    //   "calibrationReminderDays": caliRemainderDays,
-    //   "calibrationFirstDueDate": caliRemainderFirstDate,
-    //   "calibrationLastDate": lastCaliDate,
-    //   "customerId": null,
-    //   "ownerId": null,
-    //   "operatorId": null,
-    //   "manufacturerId": manufacturerId,
-    //   "supplierId": supplierId,
-    //   "model": manufacturerModel,
-    //   "stockCount": null,
-    //   "moduleQuantity": 0,
-    //   "cost": manufacturerCost,
-    //   "currency": currency,
-    //   "attachments": null,
-    //   "lstWarrantyDetail": [
-    //     <String, dynamic>{
-    //       "warranty_type": warrantyTypeId,
-    //       "warranty_description": warrantyDescription,
-    //       "warrranty_term_type": null,
-    //       "expiry_date": expireDate,
-    //       "meter_limit": 0,
-    //       "meter_unit": 0,
-    //       "warranty_provider_Id": warrantyProviderId,
-    //       "certificate_number": warrantyCertification,
-    //       "warranty_status": 1,
-    //     }
-    //   ]
-    //  LstWarrantyDetail(
-    // expiryDate: expireDate,
-    // warrantyDescription: warrantyDescription,
-    // warrantyProviderId: warrantyProviderId,
-    // certificateNumber: warrantyCertification,
-    // warrantyType: warrantyTypeId,
-    // warrrantyTermType: warrantyProviderId,
-    // warrantyStatus: 1,
-    // meterLimit: 0,
-    // meterUnit: 0,
-    // ),
-    // };
-
     var requestBody = AddInventoryRequestModel(
-      id: toAddOrUpdate ? null : selectedInventoryId,
       blockId: blockId,
       name: assetName,
       description: assetDes,
@@ -481,22 +424,107 @@ class HomeController extends GetxController {
     );
 
     try {
-      if (toAddOrUpdate) {
-        await homePresenter.addInventory(
-          requestBody: requestBody,
-          isLoading: true,
-        );
-        Utility.showSuccessSnackBar('The inventory added successfully');
-      } else {
-        await homePresenter.updateInventory(
-          requestBody: requestBody,
-          isLoading: true,
-        );
-        Utility.showSuccessSnackBar('The inventory updated successfully');
-      }
+      await homePresenter.addInventory(
+        requestBody: requestBody,
+        isLoading: true,
+      );
+      Utility.showSuccessSnackBar('The inventory added successfully');
 
       getInventoryList();
       Get.to(() => HomeView());
+    } catch (e) {
+      Utility.showSuccessSnackBar('Failed to add the inventory. Please check.');
+
+      Utility.printELog(e.toString());
+    }
+  }
+
+  Future<void> updateInventory({
+    required int inventoryId,
+    required int blockId,
+    required String assetName,
+    required int parentEqipId,
+    required int typeId,
+    required int categoryId,
+    required int statusId,
+    required String serialNo,
+    required String assetDes,
+    required int multiplier,
+    required int caliFreq,
+    required int caliFreqType,
+    required int caliRemainderDays,
+    required String caliRemainderFirstDate,
+    required String lastCaliDate,
+    required int warrantyTypeId,
+    required int warrantyProviderId,
+    required int warrantyUsageId,
+    required String expireDate,
+    required String warrantyCertification,
+    required String warrantyDescription,
+    required int manufacturerId,
+    required int supplierId,
+    required String currency,
+    required String manufacturerModel,
+    required int manufacturerCost,
+    required String manufacturerParentEquipmentNo,
+  }) async {
+    print('Inventory Id $inventoryId');
+    var requestBody = AddInventoryRequestModel(
+      id: inventoryId,
+      blockId: blockId,
+      name: assetName,
+      description: assetDes,
+      typeId: typeId,
+      categoryId: categoryId,
+      statusId: statusId,
+      serialNumber: serialNo,
+      parentId: parentEqipId,
+      calibrationFrequency: caliFreq,
+      calibrationFrequencyType: caliFreqType,
+      calibrationReminderDays: caliRemainderDays,
+      calibrationFirstDueDate: caliRemainderFirstDate,
+      calibrationLastDate: lastCaliDate,
+      acCapacity: 2000,
+      cost: manufacturerCost,
+      currency: currency,
+      customerId: 5,
+      dcCapacity: 5000,
+      facilityId: 0,
+      manufacturerId: manufacturerId,
+      model: manufacturerModel,
+      multiplier: multiplier,
+      supplierId: supplierId,
+      moduleQuantity: 0,
+      operatorId: 0,
+      ownerId: 0,
+      stockCount: 0,
+      attachments: null,
+      lstWarrantyDetail: [
+        LstWarrantyDetail(
+          expiryDate: expireDate,
+          warrantyDescription: warrantyDescription,
+          warrantyProviderId: warrantyProviderId,
+          certificateNumber: warrantyCertification,
+          warrantyType: warrantyTypeId,
+          warrrantyTermType: warrantyProviderId,
+          warrantyStatus: 1,
+          meterLimit: 0,
+          meterUnit: 0,
+        ),
+      ],
+    );
+
+    try {
+      var response = await homePresenter.updateInventory(
+        requestBody: requestBody,
+        isLoading: true,
+      );
+
+      print('update respone id ${response.id} ${response.message}');
+      Utility.showSuccessSnackBar('The inventory updated successfully');
+
+      // getInventoryList();
+      // Get.to(() => HomeView());
       // print('Response ');
     } catch (e) {
       Utility.showSuccessSnackBar('Failed to add the inventory. Please check.');

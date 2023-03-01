@@ -405,14 +405,18 @@ class ConnectHelper {
     required String auth,
     required AddInventoryRequestModel requestBody,
   }) async {
+    print('In Coonect helper');
     var response = await apiWrapper.makeRequest(
       'Inventory/UpdateInventory',
       Request.put,
-      [requestBody],
+      requestBody,
       isLoading,
-      {'Authorization': 'Bearer $auth', 'Content-type': 'application/json'},
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-type': 'application/json',
+      },
     );
-    // print('Response UpdateInventory ${response.data}');
+    print('Response UpdateInventory ${response.data}');
     return response;
   }
 
