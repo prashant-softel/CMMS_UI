@@ -25,6 +25,7 @@ class JobListController extends GetxController {
   Rx<bool> isFacilitySelected = false.obs;
   int facilityId = 45;
   int userId = 35;
+  Rx<int> jobId = 0.obs;
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
@@ -38,9 +39,10 @@ class JobListController extends GetxController {
       rowCount: jobList?.length ?? 0,
       rowsPerPage: 10,
     );
-    await homePresenter.generateToken();
-    await getFacilityList();
-    await getJobList(facilityId, userId);
+    await homePresenter.generateToken().then((value) {
+      getFacilityList();
+      getJobList(facilityId, userId);
+    });
 
     super.onInit();
   }
@@ -52,16 +54,17 @@ class JobListController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await jobListPresenter.getFacilityList();
+    facilityList.value = <FacilityModel>[];
+    List<FacilityModel?>? _facilityList = <FacilityModel?>[];
 
-    if (_facilityList != null) {
+    _facilityList = await jobListPresenter.getFacilityList();
+    if (_facilityList != null && _facilityList.isNotEmpty) {
       for (var facility in _facilityList) {
         facilityList.add(facility);
-        //jobListTableColumns.add()
       }
-      if (facilityList.isNotEmpty) {
-        selectedFacility.value = facilityList[0]?.name ?? '';
-      }
+    }
+    if (facilityList.isNotEmpty) {
+      selectedFacility.value = facilityList[0]?.name ?? '';
     }
   }
 
@@ -90,8 +93,8 @@ class JobListController extends GetxController {
     Get.toNamed(Routes.addJob, arguments: facilityId);
   }
 
-  void showJobDetails(int jobId) {
-    Get.toNamed(Routes.jobDetails, arguments: jobId);
+  void showJobDetails(int _jobId) {
+    Get.toNamed(Routes.jobDetails, arguments: _jobId);
   }
 
   ///

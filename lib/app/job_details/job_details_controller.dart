@@ -25,24 +25,25 @@ class JobDetailsController extends GetxController {
   Rx<bool> isFacilitySelected = false.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
-  int jobId = 3158;
+  Rx<int> jobId = 0.obs;
   int userId = 36;
   var breakdownTime;
 
   ///
   @override
   void onInit() async {
-    jobId = Get.arguments;
-    await homePresenter.generateToken();
-    await getJobDetails(jobId);
+    jobId.value = Get.arguments;
+    await homePresenter
+        .generateToken()
+        .then((value) => getJobDetails(jobId.value));
+    //Future.delayed(const Duration(milliseconds: 1000), () async {});
     super.onInit();
   }
 
-  Future<void> getJobDetails(int jobId) async {
-    //jobId = 3158;
+  Future<void> getJobDetails(int? jobId) async {
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
-        await jobDetailsPresenter.getJobDetails(jobId: jobId);
+        await jobDetailsPresenter.getJobDetails(jobId: jobId, isLoading: true);
 
     if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
       jobDetailsModel.value = _jobDetailsList[0];
@@ -53,7 +54,7 @@ class JobDetailsController extends GetxController {
   }
 
   void editJob() {
-    Get.toNamed(Routes.editJob, arguments: jobId);
+    Get.toNamed(Routes.editJob, arguments: jobId.value);
   }
 
   ///

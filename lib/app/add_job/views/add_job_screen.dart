@@ -1,8 +1,8 @@
-import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import '../../../domain/models/inventory_category_model.dart';
 import '../../theme/colors_value.dart';
 import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
@@ -170,9 +170,7 @@ class AddJobScreen extends GetView<AddJobController> {
                           ]);
                         }
                       }())
-
                       //
-
                       ),
                 ),
               ),
@@ -185,7 +183,7 @@ class AddJobScreen extends GetView<AddJobController> {
     ///build ends
   }
 
-  ElevatedButton _buildSaveJobButton(ButtonStyle saveButtonStyle) {
+  Widget _buildSaveJobButton(ButtonStyle saveButtonStyle) {
     return ElevatedButton(
       style: saveButtonStyle,
       onPressed: () => controller.saveJob(),
@@ -549,7 +547,43 @@ class AddJobScreen extends GetView<AddJobController> {
           color: ColorsValue.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
-        child: MultiSelectDialogField(
+        child: //
+            //     MultiSelectFormField(
+            //   autovalidate: AutovalidateMode.always,
+            //   chipBackGroundColor: ColorsValue.blueMediumColor,
+            //   chipLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+            //   dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
+            //   checkBoxActiveColor: ColorsValue.whiteColor,
+            //   checkBoxCheckColor: ColorsValue.blueColor,
+            //   dialogShapeBorder: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            //   ),
+            //   // title: Text(
+            //   //   "SELECT",
+            //   //   style: TextStyle(fontSize: 16),
+            //   // ),
+            //   dataSource: controller.workTypeList.value
+            //       .map((workType) => {
+            //             "value": workType?.id ?? 0,
+            //             "display ": workType?.workType,
+            //           })
+            //       .toList(),
+            //   textField: 'display',
+            //   valueField: 'value',
+            //   okButtonLabel: 'OK',
+            //   cancelButtonLabel: 'CANCEL',
+            //   //hintWidget: Text('Please choose one or more'),
+            //   initialValue: controller.selectedWorkTypeList.value,
+            //   onSaved: (value) {
+            //     if (value == null) {
+            //       return;
+            //     }
+            //     //setState(() {
+            //     controller.selectedWorkTypeList.value = value;
+            //     //});
+            //   },
+            // ),
+            MultiSelectDialogField(
           decoration: BoxDecoration(border: Border()),
           buttonIcon: Icon(Icons.arrow_drop_down),
           items: controller.workTypeList.value
@@ -667,18 +701,23 @@ class AddJobScreen extends GetView<AddJobController> {
           color: ColorsValue.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
-        child: MultiSelectDialogField(
-          decoration: BoxDecoration(border: Border()),
-          buttonIcon: Icon(Icons.arrow_drop_down),
-          items: controller.equipmentCategoryList.value
-              .map(
-                (e) =>
-                    MultiSelectItem<InventoryCategoryModel?>(e, e?.name ?? ''),
-              )
-              .toList(),
-          onConfirm: (selectedOptionsList) =>
-              {controller.equipmentCategoriesSelected(selectedOptionsList)},
-          chipDisplay: MultiSelectChipDisplay(),
+        child: //
+            Obx(
+          () => MultiSelectDialogField(
+            decoration: BoxDecoration(border: Border()),
+            buttonIcon: Icon(Icons.arrow_drop_down),
+            items: controller.equipmentCategoryList.value
+                .map(
+                  (equipCat) => MultiSelectItem<InventoryCategoryModel?>(
+                    equipCat,
+                    equipCat?.name ?? '',
+                  ),
+                )
+                .toList(),
+            onConfirm: (selectedOptionsList) =>
+                {controller.equipmentCategoriesSelected(selectedOptionsList)},
+            chipDisplay: MultiSelectChipDisplay(),
+          ),
         ),
       ),
       Dimens.boxHeight20,

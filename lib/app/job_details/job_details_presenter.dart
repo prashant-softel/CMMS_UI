@@ -19,6 +19,6 @@ class JobDetailsPresenter {
         auth: auth ?? "",
         jobId: jobId ?? 0,
         userId: userId ?? 0,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
 }

@@ -77,9 +77,9 @@ class DeviceRepository extends DomainRepository {
 
   /// Save data in secure storage
   @override
-  void saveValueSecurely(String key, String value) {
+  Future<void> saveValueSecurely(String key, String value) async {
     try {
-      _flutterSecureStorage.write(key: key, value: value);
+      await _flutterSecureStorage.write(key: key, value: value);
     } catch (e) {
       print(e);
     }

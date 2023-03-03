@@ -8,9 +8,9 @@ String jobListToJson(List<JobModel> data) =>
 
 class JobModel {
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
-      id: json['id'] == null ? null : json['id'],
-      userId: json['userId'] == null ? null : json['userId'],
-      facilityId: json['facility_id'] == null ? null : json['facility_id'],
+      id: json['id'] == null ? 0 : json['id'],
+      userId: json['userId'] == null ? 0 : json['userId'],
+      facilityId: json['facility_id'] == null ? 0 : json['facility_id'],
       facilityName: json['facilityName'] == null ? null : json['facilityName'],
       jobDate: json['jobDate'] == null ? null : DateTime.parse(json['jobDate']),
       equipmentCat: json['equipmentCat'] == null ? null : json['equipmentCat'],

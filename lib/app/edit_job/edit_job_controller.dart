@@ -3,15 +3,13 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
 import '../job_details/job_details_presenter.dart';
 import '../job_list/job_list_presenter.dart';
-import '../navigators/app_pages.dart';
-
+import '../widgets/job_saved_dialog.dart';
 import 'edit_job_presenter.dart';
 
 class EditJobController extends GetxController {
@@ -37,21 +35,20 @@ class EditJobController extends GetxController {
   Rx<String> selectedFacilityName = ''.obs;
   Rx<bool> isFacilitySelected = true.obs;
   int selectedFacilityId = 0;
+
   //
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isBlockSelected = true.obs;
   int selectedBlockId = 0;
-  //
-  Rx<String> selectedEquipment = ''.obs;
-  Rx<bool> isEquipmentSelected = true.obs;
-  RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
+
   //
   Rx<String> selectedWorkTypeCategory = ''.obs;
   Rx<bool> isWorkTypeCategorySelected = false.obs;
   RxList<WorkTypeModel?> selectedWorkTypeList = <WorkTypeModel>[].obs;
   RxList<WorkTypeModel?> workTypeList = <WorkTypeModel>[].obs;
   RxList<int> selectedWorkTypeIdList = <int>[].obs;
+
   //
   Rx<String> selectedWorkArea = ''.obs;
   Rx<bool> isWorkAreaSelected = true.obs;
@@ -59,6 +56,7 @@ class EditJobController extends GetxController {
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
+
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
   Rx<bool> isEquipmentCategorySelected = false.obs;
@@ -66,13 +64,14 @@ class EditJobController extends GetxController {
       <InventoryCategoryModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
-  RxList<String?> selectedEquipmentCategoryNameList = <String>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+
   //
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
+
   //
   Rx<String> selectedToolRequiredToWorkType = ''.obs;
   Rx<bool> isToolRequiredToWorkTypeSelected = false.obs;
@@ -105,6 +104,11 @@ class EditJobController extends GetxController {
     await getFacilityList();
     await getBlocksList(selectedFacilityId);
     await getInventoryCategoryList(selectedFacilityId.toString());
+    await getInventoryList(
+      facilityId: selectedFacilityId,
+      blockId: selectedBlockId,
+    );
+    await getWorkTypeList();
     await getAssignedToList();
     super.onInit();
   }
@@ -148,6 +152,7 @@ class EditJobController extends GetxController {
         blockList.add(block);
       }
       selectedBlock.value = jobDetailsModel.value?.blockName ?? '';
+      selectedBlockId = jobDetailsModel.value?.blockId ?? 0;
     }
   }
 
@@ -163,17 +168,6 @@ class EditJobController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentList({
-    required String facilityId,
-  }) async {
-    final list = await homePresenter.getEquipmentList(
-      isLoading: true,
-      facilityId: facilityId,
-    );
-    equipmentList.value = list;
-    selectedEquipment.value = equipmentList[0]?.name ?? '';
-  }
-
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
     final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
       isLoading: true,
@@ -186,7 +180,7 @@ class EditJobController extends GetxController {
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     selectedEquipmentCategoryList.value = <InventoryCategoryModel>[];
-    selectedEquipmentCategoryNameList.value = <String>[];
+
     //
     final _equipmentCategoryList =
         await editJobPresenter.getInventoryCategoryList(
@@ -196,26 +190,25 @@ class EditJobController extends GetxController {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
       }
-      //selectedEquipmentCategoryList = equipmentCategoryList;
+
       if (jobDetailsModel.value?.equipmentCatList != null)
         for (var equipCat in jobDetailsModel.value?.equipmentCatList ?? []) {
           InventoryCategoryModel equipmentCategory = InventoryCategoryModel(
             id: equipCat.equipmentCatId,
             name: equipCat.equipmentCatName,
           );
-
           selectedEquipmentCategoryList.add(equipmentCategory);
-          print(selectedEquipmentCategoryList[0]);
-          selectedEquipmentCategoryNameList.add(equipmentCategory.name);
+          selectedEquipmentCategoryIdList.add(equipmentCategory.id);
+          update();
         }
     }
   }
 
   Future<void> getInventoryList({
-    required int? facilityId,
-    required int blockId,
+    int? facilityId,
+    int? blockId,
   }) async {
-    categoryIds = selectedEquipmentCategoryIdList.value;
+    categoryIds = selectedEquipmentCategoryIdList;
     String lststrCategoryIds = categoryIds.join(', ').toString();
     final _workAreaList = await homePresenter.getInventoryList(
       facilityId: facilityId,
@@ -224,15 +217,21 @@ class EditJobController extends GetxController {
       isLoading: true,
     );
     workAreaList.value = _workAreaList;
-
-    update(["workAreaList"]);
-    //selectedWorkArea.value = workAreaList[0]?.name ?? '';
+    if (jobDetailsModel.value?.workingAreaNameList != null)
+      for (var _workArea in jobDetailsModel.value?.workingAreaNameList ?? []) {
+        int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
+        if (_selectedWorkAreaId > 0) {
+          selectedWorkAreaIdList.add(_selectedWorkAreaId);
+        }
+      }
   }
 
   Future<void> getWorkTypeList({
     List<int>? categoryIds,
   }) async {
-    String lststrCategoryIds = categoryIds?.join(', ').toString() ?? '';
+    //String lststrCategoryIds = categoryIds?.join(', ').toString() ?? '';
+    categoryIds = selectedEquipmentCategoryIdList;
+    String lststrCategoryIds = categoryIds.join(', ').toString();
     final _workTypeList = await editJobPresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
       isLoading: true,
@@ -317,7 +316,7 @@ class EditJobController extends GetxController {
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-          if (selectedFacilityId != 0) {
+          if (selectedFacilityId > 0) {
             isFacilitySelected.value = true;
           }
           selectedFacilityName.value = value;
@@ -329,36 +328,34 @@ class EditJobController extends GetxController {
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
-          if (selectedBlockId != 0) {
+          if (selectedBlockId > 0) {
             isBlockSelected.value = true;
           }
           selectedBlock.value = value;
           getInventoryCategoryList(selectedBlockId.toString());
         }
         break;
-      case RxList<EquipmentModel>:
-        {
-          int equipmentIndex =
-              equipmentList.indexWhere((x) => x?.name == value);
-          int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
-          print(selectedEquipmentId);
-        }
-        break;
+
       case RxList<InventoryModel>:
         {
+          selectedWorkAreaIdList.value = <int>[];
           for (var workAreaName in selectedWorkAreaNameList) {
             int workAreaIndex =
                 workAreaList.indexWhere((x) => x?.name == workAreaName);
-            selectedWorkAreaIdList.add(workAreaIndex);
+            int _selectedworkAreaId = workAreaList[workAreaIndex]?.id ?? 0;
+            selectedWorkAreaIdList.add(_selectedworkAreaId);
           }
         }
         break;
       case RxList<InventoryCategoryModel>:
         {
+          selectedEquipmentCategoryIdList.value = <int>[];
           for (var equipCat in selectedEquipmentCategoryList) {
             int equipCatIndex = selectedEquipmentCategoryList
                 .indexWhere((x) => x?.name == equipCat);
-            selectedEquipmentCategoryIdList.add(equipCatIndex);
+            int _selectedEquipmentCategoryId =
+                equipmentCategoryList[equipCatIndex]?.id ?? 0;
+            selectedEquipmentCategoryIdList.add(_selectedEquipmentCategoryId);
           }
         }
         break;
@@ -420,57 +417,7 @@ class EditJobController extends GetxController {
     Function()? onPress,
   }) async {
     await Get.dialog<void>(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-        ),
-        insetPadding: Dimens.edgeInsets10_0_10_0,
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          'Job Saved',
-          textAlign: TextAlign.center,
-        ),
-        content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-
-          return Container(
-            padding: Dimens.edgeInsets05_0_5_0,
-            height: height / 6,
-            width: double.infinity,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Divider(
-                    color: ColorsValue.greyLightColour,
-                    thickness: 1,
-                  ),
-                  Spacer(),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          style: Styles.greenElevatedButtonStyle,
-                          onPressed: () => Get.offAllNamed(Routes.jobList),
-                          child: const Text('Job List'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.yellowElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.jobDetails),
-                          child: const Text('View Job'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.redElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.addJob),
-                          child: const Text('Add New Job'),
-                        ),
-                      ]),
-                ]),
-          );
-        }),
-        actions: [],
-      ),
+      JobSavedDialog(),
     );
   }
 

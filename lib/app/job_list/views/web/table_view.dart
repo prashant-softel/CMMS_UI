@@ -11,7 +11,7 @@ class JobListScreenWeb extends GetView<JobListController> {
 
   @override
   Widget build(BuildContext context) {
-    var jobId = 0;
+    //var jobId = 0;
     return //
         Obx(
       () => //
@@ -77,7 +77,7 @@ class JobListScreenWeb extends GetView<JobListController> {
             ...List.generate(
               controller.jobList?.length ?? 0,
               (index) {
-                jobId = controller.jobList?[index]?.id ?? 0;
+                controller.jobId.value = controller.jobList?[index]?.id ?? 0;
                 return [
                   '${controller.jobList?[index]?.facilityName ?? ''}',
                   //index + 1,
@@ -88,7 +88,7 @@ class JobListScreenWeb extends GetView<JobListController> {
                   '${controller.jobList?[index]?.jobDetails}',
                   '${controller.jobList?[index]?.workType}',
                   '${controller.jobList?[index]?.raisedByName}',
-                  '${controller.jobList?[index]?.breakdownTime}',
+                  '${controller.jobList?[index]?.breakdownTime ?? ''}',
                   '${controller.jobList?[index]?.breakdownType}',
                   '${controller.jobList?[index]?.permitId}',
                   '${controller.jobList?[index]?.assignedToName}',
@@ -109,8 +109,13 @@ class JobListScreenWeb extends GetView<JobListController> {
                                 color: Colors.green,
                                 icon: Icons.visibility,
                                 label: 'View',
-                                onPress: () =>
-                                    {controller.showJobDetails(jobId)},
+                                onPress: () {
+                                  print('value = $value');
+                                  //                                   var _jobId = jobModel?.id ?? 0;
+                                  // controller.showJobDetails(_jobId);
+                                  controller
+                                      .showJobDetails(controller.jobId.value);
+                                },
                               ),
                               // TableActionButton(
                               //   color: Colors.blue,

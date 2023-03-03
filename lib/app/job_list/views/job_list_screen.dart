@@ -2,7 +2,6 @@ import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../theme/colors_value.dart';
 import '../../utils/responsive.dart';
 import 'mobile/card_widget.dart';
@@ -109,8 +108,10 @@ class JobListScreen extends GetView<JobListController> {
                           ? controller.jobList![index]
                           : JobModel();
                       return GestureDetector(
-                        onTap: () =>
-                            controller.showJobDetails(jobModel?.id ?? 0),
+                        onTap: () {
+                          var _jobId = jobModel?.id ?? 0;
+                          controller.showJobDetails(_jobId);
+                        },
                         child: SizedBox(
                           width: double.infinity,
                           child: CardWidget(jobModel: jobModel),
@@ -120,7 +121,9 @@ class JobListScreen extends GetView<JobListController> {
               ),
 
             if (Responsive.isDesktop(context))
-              Expanded(child: JobListScreenWeb())
+              Expanded(
+                child: JobListScreenWeb(),
+              ),
           ]),
         ),
       ),

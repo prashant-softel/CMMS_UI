@@ -180,7 +180,7 @@ class DataRepository extends DomainRepository {
         auth: auth,
         jobId: jobId ?? 0,
         userId: userId,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
 
   Future<ResponseModel> getAssignedToList({

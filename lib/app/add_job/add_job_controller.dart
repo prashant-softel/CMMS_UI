@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/widgets/job_saved_dialog.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
 import '../job_list/job_list_presenter.dart';
-import '../navigators/app_pages.dart';
 import 'add_job_presenter.dart';
 
 class AddJobController extends GetxController {
@@ -377,68 +377,7 @@ class AddJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-        ),
-        insetPadding: Dimens.edgeInsets10_0_10_0,
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          'Job Added',
-          textAlign: TextAlign.center,
-        ),
-        content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          //var width = MediaQuery.of(context).size.width;
-
-          return Container(
-            padding: Dimens.edgeInsets05_0_5_0,
-            height: height / 6,
-            width: double.infinity,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Divider(
-                    color: ColorsValue.greyLightColour,
-                    thickness: 1,
-                  ),
-                  Spacer(),
-                  Text(
-                    'Job ID: Job$jobId',
-                    style: Styles.black16W400,
-                  ),
-                  Spacer(),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          style: Styles.greenElevatedButtonStyle,
-                          onPressed: () => Get.offAllNamed(Routes.jobList),
-                          child: const Text('Job List'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.yellowElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(
-                            Routes.jobDetails,
-                            arguments: jobId,
-                          ),
-                          child: const Text('View Job'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.redElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.addJob),
-                          child: const Text('Add New Job'),
-                        ),
-                      ]),
-                ]),
-          );
-        }),
-        actions: [],
-      ),
-    );
+    await Get.dialog<void>(JobSavedDialog());
   }
 
   ///

@@ -52,9 +52,9 @@ class JobDetailsModel {
   int? assignedId;
   String? assignedName;
   int? jobType;
-  dynamic workType;
-  dynamic standardAction;
-  dynamic breakdownType;
+  List<String?>? workType;
+  String? standardAction;
+  String? breakdownType;
   String? jobTitle;
   String? jobDescription;
   DateTime? breakdownTime;
@@ -67,35 +67,50 @@ class JobDetailsModel {
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
-        id: json["id"],
-        facilityId: json["facility_id"],
-        facilityName: json["facility_name"],
-        blockId: json["block_id"],
-        blockName: json["block_name"],
-        status: json["status"],
-        statusShort: json["status_short"],
-        statusLong: json["status_long"],
-        createdById: json["created_by_id"],
-        createdByName: json["created_by_name"],
-        assignedId: json["assigned_id"],
-        assignedName: json["assigned_name"],
-        jobType: json["job_type"],
-        workType: json["work_type"],
-        standardAction: json["standard_action"],
-        breakdownType: json["breakdown_type"],
-        jobTitle: json["job_title"],
-        jobDescription: json["job_description"],
-        breakdownTime: DateTime.parse(json["breakdown_time"]),
-        currentPtwId: json["current_ptw_id"],
-        currentPtwTitle: json["current_ptw_title"],
-        equipmentCatList: List<EquipmentCatList>.from(json["equipment_cat_list"]
-            .map((x) => EquipmentCatList.fromJson(x))),
-        workingAreaNameList: List<WorkingAreaNameList>.from(
-            json["working_area_name_list"]
-                .map((x) => WorkingAreaNameList.fromJson(x))),
-        associatedPermit: List<AssociatedPermit>.from(
-            json["associated_permit"].map((x) => AssociatedPermit.fromJson(x))),
-        lstToolsRequired: json["lst_tools_required"],
+        id: json["id"] == null ? 0 : json['id'],
+        facilityId: json["facility_id"] == null ? 0 : json['facility_id'],
+        facilityName:
+            json["facility_name"] == null ? '' : json['facility_name'],
+        blockId: json["block_id"] == null ? 0 : json['block_id'],
+        blockName: json["block_name"] == null ? '' : json['block_name'],
+        status: json["status"] == null ? 0 : json['status'],
+        statusShort: json["status_short"] == null ? '' : json['status_short'],
+        statusLong: json["status_long"] == null ? '' : json['status_long'],
+        createdById: json["created_by_id"] == null ? 0 : json['created_by_id'],
+        createdByName:
+            json["created_by_name"] == null ? '' : json['created_by_name'],
+        assignedId: json["assigned_id"] == null ? 0 : json['assigned_id'],
+        assignedName:
+            json["assigned_name"] == null ? '' : json['assigned_name'],
+        jobType: json["job_type"] == null ? 0 : json['job_type'],
+        workType: json["work_type"] == null ? <String>[] : json['work_type'],
+        standardAction:
+            json["standard_action"] == null ? '' : json['standard_action'],
+        breakdownType:
+            json["breakdown_type"] == null ? '' : json['breakdown_type'],
+        jobTitle: json["job_title"] == null ? '' : json['job_title'],
+        jobDescription:
+            json["job_description"] == null ? '' : json['job_description'],
+        breakdownTime: json['breakdown_time'] == null
+            ? null
+            : DateTime.parse(json['breakdown_time'] as String),
+        //DateTime.parse(json["breakdown_time"]),
+        currentPtwId:
+            json["current_ptw_id"] == null ? 0 : json['current_ptw_id'],
+        currentPtwTitle:
+            json["current_ptw_title"] == null ? '' : json['current_ptw_title'],
+        equipmentCatList: (json["equipment_cat_list"] != null)
+            ? List<EquipmentCatList>.from(json["equipment_cat_list"]
+                .map((x) => EquipmentCatList.fromJson(x)))
+            : [],
+        workingAreaNameList: (json["associated_permit"] != null)
+            ? List<WorkingAreaNameList>.from(json["associated_permit"]
+                .map((x) => WorkingAreaNameList.fromJson(x)))
+            : [],
+        associatedPermit: (json["working_area_name_list"] != null)
+            ? List<AssociatedPermit>.from(json["working_area_name_list"]
+                .map((x) => AssociatedPermit.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -132,41 +147,47 @@ class JobDetailsModel {
 
 class AssociatedPermit {
   AssociatedPermit({
-    required this.permitId,
-    required this.sitePermitNo,
+    this.permitId,
+    this.sitePermitNo,
     this.permitTypeName,
-    required this.title,
-    required this.issuedByName,
-    required this.issueAt,
-    required this.ptwStatus,
-    required this.ptwStatusShort,
-    required this.startDate,
-    required this.endDate,
+    this.title,
+    this.issuedByName,
+    this.issueAt,
+    this.ptwStatus,
+    this.ptwStatusShort,
+    this.startDate,
+    this.endDate,
   });
 
-  int permitId;
-  String sitePermitNo;
+  int? permitId;
+  String? sitePermitNo;
   String? permitTypeName;
-  String title;
-  String issuedByName;
-  DateTime issueAt;
-  int ptwStatus;
-  String ptwStatusShort;
-  DateTime startDate;
-  DateTime endDate;
+  String? title;
+  String? issuedByName;
+  DateTime? issueAt;
+  int? ptwStatus;
+  String? ptwStatusShort;
+  DateTime? startDate;
+  DateTime? endDate;
 
   factory AssociatedPermit.fromJson(Map<String, dynamic> json) =>
       AssociatedPermit(
-        permitId: json["permitId"],
-        sitePermitNo: json["sitePermitNo"],
-        permitTypeName: json["permitTypeName"],
-        title: json["title"],
-        issuedByName: json["issuedByName"],
-        issueAt: DateTime.parse(json["issue_at"]),
-        ptwStatus: json["ptwStatus"],
-        ptwStatusShort: json["ptwStatus_short"],
-        startDate: DateTime.parse(json["startDate"]),
-        endDate: DateTime.parse(json["endDate"]),
+        permitId: json["permitId"] == null ? 0 : json['permitId'],
+        sitePermitNo: json["sitePermitNo"] == null ? '' : json['sitePermitNo'],
+        permitTypeName:
+            json["permitTypeName"] == null ? '' : json['permitTypeName'],
+        title: json["title"] == null ? '' : json['title'],
+        issuedByName: json["issuedByName"] == null ? '' : json['issuedByName'],
+        issueAt:
+            json['issue_at'] == null ? null : DateTime.parse(json["issue_at"]),
+        ptwStatus: json["ptwStatus"] == null ? 0 : json['ptwStatus'],
+        ptwStatusShort:
+            json["ptwStatus_short"] == null ? '' : json['ptwStatus_short'],
+        startDate: json['startDate'] == null
+            ? null
+            : DateTime.parse(json["startDate"]),
+        endDate:
+            json['endDate'] == null ? null : DateTime.parse(json["endDate"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -175,11 +196,11 @@ class AssociatedPermit {
         "permitTypeName": permitTypeName,
         "title": title,
         "issuedByName": issuedByName,
-        "issue_at": issueAt.toIso8601String(),
+        "issue_at": issueAt?.toIso8601String(),
         "ptwStatus": ptwStatus,
         "ptwStatus_short": ptwStatusShort,
-        "startDate": startDate.toIso8601String(),
-        "endDate": endDate.toIso8601String(),
+        "startDate": startDate?.toIso8601String(),
+        "endDate": endDate?.toIso8601String(),
       };
 }
 
