@@ -109,9 +109,8 @@ class JobListScreenWeb extends GetView<JobListController> {
                               icon: Icons.visibility,
                               label: 'View',
                               onPress: () {
-                                print('value = $value');
-                                //                                   var _jobId = jobModel?.id ?? 0;
-                                // controller.showJobDetails(_jobId);
+                                //print('value = $value');
+
                                 controller
                                     .showJobDetails(controller.jobId.value);
                               },

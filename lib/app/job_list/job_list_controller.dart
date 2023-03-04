@@ -63,9 +63,6 @@ class JobListController extends GetxController {
     _facilityList = await jobListPresenter.getFacilityList();
     if (_facilityList != null && _facilityList.isNotEmpty) {
       facilityList.value = _facilityList;
-      // for (var facility in _facilityList) {
-      //   facilityList.add(facility);
-      // }
     }
     if (facilityList.isNotEmpty) {
       selectedFacility.value = facilityList[0]?.name ?? '';
@@ -81,9 +78,6 @@ class JobListController extends GetxController {
 
     if (_jobList != null) {
       jobList?.value = _jobList;
-      // for (JobModel? job in _jobList) {
-      //   jobList?.add(job);
-      // }
 
       if (jobList != null && jobList!.isNotEmpty) {
         JobModel? job = jobList![0];

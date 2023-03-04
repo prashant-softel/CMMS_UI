@@ -101,9 +101,8 @@ class AddJobController extends GetxController {
     final _facilityList = await jobListPresenter.getFacilityList();
     selectedFacilityId = Get.arguments;
     if (_facilityList != null) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
-      }
+      facilityList.value = _facilityList;
+
       int facilityIndex =
           facilityList.indexWhere((x) => x?.id == selectedFacilityId);
       if (facilityIndex > -1) {
@@ -296,7 +295,7 @@ class AddJobController extends GetxController {
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
-          if (selectedBlockId != 0) {
+          if (selectedBlockId > 0) {
             isBlockSelected.value = true;
           }
           selectedBlock.value = value;

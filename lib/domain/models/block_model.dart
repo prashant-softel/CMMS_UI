@@ -27,13 +27,13 @@ class BlockModel {
   int? pin;
 
   factory BlockModel.fromJson(Map<String, dynamic> json) => BlockModel(
-        id: json["id"],
-        name: json["name"],
-        address: json["address"],
-        city: json["city"],
-        state: json["state"],
-        country: json["country"],
-        pin: json["pin"],
+        id: json["id"] == null ? 0 : json['id'],
+        name: json["name"] == null ? '' : json['name'],
+        address: json["address"] == null ? '' : json['address'],
+        city: json["city"] == null ? '' : json['city'],
+        state: json["state"] == null ? '' : json['state'],
+        country: json["country"] == null ? '' : json['country'],
+        pin: json["pin"] == null ? 0 : json['pin'],
       );
 
   Map<String, dynamic> toJson() => {

@@ -109,9 +109,7 @@ class Repository {
     var _value = '';
     try {
       _value = await _deviceRepository.getSecuredValue(key);
-      // if (_value == '') {
-      //   _value = await _dataRepository.getSecuredValue(key);
-      // }
+
       return _value;
     } catch (_) {
       _value = await _dataRepository.getSecuredValue(key);
@@ -259,7 +257,8 @@ class Repository {
       );
 
       if (!res.hasError) {
-        return blockModelFromJson(res.data);
+        var _lstBlocks = blockModelFromJson(res.data);
+        return _lstBlocks;
       }
       return [];
     } catch (error) {
@@ -396,8 +395,8 @@ class Repository {
       final auth = await getSecureValue(LocalKeys.authToken);
       final res = await _dataRepository.getInventoryCategoryList(
         auth: auth,
-        isLoading: isLoading ?? false,
-        facilityId: facilityId ?? 0,
+        isLoading: isLoading,
+        facilityId: facilityId,
       );
 
       if (!res.hasError) {

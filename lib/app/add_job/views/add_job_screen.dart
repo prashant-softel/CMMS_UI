@@ -14,9 +14,6 @@ class AddJobScreen extends GetView<AddJobController> {
   AddJobScreen({Key? key}) : super(key: key);
 
   ///
-  //final JobListController jobListController = Get.find();
-
-  ///
   @override
   Widget build(BuildContext context) {
     ///
@@ -113,7 +110,8 @@ class AddJobScreen extends GetView<AddJobController> {
                                   ///
                                 ]),
                           );
-                        } else if (Responsive.isDesktop(context)) {
+                        } //
+                        else if (Responsive.isDesktop(context)) {
                           return Column(children: [
                             Row(//
                                 children: [
@@ -548,41 +546,7 @@ class AddJobScreen extends GetView<AddJobController> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: //
-            //     MultiSelectFormField(
-            //   autovalidate: AutovalidateMode.always,
-            //   chipBackGroundColor: ColorsValue.blueMediumColor,
-            //   chipLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-            //   dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
-            //   checkBoxActiveColor: ColorsValue.whiteColor,
-            //   checkBoxCheckColor: ColorsValue.blueColor,
-            //   dialogShapeBorder: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.all(Radius.circular(12.0)),
-            //   ),
-            //   // title: Text(
-            //   //   "SELECT",
-            //   //   style: TextStyle(fontSize: 16),
-            //   // ),
-            //   dataSource: controller.workTypeList.value
-            //       .map((workType) => {
-            //             "value": workType?.id ?? 0,
-            //             "display ": workType?.workType,
-            //           })
-            //       .toList(),
-            //   textField: 'display',
-            //   valueField: 'value',
-            //   okButtonLabel: 'OK',
-            //   cancelButtonLabel: 'CANCEL',
-            //   //hintWidget: Text('Please choose one or more'),
-            //   initialValue: controller.selectedWorkTypeList.value,
-            //   onSaved: (value) {
-            //     if (value == null) {
-            //       return;
-            //     }
-            //     //setState(() {
-            //     controller.selectedWorkTypeList.value = value;
-            //     //});
-            //   },
-            // ),
+
             MultiSelectDialogField(
           decoration: BoxDecoration(border: Border()),
           buttonIcon: Icon(Icons.arrow_drop_down),
