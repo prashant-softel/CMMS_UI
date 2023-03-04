@@ -6,7 +6,7 @@ class HomeUsecase {
   HomeUsecase(this._repository);
 
   Future<void> generateToken() async {
-    return _repository.generateToken();
+    return await _repository.generateToken();
   }
 
   Future<List<InventoryModel>> getInventoryList({

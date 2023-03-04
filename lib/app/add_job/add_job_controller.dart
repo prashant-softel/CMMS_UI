@@ -6,7 +6,6 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
@@ -175,8 +174,12 @@ class AddJobController extends GetxController {
   Future<void> getInventoryList({
     required int? facilityId,
     required int blockId,
+    categoryIds,
   }) async {
-    categoryIds = selectedEquipmentCategoryIdList.value;
+    workAreaList.value = <InventoryModel?>[];
+    if (categoryIds == null || categoryIds.isEmpty) {
+      categoryIds = selectedEquipmentCategoryIdList;
+    }
     String lststrCategoryIds = categoryIds.join(', ').toString();
     final _workAreaList = await homePresenter.getInventoryList(
       facilityId: facilityId,
@@ -192,6 +195,7 @@ class AddJobController extends GetxController {
   Future<void> getWorkTypeList({
     List<int>? categoryIds,
   }) async {
+    workTypeList.value = <WorkTypeModel?>[];
     String lststrCategoryIds = categoryIds?.join(', ').toString() ?? '';
     final _workTypeList = await addJobPresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
@@ -350,8 +354,13 @@ class AddJobController extends GetxController {
     for (var _selectedCategory in _selectedEquipmentCategories) {
       selectedEquipmentCategoryIdList.add(_selectedCategory.id);
     }
-    getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
-    getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList.value);
+
+    getInventoryList(
+      facilityId: facilityId,
+      blockId: selectedBlockId,
+      categoryIds: selectedEquipmentCategoryIdList,
+    );
+    getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList);
   }
 
   void workAreasSelected(_selectedWorkAreaList) {
@@ -365,8 +374,7 @@ class AddJobController extends GetxController {
       selectedWorkTypeIdList.add(_selectedWorkType.id);
     }
 
-    String lststrWorkTypeIds =
-        selectedWorkTypeIdList.value.join(', ').toString() ?? '';
+    String lststrWorkTypeIds = selectedWorkTypeIdList.join(', ').toString();
     getToolsRequiredToWorkTypeList(lststrWorkTypeIds);
   }
 

@@ -39,9 +39,12 @@ class JobListController extends GetxController {
       rowCount: jobList?.length ?? 0,
       rowsPerPage: 10,
     );
-    await homePresenter.generateToken().then((value) {
-      getFacilityList();
-      getJobList(facilityId, userId);
+    homePresenter.generateToken();
+    Future.delayed(Duration(seconds: 2), () {
+      getFacilityList(isLoading: true);
+      Future.delayed(Duration(seconds: 1), () {
+        getJobList(facilityId, userId);
+      });
     });
 
     super.onInit();
@@ -53,7 +56,7 @@ class JobListController extends GetxController {
     getJobList(facilityId, userId);
   }
 
-  Future<void> getFacilityList() async {
+  Future<void> getFacilityList({bool? isLoading}) async {
     facilityList.value = <FacilityModel>[];
     List<FacilityModel?>? _facilityList = <FacilityModel?>[];
 

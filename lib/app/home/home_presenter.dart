@@ -5,7 +5,7 @@ class HomePresenter {
   HomeUsecase homeUsecase;
 
   Future<void> generateToken() async {
-    return homeUsecase.generateToken();
+    return await homeUsecase.generateToken();
   }
 
   Future<List<InventoryModel>> getInventoryList({

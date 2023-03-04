@@ -7,8 +7,8 @@ class JobListPresenter {
 
   ///
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await jobUsecase.getFacilityList();
+  Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
+      await jobUsecase.getFacilityList(isLoading: isLoading);
 
   Future<List<JobModel?>?> getJobList({
     String? auth,

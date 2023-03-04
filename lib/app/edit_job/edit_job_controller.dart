@@ -385,7 +385,7 @@ class EditJobController extends GetxController {
       selectedEquipmentCategoryIdList.add(_selectedCategoryId);
     }
     getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
-    getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList.value);
+    getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList);
   }
 
   void workAreasSelected(_selectedWorkAreaIdsList) {
@@ -406,7 +406,7 @@ class EditJobController extends GetxController {
     }
 
     String lststrWorkTypeIds =
-        selectedWorkTypeIdList.value.join(', ').toString() ?? '';
+        selectedWorkTypeIdList.join(', ').toString() ?? '';
     getToolsRequiredToWorkTypeList(lststrWorkTypeIds);
   }
 

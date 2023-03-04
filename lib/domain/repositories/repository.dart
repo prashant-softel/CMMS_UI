@@ -120,9 +120,9 @@ class Repository {
   ///
   /// [key] : The key to which [value] will be saved.
   /// [value] : The value which needs to be saved.
-  void saveSecureValue(String key, String value) {
+  void saveSecureValue(String key, String value) async {
     try {
-      _deviceRepository.saveValueSecurely(
+      await _deviceRepository.saveValueSecurely(
         key,
         value,
       );
@@ -325,10 +325,13 @@ class Repository {
     }
   }
 
-  Future<List<FacilityModel?>?> getFacilityList() async {
+  Future<List<FacilityModel?>?> getFacilityList(bool? isLoading) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
-      final res = await _dataRepository.getFacilityList(auth: auth);
+      final res = await _dataRepository.getFacilityList(
+        auth: auth,
+        isLoading: isLoading,
+      );
 
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);

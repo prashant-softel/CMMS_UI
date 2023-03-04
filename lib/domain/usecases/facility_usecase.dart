@@ -5,6 +5,6 @@ class FacilityUsecase {
   FacilityUsecase(this.repository);
   Repository repository;
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await repository.getFacilityList();
+  Future<List<FacilityModel?>?> getFacilityList(isLoading) async =>
+      await repository.getFacilityList(isLoading);
 }

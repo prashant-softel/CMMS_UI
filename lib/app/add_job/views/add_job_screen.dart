@@ -586,7 +586,7 @@ class AddJobScreen extends GetView<AddJobController> {
             MultiSelectDialogField(
           decoration: BoxDecoration(border: Border()),
           buttonIcon: Icon(Icons.arrow_drop_down),
-          items: controller.workTypeList.value
+          items: controller.workTypeList
               .map((e) => MultiSelectItem(e, e?.workType ?? ''))
               .toList(),
           onConfirm: (selectedOptionsList) =>
@@ -645,7 +645,7 @@ class AddJobScreen extends GetView<AddJobController> {
         child: MultiSelectDialogField(
           decoration: BoxDecoration(border: Border()),
           buttonIcon: Icon(Icons.arrow_drop_down),
-          items: controller.workAreaList.value
+          items: controller.workAreaList
               .map((e) => MultiSelectItem(e, e?.name ?? ''))
               .toList(),
           onConfirm: (selectedOptionsList) =>
@@ -706,7 +706,7 @@ class AddJobScreen extends GetView<AddJobController> {
           () => MultiSelectDialogField(
             decoration: BoxDecoration(border: Border()),
             buttonIcon: Icon(Icons.arrow_drop_down),
-            items: controller.equipmentCategoryList.value
+            items: controller.equipmentCategoryList
                 .map(
                   (equipCat) => MultiSelectItem<InventoryCategoryModel?>(
                     equipCat,
@@ -822,10 +822,10 @@ class AddJobScreen extends GetView<AddJobController> {
 
   Future<DateTime?> pickDate(BuildContext context) async {
     DateTime? dateTime = controller.selectedBreakdownTime.value;
-    final initialDate = DateTime.now();
+    //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
-      initialDate: dateTime ?? initialDate,
+      initialDate: dateTime,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
     );

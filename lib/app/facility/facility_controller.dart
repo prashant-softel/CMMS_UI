@@ -11,13 +11,13 @@ class FacilityController extends GetxController {
   ///
   @override
   void onInit() {
-    getFacilityList();
+    getFacilityList(isLoading: true);
 
     super.onInit();
   }
 
-  Future<void> getFacilityList() async {
-    final _facilityList = await facilityPresenter.getFacilityList();
+  Future<void> getFacilityList({bool? isLoading}) async {
+    final _facilityList = await facilityPresenter.getFacilityList(isLoading);
 
     if (_facilityList != null) {
       for (var facility in _facilityList) {

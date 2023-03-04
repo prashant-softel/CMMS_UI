@@ -8,8 +8,8 @@ class JobListUsecase {
 
   ///
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await repository.getFacilityList();
+  Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
+      await repository.getFacilityList(isLoading);
 
   Future<List<JobModel?>?> getJobList({
     required String auth,

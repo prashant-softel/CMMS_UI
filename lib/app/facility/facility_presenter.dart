@@ -5,6 +5,6 @@ class FacilityPresenter {
   FacilityPresenter(this.facilityUsecase);
   FacilityUsecase facilityUsecase;
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await facilityUsecase.getFacilityList();
+  Future<List<FacilityModel?>?> getFacilityList(isLoading) async =>
+      await facilityUsecase.getFacilityList(isLoading);
 }
