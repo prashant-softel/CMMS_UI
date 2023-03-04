@@ -39,6 +39,7 @@ class DataRepository extends DomainRepository {
   /// Get data from secure storage
   @override
   Future<String> getSecuredValue(String key) async {
+    //return generateToken();
     throw UnimplementedError();
   }
 

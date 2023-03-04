@@ -92,9 +92,9 @@ class ConnectHelper {
       );
     } catch (error) {
       print(error);
+    } finally {
+      return response;
     }
-
-    return response;
   }
 
   Future<ResponseModel> getInventoryList({

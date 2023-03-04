@@ -109,6 +109,9 @@ class Repository {
     var _value = '';
     try {
       _value = await _deviceRepository.getSecuredValue(key);
+      // if (_value == '') {
+      //   _value = await _dataRepository.getSecuredValue(key);
+      // }
       return _value;
     } catch (_) {
       _value = await _dataRepository.getSecuredValue(key);
@@ -436,8 +439,6 @@ class Repository {
       );
 
       if (!res.hasError) {
-        //final jsonJobDetailsModels = jsonDecode(res.data);
-
         final JobDetailsModel _jobDetailsModel =
             jobDetailsModelFromJson(res.data);
         List<JobDetailsModel> _jobDetailsModelList = [];

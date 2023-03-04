@@ -39,10 +39,10 @@ class JobListController extends GetxController {
       rowCount: jobList?.length ?? 0,
       rowsPerPage: 10,
     );
-    homePresenter.generateToken();
-    Future.delayed(Duration(seconds: 2), () {
+    await homePresenter.generateToken();
+    Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(milliseconds: 500), () {
         getJobList(facilityId, userId);
       });
     });
@@ -62,9 +62,10 @@ class JobListController extends GetxController {
 
     _facilityList = await jobListPresenter.getFacilityList();
     if (_facilityList != null && _facilityList.isNotEmpty) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
-      }
+      facilityList.value = _facilityList;
+      // for (var facility in _facilityList) {
+      //   facilityList.add(facility);
+      // }
     }
     if (facilityList.isNotEmpty) {
       selectedFacility.value = facilityList[0]?.name ?? '';
@@ -74,12 +75,15 @@ class JobListController extends GetxController {
   Future<void> getJobList(int facilityId, int userId) async {
     jobList?.value = <JobModel>[];
     final _jobList = await jobListPresenter.getJobList(
-        facilityId: facilityId, userId: userId);
+      facilityId: facilityId,
+      userId: userId,
+    );
 
     if (_jobList != null) {
-      for (JobModel? job in _jobList) {
-        jobList?.add(job);
-      }
+      jobList?.value = _jobList;
+      // for (JobModel? job in _jobList) {
+      //   jobList?.add(job);
+      // }
 
       if (jobList != null && jobList!.isNotEmpty) {
         JobModel? job = jobList![0];

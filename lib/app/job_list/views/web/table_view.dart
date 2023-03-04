@@ -13,142 +13,141 @@ class JobListScreenWeb extends GetView<JobListController> {
   Widget build(BuildContext context) {
     //var jobId = 0;
     return //
-        Obx(
-      () => //
-          Container(
-        color: ColorsValue.lightBlueishColor,
-        height: 600,
-        child: ScrollableTableView(
-          //paginationController: controller.paginationController,
-          columns: [
-            'facilityName'.tr,
-            'jobDate'.tr,
-            'equipmentCat'.tr,
-            'workingArea'.tr,
-            'description'.tr,
-            'jobDetails',
-            'workType',
-            'raisedByName',
-            'breakdownTime',
-            'breakdownType',
-            'permitId',
-            'assignedToName',
-            'status',
-            'action'.tr,
-          ].map((column) {
-            return TableViewColumn(
-              minWidth: 1100 / 6,
-              label: column == "facilityName"
-                  ? "Facility"
-                  : column == "jobDate"
-                      ? "Job Date"
-                      : column == "equipmentCat"
-                          ? "Equipment Category"
-                          : column == "workingArea"
-                              ? "Work Area / Equipment" //
-                              : column == "description"
-                                  ? "Description"
-                                  : column == "jobDetails"
-                                      ? "Job Details"
-                                      : column == "workType"
-                                          ? "Work Type"
-                                          : column == "raisedByName"
-                                              ? "Raised By"
-                                              : column == "breakdownTime"
-                                                  ? "Breakdown Time"
-                                                  : column == "breakdownType"
-                                                      ? "Breakdown Type"
-                                                      : column == "permitId"
-                                                          ? "Permit ID"
-                                                          : column ==
-                                                                  "assignedToName"
-                                                              ? "Assigned To"
-                                                              : column ==
-                                                                      "status"
-                                                                  ? "Status"
-                                                                  : column ==
-                                                                          "Actions"
-                                                                      ? "Actions"
-                                                                      : "",
-            );
-          }).toList(),
-          rows: //
-              [
-            ...List.generate(
-              controller.jobList?.length ?? 0,
-              (index) {
-                controller.jobId.value = controller.jobList?[index]?.id ?? 0;
-                return [
-                  '${controller.jobList?[index]?.facilityName ?? ''}',
-                  //index + 1,
-                  '${controller.jobList?[index]?.jobDate}',
-                  '${controller.jobList?[index]?.equipmentCat}',
-                  '${controller.jobList?[index]?.workingArea}',
-                  '${controller.jobList?[index]?.description}',
-                  '${controller.jobList?[index]?.jobDetails}',
-                  '${controller.jobList?[index]?.workType}',
-                  '${controller.jobList?[index]?.raisedByName}',
-                  '${controller.jobList?[index]?.breakdownTime ?? ''}',
-                  '${controller.jobList?[index]?.breakdownType}',
-                  '${controller.jobList?[index]?.permitId}',
-                  '${controller.jobList?[index]?.assignedToName}',
-                  '${controller.jobList?[index]?.status}',
-                  'Actions'
-                ];
-              },
-            ),
-          ].map((_jobList) {
-            return TableViewRow(
-                height: 60,
-                cells: _jobList.map((value) {
-                  return TableViewCell(
-                    child: (value == 'Actions')
-                        ? Wrap(
-                            children: [
-                              TableActionButton(
-                                color: Colors.green,
-                                icon: Icons.visibility,
-                                label: 'View',
-                                onPress: () {
-                                  print('value = $value');
-                                  //                                   var _jobId = jobModel?.id ?? 0;
-                                  // controller.showJobDetails(_jobId);
-                                  controller
-                                      .showJobDetails(controller.jobId.value);
-                                },
-                              ),
-                              // TableActionButton(
-                              //   color: Colors.blue,
-                              //   icon: Icons.edit,
-                              //   label: 'Edit',
-                              //   onPress: () {},
-                              // ),
-                              // TableActionButton(
-                              //   color: Colors.red,
-                              //   icon: Icons.delete,
-                              //   label: 'Delete',
-                              //   onPress: () {},
-                              // ),
-                              // TableActionButton(
-                              //   color: Colors.green,
-                              //   icon: Icons.visibility,
-                              //   label: 'Approve Request',
-                              //   onPress: () {},
-                              // ),
-                              // TableActionButton(
-                              //   color: Colors.red,
-                              //   icon: Icons.visibility,
-                              //   label: 'Reject Request',
-                              //   onPress: () {},
-                              // ),
-                            ],
-                          )
-                        : Text(value.toString()),
-                  );
-                }).toList());
-          }).toList(),
-        ),
+        //   Obx(
+        // () => //
+        Container(
+      color: ColorsValue.lightBlueishColor,
+      height: 600,
+      child: ScrollableTableView(
+        //paginationController: controller.paginationController,
+        columns: [
+          'facilityName'.tr,
+          'jobDate'.tr,
+          'equipmentCat'.tr,
+          'workingArea'.tr,
+          'description'.tr,
+          'jobDetails',
+          'workType',
+          'raisedByName',
+          'breakdownTime',
+          'breakdownType',
+          'permitId',
+          'assignedToName',
+          'status',
+          'action'.tr,
+        ].map((column) {
+          return TableViewColumn(
+            minWidth: 1100 / 6,
+            label: column == "facilityName"
+                ? "Facility"
+                : column == "jobDate"
+                    ? "Job Date"
+                    : column == "equipmentCat"
+                        ? "Equipment Category"
+                        : column == "workingArea"
+                            ? "Work Area / Equipment" //
+                            : column == "description"
+                                ? "Description"
+                                : column == "jobDetails"
+                                    ? "Job Details"
+                                    : column == "workType"
+                                        ? "Work Type"
+                                        : column == "raisedByName"
+                                            ? "Raised By"
+                                            : column == "breakdownTime"
+                                                ? "Breakdown Time"
+                                                : column == "breakdownType"
+                                                    ? "Breakdown Type"
+                                                    : column == "permitId"
+                                                        ? "Permit ID"
+                                                        : column ==
+                                                                "assignedToName"
+                                                            ? "Assigned To"
+                                                            : column == "status"
+                                                                ? "Status"
+                                                                : column ==
+                                                                        "Actions"
+                                                                    ? "Actions"
+                                                                    : "",
+          );
+        }).toList(),
+        rows: //
+            [
+          ...List.generate(
+            controller.jobList?.length ?? 0,
+            (index) {
+              controller.jobId.value = controller.jobList?[index]?.id ?? 0;
+              return [
+                '${controller.jobList?[index]?.facilityName ?? ''}',
+                //index + 1,
+                '${controller.jobList?[index]?.jobDate}',
+                '${controller.jobList?[index]?.equipmentCat}',
+                '${controller.jobList?[index]?.workingArea}',
+                '${controller.jobList?[index]?.description}',
+                '${controller.jobList?[index]?.jobDetails}',
+                '${controller.jobList?[index]?.workType}',
+                '${controller.jobList?[index]?.raisedByName}',
+                '${controller.jobList?[index]?.breakdownTime ?? ''}',
+                '${controller.jobList?[index]?.breakdownType}',
+                '${controller.jobList?[index]?.permitId}',
+                '${controller.jobList?[index]?.assignedToName}',
+                '${controller.jobList?[index]?.status}',
+                'Actions'
+              ];
+            },
+          ),
+        ].map((_jobList) {
+          return TableViewRow(
+              height: 60,
+              cells: _jobList.map((value) {
+                return TableViewCell(
+                  child: (value == 'Actions')
+                      ? Wrap(
+                          children: [
+                            TableActionButton(
+                              color: Colors.green,
+                              icon: Icons.visibility,
+                              label: 'View',
+                              onPress: () {
+                                print('value = $value');
+                                //                                   var _jobId = jobModel?.id ?? 0;
+                                // controller.showJobDetails(_jobId);
+                                controller
+                                    .showJobDetails(controller.jobId.value);
+                              },
+                            ),
+                            // TableActionButton(
+                            //   color: Colors.blue,
+                            //   icon: Icons.edit,
+                            //   label: 'Edit',
+                            //   onPress: () {},
+                            // ),
+                            // TableActionButton(
+                            //   color: Colors.red,
+                            //   icon: Icons.delete,
+                            //   label: 'Delete',
+                            //   onPress: () {},
+                            // ),
+                            // TableActionButton(
+                            //   color: Colors.green,
+                            //   icon: Icons.visibility,
+                            //   label: 'Approve Request',
+                            //   onPress: () {},
+                            // ),
+                            // TableActionButton(
+                            //   color: Colors.red,
+                            //   icon: Icons.visibility,
+                            //   label: 'Reject Request',
+                            //   onPress: () {},
+                            // ),
+                          ],
+                        )
+                      : Text(value.toString()),
+                );
+              }).toList());
+        }).toList(),
       ),
+      //),
     );
   }
 }
