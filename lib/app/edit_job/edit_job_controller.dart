@@ -98,7 +98,6 @@ class EditJobController extends GetxController {
   ///
   @override
   void onInit() async {
-    await homePresenter.generateToken();
     jobId = Get.arguments;
     await getJobDetails(jobId);
     await getFacilityList();

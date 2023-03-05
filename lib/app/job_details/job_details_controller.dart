@@ -33,10 +33,7 @@ class JobDetailsController extends GetxController {
   @override
   void onInit() async {
     jobId.value = Get.arguments;
-    await homePresenter
-        .generateToken()
-        .then((value) => getJobDetails(jobId.value));
-    //Future.delayed(const Duration(milliseconds: 1000), () async {});
+    getJobDetails(jobId.value);
     super.onInit();
   }
 
