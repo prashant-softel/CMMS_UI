@@ -12,7 +12,10 @@ import '../navigators/app_pages.dart';
 class JobListController extends GetxController {
   ///
   JobListController(
-      this.jobListPresenter, this.facilityPresenter, this.homePresenter);
+    this.jobListPresenter,
+    this.facilityPresenter,
+    this.homePresenter,
+  );
   JobListPresenter jobListPresenter;
   HomePresenter homePresenter;
   FacilityPresenter facilityPresenter;
@@ -39,7 +42,7 @@ class JobListController extends GetxController {
       rowCount: jobList?.length ?? 0,
       rowsPerPage: 10,
     );
-    await homePresenter.generateToken();
+
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
       Future.delayed(Duration(milliseconds: 500), () {

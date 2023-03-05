@@ -88,7 +88,6 @@ class AddJobController extends GetxController {
   ///
   @override
   void onInit() async {
-    await homePresenter.generateToken();
     await getFacilityList();
     await getAssignedToList();
 
