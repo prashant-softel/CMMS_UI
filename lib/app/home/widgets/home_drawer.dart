@@ -15,7 +15,7 @@ class HomeDrawer extends GetView<HomeController> {
       () => //
           ///
           Drawer(
-        width: Get.width * 0.15,
+        width: 200,
         child: ListView.builder(
           itemCount: controller.menuItems.length + 1,
           itemBuilder: (BuildContext context, int index) {
@@ -37,9 +37,9 @@ class HomeDrawer extends GetView<HomeController> {
               leading: Icon(item.icon),
               title: Text(item.title),
               selected: index == controller.selectedIndex.value,
-              onTap: () => () {
-                controller.selectedIndex.value = index;
-                Get.back();
+              onTap: () => {
+                controller.selectedIndex.value = index,
+                Get.back(),
               },
             );
           },
