@@ -5,14 +5,14 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/block_model.dart';
 import '../navigators/app_pages.dart';
-import 'job_list_presenter.dart';
+import 'job_card_presenter.dart';
 
-class JobListController extends GetxController {
+class JobCardController extends GetxController {
   ///
-  JobListController(
+  JobCardController(
     this.jobListPresenter,
   );
-  JobListPresenter jobListPresenter;
+  JobCardPresenter jobListPresenter;
 
   ///
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
@@ -54,37 +54,37 @@ class JobListController extends GetxController {
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
-    facilityList.value = <FacilityModel>[];
-    List<FacilityModel?>? _facilityList = <FacilityModel?>[];
+    // facilityList.value = <FacilityModel>[];
+    // List<FacilityModel?>? _facilityList = <FacilityModel?>[];
 
-    _facilityList = await jobListPresenter.getFacilityList();
-    if (_facilityList != null && _facilityList.isNotEmpty) {
-      facilityList.value = _facilityList;
-    }
-    if (facilityList.isNotEmpty) {
-      selectedFacility.value = facilityList[0]?.name ?? '';
-    }
+    // _facilityList = await jobListPresenter.getFacilityList();
+    // if (_facilityList != null && _facilityList.isNotEmpty) {
+    //   facilityList.value = _facilityList;
+    // }
+    // if (facilityList.isNotEmpty) {
+    //   selectedFacility.value = facilityList[0]?.name ?? '';
+    // }
   }
 
   Future<void> getJobList(int facilityId, int userId) async {
     jobList?.value = <JobModel>[];
-    final _jobList = await jobListPresenter.getJobList(
-      facilityId: facilityId,
-      userId: userId,
-    );
+    // final _jobList = await jobListPresenter.getJobList(
+    //   facilityId: facilityId,
+    //   userId: userId,
+    // );
 
-    if (_jobList != null) {
-      jobList?.value = _jobList;
+    // if (_jobList != null) {
+    //   jobList?.value = _jobList;
 
-      if (jobList != null && jobList!.isNotEmpty) {
-        JobModel? job = jobList![0];
-        var jobJson = job?.toJson();
-        jobListTableColumns.value = <String>[];
-        for (var key in jobJson?.keys.toList() ?? []) {
-          jobListTableColumns.add(key);
-        }
-      }
-    }
+    //   if (jobList != null && jobList!.isNotEmpty) {
+    //     JobModel? job = jobList![0];
+    //     var jobJson = job?.toJson();
+    //     jobListTableColumns.value = <String>[];
+    //     for (var key in jobJson?.keys.toList() ?? []) {
+    //       jobListTableColumns.add(key);
+    //     }
+    //   }
+    // }
   }
 
   Future<void> addJob() async {

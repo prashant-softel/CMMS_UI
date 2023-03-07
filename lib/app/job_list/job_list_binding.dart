@@ -1,31 +1,35 @@
-import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
-import 'package:cmms/app/job_list/job_list_presenter.dart';
-import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 
-import '../home/home_presenter.dart';
+import '../../domain/usecases/job_list_usecase.dart';
+import 'job_list_presenter.dart';
 
 class JobListBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<JobListController>(
       () => JobListController(
-        JobListPresenter(
-          JobListUsecase(
-            Get.find(),
+        Get.put(
+          JobListPresenter(
+            JobListUsecase(
+              Get.find(),
+            ),
           ),
         ),
-        FacilityPresenter(
-          FacilityUsecase(
-            Get.find(),
-          ),
-        ),
-        HomePresenter(
-          HomeUsecase(
-            Get.find(),
-          ),
-        ),
+        //   Get.put(
+        //     FacilityPresenter(
+        //       FacilityUsecase(
+        //         Get.find(),
+        //       ),
+        //     ),
+        //   ),
+        //   Get.put(
+        //     HomePresenter(
+        //       HomeUsecase(
+        //         Get.find(),
+        //       ),
+        //     ),
+        //   ),
       ),
     );
   }

@@ -32,6 +32,7 @@ class JobDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
+    //homePresenter.generateToken();
     jobId.value = Get.arguments;
     getJobDetails(jobId.value);
     super.onInit();

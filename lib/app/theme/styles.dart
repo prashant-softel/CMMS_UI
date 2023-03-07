@@ -268,7 +268,7 @@ abstract class Styles {
   );
 
   static TextStyle white14 = TextStyle(
-    // color: ColorsValue.whiteColor,
+    color: ColorsValue.whiteColor,
     fontSize: Dimens.fourteen,
   );
 
@@ -284,13 +284,13 @@ abstract class Styles {
   );
 
   static TextStyle whiteBold15 = TextStyle(
-    // color: ColorsValue.whiteColor,
+    color: ColorsValue.whiteColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.fifteen,
   );
 
   static TextStyle white16 = TextStyle(
-    // color: ColorsValue.whiteColor,
+    color: ColorsValue.whiteColor,
     fontSize: Dimens.sixteen,
   );
 

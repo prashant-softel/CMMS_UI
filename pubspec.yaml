@@ -107,7 +107,7 @@ dependencies:
   dropdown_search: ^5.0.5
   flutter_form_builder: ^7.7.0
   date_range_picker: ^1.0.7
-
+  easy_sidemenu: ^0.4.1+1
 
 
 dev_dependencies:

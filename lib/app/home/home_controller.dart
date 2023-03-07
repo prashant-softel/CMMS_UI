@@ -3,6 +3,8 @@ import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../domain/models/menu_item.dart';
+
 class HomeController extends GetxController {
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
@@ -11,7 +13,6 @@ class HomeController extends GetxController {
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
-
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
   final typeTextController = TextEditingController();
@@ -21,17 +22,39 @@ class HomeController extends GetxController {
   final assetNameTextController = TextEditingController();
   final enterMultiplierTextController = TextEditingController();
   final assetDescpTextController = TextEditingController();
-
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
   String categoryIds = '';
+
+  /// SIDE MENU WEB
+  Rx<int> selectedIndex = 0.obs;
+  Rx<NavigationRailLabelType> labelType = NavigationRailLabelType.all.obs;
+  Rx<bool> showLeading = true.obs;
+  Rx<bool> showTrailing = true.obs;
+  Rx<double> groupAligment = 0.0.obs;
+  RxList<MenuItem> menuItems = [
+    MenuItem(
+      title: "Inventory",
+      icon: Icons.wysiwyg_outlined,
+    ),
+    MenuItem(
+      title: "Job List",
+      icon: Icons.warehouse,
+    ),
+    MenuItem(
+      title: "Warranty",
+      icon: Icons.wysiwyg_outlined,
+    ),
+  ].obs;
 
   ///
 
   @override
   void onInit() async {
     await homePresenter.generateToken();
+
+    getInventoryList();
     super.onInit();
   }
 

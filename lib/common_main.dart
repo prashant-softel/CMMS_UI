@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app_config.dart';
 import 'package:cmms/data/data.dart';
@@ -21,6 +22,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+import 'app/job_list/job_list_controller.dart';
 
 Future<void> mainCommon(AppConfig appConfig) async {
   try {
@@ -122,7 +125,7 @@ Future<void> initServices() async {
 
   await Hive.openBox<DownloadTaskModel>('download_task_model');
 
-  Get.put(
+  var repository = Get.put(
     Repository(
       Get.put(
         DeviceRepository(),
@@ -138,6 +141,18 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
+  Get.put(
+    JobListController(
+      Get.put(
+        JobListPresenter(
+          Get.put(JobListUsecase(repository)),
+        ),
+        permanent: true,
+      ),
+    ),
+    permanent: true,
+  );
+  //);
 
   /// Services
   await Get.putAsync(() => CommonService().init());

@@ -104,9 +104,16 @@ class ConnectHelper {
     int? blockId,
     required String categoryIds,
   }) async {
-    //blockId = 72;
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?linkedToBlockId=$blockId&categoryIds=$categoryIds&status=1',
+      'Inventory/GetInventoryList?' +
+          blockIdParam +
+          categoryIdsParam +
+          statusParam,
       Request.getMultiparts,
       null,
       isLoading,

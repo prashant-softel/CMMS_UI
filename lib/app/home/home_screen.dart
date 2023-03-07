@@ -3,296 +3,74 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class HomeScreen extends StatefulWidget {
+import '../job_list/views/job_list_screen.dart';
+
+class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final controller = Get.find<HomeController>();
-  @override
-  void initState() {
-    controller.getInventoryList();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('${'hello'.tr}'),
-        ),
-        drawer: Responsive.isMobile(context) || Responsive.isTablet(context)
-            ? HomeDrawer()
-            : null,
-        body: Row(
-          children: [
-            Responsive.isMobile(context) || Responsive.isTablet(context)
+  Widget build(BuildContext context) {
+    return //
+        Scaffold(
+      appBar: AppBar(
+        title: Text('${'hello'.tr}'),
+      ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
+      body:
+          ////
+          Row(
+              //
+              children: [
+            //
+            (Responsive.isMobile(context) || Responsive.isTablet(context))
                 ? Dimens.box0
-                : HomeDrawer(),
-            Expanded(
-              child: Center(
-                child: Container(
-                  margin: Dimens.edgeInsets16,
-                  height: Get.height,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.withOpacity(.3)),
+                :
+                //
+                HomeDrawer(),
+
+            Obx(
+              () => //
+                  Expanded(
+                //flex: 8,
+                child: Center(
+                  child: Container(
+                    margin: Dimens.edgeInsets16,
+                    height: Get.height,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.withOpacity(.3)),
+                    ),
+                    constraints: BoxConstraints(
+                        //maxWidth: 1100,
+                        ),
+                    child: (() {
+                      switch (controller.selectedIndex.value) {
+                        case 1:
+                          return InventoryModule();
+
+                        case 2:
+                          return JobListScreen();
+
+                        case 3:
+                          //InventoryModule();
+                          break;
+
+                        default:
+                          return InventoryModule();
+                      }
+                      // your code here
+                    }()),
                   ),
-                  constraints: BoxConstraints(
-                    maxWidth: 1100,
-                  ),
-                  // child: Expanded(
-                  //   child: Center(
-                  //     child: Container(
-                  //       margin: Dimens.edgeInsets16,
-                  //       height: Get.height,
-                  //       decoration: BoxDecoration(
-                  //         border:
-                  //             Border.all(color: Colors.grey.withOpacity(.3)),
-                  //       ),
-                  //       constraints: BoxConstraints(
-                  //         maxWidth: 1100,
-                  //       ),
-                  //       child: SingleChildScrollView(
-                  //         child: Column(
-                  //           children: [
-                  //             CustomAppBar(
-                  //               title: 'addInventory'.tr,
-                  //               action: ActionButton(
-                  //                 icon: Icons.menu,
-                  //                 lable: 'Inventory List',
-                  //                 onPress: () async {},
-                  //                 color: Colors.green,
-                  //               ),
-                  //             ),
-                  //             Dimens.boxHeight10,
-                  //             AddPhoto(),
-                  //             Dimens.boxHeight10,
-                  //             Wrap(
-                  //               children: [
-                  //                 CustomTextField(
-                  //                   label: 'Block: *',
-                  //                 ),
-                  //                 CustomTextField(
-                  //                   label: 'Parent Equipment *',
-                  //                 ),
-                  //                 Wrap(
-                  //                   children: [
-                  //                     CustomTextField(
-                  //                       label: 'Type *',
-                  //                     ),
-                  //                     Container(
-                  //                       margin: Dimens.edgeInsets16,
-                  //                       width: 100,
-                  //                       color: Colors.black,
-                  //                       child: ActionButton(
-                  //                         lable: 'Add',
-                  //                         onPress: () {},
-                  //                         icon: Icons.add,
-                  //                         color: Colors.blue,
-                  //                       ),
-                  //                     )
-                  //                   ],
-                  //                 ),
-                  //                 Wrap(
-                  //                   children: [
-                  //                     CustomTextField(
-                  //                       label: 'Category *',
-                  //                     ),
-                  //                     Container(
-                  //                       margin: Dimens.edgeInsets16,
-                  //                       width: 100,
-                  //                       color: Colors.black,
-                  //                       child: ActionButton(
-                  //                         lable: 'Add',
-                  //                         onPress: () {},
-                  //                         icon: Icons.add,
-                  //                         color: Colors.blue,
-                  //                       ),
-                  //                     )
-                  //                   ],
-                  //                 ),
-                  //                 CustomTextField(
-                  //                   label: 'Serial No.',
-                  //                 ),
-                  //                 CustomTextField(
-                  //                   label: 'Status',
-                  //                 ),
-                  //                 CustomTextField(
-                  //                   label: 'Asset Name: *',
-                  //                 ),
-                  //                 CustomTextField(
-                  //                   label: 'Enter Multiplier: ',
-                  //                 ),
-                  //                 Row(
-                  //                   children: [
-                  //                     Expanded(
-                  //                       child: CustomTextField(
-                  //                         label: 'Asset Description: ',
-                  //                         maxLine: 6,
-                  //                       ),
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //                 Wrap(
-                  //                   children: [
-                  //                     Row(
-                  //                       mainAxisSize: MainAxisSize.min,
-                  //                       children: [
-                  //                         CustomTextField(
-                  //                           label: 'Calibration Frequency: ',
-                  //                           width: 300,
-                  //                         ),
-                  //                         Container(
-                  //                           width: 100,
-                  //                           child: TextField(
-                  //                             decoration: InputDecoration(
-                  //                               contentPadding:
-                  //                                   Dimens.edgeInsets16_0_16_0,
-                  //                               focusedBorder:
-                  //                                   OutlineInputBorder(
-                  //                                 borderSide:
-                  //                                     BorderSide(width: .2),
-                  //                                 borderRadius:
-                  //                                     BorderRadius.circular(2),
-                  //                               ),
-                  //                               enabledBorder:
-                  //                                   OutlineInputBorder(
-                  //                                 borderSide:
-                  //                                     BorderSide(width: .2),
-                  //                                 borderRadius:
-                  //                                     BorderRadius.circular(2),
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                     CustomTextField(
-                  //                       label: 'Last calibration date: ',
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //                 Wrap(
-                  //                   children: [
-                  //                     Row(
-                  //                       mainAxisSize: MainAxisSize.min,
-                  //                       children: [
-                  //                         CustomTextField(
-                  //                           label: 'Calibration remainder In: ',
-                  //                           width: 300,
-                  //                         ),
-                  //                         Container(
-                  //                           width: 100,
-                  //                           child: TextField(
-                  //                             decoration: InputDecoration(
-                  //                               contentPadding:
-                  //                                   Dimens.edgeInsets16_0_16_0,
-                  //                               focusedBorder:
-                  //                                   OutlineInputBorder(
-                  //                                 borderSide:
-                  //                                     BorderSide(width: .2),
-                  //                                 borderRadius:
-                  //                                     BorderRadius.circular(2),
-                  //                               ),
-                  //                               enabledBorder:
-                  //                                   OutlineInputBorder(
-                  //                                 borderSide:
-                  //                                     BorderSide(width: .2),
-                  //                                 borderRadius:
-                  //                                     BorderRadius.circular(2),
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                     Container(
-                  //                       margin: Dimens.edgeInsets16,
-                  //                       child: Row(
-                  //                         mainAxisSize: MainAxisSize.min,
-                  //                         children: [
-                  //                           Text('Calibration cirtificate'),
-                  //                           Dimens.boxWidth10,
-                  //                           ActionButton(
-                  //                             lable:
-                  //                                 'Upload cirtification file',
-                  //                             onPress: () {},
-                  //                             icon: Icons.file_upload_outlined,
-                  //                             color: Colors.blue,
-                  //                           )
-                  //                         ],
-                  //                       ),
-                  //                     )
-                  //                   ],
-                  //                 ),
-                  //                 Container(
-                  //                   margin: Dimens.edgeInsets16,
-                  //                   decoration: BoxDecoration(
-                  //                     border: Border.all(
-                  //                       width: 1,
-                  //                       color: Colors.grey.withOpacity(.3),
-                  //                     ),
-                  //                   ),
-                  //                   child: DefaultTabController(
-                  //                     length: 3,
-                  //                     child: Column(
-                  //                       children: [
-                  //                         Container(
-                  //                           color: Colors.grey.withOpacity(.2),
-                  //                           child: TabBar(
-                  //                             tabs: [
-                  //                               Container(
-                  //                                 height: 40,
-                  //                                 child: Center(
-                  //                                   child: Text('Warranties'),
-                  //                                 ),
-                  //                               ),
-                  //                               Container(
-                  //                                 height: 40,
-                  //                                 child: Center(
-                  //                                   child: Text('Purchasing'),
-                  //                                 ),
-                  //                               ),
-                  //                               Container(
-                  //                                 height: 40,
-                  //                                 child: Center(
-                  //                                   child: Text('Files'),
-                  //                                 ),
-                  //                               ),
-                  //                             ],
-                  //                           ),
-                  //                         ),
-                  //                         Container(
-                  //                           height: 400,
-                  //                           child: TabBarView(
-                  //                             children: [
-                  //                               WarrantyTab(),
-                  //                               ManufacturarTab(),
-                  //                               Files(),
-                  //                             ],
-                  //                           ),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  child: InventoryModule(),
                 ),
               ),
             ),
-          ],
-        ),
-      );
+
+            ///
+          ]),
+    );
+  }
 }
 
 class Files extends StatelessWidget {
