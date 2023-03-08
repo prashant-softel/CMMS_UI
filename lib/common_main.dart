@@ -152,8 +152,10 @@ Future<void> initServices() async {
   //   ),
   //   //permanent: true,
   // );
-  Get.put(
-    JobListController(
+  // Get.lazyPut(
+  // () => HomeController(
+  Get.lazyPut(
+    () => JobListController(
       Get.put(
         JobListPresenter(
           Get.put(JobListUsecase(repository)),
