@@ -26,16 +26,16 @@ class JobListController extends GetxController {
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
-  late PaginationController paginationController;
+
   RxList<String> jobListTableColumns = <String>[].obs;
+  PaginationController paginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
 
   ///
   @override
   void onInit() async {
-    paginationController = PaginationController(
-      rowCount: jobList?.length ?? 0,
-      rowsPerPage: 10,
-    );
     //homePresenter.generateToken();
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
@@ -74,7 +74,11 @@ class JobListController extends GetxController {
     );
 
     if (_jobList != null) {
-      jobList?.value = _jobList;
+      jobList!.value = _jobList;
+      paginationController = PaginationController(
+        rowCount: jobList!.length,
+        rowsPerPage: 10,
+      );
 
       if (jobList != null && jobList!.isNotEmpty) {
         JobModel? job = jobList![0];

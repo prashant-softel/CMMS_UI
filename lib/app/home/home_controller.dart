@@ -2,7 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/menu_item.dart';
 
 class HomeController extends GetxController {
@@ -26,13 +26,13 @@ class HomeController extends GetxController {
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
   String categoryIds = '';
+  PaginationController paginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
-  Rx<NavigationRailLabelType> labelType = NavigationRailLabelType.all.obs;
-  Rx<bool> showLeading = true.obs;
-  Rx<bool> showTrailing = true.obs;
-  Rx<double> groupAligment = 0.0.obs;
   RxList<MenuItem> menuItems = [
     MenuItem(
       title: "Home",
@@ -57,6 +57,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     await homePresenter.generateToken();
+
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
@@ -70,6 +71,10 @@ class HomeController extends GetxController {
       facilityId: facilityId,
     );
     inventoryList = list;
+    paginationController = PaginationController(
+      rowCount: inventoryList.length,
+      rowsPerPage: 10,
+    );
     update(['inventory_list']);
   }
 

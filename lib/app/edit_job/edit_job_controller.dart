@@ -404,8 +404,7 @@ class EditJobController extends GetxController {
       selectedWorkTypeIdList.add(_selectedWorkType.id);
     }
 
-    String lststrWorkTypeIds =
-        selectedWorkTypeIdList.join(', ').toString() ?? '';
+    String lststrWorkTypeIds = selectedWorkTypeIdList.join(', ').toString();
     getToolsRequiredToWorkTypeList(lststrWorkTypeIds);
   }
 

@@ -141,6 +141,17 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
+  // Get.put(
+  //   HomeController(
+  //     Get.put(
+  //       HomePresenter(
+  //         Get.put(HomeUsecase(repository)),
+  //       ),
+  //       permanent: true,
+  //     ),
+  //   ),
+  //   //permanent: true,
+  // );
   Get.put(
     JobListController(
       Get.put(
@@ -150,7 +161,7 @@ Future<void> initServices() async {
         permanent: true,
       ),
     ),
-    permanent: true,
+    //permanent: true,
   );
   //);
 

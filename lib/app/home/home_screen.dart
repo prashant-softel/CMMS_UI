@@ -43,9 +43,6 @@ class HomeScreen extends GetView<HomeController> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.withOpacity(.3)),
                     ),
-                    constraints: BoxConstraints(
-                        //maxWidth: 1100,
-                        ),
                     child: (() {
                       switch (controller.selectedIndex.value) {
                         case 1:
