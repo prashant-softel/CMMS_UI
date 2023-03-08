@@ -35,8 +35,12 @@ class HomeController extends GetxController {
   Rx<double> groupAligment = 0.0.obs;
   RxList<MenuItem> menuItems = [
     MenuItem(
+      title: "Home",
+      icon: Icons.home,
+    ),
+    MenuItem(
       title: "Inventory",
-      icon: Icons.wysiwyg_outlined,
+      icon: Icons.wysiwyg,
     ),
     MenuItem(
       title: "Job List",
@@ -44,7 +48,7 @@ class HomeController extends GetxController {
     ),
     MenuItem(
       title: "Warranty",
-      icon: Icons.wysiwyg_outlined,
+      icon: Icons.group,
     ),
   ].obs;
 
@@ -53,14 +57,15 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     await homePresenter.generateToken();
-
-    getInventoryList();
+    Future.delayed(Duration(seconds: 1), () {
+      getInventoryList();
+    });
     super.onInit();
   }
 
   void getInventoryList() async {
     final list = await homePresenter.getInventoryList(
-      isLoading: false,
+      isLoading: true,
       categoryIds: categoryIds,
       facilityId: facilityId,
     );

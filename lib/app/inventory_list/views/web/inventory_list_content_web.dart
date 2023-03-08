@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class InventoryModule extends StatelessWidget {
-  InventoryModule({super.key});
+class InventoryListContentWeb extends StatelessWidget {
+  InventoryListContentWeb({super.key});
 
-  //final _controller = Get.find<HomeController>();
+  ///
 
   @override
   Widget build(BuildContext context) {

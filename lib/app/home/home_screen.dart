@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
+import '../inventory_list/views/inventory_list_screen.dart';
 import '../job_list/views/job_list_screen.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -48,7 +49,7 @@ class HomeScreen extends GetView<HomeController> {
                     child: (() {
                       switch (controller.selectedIndex.value) {
                         case 1:
-                          return InventoryModule();
+                          return InventoryListScreen();
 
                         case 2:
                           return JobListScreen();
@@ -58,7 +59,7 @@ class HomeScreen extends GetView<HomeController> {
                           break;
 
                         default:
-                          return InventoryModule();
+                          return InventoryListScreen();
                       }
                       // your code here
                     }()),

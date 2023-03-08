@@ -3,4 +3,4 @@ export 'home_controller.dart';
 export 'home_presenter.dart';
 export 'home_screen.dart';
 export 'widgets/widgets.dart';
-export 'devices/web.dart';
+export 'views/web.dart';
