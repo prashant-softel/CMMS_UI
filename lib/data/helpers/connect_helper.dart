@@ -77,12 +77,9 @@ class ConnectHelper {
     ResponseModel response = ResponseModel(data: '', hasError: true);
     try {
       response = await apiWrapper.makeRequest(
-        'Token/Authenticate',
+        'User/Authenticate',
         Request.postMultiparts,
-        {
-          'user_name': 'khushru.mistry@softeltech.in',
-          'password': '/bS4BMO+fOLSPh0oK2qP0A=='
-        },
+        {'user_name': 'sujit@softeltech.in', 'password': 'Sujit123'},
         true,
         {
           'Content-Type': 'application/json',

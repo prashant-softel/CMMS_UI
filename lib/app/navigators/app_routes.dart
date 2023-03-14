@@ -7,6 +7,7 @@ abstract class Routes {
   static const splash = _Paths.splash;
   static const home = _Paths.home;
   static const jobList = _Paths.jobList;
+  static const jobCard = _Paths.jobCardDetails;
   static const jobDetails = _Paths.jobDetails;
   static const addJob = _Paths.addJob;
   static const editJob = _Paths.editJob;
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const addJob = '/add-job-screen';
   static const editJob = '/edit-job-screen';
   static const facility = '/facility';
+  static const jobCardDetails = '/job-card-details';
 }

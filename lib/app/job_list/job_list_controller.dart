@@ -20,13 +20,13 @@ class JobListController extends GetxController {
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
-  int facilityId = 45;
+  int facilityId = 46;
   int userId = 35;
   Rx<int> jobId = 0.obs;
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
-
+  JobModel? jobModel;
   RxList<String> jobListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -81,8 +81,8 @@ class JobListController extends GetxController {
       );
 
       if (jobList != null && jobList!.isNotEmpty) {
-        JobModel? job = jobList![0];
-        var jobJson = job?.toJson();
+        jobModel = jobList![0];
+        var jobJson = jobModel?.toJson();
         jobListTableColumns.value = <String>[];
         for (var key in jobJson?.keys.toList() ?? []) {
           jobListTableColumns.add(key);
@@ -93,6 +93,10 @@ class JobListController extends GetxController {
 
   Future<void> addJob() async {
     Get.toNamed(Routes.addJob, arguments: facilityId);
+  }
+
+  void goToJobCardScreen(int? jobId) {
+    Get.toNamed(Routes.jobCard, arguments: jobId);
   }
 
   void showJobDetails(int _jobId) {

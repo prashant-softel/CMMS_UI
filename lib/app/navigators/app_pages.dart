@@ -2,16 +2,16 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:get/get.dart';
-
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
-
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
+import '../job_card_details/job_card_details_binding.dart';
+import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_details/job_details_binding.dart';
-import '../job_details/views/mobile/job_details_screen.dart';
+import '../job_details/views/job_details_screen.dart';
 import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 
@@ -73,6 +73,11 @@ class AppPages {
       name: _Paths.facility,
       page: FacilityView.new,
       binding: FacilityBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.jobCardDetails,
+      page: JobCardDetailsScreen.new,
+      binding: JobCardDetailsBinding(),
     ),
   ];
 }

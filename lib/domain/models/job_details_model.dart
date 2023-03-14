@@ -35,7 +35,7 @@ class JobDetailsModel {
     this.currentPtwTitle,
     this.equipmentCatList,
     this.workingAreaNameList,
-    this.associatedPermit,
+    this.associatedPermitList,
     this.lstToolsRequired,
   });
 
@@ -62,7 +62,7 @@ class JobDetailsModel {
   String? currentPtwTitle;
   List<EquipmentCatList>? equipmentCatList;
   List<WorkingAreaNameList>? workingAreaNameList;
-  List<AssociatedPermit>? associatedPermit;
+  List<AssociatedPermit>? associatedPermitList;
   dynamic lstToolsRequired;
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
@@ -107,7 +107,7 @@ class JobDetailsModel {
             ? List<WorkingAreaNameList>.from(json["associated_permit"]
                 .map((x) => WorkingAreaNameList.fromJson(x)))
             : [],
-        associatedPermit: (json["working_area_name_list"] != null)
+        associatedPermitList: (json["working_area_name_list"] != null)
             ? List<AssociatedPermit>.from(json["working_area_name_list"]
                 .map((x) => AssociatedPermit.fromJson(x)))
             : [],
@@ -139,8 +139,8 @@ class JobDetailsModel {
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
         "working_area_name_list": List<dynamic>.from(
             workingAreaNameList?.map((x) => x.toJson()) ?? []),
-        "associated_permit":
-            List<dynamic>.from(associatedPermit?.map((x) => x.toJson()) ?? []),
+        "associated_permit_list": List<dynamic>.from(
+            associatedPermitList?.map((x) => x.toJson()) ?? []),
         "lst_tools_required": lstToolsRequired,
       };
 }

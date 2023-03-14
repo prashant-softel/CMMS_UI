@@ -18,7 +18,7 @@ class JobDetailsPresenter {
       await jobDetailsUsecase.getJobDetails(
         auth: auth ?? "",
         jobId: jobId ?? 0,
-        userId: userId ?? 0,
+        userId: userId,
         isLoading: isLoading,
       );
 }

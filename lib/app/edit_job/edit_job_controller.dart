@@ -127,7 +127,7 @@ class EditJobController extends GetxController {
     }
 
     associatedPermitList?.value =
-        jobDetailsModel.value?.associatedPermit ?? <AssociatedPermit>[];
+        jobDetailsModel.value?.associatedPermitList ?? <AssociatedPermit>[];
   }
 
   Future<void> getFacilityList() async {

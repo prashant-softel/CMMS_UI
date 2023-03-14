@@ -16,7 +16,10 @@ import 'add_job_presenter.dart';
 class AddJobController extends GetxController {
   ///
   AddJobController(
-      this.addJobPresenter, this.jobListPresenter, this.homePresenter);
+    this.addJobPresenter,
+    this.jobListPresenter,
+    this.homePresenter,
+  );
   AddJobPresenter addJobPresenter;
   HomePresenter homePresenter;
   JobListPresenter jobListPresenter;

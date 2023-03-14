@@ -15,7 +15,7 @@ class JobListContentWeb extends GetView<JobListController> {
 
   @override
   Widget build(BuildContext context) {
-    //var jobId = 0;
+    int? _jobId = 0;
     return //
         Obx(
       () => //
@@ -45,31 +45,14 @@ class JobListContentWeb extends GetView<JobListController> {
                   ActionButton(
                     icon: Icons.add,
                     lable: 'Created By Me'.tr,
-                    onPress: () {
-                      //Get.to(() => AddInventory());
-                    },
+                    onPress: () {},
                     color: Color.fromARGB(255, 73, 142, 143),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.close,
                     lable: 'Assigned To Me'.tr,
-                    onPress: () async {
-                      // ByteData data = await rootBundle
-                      //     .load("assets/files/Fixed Asset Imports.xlsx");
-                      // var bytes = data.buffer
-                      //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
-                      // var excel = Excel.decodeBytes(bytes);
-
-                      // for (var table in excel.tables.keys) {
-                      //   print(table); //sheet Name
-                      //   print(excel.tables[table]?.maxCols);
-                      //   print(excel.tables[table]?.maxRows);
-                      //   for (var row in excel.tables[table]!.rows) {
-                      //     print("QWERTY $row");
-                      //   }
-                      // }
-                    },
+                    onPress: () async {},
                     color: Colors.green,
                   ),
                   Dimens.boxWidth10,
@@ -77,18 +60,7 @@ class JobListContentWeb extends GetView<JobListController> {
                     icon: Icons.upload,
                     lable: 'Add New Job',
                     onPress: () {
-                      // var file = "assets/files/Fixed Asset Imports.xlsx";
-                      // var bytes = File(file).readAsBytesSync();
-                      // var excel = Excel.decodeBytes(bytes);
-
-                      // for (var table in excel.tables.keys) {
-                      //   print(table); //sheet Name
-                      //   print(excel.tables[table]?.maxCols);
-                      //   print(excel.tables[table]?.maxRows);
-                      //   for (var row in excel.tables[table]!.rows) {
-                      //     print("QWERTY $row");
-                      //   }
-                      // }
+                      controller.addJob();
                     },
                     color: Colors.blue,
                   ),
@@ -107,11 +79,12 @@ class JobListContentWeb extends GetView<JobListController> {
                           ScrollableTableView(
                         paginationController: controller.paginationController,
                         columns: [
-                          'facilityName'.tr,
-                          'jobDate'.tr,
-                          'equipmentCat'.tr,
-                          'workingArea'.tr,
-                          'description'.tr,
+                          'id',
+                          'facilityName',
+                          'jobDate',
+                          'equipmentCat',
+                          'workingArea',
+                          'description',
                           'jobDetails',
                           'workType',
                           'raisedByName',
@@ -165,32 +138,35 @@ class JobListContentWeb extends GetView<JobListController> {
                           ...List.generate(
                             controller.jobList?.length ?? 0,
                             (index) {
-                              controller.jobId.value =
-                                  controller.jobList?[index]?.id ?? 0;
+                              var jobDetails = controller.jobList?[index];
+                              //_jobId = jobDetails?.id;
+                              controller.jobId.value = jobDetails?.id ?? 0;
                               return [
-                                '${controller.jobList?[index]?.facilityName ?? ''}',
-                                //index + 1,
-                                '${controller.jobList?[index]?.jobDate}',
-                                '${controller.jobList?[index]?.equipmentCat}',
-                                '${controller.jobList?[index]?.workingArea}',
-                                '${controller.jobList?[index]?.description}',
-                                '${controller.jobList?[index]?.jobDetails}',
-                                '${controller.jobList?[index]?.workType}',
-                                '${controller.jobList?[index]?.raisedByName}',
-                                '${controller.jobList?[index]?.breakdownTime ?? ''}',
-                                '${controller.jobList?[index]?.breakdownType}',
-                                '${controller.jobList?[index]?.permitId}',
-                                '${controller.jobList?[index]?.assignedToName}',
-                                '${controller.jobList?[index]?.status}',
+                                '${jobDetails?.id}',
+                                '${jobDetails?.facilityName ?? ''}',
+                                '${jobDetails?.jobDate}',
+                                '${jobDetails?.equipmentCat}',
+                                '${jobDetails?.workingArea}',
+                                '${jobDetails?.description}',
+                                '${jobDetails?.jobDetails}',
+                                '${jobDetails?.workType}',
+                                '${jobDetails?.raisedByName}',
+                                '${jobDetails?.breakdownTime ?? ''}',
+                                '${jobDetails?.breakdownType}',
+                                '${jobDetails?.permitId}',
+                                '${jobDetails?.assignedToName}',
+                                '${jobDetails?.status}',
                                 'Actions'
                               ];
                             },
                           ),
                         ].map((_jobList) {
                           return TableViewRow(
+                              onTap: () => {print('ZERO = ${_jobList[0]}')},
                               height: 60,
                               cells: _jobList.map((value) {
                                 return TableViewCell(
+                                  //key: ,
                                   child: (value == 'Actions')
                                       ? Wrap(
                                           children: [
@@ -199,18 +175,20 @@ class JobListContentWeb extends GetView<JobListController> {
                                               icon: Icons.visibility,
                                               label: 'View',
                                               onPress: () {
-                                                //print('value = $value');
-
                                                 controller.showJobDetails(
                                                     controller.jobId.value);
                                               },
                                             ),
-                                            // TableActionButton(
-                                            //   color: Colors.blue,
-                                            //   icon: Icons.edit,
-                                            //   label: 'Edit',
-                                            //   onPress: () {},
-                                            // ),
+                                            TableActionButton(
+                                              color: ColorsValue.purpleColor,
+                                              icon: Icons.add,
+                                              label: 'Job Card',
+                                              onPress: () {
+                                                controller.goToJobCardScreen(
+                                                  int.tryParse(_jobList[0]),
+                                                );
+                                              },
+                                            ),
                                             // TableActionButton(
                                             //   color: Colors.red,
                                             //   icon: Icons.delete,

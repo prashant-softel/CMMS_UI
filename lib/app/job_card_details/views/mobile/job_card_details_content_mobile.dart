@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JobCardContentMobile extends StatelessWidget {
-  const JobCardContentMobile({super.key});
+class JobCardDetailsContentMobile extends StatelessWidget {
+  const JobCardDetailsContentMobile({super.key});
 
   @override
   Widget build(BuildContext context) {

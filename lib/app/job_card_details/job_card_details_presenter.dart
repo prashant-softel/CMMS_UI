@@ -1,8 +1,8 @@
 import '../../domain/usecases/job_card_usecase.dart';
 
-class JobCardPresenter {
-  JobCardPresenter(this.jobUsecase);
-  JobCardUsecase jobUsecase;
+class JobCardDetailsPresenter {
+  JobCardDetailsPresenter(this.jobUsecase);
+  JobCardDetailsUsecase jobUsecase;
 
   ///
 

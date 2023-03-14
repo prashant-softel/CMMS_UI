@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../domain/models/inventory_category_model.dart';
+import '../../home/widgets/home_drawer.dart';
 import '../../theme/colors_value.dart';
 import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
@@ -30,152 +31,167 @@ class AddJobScreen extends GetView<AddJobController> {
       ),
       body:
           //
-          Obx(
-        () => //
-            Container(
-          margin: Dimens.edgeInsets10_0_10_0,
-          child: Column(children: [
-            ///
+          Row(children: [
+        (Responsive.isMobile(context) || Responsive.isTablet(context))
+            ? Dimens.box0
+            :
+            //
+            HomeDrawer(),
 
-            /// SELECT PLANT DropDown
-            Row(
-                //
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Select Plant:',
-                    ),
-                  ),
-                  Expanded(
-                    child: DropdownWidget(
-                      dropdownList: controller.facilityList,
-                      isValueSelected: controller.isFacilitySelected.value,
-                      selectedValue: controller.selectedFacility.value,
-                    ),
-                  ),
-                ]),
-            Dimens.boxHeight20,
+        /// CONTENT
+        Obx(
+          () => //
+              Expanded(
+            child: Container(
+              height: double.infinity,
+              margin: Dimens.edgeInsets10_0_10_0,
+              child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  //
+                  children: [
+                    /// SELECT PLANT DropDown
+                    Row(
+                        //
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Select Plant:',
+                            ),
+                          ),
+                          Expanded(
+                            child: DropdownWidget(
+                              dropdownList: controller.facilityList,
+                              isValueSelected:
+                                  controller.isFacilitySelected.value,
+                              selectedValue: controller.selectedFacility.value,
+                            ),
+                          ),
+                        ]),
+                    Dimens.boxHeight20,
 
-            /// CARD
-            Container(
-              child: Expanded(
-                child: Card(
-                  color: Colors.lightBlue.shade50,
-                  elevation: 20,
-                  shadowColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Padding(
-                      padding: Dimens.edgeInsets10,
-                      child: (() {
-                        if (Responsive.isMobile(context)) {
-                          return SingleChildScrollView(
-                            child: Column(
-                                ////
-                                children: [
-                                  ///
-                                  /// SELECT BLOCK DropDown
-                                  _buildBlockDropdown(),
+                    /// CARD
+                    Container(
+                      child: Expanded(
+                        child: Card(
+                          color: Colors.lightBlue.shade50,
+                          elevation: 20,
+                          shadowColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                              padding: Dimens.edgeInsets10,
+                              child: (() {
+                                if (Responsive.isMobile(context)) {
+                                  return SingleChildScrollView(
+                                    child: Column(
+                                        ////
+                                        children: [
+                                          ///
+                                          /// SELECT BLOCK DropDown
+                                          _buildBlockDropdown(),
 
-                                  ///MULTISELECT CONTROL Equipment Categories
-                                  _buildEquipmentCategoriesDropdown(),
+                                          ///MULTISELECT CONTROL Equipment Categories
+                                          _buildEquipmentCategoriesDropdown(),
 
-                                  /// WORK AREA (= EQUIPMENTS) DropDown
-                                  _buildWorkAreaDropdown(),
+                                          /// WORK AREA (= EQUIPMENTS) DropDown
+                                          _buildWorkAreaDropdown(),
 
-                                  /// WORK TYPE  DropDown
-                                  _buildWorkTypeDropdown(),
+                                          /// WORK TYPE  DropDown
+                                          _buildWorkTypeDropdown(),
 
-                                  /// TOOLS REQUIRED DropDown
-                                  _buildToolsRequiredDropdown(),
+                                          /// TOOLS REQUIRED DropDown
+                                          _buildToolsRequiredDropdown(),
 
-                                  /// ASSIGNED TO DropDown
-                                  _buildAssignedToDropdown(),
+                                          /// ASSIGNED TO DropDown
+                                          _buildAssignedToDropdown(),
 
-                                  /// JOB TITLE
-                                  _buildJobTitleField(),
+                                          /// JOB TITLE
+                                          _buildJobTitleField(),
 
-                                  /// JOB DESCRIPTION
-                                  _buildJobDescriptionField(),
+                                          /// JOB DESCRIPTION
+                                          _buildJobDescriptionField(),
 
-                                  /// BREAKDOWN TIME
-                                  _buildBreakDownTimeField(context),
+                                          /// BREAKDOWN TIME
+                                          _buildBreakDownTimeField(context),
 
-                                  /// SAVE BUTTON
-                                  _buildSaveJobButton(saveButtonStyle),
+                                          /// SAVE BUTTON
+                                          _buildSaveJobButton(saveButtonStyle),
 
-                                  ///
-                                ]),
-                          );
-                        } //
-                        else if (Responsive.isDesktop(context)) {
-                          return Column(children: [
-                            Row(//
-                                children: [
-                              Expanded(
-                                child: Container(
-                                  //height: 1100,
-                                  child: Column(
-                                      //
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        /// SELECT BLOCK DropDown
-                                        _buildBlockDropdown(),
+                                          ///
+                                        ]),
+                                  );
+                                } //
+                                else if (Responsive.isDesktop(context)) {
+                                  return Column(children: [
+                                    Row(//
+                                        children: [
+                                      Expanded(
+                                        child: Container(
+                                          //height: 1100,
+                                          child: Column(
+                                              //
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                /// SELECT BLOCK DropDown
+                                                _buildBlockDropdown(),
 
-                                        /// WORK AREA (= EQUIPMENTS) DropDown
-                                        _buildWorkAreaDropdown(),
+                                                /// WORK AREA (= EQUIPMENTS) DropDown
+                                                _buildWorkAreaDropdown(),
 
-                                        /// TOOLS REQUIRED DropDown
-                                        _buildToolsRequiredDropdown(),
+                                                /// TOOLS REQUIRED DropDown
+                                                _buildToolsRequiredDropdown(),
 
-                                        /// JOB TITLE
-                                        _buildJobTitleField(),
+                                                /// JOB TITLE
+                                                _buildJobTitleField(),
 
-                                        /// BREAKDOWN TIME
-                                        _buildBreakDownTimeField(context),
-                                      ]),
-                                ),
+                                                /// BREAKDOWN TIME
+                                                _buildBreakDownTimeField(
+                                                    context),
+                                              ]),
+                                        ),
+                                      ),
+                                      Dimens.boxWidth30,
+                                      Expanded(
+                                        child: Container(
+                                          //height: 1100,
+                                          child: Column(
+                                              //
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                ///MULTISELECT CONTROL Equipment Categories
+                                                _buildEquipmentCategoriesDropdown(),
+
+                                                /// WORK TYPE  DropDown
+                                                _buildWorkTypeDropdown(),
+
+                                                /// ASSIGNED TO DropDown
+                                                _buildAssignedToDropdown(),
+
+                                                /// JOB DESCRIPTION
+                                                _buildJobDescriptionField(),
+                                              ]),
+                                        ),
+                                      ),
+                                    ]),
+
+                                    /// SAVE BUTTON
+                                    _buildSaveJobButton(saveButtonStyle),
+                                  ]);
+                                }
+                              }())
+                              //
                               ),
-                              Dimens.boxWidth30,
-                              Expanded(
-                                child: Container(
-                                  //height: 1100,
-                                  child: Column(
-                                      //
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        ///MULTISELECT CONTROL Equipment Categories
-                                        _buildEquipmentCategoriesDropdown(),
-
-                                        /// WORK TYPE  DropDown
-                                        _buildWorkTypeDropdown(),
-
-                                        /// ASSIGNED TO DropDown
-                                        _buildAssignedToDropdown(),
-
-                                        /// JOB DESCRIPTION
-                                        _buildJobDescriptionField(),
-                                      ]),
-                                ),
-                              ),
-                            ]),
-
-                            /// SAVE BUTTON
-                            _buildSaveJobButton(saveButtonStyle),
-                          ]);
-                        }
-                      }())
-                      //
+                        ),
                       ),
-                ),
-              ),
+                    ),
+                  ]),
             ),
-          ]),
+          ),
         ),
-      ),
+      ]),
     );
 
     ///build ends

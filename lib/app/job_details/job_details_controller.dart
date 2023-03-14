@@ -48,7 +48,8 @@ class JobDetailsController extends GetxController {
       update(["jobDetailsModel"]);
     }
 
-    associatedPermitList?.value = jobDetailsModel.value?.associatedPermit ?? [];
+    associatedPermitList?.value =
+        jobDetailsModel.value?.associatedPermitList ?? [];
   }
 
   void editJob() {
