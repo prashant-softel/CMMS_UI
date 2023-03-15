@@ -73,14 +73,17 @@ class ConnectHelper {
         },
       );
 
-  Future<ResponseModel> generateToken() async {
+  Future<ResponseModel> generateToken({
+    auth,
+    bool? isLoading,
+  }) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
     try {
       response = await apiWrapper.makeRequest(
         'User/Authenticate',
         Request.postMultiparts,
-        {'user_name': 'sujit@softeltech.in', 'password': 'Sujit123'},
-        true,
+        // {'user_name': 'sujit@softeltech.in', 'password': 'Sujit123'},
+        auth, true,
         {
           'Content-Type': 'application/json',
           "Access-Control-Allow-Origin":
@@ -311,6 +314,25 @@ class ConnectHelper {
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getUserAccessList({
+    required String auth,
+    bool? isLoading,
+    String? userId,
+  }) async {
+    userId = userId;
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetUserAccess?user_id=$userId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
         'Authorization': 'Bearer $auth',
       },
     );

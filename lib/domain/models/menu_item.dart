@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MenuItem {
   final String title;
-  final IconData? icon;
+  final String? icon;
 
   MenuItem({
     required this.title,

@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 
+import '../models/facility_model.dart';
+
 class HomeUsecase {
   final Repository _repository;
 
@@ -42,4 +44,7 @@ class HomeUsecase {
       facilityId: facilityId,
     );
   }
+
+  Future<List<FacilityModel?>?> getFacilityList() async =>
+      await _repository.getFacilityList(true);
 }

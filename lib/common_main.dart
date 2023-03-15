@@ -5,10 +5,13 @@ import 'dart:developer';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/preventive_maintanance/preventive_controller.dart';
+import 'package:cmms/app/preventive_maintanance/preventive_presenter.dart';
 import 'package:cmms/app_config.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/usecases/preventive_usecase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -141,17 +144,17 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
-  Get.put(
-    HomeController(
-      Get.put(
-        HomePresenter(
-          Get.put(HomeUsecase(repository)),
-        ),
-        permanent: true,
-      ),
-    ),
-    //permanent: true,
-  );
+  // Get.put(
+  //   HomeController(
+  //     Get.put(
+  //       HomePresenter(
+  //         Get.put(HomeUsecase(repository)),
+  //       ),
+  //       permanent: true,
+  //     ),
+  //   ),
+  //   //permanent: true,
+  // );
 
   Get.lazyPut(
     () => JobListController(
@@ -164,7 +167,17 @@ Future<void> initServices() async {
     ),
     //permanent: true,
   );
-
+  Get.lazyPut(
+    () => PreventiveController(
+      Get.put(
+        PreventivePresenter(
+          Get.put(PreventiveUsecase(repository)),
+        ),
+        permanent: true,
+      ),
+    ),
+    //permanent: true,
+  );
   //);
 
   /// Services

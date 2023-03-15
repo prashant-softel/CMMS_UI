@@ -13,9 +13,12 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
+import '../../app/navigators/app_pages.dart';
 import '../models/state.dart';
+import '../models/user_access_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -176,14 +179,26 @@ class Repository {
     }
   }
 
-  Future<void> generateToken() async {
+  Future<void> generateToken({
+    auth,
+    bool? isLoading,
+  }) async {
     try {
-      final res = await _dataRepository.generateToken();
+      final res =
+          await _dataRepository.generateToken(auth: auth, isLoading: isLoading);
       print(res.data.toString());
 
       if (!res.hasError) {
         final decodeRes = jsonDecode(res.data);
         saveSecureValue(LocalKeys.authToken, decodeRes['token']);
+        String userId = decodeRes['user_detail']['id'].toString();
+        String token = decodeRes['token'];
+        await getUserAccessList(
+            userId: userId, auth: token, isLoading: isLoading ?? false);
+
+        // Get.offAllNamed(
+        //   Routes.home,
+        // );
       }
     } catch (error) {
       await _deviceRepository.generateToken();
@@ -546,5 +561,33 @@ class Repository {
     }
   }
 
-  ///
+  Future<AccessListModel?> getUserAccessList(
+      {required String auth,
+      required String userId,
+      required bool isLoading}) async {
+    try {
+      final res = await _dataRepository.getUserAccessList(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final userAccessModelList = jsonDecode(res.data);
+        print(res.data);
+        var userAccess = AccessListModel.fromJson(userAccessModelList);
+        Get.offAndToNamed(Routes.home, arguments: userAccess.user_name);
+        return null;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return null;
+    }
+
+    ///
+  }
 }
