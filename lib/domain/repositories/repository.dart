@@ -120,6 +120,18 @@ class Repository {
     }
   }
 
+  Future<String> getUserAccessData(String key) async {
+    var _value = '';
+    try {
+      _value = await _deviceRepository.getUserAccessData(key);
+
+      return _value;
+    } catch (_) {
+      _value = await _dataRepository.getUserAccessData(key);
+      return _value;
+    }
+  }
+
   /// Save the value to the string.
   ///
   /// [key] : The key to which [value] will be saved.
@@ -132,6 +144,20 @@ class Repository {
       );
     } catch (_) {
       _dataRepository.saveValueSecurely(
+        key,
+        value,
+      );
+    }
+  }
+
+  void saveUserAcessData(String key, String value) async {
+    try {
+      await _deviceRepository.saveUserAcessData(
+        key,
+        value,
+      );
+    } catch (_) {
+      _dataRepository.saveUserAcessData(
         key,
         value,
       );
@@ -214,6 +240,7 @@ class Repository {
   }) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
+
       log(auth);
       final res = await _dataRepository.getInventoryList(
         facilityId: facilityId,
@@ -309,12 +336,15 @@ class Repository {
   Future<List<JobModel?>?> getJobList(
     String auth,
     int? facilityId,
-    int? userId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
-      log(auth);
+      final userAcessData = await getUserAccessData(LocalKeys.userAccess);
+      final userAccessModelList = jsonDecode(userAcessData);
+      var userAccess = AccessListModel.fromJson(userAccessModelList);
+      int userId = userAccess.user_id ?? 0;
+      print({"userdatatat", userAccess.user_id});
       final res = await _dataRepository.getJobList(
         auth: auth,
         facilityId: facilityId ?? 0,
@@ -575,8 +605,12 @@ class Repository {
       if (!res.hasError) {
         final userAccessModelList = jsonDecode(res.data);
         print(res.data);
-        var userAccess = AccessListModel.fromJson(userAccessModelList);
-        Get.offAndToNamed(Routes.home, arguments: userAccess.user_name);
+        //  var userAccess = AccessListModel.fromJson(userAccessModelList);
+        saveUserAcessData(LocalKeys.userAccess, res.data);
+
+        Get.offAndToNamed(
+          Routes.home,
+        );
         return null;
       } else {
         Utility.showDialog('Something Went Wrong!!');

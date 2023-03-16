@@ -2,6 +2,7 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
@@ -17,6 +18,7 @@ import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
+import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/preventive_binding.dart';
 import '../preventive_maintanance/view/preventive_screen.dart';
 
@@ -97,6 +99,11 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.create_checkList,
       page: CreatePriventiveListScreen.new,
+      // binding: CreatePriventiveListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.preventive_List,
+      page: PriventiveListScreen.new,
       // binding: CreatePriventiveListBinding(),
     ),
   ];

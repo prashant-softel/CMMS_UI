@@ -1,26 +1,12 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-class HeaderWidget extends StatefulWidget {
-  String? userName;
-  RxList<FacilityModel?>? facilityList;
-  bool isFacilitySelected;
-  String? selectedFacility;
-  HeaderWidget({
-    Key? key,
-    this.userName,
-    this.facilityList,
-    this.isFacilitySelected = false,
-    this.selectedFacility,
-  }) : super(key: key);
-  @override
-  _HeaderWidgetState createState() => _HeaderWidgetState();
-}
-
-class _HeaderWidgetState extends State<HeaderWidget> {
+class HeaderWidget extends GetView<HomeController> {
+  const HeaderWidget({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,30 +26,54 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                 // height: 120,
               ),
             ),
-          // Obx(
-          //   () => DropdownButtonHideUnderline(
-          //     child: DropdownButton(
-          //       //isExpanded: true,
-          //       value: widget.selectedFacility,
-          //       icon: const Icon(Icons.arrow_downward),
-          //       elevation: 9,
-          //       style: const TextStyle(color: Colors.black),
-          //       onChanged: (String? selectedValue) {
-          //         widget..isFacilitySelected = true;
-          //         widget.selectedFacility = selectedValue ?? '';
-          //         //controller.switchFacility(selectedValue);
-          //       },
-          //       items: widget.facilityList
-          //           ?.map<DropdownMenuItem<String>>((facility) {
-          //         return DropdownMenuItem<String>(
-          //           value: facility?.name ?? '',
-          //           child: Text(facility?.name ?? ''),
-          //         );
-          //       }).toList(),
-          //     ),
-          //   ),
-          // ),
-
+          Spacer(),
+          if (Responsive.isDesktop(context)) Text("Select Plant:"),
+          if (Responsive.isDesktop(context))
+            SizedBox(
+              width: 10,
+            ),
+          if (Responsive.isDesktop(context))
+            Obx(
+              () => Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      // isExpanded: true,
+                      value: controller.selectedFacility.value,
+                      icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                      elevation: 9,
+                      style: const TextStyle(color: Colors.black),
+                      onChanged: (String? selectedValue) {
+                        controller.isFacilitySelected.value = true;
+                        controller.selectedFacility.value = selectedValue ?? '';
+                      },
+                      items: controller.facilityList
+                          .map<DropdownMenuItem<String>>((facility) {
+                        return DropdownMenuItem<String>(
+                          value: facility?.name ?? '',
+                          child: Text(facility?.name ?? ''),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           Spacer(),
           if (Responsive.isDesktop(context))
             Icon(Icons.notifications_active, color: ColorsValue.greyLightColor),
@@ -86,12 +96,17 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   if (Responsive.isDesktop(context))
                     SizedBox(width: 5), // space between icon and text
                   if (Responsive.isDesktop(context))
-                    Text(
-                      '${widget.userName ?? "Sujit Kumar"}',
-                      style: TextStyle(
-                        color: Colors.black, // text color
-                        fontSize: 12, // text size
-                        fontWeight: FontWeight.w500, // text weight
+                    GestureDetector(
+                      onTap: () {
+                        print("${constUserAccessModel.value.user_name ?? ""}");
+                      },
+                      child: Text(
+                        "${constUserAccessModel.value.user_name ?? "ddffff"}",
+                        style: TextStyle(
+                          color: Colors.black, // text color
+                          fontSize: 12, // text size
+                          fontWeight: FontWeight.w500, // text weight
+                        ),
                       ),
                     ),
                   Icon(Icons.keyboard_arrow_down_outlined,

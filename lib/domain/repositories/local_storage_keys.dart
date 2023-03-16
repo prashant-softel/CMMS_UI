@@ -5,6 +5,8 @@ abstract class LocalKeys {
   static const userId = 'user-id';
   static const guestToken = 'guest-token';
   static const authToken = 'auth-token';
+  static const userAccess = 'user-access';
+
   static const refreshToken = 'refresh-token';
   static const userType = 'userType';
   static const userLoggerIn = 'userLoggerIn';

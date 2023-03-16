@@ -162,7 +162,6 @@ class ConnectHelper {
     int? userId,
   }) async {
     // facilityId = 45;
-    userId = 35;
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobList?facility_id=$facilityId&userId=$userId',
       Request.get,

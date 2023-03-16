@@ -19,7 +19,6 @@ class JobListPresenter {
       await jobUsecase.getJobList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
-        userId: userId ?? 0,
         isLoading: isLoading ?? false,
       );
 }

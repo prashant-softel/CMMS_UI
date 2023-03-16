@@ -43,9 +43,20 @@ class DataRepository extends DomainRepository {
     throw UnimplementedError();
   }
 
+  @override
+  Future<String> getUserAccessData(String key) async {
+    //return generateToken();
+    throw UnimplementedError();
+  }
+
   /// Save data in secure storage
   @override
   void saveValueSecurely(String key, String value) {
+    throw UnimplementedError();
+  }
+
+  @override
+  void saveUserAcessData(String key, String value) {
     throw UnimplementedError();
   }
 

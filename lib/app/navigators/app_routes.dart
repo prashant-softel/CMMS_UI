@@ -15,6 +15,7 @@ abstract class Routes {
   static const login = _Paths.login;
   static const preventive = _Paths.preventive;
   static const create_checkList = _Paths.create_checkList;
+  static const preventive_list = _Paths.preventive_List;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const login = '/login-screen';
   static const preventive = '/preventive-screen';
   static const create_checkList = '/create_preventive_checklist-screen';
+  static const preventive_List = '/preventive-list-screen';
 }
