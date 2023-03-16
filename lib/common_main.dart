@@ -144,17 +144,17 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
-  // Get.put(
-  //   HomeController(
-  //     Get.put(
-  //       HomePresenter(
-  //         Get.put(HomeUsecase(repository)),
-  //       ),
-  //       permanent: true,
-  //     ),
-  //   ),
-  //   //permanent: true,
-  // );
+  Get.lazyPut(
+    () => HomeController(
+      Get.put(
+        HomePresenter(
+          Get.put(HomeUsecase(repository)),
+        ),
+        permanent: true,
+      ),
+    ),
+    //permanent: true,
+  );
 
   Get.lazyPut(
     () => JobListController(
