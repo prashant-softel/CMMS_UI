@@ -3,6 +3,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/facility_model.dart';
 import '../../domain/models/menu_item.dart';
 
 class HomeController extends GetxController {
@@ -26,6 +27,11 @@ class HomeController extends GetxController {
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
   String categoryIds = '';
+  String username = '';
+
+  Rx<String> selectedFacility = ''.obs;
+  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
+  Rx<bool> isFacilitySelected = false.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -35,20 +41,56 @@ class HomeController extends GetxController {
   Rx<int> selectedIndex = 0.obs;
   RxList<MenuItem> menuItems = [
     MenuItem(
-      title: "Home",
-      icon: Icons.home,
+      title: "DashBoard",
+      icon: "assets/files/home.png",
     ),
     MenuItem(
       title: "Inventory",
-      icon: Icons.wysiwyg,
+      icon: "assets/files/warranty.png",
     ),
     MenuItem(
       title: "Job List",
-      icon: Icons.warehouse,
+      icon: "assets/files/preventive.png",
     ),
     MenuItem(
-      title: "Warranty",
-      icon: Icons.group,
+      title: "Warranty claim",
+      icon: "assets/files/warranty.png",
+    ),
+    MenuItem(
+      title: "Preventive",
+      icon: "assets/files/preventive.png",
+    ),
+    MenuItem(
+      title: "Corrective Maint",
+      icon: "assets/files/maint.png",
+    ),
+    MenuItem(
+      title: "Module Cleaning",
+      icon: "assets/files/maintenance.png",
+    ),
+    MenuItem(
+      title: "Vegetation Control",
+      icon: "assets/files/preventive.png",
+    ),
+    MenuItem(
+      title: "Incident Report",
+      icon: "assets/files/reportins.png",
+    ),
+    MenuItem(
+      title: "Calibration",
+      icon: "assets/files/preventive.png",
+    ),
+    MenuItem(
+      title: "Misc",
+      icon: "assets/files/misc.png",
+    ),
+    MenuItem(
+      title: "Settings",
+      icon: "assets/files/setting.png",
+    ),
+    MenuItem(
+      title: "Log Out",
+      icon: "assets/files/dashboard.png",
     ),
   ].obs;
 
@@ -56,12 +98,26 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    await homePresenter.generateToken();
+    //await homePresenter.generateToken();
+
+    username = Get.arguments;
+    // getFacilityList();
 
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
     super.onInit();
+  }
+
+  Future<void> getFacilityList() async {
+    final _facilityList = await homePresenter.getFacilityList();
+
+    if (_facilityList != null) {
+      for (var facility in _facilityList) {
+        facilityList.add(facility);
+      }
+      selectedFacility.value = facilityList[0]?.name ?? '';
+    }
   }
 
   void getInventoryList() async {

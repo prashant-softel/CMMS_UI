@@ -1,4 +1,6 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/preventive_maintanance/view/preventive_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -8,14 +10,68 @@ import '../job_list/views/job_list_screen.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
+  final controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return //
         Scaffold(
-      appBar: AppBar(
-        title: Text('${'hello'.tr}'),
-      ),
+      appBar: Responsive.isDesktop(context)
+          ? AppBar(
+              title:
+                  // Text("${controller.username}"),
+                  HeaderWidget(
+                userName: controller.username,
+                // facilityList: controller.facilityList,
+                // isFacilitySelected: controller.isFacilitySelected.value,
+                // selectedFacility: controller.selectedFacility.value
+              ),
+              elevation: 0,
+              toolbarHeight: 100,
+            )
+          : AppBar(
+              title:
+                  // Obx(
+                  //   () => DropdownButtonHideUnderline(
+                  //     child: DropdownButton(
+                  //       isExpanded: true,
+                  //       value: controller.selectedFacility.value,
+                  //       icon: const Icon(Icons.arrow_downward),
+                  //       elevation: 9,
+                  //       style: const TextStyle(color: Colors.black),
+                  //       onChanged: (String? selectedValue) {
+                  //         // controller.updateDropdownValue(selectedValue ?? "");
+                  //         controller.isFacilitySelected.value = true;
+                  //         controller.selectedFacility.value = selectedValue ?? '';
+                  //         print({
+                  //           "selected value",
+                  //           controller.selectedFacility.value
+                  //         });
+                  //         // controller.switchFacility(selectedValue);
+                  //       },
+                  //       items: controller.facilityList
+                  //           .map<DropdownMenuItem<String>>((facility) {
+                  //         return DropdownMenuItem<String>(
+                  //           value: facility?.name ?? '',
+                  //           child: Text(facility?.name ?? ''),
+                  //         );
+                  //       }).toList(),
+                  //     ),
+                  //   ),
+                  // ),
+
+                  HeaderWidget(
+                userName: controller.username,
+                // facilityList: controller.facilityList,
+                // isFacilitySelected: controller.isFacilitySelected.value,
+                // selectedFacility: controller.selectedFacility.value
+              ),
+              elevation: 0,
+            ),
+
+      // AppBar(
+      //   title: Text('${'hello'.tr}'),
+      // ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -52,8 +108,9 @@ class HomeScreen extends GetView<HomeController> {
                           return JobListScreen();
 
                         case 3:
-                          //InventoryModule();
-                          break;
+                          return InventoryListScreen();
+                        case 4:
+                          return PreventiveScreen();
 
                         default:
                           return InventoryListScreen();
