@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,25 +52,19 @@ class HeaderWidget extends GetView<HomeController> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 4),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      // isExpanded: true,
-                      value: controller.selectedFacility.value,
-                      icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                      elevation: 9,
-                      style: const TextStyle(color: Colors.black),
-                      onChanged: (String? selectedValue) {
-                        controller.isFacilitySelected.value = true;
-                        controller.selectedFacility.value = selectedValue ?? '';
-                      },
-                      items: controller.facilityList
-                          .map<DropdownMenuItem<String>>((facility) {
-                        return DropdownMenuItem<String>(
-                          value: facility?.name ?? '',
-                          child: Text(facility?.name ?? ''),
-                        );
-                      }).toList(),
-                    ),
+                  child: CustomDropDownButton(
+                    value: controller.selectedFacility.value,
+                    onChange: (String? selectedValue) {
+                      controller.isFacilitySelected.value = true;
+                      controller.selectedFacility.value = selectedValue ?? '';
+                    },
+                    item: controller.facilityList
+                        .map<DropdownMenuItem<String>>((facility) {
+                      return DropdownMenuItem<String>(
+                        value: facility?.name ?? '',
+                        child: Text(facility?.name ?? ''),
+                      );
+                    }).toList(),
                   ),
                 ),
               ),
