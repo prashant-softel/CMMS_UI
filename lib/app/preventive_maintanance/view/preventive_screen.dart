@@ -20,58 +20,39 @@ class PreventiveScreen extends GetView<PreventiveController> {
     return Scaffold(
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         if (Responsive.isMobile(context))
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Select Plant :",
-                    style: const TextStyle(
-                        color: Colors.black87, fontWeight: FontWeight.w400),
+          Obx(
+            () => Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Card(
+                  shadowColor: ColorsValue.greyColor,
+                  elevation: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        // isExpanded: true,
+                        value: controller.selectedFacility.value,
+                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                        elevation: 9,
+                        style: const TextStyle(color: Colors.black),
+                        onChanged: (String? selectedValue) {
+                          controller.isFacilitySelected.value = true;
+                          controller.selectedFacility.value =
+                              selectedValue ?? '';
+                        },
+                        items: controller.facilityList
+                            .map<DropdownMenuItem<String>>((facility) {
+                          return DropdownMenuItem<String>(
+                            value: facility?.name ?? '',
+                            child: Text(facility?.name ?? ''),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  // SelectPlantDropdownWidget(),
-
-                  // Card(
-                  //   shadowColor: ColorsValue.greyColor,
-                  //   elevation: 1,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(2.0),
-                  //     child: DropdownButtonHideUnderline(
-                  //       child: DropdownButton(
-                  //         // isExpanded: true,
-                  //         value: controller.selectedFacility.value,
-                  //         icon:
-                  //             const Icon(Icons.keyboard_arrow_down_outlined),
-                  //         elevation: 9,
-                  //         style: const TextStyle(color: Colors.black),
-                  //         onChanged: (String? selectedValue) {
-                  //           // controller.updateDropdownValue(selectedValue ?? "");
-                  //           controller.isFacilitySelected.value = true;
-                  //           controller.selectedFacility.value =
-                  //               selectedValue ?? '';
-                  //           print({
-                  //             "selected value",
-                  //             controller.selectedFacility.value
-                  //           });
-                  //           // controller.switchFacility(selectedValue);
-                  //         },
-                  //         items: controller.facilityList
-                  //             .map<DropdownMenuItem<String>>((facility) {
-                  //           return DropdownMenuItem<String>(
-                  //             value: facility?.name ?? '',
-                  //             child: Text(facility?.name ?? ''),
-                  //           );
-                  //         }).toList(),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+                ),
               ),
             ),
           ),
@@ -100,10 +81,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
             _priventiveList(
                 tittle: "Create CheckList Number",
                 ontap: () {
-                  print("hii");
-                  Get.toNamed(
-                    Routes.create_checkList,
-                  );
+                  controller.createChecklist();
                 }),
             _priventiveList(tittle: "Check Point Creator"),
             _priventiveList(tittle: "CheckList Mapping"),

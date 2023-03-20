@@ -75,9 +75,31 @@ class DeviceRepository extends DomainRepository {
     }
   }
 
+  @override
+  Future<String> getUserAccessData(String key) async {
+    try {
+      var value = await _flutterSecureStorage.read(key: key);
+      if (value == null || value.isEmpty) {
+        value = '';
+      }
+      return value;
+    } catch (error) {
+      return '';
+    }
+  }
+
   /// Save data in secure storage
   @override
   Future<void> saveValueSecurely(String key, String value) async {
+    try {
+      await _flutterSecureStorage.write(key: key, value: value);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Future<void> saveUserAcessData(String key, String value) async {
     try {
       await _flutterSecureStorage.write(key: key, value: value);
     } catch (e) {

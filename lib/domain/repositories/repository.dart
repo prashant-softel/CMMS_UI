@@ -9,6 +9,7 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -120,6 +121,18 @@ class Repository {
     }
   }
 
+  Future<String> getUserAccessData(String key) async {
+    var _value = '';
+    try {
+      _value = await _deviceRepository.getUserAccessData(key);
+
+      return _value;
+    } catch (_) {
+      _value = await _dataRepository.getUserAccessData(key);
+      return _value;
+    }
+  }
+
   /// Save the value to the string.
   ///
   /// [key] : The key to which [value] will be saved.
@@ -132,6 +145,20 @@ class Repository {
       );
     } catch (_) {
       _dataRepository.saveValueSecurely(
+        key,
+        value,
+      );
+    }
+  }
+
+  void saveUserAcessData(String key, String value) async {
+    try {
+      await _deviceRepository.saveUserAcessData(
+        key,
+        value,
+      );
+    } catch (_) {
+      _dataRepository.saveUserAcessData(
         key,
         value,
       );
@@ -214,6 +241,7 @@ class Repository {
   }) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
+
       log(auth);
       final res = await _dataRepository.getInventoryList(
         facilityId: facilityId,
@@ -309,12 +337,15 @@ class Repository {
   Future<List<JobModel?>?> getJobList(
     String auth,
     int? facilityId,
-    int? userId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
-      log(auth);
+      final userAcessData = await getUserAccessData(LocalKeys.userAccess);
+      final userAccessModelList = jsonDecode(userAcessData);
+      var userAccess = AccessListModel.fromJson(userAccessModelList);
+      int userId = userAccess.user_id ?? 0;
+      print({"userdatatat", userAccess.user_id});
       final res = await _dataRepository.getJobList(
         auth: auth,
         facilityId: facilityId ?? 0,
@@ -575,8 +606,12 @@ class Repository {
       if (!res.hasError) {
         final userAccessModelList = jsonDecode(res.data);
         print(res.data);
-        var userAccess = AccessListModel.fromJson(userAccessModelList);
-        Get.offAndToNamed(Routes.home, arguments: userAccess.user_name);
+        //  var userAccess = AccessListModel.fromJson(userAccessModelList);
+        saveUserAcessData(LocalKeys.userAccess, res.data);
+
+        Get.offAndToNamed(
+          Routes.home,
+        );
         return null;
       } else {
         Utility.showDialog('Something Went Wrong!!');
@@ -587,7 +622,60 @@ class Repository {
 
       return null;
     }
+  }
 
-    ///
+  Future<void> createCheckList({
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createCheckList(
+          auth: auth, isLoading: isLoading);
+      print(res.data.toString());
+
+      if (!res.hasError) {
+        print("successsss");
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPreventiveCheckList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+
+        final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
+            jsonPreventiveCheckListModelModels
+                .map<PreventiveCheckListModel>((m) =>
+                    PreventiveCheckListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        print({"res.data", _PreventiveCheckListModelList});
+
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
   }
 }

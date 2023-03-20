@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/menu_item.dart';
+import '../../domain/models/user_access_model.dart';
 
 class HomeController extends GetxController {
   HomeController(this.homePresenter);
@@ -27,9 +31,10 @@ class HomeController extends GetxController {
   var selectedEquipment = EquipmentModel();
   int facilityId = 45;
   String categoryIds = '';
-  String username = '';
 
   Rx<String> selectedFacility = ''.obs;
+  String username = '';
+
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = false.obs;
   PaginationController paginationController = PaginationController(
@@ -98,11 +103,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    //await homePresenter.generateToken();
-
-    username = Get.arguments;
-    // getFacilityList();
-
+    getFacilityList();
+    getuserAccessData();
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
@@ -117,6 +119,18 @@ class HomeController extends GetxController {
         facilityList.add(facility);
       }
       selectedFacility.value = facilityList[0]?.name ?? '';
+    }
+  }
+
+  Future<void> getuserAccessData() async {
+    final _userAccessList = await homePresenter.getUserAccessList();
+
+    if (_userAccessList != null) {
+      final userAccessModelList = jsonDecode(_userAccessList);
+      var userAccess = AccessListModel.fromJson(userAccessModelList);
+      varUserAccessModel.value = userAccess;
+      username = userAccess.user_name ?? "";
+      // userName = userAccess.user_name ?? "";
     }
   }
 
