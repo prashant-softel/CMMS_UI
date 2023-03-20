@@ -6,8 +6,8 @@ import '../../theme/colors_value.dart';
 import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
 import '../../utils/responsive.dart';
+import '../../widgets/dropdown.dart';
 import '../edit_job_controller.dart';
-import 'widgets/dropdown.dart';
 
 class EditJobScreen extends GetView<EditJobController> {
   EditJobScreen({Key? key}) : super(key: key);
@@ -51,6 +51,7 @@ class EditJobScreen extends GetView<EditJobController> {
                       dropdownList: controller.facilityList,
                       isValueSelected: controller.isFacilitySelected.value,
                       selectedValue: controller.selectedFacilityName.value,
+                      onValueChanged: controller.onValueChanged,
                     ),
                   ),
                 ]),
@@ -296,6 +297,7 @@ class EditJobScreen extends GetView<EditJobController> {
         dropdownList: controller.assignedToList,
         isValueSelected: controller.isAssignedToSelected.value,
         selectedValue: controller.selectedAssignedTo.value,
+        onValueChanged: controller.onValueChanged,
       ),
       Dimens.boxHeight20,
     ]);
@@ -594,6 +596,7 @@ class EditJobScreen extends GetView<EditJobController> {
       DropdownWidget(
         dropdownList: controller.toolsRequiredToWorkTypeList,
         selectedValue: controller.selectedToolRequiredToWorkType.value,
+        onValueChanged: controller.onValueChanged,
       ),
       Dimens.boxHeight20,
     ]);
@@ -691,6 +694,7 @@ class EditJobScreen extends GetView<EditJobController> {
         dropdownList: controller.blockList,
         isValueSelected: controller.isBlockSelected.value,
         selectedValue: controller.selectedBlock.value,
+        onValueChanged: controller.onValueChanged,
       ),
       Dimens.boxHeight20,
     ]);

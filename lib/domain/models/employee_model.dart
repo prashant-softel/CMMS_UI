@@ -26,7 +26,7 @@ class EmployeeModel {
   });
 
   int? id;
-  int? loginId;
+  String? loginId;
   String? name;
   DateTime? birthdate;
   String? gender;

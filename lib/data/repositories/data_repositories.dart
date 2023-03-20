@@ -192,9 +192,9 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.getAssignedToList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        facilityId: facilityId,
         userId: userId,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
 
   Future<ResponseModel> getToolsRequiredToWorkTypeList({

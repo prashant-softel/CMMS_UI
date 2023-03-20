@@ -1,10 +1,9 @@
-import 'package:cmms/app/controllers/file_upload_controller.dart';
-import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:get/get.dart';
 
-import '../../domain/models/block_model.dart';
 import '../../domain/models/job_details_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
+import '../controllers/dropzone_controller.dart';
 import '../job_details/job_details_presenter.dart';
 import 'job_card_details_presenter.dart';
 
@@ -17,13 +16,17 @@ class JobCardDetailsController extends GetxController {
 
   ///
   late JobDetailsPresenter jobDetailsPresenter;
+  //late AddJobPresenter addJobPresenter;
+  // late JobListPresenter jobListPresenter;
+  // late HomePresenter homePresenter;
+  // late AddJobController addJobController;
 
   ///
   RxList<JobDetailsModel?> jobList = <JobDetailsModel?>[].obs;
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  RxList<BlockModel?> blockList = <BlockModel>[].obs;
-  Rx<String> selectedFacility = ''.obs;
-  Rx<bool> isFacilitySelected = false.obs;
+
+  RxList<EmployeeModel?> employeeList = <EmployeeModel>[].obs;
+  Rx<String> selectedEmployee = ''.obs;
+  Rx<bool> isEmployeeSelected = true.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   List<String> equipmentCategoryNames = [];
   List<String> toolsRequiredNames = [];
@@ -38,6 +41,8 @@ class JobCardDetailsController extends GetxController {
   RxMap productDetails = {}.obs;
   RxMap jobDetails = {}.obs;
   RxMap permitDetails = {}.obs;
+  Rx<bool> isJobCardStarted = false.obs;
+  Rx<bool> isNormalized = false.obs;
 
   ///
   @override
@@ -51,6 +56,7 @@ class JobCardDetailsController extends GetxController {
           ),
         ),
       );
+
       jobId.value = Get.arguments ?? 0;
 
       /// TODO: Remove this line later
@@ -63,9 +69,22 @@ class JobCardDetailsController extends GetxController {
       createPlantDetailsTableData();
       createJobDetailsTableData();
       createPermitDetailsTableData();
+      getEmployeeList();
       super.onInit();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> getEmployeeList() async {
+    final _employeeList =
+        await jobCardDetailsPresenter.getAssignedToList(facilityId: facilityId);
+
+    if (_employeeList != null) {
+      for (var employee in _employeeList) {
+        employeeList.add(employee);
+      }
+      update(["employeeList"]);
     }
   }
 
@@ -163,6 +182,22 @@ class JobCardDetailsController extends GetxController {
     } //
     catch (e) {
       print(e);
+    }
+  }
+
+  void onValueChanged() {}
+
+  void startStopJobCard() {
+    isJobCardStarted.value = !isJobCardStarted.value;
+  }
+
+  void toggleIsNormalizedSwitch(bool value) {
+    isNormalized.value = value;
+  }
+
+  void checkForm() {
+    if (selectedEmployee.value == '') {
+      isEmployeeSelected.value = false;
     }
   }
 
