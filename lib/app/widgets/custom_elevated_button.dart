@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../theme/dimens.dart';
+class CustomElevatedButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final Color? backgroundColor;
+  final Color? textColor;
 
-class CustomElevatedButton extends GetView {
-  Color backgroundColor;
-  String text;
-  Function()? onPressed;
-  CustomElevatedButton(
-      {super.key,
-      required this.backgroundColor,
-      required this.text,
-      required this.onPressed});
+  const CustomElevatedButton({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+    this.backgroundColor,
+    this.textColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        textStyle: TextStyle(fontSize: Dimens.fourteen),
-        backgroundColor: backgroundColor,
-      ),
+    return //
+        //   Obx(
+        // () => //
+        ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        elevation: 25.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: textColor,
+          fontSize: 16.0,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      // ),
     );
   }
 }

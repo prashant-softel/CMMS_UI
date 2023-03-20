@@ -509,8 +509,8 @@ class Repository {
       final auth = await getSecureValue(LocalKeys.authToken);
       final res = await _dataRepository.getAssignedToList(
         auth: auth,
-        isLoading: isLoading ?? false,
-        facilityId: facilityId ?? 0,
+        isLoading: isLoading,
+        facilityId: facilityId,
       );
 
       if (!res.hasError) {

@@ -1,9 +1,9 @@
-class DroppedFile {
+class FileModel {
   String? url;
   String? fileName;
   String? mime;
   int? bytes;
-  DroppedFile({
+  FileModel({
     this.url,
     this.fileName,
     this.mime,

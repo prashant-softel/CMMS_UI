@@ -1,27 +1,30 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../theme/colors_value.dart';
-import '../../../theme/dimens.dart';
-import '../../add_job_controller.dart';
+import '../theme/colors_value.dart';
+import '../theme/dimens.dart';
 
-class DropdownWidget extends GetView<AddJobController> {
+class DropdownWidget extends StatelessWidget {
   DropdownWidget({
     super.key,
     this.selectedValue,
     this.isValueSelected,
     this.dropdownList,
     this.isEditable,
+    required this.onValueChanged,
+    this.controller,
   });
 
   String? selectedValue;
   bool? isValueSelected;
   final List? dropdownList;
   final bool? isEditable;
+  Function(dynamic, dynamic) onValueChanged;
+  final dynamic controller;
 
   @override
   Widget build(BuildContext context) {
-    final AddJobController addJobController = Get.find();
+    //final AddJobController addJobController = Get.find();
     return //
         Obx(
       () => //
@@ -97,7 +100,7 @@ class DropdownWidget extends GetView<AddJobController> {
           ),
           onChanged: (String? _selectedValue) {
             selectedValue = _selectedValue ?? '';
-            addJobController.valueChanged(dropdownList, selectedValue);
+            onValueChanged(dropdownList, selectedValue);
           },
           selectedItem: selectedValue,
         ),

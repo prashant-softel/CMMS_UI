@@ -76,7 +76,7 @@ class AddJobController extends GetxController {
 
   ///
   int selectedPermitId = 0;
-  int facilityId = 45;
+  int facilityId = 46;
   int blockId = 72;
   List<int> categoryIds = <int>[];
   Rx<bool> isFormInvalid = false.obs;
@@ -132,8 +132,8 @@ class AddJobController extends GetxController {
         await addJobPresenter.getAssignedToList(facilityId: facilityId);
 
     if (_assignedToList != null) {
-      for (var block in _assignedToList) {
-        assignedToList.add(block);
+      for (var _assignedTo in _assignedToList) {
+        assignedToList.add(_assignedTo);
       }
       update(["assignedToList"]);
     }
@@ -279,7 +279,7 @@ class AddJobController extends GetxController {
     }
   }
 
-  void valueChanged(list, value) {
+  void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
