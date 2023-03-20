@@ -43,4 +43,12 @@ class PreventiveCheckListController extends GetxController {
       }
     }
   }
+
+  void createCheckList() async {
+    {
+      await createpreventivePresenter.createCheckList(
+        isLoading: true,
+      );
+    }
+  }
 }

@@ -128,7 +128,7 @@ class HomeController extends GetxController {
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
-      constUserAccessModel.value = userAccess;
+      varUserAccessModel.value = userAccess;
       username = userAccess.user_name ?? "";
       // userName = userAccess.user_name ?? "";
     }

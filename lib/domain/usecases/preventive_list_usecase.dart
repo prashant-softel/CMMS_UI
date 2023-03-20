@@ -1,8 +1,9 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-class CreatePreventiveChecklistUsecase {
-  CreatePreventiveChecklistUsecase(this.repository);
+class PreventivelistUsecase {
+  PreventivelistUsecase(this.repository);
   Repository repository;
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
@@ -15,8 +16,14 @@ class CreatePreventiveChecklistUsecase {
         facilityId,
         isLoading,
       );
-  Future<void> createCheckList({
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList({
+    int? type,
+    int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.createCheckList(isLoading: isLoading);
+      await repository.getPreventiveCheckList(
+        type,
+        facilityId,
+        isLoading,
+      );
 }

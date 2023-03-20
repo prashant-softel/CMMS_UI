@@ -9,6 +9,7 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -621,7 +622,60 @@ class Repository {
 
       return null;
     }
+  }
 
-    ///
+  Future<void> createCheckList({
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createCheckList(
+          auth: auth, isLoading: isLoading);
+      print(res.data.toString());
+
+      if (!res.hasError) {
+        print("successsss");
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPreventiveCheckList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+
+        final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
+            jsonPreventiveCheckListModelModels
+                .map<PreventiveCheckListModel>((m) =>
+                    PreventiveCheckListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        print({"res.data", _PreventiveCheckListModelList});
+
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
   }
 }

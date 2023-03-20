@@ -152,7 +152,18 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> getPreventiveCheckList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPreventiveCheckList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getFacilityList({
     String? auth,
     bool? isLoading,
@@ -244,6 +255,14 @@ class DataRepository extends DomainRepository {
         job: job,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createCheckList({
+    auth,
+    bool? isLoading,
+  }) async {
+    var response =
+        await connectHelper.createCheckList(auth: auth, isLoading: isLoading);
+    return response;
+  }
 
   ///
 }

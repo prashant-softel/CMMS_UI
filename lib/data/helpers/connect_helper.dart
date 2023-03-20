@@ -175,6 +175,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPreventiveCheckList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckList?facility_id=$facilityId&type=$type',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getJobDetails({
     required String auth,
     bool? isLoading,
@@ -339,5 +358,32 @@ class ConnectHelper {
     return responseModel;
   }
 
-  ///
+  Future<ResponseModel> createCheckList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/CreateCheckList',
+      Request.post,
+      [
+        {
+          "checklist_number": "IV _Test Check List 005",
+          "type": 1,
+          "facility_id": 45,
+          "category_id": 2,
+          "frequency_id": 2,
+          "manPower": 16,
+          "duration": 2,
+          "status": 1
+        }
+      ],
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

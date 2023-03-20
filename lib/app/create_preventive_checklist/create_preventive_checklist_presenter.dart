@@ -12,4 +12,12 @@ class CreateCheckListPresenter {
       await createPreventiveChecklistUsecase.getInventoryCategoryList(
         isLoading: isLoading ?? false,
       );
+  Future<void> createCheckList({
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    return createPreventiveChecklistUsecase.createCheckList(
+      isLoading: isLoading,
+    );
+  }
 }
