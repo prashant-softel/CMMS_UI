@@ -309,7 +309,7 @@ class EditJobController extends GetxController {
     }
   }
 
-  void valueChanged(list, value) {
+  void onValueChanged(list, value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {

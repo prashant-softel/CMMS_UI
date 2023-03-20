@@ -9,7 +9,7 @@ import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
 import '../../utils/responsive.dart';
 import '../add_job_controller.dart';
-import 'widgets/dropdown.dart';
+import '../../widgets/dropdown.dart';
 
 class AddJobScreen extends GetView<AddJobController> {
   AddJobScreen({Key? key}) : super(key: key);
@@ -66,6 +66,7 @@ class AddJobScreen extends GetView<AddJobController> {
                               isValueSelected:
                                   controller.isFacilitySelected.value,
                               selectedValue: controller.selectedFacility.value,
+                              onValueChanged: controller.onValueChanged,
                             ),
                           ),
                         ]),
@@ -485,9 +486,11 @@ class AddJobScreen extends GetView<AddJobController> {
       ),
       Dimens.boxHeight5,
       DropdownWidget(
+        controller: controller,
         dropdownList: controller.assignedToList,
         isValueSelected: controller.isAssignedToSelected.value,
         selectedValue: controller.selectedAssignedTo.value,
+        onValueChanged: controller.onValueChanged,
       ),
       Dimens.boxHeight20,
     ]);
@@ -509,8 +512,7 @@ class AddJobScreen extends GetView<AddJobController> {
       Dimens.boxHeight5,
       DropdownWidget(
         dropdownList: controller.toolsRequiredToWorkTypeList,
-        //isValueSelected: controller
-        //.isToolRequiredToWorkTypeSelected.value,
+        onValueChanged: controller.onValueChanged,
         selectedValue: controller.selectedToolRequiredToWorkType.value,
       ),
       Dimens.boxHeight20,
@@ -728,6 +730,7 @@ class AddJobScreen extends GetView<AddJobController> {
         dropdownList: controller.blockList,
         isValueSelected: controller.isBlockSelected.value,
         selectedValue: controller.selectedBlock.value,
+        onValueChanged: controller.onValueChanged,
       ),
       Dimens.boxHeight20,
     ]);
