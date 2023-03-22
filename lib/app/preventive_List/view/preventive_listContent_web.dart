@@ -426,9 +426,20 @@ class PreventiveChecklistListContentWeb
                                       height: 60,
                                       cells: _preventiveCheckList.map((value) {
                                         return TableViewCell(
-                                            child: Text(
-                                          value,
-                                        ));
+                                            child: (value == 'No')
+                                                ? SwitchListTile(
+                                                    visualDensity: VisualDensity
+                                                        .comfortable,
+                                                    value: value == 'No'
+                                                        ? true
+                                                        : false,
+                                                    onChanged: (value) {},
+                                                    activeColor: Color.fromARGB(
+                                                        255, 86, 211, 111),
+                                                  )
+                                                : Text(
+                                                    value,
+                                                  ));
                                       }).toList());
                                 }).toList(),
                               ),

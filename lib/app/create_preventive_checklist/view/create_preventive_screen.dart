@@ -3,12 +3,8 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
 
-import '../../theme/colors_value.dart';
-import '../../theme/dimens.dart';
-import '../../theme/styles.dart';
-import '../../widgets/custom_multiselect_dialog_field.dart';
+import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../create_preventive_checklist_controller.dart';
 
@@ -57,26 +53,34 @@ class CreatePriventiveListScreen
                                 SizedBox(
                                   height: 5,
                                 ),
-                                CustomMultiSelectDialogField(
-                                  initialValue: (controller
-                                          .selectedEquipmentCategoryIdList
-                                          .isNotEmpty)
-                                      ? controller
-                                          .selectedEquipmentCategoryIdList
-                                      : [],
-                                  items: controller.equipmentCategoryList
-                                      .map(
-                                        (equipmentCategory) => MultiSelectItem(
-                                          equipmentCategory?.id,
-                                          equipmentCategory?.name ?? '',
-                                        ),
-                                      )
-                                      .toList(),
-                                  onConfirm: (selectedOptionsList) => {
-                                    controller.equipmentCategoriesSelected(
-                                        selectedOptionsList)
-                                  },
-                                ),
+                                // Container(
+                                //   width: MediaQuery.of(context).size.width,
+                                //   decoration: BoxDecoration(
+                                //     color: Colors.white,
+                                //     borderRadius: BorderRadius.circular(5),
+                                //   ),
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.only(left: 4),
+                                //     child: CustomDropDownButton(
+                                //       value: controller.selectedequipment.value,
+                                //       onChange: (String? selectedValue) {
+                                //         controller.isSelectedequipment.value =
+                                //             true;
+                                //         controller.selectedequipment.value =
+                                //             selectedValue ?? '';
+                                //       },
+                                //       item: controller.equipmentCategoryList
+                                //           .map<DropdownMenuItem<String>>(
+                                //               (facility) {
+                                //         return DropdownMenuItem<String>(
+                                //           value: facility?.name ?? '',
+                                //           child: Text(facility?.name ?? ''),
+                                //         );
+                                //       }).toList(),
+                                //     ),
+                                //   ),
+                                // ),
+
                                 SizedBox(
                                   height: 10,
                                 ),

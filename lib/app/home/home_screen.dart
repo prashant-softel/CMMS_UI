@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/preventive_maintanance/view/preventive_screen.dart';
+import 'package:cmms/app/preventive_maintanance/view/preventive_maintenance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';

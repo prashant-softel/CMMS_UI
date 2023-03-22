@@ -665,7 +665,6 @@ class Repository {
                     PreventiveCheckListModel.fromJson(
                         Map<String, dynamic>.from(m)))
                 .toList();
-        print({"res.data", _PreventiveCheckListModelList});
 
         return _PreventiveCheckListModelList;
       } else {

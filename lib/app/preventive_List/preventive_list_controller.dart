@@ -1,8 +1,10 @@
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
+import 'package:cmms/app/preventive_check_point/preventive_check_point_controller.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/inventory_category_model.dart';
+import '../navigators/app_pages.dart';
 
 class PreventiveListController extends GetxController {
   PreventiveListController(
@@ -28,7 +30,7 @@ class PreventiveListController extends GetxController {
 
   @override
   void onInit() async {
-    // getInventoryCategoryList();
+    getInventoryCategoryList();
     // Future.delayed(Duration(milliseconds: 500), () {
     getPreventiveCheckList(facilityId, type);
     //  });
@@ -64,7 +66,6 @@ class PreventiveListController extends GetxController {
     );
 
     if (_preventiveCheckList != null) {
-      print({"preventivemmm", _preventiveCheckList});
       preventiveCheckList!.value = _preventiveCheckList;
       paginationController = PaginationController(
         rowCount: preventiveCheckList!.length,
@@ -75,11 +76,16 @@ class PreventiveListController extends GetxController {
         preventiveCheckListModel = preventiveCheckList![0];
         var preventiveCheckListJson = preventiveCheckListModel?.toJson();
         preventiveCheckListTableColumns.value = <String>[];
-        print({"preventiveCheckListJson", preventiveCheckListJson});
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
           preventiveCheckListTableColumns.add(key);
         }
       }
     }
+  }
+
+  Future<void> createChecklist() async {
+    Get.toNamed(
+      Routes.createCheckList,
+    );
   }
 }

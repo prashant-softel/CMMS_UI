@@ -24,23 +24,15 @@ class PreventiveCheckListController extends GetxController {
     super.onInit();
   }
 
-  void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
-    selectedEquipmentCategoryIdList.value = <int>[];
-    for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
-      selectedEquipmentCategoryIdList.add(_selectedCategoryId);
-    }
-  }
-
   Future<void> getInventoryCategoryList() async {
-    equipmentCategoryList.value = <InventoryCategoryModel>[];
-    final _equipmentCategoryList =
-        await createpreventivePresenter.getInventoryCategoryList(
-      isLoading: true,
-    );
-    if (_equipmentCategoryList != null) {
-      for (var equimentCategory in _equipmentCategoryList) {
-        equipmentCategoryList.add(equimentCategory);
+    final _facilityList =
+        await createpreventivePresenter.getInventoryCategoryList();
+
+    if (_facilityList != null) {
+      for (var facility in _facilityList) {
+        equipmentCategoryList.add(facility);
       }
+      selectedequipment.value = equipmentCategoryList[0]?.name ?? '';
     }
   }
 

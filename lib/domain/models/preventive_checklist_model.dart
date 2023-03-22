@@ -8,42 +8,42 @@ String preventiveCheckListModelToJson(List<PreventiveCheckListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class PreventiveCheckListModel {
-  int id;
-  String checklist_number;
-  int type;
-  int facility_id;
-  String facility_name;
-  int category_id;
-  String category_name;
-  int frequency_id;
-  String frequency_name;
-  int manPower;
-  int duration;
-  int status;
-  int createdById;
-  String createdByName;
-  String createdAt;
-  String updatedAt;
-  int updatedById;
+  int? id;
+  String? checklist_number;
+  int? type;
+  int? facility_id;
+  String? facility_name;
+  int? category_id;
+  String? category_name;
+  int? frequency_id;
+  String? frequency_name;
+  int? manPower;
+  int? duration;
+  int? status;
+  int? createdById;
+  String? createdByName;
+  String? createdAt;
+  String? updatedAt;
+  int? updatedById;
 
   PreventiveCheckListModel({
-    required this.id,
-    required this.category_id,
-    required this.category_name,
-    required this.checklist_number,
-    required this.createdAt,
-    required this.createdById,
-    required this.createdByName,
-    required this.duration,
-    required this.facility_id,
-    required this.facility_name,
-    required this.frequency_id,
-    required this.frequency_name,
-    required this.manPower,
-    required this.status,
-    required this.type,
-    required this.updatedAt,
-    required this.updatedById,
+    this.id,
+    this.category_id,
+    this.category_name,
+    this.checklist_number,
+    this.createdAt,
+    this.createdById,
+    this.createdByName,
+    this.duration,
+    this.facility_id,
+    this.facility_name,
+    this.frequency_id,
+    this.frequency_name,
+    this.manPower,
+    this.status,
+    this.type,
+    this.updatedAt,
+    this.updatedById,
   });
 
   factory PreventiveCheckListModel.fromJson(Map<String, dynamic> json) =>
