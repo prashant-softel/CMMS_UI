@@ -18,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import '../../app/navigators/app_pages.dart';
+import '../models/frequency_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 
@@ -456,6 +457,36 @@ class Repository {
                 .toList();
 
         return _inventoryCategoryModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<FrequencyModel?>?> getFrequencyList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getFrequencyList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonFrequencyModels = jsonDecode(res.data);
+        final List<FrequencyModel> _frequencyModelList = jsonFrequencyModels
+            .map<FrequencyModel>(
+              (m) => FrequencyModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _frequencyModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return null;

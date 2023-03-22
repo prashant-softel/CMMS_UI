@@ -207,6 +207,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getFrequencyList({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getFrequencyList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> getJobDetails({
     required String auth,
     int? jobId,

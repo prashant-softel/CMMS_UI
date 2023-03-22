@@ -3,6 +3,7 @@ import 'package:cmms/app/preventive_check_point/preventive_check_point_controlle
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
 
@@ -15,7 +16,7 @@ class PreventiveListController extends GetxController {
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
-  Rx<bool> isSelectedequipment = false.obs;
+  Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<PreventiveCheckListModel?>? preventiveCheckList =
       <PreventiveCheckListModel?>[].obs;
@@ -27,32 +28,36 @@ class PreventiveListController extends GetxController {
   );
   PreventiveCheckListModel? preventiveCheckListModel;
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
-
+  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
+  Rx<String> selectedfrequency = ''.obs;
+  Rx<bool> isSelectedfrequency = true.obs;
   @override
   void onInit() async {
     getInventoryCategoryList();
+    getFrequencyList();
+
     // Future.delayed(Duration(milliseconds: 500), () {
     getPreventiveCheckList(facilityId, type);
     //  });
     super.onInit();
   }
 
-  void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
-    selectedEquipmentCategoryIdList.value = <int>[];
-    for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
-      selectedEquipmentCategoryIdList.add(_selectedCategoryId);
+  Future<void> getFrequencyList() async {
+    final list = await preventiveListPresenter.getFrequencyList();
+
+    if (list != null) {
+      for (var _frequencyList in list) {
+        frequencyList.add(_frequencyList);
+      }
     }
   }
 
   Future<void> getInventoryCategoryList() async {
-    equipmentCategoryList.value = <InventoryCategoryModel>[];
-    final _equipmentCategoryList =
-        await preventiveListPresenter.getInventoryCategoryList(
-      isLoading: true,
-    );
-    if (_equipmentCategoryList != null) {
-      for (var equimentCategory in _equipmentCategoryList) {
-        equipmentCategoryList.add(equimentCategory);
+    final list = await preventiveListPresenter.getInventoryCategoryList();
+
+    if (list != null) {
+      for (var _equipmentCategoryList in list) {
+        equipmentCategoryList.add(_equipmentCategoryList);
       }
     }
   }
@@ -87,5 +92,31 @@ class PreventiveListController extends GetxController {
     Get.toNamed(
       Routes.createCheckList,
     );
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<InventoryCategoryModel>:
+        {
+          int equipmentIndex =
+              equipmentCategoryList.indexWhere((x) => x?.name == value);
+          int selectedEquipmentId =
+              equipmentCategoryList[equipmentIndex]?.id ?? 0;
+        }
+
+        break;
+      case RxList<FrequencyModel>:
+        {
+          int frequencyIndex =
+              frequencyList.indexWhere((x) => x?.name == value);
+          int selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+        }
+        break;
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
   }
 }
