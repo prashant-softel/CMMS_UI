@@ -8,9 +8,12 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_controller.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_presenter.dart';
 import 'package:cmms/app_config.dart';
+import 'package:cmms/breakdown_maintenance/breakdown_maintenance_controller.dart';
+import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/preventive_usecase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -157,10 +160,10 @@ Future<void> initServices() async {
   );
 
   Get.lazyPut(
-    () => JobListController(
+    () => BreakdownMaintenanceController(
       Get.put(
-        JobListPresenter(
-          Get.put(JobListUsecase(repository)),
+        BreakdownMaintenancePresenter(
+          Get.put(BreakdownMaintenanceUsecase(repository)),
         ),
         permanent: true,
       ),
