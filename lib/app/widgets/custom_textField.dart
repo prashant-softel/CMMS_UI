@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../theme/colors_value.dart';
 import '../theme/styles.dart';
 
-class LoginCustomTextfield extends StatefulWidget {
+class LoginCustomTextfield extends GetView {
   String? ishint;
   bool obscureText;
   Widget? widget;
@@ -19,18 +20,12 @@ class LoginCustomTextfield extends StatefulWidget {
     this.errorController,
     this.onChanged,
   }) : super(key: key);
-
-  @override
-  State<LoginCustomTextfield> createState() => _LoginCustomTextfieldState();
-}
-
-class _LoginCustomTextfieldState extends State<LoginCustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: widget.onChanged,
-      controller: widget.textController,
-      obscureText: widget.obscureText,
+      onChanged: onChanged,
+      controller: textController,
+      obscureText: obscureText,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         fillColor: ColorsValue.whiteColor,
@@ -50,9 +45,9 @@ class _LoginCustomTextfieldState extends State<LoginCustomTextfield> {
         errorStyle: TextStyle(
           height: 0,
         ),
-        errorText: widget.errorController,
+        errorText: errorController,
         contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-        suffixIcon: widget.widget,
+        suffixIcon: widget,
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
@@ -63,7 +58,7 @@ class _LoginCustomTextfieldState extends State<LoginCustomTextfield> {
             borderSide: BorderSide(
               color: ColorsValue.greyBorderColor,
             )),
-        hintText: widget.ishint,
+        hintText: ishint,
         hintStyle: Styles.grey12,
       ),
     );

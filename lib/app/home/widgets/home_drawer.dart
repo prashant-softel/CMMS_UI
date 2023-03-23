@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../theme/colors_value.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../home_controller.dart';
 

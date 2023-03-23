@@ -264,7 +264,19 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
-
+  Future<ResponseModel> getFrequencyList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'CMMS/GetFrequencyList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
   Future<ResponseModel> getAssignedToList({
     required String auth,
     bool? isLoading,
@@ -367,7 +379,7 @@ class ConnectHelper {
       Request.post,
       [
         {
-          "checklist_number": "IV _Test Check List 005",
+          "checkList_number": "IV _Test Check List 005",
           "type": 1,
           "facility_id": 45,
           "category_id": 2,

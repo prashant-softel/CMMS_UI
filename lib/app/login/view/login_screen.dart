@@ -8,7 +8,7 @@ import '../../widgets/custom_textfield.dart';
 
 class LoginScreen extends GetView<LoginController> {
   LoginScreen({Key? key}) : super(key: key);
-  final LoginController loginController = Get.find();
+  final LoginController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class LoginScreen extends GetView<LoginController> {
                                         50,
                                     child: LoginCustomTextfield(
                                       textController: controller.emailCtrlr,
-                                      ishint: "EmailId",
+                                      ishint: "Email Id",
                                       onChanged: (value) =>
                                           controller.updateemail(value),
                                       widget: Icon(
@@ -176,7 +176,7 @@ class LoginScreen extends GetView<LoginController> {
                             ),
                             LoginCustomTextfield(
                               textController: controller.emailCtrlr,
-                              ishint: "EmailId",
+                              ishint: "Email Id",
                               onChanged: (value) =>
                                   controller.updateemail(value),
                               widget: Icon(
