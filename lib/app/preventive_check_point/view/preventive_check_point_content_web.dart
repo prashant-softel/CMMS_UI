@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textfield.dart';
@@ -11,7 +12,7 @@ import '../preventive_check_point_controller.dart';
 class PreventiveCheckPointContentWeb
     extends GetView<PreventiveCheckPointController> {
   PreventiveCheckPointContentWeb({Key? key}) : super(key: key);
-  final PreventiveCheckPointController controller = Get.find();
+  // final PreventiveCheckPointController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class PreventiveCheckPointContentWeb
                   Container(
                     width: (MediaQuery.of(context).size.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: MediaQuery.of(context).size.height / 1.7,
+                    height: MediaQuery.of(context).size.height / 1.8,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -99,18 +100,49 @@ class PreventiveCheckPointContentWeb
                                         width:
                                             (MediaQuery.of(context).size.width *
                                                     .2) -
-                                                35,
-                                        child: DropdownWidget(
-                                          controller: controller,
-                                          dropdownList: controller.checkList,
-                                          isValueSelected: controller
-                                              .isSelectedchecklist.value,
-                                          selectedValue: controller
-                                              .selectedchecklist.value,
-                                          onValueChanged:
-                                              controller.onValueChanged,
+                                                30,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                      255, 236, 234, 234)
+                                                  .withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
                                         ),
-                                      ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: CustomDropDownButton(
+                                            value: controller
+                                                .selectedchecklist.value,
+                                            onChange: (String? selectedValue) {
+                                              controller.isSelectedchecklist
+                                                  .value = true;
+                                              controller.selectedchecklist
+                                                  .value = selectedValue ?? '';
+                                            },
+                                            item: controller.checkList
+                                                .map<DropdownMenuItem<String>>(
+                                                    (facility) {
+                                              return DropdownMenuItem<String>(
+                                                value: facility
+                                                        ?.checklist_number ??
+                                                    '',
+                                                child: Text(facility
+                                                        ?.checklist_number ??
+                                                    ''),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                   SizedBox(
@@ -122,7 +154,6 @@ class PreventiveCheckPointContentWeb
                                     children: [
                                       CustomRichText(title: 'Check Point'),
                                       Container(
-                                          height: 60,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -161,7 +192,6 @@ class PreventiveCheckPointContentWeb
                                     children: [
                                       CustomRichText(title: 'Requirement'),
                                       Container(
-                                          height: 60,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -276,6 +306,46 @@ class PreventiveCheckPointContentWeb
                             Divider(
                               color: ColorsValue.greyLightColour,
                             ),
+                            Container(
+                              width: 300,
+                              margin: EdgeInsets.only(left: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 236, 234, 234)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: CustomDropDownButton(
+                                  value: controller.selectedchecklist.value,
+                                  onChange: (String? selectedValue) {
+                                    controller.isSelectedchecklist.value = true;
+                                    controller.selectedchecklist.value =
+                                        selectedValue ?? '';
+                                  },
+                                  item: controller.checkList
+                                      .map<DropdownMenuItem<String>>(
+                                          (facility) {
+                                    return DropdownMenuItem<String>(
+                                      value: facility?.checklist_number ?? '',
+                                      child: Text(
+                                          facility?.checklist_number ?? ''),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
                             Row(
                               children: [
                                 Container(
@@ -331,35 +401,35 @@ class PreventiveCheckPointContentWeb
                               }).toList(),
                               rows: [
                                 [
-                                  "PR100dgWER0PRT097BHSDBHBHF",
+                                  "PR100dgWER097BHSDBHBHF",
                                   "Visivility check the outer",
                                   "ther is not be any damage andit must be free",
                                   "yes",
                                   "Action"
                                 ],
                                 [
-                                  "PR100dgWER0PRT097BHSDBHBHF",
+                                  "PR100dgWER097BHSDBHBHF",
                                   "Visivility check the outer",
                                   "ther is not be any damage andit must be free",
                                   "yes",
                                   "Action"
                                 ],
                                 [
-                                  "PR100dgWER0PRT097BHSDBHBHF",
+                                  "PR100dgWER097BHSDBHBHF",
                                   "Visivility check the outer",
                                   "ther is not be any damage andit must be free",
                                   "yes",
                                   "Action"
                                 ],
                                 [
-                                  "PR100dgWER0PRT097BHSDBHBHF",
+                                  "PR100dgWER097BHSDBHBHF",
                                   "Visivility check the outer",
                                   "ther is not be any damage andit must be free",
                                   "yes",
                                   "Action"
                                 ],
                                 [
-                                  "PR100dgWER0PRT097BHSDBHBHF",
+                                  "PR100dgWER097BHSDBHBHF",
                                   "Visivility check the outer",
                                   "ther is not be any damage andit must be free",
                                   "yes",

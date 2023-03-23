@@ -287,7 +287,9 @@ class PreventiveChecklistListContentWeb
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        controller.createChecklistNumber();
+                                      },
                                       text: 'Create Number')),
                             ],
                           ),

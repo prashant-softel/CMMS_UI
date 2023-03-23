@@ -26,5 +26,5 @@ class CreatePreventiveChecklistUsecase {
   Future<void> createCheckList({
     bool? isLoading,
   }) async =>
-      await repository.createCheckList(isLoading: isLoading);
+      await repository.createCheckListNumber(isLoading: isLoading);
 }

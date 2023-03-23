@@ -10,7 +10,7 @@ class PreventiveCheckPointController extends GetxController {
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
   Rx<String> selectedchecklist = ''.obs;
-  Rx<bool> isSelectedchecklist = true.obs;
+  Rx<bool> isSelectedchecklist = false.obs;
   int facilityId = 45;
   int type = 1;
   @override
@@ -33,28 +33,11 @@ class PreventiveCheckPointController extends GetxController {
     );
 
     if (list != null) {
+      print({"listchecklist", list});
       for (var _checkList in list) {
         checkList.add(_checkList);
       }
     }
-  }
-
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<PreventiveCheckListModel>:
-        {
-          int checklistIndex =
-              checkList.indexWhere((x) => x?.category_id == value);
-          int selectedChecklistId = checkList[checklistIndex]?.id ?? 0;
-        }
-
-        break;
-
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
+    selectedchecklist.value = checkList[0]?.checklist_number ?? '';
   }
 }

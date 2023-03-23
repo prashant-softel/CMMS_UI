@@ -34,4 +34,9 @@ class PreventivelistUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
+  Future<void> createChecklistNumber({
+    auth,
+    bool? isLoading,
+  }) async =>
+      await repository.createCheckListNumber(isLoading: isLoading);
 }

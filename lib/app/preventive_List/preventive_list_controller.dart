@@ -35,10 +35,7 @@ class PreventiveListController extends GetxController {
   void onInit() async {
     getInventoryCategoryList();
     getFrequencyList();
-
-    // Future.delayed(Duration(milliseconds: 500), () {
     getPreventiveCheckList(facilityId, type);
-    //  });
     super.onInit();
   }
 
@@ -118,5 +115,11 @@ class PreventiveListController extends GetxController {
         }
         break;
     }
+  }
+
+  void createChecklistNumber() async {
+    await preventiveListPresenter.createChecklistNumber(
+      isLoading: true,
+    );
   }
 }

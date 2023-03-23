@@ -655,7 +655,7 @@ class Repository {
     }
   }
 
-  Future<void> createCheckList({
+  Future<void> createCheckListNumber({
     bool? isLoading,
   }) async {
     try {
@@ -663,7 +663,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.createCheckList(
           auth: auth, isLoading: isLoading);
-      print(res.data.toString());
+      print({"res.data.toString()", res.data});
 
       if (!res.hasError) {
         print("successsss");

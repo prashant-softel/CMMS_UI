@@ -379,7 +379,7 @@ class ConnectHelper {
       Request.post,
       [
         {
-          "checklist_number": "IV _Test Check List 005",
+          "checkList_number": "IV _Test Check List 005",
           "type": 1,
           "facility_id": 45,
           "category_id": 2,
