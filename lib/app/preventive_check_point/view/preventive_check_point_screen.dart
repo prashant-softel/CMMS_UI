@@ -1,4 +1,3 @@
-import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

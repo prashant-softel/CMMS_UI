@@ -5,6 +5,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textfield.dart';
+import '../../widgets/dropdown.dart';
 import '../preventive_check_point_controller.dart';
 
 class PreventiveCheckPointContentWeb
@@ -48,8 +49,13 @@ class PreventiveCheckPointContentWeb
                     "Dashboard",
                     style: Styles.greyLight14,
                   ),
-                  Text(" / Preventive Maintenance",
-                      style: Styles.greyMediumLight12),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Text(" / Preventive Maintenance",
+                        style: Styles.greyMediumLight12),
+                  ),
                   Text(" / Check Point Creator",
                       style: Styles.greyMediumLight12)
                 ],
@@ -58,7 +64,6 @@ class PreventiveCheckPointContentWeb
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     width: (MediaQuery.of(context).size.width * .3),
@@ -91,35 +96,22 @@ class PreventiveCheckPointContentWeb
                                     children: [
                                       CustomRichText(title: 'Check List No. '),
                                       Container(
-                                          width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2) -
-                                              30,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                              color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: LoginCustomTextfield()),
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                    .2) -
+                                                35,
+                                        child: DropdownWidget(
+                                          controller: controller,
+                                          dropdownList: controller.checkList,
+                                          isValueSelected: controller
+                                              .isSelectedchecklist.value,
+                                          selectedValue: controller
+                                              .selectedchecklist.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
                                     ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
                                   ),
                                   SizedBox(
                                     height: 10,

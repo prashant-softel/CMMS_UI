@@ -2,10 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
-import '../../widgets/custom_multiselect_dialog_field.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/dropdown.dart';
@@ -51,8 +48,13 @@ class PreventiveChecklistListContentWeb
                     "Dashboard",
                     style: Styles.greyLight14,
                   ),
-                  Text(" / Preventive Maintenance",
-                      style: Styles.greyMediumLight12),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Text(" / Preventive Maintenance",
+                        style: Styles.greyMediumLight12),
+                  ),
                   Text(" / Create Checklist Number",
                       style: Styles.greyMediumLight12)
                 ],
