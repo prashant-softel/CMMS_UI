@@ -11,7 +11,7 @@ class InventoryListContentWeb extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorsValue.lightBlueishColor,
+      color: ColorValues.lightBlueishColor,
       child: DefaultTabController(
         length: 3,
         child: Column(children: [

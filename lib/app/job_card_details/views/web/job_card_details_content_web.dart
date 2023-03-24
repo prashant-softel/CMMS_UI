@@ -1,13 +1,14 @@
 import 'package:cmms/app/job_card_details/views/widgets/isolated_assets_widget.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/history_table_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/dropzone_controller.dart';
-import '../../../theme/colors_value.dart';
+import '../../../controllers/file_upload_controller.dart';
+import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../widgets/custom_elevated_button.dart';
-import '../../../widgets/dropzone_widget.dart';
+import '../../../widgets/file_upload_with_dropzone_widget.dart';
 import '../../../widgets/file_upload_details_widget.dart';
 import '../../job_card_details_controller.dart';
 import '../widgets/employee_table_widget.dart';
@@ -29,9 +30,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
       padding: Dimens.edgeInsets10,
       margin: Dimens.edgeInsets20,
       decoration: BoxDecoration(
-        color: ColorsValue.whiteColor,
+        color: ColorValues.whiteColor,
         border: Border.all(
-          color: ColorsValue.blueColor,
+          color: ColorValues.appDarkBlueColor,
           style: BorderStyle.solid,
           width: 3,
         ),
@@ -72,39 +73,58 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                 Dimens.boxHeight20,
 
                 /// ISOLATE ASSETS TABLE WIDGET
-                IsolatedAssetsWidget(),
+                SizedBox(
+                  height: Get.height * 0.2,
+                  child: IsolatedAssetsWidget(),
+                ),
+                Dimens.boxHeight20,
+                Divider(color: ColorValues.greyLightColour, thickness: 2),
 
                 /// EMPLOYEE TABLE
-                EmployeeTable(controller: controller),
+                SizedBox(
+                  height: Get.height * 0.2,
+                  child: EmployeeTable(controller: controller),
+                ),
                 Dimens.boxHeight20,
-                Divider(color: ColorsValue.greyLightColour, thickness: 2),
+                Divider(color: ColorValues.greyLightColour, thickness: 2),
 
                 /// FILE UPLOAD WIDGET
                 Container(
                   //color: ColorsValue.blueMediumColor,
-                  height: Get.height * 0.25,
+                  height: Get.height * 0.35,
                   width: Get.width,
-                  child: Row(children: [
-                    Expanded(
+                  child: Row(//
+                      children: [
+                    Flexible(
                       flex: 3,
-                      child: DropZoneWidget(
-                        onDroppedFiles: (files) =>
-                            dropzoneController.droppedFiles.value = files,
-                      ),
+                      child: FileUploadWidgetWithDropzone(),
                     ),
                     Dimens.boxWidth10,
                     Expanded(flex: 7, child: FileUploadDetailsWidget()),
                   ]),
                 ),
+
                 Dimens.boxHeight20,
-                Divider(color: ColorsValue.greyLightColour, thickness: 2),
+                Divider(color: ColorValues.greyLightColour, thickness: 2),
+
+                ///HISTORY
+                (controller.isJobCardStarted.value == true)
+                    ? //
+                    HistoryTableWidget()
+                    : //
+                    Dimens.box0,
+
+                /// DESCRIPTION OF WORK DONE
                 Row(children: [
                   Text('Description of work done: '),
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorValues.appLightBlueColor,
+                            width: 1.0,
+                          ),
                         ),
                       ),
                       keyboardType: TextInputType.multiline,
@@ -117,12 +137,11 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                 (controller.isJobCardStarted == false)
                     ? //
-
                     Center(
                         child: CustomElevatedButton(
                           text: 'Start Job Card',
                           onPressed: () => controller.startStopJobCard(),
-                          backgroundColor: ColorsValue.blueColor,
+                          backgroundColor: ColorValues.appGreenColor,
                         ),
                       )
                     : //
@@ -133,25 +152,25 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             CustomElevatedButton(
                               text: 'Cancel',
                               onPressed: () => controller.startStopJobCard(),
-                              backgroundColor: ColorsValue.redColor,
+                              backgroundColor: ColorValues.appRedColor,
                             ),
                             Dimens.boxWidth10,
                             CustomElevatedButton(
                               text: 'Update',
                               onPressed: () => controller.startStopJobCard(),
-                              backgroundColor: ColorsValue.yellowColor,
+                              backgroundColor: ColorValues.appYellowColor,
                             ),
                             Dimens.boxWidth10,
                             CustomElevatedButton(
                               text: 'Close Job',
                               onPressed: () => controller.startStopJobCard(),
-                              backgroundColor: ColorsValue.lightGreenColor,
+                              backgroundColor: ColorValues.appGreenColor,
                             ),
                             Dimens.boxWidth10,
                             CustomElevatedButton(
                               text: 'Carry Forward Job',
                               onPressed: () => controller.startStopJobCard(),
-                              backgroundColor: ColorsValue.blueColor,
+                              backgroundColor: ColorValues.appLightBlueColor,
                             ),
                             Dimens.boxWidth10,
                           ]),

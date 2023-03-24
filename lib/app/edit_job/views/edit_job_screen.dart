@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import '../../theme/colors_value.dart';
+import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
 import '../../utils/responsive.dart';
@@ -18,7 +18,7 @@ class EditJobScreen extends GetView<EditJobController> {
     ///
     final ButtonStyle saveButtonStyle = ElevatedButton.styleFrom(
       textStyle: TextStyle(fontSize: Dimens.fourteen),
-      backgroundColor: ColorsValue.navyBlueColor,
+      backgroundColor: ColorValues.navyBlueColor,
     );
 
     ///
@@ -198,7 +198,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -219,13 +219,13 @@ class EditJobScreen extends GetView<EditJobController> {
               spreadRadius: 1.0,
             ),
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ),
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: TextField(
@@ -234,7 +234,7 @@ class EditJobScreen extends GetView<EditJobController> {
           maxLines: 5,
           autofocus: false,
           decoration: InputDecoration(
-            fillColor: ColorsValue.whiteColor,
+            fillColor: ColorValues.whiteColor,
             filled: true,
             contentPadding: Dimens.edgeInsets05_10,
             border: InputBorder.none,
@@ -244,7 +244,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 ? OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(
-                      color: ColorsValue.redColorDark,
+                      color: ColorValues.redColorDark,
                     ),
                   )
                 : InputBorder.none,
@@ -252,7 +252,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 ? OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(
-                      color: ColorsValue.redColorDark,
+                      color: ColorValues.redColorDark,
                     ),
                   )
                 : null,
@@ -285,7 +285,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -315,7 +315,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -337,13 +337,13 @@ class EditJobScreen extends GetView<EditJobController> {
               spreadRadius: 1.0,
             ),
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ),
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: MultiSelectDialogField(
@@ -374,7 +374,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -396,13 +396,13 @@ class EditJobScreen extends GetView<EditJobController> {
               spreadRadius: 1.0,
             ),
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ),
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: //
@@ -463,13 +463,13 @@ class EditJobScreen extends GetView<EditJobController> {
               spreadRadius: 1.0,
             ), //BoxShadow
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ), //BoxShadow
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: TextField(
@@ -482,7 +482,7 @@ class EditJobScreen extends GetView<EditJobController> {
           controller: controller.breakdownTimeCtrlr,
           autofocus: false,
           decoration: InputDecoration(
-            fillColor: ColorsValue.whiteColor,
+            fillColor: ColorValues.whiteColor,
             filled: true,
             contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
             border: InputBorder.none,
@@ -508,7 +508,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -529,20 +529,20 @@ class EditJobScreen extends GetView<EditJobController> {
               spreadRadius: 1.0,
             ), //BoxShadow
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ), //BoxShadow
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: TextField(
           controller: controller.jobTitleCtrlr,
           autofocus: false,
           decoration: InputDecoration(
-            fillColor: ColorsValue.whiteColor,
+            fillColor: ColorValues.whiteColor,
             filled: true,
             contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
             border: InputBorder.none,
@@ -552,7 +552,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 ? OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(
-                      color: ColorsValue.redColorDark,
+                      color: ColorValues.redColorDark,
                     ),
                   )
                 : InputBorder.none,
@@ -560,7 +560,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 ? OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(
-                      color: ColorsValue.redColorDark,
+                      color: ColorValues.redColorDark,
                     ),
                   )
                 : null,
@@ -614,7 +614,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -636,13 +636,13 @@ class EditJobScreen extends GetView<EditJobController> {
               spreadRadius: 1.0,
             ),
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ),
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: MultiSelectDialogField(
@@ -682,7 +682,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 TextSpan(
                   text: '*',
                   style: TextStyle(
-                    color: ColorsValue.orangeColor,
+                    color: ColorValues.orangeColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

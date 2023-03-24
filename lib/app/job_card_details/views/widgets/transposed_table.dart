@@ -2,7 +2,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../theme/colors_value.dart';
+import '../../../theme/color_values.dart';
 
 class TransposedTable extends StatelessWidget {
   ///
@@ -23,15 +23,15 @@ class TransposedTable extends StatelessWidget {
           Table(
               border: TableBorder.all(
                 style: BorderStyle.solid,
-                color: ColorsValue.blackColor,
+                color: ColorValues.appDarkBlueColor,
               ),
               children: [
             for (var i = 0; i < tableDataMap.length; i++)
               TableRow(
                   decoration: BoxDecoration(
                     color: i % 2 == 0
-                        ? ColorsValue.lightGreyColorWithOpacity50
-                        : ColorsValue.lightBlueishColor,
+                        ? ColorValues.appLightBlueColor.withOpacity(0.1)
+                        : ColorValues.whiteColor,
                   ),
                   children: [
                     TableCell(

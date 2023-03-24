@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../theme/colors_value.dart';
+import '../theme/color_values.dart';
 import '../theme/styles.dart';
 
 class LoginCustomTextfield extends GetView {
@@ -28,19 +28,19 @@ class LoginCustomTextfield extends GetView {
       obscureText: obscureText,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        fillColor: ColorsValue.whiteColor,
+        fillColor: ColorValues.whiteColor,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         filled: true,
         errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: ColorsValue.greyBorderColor,
+              color: ColorValues.greyBorderColor,
             )),
         border: InputBorder.none,
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: ColorsValue.greyBorderColor,
+              color: ColorValues.greyBorderColor,
             )),
         errorStyle: TextStyle(
           height: 0,
@@ -51,12 +51,12 @@ class LoginCustomTextfield extends GetView {
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: ColorsValue.greyBorderColor,
+              color: ColorValues.greyBorderColor,
             )),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: ColorsValue.greyBorderColor,
+              color: ColorValues.greyBorderColor,
             )),
         hintText: ishint,
         hintStyle: Styles.grey12,

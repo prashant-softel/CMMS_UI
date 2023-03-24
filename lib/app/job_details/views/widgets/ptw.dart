@@ -1,4 +1,4 @@
-import 'package:cmms/app/theme/colors_value.dart';
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -51,7 +51,7 @@ class PTWCardWidget extends StatelessWidget {
                       child: Text(
                         '${associatedPermit?.permitTypeName ?? ''}',
                         style: const TextStyle(
-                          color: ColorsValue.blackColor,
+                          color: ColorValues.blackColor,
                         ),
                       ),
                     ),
