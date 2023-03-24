@@ -172,6 +172,16 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
       );
+
+  Future<ResponseModel> getTypePermitList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getTypePermitList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> getUserAccessList({
     required String auth,
     String? userId,

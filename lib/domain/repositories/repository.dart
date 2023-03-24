@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -389,6 +390,33 @@ class Repository {
             .toList();
 
         return _facilityModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+    Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getTypePermitList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonTypePermitModels = jsonDecode(res.data);
+        final List<TypePermitModel> _typePermitModelList = jsonTypePermitModels
+            .map<TypePermitModel>(
+                (m) => TypePermitModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+          print('PermitztypeData: ${res.data}');
+        return _typePermitModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return null;

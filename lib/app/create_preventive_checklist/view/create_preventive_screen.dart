@@ -74,7 +74,9 @@ class CreatePriventiveListScreen
                                       .toList(),
                                   onConfirm: (selectedOptionsList) => {
                                     controller.equipmentCategoriesSelected(
-                                        selectedOptionsList)
+                                        selectedOptionsList),
+                                        print('Equipment list5 ${controller.equipmentCategoryList}')
+
                                   },
                                 ),
                                 SizedBox(

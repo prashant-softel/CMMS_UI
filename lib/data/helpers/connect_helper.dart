@@ -235,6 +235,29 @@ class ConnectHelper {
     return response;
   }
 
+    Future<ResponseModel> getTypePermitList({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('PermitTypeResponse: $response');
+    try {
+      response = await apiWrapper.makeRequest(
+        'Permit/GetPermitTypeList?facility_id=50',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
   Future<ResponseModel> getBlocksList({
     String? auth,
     bool? isLoading,

@@ -1,3 +1,4 @@
+import 'package:cmms/app/create_preventive_checklist/create_preventive_checklist_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart';
@@ -7,6 +8,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/date_range_picker.dart';
 import 'package:cmms/app/utils/responsive.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -29,6 +31,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class NewPermitScreen extends GetView<NewPermitController> {
   NewPermitScreen({super.key});
+  // final NewPermitController controller = Get.find();
 
   DateTime? _dateTime1;
   DateTime? _dateTime2;
@@ -63,14 +66,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
               elevation: 0,
             ),
       body: Obx(
-        ()=> Container(
+        () => Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 20),
                   child: Row(
                     children: [
                       Text('Select Plant:'),
@@ -83,37 +86,45 @@ class NewPermitScreen extends GetView<NewPermitController> {
                       // )
                       Obx(
                         () => Container(
-                          width: MediaQuery.of(context).size.width / 2,
+                          width: MediaQuery.of(context).size.width / 1.4,
                           child: Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Card(
                               shadowColor: ColorsValue.greyColor,
                               elevation: 1,
                               child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    value: controller.selectedFacility.value,
-                                    icon: const Icon(
-                                        Icons.keyboard_arrow_down_outlined),
-                                    elevation: 7,
-                                    style: const TextStyle(color: Colors.black),
-                                    onChanged: (String? selectedValue) {
-                                      controller.isFacilitySelected.value = true;
-                                      controller.selectedFacility.value =
-                                          selectedValue ?? '';
-                                    },
-                                    items: controller.facilityList
-                                        .map<DropdownMenuItem<String>>(
-                                            (facility) {
-                                      return DropdownMenuItem<String>(
-                                        value: facility?.name ?? '',
-                                        child: Text(facility?.name ?? ''),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
+                                padding: const EdgeInsets.all(1.0),
+                                child: DropdownWidget(
+                              dropdownList: controller.facilityList,
+                              isValueSelected:
+                                  controller.isFacilitySelected.value,
+                              selectedValue: controller.selectedFacility.value,
+                              onValueChanged: controller.onValueChanged,
+                            ),
+                                // DropdownButtonHideUnderline(
+                                //   child: DropdownButton(
+                                //     isExpanded: true,
+                                //     value: controller.selectedFacility.value,
+                                //     icon: const Icon(
+                                //         Icons.keyboard_arrow_down_outlined),
+                                //     elevation: 7,
+                                //     style: const TextStyle(color: Colors.black),
+                                //     onChanged: (String? selectedValue) {
+                                //       controller.isFacilitySelected.value =
+                                //           true;
+                                //       controller.selectedFacility.value =
+                                //           selectedValue ?? '';
+                                //     },
+                                //     items: controller.facilityList
+                                //         .map<DropdownMenuItem<String>>(
+                                //             (facility) {
+                                //       return DropdownMenuItem<String>(
+                                //         value: facility?.name ?? '',
+                                //         child: Text(facility?.name ?? ''),
+                                //       );
+                                //     }).toList(),
+                                //   ),
+                                // ),
                               ),
                             ),
                           ),
@@ -122,146 +133,432 @@ class NewPermitScreen extends GetView<NewPermitController> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Text(
-                    'REQUEST A PERMIT TO WORK',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Row(
-                    children: [
-                      CustomRichText(title: 'Block/Plot: '),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 1.6,
-                        child: LoginCustomTextfield(),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  children: [
-                    SizedBox(width: 27,),
-                    CustomRichText(title: 'Type of permit: '),
-                      SizedBox(
-                        width: 5,
-                      ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width/2,
-                  child: CustomMultiSelectDialogField(
-                    initialValue:
-                              (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                                  ? controller.selectedEquipmentCategoryIdList
-                                  : [],
-                          items: controller.equipmentCategoryList
-                              .map(
-                                (equipmentCategory) => MultiSelectItem(
-                                  equipmentCategory?.id,
-                                  equipmentCategory?.name ?? '',
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.equipmentCategoriesSelected(selectedOptionsList)
-                          },
-                  ),
-                )
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  children: [
-                    SizedBox(width: 27,),
-                    CustomRichText(title: 'Equipment Categories: '),
-                      SizedBox(
-                        width: 5,
-                      ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: CustomMultiSelectDialogField(
-                    initialValue:
-                              (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                                  ? controller.selectedEquipmentCategoryIdList
-                                  : [],
-                          items: controller.equipmentCategoryList
-                              .map(
-                                (equipmentCategory) => MultiSelectItem(
-                                  equipmentCategory?.id,
-                                  equipmentCategory?.name ?? '',
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.equipmentCategoriesSelected(selectedOptionsList)
-                          },
-                  ),
-                )
-                  ],
-                ),
-                SizedBox(height: 20,),
-                _buildStartDateField(context),
-                
-                _buildValidTillField(context),
+                // SizedBox(
+                //   height: 15,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 30),
+                //   child: Text(
+                //     'REQUEST A PERMIT TO WORK',
+                //     style: TextStyle(fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 30),
+                //   child: Row(
+                //     children: [
+                //       CustomRichText(title: 'Block/Plot: '),
+                //       SizedBox(
+                //         width: 5,
+                //       ),
+                //       SizedBox(
+                //         width: MediaQuery.of(context).size.width / 1.6,
+                //         child: LoginCustomTextfield(),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Row(
+                //   children: [
+                //     SizedBox(
+                //       width: 27,
+                //     ),
+                //     CustomRichText(title: 'Type of permit: '),
+                //     SizedBox(
+                //       width: 5,
+                //     ),
+                //     SizedBox(
+                //       width: MediaQuery.of(context).size.width / 1.82,
+                //       child: CustomMultiSelectDialogField(
+                //         initialValue: (controller
+                //                 .selectedEquipmentCategoryIdList.isNotEmpty)
+                //             ? controller.selectedEquipmentCategoryIdList
+                //             : [],
+                //         items: controller.equipmentCategoryList
+                //             .map(
+                //               (equipmentCategory) => MultiSelectItem(
+                //                 equipmentCategory?.id,
+                //                 equipmentCategory?.name ?? '',
+                //               ),
+                //             )
+                //             .toList(),
+                //         onConfirm: (selectedOptionsList) => {
+                //           controller
+                //               .equipmentCategoriesSelected(selectedOptionsList)
+                //         },
+                //       ),
+                //     )
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Row(
+                //   children: [
+                //     SizedBox(
+                //       width: 27,
+                //     ),
+                //     CustomRichText(title: 'Equipment Categories: '),
+                //     SizedBox(
+                //       width: 5,
+                //     ),
+                //     SizedBox(
+                //       width: MediaQuery.of(context).size.width / 2.5,
+                //       child: CustomMultiSelectDialogField(
+                //         initialValue: (controller
+                //                 .selectedEquipmentCategoryIdList.isNotEmpty)
+                //             ? controller.selectedEquipmentCategoryIdList
+                //             : [],
+                //         items: controller.equipmentCategoryList
+                //             .map(
+                //               (equipmentCategory) => MultiSelectItem(
+                //                 equipmentCategory?.id,
+                //                 equipmentCategory?.name ?? '',
+                //               ),
+                //             )
+                //             .toList(),
+                //         onConfirm: (selectedOptionsList) => {
+                //           controller
+                //               .equipmentCategoriesSelected(selectedOptionsList)
+                //         },
+                //       ),
+                //     )
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // _buildStartDateField(context),
+                // _buildValidTillField(context),
+                // _buildJobDescriptionField(context),
 
-                _buildJobDescriptionField(context),
-             
+                // Center(
+                //   child: Container(
+                //       height: 45,
+                //       child: CustomElevatedButton(
+                //         backgroundColor: ColorsValue.navyBlueColor,
+                //         text: "Submit",
+                //         onPressed: () {
+                //           // controller.createCheckList();
+                //         },
+                //       )),
+                // ),
+
+                // Expanded(
+                //   child: Row(
+                //     children: [
+                //       (Responsive.isMobile(context) ||
+                //               Responsive.isTablet(context))
+                //           ? Dimens.box0
+                //           : HomeDrawer(),
+                //       Expanded(
+                //         child: Column(
+                //           children: [
+                //             if (Responsive.isMobile(context))
+                //               Expanded(
+                //                 child: NewPermitMobile(),
+                //               ),
+                //             if (Responsive.isDesktop(context))
+                //               Expanded(
+                //                 child: NewPermitWeb(),
+                //               ),
+                //           ],
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+
+                /// CARD
                 Expanded(
-                  child: Row(
-                    children: [
-                      (Responsive.isMobile(context) ||
-                              Responsive.isTablet(context))
-                          ? Dimens.box0
-                          : HomeDrawer(),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            if (Responsive.isMobile(context) ||
-                                Responsive.isTablet(context))
-                              Expanded(
-                                child: NewPermitMobile(),
-                              ),
-                            if (Responsive.isDesktop(context))
-                              Expanded(
-                                child: NewPermitWeb(),
-                              ),
-                          ],
-                        ),
+                  child: Container(
+                    child: Card(
+                      color: Colors.lightBlue.shade50,
+                      elevation: 20,
+                      shadowColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                    ],
+                      child: Padding(
+                          padding: Dimens.edgeInsets10,
+                          child: (() {
+                            if (Responsive.isMobile(context)) {
+                              return SingleChildScrollView(
+                                child: Column(
+                                    ////
+                                    children: [
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 140),
+                                        child: Text(
+                                          'REQUEST A PERMIT TO WORK',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Block/Plot: '),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.6,
+                                              child: Obx(
+                                                ()=> DropdownWidget(
+                                                  dropdownList:controller.blockList,
+                                                  isValueSelected: controller.isBlockSelected.value,
+                                                  selectedValue: controller.selectedBlock.value,
+                                                  onValueChanged:controller.onValueChanged,
+                                                ),
+                                              ),
+                                              // LoginCustomTextfield(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          CustomRichText(
+                                              title: 'Type of permit: '),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.82,
+                                            child: DropdownWidget(
+                                                  dropdownList:controller.typePermitList,
+                                                  isValueSelected: controller.isTypePermitSelected.value,
+                                                  selectedValue: controller.selectedTypePermit.value,
+                                                  onValueChanged:controller.onValueChanged,
+                                                ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          CustomRichText(
+                                              title: 'Equipment Categories: '),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.5,
+                                            child: CustomMultiSelectDialogField(
+                                              initialValue: (controller
+                                                      .selectedEquipmentCategoryIdList
+                                                      .isNotEmpty)
+                                                  ? controller
+                                                      .selectedEquipmentCategoryIdList
+                                                  : [],
+                                              items: controller
+                                                  .equipmentCategoryList
+                                                  .map(
+                                                    (equipmentCategory) =>
+                                                        MultiSelectItem(
+                                                      equipmentCategory?.id,
+                                                      equipmentCategory?.name ??
+                                                          '',
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                              onConfirm:
+                                                  (selectedOptionsList) => {
+                                                controller
+                                                    .equipmentCategoriesSelected(
+                                                        selectedOptionsList),
+                                                print(
+                                                    'Equipment list ${controller.equipmentCategoryList}')
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      _buildStartDateField(context),
+                                      _buildValidTillField(context),
+                                      _buildJobDescriptionField(context),
+
+                                      Center(
+                                        child: Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorsValue.navyBlueColor,
+                                              text: "Submit",
+                                              onPressed: () {
+                                                // controller.createCheckList();
+                                              },
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 90,
+                                      ),
+
+                                      // /
+                                      // / SELECT BLOCK DropDown
+                                      // _buildBlockDropdown(),
+
+                                      // /MULTISELECT CONTROL Equipment Categories
+                                      // _buildEquipmentCategoriesDropdown(),
+
+                                      // / WORK AREA (= EQUIPMENTS) DropDown
+                                      // _buildWorkAreaDropdown(),
+
+                                      // / WORK TYPE  DropDown
+                                      // _buildWorkTypeDropdown(),
+
+                                      // / TOOLS REQUIRED DropDown
+                                      // _buildToolsRequiredDropdown(),
+
+                                      // / ASSIGNED TO DropDown
+                                      // _buildAssignedToDropdown(),
+
+                                      // / JOB TITLE
+                                      // _buildJobTitleField(),
+
+                                      // / JOB DESCRIPTION
+                                      // _buildJobDescriptionField(),
+
+                                      // / BREAKDOWN TIME
+                                      // _buildBreakDownTimeField(context),
+
+                                      // / SAVE BUTTON
+                                      // _buildSaveJobButton(saveButtonStyle),
+
+                                      ///
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+                                    ]),
+                              );
+                            } //
+                            else if (Responsive.isDesktop(context)) {
+                              return Column(children: [
+                                Row(//
+                                    children: [
+                                  Expanded(
+                                    child: Container(
+                                      //height: 1100,
+                                      child: Column(
+                                          //
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            /// SELECT BLOCK DropDown
+                                            // _buildBlockDropdown(),
+
+                                            /// WORK AREA (= EQUIPMENTS) DropDown
+                                            // _buildWorkAreaDropdown(),
+
+                                            /// TOOLS REQUIRED DropDown
+                                            // _buildToolsRequiredDropdown(),
+
+                                            /// JOB TITLE
+                                            // _buildJobTitleField(),
+
+                                            /// BREAKDOWN TIME
+                                            // _buildBreakDownTimeField(
+                                            //     context),
+                                          ]),
+                                    ),
+                                  ),
+                                  Dimens.boxWidth30,
+                                  Expanded(
+                                    child: Container(
+                                      //height: 1100,
+                                      child: Column(
+                                          //
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ///MULTISELECT CONTROL Equipment Categories
+                                            // _buildEquipmentCategoriesDropdown(),
+
+                                            /// WORK TYPE  DropDown
+                                            // _buildWorkTypeDropdown(),
+
+                                            /// ASSIGNED TO DropDown
+                                            // _buildAssignedToDropdown(),
+
+                                            /// JOB DESCRIPTION
+                                            // _buildJobDescriptionField(),
+                                          ]),
+                                    ),
+                                  ),
+                                ]),
+
+                                /// SAVE BUTTON
+                                // _buildSaveJobButton(saveButtonStyle),
+                                // SizedBox(height: 150,)
+                              ]);
+                            }
+                          }())
+                          //
+                          ),
+                    ),
                   ),
                 ),
+                // Expanded(child: NewPermitMobile()),
               ],
             )),
       ),
     );
   }
-   Widget _buildStartDateField(BuildContext context) {
+
+  Widget _buildStartDateField(BuildContext context) {
     return Column(//
         children: [
       Align(
         alignment: Alignment.centerLeft,
         child: Padding(
-          padding: const EdgeInsets.only(left: 25),
+          padding: const EdgeInsets.only(left: 10),
           child: RichText(
             text: TextSpan(
-                text: 'Start Date: ',
-                style: Styles.blackBold16,
-                children: []),
+                text: 'Start Date: ', style: Styles.blackBold16, children: []),
           ),
         ),
       ),
       Dimens.boxHeight5,
       Padding(
-        padding: const EdgeInsets.only(right: 150),
+        padding: const EdgeInsets.only(right: 10, left: 10),
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -285,7 +582,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2 ,
+            width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
               onTap: () {
                 pickDateTime(context);
@@ -338,24 +635,22 @@ class NewPermitScreen extends GetView<NewPermitController> {
     ]);
   }
 
-   Widget _buildValidTillField(BuildContext context) {
+  Widget _buildValidTillField(BuildContext context) {
     return Column(//
         children: [
       Align(
         alignment: Alignment.centerLeft,
         child: Padding(
-          padding: const EdgeInsets.only(left: 25),
+          padding: const EdgeInsets.only(left: 10),
           child: RichText(
             text: TextSpan(
-                text: 'Valid Till: ',
-                style: Styles.blackBold16,
-                children: []),
+                text: 'Valid Till: ', style: Styles.blackBold16, children: []),
           ),
         ),
       ),
       Dimens.boxHeight5,
       Padding(
-        padding: const EdgeInsets.only(right: 150),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -379,7 +674,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
+            width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
               onTap: () {
                 pickDateTimeTill(context);
@@ -432,8 +727,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
     ]);
   }
 
-//Start Date 
-   Future pickDateTime(BuildContext context) async {
+//Start Date
+  Future pickDateTime(BuildContext context) async {
     var dateTime = controller.selectedBreakdownTime.value;
     final date = await pickDate(context);
     if (date == null) {
@@ -478,7 +773,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
     return newDate;
   }
 
-   Future<TimeOfDay?> pickTime(BuildContext context) async {
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
     DateTime dateTime = controller.selectedBreakdownTime.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
@@ -499,7 +794,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
   }
 
   // Valid Till
-Future pickDateTimeTill(BuildContext context) async {
+  Future pickDateTimeTill(BuildContext context) async {
     var dateTime = controller.selectedValidTillTime.value;
     final date = await pickDateTill(context);
     if (date == null) {
@@ -544,7 +839,7 @@ Future pickDateTimeTill(BuildContext context) async {
     return newDate;
   }
 
-   Future<TimeOfDay?> pickTimeTill(BuildContext context) async {
+  Future<TimeOfDay?> pickTimeTill(BuildContext context) async {
     DateTime dateTime = controller.selectedValidTillTime.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
@@ -564,14 +859,13 @@ Future pickDateTimeTill(BuildContext context) async {
     return newTime;
   }
 
-
-   Widget _buildJobDescriptionField(BuildContext context) {
+  Widget _buildJobDescriptionField(BuildContext context) {
     return Column(//
         children: [
       Align(
         alignment: Alignment.centerLeft,
         child: Padding(
-          padding: const EdgeInsets.only(left: 25),
+          padding: const EdgeInsets.only(left: 10),
           child: RichText(
             text: TextSpan(
                 text: 'Job Description: ',
@@ -658,7 +952,4 @@ Future pickDateTimeTill(BuildContext context) async {
       Dimens.boxHeight10,
     ]);
   }
-
-
-
 }
