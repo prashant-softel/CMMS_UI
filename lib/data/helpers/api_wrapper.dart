@@ -74,11 +74,16 @@ class ApiWrapper {
 
               Utility.printILog(uri);
               return returnResponse(response);
-            } on TimeoutException catch (_) {
-              Utility.closeDialog();
+            } catch (e) {
+              print({"error": e});
               return ResponseModel(
                   data: '{"message":"Request timed out"}', hasError: true);
             }
+            //  on TimeoutException catch (_) {
+            //   Utility.closeDialog();
+            //   return ResponseModel(
+            //       data: '{"message":"Request timed out"}', hasError: true);
+            // }
           }
         case Request.put:
 

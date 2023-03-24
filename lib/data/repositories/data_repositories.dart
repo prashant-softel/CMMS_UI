@@ -43,9 +43,20 @@ class DataRepository extends DomainRepository {
     throw UnimplementedError();
   }
 
+  @override
+  Future<String> getUserAccessData(String key) async {
+    //return generateToken();
+    throw UnimplementedError();
+  }
+
   /// Save data in secure storage
   @override
   void saveValueSecurely(String key, String value) {
+    throw UnimplementedError();
+  }
+
+  @override
+  void saveUserAcessData(String key, String value) {
     throw UnimplementedError();
   }
 
@@ -141,7 +152,18 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> getPreventiveCheckList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPreventiveCheckList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getFacilityList({
     String? auth,
     bool? isLoading,
@@ -182,6 +204,16 @@ class DataRepository extends DomainRepository {
       auth: auth,
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getFrequencyList({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getFrequencyList(
+      auth: auth,
+      isLoading: isLoading,
     );
   }
 
@@ -233,6 +265,14 @@ class DataRepository extends DomainRepository {
         job: job,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createCheckList({
+    auth,
+    bool? isLoading,
+  }) async {
+    var response =
+        await connectHelper.createCheckList(auth: auth, isLoading: isLoading);
+    return response;
+  }
 
   ///
   Future<ResponseModel> uploadFiles({

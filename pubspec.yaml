@@ -111,6 +111,7 @@ dependencies:
   flutter_dropzone: ^3.0.5
   http_parser: ^4.0.2
   data_table_2: ^2.4.1
+  rxdart: ^0.27.7
 
 
 dev_dependencies:

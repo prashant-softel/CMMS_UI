@@ -1,13 +1,14 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/login/login_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/custom_textField.dart';
+import '../../widgets/custom_textfield.dart';
 
 class LoginScreen extends GetView<LoginController> {
   LoginScreen({Key? key}) : super(key: key);
-  final LoginController loginController = Get.find();
+  final LoginController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class LoginScreen extends GetView<LoginController> {
                                         50,
                                     child: LoginCustomTextfield(
                                       textController: controller.emailCtrlr,
-                                      ishint: "EmailId",
+                                      ishint: "Email Id",
                                       onChanged: (value) =>
                                           controller.updateemail(value),
                                       widget: Icon(
@@ -131,23 +132,18 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 30,
                                 ),
                                 Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .3) -
-                                          50,
-                                  height: 45,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      textStyle:
-                                          TextStyle(fontSize: Dimens.fourteen),
+                                    width: (MediaQuery.of(context).size.width *
+                                            .3) -
+                                        50,
+                                    height: 45,
+                                    child: CustomElevatedButton(
                                       backgroundColor:
                                           ColorValues.navyBlueColor,
-                                    ),
-                                    onPressed: () {
-                                      controller.login();
-                                    },
-                                    child: const Text('Login'),
-                                  ),
-                                ),
+                                      text: "Login",
+                                      onPressed: () {
+                                        controller.login();
+                                      },
+                                    )),
                               ],
                             )
                           ],
@@ -180,7 +176,7 @@ class LoginScreen extends GetView<LoginController> {
                             ),
                             LoginCustomTextfield(
                               textController: controller.emailCtrlr,
-                              ishint: "EmailId",
+                              ishint: "Email Id",
                               onChanged: (value) =>
                                   controller.updateemail(value),
                               widget: Icon(

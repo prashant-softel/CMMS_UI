@@ -1,4 +1,3 @@
-import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 
 import '../../domain/usecases/login_usecase.dart';

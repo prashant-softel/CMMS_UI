@@ -1,6 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 
 import '../../domain/models/facility_model.dart';
+import '../../domain/models/user_access_model.dart';
 
 class HomePresenter {
   HomePresenter(this.homeUsecase);
@@ -46,6 +47,8 @@ class HomePresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await homeUsecase.getFacilityList();
+  Future<String?> getUserAccessList() async =>
+      await homeUsecase.getUserAccessList();
 
   ///
 }

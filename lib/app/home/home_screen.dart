@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/preventive_maintanance/view/preventive_screen.dart';
+import 'package:cmms/app/preventive_maintanance/view/preventive_maintenance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -18,60 +18,14 @@ class HomeScreen extends GetView<HomeController> {
         Scaffold(
       appBar: Responsive.isDesktop(context)
           ? AppBar(
-              title:
-                  // Text("${controller.username}"),
-                  HeaderWidget(
-                userName: controller.username,
-                // facilityList: controller.facilityList,
-                // isFacilitySelected: controller.isFacilitySelected.value,
-                // selectedFacility: controller.selectedFacility.value
-              ),
+              title: HeaderWidget(),
               elevation: 0,
               toolbarHeight: 100,
             )
           : AppBar(
-              title:
-                  // Obx(
-                  //   () => DropdownButtonHideUnderline(
-                  //     child: DropdownButton(
-                  //       isExpanded: true,
-                  //       value: controller.selectedFacility.value,
-                  //       icon: const Icon(Icons.arrow_downward),
-                  //       elevation: 9,
-                  //       style: const TextStyle(color: Colors.black),
-                  //       onChanged: (String? selectedValue) {
-                  //         // controller.updateDropdownValue(selectedValue ?? "");
-                  //         controller.isFacilitySelected.value = true;
-                  //         controller.selectedFacility.value = selectedValue ?? '';
-                  //         print({
-                  //           "selected value",
-                  //           controller.selectedFacility.value
-                  //         });
-                  //         // controller.switchFacility(selectedValue);
-                  //       },
-                  //       items: controller.facilityList
-                  //           .map<DropdownMenuItem<String>>((facility) {
-                  //         return DropdownMenuItem<String>(
-                  //           value: facility?.name ?? '',
-                  //           child: Text(facility?.name ?? ''),
-                  //         );
-                  //       }).toList(),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  HeaderWidget(
-                userName: controller.username,
-                // facilityList: controller.facilityList,
-                // isFacilitySelected: controller.isFacilitySelected.value,
-                // selectedFacility: controller.selectedFacility.value
-              ),
+              title: HeaderWidget(),
               elevation: 0,
             ),
-
-      // AppBar(
-      //   title: Text('${'hello'.tr}'),
-      // ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -96,9 +50,9 @@ class HomeScreen extends GetView<HomeController> {
                   child: Container(
                     margin: Dimens.edgeInsets16,
                     height: Get.height,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(.3)),
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.grey.withOpacity(.3)),
+                    // ),
                     child: (() {
                       switch (controller.selectedIndex.value) {
                         case 1:

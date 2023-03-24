@@ -2,9 +2,13 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
+import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
+import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
+import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
@@ -17,8 +21,9 @@ import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
-import '../preventive_maintanance/preventive_binding.dart';
-import '../preventive_maintanance/view/preventive_screen.dart';
+import '../preventive_List/preventive_list_binding.dart';
+import '../preventive_List/view/preventive_list_screen.dart';
+import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
 
 // coverage:ignore-file
 
@@ -95,9 +100,19 @@ class AppPages {
       binding: PreventiveBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.create_checkList,
+      name: _Paths.createCheckList,
       page: CreatePriventiveListScreen.new,
-      // binding: CreatePriventiveListBinding(),
+      binding: CreatePriventiveListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.preventiveList,
+      page: PreventiveListScreen.new,
+      binding: PreventiveListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.preventiveCheckPoint,
+      page: PreventiveCheckPointScreen.new,
+      binding: PreventiveCheckPointBinding(),
     ),
   ];
 }

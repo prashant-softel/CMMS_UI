@@ -6,13 +6,13 @@ class TableActionButton extends StatelessWidget {
     Key? key,
     this.label,
     this.onPress,
-    required this.icon,
+    this.icon,
     required this.color,
   }) : super(key: key);
 
   final String? label;
   final Function()? onPress;
-  final IconData icon;
+  final IconData? icon;
   final Color color;
 
   @override
