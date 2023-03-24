@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../navigators/app_pages.dart';
-import '../theme/colors_value.dart';
+import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
@@ -33,7 +33,7 @@ class JobSavedDialog extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             Divider(
-              color: ColorsValue.greyLightColour,
+              color: ColorValues.greyLightColour,
               thickness: 1,
             ),
             Spacer(),

@@ -21,7 +21,7 @@ abstract class Styles {
   );
 
   static TextStyle blue11 = TextStyle(
-    color: ColorsValue.blueColor,
+    color: ColorValues.blueColor,
     fontSize: Dimens.eleven,
   );
 
@@ -71,12 +71,12 @@ abstract class Styles {
   );
 
   static TextStyle semiBoldBlueDark14 = TextStyle(
-      color: ColorsValue.blueDarkColor,
+      color: ColorValues.blueDarkColor,
       fontSize: Dimens.fourteen,
       fontWeight: FontWeight.w500);
 
   static TextStyle black15 = TextStyle(
-    color: ColorsValue.blackColor,
+    color: ColorValues.blackColor,
     fontSize: Dimens.fifteen,
   );
 
@@ -87,30 +87,30 @@ abstract class Styles {
   );
 
   static TextStyle black16 = TextStyle(
-    color: ColorsValue.blackColor,
+    color: ColorValues.blackColor,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle black16W400 = TextStyle(
-    color: ColorsValue.blackColor,
+    color: ColorValues.blackColor,
     fontSize: Dimens.sixteen,
     fontWeight: FontWeight.w400,
   );
 
   static TextStyle black16W500 = TextStyle(
-    color: ColorsValue.blackColor,
+    color: ColorValues.blackColor,
     fontSize: Dimens.sixteen,
     fontWeight: FontWeight.w500,
   );
 
   static TextStyle blackBold16 = TextStyle(
-    color: ColorsValue.blackColor,
+    color: ColorValues.blackColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle blueBold16 = const TextStyle(
-    color: ColorsValue.blueDarkColor,
+    color: ColorValues.blueDarkColor,
     fontWeight: FontWeight.bold,
   );
 
@@ -121,17 +121,17 @@ abstract class Styles {
   );
 
   static TextStyle blue16 = TextStyle(
-    color: ColorsValue.blueColor,
+    color: ColorValues.blueColor,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle blueDark16 = TextStyle(
-    color: ColorsValue.blueDarkColor,
+    color: ColorValues.blueDarkColor,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle blueDark14 = TextStyle(
-    color: ColorsValue.blueDarkColor,
+    color: ColorValues.blueDarkColor,
     fontSize: Dimens.fourteen,
   );
 
@@ -245,13 +245,13 @@ abstract class Styles {
   );
 
   static TextStyle whiteBold12w600 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontWeight: FontWeight.w600,
     fontSize: Dimens.twelve,
   );
 
   static TextStyle white13 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontSize: Dimens.thirteen,
   );
 
@@ -268,7 +268,7 @@ abstract class Styles {
   );
 
   static TextStyle white14 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontSize: Dimens.fourteen,
   );
 
@@ -284,29 +284,29 @@ abstract class Styles {
   );
 
   static TextStyle whiteBold15 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.fifteen,
   );
 
   static TextStyle white16 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle whiteColor16 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle whiteColor16w400 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontWeight: FontWeight.w400,
     fontSize: Dimens.sixteen,
   );
 
   static TextStyle whitecolor16 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontSize: Dimens.sixteen,
   );
 
@@ -383,7 +383,7 @@ abstract class Styles {
   );
 
   static TextStyle whiteBold25 = TextStyle(
-    color: ColorsValue.whiteColor,
+    color: ColorValues.whiteColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.twentyFour,
   );
@@ -534,7 +534,7 @@ abstract class Styles {
     fontSize: Dimens.ten,
   );
   static TextStyle greyLight10 = TextStyle(
-    color: ColorsValue.greyLightColor,
+    color: ColorValues.greyLightColor,
     fontSize: Dimens.ten,
   );
 
@@ -555,7 +555,7 @@ abstract class Styles {
   );
 
   static TextStyle mediumGrey12 = TextStyle(
-    color: ColorsValue.greyColor,
+    color: ColorValues.greyColor,
     fontWeight: FontWeight.w500,
     fontSize: Dimens.twelve,
   );
@@ -618,19 +618,19 @@ abstract class Styles {
   );
 
   static TextStyle greyMediumLight12 = TextStyle(
-    color: ColorsValue.lightGreyTextColor,
+    color: ColorValues.lightGreyTextColor,
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w400,
   );
 
   static TextStyle greyLight14 = TextStyle(
-    color: ColorsValue.lightGreyTextColor,
+    color: ColorValues.lightGreyTextColor,
     fontSize: Dimens.fourteen,
     fontWeight: FontWeight.w400,
   );
 
   static TextStyle greyLight16 = TextStyle(
-    color: ColorsValue.greyColor,
+    color: ColorValues.greyColor,
     fontSize: Dimens.fifteen,
   );
 
@@ -650,12 +650,12 @@ abstract class Styles {
     fontSize: Dimens.fifteen,
   );
   static TextStyle navyBlue12 = TextStyle(
-    color: ColorsValue.navyBlueColor,
+    color: ColorValues.navyBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.twelve,
   );
   static TextStyle navyBlue13 = TextStyle(
-    color: ColorsValue.navyBlueColor,
+    color: ColorValues.navyBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.thirteen,
   );
@@ -722,13 +722,13 @@ abstract class Styles {
   );
 
   static TextStyle pinkBold16w700 = TextStyle(
-    color: ColorsValue.pinkColor,
+    color: ColorValues.pinkColor,
     fontSize: Dimens.fourteen,
     fontWeight: FontWeight.w700,
   );
 
   static TextStyle pinkBold12w400 = TextStyle(
-    color: ColorsValue.pinkColor,
+    color: ColorValues.pinkColor,
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w400,
   );

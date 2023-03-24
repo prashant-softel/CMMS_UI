@@ -1,3 +1,5 @@
+import 'dart:html';
+
 class FileModel {
   String? url;
   String? fileName;
@@ -15,6 +17,17 @@ class FileModel {
     return (mb > 1)
         ? '${mb.toStringAsFixed(2)} MB'
         : '${kb.toStringAsFixed(2)} KB';
+  }
+
+  File createHtmlFileFromModel(FileModel? model) {
+    // Create a blob from the bytes of the file
+    final blob = Blob([model?.bytes], model?.mime);
+
+    // Create a new file with the blob and filename
+    final file = File([blob], model?.fileName ?? "", {'type': model?.mime});
+    return file;
+    // Use the file as needed
+    // ...
   }
 
   ///

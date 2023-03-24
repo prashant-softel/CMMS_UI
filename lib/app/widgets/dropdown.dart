@@ -1,7 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../theme/colors_value.dart';
+import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
 class DropdownWidget extends StatelessWidget {
@@ -41,13 +41,13 @@ class DropdownWidget extends StatelessWidget {
               spreadRadius: 1.0,
             ),
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ),
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: //
@@ -64,7 +64,7 @@ class DropdownWidget extends StatelessWidget {
           dropdownButtonProps: DropdownButtonProps(
             icon: Icon(
               Icons.arrow_drop_down,
-              color: ColorsValue.blackColor,
+              color: ColorValues.blackColor,
             ),
           ),
           popupProps: PopupProps.dialog(
@@ -72,11 +72,11 @@ class DropdownWidget extends StatelessWidget {
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorsValue.blueColor),
+                  borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorsValue.blueColor),
+                  borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
@@ -92,7 +92,7 @@ class DropdownWidget extends StatelessWidget {
               focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: ColorsValue.redColorDark),
+                borderSide: BorderSide(color: ColorValues.redColorDark),
               ),
               contentPadding: Dimens.edgeInsets05_0_5_0,
               hintText: "Select",

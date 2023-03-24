@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../theme/colors_value.dart';
+import '../../theme/color_values.dart';
 import '../create_preventive_checklist_controller.dart';
 
 class CreatePriventiveListScreen
@@ -19,10 +19,10 @@ class CreatePriventiveListScreen
       body: Container(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: ColorsValue.navyBlueColor,
+        backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
         ),
       ),
     );

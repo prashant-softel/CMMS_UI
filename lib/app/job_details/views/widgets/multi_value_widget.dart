@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/colors_value.dart';
+import '../../../theme/color_values.dart';
 
 class MultiValueWidget extends StatelessWidget {
   const MultiValueWidget({
@@ -15,7 +15,7 @@ class MultiValueWidget extends StatelessWidget {
     return Chip(
       elevation: 20,
       padding: EdgeInsets.all(8),
-      backgroundColor: ColorsValue.lightBlueColor,
+      backgroundColor: ColorValues.lightBlueColor,
       shadowColor: Colors.black,
       label: Text(
         equipmentCategory.equipmentCatName,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../theme/colors_value.dart';
+import '../theme/color_values.dart';
 
 class DateRangePicker extends StatefulWidget {
   DateRangePicker({
@@ -56,7 +56,7 @@ class _DateRangePickerState extends State<DateRangePicker> {
                     padding: const EdgeInsets.only(right: 5),
                     child: Icon(
                       Icons.keyboard_arrow_down,
-                      color: ColorsValue.blueColor,
+                      color: ColorValues.blueColor,
                     ),
                   ),
                 ],
@@ -100,7 +100,7 @@ class _DateRangePickerState extends State<DateRangePicker> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: ColorsValue.blueColor, // button text color
+                foregroundColor: ColorValues.blueColor, // button text color
               ),
             ),
           ),

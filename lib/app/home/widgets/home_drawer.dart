@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../theme/colors_value.dart';
+import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../home_controller.dart';
@@ -12,20 +12,17 @@ class HomeDrawer extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return
-
-        ///
+        //
         Obx(
       () =>
-
-          ///
+          //
           Drawer(
-        width: 230,
+        width: Get.width * 0.15,
         child: //
             ScrollConfiguration(
           behavior: const ScrollBehavior().copyWith(overscroll: false),
           child: SingleChildScrollView(
             child: Column(
-                //mainAxisSize: MainAxisSize.min,
                 //
                 children: [
                   ///
@@ -37,11 +34,11 @@ class HomeDrawer extends GetView<HomeController> {
                         ),
                       ),
                     ),
-                  // Dimens.boxHeight20,
+
                   SingleChildScrollView(
                     child: Container(
                       height: MediaQuery.of(context).size.height,
-                      color: Color(0xff31576D),
+                      color: ColorValues.appDarkBlueColor,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: controller.menuItems.length,
@@ -51,11 +48,12 @@ class HomeDrawer extends GetView<HomeController> {
                           return ListTile(
                             dense: true,
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 5.0),
+                              horizontal: 20.0,
+                              vertical: 5.0,
+                            ),
                             visualDensity:
                                 VisualDensity(horizontal: 0, vertical: -3),
 
-                            //leading: Icon(item.icon),
                             title: Row(
                               children: [
                                 Image.asset(
@@ -63,9 +61,7 @@ class HomeDrawer extends GetView<HomeController> {
                                   height: 15,
                                   color: Color(0xffD2D0D0),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                Dimens.boxWidth10,
                                 Text(
                                   item.title,
                                   style: TextStyle(

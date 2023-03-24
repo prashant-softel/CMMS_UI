@@ -70,7 +70,7 @@ class LoginScreen extends GetView<LoginController> {
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: ColorsValue.greyColor),
+                                      color: ColorValues.greyColor),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -86,7 +86,7 @@ class LoginScreen extends GetView<LoginController> {
                                           controller.updateemail(value),
                                       widget: Icon(
                                         Icons.email_outlined,
-                                        color: ColorsValue.greyLightColor,
+                                        color: ColorValues.greyLightColor,
                                       ),
                                     )),
                                 SizedBox(
@@ -108,7 +108,7 @@ class LoginScreen extends GetView<LoginController> {
                                         controller.passwordVisible.value
                                             ? Icons.visibility_off
                                             : Icons.visibility,
-                                        color: ColorsValue.greyLightColor,
+                                        color: ColorValues.greyLightColor,
                                       ),
                                       onPressed: () =>
                                           controller.passwordVisible.toggle(),
@@ -124,7 +124,7 @@ class LoginScreen extends GetView<LoginController> {
                                     'Forgot Password',
                                     style: TextStyle(
                                         fontSize: 13,
-                                        color: ColorsValue.greyColor),
+                                        color: ColorValues.greyColor),
                                   ),
                                 ),
                                 SizedBox(
@@ -140,7 +140,7 @@ class LoginScreen extends GetView<LoginController> {
                                       textStyle:
                                           TextStyle(fontSize: Dimens.fourteen),
                                       backgroundColor:
-                                          ColorsValue.navyBlueColor,
+                                          ColorValues.navyBlueColor,
                                     ),
                                     onPressed: () {
                                       controller.login();
@@ -185,7 +185,7 @@ class LoginScreen extends GetView<LoginController> {
                                   controller.updateemail(value),
                               widget: Icon(
                                 Icons.email_outlined,
-                                color: ColorsValue.greyLightColor,
+                                color: ColorValues.greyLightColor,
                               ),
                             ),
                             SizedBox(
@@ -202,7 +202,7 @@ class LoginScreen extends GetView<LoginController> {
                                   controller.passwordVisible.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color: ColorsValue.greyLightColor,
+                                  color: ColorValues.greyLightColor,
                                 ),
                                 onPressed: () =>
                                     controller.passwordVisible.toggle(),
@@ -228,7 +228,7 @@ class LoginScreen extends GetView<LoginController> {
                                 style: ElevatedButton.styleFrom(
                                   textStyle:
                                       TextStyle(fontSize: Dimens.fourteen),
-                                  backgroundColor: ColorsValue.navyBlueColor,
+                                  backgroundColor: ColorValues.navyBlueColor,
                                 ),
                                 onPressed: () {
                                   print("hiii");

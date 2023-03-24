@@ -1,9 +1,8 @@
-import 'package:cmms/app/controllers/dropzone_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../domain/models/file_model.dart';
-import '../theme/colors_value.dart';
+import '../controllers/file_upload_controller.dart';
+import '../theme/color_values.dart';
 
 class FileUploadDetailsWidget extends StatelessWidget {
   FileUploadDetailsWidget({super.key});
@@ -21,7 +20,7 @@ class FileUploadDetailsWidget extends StatelessWidget {
           Table(
               border: TableBorder.all(
                 style: BorderStyle.solid,
-                color: ColorsValue.blackColor,
+                color: ColorValues.blackColor,
               ),
               //
               children: [
@@ -51,11 +50,11 @@ class FileUploadDetailsWidget extends StatelessWidget {
                 child: Text('Remove'),
               ),
             ]),
-            for (FileModel _file in _dropzoneController.droppedFiles)
+            for (var _file in _dropzoneController.files)
               TableRow(children: [
                 Container(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('-'),
+                  child: Text('${_file.name}'),
                 ),
                 Container(
                   padding: EdgeInsets.all(8.0),
@@ -71,7 +70,12 @@ class FileUploadDetailsWidget extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('-'),
+                  child: //
+                      LinearProgressIndicator(
+                    color: ColorValues.appLightBlueColor,
+                    //value: _file.
+                    value: _dropzoneController.progress.value / 100,
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.all(8.0),
