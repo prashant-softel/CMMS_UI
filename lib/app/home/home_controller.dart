@@ -33,7 +33,7 @@ class HomeController extends GetxController {
   String categoryIds = '';
 
   Rx<String> selectedFacility = ''.obs;
-  String username = '';
+  Rx<String> username = ''.obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = false.obs;
@@ -102,9 +102,9 @@ class HomeController extends GetxController {
   ///
 
   @override
-  void onInit() async {
+  void onInit() async {   
+
     getFacilityList();
-    getuserAccessData();
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
@@ -119,18 +119,6 @@ class HomeController extends GetxController {
         facilityList.add(facility);
       }
       selectedFacility.value = facilityList[0]?.name ?? '';
-    }
-  }
-
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await homePresenter.getUserAccessList();
-
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      username = userAccess.user_name ?? "";
-      // userName = userAccess.user_name ?? "";
     }
   }
 

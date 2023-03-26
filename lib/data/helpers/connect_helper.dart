@@ -194,6 +194,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getCheckPointlist({
+    required String auth,
+    bool? isLoading,
+    int? selectedchecklistId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   Future<ResponseModel> getJobDetails({
     required String auth,
     bool? isLoading,
@@ -372,23 +389,29 @@ class ConnectHelper {
 
   Future<ResponseModel> createCheckList({
     required String auth,
-    bool? isLoading,
+    bool? isLoading, required checklistJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/CreateCheckList',
       Request.post,
-      [
-        {
-          "checkList_number": "IV _Test Check List 005",
-          "type": 1,
-          "facility_id": 45,
-          "category_id": 2,
-          "frequency_id": 2,
-          "manPower": 16,
-          "duration": 2,
-          "status": 1
-        }
-      ],
+     checklistJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+    Future<ResponseModel> createCheckpoint({
+    required String auth,
+    bool? isLoading, required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/CreateCheckPoint',
+      Request.post,
+     checkpointJsonString,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',

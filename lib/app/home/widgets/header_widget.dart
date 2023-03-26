@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HeaderWidget extends GetView<HomeController> {
-  const HeaderWidget({
+   HeaderWidget({
     super.key,
   });
   @override
@@ -41,7 +41,7 @@ class HeaderWidget extends GetView<HomeController> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15),border: Border.all(color: ColorsValue.greyLightColour),
                     boxShadow: [
                       BoxShadow(
                         color:

@@ -14,4 +14,24 @@ class PreventiveCheckPointPresenter {
         type: type,
         isLoading: isLoading ?? false,
       );
+        Future<bool> createCheckPoint({
+    checkpointJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+     preventiveCheckPointUsecase.createCheckpoint(
+      checkpointJsonString: checkpointJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+  getCheckPointlist({
+    int? selectedchecklistId,
+    bool? isLoading,
+  }) async =>
+      await preventiveCheckPointUsecase.getCheckPointlist(
+        selectedchecklistId: selectedchecklistId ?? 0,
+      
+        isLoading: isLoading ?? false,
+      );
 }
