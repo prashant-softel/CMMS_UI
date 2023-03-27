@@ -265,6 +265,7 @@ class DataRepository extends DomainRepository {
         job: job,
         isLoading: isLoading ?? false,
       );
+      
   Future<ResponseModel> createCheckList({
     auth,
     bool? isLoading,
@@ -273,6 +274,17 @@ class DataRepository extends DomainRepository {
         await connectHelper.createCheckList(auth: auth, isLoading: isLoading);
     return response;
   }
+
+  Future<ResponseModel> createNewPermit({
+    required String auth,
+     newPermit,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createNewPermit(
+        auth: auth,
+         newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
 
   ///
 }

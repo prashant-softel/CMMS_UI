@@ -60,4 +60,14 @@ class NewPermitUsecase {
 
   Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
       await repository.getTypePermitList(isLoading);
+
+  Future<Map<String, dynamic>> createNewPermit({
+    newPermit,
+    bool? isLoading,
+  }) async =>
+      await repository.createNewPermit(
+         newPermit,
+        isLoading,
+      );
+
 }

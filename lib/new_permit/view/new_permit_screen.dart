@@ -288,7 +288,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                       child: Padding(
                           padding: Dimens.edgeInsets10,
                           child: (() {
-                            if (Responsive.isMobile(context)) {
+                           // if (Responsive.isMobile(context)) {
                               return SingleChildScrollView(
                                 child: Column(
                                     ////
@@ -426,7 +426,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   ColorsValue.navyBlueColor,
                                               text: "Submit",
                                               onPressed: () {
-                                                // controller.createCheckList();
+                                                 controller.createNewPermit();
                                               },
                                             )),
                                       ),
@@ -471,65 +471,65 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                       ),
                                     ]),
                               );
-                            } //
-                            else if (Responsive.isDesktop(context)) {
-                              return Column(children: [
-                                Row(//
-                                    children: [
-                                  Expanded(
-                                    child: Container(
-                                      //height: 1100,
-                                      child: Column(
-                                          //
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            /// SELECT BLOCK DropDown
-                                            // _buildBlockDropdown(),
+                         //   } //
+                            // else if (Responsive.isDesktop(context)) {
+                            //   return Column(children: [
+                            //     Row(//
+                            //         children: [
+                            //       Expanded(
+                            //         child: Container(
+                            //           //height: 1100,
+                            //           child: Column(
+                            //               //
+                            //               mainAxisSize: MainAxisSize.max,
+                            //               children: [
+                            //                 /// SELECT BLOCK DropDown
+                            //                 // _buildBlockDropdown(),
 
-                                            /// WORK AREA (= EQUIPMENTS) DropDown
-                                            // _buildWorkAreaDropdown(),
+                            //                 /// WORK AREA (= EQUIPMENTS) DropDown
+                            //                 // _buildWorkAreaDropdown(),
 
-                                            /// TOOLS REQUIRED DropDown
-                                            // _buildToolsRequiredDropdown(),
+                            //                 /// TOOLS REQUIRED DropDown
+                            //                 // _buildToolsRequiredDropdown(),
 
-                                            /// JOB TITLE
-                                            // _buildJobTitleField(),
+                            //                 /// JOB TITLE
+                            //                 // _buildJobTitleField(),
 
-                                            /// BREAKDOWN TIME
-                                            // _buildBreakDownTimeField(
-                                            //     context),
-                                          ]),
-                                    ),
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Expanded(
-                                    child: Container(
-                                      //height: 1100,
-                                      child: Column(
-                                          //
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            ///MULTISELECT CONTROL Equipment Categories
-                                            // _buildEquipmentCategoriesDropdown(),
+                            //                 /// BREAKDOWN TIME
+                            //                 // _buildBreakDownTimeField(
+                            //                 //     context),
+                            //               ]),
+                            //         ),
+                            //       ),
+                            //       Dimens.boxWidth30,
+                            //       Expanded(
+                            //         child: Container(
+                            //           //height: 1100,
+                            //           child: Column(
+                            //               //
+                            //               mainAxisSize: MainAxisSize.max,
+                            //               children: [
+                            //                 ///MULTISELECT CONTROL Equipment Categories
+                            //                 // _buildEquipmentCategoriesDropdown(),
 
-                                            /// WORK TYPE  DropDown
-                                            // _buildWorkTypeDropdown(),
+                            //                 /// WORK TYPE  DropDown
+                            //                 // _buildWorkTypeDropdown(),
 
-                                            /// ASSIGNED TO DropDown
-                                            // _buildAssignedToDropdown(),
+                            //                 /// ASSIGNED TO DropDown
+                            //                 // _buildAssignedToDropdown(),
 
-                                            /// JOB DESCRIPTION
-                                            // _buildJobDescriptionField(),
-                                          ]),
-                                    ),
-                                  ),
-                                ]),
+                            //                 /// JOB DESCRIPTION
+                            //                 // _buildJobDescriptionField(),
+                            //               ]),
+                            //         ),
+                            //       ),
+                            //     ]),
 
-                                /// SAVE BUTTON
-                                // _buildSaveJobButton(saveButtonStyle),
-                                // SizedBox(height: 150,)
-                              ]);
-                            }
+                            //     /// SAVE BUTTON
+                            //     // _buildSaveJobButton(saveButtonStyle),
+                            //     // SizedBox(height: 150,)
+                            //   ]);
+                            // }
                           }())
                           //
                           ),
@@ -584,10 +584,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
+              
               onTap: () {
                 pickDateTime(context);
               },
-              controller: controller.breakdownTimeCtrlr,
+              controller: controller.startDateTimeCtrlr,
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorsValue.whiteColor,
@@ -748,11 +749,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
       time.minute,
     );
     controller.selectedBreakdownTime.value = dateTime;
-    controller.breakdownTimeCtrlr
+    controller.startDateTimeCtrlr
       ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: controller.breakdownTimeCtrlr.text.length,
+          offset: controller.startDateTimeCtrlr.text.length,
           affinity: TextAffinity.upstream,
         ),
       );

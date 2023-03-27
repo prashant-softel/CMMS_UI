@@ -179,6 +179,40 @@ class Repository {
     }
   }
 
+  //create New Permit
+  Future<Map<String, dynamic>> createNewPermit(
+     newPermit,
+    bool? isLoading,
+  ) async {
+    try {
+       print({"NewPermit",newPermit});
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.createNewPermit(
+        auth: auth,
+         newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+            print('Response Create Permit: ${res.data}');
+
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
+
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -603,6 +637,8 @@ class Repository {
         job: job,
         isLoading: isLoading ?? false,
       );
+        print('SaveJobData: ${res.data}');
+
 
       if (!res.hasError) {
         if (res.errorCode == 200) {

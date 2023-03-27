@@ -362,6 +362,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  //Create New Permit
+   Future<ResponseModel> createNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermit',
+      Request.post,
+       newPermit,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getUserAccessList({
     required String auth,
     bool? isLoading,

@@ -69,6 +69,17 @@ class NewPermitPresenter {
     bool? isLoading,
   }) async =>
       await newPermitUsecase.createCheckList(isLoading: isLoading);
+
+  Future<Map<String, dynamic>?> createNewPermit({
+     newPermit,
+    required bool isLoading,
+  }) async {
+    return newPermitUsecase.createNewPermit(
+       newPermit: newPermit,
+      isLoading: isLoading,
+    );
+  }
+
 }
 
 

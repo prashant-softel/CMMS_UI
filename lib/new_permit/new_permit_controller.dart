@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/app/preventive_maintanance/preventive.dart';
+import 'package:cmms/app/widgets/create_permit_dialog.dart';
+import 'package:cmms/app/widgets/job_saved_dialog.dart';
 import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
+import 'package:cmms/domain/models/add_job_model.dart';
 import 'package:cmms/domain/models/block_model.dart';
+import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
@@ -32,6 +39,18 @@ class NewPermitController extends GetxController {
   NewPermitPresenter permitPresenter;
   JobListPresenter jobListPresenter;
 
+  // create permit
+  Rx<bool> isFormInvalid = false.obs;
+  int selectedFacility_id = 0;
+  RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
+
+
+
+
+
+
+
+
   String username = '';
   Rx<String> selectedFacility = ''.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -44,9 +63,15 @@ class NewPermitController extends GetxController {
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;
   Rx<String> selectedTypePermit = ''.obs;
+  Rx<String> selectedTypeOfPermit = ''.obs;
+  Rx<bool> isTypePermit = true.obs;
+  Rx<String> selectedStartDate = ''.obs;
+  Rx<bool> isStartdate = true.obs;
+  Rx<bool> isEnddate = true.obs;
 
 
-  var breakdownTimeCtrlr = TextEditingController();
+
+  var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
 
   var jobDescriptionCtrlr = TextEditingController();
@@ -58,6 +83,8 @@ class NewPermitController extends GetxController {
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<bool> isBlockSelected = true.obs;
   Rx<String> selectedBlock = ''.obs;
+  Rx<bool> isstartdateFieldSelected = true.obs;
+
   int selectedBlockId = 0;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
@@ -260,6 +287,117 @@ Future<void> getBlocksList(int _facilityId) async {
     }
   }
 
+  void checkForm() {
+    if (selectedFacility.value == '') {
+      isFacilitySelected.value = false;
+    }
+    if (selectedBlock.value == '') {
+      isBlockSelected.value = false;
+    }
+    if (selectedTypeOfPermit.value == '') {
+      isTypePermit.value = false;
+    }
+    if (startDateTimeCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'Start date Field cannot be empty');
+    }
+    if (validTillTimeCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'End date Field cannot be empty');
+    }
+    if(selectedTypePermit.value == ''){
+      isTypePermitSelected.value = false;
+
+    }
+    if (jobDescriptionCtrlr.text.trim().length < 3) {
+      isJobDescriptionInvalid.value = true;
+    }
+    if (isAssignedToSelected.value == false ||
+        isFacilitySelected.value == false ||
+        isBlockSelected.value == false ||
+        isJobDescriptionInvalid == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
+  void createNewPermit() async {
+    {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+      //
+      int facility_id = selectedFacility_id;
+      // String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
+      String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
+
+      // List<Employeelist> employee_list= <Employeelist>[];
+      // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
+      // List<LotoList> loto_list = <LotoList>[];
+
+
+
+      // for (var _selectedWorkArea in selectedWorkAreaList) {
+      //   var json = '{"asset_id": ${_selectedWorkArea?.id},'
+      //       '"category_ids": ${_selectedWorkArea?.categoryId}}';
+
+      //   // CreatePermitModel _employeeList = addCreatePermitModelFromJson(json);
+      //   // employee_list.add(_employeeList as Employeelist);
+      //   // CreatePermitModel _safetyQuestionList = addCreatePermitModelFromJson(json);
+      //   // safety_question_list.add(_safetyQuestionList as Safetyquestionlist);
+      //   // CreatePermitModel _lotoList = addCreatePermitModelFromJson(json);
+      //   // loto_list.add(_lotoList as LotoList);
+        
+
+      //   // SafetyQuestionList _safetyQuestionList = addSafetyQuestionListFromJson(json);
+      //   // safety_question_list.add(_safetyQuestionList);
+      // }
+
+      CreatePermitModel createPermitModel = CreatePermitModel(
+        facility_id: 0,
+        blockId: selectedBlockId,
+        description: _description, 
+        approver_id: 0, 
+        category_ids: [], 
+        block_ids: [], 
+        employee_list: [], 
+        start_datetime: "2022-12-26",
+        end_datetime: "2022-12-27", 
+        is_isolation_required: true, 
+        isolated_category_ids: [], 
+        issuer_id: 0, 
+        lotoId: 0, 
+        safety_question_list: [], 
+        sop_type_id: 0, 
+        typeId: 0, 
+        user_id: 2, 
+        work_type_id: 0, 
+        Loto_list: [], 
+      );
+       var jobJsonString = json.encode(createPermitModel);
+       print({"jsonData5",jobJsonString});
+      Map<String, dynamic>? responseNewPermitCreated =
+          await permitPresenter.createNewPermit(
+         newPermit: jobJsonString,
+        isLoading: true,
+      );
+      if (responseNewPermitCreated != null) {
+         var _facilityId = responseNewPermitCreated["newPermit"];
+         showAlertDialog(facility_id: _facilityId);
+        // print('NewCreated:$_facilityId');
+      }
+    }
+  }
+
+  static void showAlertDialog({
+    int? facility_id,
+    String? message,
+    String? title,
+    Function()? onPress,
+  }) async {
+    await Get.dialog<void>(CreateNewPermitDialog());
+  }
+
    void createCheckList() async {
     {
       await permitPresenter.createCheckList(
@@ -282,7 +420,7 @@ Future<void> getBlocksList(int _facilityId) async {
   //         }
   //         selectedFacility.value = value;
   //       }
-    Future<void> createNewPermit() async {
+    Future<void> createNewPermits() async {
     Get.toNamed(
       Routes.new_permit,
       
