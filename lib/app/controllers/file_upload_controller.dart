@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:cmms/domain/services/file_upload_service.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:get/get.dart';
-
 import '../../domain/repositories/local_storage_keys.dart';
 
 class DropzoneController extends GetxController {

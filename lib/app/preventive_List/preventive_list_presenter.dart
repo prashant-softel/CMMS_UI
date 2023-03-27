@@ -30,13 +30,15 @@ class PreventiveListPresenter {
       await preventivelistUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<void> createChecklistNumber({
-    auth,
+  Future<bool> createChecklistNumber({
+    checklistJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    return preventivelistUsecase.createChecklistNumber(
+     preventivelistUsecase.createChecklistNumber(
+      checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );
+    return true;
   }
 }

@@ -83,7 +83,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                 ontap: () {
                   controller.createChecklist();
                 }),
-            if (Responsive.isDesktop(context))
+          //  if (Responsive.isDesktop(context))
               _priventiveList(
                   tittle: "Check Point Creator",
                   ontap: () {

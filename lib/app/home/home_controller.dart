@@ -102,10 +102,13 @@ class HomeController extends GetxController {
   ///
 
   @override
-  void onInit() async {
-    getFacilityList();
-    getuserAccessData();
-    Future.delayed(Duration(seconds: 1), () {
+  void onInit() async {   
+ Future.delayed(Duration(seconds: 1), () {
+      getFacilityList();
+    });
+ Future.delayed(Duration(seconds: 1), () {
+      getuserAccessData();
+    });    Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
     super.onInit();
@@ -121,7 +124,6 @@ class HomeController extends GetxController {
       selectedFacility.value = facilityList[0]?.name ?? '';
     }
   }
-
   Future<void> getuserAccessData() async {
     final _userAccessList = await homePresenter.getUserAccessList();
 
@@ -133,7 +135,6 @@ class HomeController extends GetxController {
       // userName = userAccess.user_name ?? "";
     }
   }
-
   void getInventoryList() async {
     final list = await homePresenter.getInventoryList(
       isLoading: true,

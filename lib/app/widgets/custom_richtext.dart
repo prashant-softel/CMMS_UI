@@ -1,8 +1,6 @@
-import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 
-// import '../theme/colors_value.dart';
-import '../theme/styles.dart';
 
 class CustomRichText extends StatelessWidget {
   String title;

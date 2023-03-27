@@ -6,7 +6,6 @@ import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textfield.dart';
-import '../../widgets/dropdown.dart';
 import '../preventive_check_point_controller.dart';
 
 class PreventiveCheckPointContentWeb
@@ -91,6 +90,27 @@ class PreventiveCheckPointContentWeb
                                   SizedBox(
                                     height: 30,
                                   ),
+                                      Visibility(
+                                    visible: controller.isSuccess.value,
+                                    child: Center(
+                                      child: Wrap(
+                                        children: [
+
+                                          Text(
+                                            "CheckPoint added Successfully in the List.",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromARGB(
+                                                    255, 24, 243, 123)),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -127,16 +147,20 @@ class PreventiveCheckPointContentWeb
                                                   .value = true;
                                               controller.selectedchecklist
                                                   .value = selectedValue ?? '';
+
+                                              controller.getCheckPointlist(
+                                                  selectedchecklistId:
+                                                      selectedValue.toString());
                                             },
                                             item: controller.checkList
                                                 .map<DropdownMenuItem<String>>(
-                                                    (facility) {
+                                                    (list) {
                                               return DropdownMenuItem<String>(
-                                                value: facility
-                                                        ?.checklist_number ??
-                                                    '',
-                                                child: Text(facility
-                                                        ?.checklist_number ??
+                                                value:
+                                                    list?.id.toString() ?? '',
+                                                child: Text(list
+                                                        ?.checklist_number
+                                                        .toString() ??
                                                     ''),
                                               );
                                             }).toList(),
@@ -148,6 +172,7 @@ class PreventiveCheckPointContentWeb
                                   SizedBox(
                                     height: 10,
                                   ),
+
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -180,6 +205,8 @@ class PreventiveCheckPointContentWeb
                                               30,
                                           child: LoginCustomTextfield(
                                             ishint: 'Enter Check Point',
+                                            textController:
+                                                controller.checkPointCtrlr,
                                           )),
                                     ],
                                   ),
@@ -218,6 +245,8 @@ class PreventiveCheckPointContentWeb
                                               30,
                                           child: LoginCustomTextfield(
                                             ishint: 'Enter Requirement',
+                                            textController:
+                                                controller.requirementCtrlr,
                                           )),
                                     ],
                                   ),
@@ -262,7 +291,15 @@ class PreventiveCheckPointContentWeb
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        controller
+                                            .createCheckpoint()
+                                            .then((value) {if(value==true)
+                                                                                      controller.issuccessCreatecheckpont();
+
+
+                                        });
+                                      },
                                       text: 'Create Check Point')),
                             ],
                           ),
@@ -306,43 +343,44 @@ class PreventiveCheckPointContentWeb
                             Divider(
                               color: ColorValues.greyLightColour,
                             ),
-                            Container(
-                              width: 300,
-                              margin: EdgeInsets.only(left: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 236, 234, 234)
-                                        .withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 15.0),
-                                child: CustomDropDownButton(
-                                  value: controller.selectedchecklist.value,
-                                  onChange: (String? selectedValue) {
-                                    controller.isSelectedchecklist.value = true;
-                                    controller.selectedchecklist.value =
-                                        selectedValue ?? '';
-                                  },
-                                  item: controller.checkList
-                                      .map<DropdownMenuItem<String>>(
-                                          (facility) {
-                                    return DropdownMenuItem<String>(
-                                      value: facility?.checklist_number ?? '',
-                                      child: Text(
-                                          facility?.checklist_number ?? ''),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
+                            // Container(
+                            //   width: 300,
+                            //   margin: EdgeInsets.only(left: 10),
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     borderRadius: BorderRadius.circular(5),
+                            //     boxShadow: [
+                            //       BoxShadow(
+                            //         color: Color.fromARGB(255, 236, 234, 234)
+                            //             .withOpacity(0.5),
+                            //         spreadRadius: 2,
+                            //         blurRadius: 5,
+                            //         offset: Offset(0, 2),
+                            //       ),
+                            //     ],
+                            //   ),
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.only(left: 15.0),
+                            //     child: CustomDropDownButton(
+                            //       value: controller.selectedchecklist.value,
+                            //       onChange: (String? selectedValue) {
+                            //         controller.isSelectedchecklist.value = true;
+                            //         controller.selectedchecklist.value =
+                            //             selectedValue ?? '';
+                            //       },
+                            //       item: controller.checkList
+                            //           .map<DropdownMenuItem<String>>(
+                            //               (facility) {
+                            //         return DropdownMenuItem<String>(
+                            //           value: facility?.id.toString() ?? '',
+                            //           child: Text(
+                            //               facility?.id.toString() ?? ''),
+                            //         );
+                            //       }).toList(),
+                            //     ),
+                            //   ),
+                            // ),
+
                             SizedBox(
                               height: 15,
                             ),
@@ -385,96 +423,154 @@ class PreventiveCheckPointContentWeb
                             SizedBox(
                               height: 20,
                             ),
-                            Expanded(
-                                child: ScrollableTableView(
-                              columns: [
-                                "Check List No.",
-                                "Check Point",
-                                "Requirement",
-                                "Upload Image?",
-                                "Action",
-                              ].map((column) {
-                                return TableViewColumn(
-                                  label: column,
-                                  minWidth: Get.width * 0.16,
-                                );
-                              }).toList(),
-                              rows: [
-                                [
-                                  "PR100dgWER097BHSDBHBHF",
-                                  "Visivility check the outer",
-                                  "ther is not be any damage andit must be free",
-                                  "yes",
-                                  "Action"
-                                ],
-                                [
-                                  "PR100dgWER097BHSDBHBHF",
-                                  "Visivility check the outer",
-                                  "ther is not be any damage andit must be free",
-                                  "yes",
-                                  "Action"
-                                ],
-                                [
-                                  "PR100dgWER097BHSDBHBHF",
-                                  "Visivility check the outer",
-                                  "ther is not be any damage andit must be free",
-                                  "yes",
-                                  "Action"
-                                ],
-                                [
-                                  "PR100dgWER097BHSDBHBHF",
-                                  "Visivility check the outer",
-                                  "ther is not be any damage andit must be free",
-                                  "yes",
-                                  "Action"
-                                ],
-                                [
-                                  "PR100dgWER097BHSDBHBHF",
-                                  "Visivility check the outer",
-                                  "ther is not be any damage andit must be free",
-                                  "yes",
-                                  "Action"
-                                ],
-                              ].map((record) {
-                                return TableViewRow(
-                                  height: 60,
-                                  cells: record.map((value) {
-                                    return TableViewCell(
-                                      child: (value == "Action")
-                                          ? Wrap(children: [
-                                              TableActionButton(
-                                                color: Colors.blue,
-                                                icon: Icons.edit,
-                                                label: 'Edit',
-                                                onPress: () {},
-                                              ),
-                                              TableActionButton(
-                                                color: Colors.red,
-                                                icon: Icons.delete,
-                                                label: 'Delete',
-                                                onPress: () {},
-                                              ),
-                                            ])
-                                          : (value == "yes")
-                                              ? Wrap(
-                                                  children: [
-                                                    Text("No"),
-                                                    Switch.adaptive(
-                                                        activeColor: ColorValues
-                                                            .redColor,
-                                                        value: false,
-                                                        onChanged: (value) {
-                                                          // controller.toggle();
-                                                        }),
-                                                    Text("Yes"),
-                                                  ],
-                                                )
-                                              : Text(value),
-                                    );
-                                  }).toList(),
-                                );
-                              }).toList(),
-                            )),
+                            controller.preventiveCheckpoint!.length < 1
+                                ? Container()
+                                : Expanded(
+                                    child: ScrollableTableView(
+                                    paginationController:
+                                        controller.paginationController,
+                                    columns: [
+                                      "Check List No.",
+                                      "Check Point",
+                                      "Requirement",
+                                      "Upload Image?",
+                                      "Action",
+                                    ].map((column) {
+                                      return TableViewColumn(
+                                        label: column,
+                                        minWidth: Get.width * 0.16,
+                                      );
+                                    }).toList(),
+                                    rows: [
+                                      ...List.generate(
+                                        controller
+                                                .preventiveCheckpoint?.length ??
+                                            0,
+                                        (index) {
+                                          var preventiveCheckPointModelListDetails =
+                                              controller
+                                                  .preventiveCheckpoint?[index];
+                                          return [
+                                            '${preventiveCheckPointModelListDetails?.checklist_name}',
+                                            '${preventiveCheckPointModelListDetails?.check_point}',
+                                            '${preventiveCheckPointModelListDetails?.requirement}',
+                                            '${preventiveCheckPointModelListDetails?.is_document_required}',
+                                            'Action',
+                                          ];
+                                        },
+                                      ),
+                                    ].map((record) {
+                                      return TableViewRow(
+                                        height: 60,
+                                        cells: record.map((value) {
+                                          return TableViewCell(
+                                            child: (value == "Action")
+                                                ? Wrap(children: [
+                                                    TableActionButton(
+                                                      color: Colors.blue,
+                                                      icon: Icons.edit,
+                                                      label: 'Edit',
+                                                      onPress: () {},
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Colors.red,
+                                                      icon: Icons.delete,
+                                                      label: 'Delete',
+                                                      onPress: () {},
+                                                    ),
+                                                  ])
+                                                : (value == "0" || value == '1')
+                                                    ? Wrap(
+                                                        children: [
+                                                          Text("No"),
+                                                          Switch.adaptive(
+                                                              activeColor:
+                                                                  ColorValues
+                                                                      .greenColor,
+                                                              value:
+                                                                  value == "1"
+                                                                      ? true
+                                                                      : false,
+                                                              onChanged:
+                                                                  (value) {
+                                                                // controller.toggle();
+                                                              }),
+                                                          Text("Yes"),
+                                                        ],
+                                                      )
+                                                    : Text(value),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+                                  )),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              child: ValueListenableBuilder(
+                                  valueListenable:
+                                      controller.paginationController,
+                                  builder: (context, value, child) {
+                                    return Row(children: [
+                                      Text(
+                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                      Row(children: [
+                                        IconButton(
+                                          onPressed: controller
+                                                      .paginationController
+                                                      .currentPage <=
+                                                  1
+                                              ? null
+                                              : () {
+                                                  controller
+                                                      .paginationController
+                                                      .previous();
+                                                },
+                                          iconSize: 20,
+                                          splashRadius: 20,
+                                          icon: Icon(
+                                            Icons.arrow_back_ios_new_rounded,
+                                            color: controller
+                                                        .paginationController
+                                                        .currentPage <=
+                                                    1
+                                                ? Colors.black26
+                                                : Theme.of(context)
+                                                    .primaryColor,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: controller
+                                                      .paginationController
+                                                      .currentPage >=
+                                                  controller
+                                                      .paginationController
+                                                      .pageCount
+                                              ? null
+                                              : () {
+                                                  controller
+                                                      .paginationController
+                                                      .next();
+                                                },
+                                          iconSize: 20,
+                                          splashRadius: 20,
+                                          icon: Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: controller
+                                                        .paginationController
+                                                        .currentPage >=
+                                                    controller
+                                                        .paginationController
+                                                        .pageCount
+                                                ? Colors.black26
+                                                : Theme.of(context)
+                                                    .primaryColor,
+                                          ),
+                                        ),
+                                      ]),
+                                    ]);
+                                  }),
+                            ),
                           ],
                         ),
                       ),
