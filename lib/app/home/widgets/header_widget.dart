@@ -13,7 +13,7 @@ class HeaderWidget extends GetView<HomeController> {
     return Obx(
       () => Container(
         decoration:
-            new BoxDecoration(color: ColorsValue.whiteColor, boxShadow: [
+            new BoxDecoration(color: ColorValues.whiteColor, boxShadow: [
           new BoxShadow(
               color: Color.fromARGB(255, 240, 237, 237),
               offset: Offset(0.0, 0.0)),
@@ -74,13 +74,13 @@ class HeaderWidget extends GetView<HomeController> {
             Spacer(),
             if (Responsive.isDesktop(context))
               Icon(Icons.notifications_active,
-                  color: ColorsValue.greyLightColor),
+                  color: ColorValues.greyLightColor),
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
               ),
-              color: ColorsValue.blueMediumColor,
+              color: ColorValues.blueMediumColor,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
@@ -89,7 +89,7 @@ class HeaderWidget extends GetView<HomeController> {
                       radius: 15,
                       backgroundColor: Color.fromARGB(255, 206, 200, 200),
                       child: Icon(Icons.person,
-                          color: ColorsValue.blueMediumColor),
+                          color: ColorValues.blueMediumColor),
                     ), // icon
                     if (Responsive.isDesktop(context))
                       SizedBox(width: 5), // space between icon and text
@@ -108,13 +108,13 @@ class HeaderWidget extends GetView<HomeController> {
                         ),
                       ),
                     Icon(Icons.keyboard_arrow_down_outlined,
-                        color: ColorsValue.blackColor),
+                        color: ColorValues.blackColor),
                   ],
                 ),
               ),
             ),
             if (Responsive.isMobile(context) || Responsive.isTablet(context))
-              Icon(Icons.notifications_active, color: ColorsValue.blackColor),
+              Icon(Icons.notifications_active, color: ColorValues.blackColor),
           ],
         ),
       ),

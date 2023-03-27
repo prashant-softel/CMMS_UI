@@ -292,4 +292,30 @@ class DataRepository extends DomainRepository {
     return response;
   }
   ///
+  Future<ResponseModel> uploadFiles({
+    required String auth,
+    fileUploadModel,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.uploadFiles(
+        auth: auth,
+        fileUploadModel: fileUploadModel,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getHistory({
+    String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getHistory(
+      auth: auth,
+      moduleType: moduleType,
+      id: id,
+      isLoading: isLoading,
+    );
+  }
+
+  ///
 }

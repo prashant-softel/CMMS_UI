@@ -65,7 +65,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                             'Job${jobModel?.id ?? 0}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color: ColorsValue.navyBlueColor,
+                                              color: ColorValues.navyBlueColor,
                                             ),
                                           ),
                                         ),
@@ -121,7 +121,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                       child: Text(
                                         'Assigned To: ',
                                         style: const TextStyle(
-                                          color: ColorsValue.blackColor,
+                                          color: ColorValues.blackColor,
                                         ),
                                       ),
                                     ),
@@ -129,7 +129,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                       child: Text(
                                         '${jobModel?.assignedToName ?? 'Unassigned'}',
                                         style: const TextStyle(
-                                          color: ColorsValue.blackColor,
+                                          color: ColorValues.blackColor,
                                         ),
                                       ),
                                     ),
@@ -224,10 +224,10 @@ class JobListContentMobile extends GetView<JobListController> {
       //
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.addJob(),
-        backgroundColor: ColorsValue.navyBlueColor,
+        backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
         ),
       ),
     );

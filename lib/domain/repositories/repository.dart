@@ -8,6 +8,7 @@ import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
@@ -335,7 +336,6 @@ class Repository {
     }
   }
 
-  ///
   Future<List<JobModel?>?> getJobList(
     String auth,
     int? facilityId,
@@ -589,9 +589,9 @@ class Repository {
         Utility.showDialog('Something Went Wrong!!');
         return null;
       }
-    } catch (error) {
+    } //
+    catch (error) {
       log(error.toString());
-
       return [];
     }
   }
@@ -624,10 +624,11 @@ class Repository {
     }
   }
 
-  Future<AccessListModel?> getUserAccessList(
-      {required String auth,
-      required String userId,
-      required bool isLoading}) async {
+  Future<AccessListModel?> getUserAccessList({
+    required String auth,
+    required String userId,
+    required bool isLoading,
+  }) async {
     try {
       final res = await _dataRepository.getUserAccessList(
         auth: auth,
@@ -651,7 +652,6 @@ class Repository {
       }
     } catch (error) {
       log(error.toString());
-
       return null;
     }
   }
@@ -667,7 +667,7 @@ class Repository {
           auth: auth, isLoading: isLoading,checklistJsonString:checklistJsonString);
 print({"res.data",res.data});
       if (!res.hasError) {
-        
+
         return true;
       }
       return true;
@@ -746,7 +746,7 @@ print({"checkpoint list",res.data});
       return [];
     }
   }
-  
+
     Future<bool> createCheckpoint({
     bool? isLoading,
      checkpointJsonString
@@ -767,4 +767,70 @@ print({"res.data1",res.data});
       return false;
     }
   }
+
+  Future<Map<String, dynamic>?> uploadFiles(
+    fileUploadModel,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.uploadFiles(
+        auth: auth,
+        fileUploadModel: fileUploadModel,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } //
+    catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
+  Future<List<HistoryModel>?> getHistory(
+    //String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getHistory(
+        auth: auth,
+        isLoading: isLoading,
+        moduleType: moduleType,
+        id: id,
+      );
+
+      if (!res.hasError) {
+        final jsonHistoryModels = jsonDecode(res.data);
+        final List<HistoryModel> _historyModelList = jsonHistoryModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _historyModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  ///
 }

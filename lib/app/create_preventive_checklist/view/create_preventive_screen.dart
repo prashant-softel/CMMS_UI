@@ -1,10 +1,7 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../widgets/dropdown.dart';
-import '../../widgets/custom_elevated_button.dart';
+import '../../theme/color_values.dart';
 import '../create_preventive_checklist_controller.dart';
 
 class CreatePriventiveListScreen

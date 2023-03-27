@@ -345,7 +345,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
 
@@ -361,6 +360,27 @@ class ConnectHelper {
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> uploadFiles({
+    required String auth,
+    fileUploadModel,
+    int? facilityId,
+    int? moduleId,
+    int? id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'FileUpload/UploadFile',
+      Request.post,
+      fileUploadModel,
+      isLoading ?? true,
+      {
+        'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer $auth',
       },
     );
@@ -383,7 +403,24 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
 
+  Future<ResponseModel> getHistory({
+    String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

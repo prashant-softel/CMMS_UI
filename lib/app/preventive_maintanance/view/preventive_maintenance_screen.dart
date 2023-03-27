@@ -26,7 +26,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Card(
-                  shadowColor: ColorsValue.greyColor,
+                  shadowColor: ColorValues.greyColor,
                   elevation: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(3.0),
@@ -120,7 +120,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               child: Text(
                 tittle,
                 style: TextStyle(
-                    color: ColorsValue.whiteColor,
+                    color: ColorValues.whiteColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w700),
               ),
@@ -132,7 +132,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 243, 245, 245),
                 border: Border.all(
-                  color: ColorsValue.whiteColor,
+                  color: ColorValues.whiteColor,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
