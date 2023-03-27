@@ -2,6 +2,8 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/new_permit/new_permit_binding.dart';
+import 'package:cmms/new_permit/view/new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
@@ -108,6 +110,11 @@ class AppPages {
       name: _Paths.preventiveList,
       page: PreventiveListScreen.new,
       binding: PreventiveListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.new_permit,
+      page: NewPermitScreen.new,
+      binding: NewPermitBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.preventiveCheckPoint,

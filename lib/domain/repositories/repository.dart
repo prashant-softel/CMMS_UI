@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -180,6 +181,41 @@ class Repository {
       );
     }
   }
+
+  //create New Permit
+  Future<Map<String, dynamic>> createNewPermit(
+     newPermit,
+    bool? isLoading,
+  ) async {
+    try {
+       print({"NewPermit",newPermit});
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.createNewPermit(
+        auth: auth,
+         newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+      var data = res.data; 
+            print('Response Create Permit: ${data}');
+
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -402,6 +438,33 @@ class Repository {
     }
   }
 
+    Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getTypePermitList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonTypePermitModels = jsonDecode(res.data);
+        final List<TypePermitModel> _typePermitModelList = jsonTypePermitModels
+            .map<TypePermitModel>(
+                (m) => TypePermitModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+          print('PermitztypeData: ${res.data}');
+        return _typePermitModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
   Future<List<BlockModel?>?> getBlocksList(
     String? auth,
     int? facilityId,
@@ -607,6 +670,8 @@ class Repository {
         job: job,
         isLoading: isLoading ?? false,
       );
+        print('SaveJobData: ${res.data}');
+
 
       if (!res.hasError) {
         if (res.errorCode == 200) {

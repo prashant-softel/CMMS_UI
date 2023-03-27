@@ -54,7 +54,7 @@ class HomeController extends GetxController {
       icon: "assets/files/warranty.png",
     ),
     MenuItem(
-      title: "Job List",
+      title: "Breakdown Maintain",
       icon: "assets/files/preventive.png",
     ),
     MenuItem(

@@ -182,6 +182,16 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
       );
+
+  Future<ResponseModel> getTypePermitList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getTypePermitList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> getUserAccessList({
     required String auth,
     String? userId,
@@ -275,6 +285,7 @@ class DataRepository extends DomainRepository {
         job: job,
         isLoading: isLoading ?? false,
       );
+
   Future<ResponseModel> createCheckList({
     auth,
     bool? isLoading,  checklistJsonString,
@@ -291,6 +302,18 @@ class DataRepository extends DomainRepository {
         await connectHelper.createCheckpoint(auth: auth, isLoading: isLoading,checkpointJsonString:checkpointJsonString);
     return response;
   }
+
+  Future<ResponseModel> createNewPermit({
+    required String auth,
+     newPermit,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createNewPermit(
+        auth: auth,
+         newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+
   ///
   Future<ResponseModel> uploadFiles({
     required String auth,

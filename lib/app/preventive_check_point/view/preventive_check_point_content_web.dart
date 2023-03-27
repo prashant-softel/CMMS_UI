@@ -95,7 +95,7 @@ class PreventiveCheckPointContentWeb
                                     child: Center(
                                       child: Wrap(
                                         children: [
-                                         
+
                                           Text(
                                             "CheckPoint added Successfully in the List.",
                                             style: TextStyle(
@@ -110,7 +110,7 @@ class PreventiveCheckPointContentWeb
                                       ),
                                     ),
                                   ),
-                                
+
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -172,7 +172,7 @@ class PreventiveCheckPointContentWeb
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  
+
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -297,7 +297,7 @@ class PreventiveCheckPointContentWeb
                                             .then((value) {if(value==true)
                                                                                       controller.issuccessCreatecheckpont();
 
-                                         
+
                                         });
                                       },
                                       text: 'Create Check Point')),
@@ -429,7 +429,7 @@ class PreventiveCheckPointContentWeb
                                     child: ScrollableTableView(
                                     paginationController:
                                         controller.paginationController,
-                                    columns: [ 
+                                    columns: [
                                       "Check List No.",
                                       "Check Point",
                                       "Requirement",
