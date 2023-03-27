@@ -222,13 +222,13 @@ class Repository {
         final decodeRes = jsonDecode(res.data);
         saveSecureValue(LocalKeys.authToken, decodeRes['token']);
         String userId = decodeRes['user_detail']['id'].toString();
-      //  String token = decodeRes['token'];
-        // await getUserAccessList(
-        //     userId: userId, auth: token, isLoading: isLoading ?? false);
+       String token = decodeRes['token'];
+        await getUserAccessList(
+            userId: userId, auth: token, isLoading: isLoading ?? false);
 
-        Get.offAllNamed(
-          Routes.home,arguments: userId
-        );
+        // Get.offAllNamed(
+        //   Routes.home,arguments: userId
+        // );
       }
     } catch (error) {
       await _deviceRepository.generateToken();

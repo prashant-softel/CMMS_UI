@@ -50,14 +50,14 @@ class PreventiveChecklistListContentMobile
                                       Text(
                                         'CheckList Id: ',
                                         style: const TextStyle(
-                                            color: ColorsValue.blackColor,
+                                            color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
                                         '${preventiveCheckListModel?.id ?? 0}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: ColorsValue.navyBlueColor,
+                                          color: ColorValues.navyBlueColor,
                                         ),
                                       ),
                                     ],
@@ -66,7 +66,7 @@ class PreventiveChecklistListContentMobile
                                     Text(
                                       'CheckList Number: ',
                                       style: const TextStyle(
-                                          color: ColorsValue.blackColor,
+                                          color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
                                     ),
                                     SizedBox(
@@ -77,7 +77,7 @@ class PreventiveChecklistListContentMobile
                                         '${preventiveCheckListModel?.checklist_number}'
                                         '',
                                         style: const TextStyle(
-                                          color: ColorsValue.navyBlueColor,
+                                          color: ColorValues.navyBlueColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -88,7 +88,7 @@ class PreventiveChecklistListContentMobile
                                     Text(
                                       'Category: ',
                                       style: const TextStyle(
-                                          color: ColorsValue.blackColor,
+                                          color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
                                     ),
                                     SizedBox(
@@ -100,7 +100,7 @@ class PreventiveChecklistListContentMobile
                                                 ?.category_name ??
                                             '',
                                         style: const TextStyle(
-                                          color: ColorsValue.navyBlueColor,
+                                          color: ColorValues.navyBlueColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -110,7 +110,7 @@ class PreventiveChecklistListContentMobile
                                     Text(
                                       'Frequency: ',
                                       style: const TextStyle(
-                                          color: ColorsValue.blackColor,
+                                          color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
                                     ),
                                     SizedBox(
@@ -120,7 +120,7 @@ class PreventiveChecklistListContentMobile
                                       child: Text(
                                         "${preventiveCheckListModel?.frequency_name ?? ''}",
                                         style: const TextStyle(
-                                          color: ColorsValue.navyBlueColor,
+                                          color: ColorValues.navyBlueColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -132,13 +132,13 @@ class PreventiveChecklistListContentMobile
                                         Text(
                                           'Duration',
                                           style: const TextStyle(
-                                              color: ColorsValue.blackColor,
+                                              color: ColorValues.blackColor,
                                               fontWeight: FontWeight.w400),
                                         ),
                                         Text(
                                           "${preventiveCheckListModel?.duration ?? ''} min.",
                                           style: const TextStyle(
-                                            color: ColorsValue.navyBlueColor,
+                                            color: ColorValues.navyBlueColor,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         )
@@ -150,13 +150,13 @@ class PreventiveChecklistListContentMobile
                                           Text(
                                             'ManPower',
                                             style: const TextStyle(
-                                                color: ColorsValue.blackColor,
+                                                color: ColorValues.blackColor,
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           Text(
                                             "${preventiveCheckListModel?.manPower ?? ''}",
                                             style: const TextStyle(
-                                              color: ColorsValue.navyBlueColor,
+                                              color: ColorValues.navyBlueColor,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           )
@@ -177,7 +177,7 @@ class PreventiveChecklistListContentMobile
                                         ? true
                                         : false,
                                     onChanged: (value) {},
-                                    activeColor: ColorsValue.greenColor,
+                                    activeColor: ColorValues.greenColor,
                                   ),
                                 ]),
                           ),
@@ -192,10 +192,10 @@ class PreventiveChecklistListContentMobile
       //
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.createChecklist(),
-        backgroundColor: ColorsValue.navyBlueColor,
+        backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
         ),
       ),
     );

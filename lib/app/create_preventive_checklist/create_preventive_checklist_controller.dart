@@ -155,14 +155,14 @@ children: [
                 
             child: Icon(
               Icons.check,size: 35,
-              color: ColorsValue.whiteColor
+              color: ColorValues.whiteColor
             ),
           ),
           SizedBox(height: 10,),
          Text(
             "${checklistNumberCtrlr.text.trim()} added Successfully in the List....",
             style: TextStyle(
-                fontSize: 16, color:ColorsValue.blackColor )
+                fontSize: 16, color:ColorValues.blackColor )
           )
         ]),
         actions: [

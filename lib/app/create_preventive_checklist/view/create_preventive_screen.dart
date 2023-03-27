@@ -1,7 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../theme/color_values.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_richtext.dart';
+import '../../widgets/custom_textField.dart';
+import '../../widgets/dropdown.dart';
 import '../create_preventive_checklist_controller.dart';
 
 class CreatePriventiveListScreen
@@ -68,13 +71,13 @@ class CreatePriventiveListScreen
                                           spreadRadius: 1.0,
                                         ),
                                         BoxShadow(
-                                          color: ColorsValue.whiteColor,
+                                          color: ColorValues.whiteColor,
                                           offset: const Offset(0.0, 0.0),
                                           blurRadius: 0.0,
                                           spreadRadius: 0.0,
                                         ),
                                       ],
-                                      color: ColorsValue.whiteColor,
+                                      color: ColorValues.whiteColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: LoginCustomTextfield(
@@ -134,13 +137,13 @@ class CreatePriventiveListScreen
                                           spreadRadius: 1.0,
                                         ),
                                         BoxShadow(
-                                          color: ColorsValue.whiteColor,
+                                          color: ColorValues.whiteColor,
                                           offset: const Offset(0.0, 0.0),
                                           blurRadius: 0.0,
                                           spreadRadius: 0.0,
                                         ),
                                       ],
-                                      color: ColorsValue.whiteColor,
+                                      color: ColorValues.whiteColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: LoginCustomTextfield(
@@ -166,13 +169,13 @@ class CreatePriventiveListScreen
                                           spreadRadius: 1.0,
                                         ),
                                         BoxShadow(
-                                          color: ColorsValue.whiteColor,
+                                          color: ColorValues.whiteColor,
                                           offset: const Offset(0.0, 0.0),
                                           blurRadius: 0.0,
                                           spreadRadius: 0.0,
                                         ),
                                       ],
-                                      color: ColorsValue.whiteColor,
+                                      color: ColorValues.whiteColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: LoginCustomTextfield(
@@ -186,7 +189,7 @@ class CreatePriventiveListScreen
                                       height: 45,
                                       child: CustomElevatedButton(
                                         backgroundColor:
-                                            ColorsValue.navyBlueColor,
+                                            ColorValues.navyBlueColor,
                                         text: "Submit",
                                         onPressed: () {
                                           controller

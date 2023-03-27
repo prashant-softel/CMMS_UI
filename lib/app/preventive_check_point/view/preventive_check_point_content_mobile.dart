@@ -26,10 +26,10 @@ class PreventiveCheckPointContentMobile
         onPressed: () {
           //  Routes.create_checkList;
         }, // => controller.createChecklist(),
-        backgroundColor: ColorsValue.navyBlueColor,
+        backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
         ),
       ),
     );

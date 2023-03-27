@@ -43,7 +43,7 @@ class PreventiveCheckPointContentWeb
                 children: [
                   Icon(
                     Icons.home,
-                    color: ColorsValue.greyLightColor,
+                    color: ColorValues.greyLightColor,
                   ),
                   Text(
                     "Dashboard",
@@ -260,7 +260,7 @@ class PreventiveCheckPointContentWeb
                                       ),
                                       Text("No"),
                                       Switch(
-                                          activeColor: ColorsValue.greenColor,
+                                          activeColor: ColorValues.greenColor,
                                           value: controller.isToggleOn.value,
                                           onChanged: (value) {
                                             controller.toggle();
@@ -341,7 +341,7 @@ class PreventiveCheckPointContentWeb
                               ),
                             ),
                             Divider(
-                              color: ColorsValue.greyLightColour,
+                              color: ColorValues.greyLightColour,
                             ),
                             // Container(
                             //   width: 300,
@@ -485,7 +485,7 @@ class PreventiveCheckPointContentWeb
                                                           Text("No"),
                                                           Switch.adaptive(
                                                               activeColor:
-                                                                  ColorsValue
+                                                                  ColorValues
                                                                       .greenColor,
                                                               value:
                                                                   value == "1"

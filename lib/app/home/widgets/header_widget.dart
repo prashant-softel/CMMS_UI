@@ -41,7 +41,7 @@ class HeaderWidget extends GetView<HomeController> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),border: Border.all(color: ColorsValue.greyLightColour),
+                    borderRadius: BorderRadius.circular(15),border: Border.all(color: ColorValues.greyLightColour),
                     boxShadow: [
                       BoxShadow(
                         color:
