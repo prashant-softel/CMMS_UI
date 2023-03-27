@@ -17,7 +17,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
 
     final double itemWidth = size.width / 3;
 
-    return Scaffold(
+    return Scaffold( 
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         if (Responsive.isMobile(context))
           Obx(
@@ -96,8 +96,8 @@ class PreventiveScreen extends GetView<PreventiveController> {
             _priventiveList(tittle: "PM Schedule"),
             _priventiveList(tittle: "PM Schedule View"),
             _priventiveList(tittle: "PM Report"),
-            _priventiveList(tittle: "PM Report"),
-            _priventiveList(tittle: "PM Report"),
+            _priventiveList(tittle: "PM Execution"),
+            _priventiveList(tittle: "Maintenance Report"),
           ],
         )
       ]),

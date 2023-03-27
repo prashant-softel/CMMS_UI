@@ -54,7 +54,7 @@ class HomeController extends GetxController {
       icon: "assets/files/warranty.png",
     ),
     MenuItem(
-      title: "Breakdown Maintain",
+      title: "Breakdown Maintenance",
       icon: "assets/files/preventive.png",
     ),
     MenuItem(
@@ -62,11 +62,11 @@ class HomeController extends GetxController {
       icon: "assets/files/warranty.png",
     ),
     MenuItem(
-      title: "Preventive",
+      title: "Preventive Maintenance",
       icon: "assets/files/preventive.png",
     ),
     MenuItem(
-      title: "Corrective Maint",
+      title: "Corrective Maintenance",
       icon: "assets/files/maint.png",
     ),
     MenuItem(

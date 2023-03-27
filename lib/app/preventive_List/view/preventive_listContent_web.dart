@@ -318,7 +318,7 @@ class PreventiveChecklistListContentWeb
                               ),
                               Container(
                                   width:
-                                      (MediaQuery.of(context).size.width * .2) -60
+                                      (MediaQuery.of(context).size.width * .2) -120
                                           ,
                                   child: CustomElevatedButton(
                                       backgroundColor:
@@ -327,6 +327,7 @@ class PreventiveChecklistListContentWeb
                                         controller
                                             .createChecklistNumber()
                                             .then((value) {
+                                              print("value,$value");
                                           if (value == true)
                                             controller
                                                 .issuccessCreatechecklist();
@@ -367,14 +368,16 @@ class PreventiveChecklistListContentWeb
                               children: [
                                 Container(
   width:
-                                      (MediaQuery.of(context).size.width * .1) 
+                                      (MediaQuery.of(context).size.width * .1) -70
                                           ,                                  margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
                                       text: 'Copy'),
                                 ),
-                                Container(
+                                Container(   width:
+                                      (MediaQuery.of(context).size.width * .1)-60,
+                                 
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -382,16 +385,18 @@ class PreventiveChecklistListContentWeb
                                       text: 'Excel'),
                                 ),
                                 Container(
-                                  height: 40,
-                                  margin: EdgeInsets.only(left: 10),
+   width:
+                                      (MediaQuery.of(context).size.width * .1)-70,
+                                                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
                                       text: 'PDF'),
                                 ),
                                 Container(
-                                  height: 40,
-                                  margin: EdgeInsets.only(left: 10),
+   width:
+                                      (MediaQuery.of(context).size.width * .2)-135,
+                                                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
@@ -403,7 +408,51 @@ class PreventiveChecklistListContentWeb
                               height: 20,
                             ),
                             controller.preventiveCheckList!.length < 1
-                                ? Container()
+                                ?               Expanded(
+                                  child: ScrollableTableView(
+                                    
+                                      columns: [
+                                        "Check List No.",
+                                        "Check Point",
+                                        "Requirement",
+                                        "Upload Image?",
+                                        "Action",
+                                      ].map((column) {
+                                        return TableViewColumn(
+                                          label: column,
+                                          minWidth: Get.width * 0.16,
+                                        );
+                                      }).toList(),
+                                      rows: [
+                                        ...List.generate(
+                                          controller
+                                                  .preventiveCheckList?.length ??
+                                              0,
+                                          (index) {
+                                          
+                                            return [
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                            ];
+                                          },
+                                        ),
+                                      ].map((record) {
+                                        return TableViewRow(
+                                          height: 60,
+                                          cells: record.map((value) {
+                                            return TableViewCell(
+                                              child:  Text(value),
+                                            );
+                                          }).toList(),
+                                        );
+                                      }).toList(),
+                                    ),
+                                )
+                      
+                              
                                 : Expanded(
                                     child: ScrollableTableView(
                                       paginationController:

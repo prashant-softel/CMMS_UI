@@ -1,8 +1,8 @@
 
 import 'dart:convert';
 
-String createCheckPointToJson(List<CreateCheckpoint> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+// String createCheckPointToJson(List<CreateCheckpoint> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CreateCheckpoint {
   String check_point;
