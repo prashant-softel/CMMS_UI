@@ -42,7 +42,7 @@ class CreatePriventiveListScreen
               Container(
                 margin: EdgeInsets.all(10),
                 child: Card(
-                    color: Colors.lightBlue.shade50,
+                    color: ColorValues.appLightGreyColor,
                     elevation: 20,
                     shadowColor: Colors.black,
                     shape: RoundedRectangleBorder(
@@ -120,7 +120,10 @@ class CreatePriventiveListScreen
                                 SizedBox(
                                   height: 10,
                                 ),
-                                CustomRichText(title: 'Manpower: '),
+                                Text(
+                                  "Manpower: ",
+                                  style: Styles.blackBold16,
+                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -152,7 +155,10 @@ class CreatePriventiveListScreen
                                 SizedBox(
                                   height: 10,
                                 ),
-                                CustomRichText(title: 'Duration(in Minutes): '),
+                                Text(
+                                  "Duration(in Min.): ",
+                                  style: Styles.blackBold16,
+                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -189,14 +195,14 @@ class CreatePriventiveListScreen
                                       height: 45,
                                       child: CustomElevatedButton(
                                         backgroundColor:
-                                            ColorValues.navyBlueColor,
+                                            ColorValues.appDarkBlueColor,
                                         text: "Submit",
                                         onPressed: () {
                                           controller
                                               .createChecklistNumber()
-                                              .then((value) {if(value==true)
-                                                controller.isSuccessDialog();
-
+                                              .then((value) {
+                                            if (value == true)
+                                              controller.isSuccessDialog();
                                           });
                                         },
                                       )),

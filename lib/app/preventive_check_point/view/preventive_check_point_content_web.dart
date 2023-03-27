@@ -90,12 +90,11 @@ class PreventiveCheckPointContentWeb
                                   SizedBox(
                                     height: 30,
                                   ),
-                                      Visibility(
+                                  Visibility(
                                     visible: controller.isSuccess.value,
                                     child: Center(
                                       child: Wrap(
                                         children: [
-
                                           Text(
                                             "CheckPoint added Successfully in the List.",
                                             style: TextStyle(
@@ -110,7 +109,6 @@ class PreventiveCheckPointContentWeb
                                       ),
                                     ),
                                   ),
-
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -172,7 +170,6 @@ class PreventiveCheckPointContentWeb
                                   SizedBox(
                                     height: 10,
                                   ),
-
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -277,7 +274,8 @@ class PreventiveCheckPointContentWeb
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  height: 45,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1),
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 223, 101, 80),
@@ -287,17 +285,19 @@ class PreventiveCheckPointContentWeb
                                 width: 10,
                               ),
                               Container(
-                                  height: 45,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2) -
+                                          120,
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
                                       onPressed: () {
                                         controller
                                             .createCheckpoint()
-                                            .then((value) {if(value==true)
-                                                                                      controller.issuccessCreatecheckpont();
-
-
+                                            .then((value) {
+                                          if (value == true)
+                                            controller
+                                                .issuccessCreatecheckpont();
                                         });
                                       },
                                       text: 'Create Check Point')),
@@ -387,7 +387,9 @@ class PreventiveCheckPointContentWeb
                             Row(
                               children: [
                                 Container(
-                                  height: 40,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1) -
+                                          70,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -395,7 +397,9 @@ class PreventiveCheckPointContentWeb
                                       text: 'Copy'),
                                 ),
                                 Container(
-                                  height: 40,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1) -
+                                          60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -403,7 +407,9 @@ class PreventiveCheckPointContentWeb
                                       text: 'Excel'),
                                 ),
                                 Container(
-                                  height: 40,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1) -
+                                          70,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -411,7 +417,9 @@ class PreventiveCheckPointContentWeb
                                       text: 'PDF'),
                                 ),
                                 Container(
-                                  height: 40,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2) -
+                                          135,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -424,7 +432,47 @@ class PreventiveCheckPointContentWeb
                               height: 20,
                             ),
                             controller.preventiveCheckpoint!.length < 1
-                                ? Container()
+                                ? Expanded(
+                                    child: ScrollableTableView(
+                                      columns: [
+                                        "Check List No.",
+                                        "Check Point",
+                                        "Requirement",
+                                        "Upload Image?",
+                                        "Action",
+                                      ].map((column) {
+                                        return TableViewColumn(
+                                          label: column,
+                                          minWidth: Get.width * 0.16,
+                                        );
+                                      }).toList(),
+                                      rows: [
+                                        ...List.generate(
+                                          controller.preventiveCheckpoint
+                                                  ?.length ??
+                                              0,
+                                          (index) {
+                                            return [
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                            ];
+                                          },
+                                        ),
+                                      ].map((record) {
+                                        return TableViewRow(
+                                          height: 60,
+                                          cells: record.map((value) {
+                                            return TableViewCell(
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  )
                                 : Expanded(
                                     child: ScrollableTableView(
                                     paginationController:

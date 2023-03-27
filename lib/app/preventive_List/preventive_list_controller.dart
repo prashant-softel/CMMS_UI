@@ -144,7 +144,7 @@ class PreventiveListController extends GetxController {
         status: 1,
         type: 1,
         checklist_number: _checklistNumber);
-    var checklistJsonString = createCheckListToJson([createChecklist]);
+    var checklistJsonString = [createChecklist.toJson()];//createCheckListToJson([createChecklist]);
 
     print({"checklistJsonString", checklistJsonString});
     await preventiveListPresenter.createChecklistNumber(
@@ -169,7 +169,10 @@ await { _cleardata()};
     selectedequipment.value = '';
 
     selectedfrequency.value = '';
-
+  Future.delayed(Duration(seconds: 4), () {
+     isSuccess.value=false;
+    
+    });
     getPreventiveCheckList(facilityId, type,true);
     }
    
