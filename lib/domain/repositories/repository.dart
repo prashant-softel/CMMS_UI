@@ -6,6 +6,7 @@ import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -221,12 +222,12 @@ class Repository {
         final decodeRes = jsonDecode(res.data);
         saveSecureValue(LocalKeys.authToken, decodeRes['token']);
         String userId = decodeRes['user_detail']['id'].toString();
-        String token = decodeRes['token'];
+       String token = decodeRes['token'];
         await getUserAccessList(
             userId: userId, auth: token, isLoading: isLoading ?? false);
 
         // Get.offAllNamed(
-        //   Routes.home,
+        //   Routes.home,arguments: userId
         // );
       }
     } catch (error) {
@@ -655,21 +656,24 @@ class Repository {
     }
   }
 
-  Future<void> createCheckListNumber({
+  Future<bool> createCheckListNumber({
     bool? isLoading,
+     checklistJsonString
   }) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.createCheckList(
-          auth: auth, isLoading: isLoading);
-      print({"res.data.toString()", res.data});
-
+          auth: auth, isLoading: isLoading,checklistJsonString:checklistJsonString);
+print({"res.data",res.data});
       if (!res.hasError) {
-        print("successsss");
+
+        return true;
       }
+      return true;
     } catch (error) {
       log(error.toString());
+      return false;
     }
   }
 
@@ -706,6 +710,61 @@ class Repository {
       log(error.toString());
 
       return [];
+    }
+  }
+   Future<List<CheckPointModel?>?> getCheckPointlist(
+    int? selectedchecklistId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      print({"checkid",selectedchecklistId});
+      final res = await _dataRepository.getCheckPointlist(
+        auth: auth,
+        selectedchecklistId: selectedchecklistId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+print({"checkpoint list",res.data});
+      if (!res.hasError) {
+        final jsonPreventiveCheckPointModels = jsonDecode(res.data);
+
+        final List<CheckPointModel> _PreventiveCheckPointList =
+            jsonPreventiveCheckPointModels
+                .map<CheckPointModel>((m) =>
+                    CheckPointModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _PreventiveCheckPointList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+    Future<bool> createCheckpoint({
+    bool? isLoading,
+     checkpointJsonString
+  }) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createCheckpoint(
+          auth: auth, isLoading: isLoading,checkpointJsonString:checkpointJsonString);
+print({"res.data1",res.data});
+
+      if (!res.hasError) {
+        return true;
+      }
+      return true;
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 

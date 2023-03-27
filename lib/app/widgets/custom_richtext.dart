@@ -1,7 +1,6 @@
+import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 
-import '../theme/colors_value.dart';
-import '../theme/styles.dart';
 
 class CustomRichText extends StatelessWidget {
   String title;
@@ -15,7 +14,7 @@ class CustomRichText extends StatelessWidget {
         TextSpan(
           text: '*',
           style: TextStyle(
-            color: ColorsValue.orangeColor,
+            color: ColorValues.orangeColor,
             fontWeight: FontWeight.bold,
           ),
         ),

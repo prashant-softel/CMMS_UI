@@ -164,6 +164,16 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+      Future<ResponseModel> getCheckPointlist({
+    required String auth,
+    int? selectedchecklistId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCheckPointlist(
+        auth: auth,
+        selectedchecklistId: selectedchecklistId ?? 0,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getFacilityList({
     String? auth,
     bool? isLoading,
@@ -267,13 +277,20 @@ class DataRepository extends DomainRepository {
       );
   Future<ResponseModel> createCheckList({
     auth,
-    bool? isLoading,
+    bool? isLoading,  checklistJsonString,
   }) async {
     var response =
-        await connectHelper.createCheckList(auth: auth, isLoading: isLoading);
+        await connectHelper.createCheckList(auth: auth, isLoading: isLoading,checklistJsonString:checklistJsonString);
     return response;
   }
-
+ Future<ResponseModel> createCheckpoint({
+    auth,
+    bool? isLoading,  checkpointJsonString,
+  }) async {
+    var response =
+        await connectHelper.createCheckpoint(auth: auth, isLoading: isLoading,checkpointJsonString:checkpointJsonString);
+    return response;
+  }
   ///
   Future<ResponseModel> uploadFiles({
     required String auth,

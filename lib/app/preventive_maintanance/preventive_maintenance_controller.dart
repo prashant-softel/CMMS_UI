@@ -9,7 +9,7 @@ class PreventiveController extends GetxController {
   PreventivePresenter preventivePresenter;
 
   String username = '';
-  Rx<String> selectedFacility = ''.obs;
+  Rx<String> selectedFacility = ''.obs;  
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = false.obs;
 

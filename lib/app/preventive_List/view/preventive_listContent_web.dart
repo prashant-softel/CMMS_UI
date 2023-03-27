@@ -42,7 +42,7 @@ class PreventiveChecklistListContentWeb
                 children: [
                   Icon(
                     Icons.home,
-                    color: ColorsValue.greyLightColor,
+                    color: ColorValues.greyLightColor,
                   ),
                   Text(
                     "Dashboard",
@@ -68,7 +68,7 @@ class PreventiveChecklistListContentWeb
                   Container(
                     width: (MediaQuery.of(context).size.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: MediaQuery.of(context).size.height / 1.6,
+                    height: MediaQuery.of(context).size.height / 1.5,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -84,11 +84,30 @@ class PreventiveChecklistListContentWeb
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Create Checklist Number",
+                                    "Create Checklist",
                                     style: Styles.blackBold16,
                                   ),
                                   SizedBox(
                                     height: 30,
+                                  ),
+                                  Visibility(
+                                    visible: controller.isSuccess.value,
+                                    child: Center(
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            "CheckList added Successfully in the List.",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromARGB(
+                                                    255, 24, 243, 123)),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -114,17 +133,20 @@ class PreventiveChecklistListContentWeb
                                                 spreadRadius: 1.0,
                                               ),
                                               BoxShadow(
-                                                color: ColorsValue.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 offset: const Offset(0.0, 0.0),
                                                 blurRadius: 0.0,
                                                 spreadRadius: 0.0,
                                               ),
                                             ],
-                                            color: ColorsValue.whiteColor,
+                                            color: ColorValues.whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
-                                          child: LoginCustomTextfield()),
+                                          child: LoginCustomTextfield(
+                                            textController:
+                                                controller.checklistNumberCtrlr,
+                                          )),
                                     ],
                                   ),
                                   SizedBox(
@@ -192,7 +214,10 @@ class PreventiveChecklistListContentWeb
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      CustomRichText(title: 'Manpower: '),
+                                      Text(
+                                        "Manpower: ",
+                                        style: Styles.blackBold16,
+                                      ),
                                       Container(
                                           decoration: BoxDecoration(
                                             boxShadow: [
@@ -206,13 +231,13 @@ class PreventiveChecklistListContentWeb
                                                 spreadRadius: 1.0,
                                               ),
                                               BoxShadow(
-                                                color: ColorsValue.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 offset: const Offset(0.0, 0.0),
                                                 blurRadius: 0.0,
                                                 spreadRadius: 0.0,
                                               ),
                                             ],
-                                            color: ColorsValue.whiteColor,
+                                            color: ColorValues.whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -221,7 +246,10 @@ class PreventiveChecklistListContentWeb
                                                       .width *
                                                   .2) -
                                               30,
-                                          child: LoginCustomTextfield()),
+                                          child: LoginCustomTextfield(
+                                            textController:
+                                                controller.manpowerCtrlr,
+                                          )),
                                     ],
                                   ),
                                   SizedBox(
@@ -231,8 +259,10 @@ class PreventiveChecklistListContentWeb
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      CustomRichText(
-                                          title: 'Duration(in Min.): '),
+                                      Text(
+                                        "Duration(in Min.): ",
+                                        style: Styles.blackBold16,
+                                      ),
                                       Container(
                                           decoration: BoxDecoration(
                                             boxShadow: [
@@ -246,13 +276,13 @@ class PreventiveChecklistListContentWeb
                                                 spreadRadius: 1.0,
                                               ),
                                               BoxShadow(
-                                                color: ColorsValue.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 offset: const Offset(0.0, 0.0),
                                                 blurRadius: 0.0,
                                                 spreadRadius: 0.0,
                                               ),
                                             ],
-                                            color: ColorsValue.whiteColor,
+                                            color: ColorValues.whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -261,7 +291,10 @@ class PreventiveChecklistListContentWeb
                                                       .width *
                                                   .2) -
                                               30,
-                                          child: LoginCustomTextfield()),
+                                          child: LoginCustomTextfield(
+                                            textController:
+                                                controller.durationCtrlr,
+                                          )),
                                     ],
                                   ),
                                   SizedBox(
@@ -273,7 +306,8 @@ class PreventiveChecklistListContentWeb
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  height: 45,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1),
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 223, 101, 80),
@@ -283,14 +317,22 @@ class PreventiveChecklistListContentWeb
                                 width: 10,
                               ),
                               Container(
-                                  height: 45,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2) -60
+                                          ,
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
                                       onPressed: () {
-                                        controller.createChecklistNumber();
+                                        controller
+                                            .createChecklistNumber()
+                                            .then((value) {
+                                          if (value == true)
+                                            controller
+                                                .issuccessCreatechecklist();
+                                        });
                                       },
-                                      text: 'Create Number')),
+                                      text: 'Create CheckList')),
                             ],
                           ),
                         ],
@@ -319,20 +361,20 @@ class PreventiveChecklistListContentWeb
                               ),
                             ),
                             Divider(
-                              color: ColorsValue.greyLightColour,
+                              color: ColorValues.greyLightColour,
                             ),
                             Row(
                               children: [
                                 Container(
-                                  height: 40,
-                                  margin: EdgeInsets.only(left: 10),
+  width:
+                                      (MediaQuery.of(context).size.width * .1) 
+                                          ,                                  margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
                                       text: 'Copy'),
                                 ),
                                 Container(
-                                  height: 40,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -360,131 +402,142 @@ class PreventiveChecklistListContentWeb
                             SizedBox(
                               height: 20,
                             ),
-                            Expanded(
-                              child: ScrollableTableView(
-                                paginationController:
-                                    controller.paginationController,
-                                columns: [
-                                  "Checklist Number ",
-                                  "Active Status ",
-                                  "Category ",
-                                  "Frequency ",
-                                  "PM Manpower",
-                                  "PM Duration(in Min.)"
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    minWidth: Get.width * 0.12,
-                                    label: column,
-                                  );
-                                }).toList(),
-                                rows: //
-                                    [
-                                  ...List.generate(
-                                    controller.preventiveCheckList?.length ?? 0,
-                                    (index) {
-                                      var preventiveCheckListModelListDetails =
-                                          controller
-                                              .preventiveCheckList?[index];
-                                      return [
-                                        '${preventiveCheckListModelListDetails?.checklist_number}',
-                                        "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                        '${preventiveCheckListModelListDetails?.category_name}',
-                                        '${preventiveCheckListModelListDetails?.frequency_name}',
-                                        '${preventiveCheckListModelListDetails?.manPower}',
-                                        '${preventiveCheckListModelListDetails?.duration}',
-                                      ];
-                                    },
+                            controller.preventiveCheckList!.length < 1
+                                ? Container()
+                                : Expanded(
+                                    child: ScrollableTableView(
+                                      paginationController:
+                                          controller.paginationController,
+                                      columns: [
+                                        "Checklist Number ",
+                                        "Active Status ",
+                                        "Category ",
+                                        "Frequency ",
+                                        "PM Manpower",
+                                        "PM Duration(in Min.)"
+                                      ].map((column) {
+                                        return TableViewColumn(
+                                          minWidth: Get.width * 0.12,
+                                          label: column,
+                                        );
+                                      }).toList(),
+                                      rows: //
+                                          [
+                                        ...List.generate(
+                                          controller.preventiveCheckList
+                                                  ?.length ??
+                                              0,
+                                          (index) {
+                                            var preventiveCheckListModelListDetails =
+                                                controller.preventiveCheckList?[
+                                                    index];
+                                            return [
+                                              '${preventiveCheckListModelListDetails?.checklist_number}',
+                                              "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
+                                              '${preventiveCheckListModelListDetails?.category_name}',
+                                              '${preventiveCheckListModelListDetails?.frequency_name}',
+                                              '${preventiveCheckListModelListDetails?.manPower}',
+                                              '${preventiveCheckListModelListDetails?.duration}',
+                                            ];
+                                          },
+                                        ),
+                                      ].map((_preventiveCheckList) {
+                                        return TableViewRow(
+                                            height: 60,
+                                            cells: _preventiveCheckList
+                                                .map((value) {
+                                              return TableViewCell(
+                                                  child: (value == 'No')
+                                                      ? SwitchListTile(
+                                                          visualDensity:
+                                                              VisualDensity
+                                                                  .comfortable,
+                                                          value: value == 'No'
+                                                              ? true
+                                                              : false,
+                                                          onChanged: (value) {},
+                                                          activeColor:
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  86,
+                                                                  211,
+                                                                  111),
+                                                        )
+                                                      : Text(
+                                                          value,
+                                                        ));
+                                            }).toList());
+                                      }).toList(),
+                                    ),
                                   ),
-                                ].map((_preventiveCheckList) {
-                                  return TableViewRow(
-                                      height: 60,
-                                      cells: _preventiveCheckList.map((value) {
-                                        return TableViewCell(
-                                            child: (value == 'No')
-                                                ? SwitchListTile(
-                                                    visualDensity: VisualDensity
-                                                        .comfortable,
-                                                    value: value == 'No'
-                                                        ? true
-                                                        : false,
-                                                    onChanged: (value) {},
-                                                    activeColor: Color.fromARGB(
-                                                        255, 86, 211, 111),
-                                                  )
-                                                : Text(
-                                                    value,
-                                                  ));
-                                      }).toList());
-                                }).toList(),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: ValueListenableBuilder(
-                                  valueListenable:
-                                      controller.paginationController,
-                                  builder: (context, value, child) {
-                                    return Row(children: [
-                                      Text(
-                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                      Row(children: [
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
-                                                      .currentPage <=
-                                                  1
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .previous();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
-                                                      .currentPage >=
-                                                  controller
-                                                      .paginationController
-                                                      .pageCount
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .next();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                      ]),
-                                    ]);
-                                  }),
-                            ),
+
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 25),
+                            //   child: ValueListenableBuilder(
+                            //       valueListenable:
+                            //           controller.paginationController,
+                            //       builder: (context, value, child) {
+                            //         return Row(children: [
+                            //           Text(
+                            //               "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                            //           Row(children: [
+                            //             IconButton(
+                            //               onPressed: controller
+                            //                           .paginationController
+                            //                           .currentPage <=
+                            //                       1
+                            //                   ? null
+                            //                   : () {
+                            //                       controller
+                            //                           .paginationController
+                            //                           .previous();
+                            //                     },
+                            //               iconSize: 20,
+                            //               splashRadius: 20,
+                            //               icon: Icon(
+                            //                 Icons.arrow_back_ios_new_rounded,
+                            //                 color: controller
+                            //                             .paginationController
+                            //                             .currentPage <=
+                            //                         1
+                            //                     ? Colors.black26
+                            //                     : Theme.of(context)
+                            //                         .primaryColor,
+                            //               ),
+                            //             ),
+                            //             IconButton(
+                            //               onPressed: controller
+                            //                           .paginationController
+                            //                           .currentPage >=
+                            //                       controller
+                            //                           .paginationController
+                            //                           .pageCount
+                            //                   ? null
+                            //                   : () {
+                            //                       controller
+                            //                           .paginationController
+                            //                           .next();
+                            //                     },
+                            //               iconSize: 20,
+                            //               splashRadius: 20,
+                            //               icon: Icon(
+                            //                 Icons.arrow_forward_ios_rounded,
+                            //                 color: controller
+                            //                             .paginationController
+                            //                             .currentPage >=
+                            //                         controller
+                            //                             .paginationController
+                            //                             .pageCount
+                            //                     ? Colors.black26
+                            //                     : Theme.of(context)
+                            //                         .primaryColor,
+                            //               ),
+                            //             ),
+                            //           ]),
+                            //         ]);
+                            //       }),
+                            // ),
                           ],
                         ),
                       ),
