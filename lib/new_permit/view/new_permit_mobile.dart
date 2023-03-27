@@ -26,14 +26,14 @@ class NewPermitMobile
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(
-            Routes.create_checkList,
+            Routes.createCheckList,
           );
           // controller.createChecklist();
         },
-        backgroundColor: ColorsValue.navyBlueColor,
+        backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
         ),
       ),
     );

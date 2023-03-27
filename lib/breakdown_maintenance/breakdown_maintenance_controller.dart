@@ -1,6 +1,6 @@
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/app/preventive_maintanance/preventive.dart';
+// import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';

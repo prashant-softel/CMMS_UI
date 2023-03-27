@@ -50,10 +50,10 @@ class NewPermitUsecase {
         facilityId,
         isLoading,
       );
-  Future<void> createCheckList({
-    bool? isLoading,
-  }) async =>
-      await repository.createCheckList(isLoading: isLoading);
+  // Future<void> createCheckList({
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.createCheckList(isLoading: isLoading);
 
   Future<List<FacilityModel?>?> getFacilityLists(bool? isLoading) async =>
       await repository.getFacilityList(isLoading);

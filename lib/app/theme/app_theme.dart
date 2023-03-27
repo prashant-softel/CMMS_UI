@@ -32,7 +32,7 @@ ThemeData themeData(BuildContext context) => ThemeData(
         ),
       ),
       brightness: Brightness.light,
-      scaffoldBackgroundColor: ColorsValue.whiteColor,
+      scaffoldBackgroundColor: ColorValues.whiteColor,
       colorScheme: ColorScheme.light(
         surface: Colors.black.withOpacity(.16),
         onInverseSurface: const Color.fromRGBO(0, 0, 0, 0.12),

@@ -1,9 +1,12 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:get/get.dart';
 
+import '../../domain/models/history_model.dart';
 import '../../domain/models/job_details_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
-import '../controllers/dropzone_controller.dart';
+
+import '../controllers/file_upload_controller.dart';
+import '../controllers/history_controller.dart';
 import '../job_details/job_details_presenter.dart';
 import 'job_card_details_presenter.dart';
 
@@ -16,14 +19,11 @@ class JobCardDetailsController extends GetxController {
 
   ///
   late JobDetailsPresenter jobDetailsPresenter;
-  //late AddJobPresenter addJobPresenter;
-  // late JobListPresenter jobListPresenter;
-  // late HomePresenter homePresenter;
-  // late AddJobController addJobController;
+  var historyController = Get.put(HistoryController());
 
   ///
   RxList<JobDetailsModel?> jobList = <JobDetailsModel?>[].obs;
-
+  RxList<HistoryModel?> historyList = <HistoryModel?>[].obs;
   RxList<EmployeeModel?> employeeList = <EmployeeModel>[].obs;
   Rx<String> selectedEmployee = ''.obs;
   Rx<bool> isEmployeeSelected = true.obs;
@@ -88,6 +88,20 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
+  Future<void> getJobCardHistory() async {
+    final _moduleType = 1;
+    final _id = 1;
+    final _jobCardHistoryList =
+        await historyController.getHistory(_moduleType, _id);
+
+    if (_jobCardHistoryList != null) {
+      for (var history in _jobCardHistoryList) {
+        historyList.add(history);
+      }
+      update(["historyList"]);
+    }
+  }
+
   void createPlantDetailsTableData() {
     if (jobList.isNotEmpty) {
       jobDetailsModel.value = jobList[0];
@@ -96,13 +110,6 @@ class JobCardDetailsController extends GetxController {
         equipmentCategoryNames.add(eC.equipmentCatName);
       }
       strEquipmentCategories.value = equipmentCategoryNames.join(', ');
-      //remove extra comma at the end
-      if (strEquipmentCategories.value.length > 0) {
-        strEquipmentCategories.value = strEquipmentCategories.substring(
-          0,
-          strEquipmentCategories.value.length - 1,
-        );
-      }
       productDetails.value = {
         "Plant Details": jobDetailsModel.value?.facilityName,
         "Block": jobDetailsModel.value?.blockName,

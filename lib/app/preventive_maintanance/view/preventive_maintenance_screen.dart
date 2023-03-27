@@ -1,12 +1,12 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../navigators/app_pages.dart';
+import '../preventive_maintenance_controller.dart';
 
 class PreventiveScreen extends GetView<PreventiveController> {
   PreventiveScreen({super.key});
+  final PreventiveController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Card(
-                  shadowColor: ColorsValue.greyColor,
+                  shadowColor: ColorValues.greyColor,
                   elevation: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(3.0),
@@ -83,7 +83,15 @@ class PreventiveScreen extends GetView<PreventiveController> {
                 ontap: () {
                   controller.createChecklist();
                 }),
-            _priventiveList(tittle: "Check Point Creator"),
+            if (Responsive.isDesktop(context))
+              _priventiveList(
+                  tittle: "Check Point Creator",
+                  ontap: () {
+                    // Get.toNamed(
+                    //   Routes.preventive_checkPoint,
+                    // );
+                    controller.checkPoint();
+                  }),
             _priventiveList(tittle: "CheckList Mapping"),
             _priventiveList(tittle: "PM Schedule"),
             _priventiveList(tittle: "PM Schedule View"),
@@ -112,7 +120,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               child: Text(
                 tittle,
                 style: TextStyle(
-                    color: ColorsValue.whiteColor,
+                    color: ColorValues.whiteColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w700),
               ),
@@ -124,7 +132,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 243, 245, 245),
                 border: Border.all(
-                  color: ColorsValue.whiteColor,
+                  color: ColorValues.whiteColor,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),

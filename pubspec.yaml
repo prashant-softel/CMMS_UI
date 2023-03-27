@@ -54,7 +54,7 @@ dependencies:
   google_sign_in: ^5.4.2
   hive: ^2.1.0
   hive_flutter: ^1.1.0
-  http: ^0.13.3
+  http: ^0.13.4
   image_cropper: ^3.0.1
   # image_editor_plus:
   #   path: image_editor_plus
@@ -111,6 +111,7 @@ dependencies:
   flutter_dropzone: ^3.0.5
   http_parser: ^4.0.2
   data_table_2: ^2.4.1
+  rxdart: ^0.27.7
 
 
 dev_dependencies:

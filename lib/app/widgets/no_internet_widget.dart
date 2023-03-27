@@ -17,7 +17,7 @@ class NoInternetWidget extends StatelessWidget {
           children: [
             Center(
               child: Container(
-                color: ColorsValue.whiteColor,
+                color: ColorValues.whiteColor,
                 width: Dimens.threeHundred,
                 height: Dimens.hundred,
                 padding: const EdgeInsets.all(15.0),

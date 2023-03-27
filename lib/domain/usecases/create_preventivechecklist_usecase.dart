@@ -1,6 +1,8 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
+import '../models/frequency_model.dart';
+
 class CreatePreventiveChecklistUsecase {
   CreatePreventiveChecklistUsecase(this.repository);
   Repository repository;
@@ -15,8 +17,14 @@ class CreatePreventiveChecklistUsecase {
         facilityId,
         isLoading,
       );
+  Future<List<FrequencyModel?>?> getFrequencyList({
+    bool? isLoading,
+  }) async =>
+      await repository.getFrequencyList(
+        isLoading,
+      );
   Future<void> createCheckList({
     bool? isLoading,
   }) async =>
-      await repository.createCheckList(isLoading: isLoading);
+      await repository.createCheckListNumber(isLoading: isLoading);
 }

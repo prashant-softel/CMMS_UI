@@ -1,8 +1,9 @@
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../navigators/app_pages.dart';
-import '../theme/colors_value.dart';
+// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
@@ -34,7 +35,7 @@ class CreateNewPermitDialog extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             Divider(
-              color: ColorsValue.greyLightColour,
+              color: ColorValues.greyLightColour,
               thickness: 1,
             ),
             Text('New Permit Created Successfully.\nPlease wait for Approval, you can start \nthe job only after PTW is approved '),

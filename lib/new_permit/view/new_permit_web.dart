@@ -48,7 +48,7 @@ class NewPermitWeb
                 children: [
                   Icon(
                     Icons.home,
-                    color: ColorsValue.greyLightColor,
+                    color: ColorValues.greyLightColor,
                   ),
                   Text(
                     "Dashboard",
@@ -349,7 +349,7 @@ class NewPermitWeb
                               ),
                             ),
                             Divider(
-                              color: ColorsValue.greyLightColour,
+                              color: ColorValues.greyLightColour,
                             ),
                             Row(
                               children: [

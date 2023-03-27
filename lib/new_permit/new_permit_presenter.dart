@@ -65,10 +65,10 @@ class NewPermitPresenter {
   }) async =>
       await newPermitUsecase.getInventoryCategoryList(
       );
-  Future<void> createCheckList({
-    bool? isLoading,
-  }) async =>
-      await newPermitUsecase.createCheckList(isLoading: isLoading);
+  // Future<void> createCheckList({
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitUsecase.createCheckList(isLoading: isLoading);
 
   Future<Map<String, dynamic>?> createNewPermit({
      newPermit,

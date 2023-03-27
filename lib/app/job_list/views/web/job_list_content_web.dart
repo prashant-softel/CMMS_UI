@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import '../../../theme/colors_value.dart';
+import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../widgets/action_button.dart';
 import '../../../widgets/body_custom_app_bar.dart';
@@ -20,7 +20,7 @@ class JobListContentWeb extends GetView<JobListController> {
         Obx(
       () => //
           Container(
-        color: ColorsValue.lightBlueishColor,
+        color: ColorValues.lightBlueishColor,
         child: Column(
             //
             children: [
@@ -180,7 +180,7 @@ class JobListContentWeb extends GetView<JobListController> {
                                               },
                                             ),
                                             TableActionButton(
-                                              color: ColorsValue.purpleColor,
+                                              color: ColorValues.purpleColor,
                                               icon: Icons.add,
                                               label: 'Job Card',
                                               onPress: () {

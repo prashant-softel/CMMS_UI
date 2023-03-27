@@ -14,8 +14,9 @@ abstract class Routes {
   static const facility = _Paths.facility;
   static const login = _Paths.login;
   static const preventive = _Paths.preventive;
-  static const create_checkList = _Paths.create_checkList;
-  static const preventive_list = _Paths.preventive_List;
+  static const createCheckList = _Paths.createCheckList;
+  static const preventiveList = _Paths.preventiveList;
+  static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
   static const breakdown = _Paths.breakdown;
   static const new_permit = _Paths.new_permit;
 }
@@ -35,4 +36,7 @@ abstract class _Paths {
   static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
   static const new_permit = '/new-permit';
+  static const createCheckList = '/create_preventive_checklist-screen';
+  static const preventiveList = '/preventive-list-screen';
+  static const preventiveCheckPoint = '/preventive-check-point';
 }

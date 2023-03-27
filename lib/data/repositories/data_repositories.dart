@@ -217,6 +217,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getFrequencyList({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getFrequencyList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> getJobDetails({
     required String auth,
     int? jobId,
@@ -285,6 +295,32 @@ class DataRepository extends DomainRepository {
          newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
+
+  ///
+  Future<ResponseModel> uploadFiles({
+    required String auth,
+    fileUploadModel,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.uploadFiles(
+        auth: auth,
+        fileUploadModel: fileUploadModel,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getHistory({
+    String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getHistory(
+      auth: auth,
+      moduleType: moduleType,
+      id: id,
+      isLoading: isLoading,
+    );
+  }
 
   ///
 }

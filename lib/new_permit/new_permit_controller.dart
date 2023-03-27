@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/job_saved_dialog.dart';
 import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
@@ -374,7 +373,7 @@ Future<void> getBlocksList(int _facilityId) async {
         work_type_id: 0, 
         Loto_list: [], 
       );
-       var jobJsonString = json.encode(createPermitModel);
+       var jobJsonString = createPermitModel.toJson();
        print({"jsonData5",jobJsonString});
       Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.createNewPermit(
@@ -398,13 +397,13 @@ Future<void> getBlocksList(int _facilityId) async {
     await Get.dialog<void>(CreateNewPermitDialog());
   }
 
-   void createCheckList() async {
-    {
-      await permitPresenter.createCheckList(
-        isLoading: true,
-      );
-    }
-  }
+  //  void createCheckList() async {
+  //   {
+  //     await permitPresenter.createCheckList(
+  //       isLoading: true,
+  //     );
+  //   }
+  // }
 
   // void switchFacility(String? facilityName) {
   //   facilityId =

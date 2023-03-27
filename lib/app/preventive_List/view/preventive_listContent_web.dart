@@ -2,12 +2,10 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
-import '../../widgets/custom_multiselect_dialog_field.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/dropdown.dart';
 import '../preventive_list_controller.dart';
 
 class PreventiveChecklistListContentWeb
@@ -44,14 +42,19 @@ class PreventiveChecklistListContentWeb
                 children: [
                   Icon(
                     Icons.home,
-                    color: ColorsValue.greyLightColor,
+                    color: ColorValues.greyLightColor,
                   ),
                   Text(
                     "Dashboard",
                     style: Styles.greyLight14,
                   ),
-                  Text(" / Preventive Maintenance",
-                      style: Styles.greyMediumLight12),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Text(" / Preventive Maintenance",
+                        style: Styles.greyMediumLight12),
+                  ),
                   Text(" / Create Checklist Number",
                       style: Styles.greyMediumLight12)
                 ],
@@ -100,23 +103,26 @@ class PreventiveChecklistListContentWeb
                                                   .2) -
                                               30,
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                              color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
                                               ),
                                             ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                           ),
                                           child: LoginCustomTextfield()),
                                     ],
@@ -131,51 +137,20 @@ class PreventiveChecklistListContentWeb
                                       CustomRichText(
                                           title: 'Equipment Category: '),
                                       Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
-                                            color: Color.fromARGB(
-                                                255, 227, 224, 224),
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromARGB(
-                                                      255, 236, 234, 234)
-                                                  .withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
                                         width:
                                             (MediaQuery.of(context).size.width *
                                                     .2) -
-                                                40,
-                                        child: CustomMultiSelectDialogField(
-                                          initialValue: (controller
-                                                  .selectedEquipmentCategoryIdList
-                                                  .isNotEmpty)
-                                              ? controller
-                                                  .selectedEquipmentCategoryIdList
-                                              : [],
-                                          items: controller
-                                              .equipmentCategoryList
-                                              .map(
-                                                (equipmentCategory) =>
-                                                    MultiSelectItem(
-                                                  equipmentCategory?.id,
-                                                  equipmentCategory?.name ?? '',
-                                                ),
-                                              )
-                                              .toList(),
-                                          onConfirm: (selectedOptionsList) => {
-                                            controller
-                                                .equipmentCategoriesSelected(
-                                                    selectedOptionsList)
-                                          },
+                                                35,
+                                        child: DropdownWidget(
+                                          controller: controller,
+                                          dropdownList:
+                                              controller.equipmentCategoryList,
+                                          isValueSelected: controller
+                                              .isSelectedequipment.value,
+                                          selectedValue: controller
+                                              .selectedequipment.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
                                         ),
                                       ),
                                     ],
@@ -192,31 +167,22 @@ class PreventiveChecklistListContentWeb
                                     children: [
                                       CustomRichText(title: 'Frequency: '),
                                       Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                              color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2) -
-                                              30,
-                                          child: LoginCustomTextfield()),
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                    .2) -
+                                                30,
+                                        child: DropdownWidget(
+                                          controller: controller,
+                                          dropdownList:
+                                              controller.frequencyList,
+                                          isValueSelected: controller
+                                              .isSelectedfrequency.value,
+                                          selectedValue: controller
+                                              .selectedfrequency.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -229,23 +195,26 @@ class PreventiveChecklistListContentWeb
                                       CustomRichText(title: 'Manpower: '),
                                       Container(
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                              color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
                                               ),
                                             ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                           ),
                                           width: (MediaQuery.of(context)
                                                       .size
@@ -266,23 +235,26 @@ class PreventiveChecklistListContentWeb
                                           title: 'Duration(in Min.): '),
                                       Container(
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                              color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
                                               ),
                                             ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                           ),
                                           width: (MediaQuery.of(context)
                                                       .size
@@ -315,7 +287,9 @@ class PreventiveChecklistListContentWeb
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        controller.createChecklistNumber();
+                                      },
                                       text: 'Create Number')),
                             ],
                           ),
@@ -345,7 +319,7 @@ class PreventiveChecklistListContentWeb
                               ),
                             ),
                             Divider(
-                              color: ColorsValue.greyLightColour,
+                              color: ColorValues.greyLightColour,
                             ),
                             Row(
                               children: [
@@ -426,9 +400,20 @@ class PreventiveChecklistListContentWeb
                                       height: 60,
                                       cells: _preventiveCheckList.map((value) {
                                         return TableViewCell(
-                                            child: Text(
-                                          value,
-                                        ));
+                                            child: (value == 'No')
+                                                ? SwitchListTile(
+                                                    visualDensity: VisualDensity
+                                                        .comfortable,
+                                                    value: value == 'No'
+                                                        ? true
+                                                        : false,
+                                                    onChanged: (value) {},
+                                                    activeColor: Color.fromARGB(
+                                                        255, 86, 211, 111),
+                                                  )
+                                                : Text(
+                                                    value,
+                                                  ));
                                       }).toList());
                                 }).toList(),
                               ),

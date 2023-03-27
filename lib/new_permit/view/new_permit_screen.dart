@@ -3,7 +3,8 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart';
 import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
-import 'package:cmms/app/theme/colors_value.dart';
+import 'package:cmms/app/theme/color_values.dart';
+// import 'package:cmms/app/theme/colors_value.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/date_range_picker.dart';
@@ -90,7 +91,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Card(
-                              shadowColor: ColorsValue.greyColor,
+                              shadowColor: ColorValues.greyColor,
                               elevation: 1,
                               child: Padding(
                                 padding: const EdgeInsets.all(1.0),
@@ -423,7 +424,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                             height: 45,
                                             child: CustomElevatedButton(
                                               backgroundColor:
-                                                  ColorsValue.navyBlueColor,
+                                                  ColorValues.navyBlueColor,
                                               text: "Submit",
                                               onPressed: () {
                                                  controller.createNewPermit();
@@ -572,13 +573,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 spreadRadius: 1.0,
               ), //BoxShadow
               BoxShadow(
-                color: ColorsValue.whiteColor,
+                color: ColorValues.whiteColor,
                 offset: const Offset(0.0, 0.0),
                 blurRadius: 0.0,
                 spreadRadius: 0.0,
               ), //BoxShadow
             ],
-            color: ColorsValue.whiteColor,
+            color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
@@ -591,7 +592,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
               controller: controller.startDateTimeCtrlr,
               autofocus: false,
               decoration: InputDecoration(
-                fillColor: ColorsValue.whiteColor,
+                fillColor: ColorValues.whiteColor,
                 filled: true,
                 contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
                 border: InputBorder.none,
@@ -665,13 +666,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 spreadRadius: 1.0,
               ), //BoxShadow
               BoxShadow(
-                color: ColorsValue.whiteColor,
+                color: ColorValues.whiteColor,
                 offset: const Offset(0.0, 0.0),
                 blurRadius: 0.0,
                 spreadRadius: 0.0,
               ), //BoxShadow
             ],
-            color: ColorsValue.whiteColor,
+            color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
@@ -683,7 +684,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
               controller: controller.validTillTimeCtrlr,
               autofocus: false,
               decoration: InputDecoration(
-                fillColor: ColorsValue.whiteColor,
+                fillColor: ColorValues.whiteColor,
                 filled: true,
                 contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
                 border: InputBorder.none,
@@ -875,7 +876,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                   TextSpan(
                     text: '*',
                     style: TextStyle(
-                      color: ColorsValue.orangeColor,
+                      color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -897,13 +898,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
               spreadRadius: 1.0,
             ),
             BoxShadow(
-              color: ColorsValue.whiteColor,
+              color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ),
           ],
-          color: ColorsValue.whiteColor,
+          color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
         child: SizedBox(
@@ -914,7 +915,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
             maxLines: 5,
             autofocus: false,
             decoration: InputDecoration(
-              fillColor: ColorsValue.whiteColor,
+              fillColor: ColorValues.whiteColor,
               filled: true,
               contentPadding: Dimens.edgeInsets05_10,
               border: InputBorder.none,
@@ -924,7 +925,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                   ? OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
-                        color: ColorsValue.redColorDark,
+                        color: ColorValues.redColorDark,
                       ),
                     )
                   : InputBorder.none,
@@ -932,7 +933,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                   ? OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
-                        color: ColorsValue.redColorDark,
+                        color: ColorValues.redColorDark,
                       ),
                     )
                   : null,

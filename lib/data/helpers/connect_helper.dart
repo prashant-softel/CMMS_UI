@@ -287,7 +287,19 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
-
+  Future<ResponseModel> getFrequencyList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'CMMS/GetFrequencyList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
   Future<ResponseModel> getAssignedToList({
     required String auth,
     bool? isLoading,
@@ -339,7 +351,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
 
@@ -358,6 +369,27 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> uploadFiles({
+    required String auth,
+    fileUploadModel,
+    int? facilityId,
+    int? moduleId,
+    int? id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'FileUpload/UploadFile',
+      Request.post,
+      fileUploadModel,
+      isLoading ?? true,
+      {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
     return responseModel;
   }
@@ -367,6 +399,7 @@ class ConnectHelper {
     required String auth,
     newPermit,
     bool? isLoading,
+  
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/CreatePermit',
@@ -398,7 +431,24 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
 
+  Future<ResponseModel> getHistory({
+    String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 
@@ -411,7 +461,7 @@ class ConnectHelper {
       Request.post,
       [
         {
-          "checklist_number": "IV _Test Check List 005",
+          "checkList_number": "IV _Test Check List 005",
           "type": 1,
           "facility_id": 45,
           "category_id": 2,

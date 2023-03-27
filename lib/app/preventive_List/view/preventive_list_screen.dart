@@ -5,14 +5,12 @@ import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
-import '../../navigators/app_pages.dart';
-import '../../theme/colors_value.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../preventive_list_controller.dart';
 
-class PriventiveListScreen extends GetView<PreventiveListController> {
-  PriventiveListScreen({super.key});
+class PreventiveListScreen extends GetView<PreventiveListController> {
+  PreventiveListScreen({super.key});
 
   ///
   @override

@@ -8,7 +8,7 @@ import '../../widgets/custom_textfield.dart';
 
 class LoginScreen extends GetView<LoginController> {
   LoginScreen({Key? key}) : super(key: key);
-  final LoginController loginController = Get.find();
+  final LoginController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class LoginScreen extends GetView<LoginController> {
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: ColorsValue.greyColor),
+                                      color: ColorValues.greyColor),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -82,12 +82,12 @@ class LoginScreen extends GetView<LoginController> {
                                         50,
                                     child: LoginCustomTextfield(
                                       textController: controller.emailCtrlr,
-                                      ishint: "EmailId",
+                                      ishint: "Email Id",
                                       onChanged: (value) =>
                                           controller.updateemail(value),
                                       widget: Icon(
                                         Icons.email_outlined,
-                                        color: ColorsValue.greyLightColor,
+                                        color: ColorValues.greyLightColor,
                                       ),
                                     )),
                                 SizedBox(
@@ -109,7 +109,7 @@ class LoginScreen extends GetView<LoginController> {
                                         controller.passwordVisible.value
                                             ? Icons.visibility_off
                                             : Icons.visibility,
-                                        color: ColorsValue.greyLightColor,
+                                        color: ColorValues.greyLightColor,
                                       ),
                                       onPressed: () =>
                                           controller.passwordVisible.toggle(),
@@ -125,7 +125,7 @@ class LoginScreen extends GetView<LoginController> {
                                     'Forgot Password',
                                     style: TextStyle(
                                         fontSize: 13,
-                                        color: ColorsValue.greyColor),
+                                        color: ColorValues.greyColor),
                                   ),
                                 ),
                                 SizedBox(
@@ -138,7 +138,7 @@ class LoginScreen extends GetView<LoginController> {
                                     height: 45,
                                     child: CustomElevatedButton(
                                       backgroundColor:
-                                          ColorsValue.navyBlueColor,
+                                          ColorValues.navyBlueColor,
                                       text: "Login",
                                       onPressed: () {
                                         controller.login();
@@ -176,12 +176,12 @@ class LoginScreen extends GetView<LoginController> {
                             ),
                             LoginCustomTextfield(
                               textController: controller.emailCtrlr,
-                              ishint: "EmailId",
+                              ishint: "Email Id",
                               onChanged: (value) =>
                                   controller.updateemail(value),
                               widget: Icon(
                                 Icons.email_outlined,
-                                color: ColorsValue.greyLightColor,
+                                color: ColorValues.greyLightColor,
                               ),
                             ),
                             SizedBox(
@@ -198,7 +198,7 @@ class LoginScreen extends GetView<LoginController> {
                                   controller.passwordVisible.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color: ColorsValue.greyLightColor,
+                                  color: ColorValues.greyLightColor,
                                 ),
                                 onPressed: () =>
                                     controller.passwordVisible.toggle(),
@@ -218,15 +218,21 @@ class LoginScreen extends GetView<LoginController> {
                               height: 30,
                             ),
                             Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 45,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorsValue.navyBlueColor,
-                                  text: "Login",
-                                  onPressed: () {
-                                    controller.login();
-                                  },
-                                )),
+                              width: MediaQuery.of(context).size.width,
+                              height: 45,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  textStyle:
+                                      TextStyle(fontSize: Dimens.fourteen),
+                                  backgroundColor: ColorValues.navyBlueColor,
+                                ),
+                                onPressed: () {
+                                  print("hiii");
+                                  controller.login();
+                                },
+                                child: const Text('Login'),
+                              ),
+                            ),
                           ],
                         ),
                       ),
