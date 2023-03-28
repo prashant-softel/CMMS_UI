@@ -343,44 +343,6 @@ class PreventiveCheckPointContentWeb
                             Divider(
                               color: ColorValues.greyLightColour,
                             ),
-                            // Container(
-                            //   width: 300,
-                            //   margin: EdgeInsets.only(left: 10),
-                            //   decoration: BoxDecoration(
-                            //     color: Colors.white,
-                            //     borderRadius: BorderRadius.circular(5),
-                            //     boxShadow: [
-                            //       BoxShadow(
-                            //         color: Color.fromARGB(255, 236, 234, 234)
-                            //             .withOpacity(0.5),
-                            //         spreadRadius: 2,
-                            //         blurRadius: 5,
-                            //         offset: Offset(0, 2),
-                            //       ),
-                            //     ],
-                            //   ),
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(left: 15.0),
-                            //     child: CustomDropDownButton(
-                            //       value: controller.selectedchecklist.value,
-                            //       onChange: (String? selectedValue) {
-                            //         controller.isSelectedchecklist.value = true;
-                            //         controller.selectedchecklist.value =
-                            //             selectedValue ?? '';
-                            //       },
-                            //       item: controller.checkList
-                            //           .map<DropdownMenuItem<String>>(
-                            //               (facility) {
-                            //         return DropdownMenuItem<String>(
-                            //           value: facility?.id.toString() ?? '',
-                            //           child: Text(
-                            //               facility?.id.toString() ?? ''),
-                            //         );
-                            //       }).toList(),
-                            //     ),
-                            //   ),
-                            // ),
-
                             SizedBox(
                               height: 15,
                             ),
@@ -435,6 +397,7 @@ class PreventiveCheckPointContentWeb
                                 ? Expanded(
                                     child: ScrollableTableView(
                                       columns: [
+                                      "Check Point Id",
                                         "Check List No.",
                                         "Check Point",
                                         "Requirement",
@@ -453,6 +416,7 @@ class PreventiveCheckPointContentWeb
                                               0,
                                           (index) {
                                             return [
+                                              "",
                                               '',
                                               '',
                                               '',
@@ -478,6 +442,7 @@ class PreventiveCheckPointContentWeb
                                     paginationController:
                                         controller.paginationController,
                                     columns: [
+                                      "Check Point Id",
                                       "Check List No.",
                                       "Check Point",
                                       "Requirement",
@@ -499,6 +464,7 @@ class PreventiveCheckPointContentWeb
                                               controller
                                                   .preventiveCheckpoint?[index];
                                           return [
+                                            '${preventiveCheckPointModelListDetails?.id}',
                                             '${preventiveCheckPointModelListDetails?.checklist_name}',
                                             '${preventiveCheckPointModelListDetails?.check_point}',
                                             '${preventiveCheckPointModelListDetails?.requirement}',
@@ -524,7 +490,12 @@ class PreventiveCheckPointContentWeb
                                                       color: Colors.red,
                                                       icon: Icons.delete,
                                                       label: 'Delete',
-                                                      onPress: () {},
+                                                      onPress: () {
+                                                        print(record[0]);
+                                                        controller.isDeleteDialog(
+                                                         check_point: record[2],check_point_id: record[0]
+                                                            );
+                                                      },
                                                     ),
                                                   ])
                                                 : (value == "0" || value == '1')

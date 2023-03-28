@@ -758,7 +758,7 @@ print({"res.data",res.data});
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-
+print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
@@ -896,6 +896,28 @@ print({"res.data1",res.data});
       return [];
     }
   }
+ Future<void>  deleteCkeckpoint(Object check_point_id, bool isLoading)  async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      print({"checkid",check_point_id});
+      final res = await _dataRepository.deleteCkeckpoint(
+        auth: auth,
+        check_point_id: check_point_id ,
+        isLoading: isLoading,
+      );
+print({"checkpoint list",res.data});
+      if (!res.hasError) {
+      print("jngfjnfj");
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+      }
+    } catch (error) {
+      log(error.toString());
+
+    }
+  }
+
+ 
 
   ///
 }
