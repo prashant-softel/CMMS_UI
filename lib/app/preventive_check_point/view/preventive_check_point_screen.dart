@@ -20,7 +20,7 @@ class PreventiveCheckPointScreen
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 90,automaticallyImplyLeading: false,
             )
           : AppBar(
               title: Text('Preventive Check Point'),
