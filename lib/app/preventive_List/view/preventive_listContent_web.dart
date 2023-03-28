@@ -412,11 +412,12 @@ class PreventiveChecklistListContentWeb
                                   child: ScrollableTableView(
                                     
                                       columns: [
-                                        "Check List No.",
-                                        "Check Point",
-                                        "Requirement",
-                                        "Upload Image?",
-                                        "Action",
+                                       "Checklist Number ",
+                                        "Active Status ",
+                                        "Category ",
+                                        "Frequency ",
+                                        "PM Manpower",
+                                        "PM Duration(in Min.)","Action",
                                       ].map((column) {
                                         return TableViewColumn(
                                           label: column,
@@ -431,6 +432,7 @@ class PreventiveChecklistListContentWeb
                                           (index) {
                                           
                                             return [
+                                              '',
                                               '',
                                               '',
                                               '',
@@ -463,7 +465,7 @@ class PreventiveChecklistListContentWeb
                                         "Category ",
                                         "Frequency ",
                                         "PM Manpower",
-                                        "PM Duration(in Min.)"
+                                        "PM Duration(in Min.)","Action"
                                       ].map((column) {
                                         return TableViewColumn(
                                           minWidth: Get.width * 0.12,
@@ -486,7 +488,7 @@ class PreventiveChecklistListContentWeb
                                               '${preventiveCheckListModelListDetails?.category_name}',
                                               '${preventiveCheckListModelListDetails?.frequency_name}',
                                               '${preventiveCheckListModelListDetails?.manPower}',
-                                              '${preventiveCheckListModelListDetails?.duration}',
+                                              '${preventiveCheckListModelListDetails?.duration}',"Action"
                                             ];
                                           },
                                         ),
@@ -511,7 +513,21 @@ class PreventiveChecklistListContentWeb
                                                                   86,
                                                                   211,
                                                                   111),
-                                                        )
+                                                        ):(value == "Action")
+                                                ? Wrap(children: [
+                                                    TableActionButton(
+                                                      color: Colors.blue,
+                                                      icon: Icons.edit,
+                                                      label: 'Edit',
+                                                      onPress: () {},
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Colors.red,
+                                                      icon: Icons.delete,
+                                                      label: 'Delete',
+                                                      onPress: () {},
+                                                    ),
+                                                  ])
                                                       : Text(
                                                           value,
                                                         ));

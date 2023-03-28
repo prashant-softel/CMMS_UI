@@ -153,7 +153,7 @@ class PreventiveListController extends GetxController {
     );    return true;
 
     }
-    return false;
+    return true;
   }
 
   Future<void> issuccessCreatechecklist() async {
@@ -169,7 +169,7 @@ await { _cleardata()};
     selectedequipment.value = '';
 
     selectedfrequency.value = '';
-  Future.delayed(Duration(seconds: 4), () {
+  Future.delayed(Duration(seconds: 5), () {
      isSuccess.value=false;
     
     });

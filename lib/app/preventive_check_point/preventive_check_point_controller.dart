@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_checkpoint_model.dart';
+import '../theme/color_values.dart';
+import '../theme/styles.dart';
 import 'preventive_check_point_presenter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -29,6 +31,7 @@ class PreventiveCheckPointController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+    var preventiveCheckPointModelListDetails;
   @override
   void onInit() async {
     getPreventiveCheckList(facilityId, type);
@@ -117,11 +120,70 @@ class PreventiveCheckPointController extends GetxController {
     checkPointCtrlr.text = '';
     requirementCtrlr.text = '';
     isToggleOn.value = false;
-        Future.delayed(Duration(seconds: 4), () {
-     isSuccess.value=false;
-    
+    Future.delayed(Duration(seconds: 4), () {
+      isSuccess.value = false;
     });
 
     getCheckPointlist(selectedchecklistId: selectedchecklist.value);
   }
+
+  void isDeleteDialog({
+    String? check_point_id,String? check_point
+  }) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+ RichText(
+          text: TextSpan(
+              text: 'Are you sure you want to delete the checkpoint ',
+              style: Styles.blackBold16,
+              children: [
+                TextSpan(
+                  text: check_point,
+                  style: TextStyle(
+                    color: ColorValues.orangeColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]),
+        ),        
+        ]),
+        actions: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                 deleteCkeckpoint(check_point_id).then((value){
+                  Get.back();
+                      getCheckPointlist(selectedchecklistId: selectedchecklist.value);
+
+                 });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+ Future< void> deleteCkeckpoint(String? check_point_id) async {
+    {
+        await preventiveCheckPointPresenter.deleteCkeckpoint(
+        check_point_id,
+          isLoading: true,
+        );
+      }
+    }
+  
 }

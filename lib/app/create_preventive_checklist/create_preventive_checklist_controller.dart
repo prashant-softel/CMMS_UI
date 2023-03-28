@@ -95,7 +95,7 @@ class PreventiveCheckListController extends GetxController {
       );
       return true;
     }
-    return false;
+    return true;
   }
 
   Future<void> getFacilityList() async {
