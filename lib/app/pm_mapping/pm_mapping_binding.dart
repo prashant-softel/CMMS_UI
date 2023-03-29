@@ -7,7 +7,6 @@ import '../../domain/usecases/pm_mapping_usecase.dart';
 class PmMappingBinding extends Bindings {
   @override
   void dependencies() {
-    //Get.find<PmMappingController>();
 
     Get.lazyPut(
       () => PmMappingController(

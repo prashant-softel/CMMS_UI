@@ -4,8 +4,10 @@ import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/dropdown.dart';
+
 class HeaderWidget extends GetView<HomeController> {
-   HeaderWidget({
+  HeaderWidget({
     super.key,
   });
   @override
@@ -38,36 +40,13 @@ class HeaderWidget extends GetView<HomeController> {
             if (Responsive.isDesktop(context))
               Obx(
                 () => Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),border: Border.all(color: ColorValues.greyLightColour),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 4),
-                    child: CustomDropDownButton(
-                      value: controller.selectedFacility.value,
-                      onChange: (String? selectedValue) {
-                        controller.isFacilitySelected.value = true;
-                        controller.selectedFacility.value = selectedValue ?? '';
-                      },
-                      item: controller.facilityList
-                          .map<DropdownMenuItem<String>>((facility) {
-                        return DropdownMenuItem<String>(
-                          value: facility?.name ?? '',
-                          child: Text(facility?.name ?? ''),
-                        );
-                      }).toList(),
-                    ),
+                  width: MediaQuery.of(context).size.width * .2,
+                  child: DropdownWidget(
+                    controller: controller,
+                    dropdownList: controller.facilityList,
+                    isValueSelected: controller.isFacilitySelected.value,
+                    selectedValue: controller.selectedFacility.value,
+                    onValueChanged: controller.onValueChanged,
                   ),
                 ),
               ),

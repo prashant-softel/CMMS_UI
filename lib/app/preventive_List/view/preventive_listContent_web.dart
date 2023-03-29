@@ -318,8 +318,8 @@ class PreventiveChecklistListContentWeb
                               ),
                               Container(
                                   width:
-                                      (MediaQuery.of(context).size.width * .2) -120
-                                          ,
+                                      (MediaQuery.of(context).size.width * .2) -
+                                          120,
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
@@ -327,7 +327,7 @@ class PreventiveChecklistListContentWeb
                                         controller
                                             .createChecklistNumber()
                                             .then((value) {
-                                              print("value,$value");
+                                          print("value,$value");
                                           if (value == true)
                                             controller
                                                 .issuccessCreatechecklist();
@@ -367,17 +367,19 @@ class PreventiveChecklistListContentWeb
                             Row(
                               children: [
                                 Container(
-  width:
-                                      (MediaQuery.of(context).size.width * .1) -70
-                                          ,                                  margin: EdgeInsets.only(left: 10),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1) -
+                                          70,
+                                  margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
                                       text: 'Copy'),
                                 ),
-                                Container(   width:
-                                      (MediaQuery.of(context).size.width * .1)-60,
-                                 
+                                Container(
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1) -
+                                          60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -385,18 +387,20 @@ class PreventiveChecklistListContentWeb
                                       text: 'Excel'),
                                 ),
                                 Container(
-   width:
-                                      (MediaQuery.of(context).size.width * .1)-70,
-                                                                   margin: EdgeInsets.only(left: 10),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .1) -
+                                          70,
+                                  margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
                                       text: 'PDF'),
                                 ),
                                 Container(
-   width:
-                                      (MediaQuery.of(context).size.width * .2)-135,
-                                                                   margin: EdgeInsets.only(left: 10),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2) -
+                                          135,
+                                  margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
                                       onPressed: () {},
@@ -408,16 +412,16 @@ class PreventiveChecklistListContentWeb
                               height: 20,
                             ),
                             controller.preventiveCheckList!.length < 1
-                                ?               Expanded(
-                                  child: ScrollableTableView(
-                                    
+                                ? Expanded(
+                                    child: ScrollableTableView(
                                       columns: [
-                                       "Checklist Number ",
+                                        "Checklist Number ",
                                         "Active Status ",
                                         "Category ",
                                         "Frequency ",
                                         "PM Manpower",
-                                        "PM Duration(in Min.)","Action",
+                                        "PM Duration(in Min.)",
+                                        "Action",
                                       ].map((column) {
                                         return TableViewColumn(
                                           label: column,
@@ -426,11 +430,10 @@ class PreventiveChecklistListContentWeb
                                       }).toList(),
                                       rows: [
                                         ...List.generate(
-                                          controller
-                                                  .preventiveCheckList?.length ??
+                                          controller.preventiveCheckList
+                                                  ?.length ??
                                               0,
                                           (index) {
-                                          
                                             return [
                                               '',
                                               '',
@@ -446,15 +449,13 @@ class PreventiveChecklistListContentWeb
                                           height: 60,
                                           cells: record.map((value) {
                                             return TableViewCell(
-                                              child:  Text(value),
+                                              child: Text(value),
                                             );
                                           }).toList(),
                                         );
                                       }).toList(),
                                     ),
-                                )
-                      
-                              
+                                  )
                                 : Expanded(
                                     child: ScrollableTableView(
                                       paginationController:
@@ -465,7 +466,8 @@ class PreventiveChecklistListContentWeb
                                         "Category ",
                                         "Frequency ",
                                         "PM Manpower",
-                                        "PM Duration(in Min.)","Action"
+                                        "PM Duration(in Min.)",
+                                        "Action"
                                       ].map((column) {
                                         return TableViewColumn(
                                           minWidth: Get.width * 0.12,
@@ -488,7 +490,8 @@ class PreventiveChecklistListContentWeb
                                               '${preventiveCheckListModelListDetails?.category_name}',
                                               '${preventiveCheckListModelListDetails?.frequency_name}',
                                               '${preventiveCheckListModelListDetails?.manPower}',
-                                              '${preventiveCheckListModelListDetails?.duration}',"Action"
+                                              '${preventiveCheckListModelListDetails?.duration}',
+                                              "Action"
                                             ];
                                           },
                                         ),
@@ -513,24 +516,29 @@ class PreventiveChecklistListContentWeb
                                                                   86,
                                                                   211,
                                                                   111),
-                                                        ):(value == "Action")
-                                                ? Wrap(children: [
-                                                    TableActionButton(
-                                                      color: Colors.blue,
-                                                      icon: Icons.edit,
-                                                      label: 'Edit',
-                                                      onPress: () {},
-                                                    ),
-                                                    TableActionButton(
-                                                      color: Colors.red,
-                                                      icon: Icons.delete,
-                                                      label: 'Delete',
-                                                      onPress: () {},
-                                                    ),
-                                                  ])
-                                                      : Text(
-                                                          value,
-                                                        ));
+                                                        )
+                                                      : (value == "Action")
+                                                          ? Wrap(children: [
+                                                              TableActionButton(
+                                                                color:
+                                                                    Colors.blue,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                label: 'Edit',
+                                                                onPress: () {},
+                                                              ),
+                                                              TableActionButton(
+                                                                color:
+                                                                    Colors.red,
+                                                                icon: Icons
+                                                                    .delete,
+                                                                label: 'Delete',
+                                                                onPress: () {},
+                                                              ),
+                                                            ])
+                                                          : Text(
+                                                              value,
+                                                            ));
                                             }).toList());
                                       }).toList(),
                                     ),
