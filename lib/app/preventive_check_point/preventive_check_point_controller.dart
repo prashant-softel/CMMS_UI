@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_checkpoint_model.dart';
+import '../home/home_controller.dart';
 import '../theme/color_values.dart';
 import '../theme/styles.dart';
 import 'preventive_check_point_presenter.dart';
@@ -14,11 +17,13 @@ class PreventiveCheckPointController extends GetxController {
     this.preventiveCheckPointPresenter,
   );
   PreventiveCheckPointPresenter preventiveCheckPointPresenter;
+  final HomeController homecontroller = Get.find();
+
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
   Rx<String> selectedchecklist = ''.obs;
   Rx<bool> isSelectedchecklist = true.obs;
-  int facilityId = 45;
+  int facilityId = 0;
   int type = 1;
   var checkPointCtrlr = TextEditingController();
   var requirementCtrlr = TextEditingController();
@@ -31,11 +36,18 @@ class PreventiveCheckPointController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-    var preventiveCheckPointModelListDetails;
+  var preventiveCheckPointModelListDetails;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+
   @override
   void onInit() async {
-    getPreventiveCheckList(facilityId, type);
-
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      getPreventiveCheckList(
+        facilityId,
+        type,
+      );
+    });
     super.onInit();
   }
 
@@ -46,11 +58,12 @@ class PreventiveCheckPointController extends GetxController {
     isToggleOn.value = !isToggleOn.value;
   }
 
-  Future<void> getPreventiveCheckList(facilityId, type) async {
+  Future<void> getPreventiveCheckList(
+    facilityId,
+    type,
+  ) async {
     final list = await preventiveCheckPointPresenter.getPreventiveCheckList(
-      facilityId: facilityId,
-      type: type,
-    );
+        facilityId: facilityId, type: type, isLoading: true);
 
     if (list != null) {
       for (var _checkList in list) {
@@ -127,9 +140,7 @@ class PreventiveCheckPointController extends GetxController {
     getCheckPointlist(selectedchecklistId: selectedchecklist.value);
   }
 
-  void isDeleteDialog({
-    String? check_point_id,String? check_point
-  }) {
+  void isDeleteDialog({String? check_point_id, String? check_point}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -137,23 +148,24 @@ class PreventiveCheckPointController extends GetxController {
           SizedBox(
             height: 10,
           ),
- RichText(
-          text: TextSpan(
-              text: 'Are you sure you want to delete the checkpoint ',
-              style: Styles.blackBold16,
-              children: [
-                TextSpan(
-                  text: check_point,
-                  style: TextStyle(
-                    color: ColorValues.orangeColor,
-                    fontWeight: FontWeight.bold,
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the checkpoint ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: check_point,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ]),
-        ),        
+                ]),
+          ),
         ]),
         actions: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TextButton(
                 onPressed: () {
@@ -163,11 +175,11 @@ class PreventiveCheckPointController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                 deleteCkeckpoint(check_point_id).then((value){
-                  Get.back();
-                      getCheckPointlist(selectedchecklistId: selectedchecklist.value);
-
-                 });
+                  deleteCkeckpoint(check_point_id).then((value) {
+                    Get.back();
+                    getCheckPointlist(
+                        selectedchecklistId: selectedchecklist.value);
+                  });
                 },
                 child: Text('YES'),
               ),
@@ -177,13 +189,13 @@ class PreventiveCheckPointController extends GetxController {
       ),
     );
   }
- Future< void> deleteCkeckpoint(String? check_point_id) async {
+
+  Future<void> deleteCkeckpoint(String? check_point_id) async {
     {
-        await preventiveCheckPointPresenter.deleteCkeckpoint(
+      await preventiveCheckPointPresenter.deleteCkeckpoint(
         check_point_id,
-          isLoading: true,
-        );
-      }
+        isLoading: true,
+      );
     }
-  
+  }
 }
