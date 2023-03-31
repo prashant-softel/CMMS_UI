@@ -442,7 +442,7 @@ class EditJobScreen extends GetView<EditJobController> {
                 // TextSpan(
                 //   text: '*',
                 //   style: TextStyle(
-                //     color: ColorsValue.orangeColor,
+                //     color: ColorValues.orangeColor,
                 //     fontWeight: FontWeight.bold,
                 //   ),
                 // ),

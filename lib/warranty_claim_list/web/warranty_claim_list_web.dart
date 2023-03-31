@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/warranty_claim_list/web/new_warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,80 +15,81 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
       color: ColorValues.lightBlueishColor,
       child: DefaultTabController(
         length: 3,
-        child: Column(
-          children: [
+        child: Column(children: [
           ///
           Container(
-              height: 55,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(0),
-                border: Border.all(
-                  color: Color.fromARGB(255, 227, 224, 224),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
+            height: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0),
+              border: Border.all(
+                color: Color.fromARGB(255, 227, 224, 224),
+                width: 1,
               ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.home,
-                    color: ColorValues.greyLightColor,
-                  ),
-                  Text(
-                    "Dashboard",
-                    style: Styles.greyLight14,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(" / Warranty Claim List",
-                        style: Styles.greyMediumLight12),
-                  ),
-                  // Text(" / Create Checklist Number",
-                  //     style: Styles.greyMediumLight12)
-                  SizedBox(width: 700,),
-                  ActionButton(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.home,
+                  color: ColorValues.greyLightColor,
+                ),
+                Text(
+                  "Dashboard",
+                  style: Styles.greyLight14,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Text(" / Warranty Claim List",
+                      style: Styles.greyMediumLight12),
+                ),
+                // Text(" / Create Checklist Number",
+                //     style: Styles.greyMediumLight12)
+                SizedBox(
+                  width: 700,
+                ),
+                ActionButton(
                   icon: Icons.calendar_month,
-                  lable: 'December 3rd 2022',
-                  onPress: () {
+                  label: 'December 3rd 2022',
+                  onPressed: () {
                     // Get.to(() => AddInventory());
                     // _buildStartDateField_mobile(context);
                   },
                   color: Colors.green,
                 ),
-                ],
-              ),
+              ],
             ),
-            Dimens.boxHeight30,
+          ),
+          Dimens.boxHeight30,
 
-            ///
+          ///
           CustomAppBar(
             title: 'Warranty Claim List'.tr,
             action: Row(
               children: [
                 ActionButton(
                   icon: Icons.all_inbox,
-                  lable: 'All',
-                  onPress: () {},
+                  label: 'All',
+                  onPressed: () {},
                   color: Colors.blue,
                 ),
                 Dimens.boxWidth10,
                 ActionButton(
                   icon: Icons.close,
-                  lable: 'Closed',
-                  onPress: () {
+                  label: 'Closed',
+                  onPressed: () {
                     // var file = "assets/files/Fixed Asset Imports.xlsx";
                     // var bytes = File(file).readAsBytesSync();
                     // var excel = Excel.decodeBytes(bytes);
-            
+
                     // for (var table in excel.tables.keys) {
                     //   print(table); //sheet Name
                     //   print(excel.tables[table]?.maxCols);
@@ -104,11 +104,10 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                 Dimens.boxWidth10,
                 ActionButton(
                   icon: Icons.add,
-                  lable: 'Add Warranty Claim',
-                  onPress: () {
+                  label: 'Add Warranty Claim',
+                  onPressed: () {
                     // Get.to(() => AddInventory());
                     //  Get.to(() => NewWarrantyClaimListWeb());
-
                   },
                   color: Colors.blue,
                 ),
@@ -122,7 +121,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                 //     // var bytes = data.buffer
                 //     //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
                 //     // var excel = Excel.decodeBytes(bytes);
-            
+
                 //     // for (var table in excel.tables.keys) {
                 //     //   print(table); //sheet Name
                 //     //   print(excel.tables[table]?.maxCols);
@@ -137,7 +136,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
               ],
             ),
           ),
-            
+
           ///
           // Align(
           //   alignment: Alignment.centerLeft,
@@ -161,9 +160,11 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
           //     ),
           //   ),
           // ),
-            
+
           ///
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -183,7 +184,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
               Padding(
                 padding: const EdgeInsets.only(right: 600),
                 child: Container(
-                margin: Dimens.edgeInsets16_16_0_0,
+                  margin: Dimens.edgeInsets16_16_0_0,
                   padding: Dimens.edgeInsets5_8_16_8,
                   decoration: BoxDecoration(
                     color: Colors.blue,
@@ -221,7 +222,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
               ),
             ],
           ),
-            
+
           ///
           Expanded(
             child: Container(
@@ -261,7 +262,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                   controller.inventoryList.length,
                                   (index) => [
                                     AssetName(
-                                       '${controller.inventoryList[index].name}',
+                                      '${controller.inventoryList[index].name}',
                                       // 'dummy data',
                                       1,
                                     ),
@@ -351,7 +352,6 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                               //       .white,
                                                               // ),
                                                               '',
-                                              
                                                             ),
                                                           ),
                                                         ),
@@ -363,36 +363,45 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                     ? Wrap(
                                                         children: [
                                                           Row(
-                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                            children: [
-                                                            TableActionButton(
-                                                              color:
-                                                                  Colors.blue,
-                                                              icon: Icons
-                                                                  .visibility,
-                                                              label: 'View',
-                                                              onPress: () {},
-                                                            ),
-                                                            //),
-            
-                                                            TableActionButton(
-                                                              color:
-                                                                  Color.fromARGB(255, 252, 231, 49),
-                                                              icon: Icons.edit,
-                                                              label: 'Edit',
-                                                              onPress: () {},
-                                                            ),
-                                                            //),
-            
-                                                            // TableActionButton(
-                                                            //   color: Colors.red,
-                                                            //   icon:
-                                                            //       Icons.delete,
-                                                            //   label: 'Delete',
-                                                            //   onPress: () {},
-                                                            // ),
-                                                            //),
-                                                          ]),
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                TableActionButton(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  icon: Icons
+                                                                      .visibility,
+                                                                  label: 'View',
+                                                                  onPress:
+                                                                      () {},
+                                                                ),
+                                                                //),
+
+                                                                TableActionButton(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          252,
+                                                                          231,
+                                                                          49),
+                                                                  icon: Icons
+                                                                      .edit,
+                                                                  label: 'Edit',
+                                                                  onPress:
+                                                                      () {},
+                                                                ),
+                                                                //),
+
+                                                                // TableActionButton(
+                                                                //   color: Colors.red,
+                                                                //   icon:
+                                                                //       Icons.delete,
+                                                                //   label: 'Delete',
+                                                                //   onPress: () {},
+                                                                // ),
+                                                                //),
+                                                              ]),
                                                           // TableActionButton(
                                                           //   color: Colors.green,
                                                           //   icon: Icons
@@ -496,7 +505,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                   }),
                             ),
                           ),
-            
+
                           ///
                         ]);
                     //);
@@ -508,7 +517,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
     );
   }
 
-   Widget _buildStartDateField_mobile(BuildContext context) {
+  Widget _buildStartDateField_mobile(BuildContext context) {
     return Column(//
         children: [
       Align(
@@ -517,8 +526,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
           padding: const EdgeInsets.only(left: 10),
           child: RichText(
             text: TextSpan(
-                text: 'Start Date: ', style: Styles.blackBold16, children: []
-                ),
+                text: 'Start Date: ', style: Styles.blackBold16, children: []),
           ),
         ),
       ),
@@ -550,7 +558,6 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
-              
               onTap: () {
                 pickDateTime_mobile(context);
               },
@@ -601,6 +608,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
       Dimens.boxHeight20,
     ]);
   }
+
   Future pickDateTime_mobile(BuildContext context) async {
     var dateTime = controller.selectedBreakdownTime.value;
     final date = await pickDate_mobile(context);
@@ -665,5 +673,4 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
 
     return newTime;
   }
-
 }

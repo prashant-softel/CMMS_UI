@@ -168,8 +168,8 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                             ),
                             ActionButton(
                               icon: Icons.upload,
-                              lable: 'Import Schedule',
-                              onPress: () {},
+                              label: 'Import Schedule',
+                              onPressed: () {},
                               color: Colors.blue,
                             ),
                           ],

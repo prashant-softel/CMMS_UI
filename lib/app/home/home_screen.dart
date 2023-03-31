@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
+import '../../warranty_claim_list/warranty_claim_list_screen.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../job_list/views/job_list_screen.dart';
 

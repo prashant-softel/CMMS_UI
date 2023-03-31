@@ -8,6 +8,9 @@ import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.d
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
 import 'package:get/get.dart';
+import '../../new_permit_list/new_permit_list_binding.dart';
+import '../../new_permit_list/new_permit_list_screen.dart';
+import '../../warranty_claim_list/warranty_claim_list_screen.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';

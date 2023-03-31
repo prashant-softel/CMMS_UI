@@ -36,10 +36,6 @@ class PreventiveCheckListController extends GetxController {
   Rx<bool> isFacilitySelected = true.obs;
   @override
   void onInit() async {
-    //homePresenter.generateToken();
-    // Future.delayed(Duration(seconds: 1), () {
-    getFacilityList();
-    // });
     getInventoryCategoryList();
     getFrequencyList();
 

@@ -1,4 +1,5 @@
 import 'package:cmms/app/job_details/job_details_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
@@ -30,11 +31,12 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
           ////
           Row(
         children: [
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? Dimens.box0
-              :
-              //
-              HomeDrawer(),
+          //(Responsive.isMobile(context) || Responsive.isTablet(context))
+          if (!kIsWeb)
+            Dimens.box0
+          else
+            //
+            HomeDrawer(),
 
           /// CONTENT
           Obx(
@@ -227,22 +229,31 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                             )
                           ],
 
-                          //Spacer(),
-                          Padding(
-                            padding: Dimens.edgeInsets10_0_10_0,
-                            child: Column(children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Permits',
-                                ),
-                              ),
-                              for (var associatedPermit
-                                  in controller.associatedPermitList ?? [])
-                                PTWCardWidget(
-                                    associatedPermit: associatedPermit),
-                            ]),
-                          ),
+                          /// if Mobile
+                          (kIsWeb && Responsive.isMobile(context))
+                              ?
+
+                              /// ASSOCIATED PERMITS TABLE
+                              Padding(
+                                  padding: Dimens.edgeInsets10_0_10_0,
+                                  child: Column(children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Permits',
+                                      ),
+                                    ),
+                                    for (var associatedPermit
+                                        in controller.associatedPermitList ??
+                                            [])
+                                      PTWCardWidget(
+                                          associatedPermit: associatedPermit),
+                                  ]),
+                                )
+                              :
+
+                              /// if Web
+                              Container(),
                         ]),
                   ),
                 ),

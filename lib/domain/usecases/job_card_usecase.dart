@@ -1,39 +1,15 @@
 import 'package:cmms/domain/models/employee_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/work_type_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-import '../models/block_model.dart';
-import '../models/tools_model.dart';
+import '../models/job_card_details_model.dart';
+import '../models/permit_details_model.dart';
 
 class JobCardDetailsUsecase {
   JobCardDetailsUsecase(this.repository);
   Repository repository;
 
   ///
-
-  Future<List<BlockModel?>?> getBlocksList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getBlocksList(
-        auth,
-        facilityId,
-        isLoading,
-      );
-
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
-
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
@@ -46,30 +22,80 @@ class JobCardDetailsUsecase {
       );
 
   ///
-  Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
-    String? workTypeIds,
+  Future<Map<String, dynamic>?> createJobCard({
+    String? auth,
+    int? jobId,
     bool? isLoading,
   }) async =>
-      await repository.getToolsRequiredToWorkTypeList(
-        workTypeIds,
+      await repository.createJobCard(
+        auth,
+        jobId,
         isLoading,
       );
 
   ///
-  Future<List<WorkTypeModel?>?> getWorkTypeList(
-          {bool? isLoading, String? categoryIds}) async =>
-      await repository.getWorkTypeList(
+  Future<List<JobCardDetailsModel?>?> getJobCardDetails({
+    int? jobCardId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobCardDetails(
+        jobCardId,
         isLoading,
-        categoryIds,
       );
 
   ///
-  Future<Map<String, dynamic>> saveJob({
-    job,
+  Future<PermitDetailsModel?> getPermitDetails({
+    int? permitId,
     bool? isLoading,
   }) async =>
-      await repository.saveJob(
-        job,
+      await repository.getPermitDetails(
+        permitId,
+        isLoading,
+      );
+
+  ///
+  Future<Map<String, dynamic>?> updateJobCard({
+    jobCard,
+    bool? isLoading,
+  }) async =>
+      await repository.updateJobCard(
+        jobCard,
+        isLoading,
+      );
+
+  ///
+  Future<List<HistoryModel>?> getJobCardHistory({
+    moduleType,
+    jobCardId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobCardHistory(
+        moduleType,
+        jobCardId,
+        isLoading,
+      );
+
+  ///
+  Future<dynamic> approveJobCard({
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async =>
+      await repository.approveJobCard(
+        jobCardId,
+        comment,
+        isLoading,
+      );
+
+  ///
+  Future<dynamic> rejectJobCard({
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async =>
+      await repository.rejectJobCard(
+        jobCardId,
+        comment,
         isLoading,
       );
 

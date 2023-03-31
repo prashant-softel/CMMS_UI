@@ -20,7 +20,7 @@ class JobListContentWeb extends GetView<JobListController> {
         Obx(
       () => //
           Container(
-        color: ColorValues.lightBlueishColor,
+        color: ColorValues.appBackGroundColor,
         child: Column(
             //
             children: [
@@ -30,39 +30,39 @@ class JobListContentWeb extends GetView<JobListController> {
                 action: Row(children: [
                   ActionButton(
                     icon: Icons.download,
-                    lable: 'BM Report',
-                    onPress: () {},
-                    color: Color.fromARGB(255, 220, 176, 45),
+                    label: 'BM Report',
+                    onPressed: () {},
+                    color: ColorValues.appYellowColor,
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.upload,
-                    lable: 'Pending Jobs',
-                    onPress: () {},
-                    color: Color.fromARGB(255, 130, 183, 146),
+                    label: 'Pending Jobs',
+                    onPressed: () {},
+                    color: ColorValues.appDarkBlueColor.withOpacity(0.3),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.add,
-                    lable: 'Created By Me'.tr,
-                    onPress: () {},
-                    color: Color.fromARGB(255, 73, 142, 143),
+                    label: 'Created By Me'.tr,
+                    onPressed: () {},
+                    color: ColorValues.appLightBlueColor,
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.close,
-                    lable: 'Assigned To Me'.tr,
-                    onPress: () async {},
-                    color: Colors.green,
+                    label: 'Assigned To Me'.tr,
+                    onPressed: () async {},
+                    color: ColorValues.appGreenColor,
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.upload,
-                    lable: 'Add New Job',
-                    onPress: () {
+                    label: 'Add New Job',
+                    onPressed: () {
                       controller.addJob();
                     },
-                    color: Colors.blue,
+                    color: ColorValues.appDarkBlueColor,
                   ),
                   Dimens.boxWidth10,
                 ]),
@@ -171,7 +171,7 @@ class JobListContentWeb extends GetView<JobListController> {
                                       ? Wrap(
                                           children: [
                                             TableActionButton(
-                                              color: Colors.green,
+                                              color: ColorValues.appGreenColor,
                                               icon: Icons.visibility,
                                               label: 'View',
                                               onPress: () {
@@ -180,7 +180,7 @@ class JobListContentWeb extends GetView<JobListController> {
                                               },
                                             ),
                                             TableActionButton(
-                                              color: ColorValues.purpleColor,
+                                              color: ColorValues.appPurpleColor,
                                               icon: Icons.add,
                                               label: 'Job Card',
                                               onPress: () {
@@ -189,24 +189,6 @@ class JobListContentWeb extends GetView<JobListController> {
                                                 );
                                               },
                                             ),
-                                            // TableActionButton(
-                                            //   color: Colors.red,
-                                            //   icon: Icons.delete,
-                                            //   label: 'Delete',
-                                            //   onPress: () {},
-                                            // ),
-                                            // TableActionButton(
-                                            //   color: Colors.green,
-                                            //   icon: Icons.visibility,
-                                            //   label: 'Approve Request',
-                                            //   onPress: () {},
-                                            // ),
-                                            // TableActionButton(
-                                            //   color: Colors.red,
-                                            //   icon: Icons.visibility,
-                                            //   label: 'Reject Request',
-                                            //   onPress: () {},
-                                            // ),
                                           ],
                                         )
                                       : Text(value.toString()),

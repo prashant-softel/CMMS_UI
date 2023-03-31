@@ -129,7 +129,9 @@ class PmMappingController extends GetxController {
         pmJsonString: pmJsonString,
         isLoading: true,
       );
-      if (responsePmMapCreated != null) {}
+      if (responsePmMapCreated != null) {
+        isSuccessDialog();
+      }
     }
   }
 

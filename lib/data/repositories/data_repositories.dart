@@ -39,13 +39,11 @@ class DataRepository extends DomainRepository {
   /// Get data from secure storage
   @override
   Future<String> getSecuredValue(String key) async {
-    //return generateToken();
     throw UnimplementedError();
   }
 
   @override
   Future<String> getUserAccessData(String key) async {
-    //return generateToken();
     throw UnimplementedError();
   }
 
@@ -270,6 +268,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  ///
   Future<ResponseModel> getJobDetails({
     required String auth,
     int? jobId,
@@ -283,6 +282,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  ///
   Future<ResponseModel> getAssignedToList({
     required String auth,
     int? facilityId,
@@ -296,6 +296,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  ///
   Future<ResponseModel> getToolsRequiredToWorkTypeList({
     required String auth,
     String? workTypeIds,
@@ -318,6 +319,20 @@ class DataRepository extends DomainRepository {
         job: job,
         isLoading: isLoading ?? false,
       );
+
+  ///
+  Future<ResponseModel> createJobCard({
+    String? auth,
+    jobId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createJobCard(
+        auth: auth,
+        jobId: jobId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
 
   ///
   Future<ResponseModel> savePmMapping({
@@ -379,16 +394,78 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getHistory({
+  Future<ResponseModel> getJobCardDetails({
     String? auth,
-    int? moduleType,
-    int? id,
+    int? jobCardId,
     bool? isLoading,
   }) async {
-    return await connectHelper.getHistory(
+    return await connectHelper.getJobCardDetails(
+      auth: auth,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getPermitDetails({
+    String? auth,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getPermitDetails(
+      auth: auth,
+      permitId: permitId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getJobCardHistory({
+    String? auth,
+    int? jobCardId,
+    int? moduleType,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getJobCardHistory(
       auth: auth,
       moduleType: moduleType,
-      id: id,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> updateJobCard({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.updateJobCard(
+      auth: auth,
+      jobCard: jobCard,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> approveJobCard({
+    String? auth,
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.approveJobCard(
+      auth: auth,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> rejectJobCard({
+    String? auth,
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.rejectJobCard(
+      auth: auth,
+      jobCardId: jobCardId,
       isLoading: isLoading,
     );
   }

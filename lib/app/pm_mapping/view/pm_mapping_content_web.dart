@@ -136,7 +136,9 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                                                           .equipmentCategoryNameList[
                                                       index]))
                                           .map((e) => MultiSelectItem(
-                                              e, e?.id.toString() ?? ''))
+                                              e,
+                                              e?.checklist_number.toString() ??
+                                                  ''))
                                           .toList(),
                                       searchable: true,
                                       onConfirm: (selectedOptionsList) => {

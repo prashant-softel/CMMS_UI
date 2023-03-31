@@ -19,7 +19,7 @@ class HomeController extends GetxController {
   var startDateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
 
-  
+
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
@@ -116,6 +116,7 @@ class HomeController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
+      getFacilityList();
     });
     super.onInit();
   }

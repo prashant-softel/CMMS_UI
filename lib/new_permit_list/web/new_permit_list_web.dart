@@ -36,36 +36,36 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                 action: Row(children: [
                   ActionButton(
                     icon: Icons.download,
-                    lable: 'BM Report',
-                    onPress: () {},
+                    label: 'BM Report',
+                    onPressed: () {},
                     color: Color.fromARGB(255, 220, 176, 45),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.upload,
-                    lable: 'Pending Permits',
-                    onPress: () {},
+                    label: 'Pending Permits',
+                    onPressed: () {},
                     color: Color.fromARGB(255, 130, 183, 146),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.add,
-                    lable: 'Created By Me'.tr,
-                    onPress: () {},
+                    label: 'Created By Me'.tr,
+                    onPressed: () {},
                     color: Color.fromARGB(255, 73, 142, 143),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.close,
-                    lable: 'Assigned To Me'.tr,
-                    onPress: () async {},
+                    label: 'Assigned To Me'.tr,
+                    onPressed: () async {},
                     color: Colors.green,
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.upload,
-                    lable: 'Add New Permit',
-                    onPress: () {
+                    label: 'Add New Permit',
+                    onPressed: () {
                       controller.addNewPermitList();
                     },
                     color: Colors.blue,
@@ -98,7 +98,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                           // 'permitId',
                           // 'assignedToName',
                           // 'status',
-                           'action'.tr,
+                          'action'.tr,
                         ].map((column) {
                           return TableViewColumn(
                             minWidth: Get.width * 0.25,
@@ -116,26 +116,26 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                     ? "Description"
                                                     : column == "permitTypeName"
                                                         ? "Work Type"
-                                                //         : column ==
-                                                //                 "raisedByName"
-                                                //             ? "Raised By"
-                                                //             : column ==
-                                                //                     "breakdownTime"
-                                                //                 ? "Breakdown Time"
-                                                //                 : column ==
-                                                //                         "breakdownType"
-                                                //                     ? "Breakdown Type"
-                                                //                     : column ==
-                                                //                             "permitId"
-                                                //                         ? "Permit ID"
-                                                //                         : column ==
-                                                //                                 "assignedToName"
-                                                //                             ? "Assigned To"
-                                                //                             : column == "status"
-                                                //                                 ? "Status"
-                                                //                                 : column == "Actions"
-                                                //                                     ? "Actions"
-                                                                                    : "",
+                                                        //         : column ==
+                                                        //                 "raisedByName"
+                                                        //             ? "Raised By"
+                                                        //             : column ==
+                                                        //                     "breakdownTime"
+                                                        //                 ? "Breakdown Time"
+                                                        //                 : column ==
+                                                        //                         "breakdownType"
+                                                        //                     ? "Breakdown Type"
+                                                        //                     : column ==
+                                                        //                             "permitId"
+                                                        //                         ? "Permit ID"
+                                                        //                         : column ==
+                                                        //                                 "assignedToName"
+                                                        //                             ? "Assigned To"
+                                                        //                             : column == "status"
+                                                        //                                 ? "Status"
+                                                        //                                 : column == "Actions"
+                                                        //                                     ? "Actions"
+                                                        : "",
                           );
                         }).toList(),
                         rows: //
@@ -143,9 +143,11 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                           ...List.generate(
                             controller.newPermitList?.length ?? 0,
                             (index) {
-                              var newPermitDetails = controller.newPermitList?[index];
+                              var newPermitDetails =
+                                  controller.newPermitList?[index];
                               //_jobId = jobDetails?.id;
-                              controller.permitId.value = newPermitDetails?.permitId ?? 0;
+                              controller.permitId.value =
+                                  newPermitDetails?.permitId ?? 0;
                               return [
                                 '${newPermitDetails?.permitId}',
                                 '${newPermitDetails?.workingAreaName ?? ''}',
@@ -167,7 +169,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                           ),
                         ].map((_newPermitList) {
                           return TableViewRow(
-                              onTap: () => {print('ZERO = ${_newPermitList[0]}')},
+                              onTap: () =>
+                                  {print('ZERO = ${_newPermitList[0]}')},
                               height: 45,
                               cells: _newPermitList.map((value) {
                                 return TableViewCell(
@@ -180,8 +183,10 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                               icon: Icons.visibility,
                                               label: 'View',
                                               onPress: () {
-                                                controller.showNewPermitListDetails(
-                                                    controller.permitId.value);
+                                                controller
+                                                    .showNewPermitListDetails(
+                                                        controller
+                                                            .permitId.value);
                                               },
                                             ),
                                             TableActionButton(
@@ -190,7 +195,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                               label: 'Job Card',
                                               onPress: () {
                                                 controller.goToJobCardScreen(
-                                                  int.tryParse(_newPermitList[0]),
+                                                  int.tryParse(
+                                                      _newPermitList[0]),
                                                 );
                                               },
                                             ),
