@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                     onCreated: (controller) => this.dzvcontroller = controller,
                     onDrop: (dynamic event) {},
                     onDropMultiple: (List<dynamic>? events) {
-                      controller.files.value = events?.cast<File>() ?? [];
+                   //   controller.files.value = events?.cast<File>() ?? [];
                     },
                     onHover: () => controller.blnHiglight.value = true,
                     onLeave: () => controller.blnHiglight.value = false,

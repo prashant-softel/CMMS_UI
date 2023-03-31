@@ -9,7 +9,7 @@ class PreventiveController extends GetxController {
   PreventivePresenter preventivePresenter;
 
   String username = '';
-  Rx<String> selectedFacility = ''.obs;  
+  Rx<String> selectedFacility = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = false.obs;
 
@@ -19,7 +19,7 @@ class PreventiveController extends GetxController {
   void onInit() async {
     //homePresenter.generateToken();
     //  Future.delayed(Duration(seconds: 1), () {
-    getFacilityList();
+    // getFacilityList();
     //});
 
     super.onInit();
@@ -56,9 +56,16 @@ class PreventiveController extends GetxController {
       Routes.preventiveCheckPoint,
     );
   }
+
   Future<void> pmMapping() async {
     Get.toNamed(
       Routes.pmMapping,
+    );
+  }
+
+  Future<void> pmSchedule() async {
+    Get.toNamed(
+      Routes.pmSchedule,
     );
   }
 }

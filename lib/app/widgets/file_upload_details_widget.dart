@@ -8,7 +8,7 @@ class FileUploadDetailsWidget extends StatelessWidget {
   FileUploadDetailsWidget({super.key});
 
   ///
-  final DropzoneController _dropzoneController = Get.find<DropzoneController>();
+  // final DropzoneController _dropzoneController = Get.find<DropzoneController>();
 
   ///
   @override
@@ -50,33 +50,34 @@ class FileUploadDetailsWidget extends StatelessWidget {
                 child: Text('Remove'),
               ),
             ]),
-            for (var _file in _dropzoneController.files)
+          //  for (var _file in _dropzoneController.files)
               TableRow(children: [
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('${_file.name}'),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('-'),
-                ),
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text('${_file.name}'),
+                // ),
                 Container(
                   padding: EdgeInsets.all(8.0),
                   child: Text('-'),
                 ),
                 Container(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('${_file.size}'),
+                  child: Text('-'),
                 ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: //
-                      LinearProgressIndicator(
-                    color: ColorValues.appLightBlueColor,
-                    //value: _file.
-                    value: _dropzoneController.progress.value / 100,
-                  ),
-                ),
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text('${_file.size}'),
+                // ),
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: //
+                //       LinearProgressIndicator(
+                //     color: ColorValues.appLightBlueColor,
+                //     //value: _file.
+                //     value: _dropzoneController.progress.value / 100,
+                //   ),
+                // ),
+                
                 Container(
                   padding: EdgeInsets.all(8.0),
                   child: Text('-'),

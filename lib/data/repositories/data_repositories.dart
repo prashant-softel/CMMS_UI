@@ -164,7 +164,7 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
-      Future<ResponseModel> getCheckPointlist({
+  Future<ResponseModel> getCheckPointlist({
     required String auth,
     int? selectedchecklistId,
     bool? isLoading,
@@ -172,6 +172,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.getCheckPointlist(
         auth: auth,
         selectedchecklistId: selectedchecklistId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getPmMappingList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPmMappingList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getFacilityList({
@@ -288,29 +298,36 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> createCheckList({
     auth,
-    bool? isLoading,  checklistJsonString,
+    bool? isLoading,
+    checklistJsonString,
   }) async {
-    var response =
-        await connectHelper.createCheckList(auth: auth, isLoading: isLoading,checklistJsonString:checklistJsonString);
+    var response = await connectHelper.createCheckList(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString);
     return response;
   }
- Future<ResponseModel> createCheckpoint({
+
+  Future<ResponseModel> createCheckpoint({
     auth,
-    bool? isLoading,  checkpointJsonString,
+    bool? isLoading,
+    checkpointJsonString,
   }) async {
-    var response =
-        await connectHelper.createCheckpoint(auth: auth, isLoading: isLoading,checkpointJsonString:checkpointJsonString);
+    var response = await connectHelper.createCheckpoint(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
     return response;
   }
 
   Future<ResponseModel> createNewPermit({
     required String auth,
-     newPermit,
+    newPermit,
     bool? isLoading,
   }) async =>
       await connectHelper.createNewPermit(
         auth: auth,
-         newPermit: newPermit,
+        newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
 
@@ -339,13 +356,16 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
-Future<ResponseModel> deleteCkeckpoint({
+
+  Future<ResponseModel> deleteCkeckpoint({
     auth,
-    bool? isLoading,  check_point_id,
+    bool? isLoading,
+    check_point_id,
   }) async {
-    var response =
-        await connectHelper.deleteCkeckpoint(auth: auth, isLoading: isLoading,check_point_id:check_point_id);
+    var response = await connectHelper.deleteCkeckpoint(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   ///
 }

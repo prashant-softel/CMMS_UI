@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'dart:html';
+// import 'dart:html';
 import 'package:http/http.dart' as http;
 
 class FileUploadService {
   final String url;
   final String token;
-  final List<File> files;
+  // final List<File> files;
   final Map<String, String>? requestFields;
 
   ///
   FileUploadService({
     required this.url,
     required this.token,
-    required this.files,
+    // required this.files,
     this.requestFields,
   });
 
@@ -23,37 +23,37 @@ class FileUploadService {
 
   ///
   Future<void> upload() async {
-    for (var i = 0; i < files.length; i++) {
-      final file = files[i];
-      final completer = Completer<List<int>>();
-      final reader = FileReader();
+    // for (var i = 0; i < files.length; i++) {
+    //   final file = files[i];
+    //   final completer = Completer<List<int>>();
+    //   final reader = FileReader();
 
-      reader.onLoad.listen((event) {
-        final bytesData = reader.result as List<int>;
-        completer.complete(bytesData);
-      });
+    //   reader.onLoad.listen((event) {
+    //     final bytesData = reader.result as List<int>;
+    //     completer.complete(bytesData);
+    //   });
 
-      reader.readAsArrayBuffer(file);
-      final bytesData = await completer.future;
-      final request = http.MultipartRequest("POST", Uri.parse(url));
-      final headers = {
-        "Authorization": "Bearer $token",
-        "Content-Type": "multipart/form-data",
-        "Content-Length": bytesData.length.toString(),
-        "Accept": "*/*",
-      };
-      request.headers.addAll(headers);
-      if (requestFields != null) {
-        request.fields.addAll(requestFields!);
-      }
-      request.files.add(http.MultipartFile.fromBytes(
-        'files',
-        bytesData,
-        filename: file.name,
-      ));
-      final response = await request.send();
-      handleResponse(response);
-    }
+    //   reader.readAsArrayBuffer(file);
+    //   final bytesData = await completer.future;
+    //   final request = http.MultipartRequest("POST", Uri.parse(url));
+    //   final headers = {
+    //     "Authorization": "Bearer $token",
+    //     "Content-Type": "multipart/form-data",
+    //     "Content-Length": bytesData.length.toString(),
+    //     "Accept": "*/*",
+    //   };
+    //   request.headers.addAll(headers);
+    //   if (requestFields != null) {
+    //     request.fields.addAll(requestFields!);
+    //   }
+    //   request.files.add(http.MultipartFile.fromBytes(
+    //     'files',
+    //     bytesData,
+    //     filename: file.name,
+    //   ));
+    //   final response = await request.send();
+    //   handleResponse(response);
+    // }
   }
 
   Future<void> handleResponse(http.StreamedResponse response) async {

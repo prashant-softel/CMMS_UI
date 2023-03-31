@@ -349,6 +349,7 @@ class PreventiveCheckPointContentWeb
                             Row(
                               children: [
                                 Container(
+                                  height: 40,
                                   width:
                                       (MediaQuery.of(context).size.width * .1) -
                                           70,
@@ -359,6 +360,7 @@ class PreventiveCheckPointContentWeb
                                       text: 'Copy'),
                                 ),
                                 Container(
+                                  height: 40,
                                   width:
                                       (MediaQuery.of(context).size.width * .1) -
                                           60,
@@ -369,6 +371,7 @@ class PreventiveCheckPointContentWeb
                                       text: 'Excel'),
                                 ),
                                 Container(
+                                  height: 40,
                                   width:
                                       (MediaQuery.of(context).size.width * .1) -
                                           70,
@@ -379,6 +382,7 @@ class PreventiveCheckPointContentWeb
                                       text: 'PDF'),
                                 ),
                                 Container(
+                                  height: 40,
                                   width:
                                       (MediaQuery.of(context).size.width * .2) -
                                           135,
@@ -397,7 +401,7 @@ class PreventiveCheckPointContentWeb
                                 ? Expanded(
                                     child: ScrollableTableView(
                                       columns: [
-                                      "Check Point Id",
+                                        "Check Point Id",
                                         "Check List No.",
                                         "Check Point",
                                         "Requirement",
@@ -492,9 +496,12 @@ class PreventiveCheckPointContentWeb
                                                       label: 'Delete',
                                                       onPress: () {
                                                         print(record[0]);
-                                                        controller.isDeleteDialog(
-                                                         check_point: record[2],check_point_id: record[0]
-                                                            );
+                                                        controller
+                                                            .isDeleteDialog(
+                                                                check_point:
+                                                                    record[2],
+                                                                check_point_id:
+                                                                    record[0]);
                                                       },
                                                     ),
                                                   ])

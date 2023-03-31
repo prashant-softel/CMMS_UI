@@ -20,6 +20,7 @@ abstract class Routes {
   static const breakdown = _Paths.breakdown;
   static const new_permit = _Paths.new_permit;
   static const pmMapping = _Paths.pmMapping;
+  static const pmSchedule = _Paths.pmSchedule;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const preventiveList = '/preventive-list-screen';
   static const preventiveCheckPoint = '/preventive-check-point';
   static const pmMapping = '/pm-mapping-screen';
+  static const pmSchedule = '/pm-schedule-screen';
 }

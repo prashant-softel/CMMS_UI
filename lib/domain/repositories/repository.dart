@@ -22,6 +22,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
+import '../models/pm_mapping_list_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 
@@ -796,6 +797,39 @@ class Repository {
                 .toList();
 
         return _PreventiveCheckPointList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<PmMappingListModel?>?> getPmMappingList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmMappingList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      print({"restt", res.data});
+      if (!res.hasError) {
+        final jsonPmMappingListModels = jsonDecode(res.data);
+        print(res.data);
+        final List<PmMappingListModel> _pmMappingListModel =
+            jsonPmMappingListModels
+                .map<PmMappingListModel>((m) =>
+                    PmMappingListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _pmMappingListModel;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return [];

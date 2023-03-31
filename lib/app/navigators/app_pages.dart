@@ -25,6 +25,8 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
+import '../pm_schedule/pm_schedule_binding.dart';
+import '../pm_schedule/view/pm_schedule_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
@@ -123,10 +125,15 @@ class AppPages {
       page: PreventiveCheckPointScreen.new,
       binding: PreventiveCheckPointBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.pmMapping,
       page: PmMappingScreen.new,
       binding: PmMappingBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmSchedule,
+      page: PmScheduleScreen.new,
+      binding: PmScheduleBinding(),
     ),
   ];
 }
