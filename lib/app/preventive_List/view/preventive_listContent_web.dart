@@ -42,7 +42,7 @@ class PreventiveChecklistListContentWeb
                 children: [
                   Icon(
                     Icons.home,
-                    color: ColorsValue.greyLightColor,
+                    color: ColorValues.greyLightColor,
                   ),
                   Text(
                     "Dashboard",
@@ -114,13 +114,13 @@ class PreventiveChecklistListContentWeb
                                                 spreadRadius: 1.0,
                                               ),
                                               BoxShadow(
-                                                color: ColorsValue.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 offset: const Offset(0.0, 0.0),
                                                 blurRadius: 0.0,
                                                 spreadRadius: 0.0,
                                               ),
                                             ],
-                                            color: ColorsValue.whiteColor,
+                                            color: ColorValues.whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -206,13 +206,13 @@ class PreventiveChecklistListContentWeb
                                                 spreadRadius: 1.0,
                                               ),
                                               BoxShadow(
-                                                color: ColorsValue.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 offset: const Offset(0.0, 0.0),
                                                 blurRadius: 0.0,
                                                 spreadRadius: 0.0,
                                               ),
                                             ],
-                                            color: ColorsValue.whiteColor,
+                                            color: ColorValues.whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -246,13 +246,13 @@ class PreventiveChecklistListContentWeb
                                                 spreadRadius: 1.0,
                                               ),
                                               BoxShadow(
-                                                color: ColorsValue.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 offset: const Offset(0.0, 0.0),
                                                 blurRadius: 0.0,
                                                 spreadRadius: 0.0,
                                               ),
                                             ],
-                                            color: ColorsValue.whiteColor,
+                                            color: ColorValues.whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -319,7 +319,7 @@ class PreventiveChecklistListContentWeb
                               ),
                             ),
                             Divider(
-                              color: ColorsValue.greyLightColour,
+                              color: ColorValues.greyLightColour,
                             ),
                             Row(
                               children: [

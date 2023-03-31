@@ -1,15 +1,14 @@
-import 'dart:html';
-//import 'dart:io';
+import 'dart:html' as html;
 
-class FileUploadModel {
+class FileUploadModelWeb {
   //List<PlatformFile> filesWeb;
-  List<File?> files;
+  List<html.File?> files;
   int? facilityId;
   int? moduleId;
   int? id;
 
   ///
-  FileUploadModel({
+  FileUploadModelWeb({
     this.facilityId,
     this.moduleId,
     this.id,
@@ -19,3 +18,6 @@ class FileUploadModel {
 
   ///
 }
+
+///
+enum FileUploadEvents { BEFORE, DURING, AFTER }

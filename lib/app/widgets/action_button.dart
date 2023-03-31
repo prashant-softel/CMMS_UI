@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 class ActionButton extends StatelessWidget {
   const ActionButton({
     Key? key,
-    required this.lable,
-    required this.onPress,
-    required this.icon,
+    required this.label,
+    required this.onPressed,
+    this.icon,
     required this.color,
   }) : super(key: key);
-  final String lable;
-  final IconData icon;
-  final Function() onPress;
+  final String label;
+  final IconData? icon;
+  final Function() onPressed;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPress,
+      onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(2),
@@ -41,7 +41,7 @@ class ActionButton extends StatelessWidget {
             Padding(
               padding: Dimens.edgeInsets8,
               child: Text(
-                lable,
+                label,
                 style: Styles.white12.copyWith(
                   color: Theme.of(context).textTheme.displaySmall!.color,
                 ),

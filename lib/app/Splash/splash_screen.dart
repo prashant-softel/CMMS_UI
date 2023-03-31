@@ -1,4 +1,4 @@
-import 'package:cmms/app/Splash/splash.dart';
+import 'package:cmms/app/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -103,10 +103,10 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    getFacilityList();
-    getuserAccessData();
+    //getuserAccessData();
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
+      getFacilityList();
     });
     super.onInit();
   }

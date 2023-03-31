@@ -6,8 +6,8 @@ import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../job_card_details_controller.dart';
 
-class IsolatedAssetsWidget extends GetView<JobCardDetailsController> {
-  const IsolatedAssetsWidget({super.key});
+class LotoAppliedAssetsWidget extends GetView<JobCardDetailsController> {
+  const LotoAppliedAssetsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,34 +28,23 @@ class IsolatedAssetsWidget extends GetView<JobCardDetailsController> {
               size: ColumnSize.L,
             ),
             DataColumn2(
-              label: Text('Normalized'),
+              label: Text('LOTO Removed'),
               size: ColumnSize.L,
             ),
           ],
           rows: List<DataRow>.generate(
-            controller.isolationAssetsCategoryList.length ?? 0,
+            controller.lotoAppliedAssets?.length ?? 0,
             (index) => DataRow(//
                 cells: [
               DataCell(
                 Container(
                   padding: Dimens.edgeInsets5,
-                  child: Text(controller.isolationAssetsCategoryList[index]
-                          .isolationAssetsCatName ??
-                      ''),
+                  child: Text('Category'),
                 ),
               ),
               DataCell(
                 Switch(
-                  value: (controller.isolationAssetsCategoryList.isNotEmpty)
-                      ? (controller.isolationAssetsCategoryList[index]
-                                      .isNormalized ==
-                                  0 ||
-                              controller.isolationAssetsCategoryList[index]
-                                      .isNormalized ==
-                                  null)
-                          ? false
-                          : true
-                      : false,
+                  value: controller.isNormalized.value,
                   onChanged: (value) =>
                       controller.toggleIsNormalizedSwitch(value, index),
                   activeColor: ColorValues.appGreenColor,

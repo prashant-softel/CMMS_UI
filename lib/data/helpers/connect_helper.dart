@@ -264,6 +264,7 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
   Future<ResponseModel> getFrequencyList({
     String? auth,
     bool? isLoading,
@@ -277,6 +278,7 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
   Future<ResponseModel> getAssignedToList({
     required String auth,
     bool? isLoading,
@@ -349,6 +351,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createJobCard({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/CreateJC?job=$jobId',
+      Request.post,
+      null,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,
@@ -379,6 +399,23 @@ class ConnectHelper {
     userId = userId;
     var responseModel = await apiWrapper.makeRequest(
       'User/GetUserAccess?user_id=$userId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getJobCardDetails({
+    String? auth,
+    int? jobCardId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/GetJCDetail?jc_id=$jobCardId',
       Request.get,
       null,
       isLoading ?? true,
@@ -435,4 +472,99 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getPermitDetails({
+    required String? auth,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitDetails?permit_id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getJobCardHistory({
+    required String? auth,
+    int? moduleType,
+    int? jobCardId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$jobCardId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateJobCard({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/UpdateJC',
+      Request.post,
+      jobCard,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveJobCard({
+    String? auth,
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/ApproveJC',
+      Request.post,
+      null,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectJobCard({
+    String? auth,
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/RejectJC',
+      Request.post,
+      null,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///
 }

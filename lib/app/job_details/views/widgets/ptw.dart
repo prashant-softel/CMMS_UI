@@ -1,4 +1,4 @@
-import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -41,7 +41,8 @@ class PTWCardWidget extends StatelessWidget {
                           ),
                         ),
                       ]),
-                  Row(children: [
+                  Row(//
+                      children: [
                     Expanded(
                       child: Text(
                         'Permit Type: ',
@@ -102,6 +103,16 @@ class PTWCardWidget extends StatelessWidget {
                           ),
                         ),
                       ]),
+                  Row(
+                    children: [
+                      ActionButton(
+                        label: "Job Card",
+                        icon: Icons.add,
+                        onPressed: () {},
+                        color: ColorValues.appPurpleColor,
+                      )
+                    ],
+                  )
                 ]),
           ),
         ),
