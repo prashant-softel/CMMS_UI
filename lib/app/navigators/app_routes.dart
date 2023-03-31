@@ -19,7 +19,7 @@ abstract class Routes {
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
   static const breakdown = _Paths.breakdown;
   static const new_permit = _Paths.new_permit;
-  static const new_Permit_List  = _Paths.new_Permit_List;
+  static const new_Permit_List = _Paths.new_Permit_List;
   static const warranty_Claim_List = _Paths.warranty_Claim_List;
   static const new_warranty_claim_list = _Paths.new_warranty_claim_list;
   static const pmMapping = _Paths.pmMapping;

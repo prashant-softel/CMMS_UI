@@ -47,7 +47,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                     onCreated: (controller) => this.dzvcontroller = controller,
                     onDrop: (dynamic event) {},
                     onDropMultiple: (List<dynamic>? events) {
-                      //   controller.files.value = events?.cast<File>() ?? [];
+                   //   controller.files.value = events?.cast<File>() ?? [];
                       controller.onFilesAdded();
                     },
                     onHover: () => controller.blnHiglight.value = true,

@@ -1,9 +1,9 @@
-import 'package:cmms/domain/models/file_upload_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:filesize/filesize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../domain/models/file_upload_model.dart';
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 
@@ -118,7 +118,7 @@ class FileUploadDetailsWidget extends StatelessWidget {
                         return DataRow(
                             onSelectChanged: (bool? selected) {
                               if (selected ?? true) {
-                                //log.add('row-selected: ${itemRow.index}');
+                                //  log.add('row-selected: ${itemRow.index}');
                               }
                             },
                             cells: [

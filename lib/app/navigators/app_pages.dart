@@ -148,5 +148,14 @@ class AppPages {
       page: PmScheduleScreen.new,
       binding: PmScheduleBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.pmSchedule,
+      page: PmScheduleScreen.new,
+      binding: PmScheduleBinding(),
+    ),
+    // GetPage<dynamic>(
+    //   name: _Paths.warranty_Claim_List,
+    //   page: WarrantyClaimListScreen.new,
+    // ),
   ];
 }

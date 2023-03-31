@@ -110,8 +110,10 @@ class FileUploadService {
         completer.completeError(error);
       });
 
-      await completer.future;
-    } catch (error) {}
+    await completer.future;
+  } catch(error){
+
+  }
 
     ///
   }

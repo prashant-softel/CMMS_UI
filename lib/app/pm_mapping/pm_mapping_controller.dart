@@ -34,7 +34,6 @@ class PmMappingController extends GetxController {
   Map<int, dynamic> checklist_map = {};
   @override
   void onInit() async {
-    // getInventoryCategoryList();
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
