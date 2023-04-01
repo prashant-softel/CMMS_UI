@@ -2,6 +2,8 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/new_permit/new_permit_binding.dart';
+import 'package:cmms/new_permit/view/new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
@@ -21,6 +23,8 @@ import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
+import '../pm_mapping/pm_mapping_binding.dart';
+import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
@@ -110,9 +114,19 @@ class AppPages {
       binding: PreventiveListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.new_permit,
+      page: NewPermitScreen.new,
+      binding: NewPermitBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.preventiveCheckPoint,
       page: PreventiveCheckPointScreen.new,
       binding: PreventiveCheckPointBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.pmMapping,
+      page: PmMappingScreen.new,
+      binding: PmMappingBinding(),
     ),
   ];
 }

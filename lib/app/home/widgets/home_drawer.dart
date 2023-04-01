@@ -17,7 +17,7 @@ class HomeDrawer extends GetView<HomeController> {
       () =>
           //
           Drawer(
-        width: Get.width * 0.15,
+        width: 250,//Get.width * 0.65,
         child: //
             ScrollConfiguration(
           behavior: const ScrollBehavior().copyWith(overscroll: false),

@@ -5,6 +5,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/menu_item.dart';
@@ -29,18 +30,18 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
-  int facilityId = 45;
   String categoryIds = '';
-
   Rx<String> selectedFacility = ''.obs;
   String username = '';
-
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<bool> isFacilitySelected = false.obs;
+  Rx<bool> isFacilitySelected = true.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
+  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  Stream<int> get facilityId$ => _facilityId.stream;
+  int get facilityId => _facilityId.value;
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
@@ -54,7 +55,7 @@ class HomeController extends GetxController {
       icon: "assets/files/warranty.png",
     ),
     MenuItem(
-      title: "Job List",
+      title: "Breakdown Maintenance",
       icon: "assets/files/preventive.png",
     ),
     MenuItem(
@@ -62,11 +63,11 @@ class HomeController extends GetxController {
       icon: "assets/files/warranty.png",
     ),
     MenuItem(
-      title: "Preventive",
+      title: "Preventive Maintenance",
       icon: "assets/files/preventive.png",
     ),
     MenuItem(
-      title: "Corrective Maint",
+      title: "Corrective Maintenance",
       icon: "assets/files/maint.png",
     ),
     MenuItem(
@@ -103,14 +104,17 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    //getuserAccessData();
+    Future.delayed(Duration(seconds: 1), () {
+      getFacilityList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getuserAccessData();
+    });
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
-      getFacilityList();
     });
     super.onInit();
   }
-
   Future<void> getFacilityList() async {
     final _facilityList = await homePresenter.getFacilityList();
 
@@ -118,7 +122,9 @@ class HomeController extends GetxController {
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
+
       selectedFacility.value = facilityList[0]?.name ?? '';
+      _facilityId.add(facilityList[0]?.id ?? 0);
     }
   }
 
@@ -130,7 +136,6 @@ class HomeController extends GetxController {
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       varUserAccessModel.value = userAccess;
       username = userAccess.user_name ?? "";
-      // userName = userAccess.user_name ?? "";
     }
   }
 
@@ -178,5 +183,23 @@ class HomeController extends GetxController {
     blockTextController.text = selectedBlock.name ?? '';
 
     update(['block_field']);
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<FacilityModel>:
+        {
+          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+        }
+
+        break;
+
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
   }
 }

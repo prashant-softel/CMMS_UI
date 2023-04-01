@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -5,12 +6,14 @@ import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -194,6 +197,38 @@ class Repository {
     }
   }
 
+  //create New Permit
+  Future<Map<String, dynamic>> createNewPermit(
+    newPermit,
+    bool? isLoading,
+  ) async {
+    try {
+      print({"NewPermit", newPermit});
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createNewPermit(
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+      var data = res.data;
+      print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -227,8 +262,7 @@ class Repository {
     bool? isLoading,
   }) async {
     try {
-      final res =
-          await _dataRepository.generateToken(auth: auth, isLoading: isLoading);
+      final res = await _dataRepository.generateToken();
       print(res.data.toString());
 
       if (!res.hasError) {
@@ -240,7 +274,7 @@ class Repository {
             userId: userId, auth: token, isLoading: isLoading ?? false);
 
         // Get.offAllNamed(
-        //   Routes.home,
+        //   Routes.home,arguments: userId
         // );
       }
     } catch (error) {
@@ -404,6 +438,33 @@ class Repository {
             .toList();
 
         return _facilityModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getTypePermitList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonTypePermitModels = jsonDecode(res.data);
+        final List<TypePermitModel> _typePermitModelList = jsonTypePermitModels
+            .map<TypePermitModel>(
+                (m) => TypePermitModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        print('PermitztypeData: ${res.data}');
+        return _typePermitModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return null;
@@ -621,6 +682,7 @@ class Repository {
         job: job,
         isLoading: isLoading ?? false,
       );
+      print('SaveJobData: ${res.data}');
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -670,21 +732,23 @@ class Repository {
     }
   }
 
-  Future<void> createCheckListNumber({
-    bool? isLoading,
-  }) async {
+  Future<bool> createCheckListNumber(
+      {bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.createCheckList(
-          auth: auth, isLoading: isLoading);
-      print({"res.data.toString()", res.data});
-
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString);
+      print({"res.data", res.data});
       if (!res.hasError) {
-        print("successsss");
+        return true;
       }
+      return true;
     } catch (error) {
       log(error.toString());
+      return false;
     }
   }
 
@@ -704,7 +768,7 @@ class Repository {
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-
+        print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
@@ -721,6 +785,60 @@ class Repository {
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<List<CheckPointModel?>?> getCheckPointlist(
+    int? selectedchecklistId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      print({"checkid", selectedchecklistId});
+      final res = await _dataRepository.getCheckPointlist(
+        auth: auth,
+        selectedchecklistId: selectedchecklistId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      print({"checkpoint list", res.data});
+      if (!res.hasError) {
+        final jsonPreventiveCheckPointModels = jsonDecode(res.data);
+
+        final List<CheckPointModel> _PreventiveCheckPointList =
+            jsonPreventiveCheckPointModels
+                .map<CheckPointModel>((m) =>
+                    CheckPointModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _PreventiveCheckPointList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<bool> createCheckpoint({bool? isLoading, checkpointJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createCheckpoint(
+          auth: auth,
+          isLoading: isLoading,
+          checkpointJsonString: checkpointJsonString);
+      print({"res.data1", res.data});
+
+      if (!res.hasError) {
+        return true;
+      }
+      return true;
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 
@@ -970,6 +1088,61 @@ class Repository {
     } catch (error) {
       log(error.toString());
       return Map();
+    }
+  }
+
+  Future<List<HistoryModel>?> getHistory(
+    //String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getHistory(
+        auth: auth,
+        isLoading: isLoading,
+        moduleType: moduleType,
+        id: id,
+      );
+
+      if (!res.hasError) {
+        final jsonHistoryModels = jsonDecode(res.data);
+        final List<HistoryModel> _historyModelList = jsonHistoryModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _historyModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      print({"checkid", check_point_id});
+      final res = await _dataRepository.deleteCkeckpoint(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
+      print({"checkpoint list", res.data});
+      if (!res.hasError) {
+        print("jngfjnfj");
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+      }
+    } catch (error) {
+      log(error.toString());
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../navigators/app_pages.dart';
 import '../preventive_maintenance_controller.dart';
 
 class PreventiveScreen extends GetView<PreventiveController> {
@@ -17,7 +18,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
 
     final double itemWidth = size.width / 3;
 
-    return Scaffold(
+    return Scaffold( 
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         if (Responsive.isMobile(context))
           Obx(
@@ -83,7 +84,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                 ontap: () {
                   controller.createChecklist();
                 }),
-            if (Responsive.isDesktop(context))
+          //  if (Responsive.isDesktop(context))
               _priventiveList(
                   tittle: "Check Point Creator",
                   ontap: () {
@@ -92,12 +93,17 @@ class PreventiveScreen extends GetView<PreventiveController> {
                     // );
                     controller.checkPoint();
                   }),
-            _priventiveList(tittle: "CheckList Mapping"),
+            _priventiveList(tittle: "CheckList Mapping", ontap: () {
+                    Get.toNamed(
+      Routes.pmMapping,
+    );
+                //    controller.pmMapping();
+                  }),
             _priventiveList(tittle: "PM Schedule"),
             _priventiveList(tittle: "PM Schedule View"),
             _priventiveList(tittle: "PM Report"),
-            _priventiveList(tittle: "PM Report"),
-            _priventiveList(tittle: "PM Report"),
+            _priventiveList(tittle: "PM Execution"),
+            _priventiveList(tittle: "Maintenance Report"),
           ],
         )
       ]),

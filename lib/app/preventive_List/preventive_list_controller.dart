@@ -1,17 +1,23 @@
+import 'dart:async';
+
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/app/preventive_check_point/preventive_check_point_controller.dart';
+import 'package:cmms/domain/models/create_checklist_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PreventiveListController extends GetxController {
   PreventiveListController(
     this.preventiveListPresenter,
   );
   PreventiveListPresenter preventiveListPresenter;
+  final HomeController homecontroller = Get.find();
 
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -20,7 +26,7 @@ class PreventiveListController extends GetxController {
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<PreventiveCheckListModel?>? preventiveCheckList =
       <PreventiveCheckListModel?>[].obs;
-  int facilityId = 45;
+  int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -31,11 +37,22 @@ class PreventiveListController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
+  var checklistNumberCtrlr = TextEditingController();
+  var manpowerCtrlr = TextEditingController();
+  var durationCtrlr = TextEditingController();
+  int selectedEquipmentId = 0;
+  int selectedfrequencyId = 0;
+  final isSuccess = false.obs;
+  StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
     getInventoryCategoryList();
     getFrequencyList();
-    getPreventiveCheckList(facilityId, type);
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      getPreventiveCheckList(facilityId, type, true);
+    });
+
     super.onInit();
   }
 
@@ -59,18 +76,17 @@ class PreventiveListController extends GetxController {
     }
   }
 
-  Future<void> getPreventiveCheckList(int facilityId, int type) async {
+  Future<void> getPreventiveCheckList(
+      int facilityId, int type, bool isLoading) async {
     preventiveCheckList?.value = <PreventiveCheckListModel>[];
     final _preventiveCheckList =
         await preventiveListPresenter.getPreventiveCheckList(
-      facilityId: facilityId,
-      type: type,
-    );
+            facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_preventiveCheckList != null) {
       preventiveCheckList!.value = _preventiveCheckList;
       paginationController = PaginationController(
-        rowCount: preventiveCheckList!.length,
+        rowCount: preventiveCheckList?.length ?? 0,
         rowsPerPage: 10,
       );
 
@@ -97,8 +113,7 @@ class PreventiveListController extends GetxController {
         {
           int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
-          int selectedEquipmentId =
-              equipmentCategoryList[equipmentIndex]?.id ?? 0;
+          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
         }
 
         break;
@@ -106,7 +121,7 @@ class PreventiveListController extends GetxController {
         {
           int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
-          int selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
       default:
@@ -117,9 +132,56 @@ class PreventiveListController extends GetxController {
     }
   }
 
-  void createChecklistNumber() async {
-    await preventiveListPresenter.createChecklistNumber(
-      isLoading: true,
-    );
+  Future<bool> createChecklistNumber() async {
+    if (checklistNumberCtrlr.text.trim() == '' ||
+        selectedEquipmentId == 0 ||
+        selectedfrequencyId == 0) {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _checklistNumber = checklistNumberCtrlr.text.trim();
+      String _duration = durationCtrlr.text.trim();
+      String _manpower = manpowerCtrlr.text.trim();
+
+      CreateChecklist createChecklist = CreateChecklist(
+          category_id: selectedEquipmentId,
+          duration: int.tryParse(_duration) ?? 0,
+          manPower: int.tryParse(_manpower) ?? 0,
+          facility_id: facilityId,
+          frequency_id: selectedfrequencyId,
+          status: 1,
+          type: 1,
+          checklist_number: _checklistNumber);
+      var checklistJsonString = [
+        createChecklist.toJson()
+      ]; //createCheckListToJson([createChecklist]);
+
+      print({"checklistJsonString", checklistJsonString});
+      await preventiveListPresenter.createChecklistNumber(
+        checklistJsonString: checklistJsonString,
+        isLoading: true,
+      );
+      return true;
+    }
+    return true;
+  }
+
+  Future<void> issuccessCreatechecklist() async {
+    isSuccess.toggle();
+    await {_cleardata()};
+  }
+
+  _cleardata() {
+    checklistNumberCtrlr.text = '';
+    durationCtrlr.text = '';
+    manpowerCtrlr.text = '';
+
+    selectedequipment.value = '';
+
+    selectedfrequency.value = '';
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
+    getPreventiveCheckList(facilityId, type, true);
   }
 }

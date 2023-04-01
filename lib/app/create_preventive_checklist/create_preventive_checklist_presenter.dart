@@ -1,5 +1,6 @@
 import 'package:cmms/domain/usecases/create_preventivechecklist_usecase.dart';
 
+import '../../domain/models/facility_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 
@@ -19,12 +20,18 @@ class CreateCheckListPresenter {
       await createPreventiveChecklistUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<void> createCheckList({
+  Future<bool> createChecklistNumber({
+    checklistJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    return createPreventiveChecklistUsecase.createCheckList(
+     createPreventiveChecklistUsecase.createChecklistNumber(
+      checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );
+    return true;
+  } Future<List<FacilityModel?>?> getFacilityList() async =>
+      await createPreventiveChecklistUsecase.getFacilityList();
+ 
   }
-}
+

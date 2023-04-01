@@ -194,6 +194,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getCheckPointlist({
+    required String auth,
+    bool? isLoading,
+    int? selectedchecklistId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   Future<ResponseModel> getJobDetails({
     required String auth,
     bool? isLoading,
@@ -221,6 +238,29 @@ class ConnectHelper {
     try {
       response = await apiWrapper.makeRequest(
         'CMMS/GetFacilityList',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
+    Future<ResponseModel> getTypePermitList({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('PermitTypeResponse: $response');
+    try {
+      response = await apiWrapper.makeRequest(
+        'Permit/GetPermitTypeList?facility_id=50',
         Request.get,
         null,
         true,
@@ -391,6 +431,28 @@ class ConnectHelper {
     return responseModel;
   }
 
+  //Create New Permit
+   Future<ResponseModel> createNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+  
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermit',
+      Request.post,
+       newPermit,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getUserAccessList({
     required String auth,
     bool? isLoading,
@@ -446,23 +508,46 @@ class ConnectHelper {
 
   Future<ResponseModel> createCheckList({
     required String auth,
-    bool? isLoading,
+    bool? isLoading, required checklistJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/CreateCheckList',
       Request.post,
-      [
-        {
-          "checkList_number": "IV _Test Check List 005",
-          "type": 1,
-          "facility_id": 45,
-          "category_id": 2,
-          "frequency_id": 2,
-          "manPower": 16,
-          "duration": 2,
-          "status": 1
-        }
-      ],
+     checklistJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+    Future<ResponseModel> createCheckpoint({
+    required String auth,
+    bool? isLoading, required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/CreateCheckPoint',
+      Request.post,
+     checkpointJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+    Future<ResponseModel> deleteCkeckpoint({
+    required String auth,
+    bool? isLoading, required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/DeleteCheckPoint?id=$check_point_id',
+      Request.delete,
+     check_point_id,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
