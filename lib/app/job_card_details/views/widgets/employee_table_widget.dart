@@ -24,7 +24,7 @@ class EmployeeTable extends StatelessWidget {
       var employeeTableRows = controller.employeeTableRows;
       var employeeList = controller.employeeList;
       var isEmployeeSelected = controller.isEmployeeSelected.value;
-      var selectedEmployee = controller.selectedEmployee.value;
+      var selectedEmployeeName = controller.selectedEmployeeName.value;
       var currentIndex = controller.currentIndex.value;
       var responsibilityCtrlrs = controller.responsibilityCtrlrs;
 
@@ -50,11 +50,8 @@ class EmployeeTable extends StatelessWidget {
                             controller: controller,
                             dropdownList: employeeList,
                             isValueSelected: isEmployeeSelected,
-                            selectedValue: selectedEmployee,
-                            // onValueChanged: (value, index) {
-                            //   controller.onEmployeeSelected(
-                            //       value, currentIndex, controller);
-                            // },
+                            selectedValue: selectedEmployeeName,
+
                             onValueChanged: (list, selectedValueText) {
                               final rowIndex = currentIndex;
                               controller.onEmployeeSelected(
