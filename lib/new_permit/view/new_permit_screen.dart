@@ -313,12 +313,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                         padding:
                                             const EdgeInsets.only(left: 10),
                                         child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomRichText(
                                                 title: 'Block/Plot: '),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
+                                            // SizedBox(
+                                            //   width: 5,
+                                            // ),
                                             SizedBox(
                                               width: MediaQuery.of(context)
                                                       .size

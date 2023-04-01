@@ -49,6 +49,12 @@ class DataRepository extends DomainRepository {
     throw UnimplementedError();
   }
 
+  @override
+  Future<String> getNewPermitAccessData(String key) async {
+    //return generateToken();
+    throw UnimplementedError();
+  }
+
   /// Save data in secure storage
   @override
   void saveValueSecurely(String key, String value) {
@@ -152,6 +158,23 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading ?? false,
       );
+
+
+   Future<ResponseModel> getNewPermitList({
+    required String auth,
+    int? facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getNewPermitList(
+        auth: auth,
+        facilityId: 45,
+        // facilityId: facilityId ?? 0,
+        // userId: userId,
+        userId: 33,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getPreventiveCheckList({
     required String auth,
     int? facilityId,

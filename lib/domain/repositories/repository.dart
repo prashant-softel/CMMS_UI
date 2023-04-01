@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
@@ -31,7 +32,10 @@ import '../models/user_access_model.dart';
 class Repository {
   /// [_deviceRepository] : the local repository.
   /// [_dataRepository] : the data repository like api and all.
-  Repository(this._deviceRepository, this._dataRepository);
+  Repository(
+    this._deviceRepository,
+    this._dataRepository,
+  );
 
   final DeviceRepository _deviceRepository;
   final DataRepository _dataRepository;
@@ -138,6 +142,18 @@ class Repository {
     }
   }
 
+  Future<String> getNewPermitAccessData(String key) async {
+    var _value = '';
+    try {
+      _value = await _deviceRepository.getNewPermitAccessData(key);
+
+      return _value;
+    } catch (_) {
+      _value = await _dataRepository.getNewPermitAccessData(key);
+      return _value;
+    }
+  }
+
   /// Save the value to the string.
   ///
   /// [key] : The key to which [value] will be saved.
@@ -198,7 +214,12 @@ class Repository {
       );
       var data = res.data;
       print('Response Create Permit: ${data}');
-
+      Get.dialog(
+        CreateNewPermitDialog(
+          createPermitData: 'Dialog Title',
+        ),
+      );
+      // CreateNewPermitDialog(createPermitData: 'data',);
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -398,6 +419,49 @@ class Repository {
         print(_jobModelList.runtimeType);
 
         return _jobModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<NewPermitListModel?>?> getNewPermitList(
+    String auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final newPermitListData =
+          await getNewPermitAccessData(LocalKeys.userAccess);
+      final newPermitModelList = jsonDecode(newPermitListData);
+      var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
+      int permitId = newPermitList.permitId ?? 0;
+      print({"NewPermitList:", newPermitList.permitId});
+      final res = await _dataRepository.getNewPermitList(
+        auth: auth,
+        facilityId: 45,
+        // userId: permitId,
+        userId: 33,
+        isLoading: isLoading ?? false,
+      );
+      print('NewPermitResponse5: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonNewPermitListModels = jsonDecode(res.data);
+        final List<NewPermitListModel> _newPermitModelList =
+            jsonNewPermitListModels
+                .map<NewPermitListModel>((m) =>
+                    NewPermitListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        print('Permit Data:${_newPermitModelList.runtimeType}');
+
+        return _newPermitModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return [];

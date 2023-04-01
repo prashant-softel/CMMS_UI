@@ -121,9 +121,19 @@ class AppPages {
       binding: NewPermitBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.new_Permit_List,
+      page: NewPermitListScreen.new,
+      binding: NewPermitListBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.preventiveCheckPoint,
       page: PreventiveCheckPointScreen.new,
       binding: PreventiveCheckPointBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.warranty_Claim_List,
+      page: WarrantyClaimListScreen.new,
+      binding: HomeBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.pmMapping,

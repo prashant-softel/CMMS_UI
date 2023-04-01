@@ -151,6 +151,7 @@ Future<void> initServices() async {
             ),
           ),
           permanent: true),
+          
     ),
   );
   Get.lazyPut(

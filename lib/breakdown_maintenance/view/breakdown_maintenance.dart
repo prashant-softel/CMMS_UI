@@ -96,7 +96,12 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
                   controller.createNewPermit();
                 }
                 ),
-              _priventiveList(tittle: "Permit List"),
+              _priventiveList(
+                tittle: "Permit List",
+                ontap: (){
+                  controller.newPermitList();
+                }
+                ),
               _priventiveList(tittle: "Job Card List"),
               // _priventiveList(tittle: "PM Schedule View"),
               // _priventiveList(tittle: "PM Report"),

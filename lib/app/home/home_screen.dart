@@ -63,7 +63,8 @@ class HomeScreen extends GetView<HomeController> {
                           return BreakdownMaintenanceScreen();
 
                         case 3:
-                          return InventoryListScreen();
+                          return WarrantyClaimListScreen();
+
                         case 4:
                           return PreventiveScreen();
 

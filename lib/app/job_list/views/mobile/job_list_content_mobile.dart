@@ -36,6 +36,7 @@ class JobListContentMobile extends GetView<JobListController> {
                         ? controller.jobList![index]
                         : JobModel();
                     var status = jobModel?.status?.name.toString() ?? '';
+                    print('Status: $status');
                     return GestureDetector(
                       onTap: () {
                         var _jobId = jobModel?.id ?? 0;
