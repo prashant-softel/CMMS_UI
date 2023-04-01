@@ -37,7 +37,7 @@ class HomeController extends GetxController {
   String username = '';
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<bool> isFacilitySelected = false.obs;
+  Rx<bool> isFacilitySelected = true.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,

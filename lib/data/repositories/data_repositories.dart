@@ -74,8 +74,12 @@ class DataRepository extends DomainRepository {
       await connectHelper.getStateList(countryCode);
 
   @override
-  Future<ResponseModel> generateToken() async {
-    var response = await connectHelper.generateToken();
+  Future<ResponseModel> generateToken({
+    auth,
+    bool? isLoading,
+  }) async {
+    var response =
+        await connectHelper.generateToken(auth: auth, isLoading: isLoading);
     return response;
   }
 

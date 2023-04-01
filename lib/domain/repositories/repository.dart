@@ -262,7 +262,8 @@ class Repository {
     bool? isLoading,
   }) async {
     try {
-      final res = await _dataRepository.generateToken();
+      final res =
+          await _dataRepository.generateToken(auth: auth, isLoading: isLoading);
       print(res.data.toString());
 
       if (!res.hasError) {
