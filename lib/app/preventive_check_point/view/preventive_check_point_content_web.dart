@@ -276,8 +276,7 @@ class PreventiveCheckPointContentWeb
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width:
-                                      (MediaQuery.of(context).size.width * .1),
+                                width: (MediaQuery.of(context).size.width * .1),
                                 child: CustomElevatedButton(
                                     backgroundColor:
                                         Color.fromARGB(255, 223, 101, 80),
