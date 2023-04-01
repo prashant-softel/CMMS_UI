@@ -17,9 +17,10 @@ class PreventiveController extends GetxController {
 
   @override
   void onInit() async {
-    Future.delayed(Duration(seconds: 1), () {
-      // getFacilityList();
-    });
+    //homePresenter.generateToken();
+    //  Future.delayed(Duration(seconds: 1), () {
+    // getFacilityList();
+    //});
 
     super.onInit();
   }
@@ -39,11 +40,7 @@ class PreventiveController extends GetxController {
     }
   }
 
-  void switchFacility(String? facilityName) {
-    // facilityId =
-    //     facilityList.indexWhere((facility) => facility?.name == facilityName);
-    // getJobList(facilityId, userId);
-  }
+  void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
     Get.toNamed(
       Routes.preventiveList,

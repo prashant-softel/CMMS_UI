@@ -34,11 +34,14 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
+  //int facilityId = 45;
   String categoryIds = '';
+
   Rx<String> selectedFacility = ''.obs;
   String username = '';
+
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<bool> isFacilitySelected = true.obs;
+  Rx<bool> isFacilitySelected = false.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,

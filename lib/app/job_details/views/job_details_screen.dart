@@ -31,12 +31,11 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
           ////
           Row(
         children: [
-          //(Responsive.isMobile(context) || Responsive.isTablet(context))
-          if (!kIsWeb)
-            Dimens.box0
-          else
-            //
-            HomeDrawer(),
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? Dimens.box0
+              :
+              //
+              HomeDrawer(),
 
           /// CONTENT
           Obx(

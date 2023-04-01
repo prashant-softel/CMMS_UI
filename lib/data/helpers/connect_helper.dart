@@ -529,23 +529,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getJobCardDetails({
-    String? auth,
-    int? jobCardId,
-    bool? isLoading,
-  }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'JC/GetJCDetail?jc_id=$jobCardId',
-      Request.get,
-      null,
-      isLoading ?? true,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    return responseModel;
-  }
-
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -621,24 +604,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPermitDetails({
-    required String? auth,
-    int? permitId,
-    bool? isLoading,
-  }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitDetails?permit_id=$permitId',
-      Request.get,
-      null,
-      isLoading ?? true,
-      {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    return responseModel;
-  }
-
   Future<ResponseModel> getJobCardHistory({
     required String? auth,
     int? moduleType,
@@ -708,6 +673,41 @@ class ConnectHelper {
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPermitDetails({
+    required String? auth,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitDetails?permit_id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getJobCardDetails({
+    String? auth,
+    int? jobCardId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/GetJCDetail?jc_id=$jobCardId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
         'Authorization': 'Bearer $auth',
       },
     );

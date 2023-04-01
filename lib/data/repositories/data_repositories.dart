@@ -42,13 +42,7 @@ class DataRepository extends DomainRepository {
     throw UnimplementedError();
   }
 
-  @override
   Future<String> getUserAccessData(String key) async {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String> getNewPermitAccessData(String key) async {
     //return generateToken();
     throw UnimplementedError();
   }
@@ -60,6 +54,10 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  void saveUserAcessData(String key, String value) {
+    throw UnimplementedError();
+  }
+
   void saveUserAcessData(String key, String value) {
     throw UnimplementedError();
   }
