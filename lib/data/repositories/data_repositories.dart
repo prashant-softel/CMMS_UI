@@ -362,6 +362,13 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
-
+Future<ResponseModel> deleteCkeckpoint({
+    auth,
+    bool? isLoading,  check_point_id,
+  }) async {
+    var response =
+        await connectHelper.deleteCkeckpoint(auth: auth, isLoading: isLoading,check_point_id:check_point_id);
+    return response;
+  }
   ///
 }

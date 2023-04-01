@@ -56,4 +56,9 @@ class PreventiveController extends GetxController {
       Routes.preventiveCheckPoint,
     );
   }
+  Future<void> pmMapping() async {
+    Get.toNamed(
+      Routes.pmMapping,
+    );
+  }
 }

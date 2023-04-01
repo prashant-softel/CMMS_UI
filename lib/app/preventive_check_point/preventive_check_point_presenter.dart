@@ -34,4 +34,11 @@ class PreventiveCheckPointPresenter {
       
         isLoading: isLoading ?? false,
       );
+
+  deleteCkeckpoint(String? check_point_id, {required bool isLoading}) async =>
+      await preventiveCheckPointUsecase.deleteCkeckpoint(
+        check_point_id: check_point_id ?? 0,
+      
+        isLoading: isLoading,
+      );
 }

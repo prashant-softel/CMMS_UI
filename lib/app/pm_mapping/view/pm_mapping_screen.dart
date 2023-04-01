@@ -1,16 +1,15 @@
-import 'package:cmms/app/preventive_check_point/view/preventive_check_point_content_web.dart';
+import 'package:cmms/app/pm_mapping/view/pm_mapping_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../preventive_check_point_controller.dart';
+import '../pm_mapping_controller.dart';
 
-class PreventiveCheckPointScreen
-    extends GetView<PreventiveCheckPointController> {
-  PreventiveCheckPointScreen({super.key});
+class PmMappingScreen
+    extends GetView<PmMappingController> {
+  PmMappingScreen({super.key});
 
   ///
   @override
@@ -23,7 +22,7 @@ class PreventiveCheckPointScreen
               toolbarHeight: 90,automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive Check Point'),
+              title: Text('PM Mapping'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -38,15 +37,9 @@ class PreventiveCheckPointScreen
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveCheckPointContentMobile(),
-                    //   ),
-
-                    if (Responsive.isDesktop(context))
+   if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PreventiveCheckPointContentWeb(),
+                        child: PmMappingContentWeb(),
                       )
                   ],
                 ),

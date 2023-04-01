@@ -50,8 +50,10 @@ class InventoryListContentWeb extends GetView<HomeController> {
                 ActionButton(
                   icon: Icons.add,
                   lable: 'addAsset'.tr,
-                  onPress: () {
-                    Get.to(() => AddInventory());
+                  onPress: () async{
+                    // await Get.to(() => AddInventory());
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddInventory()));
+                    
                   },
                   color: Colors.blue,
                 ),

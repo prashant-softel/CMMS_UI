@@ -21,7 +21,7 @@ abstract class Routes {
   static const new_permit = _Paths.new_permit;
   static const new_Permit_List  = _Paths.new_Permit_List;
   static const warranty_Claim_List = _Paths.warranty_Claim_List;
-  static const new_warranty_claim_list = _Paths.new_warranty_claim_list;
+  static const pmMapping = _Paths.pmMapping;
 }
 
 abstract class _Paths {
@@ -44,5 +44,5 @@ abstract class _Paths {
   static const preventiveCheckPoint = '/preventive-check-point';
   static const new_Permit_List = '/new-permit-list';
   static const warranty_Claim_List = '/warranty-claim-list';
-  static const new_warranty_claim_list = '/new-warranty-claim-list';
+  static const pmMapping = '/pm-mapping-screen';
 }

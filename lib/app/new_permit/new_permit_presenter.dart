@@ -9,9 +9,9 @@ import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/new_permit_usecase.dart';
 
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/usecases/preventive_list_usecase.dart';
-import '../domain/usecases/breakdown_usecase.dart';
+import '../../../domain/models/inventory_category_model.dart';
+import '../../../domain/usecases/preventive_list_usecase.dart';
+import '../../domain/usecases/breakdown_usecase.dart';
 
 class NewPermitPresenter {
  NewPermitPresenter(this.newPermitUsecase);

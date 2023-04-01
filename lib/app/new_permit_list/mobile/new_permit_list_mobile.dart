@@ -1,8 +1,8 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
-import 'package:cmms/new_permit_list/new_permit_list_controller.dart';
-import 'package:cmms/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
+import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

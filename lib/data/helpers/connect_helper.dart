@@ -526,4 +526,21 @@ class ConnectHelper {
 
     return responseModel;
   }
+    Future<ResponseModel> deleteCkeckpoint({
+    required String auth,
+    bool? isLoading, required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/DeleteCheckPoint?id=$check_point_id',
+      Request.delete,
+     check_point_id,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

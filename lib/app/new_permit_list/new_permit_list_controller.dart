@@ -2,12 +2,12 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
-import 'package:cmms/new_permit_list/new_permit_list_presenter.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_presenter.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import '../../domain/models/block_model.dart';
+import '../../../domain/models/block_model.dart';
 // import '../navigators/app_pages.dart';
 // import 'job_list_presenter.dart';
 

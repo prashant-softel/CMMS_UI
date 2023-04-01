@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/warranty_claim_list/web/warranty_claim_list_web.dart';
+import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import '../../home/home_controller.dart';
@@ -18,8 +18,7 @@ class WarrantyClaimListScreen extends GetView<HomeController> {
     return //
         Scaffold(
       body:
-          //   Obx(
-          // () => //
+           
           Container(
         child: Column(
             //

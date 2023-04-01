@@ -3,7 +3,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
-import 'package:cmms/new_permit_list/new_permit_list_controller.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';

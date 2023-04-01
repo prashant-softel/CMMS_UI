@@ -27,5 +27,13 @@ class PreventiveCheckPointUsecase {
       await repository.getCheckPointlist(
         selectedchecklistId,
         isLoading,
-      ); 
+      );
+
+  deleteCkeckpoint({required Object check_point_id, required bool isLoading})  async =>
+      await repository.deleteCkeckpoint(
+        check_point_id,
+        isLoading,
+      );
+
+  
 }

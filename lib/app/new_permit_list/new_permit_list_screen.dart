@@ -1,9 +1,9 @@
 import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/job_list/views/mobile/job_list_content_mobile.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/new_permit_list/mobile/new_permit_list_mobile.dart';
-import 'package:cmms/new_permit_list/new_permit_list_controller.dart';
-import 'package:cmms/new_permit_list/web/new_permit_list_web.dart';
+import 'package:cmms/app/new_permit_list/mobile/new_permit_list_mobile.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
+import 'package:cmms/app/new_permit_list/web/new_permit_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import '../../utils/responsive.dart';

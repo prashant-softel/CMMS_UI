@@ -40,7 +40,7 @@ class Repository {
   final DeviceRepository _deviceRepository;
   final DataRepository _dataRepository;
 
-  
+
 
   /// Clear data from local storage for [key].
   void clearData(dynamic key) {
@@ -203,7 +203,7 @@ class Repository {
 
   //create New Permit
   Future<Map<String, dynamic>> createNewPermit(
-    newPermit,
+     newPermit,
     bool? isLoading,
   ) async {
     try {
@@ -211,7 +211,7 @@ class Repository {
       final auth = await getSecureValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermit(
         auth: auth,
-        newPermit: newPermit,
+         newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
       var data = res.data; 
@@ -222,8 +222,11 @@ class Repository {
 );
      // CreateNewPermitDialog(createPermitData: 'data',);
 
+       data = res.data;
+      print('Response Create Permit: ${data}');
+
       if (!res.hasError) {
-        if (res.errorCode == 200) {        
+        if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
         
@@ -238,7 +241,6 @@ class Repository {
       return Map();
     }
   }
-
 
 
   /// Clear all data from secure storage .
@@ -504,7 +506,7 @@ class Repository {
     }
   }
 
-    Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
+  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
       final res = await _dataRepository.getTypePermitList(
@@ -518,7 +520,7 @@ class Repository {
             .map<TypePermitModel>(
                 (m) => TypePermitModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
-          print('PermitztypeData: ${res.data}');
+        print('PermitztypeData: ${res.data}');
         return _typePermitModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
@@ -736,7 +738,7 @@ class Repository {
         job: job,
         isLoading: isLoading ?? false,
       );
-        print('SaveJobData: ${res.data}');
+      print('SaveJobData: ${res.data}');
 
 
       if (!res.hasError) {
@@ -787,16 +789,16 @@ class Repository {
     }
   }
 
-  Future<bool> createCheckListNumber({
-    bool? isLoading,
-     checklistJsonString
-  }) async {
+  Future<bool> createCheckListNumber(
+      {bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.createCheckList(
-          auth: auth, isLoading: isLoading,checklistJsonString:checklistJsonString);
-print({"res.data",res.data});
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString);
+      print({"res.data", res.data});
       if (!res.hasError) {
 
         return true;
@@ -824,7 +826,7 @@ print({"res.data",res.data});
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-
+        print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
@@ -843,27 +845,27 @@ print({"res.data",res.data});
       return [];
     }
   }
-   Future<List<CheckPointModel?>?> getCheckPointlist(
+
+  Future<List<CheckPointModel?>?> getCheckPointlist(
     int? selectedchecklistId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
-      print({"checkid",selectedchecklistId});
+      print({"checkid", selectedchecklistId});
       final res = await _dataRepository.getCheckPointlist(
         auth: auth,
         selectedchecklistId: selectedchecklistId ?? 0,
         isLoading: isLoading ?? false,
       );
-print({"checkpoint list",res.data});
+      print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
 
         final List<CheckPointModel> _PreventiveCheckPointList =
             jsonPreventiveCheckPointModels
                 .map<CheckPointModel>((m) =>
-                    CheckPointModel.fromJson(
-                        Map<String, dynamic>.from(m)))
+                    CheckPointModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
         return _PreventiveCheckPointList;
@@ -878,16 +880,15 @@ print({"checkpoint list",res.data});
     }
   }
 
-    Future<bool> createCheckpoint({
-    bool? isLoading,
-     checkpointJsonString
-  }) async {
+  Future<bool> createCheckpoint({bool? isLoading, checkpointJsonString}) async {
     try {
       final auth = await getSecureValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.createCheckpoint(
-          auth: auth, isLoading: isLoading,checkpointJsonString:checkpointJsonString);
-print({"res.data1",res.data});
+          auth: auth,
+          isLoading: isLoading,
+          checkpointJsonString: checkpointJsonString);
+      print({"res.data1", res.data});
 
       if (!res.hasError) {
         return true;
@@ -960,6 +961,26 @@ print({"res.data1",res.data});
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      print({"checkid", check_point_id});
+      final res = await _dataRepository.deleteCkeckpoint(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
+      print({"checkpoint list", res.data});
+      if (!res.hasError) {
+        print("jngfjnfj");
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+      }
+    } catch (error) {
+      log(error.toString());
     }
   }
 
