@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
@@ -11,6 +12,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -28,12 +30,17 @@ import '../models/user_access_model.dart';
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
 class Repository {
+
+
+
   /// [_deviceRepository] : the local repository.
   /// [_dataRepository] : the data repository like api and all.
-  Repository(this._deviceRepository, this._dataRepository);
+  Repository(this._deviceRepository, this._dataRepository,);
 
   final DeviceRepository _deviceRepository;
   final DataRepository _dataRepository;
+
+  
 
   /// Clear data from local storage for [key].
   void clearData(dynamic key) {
@@ -137,6 +144,18 @@ class Repository {
     }
   }
 
+  Future<String> getNewPermitAccessData(String key) async {
+    var _value = '';
+    try {
+      _value = await _deviceRepository.getNewPermitAccessData(key);
+
+      return _value;
+    } catch (_) {
+      _value = await _dataRepository.getNewPermitAccessData(key);
+      return _value;
+    }
+  }
+
   /// Save the value to the string.
   ///
   /// [key] : The key to which [value] will be saved.
@@ -184,7 +203,7 @@ class Repository {
 
   //create New Permit
   Future<Map<String, dynamic>> createNewPermit(
-     newPermit,
+    newPermit,
     bool? isLoading,
   ) async {
     try {
@@ -192,15 +211,19 @@ class Repository {
       final auth = await getSecureValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermit(
         auth: auth,
-         newPermit: newPermit,
+        newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
       var data = res.data; 
-            print('Response Create Permit: ${data}');
-
+      print('Response Create Permit: ${data}');Get.dialog(
+  CreateNewPermitDialog(
+    createPermitData: 'Dialog Title',
+  ),
+);
+     // CreateNewPermitDialog(createPermitData: 'data',);
 
       if (!res.hasError) {
-        if (res.errorCode == 200) {
+        if (res.errorCode == 200) {        
           var responseMap = json.decode(res.data);
           return responseMap;
         
@@ -215,6 +238,7 @@ class Repository {
       return Map();
     }
   }
+
 
 
   /// Clear all data from secure storage .
@@ -400,6 +424,48 @@ class Repository {
         print(_jobModelList.runtimeType);
 
         return _jobModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+
+  Future<List<NewPermitListModel?>?> getNewPermitList(
+    String auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final newPermitListData = await getNewPermitAccessData(LocalKeys.userAccess);
+      final newPermitModelList = jsonDecode(newPermitListData);
+      var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
+      int permitId = newPermitList.permitId ?? 0;
+      print({"NewPermitList:", newPermitList.permitId});
+      final res = await _dataRepository.getNewPermitList(
+        auth: auth,
+        facilityId: 45,
+        // userId: permitId,
+        userId: 33,
+        isLoading: isLoading ?? false,
+      );
+          print('NewPermitResponse5: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonNewPermitListModels = jsonDecode(res.data);
+        final List<NewPermitListModel> _newPermitModelList = jsonNewPermitListModels
+            .map<NewPermitListModel>(
+                (m) => NewPermitListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        print('Permit Data:${_newPermitModelList.runtimeType}');
+
+        return _newPermitModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return [];

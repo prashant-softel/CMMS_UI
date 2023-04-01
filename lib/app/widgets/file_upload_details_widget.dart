@@ -50,24 +50,24 @@ class FileUploadDetailsWidget extends StatelessWidget {
                 child: Text('Remove'),
               ),
             ]),
-            for (var _file in _dropzoneController.files)
+            // for (var _file in _dropzoneController.files)
               TableRow(children: [
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('${_file.name}'),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('-'),
-                ),
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text('${_file.name}'),
+                // ),
                 Container(
                   padding: EdgeInsets.all(8.0),
                   child: Text('-'),
                 ),
                 Container(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('${_file.size}'),
+                  child: Text('-'),
                 ),
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text('${_file.size}'),
+                // ),
                 Container(
                   padding: EdgeInsets.all(8.0),
                   child: //

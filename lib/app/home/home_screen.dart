@@ -2,6 +2,8 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/preventive_maintanance/view/preventive_maintenance_screen.dart';
 import 'package:cmms/breakdown_maintenance/view/breakdown_maintenance.dart';
+import 'package:cmms/warranty_claim_list/warranty_claim_list_screen.dart';
+import 'package:cmms/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -41,7 +43,7 @@ class HomeScreen extends GetView<HomeController> {
                 ? Dimens.box0
                 :
                 //
-                HomeDrawer(),
+                 HomeDrawer(),
 
             Obx(
               () => //
@@ -63,9 +65,12 @@ class HomeScreen extends GetView<HomeController> {
                           return BreakdownMaintenanceScreen();
 
                         case 3:
-                          return InventoryListScreen();
+                          return WarrantyClaimListScreen();
+
                         case 4:
                           return PreventiveScreen();
+
+                        
 
                         default:
                           return InventoryListScreen();

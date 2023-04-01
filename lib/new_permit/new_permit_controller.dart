@@ -381,8 +381,10 @@ Future<void> getBlocksList(int _facilityId) async {
         isLoading: true,
       );
       if (responseNewPermitCreated != null) {
-         var _facilityId = responseNewPermitCreated["newPermit"];
-         showAlertDialog(facility_id: _facilityId);
+        print("respomsecghj,$responseNewPermitCreated");
+        //  CreateNewPermitDialog();
+         showAlertDialog();
+
         // print('NewCreated:$_facilityId');
       }
     }

@@ -16,7 +16,7 @@ abstract class Variables {
       ..lazyPut(ConnectHelper.new)
       ..lazyPut(() => DataRepository(Get.put(ConnectHelper())))
       ..lazyPut(DeviceRepository.new)
-      ..lazyPut(() => Repository(Get.find(), Get.find()));
+      ..lazyPut(() => Repository(Get.find(), Get.find(),));
   });
 
   static final authBinding = BindingsBuilder<dynamic>(() {
