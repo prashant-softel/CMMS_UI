@@ -487,7 +487,7 @@ abstract class Utility {
   //       Container(
   //         color: isThemeDarkMode()
   //             ? Theme.of(Get.context!).canvasColor
-  //             : ColorsValue.whiteColor,
+  //             : ColorValues.whiteColor,
   //         padding: Dimens.edgeInsets35,
   //         child: Column(
   //           mainAxisSize: MainAxisSize.min,

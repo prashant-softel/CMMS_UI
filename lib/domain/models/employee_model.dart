@@ -23,6 +23,7 @@ class EmployeeModel {
     this.state,
     this.country,
     this.pin,
+    this.responsibility,
   });
 
   int? id;
@@ -35,6 +36,7 @@ class EmployeeModel {
   String? state;
   String? country;
   int? pin;
+  String? responsibility;
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
         id: json["id"] == null ? null : json["id"],
@@ -44,7 +46,6 @@ class EmployeeModel {
             ? null
             : DateTime.parse(json["birthdate"] as String),
         gender: json["gender"] == null ? null : json["gender"],
-        //genderValues.map?[json["gender"] == null ? null : json["gender"]]!,
         mobileNumber: json["mobileNumber"],
         city: json["city"],
         state: json["state"],

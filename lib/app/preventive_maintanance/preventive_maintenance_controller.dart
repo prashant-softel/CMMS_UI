@@ -9,7 +9,7 @@ class PreventiveController extends GetxController {
   PreventivePresenter preventivePresenter;
 
   String username = '';
-  Rx<String> selectedFacility = ''.obs;  
+  Rx<String> selectedFacility = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = false.obs;
 
@@ -40,11 +40,7 @@ class PreventiveController extends GetxController {
     }
   }
 
-  void switchFacility(String? facilityName) {
-    // facilityId =
-    //     facilityList.indexWhere((facility) => facility?.name == facilityName);
-    // getJobList(facilityId, userId);
-  }
+  void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
     Get.toNamed(
       Routes.preventiveList,
@@ -56,6 +52,7 @@ class PreventiveController extends GetxController {
       Routes.preventiveCheckPoint,
     );
   }
+
   Future<void> pmMapping() async {
     Get.toNamed(
       Routes.pmMapping,

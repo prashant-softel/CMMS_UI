@@ -16,7 +16,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
   }) : super(key: key);
 
   ///
-  final DropzoneController controller = Get.find<DropzoneController>();
+  final FileUploadController controller = Get.find<FileUploadController>();
   late DropzoneViewController dzvcontroller;
 
   ///
@@ -25,6 +25,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
     return //
         Obx(
       () => //
+
           ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Container(
@@ -41,11 +42,13 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                     //
                     children: [
                   ///
+
                   DropzoneView(
                     onCreated: (controller) => this.dzvcontroller = controller,
                     onDrop: (dynamic event) {},
                     onDropMultiple: (List<dynamic>? events) {
                       controller.files.value = events?.cast<File>() ?? [];
+                      controller.onFilesAdded();
                     },
                     onHover: () => controller.blnHiglight.value = true,
                     onLeave: () => controller.blnHiglight.value = false,
@@ -57,14 +60,14 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.cloud_upload_outlined,
-                            size: 60,
+                            size: Get.height * 0.05,
                             color: Colors.white,
                           ),
                           Text(
                             'Drop Files Here',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 24,
+                              fontSize: 18,
                             ),
                           ),
                           const SizedBox(

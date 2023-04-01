@@ -33,16 +33,16 @@ class JobCardDetailsScreen extends GetView<JobListController> {
                 //
                 children: [
                   ///ListView
-                  if (Responsive.isMobile(context))
-                    Expanded(
-                      child: JobCardDetailsContentMobile(),
-                    ),
-
-                  if (Responsive.isDesktop(context))
-                    Expanded(
-                      child: //
-                          JobCardDetailsContentWeb(),
-                    ),
+                  Responsive.isMobile(context) || Responsive.isTablet(context)
+                      ? //
+                      Expanded(
+                          child: JobCardDetailsContentMobile(),
+                        )
+                      : //
+                      Expanded(
+                          child: //
+                              JobCardDetailsContentWeb(),
+                        ),
                 ]),
           ),
         ),

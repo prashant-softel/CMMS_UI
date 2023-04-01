@@ -69,6 +69,9 @@ abstract class ColorValues {
   static const Color appYellowColor = Color(appYellowColorHex);
   static const Color appGreenColor = Color(appGreenColorHex);
   static const Color appLightGreyColor = Color.fromARGB(255, 206, 218, 226);
+  static const Color appPurpleColor = Color(appPurpleColorHex);
+  static Color appBackGroundColor = appLightBlueColor.withOpacity(0.1);
+
   // ===========================================================================
 
   /// Hex Values
@@ -125,9 +128,10 @@ abstract class ColorValues {
   ///
   // APP COLOR HEX============================================================================
   static const int appDarkBlueColorHex = 0xff506677;
-  static const int appLightBlueColorHex = 0xff7cabb2;
-  static const int appRedColorHex = 0xffc45c59;
-  static const int appYellowColorHex = 0xffccad6b;
-  static const int appGreenColorHex = 0xff85a871;
+  static const int appLightBlueColorHex = 0xff7CABB2;
+  static const int appRedColorHex = 0xffC45C59;
+  static const int appYellowColorHex = 0xffCCAD6B;
+  static const int appGreenColorHex = 0xff85A871;
   static const int appLightGreyColorHex = 0xffD3D3D3;
+  static const int appPurpleColorHex = 0xffDA70D6;
 }
