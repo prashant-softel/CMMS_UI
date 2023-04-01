@@ -153,17 +153,6 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
-  // Get.lazyPut(
-  //   () => LoginController(
-  //     Get.put(
-  //       LoginPresenter(
-  //         Get.put(LoginUsecase(repository)),
-  //       ),
-  //       permanent: true,
-  //     ),
-  //   ),
-  //   //permanent: true,
-  // );
   Get.lazyPut(
     () => HomeController(
       Get.put(

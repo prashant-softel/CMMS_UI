@@ -39,6 +39,10 @@ class DataRepository extends DomainRepository {
   /// Get data from secure storage
   @override
   Future<String> getSecuredValue(String key) async {
+    throw UnimplementedError();
+  }
+
+  Future<String> getUserAccessData(String key) async {
     //return generateToken();
     throw UnimplementedError();
   }
@@ -46,6 +50,10 @@ class DataRepository extends DomainRepository {
   /// Save data in secure storage
   @override
   void saveValueSecurely(String key, String value) {
+    throw UnimplementedError();
+  }
+
+  void saveUserAcessData(String key, String value) {
     throw UnimplementedError();
   }
 
@@ -219,6 +227,219 @@ class DataRepository extends DomainRepository {
         job: job,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> createCheckList({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.createCheckList(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> createCheckpoint({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createCheckpoint(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> createNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createNewPermit(
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getHistory({
+    String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getHistory(
+      auth: auth,
+      moduleType: moduleType,
+      id: id,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> deleteCkeckpoint({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteCkeckpoint(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+
+  Future<ResponseModel> getPermitDetails({
+    String? auth,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getPermitDetails(
+      auth: auth,
+      permitId: permitId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getJobCardHistory({
+    String? auth,
+    int? jobCardId,
+    int? moduleType,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getJobCardHistory(
+      auth: auth,
+      moduleType: moduleType,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> updateJobCard({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.updateJobCard(
+      auth: auth,
+      jobCard: jobCard,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> approveJobCard({
+    String? auth,
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.approveJobCard(
+      auth: auth,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> rejectJobCard({
+    String? auth,
+    jobCardId,
+    comment,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.rejectJobCard(
+      auth: auth,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getPreventiveCheckList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPreventiveCheckList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getCheckPointlist({
+    required String auth,
+    int? selectedchecklistId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCheckPointlist(
+        auth: auth,
+        selectedchecklistId: selectedchecklistId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getTypePermitList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getTypePermitList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> getUserAccessList({
+    required String auth,
+    String? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getUserAccessList(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
+  Future<ResponseModel> uploadFiles({
+    required String auth,
+    fileUploadModel,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.uploadFiles(
+        auth: auth,
+        fileUploadModel: fileUploadModel,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
+  Future<ResponseModel> createJobCard({
+    String? auth,
+    jobId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createJobCard(
+        auth: auth,
+        jobId: jobId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
+  Future<ResponseModel> getJobCardDetails({
+    String? auth,
+    int? jobCardId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getJobCardDetails(
+      auth: auth,
+      jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getFrequencyList({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getFrequencyList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
 
   ///
 }
