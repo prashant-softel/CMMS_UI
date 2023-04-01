@@ -274,13 +274,13 @@ class PreventiveCheckPointContentWeb
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .1),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 223, 101, 80),
-                                      onPressed: () {},
-                                      text: 'Cancel')),
+                                width: (MediaQuery.of(context).size.width * .1),
+                                child: CustomElevatedButton(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 223, 101, 80),
+                                    onPressed: () {},
+                                    text: 'Cancel'),
+                              ),
                               SizedBox(
                                 width: 10,
                               ),
@@ -333,8 +333,8 @@ class PreventiveCheckPointContentWeb
                                   ),
                                   ActionButton(
                                     icon: Icons.upload,
-                                    lable: 'Import Check Point',
-                                    onPress: () {},
+                                    label: 'Import Check Point',
+                                    onPressed: () {},
                                     color: Colors.blue,
                                   ),
                                 ],
@@ -397,7 +397,7 @@ class PreventiveCheckPointContentWeb
                                 ? Expanded(
                                     child: ScrollableTableView(
                                       columns: [
-                                      "Check Point Id",
+                                        "Check Point Id",
                                         "Check List No.",
                                         "Check Point",
                                         "Requirement",
@@ -492,9 +492,12 @@ class PreventiveCheckPointContentWeb
                                                       label: 'Delete',
                                                       onPress: () {
                                                         print(record[0]);
-                                                        controller.isDeleteDialog(
-                                                         check_point: record[2],check_point_id: record[0]
-                                                            );
+                                                        controller
+                                                            .isDeleteDialog(
+                                                                check_point:
+                                                                    record[2],
+                                                                check_point_id:
+                                                                    record[0]);
                                                       },
                                                     ),
                                                   ])
