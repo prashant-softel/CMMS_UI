@@ -27,17 +27,7 @@ class BreakdownMaintenanceController extends GetxController {
     //  Future.delayed(Duration(seconds: 1), () {
     getFacilityList();
     //});
-    Get.lazyPut(
-      () => JobListController(
-        Get.put(
-          JobListPresenter(
-            Get.put(JobListUsecase(Get.find())),
-          ),
-          permanent: true,
-        ),
-      ),
-      //permanent: true,
-    );
+
     super.onInit();
   }
 
@@ -73,11 +63,9 @@ class BreakdownMaintenanceController extends GetxController {
     );
   }
 
-  Future<void> newPermitList() async{
+  Future<void> newPermitList() async {
     Get.toNamed(
       Routes.new_Permit_List,
-
     );
   }
-
 }

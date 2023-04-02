@@ -1,11 +1,11 @@
-import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/job_list/views/mobile/job_list_content_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../home/widgets/home_drawer.dart';
 import '../../utils/responsive.dart';
 import 'web/job_list_content_web.dart';
 
-class JobListScreen extends GetView<JobListController> {
+class JobListScreen extends StatelessWidget {
   JobListScreen({Key? key});
 
   ///
@@ -14,10 +14,8 @@ class JobListScreen extends GetView<JobListController> {
   {
     return //
         Scaffold(
-      body:
-          //   Obx(
-          // () => //
-          Container(
+      body: Container(
+        width: double.infinity,
         child: Column(
             //
             children: [
@@ -28,9 +26,16 @@ class JobListScreen extends GetView<JobListController> {
                 ),
 
               if (Responsive.isDesktop(context))
-                Expanded(
-                  child: //
-                      JobListContentWeb(),
+                Container(
+                  height: Get.height * 0.99,
+                  width: Get.width * 0.99,
+                  child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        HomeDrawer(),
+                        JobListContentWeb(),
+                      ]),
                 ),
             ]),
       ),

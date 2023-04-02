@@ -5,9 +5,6 @@ import 'dart:developer';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/pm_mapping/pm_mapping_controller.dart';
-import 'package:cmms/app/pm_mapping/pm_mapping_presenter.dart';
-import 'package:cmms/app/preventive_check_point/preventive_check_point_presenter.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_controller.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_presenter.dart';
 import 'package:cmms/app_config.dart';
@@ -17,8 +14,6 @@ import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
-import 'package:cmms/domain/usecases/pm_mapping_usecase.dart';
-import 'package:cmms/domain/usecases/preventive_checkpoint_usecase.dart';
 import 'package:cmms/domain/usecases/preventive_usecase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -35,7 +30,6 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app/job_list/job_list_controller.dart';
-import 'app/preventive_check_point/preventive_check_point_controller.dart';
 
 Future<void> mainCommon(AppConfig appConfig) async {
   try {
@@ -151,7 +145,6 @@ Future<void> initServices() async {
             ),
           ),
           permanent: true),
-          
     ),
   );
   Get.lazyPut(
@@ -188,8 +181,18 @@ Future<void> initServices() async {
     ),
     //permanent: true,
   );
-  
-  //);
+
+  Get.lazyPut(
+    () => JobListController(
+      Get.put(
+        JobListPresenter(
+          Get.put(JobListUsecase(Get.find())),
+        ),
+        permanent: true,
+      ),
+    ),
+    //permanent: true,
+  );
 
   /// Services
   await Get.putAsync(() => CommonService().init());

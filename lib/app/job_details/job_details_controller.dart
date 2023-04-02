@@ -1,5 +1,6 @@
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 
@@ -36,7 +37,18 @@ class JobDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
-    jobId.value = Get.arguments;
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    // Read jobId
+    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+    if (_jobId == null || _jobId == '') {
+      jobId.value = Get.arguments;
+      await _flutterSecureStorage.write(
+        key: "jobId",
+        value: jobId.value.toString(),
+      );
+    } else {
+      jobId.value = int.tryParse(_jobId) ?? 0;
+    }
     getJobDetails(jobId.value);
     super.onInit();
   }

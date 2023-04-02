@@ -34,7 +34,7 @@ class JobDetailsModel {
     this.currentPtwId,
     this.currentPtwTitle,
     this.equipmentCatList,
-    this.workingAreaNameList,
+    this.workingAreaList,
     this.associatedPermitList,
     this.lstToolsRequired,
   });
@@ -61,7 +61,7 @@ class JobDetailsModel {
   int? currentPtwId;
   String? currentPtwTitle;
   List<EquipmentCatList>? equipmentCatList;
-  List<WorkingAreaNameList>? workingAreaNameList;
+  List<WorkingAreaList>? workingAreaList;
   List<AssociatedPermit>? associatedPermitList;
   dynamic lstToolsRequired;
 
@@ -103,9 +103,9 @@ class JobDetailsModel {
             ? List<EquipmentCatList>.from(json["equipment_cat_list"]
                 .map((x) => EquipmentCatList.fromJson(x)))
             : [],
-        workingAreaNameList: (json["associated_permit"] != null)
-            ? List<WorkingAreaNameList>.from(json["associated_permit"]
-                .map((x) => WorkingAreaNameList.fromJson(x)))
+        workingAreaList: (json["associated_permit"] != null)
+            ? List<WorkingAreaList>.from(json["associated_permit"]
+                .map((x) => WorkingAreaList.fromJson(x)))
             : [],
         associatedPermitList: (json["working_area_name_list"] != null)
             ? List<AssociatedPermit>.from(json["working_area_name_list"]
@@ -137,8 +137,8 @@ class JobDetailsModel {
         "current_ptw_title": currentPtwTitle,
         "equipment_cat_list":
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
-        "working_area_name_list": List<dynamic>.from(
-            workingAreaNameList?.map((x) => x.toJson()) ?? []),
+        "working_area_name_list":
+            List<dynamic>.from(workingAreaList?.map((x) => x.toJson()) ?? []),
         "associated_permit_list": List<dynamic>.from(
             associatedPermitList?.map((x) => x.toJson()) ?? []),
         "lst_tools_required": lstToolsRequired,
@@ -225,8 +225,8 @@ class EquipmentCatList {
       };
 }
 
-class WorkingAreaNameList {
-  WorkingAreaNameList({
+class WorkingAreaList {
+  WorkingAreaList({
     required this.workingAreaId,
     required this.workingAreaName,
   });
@@ -234,8 +234,8 @@ class WorkingAreaNameList {
   int workingAreaId;
   String workingAreaName;
 
-  factory WorkingAreaNameList.fromJson(Map<String, dynamic> json) =>
-      WorkingAreaNameList(
+  factory WorkingAreaList.fromJson(Map<String, dynamic> json) =>
+      WorkingAreaList(
         workingAreaId: json["workingArea_id"],
         workingAreaName: json["workingArea_name"],
       );

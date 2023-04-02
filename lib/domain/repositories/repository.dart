@@ -235,6 +235,8 @@ class Repository {
         ),
       );
       // CreateNewPermitDialog(createPermitData: 'data',);
+
+
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -668,6 +670,7 @@ class Repository {
         return [];
       }
     } catch (error) {
+      print(error.toString());
       log(error.toString());
       return [];
     }
