@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/navigators.dart';
-import 'package:cmms/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

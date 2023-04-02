@@ -11,8 +11,8 @@ import 'package:cmms/app/preventive_check_point/preventive_check_point_presenter
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_controller.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_presenter.dart';
 import 'package:cmms/app_config.dart';
-import 'package:cmms/breakdown_maintenance/breakdown_maintenance_controller.dart';
-import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
+import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
+import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
@@ -151,6 +151,7 @@ Future<void> initServices() async {
             ),
           ),
           permanent: true),
+          
     ),
   );
   Get.lazyPut(

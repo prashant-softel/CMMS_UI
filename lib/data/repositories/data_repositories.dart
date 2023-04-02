@@ -39,10 +39,17 @@ class DataRepository extends DomainRepository {
   /// Get data from secure storage
   @override
   Future<String> getSecuredValue(String key) async {
+    //return generateToken();
     throw UnimplementedError();
   }
 
   Future<String> getUserAccessData(String key) async {
+    //return generateToken();
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> getNewPermitAccessData(String key) async {
     //return generateToken();
     throw UnimplementedError();
   }
@@ -147,6 +154,45 @@ class DataRepository extends DomainRepository {
         auth: auth,
         facilityId: facilityId ?? 0,
         userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+
+   Future<ResponseModel> getNewPermitList({
+    required String auth,
+    int? facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getNewPermitList(
+        auth: auth,
+        facilityId: 45,
+        // facilityId: facilityId ?? 0,
+        // userId: userId,
+        userId: 33,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getPreventiveCheckList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPreventiveCheckList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+      Future<ResponseModel> getCheckPointlist({
+    required String auth,
+    int? selectedchecklistId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCheckPointlist(
+        auth: auth,
+        selectedchecklistId: selectedchecklistId ?? 0,
         isLoading: isLoading ?? false,
       );
 
@@ -355,28 +401,29 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> getPreventiveCheckList({
-    required String auth,
-    int? facilityId,
-    int? type,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.getPreventiveCheckList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> getCheckPointlist({
-    required String auth,
-    int? selectedchecklistId,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.getCheckPointlist(
-        auth: auth,
-        selectedchecklistId: selectedchecklistId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+  // Future<ResponseModel> getPreventiveCheckList({
+  //   required String auth,
+  //   int? facilityId,
+  //   int? type,
+  //   bool? isLoading,
+  // }) async =>
+  //     await connectHelper.getPreventiveCheckList(
+  //       auth: auth,
+  //       facilityId: facilityId ?? 0,
+  //       type: type,
+  //       isLoading: isLoading ?? false,
+  //     );
+
+  // Future<ResponseModel> getCheckPointlist({
+  //   required String auth,
+  //   int? selectedchecklistId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await connectHelper.getCheckPointlist(
+  //       auth: auth,
+  //       selectedchecklistId: selectedchecklistId ?? 0,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<ResponseModel> getTypePermitList({
     String? auth,

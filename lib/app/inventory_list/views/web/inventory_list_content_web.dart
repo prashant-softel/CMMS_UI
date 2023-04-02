@@ -53,6 +53,12 @@ class InventoryListContentWeb extends GetView<HomeController> {
                   onPressed: () {
                     Get.to(() => AddInventory());
                   },
+                  // lable: 'addAsset'.tr,
+                  // onPress: () async{
+                  //   // await Get.to(() => AddInventory());
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => AddInventory()));
+
+                  // },
                   color: ColorValues.appDarkBlueColor,
                 ),
                 Dimens.boxWidth10,

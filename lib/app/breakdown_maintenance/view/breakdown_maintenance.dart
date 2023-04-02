@@ -1,7 +1,7 @@
 import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
-import 'package:cmms/breakdown_maintenance/breakdown_maintenance_controller.dart';
-import 'package:cmms/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -96,7 +96,12 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
                   controller.createNewPermit();
                 }
                 ),
-              _priventiveList(tittle: "Permit List"),
+              _priventiveList(
+                tittle: "Permit List",
+                ontap: (){
+                  controller.newPermitList();
+                }
+                ),
               _priventiveList(tittle: "Job Card List"),
               // _priventiveList(tittle: "PM Schedule View"),
               // _priventiveList(tittle: "PM Report"),

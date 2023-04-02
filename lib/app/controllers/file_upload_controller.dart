@@ -18,6 +18,9 @@ class FileUploadController extends GetxController {
   var progress = Rx<double>(0);
   Uint8List? bytesData;
   Rx<bool> blnHiglight = false.obs;
+  // Rx<double> progress = 0.0.obs;
+  // late File? file;
+
   RxList<int> progresses = <int>[].obs;
   late File? file;
   int index = 0;
@@ -35,6 +38,20 @@ class FileUploadController extends GetxController {
     super.onInit();
   }
 
+  // addFiles() async {
+  //   try {
+  //     final uploadInput = FileUploadInputElement();
+  //     uploadInput.multiple = true;
+  //     uploadInput.draggable = true;
+  //     uploadInput.click();
+  //     uploadInput.onChange.listen((event) {
+  //       files.value = uploadInput.files!;
+  //     });
+  //   } //
+  //   catch (e) {
+  //     print(e);
+  //   }
+  // }
   addFiles() async {
     try {
       final uploadInput = FileUploadInputElement();
@@ -52,6 +69,29 @@ class FileUploadController extends GetxController {
     }
   }
 
+  // void uploadFiles() {
+  //   try {
+  //     var requestFields = {
+  //       "facility_id": "380",
+  //       "module_id": "1",
+  //       "id": "3263",
+  //     };
+  //     final fileUploadService = FileUploadService(
+  //       url: 'http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile',
+  //       token: token,
+  //       files: files.toList(),
+  //       requestFields: requestFields,
+  //     );
+  //     fileUploadService.upload();
+  //     fileUploadService.uploadProgress.listen((_progress) {
+  //       progress.value = _progress.toDouble();
+  //       print("File upload progress: ${progress.value}%");
+  //     });
+  //   } //
+  //   catch (e) {
+  //     print(e);
+  //   }
+  // }
   void onFilesAdded() {
     progresses.value = List<int>.filled(files.length, 0);
     descriptionCtrlrs.length = files.length;

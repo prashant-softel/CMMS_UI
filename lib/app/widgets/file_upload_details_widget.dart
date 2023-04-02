@@ -1,9 +1,9 @@
+import 'package:cmms/domain/models/file_upload_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:filesize/filesize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../domain/models/file_upload_model.dart';
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 
@@ -20,8 +20,68 @@ class FileUploadDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return //
         Obx(
-      () => //
-          DataTable2(
+      () =>
+          //
+          Table(
+              border: TableBorder.all(
+                style: BorderStyle.solid,
+                color: ColorValues.blackColor,
+              ),
+              //
+              children: [
+            TableRow(children: [
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Event'),
+              ),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Description'),
+              ),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Upload Progress'),
+              ),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Size'),
+              ),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Status'),
+              ),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Remove'),
+              ),
+            ]),
+            // for (var _file in _dropzoneController.files)
+              TableRow(children: [
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text('${_file.name}'),
+                // ),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('-'),
+                ),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('-'),
+                ),
+                // Container(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text('${_file.size}'),
+                // ),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: //
+                      LinearProgressIndicator(
+                        
+
+                      ),
+              ),
+                DataTable2(
         showCheckboxColumn: false,
         horizontalMargin: 5,
         lmRatio: 2,
@@ -106,9 +166,6 @@ class FileUploadDetailsWidget extends StatelessWidget {
                 DataCell(
                   LinearProgressIndicator(
                     color: ColorValues.appLightBlueColor,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      ColorValues.appDarkBlueColor,
-                    ),
                     //value: _file.
                     backgroundColor:
                         ColorValues.appLightBlueColor.withOpacity(0.3),
@@ -127,6 +184,7 @@ class FileUploadDetailsWidget extends StatelessWidget {
               ]);
         }).toList(),
       ),
-    );
-  }
+     
+              ]
+  )]));}
 }

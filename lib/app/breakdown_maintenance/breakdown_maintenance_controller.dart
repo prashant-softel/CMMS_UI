@@ -1,12 +1,14 @@
+import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
+import 'package:cmms/app/job_list/job_list_controller.dart';
+import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
-import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
+// import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/usecases/job_list_usecase.dart';
 import 'package:get/get.dart';
-
-import '../app/job_list/job_list_controller.dart';
-import '../app/job_list/job_list_presenter.dart';
-import '../domain/usecases/job_list_usecase.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../../domain/models/inventory_category_model.dart';
 
 class BreakdownMaintenanceController extends GetxController {
   BreakdownMaintenanceController(
@@ -14,7 +16,7 @@ class BreakdownMaintenanceController extends GetxController {
   );
 
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
-  late JobListController jobListController;
+   late JobListController jobListController;
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
@@ -64,12 +66,23 @@ class BreakdownMaintenanceController extends GetxController {
   Future<void> createChecklist() async {
     Get.toNamed(
       Routes.jobList,
+      
+    );
+    
+  }
+
+  Future<void> createNewPermit() async{
+    Get.toNamed(
+      Routes.new_permit,
+      
     );
   }
 
-  Future<void> createNewPermit() async {
+  Future<void> newPermitList() async{
     Get.toNamed(
-      Routes.new_permit,
+      Routes.new_Permit_List,
+
     );
   }
+
 }

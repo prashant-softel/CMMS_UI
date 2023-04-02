@@ -175,6 +175,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+   Future<ResponseModel> getNewPermitList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? userId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('NewPermitResponse: ${responseModel.data}');
+
+    return responseModel;
+  }
+
+
+
   Future<ResponseModel> getPreventiveCheckList({
     required String auth,
     bool? isLoading,

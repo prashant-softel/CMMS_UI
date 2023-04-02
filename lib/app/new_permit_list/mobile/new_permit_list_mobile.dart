@@ -1,15 +1,18 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/job_model.dart';
+import 'package:cmms/domain/models/new_permit_list_model.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
+import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../job_list_controller.dart';
-import '../widgets/facility_selection_dropdown_widget.dart';
+// import '../../job_list_controller.dart';
+// import '../widgets/facility_selection_dropdown_widget.dart';
 
-class JobListContentMobile extends GetView<JobListController> {
-  JobListContentMobile({Key? key, this.jobModel}) : super(key: key);
+class NewPermitListMobile extends GetView<NewPermitListController> {
+  NewPermitListMobile({Key? key, this.newPermitListModel}) : super(key: key);
 
-  final JobModel? jobModel;
+  final NewPermitListModel? newPermitListModel;
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +21,29 @@ class JobListContentMobile extends GetView<JobListController> {
         Scaffold(
       body: //
           Container(
-        child: //
+                child: 
             Column(
           children: [
-            //
-            /// DropDown
-            FacilitySelectionDropdownWidget(),
+            SizedBox(height: 50,),
+            //DropDown
+             FacilitySelectionDropdownWidget(),
             Expanded(
               child: ListView.builder(
                   //physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: controller.jobList != null
-                      ? controller.jobList?.length
+                  itemCount: controller.newPermitList != null
+                      ? controller.newPermitList?.length
                       : 0,
                   itemBuilder: (context, index) {
-                    final jobModel = (controller.jobList != null)
-                        ? controller.jobList![index]
-                        : JobModel();
-                    var status = jobModel?.status?.name.toString() ?? '';
-                    print('Status: $status');
+                    final newPermitListModel = (controller.newPermitList != null)
+                        ? controller.newPermitList![index]
+                        : NewPermitListModel();
+                    var status = newPermitListModel?.current_status?.name.toString() ?? '';
+                    print('Current Status: $status');
                     return GestureDetector(
                       onTap: () {
-                        var _jobId = jobModel?.id ?? 0;
-                        controller.showJobDetails(_jobId);
+                        var _newPermitListId = newPermitListModel?.permitId ?? 0;
+                        controller.showNewPermitListDetails(_newPermitListId);
                       },
                       child: SizedBox(
                         width: double.infinity,
@@ -63,7 +66,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Job${jobModel?.id ?? 0}',
+                                            'Permit Id: ${newPermitListModel?.permitId ?? 0}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: ColorValues.navyBlueColor,
@@ -94,8 +97,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                                                       0xff3438cd)
                                                                   : (status.toLowerCase() ==
                                                                           "cancelled")
-                                                                      ? Color(
-                                                                          0xffbf4844)
+                                                                      ? Color(0xFFBF4844)
                                                                       : Color.fromARGB(
                                                                           255,
                                                                           227,
@@ -120,7 +122,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                   Row(children: [
                                     Expanded(
                                       child: Text(
-                                        'Assigned To: ',
+                                        'Permit Type Name: ',
                                         style: const TextStyle(
                                           color: ColorValues.blackColor,
                                         ),
@@ -128,7 +130,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '${jobModel?.assignedToName ?? 'Unassigned'}',
+                                        '${newPermitListModel?.permitTypeName ?? 'Unassigned'}',
                                         style: const TextStyle(
                                           color: ColorValues.blackColor,
                                         ),
@@ -139,7 +141,8 @@ class JobListContentMobile extends GetView<JobListController> {
                                       children: [
                                     Expanded(
                                       child: Text(
-                                        jobModel?.jobDetails ?? '',
+                                         '${newPermitListModel?.workingAreaName ?? ''}',
+                                        // 'Not Assigned',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color:
@@ -152,7 +155,15 @@ class JobListContentMobile extends GetView<JobListController> {
                                       children: [
                                     Expanded(
                                       child: Text(
-                                        jobModel?.description ?? '',
+                                        'Description: ',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        newPermitListModel?.description ?? '',
                                         style: const TextStyle(),
                                       ),
                                     )
@@ -161,7 +172,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                       children: [
                                     Expanded(
                                       child: Text(
-                                        'Work Area: ',
+                                        'Equipment: ',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -169,7 +180,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        jobModel?.workingArea ?? '',
+                                        newPermitListModel?.equipment ?? '',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -182,7 +193,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Plant name: ',
+                                          'Work Area Name: ',
                                           style: TextStyle(
                                             color: Colors.blue.shade900,
                                             fontWeight: FontWeight.w600,
@@ -190,25 +201,26 @@ class JobListContentMobile extends GetView<JobListController> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                              jobModel?.facilityName ?? ''),
+                                              newPermitListModel?.workingAreaName ?? ''),
                                         ),
                                       ]),
                                   Row(//
                                       children: [
                                     Expanded(
                                       child: Text(
-                                        'Breakdown Time: ',
+                                        'Approved Time: ',
                                         style: TextStyle(color: Colors.grey),
                                       ),
                                     ),
                                     Flexible(
                                       child: Text(
-                                        (jobModel?.breakdownTime != null)
+                                        (newPermitListModel?.approved_datetime != null)
                                             ? DateFormat('dd-MMM-yyyy hh:mm')
                                                 .format(
-                                                    jobModel!.breakdownTime!)
+                                                    newPermitListModel!.approved_datetime!)
                                             : '',
                                         style: TextStyle(color: Colors.grey),
+                                        // 'Time djhb'
                                       ),
                                     ),
                                   ]),
@@ -220,11 +232,11 @@ class JobListContentMobile extends GetView<JobListController> {
                   }),
             ),
           ],
-        ),
-      ),
-      //
+                ),
+              ),
+      
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.addJob(),
+        onPressed: () => controller.addNewPermitList(),
         backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,

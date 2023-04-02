@@ -47,6 +47,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                     onCreated: (controller) => this.dzvcontroller = controller,
                     onDrop: (dynamic event) {},
                     onDropMultiple: (List<dynamic>? events) {
+                      // controller.files.value = events?.cast<File>() ?? [];
                       controller.files.value = events?.cast<File>() ?? [];
                       controller.onFilesAdded();
                     },
@@ -60,7 +61,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.cloud_upload_outlined,
-                            size: Get.height * 0.05,
+                            size: 60,
                             color: Colors.white,
                           ),
                           Text(
@@ -76,7 +77,8 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
 
                           /// CHOOSE FILE BUTTON
                           ElevatedButton.icon(
-                            onPressed: () => controller.addFiles(),
+                            onPressed: (){},
+                            // onPressed: () => controller.addFiles(),
                             icon: Icon(Icons.search),
                             label: Text(
                               'Choose File',
@@ -97,7 +99,8 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
 
                           /// UPLOAD BUTTON
                           ElevatedButton(
-                            onPressed: () => controller.uploadFiles(),
+                            onPressed: (){},
+                            // onPressed: () => controller.uploadFiles(),
                             child: const Text('Upload'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorValues.appDarkBlueColor,

@@ -5,7 +5,7 @@ import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/job_saved_dialog.dart';
-import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
+import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/domain/models/add_job_model.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/create_permit_model.dart';
@@ -16,11 +16,11 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
-import 'package:cmms/new_permit/new_permit_presenter.dart';
+import 'package:cmms/app/new_permit/new_permit_presenter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/inventory_category_model.dart';
+import '../../../domain/models/inventory_category_model.dart';
 
 class NewPermitController extends GetxController {
  NewPermitController(
@@ -381,8 +381,10 @@ Future<void> getBlocksList(int _facilityId) async {
         isLoading: true,
       );
       if (responseNewPermitCreated != null) {
-         var _facilityId = responseNewPermitCreated["newPermit"];
-         showAlertDialog(facility_id: _facilityId);
+        print("respomsecghj,$responseNewPermitCreated");
+        //  CreateNewPermitDialog();
+         showAlertDialog();
+
         // print('NewCreated:$_facilityId');
       }
     }

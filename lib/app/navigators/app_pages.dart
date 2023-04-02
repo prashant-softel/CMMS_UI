@@ -2,11 +2,15 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
-import 'package:cmms/new_permit/new_permit_binding.dart';
-import 'package:cmms/new_permit/view/new_permit_screen.dart';
+import 'package:cmms/app/new_permit/new_permit_binding.dart';
+import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
+// import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
+import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
@@ -119,6 +123,11 @@ class AppPages {
       binding: NewPermitBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.new_Permit_List,
+      page: NewPermitListScreen.new,
+      binding: NewPermitListBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.preventiveCheckPoint,
       page: PreventiveCheckPointScreen.new,
       binding: PreventiveCheckPointBinding(),
@@ -128,5 +137,9 @@ class AppPages {
       page: PmMappingScreen.new,
       binding: PmMappingBinding(),
     ),
+    // GetPage<dynamic>(
+    //   name: _Paths.warranty_Claim_List,
+    //   page: WarrantyClaimListScreen.new,
+    // ),
   ];
 }

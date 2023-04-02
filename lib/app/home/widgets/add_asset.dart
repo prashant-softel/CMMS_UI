@@ -40,7 +40,7 @@ class AddInventory extends StatelessWidget {
                             icon: Icons.menu,
                             label: 'Inventory List',
                             onPressed: () async {},
-                            color: Colors.green,
+                            color: Colors.green, 
                           ),
                         ),
                         Dimens.boxHeight10,
@@ -359,6 +359,7 @@ class AddInventory extends StatelessWidget {
                 ),
               ),
             ),
+        
           ],
         ),
       );

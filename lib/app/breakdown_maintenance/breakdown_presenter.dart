@@ -3,9 +3,9 @@ import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/usecases/preventive_list_usecase.dart';
-import '../domain/usecases/breakdown_usecase.dart';
+import '../../../domain/models/inventory_category_model.dart';
+import '../../../domain/usecases/preventive_list_usecase.dart';
+import '../../domain/usecases/breakdown_usecase.dart';
 
 class BreakdownMaintenancePresenter {
   BreakdownMaintenancePresenter(this.breakdownMaintenanceUsecase);
