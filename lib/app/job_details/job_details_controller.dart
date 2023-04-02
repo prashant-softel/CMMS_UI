@@ -1,4 +1,5 @@
 import 'package:cmms/app/facility/facility_presenter.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -29,12 +30,23 @@ class JobDetailsController extends GetxController {
   int userId = 36;
   var breakdownTime;
 
+  final permitDropdownValues = <String>[].obs;
+  final textControllers = <List<TextEditingController>>[].obs;
+
   ///
   @override
   void onInit() async {
     jobId.value = Get.arguments;
     getJobDetails(jobId.value);
     super.onInit();
+  }
+
+  setDropdownValue(int index, String value) {
+    permitDropdownValues[index] = value;
+  }
+
+  setTextValue(int row, int col, String value) {
+    textControllers[row][col].text = value;
   }
 
   Future<void> getJobDetails(int? jobId) async {
@@ -53,6 +65,26 @@ class JobDetailsController extends GetxController {
 
   void editJob() {
     Get.toNamed(Routes.editJob, arguments: jobId.value);
+  }
+
+  void linkToExistingPermit() {
+    // Initialize dropdown and text field values
+    associatedPermitList?.forEach((data) {
+      permitDropdownValues.add(data.permitTypeName ?? '');
+      final textControllerList = <TextEditingController>[];
+      textControllerList.add(TextEditingController(text: ''));
+      textControllerList.add(TextEditingController(text: ''));
+      textControllerList.add(TextEditingController(text: ''));
+      textControllerList.add(TextEditingController(text: ''));
+      textControllerList.add(TextEditingController(text: ''));
+      textControllers.add(textControllerList);
+    });
+  }
+
+  createNewPermit() {}
+
+  void goToJobCardScreen() {
+    Get.toNamed(Routes.jobCard, arguments: jobId);
   }
 
   ///
