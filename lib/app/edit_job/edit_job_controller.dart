@@ -216,8 +216,8 @@ class EditJobController extends GetxController {
       isLoading: true,
     );
     workAreaList.value = _workAreaList;
-    if (jobDetailsModel.value?.workingAreaNameList != null)
-      for (var _workArea in jobDetailsModel.value?.workingAreaNameList ?? []) {
+    if (jobDetailsModel.value?.workingAreaList != null)
+      for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
         int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
         if (_selectedWorkAreaId > 0) {
           selectedWorkAreaIdList.add(_selectedWorkAreaId);
