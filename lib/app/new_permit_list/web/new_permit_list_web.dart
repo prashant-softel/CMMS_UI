@@ -36,36 +36,36 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                 action: Row(children: [
                   ActionButton(
                     icon: Icons.download,
-                    lable: 'BM Report',
-                    onPress: () {},
+                    label: 'BM Report',
+                    onPressed: () {},
                     color: Color.fromARGB(255, 220, 176, 45),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.upload,
-                    lable: 'Pending Permits',
-                    onPress: () {},
+                    label: 'Pending Permits',
+                    onPressed: () {},
                     color: Color.fromARGB(255, 130, 183, 146),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.add,
-                    lable: 'Created By Me'.tr,
-                    onPress: () {},
+                    label: 'Created By Me'.tr,
+                    onPressed: () {},
                     color: Color.fromARGB(255, 73, 142, 143),
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.close,
-                    lable: 'Assigned To Me'.tr,
-                    onPress: () async {},
+                    label: 'Assigned To Me'.tr,
+                    onPressed: () async {},
                     color: Colors.green,
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.upload,
-                    lable: 'Add New Permit',
-                    onPress: () {
+                    label: 'Add New Permit',
+                    onPressed: () {
                       controller.addNewPermitList();
                     },
                     color: Colors.blue,

@@ -58,12 +58,13 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                     SizedBox(width: 700,),
                     ActionButton(
                     icon: Icons.calendar_month,
-                    lable: 'December 3rd 2022',
-                    onPress: () {
-                      // Get.to(() => AddInventory());
-                      // _buildStartDateField_mobile(context);
-                    },
-                    color: Colors.green,
+                    label: 'December 3rd 2022',
+                    // onPress: () {
+                    //   // Get.to(() => AddInventory());
+                    //   // _buildStartDateField_mobile(context);
+                    // },
+                    color: Colors.green, 
+                    onPressed: () {  },
                   ),
                   ],
                 ),
@@ -77,15 +78,15 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                 children: [
                   ActionButton(
                     icon: Icons.all_inbox,
-                    lable: 'All',
-                    onPress: () {},
+                    label: 'All',
+                    onPressed: () {},
                     color: Colors.blue,
                   ),
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.close,
-                    lable: 'Closed',
-                    onPress: () {
+                    label: 'Closed',
+                    onPressed: () {
                       // var file = "assets/files/Fixed Asset Imports.xlsx";
                       // var bytes = File(file).readAsBytesSync();
                       // var excel = Excel.decodeBytes(bytes);
@@ -104,8 +105,8 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                   Dimens.boxWidth10,
                   ActionButton(
                     icon: Icons.add,
-                    lable: 'Add Warranty Claim',
-                    onPress: () {
+                    label: 'Add Warranty Claim',
+                    onPressed: () {
                       // Get.to(() => AddInventory());
                         // Get.to(() => NewWarrantyClaimListWeb());
                     Navigator.push(context, MaterialPageRoute(builder: (context) => NewWarrantyClaimListWeb()));

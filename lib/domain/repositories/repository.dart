@@ -24,6 +24,8 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
+import '../models/job_card_details_model.dart';
+import '../models/permit_details_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 
@@ -41,6 +43,10 @@ class Repository {
   final DataRepository _dataRepository;
 
 
+
+  ///
+  var tokenFetchCount = 0;
+  var tokenSaveCount = 0;
 
   /// Clear data from local storage for [key].
   void clearData(dynamic key) {
@@ -120,13 +126,18 @@ class Repository {
 
   /// Get the secure value for the [key].
   /// [key] : The key whose value is needed.
-  Future<String> getSecureValue(String key) async {
+  Future<String> getSecuredValue(String key) async {
     var _value = '';
+
+    if (key == "auth-token") {
+      tokenFetchCount++;
+    }
     try {
       _value = await _deviceRepository.getSecuredValue(key);
-
+      print("Token fetched $tokenFetchCount times, value = $_value");
       return _value;
-    } catch (_) {
+    } //
+    catch (_) {
       _value = await _dataRepository.getSecuredValue(key);
       return _value;
     }
@@ -160,12 +171,16 @@ class Repository {
   ///
   /// [key] : The key to which [value] will be saved.
   /// [value] : The value which needs to be saved.
-  void saveSecureValue(String key, String value) async {
+  Future<void> saveSecureValue(String key, String value) async {
     try {
+      if (key == "auth-token") {
+        tokenSaveCount++;
+      }
       await _deviceRepository.saveValueSecurely(
         key,
         value,
       );
+      print("Token saved $tokenSaveCount times");
     } catch (_) {
       _dataRepository.saveValueSecurely(
         key,
@@ -207,14 +222,16 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-       print({"NewPermit",newPermit});
-      final auth = await getSecureValue(LocalKeys.authToken);
+      //  print({"NewPermit",newPermit});
+      // final auth = await getSecuredValue(LocalKeys.authToken);
+      print({"NewPermit", newPermit});
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermit(
         auth: auth,
          newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
-      var data = res.data; 
+      var data = res.data;
       print('Response Create Permit: ${data}');Get.dialog(
   CreateNewPermitDialog(
     createPermitData: 'Dialog Title',
@@ -229,7 +246,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-        
+
         }
       } else {
         Utility.showDialog(res.errorCode.toString());
@@ -282,7 +299,7 @@ class Repository {
 
       if (!res.hasError) {
         final decodeRes = jsonDecode(res.data);
-        saveSecureValue(LocalKeys.authToken, decodeRes['token']);
+        await saveSecureValue(LocalKeys.authToken, decodeRes['token']);
         String userId = decodeRes['user_detail']['id'].toString();
        String token = decodeRes['token'];
         await getUserAccessList(
@@ -305,7 +322,7 @@ class Repository {
     required bool isLoading,
   }) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
       final res = await _dataRepository.getInventoryList(
@@ -332,7 +349,7 @@ class Repository {
     String? categoryIds,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.getWorkTypeList(
         categoryIds: categoryIds,
@@ -356,7 +373,7 @@ class Repository {
     required String facilityId,
   }) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.getBlockList(
         isLoading: isLoading,
@@ -380,7 +397,7 @@ class Repository {
     required String facilityId,
   }) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.getEquipmentList(
         isLoading: isLoading,
@@ -404,7 +421,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final userAcessData = await getUserAccessData(LocalKeys.userAccess);
       final userAccessModelList = jsonDecode(userAcessData);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
@@ -444,7 +461,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final newPermitListData = await getNewPermitAccessData(LocalKeys.userAccess);
       final newPermitModelList = jsonDecode(newPermitListData);
       var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
@@ -481,7 +498,7 @@ class Repository {
 
   Future<List<FacilityModel?>?> getFacilityList(bool? isLoading) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getFacilityList(
         auth: auth,
         isLoading: isLoading,
@@ -508,7 +525,7 @@ class Repository {
 
   Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getTypePermitList(
         auth: auth,
         isLoading: isLoading,
@@ -539,7 +556,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getBlocksList(
         auth: auth,
         isLoading: isLoading ?? false,
@@ -571,7 +588,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getInventoryCategoryList(
         auth: auth,
         isLoading: isLoading,
@@ -584,7 +601,8 @@ class Repository {
             jsonInventoryCategoryModels
                 .map<InventoryCategoryModel>(
                   (m) => InventoryCategoryModel.fromJson(
-                      Map<String, dynamic>.from(m)),
+                    Map<String, dynamic>.from(m),
+                  ),
                 )
                 .toList();
 
@@ -604,7 +622,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getFrequencyList(
         auth: auth,
         isLoading: isLoading,
@@ -637,7 +655,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.getJobDetails(
         auth: auth,
@@ -669,7 +687,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAssignedToList(
         auth: auth,
         isLoading: isLoading,
@@ -701,7 +719,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getToolsRequiredToWorkTypeList(
         auth: auth,
         isLoading: isLoading ?? false,
@@ -732,7 +750,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.saveJob(
         auth: auth,
         job: job,
@@ -792,7 +810,7 @@ class Repository {
   Future<bool> createCheckListNumber(
       {bool? isLoading, checklistJsonString}) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.createCheckList(
           auth: auth,
@@ -816,7 +834,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPreventiveCheckList(
         auth: auth,
         facilityId: facilityId ?? 0,
@@ -851,7 +869,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       print({"checkid", selectedchecklistId});
       final res = await _dataRepository.getCheckPointlist(
         auth: auth,
@@ -882,7 +900,7 @@ class Repository {
 
   Future<bool> createCheckpoint({bool? isLoading, checkpointJsonString}) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.createCheckpoint(
           auth: auth,
@@ -905,7 +923,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.uploadFiles(
         auth: auth,
         fileUploadModel: fileUploadModel,
@@ -929,6 +947,226 @@ class Repository {
     }
   }
 
+  Future<List<JobCardDetailsModel>?> getJobCardDetails(
+    //String? auth,
+    int? jobCardId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getJobCardDetails(
+        auth: auth,
+        jobCardId: jobCardId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonJobCardDetailsModels = jsonDecode(res.data);
+        final List<JobCardDetailsModel> _jobCardDetailsList =
+            jsonJobCardDetailsModels
+                .map<JobCardDetailsModel>(
+                  (m) => JobCardDetailsModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _jobCardDetailsList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> createJobCard(
+    auth,
+    jobId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createJobCard(
+        auth: auth,
+        jobId: jobId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
+  Future<PermitDetailsModel?> getPermitDetails(
+    int? permitId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPermitDetails(
+        auth: auth,
+        permitId: permitId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final PermitDetailsModel _permitDetailsModel =
+            permitDetailsModelFromJson(res.data);
+        return _permitDetailsModel;
+      } //
+      else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } //
+    catch (error) {
+      log(error.toString());
+      return null;
+    }
+  }
+
+  Future<List<HistoryModel>?> getJobCardHistory(
+    int? moduleType,
+    int? jobCardId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getJobCardHistory(
+        auth: auth,
+        moduleType: moduleType,
+        jobCardId: jobCardId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonJobCardDetailsModels = jsonDecode(res.data);
+        final List<HistoryModel> _jobCardDetailsList = jsonJobCardDetailsModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(
+                Map<String, dynamic>.from(m),
+              ),
+            )
+            .toList();
+
+        return _jobCardDetailsList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  ///
+  Future<Map<String, dynamic>> updateJobCard(
+    jobCard,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateJobCard(
+        auth: auth,
+        jobCard: jobCard,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error);
+      log(error.toString());
+      return Map();
+    }
+  }
+
+  ///
+  Future<Map<String, dynamic>> approveJobCard(
+    jobCardId,
+    comment,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.approveJobCard(
+        auth: auth,
+        jobCardId: jobCardId,
+        comment: comment,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
+  ///
+  Future<Map<String, dynamic>> rejectJobCard(
+    jobCardId,
+    comment,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.rejectJobCard(
+        auth: auth,
+        jobCardId: jobCardId,
+        comment: comment,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
   Future<List<HistoryModel>?> getHistory(
     //String? auth,
     int? moduleType,
@@ -936,7 +1174,7 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getHistory(
         auth: auth,
         isLoading: isLoading,
@@ -966,7 +1204,7 @@ class Repository {
 
   Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
     try {
-      final auth = await getSecureValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
       print({"checkid", check_point_id});
       final res = await _dataRepository.deleteCkeckpoint(
         auth: auth,

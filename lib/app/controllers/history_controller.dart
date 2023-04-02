@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../domain/models/history_model.dart';
 import '../../domain/repositories/local_storage_keys.dart';
 import '../../domain/repositories/repository.dart';
 
@@ -11,12 +12,17 @@ class HistoryController extends GetxController {
   ///
   @override
   void onInit() async {
-    token = await repository.getSecureValue(LocalKeys.authToken);
+    token = await repository.getSecuredValue(LocalKeys.authToken);
     super.onInit();
   }
 
-  getHistory(int? moduleType, int? id) {
-    repository.getHistory(moduleType, id, true);
+  Future<List<HistoryModel>?> getJobCardHistory(
+    int? moduleType,
+    int? jobCardId,
+  ) async {
+    var jobCardHistoryList =
+        await repository.getJobCardHistory(moduleType, jobCardId, true);
+    return jobCardHistoryList;
   }
 
   ///

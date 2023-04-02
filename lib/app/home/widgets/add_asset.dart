@@ -38,9 +38,9 @@ class AddInventory extends StatelessWidget {
                           title: 'addInventory'.tr,
                           action: ActionButton(
                             icon: Icons.menu,
-                            lable: 'Inventory List',
-                            onPress: () async {},
-                            color: Colors.green,
+                            label: 'Inventory List',
+                            onPressed: () async {},
+                            color: Colors.green, 
                           ),
                         ),
                         Dimens.boxHeight10,
@@ -159,8 +159,8 @@ class AddInventory extends StatelessWidget {
                                   width: 100,
                                   color: Colors.black,
                                   child: ActionButton(
-                                    lable: 'Add',
-                                    onPress: () {},
+                                    label: 'Add',
+                                    onPressed: () {},
                                     icon: Icons.add,
                                     color: Colors.blue,
                                   ),
@@ -179,8 +179,8 @@ class AddInventory extends StatelessWidget {
                                   width: 100,
                                   color: Colors.black,
                                   child: ActionButton(
-                                    lable: 'Add',
-                                    onPress: () {},
+                                    label: 'Add',
+                                    onPressed: () {},
                                     icon: Icons.add,
                                     color: Colors.blue,
                                   ),
@@ -290,8 +290,8 @@ class AddInventory extends StatelessWidget {
                                       Text('Calibration cirtificate'),
                                       Dimens.boxWidth10,
                                       ActionButton(
-                                        lable: 'Upload cirtification file',
-                                        onPress: () {},
+                                        label: 'Upload cirtification file',
+                                        onPressed: () {},
                                         icon: Icons.file_upload_outlined,
                                         color: Colors.blue,
                                       )

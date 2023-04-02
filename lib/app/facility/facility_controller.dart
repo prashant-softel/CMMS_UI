@@ -11,7 +11,7 @@ class FacilityController extends GetxController {
   ///
   @override
   void onInit() {
-    getFacilityList(isLoading: true);
+    //getFacilityList(isLoading: true);
 
     super.onInit();
   }

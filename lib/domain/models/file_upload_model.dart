@@ -19,3 +19,7 @@ class FileUploadModel {
 
   ///
 }
+
+
+///
+enum FileUploadEvents { BEFORE, DURING, AFTER }

@@ -36,7 +36,6 @@ class JobListController extends GetxController {
   ///
   @override
   void onInit() async {
-    //homePresenter.generateToken();
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
       Future.delayed(Duration(milliseconds: 500), () {

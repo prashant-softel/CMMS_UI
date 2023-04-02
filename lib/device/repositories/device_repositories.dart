@@ -5,11 +5,14 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:synchronized/synchronized.dart';
 
 /// Repositories that communicate with the platform e.g. GPS
 class DeviceRepository extends DomainRepository {
   /// initialize flutter secure storage
   final _flutterSecureStorage = const FlutterSecureStorage();
+  bool isTokenStored = false;
+  var _lock = new Lock();
 
   /// initialize the hive box
   Future<void> init({bool isTest = false}) async {
@@ -65,12 +68,15 @@ class DeviceRepository extends DomainRepository {
   @override
   Future<String> getSecuredValue(String key) async {
     try {
-      var value = await _flutterSecureStorage.read(key: key);
-      if (value == null || value.isEmpty) {
-        value = '';
-      }
+      print('reading $key');
+      var value = '';
+      await _lock.synchronized(() async {
+        value = await _flutterSecureStorage.read(key: key) ?? '';
+      });
+      print("$key read");
       return value;
     } catch (error) {
+      print("Error reading token: $error");
       return '';
     }
   }
@@ -105,7 +111,12 @@ class DeviceRepository extends DomainRepository {
   @override
   Future<void> saveValueSecurely(String key, String value) async {
     try {
-      await _flutterSecureStorage.write(key: key, value: value);
+      await _lock.synchronized(() async {
+        await _flutterSecureStorage.write(key: key, value: value);
+      });
+
+      isTokenStored = true;
+      print("Token saved");
     } catch (e) {
       print(e);
     }

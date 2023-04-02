@@ -1,7 +1,7 @@
-import 'package:cmms/app/app.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/state.dart';
+import 'splash_presenter.dart';
 
 class SplashController extends GetxController {
   SplashController(this.splashPresenter);

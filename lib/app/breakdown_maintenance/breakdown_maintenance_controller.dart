@@ -1,35 +1,45 @@
-import 'package:cmms/app/navigators/navigators.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-// import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
+import 'package:cmms/app/job_list/job_list_controller.dart';
+import 'package:cmms/app/job_list/job_list_presenter.dart';
+import 'package:cmms/app/navigators/navigators.dart';
+// import 'package:cmms/app/preventive_maintanance/preventive.dart';
+// import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/usecases/job_list_usecase.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 
 class BreakdownMaintenanceController extends GetxController {
- BreakdownMaintenanceController(
+  BreakdownMaintenanceController(
     this.breakdownMaintenancePresenter,
   );
 
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
-  // PreventivePresenter preventivePresenter;
-
-
+   late JobListController jobListController;
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = false.obs;
 
-    @override
+  @override
   void onInit() async {
     //homePresenter.generateToken();
     //  Future.delayed(Duration(seconds: 1), () {
-     getFacilityList();
+    getFacilityList();
     //});
-
+    Get.lazyPut(
+      () => JobListController(
+        Get.put(
+          JobListPresenter(
+            Get.put(JobListUsecase(Get.find())),
+          ),
+          permanent: true,
+        ),
+      ),
+      //permanent: true,
+    );
     super.onInit();
   }
 
@@ -53,7 +63,7 @@ class BreakdownMaintenanceController extends GetxController {
   //       facilityList.indexWhere((facility) => facility?.name == facilityName);
   //   getJobList(facilityId, userId);
   // }
-   Future<void> createChecklist() async {
+  Future<void> createChecklist() async {
     Get.toNamed(
       Routes.jobList,
       
@@ -71,8 +81,8 @@ class BreakdownMaintenanceController extends GetxController {
   Future<void> newPermitList() async{
     Get.toNamed(
       Routes.new_Permit_List,
-      
+
     );
   }
-   
+
 }

@@ -11,7 +11,7 @@ class InventoryListContentWeb extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorValues.lightBlueishColor,
+      color: ColorValues.appBackGroundColor,
       child: DefaultTabController(
         length: 3,
         child: Column(children: [
@@ -22,15 +22,15 @@ class InventoryListContentWeb extends GetView<HomeController> {
               children: [
                 ActionButton(
                   icon: Icons.download,
-                  lable: 'exportAsset'.tr,
-                  onPress: () {},
-                  color: Colors.blue,
+                  label: 'exportAsset'.tr,
+                  onPressed: () {},
+                  color: ColorValues.appDarkBlueColor,
                 ),
                 Dimens.boxWidth10,
                 ActionButton(
                   icon: Icons.upload,
-                  lable: 'importAsset'.tr,
-                  onPress: () {
+                  label: 'importAsset'.tr,
+                  onPressed: () {
                     // var file = "assets/files/Fixed Asset Imports.xlsx";
                     // var bytes = File(file).readAsBytesSync();
                     // var excel = Excel.decodeBytes(bytes);
@@ -44,24 +44,28 @@ class InventoryListContentWeb extends GetView<HomeController> {
                     //   }
                     // }
                   },
-                  color: Colors.blue,
+                  color: ColorValues.appDarkBlueColor,
                 ),
                 Dimens.boxWidth10,
                 ActionButton(
                   icon: Icons.add,
-                  lable: 'addAsset'.tr,
-                  onPress: () async{
-                    // await Get.to(() => AddInventory());
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddInventory()));
-                    
+                  label: 'addAsset'.tr,
+                  onPressed: () {
+                    Get.to(() => AddInventory());
                   },
-                  color: Colors.blue,
+                  // lable: 'addAsset'.tr,
+                  // onPress: () async{
+                  //   // await Get.to(() => AddInventory());
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => AddInventory()));
+
+                  // },
+                  color: ColorValues.appDarkBlueColor,
                 ),
                 Dimens.boxWidth10,
                 ActionButton(
                   icon: Icons.close,
-                  lable: 'retireAsset'.tr,
-                  onPress: () async {
+                  label: 'retireAsset'.tr,
+                  onPressed: () async {
                     // ByteData data = await rootBundle
                     //     .load("assets/files/Fixed Asset Imports.xlsx");
                     // var bytes = data.buffer
@@ -77,7 +81,7 @@ class InventoryListContentWeb extends GetView<HomeController> {
                     //   }
                     // }
                   },
-                  color: Colors.red,
+                  color: ColorValues.appRedColor,
                 ),
               ],
             ),
@@ -115,7 +119,7 @@ class InventoryListContentWeb extends GetView<HomeController> {
                 margin: Dimens.edgeInsets16_16_0_0,
                 padding: Dimens.edgeInsets16_8_16_8,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: ColorValues.appLightBlueColor,
                 ),
                 child: Text(
                   'columnVisibility'.tr,
@@ -230,9 +234,10 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                                 BoxDecoration(
                                                               color: val.requirementStatus ==
                                                                       1
-                                                                  ? Colors.red
-                                                                  : Colors
-                                                                      .green,
+                                                                  ? ColorValues
+                                                                      .appRedColor
+                                                                  : ColorValues
+                                                                      .appGreenColor,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -262,8 +267,8 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                         children: [
                                                           Row(children: [
                                                             TableActionButton(
-                                                              color:
-                                                                  Colors.green,
+                                                              color: ColorValues
+                                                                  .appGreenColor,
                                                               icon: Icons
                                                                   .visibility,
                                                               label: 'View',
@@ -272,8 +277,8 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                             //),
 
                                                             TableActionButton(
-                                                              color:
-                                                                  Colors.blue,
+                                                              color: ColorValues
+                                                                  .appLightBlueColor,
                                                               icon: Icons.edit,
                                                               label: 'Edit',
                                                               onPress: () {},
@@ -281,7 +286,8 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                             //),
 
                                                             TableActionButton(
-                                                              color: Colors.red,
+                                                              color: ColorValues
+                                                                  .appRedColor,
                                                               icon:
                                                                   Icons.delete,
                                                               label: 'Delete',
@@ -290,7 +296,8 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                             //),
                                                           ]),
                                                           TableActionButton(
-                                                            color: Colors.green,
+                                                            color: ColorValues
+                                                                .appGreenColor,
                                                             icon: Icons
                                                                 .visibility,
                                                             label:
@@ -298,7 +305,8 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                             onPress: () {},
                                                           ),
                                                           TableActionButton(
-                                                            color: Colors.red,
+                                                            color: ColorValues
+                                                                .appRedColor,
                                                             icon: Icons
                                                                 .visibility,
                                                             label:

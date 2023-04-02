@@ -353,12 +353,13 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                                                         ActionButton(
                                                                       icon: Icons
                                                                           .add,
-                                                                      lable:
+                                                                      label:
                                                                           'Add',
-                                                                      onPress:
-                                                                          () async {},
+                                                                      // onPress:
+                                                                      //     () async {},
                                                                       color: Colors
-                                                                          .blue,
+                                                                          .blue, 
+                                                                          onPressed: () {  },
                                                                     ),
                                                                   ),
                                                                   Dimens
@@ -428,12 +429,13 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                                                           ActionButton(
                                                                             icon:
                                                                                 Icons.remove,
-                                                                            lable:
+                                                                            label:
                                                                                 'Delete',
-                                                                            onPress:
-                                                                                () async {},
+                                                                            // onPress:
+                                                                            //     () async {},
                                                                             color:
-                                                                                Colors.red,
+                                                                                Colors.red, 
+                                                                                onPressed: () {  },
                                                                           ),
                                                                         ],
                                                                       )
@@ -566,10 +568,12 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                   width: 100,
                                   color: Colors.black,
                                   child: ActionButton(
-                                    lable: 'Add',
-                                    onPress: () {},
+                                    label: 'Add',
+                                    // onPress: () {},
                                     icon: Icons.add,
-                                    color: Colors.blue,
+                                    color: Colors.blue, 
+                                    onPressed: () {  }, 
+                                    
                                   ),
                                 )
                               ],
@@ -586,8 +590,8 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                   width: 100,
                                   color: Colors.black,
                                   child: ActionButton(
-                                    lable: 'Add',
-                                    onPress: () {},
+                                    label: 'Add',
+                                    onPressed: () {},
                                     icon: Icons.add,
                                     color: Colors.blue,
                                   ),
@@ -697,8 +701,8 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                       Text('Calibration cirtificate'),
                                       Dimens.boxWidth10,
                                       ActionButton(
-                                        lable: 'Upload cirtification file',
-                                        onPress: () {},
+                                        label: 'Upload cirtification file',
+                                        onPressed: () {},
                                         icon: Icons.file_upload_outlined,
                                         color: Colors.blue,
                                       )
