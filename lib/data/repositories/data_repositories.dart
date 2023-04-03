@@ -345,6 +345,19 @@ class DataRepository extends DomainRepository {
       );
 
   ///
+  ///
+  Future<ResponseModel> savePmMapping({
+    required String auth,
+    pmJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.savePmMapping(
+        auth: auth,
+        pmJsonString: pmJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
   Future<ResponseModel> createCheckList({
     auth,
     bool? isLoading,
