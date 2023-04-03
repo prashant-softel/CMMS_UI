@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/pm_mapping/pm_mapping_presenter.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/inventory_category_model.dart';
@@ -9,6 +10,7 @@ import '../../domain/models/pm_mapping_list_model.dart';
 import '../../domain/models/preventive_checklist_model.dart';
 import '../../domain/models/save_pm_mapping_model.dart';
 import '../home/home_controller.dart';
+import '../theme/color_values.dart';
 
 class PmMappingController extends GetxController {
   PmMappingController(
@@ -114,7 +116,6 @@ class PmMappingController extends GetxController {
       checklist_map_list.add(ChecklistMapList(
           category_id: category_id, status: 0, checklist_ids: checklist_ids));
     });
-    // return;
 
     SavePmModel savePmModel = SavePmModel(
       facilityId: facilityId,
@@ -122,12 +123,47 @@ class PmMappingController extends GetxController {
     );
     var pmJsonString = savePmModel.toJson();
     print({"redddd", pmJsonString});
+    if (checklist_map_list != []) {
+      Map<String, dynamic>? responsePmMapCreated =
+          await pmMappingPresenter.savePmMapping(
+        pmJsonString: pmJsonString,
+        isLoading: true,
+      );
+      if (responsePmMapCreated != null) {}
+    }
+  }
 
-    Map<String, dynamic>? responsePmMapCreated =
-        await pmMappingPresenter.savePmMapping(
-      pmJsonString: pmJsonString,
-      isLoading: true,
+  void isSuccessDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('CheckList Mapping'),
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color.fromARGB(255, 7, 161, 17),
+              border: Border.all(
+                color: Color.fromARGB(255, 7, 161, 17),
+                width: 1,
+              ),
+            ),
+            child: Icon(Icons.check, size: 35, color: ColorValues.whiteColor),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Check List Mapped  Successfully ....",
+              style: TextStyle(fontSize: 16, color: ColorValues.blackColor))
+        ]),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ),
     );
-    if (responsePmMapCreated != null) {}
   }
 }
