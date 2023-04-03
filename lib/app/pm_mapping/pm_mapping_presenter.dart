@@ -20,6 +20,7 @@ class PmMappingPresenter {
       await pmMappingUsecase.getInventoryCategoryList(
         isLoading: isLoading ?? false,
       );
+  //
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList({
     int? facilityId,
     int? type,
@@ -28,6 +29,16 @@ class PmMappingPresenter {
       await pmMappingUsecase.getPreventiveCheckList(
         facilityId: facilityId ?? 0,
         type: type,
-        isLoading: isLoading ?? false,
+        isLoading: false,
       );
+  //
+  Future<Map<String, dynamic>> savePmMapping({
+    pmJsonString,
+    required bool isLoading,
+  }) async {
+    return pmMappingUsecase.savePmMapping(
+      pmJsonString: pmJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

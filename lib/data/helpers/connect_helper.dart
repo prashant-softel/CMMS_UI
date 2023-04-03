@@ -408,6 +408,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> savePmMapping({
+    required String auth,
+    pmJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/CreateCheckListMap',
+      Request.post,
+      pmJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,

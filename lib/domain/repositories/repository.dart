@@ -686,6 +686,37 @@ class Repository {
     }
   }
 
+  ///
+  Future<Map<String, dynamic>> savePmMapping(
+    pmJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecureValue(LocalKeys.authToken);
+      final res = await _dataRepository.savePmMapping(
+        auth: auth,
+        pmJsonString: pmJsonString,
+        isLoading: isLoading ?? false,
+      );
+      print('SaveData: ${res.data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
+    }
+  }
+
+  ///
   Future<AccessListModel?> getUserAccessList({
     required String auth,
     required String userId,
@@ -749,7 +780,7 @@ class Repository {
         auth: auth,
         facilityId: facilityId ?? 0,
         type: type,
-        isLoading: isLoading ?? false,
+        isLoading: false,
       );
 
       if (!res.hasError) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/pm_mapping/pm_mapping_presenter.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/pm_mapping_list_model.dart';
 import '../../domain/models/preventive_checklist_model.dart';
+import '../../domain/models/save_pm_mapping_model.dart';
 import '../home/home_controller.dart';
 
 class PmMappingController extends GetxController {
@@ -21,14 +23,16 @@ class PmMappingController extends GetxController {
   RxList<PmMappingListModel?> mappingList = <PmMappingListModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
+  RxList<String?> equipmentCategoryNameList = <String>[].obs;
   RxList<int> selectedchecklistIdList = <int>[].obs;
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
   RxList<PreventiveCheckListModel?> selectedChecklistList =
       <PreventiveCheckListModel>[].obs;
+  Map<int, dynamic> checklist_map = {};
   @override
   void onInit() async {
-    getInventoryCategoryList();
+    // getInventoryCategoryList();
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -53,9 +57,16 @@ class PmMappingController extends GetxController {
     );
 
     if (list != null) {
+      equipmentCategoryNameList.clear();
+      checkList.clear();
+      Set<String> equipmentCategoryNameSet = {};
       for (var _checkList in list) {
-        checkList.add(_checkList);
+        if (_checkList?.category_name != null) {
+          equipmentCategoryNameSet.add(_checkList?.category_name ?? "");
+          checkList.add(_checkList);
+        }
       }
+      equipmentCategoryNameList.addAll(equipmentCategoryNameSet.toList());
     }
   }
 
@@ -69,14 +80,11 @@ class PmMappingController extends GetxController {
     }
   }
 
-  Future<void> getPmMappingList(
-    type,
-  ) async {
+  Future<void> getPmMappingList(facilityId) async {
     final list = await pmMappingPresenter.getPmMappingList(
         facilityId: facilityId, isLoading: true);
 
     if (list != null) {
-      // print({"listinh", list});
       mappingList.clear();
 
       for (var _mappingList in list) {
@@ -86,14 +94,40 @@ class PmMappingController extends GetxController {
   }
 
   void checkListSelected(_selectedCheckList) {
+    print({"_selectedCheckList": _selectedCheckList});
     selectedChecklistList.value =
         _selectedCheckList.cast<PreventiveCheckListModel>();
     selectedchecklistIdList.value = <int>[];
+    late int cat_id = 0;
     for (var _selectedChecklist in _selectedCheckList) {
       selectedchecklistIdList.add(_selectedChecklist.id);
+      cat_id = _selectedChecklist?.category_id;
     }
+    checklist_map[cat_id] = selectedchecklistIdList;
+  }
 
-    // String lststrWorkTypeIds = selectedChecklistList.join(', ').toString();
-    // getToolsRequiredToWorkTypeList(lststrWorkTypeIds);
+  void savePmMapping() async {
+    print({"checklist_map": checklist_map});
+    late List<ChecklistMapList> checklist_map_list = [];
+
+    checklist_map.forEach((category_id, checklist_ids) {
+      checklist_map_list.add(ChecklistMapList(
+          category_id: category_id, status: 0, checklist_ids: checklist_ids));
+    });
+    // return;
+
+    SavePmModel savePmModel = SavePmModel(
+      facilityId: facilityId,
+      checklist_map_list: checklist_map_list,
+    );
+    var pmJsonString = savePmModel.toJson();
+    print({"redddd", pmJsonString});
+
+    Map<String, dynamic>? responsePmMapCreated =
+        await pmMappingPresenter.savePmMapping(
+      pmJsonString: pmJsonString,
+      isLoading: true,
+    );
+    if (responsePmMapCreated != null) {}
   }
 }

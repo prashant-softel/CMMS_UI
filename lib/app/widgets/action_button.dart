@@ -6,11 +6,11 @@ class ActionButton extends StatelessWidget {
     Key? key,
     required this.lable,
     required this.onPress,
-    required this.icon,
+    this.icon,
     required this.color,
   }) : super(key: key);
   final String lable;
-  final IconData icon;
+  final IconData? icon;
   final Function() onPress;
   final Color color;
 

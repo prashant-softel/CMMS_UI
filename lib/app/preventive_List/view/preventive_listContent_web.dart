@@ -369,7 +369,7 @@ class PreventiveChecklistListContentWeb
                                 Container(
                                   width:
                                       (MediaQuery.of(context).size.width * .1) -
-                                          70,
+                                          60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -399,7 +399,7 @@ class PreventiveChecklistListContentWeb
                                 Container(
                                   width:
                                       (MediaQuery.of(context).size.width * .2) -
-                                          135,
+                                          100,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -543,74 +543,73 @@ class PreventiveChecklistListContentWeb
                                       }).toList(),
                                     ),
                                   ),
-
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 25),
-                            //   child: ValueListenableBuilder(
-                            //       valueListenable:
-                            //           controller.paginationController,
-                            //       builder: (context, value, child) {
-                            //         return Row(children: [
-                            //           Text(
-                            //               "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                            //           Row(children: [
-                            //             IconButton(
-                            //               onPressed: controller
-                            //                           .paginationController
-                            //                           .currentPage <=
-                            //                       1
-                            //                   ? null
-                            //                   : () {
-                            //                       controller
-                            //                           .paginationController
-                            //                           .previous();
-                            //                     },
-                            //               iconSize: 20,
-                            //               splashRadius: 20,
-                            //               icon: Icon(
-                            //                 Icons.arrow_back_ios_new_rounded,
-                            //                 color: controller
-                            //                             .paginationController
-                            //                             .currentPage <=
-                            //                         1
-                            //                     ? Colors.black26
-                            //                     : Theme.of(context)
-                            //                         .primaryColor,
-                            //               ),
-                            //             ),
-                            //             IconButton(
-                            //               onPressed: controller
-                            //                           .paginationController
-                            //                           .currentPage >=
-                            //                       controller
-                            //                           .paginationController
-                            //                           .pageCount
-                            //                   ? null
-                            //                   : () {
-                            //                       controller
-                            //                           .paginationController
-                            //                           .next();
-                            //                     },
-                            //               iconSize: 20,
-                            //               splashRadius: 20,
-                            //               icon: Icon(
-                            //                 Icons.arrow_forward_ios_rounded,
-                            //                 color: controller
-                            //                             .paginationController
-                            //                             .currentPage >=
-                            //                         controller
-                            //                             .paginationController
-                            //                             .pageCount
-                            //                     ? Colors.black26
-                            //                     : Theme.of(context)
-                            //                         .primaryColor,
-                            //               ),
-                            //             ),
-                            //           ]),
-                            //         ]);
-                            //       }),
-                            // ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              child: ValueListenableBuilder(
+                                  valueListenable:
+                                      controller.paginationController,
+                                  builder: (context, value, child) {
+                                    return Row(children: [
+                                      Text(
+                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                      Row(children: [
+                                        IconButton(
+                                          onPressed: controller
+                                                      .paginationController
+                                                      .currentPage <=
+                                                  1
+                                              ? null
+                                              : () {
+                                                  controller
+                                                      .paginationController
+                                                      .previous();
+                                                },
+                                          iconSize: 20,
+                                          splashRadius: 20,
+                                          icon: Icon(
+                                            Icons.arrow_back_ios_new_rounded,
+                                            color: controller
+                                                        .paginationController
+                                                        .currentPage <=
+                                                    1
+                                                ? Colors.black26
+                                                : Theme.of(context)
+                                                    .primaryColor,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: controller
+                                                      .paginationController
+                                                      .currentPage >=
+                                                  controller
+                                                      .paginationController
+                                                      .pageCount
+                                              ? null
+                                              : () {
+                                                  controller
+                                                      .paginationController
+                                                      .next();
+                                                },
+                                          iconSize: 20,
+                                          splashRadius: 20,
+                                          icon: Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: controller
+                                                        .paginationController
+                                                        .currentPage >=
+                                                    controller
+                                                        .paginationController
+                                                        .pageCount
+                                                ? Colors.black26
+                                                : Theme.of(context)
+                                                    .primaryColor,
+                                          ),
+                                        ),
+                                      ]),
+                                    ]);
+                                  }),
+                            ),
                           ],
                         ),
                       ),

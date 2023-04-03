@@ -352,7 +352,7 @@ class PreventiveCheckPointContentWeb
                                   height: 40,
                                   width:
                                       (MediaQuery.of(context).size.width * .1) -
-                                          70,
+                                          60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -385,7 +385,7 @@ class PreventiveCheckPointContentWeb
                                   height: 40,
                                   width:
                                       (MediaQuery.of(context).size.width * .2) -
-                                          135,
+                                          100,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,

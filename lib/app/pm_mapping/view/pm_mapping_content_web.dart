@@ -1,4 +1,5 @@
 import 'package:cmms/app/pm_mapping/pm_mapping_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,8 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
+import '../../widgets/action_button.dart';
+import '../../widgets/table_action_button.dart';
 
 class PmMappingContentWeb extends GetView<PmMappingController> {
   PmMappingContentWeb({super.key});
@@ -55,11 +58,18 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
             ],
           ),
         ),
+        Container(
+          margin: EdgeInsets.only(left: 20, top: 25),
+          child: Text(
+            "Check List Mapping",
+            style: Styles.blackBold16,
+          ),
+        ),
         Expanded(
           child: Container(
               width: MediaQuery.of(context).size.width,
               color: Color.fromARGB(255, 244, 248, 250),
-              margin: EdgeInsets.only(top: 20, right: 30, left: 20, bottom: 30),
+              margin: EdgeInsets.only(top: 10, right: 30, left: 20, bottom: 30),
               child: Obx(
                 () => DataTable2(
                   headingRowColor: MaterialStateColor.resolveWith((states) {
@@ -90,22 +100,21 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                             ))),
                   ],
                   rows: List.generate(
-                    controller.equipmentCategoryList.length >=
-                            controller.checkList.length
-                        ? controller.equipmentCategoryList.length
+                    controller.checkList.length >= controller.checkList.length
+                        ? controller.equipmentCategoryNameList.length
                         : controller.checkList.length,
                     (index) {
                       return DataRow(cells: [
                         DataCell(
-                          index < controller.equipmentCategoryList.length
+                          index < controller.equipmentCategoryNameList.length
                               ? Center(
                                   child: Text(controller
-                                      .equipmentCategoryList[index]!.name),
-                                )
+                                          .equipmentCategoryNameList[index] ??
+                                      ""))
                               : Container(),
                         ),
                         DataCell(
-                          index < controller.equipmentCategoryList.length
+                          index < controller.equipmentCategoryNameList.length
                               ? SingleChildScrollView(
                                   scrollDirection: Axis.vertical,
                                   child: Container(
@@ -120,14 +129,20 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                                         Icons.arrow_drop_down,
                                         color: ColorValues.whiteColor,
                                       ),
-                                      items: controller.checkList
+                                      items: (controller.checkList.where(
+                                              (element) =>
+                                                  element?.category_name ==
+                                                  controller
+                                                          .equipmentCategoryNameList[
+                                                      index]))
                                           .map((e) => MultiSelectItem(
-                                              e, e?.checklist_number ?? ''))
+                                              e, e?.id.toString() ?? ''))
                                           .toList(),
                                       searchable: true,
                                       onConfirm: (selectedOptionsList) => {
                                         controller.checkListSelected(
-                                            selectedOptionsList)
+                                          selectedOptionsList,
+                                        )
                                       },
                                       buttonText: null,
                                       chipDisplay: MultiSelectChipDisplay(
@@ -143,8 +158,50 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                   ),
                 ),
               )),
-          //),
         ),
+        Container(
+          margin: EdgeInsets.only(bottom: 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 35,
+                width: (MediaQuery.of(context).size.width * .1) - 50,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.redColor,
+                  text: "Cancel",
+                  onPressed: () {},
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Container(
+                height: 35,
+                width: (MediaQuery.of(context).size.width * .2) - 100,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.greenColor,
+                  text: 'Link and save',
+                  onPressed: () {
+                    controller.savePmMapping();
+                  },
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Container(
+                height: 35,
+                width: (MediaQuery.of(context).size.width * .1) - 70,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.appDarkBlueColor,
+                  text: "Print",
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
+        )
       ]),
     );
   }

@@ -36,4 +36,12 @@ class PmMappingUsecase {
         facilityId,
         isLoading,
       );
+  Future<Map<String, dynamic>> savePmMapping({
+    pmJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.savePmMapping(
+        pmJsonString,
+        isLoading,
+      );
 }
