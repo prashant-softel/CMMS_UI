@@ -115,38 +115,44 @@ class PreventiveChecklistListContentWeb
                                     children: [
                                       CustomRichText(
                                           title: 'CheckList Number: '),
-                                      Container(
-                                          width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2) -
-                                              30,
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2) -
+                                                30,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: LoginCustomTextfield(
-                                            textController:
-                                                controller.checklistNumberCtrlr,
-                                          )),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              textController: controller
+                                                  .checklistNumberCtrlr,
+                                            )),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -158,27 +164,27 @@ class PreventiveChecklistListContentWeb
                                     children: [
                                       CustomRichText(
                                           title: 'Equipment Category: '),
-                                      Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .2) -
-                                                35,
-                                        child: DropdownWidget(
-                                          controller: controller,
-                                          dropdownList:
-                                              controller.equipmentCategoryList,
-                                          isValueSelected: controller
-                                              .isSelectedequipment.value,
-                                          selectedValue: controller
-                                              .selectedequipment.value,
-                                          onValueChanged:
-                                              controller.onValueChanged,
+                                      Expanded(
+                                        child: Container(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .2) -
+                                              35,
+                                          child: DropdownWidget(
+                                            controller: controller,
+                                            dropdownList: controller
+                                                .equipmentCategoryList,
+                                            isValueSelected: controller
+                                                .isSelectedequipment.value,
+                                            selectedValue: controller
+                                                .selectedequipment.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
                                         ),
                                       ),
                                     ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -188,21 +194,27 @@ class PreventiveChecklistListContentWeb
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       CustomRichText(title: 'Frequency: '),
-                                      Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .2) -
-                                                30,
-                                        child: DropdownWidget(
-                                          controller: controller,
-                                          dropdownList:
-                                              controller.frequencyList,
-                                          isValueSelected: controller
-                                              .isSelectedfrequency.value,
-                                          selectedValue: controller
-                                              .selectedfrequency.value,
-                                          onValueChanged:
-                                              controller.onValueChanged,
+                                      SizedBox(
+                                        width: 64,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .2) -
+                                              30,
+                                          child: DropdownWidget(
+                                            controller: controller,
+                                            dropdownList:
+                                                controller.frequencyList,
+                                            isValueSelected: controller
+                                                .isSelectedfrequency.value,
+                                            selectedValue: controller
+                                                .selectedfrequency.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -218,38 +230,44 @@ class PreventiveChecklistListContentWeb
                                         "Manpower: ",
                                         style: Styles.blackBold16,
                                       ),
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                      SizedBox(
+                                        width: 60,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2) -
-                                              30,
-                                          child: LoginCustomTextfield(
-                                            textController:
-                                                controller.manpowerCtrlr,
-                                          )),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2) -
+                                                30,
+                                            child: LoginCustomTextfield(
+                                              textController:
+                                                  controller.manpowerCtrlr,
+                                            )),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -263,38 +281,44 @@ class PreventiveChecklistListContentWeb
                                         "Duration(in Min.): ",
                                         style: Styles.blackBold16,
                                       ),
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2) -
-                                              30,
-                                          child: LoginCustomTextfield(
-                                            textController:
-                                                controller.durationCtrlr,
-                                          )),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2) -
+                                                45,
+                                            child: LoginCustomTextfield(
+                                              textController:
+                                                  controller.durationCtrlr,
+                                            )),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -319,7 +343,7 @@ class PreventiveChecklistListContentWeb
                               Container(
                                   width:
                                       (MediaQuery.of(context).size.width * .2) -
-                                          120,
+                                          60,
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 102, 249, 132),
@@ -369,7 +393,7 @@ class PreventiveChecklistListContentWeb
                                 Container(
                                   width:
                                       (MediaQuery.of(context).size.width * .1) -
-                                          70,
+                                          60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
@@ -399,7 +423,7 @@ class PreventiveChecklistListContentWeb
                                 Container(
                                   width:
                                       (MediaQuery.of(context).size.width * .2) -
-                                          135,
+                                          100,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
                                       backgroundColor: Colors.blue,
