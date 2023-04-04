@@ -7,13 +7,9 @@ import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../widgets/custom_divider.dart';
 import '../../../widgets/custom_elevated_button.dart';
-import '../../../widgets/file_upload_details_widget.dart';
-import '../../../widgets/file_upload_with_dropzone_widget.dart';
-import '../../../widgets/history_table_widget.dart';
 import '../../job_card_details_controller.dart';
 import '../widgets/employee_table_widget.dart';
 import '../widgets/isolated_assets_widget.dart';
-import '../widgets/loto_applied_assets_widget.dart';
 import '../widgets/transposed_table.dart';
 
 class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
@@ -110,19 +106,19 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                 // if (controller.lotoAppliedAssets != null &&
                 //     controller.lotoAppliedAssets!.isNotEmpty)
                 Container(
-                  margin: Dimens.edgeInsets20,
-                  constraints: BoxConstraints(
-                    maxHeight: (controller.lotoAppliedAssets?.length ?? 0) > 0
-                        ? (controller.lotoAppliedAssets?.length ?? 0) *
-                            (Get.height * 0.1)
-                        : Get.height * 0.06,
-                    minHeight: (controller.lotoAppliedAssets?.length ?? 0) > 0
-                        ? (controller.lotoAppliedAssets?.length ?? 0) *
-                            (Get.height * 0.1)
-                        : Get.height * 0.06,
-                  ),
-                  child: Expanded(child: LotoAppliedAssetsWidget()),
-                ),
+                    // margin: Dimens.edgeInsets20,
+                    // constraints: BoxConstraints(
+                    //   maxHeight: (controller.lotoAppliedAssets?.length ?? 0) > 0
+                    //       ? (controller.lotoAppliedAssets?.length ?? 0) *
+                    //           (Get.height * 0.1)
+                    //       : Get.height * 0.06,
+                    //   minHeight: (controller.lotoAppliedAssets?.length ?? 0) > 0
+                    //       ? (controller.lotoAppliedAssets?.length ?? 0) *
+                    //           (Get.height * 0.1)
+                    //       : Get.height * 0.06,
+                    // ),
+                    // child: Expanded(child: LotoAppliedAssetsWidget()),
+                    ),
                 // else
                 //   Dimens.boxHeight0,
                 Dimens.boxHeight20,
@@ -159,12 +155,12 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   width: Get.width,
                   child: Row(//
                       children: [
-                    Expanded(
-                      flex: 2,
-                      child: FileUploadWidgetWithDropzone(),
-                    ),
-                    Dimens.boxWidth10,
-                    Expanded(flex: 8, child: FileUploadDetailsWidget()),
+                    // Expanded(
+                    //   flex: 2,
+                    //   child: FileUploadWidgetWithDropzone(),
+                    // ),
+                    // Dimens.boxWidth10,
+                    // Expanded(flex: 8, child: FileUploadDetailsWidget()),
                   ]),
                 ),
 
@@ -178,15 +174,15 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                     ? //
 
                     Container(
-                        margin: Dimens.edgeInsets20,
-                        constraints: BoxConstraints(
-                          maxHeight: 500,
-                          minHeight: 100,
-                        ),
-                        child: HistoryTableWidget(
-                          historyList: controller.historyList,
-                        ),
-                      )
+                        // margin: Dimens.edgeInsets20,
+                        // constraints: BoxConstraints(
+                        //   maxHeight: 500,
+                        //   minHeight: 100,
+                        // ),
+                        // child: HistoryTableWidget(
+                        //   historyList: controller.historyList,
+                        // ),
+                        )
                     //)
                     : //
                     Dimens.box0,

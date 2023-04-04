@@ -81,7 +81,7 @@ class JobListContentWeb extends GetView<JobListController> {
                             ScrollableTableView(
                           paginationController: controller.paginationController,
                           columns: [
-                            'id',
+                            //'id',
                             'facilityName',
                             'jobDate',
                             'equipmentCat',

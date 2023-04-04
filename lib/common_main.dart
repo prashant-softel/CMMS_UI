@@ -182,8 +182,8 @@ Future<void> initServices() async {
     //permanent: true,
   );
 
-  Get.lazyPut(
-    () => JobListController(
+  Get.put(
+    JobListController(
       Get.put(
         JobListPresenter(
           Get.put(JobListUsecase(Get.find())),
@@ -191,7 +191,7 @@ Future<void> initServices() async {
         permanent: true,
       ),
     ),
-    //permanent: true,
+    permanent: true,
   );
 
   /// Services
