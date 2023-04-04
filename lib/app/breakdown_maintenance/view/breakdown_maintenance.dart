@@ -1,15 +1,14 @@
 import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // import '../../navigators/app_pages.dart';
 
-class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController> {
+class BreakdownMaintenanceScreen
+    extends GetView<BreakdownMaintenanceController> {
   BreakdownMaintenanceScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +21,10 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, 
-          children: [
-            SizedBox(height: 40,),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(
+            height: 40,
+          ),
           if (Responsive.isMobile(context))
             Obx(
               () => Container(
@@ -39,7 +38,7 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
                       padding: const EdgeInsets.all(3.0),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                           isExpanded: true,
+                          isExpanded: true,
                           value: controller.selectedFacility.value,
                           icon: const Icon(Icons.keyboard_arrow_down_outlined),
                           elevation: 7,
@@ -77,7 +76,7 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
           GridView.count(
             shrinkWrap: true,
             primary: false,
-            padding: const EdgeInsets.all(16),
+            padding: Dimens.edgeInsets15,
             crossAxisSpacing: 6,
             mainAxisSpacing: 6,
             crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
@@ -85,24 +84,22 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
                 ? (itemWidth / itemHeight)
                 : (itemWidth / itemHeightWeb),
             children: <Widget>[
-              _priventiveList(
-                  tittle: "Job List",
-                  ontap: () {
-                    controller.createChecklist();
+              createContentTile(
+                  title: "Job List",
+                  onTap: () {
+                    controller.goToJobListScreen();
                   }),
-              _priventiveList(
-                tittle: "New Permit",
-                ontap: (){
-                  controller.createNewPermit();
-                }
-                ),
-              _priventiveList(
-                tittle: "Permit List",
-                ontap: (){
-                  controller.newPermitList();
-                }
-                ),
-              _priventiveList(tittle: "Job Card List"),
+              createContentTile(
+                  title: "New Permit",
+                  onTap: () {
+                    controller.createNewPermit();
+                  }),
+              createContentTile(
+                  title: "Permit List",
+                  onTap: () {
+                    controller.newPermitList();
+                  }),
+              createContentTile(title: "Job Card List"),
               // _priventiveList(tittle: "PM Schedule View"),
               // _priventiveList(tittle: "PM Report"),
               // _priventiveList(tittle: "PM Report"),
@@ -114,12 +111,12 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
     );
   }
 
-  _priventiveList({required String tittle, Function()? ontap}) {
+  createContentTile({required String title, Function()? onTap}) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 28, 187, 245),
+          color: ColorValues.appLightBlueColor,
           borderRadius: BorderRadius.circular(2),
         ),
         padding: EdgeInsets.all(9),
@@ -128,7 +125,7 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
           children: [
             Expanded(
               child: Text(
-                tittle,
+                title,
                 style: TextStyle(
                     color: ColorValues.whiteColor,
                     fontSize: 16,
@@ -149,7 +146,7 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
               child: Icon(
                 Icons.format_list_bulleted,
                 size: 30,
-                color: Color.fromARGB(255, 28, 187, 245),
+                color: ColorValues.appLightBlueColor,
               ),
             ),
           ],
