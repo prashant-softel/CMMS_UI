@@ -26,6 +26,7 @@ import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
+import '../models/pm_mapping_list_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 
@@ -1216,6 +1217,68 @@ class Repository {
       }
     } catch (error) {
       log(error.toString());
+    }
+  }
+
+  Future<List<PmMappingListModel?>?> getPmMappingList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmMappingList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      print({"restt", res.data});
+      if (!res.hasError) {
+        final jsonPmMappingListModels = jsonDecode(res.data);
+        print(res.data);
+        final List<PmMappingListModel> _pmMappingListModel =
+            jsonPmMappingListModels
+                .map<PmMappingListModel>((m) =>
+                    PmMappingListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _pmMappingListModel;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> savePmMapping(
+    pmJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.savePmMapping(
+        auth: auth,
+        pmJsonString: pmJsonString,
+        isLoading: isLoading ?? false,
+      );
+      print('SaveData: ${res.data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
     }
   }
 
