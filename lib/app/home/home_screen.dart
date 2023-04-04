@@ -290,12 +290,14 @@ class CustomTextField extends StatelessWidget {
     this.textController,
     this.readOnly = false,
     this.onTap,
+    this.suffixIcon, 
   }) : super(key: key);
 
   final String? label;
   final int? maxLine;
   final double? width;
   final bool readOnly;
+  final Icon? suffixIcon;
   final Function()? onTap;
 
   final TextEditingController? textController;
@@ -328,6 +330,7 @@ class CustomTextField extends StatelessWidget {
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),
                   ),
+                  suffixIcon: suffixIcon,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),

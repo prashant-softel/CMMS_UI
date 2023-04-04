@@ -1036,6 +1036,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           ),
         ),
       ),
+      
       Dimens.boxHeight20,
     ]);
   }

@@ -15,9 +15,19 @@ class HomeController extends GetxController {
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
 
+///
+  var startDateTimeCtrlrWeb = TextEditingController();
+  Rx<DateTime> selectedDateTimeWeb = DateTime.now().obs;
+
   ///
-  var startDateTimeCtrlr = TextEditingController();
-  Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
+ var startDateTimeCtrlr2 = TextEditingController();
+  Rx<DateTime> selectedBreakdownTime2 = DateTime.now().obs;
+
+
+ ///
+ var startDateTimeCtrlr3 = TextEditingController();
+  Rx<DateTime> selectedBreakdownTime3 = DateTime.now().obs;
+
 
   
   var inventoryList = <InventoryModel>[];

@@ -503,6 +503,7 @@ class Repository {
         auth: auth,
         isLoading: isLoading,
       );
+      print('Facilitydata5: ${res.data}');
 
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);

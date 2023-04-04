@@ -259,6 +259,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Facility List: ${response}');
     try {
       response = await apiWrapper.makeRequest(
         'CMMS/GetFacilityList',
@@ -268,6 +269,7 @@ class ConnectHelper {
         {
           'Authorization': 'Bearer $auth',
         },
+        
       );
     } catch (error) {
       print(error);
