@@ -15,7 +15,6 @@ import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.d
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
