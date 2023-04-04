@@ -2,11 +2,7 @@ import 'dart:convert';
 
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
-import 'package:cmms/app/widgets/job_saved_dialog.dart';
-import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
-import 'package:cmms/domain/models/add_job_model.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -14,23 +10,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/app/new_permit/new_permit_presenter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 
 class NewPermitController extends GetxController {
- NewPermitController(
-    this.permitPresenter,
-    this.jobListPresenter
-  );
+  NewPermitController(this.permitPresenter, this.jobListPresenter);
 
-  
   // PreventivePresenter preventivePresenter;
-
 
   int? selectedFacilityId = 0;
   int selectedTypePermitId = 0;
@@ -42,13 +31,6 @@ class NewPermitController extends GetxController {
   Rx<bool> isFormInvalid = false.obs;
   int selectedFacility_id = 0;
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
-
-
-
-
-
-
-
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
@@ -67,8 +49,6 @@ class NewPermitController extends GetxController {
   Rx<String> selectedStartDate = ''.obs;
   Rx<bool> isStartdate = true.obs;
   Rx<bool> isEnddate = true.obs;
-
-
 
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
@@ -96,9 +76,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
 
-
-
-    @override
+  @override
   void onInit() async {
     //homePresenter.generateToken();
     //  Future.delayed(Duration(seconds: 1), () {
@@ -108,18 +86,16 @@ class NewPermitController extends GetxController {
     await getFacilitiesLists();
     await getTypePermitList();
 
-     
     //});
 
     super.onInit();
   }
 
-
   Future<void> getFacilitiesLists() async {
     facilityList.value = <FacilityModel>[];
     blockList.value = <BlockModel>[];
     final _facilityList = await jobListPresenter.getFacilityList();
-     selectedFacilityId = Get.arguments;
+    selectedFacilityId = Get.arguments;
     if (_facilityList != null) {
       facilityList.value = _facilityList;
 
@@ -140,8 +116,7 @@ class NewPermitController extends GetxController {
   }
 
   Future<void> getAssignedToList() async {
-    final _assignedToList =
-        await permitPresenter.getAssignedToList();
+    final _assignedToList = await permitPresenter.getAssignedToList();
 
     if (_assignedToList != null) {
       for (var _assignedTo in _assignedToList) {
@@ -151,8 +126,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-
-   void onValueChanged(dynamic list, dynamic value) {
+  void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -215,9 +189,10 @@ class NewPermitController extends GetxController {
           selectedAssignedTo.value = value;
         }
         break;
-         case RxList<TypePermitModel>:
+      case RxList<TypePermitModel>:
         {
-          int permitTypeIndex = typePermitList.indexWhere((x) => x?.name == value);
+          int permitTypeIndex =
+              typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = facilityList[permitTypeIndex]?.id ?? 0;
           if (selectedTypePermitId != 0) {
             isTypePermitSelected.value = true;
@@ -234,7 +209,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-Future<void> getBlocksList(int _facilityId) async {
+  Future<void> getBlocksList(int _facilityId) async {
     blockList.value = <BlockModel>[];
     final _blockList =
         await permitPresenter.getBlocksList(facilityId: _facilityId);
@@ -302,9 +277,8 @@ Future<void> getBlocksList(int _facilityId) async {
     if (validTillTimeCtrlr.text == '') {
       Fluttertoast.showToast(msg: 'End date Field cannot be empty');
     }
-    if(selectedTypePermit.value == ''){
+    if (selectedTypePermit.value == '') {
       isTypePermitSelected.value = false;
-
     }
     if (jobDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
@@ -334,8 +308,6 @@ Future<void> getBlocksList(int _facilityId) async {
       // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
       // List<LotoList> loto_list = <LotoList>[];
 
-
-
       // for (var _selectedWorkArea in selectedWorkAreaList) {
       //   var json = '{"asset_id": ${_selectedWorkArea?.id},'
       //       '"category_ids": ${_selectedWorkArea?.categoryId}}';
@@ -346,7 +318,6 @@ Future<void> getBlocksList(int _facilityId) async {
       //   // safety_question_list.add(_safetyQuestionList as Safetyquestionlist);
       //   // CreatePermitModel _lotoList = addCreatePermitModelFromJson(json);
       //   // loto_list.add(_lotoList as LotoList);
-        
 
       //   // SafetyQuestionList _safetyQuestionList = addSafetyQuestionListFromJson(json);
       //   // safety_question_list.add(_safetyQuestionList);
@@ -355,35 +326,35 @@ Future<void> getBlocksList(int _facilityId) async {
       CreatePermitModel createPermitModel = CreatePermitModel(
         facility_id: 0,
         blockId: selectedBlockId,
-        description: _description, 
-        approver_id: 0, 
-        category_ids: [], 
-        block_ids: [], 
-        employee_list: [], 
+        description: _description,
+        approver_id: 0,
+        category_ids: [],
+        block_ids: [],
+        employee_list: [],
         start_datetime: "2022-12-26",
-        end_datetime: "2022-12-27", 
-        is_isolation_required: true, 
-        isolated_category_ids: [], 
-        issuer_id: 0, 
-        lotoId: 0, 
-        safety_question_list: [], 
-        sop_type_id: 0, 
-        typeId: 0, 
-        user_id: 2, 
-        work_type_id: 0, 
-        Loto_list: [], 
+        end_datetime: "2022-12-27",
+        is_isolation_required: true,
+        isolated_category_ids: [],
+        issuer_id: 0,
+        lotoId: 0,
+        safety_question_list: [],
+        sop_type_id: 0,
+        typeId: 0,
+        user_id: 2,
+        work_type_id: 0,
+        Loto_list: [],
       );
-       var jobJsonString = createPermitModel.toJson();
-       print({"jsonData5",jobJsonString});
+      var jobJsonString = createPermitModel.toJson();
+      print({"jsonData5", jobJsonString});
       Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.createNewPermit(
-         newPermit: jobJsonString,
+        newPermit: jobJsonString,
         isLoading: true,
       );
       if (responseNewPermitCreated != null) {
         print("respomsecghj,$responseNewPermitCreated");
         //  CreateNewPermitDialog();
-         showAlertDialog();
+        showAlertDialog();
 
         // print('NewCreated:$_facilityId');
       }
@@ -413,7 +384,7 @@ Future<void> getBlocksList(int _facilityId) async {
   //   getJobList(facilityId, userId);
   // }
   //  void onValueChanged(dynamic list, dynamic value) {
-     
+
   //         int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
   //         selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
   //         if (selectedFacilityId != 0) {
@@ -421,12 +392,9 @@ Future<void> getBlocksList(int _facilityId) async {
   //         }
   //         selectedFacility.value = value;
   //       }
-    Future<void> createNewPermits() async {
+  Future<void> createNewPermits() async {
     Get.toNamed(
-      Routes.new_permit,
-      
+      Routes.newPermit,
     );
-    
   }
-    
 }

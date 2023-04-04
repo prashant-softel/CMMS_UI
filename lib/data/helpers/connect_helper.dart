@@ -175,7 +175,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> getNewPermitList({
+  Future<ResponseModel> getNewPermitList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -195,8 +195,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getPreventiveCheckList({
     required String auth,
@@ -674,6 +672,42 @@ class ConnectHelper {
       null,
       isLoading ?? true,
       {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPmMappingList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckListMap?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> savePmMapping({
+    required String auth,
+    pmJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/CreateCheckListMap',
+      Request.post,
+      pmJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

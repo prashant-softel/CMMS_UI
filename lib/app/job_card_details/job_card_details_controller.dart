@@ -53,6 +53,7 @@ class JobCardDetailsController extends GetxController {
   int? permitId = 0;
   RxMap permitDetails = {}.obs;
   RxList<AssociatedPermit>? permitList = <AssociatedPermit>[].obs;
+  //RxList<AssociatedPermit>? permitList = <AssociatedPermit>[].obs;
 
   /// Job Details
   Rx<int?> jobId = 0.obs;
@@ -248,7 +249,7 @@ class JobCardDetailsController extends GetxController {
     try {
       var _isolatedAssetCatList = [];
       for (IsolationAssetsCategory isolationAssetsCategory
-          in isolationAssetsCategoryList ?? []) {
+          in isolationAssetsCategoryList) {
         _isolatedAssetCatList.add({
           "isolation_id": isolationAssetsCategory.isolationAssetsCatId,
           "normalisedStatus": isolationAssetsCategory.isNormalized
@@ -392,22 +393,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   void onEmployeeSelected(String selectedValueText, int rowIndex) {
-    // currentIndex.value = rowIndex;
-    // // Update the selected employee value for the corresponding row
-    // final rowToUpdate = employeeTableRows[rowIndex];
-    // rowToUpdate.cells[0] = DataCell(
-    //   Container(
-    //     padding: Dimens.edgeInsets5,
-    //     child: DropdownWidget(
-    //       controller: controller,
-    //       dropdownList: employeeList,
-    //       isValueSelected: true,
-    //       selectedValue: selectedValueText,
-    //       onValueChanged: (value, index) =>
-    //           onEmployeeSelected(value, rowIndex, controller),
-    //     ),
-    //   ),
-    // );
     currentIndex.value = rowIndex;
     // Update the selected employee value for the corresponding row
     final rowToUpdate = employeeTableRows[rowIndex];
@@ -441,8 +426,6 @@ class JobCardDetailsController extends GetxController {
         selectedEmployeeList?.add(_selectedEmployee);
       }
     }
-
-    //}
   }
 
   ///

@@ -118,12 +118,12 @@ class AppPages {
       binding: PreventiveListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.new_permit,
+      name: _Paths.newPermit,
       page: NewPermitScreen.new,
       binding: NewPermitBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.new_Permit_List,
+      name: _Paths.newPermitList,
       page: NewPermitListScreen.new,
       binding: NewPermitListBinding(),
     ),
@@ -132,8 +132,8 @@ class AppPages {
       page: PreventiveCheckPointScreen.new,
       binding: PreventiveCheckPointBinding(),
     ),
-     GetPage<dynamic>(
-      name: _Paths.pmMapping,
+    GetPage<dynamic>(
+      name: _Paths.preventiveMaintenanceMapping,
       page: PmMappingScreen.new,
       binding: PmMappingBinding(),
     ),

@@ -26,23 +26,22 @@ import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
+import '../models/pm_mapping_list_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
 class Repository {
-
-
-
   /// [_deviceRepository] : the local repository.
   /// [_dataRepository] : the data repository like api and all.
-  Repository(this._deviceRepository, this._dataRepository,);
+  Repository(
+    this._deviceRepository,
+    this._dataRepository,
+  );
 
   final DeviceRepository _deviceRepository;
   final DataRepository _dataRepository;
-
-
 
   ///
   var tokenFetchCount = 0;
@@ -218,7 +217,7 @@ class Repository {
 
   //create New Permit
   Future<Map<String, dynamic>> createNewPermit(
-     newPermit,
+    newPermit,
     bool? isLoading,
   ) async {
     try {
@@ -228,25 +227,25 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermit(
         auth: auth,
-         newPermit: newPermit,
+        newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
       var data = res.data;
-      print('Response Create Permit: ${data}');Get.dialog(
-  CreateNewPermitDialog(
-    createPermitData: 'Dialog Title',
-  ),
-);
-     // CreateNewPermitDialog(createPermitData: 'data',);
+      print('Response Create Permit: ${data}');
+      Get.dialog(
+        CreateNewPermitDialog(
+          createPermitData: 'Dialog Title',
+        ),
+      );
+      // CreateNewPermitDialog(createPermitData: 'data',);
 
-       data = res.data;
+      data = res.data;
       print('Response Create Permit: ${data}');
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-
         }
       } else {
         Utility.showDialog(res.errorCode.toString());
@@ -258,7 +257,6 @@ class Repository {
       return Map();
     }
   }
-
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -301,7 +299,7 @@ class Repository {
         final decodeRes = jsonDecode(res.data);
         await saveSecureValue(LocalKeys.authToken, decodeRes['token']);
         String userId = decodeRes['user_detail']['id'].toString();
-       String token = decodeRes['token'];
+        String token = decodeRes['token'];
         await getUserAccessList(
             userId: userId, auth: token, isLoading: isLoading ?? false);
 
@@ -454,7 +452,6 @@ class Repository {
     }
   }
 
-
   Future<List<NewPermitListModel?>?> getNewPermitList(
     String auth,
     int? facilityId,
@@ -462,7 +459,8 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final newPermitListData = await getNewPermitAccessData(LocalKeys.userAccess);
+      final newPermitListData =
+          await getNewPermitAccessData(LocalKeys.userAccess);
       final newPermitModelList = jsonDecode(newPermitListData);
       var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
       int permitId = newPermitList.permitId ?? 0;
@@ -474,14 +472,15 @@ class Repository {
         userId: 33,
         isLoading: isLoading ?? false,
       );
-          print('NewPermitResponse5: ${res.data}');
+      print('NewPermitResponse5: ${res.data}');
 
       if (!res.hasError) {
         final jsonNewPermitListModels = jsonDecode(res.data);
-        final List<NewPermitListModel> _newPermitModelList = jsonNewPermitListModels
-            .map<NewPermitListModel>(
-                (m) => NewPermitListModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+        final List<NewPermitListModel> _newPermitModelList =
+            jsonNewPermitListModels
+                .map<NewPermitListModel>((m) =>
+                    NewPermitListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
         print('Permit Data:${_newPermitModelList.runtimeType}');
 
         return _newPermitModelList;
@@ -677,6 +676,7 @@ class Repository {
         return [];
       }
     } catch (error) {
+      print(error.toString());
       log(error.toString());
       return [];
     }
@@ -759,7 +759,6 @@ class Repository {
       );
       print('SaveJobData: ${res.data}');
 
-
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -819,7 +818,6 @@ class Repository {
           checklistJsonString: checklistJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-
         return true;
       }
       return true;
@@ -1220,6 +1218,68 @@ class Repository {
       }
     } catch (error) {
       log(error.toString());
+    }
+  }
+
+  Future<List<PmMappingListModel?>?> getPmMappingList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmMappingList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      print({"restt", res.data});
+      if (!res.hasError) {
+        final jsonPmMappingListModels = jsonDecode(res.data);
+        print(res.data);
+        final List<PmMappingListModel> _pmMappingListModel =
+            jsonPmMappingListModels
+                .map<PmMappingListModel>((m) =>
+                    PmMappingListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _pmMappingListModel;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> savePmMapping(
+    pmJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.savePmMapping(
+        auth: auth,
+        pmJsonString: pmJsonString,
+        isLoading: isLoading ?? false,
+      );
+      print('SaveData: ${res.data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      log(error.toString());
+      return Map();
     }
   }
 

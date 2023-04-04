@@ -157,8 +157,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
-   Future<ResponseModel> getNewPermitList({
+  Future<ResponseModel> getNewPermitList({
     required String auth,
     int? facilityId,
     int? userId,
@@ -185,7 +184,7 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
-      Future<ResponseModel> getCheckPointlist({
+  Future<ResponseModel> getCheckPointlist({
     required String auth,
     int? selectedchecklistId,
     bool? isLoading,
@@ -491,6 +490,27 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  Future<ResponseModel> getPmMappingList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPmMappingList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> savePmMapping({
+    required String auth,
+    pmJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.savePmMapping(
+        auth: auth,
+        pmJsonString: pmJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   ///
 }

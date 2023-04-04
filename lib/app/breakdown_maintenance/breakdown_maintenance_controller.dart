@@ -16,7 +16,7 @@ class BreakdownMaintenanceController extends GetxController {
   );
 
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
-   late JobListController jobListController;
+  late JobListController jobListController;
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
@@ -29,17 +29,7 @@ class BreakdownMaintenanceController extends GetxController {
     //  Future.delayed(Duration(seconds: 1), () {
     getFacilityList();
     //});
-    Get.lazyPut(
-      () => JobListController(
-        Get.put(
-          JobListPresenter(
-            Get.put(JobListUsecase(Get.find())),
-          ),
-          permanent: true,
-        ),
-      ),
-      //permanent: true,
-    );
+
     super.onInit();
   }
 
@@ -63,26 +53,21 @@ class BreakdownMaintenanceController extends GetxController {
   //       facilityList.indexWhere((facility) => facility?.name == facilityName);
   //   getJobList(facilityId, userId);
   // }
-  Future<void> createChecklist() async {
+  Future<void> goToJobListScreen() async {
     Get.toNamed(
       Routes.jobList,
-      
     );
-    
   }
 
-  Future<void> createNewPermit() async{
+  Future<void> createNewPermit() async {
     Get.toNamed(
-      Routes.new_permit,
-      
+      Routes.newPermit,
     );
   }
 
-  Future<void> newPermitList() async{
+  Future<void> newPermitList() async {
     Get.toNamed(
-      Routes.new_Permit_List,
-
+      Routes.newPermitList,
     );
   }
-
 }
