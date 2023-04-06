@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -65,10 +64,10 @@ class PreventiveChecklistListContentWeb
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  varUserAccessModel.value.access_list!.where((e) =>
-                              e.feature_name == "PM Checklist Number" &&
-                              e.add == 1) ==
-                          true
+                  varUserAccessModel.value.access_list!
+                              .where((e) => e.feature_id == 5 && e.add == 1)
+                              .length >
+                          0
                       ? Container(
                           width: (MediaQuery.of(context).size.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
@@ -81,6 +80,8 @@ class PreventiveChecklistListContentWeb
                             ),
                             child: Column(
                               children: [
+                                // Text(
+                                //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10.0, right: 10, top: 10),
@@ -384,308 +385,304 @@ class PreventiveChecklistListContentWeb
                           ),
                         )
                       : Container(),
-                  Expanded(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 30),
-                      height: Get.height,
-                      child: Card(
-                        color: Color.fromARGB(255, 251, 252, 253),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Checklist Number List",
-                                style: Styles.blackBold16,
+                  varUserAccessModel.value.access_list!
+                              .where((e) => e.feature_id == 5 && e.view == 1)
+                              .length >
+                          0
+                      ? Expanded(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 7,
+                            margin: EdgeInsets.only(left: 10, top: 30),
+                            height: Get.height,
+                            child: Card(
+                              color: Color.fromARGB(255, 251, 252, 253),
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "Checklist Number List",
+                                      style: Styles.blackBold16,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: ColorValues.greyLightColour,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                    .1) -
+                                                60,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {},
+                                            text: 'Copy'),
+                                      ),
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                    .1) -
+                                                60,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {},
+                                            text: 'Excel'),
+                                      ),
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                    .1) -
+                                                70,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {},
+                                            text: 'PDF'),
+                                      ),
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                    .2) -
+                                                100,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'columnVisibility'.tr,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  controller.preventiveCheckList!.isEmpty
+                                      ? Expanded(
+                                          child: ScrollableTableView(
+                                            columns: [
+                                              "Checklist Number ",
+                                              "Active Status ",
+                                              "Category ",
+                                              "Frequency ",
+                                              "PM Manpower",
+                                              "PM Duration(in Min.)",
+                                              "Action",
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                label: column,
+                                                minWidth: Get.width * 0.16,
+                                              );
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller.preventiveCheckList
+                                                        ?.length ??
+                                                    0,
+                                                (index) {
+                                                  return [
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((record) {
+                                              return TableViewRow(
+                                                height: 60,
+                                                cells: record.map((value) {
+                                                  return TableViewCell(
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController:
+                                                controller.paginationController,
+                                            columns: [
+                                              "Checklist Number ",
+                                              "Active Status ",
+                                              "Category ",
+                                              "Frequency ",
+                                              "PM Manpower",
+                                              "PM Duration(in Min.)",
+                                              "Action"
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.12,
+                                                label: column,
+                                              );
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller.preventiveCheckList
+                                                        ?.length ??
+                                                    0,
+                                                (index) {
+                                                  var preventiveCheckListModelListDetails =
+                                                      controller
+                                                              .preventiveCheckList?[
+                                                          index];
+                                                  return [
+                                                    '${preventiveCheckListModelListDetails?.checklist_number}',
+                                                    "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
+                                                    '${preventiveCheckListModelListDetails?.category_name}',
+                                                    '${preventiveCheckListModelListDetails?.frequency_name}',
+                                                    '${preventiveCheckListModelListDetails?.manPower}',
+                                                    '${preventiveCheckListModelListDetails?.duration}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_preventiveCheckList) {
+                                              return TableViewRow(
+                                                  height: 60,
+                                                  cells: _preventiveCheckList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value == 'No')
+                                                            ? Transform.scale(
+                                                                scale: .7,
+                                                                child: SwitchListTile.adaptive(
+                                                                    visualDensity:
+                                                                        VisualDensity
+                                                                            .comfortable,
+                                                                    value: value ==
+                                                                            'No'
+                                                                        ? true
+                                                                        : false,
+                                                                    onChanged:
+                                                                        (value) {},
+                                                                    activeColor:
+                                                                        ColorValues
+                                                                            .appGreenColor),
+                                                              )
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                                0
+                                                                            ? TableActionButton(
+                                                                                color: ColorValues.appLightBlueColor,
+                                                                                icon: Icons.edit,
+                                                                                label: 'Edit',
+                                                                                onPress: () {},
+                                                                              )
+                                                                            : Container(),
+                                                                        // :Container(),
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                                                0
+                                                                            ? TableActionButton(
+                                                                                color: ColorValues.appRedColor,
+                                                                                icon: Icons.delete,
+                                                                                label: 'Delete',
+                                                                                onPress: () {},
+                                                                              )
+                                                                            : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
+                                        ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25),
+                                    child: ValueListenableBuilder(
+                                        valueListenable:
+                                            controller.paginationController,
+                                        builder: (context, value, child) {
+                                          return Row(children: [
+                                            Text(
+                                                "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                            Row(children: [
+                                              IconButton(
+                                                onPressed: controller
+                                                            .paginationController
+                                                            .currentPage <=
+                                                        1
+                                                    ? null
+                                                    : () {
+                                                        controller
+                                                            .paginationController
+                                                            .previous();
+                                                      },
+                                                iconSize: 20,
+                                                splashRadius: 20,
+                                                icon: Icon(
+                                                  Icons
+                                                      .arrow_back_ios_new_rounded,
+                                                  color: controller
+                                                              .paginationController
+                                                              .currentPage <=
+                                                          1
+                                                      ? Colors.black26
+                                                      : Theme.of(context)
+                                                          .primaryColor,
+                                                ),
+                                              ),
+                                              IconButton(
+                                                onPressed: controller
+                                                            .paginationController
+                                                            .currentPage >=
+                                                        controller
+                                                            .paginationController
+                                                            .pageCount
+                                                    ? null
+                                                    : () {
+                                                        controller
+                                                            .paginationController
+                                                            .next();
+                                                      },
+                                                iconSize: 20,
+                                                splashRadius: 20,
+                                                icon: Icon(
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
+                                                  color: controller
+                                                              .paginationController
+                                                              .currentPage >=
+                                                          controller
+                                                              .paginationController
+                                                              .pageCount
+                                                      ? Colors.black26
+                                                      : Theme.of(context)
+                                                          .primaryColor,
+                                                ),
+                                              ),
+                                            ]),
+                                          ]);
+                                        }),
+                                  ),
+                                ],
                               ),
                             ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .1) -
-                                          60,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Copy'),
-                                ),
-                                Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .1) -
-                                          60,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Excel'),
-                                ),
-                                Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .1) -
-                                          70,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'PDF'),
-                                ),
-                                Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .2) -
-                                          100,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () {},
-                                    text: 'columnVisibility'.tr,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            controller.preventiveCheckList!.isEmpty
-                                ? Expanded(
-                                    child: ScrollableTableView(
-                                      columns: [
-                                        "Checklist Number ",
-                                        "Active Status ",
-                                        "Category ",
-                                        "Frequency ",
-                                        "PM Manpower",
-                                        "PM Duration(in Min.)",
-                                        "Action",
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          label: column,
-                                          minWidth: Get.width * 0.16,
-                                        );
-                                      }).toList(),
-                                      rows: [
-                                        ...List.generate(
-                                          controller.preventiveCheckList
-                                                  ?.length ??
-                                              0,
-                                          (index) {
-                                            return [
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                            ];
-                                          },
-                                        ),
-                                      ].map((record) {
-                                        return TableViewRow(
-                                          height: 60,
-                                          cells: record.map((value) {
-                                            return TableViewCell(
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  )
-                                : Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController:
-                                          controller.paginationController,
-                                      columns: [
-                                        "Checklist Number ",
-                                        "Active Status ",
-                                        "Category ",
-                                        "Frequency ",
-                                        "PM Manpower",
-                                        "PM Duration(in Min.)",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.preventiveCheckList
-                                                  ?.length ??
-                                              0,
-                                          (index) {
-                                            var preventiveCheckListModelListDetails =
-                                                controller.preventiveCheckList?[
-                                                    index];
-                                            return [
-                                              '${preventiveCheckListModelListDetails?.checklist_number}',
-                                              "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                              '${preventiveCheckListModelListDetails?.category_name}',
-                                              '${preventiveCheckListModelListDetails?.frequency_name}',
-                                              '${preventiveCheckListModelListDetails?.manPower}',
-                                              '${preventiveCheckListModelListDetails?.duration}',
-                                              "Action"
-                                            ];
-                                          },
-                                        ),
-                                      ].map((_preventiveCheckList) {
-                                        return TableViewRow(
-                                            height: 60,
-                                            cells: _preventiveCheckList
-                                                .map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'No')
-                                                      ? Transform.scale(
-                                                          scale: .7,
-                                                          child: SwitchListTile.adaptive(
-                                                              visualDensity:
-                                                                  VisualDensity
-                                                                      .comfortable,
-                                                              value:
-                                                                  value == 'No'
-                                                                      ? true
-                                                                      : false,
-                                                              onChanged:
-                                                                  (value) {},
-                                                              activeColor:
-                                                                  ColorValues
-                                                                      .appGreenColor),
-                                                        )
-                                                      : (value == "Action")
-                                                          ? Wrap(children: [
-                                                              varUserAccessModel
-                                                                          .value
-                                                                          .access_list!
-                                                                          .where((e) =>
-                                                                              e.feature_name == "PM Checklist Number" &&
-                                                                              e.edit == 1) ==
-                                                                      true
-                                                                  ? TableActionButton(
-                                                                      color: ColorValues
-                                                                          .appLightBlueColor,
-                                                                      icon: Icons
-                                                                          .edit,
-                                                                      label:
-                                                                          'Edit',
-                                                                      onPress:
-                                                                          () {},
-                                                                    )
-                                                                  : Container(),
-                                                              // :Container(),
-                                                              varUserAccessModel
-                                                                          .value
-                                                                          .access_list!
-                                                                          .where((e) =>
-                                                                              e.feature_name == "PM Checklist Number" &&
-                                                                              e.delete == 1) ==
-                                                                      true
-                                                                  ? TableActionButton(
-                                                                      color: ColorValues
-                                                                          .appRedColor,
-                                                                      icon: Icons
-                                                                          .delete,
-                                                                      label:
-                                                                          'Delete',
-                                                                      onPress:
-                                                                          () {},
-                                                                    )
-                                                                  : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: ValueListenableBuilder(
-                                  valueListenable:
-                                      controller.paginationController,
-                                  builder: (context, value, child) {
-                                    return Row(children: [
-                                      Text(
-                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                      Row(children: [
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
-                                                      .currentPage <=
-                                                  1
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .previous();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
-                                                      .currentPage >=
-                                                  controller
-                                                      .paginationController
-                                                      .pageCount
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .next();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                      ]),
-                                    ]);
-                                  }),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                          ),
+                        )
+                      : Container()
                 ],
               ),
             ),
