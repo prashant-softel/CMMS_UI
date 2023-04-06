@@ -1,6 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/new_permit/new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
@@ -14,6 +15,7 @@ import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
+import '../calibration/calibration_list_binding.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
@@ -141,5 +143,10 @@ class AppPages {
     //   name: _Paths.warranty_Claim_List,
     //   page: WarrantyClaimListScreen.new,
     // ),
+    GetPage<dynamic>(
+      name: _Paths.calibrationList,
+      page: CalibrationListScreen.new,
+      binding: CalibrationListBinding(),
+    ),
   ];
 }

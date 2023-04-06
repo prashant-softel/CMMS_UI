@@ -19,7 +19,6 @@ class HomeController extends GetxController {
   var startDateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
 
-  
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
@@ -143,7 +142,7 @@ class HomeController extends GetxController {
       final userAccessModelList = jsonDecode(_userAccessList);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       varUserAccessModel.value = userAccess;
-      username = userAccess.user_name ?? "";
+      varUserAccessModel.value.access_list = userAccess.access_list;
     }
   }
 

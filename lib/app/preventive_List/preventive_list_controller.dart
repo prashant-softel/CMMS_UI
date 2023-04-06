@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
+import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -33,6 +34,7 @@ class PreventiveListController extends GetxController {
     rowsPerPage: 10,
   );
   PreventiveCheckListModel? preventiveCheckListModel;
+
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
@@ -48,11 +50,15 @@ class PreventiveListController extends GetxController {
   void onInit() async {
     getInventoryCategoryList();
     getFrequencyList();
+    var data = varUserAccessModel.value.access_list!
+            .where((e) => e.feature_id == 5 && e.add == 1) ==
+        true;
+    print({"listing", data});
+
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       getPreventiveCheckList(facilityId, type, true);
     });
-
     super.onInit();
   }
 
@@ -179,9 +185,11 @@ class PreventiveListController extends GetxController {
     selectedequipment.value = '';
 
     selectedfrequency.value = '';
+    Future.delayed(Duration(seconds: 1), () {
+      getPreventiveCheckList(facilityId, type, true);
+    });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
-    getPreventiveCheckList(facilityId, type, true);
   }
 }

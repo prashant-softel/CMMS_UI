@@ -117,7 +117,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
       onTap: ontap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 28, 187, 245),
+          color: ColorValues.appLightBlueColor,
           borderRadius: BorderRadius.circular(2),
         ),
         padding: EdgeInsets.all(9),
@@ -147,7 +147,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
               child: Icon(
                 Icons.format_list_bulleted,
                 size: 30,
-                color: Color.fromARGB(255, 28, 187, 245),
+                color: ColorValues.appLightBlueColor,
               ),
             ),
           ],

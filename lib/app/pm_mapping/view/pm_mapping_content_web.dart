@@ -21,7 +21,6 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
         Container(
           height: 45,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: Color.fromARGB(255, 227, 224, 224),
               width: 1,
@@ -42,22 +41,22 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                 color: ColorValues.greyLightColor,
               ),
               Text(
-                "Dashboard",
+                "DASHBOARD",
                 style: Styles.greyLight14,
               ),
               GestureDetector(
                 onTap: () {
                   Get.back();
                 },
-                child: Text(" / Preventive Maintenance",
+                child: Text(" / PREVENTIVE MAINTENANCE",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / Checklist Mapping ", style: Styles.greyMediumLight12)
+              Text(" / CHECKLIST MAPPING ", style: Styles.greyMediumLight12)
             ],
           ),
         ),
         Container(
-          margin: EdgeInsets.only(left: 20, top: 25),
+          margin: EdgeInsets.only(left: 20, top: 20),
           child: Text(
             "Check List Mapping",
             style: Styles.blackBold16,

@@ -25,7 +25,6 @@ class PreventiveCheckPointContentWeb
             Container(
               height: 45,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Color.fromARGB(255, 227, 224, 224),
                   width: 1,
@@ -46,17 +45,17 @@ class PreventiveCheckPointContentWeb
                     color: ColorValues.greyLightColor,
                   ),
                   Text(
-                    "Dashboard",
+                    "DASHBOARD",
                     style: Styles.greyLight14,
                   ),
                   GestureDetector(
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Preventive Maintenance",
+                    child: Text(" / PREVENTIVE MAINTENANCE",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Check Point Creator",
+                  Text(" / CHECK POINT CREATOR",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -119,6 +118,7 @@ class PreventiveCheckPointContentWeb
                                       ),
                                       Expanded(
                                         child: Container(
+                                          height: 45,
                                           width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -275,12 +275,16 @@ class PreventiveCheckPointContentWeb
                                         width: 35,
                                       ),
                                       Text("No"),
-                                      Switch(
-                                          activeColor: ColorValues.greenColor,
-                                          value: controller.isToggleOn.value,
-                                          onChanged: (value) {
-                                            controller.toggle();
-                                          }),
+                                      Transform.scale(
+                                        scale: .7,
+                                        child: Switch.adaptive(
+                                            activeColor:
+                                                ColorValues.appGreenColor,
+                                            value: controller.isToggleOn.value,
+                                            onChanged: (value) {
+                                              controller.toggle();
+                                            }),
+                                      ),
                                       Text("Yes"),
                                     ],
                                   ),
@@ -295,8 +299,7 @@ class PreventiveCheckPointContentWeb
                               Container(
                                 width: (MediaQuery.of(context).size.width * .1),
                                 child: CustomElevatedButton(
-                                    backgroundColor:
-                                        Color.fromARGB(255, 223, 101, 80),
+                                    backgroundColor: ColorValues.appRedColor,
                                     onPressed: () {},
                                     text: 'Cancel'),
                               ),
@@ -309,12 +312,12 @@ class PreventiveCheckPointContentWeb
                                           80,
                                   child: CustomElevatedButton(
                                       backgroundColor:
-                                          Color.fromARGB(255, 102, 249, 132),
+                                          ColorValues.appDarkBlueColor,
                                       onPressed: () {
                                         controller
                                             .createCheckpoint()
                                             .then((value) {
-                                          if (value == true)
+                                          if (value)
                                             controller
                                                 .issuccessCreatecheckpont();
                                         });
@@ -354,7 +357,7 @@ class PreventiveCheckPointContentWeb
                                     icon: Icons.upload,
                                     label: 'Import Check Point',
                                     onPressed: () {},
-                                    color: Colors.blue,
+                                    color: ColorValues.appDarkBlueColor,
                                   ),
                                 ],
                               ),
@@ -373,7 +376,8 @@ class PreventiveCheckPointContentWeb
                                           60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor:
+                                          ColorValues.appLightBlueColor,
                                       onPressed: () {},
                                       text: 'Copy'),
                                 ),
@@ -383,7 +387,8 @@ class PreventiveCheckPointContentWeb
                                           60,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor:
+                                          ColorValues.appLightBlueColor,
                                       onPressed: () {},
                                       text: 'Excel'),
                                 ),
@@ -393,7 +398,8 @@ class PreventiveCheckPointContentWeb
                                           70,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor:
+                                          ColorValues.appLightBlueColor,
                                       onPressed: () {},
                                       text: 'PDF'),
                                 ),
@@ -403,16 +409,18 @@ class PreventiveCheckPointContentWeb
                                           100,
                                   margin: EdgeInsets.only(left: 10),
                                   child: CustomElevatedButton(
-                                      backgroundColor: Colors.blue,
-                                      onPressed: () {},
-                                      text: 'Column Visibility'),
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () {},
+                                    text: 'columnVisibility'.tr,
+                                  ),
                                 )
                               ],
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            controller.preventiveCheckpoint!.length < 1
+                            controller.preventiveCheckpoint!.isEmpty
                                 ? Expanded(
                                     child: ScrollableTableView(
                                       columns: [
@@ -500,13 +508,15 @@ class PreventiveCheckPointContentWeb
                                             child: (value == "Action")
                                                 ? Wrap(children: [
                                                     TableActionButton(
-                                                      color: Colors.blue,
+                                                      color: ColorValues
+                                                          .appLightBlueColor,
                                                       icon: Icons.edit,
                                                       label: 'Edit',
                                                       onPress: () {},
                                                     ),
                                                     TableActionButton(
-                                                      color: Colors.red,
+                                                      color: ColorValues
+                                                          .appRedColor,
                                                       icon: Icons.delete,
                                                       label: 'Delete',
                                                       onPress: () {
@@ -524,18 +534,24 @@ class PreventiveCheckPointContentWeb
                                                     ? Wrap(
                                                         children: [
                                                           Text("No"),
-                                                          Switch.adaptive(
-                                                              activeColor:
-                                                                  ColorValues
-                                                                      .greenColor,
-                                                              value:
-                                                                  value == "1"
-                                                                      ? true
-                                                                      : false,
-                                                              onChanged:
-                                                                  (value) {
-                                                                // controller.toggle();
-                                                              }),
+                                                          Transform.scale(
+                                                            alignment: Alignment
+                                                                .topCenter,
+                                                            scale: .7,
+                                                            child:
+                                                                Switch.adaptive(
+                                                                    activeColor:
+                                                                        ColorValues
+                                                                            .appGreenColor,
+                                                                    value: value ==
+                                                                            "1"
+                                                                        ? true
+                                                                        : false,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      // controller.toggle();
+                                                                    }),
+                                                          ),
                                                           Text("Yes"),
                                                         ],
                                                       )
