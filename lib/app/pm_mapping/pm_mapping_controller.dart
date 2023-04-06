@@ -10,6 +10,7 @@ import '../../domain/models/preventive_checklist_model.dart';
 import '../../domain/models/save_pm_mapping_model.dart';
 import '../home/home_controller.dart';
 import '../theme/color_values.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PmMappingController extends GetxController {
   PmMappingController(
@@ -119,8 +120,8 @@ class PmMappingController extends GetxController {
       checklist_map_list: checklist_map_list,
     );
     var pmJsonString = savePmModel.toJson();
-    print({"redddd", pmJsonString});
-    if (checklist_map_list != []) {
+    print({"redddd", checklist_map_list});
+    if (checklist_map_list.isNotEmpty) {
       Map<String, dynamic>? responsePmMapCreated =
           await pmMappingPresenter.savePmMapping(
         pmJsonString: pmJsonString,
@@ -129,6 +130,8 @@ class PmMappingController extends GetxController {
       if (responsePmMapCreated != null) {
         isSuccessDialog();
       }
+    } else {
+      Fluttertoast.showToast(msg: "Please Map the Checklist", fontSize: 16.0);
     }
   }
 

@@ -106,7 +106,7 @@ class PreventiveCheckPointController extends GetxController {
       );
       return true;
     }
-    return false;
+    return true;
   }
 
   Future<void> getCheckPointlist({required String selectedchecklistId}) async {
@@ -138,11 +138,13 @@ class PreventiveCheckPointController extends GetxController {
     checkPointCtrlr.text = '';
     requirementCtrlr.text = '';
     isToggleOn.value = false;
+
+    Future.delayed(Duration(seconds: 1), () {
+      getCheckPointlist(selectedchecklistId: selectedchecklist.value);
+    });
     Future.delayed(Duration(seconds: 4), () {
       isSuccess.value = false;
     });
-
-    getCheckPointlist(selectedchecklistId: selectedchecklist.value);
   }
 
   void isDeleteDialog({String? check_point_id, String? check_point}) {
