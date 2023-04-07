@@ -7,7 +7,6 @@ import '../../domain/models/create_checklist_model.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class PreventiveCheckListController extends GetxController {
@@ -86,7 +85,7 @@ class PreventiveCheckListController extends GetxController {
           status: 1,
           type: 1,
           checklist_number: _checklistNumber);
-      var checklistJsonString =[createChecklist.toJson()];
+      var checklistJsonString = [createChecklist.toJson()];
 
       print({"checklistJsonString", checklistJsonString});
       await createpreventivePresenter.createChecklistNumber(

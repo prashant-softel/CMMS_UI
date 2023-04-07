@@ -37,7 +37,7 @@ class HomeDrawer extends GetView<HomeController> {
 
                   SingleChildScrollView(
                     child: Container(
-                      height: MediaQuery.of(context).size.height,
+                      height: Get.height,
                       color: ColorValues.appDarkBlueColor,
                       child: ListView.builder(
                         shrinkWrap: true,
