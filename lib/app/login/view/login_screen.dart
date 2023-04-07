@@ -22,8 +22,8 @@ class LoginScreen extends GetView<LoginController> {
               children: [
                 if (Responsive.isDesktop(context))
                   Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
+                    height: Get.height,
+                    width: Get.width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/files/banner.png'),
@@ -45,11 +45,8 @@ class LoginScreen extends GetView<LoginController> {
                             Padding(
                               padding: const EdgeInsets.all(10),
                               child: Container(
-                                width:
-                                    (MediaQuery.of(context).size.width * .7) -
-                                        400,
-                                height:
-                                    MediaQuery.of(context).size.height - 240,
+                                width: (Get.width * .7) - 400,
+                                height: Get.height - 240,
                                 child: Image.asset(
                                   'assets/files/soler.jpeg',
                                   fit: BoxFit.cover,
@@ -77,9 +74,7 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 10,
                                 ),
                                 Container(
-                                    width: (MediaQuery.of(context).size.width *
-                                            .3) -
-                                        50,
+                                    width: (Get.width * .3) - 50,
                                     child: LoginCustomTextfield(
                                       textController: controller.emailCtrlr,
                                       ishint: "Email Id",
@@ -94,9 +89,7 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 10,
                                 ),
                                 Container(
-                                  width:
-                                      (MediaQuery.of(context).size.width * .3) -
-                                          50,
+                                  width: (Get.width * .3) - 50,
                                   child: LoginCustomTextfield(
                                     textController: controller.passwordCtrlr,
                                     obscureText:
@@ -132,9 +125,7 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 30,
                                 ),
                                 Container(
-                                    width: (MediaQuery.of(context).size.width *
-                                            .3) -
-                                        50,
+                                    width: (Get.width * .3) - 50,
                                     height: 45,
                                     child: CustomElevatedButton(
                                       backgroundColor:
@@ -218,7 +209,7 @@ class LoginScreen extends GetView<LoginController> {
                               height: 30,
                             ),
                             Container(
-                              width: MediaQuery.of(context).size.width,
+                              width: Get.width,
                               height: 45,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(

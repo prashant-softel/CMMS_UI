@@ -11,7 +11,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = Get;
 
     final double itemHeight = (size.height - kToolbarHeight - 90) / 10;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
@@ -23,7 +23,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
         if (Responsive.isMobile(context))
           Obx(
             () => Container(
-              width: MediaQuery.of(context).size.width,
+              width: Get.width,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Card(

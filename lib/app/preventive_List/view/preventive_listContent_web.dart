@@ -18,8 +18,8 @@ class PreventiveChecklistListContentWeb
     return Obx(
       () => Container(
         color: Color.fromARGB(255, 234, 236, 238),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: Get.width,
+        height: Get.height,
         child: Column(
           children: [
             Container(
@@ -69,9 +69,9 @@ class PreventiveChecklistListContentWeb
                               .length >
                           0
                       ? Container(
-                          width: (MediaQuery.of(context).size.width * .3),
+                          width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: MediaQuery.of(context).size.height / 1.5,
+                          height: Get.height / 1.5,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -348,9 +348,7 @@ class PreventiveChecklistListContentWeb
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .1),
+                                        width: (Get.width * .1),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -360,10 +358,7 @@ class PreventiveChecklistListContentWeb
                                       width: 10,
                                     ),
                                     Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .2) -
-                                                70,
+                                        width: (Get.width * .2) - 70,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
@@ -391,7 +386,7 @@ class PreventiveChecklistListContentWeb
                           0
                       ? Expanded(
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 7,
+                            width: Get.width * 7,
                             margin: EdgeInsets.only(left: 10, top: 30),
                             height: Get.height,
                             child: Card(
@@ -416,10 +411,7 @@ class PreventiveChecklistListContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .1) -
-                                                60,
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -428,10 +420,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .1) -
-                                                60,
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -440,10 +429,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .1) -
-                                                70,
+                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -452,10 +438,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                    .2) -
-                                                100,
+                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
