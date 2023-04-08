@@ -3,6 +3,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -175,7 +176,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                           "Equipment Name",
                           "Description",
                           "Serial No.",
-                          "Manufactured date",
+                          "Calibration Certificates",
                           "Installation date",
                           "Last Calibration date",
                           "Next Due Date",
@@ -194,20 +195,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                             "Pynarometer",
                             "DEmo_Block_001_transfer0012",
                             "PR1000",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "2023-03-26",
+                            "calibration_certificate",
                             "2023-03-26",
                             "2023-03-26",
                             "2023-03-26",
@@ -220,20 +208,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                             "Pynarometer",
                             "DEmo_Block_001_transfer0012",
                             "PR1000",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "2023-03-26",
+                            "calibration_certificate",
                             "2023-03-26",
                             "2023-03-26",
                             "2023-03-26",
@@ -246,20 +221,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                             "Pynarometer",
                             "DEmo_Block_001_transfer0012",
                             "PR1000",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "2023-03-26",
+                            "calibration_certificate",
                             "2023-03-26",
                             "2023-03-26",
                             "2023-03-26",
@@ -272,7 +234,46 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                             "Pynarometer",
                             "DEmo_Block_001_transfer0012",
                             "PR1000",
+                            "calibration_certificate",
                             "2023-03-26",
+                            "2023-03-26",
+                            "2023-03-26",
+                            "Day",
+                            "Status",
+                            "Action"
+                          ],
+                          [
+                            "SCADA",
+                            "Pynarometer",
+                            "DEmo_Block_001_transfer0012",
+                            "PR1000",
+                            "calibration_certificate",
+                            "2023-03-26",
+                            "2023-03-26",
+                            "2023-03-26",
+                            "Day",
+                            "Status",
+                            "Action"
+                          ],
+                          [
+                            "SCADA",
+                            "Pynarometer",
+                            "DEmo_Block_001_transfer0012",
+                            "PR1000",
+                            "calibration_certificate",
+                            "2023-03-26",
+                            "2023-03-26",
+                            "2023-03-26",
+                            "Day",
+                            "Status",
+                            "Action"
+                          ],
+                          [
+                            "SCADA",
+                            "Pynarometer",
+                            "DEmo_Block_001_transfer0012",
+                            "PR1000",
+                            "calibration_certificate",
                             "2023-03-26",
                             "2023-03-26",
                             "2023-03-26",
@@ -311,12 +312,14 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                           icon:
                                               Icons.access_time_filled_outlined,
                                           label: 'History',
-                                          onPress: () {},
+                                          onPress: () {
+                                            controller.calibrationHistory();
+                                          },
                                         ),
                                         TableActionButton(
                                           color: ColorValues.appRedColor,
                                           icon: Icons.close,
-                                          label: 'Close',
+                                          label: 'Reject',
                                           onPress: () {},
                                         ),
                                         // TableActionButton(
@@ -347,7 +350,16 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 color: Colors.white,
                                               ),
                                             ))
-                                        : Text(value),
+                                        : (value == "calibration_certificate")
+                                            ? TableActionButton(
+                                                color: ColorValues
+                                                    .appDarkBlueColor,
+                                                icon: Icons
+                                                    .remove_red_eye_outlined,
+                                                label: 'View',
+                                                onPress: () {},
+                                              )
+                                            : Text(value),
                               );
                             }).toList(),
                           );
