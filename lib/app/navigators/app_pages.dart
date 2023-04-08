@@ -1,7 +1,10 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
+import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
+import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/new_permit/new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
@@ -147,6 +150,15 @@ class AppPages {
       name: _Paths.calibrationList,
       page: CalibrationListScreen.new,
       binding: CalibrationListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.calibrationHistory,
+      page: CalibrationHistoryScreen.new,
+      binding: CalibrationHistoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.breakdown,
+      page: BreakdownMaintenanceScreen.new,
     ),
   ];
 }

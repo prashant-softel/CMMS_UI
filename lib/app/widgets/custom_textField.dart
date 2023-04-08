@@ -12,6 +12,8 @@ class LoginCustomTextfield extends GetView {
   String? errorController;
   Function(dynamic value)? onChanged;
   Function()? ontap;
+  Function(dynamic value)? onfieldSubmitted;
+
   LoginCustomTextfield(
       {Key? key,
       this.ishint,
@@ -20,11 +22,13 @@ class LoginCustomTextfield extends GetView {
       this.widget,
       this.errorController,
       this.onChanged,
+      this.onfieldSubmitted,
       this.ontap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted: onfieldSubmitted,
       onTap: ontap,
       onChanged: onChanged,
       controller: textController,

@@ -1,14 +1,14 @@
-import 'package:cmms/app/calibration/view/calibration_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../calibration_list_controller.dart';
+import '../calibration_history_controller.dart';
+import 'calibration_history_content_web.dart';
 
-class CalibrationListScreen extends GetView<CalibrationListController> {
-  CalibrationListScreen({super.key});
+class CalibrationHistoryScreen extends GetView<CalibrationHistoryController> {
+  CalibrationHistoryScreen({super.key});
 
   ///
   @override
@@ -22,14 +22,10 @@ class CalibrationListScreen extends GetView<CalibrationListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Calibration'),
+              title: Text('Calibration History'),
               centerTitle: true,
               elevation: 0,
             ),
-      drawer: //
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
-              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -41,14 +37,9 @@ class CalibrationListScreen extends GetView<CalibrationListController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: CalibrationListContentWeb(),
+                        child: CalibrationHistoryContentWeb(),
                       )
                   ],
                 ),
