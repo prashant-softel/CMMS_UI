@@ -1,6 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
@@ -154,6 +155,10 @@ class AppPages {
       name: _Paths.calibrationHistory,
       page: CalibrationHistoryScreen.new,
       binding: CalibrationHistoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.breakdown,
+      page: BreakdownMaintenanceScreen.new,
     ),
   ];
 }
