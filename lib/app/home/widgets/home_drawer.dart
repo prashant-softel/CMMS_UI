@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
+import '../../theme/styles.dart';
 import '../../utils/responsive.dart';
 import '../home_controller.dart';
 import '../../theme/color_values.dart';
@@ -124,7 +125,7 @@ class HomeDrawer extends GetView<HomeController> {
                         title: "Log Out",
                         icon: "assets/files/dashboard.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          _isDeleteDialog();
                         },
                       ),
                     ]),
@@ -136,6 +137,42 @@ class HomeDrawer extends GetView<HomeController> {
     );
 
     ///
+  }
+
+  _isDeleteDialog() {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.logout_outlined, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Are you sure you want to logout?',
+            style: Styles.blackBold14w500,
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.offAllNamed(Routes.login);
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   ///
