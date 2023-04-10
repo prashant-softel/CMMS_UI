@@ -29,8 +29,8 @@ class PreventiveListScreen extends GetView<PreventiveListController> {
               elevation: 0,
             ),
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: Get.width,
+          height: Get.height,
           child: Row(
             children: [
               (Responsive.isMobile(context) || Responsive.isTablet(context))

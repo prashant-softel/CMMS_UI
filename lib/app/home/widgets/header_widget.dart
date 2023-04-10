@@ -41,7 +41,7 @@ class HeaderWidget extends GetView<HomeController> {
             if (Responsive.isDesktop(context))
               Obx(
                 () => Container(
-                  width: MediaQuery.of(context).size.width * .2,
+                  width: Get.width * .2,
                   child: DropdownWidget(
                     controller: controller,
                     dropdownList: controller.facilityList,

@@ -64,7 +64,6 @@ RxList<int> selectedEquipmentList = <int>[].obs;
 
 
 
-  
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
@@ -105,60 +104,60 @@ RxList<int> selectedEquipmentList = <int>[].obs;
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
-  RxList<MenuItem> menuItems = [
-    MenuItem(
-      title: "DashBoard",
-      icon: "assets/files/home.png",
-    ),
-    MenuItem(
-      title: "Inventory",
-      icon: "assets/files/warranty.png",
-    ),
-    MenuItem(
-      title: "Breakdown Maintenance",
-      icon: "assets/files/preventive.png",
-    ),
-    MenuItem(
-      title: "Warranty claim",
-      icon: "assets/files/warranty.png",
-    ),
-    MenuItem(
-      title: "Preventive Maintenance",
-      icon: "assets/files/preventive.png",
-    ),
-    MenuItem(
-      title: "Corrective Maintenance",
-      icon: "assets/files/maint.png",
-    ),
-    MenuItem(
-      title: "Module Cleaning",
-      icon: "assets/files/maintenance.png",
-    ),
-    MenuItem(
-      title: "Vegetation Control",
-      icon: "assets/files/preventive.png",
-    ),
-    MenuItem(
-      title: "Incident Report",
-      icon: "assets/files/reportins.png",
-    ),
-    MenuItem(
-      title: "Calibration",
-      icon: "assets/files/preventive.png",
-    ),
-    MenuItem(
-      title: "Misc",
-      icon: "assets/files/misc.png",
-    ),
-    MenuItem(
-      title: "Settings",
-      icon: "assets/files/setting.png",
-    ),
-    MenuItem(
-      title: "Log Out",
-      icon: "assets/files/dashboard.png",
-    ),
-  ].obs;
+  // RxList<MenuItem> menuItems = [
+  //   MenuItem(
+  //     title: "DashBoard",
+  //     icon: "assets/files/home.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Inventory",
+  //     icon: "assets/files/warranty.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Breakdown Maintenance",
+  //     icon: "assets/files/preventive.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Warranty claim",
+  //     icon: "assets/files/warranty.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Preventive Maintenance",
+  //     icon: "assets/files/preventive.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Corrective Maintenance",
+  //     icon: "assets/files/maint.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Module Cleaning",
+  //     icon: "assets/files/maintenance.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Vegetation Control",
+  //     icon: "assets/files/preventive.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Incident Report",
+  //     icon: "assets/files/reportins.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Calibration",
+  //     icon: "assets/files/preventive.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Misc",
+  //     icon: "assets/files/misc.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Settings",
+  //     icon: "assets/files/setting.png",
+  //   ),
+  //   MenuItem(
+  //     title: "Log Out",
+  //     icon: "assets/files/dashboard.png",
+  //   ),
+  // ].obs;
 
   ///
 
@@ -205,7 +204,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
       final userAccessModelList = jsonDecode(_userAccessList);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       varUserAccessModel.value = userAccess;
-      username = userAccess.user_name ?? "";
+      varUserAccessModel.value.access_list = userAccess.access_list;
     }
   }
 

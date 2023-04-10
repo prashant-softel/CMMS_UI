@@ -31,6 +31,7 @@ import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -308,6 +309,9 @@ class Repository {
         // Get.offAllNamed(
         //   Routes.home,arguments: userId
         // );
+      } else {
+        Fluttertoast.showToast(
+            msg: "Invalid Email Id and Password", fontSize: 16.0);
       }
     } catch (error) {
       await _deviceRepository.generateToken();

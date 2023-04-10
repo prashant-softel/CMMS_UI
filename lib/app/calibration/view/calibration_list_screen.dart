@@ -1,14 +1,14 @@
-import 'package:cmms/app/pm_mapping/view/pm_mapping_content_web.dart';
+import 'package:cmms/app/calibration/view/calibration_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../pm_mapping_controller.dart';
+import '../calibration_list_controller.dart';
 
-class PmMappingScreen extends GetView<PmMappingController> {
-  PmMappingScreen({super.key});
+class CalibrationListScreen extends GetView<CalibrationListController> {
+  CalibrationListScreen({super.key});
 
   ///
   @override
@@ -22,10 +22,14 @@ class PmMappingScreen extends GetView<PmMappingController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('PM Mapping'),
+              title: Text('Calibration'),
               centerTitle: true,
               elevation: 0,
             ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -37,9 +41,14 @@ class PmMappingScreen extends GetView<PmMappingController> {
               Expanded(
                 child: Column(
                   children: [
+                    // if (Responsive.isMobile(context) ||
+                    //     Responsive.isTablet(context))
+                    //   Expanded(
+                    //     child: PreventiveChecklistListContentMobile(),
+                    //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PmMappingContentWeb(),
+                        child: CalibrationListContentWeb(),
                       )
                   ],
                 ),

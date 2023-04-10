@@ -1,14 +1,14 @@
-import 'package:cmms/app/pm_mapping/view/pm_mapping_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../pm_mapping_controller.dart';
+import '../calibration_history_controller.dart';
+import 'calibration_history_content_web.dart';
 
-class PmMappingScreen extends GetView<PmMappingController> {
-  PmMappingScreen({super.key});
+class CalibrationHistoryScreen extends GetView<CalibrationHistoryController> {
+  CalibrationHistoryScreen({super.key});
 
   ///
   @override
@@ -22,7 +22,7 @@ class PmMappingScreen extends GetView<PmMappingController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('PM Mapping'),
+              title: Text('Calibration History'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -39,7 +39,7 @@ class PmMappingScreen extends GetView<PmMappingController> {
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PmMappingContentWeb(),
+                        child: CalibrationHistoryContentWeb(),
                       )
                   ],
                 ),

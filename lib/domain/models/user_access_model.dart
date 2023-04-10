@@ -27,6 +27,7 @@ class AccessList {
   int? view;
   int? issue;
   int? selfView;
+  int? approve;
 
   AccessList(
       {this.feature_id,
@@ -36,6 +37,7 @@ class AccessList {
       this.edit,
       this.issue,
       this.selfView,
+      this.approve,
       this.view});
 
   factory AccessList.fromJson(Map<String, dynamic> parsedJson) {
@@ -48,6 +50,7 @@ class AccessList {
       issue: parsedJson['issue'],
       selfView: parsedJson['selfView'],
       view: parsedJson['view'],
+      approve: parsedJson['approve'],
     );
   }
 }
