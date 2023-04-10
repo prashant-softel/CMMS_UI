@@ -629,6 +629,165 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                       ]),
                 ]),
           ),
+        return Obx(
+          () => Container(
+            margin: Dimens.edgeInsets15,
+            padding: Dimens.edgeInsets25,
+            height: height / 2.4,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: ColorValues.appBlueBackgroundColor,
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: ColorValues.appBlueBackgroundColor,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Previous Calibration"),
+                          Text("                         Date:"),
+                        ],
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  2.0,
+                                  3.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          width: Get.width / 5,
+                          child: LoginCustomTextfield(
+                            textController: controller.previousDateController,
+                            ontap: () {
+                              _selectDate(context, 1);
+                            },
+                            widget: Icon(
+                              Icons.calendar_month,
+                              color: ColorValues.greyLightColor,
+                            ),
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Due Date For Next"),
+                          Text("             Calibration:"),
+                        ],
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  2.0,
+                                  3.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          width: Get.width / 5,
+                          child: LoginCustomTextfield(
+                            textController: controller.nextDueDateController,
+                            ontap: () {
+                              _selectDate(context, 2);
+                            },
+                            widget: Icon(
+                              Icons.calendar_month,
+                              color: ColorValues.greyLightColor,
+                            ),
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Vender Name :"),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                2.0,
+                                3.0,
+                              ),
+                              blurRadius: 3.0,
+                              spreadRadius: 1.0,
+                            ),
+                          ],
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        width: Get.width / 5,
+                        child: DropdownWidget(
+                          dropdownList: controller.venderNameList,
+                          isValueSelected:
+                              controller.isVenderNameSelected.value,
+                          selectedValue: controller.selectedVender.value,
+                          onValueChanged: controller.onValueChanged,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomElevatedButton(
+                          text: "Cancel",
+                          onPressed: () {},
+                          backgroundColor: ColorValues.appRedColor,
+                          textColor: ColorValues.whiteColor,
+                        ),
+                        Dimens.boxWidth10,
+                        CustomElevatedButton(
+                          text: "Start",
+                          onPressed: () {},
+                          backgroundColor: ColorValues.appGreenColor,
+                          textColor: ColorValues.whiteColor,
+                        ),
+                        Dimens.boxWidth10,
+                      ]),
+                ]),
+          ),
         );
       }),
       actions: [],
