@@ -54,8 +54,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: Responsive.isDesktop(context)
+       appBar: Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
@@ -63,10 +62,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
               toolbarHeight: 90,
             )
           : AppBar(
-              title: Text('New Permit'),
+              title: Text('New Permit List'),
               centerTitle: true,
               elevation: 0,
             ),
+     
       body: Container(
         // width: MediaQuery.of(context).size.width ,
         height: MediaQuery.of(context).size.height,
@@ -540,45 +540,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         },
                                                       ),
                                                     ),
-                                                  ),
-                                                  SizedBox(width: 60,),
-                                                  CustomRichText(
-                                                      title: 'Equipment Categories: '),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  SizedBox(
-                                                    width: MediaQuery.of(context).size.width / 3.7,
-                                                    child: CustomMultiSelectDialogField(
-                                                      title: 'Equipment Category',
-                                                      buttonText: 'Equipment Category',
-                                                      initialValue: (controller
-                                                              .selectedEquipmentCategoryIdList
-                                                              .isNotEmpty)
-                                                          ? controller
-                                                              .selectedEquipmentCategoryIdList
-                                                          : [],
-                                                      items: controller
-                                                          .equipmentCategoryList
-                                                          .map(
-                                                            (equipmentCategory) =>
-                                                                MultiSelectItem(
-                                                              equipmentCategory?.id,
-                                                              equipmentCategory?.name ??
-                                                                  '',
-                                                            ),
-                                                          )
-                                                          .toList(),
-                                                      onConfirm:
-                                                          (selectedOptionsList) => {
-                                                        controller
-                                                            .equipmentCategoriesSelected(
-                                                                selectedOptionsList),
-                                                        print(
-                                                            'Equipment list ${controller.equipmentCategoryList}')
-                                                      },
-                                                    ),
-                                                  ),
                                                   ],
                                                 ),
                                               ),
@@ -1144,7 +1105,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
           ),
         ),
       ),
-
       Dimens.boxHeight20,
     ]);
   }

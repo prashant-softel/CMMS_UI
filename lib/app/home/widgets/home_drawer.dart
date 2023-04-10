@@ -62,7 +62,9 @@ class HomeDrawer extends GetView<HomeController> {
                       MenuItem(
                         title: "Warranty claim",
                         icon: "assets/files/warranty.png",
-                        press: () {},
+                        press: () {
+                          Get.offNamed(Routes.warrantyClaimList);
+                        },
                       ),
                       MenuItem(
                         title: "Preventive Maintenance",

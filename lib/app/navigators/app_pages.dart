@@ -143,10 +143,10 @@ class AppPages {
       page: PmMappingScreen.new,
       binding: PmMappingBinding(),
     ),
-    // GetPage<dynamic>(
-    //   name: _Paths.warranty_Claim_List,
-    //   page: WarrantyClaimListScreen.new,
-    // ),
+    GetPage<dynamic>(
+      name: _Paths.warrantyClaimList,
+      page: WarrantyClaimListScreen.new,
+    ),
     GetPage<dynamic>(
       name: _Paths.calibrationList,
       page: CalibrationListScreen.new,
