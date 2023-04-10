@@ -345,15 +345,15 @@ class Repository {
   Future<List<BusinessListModel>> getBusinessList({
     required int? businessType,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
     required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getBusinessList(
-        businessType: 5,
+        businessType: businessType,
         blockId: blockId,
-        categoryIds: categoryIds,
+        categoryIds: categoryIds ?? "",
         isLoading: isLoading,
         auth: auth,
       );

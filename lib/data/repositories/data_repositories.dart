@@ -118,7 +118,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getBusinessList(
       isLoading: isLoading,
       auth: auth,
-      businessType: 5,
+      businessType: businessType,
       blockId: blockId,
       categoryIds: categoryIds,
     );
