@@ -439,6 +439,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   SizedBox(
                                                     width: MediaQuery.of(context).size.width / 3.7,
                                                     child: CustomMultiSelectDialogField(
+                                                      title: 'Equipment Category',
+                                                      buttonText: 'Equipment Category',
                                                       initialValue: (controller
                                                               .selectedEquipmentCategoryIdList
                                                               .isNotEmpty)

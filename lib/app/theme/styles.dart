@@ -749,6 +749,10 @@ abstract class Styles {
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 143, 223, 233),
   );
+  static ButtonStyle darkBlueElevatedButtonStyle = ElevatedButton.styleFrom(
+    textStyle: TextStyle(fontSize: Dimens.fourteen),
+    backgroundColor: Color.fromARGB(255, 9, 115, 156),
+  );
 
   ///
 }

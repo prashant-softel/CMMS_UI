@@ -130,9 +130,7 @@ class AddInventory extends StatelessWidget {
                                                 (index) => ListTile(
                                                   onTap: () {
                                                     _controller.onSelectEquipment(
-                                                        _controller
-                                                                .equipmentList[
-                                                            index]);
+                                                        _controller.equipmentList[index]);
                                                     Get.back();
                                                   },
                                                   title: Text(

@@ -23,6 +23,7 @@ abstract class Routes {
   static const warrantyClaimList = _Paths.warrantyClaimList;
   static const preventiveMaintenanceMapping =
       _Paths.preventiveMaintenanceMapping;
+  static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
 }
 
 abstract class _Paths {
@@ -46,4 +47,5 @@ abstract class _Paths {
   static const newPermitList = '/new-permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
+  static const viewWarrantyClaim = '/view-warranty-claim';
 }

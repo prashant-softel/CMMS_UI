@@ -107,6 +107,40 @@ class DataRepository extends DomainRepository {
     );
   }
 
+   @override
+  Future<ResponseModel> getBusinessList({
+    int? businessType,
+    int? blockId,
+    required String categoryIds,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBusinessList(
+      isLoading: isLoading,
+      auth: auth,
+      businessType: 5,
+      blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getWarrantyClaimList({
+    int? facilityId,
+    int? blockId,
+    required String categoryIds,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getWarrantyClaimList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: 45,
+      blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
+
   @override
   Future<ResponseModel> getWorkTypeList({
     String? categoryIds,

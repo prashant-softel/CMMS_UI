@@ -11,6 +11,7 @@ import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
+import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
@@ -137,9 +138,9 @@ class AppPages {
       page: PmMappingScreen.new,
       binding: PmMappingBinding(),
     ),
-    // GetPage<dynamic>(
-    //   name: _Paths.warranty_Claim_List,
-    //   page: WarrantyClaimListScreen.new,
-    // ),
+    GetPage<dynamic>(
+      name: _Paths.viewWarrantyClaim,
+      page: ViewWarrantyClaimWeb.new,
+    ),
   ];
 }

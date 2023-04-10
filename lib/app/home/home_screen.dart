@@ -290,7 +290,8 @@ class CustomTextField extends StatelessWidget {
     this.textController,
     this.readOnly = false,
     this.onTap,
-    this.suffixIcon, 
+    this.suffixIcon,
+    this.hintText, 
   }) : super(key: key);
 
   final String? label;
@@ -298,6 +299,7 @@ class CustomTextField extends StatelessWidget {
   final double? width;
   final bool readOnly;
   final Icon? suffixIcon;
+  final String? hintText; 
   final Function()? onTap;
 
   final TextEditingController? textController;
@@ -305,6 +307,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 40,
       margin: Dimens.edgeInsets16,
       constraints: BoxConstraints(
         maxWidth: width ?? 400,
@@ -313,8 +316,10 @@ class CustomTextField extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 100,
-            child: Text('$label'),
+            width: 170,
+            child: SizedBox(
+              width: 50,
+              child: Text('$label')),
           ),
           Dimens.boxWidth10,
           Expanded(
@@ -326,10 +331,13 @@ class CustomTextField extends StatelessWidget {
                 maxLines: maxLine,
                 decoration: InputDecoration(
                   contentPadding: Dimens.edgeInsets16_0_16_0,
+                  filled: true,
+                  fillColor: readOnly == true ? Color.fromARGB(255, 206, 205, 205) :  Colors.white,
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),
                   ),
+                  hintText: hintText,
                   suffixIcon: suffixIcon,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),

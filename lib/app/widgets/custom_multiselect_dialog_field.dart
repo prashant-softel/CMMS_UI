@@ -4,11 +4,19 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 class CustomMultiSelectDialogField extends StatefulWidget {
   List initialValue;
   List<MultiSelectItem<int?>> items;
+  String? title;
+  String? buttonText;
+  
   Function(dynamic selectedOptionsList) onConfirm;
+  
+  // var title;
+  
   CustomMultiSelectDialogField(
       {super.key,
       required this.initialValue,
       required this.items,
+       this.title,
+       this.buttonText,
       required this.onConfirm});
 
   @override
@@ -26,7 +34,7 @@ class _CustomMultiSelectDialogFieldState
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+            color: Color.fromARGB(255, 206, 205, 205).withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
             offset: Offset(0, 2),
@@ -34,6 +42,8 @@ class _CustomMultiSelectDialogFieldState
         ],
       ),
       child: MultiSelectDialogField(
+        title: Text('${widget.title}'),
+        buttonText: Text('${widget.buttonText}'),
         initialValue: widget.initialValue,
         decoration: BoxDecoration(border: Border()),
         buttonIcon: Icon(Icons.arrow_drop_down),

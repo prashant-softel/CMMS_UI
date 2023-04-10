@@ -11,9 +11,9 @@ class FacilityModel {
         id: json['id'],
         name: json['name'],
         address: json['address'] ?? '',
-        city: json['city'],
-        state: json['state'],
-        country: json['country'],
+        city: json['city'] ?? '',
+        state: json['state'] ?? '',
+        country: json['country'] ?? '',
         pincode: json['pin'],
       );
   FacilityModel({

@@ -55,7 +55,7 @@ class JobListScreen extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              //HomeDrawer(),
+                              // HomeDrawer(),
                               Expanded(child: JobListContentWeb()),
                             ]),
                       ),

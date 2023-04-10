@@ -229,7 +229,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
             Expanded(
               child: Container(
                 child: GetBuilder<HomeController>(
-                    id: 'inventory_list',
+                    id: 'warranty_claim_list',
                     builder: (controller) {
                       return //
                           Column(
@@ -239,19 +239,18 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                             Expanded(
                               child: ScrollableTableView(
                                 paginationController:
-                                    controller.paginationController,
+                                    controller.paginationWarrantyController,
                                 columns: [
-                                  'Warranty Claim No',
+                                  'Warranty Claim Id',
                                   'Date of Claim',
-                                  'Country',
-                                  'Plant',
-                                  'Claim Title',
+                                  'Warranty Claim Title',
+                                  'Equipment Serial No.',
                                   'Equipment Category',
-                                  'Quantity Supplier',
-                                  'Status',
-                                  'Last Updated',
-                                  'Closure Date',
+                                  'Equipment Name',
+                                  'Warranty Description',
                                   'Estimated Cost',
+                                  'Quantity',
+                                  'Status',
                                   'action'.tr,
                                 ].map((column) {
                                   return TableViewColumn(
@@ -261,42 +260,30 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
-                                    controller.inventoryList.length,
+                                    controller.warrantyClaimList.length,
                                     (index) => [
                                       AssetName(
-                                         '${controller.inventoryList[index].name}',
+                                         '${controller.warrantyClaimList[index].wc_id}',
                                         // 'dummy data',
                                         1,
                                       ),
-                                      index + 1,
-                                      '${controller.inventoryList[index].parentName}',
-                                      '${controller.inventoryList[index].categoryName}',
-                                      '${controller.inventoryList[index].operatorName}',
-                                      '${controller.inventoryList[index].parentName}',
-                                      '${controller.inventoryList[index].categoryName}',
-                                      '${controller.inventoryList[index].operatorName}',
-                                      '${controller.inventoryList[index].operatorName}',
-                                      '${controller.inventoryList[index].operatorName}',
-                                      '${controller.inventoryList[index].operatorName}',
-    
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
-                                      // 'dummy data',
+                                      // index + 1,
+                                      '${controller.warrantyClaimList[index].date_of_claim}',
+                                      '${controller.warrantyClaimList[index].warranty_claim_title}',
+                                      '${controller.warrantyClaimList[index].equipment_sr_no}',
+                                      '${controller.warrantyClaimList[index].equipment_category}',
+                                      '${controller.warrantyClaimList[index].equipment_name}',
+                                      '${controller.warrantyClaimList[index].warranty_description}',
+                                      '${controller.warrantyClaimList[index].estimated_cost}',
+                                      '${controller.warrantyClaimList[index].quantity}',
+                                      '${controller.warrantyClaimList[index].status}',
                                       'Actions'
                                     ],
                                   ),
                                 ].map(
                                   (record) {
                                     return TableViewRow(
-                                      height: Get.height * 0.15,
+                                      height: Get.height * 0.13,
                                       cells: record.map(
                                         (value) {
                                           return TableViewCell(
