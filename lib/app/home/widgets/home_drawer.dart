@@ -154,17 +154,18 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: press,
-      horizontalTitleGap: 0.0,
-      leading: Image.asset(
-        icon,
-        height: 15,
-        color: Color(0xffD2D0D0),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(color: Colors.white54),
-      ),
-    );
+        onTap: press,
+        horizontalTitleGap: 0.0,
+        leading: Image.asset(
+          icon,
+          height: 15,
+          color: Color(0xffD2D0D0),
+        ),
+        title: Text(title,
+            style: TextStyle(
+              color: Color(0xffD2D0D0),
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            )));
   }
 }
