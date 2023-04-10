@@ -352,7 +352,7 @@ class Repository {
   Future<List<BusinessListModel>> getBusinessList({
     required int? businessType,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
     required bool isLoading,
   }) async {
     try {
@@ -360,9 +360,9 @@ class Repository {
 
       log(auth);
       final res = await _dataRepository.getBusinessList(
-        businessType: 5,
+        businessType: businessType,
         blockId: blockId,
-        categoryIds: categoryIds,
+        categoryIds: categoryIds ?? "",
         isLoading: isLoading,
         auth: auth,
       );
@@ -379,8 +379,7 @@ class Repository {
     }
   }
 
-
-   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
+  Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
     int? blockId,
     required String categoryIds,
@@ -388,7 +387,7 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      
+
       log(auth);
       final res = await _dataRepository.getWarrantyClaimList(
         facilityId: 45,

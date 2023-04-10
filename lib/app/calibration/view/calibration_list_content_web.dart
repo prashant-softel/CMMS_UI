@@ -7,6 +7,7 @@ import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/dropdown.dart';
 import '../../widgets/table_action_button.dart';
 import '../calibration_list_controller.dart';
 
@@ -80,7 +81,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                           style: Styles.blackBold16,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _filterDialog();
+                          },
                           child: Icon(
                             Icons.filter_alt_rounded,
                             color: ColorValues.lightGreyTextColor,
@@ -404,155 +407,165 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       content: Builder(builder: (context) {
         var height = Get.height;
 
-        return Container(
-          margin: Dimens.edgeInsets15,
-          padding: Dimens.edgeInsets25,
-          height: height / 2.4,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: ColorValues.appBlueBackgroundColor,
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
+        return Obx(
+          () => Container(
+            margin: Dimens.edgeInsets15,
+            padding: Dimens.edgeInsets25,
+            height: height / 2.4,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(
                 color: ColorValues.appBlueBackgroundColor,
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 2),
+                width: 1,
               ),
-            ],
+              boxShadow: [
+                BoxShadow(
+                  color: ColorValues.appBlueBackgroundColor,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Previous Calibration"),
+                          Text("                         Date:"),
+                        ],
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  2.0,
+                                  3.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          width: Get.width / 5,
+                          child: LoginCustomTextfield(
+                            textController: controller.previousDateController,
+                            ontap: () {
+                              _selectDate(context, 1);
+                            },
+                            widget: Icon(
+                              Icons.calendar_month,
+                              color: ColorValues.greyLightColor,
+                            ),
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Due Date For Next"),
+                          Text("             Calibration:"),
+                        ],
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  2.0,
+                                  3.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          width: Get.width / 5,
+                          child: LoginCustomTextfield(
+                            textController: controller.nextDueDateController,
+                            ontap: () {
+                              _selectDate(context, 2);
+                            },
+                            widget: Icon(
+                              Icons.calendar_month,
+                              color: ColorValues.greyLightColor,
+                            ),
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Vender Name :"),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                2.0,
+                                3.0,
+                              ),
+                              blurRadius: 3.0,
+                              spreadRadius: 1.0,
+                            ),
+                          ],
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        width: Get.width / 5,
+                        child: DropdownWidget(
+                          dropdownList: controller.venderNameList,
+                          isValueSelected:
+                              controller.isVenderNameSelected.value,
+                          selectedValue: controller.selectedVender.value,
+                          onValueChanged: controller.onValueChanged,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomElevatedButton(
+                          text: "Cancel",
+                          onPressed: () {},
+                          backgroundColor: ColorValues.appRedColor,
+                          textColor: ColorValues.whiteColor,
+                        ),
+                        Dimens.boxWidth10,
+                        CustomElevatedButton(
+                          text: "Start",
+                          onPressed: () {},
+                          backgroundColor: ColorValues.appGreenColor,
+                          textColor: ColorValues.whiteColor,
+                        ),
+                        Dimens.boxWidth10,
+                      ]),
+                ]),
           ),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text("Previous Calibration"),
-                    Text("                         Date:"),
-                  ],
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: const Offset(
-                            2.0,
-                            3.0,
-                          ),
-                          blurRadius: 3.0,
-                          spreadRadius: 1.0,
-                        ),
-                      ],
-                      color: ColorValues.whiteColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    width: Get.width / 5,
-                    child: LoginCustomTextfield(
-                      textController: controller.previousDateController,
-                      ontap: () {
-                        _selectDate(context, 1);
-                      },
-                      widget: Icon(
-                        Icons.calendar_month,
-                        color: ColorValues.greyLightColor,
-                      ),
-                    ))
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text("Due Date For Next"),
-                    Text("             Calibration:"),
-                  ],
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: const Offset(
-                            2.0,
-                            3.0,
-                          ),
-                          blurRadius: 3.0,
-                          spreadRadius: 1.0,
-                        ),
-                      ],
-                      color: ColorValues.whiteColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    width: Get.width / 5,
-                    child: LoginCustomTextfield(
-                      textController: controller.nextDueDateController,
-                      ontap: () {
-                        _selectDate(context, 2);
-                      },
-                      widget: Icon(
-                        Icons.calendar_month,
-                        color: ColorValues.greyLightColor,
-                      ),
-                    ))
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Vender Name :"),
-                Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: const Offset(
-                            2.0,
-                            3.0,
-                          ),
-                          blurRadius: 3.0,
-                          spreadRadius: 1.0,
-                        ),
-                      ],
-                      color: ColorValues.whiteColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    width: Get.width / 5,
-                    child: LoginCustomTextfield(
-                      textController: controller.nextDueDateController,
-                    ))
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              CustomElevatedButton(
-                text: "Cancel",
-                onPressed: () {},
-                backgroundColor: ColorValues.appRedColor,
-                textColor: ColorValues.whiteColor,
-              ),
-              Dimens.boxWidth10,
-              CustomElevatedButton(
-                text: "Start",
-                onPressed: () {},
-                backgroundColor: ColorValues.appGreenColor,
-                textColor: ColorValues.whiteColor,
-              ),
-              Dimens.boxWidth10,
-            ]),
-          ]),
         );
       }),
       actions: [],
@@ -572,4 +585,42 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
 
     controller.previousDateController.text = date.toString().substring(0, 10);
   }
+}
+
+_filterDialog() {
+  return Get.dialog(
+    Stack(
+      children: [
+        Positioned(
+          right: 1,
+          top: 170,
+          child: Container(
+            width: Get.width / 2.5,
+            //  margin: EdgeInsets.all(10),
+            child: AlertDialog(
+              // insetPadding: Dimens.edgeInsets10_0_10_0,
+              contentPadding: EdgeInsets.all(20),
+              backgroundColor: ColorValues.appBlueBackgroundColor,
+              content: Wrap(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _filterText("Rejected"),
+                    _filterText("Complete"),
+                    _filterText("Waiting for Approval"),
+                    _filterText("Approved to dispatch"),
+                    _filterText("Waiting for final Approval"),
+                  ]),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+_filterText(String text) {
+  return Card(
+    margin: const EdgeInsets.all(15.0),
+    child: Text(text),
+  );
 }
