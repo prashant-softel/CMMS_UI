@@ -540,6 +540,45 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         },
                                                       ),
                                                     ),
+                                                  ),
+                                                  SizedBox(width: 60,),
+                                                  CustomRichText(
+                                                      title: 'Equipment Categories: '),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  SizedBox(
+                                                    width: MediaQuery.of(context).size.width / 3.7,
+                                                    child: CustomMultiSelectDialogField(
+                                                      title: 'Equipment Category',
+                                                      buttonText: 'Equipment Category',
+                                                      initialValue: (controller
+                                                              .selectedEquipmentCategoryIdList
+                                                              .isNotEmpty)
+                                                          ? controller
+                                                              .selectedEquipmentCategoryIdList
+                                                          : [],
+                                                      items: controller
+                                                          .equipmentCategoryList
+                                                          .map(
+                                                            (equipmentCategory) =>
+                                                                MultiSelectItem(
+                                                              equipmentCategory?.id,
+                                                              equipmentCategory?.name ??
+                                                                  '',
+                                                            ),
+                                                          )
+                                                          .toList(),
+                                                      onConfirm:
+                                                          (selectedOptionsList) => {
+                                                        controller
+                                                            .equipmentCategoriesSelected(
+                                                                selectedOptionsList),
+                                                        print(
+                                                            'Equipment list ${controller.equipmentCategoryList}')
+                                                      },
+                                                    ),
+                                                  ),
                                                   ],
                                                 ),
                                               ),
@@ -1105,6 +1144,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           ),
         ),
       ),
+
       Dimens.boxHeight20,
     ]);
   }

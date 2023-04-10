@@ -52,6 +52,7 @@ class InventoryListContentWeb extends GetView<HomeController> {
                   label: 'addAsset'.tr,
                   onPressed: () {
                     Get.to(() => AddInventory());
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => AddInventory()));
                   },
                   // lable: 'addAsset'.tr,
                   // onPress: () async{

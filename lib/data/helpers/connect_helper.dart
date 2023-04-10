@@ -124,6 +124,61 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getBusinessList({
+    required bool isLoading,
+    required String auth,
+    int? businessType,
+    int? blockId,
+    required String categoryIds,
+  }) async {
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessList?businessType=$businessType' +
+          blockIdParam +
+          categoryIdsParam,
+          // statusParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> getWarrantyClaimList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+    int? blockId,
+    required String categoryIds,
+  }) async {
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'WC/GetWCList?facilityId=45' +
+          blockIdParam +
+          categoryIdsParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getBlockList({
     required bool isLoading,
     required String facilityId,
@@ -257,6 +312,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Facility List: ${response}');
     try {
       response = await apiWrapper.makeRequest(
         'CMMS/GetFacilityList',
@@ -266,6 +322,7 @@ class ConnectHelper {
         {
           'Authorization': 'Bearer $auth',
         },
+        
       );
     } catch (error) {
       print(error);

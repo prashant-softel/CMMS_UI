@@ -7,6 +7,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -16,6 +17,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -334,10 +336,72 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
+      print('Inventory List Data: ${res.data}');
 
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<BusinessListModel>> getBusinessList({
+    required int? businessType,
+    int? blockId,
+    required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getBusinessList(
+        businessType: 5,
+        blockId: blockId,
+        categoryIds: categoryIds,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Business List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var businessList = businessListModelFromJson(res.data);
+        return businessList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
+    required int? facilityId,
+    int? blockId,
+    required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      
+      log(auth);
+      final res = await _dataRepository.getWarrantyClaimList(
+        facilityId: 45,
+        blockId: blockId,
+        categoryIds: categoryIds,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('WarrantyClaim: ${res.data}');
+
+      if (!res.hasError) {
+        var warrantyClaimList = warrantyClaimModelFromJson(res.data);
+        return warrantyClaimList;
       }
       return [];
     } catch (error) {
@@ -506,6 +570,7 @@ class Repository {
         auth: auth,
         isLoading: isLoading,
       );
+      print('Facilitydata5: ${res.data}');
 
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);

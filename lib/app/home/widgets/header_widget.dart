@@ -51,6 +51,7 @@ class HeaderWidget extends GetView<HomeController> {
                   ),
                 ),
               ),
+              // Text('My BEST DATA: ${controller.blockList}'),
             Spacer(),
             if (Responsive.isDesktop(context))
               Icon(Icons.notifications_active,

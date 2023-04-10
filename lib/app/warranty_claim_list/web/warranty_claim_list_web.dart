@@ -372,6 +372,173 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
                                                                       .end,
+                    padding: Dimens.edgeInsets5_8_16_8,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Text(
+                      'columnVisibility'.tr,
+                      style: Styles.white12.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 50),
+                  child: Container(
+                    width: 200,
+                    height: 40,
+                    margin: Dimens.edgeInsets0_0_16_0,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        contentPadding: Dimens.edgeInsets10_0_0_0,
+                        hintText: 'search'.tr,
+                        hintStyle: Styles.grey12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            ///
+            Expanded(
+              child: Container(
+                child: GetBuilder<HomeController>(
+                    id: 'warranty_claim_list',
+                    builder: (controller) {
+                      return //
+                          Column(
+                              //
+                              children: [
+                            ///
+                            Expanded(
+                              child: ScrollableTableView(
+                                paginationController:
+                                    controller.paginationWarrantyController,
+                                columns: [
+                                  'Warranty Claim Id',
+                                  'Date of Claim',
+                                  'Warranty Claim Title',
+                                  'Equipment Serial No.',
+                                  'Equipment Category',
+                                  'Equipment Name',
+                                  'Warranty Description',
+                                  'Estimated Cost',
+                                  'Quantity',
+                                  'Status',
+                                  'action'.tr,
+                                ].map((column) {
+                                  return TableViewColumn(
+                                    minWidth: Get.width * 0.16,
+                                    label: column,
+                                  );
+                                }).toList(),
+                                rows: [
+                                  ...List.generate(
+                                    controller.warrantyClaimList.length,
+                                    (index) => [
+                                      AssetName(
+                                         '${controller.warrantyClaimList[index].wc_id}',
+                                        // 'dummy data',
+                                        1,
+                                      ),
+                                      // index + 1,
+                                      '${controller.warrantyClaimList[index].date_of_claim}',
+                                      '${controller.warrantyClaimList[index].warranty_claim_title}',
+                                      '${controller.warrantyClaimList[index].equipment_sr_no}',
+                                      '${controller.warrantyClaimList[index].equipment_category}',
+                                      '${controller.warrantyClaimList[index].equipment_name}',
+                                      '${controller.warrantyClaimList[index].warranty_description}',
+                                      '${controller.warrantyClaimList[index].estimated_cost}',
+                                      '${controller.warrantyClaimList[index].quantity}',
+                                      '${controller.warrantyClaimList[index].status}',
+                                      'Actions'
+                                    ],
+                                  ),
+                                ].map(
+                                  (record) {
+                                    return TableViewRow(
+                                      height: Get.height * 0.13,
+                                      cells: record.map(
+                                        (value) {
+                                          return TableViewCell(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                print('${value} $record');
+                                              },
+                                              child: value.runtimeType
+                                                          .toString() ==
+                                                      'AssetName'
+                                                  ? Builder(builder: (context) {
+                                                      final val =
+                                                          value as AssetName;
+                                                      return Column(
+                                                        children: [
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Padding(
+                                                              padding: Dimens
+                                                                  .edgeInsets8,
+                                                              child: Text(
+                                                                  '${val.name}'),
+                                                            ),
+                                                          ),
+                                                          Spacer(),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            child: Container(
+                                                              padding: Dimens
+                                                                  .edgeInsets8_2_8_2,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                // color: val.requirementStatus ==
+                                                                //         1
+                                                                //     ? Colors.red
+                                                                //     : Colors
+                                                                //         .green,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                              ),
+                                                              child: Text(
+                                                                // val.name == 1
+                                                                //     ? 'requirementRejected'
+                                                                //         .tr
+                                                                //     : 'requirementAccepted'
+                                                                //         .tr,
+                                                                // style: Styles
+                                                                //     .white10
+                                                                //     .copyWith(
+                                                                //   color: Colors
+                                                                //       .white,
+                                                                // ),
+                                                                '',
+
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                        ],
+                                                      );
+                                                    })
+                                                  : value == 'Actions'
+                                                      ? Wrap(
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.end,
                                                               children: [
                                                                 TableActionButton(
                                                                   color: Colors

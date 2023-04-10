@@ -25,6 +25,7 @@ abstract class Routes {
       _Paths.preventiveMaintenanceMapping;
   static const calibrationList = _Paths.calibrationList;
   static const CalibrationHistory = _Paths.calibrationHistory;
+  static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
 }
 
 abstract class _Paths {
@@ -50,4 +51,5 @@ abstract class _Paths {
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
+  static const viewWarrantyClaim = '/view-warranty-claim';
 }
