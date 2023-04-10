@@ -98,7 +98,7 @@ class BreakdownMaintenanceScreen
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Text(
-                          "Breakdown Maintenance123",
+                          "Breakdown Maintenance",
                           style: TextStyle(
                               color: Color.fromARGB(255, 159, 156, 156),
                               fontSize: 24,
@@ -111,7 +111,7 @@ class BreakdownMaintenanceScreen
                       padding: Dimens.edgeInsets15,
                       crossAxisSpacing: 6,
                       mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 2,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
@@ -122,14 +122,19 @@ class BreakdownMaintenanceScreen
                               controller.goToJobListScreen();
                             }),
                         createContentTile(
-                            title: "New Permit",
-                            onTap: () {
-                              controller.createNewPermit();
-                            }),
-                        createContentTile(
+                          title: 'Add New Job',
+                          onTap: (){
+                            controller.addNewJob();
+                          }),
+                          createContentTile(
                             title: "Permit List",
                             onTap: () {
                               controller.newPermitList();
+                            }),
+                        createContentTile(
+                            title: "Add New Permit",
+                            onTap: () {
+                              controller.createNewPermit();
                             }),
                         createContentTile(title: "Job Card List"),
                         // _priventiveList(tittle: "PM Schedule View"),
