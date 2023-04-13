@@ -26,6 +26,7 @@ abstract class Routes {
   static const calibrationList = _Paths.calibrationList;
   static const CalibrationHistory = _Paths.calibrationHistory;
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
+  static const calibrationDetail = _Paths.calibrationDetail;
 }
 
 abstract class _Paths {
@@ -39,8 +40,6 @@ abstract class _Paths {
   static const jobCardDetails = '/job-card-details';
   static const login = '/login-screen';
   static const preventive = '/preventive-screen';
-  // static const create_checkList = '/create_preventive_checklist-screen';
-  // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
   static const newPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
@@ -52,4 +51,5 @@ abstract class _Paths {
   static const calibrationList = '/calibration-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
+  static const calibrationDetail = '/calibration-detail';
 }

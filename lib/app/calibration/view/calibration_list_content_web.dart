@@ -286,7 +286,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                           ],
                         ].map((record) {
                           return TableViewRow(
-                            height: 90,
+                            height: 100,
                             cells: record.map((value) {
                               return TableViewCell(
                                 child: (value == "Action")
@@ -302,7 +302,10 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                           color: ColorValues.appDarkBlueColor,
                                           icon: Icons.remove_red_eye_outlined,
                                           label: 'View',
-                                          onPress: () {},
+                                          onPress: () {
+                                            Get.toNamed(
+                                                Routes.calibrationDetail);
+                                          },
                                         ),
                                         TableActionButton(
                                           color: ColorValues.appRedColor,
@@ -551,7 +554,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                       children: [
                         CustomElevatedButton(
                           text: "Cancel",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+                          },
                           backgroundColor: ColorValues.appRedColor,
                           textColor: ColorValues.whiteColor,
                         ),
@@ -582,8 +587,11 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       firstDate: DateTime(1900),
       lastDate: DateTime(today.year - 18, today.month, today.day),
     );
-
-    controller.previousDateController.text = date.toString().substring(0, 10);
+    if (type == 1) {
+      controller.previousDateController.text = date.toString().substring(0, 10);
+    } else {
+      controller.nextDueDateController.text = date.toString().substring(0, 10);
+    }
   }
 }
 

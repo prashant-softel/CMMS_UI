@@ -48,7 +48,7 @@ class CalibrationHistoryContentWeb
                 onTap: () {
                   Get.back();
                 },
-                child: Text(" / CALIBRATION History",
+                child: Text(" / CALIBRATION HISTORY",
                     style: Styles.greyMediumLight12),
               ),
             ],

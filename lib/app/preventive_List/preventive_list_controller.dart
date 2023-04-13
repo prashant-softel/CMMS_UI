@@ -50,10 +50,6 @@ class PreventiveListController extends GetxController {
   void onInit() async {
     getInventoryCategoryList();
     getFrequencyList();
-    var data = varUserAccessModel.value.access_list!
-            .where((e) => e.feature_id == 5 && e.add == 1) ==
-        true;
-    print({"listing", data});
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
