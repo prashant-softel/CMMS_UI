@@ -773,7 +773,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                       children: [
                         CustomElevatedButton(
                           text: "Cancel",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+                          },
                           backgroundColor: ColorValues.appRedColor,
                           textColor: ColorValues.whiteColor,
                         ),
