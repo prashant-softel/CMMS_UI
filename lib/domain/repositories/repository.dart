@@ -858,7 +858,7 @@ class Repository {
 
       if (!res.hasError) {
         final userAccessModelList = jsonDecode(res.data);
-        //print(res.data);
+        // print(res.data);
         //  var userAccess = AccessListModel.fromJson(userAccessModelList);
         saveUserAcessData(LocalKeys.userAccess, res.data);
 
@@ -915,7 +915,7 @@ class Repository {
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-        //print(res.data);
+        // print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
