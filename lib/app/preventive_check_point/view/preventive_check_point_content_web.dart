@@ -587,6 +587,8 @@ class PreventiveCheckPointContentWeb
                                                                               .appRedColor,
                                                                           inactiveTrackColor: ColorValues
                                                                               .appRedColor,
+                                                                          inactiveTrackColor: ColorValues
+                                                                              .appRedColor,
                                                                           value: value == "1"
                                                                               ? true
                                                                               : false,

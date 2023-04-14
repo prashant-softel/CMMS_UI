@@ -633,7 +633,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
           () => Container(
             margin: Dimens.edgeInsets15,
             padding: Dimens.edgeInsets25,
-            height: height / 2.4,
+            height: height / 2.3,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
