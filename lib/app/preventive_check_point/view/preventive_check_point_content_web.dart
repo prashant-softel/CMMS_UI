@@ -303,6 +303,8 @@ class PreventiveCheckPointContentWeb
                                             Transform.scale(
                                               scale: .7,
                                               child: Switch.adaptive(
+                                                  inactiveTrackColor:
+                                                      ColorValues.appRedColor,
                                                   activeColor:
                                                       ColorValues.appGreenColor,
                                                   value: controller
@@ -595,6 +597,8 @@ class PreventiveCheckPointContentWeb
                                                                       .adaptive(
                                                                           activeColor: ColorValues
                                                                               .appGreenColor,
+                                                                          inactiveTrackColor: ColorValues
+                                                                              .appRedColor,
                                                                           value: value == "1"
                                                                               ? true
                                                                               : false,

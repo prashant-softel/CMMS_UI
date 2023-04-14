@@ -36,7 +36,7 @@ class PreventiveCheckPointController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  var preventiveCheckPointModelListDetails;
+  // var preventiveCheckPointModelListDetails;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   @override

@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -856,7 +857,7 @@ class Repository {
 
       if (!res.hasError) {
         final userAccessModelList = jsonDecode(res.data);
-        //print(res.data);
+        // print(res.data);
         //  var userAccess = AccessListModel.fromJson(userAccessModelList);
         saveUserAcessData(LocalKeys.userAccess, res.data);
 
@@ -913,7 +914,7 @@ class Repository {
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-        //print(res.data);
+        // print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
@@ -1339,6 +1340,56 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<List<CalibrationListModel?>?> getCalibrationList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCalibrationList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      // print(res.data);
+      if (!res.hasError) {
+        final jsonCalibrationListModelModels = jsonDecode(res.data);
+
+        final List<CalibrationListModel> _CalibrationListModelList =
+            jsonCalibrationListModelModels
+                .map<CalibrationListModel>((m) =>
+                    CalibrationListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _CalibrationListModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<bool> StartCalibration({bool? isLoading, startcalibration}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.StartCalibration(
+          auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      }
+      return true;
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 

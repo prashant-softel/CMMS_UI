@@ -18,30 +18,28 @@ class HomeController extends GetxController {
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
 
-///
+  ///
   var startDateTimeCtrlrWeb = TextEditingController();
   Rx<DateTime> selectedDateTimeWeb = DateTime.now().obs;
 
   ///
- var startDateTimeCtrlr2 = TextEditingController();
+  var startDateTimeCtrlr2 = TextEditingController();
   Rx<DateTime> selectedBreakdownTime2 = DateTime.now().obs;
 
-
- ///
- var startDateTimeCtrlr3 = TextEditingController();
+  ///
+  var startDateTimeCtrlr3 = TextEditingController();
   Rx<DateTime> selectedBreakdownTime3 = DateTime.now().obs;
 
   Set<String> supplierNameSet = {};
 
 //Warranty Claim
-var warrantyClaimList = <WarrantyClaimModel>[];
-RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-RxList<InventoryCategoryModel?> equipmentCategoryList =
+  var warrantyClaimList = <WarrantyClaimModel>[];
+  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
 
-RxList<EquipmentModel?> equipmentModelList =
-      <EquipmentModel>[].obs;
-RxList<int> selectedEquipmentList = <int>[].obs;
+  RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
+  RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<bool> isInventorySelected = true.obs;
   RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
   Rx<String> selectedInventory = ''.obs;
@@ -54,15 +52,6 @@ RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<String> selectedSupplier = ''.obs;
   RxList<String?> selectedSupplierNameList = <String>[].obs;
   RxList<int?> selectedSupplierNameIdList = <int>[].obs;
-
-
-
-
-
-
-
-
-
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -172,7 +161,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
-     Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       getWarrantyClaimList();
     });
     Future.delayed(Duration(seconds: 1), () {
@@ -186,7 +175,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
 
   Future<void> getFacilityList() async {
     final _facilityList = await homePresenter.getFacilityList();
-    print('Facility25:$_facilityList');
+    //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
         facilityList.add(facility);
@@ -217,11 +206,10 @@ RxList<int> selectedEquipmentList = <int>[].obs;
 
   Future<void> getInventoryCategoryList({String? facilityId}) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
-    final _equipmentCategoryList =
-        await homePresenter.getInventoryCategoryList(
+    final _equipmentCategoryList = await homePresenter.getInventoryCategoryList(
       isLoading: true,
     );
-    print('equipment category:$equipmentCategoryList');
+    //  print('equipment category:$equipmentCategoryList');
     if (_equipmentCategoryList != null) {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
@@ -236,7 +224,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
       categoryIds: categoryIds,
       facilityId: facilityId,
     );
-     print('equipment Name List:$inventoryNameList');
+    //  print('equipment Name List:$inventoryNameList');
     if (_inventoryList != null) {
       for (var inventory_list in _inventoryList) {
         inventoryNameList.add(inventory_list);
@@ -257,7 +245,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
       categoryIds: categoryIds,
       businessType: 5,
     );
-     print('Supplier Name List:$supplierNameList');
+    //  print('Supplier Name List:$supplierNameList');
     if (_supplierNameList != null) {
       for (var supplier_list in _supplierNameList) {
         supplierNameList.add(supplier_list);
@@ -279,20 +267,19 @@ RxList<int> selectedEquipmentList = <int>[].obs;
       categoryIds: categoryIds,
       facilityId: 45,
     );
-     print('Supplier Name List:$supplierNameList');
+    print('Supplier Name List:$supplierNameList');
     if (list != null) {
       // selectedSupplierNameList.clear();
       // supplierNameList.clear();
       Set<String> supplierNameSet = {};
-      for(var _supplierNameList in list){
-        if(_supplierNameList.supplier_name != null){
+      for (var _supplierNameList in list) {
+        if (_supplierNameList.supplier_name != null) {
           supplierNameSet.add(_supplierNameList.supplier_name ?? "");
           // supplierNameList.add(_supplierNameList);
         }
-        print('Supplier Name Data:$supplierNameSet');
+        //  print('Supplier Name Data:$supplierNameSet');
         // selectedSupplierNameList.addAll(supplierNameSet.toList());
-        print('Supplier Name5:$selectedSupplierNameList');
-
+        //  print('Supplier Name5:$selectedSupplierNameList');
       }
 
       // for (var supplier_name_list in list) {
