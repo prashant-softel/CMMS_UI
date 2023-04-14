@@ -140,7 +140,7 @@ class ConnectHelper {
       'CMMS/GetBusinessList?businessType=$businessType' +
           blockIdParam +
           categoryIdsParam,
-          // statusParam,
+      // statusParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -150,7 +150,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
@@ -165,9 +164,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'WC/GetWCList?facilityId=45' +
-          blockIdParam +
-          categoryIdsParam,
+      'WC/GetWCList?facilityId=45' + blockIdParam + categoryIdsParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -177,7 +174,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBlockList({
     required bool isLoading,
@@ -322,7 +318,6 @@ class ConnectHelper {
         {
           'Authorization': 'Bearer $auth',
         },
-        
       );
     } catch (error) {
       print(error);
@@ -766,6 +761,43 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getCalibrationList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/GetCalibrationList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> StartCalibration({
+    required String auth,
+    bool? isLoading,
+    required startcalibration,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RequestCalibration',
+      Request.post,
+      startcalibration,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 

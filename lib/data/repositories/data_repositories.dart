@@ -107,7 +107,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getBusinessList({
     int? businessType,
     int? blockId,
@@ -118,7 +118,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getBusinessList(
       isLoading: isLoading,
       auth: auth,
-      businessType: 5,
+      businessType: businessType,
       blockId: blockId,
       categoryIds: categoryIds,
     );
@@ -545,6 +545,25 @@ class DataRepository extends DomainRepository {
         pmJsonString: pmJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getCalibrationList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCalibrationList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> StartCalibration({
+    auth,
+    bool? isLoading,
+    startcalibration,
+  }) async {
+    var response = await connectHelper.StartCalibration(
+        auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+    return response;
+  }
 
   ///
 }

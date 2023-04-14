@@ -3,6 +3,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
+import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
@@ -20,6 +21,7 @@ import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
 import '../calibration/calibration_list_binding.dart';
+import '../calibration_detail/view/calibration_detail_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
@@ -164,6 +166,11 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.viewWarrantyClaim,
       page: ViewWarrantyClaimWeb.new,
+    ),
+    GetPage<dynamic>(
+      name: _Paths.calibrationDetail,
+      page: CalibrationDetailScreen.new,
+      binding: CalibrationDetailBinding(),
     ),
   ];
 }

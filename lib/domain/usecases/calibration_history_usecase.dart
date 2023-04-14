@@ -1,7 +1,19 @@
 import 'package:cmms/domain/domain.dart';
 
-class CalibrationHistoryUsecase {
-  final Repository _repository;
+import '../models/history_model.dart';
 
-  CalibrationHistoryUsecase(this._repository);
+class CalibrationHistoryUsecase {
+  final Repository repository;
+
+  CalibrationHistoryUsecase(this.repository);
+  Future<List<HistoryModel>?> getJobCardHistory({
+    moduleType,
+    Id,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobCardHistory(
+        moduleType,
+        Id,
+        isLoading,
+      );
 }
