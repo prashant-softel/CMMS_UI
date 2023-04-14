@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:flutter/material.dart';
@@ -416,7 +417,14 @@ class PreventiveChecklistListContentWeb
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appLightBlueColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              FlutterClipboard.copy(controller
+                                                      .preventiveCheckList![0]
+                                                      .toString())
+                                                  .then((value) {
+                                                print("copy data");
+                                              });
+                                            },
                                             text: 'Copy'),
                                       ),
                                       Container(

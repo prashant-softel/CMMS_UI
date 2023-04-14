@@ -764,5 +764,42 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getCalibrationList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/GetCalibrationList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> StartCalibration({
+    required String auth,
+    bool? isLoading,
+    required startcalibration,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RequestCalibration',
+      Request.post,
+      startcalibration,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   ///
 }

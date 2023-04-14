@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../navigators/app_pages.dart';
@@ -58,322 +59,372 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
           ),
         ),
         Flexible(
-          child: Container(
-            width: Get.width * 7,
-            margin: EdgeInsets.only(left: 10, top: 30),
-            height: Get.height,
-            child: Card(
-              color: Color.fromARGB(255, 245, 248, 250),
-              elevation: 10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Calibration List",
-                          style: Styles.blackBold16,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            _filterDialog();
-                          },
-                          child: Icon(
-                            Icons.filter_alt_rounded,
-                            color: ColorValues.lightGreyTextColor,
+          child: Obx(
+            () => Container(
+              width: Get.width * 7,
+              margin: EdgeInsets.only(left: 10, top: 30),
+              height: Get.height,
+              child: Card(
+                color: Color.fromARGB(255, 245, 248, 250),
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Calibration List",
+                            style: Styles.blackBold16,
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    color: ColorValues.greyLightColour,
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: (Get.width * .1) - 60,
-                        margin: EdgeInsets.only(left: 10),
-                        child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appLightBlueColor,
-                            onPressed: () {},
-                            text: 'Copy'),
-                      ),
-                      Container(
-                        width: (Get.width * .1) - 60,
-                        margin: EdgeInsets.only(left: 10),
-                        child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appLightBlueColor,
-                            onPressed: () {},
-                            text: 'Excel'),
-                      ),
-                      Container(
-                        width: (Get.width * .1) - 70,
-                        margin: EdgeInsets.only(left: 10),
-                        child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appLightBlueColor,
-                            onPressed: () {},
-                            text: 'PDF'),
-                      ),
-                      Container(
-                        width: (Get.width * .2) - 100,
-                        margin: EdgeInsets.only(left: 10),
-                        child: CustomElevatedButton(
-                          backgroundColor: ColorValues.appLightBlueColor,
-                          onPressed: () {},
-                          text: 'columnVisibility'.tr,
-                        ),
-                      ),
-                      Spacer(),
-                      Container(
-                        width: 200,
-                        height: 40,
-                        margin: Dimens.edgeInsets0_0_16_0,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.grey, width: 0.0),
+                          GestureDetector(
+                            onTap: () {
+                              _filterDialog();
+                            },
+                            child: Icon(
+                              Icons.filter_alt_rounded,
+                              color: ColorValues.lightGreyTextColor,
                             ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.grey, width: 0.0),
-                            ),
-                            contentPadding: Dimens.edgeInsets10_0_0_0,
-                            hintText: 'search'.tr,
-                            hintStyle: Styles.grey12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: Dimens.edgeInsets15,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: ColorValues.lightGreyColorWithOpacity35,
-                          width: 1,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: ColorValues.appBlueBackgroundColor,
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
-                          ),
+                          )
                         ],
                       ),
-                      child: ScrollableTableView(
-                        columns: [
-                          "Equipment Category",
-                          "Equipment Name",
-                          "Description",
-                          "Serial No.",
-                          "Calibration Certificates",
-                          "Installation date",
-                          "Last Calibration date",
-                          "Next Due Date",
-                          "Calibration Frequency",
-                          "Status",
-                          "Action",
-                        ].map((column) {
-                          return TableViewColumn(
-                            label: column,
-                            minWidth: Get.width * 0.15,
-                          );
-                        }).toList(),
-                        rows: [
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
+                    ),
+                    Divider(
+                      color: ColorValues.greyLightColour,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: (Get.width * .1) - 60,
+                          margin: EdgeInsets.only(left: 10),
+                          child: CustomElevatedButton(
+                              backgroundColor: ColorValues.appLightBlueColor,
+                              onPressed: () {},
+                              text: 'Copy'),
+                        ),
+                        Container(
+                          width: (Get.width * .1) - 60,
+                          margin: EdgeInsets.only(left: 10),
+                          child: CustomElevatedButton(
+                              backgroundColor: ColorValues.appLightBlueColor,
+                              onPressed: () {},
+                              text: 'Excel'),
+                        ),
+                        Container(
+                          width: (Get.width * .1) - 70,
+                          margin: EdgeInsets.only(left: 10),
+                          child: CustomElevatedButton(
+                              backgroundColor: ColorValues.appLightBlueColor,
+                              onPressed: () {},
+                              text: 'PDF'),
+                        ),
+                        Container(
+                          width: (Get.width * .2) - 100,
+                          margin: EdgeInsets.only(left: 10),
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appLightBlueColor,
+                            onPressed: () {},
+                            text: 'columnVisibility'.tr,
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 200,
+                          height: 40,
+                          margin: Dimens.edgeInsets0_0_16_0,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.grey, width: 0.0),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.grey, width: 0.0),
+                              ),
+                              contentPadding: Dimens.edgeInsets10_0_0_0,
+                              hintText: 'search'.tr,
+                              hintStyle: Styles.grey12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: Dimens.edgeInsets15,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorValues.appBlueBackgroundColor,
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
                           ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                          [
-                            "SCADA",
-                            "Pynarometer",
-                            "DEmo_Block_001_transfer0012",
-                            "PR1000",
-                            "calibration_certificate",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "2023-03-26",
-                            "Day",
-                            "Status",
-                            "Action"
-                          ],
-                        ].map((record) {
-                          return TableViewRow(
-                            height: 100,
-                            cells: record.map((value) {
-                              return TableViewCell(
-                                child: (value == "Action")
-                                    ? Wrap(children: [
-                                        TableActionButton(
-                                          color: ColorValues.lightGreenColor,
-                                          label: 'Start Calibration',
-                                          onPress: () {
-                                            startCalibration();
-                                          },
-                                        ),
-                                        TableActionButton(
-                                          color: ColorValues.appDarkBlueColor,
-                                          icon: Icons.remove_red_eye_outlined,
-                                          label: 'View',
-                                          onPress: () {
-                                            Get.toNamed(
-                                                Routes.calibrationDetail);
-                                          },
-                                        ),
-                                        TableActionButton(
-                                          color: ColorValues.appRedColor,
-                                          icon: Icons.delete,
-                                          label: 'Delete',
-                                          onPress: () {},
-                                        ),
-                                        TableActionButton(
-                                          color: ColorValues.appLightBlueColor,
-                                          icon:
-                                              Icons.access_time_filled_outlined,
-                                          label: 'History',
-                                          onPress: () {
-                                            controller.calibrationHistory();
-                                          },
-                                        ),
-                                        TableActionButton(
-                                          color: ColorValues.appRedColor,
-                                          icon: Icons.close,
-                                          label: 'Reject',
-                                          onPress: () {},
-                                        ),
-                                        // TableActionButton(
-                                        //   color: ColorValues.appRedColor,
-                                        //   icon: Icons.close,
-                                        //   label: 'Completed',
-                                        //   onPress: () {},
-                                        // ),
-                                        TableActionButton(
-                                          color: ColorValues.lightGreenColor,
-                                          icon: Icons.check,
-                                          label: 'Approve',
-                                          onPress: () {},
-                                        ),
-                                      ])
-                                    : (value == "Status")
-                                        ? Container(
-                                            padding: Dimens.edgeInsets8_2_8_2,
-                                            decoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 213, 46, 40),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                            ),
-                                            child: Text(
-                                              "Overdue",
-                                              style: Styles.white13.copyWith(
-                                                color: Colors.white,
-                                              ),
-                                            ))
-                                        : (value == "calibration_certificate")
-                                            ? TableActionButton(
-                                                color: ColorValues
-                                                    .appDarkBlueColor,
-                                                icon: Icons
-                                                    .remove_red_eye_outlined,
-                                                label: 'View',
-                                                onPress: () {},
-                                              )
-                                            : Text(value),
-                              );
-                            }).toList(),
-                          );
-                        }).toList(),
+                        ),
+                        child: controller.calibrationList!.isEmpty
+                            ? ScrollableTableView(
+                                columns: [
+                                  "Equipment Category",
+                                  "Equipment Name",
+                                  "Description",
+                                  "Serial No.",
+                                  "Calibration Certificates",
+                                  "Installation date",
+                                  "Last Calibration date",
+                                  "Next Due Date",
+                                  "Calibration Frequency",
+                                  "Status",
+                                  "Action",
+                                ].map((column) {
+                                  return TableViewColumn(
+                                    label: column,
+                                    minWidth: Get.width * 0.16,
+                                  );
+                                }).toList(),
+                                rows: [
+                                  ...List.generate(
+                                    controller.calibrationList?.length ?? 0,
+                                    (index) {
+                                      return [
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                        '',
+                                      ];
+                                    },
+                                  ),
+                                ].map((record) {
+                                  return TableViewRow(
+                                    height: 60,
+                                    cells: record.map((value) {
+                                      return TableViewCell(
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  );
+                                }).toList(),
+                              )
+                            : ScrollableTableView(
+                                paginationController:
+                                    controller.paginationController,
+                                columns: [
+                                  "Equipment Category",
+                                  "Equipment Name",
+                                  "Description",
+                                  "Serial No.",
+                                  "Calibration Certificates",
+                                  "Installation date",
+                                  "Last Calibration date",
+                                  "Next Due Date",
+                                  "Calibration Frequency",
+                                  "Status",
+                                  "Action",
+                                ].map((column) {
+                                  return TableViewColumn(
+                                    label: column,
+                                    minWidth: Get.width * 0.15,
+                                  );
+                                }).toList(),
+                                rows: [
+                                  ...List.generate(
+                                    controller.calibrationList?.length ?? 0,
+                                    (index) {
+                                      var calibrationListListDetails =
+                                          controller.calibrationList?[index];
+                                      return [
+                                        '${calibrationListListDetails?.category_name}',
+                                        "Equipment Name",
+                                        '${calibrationListListDetails?.asset_name}',
+                                        '123566',
+                                        "calibration_certificate",
+                                        'Installation Date',
+                                        '${calibrationListListDetails?.last_calibration_date}',
+                                        "Next deu date",
+                                        'Day',
+                                        '${calibrationListListDetails?.calibration_status}',
+                                        "Action"
+                                      ];
+                                    },
+                                  ),
+                                ].map((record) {
+                                  return TableViewRow(
+                                    height: 100,
+                                    cells: record.map((value) {
+                                      return TableViewCell(
+                                        child: (value == "Action")
+                                            ? Wrap(children: [
+                                                TableActionButton(
+                                                  color: ColorValues
+                                                      .lightGreenColor,
+                                                  label: 'Start Calibration',
+                                                  onPress: () {
+                                                    startCalibration();
+                                                  },
+                                                ),
+                                                TableActionButton(
+                                                  color: ColorValues
+                                                      .appDarkBlueColor,
+                                                  icon: Icons
+                                                      .remove_red_eye_outlined,
+                                                  label: 'View',
+                                                  onPress: () {
+                                                    Get.toNamed(Routes
+                                                        .calibrationDetail);
+                                                  },
+                                                ),
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.delete,
+                                                  label: 'Delete',
+                                                  onPress: () {},
+                                                ),
+                                                TableActionButton(
+                                                  color: ColorValues
+                                                      .appLightBlueColor,
+                                                  icon: Icons
+                                                      .access_time_filled_outlined,
+                                                  label: 'History',
+                                                  onPress: () {
+                                                    controller
+                                                        .calibrationHistory();
+                                                  },
+                                                ),
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.close,
+                                                  label: 'Reject',
+                                                  onPress: () {},
+                                                ),
+                                                // TableActionButton(
+                                                //   color: ColorValues.appRedColor,
+                                                //   icon: Icons.close,
+                                                //   label: 'Completed',
+                                                //   onPress: () {},
+                                                // ),
+                                                TableActionButton(
+                                                  color: ColorValues
+                                                      .lightGreenColor,
+                                                  icon: Icons.check,
+                                                  label: 'Approve',
+                                                  onPress: () {},
+                                                ),
+                                              ])
+                                            : (value == "Status")
+                                                ? Container(
+                                                    padding: Dimens
+                                                        .edgeInsets8_2_8_2,
+                                                    decoration: BoxDecoration(
+                                                      color: Color.fromARGB(
+                                                          255, 213, 46, 40),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                    ),
+                                                    child: Text(
+                                                      "Overdue",
+                                                      style: Styles.white13
+                                                          .copyWith(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ))
+                                                : (value ==
+                                                        "calibration_certificate")
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        label: 'View',
+                                                        onPress: () {},
+                                                      )
+                                                    : Text(value),
+                                      );
+                                    }).toList(),
+                                  );
+                                }).toList(),
+                              ),
                       ),
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: ValueListenableBuilder(
+                          valueListenable: controller.paginationController,
+                          builder: (context, value, child) {
+                            return Row(children: [
+                              Text(
+                                  "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                              Row(children: [
+                                IconButton(
+                                  onPressed: controller.paginationController
+                                              .currentPage <=
+                                          1
+                                      ? null
+                                      : () {
+                                          controller.paginationController
+                                              .previous();
+                                        },
+                                  iconSize: 20,
+                                  splashRadius: 20,
+                                  icon: Icon(
+                                    Icons.arrow_back_ios_new_rounded,
+                                    color: controller.paginationController
+                                                .currentPage <=
+                                            1
+                                        ? Colors.black26
+                                        : Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: controller.paginationController
+                                              .currentPage >=
+                                          controller
+                                              .paginationController.pageCount
+                                      ? null
+                                      : () {
+                                          controller.paginationController
+                                              .next();
+                                        },
+                                  iconSize: 20,
+                                  splashRadius: 20,
+                                  icon: Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: controller.paginationController
+                                                .currentPage >=
+                                            controller
+                                                .paginationController.pageCount
+                                        ? Colors.black26
+                                        : Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ]),
+                            ]);
+                          }),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -414,7 +465,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
           () => Container(
             margin: Dimens.edgeInsets15,
             padding: Dimens.edgeInsets25,
-            height: height / 2.4,
+            height: height / 2.3,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
