@@ -585,6 +585,8 @@ class PreventiveCheckPointContentWeb
                                                                 CustomSwitchTroggle(
                                                                   inactiveTrackColor: ColorValues
                                                                               .appRedColor,
+                                                                          inactiveTrackColor: ColorValues
+                                                                              .appRedColor,
                                                                           value: value == "1"
                                                                               ? true
                                                                               : false,
