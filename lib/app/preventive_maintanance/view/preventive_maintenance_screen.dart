@@ -133,7 +133,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               );
                               //    controller.pmMapping();
                             }),
-                        _priventiveList(tittle: "PM Schedule"),
+                        _priventiveList(
+                            tittle: "PM Schedule",
+                            ontap: () {
+                              controller.pmSchedule();
+                            }),
                         _priventiveList(tittle: "PM Schedule View"),
                         _priventiveList(tittle: "PM Report"),
                         _priventiveList(tittle: "PM Execution"),
