@@ -16,6 +16,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Column(
       children: [
         Container(
@@ -66,6 +67,20 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
               borderRadius: BorderRadius.circular(6),
               border: Border.all(
                 color: ColorValues.appBlueBackgroundColor,
+=======
+    return Container(
+      color: Color.fromARGB(255, 234, 236, 238),
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        children: [
+          Container(
+            height: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Color.fromARGB(255, 227, 224, 224),
+>>>>>>> fad2a41 (pm schedul add)
                 width: 1,
               ),
               boxShadow: [
