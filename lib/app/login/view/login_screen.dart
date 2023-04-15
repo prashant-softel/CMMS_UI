@@ -15,9 +15,12 @@ class LoginScreen extends GetView<LoginController> {
     return Scaffold(
       body: ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),
-        child: SingleChildScrollView(
-          child: Obx(
-            () => Column(
+        child: //
+            Obx(
+          () => //
+              SingleChildScrollView(
+            child: //
+                Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (Responsive.isDesktop(context))
@@ -223,7 +226,6 @@ class LoginScreen extends GetView<LoginController> {
                                   backgroundColor: ColorValues.navyBlueColor,
                                 ),
                                 onPressed: () {
-                                  print("hiii");
                                   controller.login();
                                 },
                                 child: const Text('Login'),

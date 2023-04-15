@@ -535,9 +535,13 @@ abstract class Styles {
     // color: ColorValues.greyColor,
     fontSize: Dimens.ten,
   );
-  static TextStyle greyLight10 = TextStyle(
-    color: ColorValues.greyLightColor,
+  static TextStyle appDarkGrey10 = TextStyle(
+    color: ColorValues.appDarkGreyColor,
     fontSize: Dimens.ten,
+  );
+  static TextStyle appDarkGrey12 = TextStyle(
+    color: ColorValues.appDarkGreyColor,
+    fontSize: Dimens.twelve,
   );
 
   static TextStyle greyBold10 = TextStyle(
@@ -651,15 +655,20 @@ abstract class Styles {
     // color: ColorValues.redColor,
     fontSize: Dimens.fifteen,
   );
-  static TextStyle navyBlue12 = TextStyle(
-    color: ColorValues.navyBlueColor,
+  static TextStyle appDarkBlue12 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.twelve,
   );
-  static TextStyle navyBlue13 = TextStyle(
-    color: ColorValues.navyBlueColor,
+  static TextStyle appDarkBlue13 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.thirteen,
+  );
+  static TextStyle appDarkBlue15 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.normal,
+    fontSize: Dimens.fifteen,
   );
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

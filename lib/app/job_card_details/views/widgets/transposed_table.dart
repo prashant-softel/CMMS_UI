@@ -15,17 +15,12 @@ class TransposedTable extends StatelessWidget {
 
         ///
         Obx(
-      () =>
-
-          ///
-          //   Expanded(
-          // child: //
-          Table(
-              border: TableBorder.all(
-                style: BorderStyle.solid,
-                color: ColorValues.appDarkBlueColor,
-              ),
-              children: [
+      () => Table(
+          border: TableBorder.all(
+            style: BorderStyle.solid,
+            color: ColorValues.appDarkBlueColor,
+          ),
+          children: [
             for (var i = 0; i < tableDataMap.length; i++)
               TableRow(
                   decoration: BoxDecoration(

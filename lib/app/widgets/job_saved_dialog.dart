@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../add_job/add_job_controller.dart';
 import '../navigators/app_pages.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class JobSavedDialog extends StatelessWidget {
+class JobSavedDialog extends GetView<AddJobController> {
   const JobSavedDialog({
     super.key,
   });
@@ -24,11 +25,9 @@ class JobSavedDialog extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
       content: Builder(builder: (context) {
-        var height = MediaQuery.of(context).size.height;
-
         return Container(
           padding: Dimens.edgeInsets05_0_5_0,
-          height: height / 6,
+          height: Get.height / 6,
           width: double.infinity,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -46,7 +45,8 @@ class JobSavedDialog extends StatelessWidget {
               Dimens.boxWidth10,
               ElevatedButton(
                 style: Styles.yellowElevatedButtonStyle,
-                onPressed: () => Get.offAndToNamed(Routes.jobDetails),
+                onPressed: () => Get.offAndToNamed(Routes.jobDetails,
+                    arguments: {"jobId": controller.intJobId}),
                 child: const Text('View Job'),
               ),
               Dimens.boxWidth10,

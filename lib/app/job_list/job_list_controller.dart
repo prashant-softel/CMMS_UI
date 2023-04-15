@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/block_model.dart';
+import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
 import 'job_list_presenter.dart';
 
@@ -13,6 +17,7 @@ class JobListController extends GetxController {
     this.jobListPresenter,
   );
   JobListPresenter jobListPresenter;
+  HomeController homeController = Get.find();
 
   ///
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
@@ -20,8 +25,8 @@ class JobListController extends GetxController {
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
-  int facilityId = 46;
-  int userId = 35;
+  int facilityId = 0;
+  int userId = 0;
   Rx<int> jobId = 0.obs;
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
@@ -32,16 +37,19 @@ class JobListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
   @override
   void onInit() async {
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList(isLoading: true);
-      Future.delayed(Duration(milliseconds: 500), () {
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        userId = varUserAccessModel.value.user_id ?? 0;
         getJobList(facilityId, userId);
       });
     });
+    Future.delayed(Duration(seconds: 1), () {});
 
     super.onInit();
   }
@@ -70,22 +78,22 @@ class JobListController extends GetxController {
     final _jobList = await jobListPresenter.getJobList(
       facilityId: facilityId,
       userId: userId,
+      isLoading: false,
     );
 
-    if (_jobList != null) {
+    if (_jobList != null && _jobList.isNotEmpty) {
       jobList!.value = _jobList;
+      update(["jobList"]);
       paginationController = PaginationController(
         rowCount: jobList!.length,
         rowsPerPage: 10,
       );
 
-      if (jobList != null && jobList!.isNotEmpty) {
-        jobModel = jobList![0];
-        var jobJson = jobModel?.toJson();
-        jobListTableColumns.value = <String>[];
-        for (var key in jobJson?.keys.toList() ?? []) {
-          jobListTableColumns.add(key);
-        }
+      jobModel = jobList![0];
+      var jobJson = jobModel?.toJson();
+      jobListTableColumns.value = <String>[];
+      for (var key in jobJson?.keys.toList() ?? []) {
+        jobListTableColumns.add(key);
       }
     }
   }

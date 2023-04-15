@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
@@ -25,7 +24,6 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
     return //
         Obx(
       () => //
-
           ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Container(
@@ -42,14 +40,12 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                     //
                     children: [
                   ///
-
                   DropzoneView(
                     onCreated: (controller) => this.dzvcontroller = controller,
                     onDrop: (dynamic event) {},
                     onDropMultiple: (List<dynamic>? events) {
                       // controller.files.value = events?.cast<File>() ?? [];
-                      controller.files.value = events?.cast<File>() ?? [];
-                      controller.onFilesAdded();
+                      // controller.onFilesAdded();
                     },
                     onHover: () => controller.blnHiglight.value = true,
                     onLeave: () => controller.blnHiglight.value = false,
@@ -71,14 +67,35 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
+                          const SizedBox(height: 16),
 
                           /// CHOOSE FILE BUTTON
                           ElevatedButton.icon(
-                            onPressed: (){},
-                            // onPressed: () => controller.addFiles(),
+                            onPressed: () async {
+                              List<XFile> pickedFiles =
+                                  await controller.addFiles();
+                              List<List<int>> bytesDataList = [];
+
+                              for (var file in pickedFiles) {
+                                bytesDataList.add(await file.readAsBytes());
+                              }
+
+                              if (pickedFiles.isNotEmpty &&
+                                  pickedFiles.length == bytesDataList.length) {
+                                await controller.uploadFiles(
+                                  pickedFiles,
+                                  bytesDataList,
+                                  controller.token,
+                                  uploadProgressCallback: (progress) {
+                                    print('Upload progress: $progress%');
+                                  },
+                                );
+                              } else {
+                                print(
+                                    'No files selected or failed to read bytes data');
+                              }
+                              ;
+                            },
                             icon: Icon(Icons.search),
                             label: Text(
                               'Choose File',
@@ -99,14 +116,12 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
 
                           /// UPLOAD BUTTON
                           ElevatedButton(
-                            onPressed: (){},
-                            // onPressed: () => controller.uploadFiles(),
+                            onPressed: () => {},
                             child: const Text('Upload'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorValues.appDarkBlueColor,
                             ),
                           ),
-                          //),
                         ]),
                   ),
                 ]),

@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +11,9 @@ class HeaderWidget extends GetView<HomeController> {
     super.key,
     /////////
   });
+  var controller = Get.find<HomeController>();
+
+  ///
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -52,7 +54,7 @@ class HeaderWidget extends GetView<HomeController> {
                   ),
                 ),
               ),
-              // Text('My BEST DATA: ${controller.blockList}'),
+            // Text('My BEST DATA: ${controller.blockList}'),
             Spacer(),
             if (Responsive.isDesktop(context))
               Icon(Icons.notifications_active,
