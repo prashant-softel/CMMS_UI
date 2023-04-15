@@ -4,6 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/block_model.dart';
@@ -108,6 +109,24 @@ class JobListController extends GetxController {
 
   void showJobDetails(int _jobId) {
     Get.toNamed(Routes.jobDetails, arguments: _jobId);
+  }
+
+  String formatDate(String inputDateTime) {
+    ///
+    String formattedDateTimeString = '';
+
+    if (inputDateTime.isNotEmpty)
+    // Parse the input DateTime string
+    {
+      DateFormat inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+      DateTime parsedDateTime = inputFormat.parse(inputDateTime);
+
+      // Format the parsed DateTime to the desired format
+      DateFormat outputFormat = DateFormat("yyyy-MM-dd hh:mm");
+      formattedDateTimeString = outputFormat.format(parsedDateTime);
+    }
+
+    return formattedDateTimeString;
   }
 
   ///
