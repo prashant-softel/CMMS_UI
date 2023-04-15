@@ -13,56 +13,62 @@ class IsolatedAssetsWidget extends GetView<JobCardDetailsController> {
   Widget build(BuildContext context) {
     return //
         Container(
-      width: Get.width * 0.99,
+      width: Get.width,
       child: //
           Obx(
-        () => DataTable2(
-          dataRowHeight: Get.height * 0.06,
-          headingRowHeight: Get.height * 0.06,
-          border: TableBorder.all(color: ColorValues.appLightBlueColor),
-          columnSpacing: 12,
-          horizontalMargin: 12,
-          columns: [
-            DataColumn2(
-              label: Text('Asset Name / Designation'),
-              size: ColumnSize.L,
-            ),
-            DataColumn2(
-              label: Text('Normalized'),
-              size: ColumnSize.L,
-            ),
-          ],
-          rows: List<DataRow>.generate(
-            controller.isolationAssetsCategoryList.length ?? 0,
-            (index) => DataRow(//
-                cells: [
-              DataCell(
-                Container(
-                  padding: Dimens.edgeInsets5,
-                  child: Text(controller.isolationAssetsCategoryList[index]
-                          .isolationAssetsCatName ??
-                      ''),
+        () => //
+            Container(
+          height: (controller.isolationAssetsCategoryList.length + 1) * 50,
+          child: //
+              Flexible(
+            child: DataTable2(
+              headingRowHeight: 50,
+              border: TableBorder.all(color: ColorValues.appLightBlueColor),
+              dataRowHeight: 50,
+              horizontalMargin: 12,
+              columns: [
+                DataColumn2(
+                  label: Text('Asset Name / Designation'),
+                  size: ColumnSize.L,
                 ),
-              ),
-              DataCell(
-                Switch(
-                  value: (controller.isolationAssetsCategoryList.isNotEmpty)
-                      ? (controller.isolationAssetsCategoryList[index]
-                                      .isNormalized ==
-                                  0 ||
-                              controller.isolationAssetsCategoryList[index]
-                                      .isNormalized ==
-                                  null)
-                          ? false
-                          : true
-                      : false,
-                  onChanged: (value) =>
-                      controller.toggleIsNormalizedSwitch(value, index),
-                  activeColor: ColorValues.appGreenColor,
+                DataColumn2(
+                  label: Text('Normalized'),
+                  size: ColumnSize.L,
                 ),
+              ],
+              rows: List<DataRow>.generate(
+                controller.isolationAssetsCategoryList.length ?? 0,
+                (index) => DataRow(//
+                    cells: [
+                  DataCell(
+                    Container(
+                      padding: Dimens.edgeInsets5,
+                      child: Text(controller.isolationAssetsCategoryList[index]
+                              .isolationAssetsCatName ??
+                          ''),
+                    ),
+                  ),
+                  DataCell(
+                    Switch(
+                      value: (controller.isolationAssetsCategoryList.isNotEmpty)
+                          ? (controller.isolationAssetsCategoryList[index]
+                                          .isNormalized ==
+                                      0 ||
+                                  controller.isolationAssetsCategoryList[index]
+                                          .isNormalized ==
+                                      null)
+                              ? false
+                              : true
+                          : false,
+                      onChanged: (value) =>
+                          controller.toggleIsNormalizedSwitch(value, index),
+                      activeColor: ColorValues.appGreenColor,
+                    ),
+                  ),
+                ]),
+                growable: false,
               ),
-            ]),
-            growable: false,
+            ),
           ),
         ),
       ),
