@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/color_values.dart';
-import '../../../theme/dimens.dart';
-import '../../../widgets/action_button.dart';
-import '../../../widgets/body_custom_app_bar.dart';
 import '../../../widgets/table_action_button.dart';
 import '../../job_list_controller.dart';
 
