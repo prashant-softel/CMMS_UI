@@ -116,7 +116,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.createCheckList,
       page: CreatePriventiveListScreen.new,
-      binding: CreatePriventiveListBinding(),
+      binding: CreatePreventiveListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.preventiveList,

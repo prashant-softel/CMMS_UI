@@ -40,11 +40,11 @@ class JobDetailsController extends GetxController {
     final _flutterSecureStorage = const FlutterSecureStorage();
     // Read jobId
     String? _jobId = await _flutterSecureStorage.read(key: "jobId");
-    if (_jobId == null || _jobId == '') {
+    if (_jobId == null || _jobId == '' || _jobId == "null") {
       jobId.value = Get.arguments;
       await _flutterSecureStorage.write(
         key: "jobId",
-        value: jobId.value.toString(),
+        value: jobId.value == null ? '' : jobId.value.toString(),
       );
     } else {
       jobId.value = int.tryParse(_jobId) ?? 0;

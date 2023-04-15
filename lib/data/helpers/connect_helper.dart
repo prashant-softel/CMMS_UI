@@ -102,12 +102,12 @@ class ConnectHelper {
     required String auth,
     int? facilityId,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
   }) async {
     var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
     var categoryIdsParam =
         (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
-//var statusParam = (status!=null status!='')?'status=1':'';
+
     var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Inventory/GetInventoryList?' +
@@ -140,7 +140,7 @@ class ConnectHelper {
       'CMMS/GetBusinessList?businessType=$businessType' +
           blockIdParam +
           categoryIdsParam,
-          // statusParam,
+      // statusParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -150,7 +150,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
@@ -165,9 +164,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'WC/GetWCList?facilityId=45' +
-          blockIdParam +
-          categoryIdsParam,
+      'WC/GetWCList?facilityId=45' + blockIdParam + categoryIdsParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -177,7 +174,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBlockList({
     required bool isLoading,
@@ -216,12 +212,11 @@ class ConnectHelper {
     int? facilityId,
     int? userId,
   }) async {
-    // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobList?facility_id=$facilityId&userId=$userId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -241,7 +236,7 @@ class ConnectHelper {
       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -261,7 +256,7 @@ class ConnectHelper {
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -279,7 +274,7 @@ class ConnectHelper {
       'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -298,7 +293,7 @@ class ConnectHelper {
       'Job/GetJobDetails?job_id=$jobId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -322,7 +317,6 @@ class ConnectHelper {
         {
           'Authorization': 'Bearer $auth',
         },
-        
       );
     } catch (error) {
       print(error);
@@ -363,7 +357,7 @@ class ConnectHelper {
         'CMMS/GetBlockList?facility_id=$facilityId',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -378,7 +372,7 @@ class ConnectHelper {
         'Inventory/GetInventoryCategoryList',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -392,7 +386,7 @@ class ConnectHelper {
         'CMMS/GetFrequencyList',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -408,7 +402,7 @@ class ConnectHelper {
       'CMMS/GetEmployeeList?facility_id=$facilityId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -426,7 +420,7 @@ class ConnectHelper {
       'JobWorkType/GetJobWorkTypeList?categoryIds=$categoryIds',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -444,7 +438,7 @@ class ConnectHelper {
       'JobWorkType/GetMasterToolList?worktypeIds=$workTypeIds',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -461,7 +455,7 @@ class ConnectHelper {
       'Job/CreateNewJob?job=$job',
       Request.post,
       job,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -479,7 +473,7 @@ class ConnectHelper {
       'JC/CreateJC?job=$jobId',
       Request.post,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -500,7 +494,7 @@ class ConnectHelper {
       'FileUpload/UploadFile',
       Request.post,
       fileUploadModel,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer $auth',
@@ -520,7 +514,7 @@ class ConnectHelper {
       'Permit/CreatePermit',
       Request.post,
       newPermit,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -540,7 +534,7 @@ class ConnectHelper {
       'User/GetUserAccess?user_id=$userId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -558,7 +552,7 @@ class ConnectHelper {
       'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -575,7 +569,7 @@ class ConnectHelper {
       'CheckList/CreateCheckList',
       Request.post,
       checklistJsonString,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -594,7 +588,7 @@ class ConnectHelper {
       'CheckList/CreateCheckPoint',
       Request.post,
       checkpointJsonString,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -613,7 +607,7 @@ class ConnectHelper {
       'CheckList/DeleteCheckPoint?id=$check_point_id',
       Request.delete,
       check_point_id,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -633,7 +627,7 @@ class ConnectHelper {
       'Utils/GetHistoryLog?module_type=$moduleType&id=$jobCardId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -651,7 +645,7 @@ class ConnectHelper {
       'JC/UpdateJC',
       Request.post,
       jobCard,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -670,7 +664,7 @@ class ConnectHelper {
       'JC/ApproveJC',
       Request.post,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -689,7 +683,7 @@ class ConnectHelper {
       'JC/RejectJC',
       Request.post,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -707,7 +701,7 @@ class ConnectHelper {
       'Permit/GetPermitDetails?permit_id=$permitId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -725,7 +719,7 @@ class ConnectHelper {
       'JC/GetJCDetail?jc_id=$jobCardId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -742,7 +736,7 @@ class ConnectHelper {
       'CheckList/GetCheckListMap?facility_id=$facilityId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -760,7 +754,7 @@ class ConnectHelper {
       'CheckList/CreateCheckListMap',
       Request.post,
       pmJsonString,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',

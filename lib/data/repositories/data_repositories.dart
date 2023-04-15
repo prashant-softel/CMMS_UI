@@ -94,7 +94,7 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getInventoryList({
     int? facilityId,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
     required bool isLoading,
     required String auth,
   }) async {
@@ -107,7 +107,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getBusinessList({
     int? businessType,
     int? blockId,
