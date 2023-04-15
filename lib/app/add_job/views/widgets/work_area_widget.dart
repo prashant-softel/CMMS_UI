@@ -77,8 +77,7 @@ class WorkAreaWidget extends StatelessWidget {
               }
             },
             autovalidateMode: AutovalidateMode.always,
-            decoration: BoxDecoration(
-              border: Border.all(
+            decoration: BoxDecoration(border: Border.all(
                 color: controller.isWorkAreaSelected.value == false
                     ? Colors.red
                     : Colors.transparent,
