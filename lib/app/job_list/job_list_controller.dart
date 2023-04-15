@@ -50,6 +50,7 @@ class JobListController extends GetxController {
         getJobList(facilityId, userId);
       });
     });
+    Future.delayed(Duration(seconds: 1), () {});
 
     super.onInit();
   }

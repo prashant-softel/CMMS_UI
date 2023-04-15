@@ -39,6 +39,7 @@ class WorkAreaWidget extends StatelessWidget {
         ),
         Dimens.boxHeight5,
         Container(
+
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -76,8 +77,7 @@ class WorkAreaWidget extends StatelessWidget {
                     : Colors.transparent,
                 width: 1.0,
               ),
-              borderRadius: BorderRadius.circular(5),
-            ),
+              borderRadius: BorderRadius.circular(5),),
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.workAreaList
                 .map((e) => MultiSelectItem(e, e?.name ?? ''))

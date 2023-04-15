@@ -280,11 +280,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
-
-
-
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
     required String auth,
@@ -392,7 +387,7 @@ class ConnectHelper {
       'Permit/PermitIssue',
     Request.put,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -597,7 +592,7 @@ class ConnectHelper {
         'Inventory/GetInventoryCategoryList',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -1025,7 +1020,7 @@ class ConnectHelper {
       'Calibration/GetCalibrationList?facility_id=$facilityId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
