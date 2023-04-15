@@ -61,8 +61,7 @@ class WorkAreaWidget extends StatelessWidget {
             color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(5),
           ),
-          child: MultiSelectDialogField(
-            validator: (selectedItems) {
+          child: MultiSelectDialogField(validator: (selectedItems) {
               if (controller.isWorkAreaSelected.value == false) {
                 return "Required field";
               } else {
@@ -70,15 +69,13 @@ class WorkAreaWidget extends StatelessWidget {
               }
             },
             autovalidateMode: AutovalidateMode.always,
-            decoration: BoxDecoration(
-              border: Border.all(
+            decoration: BoxDecoration(border: Border.all(
                 color: controller.isWorkAreaSelected.value == false
                     ? Colors.red
                     : Colors.transparent,
                 width: 1.0,
               ),
-              borderRadius: BorderRadius.circular(5),
-            ),
+              borderRadius: BorderRadius.circular(5),),
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.workAreaList
                 .map((e) => MultiSelectItem(e, e?.name ?? ''))
