@@ -859,7 +859,7 @@ class ConnectHelper {
         'Inventory/GetInventoryCategoryList',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -1453,7 +1453,7 @@ class ConnectHelper {
       'Calibration/RequestCalibration',
       Request.post,
       startcalibration,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
