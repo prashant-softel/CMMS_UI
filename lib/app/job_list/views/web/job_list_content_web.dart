@@ -208,7 +208,7 @@ class _JobDataSource extends DataTableSource {
                   rowsPerPage: 10, // Number of rows per page
                   availableRowsPerPage: [10, 20, 30, 50],
                   columns: [
-                    buildDataColumn('id', 'Id', ColumnSize.M),
+                    buildDataColumn('id', 'Id', ColumnSize.S),
                     buildDataColumn('facilityName', 'Facility', ColumnSize.L),
                     buildDataColumn('jobDate', 'Job Date', ColumnSize.L),
                     buildDataColumn(
@@ -218,9 +218,9 @@ class _JobDataSource extends DataTableSource {
                     buildDataColumn('description', 'Description', ColumnSize.L),
                     buildDataColumn('jobDetails', 'Job Details', ColumnSize.L),
                     buildDataColumn('workType', 'Work Type', ColumnSize.L),
-                    buildDataColumn('raisedByName', 'Raised By', ColumnSize.L),
+                    buildDataColumn('raisedByName', 'Raised By', ColumnSize.M),
                     buildDataColumn(
-                        'breakdownTime', 'Breakdown Time', ColumnSize.L),
+                        'breakdownTime', 'Breakdown Time', ColumnSize.M),
                     buildDataColumn(
                         'breakdownType', 'Breakdown Type', ColumnSize.L),
                     buildDataColumn('permitId', 'Permit ID', ColumnSize.L),
@@ -261,14 +261,14 @@ class _JobDataSource extends DataTableSource {
         ...[
           '${jobDetails?.id ?? ''}',
           '${jobDetails?.facilityName ?? ''}',
-          '${jobDetails?.jobDate ?? ''}',
+          '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',
           '${jobDetails?.equipmentCat ?? ''}',
           '${jobDetails?.workingArea ?? ''}',
           '${jobDetails?.description ?? ''}',
           '${jobDetails?.jobDetails ?? ''}',
           '${jobDetails?.workType ?? ''}',
           '${jobDetails?.raisedByName ?? ''}',
-          '${jobDetails?.breakdownTime ?? ''}',
+          '${controller.formatDate(jobDetails?.breakdownTime ?? '')}',
           '${jobDetails?.breakdownType ?? ''}',
           '${jobDetails?.permitId ?? ''}',
           '${jobDetails?.assignedToName ?? ''}',
