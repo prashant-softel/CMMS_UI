@@ -99,16 +99,15 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                     child: Row(//
                         children: [
                       Expanded(
-                      flex: 2,
-                      child: FileUploadWidgetWithDropzone(),
-                    ),
-                    Dimens.boxWidth10,
-                    Expanded(flex: 8, child: FileUploadDetailsWidget()),
-                  ]),
-                ),
-
-                Dimens.boxHeight20,
-                CustomDivider(),
+                        flex: 2,
+                        child: FileUploadWidgetWithDropzone(),
+                      ),
+                      Dimens.boxWidth10,
+                      Expanded(flex: 8, child: FileUploadDetailsWidget()),
+                    ]),
+                  ),
+                  Dimens.boxHeight20,
+                  CustomDivider(),
 
                   ///HISTORY
                   (controller.isJobCardStarted.value == true &&
@@ -117,18 +116,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                       ? //
                       Container(
                           margin: Dimens.edgeInsets20,
-                        constraints: BoxConstraints(
-                          maxHeight: 500,
-                          minHeight: 100,
-                        ),
-                        child: //
-                            HistoryTableWidget(
-                          historyList: controller.historyList,
-                        ),
-                      )
-                    //)
-                    : //
-                    Dimens.box0,
+                          constraints: BoxConstraints(
+                            maxHeight: 500,
+                            minHeight: 100,
+                          ),
+                          child: //
+                              HistoryTableWidget(
+                            historyList: controller.historyList,
+                          ),
+                        )
+                      //)
+                      : //
+                      Dimens.box0,
 
                   /// DESCRIPTION OF WORK DONE
                   Row(children: [
