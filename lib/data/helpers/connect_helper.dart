@@ -341,11 +341,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
-
-
-
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
     required String auth,

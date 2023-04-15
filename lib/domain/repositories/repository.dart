@@ -750,12 +750,12 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
       }
       return [];
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
 
-   Future<List<EmployeeListModel>> getPermitIssuerList({
+Future<List<EmployeeListModel>> getPermitIssuerList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,
@@ -1296,11 +1296,9 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
       final newPermitModelList = jsonDecode(newPermitListData);
       var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
       int permitId = newPermitList.permitId ?? 0;
-      print({"NewPermitList:", newPermitList.permitId});
       final res = await _dataRepository.getNewPermitList(
         auth: auth,
         // facilityId: 45,
-        // userId: permitId,
         userId: 33,
         isLoading: isLoading ?? false,
       );
@@ -1374,7 +1372,7 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
         return [];
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
 
       return [];
     }
@@ -1890,7 +1888,7 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
