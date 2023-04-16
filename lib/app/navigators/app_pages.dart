@@ -41,6 +41,7 @@ import '../pm_schedule/view/pm_schedule_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
+import '../warranty_claim_list/warranty_claim_list_screen.dart';
 
 // coverage:ignore-file
 

@@ -13,54 +13,62 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ScrollConfiguration(
-        behavior: const ScrollBehavior().copyWith(overscroll: false),
-        child: //
-            Obx(
-          () => //
-              SingleChildScrollView(
-            child: //
-                Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (Responsive.isDesktop(context))
-                  Container(
-                    height: Get.height,
-                    width: Get.width,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/files/banner.png'),
-                        fit: BoxFit.cover,
-                      ),
+      body: //
+          // ScrollConfiguration(
+          //  behavior: const ScrollBehavior().copyWith(overscroll: false),
+          //  child: //
+          Obx(
+        () => //
+            SingleChildScrollView(
+          child: //
+              Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (Responsive.isDesktop(context))
+                // Expanded(
+                //  child: //
+                Container(
+                  height: Get.height,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/files/banner.png'),
+                      fit: BoxFit.cover,
                     ),
-                    child: Card(
-                        color: Color.fromARGB(255, 240, 242, 243),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        margin: EdgeInsets.only(
-                            left: 200, right: 200, top: 120, bottom: 120),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Container(
-                                width: (Get.width * .7) - 400,
-                                height: Get.height - 240,
-                                child: Image.asset(
-                                  'assets/files/soler.jpeg',
-                                  fit: BoxFit.cover,
-                                ),
+                  ),
+                  child: Card(
+                    color: Color.fromARGB(255, 240, 242, 243),
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    margin: EdgeInsets.only(
+                      left: 200,
+                      right: 200,
+                      top: 120,
+                      bottom: 120,
+                    ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Container(
+                              width: (Get.width * .7) - 400,
+                              height: Get.height - 240,
+                              child: Image.asset(
+                                'assets/files/soler.jpeg',
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start, //
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(bottom: 50, top: 20),
+                                  margin: EdgeInsets.only(top: 20, bottom: 20),
                                   child: Image.asset(
                                     'assets/files/logo.png',
                                   ),
@@ -69,9 +77,10 @@ class LoginScreen extends GetView<LoginController> {
                                   'Sign in',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: ColorValues.greyColor),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: ColorValues.greyColor,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -94,26 +103,21 @@ class LoginScreen extends GetView<LoginController> {
                                 Container(
                                   width: (Get.width * .3) - 50,
                                   child: LoginCustomTextfield(
-                                    onfieldSubmitted: (Value) {
-                                      controller.login();
-                                    },
                                     textController: controller.passwordCtrlr,
                                     obscureText:
                                         controller.passwordVisible.value,
                                     ishint: "Password",
                                     onChanged: (value) =>
                                         controller.updatepassword(value),
-                                    widget: MouseRegion(
-                                      onEnter: (_) =>
-                                          controller.passwordVisible(false),
-                                      onExit: (_) =>
-                                          controller.passwordVisible(true),
-                                      child: Icon(
+                                    widget: IconButton(
+                                      icon: Icon(
                                         controller.passwordVisible.value
                                             ? Icons.visibility_off
                                             : Icons.visibility,
                                         color: ColorValues.greyLightColor,
                                       ),
+                                      onPressed: () =>
+                                          controller.passwordVisible.toggle(),
                                     ),
                                   ),
                                 ),
@@ -132,7 +136,9 @@ class LoginScreen extends GetView<LoginController> {
                                 SizedBox(
                                   height: 30,
                                 ),
-                                Container(
+
+                                Flexible(
+                                  child: Container(
                                     width: (Get.width * .3) - 50,
                                     height: 45,
                                     child: CustomElevatedButton(
@@ -142,105 +148,107 @@ class LoginScreen extends GetView<LoginController> {
                                       onPressed: () {
                                         controller.login();
                                       },
-                                    )),
-                              ],
-                            )
-                          ],
-                        )),
+                                    ),
+                                  ),
+                                ),
+                                //Spacer(),
+                              ])
+                        ]),
                   ),
-                if (Responsive.isMobile(context) ||
-                    Responsive.isTablet(context))
-                  Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 200, bottom: 70),
-                        child: Image.asset(
-                          'assets/files/logo.png',
-                        ),
+                  // ),
+                ),
+
+              ///
+              if (Responsive.isMobile(context) || Responsive.isTablet(context))
+                Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 200, bottom: 70),
+                      child: Image.asset(
+                        'assets/files/logo.png',
                       ),
-                      Container(
-                        margin: EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Login',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.w700),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Login',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          LoginCustomTextfield(
+                            textController: controller.emailCtrlr,
+                            ishint: "Email Id",
+                            onChanged: (value) => controller.updateemail(value),
+                            widget: Icon(
+                              Icons.email_outlined,
+                              color: ColorValues.greyLightColor,
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            LoginCustomTextfield(
-                              textController: controller.emailCtrlr,
-                              ishint: "Email Id",
-                              onChanged: (value) =>
-                                  controller.updateemail(value),
-                              widget: Icon(
-                                Icons.email_outlined,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          LoginCustomTextfield(
+                            textController: controller.passwordCtrlr,
+                            obscureText: controller.passwordVisible.value,
+                            ishint: "Password",
+                            onChanged: (value) =>
+                                controller.updatepassword(value),
+                            widget: IconButton(
+                              icon: Icon(
+                                controller.passwordVisible.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                                 color: ColorValues.greyLightColor,
                               ),
+                              onPressed: () =>
+                                  controller.passwordVisible.toggle(),
                             ),
-                            SizedBox(
-                              height: 10,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'Forgot Password',
+                              style: TextStyle(fontSize: 13),
                             ),
-                            LoginCustomTextfield(
-                              textController: controller.passwordCtrlr,
-                              obscureText: controller.passwordVisible.value,
-                              ishint: "Password",
-                              onChanged: (value) =>
-                                  controller.updatepassword(value),
-                              widget: IconButton(
-                                icon: Icon(
-                                  controller.passwordVisible.value
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: ColorValues.greyLightColor,
-                                ),
-                                onPressed: () =>
-                                    controller.passwordVisible.toggle(),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Container(
+                            width: Get.width,
+                            height: 45,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                textStyle: TextStyle(fontSize: Dimens.fourteen),
+                                backgroundColor: ColorValues.navyBlueColor,
                               ),
+                              onPressed: () {
+                                controller.login();
+                              },
+                              child: const Text('Login'),
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'Forgot Password',
-                                style: TextStyle(fontSize: 13),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              width: Get.width,
-                              height: 45,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  textStyle:
-                                      TextStyle(fontSize: Dimens.fourteen),
-                                  backgroundColor: ColorValues.navyBlueColor,
-                                ),
-                                onPressed: () {
-                                  controller.login();
-                                },
-                                child: const Text('Login'),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-              ],
-            ),
+                    ),
+                  ],
+                ),
+            ],
           ),
         ),
       ),
+      // ),
     );
   }
 }
