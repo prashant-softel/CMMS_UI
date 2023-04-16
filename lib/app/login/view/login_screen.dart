@@ -17,11 +17,11 @@ class LoginScreen extends GetView<LoginController> {
           // ScrollConfiguration(
           //  behavior: const ScrollBehavior().copyWith(overscroll: false),
           //  child: //
-            Obx(
-          () => //
-              SingleChildScrollView(
-            child: //
-                Column(
+          Obx(
+        () => //
+            SingleChildScrollView(
+          child: //
+              Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               if (Responsive.isDesktop(context))
@@ -235,17 +235,16 @@ class LoginScreen extends GetView<LoginController> {
                               ),
                               onPressed: () {
                                 controller.login();
-                                },
-                                child: const Text('Login'),
-                              ),
+                              },
+                              child: const Text('Login'),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-              ],
-
+                    ),
+                  ],
+                ),
+            ],
           ),
         ),
       ),
