@@ -103,26 +103,21 @@ class LoginScreen extends GetView<LoginController> {
                           Container(
                                   width: (Get.width * .3) - 50,
                                   child: LoginCustomTextfield(
-                                    onfieldSubmitted: (Value) {
-                                      controller.login();
-                                    },
                                     textController: controller.passwordCtrlr,
                                     obscureText:
                                         controller.passwordVisible.value,
                                     ishint: "Password",
                                     onChanged: (value) =>
                                         controller.updatepassword(value),
-                                    widget: MouseRegion(
-                                      onEnter: (_) =>
-                                          controller.passwordVisible(false),
-                                      onExit: (_) =>
-                                          controller.passwordVisible(true),
-                                      child: Icon(
+                                    widget: IconButton(
+                                      icon: Icon(
                                         controller.passwordVisible.value
                                             ? Icons.visibility_off
                                             : Icons.visibility,
                                         color: ColorValues.greyLightColor,
                                       ),
+                                      onPressed: () =>
+                                          controller.passwordVisible.toggle(),
                                     ),
                                   ),
                                 ),
@@ -240,17 +235,16 @@ class LoginScreen extends GetView<LoginController> {
                               ),
                               onPressed: () {
                                 controller.login();
-                                },
-                                child: const Text('Login'),
-                              ),
+                              },
+                              child: const Text('Login'),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-              ],
-
+                    ),
+                  ],
+                ),
+            ],
           ),
         ),
       ),
