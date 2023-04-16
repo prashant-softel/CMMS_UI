@@ -37,7 +37,7 @@ class IsolatedAssetsWidget extends GetView<JobCardDetailsController> {
                 ),
               ],
               rows: List<DataRow>.generate(
-                controller.isolationAssetsCategoryList.length ?? 0,
+                controller.isolationAssetsCategoryList.length,
                 (index) => DataRow(//
                     cells: [
                   DataCell(

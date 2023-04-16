@@ -240,7 +240,7 @@ class JobCardDetailsController extends GetxController {
   }
 
   void updateJobCard() async {
-    // isolation asset catrgories
+    // isolation asset categories
     try {
       var _isolatedAssetCatList = [];
       for (IsolationAssetsCategory isolationAssetsCategory
@@ -252,7 +252,7 @@ class JobCardDetailsController extends GetxController {
       }
       // lots assets
       var _lotoAssetList = [];
-      for (LotoAsset lotoAsset in lotoAppliedAssets ?? []) {
+      for (LotoAsset lotoAsset in lotoAppliedAssets) {
         _lotoAssetList.add({
           "loto_id": lotoAsset.lotoId,
           "lotoRemovedStatus": lotoAsset.removedStatus,
@@ -265,6 +265,7 @@ class JobCardDetailsController extends GetxController {
         int _index = selectedEmployeeList?.indexOf(employee) ?? 0;
         final _responsibility = getResponsibility(_index);
         _employeeList.add({
+          "empId": employee.id,
           "employeeId": employee.id,
           "responsibility": _responsibility,
         });
@@ -411,9 +412,6 @@ class JobCardDetailsController extends GetxController {
         (employee) => employee?.name == selectedValueText,
         orElse: () => null);
     if (_selectedEmployee != null) {
-      // _selectedEmployee.responsibility =
-      //     responsibilityCtrlrs[currentIndex.value].text.trim();
-
       final exists = selectedEmployeeList
               ?.any((employee) => employee.id == _selectedEmployee.id) ??
           false;
