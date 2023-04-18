@@ -114,14 +114,14 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                           ),
                           Dimens.boxHeight10,
 
-                          /// UPLOAD BUTTON
-                          ElevatedButton(
-                            onPressed: () => {},
-                            child: const Text('Upload'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorValues.appDarkBlueColor,
-                            ),
-                          ),
+                          // /// UPLOAD BUTTON
+                          // ElevatedButton(
+                          //   onPressed: () => {},
+                          //   child: const Text('Upload'),
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor: ColorValues.appDarkBlueColor,
+                          //   ),
+                          // ),
                         ]),
                   ),
                 ]),
