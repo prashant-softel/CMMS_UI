@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../domain/models/history_model.dart';
 import '../../domain/models/job_details_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
-
 import '../controllers/file_upload_controller.dart';
 import '../controllers/history_controller.dart';
 import '../job_details/job_details_presenter.dart';
@@ -44,8 +43,7 @@ class JobCardDetailsController extends GetxController {
   /// Isolation and Loto Assets
   Rx<bool> isNormalized = false.obs;
 
-  RxList<LotoAsset>? lotoAppliedAssets = <LotoAsset>[].obs;
-
+  RxList<LotoAsset> lotoAppliedAssets = RxList<LotoAsset>([]);
   RxList<IsolationAssetsCategory> isolationAssetsCategoryList =
       RxList<IsolationAssetsCategory>([]);
 
@@ -136,9 +134,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   Future<void> getHistory() async {
-    // final _jobCardDetailsList =
-    //     await jobCardDetailsPresenter.getJobCardDetails(jobCardId: jobCardId);
-
     /// TODO: CHANGE THESE VALUES
     int moduleType = 3;
     int jobCardId = 1;
@@ -245,7 +240,7 @@ class JobCardDetailsController extends GetxController {
   }
 
   void updateJobCard() async {
-    // isolation asset catrgories
+    // isolation asset categories
     try {
       var _isolatedAssetCatList = [];
       for (IsolationAssetsCategory isolationAssetsCategory
@@ -257,7 +252,7 @@ class JobCardDetailsController extends GetxController {
       }
       // lots assets
       var _lotoAssetList = [];
-      for (LotoAsset lotoAsset in lotoAppliedAssets ?? []) {
+      for (LotoAsset lotoAsset in lotoAppliedAssets) {
         _lotoAssetList.add({
           "loto_id": lotoAsset.lotoId,
           "lotoRemovedStatus": lotoAsset.removedStatus,
@@ -270,6 +265,7 @@ class JobCardDetailsController extends GetxController {
         int _index = selectedEmployeeList?.indexOf(employee) ?? 0;
         final _responsibility = getResponsibility(_index);
         _employeeList.add({
+          "empId": employee.id,
           "employeeId": employee.id,
           "responsibility": _responsibility,
         });
@@ -329,7 +325,7 @@ class JobCardDetailsController extends GetxController {
         await jobCardDetailsPresenter.getPermitDetails(permitId: permitId);
     var x = _permitDetails;
     isolationAssetsCategoryList.value = _permitDetails?.lstIsolation ?? [];
-    lotoAppliedAssets?.value = _permitDetails?.lstLoto ?? [];
+    lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
   }
 
   void carryForwardJob(context) {
@@ -416,9 +412,6 @@ class JobCardDetailsController extends GetxController {
         (employee) => employee?.name == selectedValueText,
         orElse: () => null);
     if (_selectedEmployee != null) {
-      // _selectedEmployee.responsibility =
-      //     responsibilityCtrlrs[currentIndex.value].text.trim();
-
       final exists = selectedEmployeeList
               ?.any((employee) => employee.id == _selectedEmployee.id) ??
           false;

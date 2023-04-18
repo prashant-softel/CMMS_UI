@@ -15,7 +15,6 @@ import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.d
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
@@ -42,6 +41,7 @@ import '../pm_schedule/view/pm_schedule_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
+import '../warranty_claim_list/warranty_claim_list_screen.dart';
 
 // coverage:ignore-file
 
@@ -120,7 +120,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.createCheckList,
       page: CreatePriventiveListScreen.new,
-      binding: CreatePriventiveListBinding(),
+      binding: CreatePreventiveListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.preventiveList,

@@ -7,7 +7,6 @@ import '../../domain/usecases/home_usecase.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    //  Get.find<HomeController>();
     Get.lazyPut(
       () => HomeController(
         Get.put(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
+import '../../../utils/responsive.dart';
 
 class JobDetailField extends StatelessWidget {
   const JobDetailField({
@@ -23,7 +24,10 @@ class JobDetailField extends StatelessWidget {
                 children: [
                   Text(
                     '$title: ',
-                    style: Styles.greyLight10,
+                    style: (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Styles.appDarkGrey10
+                        : Styles.appDarkGrey12,
                   ),
                   if (title == "Current Status") ...[
                     Container(
@@ -43,13 +47,19 @@ class JobDetailField extends StatelessWidget {
                                               : Colors.transparent,
                       child: Text(
                         value,
-                        style: Styles.navyBlue12,
+                        style: (Responsive.isMobile(context) ||
+                                Responsive.isTablet(context))
+                            ? Styles.appDarkBlue12
+                            : Styles.appDarkBlue15,
                       ),
                     ),
                   ] else ...[
                     Text(
                       value,
-                      style: Styles.navyBlue12,
+                      style: (Responsive.isMobile(context) ||
+                              Responsive.isTablet(context))
+                          ? Styles.appDarkBlue12
+                          : Styles.appDarkBlue15,
                     ),
                   ],
                   Dimens.boxHeight10,

@@ -150,7 +150,7 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
-  Get.lazyPut(
+  Get.put(
     () => HomeController(
       Get.put(
         HomePresenter(
@@ -159,7 +159,7 @@ Future<void> initServices() async {
         permanent: true,
       ),
     ),
-    //permanent: true,
+    permanent: true,
   );
 
   Get.lazyPut(

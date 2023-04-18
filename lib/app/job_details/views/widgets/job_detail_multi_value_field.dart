@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
+import '../../../utils/responsive.dart';
 
 class JobDetailMultiValueField extends StatelessWidget {
   const JobDetailMultiValueField({
@@ -25,18 +26,26 @@ class JobDetailMultiValueField extends StatelessWidget {
                 //
                 children: [
                   Text(
-                    title,
-                    style: Styles.greyLight10,
+                    '$title:',
+                    style: (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Styles.appDarkGrey10
+                        : Styles.appDarkGrey12,
                   ),
                   Wrap(children: [
                     for (var value in values ?? [])
                       Text(
                         ((values.length > 1) ? ' ' : '') + value,
-                        style: Styles.navyBlue12,
+                        style: (Responsive.isMobile(context) ||
+                                Responsive.isTablet(context))
+                            ? Styles.appDarkBlue12
+                            : Styles.appDarkBlue15,
                       ),
                   ]),
+                  Dimens.boxHeight20,
                   Dimens.boxHeight10,
                 ]),
+            // Dimens.boxHeight10,
           ),
         ]);
   }

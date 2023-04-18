@@ -5,6 +5,7 @@ import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
 class DropdownWidget extends StatelessWidget {
+  ///
   DropdownWidget({
     super.key,
     this.selectedValue,
@@ -24,12 +25,12 @@ class DropdownWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final AddJobController addJobController = Get.find();
+    ///
     return //
         Obx(
-            () => //
+      () => //
           Container(
-                decoration: BoxDecoration(
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
@@ -49,8 +50,8 @@ class DropdownWidget extends StatelessWidget {
           ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
-                ),
-                child: //
+        ),
+        child: //
             DropdownSearch<String>(
           autoValidateMode: AutovalidateMode.always,
           validator: (String? item) {
@@ -103,8 +104,8 @@ class DropdownWidget extends StatelessWidget {
             onValueChanged(dropdownList, selectedValue);
           },
           selectedItem: selectedValue,
-                ),
-            ),
-          );
+        ),
+      ),
+    );
   }
 }

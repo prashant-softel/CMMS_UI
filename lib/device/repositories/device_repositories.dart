@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:synchronized/synchronized.dart';
@@ -64,16 +65,19 @@ class DeviceRepository extends DomainRepository {
   bool getBoolValue(String key) =>
       _getBox().get(key, defaultValue: false) as bool;
 
-  /// Get data from secure storage
   @override
   Future<String> getSecuredValue(String key) async {
     try {
       print('reading $key');
       var value = '';
       await _lock.synchronized(() async {
-        value = await _flutterSecureStorage.read(key: key) ?? '';
+        if (kIsWeb) {
+          value = getStringValue(key);
+        } else {
+          value = await _flutterSecureStorage.read(key: key) ?? '';
+        }
       });
-      print("$key read");
+      print("$key read, value = $value");
       return value;
     } catch (error) {
       print("Error reading token: $error");
@@ -82,37 +86,14 @@ class DeviceRepository extends DomainRepository {
   }
 
   @override
-  Future<String> getUserAccessData(String key) async {
-    try {
-      var value = await _flutterSecureStorage.read(key: key);
-      if (value == null || value.isEmpty) {
-        value = '';
-      }
-      return value;
-    } catch (error) {
-      return '';
-    }
-  }
-
-   @override
-  Future<String> getNewPermitAccessData(String key) async {
-    try {
-      var value = await _flutterSecureStorage.read(key: key);
-      if (value == null || value.isEmpty) {
-        value = '';
-      }
-      return value;
-    } catch (error) {
-      return '';
-    }
-  }
-
-  /// Save data in secure storage
-  @override
   Future<void> saveValueSecurely(String key, String value) async {
     try {
       await _lock.synchronized(() async {
-        await _flutterSecureStorage.write(key: key, value: value);
+        if (kIsWeb) {
+          saveValue(key, value);
+        } else {
+          await _flutterSecureStorage.write(key: key, value: value);
+        }
       });
 
       isTokenStored = true;
@@ -151,6 +132,32 @@ class DeviceRepository extends DomainRepository {
   @override
   Future<void> generateToken() {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<String> getUserAccessData(String key) async {
+    try {
+      var value = await _flutterSecureStorage.read(key: key);
+      if (value == null || value.isEmpty) {
+        value = '';
+      }
+      return value;
+    } catch (error) {
+      return '';
+    }
+  }
+
+  @override
+  Future<String> getNewPermitAccessData(String key) async {
+    try {
+      var value = await _flutterSecureStorage.read(key: key);
+      if (value == null || value.isEmpty) {
+        value = '';
+      }
+      return value;
+    } catch (error) {
+      return '';
+    }
   }
 
   @override
