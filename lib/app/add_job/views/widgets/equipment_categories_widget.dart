@@ -38,7 +38,6 @@ class EquipmentCategoriesWidget extends StatelessWidget {
       ),
       Dimens.boxHeight5,
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -63,7 +62,23 @@ class EquipmentCategoriesWidget extends StatelessWidget {
         child: //
             Obx(
           () => MultiSelectDialogField(
-            decoration: BoxDecoration(border: Border()),
+            validator: (selectedItems) {
+              if (controller.isEquipmentCategorySelected.value == false) {
+                return "Required field";
+              } else {
+                return null;
+              }
+            },
+            autovalidateMode: AutovalidateMode.always,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: controller.isEquipmentCategorySelected.value == false
+                    ? Colors.red
+                    : Colors.transparent,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(5),
+            ),
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.equipmentCategoryList
                 .map(

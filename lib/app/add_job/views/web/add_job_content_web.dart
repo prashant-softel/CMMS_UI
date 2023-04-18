@@ -18,59 +18,63 @@ class AddJobContentWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Row(//
+    return //
+        SingleChildScrollView(
+      child: Column(//
           children: [
-        Expanded(
-          child: Container(
-            //height: 1100,
-            child: Column(
-                //
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  /// SELECT BLOCK DropDown
-                  BlockWidget(),
+        Row(//
+            children: [
+          Expanded(
+            child: //
+                Container(
+              child: //
+                  Column(
+                      //
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                    /// SELECT BLOCK DropDown
+                    BlockWidget(),
 
-                  /// WORK AREA (= EQUIPMENTS) DropDown
-                  WorkAreaWidget(),
+                    /// WORK AREA (= EQUIPMENTS) DropDown
+                    WorkAreaWidget(),
 
-                  /// TOOLS REQUIRED DropDown
-                  ToolsRequiredWidget(),
+                    /// TOOLS REQUIRED DropDown
+                    ToolsRequiredWidget(),
 
-                  /// JOB TITLE
-                  JobTitleWidget(),
+                    /// JOB TITLE
+                    JobTitleWidget(),
 
-                  /// BREAKDOWN TIME
-                  BreakdownTimeWidget(),
-                ]),
+                    /// BREAKDOWN TIME
+                    BreakdownTimeWidget(),
+                  ]),
+            ),
           ),
-        ),
-        Dimens.boxWidth30,
-        Expanded(
-          child: Container(
-            //height: 1100,
-            child: Column(
-                //
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  ///MULTISELECT CONTROL Equipment Categories
-                  EquipmentCategoriesWidget(),
+          Dimens.boxWidth30,
+          Expanded(
+            child: Container(
+              child: Column(
+                  //
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    ///MULTISELECT CONTROL Equipment Categories
+                    EquipmentCategoriesWidget(),
 
-                  /// WORK TYPE  DropDown
-                  WorkTypeWidget(),
+                    /// WORK TYPE  DropDown
+                    WorkTypeWidget(),
 
-                  /// ASSIGNED TO DropDown
-                  AssignedToWidget(),
+                    /// ASSIGNED TO DropDown
+                    AssignedToWidget(),
 
-                  /// JOB DESCRIPTION
-                  JobDescriptionWidget(),
-                ]),
+                    /// JOB DESCRIPTION
+                    JobDescriptionWidget(),
+                  ]),
+            ),
           ),
-        ),
+        ]),
+
+        /// SAVE BUTTON
+        SaveJobButtonWidget(),
       ]),
-
-      /// SAVE BUTTON
-      SaveJobButtonWidget(),
-    ]);
+    );
   }
 }
