@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
@@ -27,6 +28,7 @@ class AddJobController extends GetxController {
   ///
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
   HtmlEscape htmlEscape = HtmlEscape();
+  HomeController homeController = Get.find<HomeController>();
   //
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
@@ -56,7 +58,7 @@ class AddJobController extends GetxController {
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
-  Rx<bool> isEquipmentCategorySelected = false.obs;
+  Rx<bool> isEquipmentCategorySelected = true.obs;
   RxList<InventoryCategoryModel?> selectedEquipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -76,7 +78,7 @@ class AddJobController extends GetxController {
 
   ///
   int selectedPermitId = 0;
-  int facilityId = 46;
+  int facilityId = 0;
   int blockId = 72;
 
   Rx<bool> isFormInvalid = false.obs;
@@ -88,12 +90,22 @@ class AddJobController extends GetxController {
   var breakdownTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   int intJobId = 0;
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
   @override
   void onInit() async {
-    await getFacilityList();
-    await getAssignedToList();
+    // await getFacilityList();
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+      }
+      Future.delayed(Duration(seconds: 1), () {
+        getBlocksList(facilityId);
+        getAssignedToList(facilityId);
+      });
+    });
 
     super.onInit();
   }
@@ -128,9 +140,9 @@ class AddJobController extends GetxController {
     }
   }
 
-  Future<void> getAssignedToList() async {
+  Future<void> getAssignedToList(_facilityId) async {
     final _assignedToList =
-        await addJobPresenter.getAssignedToList(facilityId: facilityId);
+        await addJobPresenter.getAssignedToList(facilityId: _facilityId);
 
     if (_assignedToList != null) {
       for (var _assignedTo in _assignedToList) {
@@ -207,9 +219,9 @@ class AddJobController extends GetxController {
   }
 
   void checkForm() {
-    if (selectedFacility.value == '') {
-      isFacilitySelected.value = false;
-    }
+    // if (selectedFacility.value == '') {
+    //   isFacilitySelected.value = false;
+    // }
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
@@ -222,13 +234,23 @@ class AddJobController extends GetxController {
     if (jobDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
     }
+    if (selectedEquipmentCategoryIdList.length < 1) {
+      isEquipmentCategorySelected.value = false;
+    }
+    if (selectedWorkAreaList.length < 1) {
+      isWorkAreaSelected.value = false;
+    }
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
         isJobTitleInvalid.value == true ||
-        isJobDescriptionInvalid == true) {
+        isJobDescriptionInvalid == true ||
+        isEquipmentCategorySelected.value == false ||
+        isWorkAreaSelected.value == false) //
+    {
       isFormInvalid.value = true;
-    } else {
+    } //
+    else {
       isFormInvalid.value = false;
     }
   }

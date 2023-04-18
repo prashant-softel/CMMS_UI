@@ -70,12 +70,12 @@ class JobTitleWidget extends StatelessWidget {
               borderSide: BorderSide(color: Colors.transparent),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(5.0),
               borderSide: BorderSide(color: Colors.transparent),
             ),
             focusedErrorBorder: controller.isJobTitleInvalid.value
                 ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(
                       color: ColorValues.redColorDark,
                     ),
@@ -83,7 +83,7 @@ class JobTitleWidget extends StatelessWidget {
                 : InputBorder.none,
             errorBorder: controller.isJobTitleInvalid.value
                 ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(
                       color: ColorValues.redColorDark,
                     ),

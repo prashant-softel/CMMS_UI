@@ -313,7 +313,7 @@ class ConnectHelper {
         'CMMS/GetFacilityList',
         Request.get,
         null,
-        true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },

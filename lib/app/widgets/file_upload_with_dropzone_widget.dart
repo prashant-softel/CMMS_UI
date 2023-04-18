@@ -107,21 +107,21 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                               backgroundColor: (controller.blnHiglight.value ==
                                       true)
                                   ? ColorValues.appGreenColor.withOpacity(0.3)
-                                  : ColorValues.appLightBlueColor
+                                  : ColorValues.appDarkBlueColor
                                       .withOpacity(0.1),
                               shape: RoundedRectangleBorder(),
                             ),
                           ),
                           Dimens.boxHeight10,
 
-                          /// UPLOAD BUTTON
-                          ElevatedButton(
-                            onPressed: () => {},
-                            child: const Text('Upload'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorValues.appDarkBlueColor,
-                            ),
-                          ),
+                          // /// UPLOAD BUTTON
+                          // ElevatedButton(
+                          //   onPressed: () => {},
+                          //   child: const Text('Upload'),
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor: ColorValues.appDarkBlueColor,
+                          //   ),
+                          // ),
                         ]),
                   ),
                 ]),
