@@ -64,4 +64,16 @@ class PreventiveController extends GetxController {
       Routes.pmSchedule,
     );
   }
+
+  Future<void> pmTask() async {
+    Get.toNamed(
+      Routes.pmTask,
+    );
+  }
+
+  Future<void> pmExecution() async {
+    Get.toNamed(
+      Routes.pmExecution,
+    );
+  }
 }

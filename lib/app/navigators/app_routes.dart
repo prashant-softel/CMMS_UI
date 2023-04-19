@@ -28,6 +28,9 @@ abstract class Routes {
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
   static const calibrationDetail = _Paths.calibrationDetail;
   static const pmSchedule = _Paths.pmSchedule;
+  static const pmTask = _Paths.pmTask;
+  static const pmExecution = _Paths.pmExecution;
+  static const pmExecutionView = _Paths.pmExecutionView;
 }
 
 abstract class _Paths {
@@ -54,4 +57,7 @@ abstract class _Paths {
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const calibrationDetail = '/calibration-detail';
   static const pmSchedule = '/pm-schedule-screen';
+  static const pmTask = '/pm-task-screen';
+  static const pmExecution = '/pm-execution-screen';
+  static const pmExecutionView = '/pm-execution-view-screen';
 }

@@ -565,5 +565,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getPMScheduleData({
+    required String auth,
+    int? facilityId,
+    int? selectedEquipmentId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPMScheduleData(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        selectedEquipmentId: selectedEquipmentId,
+        isLoading: isLoading ?? false,
+      );
+
   ///
 }

@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
 import '../preventive_list_controller.dart';
 
@@ -552,21 +553,13 @@ class PreventiveChecklistListContentWeb
                                                       .map((value) {
                                                     return TableViewCell(
                                                         child: (value == 'No')
-                                                            ? Transform.scale(
-                                                                scale: .7,
-                                                                child: SwitchListTile.adaptive(
-                                                                    visualDensity:
-                                                                        VisualDensity
-                                                                            .comfortable,
-                                                                    value: value ==
-                                                                            'No'
-                                                                        ? true
-                                                                        : false,
-                                                                    onChanged:
-                                                                        (value) {},
-                                                                    activeColor:
-                                                                        ColorValues
-                                                                            .appGreenColor),
+                                                            ? CustomSwitchTroggle(
+                                                                value: value ==
+                                                                        'No'
+                                                                    ? true
+                                                                    : false,
+                                                                onChanged:
+                                                                    (value) {},
                                                               )
                                                             : (value ==
                                                                     "Action")
