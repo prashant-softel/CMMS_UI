@@ -4,6 +4,10 @@ import 'package:cmms/app/preventive_maintanance/preventive_maintenance_controlle
 import 'package:cmms/domain/usecases/preventive_checkpoint_usecase.dart';
 import 'package:get/get.dart';
 
+import '../../domain/usecases/home_usecase.dart';
+import '../home/home_controller.dart';
+import '../home/home_presenter.dart';
+
 class PreventiveCheckPointBinding extends Bindings {
   @override
   void dependencies() {
@@ -14,6 +18,17 @@ class PreventiveCheckPointBinding extends Bindings {
         Get.put(
           PreventiveCheckPointPresenter(
             PreventiveCheckPointUsecase(
+              Get.find(),
+            ),
+          ),
+        ),
+      ),
+    );
+    Get.lazyPut(
+      () => HomeController(
+        Get.put(
+          HomePresenter(
+            HomeUsecase(
               Get.find(),
             ),
           ),

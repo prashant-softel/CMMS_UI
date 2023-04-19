@@ -7,8 +7,7 @@ import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../pm_mapping_controller.dart';
 
-class PmMappingScreen
-    extends GetView<PmMappingController> {
+class PmMappingScreen extends GetView<PmMappingController> {
   PmMappingScreen({super.key});
 
   ///
@@ -19,7 +18,8 @@ class PmMappingScreen
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,automaticallyImplyLeading: false,
+              toolbarHeight: 90,
+              automaticallyImplyLeading: false,
             )
           : AppBar(
               title: Text('PM Mapping'),
@@ -27,8 +27,8 @@ class PmMappingScreen
               elevation: 0,
             ),
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: Get.width,
+          height: Get.height,
           child: Row(
             children: [
               (Responsive.isMobile(context) || Responsive.isTablet(context))
@@ -37,7 +37,7 @@ class PmMappingScreen
               Expanded(
                 child: Column(
                   children: [
-   if (Responsive.isDesktop(context))
+                    if (Responsive.isDesktop(context))
                       Expanded(
                         child: PmMappingContentWeb(),
                       )

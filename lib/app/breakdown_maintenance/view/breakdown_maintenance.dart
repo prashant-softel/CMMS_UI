@@ -1,15 +1,16 @@
 import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../home/widgets/header_widget.dart';
+
 // import '../../navigators/app_pages.dart';
 
-class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController> {
+class BreakdownMaintenanceScreen
+    extends GetView<BreakdownMaintenanceController> {
   BreakdownMaintenanceScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -21,105 +22,141 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, 
+      appBar: Responsive.isDesktop(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 100,
+              automaticallyImplyLeading: false,
+            )
+          : AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+            ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
+      body: Container(
+        width: Get.width,
+        height: Get.height,
+        child: Row(
           children: [
-            SizedBox(height: 40,),
-          if (Responsive.isMobile(context))
-            Obx(
-              () => Container(
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Card(
-                    shadowColor: ColorValues.greyColor,
-                    elevation: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                           isExpanded: true,
-                          value: controller.selectedFacility.value,
-                          icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                          elevation: 7,
-                          style: const TextStyle(color: Colors.black),
-                          onChanged: (String? selectedValue) {
-                            controller.isFacilitySelected.value = true;
-                            controller.selectedFacility.value =
-                                selectedValue ?? '';
-                          },
-                          items: controller.facilityList
-                              .map<DropdownMenuItem<String>>((facility) {
-                            return DropdownMenuItem<String>(
-                              value: facility?.name ?? '',
-                              child: Text(facility?.name ?? ''),
-                            );
-                          }).toList(),
+            (Responsive.isMobile(context) || Responsive.isTablet(context))
+                ? Dimens.box0
+                :
+                //
+                HomeDrawer(),
+            Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                    ),
+                    if (Responsive.isMobile(context))
+                      Obx(
+                        () => Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Card(
+                              shadowColor: ColorValues.greyColor,
+                              elevation: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    value: controller.selectedFacility.value,
+                                    icon: const Icon(
+                                        Icons.keyboard_arrow_down_outlined),
+                                    elevation: 7,
+                                    style: const TextStyle(color: Colors.black),
+                                    onChanged: (String? selectedValue) {
+                                      controller.isFacilitySelected.value =
+                                          true;
+                                      controller.selectedFacility.value =
+                                          selectedValue ?? '';
+                                    },
+                                    items: controller.facilityList
+                                        .map<DropdownMenuItem<String>>(
+                                            (facility) {
+                                      return DropdownMenuItem<String>(
+                                        value: facility?.name ?? '',
+                                        child: Text(facility?.name ?? ''),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    if (Responsive.isDesktop(context))
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text(
+                          "Breakdown Maintenance",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 24,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: Dimens.edgeInsets15,
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 2,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        createContentTile(
+                            title: "Job List",
+                            onTap: () {
+                              controller.goToJobListScreen();
+                            }),
+                        createContentTile(
+                          title: 'Add New Job',
+                          onTap: (){
+                            controller.addNewJob();
+                          }),
+                          createContentTile(
+                            title: "Permit List",
+                            onTap: () {
+                              controller.newPermitList();
+                            }),
+                        createContentTile(
+                            title: "Add New Permit",
+                            onTap: () {
+                              controller.createNewPermit();
+                            }),
+                        createContentTile(title: "Job Card List"),
+                        // _priventiveList(tittle: "PM Schedule View"),
+                        // _priventiveList(tittle: "PM Report"),
+                        // _priventiveList(tittle: "PM Report"),
+                        // _priventiveList(tittle: "PM "),
+                      ],
+                    )
+                  ]),
             ),
-          if (Responsive.isDesktop(context))
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Text(
-                "Breakdown Maintenance",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 159, 156, 156),
-                    fontSize: 24,
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
-          GridView.count(
-            shrinkWrap: true,
-            primary: false,
-            padding: const EdgeInsets.all(16),
-            crossAxisSpacing: 6,
-            mainAxisSpacing: 6,
-            crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
-            childAspectRatio: Responsive.isMobile(context)
-                ? (itemWidth / itemHeight)
-                : (itemWidth / itemHeightWeb),
-            children: <Widget>[
-              _priventiveList(
-                  tittle: "Job List",
-                  ontap: () {
-                    controller.createChecklist();
-                  }),
-              _priventiveList(
-                tittle: "New Permit",
-                ontap: (){
-                  controller.createNewPermit();
-                }
-                ),
-              _priventiveList(
-                tittle: "Permit List",
-                ontap: (){
-                  controller.newPermitList();
-                }
-                ),
-              _priventiveList(tittle: "Job Card List"),
-              // _priventiveList(tittle: "PM Schedule View"),
-              // _priventiveList(tittle: "PM Report"),
-              // _priventiveList(tittle: "PM Report"),
-              // _priventiveList(tittle: "PM "),
-            ],
-          )
-        ]),
+          ],
+        ),
       ),
     );
   }
 
-  _priventiveList({required String tittle, Function()? ontap}) {
+  createContentTile({required String title, Function()? onTap}) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 28, 187, 245),
+          color: ColorValues.appLightBlueColor,
           borderRadius: BorderRadius.circular(2),
         ),
         padding: EdgeInsets.all(9),
@@ -128,7 +165,7 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
           children: [
             Expanded(
               child: Text(
-                tittle,
+                title,
                 style: TextStyle(
                     color: ColorValues.whiteColor,
                     fontSize: 16,
@@ -149,7 +186,7 @@ class BreakdownMaintenanceScreen extends GetView<BreakdownMaintenanceController>
               child: Icon(
                 Icons.format_list_bulleted,
                 size: 30,
-                color: Color.fromARGB(255, 28, 187, 245),
+                color: ColorValues.appLightBlueColor,
               ),
             ),
           ],

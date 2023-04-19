@@ -3,6 +3,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/calibration/calibration_list_controller.dart';
+import 'package:cmms/app/calibration/calibration_list_presenter.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_controller.dart';
@@ -14,6 +16,7 @@ import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
+import 'package:cmms/domain/usecases/calibration_list_usecase.dart';
 import 'package:cmms/domain/usecases/preventive_usecase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -187,6 +190,17 @@ Future<void> initServices() async {
       Get.put(
         JobListPresenter(
           Get.put(JobListUsecase(Get.find())),
+        ),
+        permanent: true,
+      ),
+    ),
+    //permanent: true,
+  );
+  Get.lazyPut(
+    () => CalibrationListController(
+      Get.put(
+        CalibrationListPresenter(
+          Get.put(CalibrationListUsecase(Get.find())),
         ),
         permanent: true,
       ),

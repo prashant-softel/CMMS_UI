@@ -53,21 +53,29 @@ class BreakdownMaintenanceController extends GetxController {
   //       facilityList.indexWhere((facility) => facility?.name == facilityName);
   //   getJobList(facilityId, userId);
   // }
-  Future<void> createChecklist() async {
+  Future<void> goToJobListScreen() async {
     Get.toNamed(
       Routes.jobList,
     );
   }
 
-  Future<void> createNewPermit() async {
+  Future<void> addNewJob() async {
     Get.toNamed(
-      Routes.new_permit,
+      Routes.addJob,
     );
   }
 
   Future<void> newPermitList() async {
     Get.toNamed(
-      Routes.new_Permit_List,
+      Routes.newPermitList,
     );
   }
+
+  Future<void> createNewPermit() async {
+    Get.toNamed(
+      Routes.newPermit,
+    );
+  }
+
+  
 }

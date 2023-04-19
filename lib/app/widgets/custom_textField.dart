@@ -11,18 +11,28 @@ class LoginCustomTextfield extends GetView {
   TextEditingController? textController;
   String? errorController;
   Function(dynamic value)? onChanged;
-  LoginCustomTextfield({
-    Key? key,
-    this.ishint,
-    this.obscureText = false,
-    this.textController,
-    this.widget,
-    this.errorController,
-    this.onChanged,
-  }) : super(key: key);
+  Function()? ontap;
+  Function(dynamic value)? onfieldSubmitted;
+  int? maxLine;
+
+  LoginCustomTextfield(
+      {Key? key,
+      this.ishint,
+      this.obscureText = false,
+      this.textController,
+      this.widget,
+      this.errorController,
+      this.onChanged,
+      this.onfieldSubmitted,
+      this.maxLine = 1,
+      this.ontap})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted: onfieldSubmitted,
+      onTap: ontap,
+      maxLines: maxLine,
       onChanged: onChanged,
       controller: textController,
       obscureText: obscureText,

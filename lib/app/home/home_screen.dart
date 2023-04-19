@@ -1,15 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/preventive_maintanance/view/preventive_maintenance_screen.dart';
-import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
-import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../inventory_list/views/inventory_list_screen.dart';
-import '../job_list/views/job_list_screen.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
@@ -17,73 +12,50 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return //
+    return
+        //
         Scaffold(
       appBar: Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 100,
+              toolbarHeight: 90,
+              automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: HeaderWidget(),
+              title: Text('Home'),
+              centerTitle: true,
               elevation: 0,
             ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
               : null,
-      body:
-          ////
-          Row(
-              //
-              children: [
-            //
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? Dimens.box0
-                :
-                //
-                 HomeDrawer(),
-
-            Obx(
-              () => //
-                  Expanded(
-                //flex: 8,
-                child: Center(
-                  child: Container(
-                    margin: Dimens.edgeInsets16,
-                    height: Get.height,
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(color: Colors.grey.withOpacity(.3)),
-                    // ),
-                    child: (() {
-                      switch (controller.selectedIndex.value) {
-                        case 1:
-                          return InventoryListScreen();
-
-                        case 2:
-                          return BreakdownMaintenanceScreen();
-
-                        case 3:
-                          return WarrantyClaimListScreen();
-
-                        case 4:
-                          return PreventiveScreen();
-
-                        
-
-                        default:
-                          return InventoryListScreen();
-                      }
-                      // your code here
-                    }()),
-                  ),
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Column(
+                  children: [
+                    // if (Responsive.isMobile(context) ||
+                    //     Responsive.isTablet(context))
+                    //   Expanded(
+                    //     child: PreventiveChecklistListContentMobile(),
+                    //   ),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: InventoryListScreen(),
+                      )
+                  ],
                 ),
               ),
-            ),
-
-            ///
-          ]),
+            ],
+          )),
     );
   }
 }
@@ -98,6 +70,7 @@ class Files extends StatelessWidget {
     return Container(
       margin: Dimens.edgeInsets16,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleAvatar(
             radius: 70,
@@ -106,52 +79,63 @@ class Files extends StatelessWidget {
               style: Styles.white13,
             ),
           ),
+          SizedBox(
+            width: 10,
+          ),
           Expanded(
-            child: ScrollableTableView(
-              columns: [
-                "#",
-                "Name",
-                "File Category",
-                "Size",
-                "Status",
-                "Remove",
-              ].map((column) {
-                return TableViewColumn(
-                  minWidth: 100,
-                  label: column,
-                );
-              }).toList(),
-              rows: [
-                [
-                  "1",
-                  "Test.png",
-                  "20.00",
-                  "sdvf",
-                  "sfv",
-                  "remove",
-                ],
-                [
-                  "1",
-                  "Test.png",
-                  "20.00",
-                  "sdvf",
-                  "sfv",
-                  "remove",
-                ],
-              ].map((record) {
-                return TableViewRow(
-                  height: 60,
-                  cells: record.map((value) {
-                    if (value == 'remove')
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 227, 224, 224),
+                  width: 1,
+                ),
+              ),
+              child: ScrollableTableView(
+                columns: [
+                  "#",
+                  "Name",
+                  "File Category",
+                  "Size",
+                  "Status",
+                  "Remove",
+                ].map((column) {
+                  return TableViewColumn(
+                    minWidth: Get.width * 0.12,
+                    label: column,
+                  );
+                }).toList(),
+                rows: [
+                  [
+                    "1",
+                    "Test.png",
+                    "20.00",
+                    "sdvf",
+                    "sfv",
+                    "remove",
+                  ],
+                  [
+                    "1",
+                    "Test.png",
+                    "20.00",
+                    "sdvf",
+                    "sfv",
+                    "remove",
+                  ],
+                ].map((record) {
+                  return TableViewRow(
+                    height: 60,
+                    cells: record.map((value) {
+                      if (value == 'remove')
+                        return TableViewCell(
+                          child: Icon(Icons.delete),
+                        );
                       return TableViewCell(
-                        child: Icon(Icons.delete),
+                        child: Text(value),
                       );
-                    return TableViewCell(
-                      child: Text(value),
-                    );
-                  }).toList(),
-                );
-              }).toList(),
+                    }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ],
@@ -290,12 +274,16 @@ class CustomTextField extends StatelessWidget {
     this.textController,
     this.readOnly = false,
     this.onTap,
+    this.suffixIcon,
+    this.hintText,
   }) : super(key: key);
 
   final String? label;
   final int? maxLine;
   final double? width;
   final bool readOnly;
+  final Icon? suffixIcon;
+  final String? hintText;
   final Function()? onTap;
 
   final TextEditingController? textController;
@@ -303,6 +291,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 40,
       margin: Dimens.edgeInsets16,
       constraints: BoxConstraints(
         maxWidth: width ?? 400,
@@ -311,8 +300,8 @@ class CustomTextField extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 100,
-            child: Text('$label'),
+            width: 170,
+            child: SizedBox(width: 50, child: Text('$label')),
           ),
           Dimens.boxWidth10,
           Expanded(
@@ -324,10 +313,16 @@ class CustomTextField extends StatelessWidget {
                 maxLines: maxLine,
                 decoration: InputDecoration(
                   contentPadding: Dimens.edgeInsets16_0_16_0,
+                  filled: true,
+                  fillColor: readOnly == true
+                      ? Color.fromARGB(255, 206, 205, 205)
+                      : Colors.white,
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),
                   ),
+                  hintText: hintText,
+                  suffixIcon: suffixIcon,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),
