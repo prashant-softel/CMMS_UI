@@ -583,14 +583,12 @@ class PreventiveCheckPointContentWeb
                                                               children: [
                                                                 Text("No"),
                                                                 CustomSwitchTroggle(
-                                                                  inactiveTrackColor: ColorValues
-                                                                              .appRedColor,
-                                                                          value: value == "1"
-                                                                              ? true
-                                                                              : false,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            },
+                                                                  value: value ==
+                                                                          "1"
+                                                                      ? true
+                                                                      : false,
+                                                                  onChanged:
+                                                                      (value) {},
                                                                 ),
                                                                 Text("Yes"),
                                                               ],
