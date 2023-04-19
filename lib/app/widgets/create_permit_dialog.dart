@@ -9,14 +9,17 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class CreateNewPermitDialog extends GetView {
-  String? createPermitData;
+   String? createPermitData;
 
-  CreateNewPermitDialog({super.key, this.createPermitData});
+   CreateNewPermitDialog({
+    super.key,
+     this.createPermitData
+  });
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(builder: ((context, setState) {
-      return AlertDialog(
+    return StatefulBuilder(builder: ((context, setState){
+        return AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
@@ -29,49 +32,44 @@ class CreateNewPermitDialog extends GetView {
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-
+    
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: height / 5.5,
             width: double.infinity,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Divider(
-                    color: ColorValues.greyLightColour,
-                    thickness: 1,
-                  ),
-                  Text(
-                      'New Permit Created Successfully.\nPlease wait for Approval, you can start \nthe job only after PTW is approved '),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 15,
-                        ),
-                        ElevatedButton(
-                          style: Styles.greenElevatedButtonStyle,
-                          onPressed: () => Get.offAllNamed(Routes.newPermit),
-                          child: const Text('Permit List'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.blueElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.newPermit),
-                          child: const Text('View This Permit'),
-                        ),
-                        Dimens.boxWidth10,
-                        // ElevatedButton(
-                        //   style: Styles.redElevatedButtonStyle,
-                        //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                        //   child: const Text('Add New Job'),
-                        // ),
-                      ]),
-                ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              Divider(
+                color: ColorValues.greyLightColour,
+                thickness: 1,
+              ),
+              Text('New Permit Created Successfully.\nPlease wait for Approval, you can start \nthe job only after PTW is approved '),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                SizedBox(width: 15,),
+                ElevatedButton(
+                  style: Styles.greenElevatedButtonStyle,
+                  onPressed: () => Get.offAllNamed(Routes.new_permit),
+                  child: const Text('Permit List'),
+                ),
+                Dimens.boxWidth10,
+                ElevatedButton(
+                  style: Styles.blueElevatedButtonStyle,
+                  onPressed: () => Get.offAndToNamed(Routes.new_permit),
+                  child: const Text('View This Permit'),
+                ),
+                Dimens.boxWidth10,
+                // ElevatedButton(
+                //   style: Styles.redElevatedButtonStyle,
+                //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                //   child: const Text('Add New Job'),
+                // ),
+              ]),
+            ]),
           );
         }),
         actions: [],
       );
-    }));
+      }
+      ));
   }
 }

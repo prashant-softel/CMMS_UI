@@ -71,8 +71,6 @@ abstract class ColorValues {
   static const Color appLightGreyColor = Color.fromARGB(255, 206, 218, 226);
   static const Color appPurpleColor = Color(appPurpleColorHex);
   static Color appBackGroundColor = appLightBlueColor.withOpacity(0.1);
-  static const Color appBlueBackgroundColor =
-      Color.fromARGB(255, 229, 241, 248);
 
   // ===========================================================================
 

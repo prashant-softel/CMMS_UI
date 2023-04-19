@@ -380,8 +380,8 @@ abstract class Utility {
     }
   }
 
-  static String getFormatedDate(String datetime) {
-    var date = DateTime.parse(datetime);
+  static String getFormatedDate(String date) {
+    var date = DateTime.parse('2018-04-10T04:00:00.000Z');
     return Utility.getDayMonthYear(date);
   }
 

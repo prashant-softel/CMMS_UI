@@ -7,8 +7,6 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
-import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -16,10 +14,8 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
-import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -30,10 +26,8 @@ import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
-import '../models/pm_mapping_list_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -311,9 +305,6 @@ class Repository {
         // Get.offAllNamed(
         //   Routes.home,arguments: userId
         // );
-      } else {
-        Fluttertoast.showToast(
-            msg: "Invalid Email Id and Password", fontSize: 16.0);
       }
     } catch (error) {
       await _deviceRepository.generateToken();
@@ -338,71 +329,10 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      print('Inventory List Data: ${res.data}');
 
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList;
-      }
-      return [];
-    } catch (error) {
-      log(error.toString());
-      return [];
-    }
-  }
-
-  Future<List<BusinessListModel>> getBusinessList({
-    required int? businessType,
-    int? blockId,
-    String? categoryIds,
-    required bool isLoading,
-  }) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-
-      log(auth);
-      final res = await _dataRepository.getBusinessList(
-        businessType: businessType,
-        blockId: blockId,
-        categoryIds: categoryIds ?? "",
-        isLoading: isLoading,
-        auth: auth,
-      );
-      //  print('Business List Data: ${res.data}');
-//
-      if (!res.hasError) {
-        var businessList = businessListModelFromJson(res.data);
-        return businessList;
-      }
-      return [];
-    } catch (error) {
-      log(error.toString());
-      return [];
-    }
-  }
-
-  Future<List<WarrantyClaimModel>> getWarrantyClaimList({
-    required int? facilityId,
-    int? blockId,
-    required String categoryIds,
-    required bool isLoading,
-  }) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-
-      log(auth);
-      final res = await _dataRepository.getWarrantyClaimList(
-        facilityId: 45,
-        blockId: blockId,
-        categoryIds: categoryIds,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('WarrantyClaim: ${res.data}');
-
-      if (!res.hasError) {
-        var warrantyClaimList = warrantyClaimModelFromJson(res.data);
-        return warrantyClaimList;
       }
       return [];
     } catch (error) {
@@ -571,7 +501,6 @@ class Repository {
         auth: auth,
         isLoading: isLoading,
       );
-      print('Facilitydata5: ${res.data}');
 
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
@@ -694,7 +623,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getFrequencyList(
         auth: auth,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
 
       if (!res.hasError) {
@@ -858,7 +787,7 @@ class Repository {
 
       if (!res.hasError) {
         final userAccessModelList = jsonDecode(res.data);
-        // print(res.data);
+        print(res.data);
         //  var userAccess = AccessListModel.fromJson(userAccessModelList);
         saveUserAcessData(LocalKeys.userAccess, res.data);
 
@@ -912,7 +841,7 @@ class Repository {
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-        // print(res.data);
+        print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
@@ -1287,154 +1216,6 @@ class Repository {
       }
     } catch (error) {
       log(error.toString());
-    }
-  }
-
-  Future<List<PmMappingListModel?>?> getPmMappingList(
-    int? facilityId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPmMappingList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-      print({"restt", res.data});
-      if (!res.hasError) {
-        final jsonPmMappingListModels = jsonDecode(res.data);
-        //print(res.data);
-        final List<PmMappingListModel> _pmMappingListModel =
-            jsonPmMappingListModels
-                .map<PmMappingListModel>((m) =>
-                    PmMappingListModel.fromJson(Map<String, dynamic>.from(m)))
-                .toList();
-
-        return _pmMappingListModel;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
-        return [];
-      }
-    } catch (error) {
-      log(error.toString());
-
-      return [];
-    }
-  }
-
-  Future<Map<String, dynamic>> savePmMapping(
-    pmJsonString,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.savePmMapping(
-        auth: auth,
-        pmJsonString: pmJsonString,
-        isLoading: isLoading ?? false,
-      );
-      print('SaveData: ${res.data}');
-
-      if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
-      } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
-      }
-      return Map();
-    } catch (error) {
-      log(error.toString());
-      return Map();
-    }
-  }
-
-  Future<List<CalibrationListModel?>?> getCalibrationList(
-    int? facilityId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCalibrationList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-      // print(res.data);
-      if (!res.hasError) {
-        final jsonCalibrationListModelModels = jsonDecode(res.data);
-
-        final List<CalibrationListModel> _CalibrationListModelList =
-            jsonCalibrationListModelModels
-                .map<CalibrationListModel>((m) =>
-                    CalibrationListModel.fromJson(Map<String, dynamic>.from(m)))
-                .toList();
-
-        return _CalibrationListModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
-        return [];
-      }
-    } catch (error) {
-      log(error.toString());
-
-      return [];
-    }
-  }
-
-  Future<bool> StartCalibration({bool? isLoading, startcalibration}) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      log(auth);
-      final res = await _dataRepository.StartCalibration(
-          auth: auth, isLoading: isLoading, startcalibration: startcalibration);
-      print({"res.data", res.data});
-      if (!res.hasError) {
-        return true;
-      }
-      return true;
-    } catch (error) {
-      log(error.toString());
-      return false;
-    }
-  }
-
-  Future<List<GetPmScheduleListModel?>?> getPMScheduleData(
-    int? selectedEquipmentId,
-    int? facilityId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPMScheduleData(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        selectedEquipmentId: selectedEquipmentId,
-        isLoading: isLoading ?? false,
-      );
-
-      if (!res.hasError) {
-        final jsonSetPmSchedultModels = jsonDecode(res.data);
-        // print(res.data);
-        final List<GetPmScheduleListModel> _setPmSchedultModelList =
-            jsonSetPmSchedultModels
-                .map<GetPmScheduleListModel>((m) =>
-                    GetPmScheduleListModel.fromJson(
-                        Map<String, dynamic>.from(m)))
-                .toList();
-
-        return _setPmSchedultModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
-        return [];
-      }
-    } catch (error) {
-      log(error.toString());
-
-      return [];
     }
   }
 

@@ -4,7 +4,6 @@ import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../navigators/app_pages.dart';
 import '../../widgets/dropdown.dart';
 
 class HeaderWidget extends GetView<HomeController> {
@@ -42,7 +41,7 @@ class HeaderWidget extends GetView<HomeController> {
             if (Responsive.isDesktop(context))
               Obx(
                 () => Container(
-                  width: Get.width * .2,
+                  width: MediaQuery.of(context).size.width * .2,
                   child: DropdownWidget(
                     controller: controller,
                     dropdownList: controller.facilityList,
@@ -52,7 +51,6 @@ class HeaderWidget extends GetView<HomeController> {
                   ),
                 ),
               ),
-              // Text('My BEST DATA: ${controller.blockList}'),
             Spacer(),
             if (Responsive.isDesktop(context))
               Icon(Icons.notifications_active,
@@ -89,98 +87,8 @@ class HeaderWidget extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.dialog(
-                          Stack(
-                            children: [
-                              Positioned(
-                                right: 1,
-                                top: 70,
-                                child: Container(
-                                  width: 200,
-                                  child: AlertDialog(
-                                    insetPadding: Dimens.edgeInsets10_0_10_0,
-                                    contentPadding: EdgeInsets.all(20),
-                                    backgroundColor:
-                                        ColorValues.appDarkBlueColor,
-                                    content: Column(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.person,
-                                                color: Color(0xffD2D0D0),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Profile",
-                                                  style: TextStyle(
-                                                    color: Color(0xffD2D0D0),
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w600,
-                                                  )),
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: Color(0xffD2D0D0),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.settings,
-                                                color: Color(0xffD2D0D0),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Settings",
-                                                  style: TextStyle(
-                                                    color: Color(0xffD2D0D0),
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w600,
-                                                  )),
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: Color(0xffD2D0D0),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              _isDeleteDialog();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.logout,
-                                                  color: Color(0xffD2D0D0),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text("Log Out",
-                                                    style: TextStyle(
-                                                      color: Color(0xffD2D0D0),
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    )),
-                                              ],
-                                            ),
-                                          )
-                                        ]),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      child: Icon(Icons.keyboard_arrow_down_outlined,
-                          color: ColorValues.blackColor),
-                    ),
+                    Icon(Icons.keyboard_arrow_down_outlined,
+                        color: ColorValues.blackColor),
                   ],
                 ),
               ),
@@ -189,42 +97,6 @@ class HeaderWidget extends GetView<HomeController> {
               Icon(Icons.notifications_active, color: ColorValues.blackColor),
           ],
         ),
-      ),
-    );
-  }
-
-  _isDeleteDialog() {
-    Get.dialog(
-      AlertDialog(
-        content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.logout_outlined, size: 35, color: ColorValues.redColor),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Are you sure you want to logout?',
-            style: Styles.blackBold14w500,
-          ),
-        ]),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text('NO'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Get.offAllNamed(Routes.login);
-                },
-                child: Text('YES'),
-              ),
-            ],
-          )
-        ],
       ),
     );
   }

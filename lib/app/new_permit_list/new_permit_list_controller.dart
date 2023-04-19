@@ -41,7 +41,7 @@ class NewPermitListController extends GetxController {
   @override
   void onInit() async {
     //homePresenter.generateToken();
-
+   
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
       Future.delayed(Duration(milliseconds: 500), () {
@@ -74,10 +74,11 @@ class NewPermitListController extends GetxController {
   Future<void> getNewPermitList(int facilityId, int userId) async {
     newPermitList?.value = <NewPermitListModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
-        // facilityId: facilityId,
-        facilityId: 45,
-        // userId: userId,
-        userId: 33);
+      // facilityId: facilityId,
+      facilityId: 45,
+      // userId: userId,
+      userId: 33
+    );
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
@@ -98,7 +99,7 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> addNewPermitList() async {
-    Get.toNamed(Routes.newPermit, arguments: facilityId);
+    Get.toNamed(Routes.new_permit, arguments: facilityId);
   }
 
   void goToJobCardScreen(int? jobId) {

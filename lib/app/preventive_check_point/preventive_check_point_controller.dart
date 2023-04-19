@@ -36,20 +36,17 @@ class PreventiveCheckPointController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  // var preventiveCheckPointModelListDetails;
+  var preventiveCheckPointModelListDetails;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-
-      Future.delayed(Duration(seconds: 1), () {
-        getPreventiveCheckList(
-          facilityId,
-          type,
-        );
-      });
+      getPreventiveCheckList(
+        facilityId,
+        type,
+      );
     });
     super.onInit();
   }
@@ -69,14 +66,12 @@ class PreventiveCheckPointController extends GetxController {
         facilityId: facilityId, type: type, isLoading: true);
 
     if (list != null) {
-      checkList.clear();
-
       for (var _checkList in list) {
         checkList.add(_checkList);
       }
     }
     selectedchecklist.value = checkList[0]?.id.toString() ?? '';
-    // selectedchecklistId = checkList[0]?.id.?? 0;
+    // selectedchecklistId = checkList[0]?.id ?? 0;
     getCheckPointlist(selectedchecklistId: selectedchecklist.value);
   }
 
@@ -106,7 +101,7 @@ class PreventiveCheckPointController extends GetxController {
       );
       return true;
     }
-    return true;
+    return false;
   }
 
   Future<void> getCheckPointlist({required String selectedchecklistId}) async {
@@ -138,13 +133,11 @@ class PreventiveCheckPointController extends GetxController {
     checkPointCtrlr.text = '';
     requirementCtrlr.text = '';
     isToggleOn.value = false;
-
-    Future.delayed(Duration(seconds: 1), () {
-      getCheckPointlist(selectedchecklistId: selectedchecklist.value);
-    });
     Future.delayed(Duration(seconds: 4), () {
       isSuccess.value = false;
     });
+
+    getCheckPointlist(selectedchecklistId: selectedchecklist.value);
   }
 
   void isDeleteDialog({String? check_point_id, String? check_point}) {

@@ -108,40 +108,6 @@ class DataRepository extends DomainRepository {
   }
 
   @override
-  Future<ResponseModel> getBusinessList({
-    int? businessType,
-    int? blockId,
-    required String categoryIds,
-    required bool isLoading,
-    required String auth,
-  }) async {
-    return await connectHelper.getBusinessList(
-      isLoading: isLoading,
-      auth: auth,
-      businessType: businessType,
-      blockId: blockId,
-      categoryIds: categoryIds,
-    );
-  }
-
-  @override
-  Future<ResponseModel> getWarrantyClaimList({
-    int? facilityId,
-    int? blockId,
-    required String categoryIds,
-    required bool isLoading,
-    required String auth,
-  }) async {
-    return await connectHelper.getWarrantyClaimList(
-      isLoading: isLoading,
-      auth: auth,
-      facilityId: 45,
-      blockId: blockId,
-      categoryIds: categoryIds,
-    );
-  }
-
-  @override
   Future<ResponseModel> getWorkTypeList({
     String? categoryIds,
     bool? isLoading,
@@ -191,7 +157,8 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getNewPermitList({
+
+   Future<ResponseModel> getNewPermitList({
     required String auth,
     int? facilityId,
     int? userId,
@@ -218,7 +185,7 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> getCheckPointlist({
+      Future<ResponseModel> getCheckPointlist({
     required String auth,
     int? selectedchecklistId,
     bool? isLoading,
@@ -524,59 +491,6 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
-
-  Future<ResponseModel> getPmMappingList({
-    required String auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.getPmMappingList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> savePmMapping({
-    required String auth,
-    pmJsonString,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.savePmMapping(
-        auth: auth,
-        pmJsonString: pmJsonString,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> getCalibrationList({
-    required String auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.getCalibrationList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> StartCalibration({
-    auth,
-    bool? isLoading,
-    startcalibration,
-  }) async {
-    var response = await connectHelper.StartCalibration(
-        auth: auth, isLoading: isLoading, startcalibration: startcalibration);
-    return response;
-  }
-
-  Future<ResponseModel> getPMScheduleData({
-    required String auth,
-    int? facilityId,
-    int? selectedEquipmentId,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.getPMScheduleData(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        selectedEquipmentId: selectedEquipmentId,
-        isLoading: isLoading ?? false,
-      );
 
   ///
 }

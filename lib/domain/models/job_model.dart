@@ -17,18 +17,18 @@ class JobModel {
       workingArea: json['workingArea'] == null ? null : json['workingArea'],
       description: json['description'] == null ? null : json['description'],
       jobDetails: json['jobDetails'] == null ? null : json['jobDetails'],
-      workType: json['workType'] == null ? null : json['workType'] ?? '',
-      raisedBy: json['raisedBy'] == null ? null : json['raisedBy'] ?? '',
-      raisedByName: json['raisedByName'] == null ? null : json['raisedByName'] ?? '',
+      workType: json['workType'] == null ? null : json['workType'],
+      raisedBy: json['raisedBy'] == null ? null : json['raisedBy'],
+      raisedByName: json['raisedByName'] == null ? null : json['raisedByName'],
       breakdownTime: json['breakdownTime'] == null
           ? null
-          : DateTime.parse(json['breakdownTime'] as String) ,
+          : DateTime.parse(json['breakdownTime'] as String),
       breakdownType:
-          json['breakdownType'] == null ? null : json['breakdownType'] ?? '',
-      permitId: json['permitId'] == null ? null : json['permitId'] ?? '',
+          json['breakdownType'] == null ? null : json['breakdownType'],
+      permitId: json['permitId'] == null ? null : json['permitId'],
       assignedToName:
-          json['assignedToName'] == null ? null : json['assignedToName'] ?? '',
-      assignedToId: json['assignedToId'] == null ? null : json['assignedToId'] ?? '',
+          json['assignedToName'] == null ? null : json['assignedToName'],
+      assignedToId: json['assignedToId'] == null ? null : json['assignedToId'],
       status: json['status'] == null
           ? null
           : JobStatus.values.firstWhere((x) => x.index == json['status']));

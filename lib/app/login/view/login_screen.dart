@@ -22,8 +22,8 @@ class LoginScreen extends GetView<LoginController> {
               children: [
                 if (Responsive.isDesktop(context))
                   Container(
-                    height: Get.height,
-                    width: Get.width,
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/files/banner.png'),
@@ -45,8 +45,11 @@ class LoginScreen extends GetView<LoginController> {
                             Padding(
                               padding: const EdgeInsets.all(10),
                               child: Container(
-                                width: (Get.width * .7) - 400,
-                                height: Get.height - 240,
+                                width:
+                                    (MediaQuery.of(context).size.width * .7) -
+                                        400,
+                                height:
+                                    MediaQuery.of(context).size.height - 240,
                                 child: Image.asset(
                                   'assets/files/soler.jpeg',
                                   fit: BoxFit.cover,
@@ -74,7 +77,9 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 10,
                                 ),
                                 Container(
-                                    width: (Get.width * .3) - 50,
+                                    width: (MediaQuery.of(context).size.width *
+                                            .3) -
+                                        50,
                                     child: LoginCustomTextfield(
                                       textController: controller.emailCtrlr,
                                       ishint: "Email Id",
@@ -89,28 +94,25 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 10,
                                 ),
                                 Container(
-                                  width: (Get.width * .3) - 50,
+                                  width:
+                                      (MediaQuery.of(context).size.width * .3) -
+                                          50,
                                   child: LoginCustomTextfield(
-                                    onfieldSubmitted: (Value) {
-                                      controller.login();
-                                    },
                                     textController: controller.passwordCtrlr,
                                     obscureText:
                                         controller.passwordVisible.value,
                                     ishint: "Password",
                                     onChanged: (value) =>
                                         controller.updatepassword(value),
-                                    widget: MouseRegion(
-                                      onEnter: (_) =>
-                                          controller.passwordVisible(false),
-                                      onExit: (_) =>
-                                          controller.passwordVisible(true),
-                                      child: Icon(
+                                    widget: IconButton(
+                                      icon: Icon(
                                         controller.passwordVisible.value
                                             ? Icons.visibility_off
                                             : Icons.visibility,
                                         color: ColorValues.greyLightColor,
                                       ),
+                                      onPressed: () =>
+                                          controller.passwordVisible.toggle(),
                                     ),
                                   ),
                                 ),
@@ -130,7 +132,9 @@ class LoginScreen extends GetView<LoginController> {
                                   height: 30,
                                 ),
                                 Container(
-                                    width: (Get.width * .3) - 50,
+                                    width: (MediaQuery.of(context).size.width *
+                                            .3) -
+                                        50,
                                     height: 45,
                                     child: CustomElevatedButton(
                                       backgroundColor:
@@ -214,7 +218,7 @@ class LoginScreen extends GetView<LoginController> {
                               height: 30,
                             ),
                             Container(
-                              width: Get.width,
+                              width: MediaQuery.of(context).size.width,
                               height: 45,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(

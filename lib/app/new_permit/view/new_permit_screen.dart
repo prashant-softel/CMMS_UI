@@ -54,7 +54,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: Responsive.isDesktop(context)
+      resizeToAvoidBottomInset: false,
+      appBar: Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
@@ -62,29 +63,28 @@ class NewPermitScreen extends GetView<NewPermitController> {
               toolbarHeight: 90,
             )
           : AppBar(
-              title: Text('New Permit List'),
+              title: Text('New Permit'),
               centerTitle: true,
               elevation: 0,
             ),
-     
       body: Container(
         // width: MediaQuery.of(context).size.width ,
         height: MediaQuery.of(context).size.height,
         child: Row(
           children: [
             (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? Dimens.box0
-                : HomeDrawer(),
+            ? Dimens.box0
+            : HomeDrawer(),
             Obx(
               () => Expanded(
                 child: Container(
-                    width: MediaQuery.of(context).size.width,
+                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //  if(Responsive.isMobile(context))
-                        Padding(
+                      //  if(Responsive.isMobile(context)) 
+                       Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
@@ -98,8 +98,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                               // )
                               Obx(
                                 () => Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.38,
+                                  width: MediaQuery.of(context).size.width / 1.38,
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: Card(
@@ -108,14 +107,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1.0),
                                         child: DropdownWidget(
-                                          dropdownList: controller.facilityList,
-                                          isValueSelected: controller
-                                              .isFacilitySelected.value,
-                                          selectedValue:
-                                              controller.selectedFacility.value,
-                                          onValueChanged:
-                                              controller.onValueChanged,
-                                        ),
+                                      dropdownList: controller.facilityList,
+                                      isValueSelected:
+                                          controller.isFacilitySelected.value,
+                                      selectedValue: controller.selectedFacility.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
                                         // DropdownButtonHideUnderline(
                                         //   child: DropdownButton(
                                         //     isExpanded: true,
@@ -148,7 +145,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                             ],
                           ),
                         ),
-
+                       
+                    
                         /// CARD
                         Expanded(
                           child: Container(
@@ -172,25 +170,22 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 15,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 140),
+                                                padding:
+                                                    const EdgeInsets.only(right: 140),
                                                 child: Text(
                                                   'REQUEST A PERMIT TO WORK',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                      fontWeight: FontWeight.bold),
                                                 ),
                                               ),
                                               SizedBox(
                                                 height: 20,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
+                                                padding:
+                                                    const EdgeInsets.only(left: 10),
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
                                                     CustomRichText(
                                                         title: 'Block/Plot: '),
@@ -198,27 +193,16 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     //   width: 5,
                                                     // ),
                                                     SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              1.6,
+                                                      width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          1.6,
                                                       child: Obx(
-                                                        () => DropdownWidget(
-                                                          dropdownList:
-                                                              controller
-                                                                  .blockList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isBlockSelected
-                                                                  .value,
-                                                          selectedValue:
-                                                              controller
-                                                                  .selectedBlock
-                                                                  .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
+                                                        ()=> DropdownWidget(
+                                                          dropdownList:controller.blockList,
+                                                          isValueSelected: controller.isBlockSelected.value,
+                                                          selectedValue: controller.selectedBlock.value,
+                                                          onValueChanged:controller.onValueChanged,
                                                         ),
                                                       ),
                                                       // LoginCustomTextfield(),
@@ -235,29 +219,21 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     width: 10,
                                                   ),
                                                   CustomRichText(
-                                                      title:
-                                                          'Type of permit: '),
+                                                      title: 'Type of permit: '),
                                                   SizedBox(
                                                     width: 5,
                                                   ),
                                                   SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.82,
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        1.82,
                                                     child: DropdownWidget(
-                                                      dropdownList: controller
-                                                          .typePermitList,
-                                                      isValueSelected: controller
-                                                          .isTypePermitSelected
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedTypePermit
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
+                                                          dropdownList:controller.typePermitList,
+                                                          isValueSelected: controller.isTypePermitSelected.value,
+                                                          selectedValue: controller.selectedTypePermit.value,
+                                                          onValueChanged:controller.onValueChanged,
+                                                        ),
                                                   )
                                                 ],
                                               ),
@@ -270,19 +246,16 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     width: 10,
                                                   ),
                                                   CustomRichText(
-                                                      title:
-                                                          'Equipment Categories: '),
+                                                      title: 'Equipment Categories: '),
                                                   SizedBox(
                                                     width: 5,
                                                   ),
                                                   SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            2.5,
-                                                    child:
-                                                        CustomMultiSelectDialogField(
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2.5,
+                                                    child: CustomMultiSelectDialogField(
                                                       initialValue: (controller
                                                               .selectedEquipmentCategoryIdList
                                                               .isNotEmpty)
@@ -294,17 +267,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           .map(
                                                             (equipmentCategory) =>
                                                                 MultiSelectItem(
-                                                              equipmentCategory
-                                                                  ?.id,
-                                                              equipmentCategory
-                                                                      ?.name ??
+                                                              equipmentCategory?.id,
+                                                              equipmentCategory?.name ??
                                                                   '',
                                                             ),
                                                           )
                                                           .toList(),
                                                       onConfirm:
-                                                          (selectedOptionsList) =>
-                                                              {
+                                                          (selectedOptionsList) => {
                                                         controller
                                                             .equipmentCategoriesSelected(
                                                                 selectedOptionsList),
@@ -318,82 +288,77 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              _buildStartDateField_mobile(
-                                                  context),
-                                              _buildValidTillField_mobile(
-                                                  context),
-                                              _buildJobDescriptionField_mobile(
-                                                  context),
-
+                                              _buildStartDateField_mobile(context),
+                                              _buildValidTillField_mobile(context),
+                                              _buildJobDescriptionField_mobile(context),
+                    
                                               Center(
                                                 child: Container(
                                                     height: 45,
                                                     child: CustomElevatedButton(
                                                       backgroundColor:
-                                                          ColorValues
-                                                              .navyBlueColor,
+                                                          ColorValues.navyBlueColor,
                                                       text: "Submit",
                                                       onPressed: () {
-                                                        controller
-                                                            .createNewPermit();
+                                                         controller.createNewPermit();
                                                       },
                                                     )),
                                               ),
                                               SizedBox(
                                                 height: 90,
                                               ),
-
+                    
                                               // /
                                               // / SELECT BLOCK DropDown
                                               // _buildBlockDropdown(),
-
+                    
                                               // /MULTISELECT CONTROL Equipment Categories
                                               // _buildEquipmentCategoriesDropdown(),
-
+                    
                                               // / WORK AREA (= EQUIPMENTS) DropDown
                                               // _buildWorkAreaDropdown(),
-
+                    
                                               // / WORK TYPE  DropDown
                                               // _buildWorkTypeDropdown(),
-
+                    
                                               // / TOOLS REQUIRED DropDown
                                               // _buildToolsRequiredDropdown(),
-
+                    
                                               // / ASSIGNED TO DropDown
                                               // _buildAssignedToDropdown(),
-
+                    
                                               // / JOB TITLE
                                               // _buildJobTitleField(),
-
+                    
                                               // / JOB DESCRIPTION
                                               // _buildJobDescriptionField(),
-
+                    
                                               // / BREAKDOWN TIME
                                               // _buildBreakDownTimeField(context),
-
+                    
                                               // / SAVE BUTTON
                                               // _buildSaveJobButton(saveButtonStyle),
-
+                    
                                               ///
                                               SizedBox(
                                                 height: 50,
                                               ),
-                                            ]),
+                                            ]
+                                            ),
                                       );
-                                    } else if (Responsive.isDesktop(context)) {
-                                      return SingleChildScrollView(
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
+                                    } 
+                                     else if (Responsive.isDesktop(context)) {
+                                       return SingleChildScrollView(
+                                         child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 50),
+                                                padding:
+                                                    const EdgeInsets.only(right: 50),
                                                 child: Text(
                                                   'REQUEST A PERMIT TO WORK',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                      fontWeight: FontWeight.bold),
                                                 ),
                                               ),
                                               SizedBox(
@@ -404,47 +369,32 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   SizedBox(
                                                     width: 35,
                                                   ),
-                                                  CustomRichText(
-                                                      title: 'Block/Plot: '),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            3.75,
-                                                    child: Obx(
-                                                      () => DropdownWidget(
-                                                        dropdownList: controller
-                                                            .blockList,
-                                                        isValueSelected:
-                                                            controller
-                                                                .isBlockSelected
-                                                                .value,
-                                                        selectedValue:
-                                                            controller
-                                                                .selectedBlock
-                                                                .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged,
-                                                      ),
+                                                  
+                                                   CustomRichText(
+                                                        title: 'Block/Plot: '),
+                                                    SizedBox(
+                                                      width: 5,
                                                     ),
-                                                    // LoginCustomTextfield(),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  )
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width / 3.75,
+                                                      child: Obx(
+                                                        ()=> DropdownWidget(
+                                                          dropdownList:controller.blockList,
+                                                          isValueSelected: controller.isBlockSelected.value,
+                                                          selectedValue: controller.selectedBlock.value,
+                                                          onValueChanged:controller.onValueChanged,
+                                                        ),
+                                                      ),
+                                                      // LoginCustomTextfield(),
+                                                    ),
+                                                  SizedBox(height: 20,)
                                                 ],
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, top: 20),
+                                                padding:
+                                                    const EdgeInsets.only(left: 10, top: 20),
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     // CustomRichText(
                                                     //     title: 'Block/Plot: '),
@@ -463,130 +413,104 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     //   ),
                                                     //   // LoginCustomTextfield(),
                                                     // ),
-
-                                                    CustomRichText(
-                                                        title:
-                                                            'Type of permit: '),
-                                                    SizedBox(
-                                                      width: 5,
+                                                    
+                                                  CustomRichText(
+                                                      title: 'Type of permit: '),
+                                                       SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  SizedBox(
+                                                    width: MediaQuery.of(context).size.width / 3.75,
+                                                    child: Obx(
+                                                      () => DropdownWidget(
+                                                            dropdownList:controller.typePermitList,
+                                                            isValueSelected: controller.isTypePermitSelected.value,
+                                                            selectedValue: controller.selectedTypePermit.value,
+                                                            onValueChanged:controller.onValueChanged,
+                                                          ),
                                                     ),
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              3.75,
-                                                      child: Obx(
-                                                        () => DropdownWidget(
-                                                          dropdownList: controller
-                                                              .typePermitList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isTypePermitSelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedTypePermit
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
-                                                      ),
+                                                  ),
+                                                  SizedBox(width: 60,),
+                                                  CustomRichText(
+                                                      title: 'Equipment Categories: '),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  SizedBox(
+                                                    width: MediaQuery.of(context).size.width / 3.7,
+                                                    child: CustomMultiSelectDialogField(
+                                                      initialValue: (controller
+                                                              .selectedEquipmentCategoryIdList
+                                                              .isNotEmpty)
+                                                          ? controller
+                                                              .selectedEquipmentCategoryIdList
+                                                          : [],
+                                                      items: controller
+                                                          .equipmentCategoryList
+                                                          .map(
+                                                            (equipmentCategory) =>
+                                                                MultiSelectItem(
+                                                              equipmentCategory?.id,
+                                                              equipmentCategory?.name ??
+                                                                  '',
+                                                            ),
+                                                          )
+                                                          .toList(),
+                                                      onConfirm:
+                                                          (selectedOptionsList) => {
+                                                        controller
+                                                            .equipmentCategoriesSelected(
+                                                                selectedOptionsList),
+                                                        print(
+                                                            'Equipment list ${controller.equipmentCategoryList}')
+                                                      },
                                                     ),
-                                                    SizedBox(
-                                                      width: 60,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Equipment Categories: '),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              3.7,
-                                                      child:
-                                                          CustomMultiSelectDialogField(
-                                                        initialValue: (controller
-                                                                .selectedEquipmentCategoryIdList
-                                                                .isNotEmpty)
-                                                            ? controller
-                                                                .selectedEquipmentCategoryIdList
-                                                            : [],
-                                                        items: controller
-                                                            .equipmentCategoryList
-                                                            .map(
-                                                              (equipmentCategory) =>
-                                                                  MultiSelectItem(
-                                                                equipmentCategory
-                                                                    ?.id,
-                                                                equipmentCategory
-                                                                        ?.name ??
-                                                                    '',
-                                                              ),
-                                                            )
-                                                            .toList(),
-                                                        onConfirm:
-                                                            (selectedOptionsList) =>
-                                                                {
-                                                          controller
-                                                              .equipmentCategoriesSelected(
-                                                                  selectedOptionsList),
-                                                          print(
-                                                              'Equipment list ${controller.equipmentCategoryList}')
-                                                        },
-                                                      ),
-                                                    ),
+                                                  ),
                                                   ],
                                                 ),
                                               ),
                                               SizedBox(
                                                 height: 25,
                                               ),
+                                             
+                                            
+                                              
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
-                                                  _buildStartDateField_web(
-                                                      context),
-                                                  SizedBox(
-                                                    width: 50,
-                                                  ),
-                                                  _buildValidTillField_web(
-                                                      context),
+                                                  _buildStartDateField_web(context),
+                                                  SizedBox(width: 50,),
+                                                  _buildValidTillField_web(context),
+                    
                                                 ],
                                               ),
-                                              _buildJobDescriptionField_web(
-                                                  context),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
+                                              _buildJobDescriptionField_web(context),
+                                              SizedBox(height: 20,),
                                               Center(
                                                 child: Container(
                                                     height: 45,
                                                     child: CustomElevatedButton(
                                                       backgroundColor:
-                                                          ColorValues
-                                                              .navyBlueColor,
+                                                          ColorValues.navyBlueColor,
                                                       text: "Submit",
                                                       onPressed: () {
-                                                        controller
-                                                            .createNewPermit();
+                                                         controller.createNewPermit();
                                                       },
                                                     )),
                                               ),
                                               SizedBox(
                                                 height: 90,
                                               ),
+                    
+                                             
                                               SizedBox(
                                                 height: 50,
                                               ),
-                                            ]),
-                                      );
-                                    }
+                                           
+                                         ]
+                                         ),
+                                       );
+                                     }
                                   }())
                                   //
                                   ),
@@ -646,6 +570,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
+              
               onTap: () {
                 pickDateTime_mobile(context);
               },
@@ -1015,6 +940,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
     ]);
   }
 
+
+
+
+
+
   ///Below All For WEB
 
   Widget _buildStartDateField_web(BuildContext context) {
@@ -1058,6 +988,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 2.88,
             child: TextField(
+              
               onTap: () {
                 pickDateTime_web(context);
               },
@@ -1124,9 +1055,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       ),
       Dimens.boxHeight5,
       Padding(
-        padding: const EdgeInsets.only(
-          left: 10,
-        ),
+        padding: const EdgeInsets.only(left: 10,),
         child: Container(
           // width: MediaQuery.of(context).size.width / 4,
           decoration: BoxDecoration(
@@ -1151,7 +1080,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2.6,
+            width: MediaQuery.of(context).size.width  / 2.6,
             // width: 50,
             child: TextField(
               onTap: () {

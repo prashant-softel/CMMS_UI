@@ -18,19 +18,10 @@ abstract class Routes {
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
   static const breakdown = _Paths.breakdown;
-  static const newPermit = _Paths.newPermit;
-  static const newPermitList = _Paths.newPermitList;
-  static const warrantyClaimList = _Paths.warrantyClaimList;
-  static const preventiveMaintenanceMapping =
-      _Paths.preventiveMaintenanceMapping;
-  static const calibrationList = _Paths.calibrationList;
-  static const CalibrationHistory = _Paths.calibrationHistory;
-  static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
-  static const calibrationDetail = _Paths.calibrationDetail;
-  static const pmSchedule = _Paths.pmSchedule;
-  static const pmTask = _Paths.pmTask;
-  static const pmExecution = _Paths.pmExecution;
-  static const pmExecutionView = _Paths.pmExecutionView;
+  static const new_permit = _Paths.new_permit;
+  static const new_Permit_List  = _Paths.new_Permit_List;
+  static const warranty_Claim_List = _Paths.warranty_Claim_List;
+  static const pmMapping = _Paths.pmMapping;
 }
 
 abstract class _Paths {
@@ -44,20 +35,14 @@ abstract class _Paths {
   static const jobCardDetails = '/job-card-details';
   static const login = '/login-screen';
   static const preventive = '/preventive-screen';
+  static const create_checkList = '/create_preventive_checklist-screen';
+  static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
-  static const newPermit = '/new-permit';
+  static const new_permit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
   static const preventiveList = '/preventive-list-screen';
   static const preventiveCheckPoint = '/preventive-check-point';
-  static const newPermitList = '/new-permit-list';
-  static const warrantyClaimList = '/warranty-claim-list';
-  static const preventiveMaintenanceMapping = '/pm-mapping-screen';
-  static const calibrationList = '/calibration-list-screen';
-  static const calibrationHistory = '/calibration-history-screen';
-  static const viewWarrantyClaim = '/view-warranty-claim';
-  static const calibrationDetail = '/calibration-detail';
-  static const pmSchedule = '/pm-schedule-screen';
-  static const pmTask = '/pm-task-screen';
-  static const pmExecution = '/pm-execution-screen';
-  static const pmExecutionView = '/pm-execution-view-screen';
+  static const new_Permit_List = '/new-permit-list';
+  static const warranty_Claim_List = '/warranty-claim-list';
+  static const pmMapping = '/pm-mapping-screen';
 }
