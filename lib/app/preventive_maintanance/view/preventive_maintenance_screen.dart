@@ -138,9 +138,17 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             ontap: () {
                               controller.pmSchedule();
                             }),
-                        _priventiveList(tittle: "PM Schedule View"),
+                        _priventiveList(
+                            tittle: "PM Tasks",
+                            ontap: () {
+                              controller.pmTask();
+                            }),
                         _priventiveList(tittle: "PM Report"),
-                        _priventiveList(tittle: "PM Execution"),
+                        _priventiveList(
+                            tittle: "PM Execution",
+                            ontap: () {
+                              controller.pmExecution();
+                            }),
                         _priventiveList(tittle: "Maintenance Report"),
                       ],
                     )

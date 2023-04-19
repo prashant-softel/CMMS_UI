@@ -15,6 +15,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -358,7 +359,6 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-
       if (!res.hasError) {
         var businessList = businessListModelFromJson(res.data);
         return businessList;
@@ -693,7 +693,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getFrequencyList(
         auth: auth,
-        isLoading: isLoading,
+        isLoading: isLoading ?? false,
       );
 
       if (!res.hasError) {
@@ -1301,7 +1301,6 @@ class Repository {
       );
       if (!res.hasError) {
         final jsonPmMappingListModels = jsonDecode(res.data);
-
         final List<PmMappingListModel> _pmMappingListModel =
             jsonPmMappingListModels
                 .map<PmMappingListModel>((m) =>
@@ -1392,6 +1391,42 @@ class Repository {
     } catch (error) {
       log(error.toString());
       return false;
+    }
+  }
+
+  Future<List<GetPmScheduleListModel?>?> getPMScheduleData(
+    int? selectedEquipmentId,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPMScheduleData(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        selectedEquipmentId: selectedEquipmentId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonSetPmSchedultModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GetPmScheduleListModel> _setPmSchedultModelList =
+            jsonSetPmSchedultModels
+                .map<GetPmScheduleListModel>((m) =>
+                    GetPmScheduleListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _setPmSchedultModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
     }
   }
 

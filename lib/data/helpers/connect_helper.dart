@@ -800,5 +800,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPMScheduleData({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? selectedEquipmentId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/GetScheduleData?facility_id=$facilityId&category_id=$selectedEquipmentId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   ///
 }

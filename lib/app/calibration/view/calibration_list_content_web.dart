@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -180,7 +181,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 columns: [
                                   "Equipment Category",
                                   "Equipment Name",
-                                  "Description",
                                   "Serial No.",
                                   "Calibration Certificates",
                                   "Installation date",
@@ -200,7 +200,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     controller.calibrationList?.length ?? 0,
                                     (index) {
                                       return [
-                                        '',
                                         '',
                                         '',
                                         '',
@@ -231,7 +230,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 columns: [
                                   "Equipment Category",
                                   "Equipment Name",
-                                  "Description",
                                   "Serial No.",
                                   "Calibration Certificates",
                                   "Installation date",
@@ -254,7 +252,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                           controller.calibrationList?[index];
                                       return [
                                         '${calibrationListListDetails?.category_name}',
-                                        "Equipment Name",
                                         '${calibrationListListDetails?.asset_name}',
                                         '123566',
                                         "calibration_certificate",
@@ -279,7 +276,11 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                       .lightGreenColor,
                                                   label: 'Start Calibration',
                                                   onPress: () {
-                                                    startCalibration();
+                                                    startCalibration(
+                                                        equipmentName:
+                                                            record[1],
+                                                        previousDate: record[5],
+                                                        nextDate: "04-04-2023");
                                                   },
                                                 ),
                                                 TableActionButton(
@@ -433,7 +434,10 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
     );
   }
 
-  void startCalibration() {
+  void startCalibration(
+      {required String equipmentName,
+      required String previousDate,
+      required String nextDate}) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -450,7 +454,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                 style: Styles.blackBold20,
               ),
               Text(
-                ': DEMO_BLOCK_WVM',
+                ': ${equipmentName}',
                 textAlign: TextAlign.center,
                 style: Styles.black18,
               ),
@@ -460,6 +464,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       ),
       content: Builder(builder: (context) {
         var height = Get.height;
+        String preDate = Utility.getFormatedDate(previousDate);
+        controller.previousDateController.text = preDate;
+        controller.nextDueDateController.text = nextDate;
 
         return Obx(
           () => Container(
@@ -658,17 +665,48 @@ _filterDialog() {
             //  margin: EdgeInsets.all(10),
             child: AlertDialog(
               // insetPadding: Dimens.edgeInsets10_0_10_0,
-              contentPadding: EdgeInsets.all(20),
+              contentPadding: EdgeInsets.only(bottom: 30),
               backgroundColor: ColorValues.appBlueBackgroundColor,
-              content: Wrap(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _filterText("Rejected"),
-                    _filterText("Complete"),
-                    _filterText("Waiting for Approval"),
-                    _filterText("Approved to dispatch"),
-                    _filterText("Waiting for final Approval"),
-                  ]),
+              content: Column(
+                children: [
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Spacer(),
+                      Text(
+                        "Filter",
+                        style: Styles.blackBold16,
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Icon(
+                            Icons.close,
+                            size: 25,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Divider(
+                    color: ColorValues.lightGreyColor,
+                  ),
+                  Wrap(
+                      // mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _filterText("Rejected"),
+                        _filterText("Complete"),
+                        _filterText("Waiting for Approval"),
+                        _filterText("Approved to dispatch"),
+                        _filterText("Waiting for final Approval"),
+                      ]),
+                ],
+              ),
             ),
           ),
         ),
@@ -679,7 +717,14 @@ _filterDialog() {
 
 _filterText(String text) {
   return Card(
-    margin: const EdgeInsets.all(15.0),
-    child: Text(text),
+    elevation: 3,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0),
+    ),
+    margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+    child: Padding(
+      padding: const EdgeInsets.all(7.0),
+      child: Text(text),
+    ),
   );
 }
