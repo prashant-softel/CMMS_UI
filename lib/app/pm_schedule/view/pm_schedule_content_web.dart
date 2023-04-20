@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/pm_schedule/pm_schedule_controller.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -302,23 +303,9 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         return [
                                           '${getPmScheduleListListDetails?.asset_id}',
                                           '${getPmScheduleListListDetails?.asset_name ?? ''}',
-                                          ...controller.frequencyListName,
-
-                                          // "Day",
-                                          // "Week",
-                                          // "FortNight",
-                                          // "Monthly",
-                                          // "Quarterly",
-                                          // "Half Yearly",
-                                          // "Yearly",
-                                          // "2 Years",
-                                          // "5 Years",
-                                          // "10 Years",
-                                          // "3 Years",
-                                          // "6 Years",
-                                          // "4 Years",
-                                          // "20 Years",
-                                          // "2 Months"
+                                          ...(getPmScheduleListListDetails
+                                                  ?.frequency_dates ??
+                                              []),
                                         ];
                                       },
                                     ),
@@ -329,12 +316,22 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         if (value == record[0] ||
                                             value == record[1])
                                           return TableViewCell(
-                                            child: Text(value),
+                                            child: Text(value.toString()),
                                           );
                                         return TableViewCell(
                                           child: Container(
                                               width: Get.width / 7,
-                                              child: LoginCustomTextfield()),
+                                              child: LoginCustomTextfield(
+                                                textController: (value
+                                                        as FrequencyDates)
+                                                    .schedule_date_value_controller,
+                                                enabled:
+                                                    (value as FrequencyDates)
+                                                                .schedule_date !=
+                                                            null
+                                                        ? true
+                                                        : false,
+                                              )),
                                         );
                                       }).toList(),
                                     );
@@ -403,7 +400,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         backgroundColor: ColorValues.greenColor,
                                         text: 'Submit',
                                         onPressed: () {
-                                          //  controller.savePmMapping();
+                                          controller.savePmSchedule();
                                         },
                                       ),
                                     ),

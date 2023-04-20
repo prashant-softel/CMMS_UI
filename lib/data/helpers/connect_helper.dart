@@ -819,5 +819,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> savePmSchedule({
+    required String auth,
+    pmScheduleJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/SetScheduleData',
+      Request.post,
+      pmScheduleJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   ///
 }

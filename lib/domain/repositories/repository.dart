@@ -1367,7 +1367,7 @@ class Repository {
 
         return _CalibrationListModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
         return [];
       }
     } catch (error) {
@@ -1420,13 +1420,40 @@ class Repository {
 
         return _setPmSchedultModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getPMScheduleData');
         return [];
       }
     } catch (error) {
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> savePmSchedule(
+    pmScheduleJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.savePmSchedule(
+        auth: auth,
+        pmScheduleJsonString: pmScheduleJsonString,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'savePmSchedule');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 

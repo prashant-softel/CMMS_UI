@@ -577,6 +577,16 @@ class DataRepository extends DomainRepository {
         selectedEquipmentId: selectedEquipmentId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> savePmSchedule({
+    required String auth,
+    pmScheduleJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.savePmSchedule(
+        auth: auth,
+        pmScheduleJsonString: pmScheduleJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   ///
 }

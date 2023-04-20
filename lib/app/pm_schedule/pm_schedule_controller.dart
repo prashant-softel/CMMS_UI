@@ -8,6 +8,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/frequency_model.dart';
+import '../../domain/models/save_pm_schedule_model.dart';
 import '../home/home_controller.dart';
 
 class PmScheduleController extends GetxController {
@@ -44,7 +45,7 @@ class PmScheduleController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        getPMScheduleData(facilityId, 45, true);
+        getPMScheduleData(facilityId, selectedEquipmentId, true);
       });
     });
     super.onInit();
@@ -117,5 +118,16 @@ class PmScheduleController extends GetxController {
         }
       }
     }
+  }
+
+  void savePmSchedule() async {
+    SavePmScheduleModel savePmScheduleModel =
+        SavePmScheduleModel(facilityId: facilityId, asset_schedules: []);
+    var pmScheduleJsonString = savePmScheduleModel.toJson();
+    Map<String, dynamic>? responsePmScheduleCreated =
+        await pmSchedulePresenter.savePmSchedule(
+      pmScheduleJsonString: pmScheduleJsonString,
+      isLoading: true,
+    );
   }
 }

@@ -19,6 +19,8 @@ abstract class ColorValues {
   static const Color navyBlueColor = Color.fromARGB(255, 7, 63, 115);
   static const Color skyBlueColor = Color(skyBlueColorHex);
   static const Color greyColor = Color(greyColorHex);
+  static const Color enablegreyColor = Color.fromARGB(255, 225, 220, 220);
+
   static const Color greyDividerColor = Color(lightGreyDividerColorHex);
   static const Color lightGreyTextColor = Color(lightGreyTextColorHex);
   static const Color transparent = Colors.transparent;

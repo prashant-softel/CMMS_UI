@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
+import '../../app/utils/utility.dart';
+
 List<GetPmScheduleListModel> getPmScheduleListModelFromJson(String str) =>
     List<GetPmScheduleListModel>.from(
         json.decode(str).map((x) => GetPmScheduleListModel.fromJson(x)));
@@ -24,7 +28,11 @@ class GetPmScheduleListModel {
     var list = parsedJson['frequency_dates'] as List;
     print(list.runtimeType);
     List<FrequencyDates> frequencyDates =
-        list.map((i) => FrequencyDates.fromJson(i)).toList();
+        list.map((i) => FrequencyDates.fromJson(i)).toList() ?? [];
+    for (var i = frequencyDates.length; i < 15; i++) {
+      frequencyDates.add(FrequencyDates(
+          schedule_date_value_controller: TextEditingController()));
+    }
 
     return GetPmScheduleListModel(
       category_id: parsedJson['category_id'],
@@ -49,19 +57,25 @@ class FrequencyDates {
   String? frequency_name;
   int? frequency_id;
   String? schedule_date;
+  TextEditingController? schedule_date_value_controller;
 
-  FrequencyDates(
-      {this.schedule_date,
-      this.schedule_id,
-      this.frequency_id,
-      this.frequency_name});
+  FrequencyDates({
+    this.schedule_date,
+    this.schedule_id,
+    this.frequency_id,
+    this.frequency_name,
+    this.schedule_date_value_controller,
+  });
 
   factory FrequencyDates.fromJson(Map<String, dynamic> parsedJson) {
     return FrequencyDates(
         schedule_date: parsedJson['schedule_date'],
         schedule_id: parsedJson['schedule_id'],
         frequency_id: parsedJson['frequency_id'],
-        frequency_name: parsedJson['frequency_name']);
+        frequency_name: parsedJson['frequency_name'],
+        schedule_date_value_controller: TextEditingController(
+          text: Utility.getFormatedDate(parsedJson['schedule_date']),
+        ));
   }
 
   Map<String, dynamic> toJson() => {
