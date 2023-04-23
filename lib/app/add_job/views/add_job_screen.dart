@@ -19,6 +19,7 @@ class AddJobScreen extends GetView<AddJobController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Job'),
+        // automaticallyImplyLeading: false,
         centerTitle: true,
       ),
       body:

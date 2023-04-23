@@ -4,6 +4,8 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +17,17 @@ import '../../domain/models/menu_item.dart';
 import '../../domain/models/user_access_model.dart';
 
 class HomeController extends GetxController {
+  
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
+  // final HomeController controller = Get.find();
 
 ///
   var startDateTimeCtrlrWeb = TextEditingController();
   Rx<DateTime> selectedDateTimeWeb = DateTime.now().obs;
 
   ///
- var startDateTimeCtrlr2 = TextEditingController();
+ var startDateTimeCtrlr2Web = TextEditingController();
   Rx<DateTime> selectedBreakdownTime2 = DateTime.now().obs;
 
 
@@ -32,6 +36,10 @@ class HomeController extends GetxController {
   Rx<DateTime> selectedBreakdownTime3 = DateTime.now().obs;
 
   Set<String> supplierNameSet = {};
+
+
+
+
 
 //Warranty Claim
 var warrantyClaimList = <WarrantyClaimModel>[];
@@ -43,7 +51,7 @@ RxList<EquipmentModel?> equipmentModelList =
       <EquipmentModel>[].obs;
 RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<bool> isInventorySelected = true.obs;
-  RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   Rx<String> selectedInventory = ''.obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
@@ -54,6 +62,27 @@ RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<String> selectedSupplier = ''.obs;
   RxList<String?> selectedSupplierNameList = <String>[].obs;
   RxList<int?> selectedSupplierNameIdList = <int>[].obs;
+  Rx<bool> isBlockSelected = true.obs;
+
+  RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
+  Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<String> selectedUnitCurrency = ''.obs;
+  RxList<String?> selectedUnitCurrencyList = <String>[].obs;
+  RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
+
+   RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
+  Rx<bool> isemployeeListSelected = true.obs;
+  Rx<String> selectedEmployeeList = ''.obs;
+  RxList<String?> selectedEmployeeDataList = <String>[].obs;
+  RxList<int?> selectedEmployeeIdList = <int>[].obs;
+
+
+
+
+
+ 
+
+
 
 
 
@@ -101,6 +130,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId => _facilityId.value;
+
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
@@ -181,6 +211,12 @@ RxList<int> selectedEquipmentList = <int>[].obs;
     Future.delayed(Duration(seconds: 1), () {
       getBusinessList();
     });
+     Future.delayed(Duration(seconds: 1), () {
+      getUnitCurrencyList();
+    });
+     Future.delayed(Duration(seconds: 1), () {
+      getEmployeeList();
+    });
     super.onInit();
   }
 
@@ -230,21 +266,21 @@ RxList<int> selectedEquipmentList = <int>[].obs;
   }
 
   void getInventoryList() async {
-    inventoryNameList.value = <InventoryModel>[];
+    eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await homePresenter.getInventoryList(
       isLoading: true,
       categoryIds: categoryIds,
       facilityId: facilityId,
     );
-     print('equipment Name List:$inventoryNameList');
+     print('equipment Name List:$eqipmentNameList');
     if (_inventoryList != null) {
       for (var inventory_list in _inventoryList) {
-        inventoryNameList.add(inventory_list);
+        eqipmentNameList.add(inventory_list);
       }
     }
     inventoryList = _inventoryList;
     paginationController = PaginationController(
-      rowCount: inventoryNameList.length,
+      rowCount: eqipmentNameList.length,
       rowsPerPage: 10,
     );
     update(['inventory_list']);
@@ -254,7 +290,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
     supplierNameList.value = <BusinessListModel>[];
     final _supplierNameList = await homePresenter.getBusinessList(
       isLoading: true,
-      categoryIds: categoryIds,
+      //  categoryIds: categoryIds,
       businessType: 5,
     );
      print('Supplier Name List:$supplierNameList');
@@ -264,11 +300,53 @@ RxList<int> selectedEquipmentList = <int>[].obs;
       }
     }
     // supplierNameList = _supplierNameList;
-    paginationBusinessListController = PaginationController(
-      rowCount: supplierNameList.length,
-      rowsPerPage: 10,
-    );
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
     update(['business_list']);
+  }
+
+  void getUnitCurrencyList() async {
+    unitCurrencyList.value = <CurrencyListModel>[];
+    final _unitCUrrencyList = await homePresenter.getUnitCurrencyList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+     print('Unit Currency List:$unitCurrencyList');
+    if (_unitCUrrencyList != null) {
+      for (var unit_currency_list in _unitCUrrencyList) {
+        unitCurrencyList.add(unit_currency_list);
+      }
+    }
+    // supplierNameList = _supplierNameList;
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['unit_currency_list']);
+  }
+
+  void getEmployeeList() async {
+    employeeList.value = <EmployeeListModel>[];
+    final _employeeList = await homePresenter.getEmployeeList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: 45,
+    );
+     print('Employee List:$employeeList');
+    if (_employeeList != null) {
+      for (var employee_list in _employeeList) {
+        employeeList.add(employee_list);
+      }
+    }
+    // supplierNameList = _supplierNameList;
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['employee_list']);
   }
 
   void getWarrantyClaimList() async {
@@ -277,7 +355,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
     final list = await homePresenter.getWarrantyClaimList(
       isLoading: true,
       categoryIds: categoryIds,
-      facilityId: 45,
+      facilityId: facilityId
     );
      print('Supplier Name List:$supplierNameList');
     if (list != null) {
@@ -344,6 +422,7 @@ RxList<int> selectedEquipmentList = <int>[].obs;
       case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
@@ -362,6 +441,24 @@ RxList<int> selectedEquipmentList = <int>[].obs;
             int supplierNameIndex =
                 supplierNameList.indexWhere((x) => x?.name == supplierName);
             selectedSupplierNameIdList.add(supplierNameIndex);
+          }
+        }
+        break;
+      case RxList<CurrencyListModel>:
+        {
+          for (var unitCurrency in selectedUnitCurrencyList) {
+            int unitCurrencyIndex =
+                unitCurrencyList.indexWhere((x) => x?.code == unitCurrency);
+            selectedUnitCurrencyIdList.add(unitCurrencyIndex);
+          }
+        }
+        break;
+      case RxList<EmployeeListModel>:
+        {
+          for (var employeeDataList in selectedEmployeeDataList) {
+            int employeeListIndex =
+                employeeList.indexWhere((x) => x.name == employeeDataList);
+            selectedEmployeeIdList.add(employeeListIndex);
           }
         }
         break;

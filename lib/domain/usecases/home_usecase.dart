@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -32,14 +34,36 @@ class HomeUsecase {
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
     required int? businessType,
-    int? blockId,
-    required String categoryIds,
+   
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
-      businessType: 5,
-      blockId: blockId,
-      categoryIds: categoryIds,
+      businessType: businessType,
+  
+    );
+  }
+
+  Future<List<CurrencyListModel>> getUnitCurrencyList({
+    required bool isLoading,
+    required int? facilityId
+   
+  }) async {
+    return _repository.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+  
+    );
+  }
+
+   Future<List<EmployeeListModel>> getEmployeeList({
+    required bool isLoading,
+    required int? facility_id
+   
+  }) async {
+    return _repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+  
     );
   }
 
@@ -62,7 +86,7 @@ class HomeUsecase {
   }) async {
     return _repository.getWarrantyClaimList(
       isLoading: isLoading,
-      facilityId: 45,
+      facilityId: facilityId,
       blockId: blockId,
       categoryIds: categoryIds,
     );

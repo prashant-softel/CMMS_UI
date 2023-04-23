@@ -8,10 +8,10 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class CreateNewPermitDialog extends GetView {
+class PermitMessageIssueDialog extends GetView {
   String? createPermitData;
 
-  CreateNewPermitDialog({super.key, this.createPermitData});
+  PermitMessageIssueDialog({super.key, this.createPermitData});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CreateNewPermitDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Success !!',
+          'Permit issue submited !!',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.green),
         ),

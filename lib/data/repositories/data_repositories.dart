@@ -110,17 +110,104 @@ class DataRepository extends DomainRepository {
    @override
   Future<ResponseModel> getBusinessList({
     int? businessType,
-    int? blockId,
-    required String categoryIds,
     required bool isLoading,
     required String auth,
   }) async {
     return await connectHelper.getBusinessList(
       isLoading: isLoading,
       auth: auth,
-      businessType: 5,
-      blockId: blockId,
-      categoryIds: categoryIds,
+      businessType: businessType,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getUnitCurrencyList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getUnitCurrencyList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getEmployeeList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEmployeeList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getEmployeePermitList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEmployeePermitList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getPermitIssuerList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getPermitIssuerList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getPermitApproverList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getPermitApproverList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getJobTypePermitList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getJobTypePermitList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getSopPermitList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getSopPermitList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
     );
   }
 
@@ -135,7 +222,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getWarrantyClaimList(
       isLoading: isLoading,
       auth: auth,
-      facilityId: 45,
+      facilityId: facilityId,
       blockId: blockId,
       categoryIds: categoryIds,
     );
@@ -199,10 +286,59 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.getNewPermitList(
         auth: auth,
-        facilityId: 45,
+        facilityId: facilityId,
+        // facilityId: facilityId ?? 0,
+        // userId: 33,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getPermitIssueButton({
+    required String auth,
+    String? comment,
+    int? employee_id,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPermitIssueButton(
+        auth: auth,
+        comment: comment,
+        employee_id: employee_id,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  //  @override
+  // Future<ResponseModel> getNewPermitList({
+  //   int? facilityId,
+  //   required int? userId,
+  //   // int? blockId,
+  //   // required String categoryIds,
+  //   required bool isLoading,
+  //   required String auth,
+  // }) async {
+  //   return await connectHelper.getNewPermitList(
+  //     isLoading: isLoading,
+  //     auth: auth,
+  //     facilityId: facilityId,
+  //     userId: 33,
+  //     // blockId: blockId,
+  //     // categoryIds: categoryIds,
+  //   );
+  // }
+
+  Future<ResponseModel> getInventoryDetailList({
+    required String auth,
+    // int? facilityId,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getInventoryDetailList(
+        auth: auth,
+        // facilityId: 45,
         // facilityId: facilityId ?? 0,
         // userId: userId,
-        userId: 33,
+        id: id,
         isLoading: isLoading ?? false,
       );
 
@@ -259,6 +395,34 @@ class DataRepository extends DomainRepository {
       auth: auth,
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+   Future<ResponseModel> getInventoryIsolationList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getInventoryIsolationList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getInventoryEquipmentNameList({
+    int? facilityId,
+    int? blockId,
+    required String categoryIds,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryEquipmentNameList(
+       isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: categoryIds,
     );
   }
 
