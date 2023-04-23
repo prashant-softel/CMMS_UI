@@ -94,7 +94,7 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getInventoryList({
     int? facilityId,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
     required bool isLoading,
     required String auth,
   }) async {
@@ -107,7 +107,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getBusinessList({
     int? businessType,
     required bool isLoading,
@@ -208,6 +208,9 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       job_type_id: job_type_id,
+      businessType: businessType,
+      blockId: blockId,
+      categoryIds: categoryIds,
     );
   }
 
@@ -707,6 +710,38 @@ class DataRepository extends DomainRepository {
       await connectHelper.savePmMapping(
         auth: auth,
         pmJsonString: pmJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getCalibrationList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCalibrationList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> StartCalibration({
+    auth,
+    bool? isLoading,
+    startcalibration,
+  }) async {
+    var response = await connectHelper.StartCalibration(
+        auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+    return response;
+  }
+
+  Future<ResponseModel> getPMScheduleData({
+    required String auth,
+    int? facilityId,
+    int? selectedEquipmentId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPMScheduleData(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        selectedEquipmentId: selectedEquipmentId,
         isLoading: isLoading ?? false,
       );
 

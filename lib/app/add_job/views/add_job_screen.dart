@@ -22,80 +22,98 @@ class AddJobScreen extends GetView<AddJobController> {
         // automaticallyImplyLeading: false,
         centerTitle: true,
       ),
+      appBar: Responsive.isDesktop(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 90,
+              automaticallyImplyLeading: false,
+            )
+          : AppBar(
+              title: Text('Jobs'),
+              centerTitle: true,
+              elevation: 0,
+            ),
       body:
           //
-          Row(children: [
+          Row(//
+              children: [
         (Responsive.isMobile(context) || Responsive.isTablet(context))
-            ? Dimens.box0
+            ? //
+            Dimens.box0
             :
             //
             HomeDrawer(),
 
         /// CONTENT
-        Obx(
-          () => //
-              Expanded(
-            child: Container(
-              height: double.infinity,
-              margin: Dimens.edgeInsets10_0_10_0,
-              child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  //
-                  children: [
-                    /// SELECT PLANT DropDown
-                    Row(
-                        //
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Select Plant:',
-                            ),
-                          ),
-                          Expanded(
-                            child: DropdownWidget(
-                              dropdownList: controller.facilityList,
-                              isValueSelected:
-                                  controller.isFacilitySelected.value,
-                              selectedValue: controller.selectedFacility.value,
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ]),
-                    Dimens.boxHeight20,
+        // Obx(
+        //   () => //
+        //   Expanded(
+        // child: Container(
+        //   height: double.infinity,
+        //   width: Get.width,
+        //   margin: Dimens.edgeInsets10_0_10_0,
+        //   child: //
+        // Column(
+        //     mainAxisSize: MainAxisSize.max,
+        //     //
+        //     children: [
+        // /// SELECT PLANT DropDown
+        // Row(
+        //     //
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: [
+        //       Align(
+        //         alignment: Alignment.centerLeft,
+        //         child: Text(
+        //           'Select Plant:',
+        //         ),
+        //       ),
+        //       Expanded(
+        //         child: DropdownWidget(
+        //           dropdownList: controller.facilityList,
+        //           isValueSelected:
+        //               controller.isFacilitySelected.value,
+        //           selectedValue: controller.selectedFacility.value,
+        //           onValueChanged: controller.onValueChanged,
+        //         ),
+        //       ),
+        //     ]),
+        // Dimens.boxHeight20,
 
-                    /// CARD
-                    Container(
-                      child: Expanded(
-                        child: Card(
-                          color: ColorValues.appLightGreyColor,
-                          elevation: 20,
-                          shadowColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                              padding: Dimens.edgeInsets10,
-                              child: (() {
-                                if (Responsive.isMobile(context)) {
-                                  return //
-                                      AddJobContentMobile();
-                                } //
-                                else if (Responsive.isDesktop(context)) {
-                                  return //
-                                      AddJobContentWeb();
-                                }
-                              }())
-                              //
-                              ),
-                        ),
-                      ),
-                    ),
-                  ]),
+        /// CARD
+        Expanded(
+          child: Container(
+            // child: Expanded(
+            child: Card(
+              color: ColorValues.appLightGreyColor,
+              elevation: 20,
+              shadowColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                  padding: Dimens.edgeInsets10,
+                  child: (() {
+                    if (Responsive.isMobile(context)) {
+                      return //
+                          AddJobContentMobile();
+                    } //
+                    else if (Responsive.isDesktop(context)) {
+                      return //
+                          AddJobContentWeb();
+                    }
+                  }())
+                  //
+                  ),
             ),
           ),
         ),
+        // ),
+        // ]),
+        // ),
+        //   ),
+        // ),
       ]),
     );
 

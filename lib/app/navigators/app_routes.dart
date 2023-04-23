@@ -29,6 +29,11 @@ abstract class Routes {
   static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
   static const warrantyClaimListWeb = _Paths.warrantyClaimListWeb;
 
+  static const calibrationDetail = _Paths.calibrationDetail;
+  static const pmSchedule = _Paths.pmSchedule;
+  static const pmTask = _Paths.pmTask;
+  static const pmExecution = _Paths.pmExecution;
+  static const pmExecutionView = _Paths.pmExecutionView;
 }
 
 abstract class _Paths {
@@ -58,4 +63,9 @@ abstract class _Paths {
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const newWarrantyClaimList = '/new-warranty-claim-list';
+  static const calibrationDetail = '/calibration-detail';
+  static const pmSchedule = '/pm-schedule-screen';
+  static const pmTask = '/pm-task-screen';
+  static const pmExecution = '/pm-execution-screen';
+  static const pmExecutionView = '/pm-execution-view-screen';
 }

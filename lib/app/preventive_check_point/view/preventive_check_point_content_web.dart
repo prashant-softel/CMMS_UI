@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -300,17 +301,12 @@ class PreventiveCheckPointContentWeb
                                               width: 35,
                                             ),
                                             Text("No"),
-                                            Transform.scale(
-                                              scale: .7,
-                                              child: Switch.adaptive(
-                                                  activeColor:
-                                                      ColorValues.appGreenColor,
-                                                  value: controller
-                                                      .isToggleOn.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle();
-                                                  }),
-                                            ),
+                                            CustomSwitchTroggle(
+                                                value:
+                                                    controller.isToggleOn.value,
+                                                onChanged: (value) {
+                                                  controller.toggle();
+                                                }),
                                             Text("Yes"),
                                           ],
                                         ),
@@ -586,22 +582,13 @@ class PreventiveCheckPointContentWeb
                                                           ? Wrap(
                                                               children: [
                                                                 Text("No"),
-                                                                Transform.scale(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .topCenter,
-                                                                  scale: .7,
-                                                                  child: Switch
-                                                                      .adaptive(
-                                                                          activeColor: ColorValues
-                                                                              .appGreenColor,
-                                                                          value: value == "1"
-                                                                              ? true
-                                                                              : false,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            // controller.toggle();
-                                                                          }),
+                                                                CustomSwitchTroggle(
+                                                                  value: value ==
+                                                                          "1"
+                                                                      ? true
+                                                                      : false,
+                                                                  onChanged:
+                                                                      (value) {},
                                                                 ),
                                                                 Text("Yes"),
                                                               ],

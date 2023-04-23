@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -23,6 +24,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -31,7 +33,6 @@ import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
-
 import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
 import '../models/job_card_details_model.dart';
@@ -232,9 +233,6 @@ class Repository {
     bool? isLoading,
   ) async {
     try {
-      //  print({"NewPermit",newPermit});
-      // final auth = await getSecuredValue(LocalKeys.authToken);
-      print({"NewPermit", newPermit});
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermit(
         auth: auth,
@@ -242,16 +240,15 @@ class Repository {
         isLoading: isLoading ?? false,
       );
       var data = res.data;
-      print('Response Create Permit: ${data}');
+      //print('Response Create Permit: ${data}');
       Get.dialog(
         CreateNewPermitDialog(
           createPermitData: 'Dialog Title',
         ),
       );
-      // CreateNewPermitDialog(createPermitData: 'data',);
 
       data = res.data;
-      print('Response Create Permit: ${data}');
+      //print('Response Create Permit: ${data}');
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -259,12 +256,12 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString());
+        Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
         //return '';
       }
       return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return Map();
     }
   }
@@ -286,12 +283,13 @@ class Repository {
 
       if (!res.hasError) {
         return stateFromJson(res.data);
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getStateList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       await _deviceRepository.getStateList(countryCode);
       return null;
     }
@@ -304,7 +302,7 @@ class Repository {
     try {
       final res =
           await _dataRepository.generateToken(auth: auth, isLoading: isLoading);
-      print(res.data.toString());
+      //print(res.data.toString());
 
       if (!res.hasError) {
         final decodeRes = jsonDecode(res.data);
@@ -313,30 +311,24 @@ class Repository {
         String token = decodeRes['token'];
         await getUserAccessList(
             userId: userId, auth: token, isLoading: isLoading ?? false);
-
-        // Get.offAllNamed(
-        //   Routes.home,arguments: userId
-        // );
       } else {
         Fluttertoast.showToast(
             msg: "Invalid Email Id and Password", fontSize: 16.0);
       }
     } catch (error) {
       await _deviceRepository.generateToken();
-      log(error.toString());
+      print(error.toString());
     }
   }
 
   Future<List<InventoryModel>> getInventoryList({
     required int? facilityId,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
     required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
-      log(auth);
       final res = await _dataRepository.getInventoryList(
         facilityId: facilityId,
         blockId: blockId,
@@ -344,15 +336,19 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      print('Inventory List Data: ${res.data}');
+      // print('Inventory List Data: ${res.data}');
 
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList;
       }
-      return [];
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getInventoryList');
+        return [];
+      }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -361,26 +357,31 @@ class Repository {
     required int? businessType,
     // int? blockId,
     // required String categoryIds,
+    int? blockId,
+    String? categoryIds,
     required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
-      log(auth);
       final res = await _dataRepository.getBusinessList(
+        businessType: businessType,
+        blockId: blockId,
+        categoryIds: categoryIds ?? "",
         businessType: businessType,
         isLoading: isLoading,
         auth: auth,
       );
-      print('Business List Data: ${res.data}');
-
       if (!res.hasError) {
         var businessList = businessListModelFromJson(res.data);
         return businessList;
       }
-      return [];
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -420,7 +421,7 @@ class Repository {
   ) async {
     try {
        final auth = await getSecuredValue(LocalKeys.authToken);
-      
+
       log(auth);
       final res = await _dataRepository.getInventoryDetailList(
         // facilityId: facilityId,
@@ -617,8 +618,7 @@ class Repository {
 
 
 
-
-   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
+  Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
     int? blockId,
     required String categoryIds,
@@ -626,7 +626,7 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      
+
       log(auth);
       final res = await _dataRepository.getWarrantyClaimList(
         facilityId: facilityId,
@@ -635,15 +635,18 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      print('WarrantyClaim: ${res.data}');
+      // print('WarrantyClaim: ${res.data}');
 
       if (!res.hasError) {
         var warrantyClaimList = warrantyClaimModelFromJson(res.data);
         return warrantyClaimList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getWarrantyClaimList');
+        return [];
       }
-      return [];
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -664,10 +667,13 @@ class Repository {
       if (!res.hasError) {
         var workTypeList = workTypeModelFromJson(res.data);
         return workTypeList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getWorkTypeList');
+        return [];
       }
-      return [];
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -688,10 +694,12 @@ class Repository {
       if (!res.hasError) {
         var _lstBlocks = blockModelFromJson(res.data);
         return _lstBlocks;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getBlockList');
+        return [];
       }
-      return [];
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -711,10 +719,12 @@ class Repository {
 
       if (!res.hasError) {
         return equipmentFromJson(res.data);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getEquipmentList');
+        return [];
       }
-      return [];
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -730,7 +740,7 @@ class Repository {
       final userAccessModelList = jsonDecode(userAcessData);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       int userId = userAccess.user_id ?? 0;
-      print({"userdatatat", userAccess.user_id});
+      //print({"userdatatat", userAccess.user_id});
       final res = await _dataRepository.getJobList(
         auth: auth,
         facilityId: facilityId ?? 0,
@@ -744,15 +754,15 @@ class Repository {
             .map<JobModel>(
                 (m) => JobModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
-        print(_jobModelList.runtimeType);
+        // print(_jobModelList.runtimeType);
 
         return _jobModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getJobList');
         return [];
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
 
       return [];
     }
@@ -776,16 +786,21 @@ class Repository {
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       int userId = userAccess.user_id ?? 0;
       // int userId = varUserAccessModel.value.user_id ?? 0;
-      
+
+      final newPermitListData =
+          await getNewPermitAccessData(LocalKeys.userAccess);
+      final newPermitModelList = jsonDecode(newPermitListData);
+      var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
+      int permitId = newPermitList.permitId ?? 0;
       final res = await _dataRepository.getNewPermitList(
         auth: auth,
+        facilityId: 45,
+        userId: 33,
         facilityId: facilityId,
         userId: userId,
         // userId: 33,
         isLoading: isLoading ?? false,
       );
-      print('NewPermitResponse5: ${res.data}');
-
       if (!res.hasError) {
         final jsonNewPermitListModels = jsonDecode(res.data);
         final List<NewPermitListModel> _newPermitModelList =
@@ -799,12 +814,13 @@ class Repository {
         // return newPermitList;
 
         return _newPermitModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getNewPermitList');
         return [];
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
 
       return [];
     }
@@ -830,7 +846,7 @@ class Repository {
       // var userAccess = AccessListModel.fromJson(userAccessModelList);
       // int userId = userAccess.user_id ?? 0;
       // int userId = varUserAccessModel.value.user_id ?? 0;
-      
+
       final res = await _dataRepository.getPermitIssueButton(
         auth: auth,
         comment: comment,
@@ -876,7 +892,7 @@ class Repository {
   //   try {
   //     final auth = await getSecuredValue(LocalKeys.authToken);
   //     int userId = varUserAccessModel.value.user_id ?? 0;
-      
+
   //     log(auth);
   //     final res = await _dataRepository.getNewPermitList(
   //       facilityId: facilityId,
@@ -906,8 +922,6 @@ class Repository {
         auth: auth,
         isLoading: isLoading,
       );
-      print('Facilitydata5: ${res.data}');
-
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<FacilityModel> _facilityModelList = jsonFacilityModels
@@ -916,12 +930,13 @@ class Repository {
             .toList();
 
         return _facilityModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getFacilityList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
 
       return [];
     }
@@ -941,14 +956,14 @@ class Repository {
             .map<TypePermitModel>(
                 (m) => TypePermitModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
-        print('PermitztypeData: ${res.data}');
         return _typePermitModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getTypePermitList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
 
       return [];
     }
@@ -975,13 +990,13 @@ class Repository {
             .toList();
 
         return _blockModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBlocksList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
-      //await _deviceRepository.getFacilityList();
+      print(error.toString());
       return [];
     }
   }
@@ -1011,8 +1026,10 @@ class Repository {
                 .toList();
 
         return _inventoryCategoryModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getInventoryCategoryList');
         return null;
       }
     } catch (error) {
@@ -1021,7 +1038,7 @@ class Repository {
       return [];
     }
   }
-  
+
 
 
    Future<List<InventoryCategoryModel?>?> getInventoryIsolationList(
@@ -1061,9 +1078,9 @@ class Repository {
   }
 
    Future<List<InventoryModel?>?> getInventoryEquipmentNameList(
-     {required bool isLoading, 
-     int? facilityId, 
-     int? blockId, 
+     {required bool isLoading,
+     int? facilityId,
+     int? blockId,
      required String categoryIds}
   ) async {
     try {
@@ -1095,6 +1112,7 @@ class Repository {
     } catch (error) {
       log(error.toString());
 
+      print(error.toString());
       return [];
     }
   }
@@ -1108,7 +1126,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getFrequencyList(
         auth: auth,
-        isLoading: isLoading,
+        isLoading: isLoading ?? false,
       );
 
       if (!res.hasError) {
@@ -1120,13 +1138,13 @@ class Repository {
             .toList();
 
         return _frequencyModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getFrequencyList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
-
+      print(error.toString());
       return [];
     }
   }
@@ -1154,13 +1172,13 @@ class Repository {
         _jobDetailsModelList.add(_jobDetailsModel);
 
         return _jobDetailsModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getJobDetails');
         return [];
       }
     } catch (error) {
       print(error.toString());
-      log(error.toString());
       return [];
     }
   }
@@ -1185,15 +1203,13 @@ class Repository {
               (m) => EmployeeModel.fromJson(Map<String, dynamic>.from(m)),
             )
             .toList();
-
         return _employeeModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getAssignedToList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
-
+      print(error.toString());
       return [];
     }
   }
@@ -1218,13 +1234,15 @@ class Repository {
             .toList();
 
         return _employeeModelList;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getToolsRequiredToWorkTypeList');
         return null;
       }
     } //
     catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -1240,20 +1258,21 @@ class Repository {
         job: job,
         isLoading: isLoading ?? false,
       );
-      print('SaveJobData: ${res.data}');
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
         }
-      } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'saveJob');
+        return Map();
       }
       return Map();
-    } catch (error) {
-      log(error.toString());
+    } //
+    catch (error) {
+      print(error.toString());
       return Map();
     }
   }
@@ -1272,7 +1291,7 @@ class Repository {
 
       if (!res.hasError) {
         final userAccessModelList = jsonDecode(res.data);
-        print(res.data);
+        // print(res.data);
         //  var userAccess = AccessListModel.fromJson(userAccessModelList);
         saveUserAcessData(LocalKeys.userAccess, res.data);
 
@@ -1280,12 +1299,13 @@ class Repository {
           Routes.home,
         );
         return null;
-      } else {
-        Utility.showDialog('Something Went Wrong!!');
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getUserAccessList');
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return null;
     }
   }
@@ -1294,18 +1314,20 @@ class Repository {
       {bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      log(auth);
       final res = await _dataRepository.createCheckList(
           auth: auth,
           isLoading: isLoading,
           checklistJsonString: checklistJsonString);
-      print({"res.data", res.data});
+
       if (!res.hasError) {
         return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'createCheckListNumber');
+        return false;
       }
-      return true;
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return false;
     }
   }
@@ -1326,7 +1348,7 @@ class Repository {
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-        print(res.data);
+        // print(res.data);
         final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
             jsonPreventiveCheckListModelModels
                 .map<PreventiveCheckListModel>((m) =>
@@ -1336,12 +1358,11 @@ class Repository {
 
         return _PreventiveCheckListModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getPreventiveCheckList');
         return [];
       }
     } catch (error) {
-      log(error.toString());
-
+      print(error.toString());
       return [];
     }
   }
@@ -1352,13 +1373,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      print({"checkid", selectedchecklistId});
+      //print({"checkid", selectedchecklistId});
       final res = await _dataRepository.getCheckPointlist(
         auth: auth,
         selectedchecklistId: selectedchecklistId ?? 0,
         isLoading: isLoading ?? false,
       );
-      print({"checkpoint list", res.data});
+      //print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
 
@@ -1370,12 +1391,11 @@ class Repository {
 
         return _PreventiveCheckPointList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
         return [];
       }
     } catch (error) {
-      log(error.toString());
-
+      print(error.toString());
       return [];
     }
   }
@@ -1388,14 +1408,15 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           checkpointJsonString: checkpointJsonString);
-      print({"res.data1", res.data});
 
       if (!res.hasError) {
         return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
       }
-      return true;
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return false;
     }
   }
@@ -1418,13 +1439,12 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+        Utility.showDialog(res.errorCode.toString() + 'uploadFiles');
       }
       return Map();
     } //
     catch (error) {
-      log(error.toString());
+      print(error.toString());
       return Map();
     }
   }
@@ -1455,11 +1475,11 @@ class Repository {
 
         return _jobCardDetailsList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getJobCardDetails');
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
 
       return [];
     }
@@ -1484,12 +1504,11 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+        Utility.showDialog(res.errorCode.toString() + 'createJobCard');
       }
       return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return Map();
     }
   }
@@ -1512,12 +1531,12 @@ class Repository {
         return _permitDetailsModel;
       } //
       else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getPermitDetails');
         return null;
       }
     } //
     catch (error) {
-      log(error.toString());
+      print(error.toString());
       return null;
     }
   }
@@ -1548,11 +1567,11 @@ class Repository {
 
         return _jobCardDetailsList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString());
         return null;
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return [];
     }
   }
@@ -1575,14 +1594,14 @@ class Repository {
           var responseMap = json.decode(res.data);
           return responseMap;
         }
-      } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateJobCard');
       }
       return Map();
-    } catch (error) {
-      print(error);
-      log(error.toString());
+    } //
+    catch (error) {
+      print(error.toString());
       return Map();
     }
   }
@@ -1607,13 +1626,13 @@ class Repository {
           var responseMap = json.decode(res.data);
           return responseMap;
         }
-      } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'approveJobCard');
       }
       return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return Map();
     }
   }
@@ -1644,7 +1663,7 @@ class Repository {
       }
       return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return Map();
     }
   }
@@ -1674,12 +1693,11 @@ class Repository {
 
         return _historyModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getHistory');
         return null;
       }
     } catch (error) {
-      log(error.toString());
-
+      print(error.toString());
       return [];
     }
   }
@@ -1687,20 +1705,19 @@ class Repository {
   Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      print({"checkid", check_point_id});
       final res = await _dataRepository.deleteCkeckpoint(
         auth: auth,
         check_point_id: check_point_id,
         isLoading: isLoading,
       );
-      print({"checkpoint list", res.data});
+
       if (!res.hasError) {
-        print("jngfjnfj");
+        //get delete response back from API
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
       }
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
     }
   }
 
@@ -1715,24 +1732,20 @@ class Repository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-      print({"restt", res.data});
       if (!res.hasError) {
         final jsonPmMappingListModels = jsonDecode(res.data);
-        print(res.data);
         final List<PmMappingListModel> _pmMappingListModel =
             jsonPmMappingListModels
                 .map<PmMappingListModel>((m) =>
                     PmMappingListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
-
         return _pmMappingListModel;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getPmMappingList');
         return [];
       }
     } catch (error) {
-      log(error.toString());
-
+      print(error.toString());
       return [];
     }
   }
@@ -1748,21 +1761,105 @@ class Repository {
         pmJsonString: pmJsonString,
         isLoading: isLoading ?? false,
       );
-      print('SaveData: ${res.data}');
-
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
         }
-      } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'savePmMapping');
       }
       return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
       return Map();
+    }
+  }
+
+  Future<List<CalibrationListModel?>?> getCalibrationList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCalibrationList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      // print(res.data);
+      if (!res.hasError) {
+        final jsonCalibrationListModelModels = jsonDecode(res.data);
+
+        final List<CalibrationListModel> _CalibrationListModelList =
+            jsonCalibrationListModelModels
+                .map<CalibrationListModel>((m) =>
+                    CalibrationListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _CalibrationListModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<bool> StartCalibration({bool? isLoading, startcalibration}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.StartCalibration(
+          auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      }
+      return true;
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<List<GetPmScheduleListModel?>?> getPMScheduleData(
+    int? selectedEquipmentId,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPMScheduleData(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        selectedEquipmentId: selectedEquipmentId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonSetPmSchedultModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GetPmScheduleListModel> _setPmSchedultModelList =
+            jsonSetPmSchedultModels
+                .map<GetPmScheduleListModel>((m) =>
+                    GetPmScheduleListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _setPmSchedultModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
     }
   }
 

@@ -3,6 +3,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
+import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
@@ -23,6 +24,7 @@ import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
 import '../calibration/calibration_list_binding.dart';
+import '../calibration_detail/view/calibration_detail_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
@@ -38,9 +40,19 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
+import '../pm_schedule/pm_schedule_binding.dart';
+import '../pm_schedule/view/pm_schedule_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
+import '../preventive_maintenance_execution/preventive_maintenance_execution_binding.dart';
+import '../preventive_maintenance_execution/view/preventive_maintenance_execution_screen.dart';
+import '../preventive_maintenance_execution_view/preventive_maintenance_execution_view_binding.dart';
+import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
+import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
+import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
+import '../warranty_claim_list/warranty_claim_list_screen.dart';
+import '../warranty_claim_list/warranty_claim_list_screen.dart';
 
 // coverage:ignore-file
 
@@ -119,7 +131,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.createCheckList,
       page: CreatePriventiveListScreen.new,
-      binding: CreatePriventiveListBinding(),
+      binding: CreatePreventiveListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.preventiveList,
@@ -167,6 +179,31 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.viewWarrantyClaim,
       page: ViewWarrantyClaimWeb.new,
+    ),
+    GetPage<dynamic>(
+      name: _Paths.calibrationDetail,
+      page: CalibrationDetailScreen.new,
+      binding: CalibrationDetailBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmSchedule,
+      page: PmScheduleScreen.new,
+      binding: PmScheduleBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmTask,
+      page: PreventiveMaintenanceTaskScreen.new,
+      binding: PreventiveMaintenanceTaskBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmExecution,
+      page: PreventiveMaintenanceExecutionScreen.new,
+      binding: PreventiveMaintenanceExecutionBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmExecutionView,
+      page: PreventiveMaintenanceExecutionViewScreen.new,
+      binding: PreventiveMaintenanceExecutionViewBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.newWarrantyClaimList,

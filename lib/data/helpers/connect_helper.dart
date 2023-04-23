@@ -102,12 +102,12 @@ class ConnectHelper {
     required String auth,
     int? facilityId,
     int? blockId,
-    required String categoryIds,
+    String? categoryIds,
   }) async {
     var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
     var categoryIdsParam =
         (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
-//var statusParam = (status!=null status!='')?'status=1':'';
+
     var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Inventory/GetInventoryList?' +
@@ -128,9 +128,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? businessType,
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetBusinessList?businessType=$businessType',
       Request.getMultiparts,
@@ -147,9 +147,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facilityId
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Utils/GetCurrencyList',
       Request.getMultiparts,
@@ -167,9 +167,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -187,9 +187,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -207,9 +207,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -227,10 +227,14 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessList?businessType=$businessType' +
+          blockIdParam +
+          categoryIdsParam,
+      // statusParam,
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
       null,
@@ -246,9 +250,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetJobTypeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -265,9 +269,9 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? job_type_id
-  
+
   }) async {
-   
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSOPList?job_type_id=$job_type_id',
       Request.getMultiparts,
@@ -298,9 +302,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'WC/GetWCList?facilityId=45' +
-          blockIdParam +
-          categoryIdsParam,
+      'WC/GetWCList?facilityId=45' + blockIdParam + categoryIdsParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -310,7 +312,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBlockList({
     required bool isLoading,
@@ -349,12 +350,11 @@ class ConnectHelper {
     int? facilityId,
     int? userId,
   }) async {
-    // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobList?facility_id=$facilityId&userId=$userId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -374,7 +374,7 @@ class ConnectHelper {
       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -421,7 +421,7 @@ class ConnectHelper {
 // //var statusParam = (status!=null status!='')?'status=1':'';
 //     // var statusParam = 'status=1';
 //     ResponseModel responseModel = await apiWrapper.makeRequest(
-//       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId', 
+//       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId',
 //           // blockIdParam +
 //           // categoryIdsParam,
 //       Request.getMultiparts,
@@ -470,7 +470,7 @@ class ConnectHelper {
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -488,7 +488,7 @@ class ConnectHelper {
       'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -507,7 +507,7 @@ class ConnectHelper {
       'Job/GetJobDetails?job_id=$jobId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -527,11 +527,10 @@ class ConnectHelper {
         'CMMS/GetFacilityList',
         Request.get,
         null,
-        true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
-        
       );
     } catch (error) {
       print(error);
@@ -572,7 +571,7 @@ class ConnectHelper {
         'CMMS/GetBlockList?facility_id=$facilityId',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -587,7 +586,7 @@ class ConnectHelper {
         'Inventory/GetInventoryCategoryList',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -618,7 +617,7 @@ class ConnectHelper {
     var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
     var categoryIdsParam =
         (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
-    var facilityIdparam = (facilityId != null) ? 'facilityId=$facilityId&' : ''; 
+    var facilityIdparam = (facilityId != null) ? 'facilityId=$facilityId&' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -644,7 +643,7 @@ class ConnectHelper {
         'CMMS/GetFrequencyList',
         Request.getMultiparts,
         null,
-        isLoading ?? true,
+        isLoading ?? false,
         {
           'Authorization': 'Bearer $auth',
         },
@@ -660,7 +659,7 @@ class ConnectHelper {
       'CMMS/GetEmployeeList?facility_id=$facilityId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -678,7 +677,7 @@ class ConnectHelper {
       'JobWorkType/GetJobWorkTypeList?categoryIds=$categoryIds',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -696,7 +695,7 @@ class ConnectHelper {
       'JobWorkType/GetMasterToolList?worktypeIds=$workTypeIds',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -713,7 +712,7 @@ class ConnectHelper {
       'Job/CreateNewJob?job=$job',
       Request.post,
       job,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -731,7 +730,7 @@ class ConnectHelper {
       'JC/CreateJC?job=$jobId',
       Request.post,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -752,7 +751,7 @@ class ConnectHelper {
       'FileUpload/UploadFile',
       Request.post,
       fileUploadModel,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer $auth',
@@ -772,7 +771,7 @@ class ConnectHelper {
       'Permit/CreatePermit',
       Request.post,
       newPermit,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -792,7 +791,7 @@ class ConnectHelper {
       'User/GetUserAccess?user_id=$userId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -810,7 +809,7 @@ class ConnectHelper {
       'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -827,7 +826,7 @@ class ConnectHelper {
       'CheckList/CreateCheckList',
       Request.post,
       checklistJsonString,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -846,7 +845,7 @@ class ConnectHelper {
       'CheckList/CreateCheckPoint',
       Request.post,
       checkpointJsonString,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -865,7 +864,7 @@ class ConnectHelper {
       'CheckList/DeleteCheckPoint?id=$check_point_id',
       Request.delete,
       check_point_id,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -885,7 +884,7 @@ class ConnectHelper {
       'Utils/GetHistoryLog?module_type=$moduleType&id=$jobCardId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -903,7 +902,7 @@ class ConnectHelper {
       'JC/UpdateJC',
       Request.post,
       jobCard,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -922,7 +921,7 @@ class ConnectHelper {
       'JC/ApproveJC',
       Request.post,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -941,7 +940,7 @@ class ConnectHelper {
       'JC/RejectJC',
       Request.post,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -959,7 +958,7 @@ class ConnectHelper {
       'Permit/GetPermitDetails?permit_id=$permitId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -977,7 +976,7 @@ class ConnectHelper {
       'JC/GetJCDetail?jc_id=$jobCardId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -994,7 +993,7 @@ class ConnectHelper {
       'CheckList/GetCheckListMap?facility_id=$facilityId',
       Request.get,
       null,
-      isLoading ?? true,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },
@@ -1012,12 +1011,68 @@ class ConnectHelper {
       'CheckList/CreateCheckListMap',
       Request.post,
       pmJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getCalibrationList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/GetCalibrationList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> StartCalibration({
+    required String auth,
+    bool? isLoading,
+    required startcalibration,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RequestCalibration',
+      Request.post,
+      startcalibration,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPMScheduleData({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? selectedEquipmentId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/GetScheduleData?facility_id=$facilityId&category_id=$selectedEquipmentId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 

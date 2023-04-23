@@ -173,6 +173,7 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
     fontSize: Dimens.twentyTwo,
   );
+
   static TextStyle blackBold24 = TextStyle(
     // color: ColorValues.blackColor,
     fontWeight: FontWeight.bold,
@@ -534,9 +535,13 @@ abstract class Styles {
     // color: ColorValues.greyColor,
     fontSize: Dimens.ten,
   );
-  static TextStyle greyLight10 = TextStyle(
-    color: ColorValues.greyLightColor,
+  static TextStyle appDarkGrey10 = TextStyle(
+    color: ColorValues.appDarkGreyColor,
     fontSize: Dimens.ten,
+  );
+  static TextStyle appDarkGrey12 = TextStyle(
+    color: ColorValues.appDarkGreyColor,
+    fontSize: Dimens.twelve,
   );
 
   static TextStyle greyBold10 = TextStyle(
@@ -650,15 +655,20 @@ abstract class Styles {
     // color: ColorValues.redColor,
     fontSize: Dimens.fifteen,
   );
-  static TextStyle navyBlue12 = TextStyle(
-    color: ColorValues.navyBlueColor,
+  static TextStyle appDarkBlue12 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.twelve,
   );
-  static TextStyle navyBlue13 = TextStyle(
-    color: ColorValues.navyBlueColor,
+  static TextStyle appDarkBlue13 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.thirteen,
+  );
+  static TextStyle appDarkBlue15 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.normal,
+    fontSize: Dimens.fifteen,
   );
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -733,7 +743,16 @@ abstract class Styles {
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w400,
   );
-
+  static TextStyle blue700 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fifteen,
+  );
+  static TextStyle green700 = TextStyle(
+    color: ColorValues.greenColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fifteen,
+  );
   static ButtonStyle greenElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 96, 205, 76),
@@ -753,6 +772,11 @@ abstract class Styles {
   static ButtonStyle darkBlueElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 9, 115, 156),
+  );
+  static TextStyle redBold15 = TextStyle(
+    color: ColorValues.appRedColor,
+    fontSize: Dimens.fifteen,
+    fontWeight: FontWeight.bold,
   );
   static ButtonStyle navyBlueElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),

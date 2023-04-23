@@ -7,7 +7,7 @@ import '../home/home_presenter.dart';
 import 'create_preventive_checklist_controller.dart';
 import 'create_preventive_checklist_presenter.dart';
 
-class CreatePriventiveListBinding extends Bindings {
+class CreatePreventiveListBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(

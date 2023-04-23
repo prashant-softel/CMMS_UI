@@ -5,7 +5,6 @@ import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
 class DropdownWidget extends StatelessWidget {
-  
   DropdownWidget({
     super.key,
     this.selectedValue,
@@ -22,16 +21,15 @@ class DropdownWidget extends StatelessWidget {
   final bool? isEditable;
   Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
-  
 
   @override
   Widget build(BuildContext context) {
-    //final AddJobController addJobController = Get.find();
+    ///
     return //
         Obx(
-            () => //
+      () => //
           Container(
-                decoration: BoxDecoration(
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
@@ -51,8 +49,8 @@ class DropdownWidget extends StatelessWidget {
           ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
-                ),
-                child: //
+        ),
+        child: //
             DropdownSearch<String>(
           autoValidateMode: AutovalidateMode.always,
           validator: (String? item) {
@@ -61,7 +59,6 @@ class DropdownWidget extends StatelessWidget {
             } else {
               return null;
             }
-            
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
@@ -72,7 +69,6 @@ class DropdownWidget extends StatelessWidget {
           ),
           popupProps: PopupProps.dialog(
             //
-            
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -83,7 +79,7 @@ class DropdownWidget extends StatelessWidget {
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                
+
               ),
             ),
             showSearchBox: true,
@@ -108,8 +104,8 @@ class DropdownWidget extends StatelessWidget {
             onValueChanged(dropdownList, selectedValue);
           },
           selectedItem: selectedValue,
-                ),
-            ),
-          );
+        ),
+      ),
+    );
   }
 }
