@@ -1,7 +1,13 @@
 import 'package:cmms/domain/models/block_model.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
+import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -40,6 +46,56 @@ class NewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
+   Future<List<EmployeeListModel>> getEmployeePermitList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return newPermitUsecase.getEmployeePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+  Future<List<EmployeeListModel>> getPermitIssuerList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return newPermitUsecase.getPermitIssuerList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+   Future<List<EmployeeListModel2>> getPermitApproverList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return newPermitUsecase.getPermitApproverList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+   Future<List<JobTypeListModel>> getJobTypePermitList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return newPermitUsecase.getJobTypePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+   Future<List<SOPListModel>> getSopPermitList({
+    required bool isLoading,
+    required int? job_type_id,
+  }) async {
+    return newPermitUsecase.getSopPermitList(
+      isLoading: isLoading,
+      job_type_id: job_type_id,
+    );
+  }
+
    Future<List<WorkTypeModel?>?> getWorkTypeList({
     String? auth,
     String? categoryIds,
@@ -47,6 +103,21 @@ class NewPermitPresenter {
   }) async =>
       await newPermitUsecase.getWorkTypeList(
         categoryIds: categoryIds,
+        isLoading: isLoading ?? false,
+      );
+  
+
+   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
+    String? auth,
+    // int? facilityId,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitUsecase.getInventoryDetailList(
+        auth: auth ?? "",
+        // facilityId: 45,
+        // facilityId: facilityId ?? 0,
+        id: id,
         isLoading: isLoading ?? false,
       );
 
@@ -65,6 +136,29 @@ class NewPermitPresenter {
   }) async =>
       await newPermitUsecase.getInventoryCategoryList(
       );
+
+  Future<List<InventoryCategoryModel?>?> getInventoryIsolationList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+    int? categoryId,
+  }) async =>
+      await newPermitUsecase.getInventoryIsolationList(
+      );
+
+    Future<List<InventoryModel?>?> getInventoryEquipmentNameList({
+    required bool isLoading,
+    required int? facilityId,
+    int? blockId,
+    required String categoryIds,
+  }) async {
+    return newPermitUsecase.getInventoryEquipmentNameList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
   // Future<void> createCheckList({
   //   bool? isLoading,
   // }) async =>

@@ -31,6 +31,9 @@ abstract class Routes {
   static const pmTask = _Paths.pmTask;
   static const pmExecution = _Paths.pmExecution;
   static const pmExecutionView = _Paths.pmExecutionView;
+  static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
+  static const warrantyClaimListWeb = _Paths.warrantyClaimListWeb;
+
 }
 
 abstract class _Paths {
@@ -51,10 +54,13 @@ abstract class _Paths {
   static const preventiveCheckPoint = '/preventive-check-point';
   static const newPermitList = '/new-permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
+  static const warrantyClaimListWeb = '/warranty-claim-list-web';
+
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
+  static const newWarrantyClaimList = '/new-warranty-claim-list';
   static const calibrationDetail = '/calibration-detail';
   static const pmSchedule = '/pm-schedule-screen';
   static const pmTask = '/pm-task-screen';

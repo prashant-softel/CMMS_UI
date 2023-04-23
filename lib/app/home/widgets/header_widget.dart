@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +12,7 @@ class HeaderWidget extends GetView<HomeController> {
   HeaderWidget({
     super.key,
     /////////
+    //Note: Here i have changed the controller from HomeController to NewPermitController
   });
   var controller = Get.find<HomeController>();
 

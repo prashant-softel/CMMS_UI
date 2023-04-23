@@ -1,3 +1,5 @@
+import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
+import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
@@ -8,6 +10,8 @@ import '../../theme/color_values.dart';
 
 class HomeDrawer extends GetView<HomeController> {
   HomeDrawer({super.key});
+  
+  
 
   ///
   @override
@@ -64,7 +68,11 @@ class HomeDrawer extends GetView<HomeController> {
                         title: "Warranty claim",
                         icon: "assets/files/warranty.png",
                         press: () {
-                          Get.offNamed(Routes.warrantyClaimList);
+                           Get.offNamed(Routes.warrantyClaimList);
+                          //  Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: (context) => WarrantyClaimListWeb()));
                         },
                       ),
                       MenuItem(

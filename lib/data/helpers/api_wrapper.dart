@@ -92,6 +92,7 @@ class ApiWrapper {
             var uri = _baseUrl + url;
 
             try {
+
               if (isLoading) Utility.showLoader();
               final request =
                   await http.MultipartRequest('PUT', Uri.parse(uri));
@@ -103,7 +104,7 @@ class ApiWrapper {
               // final response = await http
               //     .put(
               //       Uri.parse(uri),
-              //       body: data,
+              //       body: json.encode(data),
               //       headers: headers,
               //     )
               //     .timeout(const Duration(seconds: 120));
