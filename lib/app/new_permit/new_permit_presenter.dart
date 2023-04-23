@@ -116,7 +116,7 @@ class NewPermitPresenter {
         categoryIds: categoryIds,
         isLoading: isLoading ?? false,
       );
-  
+
 
    Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     String? auth,

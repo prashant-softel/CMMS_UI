@@ -5,7 +5,6 @@ import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
 class DropdownWidget extends StatelessWidget {
-
   DropdownWidget({
     super.key,
     this.selectedValue,
@@ -22,6 +21,7 @@ class DropdownWidget extends StatelessWidget {
   final bool? isEditable;
   Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
+
 
 
   @override
@@ -61,7 +61,6 @@ class DropdownWidget extends StatelessWidget {
             } else {
               return null;
             }
-
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
@@ -72,7 +71,6 @@ class DropdownWidget extends StatelessWidget {
           ),
           popupProps: PopupProps.dialog(
             //
-
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -83,7 +81,6 @@ class DropdownWidget extends StatelessWidget {
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
-
               ),
             ),
             showSearchBox: true,

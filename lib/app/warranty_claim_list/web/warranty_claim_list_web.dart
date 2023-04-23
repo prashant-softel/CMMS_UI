@@ -142,7 +142,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                               //  Get.to(() => NewWarrantyClaimListWeb());
                               //  Get.offAllNamed(Routes.newWarrantyClaimList);
                               Get.toNamed(Routes.newWarrantyClaimList);
-                              
+
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(
@@ -300,7 +300,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                               controller.warrantyClaimList.length,
                                               (index) => [
                                                 AssetName(
-                                                  
+
                                                    '${controller.warrantyClaimList[index].wc_id}',
                                                   // 'dummy data',
                                                   1,
@@ -538,7 +538,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                             }),
                       ),
                       )]))),
-         
+
             ),
           
         ],

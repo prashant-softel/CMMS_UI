@@ -33,11 +33,8 @@ import '../../../domain/models/inventory_category_model.dart';
 
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
-  
-  final HomeController homeController = Get.find();
-  
 
-  
+
   // PreventivePresenter preventivePresenter;
 
 
@@ -223,7 +220,7 @@ class NewPermitController extends GetxController {
   RxList<String?> selectedSafetyMeasureDataList = <String>[].obs;
   RxList<int?> selectedSafetyMeasureIdList = <int>[].obs;
   int selectedSafetyMeasureId = 0;
-  
+
 
 
 
@@ -252,9 +249,9 @@ class NewPermitController extends GetxController {
 
 
 
-   
-  
-  
+
+
+
 
 
     PaginationController equipmentNamepaginationController = PaginationController(
@@ -279,7 +276,7 @@ class NewPermitController extends GetxController {
   );
 
 
-  
+
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -299,7 +296,7 @@ class NewPermitController extends GetxController {
     //  Future.delayed(Duration(seconds: 1), () {
        facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      
+
       Future.delayed(Duration(seconds: 1), () {
        getBlocksList(facilityId);
       });
@@ -355,7 +352,7 @@ class NewPermitController extends GetxController {
           // inventoryDetailList!.add(_inventoryDetailList?.name ?? "");
           inventoryDetailList!.add(_inventoryDetailList);
         }
-       
+
 
       }
 
@@ -384,7 +381,7 @@ class NewPermitController extends GetxController {
     for (var _selectedNameId in _selectedEquipmentNameIds) {
       selectedEquipmentNameIdList.add(_selectedNameId);
    InventoryModel? e =   equipmentNameList.firstWhere((element) {
-    
+
     return element?.id ==_selectedNameId;
     } );
       filteredEquipmentNameList.add(e);
@@ -403,24 +400,24 @@ class NewPermitController extends GetxController {
     } );
       filteredEmployeeNameList.add(e);
     }
-   
+
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
   void permitIssuerSelected(_selectedEmployeeNameIds) {
-    
+
     selectedPermitIssuerIdList.value = <int>[];
     // filteredEmployeeNameList.value = <EmployeeListModel>[];
     late int emp_id = 0;
     for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
       selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
    EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
-    
+
     return element?.id ==_selectedPermitIssuerId;
     } );
       // filteredEmployeeNameList.add(e);
     }
-   
+
     // employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
@@ -519,7 +516,7 @@ class NewPermitController extends GetxController {
       for (var jobType_list in _jobTypeList) {
         jobTypeList.add(jobType_list);
       }
-      
+
     }
     // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
@@ -585,7 +582,10 @@ class NewPermitController extends GetxController {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-          
+
+          print('FacilityId:$selectedFacilityId');
+          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+
           if (selectedFacilityId != 0) {
             isFacilitySelected.value = true;
           }
@@ -610,6 +610,7 @@ class NewPermitController extends GetxController {
           int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
+          print(selectedEquipmentId);
         }
         break;
       case RxList<InventoryModel>:
@@ -668,7 +669,7 @@ class NewPermitController extends GetxController {
         break;
          case RxList<EmployeeListModel>:
         {
-          
+
             int permitIssuerListIndex =
                 permitIssuerList.indexWhere((x) => x!.name == value);
             selectedPermitIssuerTypeId = permitIssuerList[permitIssuerListIndex]!.id ?? 0;
@@ -690,7 +691,7 @@ class NewPermitController extends GetxController {
                 jobTypeList.indexWhere((x) => x.name == value);
              selectedJobTYpesId = jobTypeList[jobTypeListIndex].id ?? 0;
             getSopPermitList();
-            
+
           //}
         }
         break;
@@ -699,10 +700,10 @@ class NewPermitController extends GetxController {
             int sopPermitListIndex =
                 sopPermitList.indexWhere((x) => x.name == value);
             selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
-            
+
         }
         break;
-        
+
       default:
         {
           //statements;
@@ -769,7 +770,7 @@ class NewPermitController extends GetxController {
       rowCount: equipmentNameList.length,
       rowsPerPage: 10,
     );
-    
+
 
   }
 
@@ -840,7 +841,7 @@ class NewPermitController extends GetxController {
       if (isFormInvalid.value) {
         return;
       }
-     
+
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
@@ -852,8 +853,8 @@ class NewPermitController extends GetxController {
       employee_map_list.add(Employeelist(
           employeeId: e?.id, responsibility: e?.name));
     });
-   
-    
+
+
 
     late List<LotoList> loto_map_list = [];
 

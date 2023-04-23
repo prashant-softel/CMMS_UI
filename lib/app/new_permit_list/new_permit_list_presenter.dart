@@ -55,7 +55,7 @@ class NewPermitListPresenter {
   //     // categoryIds: categoryIds,
   //   );
   // }
-      
+
 
 }
 

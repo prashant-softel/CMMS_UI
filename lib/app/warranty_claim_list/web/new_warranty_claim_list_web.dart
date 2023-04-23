@@ -470,14 +470,14 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: [
-                                              
+
                                               Row(
                                                 children: [
                                                   Radio(
                                                       value: 1,
                                                       groupValue: 'null',
                                                       onChanged: (value) {
-                                                        
+
                                                       }),
                                                   Text(
                                                     'Critical',
@@ -495,7 +495,7 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                                       value: 1,
                                                       groupValue: 'null',
                                                       onChanged: (value) {
-                                                        
+
                                                       }),
                                                   Text(
                                                     'High',
@@ -536,8 +536,8 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                                   )
                                                 ],
                                               ),
-                                             
-                                             
+
+
                                             ],
                                           ),
                                         ],

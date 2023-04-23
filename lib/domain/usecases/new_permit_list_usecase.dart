@@ -23,7 +23,7 @@ class NewPermitListUsecase {
         auth,
         facilityId,
         isLoading,
-        
+
       );
 
    Future<void> permitIssueButton({
@@ -37,7 +37,7 @@ class NewPermitListUsecase {
         employee_id,
         id,
         isLoading,
-        
+
       );}
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required bool isLoading,

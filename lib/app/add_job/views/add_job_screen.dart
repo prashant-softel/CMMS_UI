@@ -28,6 +28,7 @@ class AddJobScreen extends GetView<AddJobController> {
           : AppBar(
               title: Text('Jobs'),
               // automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         centerTitle: true,
       elevation: 0,
             ),

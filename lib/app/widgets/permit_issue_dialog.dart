@@ -21,7 +21,7 @@ class PermitIssueDialog extends GetView {
   bool safetyValue6 = false;
   bool safetyValue7 = true;
 String? permitId;
- 
+
   PermitIssueDialog({super.key, this.permitIssueDialog, this. permitId});
   final NewPermitListController _controller = Get.find();
 

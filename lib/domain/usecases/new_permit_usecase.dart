@@ -31,72 +31,72 @@ class NewPermitUsecase {
    Future<List<EmployeeListModel>> getEmployeePermitList({
     required bool isLoading,
     required int? facility_id
-   
+
   }) async {
     return repository.getEmployeePermitList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
+
     );
   }
 
    Future<List<EmployeeListModel>> getPermitIssuerList({
     required bool isLoading,
     required int? facility_id
-   
+
   }) async {
     return repository.getPermitIssuerList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
+
     );
   }
 
    Future<List<EmployeeListModel2>> getPermitApproverList({
     required bool isLoading,
     required int? facility_id
-   
+
   }) async {
     return repository.getPermitApproverList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
+
     );
   }
 
   Future<List<JobTypeListModel>> getJobTypePermitList({
     required bool isLoading,
     required int? facility_id
-   
+
   }) async {
     return repository.getJobTypePermitList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
+
     );
   }
 
    Future<List<SOPListModel>> getSopPermitList({
     required bool isLoading,
     required int? job_type_id
-   
+
   }) async {
     return repository.getSopPermitList(
       isLoading: isLoading,
       job_type_id: job_type_id,
-  
+
     );
   }
 
    Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required bool isLoading,
     required int? permit_type_id
-   
+
   }) async {
     return repository.getSafetyMeasureList(
       isLoading: isLoading,
       permit_type_id: permit_type_id,
-  
+
     );
   }
 
@@ -154,7 +154,7 @@ class NewPermitUsecase {
       categoryIds: categoryIds,
     );
   }
-  
+
    Future<List<InventoryCategoryModel?>?> getInventoryIsolationList({
     String? auth,
     int? facilityId,
@@ -165,8 +165,8 @@ class NewPermitUsecase {
         facilityId,
         isLoading,
       );
-  
-   
+
+
   // Future<void> createCheckList({
   //   bool? isLoading,
   // }) async =>

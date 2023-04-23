@@ -445,6 +445,34 @@ class DataRepository extends DomainRepository {
     );
   }
 
+   Future<ResponseModel> getInventoryIsolationList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getInventoryIsolationList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getInventoryEquipmentNameList({
+    int? facilityId,
+    int? blockId,
+    required String categoryIds,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryEquipmentNameList(
+       isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
+
   Future<ResponseModel> getJobDetails({
     required String auth,
     int? jobId,

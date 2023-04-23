@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
@@ -637,6 +638,238 @@ Future<List<EmployeeListModel>> getPermitIssuerList({
     }
   }
 
+   Future<List<CurrencyListModel>> getUnitCurrencyList({
+    required int? facilityId,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getUnitCurrencyList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Unit Currency List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var unitCurrencyList = currencyListModelFromJson(res.data);
+        return unitCurrencyList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+   Future<List<InventoryDetailModel?>?> getInventoryDetailList(
+    String auth,
+    int? id,
+    bool? isLoading,
+  ) async {
+    try {
+       final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInventoryDetailList(
+        // facilityId: facilityId,
+        // blockId: blockId,
+        // categoryIds: categoryIds,
+        id:id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Inventory Detail List5: ${res.data}');
+
+      if (!res.hasError) {
+        var inventoryDetailList = inventoryDetailModelFromJson(res.data);
+        return inventoryDetailList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+
+  Future<List<EmployeeListModel>> getEmployeeList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getEmployeeList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Employee List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var employeeList = employeeListModelFromJson(res.data);
+        return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+   Future<List<EmployeeListModel>> getEmployeePermitList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getEmployeePermitList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Employee List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var employeeList = employeeListModelFromJson(res.data);
+        return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+   Future<List<EmployeeListModel>> getPermitIssuerList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getPermitIssuerList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('PermitIssuer List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var permitIssuerList = employeeListModelFromJson(res.data);
+        return permitIssuerList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<EmployeeListModel2>> getPermitApproverList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getPermitApproverList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('PermitApprover List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var permitApproverList = employeeListModel2FromJson(res.data);
+        return permitApproverList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+   Future<List<JobTypeListModel>> getJobTypePermitList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getJobTypePermitList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Job Type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var jobTypeList = jobTypeListModelFromJson(res.data);
+        return jobTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SOPListModel>> getSopPermitList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getSopPermitList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('SOP List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var sopPermitList = sopListModelFromJson(res.data);
+        return sopPermitList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+
+
+
 
 
 
@@ -895,6 +1128,95 @@ Future<List<EmployeeListModel>> getPermitIssuerList({
   //   }
   // }
 
+  Future<List<PermitIssueModel?>?> getPermitIssueButton(
+    String auth,
+    String? comment,
+    int? employee_id,
+    int? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      // final newPermitListData =
+      //     await getNewPermitAccessData(LocalKeys.userAccess);
+      // final newPermitModelList = jsonDecode(newPermitListData);
+      // var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
+      // int permitId = newPermitList.permitId ?? 0;
+      // print({"NewPermitList:", newPermitList.permitId});
+      // final userAcessData = await getUserAccessData(LocalKeys.userAccess);
+      // final userAccessModelList = jsonDecode(userAcessData);
+      // var userAccess = AccessListModel.fromJson(userAccessModelList);
+      // int userId = userAccess.user_id ?? 0;
+      // int userId = varUserAccessModel.value.user_id ?? 0;
+
+      final res = await _dataRepository.getPermitIssueButton(
+        auth: auth,
+        comment: comment,
+        employee_id: employee_id,
+        id: id,
+        // userId: 33,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitIssuerResponse5: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonPermitIssueModels = jsonDecode(res.data);
+        final List<PermitIssueModel> _permitIssueModel =
+            jsonPermitIssueModels
+                .map<PermitIssueModel>((m) =>
+                    PermitIssueModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        // var newPermitList = newPermitListFromJson(res.data);
+        // print('Permit Data:${newPermitList}');
+
+        // return newPermitList;
+
+        return _permitIssueModel;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+
+  // Future<List<NewPermitListModel>> getNewPermitList({
+  //   required int? facilityId,
+  //   // int? blockId,
+  //   // required String categoryIds,
+  //   required int? userId,
+  //   required bool isLoading,
+  // }) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+  //     int userId = varUserAccessModel.value.user_id ?? 0;
+
+  //     log(auth);
+  //     final res = await _dataRepository.getNewPermitList(
+  //       facilityId: facilityId,
+  //       userId: 33,
+  //       // blockId: blockId,
+  //       // categoryIds: categoryIds,
+  //       isLoading: isLoading,
+  //       auth: auth,
+  //     );
+  //     print('NewPermitResponseData: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       var newPermitList = newPermitListFromJson(res.data);
+  //       return newPermitList;
+  //     }
+  //     return [];
+  //   } catch (error) {
+  //     log(error.toString());
+  //     return [];
+  //   }
+  // }
+
   Future<List<FacilityModel?>?> getFacilityList(bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1046,6 +1368,83 @@ Future<List<EmployeeListModel>> getPermitIssuerList({
                 .toList();
 
         return _inventoryIsolationModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+
+
+   Future<List<InventoryCategoryModel?>?> getInventoryIsolationList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryIsolationList(
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryIsolationModels = jsonDecode(res.data);
+        final List<InventoryCategoryModel> _inventoryIsolationModelList =
+            jsonInventoryIsolationModels
+                .map<InventoryCategoryModel>(
+                  (m) => InventoryCategoryModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _inventoryIsolationModelList;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+   Future<List<InventoryModel?>?> getInventoryEquipmentNameList(
+     {required bool isLoading,
+     int? facilityId,
+     int? blockId,
+     required String categoryIds}
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryEquipmentNameList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: categoryIds,
+      auth: auth
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryNameModels = jsonDecode(res.data);
+        final List<InventoryModel> _inventoryNameModelList =
+            jsonInventoryNameModels
+                .map<InventoryModel>(
+                  (m) => InventoryModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _inventoryNameModelList;
       } else {
         Utility.showDialog('Something Went Wrong!!');
         return null;

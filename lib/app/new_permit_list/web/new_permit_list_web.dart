@@ -104,7 +104,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                           child: Column(
                               children: [
                             Expanded(
-                              child: 
+                              child:
                                   ScrollableTableView(
                                 paginationController: controller.newPermitPaginationController,
                                 columns: [
@@ -132,7 +132,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                             : column == "approved_datetime"
                                                 ? "Approved Time"
                                                 : column == "equipment"
-                                                    ? "Equipment" 
+                                                    ? "Equipment"
                                                     : column == "workingAreaId"
                                                         ? "Working Area Id"
                                                         : column == "description"
@@ -160,7 +160,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                             : "",
                                   );
                                 }).toList(),
-                                rows: 
+                                rows:
                                     [
                                   ...List.generate(
                                     controller.newPermitList?.length ?? 0,
@@ -189,7 +189,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         'Actions'
                                         : ''
                                       ];
-                                      
+
                                     },
                                   ),
                                 ].map((_newPermitList) {
@@ -248,7 +248,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         );
                                       }).toList());
                                 }).toList(),
-                                
+
                               ),
                             ),
                       
@@ -308,12 +308,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                     ]);
                                   }),
                             ),
-                       
+
                           ]),
                         ),
                         //),
                       ),
-                  
+
                     ]),
                     ),
                   ),

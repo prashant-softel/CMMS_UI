@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class WarrantyClaimListScreen extends GetView<HomeController> {
   WarrantyClaimListScreen({Key? key});
   // final HomeController controller = Get.find();
-  
+
 
   ///
   @override
