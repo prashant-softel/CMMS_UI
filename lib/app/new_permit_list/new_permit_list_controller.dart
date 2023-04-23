@@ -116,11 +116,21 @@ class NewPermitListController extends GetxController {
     update(['new_permit_list']);
   }
 
-  Future<void> permitIssueButton({String? permitId}) async{    String _comment = commentTextFieldCtrlr.text.trim();
-
-    final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
-    comment: _comment,id:permitId ,employee_id: "136",
+  Future<void> getPermitIssueButton() async{
+    final _permitIssueBtn = await newPermitListPresenter.getPermitIssueButton(
+        comment: commentTextFieldCtrlr.text,
+        employee_id: 136,
+        id: 59616
         );
+        print("PermitIssue5,${_permitIssueBtn}");
+
+     if (_permitIssueBtn != null) {
+        print("PermitIssue,$_permitIssueBtn");
+        //  CreateNewPermitDialog();
+        // showAlertDialog();
+
+        // print('NewCreated:$_facilityId');
+      }
 
   }
 
@@ -170,6 +180,51 @@ class NewPermitListController extends GetxController {
 
   }
 
+//  void getNewPermitList() async {
+  //   newPermitLists = <NewPermitListModel>[];
+
+  //   final list = await newPermitListPresenter.getNewPermitList(
+  //     isLoading: true,
+  //     // categoryIds: categoryIds,
+  //     facilityId: facilityId,
+  //     userId: 33
+
+  //   );
+  //    print('New Permit List:$newPermitLists');
+  //   if (list != null) {
+  //     // selectedSupplierNameList.clear();
+  //     // supplierNameList.clear();
+  //     Set<String> newPermitSet = {};
+  //     for(var _newPermitList in list){
+  //       if(_newPermitList.permitId != null){
+  //         newPermitSet.add(_newPermitList.equipment ?? "");
+  //         // supplierNameList.add(_supplierNameList);
+  //       }
+  //       print('New Permit Data:$newPermitSet');
+  //       // selectedSupplierNameList.addAll(supplierNameSet.toList());
+  //       // print('New Permit5:$selectedSupplierNameList');
+
+  //     }
+
+  //     // for (var supplier_name_list in list) {
+  //     //   supplierNameList.add(supplier_name_list);
+  //     // }
+  //   }
+  //   newPermitLists = list;
+  //   newPermitPaginationController = PaginationController(
+  //     rowCount: newPermitLists.length,
+  //     rowsPerPage: 10,
+  //   );
+  //   update(['new_permit_list']);
+  // }
+
+  Future<void> permitIssueButton({String? permitId}) async{    String _comment = commentTextFieldCtrlr.text.trim();
+
+    final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
+    comment: _comment,id:permitId ,employee_id: "136",
+        );
+
+  }
 
   Future<void> addNewPermitList() async {
     Get.toNamed(Routes.newPermit, arguments: facilityId);

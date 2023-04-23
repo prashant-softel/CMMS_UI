@@ -322,6 +322,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+   Future<ResponseModel> getSopPermitList({
+    required bool isLoading,
+    required String auth,
+    int? job_type_id
+
+  }) async {
+
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Permit/GetSOPList?job_type_id=$job_type_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
+
+
+
+
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
     required String auth,

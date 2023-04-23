@@ -34,6 +34,7 @@ import '../../../domain/models/inventory_category_model.dart';
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
 
+  
 
   // PreventivePresenter preventivePresenter;
 
@@ -595,10 +596,8 @@ class NewPermitController extends GetxController {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-
-          print('FacilityId:$selectedFacilityId');
+print('FacilityId:$selectedFacilityId');
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-
           if (selectedFacilityId != 0) {
             isFacilitySelected.value = true;
           }
@@ -866,7 +865,6 @@ class NewPermitController extends GetxController {
           employeeId: e?.id, responsibility: e?.name));
     });
 
-    
 
     late List<LotoList> loto_map_list = [];
 

@@ -62,6 +62,7 @@ class DropdownWidget extends StatelessWidget {
             } else {
               return null;
             }
+
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
@@ -72,6 +73,7 @@ class DropdownWidget extends StatelessWidget {
           ),
           popupProps: PopupProps.dialog(
             //
+
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(

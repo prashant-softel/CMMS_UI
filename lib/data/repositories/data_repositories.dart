@@ -355,6 +355,56 @@ class DataRepository extends DomainRepository {
       await connectHelper.getInventoryDetailList(
         auth: auth,
         // facilityId: 45,
+        facilityId: facilityId,
+        // facilityId: facilityId ?? 0,
+        // userId: 33,
+        userId: userId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getPermitIssueButton({
+    required String auth,
+    String? comment,
+    int? employee_id,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPermitIssueButton(
+        auth: auth,
+        comment: comment,
+        employee_id: employee_id,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  //  @override
+  // Future<ResponseModel> getNewPermitList({
+  //   int? facilityId,
+  //   required int? userId,
+  //   // int? blockId,
+  //   // required String categoryIds,
+  //   required bool isLoading,
+  //   required String auth,
+  // }) async {
+  //   return await connectHelper.getNewPermitList(
+  //     isLoading: isLoading,
+  //     auth: auth,
+  //     facilityId: facilityId,
+  //     userId: 33,
+  //     // blockId: blockId,
+  //     // categoryIds: categoryIds,
+  //   );
+  // }
+
+  Future<ResponseModel> getInventoryDetailList({
+    required String auth,
+    // int? facilityId,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getInventoryDetailList(
+        auth: auth,
+        // facilityId: 45,
         // facilityId: facilityId ?? 0,
         // userId: userId,
         id: id,

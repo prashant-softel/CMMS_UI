@@ -18,8 +18,12 @@ class HomeBinding extends Bindings {
               Get.find(),
             ),
           ),
+
         ),
+
+
       ),
+
     );
 
   }
