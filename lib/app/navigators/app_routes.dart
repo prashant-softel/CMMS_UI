@@ -43,6 +43,9 @@ abstract class Routes {
   static const warrantyClaimListWeb = _Paths.warrantyClaimListWeb;
 
   // static const editPermitWebScreen = _Paths.editPermitWebScreen;
+  static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
+  static const warrantyClaimListWeb = _Paths.warrantyClaimListWeb;
+
 }
 
 abstract class _Paths {

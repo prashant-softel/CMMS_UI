@@ -34,6 +34,7 @@ import '../../../domain/models/inventory_category_model.dart';
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
 
+  
 
   // PreventivePresenter preventivePresenter;
 
@@ -621,8 +622,7 @@ void permitIssuerSelected(_selectedEmployeeNameIds) {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-
-          print('FacilityId:$selectedFacilityId');
+print('FacilityId:$selectedFacilityId');
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           if (selectedFacilityId != 0) {
             isFacilitySelected.value = true;
