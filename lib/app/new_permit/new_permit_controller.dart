@@ -419,22 +419,7 @@ class NewPermitController extends GetxController {
     } );
       // filteredEmployeeNameList.add(e);
     }
-
-  void permitIssuerSelected(_selectedEmployeeNameIds) {
-
-    selectedPermitIssuerIdList.value = <int>[];
-    // filteredEmployeeNameList.value = <EmployeeListModel>[];
-    late int emp_id = 0;
-    for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
-      selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
-   EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
-
-    return element?.id ==_selectedPermitIssuerId;
-    } );
-      // filteredEmployeeNameList.add(e);
-    }
-
-  void permitIssuerSelected(_selectedEmployeeNameIds) {
+void permitIssuerSelected(_selectedEmployeeNameIds) {
 
     selectedPermitIssuerIdList.value = <int>[];
     // filteredEmployeeNameList.value = <EmployeeListModel>[];
@@ -462,6 +447,19 @@ class NewPermitController extends GetxController {
       // filteredEmployeeNameList.add(e);
     }
 
+  void permitIssuerSelected(_selectedEmployeeNameIds) {
+
+    selectedPermitIssuerIdList.value = <int>[];
+    // filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
+    for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
+      selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
+   EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
+
+    return element?.id ==_selectedPermitIssuerId;
+    } );
+      // filteredEmployeeNameList.add(e);
+    }
     // employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
@@ -894,7 +892,6 @@ print('FacilityId:$selectedFacilityId');
           employeeId: e?.id, responsibility: e?.name));
     });
 
-    
 
     late List<LotoList> loto_map_list = [];
 

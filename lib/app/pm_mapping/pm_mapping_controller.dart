@@ -47,8 +47,7 @@ class PmMappingController extends GetxController {
           type,
         );
       });
-    }
-    );
+    });
     super.onInit();
   }
 
