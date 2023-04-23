@@ -17,6 +17,7 @@ import '../../domain/models/menu_item.dart';
 import '../../domain/models/user_access_model.dart';
 
 class HomeController extends GetxController {
+
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
   // final HomeController controller = Get.find();
@@ -408,6 +409,7 @@ class HomeController extends GetxController {
       case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;

@@ -750,6 +750,49 @@ class ConnectHelper {
     return responseModel;
   }
 
+   Future<ResponseModel> getInventoryIsolationList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetInventoryCategoryList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
+    Future<ResponseModel> getInventoryEquipmentNameList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+    int? blockId,
+    required String categoryIds,
+  }) async {
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+    var facilityIdparam = (facilityId != null) ? 'facilityId=$facilityId&' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?' +
+          blockIdParam +
+          categoryIdsParam +
+          facilityIdparam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getFrequencyList({
     String? auth,
     bool? isLoading,

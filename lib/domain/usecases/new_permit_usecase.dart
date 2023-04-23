@@ -123,6 +123,77 @@ class NewPermitUsecase {
         isLoading,
       );
 
+   Future<List<EmployeeListModel>> getEmployeePermitList({
+    required bool isLoading,
+    required int? facility_id
+
+  }) async {
+    return repository.getEmployeePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+
+    );
+  }
+
+   Future<List<EmployeeListModel>> getPermitIssuerList({
+    required bool isLoading,
+    required int? facility_id
+
+  }) async {
+    return repository.getPermitIssuerList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+
+    );
+  }
+
+   Future<List<EmployeeListModel2>> getPermitApproverList({
+    required bool isLoading,
+    required int? facility_id
+
+  }) async {
+    return repository.getPermitApproverList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+
+    );
+  }
+
+  Future<List<JobTypeListModel>> getJobTypePermitList({
+    required bool isLoading,
+    required int? facility_id
+
+  }) async {
+    return repository.getJobTypePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+
+    );
+  }
+
+   Future<List<SOPListModel>> getSopPermitList({
+    required bool isLoading,
+    required int? job_type_id
+
+  }) async {
+    return repository.getSopPermitList(
+      isLoading: isLoading,
+      job_type_id: job_type_id,
+
+    );
+  }
+
+  Future<List<InventoryDetailModel?>?> getInventoryDetailList({
+    required String auth,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await repository.getInventoryDetailList(
+        auth,
+        id,
+        isLoading,
+      );
+
    Future<List<WorkTypeModel?>?> getWorkTypeList(
           {bool? isLoading, String? categoryIds}) async =>
       await repository.getWorkTypeList(

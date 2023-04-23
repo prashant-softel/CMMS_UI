@@ -25,6 +25,7 @@ class DropdownWidget extends StatelessWidget {
 
 
 
+
   @override
   Widget build(BuildContext context) {
     ///
@@ -84,6 +85,7 @@ class DropdownWidget extends StatelessWidget {
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
+
               ),
             ),
             showSearchBox: true,

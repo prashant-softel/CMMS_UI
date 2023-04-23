@@ -33,6 +33,8 @@ import '../../../domain/models/inventory_category_model.dart';
 
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
+  final HomeController homeController = Get.find();
+
 
 
   // PreventivePresenter preventivePresenter;
@@ -635,7 +637,7 @@ print('FacilityId:$selectedFacilityId');
           int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
-          print(selectedEquipmentId);
+          print('euipment data5:$selectedEquipmentId');
         }
         break;
       case RxList<InventoryModel>:
