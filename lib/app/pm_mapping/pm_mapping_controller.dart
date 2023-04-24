@@ -31,12 +31,13 @@ class PmMappingController extends GetxController {
       <PreventiveCheckListModel>[].obs;
   RxList<PreventiveCheckListModel?> selectedChecklistList =
       <PreventiveCheckListModel>[].obs;
+  List<String> checkListmapdata = [];
   Map<int, dynamic> checklist_map = {};
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-
+      getPmMappingList(facilityId);
       Future.delayed(Duration(seconds: 1), () {
         getPreventiveCheckList(
           facilityId,
@@ -85,16 +86,20 @@ class PmMappingController extends GetxController {
         facilityId: facilityId, isLoading: true);
 
     if (list != null) {
-      mappingList.clear();
-
       for (var _mappingList in list) {
-        mappingList.add(_mappingList);
+        [...(_mappingList?.checklists ?? [])].forEach((element) {
+          mappingList.add(_mappingList);
+          selectedchecklistIdList.add(element.checklist_id!);
+
+          checkListmapdata.add(element.checklist_name!);
+          // print({"checkListmapdata", checkListmapdata});
+        });
       }
     }
   }
 
   void checkListSelected(_selectedCheckList) {
-    print({"_selectedCheckList": _selectedCheckList});
+    // print({"_selectedCheckList": _selectedCheckList});
     selectedChecklistList.value =
         _selectedCheckList.cast<PreventiveCheckListModel>();
     selectedchecklistIdList.value = <int>[];
@@ -107,7 +112,7 @@ class PmMappingController extends GetxController {
   }
 
   void savePmMapping() async {
-    print({"checklist_map": checklist_map});
+    // print({"checklist_map": checklist_map});
     late List<ChecklistMapList> checklist_map_list = [];
 
     checklist_map.forEach((category_id, checklist_ids) {

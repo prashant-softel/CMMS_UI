@@ -29,7 +29,7 @@ class PmSchedulePresenter {
       await pmScheduleUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<Map<String, dynamic>> savePmSchedule({
+  Future<List<dynamic>> savePmSchedule({
     pmScheduleJsonString,
     required bool isLoading,
   }) async {

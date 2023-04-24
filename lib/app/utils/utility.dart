@@ -138,6 +138,9 @@ abstract class Utility {
   /// get formated [DateTime] eg. 12-01-2021
   static String getDayMonthYear(DateTime dateTime) =>
       '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';
+  static String getyearMonthDay(DateTime dateTime) =>
+      // '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';
+      DateFormat('yyyy-MM-dd').format(dateTime);
 
   /// get formated [DateTime] eg. 12
   static String getOnlyDate(DateTime dateTime) =>
@@ -383,6 +386,11 @@ abstract class Utility {
   static String getFormatedDate(String datetime) {
     var date = DateTime.parse(datetime);
     return Utility.getDayMonthYear(date);
+  }
+
+  static String getFormatedyearMonthDay(String datetime) {
+    var date = DateTime.parse(datetime);
+    return Utility.getyearMonthDay(date);
   }
 
   /// Show error dialog from response model

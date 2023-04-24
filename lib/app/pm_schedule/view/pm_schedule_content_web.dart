@@ -132,71 +132,67 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                               ),
                             ),
                             Spacer(),
+                            ActionButton(
+                              icon: Icons.upload,
+                              label: 'Import Schedule',
+                              onPressed: () {},
+                              color: ColorValues.appLightBlueColor,
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    Dimens.boxHeight40,
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                    text: 'Note: ',
-                                    style: TextStyle(
-                                      color: ColorValues.blueColor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            'Date Should be ${'"YYYY-MM-DD"'} Format in Excel File',
-                                        style: TextStyle(
-                                          color: ColorValues.appRedColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ]),
-                              ),
-                              Dimens.boxHeight20,
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: ColorValues.yellowColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.yellowColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    "PM Execution will be scheduled for mapped frequencies only",
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          ActionButton(
-                            icon: Icons.upload,
-                            label: 'Import Schedule',
-                            onPressed: () {},
-                            color: ColorValues.appLightBlueColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Dimens.boxHeight20,
+                    // Dimens.boxHeight40,
+                    // Container(
+                    //   margin: EdgeInsets.all(10),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       RichText(
+                    //         text: TextSpan(
+                    //             text: 'Note: ',
+                    //             style: TextStyle(
+                    //               color: ColorValues.blueColor,
+                    //               fontWeight: FontWeight.bold,
+                    //             ),
+                    //             children: [
+                    //               TextSpan(
+                    //                 text:
+                    //                     'Date Should be ${'"YYYY-MM-DD"'} Format in Excel File',
+                    //                 style: TextStyle(
+                    //                   color: ColorValues.appRedColor,
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //             ]),
+                    //       ),
+                    //       Dimens.boxHeight20,
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //           color: ColorValues.yellowColor,
+                    //           borderRadius: BorderRadius.circular(10),
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //               color: ColorValues.yellowColor,
+                    //               spreadRadius: 2,
+                    //               blurRadius: 5,
+                    //               offset: Offset(0, 2),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         child: Padding(
+                    //           padding: const EdgeInsets.all(5.0),
+                    //           child: Text(
+                    //             "PM Execution will be scheduled for mapped frequencies only",
+                    //             style: TextStyle(fontSize: 12),
+                    //           ),
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+
+                    Dimens.boxHeight30,
                     Row(
                       children: [
                         Container(
@@ -240,191 +236,256 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                           width: 200,
                           height: 40,
                           margin: Dimens.edgeInsets0_0_16_0,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.grey, width: 0.0),
+                          child: Tooltip(
+                            showDuration: const Duration(seconds: 2),
+                            waitDuration: const Duration(seconds: 1),
+                            padding: EdgeInsets.all(20),
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: ColorValues.appLightBlueColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                            ),
+                            textStyle: TextStyle(color: Colors.white),
+                            preferBelow: true,
+                            verticalOffset: 20,
+                            message:
+                                "Note: Date Should be ${'"YYYY-MM-DD"'} Format in Excel File\nPM Execution will be scheduled for mapped frequencies only",
+                            child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.grey, width: 0.0),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.grey, width: 0.0),
+                                ),
+                                contentPadding: Dimens.edgeInsets10_0_0_0,
+                                hintText: 'search'.tr,
+                                hintStyle: Styles.grey12,
                               ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.grey, width: 0.0),
-                              ),
-                              contentPadding: Dimens.edgeInsets10_0_0_0,
-                              hintText: 'search'.tr,
-                              hintStyle: Styles.grey12,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: Dimens.edgeInsets15,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorValues.lightGreyColorWithOpacity35,
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorValues.appBlueBackgroundColor,
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
+                    controller.getPmScheduleList!.isEmpty
+                        ? Expanded(
+                            child: ScrollableTableView(
+                              columns: [
+                                "Asset Id",
+                                "Equipment List",
+                                ...controller.frequencyListName,
+                              ].map((column) {
+                                return TableViewColumn(
+                                  label: column,
+                                  minWidth: Get.width * 0.16,
+                                );
+                              }).toList(),
+                              rows: [
+                                ...List.generate(
+                                  controller.getPmScheduleList?.length ?? 0,
+                                  (index) {
+                                    return [
+                                      "Asset Id",
+                                      "Equipment List",
+                                      ...controller.frequencyListName,
+                                    ];
+                                  },
+                                ),
+                              ].map((record) {
+                                return TableViewRow(
+                                  height: 80,
+                                  cells: record.map((value) {
+                                    return TableViewCell(
+                                      child: Text(value.toString()),
+                                    );
+                                  }).toList(),
+                                );
+                              }).toList(),
                             ),
-                          ],
-                        ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                child: ScrollableTableView(
-                                  paginationController:
-                                      controller.paginationController,
-                                  columns: [
-                                    "Asset Id",
-                                    "Equipment List",
-                                    ...controller.frequencyListName,
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.15,
-                                    );
-                                  }).toList(),
-                                  rows: [
-                                    ...List.generate(
-                                      controller.getPmScheduleList?.length ?? 0,
-                                      (index) {
-                                        var getPmScheduleListListDetails =
-                                            controller
-                                                .getPmScheduleList?[index];
-                                        return [
-                                          '${getPmScheduleListListDetails?.asset_id}',
-                                          '${getPmScheduleListListDetails?.asset_name ?? ''}',
-                                          ...(getPmScheduleListListDetails
-                                                  ?.frequency_dates ??
-                                              []),
-                                        ];
-                                      },
-                                    ),
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 80,
-                                      cells: record.map((value) {
-                                        if (value == record[0] ||
-                                            value == record[1])
-                                          return TableViewCell(
-                                            child: Text(value.toString()),
+                          )
+                        : Expanded(
+                            child: Container(
+                              margin: Dimens.edgeInsets15,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color:
+                                      ColorValues.lightGreyColorWithOpacity35,
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ColorValues.appBlueBackgroundColor,
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 500,
+                                      child: ScrollableTableView(
+                                        // paginationController:
+                                        //     controller.paginationController,
+                                        columns: [
+                                          "Asset Id",
+                                          "Equipment List",
+                                          ...controller.frequencyListName,
+                                        ].map((column) {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width * 0.15,
                                           );
-                                        return TableViewCell(
-                                          child: Container(
-                                              width: Get.width / 7,
-                                              child: LoginCustomTextfield(
-                                                textController: (value
-                                                        as FrequencyDates)
-                                                    .schedule_date_value_controller,
-                                                enabled:
-                                                    (value as FrequencyDates)
-                                                                .schedule_date !=
-                                                            null
-                                                        ? true
-                                                        : false,
-                                              )),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                              Container(
-                                margin: Dimens.edgeInsets15,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomRichText(title: "Comment:"),
-                                    Dimens.boxWidth10,
+                                        }).toList(),
+                                        rows: [
+                                          ...List.generate(
+                                            controller.getPmScheduleList
+                                                    ?.length ??
+                                                0,
+                                            (index) {
+                                              var getPmScheduleListListDetails =
+                                                  controller.getPmScheduleList?[
+                                                      index];
+                                              return [
+                                                '${getPmScheduleListListDetails?.asset_id}',
+                                                '${getPmScheduleListListDetails?.asset_name ?? ''}',
+                                                ...(getPmScheduleListListDetails
+                                                        ?.frequency_dates ??
+                                                    []),
+                                              ];
+                                            },
+                                          ),
+                                        ].map((record) {
+                                          return TableViewRow(
+                                            height: 80,
+                                            cells: record.map((value) {
+                                              if (value == record[0] ||
+                                                  value == record[1])
+                                                return TableViewCell(
+                                                  child: Text(value.toString()),
+                                                );
+                                              return TableViewCell(
+                                                child: Container(
+                                                    //  padding: EdgeInsets.all(3),
+                                                    width: Get.width / 7,
+                                                    child: LoginCustomTextfield(
+                                                      ontap: () {
+                                                        _selectDate(
+                                                            context, value);
+                                                      },
+                                                      textController: (value
+                                                              as FrequencyDates)
+                                                          .schedule_date_value_controller,
+                                                      enabled:
+                                                          (value as FrequencyDates)
+                                                                      .schedule_date !=
+                                                                  null
+                                                              ? true
+                                                              : false,
+                                                    )),
+                                              );
+                                            }).toList(),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
                                     Container(
-                                        width: (Get.width * .6),
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
+                                      margin: Dimens.edgeInsets15,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomRichText(title: "Comment:"),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                              width: (Get.width * .6),
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                               ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
+                                              child: LoginCustomTextfield(
+                                                maxLine: 5,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 30),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          // Container(
+                                          //   height: 35,
+                                          //   width: (Get.width * .1) - 60,
+                                          //   child: CustomElevatedButton(
+                                          //     backgroundColor:
+                                          //         ColorValues.appLightBlueColor,
+                                          //     text: "Save",
+                                          //     onPressed: () {},
+                                          //   ),
+                                          // ),
+                                          // SizedBox(
+                                          //   width: 20,
+                                          // ),
+                                          Container(
+                                            height: 35,
+                                            width: (Get.width * .1) - 50,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.greenColor,
+                                              text: 'Submit',
+                                              onPressed: () {
+                                                controller.savePmSchedule();
+                                              },
                                             ),
-                                            BoxShadow(
-                                              color: ColorValues.whiteColor,
-                                              offset: const Offset(0.0, 0.0),
-                                              blurRadius: 0.0,
-                                              spreadRadius: 0.0,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            height: 35,
+                                            width: (Get.width * .2) - 150,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              text: "View History",
+                                              onPressed: () {},
                                             ),
-                                          ],
-                                          color: ColorValues.whiteColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: LoginCustomTextfield(
-                                          maxLine: 5,
-                                        )),
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 35,
-                                      width: (Get.width * .1) - 60,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        text: "Save",
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      width: (Get.width * .1) - 50,
-                                      child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.greenColor,
-                                        text: 'Submit',
-                                        onPressed: () {
-                                          controller.savePmSchedule();
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      width: (Get.width * .2) - 150,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appDarkBlueColor,
-                                        text: "View History",
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -433,5 +494,19 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
         )
       ],
     );
+  }
+
+  Future<void> _selectDate(BuildContext context, FrequencyDates value) async {
+    DateTime today = DateTime.now();
+    var date = await showDatePicker(
+      context: context,
+      cancelText: "Clear",
+      confirmText: "Ok",
+      initialDate: DateTime(today.year, today.month, today.day),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(today.year + 18, today.month, today.day),
+    );
+    value.schedule_date_value_controller?.text =
+        date.toString().substring(0, 10);
   }
 }

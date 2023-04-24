@@ -733,7 +733,7 @@ class ConnectHelper {
     int? facilityId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckListMap?facility_id=$facilityId',
+      'CheckList/GetCheckListMap?facility_id=$facilityId&type=1',
       Request.get,
       null,
       isLoading ?? false,

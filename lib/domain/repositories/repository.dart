@@ -1430,7 +1430,7 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> savePmSchedule(
+  Future<List<dynamic>> savePmSchedule(
     pmScheduleJsonString,
     bool? isLoading,
   ) async {
@@ -1450,10 +1450,10 @@ class Repository {
       else {
         Utility.showDialog(res.errorCode.toString() + 'savePmSchedule');
       }
-      return Map();
+      return [];
     } catch (error) {
       print(error.toString());
-      return Map();
+      return [];
     }
   }
 

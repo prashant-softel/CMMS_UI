@@ -33,7 +33,7 @@ class PmScheduleUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<Map<String, dynamic>> savePmSchedule({
+  Future<List<dynamic>> savePmSchedule({
     pmScheduleJsonString,
     bool? isLoading,
   }) async =>

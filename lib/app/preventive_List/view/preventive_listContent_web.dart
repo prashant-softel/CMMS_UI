@@ -585,8 +585,10 @@ class PreventiveChecklistListContentWeb
                                                                               )
                                                                             : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
+                                                                : Center(
+                                                                    child: Text(
+                                                                      value,
+                                                                    ),
                                                                   ));
                                                   }).toList());
                                             }).toList(),

@@ -141,6 +141,8 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                                               Icons.arrow_drop_down,
                                               color: ColorValues.whiteColor,
                                             ),
+                                            initialValue:
+                                                controller.checkListmapdata,
                                             items: (controller.checkList.where(
                                                     (element) =>
                                                         element

@@ -27,12 +27,22 @@ class GetPmScheduleListModel {
   factory GetPmScheduleListModel.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['frequency_dates'] as List;
     print(list.runtimeType);
-    List<FrequencyDates> frequencyDates =
+    List<FrequencyDates> frequencyDates = [];
+    List<FrequencyDates> frequencyDatesBuffer =
         list.map((i) => FrequencyDates.fromJson(i)).toList() ?? [];
-    for (var i = frequencyDates.length; i < 15; i++) {
-      frequencyDates.add(FrequencyDates(
-          schedule_date_value_controller: TextEditingController()));
+    for (var i = 1; i < 16; i++) {
+      FrequencyDates freq = frequencyDatesBuffer.firstWhere(
+        (e) => e.frequency_id == i,
+        orElse: () => FrequencyDates(
+            schedule_date_value_controller: TextEditingController(),
+            frequency_id: i),
+      );
+      frequencyDates.add(freq);
     }
+    // for (var i = frequencyDates.length; i < 15; i++) {
+    //   frequencyDates.add(FrequencyDates(
+    //       schedule_date_value_controller: TextEditingController()));
+    // }
 
     return GetPmScheduleListModel(
       category_id: parsedJson['category_id'],
@@ -74,7 +84,7 @@ class FrequencyDates {
         frequency_id: parsedJson['frequency_id'],
         frequency_name: parsedJson['frequency_name'],
         schedule_date_value_controller: TextEditingController(
-          text: Utility.getFormatedDate(parsedJson['schedule_date']),
+          text: Utility.getFormatedyearMonthDay(parsedJson['schedule_date']),
         ));
   }
 
