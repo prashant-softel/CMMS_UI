@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class WarrantyClaimListWeb extends GetView<HomeController> {
   WarrantyClaimListWeb({super.key});
+  // final WarrantyClaimController controller = Get.find();
 
   ///
 
@@ -133,8 +136,10 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                             label: 'Add Warranty Claim',
                             onPressed: () {
                               // Get.to(() => AddInventory());
-                              // Get.to(() => NewWarrantyClaimListWeb());
-                              // Get.offAllNamed(NewWarrantyClaimListWeb())
+                              //  Get.to(() => NewWarrantyClaimListWeb());
+                              //  Get.offAllNamed(Routes.newWarrantyClaimList);
+                              // Get.toNamed(Routes.newWarrantyClaimList);
+                              
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -283,7 +288,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                             'action'.tr,
                                           ].map((column) {
                                             return TableViewColumn(
-                                              minWidth: Get.width * 0.16,
+                                              minWidth: Get.width * 0.1,
                                               label: column,
                                             );
                                           }).toList(),
@@ -292,6 +297,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                               controller.warrantyClaimList.length,
                                               (index) => [
                                                 AssetName(
+                                                  
                                                    '${controller.warrantyClaimList[index].wc_id}',
                                                   // 'dummy data',
                                                   1,
@@ -529,6 +535,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                             }),
                       ),
                       )]))),
+         
             ),
           
         ],

@@ -2,12 +2,12 @@ import 'package:cmms/app/add_job/views/mobile/add_job_content_mobile.dart';
 import 'package:cmms/app/add_job/views/web/add_job_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../add_job_controller.dart';
+import '../../widgets/dropdown.dart';
 
 class AddJobScreen extends GetView<AddJobController> {
   AddJobScreen({Key? key}) : super(key: key);
@@ -17,6 +17,11 @@ class AddJobScreen extends GetView<AddJobController> {
   Widget build(BuildContext context) {
     ///
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Job'),
+        // automaticallyImplyLeading: false,
+        centerTitle: true,
+      ),
       appBar: Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),

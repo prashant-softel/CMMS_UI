@@ -26,6 +26,9 @@ abstract class Routes {
   static const calibrationList = _Paths.calibrationList;
   static const CalibrationHistory = _Paths.calibrationHistory;
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
+  static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
+  static const warrantyClaimListWeb = _Paths.warrantyClaimListWeb;
+
   static const calibrationDetail = _Paths.calibrationDetail;
   static const pmSchedule = _Paths.pmSchedule;
   static const pmTask = _Paths.pmTask;
@@ -44,6 +47,8 @@ abstract class _Paths {
   static const jobCardDetails = '/job-card-details';
   static const login = '/login-screen';
   static const preventive = '/preventive-screen';
+  // static const create_checkList = '/create_preventive_checklist-screen';
+  // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
   static const newPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
@@ -51,10 +56,13 @@ abstract class _Paths {
   static const preventiveCheckPoint = '/preventive-check-point';
   static const newPermitList = '/new-permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
+  static const warrantyClaimListWeb = '/warranty-claim-list-web';
+
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
+  static const newWarrantyClaimList = '/new-warranty-claim-list';
   static const calibrationDetail = '/calibration-detail';
   static const pmSchedule = '/pm-schedule-screen';
   static const pmTask = '/pm-task-screen';
