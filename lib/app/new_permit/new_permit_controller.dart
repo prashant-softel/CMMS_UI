@@ -33,6 +33,7 @@ import '../../../domain/models/inventory_category_model.dart';
 
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
+
   final HomeController homeController = Get.find();
 
 
@@ -447,6 +448,20 @@ class NewPermitController extends GetxController {
       // filteredEmployeeNameList.add(e);
     }
 
+  void permitIssuerSelected(_selectedEmployeeNameIds) {
+
+    selectedPermitIssuerIdList.value = <int>[];
+    // filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
+    for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
+      selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
+   EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
+
+    return element?.id ==_selectedPermitIssuerId;
+    } );
+      // filteredEmployeeNameList.add(e);
+    }
+
     // employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
@@ -637,7 +652,6 @@ print('FacilityId:$selectedFacilityId');
           int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
-          print('euipment data5:$selectedEquipmentId');
         }
         break;
       case RxList<InventoryModel>:
@@ -880,6 +894,7 @@ print('FacilityId:$selectedFacilityId');
           employeeId: e?.id, responsibility: e?.name));
     });
 
+    
 
     late List<LotoList> loto_map_list = [];
 

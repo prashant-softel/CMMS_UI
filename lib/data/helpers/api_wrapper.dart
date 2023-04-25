@@ -109,6 +109,14 @@ class ApiWrapper {
               //     )
               //    .timeout(const Duration(seconds: 120));
 
+              final response = await http
+                  .put(
+                    Uri.parse(uri),
+                    body: data,//json.encode(data),
+                    headers: headers,
+                  )
+                  .timeout(const Duration(seconds: 120));
+
               if (isLoading) Utility.closeDialog();
 
               Utility.printILog(uri);

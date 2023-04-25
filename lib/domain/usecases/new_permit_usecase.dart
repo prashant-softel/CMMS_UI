@@ -183,6 +183,18 @@ class NewPermitUsecase {
     );
   }
 
+   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
+    required bool isLoading,
+    required int? permit_type_id
+   
+  }) async {
+    return repository.getSafetyMeasureList(
+      isLoading: isLoading,
+      permit_type_id: permit_type_id,
+  
+    );
+  }
+
   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     required String auth,
     int? id,
