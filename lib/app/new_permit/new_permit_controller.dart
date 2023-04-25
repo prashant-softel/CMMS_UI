@@ -34,7 +34,6 @@ import '../../../domain/models/inventory_category_model.dart';
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
 
-  
 
   // PreventivePresenter preventivePresenter;
 
