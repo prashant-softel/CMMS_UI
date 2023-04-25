@@ -118,21 +118,11 @@ class NewPermitListController extends GetxController {
     update(['new_permit_list']);
   }
 
-  Future<void> getPermitIssueButton() async{
-    final _permitIssueBtn = await newPermitListPresenter.getPermitIssueButton(
-        comment: commentTextFieldCtrlr.text,
-        employee_id: 136,
-        id: 59616
+  Future<void> permitIssueButton({String? permitId}) async{    String _comment = commentTextFieldCtrlr.text.trim();
+
+    final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
+    comment: _comment,id:permitId ,employee_id: "136",
         );
-        print("PermitIssue5,${_permitIssueBtn}");
-
-     if (_permitIssueBtn != null) {
-        print("PermitIssue,$_permitIssueBtn");
-        //  CreateNewPermitDialog();
-        // showAlertDialog();
-
-        // print('NewCreated:$_facilityId');
-      }
 
   }
 

@@ -1120,6 +1120,33 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
     }
   }
 
+  Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
+    required int? permit_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getSafetyMeasureList(
+        permit_type_id: permit_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Safety Measure List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var safetyMeasureList = safetyMeasureListModelFromJson(res.data);
+        return safetyMeasureList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
 
 
 
@@ -2021,7 +2048,7 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
       final res = await _dataRepository.getNewPermitList(
         auth: auth,
         // facilityId: 45,
-        userId: 33,
+        // userId: 33,
         isLoading: isLoading ?? false,
       );
       if (!res.hasError) {
