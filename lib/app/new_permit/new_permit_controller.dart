@@ -296,7 +296,6 @@ class NewPermitController extends GetxController {
     //  Future.delayed(Duration(seconds: 1), () {
        facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-
       Future.delayed(Duration(seconds: 1), () {
        getBlocksList(facilityId);
       });
@@ -403,6 +402,20 @@ class NewPermitController extends GetxController {
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
+
+  void permitIssuerSelected(_selectedEmployeeNameIds) {
+
+    selectedPermitIssuerIdList.value = <int>[];
+    // filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
+    for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
+      selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
+   EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
+
+    return element?.id ==_selectedPermitIssuerId;
+    } );
+      // filteredEmployeeNameList.add(e);
+    }
 
   void permitIssuerSelected(_selectedEmployeeNameIds) {
 
@@ -700,7 +713,6 @@ class NewPermitController extends GetxController {
             int sopPermitListIndex =
                 sopPermitList.indexWhere((x) => x.name == value);
             selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
-
         }
         break;
 
@@ -854,7 +866,7 @@ class NewPermitController extends GetxController {
           employeeId: e?.id, responsibility: e?.name));
     });
 
-
+    
 
     late List<LotoList> loto_map_list = [];
 

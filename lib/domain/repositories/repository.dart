@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
@@ -865,6 +866,33 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
     }
   }
 
+  Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
+    required int? permit_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getSafetyMeasureList(
+        permit_type_id: permit_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Safety Measure List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var safetyMeasureList = safetyMeasureListModelFromJson(res.data);
+        return safetyMeasureList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
 
 
 
@@ -1039,7 +1067,7 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
       final res = await _dataRepository.getNewPermitList(
         auth: auth,
         // facilityId: 45,
-        userId: 33,
+        // userId: 33,
         isLoading: isLoading ?? false,
       );
       if (!res.hasError) {
@@ -1127,58 +1155,33 @@ Future<List<EmployeeListModel2>> getPermitApproverList({
   //   }
   // }
 
-  Future<List<PermitIssueModel?>?> getPermitIssueButton(
-    String auth,
+  Future<void> permitIssueButton(
     String? comment,
-    int? employee_id,
-    int? id,
+    String? employee_id,
+    String? id,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      // final newPermitListData =
-      //     await getNewPermitAccessData(LocalKeys.userAccess);
-      // final newPermitModelList = jsonDecode(newPermitListData);
-      // var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
-      // int permitId = newPermitList.permitId ?? 0;
-      // print({"NewPermitList:", newPermitList.permitId});
-      // final userAcessData = await getUserAccessData(LocalKeys.userAccess);
-      // final userAccessModelList = jsonDecode(userAcessData);
-      // var userAccess = AccessListModel.fromJson(userAccessModelList);
-      // int userId = userAccess.user_id ?? 0;
-      // int userId = varUserAccessModel.value.user_id ?? 0;
 
-      final res = await _dataRepository.getPermitIssueButton(
+      final res = await _dataRepository.permitIssueButton(
         auth: auth,
-        comment: comment,
-        employee_id: employee_id,
-        id: id,
-        // userId: 33,
+       comment: comment,
+       id: id,
+       employee_id: employee_id,
         isLoading: isLoading ?? false,
       );
-      print('PermitIssuerResponse5: ${res.data}');
 
       if (!res.hasError) {
-        final jsonPermitIssueModels = jsonDecode(res.data);
-        final List<PermitIssueModel> _permitIssueModel =
-            jsonPermitIssueModels
-                .map<PermitIssueModel>((m) =>
-                    PermitIssueModel.fromJson(Map<String, dynamic>.from(m)))
-                .toList();
-        // var newPermitList = newPermitListFromJson(res.data);
-        // print('Permit Data:${newPermitList}');
 
-        // return newPermitList;
 
-        return _permitIssueModel;
+      //  return _permitIssueModel;
       } else {
         Utility.showDialog('Something Went Wrong!!');
-        return [];
       }
     } catch (error) {
       print(error.toString());
 
-      return [];
     }
   }
 

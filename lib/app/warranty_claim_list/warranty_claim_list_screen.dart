@@ -13,7 +13,6 @@ class WarrantyClaimListScreen extends GetView<HomeController> {
   WarrantyClaimListScreen({Key? key});
   // final HomeController controller = Get.find();
 
-
   ///
   @override
   Widget build(BuildContext context) //
