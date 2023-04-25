@@ -362,14 +362,14 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getPermitIssueButton({
+  Future<ResponseModel> permitIssueButton({
     required String auth,
     String? comment,
-    int? employee_id,
-    int? id,
+    String? employee_id,
+    String? id,
     bool? isLoading,
   }) async =>
-      await connectHelper.getPermitIssueButton(
+      await connectHelper.permitIssueButton(
         auth: auth,
         comment: comment,
         employee_id: employee_id,

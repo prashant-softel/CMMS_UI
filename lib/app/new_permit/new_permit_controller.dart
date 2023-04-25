@@ -34,7 +34,6 @@ import '../../../domain/models/inventory_category_model.dart';
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
 
-  
 
   // PreventivePresenter preventivePresenter;
 
@@ -403,6 +402,20 @@ class NewPermitController extends GetxController {
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
+
+  void permitIssuerSelected(_selectedEmployeeNameIds) {
+
+    selectedPermitIssuerIdList.value = <int>[];
+    // filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
+    for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
+      selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
+   EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
+
+    return element?.id ==_selectedPermitIssuerId;
+    } );
+      // filteredEmployeeNameList.add(e);
+    }
 
   void permitIssuerSelected(_selectedEmployeeNameIds) {
 
