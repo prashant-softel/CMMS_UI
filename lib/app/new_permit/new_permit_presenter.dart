@@ -7,6 +7,8 @@ import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
