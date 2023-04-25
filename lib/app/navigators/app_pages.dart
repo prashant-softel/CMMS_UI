@@ -1,12 +1,15 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_binding.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/edit_permit/edit_permit_binding.dart';
+import 'package:cmms/app/edit_permit/view/web/edit_permit_screen_web.dart';
 import 'package:cmms/app/new_permit/new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
@@ -175,10 +178,12 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.breakdown,
       page: BreakdownMaintenanceScreen.new,
+      binding: BreakdownMaintenanceBinding()
     ),
     GetPage<dynamic>(
       name: _Paths.viewWarrantyClaim,
       page: ViewWarrantyClaimWeb.new,
+      // binding: HomeBinding()
     ),
     GetPage<dynamic>(
       name: _Paths.calibrationDetail,
@@ -208,12 +213,17 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.newWarrantyClaimList,
       page: NewWarrantyClaimListWeb.new,
-      // binding: WarrantyClaimBinding()
+      binding: HomeBinding()
     ),
     GetPage<dynamic>(
       name: _Paths.warrantyClaimListWeb,
       page: WarrantyClaimListWeb.new,
       binding: HomeBinding()
     ),
+    // GetPage<dynamic>(
+    //   name: _Paths.editPermitWebScreen,
+    //   page: EditPermitWebScreen.new,
+    //   binding: EditPermitBinding()
+    // ),
   ];
 }

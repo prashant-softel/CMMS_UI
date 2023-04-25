@@ -11,6 +11,9 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class WarrantyClaimListWeb extends GetView<HomeController> {
   WarrantyClaimListWeb({super.key});
   // final WarrantyClaimController controller = Get.find();
+  //  final HomeController controller = Get.find();
+  // final HomeController controller = Get.find();
+
 
   ///
 
@@ -138,12 +141,12 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                               // Get.to(() => AddInventory());
                               //  Get.to(() => NewWarrantyClaimListWeb());
                               //  Get.offAllNamed(Routes.newWarrantyClaimList);
-                              // Get.toNamed(Routes.newWarrantyClaimList);
+                              Get.toNamed(Routes.newWarrantyClaimList);
                               
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => NewWarrantyClaimListWeb()));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => NewWarrantyClaimListWeb()));
                             },
                             color: Colors.blue,
                           ),

@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
@@ -93,6 +94,16 @@ class NewPermitPresenter {
     return newPermitUsecase.getSopPermitList(
       isLoading: isLoading,
       job_type_id: job_type_id,
+    );
+  }
+
+   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
+    required bool isLoading,
+    required int? permit_type_id,
+  }) async {
+    return newPermitUsecase.getSafetyMeasureList(
+      isLoading: isLoading,
+      permit_type_id: permit_type_id,
     );
   }
 

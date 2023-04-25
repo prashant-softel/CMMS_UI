@@ -22,5 +22,6 @@ class HomeBinding extends Bindings {
         ),
       ),
     );
+    
   }
 }

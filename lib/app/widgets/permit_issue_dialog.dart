@@ -20,9 +20,9 @@ class PermitIssueDialog extends GetView {
   bool safetyValue5 = false;
   bool safetyValue6 = false;
   bool safetyValue7 = true;
-
+String? permitId;
  
-  PermitIssueDialog({super.key, this.permitIssueDialog});
+  PermitIssueDialog({super.key, this.permitIssueDialog, this. permitId});
   final NewPermitListController _controller = Get.find();
 
 
@@ -79,7 +79,7 @@ class PermitIssueDialog extends GetView {
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
-                              _controller.getPermitIssueButton();
+                              _controller.permitIssueButton(permitId:permitId);
                             },
                             child: const Text('Permit Issue'),
                           ),

@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/usecases/new_permit_list_usecase.dart';
+import 'package:flutter/material.dart';
 
 class NewPermitListPresenter {
   NewPermitListPresenter(this.newPermitListUsecase);
@@ -25,15 +26,13 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<PermitIssueModel?>?> getPermitIssueButton({
-    String? auth,
+   Future<void> permitIssueButton({
     String? comment,
-    int? employee_id,
-    int? id,
+    String? employee_id,
+    String? id,
     bool? isLoading,
   }) async =>
-      await newPermitListUsecase.getPermitIssueButton(
-        auth: auth ?? "",
+      await newPermitListUsecase.permitIssueButton(
         comment: comment,
         employee_id: employee_id,
         id: id,
