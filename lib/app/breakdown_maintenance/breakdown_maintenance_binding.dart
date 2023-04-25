@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 import '../../domain/usecases/breakdown_usecase.dart';
 import 'breakdown_maintenance_controller.dart';
@@ -13,6 +14,17 @@ class BreakdownMaintenanceBinding extends Bindings {
         Get.put(
           BreakdownMaintenancePresenter(
             BreakdownMaintenanceUsecase(
+              Get.find(),
+            ),
+          ),
+        ),
+      ),
+    );
+    Get.lazyPut(
+      () => HomeController(
+        Get.put(
+          HomePresenter(
+            HomeUsecase(
               Get.find(),
             ),
           ),

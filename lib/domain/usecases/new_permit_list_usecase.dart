@@ -26,21 +26,19 @@ class NewPermitListUsecase {
         
       );
 
-   Future<List<PermitIssueModel?>?> getPermitIssueButton({
-    required String auth,
+   Future<void> permitIssueButton({
     String? comment,
-    int? employee_id,
-    int? id,
+    String? employee_id,
+    String? id,
     bool? isLoading,
-  }) async =>
-      await repository.getPermitIssueButton(
-        auth,
+  }) async {
+      await repository.permitIssueButton(
         comment,
         employee_id,
         id,
         isLoading,
         
-      );
+      );}
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required bool isLoading,
   //   required int? facilityId,

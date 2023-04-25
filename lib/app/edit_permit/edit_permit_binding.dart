@@ -1,0 +1,51 @@
+// import 'package:cmms/app/edit_permit/edit_permit_controller.dart';
+// import 'package:cmms/app/edit_permit/edit_permit_presenter.dart';
+// import 'package:cmms/app/home/home_controller.dart';
+// import 'package:cmms/app/home/home_presenter.dart';
+// import 'package:cmms/app/job_list/job_list_presenter.dart';
+// import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
+// import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
+// import 'package:cmms/domain/usecases/edit_permit_usecase.dart';
+// import 'package:cmms/domain/usecases/home_usecase.dart';
+// import 'package:cmms/domain/usecases/job_list_usecase.dart';
+// import 'package:cmms/domain/usecases/new_permit_usecase.dart';
+// import 'package:cmms/app/new_permit/new_permit_controller.dart';
+// import 'package:cmms/app/new_permit/new_permit_presenter.dart';
+// import 'package:get/get.dart';
+
+// import '../../../domain/usecases/preventive_list_usecase.dart';
+
+// class EditPermitBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.lazyPut(
+//       () => EditPermitController(
+//         Get.put(
+//           EditPermitPresenter(
+//             EditPermitUsecase(
+//               Get.find(),
+//             ),
+//           ),
+//         ),
+//          JobListPresenter(
+//           JobListUsecase(
+//             Get.find(),
+//           ),
+//         ),
+        
+//       ),
+//     );
+//      Get.lazyPut(
+//       () => HomeController(
+//         Get.put(
+//           HomePresenter(
+//             HomeUsecase(
+//               Get.find(),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+    
+//   }
+// }

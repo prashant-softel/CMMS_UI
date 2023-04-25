@@ -20,7 +20,7 @@ class HomeController extends GetxController {
 
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
-  // final HomeController controller = Get.find();
+ 
 
   ///
   var startDateTimeCtrlrWeb = TextEditingController();

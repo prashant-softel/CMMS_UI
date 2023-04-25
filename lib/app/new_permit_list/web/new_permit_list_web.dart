@@ -18,7 +18,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class NewPermitListWeb extends GetView<NewPermitListController> {
   NewPermitListWeb({super.key});
   //var controller;
-  // var controller = Get.find<NewPermitListController>();
+  var controller = Get.find<NewPermitListController>();
 
 
   @override
@@ -207,7 +207,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                       icon: Icons.visibility,
                                                       label: 'Issue',
                                                       onPress: () {
-                                                       Get.dialog(PermitIssueDialog());
+                                                       Get.dialog(PermitIssueDialog(permitId:_newPermitList[0]));
                                                       },
                                                     ),
 
@@ -226,7 +226,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                       color: Colors.blue,
                                                       icon: Icons.edit,
                                                       label: 'Edit PTW',
-                                                      onPress: () {},
+                                                      onPress: () {
+                                                        // controller.goToEditPermitWebScreen();
+                                                      },
                                                     ),
                                                     // TableActionButton(
                                                     //   color: Colors.green,

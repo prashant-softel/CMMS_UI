@@ -208,6 +208,25 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getSafetyMeasureList({
+    int? permit_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getSafetyMeasureList(
+      isLoading: isLoading,
+      auth: auth,
+      permit_type_id: permit_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
     );
   }
 
@@ -293,14 +312,14 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getPermitIssueButton({
+  Future<ResponseModel> permitIssueButton({
     required String auth,
     String? comment,
-    int? employee_id,
-    int? id,
+    String? employee_id,
+    String? id,
     bool? isLoading,
   }) async =>
-      await connectHelper.getPermitIssueButton(
+      await connectHelper.permitIssueButton(
         auth: auth,
         comment: comment,
         employee_id: employee_id,
