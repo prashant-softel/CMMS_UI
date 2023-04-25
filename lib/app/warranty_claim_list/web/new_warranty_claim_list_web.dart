@@ -18,7 +18,7 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
   bool valuefirst = false;
 
   // final controller = Get.find<HomeController>();
-  // final HomeController controller = Get.find();
+  final HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(

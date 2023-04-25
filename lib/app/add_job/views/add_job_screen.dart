@@ -1,5 +1,6 @@
 import 'package:cmms/app/add_job/views/mobile/add_job_content_mobile.dart';
 import 'package:cmms/app/add_job/views/web/add_job_content_web.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
@@ -21,8 +22,8 @@ class AddJobScreen extends GetView<AddJobController> {
         title: const Text('Add Job'),
         // automaticallyImplyLeading: false,
         centerTitle: true,
-      ),
-      appBar: Responsive.isDesktop(context)
+        actions: [
+          Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
@@ -34,6 +35,10 @@ class AddJobScreen extends GetView<AddJobController> {
               centerTitle: true,
               elevation: 0,
             ),
+
+        ],
+      ),
+    
       body:
           //
           Row(//

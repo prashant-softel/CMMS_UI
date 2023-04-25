@@ -16,6 +16,8 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
   bool valuefirst = true;
 
   // final controller = Get.find<HomeController>();
+  final HomeController controller = Get.find();
+
 
   @override
   Widget build(BuildContext context) => Scaffold(

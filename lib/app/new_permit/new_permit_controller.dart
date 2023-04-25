@@ -15,6 +15,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
+import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -32,6 +33,7 @@ import '../../../domain/models/inventory_category_model.dart';
 
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
+  
   final HomeController homeController = Get.find();
   
 
@@ -214,6 +216,16 @@ class NewPermitController extends GetxController {
   int selectedSOPId = 0;
 
 
+  ///Safety Measure List
+  RxList<SafetyMeasureListModel> safetyMeasureList = <SafetyMeasureListModel>[].obs;
+  Rx<bool> isSafetyMeasuretListSelected = true.obs;
+  Rx<String> selectedSafetyMeasureList = ''.obs;
+  RxList<String?> selectedSafetyMeasureDataList = <String>[].obs;
+  RxList<int?> selectedSafetyMeasureIdList = <int>[].obs;
+  int selectedSafetyMeasureId = 0;
+  
+
+
 
   ///Permit Issuer
    RxList<EmployeeListModel?> selectedPermitIssuerList =
@@ -287,7 +299,7 @@ class NewPermitController extends GetxController {
     //  Future.delayed(Duration(seconds: 1), () {
        facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      print('FacilityIdsss$facilityId');
+      
       Future.delayed(Duration(seconds: 1), () {
        getBlocksList(facilityId);
       });
@@ -304,6 +316,7 @@ class NewPermitController extends GetxController {
     await getJobTypePermitList();
     await getPermitIssuerList();
     await getPermitApproverList();
+    await getSafetyMeasureList();
 
 
     super.onInit();
@@ -333,7 +346,6 @@ class NewPermitController extends GetxController {
       isLoading: true,
       id: 14430
     );
-     print('InventoryDetail List:$inventoryDetailList');
     if (list != null) {
       // selectedSupplierNameList.clear();
       // supplierNameList.clear();
@@ -343,9 +355,7 @@ class NewPermitController extends GetxController {
           // inventoryDetailList!.add(_inventoryDetailList?.name ?? "");
           inventoryDetailList!.add(_inventoryDetailList);
         }
-        // print('Supplier Name Data:$supplierNameSet');
-        // selectedSupplierNameList.addAll(supplierNameSet.toList());
-        // print('Supplier Name5:$selectedSupplierNameList');
+       
 
       }
 
@@ -369,58 +379,50 @@ class NewPermitController extends GetxController {
   }
 
    void equipmentNameSelected(_selectedEquipmentNameIds) {
-    print({"_selectedEquipmentNameIds":_selectedEquipmentNameIds});
     selectedEquipmentNameIdList.value = <int>[];
     filteredEquipmentNameList.value = <InventoryModel>[];
     for (var _selectedNameId in _selectedEquipmentNameIds) {
       selectedEquipmentNameIdList.add(_selectedNameId);
    InventoryModel? e =   equipmentNameList.firstWhere((element) {
     
-    print({"element?.id":element?.id,"ddd":_selectedNameId});
     return element?.id ==_selectedNameId;
     } );
       filteredEquipmentNameList.add(e);
     }
-    print({"selectedEquipmentNameIdList le":selectedEquipmentNameIdList.value.length,"filteredEquipmentNameList":filteredEquipmentNameList.value.length});
+    // print({"selectedEquipmentNameIdList le":selectedEquipmentNameIdList.value.length,"filteredEquipmentNameList":filteredEquipmentNameList.value.length});
   }
 
    void employeeNameSelected(_selectedEmployeeNameIds) {
-    print({"_selectedEmployeeNameIds":_selectedEmployeeNameIds});
     selectedEmployeeNameIdList.value = <int>[];
     filteredEmployeeNameList.value = <EmployeeListModel>[];
     late int emp_id = 0;
     for (var _selectedEmployeeNameId in _selectedEmployeeNameIds) {
       selectedEmployeeNameIdList.add(_selectedEmployeeNameId);
    EmployeeListModel? e =   employeeNameList.firstWhere((element) {
-    
-    print({"element?.id":element?.id,"ddd":_selectedEmployeeNameId});
     return element?.id ==_selectedEmployeeNameId;
     } );
       filteredEmployeeNameList.add(e);
     }
-    print({"selectedEmployeeNameIdList":selectedEmployeeNameIdList.value.length,"filteredEmployeeNameList":filteredEmployeeNameList.value.length});
-
-    // employee_map[emp_id] = selectedEmployeeNameIdList;
+   
+    employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
-  // void permitIssuerSelected(_selectedEmployeeNameIds) {
-  //   print({"_selectedEmployeeNameIds":_selectedEmployeeNameIds});
-  //   selectedPermitIssuerIdList.value = <int>[];
-  //   // filteredEmployeeNameList.value = <EmployeeListModel>[];
-  //   late int emp_id = 0;
-  //   for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
-  //     selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
-  //  EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
+  void permitIssuerSelected(_selectedEmployeeNameIds) {
     
-  //   print({"element?.id":element?.id,"ddd":_selectedPermitIssuerId});
-  //   return element?.id ==_selectedPermitIssuerId;
-  //   } );
-  //     // filteredEmployeeNameList.add(e);
-  //   }
-  //   print({"selectedEmployeeNameIdList":selectedEmployeeNameIdList.value.length,"filteredEmployeeNameList":filteredEmployeeNameList.value.length});
-
-  //   // employee_map[emp_id] = selectedEmployeeNameIdList;
-  // }
+    selectedPermitIssuerIdList.value = <int>[];
+    // filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
+    for (var _selectedPermitIssuerId in _selectedEmployeeNameIds) {
+      selectedPermitIssuerIdList.add(_selectedPermitIssuerId);
+   EmployeeListModel? e =   permitIssuerList.firstWhere((element) {
+    
+    return element?.id ==_selectedPermitIssuerId;
+    } );
+      // filteredEmployeeNameList.add(e);
+    }
+   
+    // employee_map[emp_id] = selectedEmployeeNameIdList;
+  }
 
 
 
@@ -430,7 +432,7 @@ class NewPermitController extends GetxController {
       selectedEquipmentIsolationIdList.add(_selectedIsolationId);
 
     }
-    print("category123:${selectedEquipmentIsolationIdList}");
+
 
     getInventoryEquipmentNameList();
   }
@@ -453,7 +455,6 @@ class NewPermitController extends GetxController {
       // categoryIds: categoryIds,
       facility_id: 45,
     );
-     print('Employee List:$employeeNameList');
     if (_employeeNameList != null) {
       for (var employee_list in _employeeNameList) {
         employeeNameList.add(employee_list);
@@ -474,7 +475,6 @@ class NewPermitController extends GetxController {
       // categoryIds: categoryIds,
       facility_id: 45,
     );
-     print('Permit Issuer List:$permitIssuerList');
     if (_permitIssuerList != null) {
       for (var permit_issuer_list in _permitIssuerList) {
         permitIssuerList.add(permit_issuer_list);
@@ -495,7 +495,6 @@ class NewPermitController extends GetxController {
       // categoryIds: categoryIds,
       facility_id: 45,
     );
-     print('Permit Approver List:$permitApproverList');
     if (_permitApproverList != null) {
       for (var permit_approver_list in _permitApproverList) {
         permitApproverList.add(permit_approver_list);
@@ -516,7 +515,6 @@ class NewPermitController extends GetxController {
       // categoryIds: cPategoryIds,
       facility_id: 45,
     );
-     print('Job Type List:${jobTypeList}');
     if (_jobTypeList != null) {
       for (var jobType_list in _jobTypeList) {
         jobTypeList.add(jobType_list);
@@ -540,7 +538,6 @@ class NewPermitController extends GetxController {
       // job_type_id: 36,
 
     );
-     print('SOP Permit List:${sopPermitList}');
     if (_sopPermitList != null) {
       for (var sopPermit_list in _sopPermitList) {
         sopPermitList.add(sopPermit_list);
@@ -554,6 +551,30 @@ class NewPermitController extends GetxController {
     update(['sop_permit_list']);
   }
 
+   Future<void> getSafetyMeasureList() async {
+    safetyMeasureList.value = <SafetyMeasureListModel>[];
+    final _safetyMeasureList = await permitPresenter.getSafetyMeasureList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      permit_type_id: 7,
+      // job_type_id: 36,
+
+    );
+    if (_safetyMeasureList != null) {
+      for (var safetyMeasure_list in _safetyMeasureList) {
+        safetyMeasureList.add(safetyMeasure_list);
+      }
+    }
+    // supplierNameList = _supplierNameList;
+    // employeeNamepaginationController = PaginationController(
+    //   rowCount: employeeNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['safety_measure_list']);
+  }
+
+
+
 
 
 
@@ -563,7 +584,6 @@ class NewPermitController extends GetxController {
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-          print('FacilityId:$selectedFacilityId');
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           
           if (selectedFacilityId != 0) {
@@ -590,7 +610,6 @@ class NewPermitController extends GetxController {
           int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
-          print('euipment data5:$selectedEquipmentId');
         }
         break;
       case RxList<InventoryModel>:
@@ -640,7 +659,6 @@ class NewPermitController extends GetxController {
               typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = facilityList[permitTypeIndex]?.id ?? 0;
           selectedPermitTypeId = typePermitList[permitTypeIndex]?.id ?? 0;
-          print('TypePermitList$selectedPermitTypeId');
           if (selectedTypePermitId != 0) {
             isTypePermitSelected.value = true;
           }
@@ -654,7 +672,6 @@ class NewPermitController extends GetxController {
             int permitIssuerListIndex =
                 permitIssuerList.indexWhere((x) => x!.name == value);
             selectedPermitIssuerTypeId = permitIssuerList[permitIssuerListIndex]!.id ?? 0;
-            print('PermitIssuerId:$selectedPermitIssuerTypeId');
 
         }
         break;
@@ -664,7 +681,6 @@ class NewPermitController extends GetxController {
              int permitApproverListIndex =
                 permitApproverList.indexWhere((x) => x!.name == value);
             selectedPermitApproverTypeId = permitApproverList[permitApproverListIndex]!.id ?? 0;
-            print('PermitApproverId:$selectedPermitApproverTypeId');
 
         }
         break;
@@ -673,7 +689,6 @@ class NewPermitController extends GetxController {
             int jobTypeListIndex =
                 jobTypeList.indexWhere((x) => x.name == value);
              selectedJobTYpesId = jobTypeList[jobTypeListIndex].id ?? 0;
-            print('JobtypeId:$selectedJobTYpesId');
             getSopPermitList();
             
           //}
@@ -684,7 +699,6 @@ class NewPermitController extends GetxController {
             int sopPermitListIndex =
                 sopPermitList.indexWhere((x) => x.name == value);
             selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
-            print('SOPTyeId:$selectedSOPId');
             
         }
         break;
@@ -739,7 +753,6 @@ class NewPermitController extends GetxController {
    Future<void> getInventoryEquipmentNameList() async {
     equipmentNameList.value = <InventoryModel>[];
     String  categoryIds= selectedEquipmentIsolationIdList.join(', ');
-    print({"cate123",categoryIds});
     final _equipmentNameList =
         await permitPresenter.getInventoryEquipmentNameList(
       isLoading: true,
@@ -839,11 +852,7 @@ class NewPermitController extends GetxController {
       employee_map_list.add(Employeelist(
           employeeId: e?.id, responsibility: e?.name));
     });
-    //print('EmployeeMapList:$employee_map_list');
-    // print('EmployeeMapData:$employee_map');
-
-   // Map<int, dynamic> employee_Map = employee_map_list.asMap();
-    
+   
     
 
     late List<LotoList> loto_map_list = [];
@@ -851,6 +860,13 @@ class NewPermitController extends GetxController {
     filteredEquipmentNameList.forEach((e) {
       loto_map_list.add(LotoList(
           Loto_id: e?.id, Loto_Key: e?.name));
+    });
+
+    late List<Safetyquestionlist> safety_measure_map_list = [];
+
+    safetyMeasureList.forEach((e) {
+      safety_measure_map_list.add(Safetyquestionlist(
+          safetyMeasureId: e.id, safetyMeasureValue: e.name));
     });
 
       //  List<Employeelist> employee_list= <Employeelist>[];
@@ -887,7 +903,7 @@ class NewPermitController extends GetxController {
         isolated_category_ids: selectedEquipmentIsolationIdList,
         issuer_id: selectedPermitIssuerTypeId,
         lotoId: selectedEquipmentCategoryIdList.first,
-        safety_question_list: [],
+        safety_question_list: safety_measure_map_list,
         sop_type_id: selectedSOPId,
         typeId: selectedPermitTypeId, ///Permit Type Id
         user_id: userId,
@@ -895,18 +911,15 @@ class NewPermitController extends GetxController {
         Loto_list: loto_map_list,
       );
       var jobJsonString = createPermitModel.toJson();
-      print({"jsonData5", jobJsonString});
       Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.createNewPermit(
         newPermit: jobJsonString,
         isLoading: true,
       );
       if (responseNewPermitCreated != null) {
-        print("respomsecghj,$responseNewPermitCreated");
         //  CreateNewPermitDialog();
         showAlertDialog();
 
-        // print('NewCreated:$_facilityId');
       }
     }
   }

@@ -231,9 +231,9 @@ class ConnectHelper {
   }) async {
 
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetBusinessList?businessType=$businessType' +
-          blockIdParam +
-          categoryIdsParam,
+      // 'CMMS/GetBusinessList?businessType=$businessType' +
+      //     blockIdParam +
+      //     categoryIdsParam,
       // statusParam,
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -274,6 +274,25 @@ class ConnectHelper {
 
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSOPList?job_type_id=$job_type_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+   Future<ResponseModel> getSafetyMeasureList({
+    required bool isLoading,
+    required String auth,
+    int? permit_type_id
+
+  }) async {
+
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Permit/GetSafetyMeasurementQuestionList?permit_type_id=$permit_type_id',
       Request.getMultiparts,
       null,
       isLoading,
@@ -384,18 +403,19 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPermitIssueButton({
+  Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,
     String? comment,
-    int? employee_id,
-    int? id,
+    String? employee_id,
+    String? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
     Request.put,
-      null,
+    {'comment': "comment", 'employee_id': "136",'id':"59616"},
+
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
