@@ -417,7 +417,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   Future<ResponseModel> getInventoryIsolationList({
+  Future<ResponseModel> getInventoryIsolationList({
     String? auth,
     bool? isLoading,
     int? facilityId,
@@ -437,7 +437,7 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getInventoryEquipmentNameList(
-       isLoading: isLoading,
+      isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
       blockId: blockId,
@@ -758,6 +758,16 @@ class DataRepository extends DomainRepository {
         auth: auth,
         facilityId: facilityId ?? 0,
         selectedEquipmentId: selectedEquipmentId,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> savePmSchedule({
+    required String auth,
+    pmScheduleJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.savePmSchedule(
+        auth: auth,
+        pmScheduleJsonString: pmScheduleJsonString,
         isLoading: isLoading ?? false,
       );
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
+import '../../../domain/models/set_pm_schedule_model.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/dropdown.dart';
@@ -131,70 +132,77 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                               ),
                             ),
                             Spacer(),
+                            ActionButton(
+                              icon: Icons.upload,
+                              label: 'Import Schedule',
+                              onPressed: () {},
+                              color: ColorValues.appLightBlueColor,
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    Dimens.boxHeight40,
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                    text: 'Note: ',
-                                    style: TextStyle(
-                                      color: ColorValues.blueColor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            'Date Should be ${'"YYYY-MM-DD"'} Format in Excel File',
-                                        style: TextStyle(
-                                          color: ColorValues.appRedColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ]),
-                              ),
-                              Dimens.boxHeight20,
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: ColorValues.yellowColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.yellowColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    "PM Execution will be scheduled for mapped frequencies only",
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          ActionButton(
-                            icon: Icons.upload,
-                            label: 'Import Schedule',
-                            onPressed: () {},
-                            color: ColorValues.appLightBlueColor,
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Dimens.boxHeight40,
+                    // Container(
+                    //   margin: EdgeInsets.all(10),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           RichText(
+                    //             text: TextSpan(
+                    //                 text: 'Note: ',
+                    //                 style: TextStyle(
+                    //                   color: ColorValues.blueColor,
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //                 children: [
+                    //                   TextSpan(
+                    //                     text:
+                    //                         'Date Should be ${'"YYYY-MM-DD"'} Format in Excel File',
+                    //                     style: TextStyle(
+                    //                       color: ColorValues.appRedColor,
+                    //                       fontWeight: FontWeight.bold,
+                    //                     ),
+                    //                   ),
+                    //                 ]),
+                    //           ),
+                    //           Dimens.boxHeight20,
+                    //           Container(
+                    //             decoration: BoxDecoration(
+                    //               color: ColorValues.yellowColor,
+                    //               borderRadius: BorderRadius.circular(10),
+                    //               boxShadow: [
+                    //                 BoxShadow(
+                    //                   color: ColorValues.yellowColor,
+                    //                   spreadRadius: 2,
+                    //                   blurRadius: 5,
+                    //                   offset: Offset(0, 2),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             child: Padding(
+                    //               padding: const EdgeInsets.all(5.0),
+                    //               child: Text(
+                    //                 "PM Execution will be scheduled for mapped frequencies only",
+                    //                 style: TextStyle(fontSize: 12),
+                    //               ),
+                    //             ),
+                    //           )
+                    //         ],
+                    //       ),
+                    //       ActionButton(
+                    //         icon: Icons.upload,
+                    //         label: 'Import Schedule',
+                    //         onPressed: () {},
+                    //         color: ColorValues.appLightBlueColor,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+
                     Dimens.boxHeight20,
                     Row(
                       children: [
@@ -239,19 +247,35 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                           width: 200,
                           height: 40,
                           margin: Dimens.edgeInsets0_0_16_0,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.grey, width: 0.0),
+                          child: Tooltip(
+                            showDuration: const Duration(seconds: 2),
+                            waitDuration: const Duration(seconds: 1),
+                            padding: EdgeInsets.all(20),
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: ColorValues.appLightBlueColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                            ),
+                            textStyle: TextStyle(color: Colors.white),
+                            preferBelow: true,
+                            verticalOffset: 20,
+                            message:
+                                "Note: Date Should be ${'"YYYY-MM-DD"'} Format in Excel File\nPM Execution will be scheduled for mapped frequencies only",
+                            child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.grey, width: 0.0),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.grey, width: 0.0),
+                                ),
+                                contentPadding: Dimens.edgeInsets10_0_0_0,
+                                hintText: 'search'.tr,
+                                hintStyle: Styles.grey12,
                               ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.grey, width: 0.0),
-                              ),
-                              contentPadding: Dimens.edgeInsets10_0_0_0,
-                              hintText: 'search'.tr,
-                              hintStyle: Styles.grey12,
                             ),
                           ),
                         ),
@@ -302,8 +326,10 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         return [
                                           '${getPmScheduleListListDetails?.asset_id}',
                                           '${getPmScheduleListListDetails?.asset_name ?? ''}',
-                                          ...controller.frequencyListName,
-
+                                          //  ...controller.frequencyListName,
+                                          ...(getPmScheduleListListDetails
+                                                  ?.frequency_dates ??
+                                              []),
                                           // "Day",
                                           // "Week",
                                           // "FortNight",
@@ -329,17 +355,97 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         if (value == record[0] ||
                                             value == record[1])
                                           return TableViewCell(
-                                            child: Text(value),
+                                            child: Text(value.toString()),
                                           );
                                         return TableViewCell(
                                           child: Container(
                                               width: Get.width / 7,
-                                              child: LoginCustomTextfield()),
+                                              child: LoginCustomTextfield(
+                                                ontap: () {
+                                                  _selectDate(context, value);
+                                                },
+                                                textController: (value
+                                                        as FrequencyDates)
+                                                    .schedule_date_value_controller,
+                                                enabled:
+                                                    (value as FrequencyDates)
+                                                                .schedule_date !=
+                                                            null
+                                                        ? true
+                                                        : false,
+                                              )),
                                         );
                                       }).toList(),
                                     );
                                   }).toList(),
                                 ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25),
+                                child: ValueListenableBuilder(
+                                    valueListenable:
+                                        controller.paginationController,
+                                    builder: (context, value, child) {
+                                      return Row(children: [
+                                        Text(
+                                            "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                        Row(children: [
+                                          IconButton(
+                                            onPressed: controller
+                                                        .paginationController
+                                                        .currentPage <=
+                                                    1
+                                                ? null
+                                                : () {
+                                                    controller
+                                                        .paginationController
+                                                        .previous();
+                                                  },
+                                            iconSize: 20,
+                                            splashRadius: 20,
+                                            icon: Icon(
+                                              Icons.arrow_back_ios_new_rounded,
+                                              color: controller
+                                                          .paginationController
+                                                          .currentPage <=
+                                                      1
+                                                  ? Colors.black26
+                                                  : Theme.of(context)
+                                                      .primaryColor,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: controller
+                                                        .paginationController
+                                                        .currentPage >=
+                                                    controller
+                                                        .paginationController
+                                                        .pageCount
+                                                ? null
+                                                : () {
+                                                    controller
+                                                        .paginationController
+                                                        .next();
+                                                  },
+                                            iconSize: 20,
+                                            splashRadius: 20,
+                                            icon: Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color: controller
+                                                          .paginationController
+                                                          .currentPage >=
+                                                      controller
+                                                          .paginationController
+                                                          .pageCount
+                                                  ? Colors.black26
+                                                  : Theme.of(context)
+                                                      .primaryColor,
+                                            ),
+                                          ),
+                                        ]),
+                                      ]);
+                                    }),
                               ),
                               Container(
                                 margin: Dimens.edgeInsets15,
@@ -383,19 +489,19 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      height: 35,
-                                      width: (Get.width * .1) - 60,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        text: "Save",
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   width: (Get.width * .1) - 60,
+                                    //   child: CustomElevatedButton(
+                                    //     backgroundColor:
+                                    //         ColorValues.appLightBlueColor,
+                                    //     text: "Save",
+                                    //     onPressed: () {},
+                                    //   ),
+                                    // ),
+                                    // SizedBox(
+                                    //   width: 20,
+                                    // ),
                                     Container(
                                       height: 35,
                                       width: (Get.width * .1) - 50,
@@ -403,7 +509,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         backgroundColor: ColorValues.greenColor,
                                         text: 'Submit',
                                         onPressed: () {
-                                          //  controller.savePmMapping();
+                                          controller.savePmSchedule();
                                         },
                                       ),
                                     ),
@@ -436,5 +542,19 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
         )
       ],
     );
+  }
+
+  Future<void> _selectDate(BuildContext context, FrequencyDates value) async {
+    DateTime today = DateTime.now();
+    var date = await showDatePicker(
+      context: context,
+      cancelText: "Clear",
+      confirmText: "Ok",
+      initialDate: DateTime(today.year, today.month, today.day),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(today.year + 18, today.month, today.day),
+    );
+    value.schedule_date_value_controller?.text =
+        date.toString().substring(0, 10);
   }
 }

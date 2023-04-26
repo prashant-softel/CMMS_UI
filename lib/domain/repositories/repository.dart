@@ -387,7 +387,7 @@ class Repository {
     }
   }
 
-   Future<List<CurrencyListModel>> getUnitCurrencyList({
+  Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
     // int? blockId,
     // required String categoryIds,
@@ -415,20 +415,20 @@ class Repository {
     }
   }
 
-   Future<List<InventoryDetailModel?>?> getInventoryDetailList(
+  Future<List<InventoryDetailModel?>?> getInventoryDetailList(
     String auth,
     int? id,
     bool? isLoading,
   ) async {
     try {
-       final auth = await getSecuredValue(LocalKeys.authToken);
+      final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
       final res = await _dataRepository.getInventoryDetailList(
         // facilityId: facilityId,
         // blockId: blockId,
         // categoryIds: categoryIds,
-        id:id,
+        id: id,
         isLoading: isLoading,
         auth: auth,
       );
@@ -445,7 +445,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<EmployeeListModel>> getEmployeeList({
     required int? facility_id,
@@ -475,8 +474,7 @@ class Repository {
     }
   }
 
-
-   Future<List<EmployeeListModel>> getEmployeePermitList({
+  Future<List<EmployeeListModel>> getEmployeePermitList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,
@@ -504,7 +502,7 @@ class Repository {
     }
   }
 
-   Future<List<EmployeeListModel>> getPermitIssuerList({
+  Future<List<EmployeeListModel>> getPermitIssuerList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,
@@ -560,8 +558,7 @@ class Repository {
     }
   }
 
-
-   Future<List<JobTypeListModel>> getJobTypePermitList({
+  Future<List<JobTypeListModel>> getJobTypePermitList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,
@@ -640,11 +637,6 @@ class Repository {
       return [];
     }
   }
-
-
-
-
-
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
@@ -862,28 +854,24 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      
+
       final res = await _dataRepository.permitIssueButton(
         auth: auth,
-       comment: comment,
-       id: id,
-       employee_id: employee_id,
+        comment: comment,
+        id: id,
+        employee_id: employee_id,
         isLoading: isLoading ?? false,
       );
 
       if (!res.hasError) {
-        
-
-      //  return _permitIssueModel;
+        //  return _permitIssueModel;
       } else {
         Utility.showDialog('Something Went Wrong!!');
       }
     } catch (error) {
       log(error.toString());
-
     }
   }
-
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,
@@ -1042,9 +1030,7 @@ class Repository {
     }
   }
 
-
-
-   Future<List<InventoryCategoryModel?>?> getInventoryIsolationList(
+  Future<List<InventoryCategoryModel?>?> getInventoryIsolationList(
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -1080,21 +1066,19 @@ class Repository {
     }
   }
 
-   Future<List<InventoryModel?>?> getInventoryEquipmentNameList(
-     {required bool isLoading,
-     int? facilityId,
-     int? blockId,
-     required String categoryIds}
-  ) async {
+  Future<List<InventoryModel?>?> getInventoryEquipmentNameList(
+      {required bool isLoading,
+      int? facilityId,
+      int? blockId,
+      required String categoryIds}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getInventoryEquipmentNameList(
-      isLoading: isLoading,
-      facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: categoryIds,
-      auth: auth
-      );
+          isLoading: isLoading,
+          facilityId: facilityId,
+          blockId: blockId,
+          categoryIds: categoryIds,
+          auth: auth);
 
       if (!res.hasError) {
         final jsonInventoryNameModels = jsonDecode(res.data);
@@ -1119,8 +1103,6 @@ class Repository {
       return [];
     }
   }
-
-
 
   Future<List<FrequencyModel?>?> getFrequencyList(
     bool? isLoading,
@@ -1862,6 +1844,33 @@ class Repository {
     } catch (error) {
       log(error.toString());
 
+      return [];
+    }
+  }
+
+  Future<List<dynamic>> savePmSchedule(
+    pmScheduleJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.savePmSchedule(
+        auth: auth,
+        pmScheduleJsonString: pmScheduleJsonString,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'savePmSchedule');
+      }
+      return [];
+    } catch (error) {
+      print(error.toString());
       return [];
     }
   }
