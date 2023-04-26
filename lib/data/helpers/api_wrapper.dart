@@ -106,8 +106,7 @@ class ApiWrapper {
               //       body: json.encode(data),//json.encode(data),
               //       headers: headers,
               //     )
-              //    .timeout(const Duration(seconds: 120));
-
+              //     .timeout(const Duration(seconds: 120));
               if (isLoading) Utility.closeDialog();
 
               Utility.printILog(uri);
