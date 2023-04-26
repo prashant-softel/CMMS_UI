@@ -14,6 +14,7 @@ import '../preventive_list_controller.dart';
 class PreventiveChecklistListContentWeb
     extends GetView<PreventiveListController> {
   PreventiveChecklistListContentWeb({Key? key}) : super(key: key);
+  final PreventiveListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

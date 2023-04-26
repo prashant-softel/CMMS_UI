@@ -103,26 +103,26 @@ class PmScheduleController extends GetxController {
     getPmScheduleList?.clear();
     getPmScheduleList?.value = <GetPmScheduleListModel>[];
     final _getPmScheduleList = await pmSchedulePresenter.getPMScheduleData(
-      facilityId: facilityId,
-      selectedEquipmentId: selectedEquipmentId,
-    );
+        facilityId: facilityId,
+        selectedEquipmentId: selectedEquipmentId,
+        isLoading: true);
 
     if (_getPmScheduleList != null) {
       getPmScheduleList!.value = _getPmScheduleList;
 
-      // paginationController = PaginationController(
-      //   rowCount: getPmScheduleList?.length ?? 0,
-      //   rowsPerPage: 10,
-      // );
+      paginationController = PaginationController(
+        rowCount: getPmScheduleList?.length ?? 0,
+        rowsPerPage: 10,
+      );
 
-      // if (getPmScheduleList != null && getPmScheduleList!.isNotEmpty) {
-      //   getPmScheduleListModel = getPmScheduleList![0];
-      //  var getPmScheduleListModelJson = getPmScheduleListModel!.toJson();
-      // preventiveCheckListTableColumns.value = <String>[];
-      // for (var key in getPmScheduleListModelJson.keys.toList()) {
-      //   preventiveCheckListTableColumns.add(key);
-      // }
-      //  }
+      if (getPmScheduleList != null && getPmScheduleList!.isNotEmpty) {
+        getPmScheduleListModel = getPmScheduleList![0];
+        var getPmScheduleListModelJson = getPmScheduleListModel!.toJson();
+        preventiveCheckListTableColumns.value = <String>[];
+        for (var key in getPmScheduleListModelJson.keys.toList()) {
+          preventiveCheckListTableColumns.add(key);
+        }
+      }
     }
   }
 

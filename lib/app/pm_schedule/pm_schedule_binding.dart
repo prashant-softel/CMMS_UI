@@ -20,6 +20,7 @@ class PmScheduleBinding extends Bindings {
         ),
       ),
     );
+
     Get.lazyPut(
       () => HomeController(
         Get.put(

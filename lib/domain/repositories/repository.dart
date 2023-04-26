@@ -914,16 +914,18 @@ class Repository {
       );
 
       if (!res.hasError) {
-        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
-        // print(res.data);
-        final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
-            jsonPreventiveCheckListModelModels
-                .map<PreventiveCheckListModel>((m) =>
-                    PreventiveCheckListModel.fromJson(
-                        Map<String, dynamic>.from(m)))
-                .toList();
+        if (res.errorCode == 200) {
+          final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+          // print(res.data);
+          final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
+              jsonPreventiveCheckListModelModels
+                  .map<PreventiveCheckListModel>((m) =>
+                      PreventiveCheckListModel.fromJson(
+                          Map<String, dynamic>.from(m)))
+                  .toList();
 
-        return _PreventiveCheckListModelList;
+          return _PreventiveCheckListModelList;
+        }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getPreventiveCheckList');
         return [];

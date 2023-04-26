@@ -77,6 +77,50 @@ class PreventiveMaintenanceTaskContentWeb
                           "PM Tasks ",
                           style: Styles.blackBold16,
                         ),
+                        Spacer(),
+                        ElevatedButton(
+                          child: Row(
+                            children: [
+                              Text(
+                                  "From Date: " //'${start.year}/${start.month}/${start.day}',
+                                  ),
+                              Text(
+                                  "2023-04-04" //'${start.year}/${start.month}/${start.day}',
+                                  ),
+                              Dimens.boxWidth5,
+                              Icon(Icons.calendar_month)
+                            ],
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorValues.appLightBlueColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                          onPressed: () => _selectDate(context),
+                        ),
+                        Dimens.boxWidth10,
+                        ElevatedButton(
+                          child: Row(
+                            children: [
+                              Text(
+                                  "To Date: " //'${start.year}/${start.month}/${start.day}',
+                                  ),
+                              Text(
+                                  "2023-04-04" //'${start.year}/${start.month}/${start.day}',
+                                  ),
+                              Dimens.boxWidth5,
+                              Icon(Icons.calendar_month)
+                            ],
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorValues.appLightBlueColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                          onPressed: () => _selectDate(context),
+                        ),
                       ],
                     ),
                   ),
@@ -316,5 +360,24 @@ class PreventiveMaintenanceTaskContentWeb
         ),
       ],
     );
+  }
+
+  Future<void> _selectDate(
+    BuildContext context,
+  ) async {
+    DateTime today = DateTime.now();
+    var date = await showDatePicker(
+      context: context,
+      cancelText: "Clear",
+      confirmText: "Ok",
+      initialDate: DateTime(today.year - 18, today.month, today.day),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(today.year - 18, today.month, today.day),
+    );
+    //  if (type == 1) {
+    //  controller.previousDateController.text = date.toString().substring(0, 10);
+    //  } else {
+    //  controller.nextDueDateController.text = date.toString().substring(0, 10);
+    //  }
   }
 }

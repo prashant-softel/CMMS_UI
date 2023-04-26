@@ -93,13 +93,20 @@ class ApiWrapper {
 
             try {
               if (isLoading) Utility.showLoader();
-              final response = await http
-                  .put(
-                    Uri.parse(uri),
-                    body: data,
-                    headers: headers,
-                  )
-                  .timeout(const Duration(seconds: 120));
+              final request =
+                  await http.MultipartRequest('PUT', Uri.parse(uri));
+              request.fields.addAll(data);
+
+              http.Response response =
+                  await http.Response.fromStream(await request.send());
+
+              // final response = await http
+              //     .put(
+              //       Uri.parse(uri),
+              //       body: data,
+              //       headers: headers,
+              //     )
+              //     .timeout(const Duration(seconds: 120));
 
               if (isLoading) Utility.closeDialog();
 
