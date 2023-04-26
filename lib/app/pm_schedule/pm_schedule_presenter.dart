@@ -29,4 +29,13 @@ class PmSchedulePresenter {
       await pmScheduleUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
+  Future<List<dynamic>> savePmSchedule({
+    pmScheduleJsonString,
+    required bool isLoading,
+  }) async {
+    return pmScheduleUsecase.savePmSchedule(
+      pmScheduleJsonString: pmScheduleJsonString,
+      isLoading: isLoading,
+    );
+  }
 }
