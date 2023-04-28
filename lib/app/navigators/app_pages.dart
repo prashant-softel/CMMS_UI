@@ -22,6 +22,7 @@ import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
+import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
