@@ -1,7 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
+import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';

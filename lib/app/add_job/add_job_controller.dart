@@ -156,7 +156,7 @@ class AddJobController extends GetxController {
     required String facilityId,
   }) async {
     final list = await homePresenter.getEquipmentList(
-      isLoading: true,
+      isLoading: false,
       facilityId: facilityId,
     );
     equipmentList.value = list;
@@ -165,7 +165,7 @@ class AddJobController extends GetxController {
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
     final list = await addJobPresenter.getToolsRequiredToWorkTypeList(
-      isLoading: true,
+      isLoading: false,
       workTypeIds: workTypeIds,
     );
     toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
@@ -176,7 +176,7 @@ class AddJobController extends GetxController {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList =
         await addJobPresenter.getInventoryCategoryList(
-      isLoading: true,
+      isLoading: false,
     );
     if (_equipmentCategoryList != null) {
       for (var equimentCategory in _equipmentCategoryList) {
@@ -199,7 +199,7 @@ class AddJobController extends GetxController {
       facilityId: facilityId,
       blockId: blockId,
       categoryIds: lststrCategoryIds,
-      isLoading: true,
+      isLoading: false,
     );
     workAreaList.value = _workAreaList;
 
@@ -213,7 +213,7 @@ class AddJobController extends GetxController {
     String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
     final _workTypeList = await addJobPresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
-      isLoading: true,
+      isLoading: false,
     );
     workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
   }
@@ -293,7 +293,7 @@ class AddJobController extends GetxController {
       Map<String, dynamic>? responseMapJobCreated =
           await addJobPresenter.saveJob(
         job: jobJsonString,
-        isLoading: true,
+        isLoading: false,
       );
       if (responseMapJobCreated != null) {
         var _jobId = responseMapJobCreated["id"];

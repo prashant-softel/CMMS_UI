@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/menu_item.dart';
 import '../../domain/models/user_access_model.dart';
 
 class HomeController extends GetxController {
@@ -182,7 +181,7 @@ class HomeController extends GetxController {
       }
 
       selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.add(facilityList[0]?.id ?? 0);
+      _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
   }
 
@@ -209,7 +208,7 @@ class HomeController extends GetxController {
     final _equipmentCategoryList = await homePresenter.getInventoryCategoryList(
       isLoading: true,
     );
-    //  print('equipment category:$equipmentCategoryList');
+
     if (_equipmentCategoryList != null) {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
@@ -224,11 +223,9 @@ class HomeController extends GetxController {
       categoryIds: categoryIds,
       facilityId: facilityId,
     );
-    //  print('equipment Name List:$inventoryNameList');
-    if (_inventoryList != null) {
-      for (var inventory_list in _inventoryList) {
-        inventoryNameList.add(inventory_list);
-      }
+
+    for (var inventory_list in _inventoryList) {
+      inventoryNameList.add(inventory_list);
     }
     inventoryList = _inventoryList;
     paginationController = PaginationController(
@@ -246,10 +243,8 @@ class HomeController extends GetxController {
       businessType: 5,
     );
     //  print('Supplier Name List:$supplierNameList');
-    if (_supplierNameList != null) {
-      for (var supplier_list in _supplierNameList) {
-        supplierNameList.add(supplier_list);
-      }
+    for (var supplier_list in _supplierNameList) {
+      supplierNameList.add(supplier_list);
     }
     // supplierNameList = _supplierNameList;
     paginationBusinessListController = PaginationController(
@@ -268,23 +263,11 @@ class HomeController extends GetxController {
       facilityId: 45,
     );
     print('Supplier Name List:$supplierNameList');
-    if (list != null) {
-      // selectedSupplierNameList.clear();
-      // supplierNameList.clear();
-      Set<String> supplierNameSet = {};
-      for (var _supplierNameList in list) {
-        if (_supplierNameList.supplier_name != null) {
-          supplierNameSet.add(_supplierNameList.supplier_name ?? "");
-          // supplierNameList.add(_supplierNameList);
-        }
-        //  print('Supplier Name Data:$supplierNameSet');
-        // selectedSupplierNameList.addAll(supplierNameSet.toList());
-        //  print('Supplier Name5:$selectedSupplierNameList');
+    Set<String> supplierNameSet = {};
+    for (var _supplierNameList in list) {
+      if (_supplierNameList.supplier_name != null) {
+        supplierNameSet.add(_supplierNameList.supplier_name ?? "");
       }
-
-      // for (var supplier_name_list in list) {
-      //   supplierNameList.add(supplier_name_list);
-      // }
     }
     warrantyClaimList = list;
     paginationWarrantyController = PaginationController(

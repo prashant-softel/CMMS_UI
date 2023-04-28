@@ -74,9 +74,8 @@ class JobListContentWeb extends StatelessWidget {
                           ColorValues.appLightBlueColor),
                       source:
                           _JobDataSource(controller), // Custom DataSource class
-                      // horizontalMargin: 20,
+
                       minWidth: Get.width * 2,
-                      // header: //
 
                       rowsPerPage: 10, // Number of rows per page
                       availableRowsPerPage: [10, 20, 30, 50],
@@ -156,28 +155,39 @@ class _JobDataSource extends DataTableSource {
         ].map((value) {
           return DataCell(
             (value == 'Actions')
-                ? Wrap(
+                ? Wrap(//
                     children: [
+                    TableActionButton(
+                      color: ColorValues.appGreenColor,
+                      icon: Icons.visibility,
+                      label: 'View',
+                      onPress: () {
+                        controller.showJobDetails(controller.jobId.value);
+                      },
+                    ),
+                    TableActionButton(
+                      color: ColorValues.appPurpleColor,
+                      icon: Icons.add,
+                      label: 'Job Card',
+                      onPress: () {
+                        controller.goToJobCardScreen(
+                          int.tryParse('${jobDetails?.id}'),
+                        );
+                      },
+                    ),
+                    if (jobDetails?.assignedToName == null ||
+                        jobDetails.assignedToName.isEmpty)
                       TableActionButton(
-                        color: ColorValues.appGreenColor,
-                        icon: Icons.visibility,
-                        label: 'View',
-                        onPress: () {
-                          controller.showJobDetails(controller.jobId.value);
-                        },
-                      ),
-                      TableActionButton(
-                        color: ColorValues.appPurpleColor,
+                        color: ColorValues.appYellowColor,
                         icon: Icons.add,
-                        label: 'Job Card',
+                        label: 'Assign',
                         onPress: () {
-                          controller.goToJobCardScreen(
+                          controller.goToEditJobScreen(
                             int.tryParse('${jobDetails?.id}'),
                           );
                         },
                       ),
-                    ],
-                  )
+                  ])
                 : Text(value.toString()),
           );
         }).toList(),
