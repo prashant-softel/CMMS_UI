@@ -1,8 +1,11 @@
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_presenter.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -18,24 +21,31 @@ class NewPermitListController extends GetxController {
   );
   NewPermitListPresenter newPermitListPresenter;
 
+  final HomeController controller = Get.find();
+
   ///
+  // var newPermitLists = <NewPermitListModel>[];
+  
   RxList<NewPermitListModel?>? newPermitList = <NewPermitListModel?>[].obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
-  int facilityId = 46;
-  int userId = 35;
+  int facilityId = 45;
+  int userId = 33;
   Rx<int> permitId = 0.obs;
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
   NewPermitListModel? newPermitListModel;
   RxList<String> newPermitListTableColumns = <String>[].obs;
-  PaginationController paginationController = PaginationController(
+  PaginationController newPermitPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
+  TextEditingController commentTextFieldCtrlr = TextEditingController();
+
+  
 
   ///
   @override
@@ -47,6 +57,9 @@ class NewPermitListController extends GetxController {
       Future.delayed(Duration(milliseconds: 500), () {
         getNewPermitList(facilityId, userId);
       });
+      // Future.delayed(Duration(milliseconds: 500), () {
+      //   getPermitIssueButton();
+      // });
     });
 
     super.onInit();
@@ -72,16 +85,18 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> getNewPermitList(int facilityId, int userId) async {
-    newPermitList?.value = <NewPermitListModel>[];
+    newPermitList!.value = <NewPermitListModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
-        // facilityId: facilityId,
-        facilityId: 45,
+        facilityId: facilityId,
+        // facilityId: 45,
         // userId: userId,
-        userId: 33);
+        userId: userId
+        );
+
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
-      paginationController = PaginationController(
+      newPermitPaginationController = PaginationController(
         rowCount: newPermitList!.length,
         rowsPerPage: 10,
       );
@@ -95,8 +110,19 @@ class NewPermitListController extends GetxController {
         }
       }
     }
+
+    update(['new_permit_list']);
   }
 
+  Future<void> permitIssueButton({String? permitId}) async{    String _comment = commentTextFieldCtrlr.text.trim();
+
+    final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
+    comment: _comment,id:permitId ,employee_id: "136",
+        );
+
+  }
+
+ 
   Future<void> addNewPermitList() async {
     Get.toNamed(Routes.newPermit, arguments: facilityId);
   }
@@ -105,8 +131,18 @@ class NewPermitListController extends GetxController {
     Get.toNamed(Routes.jobCard, arguments: jobId);
   }
 
+   
   void showNewPermitListDetails(int _jobId) {
     // Get.toNamed(Routes.jobDetails, arguments: _jobId);
+  }
+  
+   static void showAlertDialog({
+    String? comment,
+    int? employee_id,
+    int? id,
+    Function()? onPress,
+  }) async {
+    await Get.dialog<void>(PermitMessageIssueDialog());
   }
 
   ///

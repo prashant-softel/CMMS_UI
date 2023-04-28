@@ -38,7 +38,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                     final newPermitListModel = (controller.newPermitList != null)
                         ? controller.newPermitList![index]
                         : NewPermitListModel();
-                    var status = newPermitListModel?.current_status?.name.toString() ?? '';
+                    var status = newPermitListModel?.current_status.toString() ?? '';
                     print('Current Status: $status');
                     return GestureDetector(
                       onTap: () {

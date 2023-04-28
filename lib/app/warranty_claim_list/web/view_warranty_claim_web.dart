@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -15,6 +16,8 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
   bool valuefirst = true;
 
   // final controller = Get.find<HomeController>();
+  final HomeController controller = Get.find();
+
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -544,54 +547,7 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                    
                                     ],
                                   );
-                                  // CustomTextField(
-                                  //   label: 'Block: *',
-                                  //   textController:
-                                  //       controller.blockTextController,
-                                  //   readOnly: true,
-                                  //   onTap: () {
-                                  //     controller.getBlockList('45');
-                                  //     Get.defaultDialog(
-                                  //       title: 'Block List',
-                                  //       content: GetBuilder<HomeController>(
-                                  //         id: 'block_list',
-                                  //         builder: (_controller) {
-                                  //           if (controller.blockList.isEmpty) {
-                                  //             return Dimens.box0;
-                                  //           }
-                                  //           return Container(
-                                  //             height: Get.height * .4,
-                                  //             decoration: BoxDecoration(
-                                  //               borderRadius:
-                                  //                   BorderRadius.circular(8),
-                                  //             ),
-                                  //             child: SingleChildScrollView(
-                                  //               child: Column(
-                                  //                 children: [
-                                  //                   ...List.generate(
-                                  //                     controller
-                                  //                         .blockList.length,
-                                  //                     (index) => ListTile(
-                                  //                       onTap: () {
-                                  //                         _controller.onSelectBlock(
-                                  //                             _controller
-                                  //                                     .blockList[
-                                  //                                 index]);
-                                  //                         Get.back();
-                                  //                       },
-                                  //                       title: Text(
-                                  //                           '${_controller.blockList[index].name}'),
-                                  //                     ),
-                                  //                   ).toList(),
-                                  //                 ],
-                                  //               ),
-                                  //             ),
-                                  //           );
-                                  //         },
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // );
+                                 
                                 }),
                             Row(
                               children: [
@@ -708,7 +664,7 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                               readOnly: true,
                               hintText: '11-Apr-2023 15:04',
                               label: 'Warranty Start Date: *',
-                              textController: controller.startDateTimeCtrlr2,
+                              textController: controller.startDateTimeCtrlr2Web,
                               suffixIcon: Icon(
                                 Icons.calendar_month,
                               ),
@@ -770,160 +726,7 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                 ),
                               ],
                             ),
-                            // Wrap(
-                            //   children: [
-                            //     SizedBox(
-                            //       width: 20,
-                            //     ),
-                            //     Container(
-                            //       height: 250,
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 1.31,
-                            //       decoration: BoxDecoration(
-                            //           border: Border.all(color: Colors.grey)),
-                            //       child: Column(
-                            //         crossAxisAlignment:
-                            //             CrossAxisAlignment.start,
-                            //         children: [
-                            //           Padding(
-                            //             padding: const EdgeInsets.only(
-                            //                 left: 20, top: 15),
-                            //             child: Text('Equipment Images'),
-                            //           ),
-                            //           Row(
-                            //             children: [
-                            //               Padding(
-                            //                 padding: const EdgeInsets.only(
-                            //                     left: 90, top: 30),
-                            //                 child: CircleAvatar(
-                            //                   radius: 70,
-                            //                   child: Text(
-                            //                     'Drop Files Here',
-                            //                     style: Styles.white13,
-                            //                   ),
-                            //                 ),
-                            //               ),
-                            //               SizedBox(
-                            //                 width: 50,
-                            //               ),
-                            //               ////
-                            //               Container(
-                            //                 height: 100,
-                            //                 width: MediaQuery.of(context)
-                            //                         .size
-                            //                         .width /
-                            //                     2.5,
-                            //                 decoration: BoxDecoration(
-                            //                   border: Border.all(
-                            //                       color: Colors.grey
-                            //                           .withOpacity(.3)),
-                            //                 ),
-                            //                 constraints: BoxConstraints(
-                            //                   maxWidth: 1100,
-                            //                 ),
-                            //                 child: SingleChildScrollView(
-                            //                   child: Column(
-                            //                     children: [
-                            //                       CustomAppBar(
-                            //                         title: '#'.tr,
-                            //                         action: Row(
-                            //                           mainAxisAlignment:
-                            //                               MainAxisAlignment
-                            //                                   .spaceBetween,
-                            //                           children: [
-                            //                             // Text('#'),
-
-                            //                             Text('Name'),
-                            //                             Dimens.boxWidth20,
-                            //                             Text('Upload Progress'),
-                            //                             Dimens.boxWidth20,
-                            //                             Text('Status'),
-                            //                             Dimens.boxWidth20,
-                            //                             Text('Description'),
-                            //                             Dimens.boxWidth20,
-                            //                             Text('Remove'),
-                            //                             Dimens.boxWidth20,
-                            //                           ],
-                            //                         ),
-                            //                       ),
-                            //                       Dimens.boxHeight10,
-                            //                       Wrap(
-                            //                         children: [
-                            //                           Row(
-                            //                             children: [
-                            //                               SizedBox(
-                            //                                 width: 10,
-                            //                               ),
-                            //                               Text(
-                            //                                   'Files list will appear heres'),
-                            //                             ],
-                            //                           ),
-                            //                           // Row(
-                            //                           //   mainAxisAlignment:
-                            //                           //       MainAxisAlignment.spaceEvenly,
-                            //                           //   children: [
-                            //                           //     SizedBox(
-                            //                           //       width:
-                            //                           //           MediaQuery.of(context).size.width / 3.8,
-                            //                           //       child:
-                            //                           //           CustomMultiSelectDialogField(
-                            //                           //         initialValue: [],
-                            //                           //         // initialValue: (
-                            //                           //         //   controller
-                            //                           //         //         .selectedEquipmentCategoryIdList
-                            //                           //         //         .isNotEmpty)
-                            //                           //         //     ? controller
-                            //                           //         //         .selectedEquipmentCategoryIdList
-                            //                           //         //     : [],
-                            //                           //         // items: controller
-                            //                           //         //     .equipmentCategoryList
-                            //                           //         //     .map(
-                            //                           //         //       (equipmentCategory) =>
-                            //                           //         //           MultiSelectItem(
-                            //                           //         //         equipmentCategory?.id,
-                            //                           //         //         equipmentCategory?.name ??
-                            //                           //         //             '',
-                            //                           //         //       ),
-                            //                           //         //     )
-                            //                           //         //     .toList(),
-                            //                           //         onConfirm: (selectedOptionsList) => {
-                            //                           //           // controller
-                            //                           //           //     .equipmentCategoriesSelected(
-                            //                           //           //         selectedOptionsList),
-                            //                           //           // print(
-                            //                           //           //     'Equipment list ${controller.equipmentCategoryList}')
-                            //                           //         },
-                            //                           //         items: [],
-                            //                           //       ),
-                            //                           //     ),
-                            //                           //     ActionButton(
-                            //                           //       icon:
-                            //                           //           Icons.remove,
-                            //                           //       label:
-                            //                           //           'Delete',
-                            //                           //       // onPress:
-                            //                           //       //     () async {},
-                            //                           //       color:
-                            //                           //           Colors.red,
-                            //                           //       onPressed:
-                            //                           //           () {},
-                            //                           //     ),
-                            //                           //   ],
-                            //                           // )
-                            //                         ],
-                            //                       ),
-                            //                     ],
-                            //                   ),
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     )
-                            //   ],
-                            // ),
-
+                           
                             Wrap(
                               children: [
                                 Row(
@@ -1468,11 +1271,11 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
       time.minute,
     );
     controller.selectedBreakdownTime2.value = dateTime;
-    controller.startDateTimeCtrlr2
+    controller.startDateTimeCtrlr2Web
       ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: controller.startDateTimeCtrlr2.text.length,
+          offset: controller.startDateTimeCtrlr2Web.text.length,
           affinity: TextAffinity.upstream,
         ),
       );

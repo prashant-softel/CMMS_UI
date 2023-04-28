@@ -13,6 +13,8 @@ class LoginCustomTextfield extends GetView {
   Function(dynamic value)? onChanged;
   Function()? ontap;
   Function(dynamic value)? onfieldSubmitted;
+  int? maxLine;
+  bool enabled;
 
   LoginCustomTextfield(
       {Key? key,
@@ -23,13 +25,17 @@ class LoginCustomTextfield extends GetView {
       this.errorController,
       this.onChanged,
       this.onfieldSubmitted,
+      this.maxLine = 1,
+      this.enabled = true,
       this.ontap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       onFieldSubmitted: onfieldSubmitted,
       onTap: ontap,
+      maxLines: maxLine,
       onChanged: onChanged,
       controller: textController,
       obscureText: obscureText,

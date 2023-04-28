@@ -32,7 +32,7 @@ class CreateNewPermitDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: height / 5.5,
+            height: 170,
             width: double.infinity,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,6 +43,7 @@ class CreateNewPermitDialog extends GetView {
                   ),
                   Text(
                       'New Permit Created Successfully.\nPlease wait for Approval, you can start \nthe job only after PTW is approved '),
+                      SizedBox(height: 20,),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -57,7 +58,7 @@ class CreateNewPermitDialog extends GetView {
                         Dimens.boxWidth10,
                         ElevatedButton(
                           style: Styles.blueElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.newPermit),
+                          onPressed: () => Get.offAndToNamed(Routes.newPermitList),
                           child: const Text('View This Permit'),
                         ),
                         Dimens.boxWidth10,

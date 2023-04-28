@@ -4,6 +4,8 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,7 @@ class HomeController extends GetxController {
 
   ///
   var startDateTimeCtrlr2 = TextEditingController();
+  var startDateTimeCtrlr2Web = TextEditingController();
   Rx<DateTime> selectedBreakdownTime2 = DateTime.now().obs;
 
   ///
@@ -40,7 +43,7 @@ class HomeController extends GetxController {
   RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
   RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<bool> isInventorySelected = true.obs;
-  RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   Rx<String> selectedInventory = ''.obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
@@ -51,6 +54,19 @@ class HomeController extends GetxController {
   Rx<String> selectedSupplier = ''.obs;
   RxList<String?> selectedSupplierNameList = <String>[].obs;
   RxList<int?> selectedSupplierNameIdList = <int>[].obs;
+  Rx<bool> isBlockSelected = true.obs;
+
+  RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
+  Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<String> selectedUnitCurrency = ''.obs;
+  RxList<String?> selectedUnitCurrencyList = <String>[].obs;
+  RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
+
+  RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
+  Rx<bool> isemployeeListSelected = true.obs;
+  Rx<String> selectedEmployeeList = ''.obs;
+  RxList<String?> selectedEmployeeDataList = <String>[].obs;
+  RxList<int?> selectedEmployeeIdList = <int>[].obs;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -169,6 +185,12 @@ class HomeController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getBusinessList();
     });
+    Future.delayed(Duration(seconds: 1), () {
+      getUnitCurrencyList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getEmployeeList();
+    });
     super.onInit();
   }
 
@@ -217,19 +239,19 @@ class HomeController extends GetxController {
   }
 
   void getInventoryList() async {
-    inventoryNameList.value = <InventoryModel>[];
+    eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await homePresenter.getInventoryList(
       isLoading: true,
       categoryIds: categoryIds,
       facilityId: facilityId,
     );
-
+    //  print('equipment Name List:$inventoryNameList');
     for (var inventory_list in _inventoryList) {
-      inventoryNameList.add(inventory_list);
+      eqipmentNameList.add(inventory_list);
     }
     inventoryList = _inventoryList;
     paginationController = PaginationController(
-      rowCount: inventoryNameList.length,
+      rowCount: eqipmentNameList.length,
       rowsPerPage: 10,
     );
     update(['inventory_list']);
@@ -239,7 +261,7 @@ class HomeController extends GetxController {
     supplierNameList.value = <BusinessListModel>[];
     final _supplierNameList = await homePresenter.getBusinessList(
       isLoading: true,
-      categoryIds: categoryIds,
+      //  categoryIds: categoryIds,
       businessType: 5,
     );
     //  print('Supplier Name List:$supplierNameList');
@@ -247,21 +269,94 @@ class HomeController extends GetxController {
       supplierNameList.add(supplier_list);
     }
     // supplierNameList = _supplierNameList;
-    paginationBusinessListController = PaginationController(
-      rowCount: supplierNameList.length,
-      rowsPerPage: 10,
-    );
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
     update(['business_list']);
   }
+
+  void getUnitCurrencyList() async {
+    unitCurrencyList.value = <CurrencyListModel>[];
+    final _unitCUrrencyList = await homePresenter.getUnitCurrencyList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+    print('Unit Currency List:$unitCurrencyList');
+    for (var unit_currency_list in _unitCUrrencyList) {
+      unitCurrencyList.add(unit_currency_list);
+    }
+    // supplierNameList = _supplierNameList;
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['unit_currency_list']);
+  }
+
+  void getEmployeeList() async {
+    employeeList.value = <EmployeeListModel>[];
+    final _employeeList = await homePresenter.getEmployeeList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: 45,
+    );
+    print('Employee List:$employeeList');
+    for (var employee_list in _employeeList) {
+      employeeList.add(employee_list);
+    }
+    // supplierNameList = _supplierNameList;
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['employee_list']);
+  }
+
+  // void getUnitCurrencyList() async {
+  //   unitCurrencyList.value = <CurrencyListModel>[];
+  //   final _unitCUrrencyList = await homePresenter.getUnitCurrencyList(
+  //     isLoading: true,
+  //     // categoryIds: categoryIds,
+  //     facilityId: facilityId,
+  //   );
+  //   print('Unit Currency List:$unitCurrencyList');
+  //   for (var unit_currency_list in _unitCUrrencyList) {
+  //     unitCurrencyList.add(unit_currency_list);
+  //   }
+  //   // supplierNameList = _supplierNameList;
+  //   // paginationBusinessListController = PaginationController(
+  //   //   rowCount: supplierNameList.length,
+  //   //   rowsPerPage: 10,
+  //   // );
+  //   update(['unit_currency_list']);
+  // }
+
+  // void getEmployeeList() async {
+  //   employeeList.value = <EmployeeListModel>[];
+  //   final _employeeList = await homePresenter.getEmployeeList(
+  //     isLoading: true,
+  //     // categoryIds: categoryIds,
+  //     facility_id: 45,
+  //   );
+  //   print('Employee List:$employeeList');
+  //   for (var employee_list in _employeeList) {
+  //     employeeList.add(employee_list);
+  //   }
+  //   // supplierNameList = _supplierNameList;
+  //   // paginationBusinessListController = PaginationController(
+  //   //   rowCount: supplierNameList.length,
+  //   //   rowsPerPage: 10,
+  //   // );
+  //   update(['employee_list']);
+  // }
 
   void getWarrantyClaimList() async {
     // supplierNameList.value = <WarrantyClaimModel>[];
 
     final list = await homePresenter.getWarrantyClaimList(
-      isLoading: true,
-      categoryIds: categoryIds,
-      facilityId: 45,
-    );
+        isLoading: true, categoryIds: categoryIds, facilityId: facilityId);
     print('Supplier Name List:$supplierNameList');
     Set<String> supplierNameSet = {};
     for (var _supplierNameList in list) {
@@ -314,6 +409,7 @@ class HomeController extends GetxController {
       case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
@@ -332,6 +428,24 @@ class HomeController extends GetxController {
             int supplierNameIndex =
                 supplierNameList.indexWhere((x) => x?.name == supplierName);
             selectedSupplierNameIdList.add(supplierNameIndex);
+          }
+        }
+        break;
+      case RxList<CurrencyListModel>:
+        {
+          for (var unitCurrency in selectedUnitCurrencyList) {
+            int unitCurrencyIndex =
+                unitCurrencyList.indexWhere((x) => x?.code == unitCurrency);
+            selectedUnitCurrencyIdList.add(unitCurrencyIndex);
+          }
+        }
+        break;
+      case RxList<EmployeeListModel>:
+        {
+          for (var employeeDataList in selectedEmployeeDataList) {
+            int employeeListIndex =
+                employeeList.indexWhere((x) => x.name == employeeDataList);
+            selectedEmployeeIdList.add(employeeListIndex);
           }
         }
         break;

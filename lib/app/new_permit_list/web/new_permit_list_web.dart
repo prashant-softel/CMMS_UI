@@ -6,26 +6,24 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/permit_issue_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-// import '../../../theme/color_values.dart';
-// import '../../../theme/dimens.dart';
-// import '../../../widgets/action_button.dart';
-// import '../../../widgets/body_custom_app_bar.dart';
-// import '../../../widgets/table_action_button.dart';
-// import '../../job_list_controller.dart';
 
 class NewPermitListWeb extends GetView<NewPermitListController> {
   NewPermitListWeb({super.key});
   //var controller;
+  var controller = Get.find<NewPermitListController>();
+
 
   @override
   Widget build(BuildContext context) {
-    int? _permitId = 0;
+    // int? _permitId = 0;s
     return //
         Scaffold(
           appBar: Responsive.isDesktop(context)
@@ -103,12 +101,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                       Expanded(
                         child: Container(
                           height: Get.height,
-                          child: Column(//
+                          child: Column(
                               children: [
                             Expanded(
-                              child: //
+                              child: 
                                   ScrollableTableView(
-                                paginationController: controller.paginationController,
+                                paginationController: controller.newPermitPaginationController,
                                 columns: [
                                   'permitId',
                                   'workingAreaName',
@@ -117,7 +115,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   'workingAreaId',
                                   'description',
                                   'permitTypeName',
-                                  // 'raisedByName',
+                                  //  'current_status',
                                   // 'breakdownTime',
                                   // 'breakdownType',
                                   // 'permitId',
@@ -134,16 +132,15 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                             : column == "approved_datetime"
                                                 ? "Approved Time"
                                                 : column == "equipment"
-                                                    ? "Equipment" //
+                                                    ? "Equipment" 
                                                     : column == "workingAreaId"
                                                         ? "Working Area Id"
                                                         : column == "description"
                                                             ? "Description"
                                                             : column == "permitTypeName"
                                                                 ? "Work Type"
-                                                        //         : column ==
-                                                        //                 "raisedByName"
-                                                        //             ? "Raised By"
+                                                                // : column == "current_status"
+                                                                //     ? "Status"
                                                         //             : column ==
                                                         //                     "breakdownTime"
                                                         //                 ? "Breakdown Time"
@@ -158,12 +155,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                         //                             ? "Assigned To"
                                                         //                             : column == "status"
                                                         //                                 ? "Status"
-                                                        //                                 : column == "Actions"
-                                                        //                                     ? "Actions"
+                                                                                        // : column == "Actions"
+                                                                                        //     ? "Actions"
                                                                                             : "",
                                   );
                                 }).toList(),
-                                rows: //
+                                rows: 
                                     [
                                   ...List.generate(
                                     controller.newPermitList?.length ?? 0,
@@ -179,6 +176,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         '${newPermitDetails?.workingAreaId}',
                                         '${newPermitDetails?.description}',
                                         '${newPermitDetails?.permitTypeName}',
+                                        // '${newPermitDetails?.current_status}'
+                                        '${newPermitDetails?.current_status}' == "Permit Created"
+                                        ?
                                         // '${jobDetails?.workType}',
                                         // '${jobDetails?.raisedByName}',
                                         // '${jobDetails?.breakdownTime ?? ''}',
@@ -187,7 +187,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         // '${jobDetails?.assignedToName}',
                                         // '${jobDetails?.status}',
                                         'Actions'
+                                        : ''
                                       ];
+                                      
                                     },
                                   ),
                                 ].map((_newPermitList) {
@@ -200,30 +202,33 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                           child: (value == 'Actions')
                                               ? Wrap(
                                                   children: [
-                                                    TableActionButton(
+                                                     TableActionButton(
                                                       color: Colors.green,
                                                       icon: Icons.visibility,
-                                                      label: 'View',
+                                                      label: 'Issue',
                                                       onPress: () {
-                                                        controller.showNewPermitListDetails(
-                                                            controller.permitId.value);
+                                                       Get.dialog(PermitIssueDialog(permitId:_newPermitList[0]));
                                                       },
                                                     ),
+
                                                     TableActionButton(
                                                       color: ColorValues.purpleColor,
                                                       icon: Icons.add,
-                                                      label: 'Job Card',
+                                                      label: 'Approve',
                                                       onPress: () {
-                                                        controller.goToJobCardScreen(
-                                                          int.tryParse(_newPermitList[0]),
-                                                        );
+                                                        // controller.goToJobCardScreen(
+                                                        //   int.tryParse(_newPermitList[0]),
+                                                        // );
                                                       },
                                                     ),
+
                                                     TableActionButton(
                                                       color: Colors.blue,
                                                       icon: Icons.edit,
                                                       label: 'Edit PTW',
-                                                      onPress: () {},
+                                                      onPress: () {
+                                                        // controller.goToEditPermitWebScreen();
+                                                      },
                                                     ),
                                                     // TableActionButton(
                                                     //   color: Colors.green,
@@ -243,6 +248,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         );
                                       }).toList());
                                 }).toList(),
+                                
                               ),
                             ),
                       
@@ -250,26 +256,26 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 25),
                               child: ValueListenableBuilder(
-                                  valueListenable: controller.paginationController,
+                                  valueListenable: controller.newPermitPaginationController,
                                   builder: (context, value, child) {
                                     return Row(children: [
                                       Text(
-                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                          "${controller.newPermitPaginationController.currentPage}  of ${controller.newPermitPaginationController.pageCount}"),
                                       Row(children: [
                                         IconButton(
-                                          onPressed: controller.paginationController
+                                          onPressed: controller.newPermitPaginationController
                                                       .currentPage <=
                                                   1
                                               ? null
                                               : () {
-                                                  controller.paginationController
+                                                  controller.newPermitPaginationController
                                                       .previous();
                                                 },
                                           iconSize: 20,
                                           splashRadius: 20,
                                           icon: Icon(
                                             Icons.arrow_back_ios_new_rounded,
-                                            color: controller.paginationController
+                                            color: controller.newPermitPaginationController
                                                         .currentPage <=
                                                     1
                                                 ? Colors.black26
@@ -277,23 +283,23 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                           ),
                                         ),
                                         IconButton(
-                                          onPressed: controller.paginationController
+                                          onPressed: controller.newPermitPaginationController
                                                       .currentPage >=
                                                   controller
-                                                      .paginationController.pageCount
+                                                      .newPermitPaginationController.pageCount
                                               ? null
                                               : () {
-                                                  controller.paginationController
+                                                  controller.newPermitPaginationController
                                                       .next();
                                                 },
                                           iconSize: 20,
                                           splashRadius: 20,
                                           icon: Icon(
                                             Icons.arrow_forward_ios_rounded,
-                                            color: controller.paginationController
+                                            color: controller.newPermitPaginationController
                                                         .currentPage >=
                                                     controller
-                                                        .paginationController.pageCount
+                                                        .newPermitPaginationController.pageCount
                                                 ? Colors.black26
                                                 : Theme.of(context).primaryColor,
                                           ),
@@ -302,10 +308,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                     ]);
                                   }),
                             ),
+                       
                           ]),
                         ),
                         //),
                       ),
+                  
                     ]),
                     ),
                   ),

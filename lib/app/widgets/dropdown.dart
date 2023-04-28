@@ -5,7 +5,6 @@ import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
 class DropdownWidget extends StatelessWidget {
-  ///
   DropdownWidget({
     super.key,
     this.selectedValue,
@@ -80,6 +79,7 @@ class DropdownWidget extends StatelessWidget {
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
+
               ),
             ),
             showSearchBox: true,

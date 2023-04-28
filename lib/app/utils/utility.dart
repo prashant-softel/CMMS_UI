@@ -134,6 +134,14 @@ abstract class Utility {
   /// returns the date time in particular given formate
   static String getWeekDayMonthNumYear(DateTime dateTime) =>
       DateFormat.yMMMMEEEEd().format(dateTime);
+  static String getFormatedyearMonthDay(String datetime) {
+    var date = DateTime.parse(datetime);
+    return Utility.getyearMonthDay(date);
+  }
+
+  static String getyearMonthDay(DateTime dateTime) =>
+      // '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';
+      DateFormat('yyyy-MM-dd').format(dateTime);
 
   /// get formated [DateTime] eg. 12-01-2021
   static String getDayMonthYear(DateTime dateTime) =>
@@ -380,8 +388,8 @@ abstract class Utility {
     }
   }
 
-  static String getFormatedDate(String date) {
-    var date = DateTime.parse('2018-04-10T04:00:00.000Z');
+  static String getFormatedDate(String datetime) {
+    var date = DateTime.parse(datetime);
     return Utility.getDayMonthYear(date);
   }
 

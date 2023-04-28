@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
@@ -10,6 +11,9 @@ class BreakdownMaintenanceController extends GetxController {
   BreakdownMaintenanceController(
     this.breakdownMaintenancePresenter,
   );
+
+  final HomeController controller = Get.find();
+
 
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
   late JobListController jobListController;

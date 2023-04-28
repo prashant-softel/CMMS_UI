@@ -173,6 +173,7 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
     fontSize: Dimens.twentyTwo,
   );
+
   static TextStyle blackBold24 = TextStyle(
     // color: ColorValues.blackColor,
     fontWeight: FontWeight.bold,
@@ -742,7 +743,16 @@ abstract class Styles {
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w400,
   );
-
+  static TextStyle blue700 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fifteen,
+  );
+  static TextStyle green700 = TextStyle(
+    color: ColorValues.greenColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fifteen,
+  );
   static ButtonStyle greenElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 96, 205, 76),
@@ -762,6 +772,15 @@ abstract class Styles {
   static ButtonStyle darkBlueElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 9, 115, 156),
+  );
+  static TextStyle redBold15 = TextStyle(
+    color: ColorValues.appRedColor,
+    fontSize: Dimens.fifteen,
+    fontWeight: FontWeight.bold,
+  );
+  static ButtonStyle navyBlueElevatedButtonStyle = ElevatedButton.styleFrom(
+    textStyle: TextStyle(fontSize: Dimens.fourteen),
+    backgroundColor: Color.fromARGB(255, 7, 63, 115),
   );
 
   ///

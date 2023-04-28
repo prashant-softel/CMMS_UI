@@ -15,7 +15,10 @@ import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.d
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
+import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
+import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dart';
 import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
+import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
@@ -41,7 +44,12 @@ import '../pm_schedule/view/pm_schedule_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
-import '../warranty_claim_list/warranty_claim_list_screen.dart';
+import '../preventive_maintenance_execution/preventive_maintenance_execution_binding.dart';
+import '../preventive_maintenance_execution/view/preventive_maintenance_execution_screen.dart';
+import '../preventive_maintenance_execution_view/preventive_maintenance_execution_view_binding.dart';
+import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
+import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
+import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 
 // coverage:ignore-file
 
@@ -162,12 +170,13 @@ class AppPages {
       binding: CalibrationHistoryBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.breakdown,
-      page: BreakdownMaintenanceScreen.new,
-    ),
+        name: _Paths.breakdown,
+        page: BreakdownMaintenanceScreen.new,
+        binding: BreakdownMaintenanceBinding()),
     GetPage<dynamic>(
       name: _Paths.viewWarrantyClaim,
       page: ViewWarrantyClaimWeb.new,
+      // binding: HomeBinding()
     ),
     GetPage<dynamic>(
       name: _Paths.calibrationDetail,
@@ -179,5 +188,33 @@ class AppPages {
       page: PmScheduleScreen.new,
       binding: PmScheduleBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.pmTask,
+      page: PreventiveMaintenanceTaskScreen.new,
+      binding: PreventiveMaintenanceTaskBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmExecution,
+      page: PreventiveMaintenanceExecutionScreen.new,
+      binding: PreventiveMaintenanceExecutionBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmExecutionView,
+      page: PreventiveMaintenanceExecutionViewScreen.new,
+      binding: PreventiveMaintenanceExecutionViewBinding(),
+    ),
+    GetPage<dynamic>(
+        name: _Paths.newWarrantyClaimList,
+        page: NewWarrantyClaimListWeb.new,
+        binding: HomeBinding()),
+    GetPage<dynamic>(
+        name: _Paths.warrantyClaimListWeb,
+        page: WarrantyClaimListWeb.new,
+        binding: HomeBinding()),
+    // GetPage<dynamic>(
+    //   name: _Paths.editPermitWebScreen,
+    //   page: EditPermitWebScreen.new,
+    //   binding: EditPermitBinding()
+    // ),
   ];
 }
