@@ -10,33 +10,32 @@ import '../../home/widgets/header_widget.dart';
 
 class BreakdownMaintenanceScreen
     extends GetView<BreakdownMaintenanceController> {
+  ///
   BreakdownMaintenanceScreen({super.key});
 
-  final BreakdownMaintenanceController controller = Get.find();
-  
-
-
+  ///
   @override
   Widget build(BuildContext context) {
+    ///
     var size = MediaQuery.of(context).size;
-
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
-
     final double itemWidth = size.width / 2;
 
-    return Scaffold(
-      appBar: Responsive.isDesktop(context)
-          ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 100,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+    return //
+        Scaffold(
+      appBar: //
+          Responsive.isDesktop(context)
+              ? AppBar(
+                  title: HeaderWidget(),
+                  elevation: 0,
+                  toolbarHeight: 100,
+                  automaticallyImplyLeading: false,
+                )
+              : AppBar(
+                  title: HeaderWidget(),
+                  elevation: 0,
+                ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -58,9 +57,11 @@ class BreakdownMaintenanceScreen
                     SizedBox(
                       height: 40,
                     ),
-                    if (Responsive.isMobile(context))
+                    if (Responsive.isMobile(context) ||
+                        Responsive.isTablet(context))
                       Obx(
-                        () => Container(
+                        () => //
+                            Container(
                           width: MediaQuery.of(context).size.width,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -104,11 +105,14 @@ class BreakdownMaintenanceScreen
                         child: Text(
                           "Breakdown Maintenance",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400),
+                            color: Color.fromARGB(255, 159, 156, 156),
+                            fontSize: 24,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
+
+                    /// GRID TILES
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
@@ -126,11 +130,11 @@ class BreakdownMaintenanceScreen
                               controller.goToJobListScreen();
                             }),
                         createContentTile(
-                          title: 'Add New Job',
-                          onTap: (){
-                            controller.addNewJob();
-                          }),
-                          createContentTile(
+                            title: 'Add New Job',
+                            onTap: () {
+                              controller.addNewJob();
+                            }),
+                        createContentTile(
                             title: "Permit List",
                             onTap: () {
                               controller.newPermitList();
@@ -141,12 +145,9 @@ class BreakdownMaintenanceScreen
                               controller.createNewPermit();
                             }),
                         createContentTile(title: "Job Card List"),
-                        // _priventiveList(tittle: "PM Schedule View"),
-                        // _priventiveList(tittle: "PM Report"),
-                        // _priventiveList(tittle: "PM Report"),
-                        // _priventiveList(tittle: "PM "),
                       ],
                     )
+                    //
                   ]),
             ),
           ],
@@ -155,7 +156,7 @@ class BreakdownMaintenanceScreen
     );
   }
 
-  createContentTile({required String title, Function()? onTap}) {
+  Widget createContentTile({required String title, Function()? onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

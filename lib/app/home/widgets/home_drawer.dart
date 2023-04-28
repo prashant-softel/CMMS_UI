@@ -5,10 +5,9 @@ import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/styles.dart';
 import '../../utils/responsive.dart';
-import '../home_controller.dart';
 import '../../theme/color_values.dart';
 
-class HomeDrawer extends GetView<HomeController> {
+class HomeDrawer extends GetView {
   HomeDrawer({super.key});
   
   
@@ -20,7 +19,9 @@ class HomeDrawer extends GetView<HomeController> {
         //
 
         Drawer(
-      width: Get.width * 0.19,
+      width: (Responsive.isMobile(context) || Responsive.isTablet(context))
+          ? Get.width * 0.75
+          : Get.width * 0.19,
       child: //
           ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),
@@ -201,18 +202,21 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        onTap: press,
-        horizontalTitleGap: 0.0,
-        leading: Image.asset(
-          icon,
-          height: 15,
+      onTap: press,
+      horizontalTitleGap: 0.0,
+      leading: Image.asset(
+        icon,
+        height: 15,
+        color: Color(0xffD2D0D0),
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
           color: Color(0xffD2D0D0),
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
         ),
-        title: Text(title,
-            style: TextStyle(
-              color: Color(0xffD2D0D0),
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-            )));
+      ),
+    );
   }
 }

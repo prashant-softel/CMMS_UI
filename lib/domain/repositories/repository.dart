@@ -760,7 +760,7 @@ class Repository {
       final userAccessModelList = jsonDecode(userAcessData);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       int userId = userAccess.user_id ?? 0;
-      //print({"userdatatat", userAccess.user_id});
+
       final res = await _dataRepository.getJobList(
         auth: auth,
         facilityId: facilityId ?? 0,
@@ -783,7 +783,6 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
-
       return [];
     }
   }

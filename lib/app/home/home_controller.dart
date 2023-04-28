@@ -13,14 +13,11 @@ import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/menu_item.dart';
 import '../../domain/models/user_access_model.dart';
 
 class HomeController extends GetxController {
-
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
- 
 
   ///
   var startDateTimeCtrlrWeb = TextEditingController();
@@ -28,7 +25,7 @@ class HomeController extends GetxController {
 
   ///
   var startDateTimeCtrlr2 = TextEditingController();
- var startDateTimeCtrlr2Web = TextEditingController();
+  var startDateTimeCtrlr2Web = TextEditingController();
   Rx<DateTime> selectedBreakdownTime2 = DateTime.now().obs;
 
   ///
@@ -36,10 +33,6 @@ class HomeController extends GetxController {
   Rx<DateTime> selectedBreakdownTime3 = DateTime.now().obs;
 
   Set<String> supplierNameSet = {};
-
-
-
-
 
 //Warranty Claim
   var warrantyClaimList = <WarrantyClaimModel>[];
@@ -69,19 +62,11 @@ class HomeController extends GetxController {
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
 
-   RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
   RxList<String?> selectedEmployeeDataList = <String>[].obs;
   RxList<int?> selectedEmployeeIdList = <int>[].obs;
-
-
-
-
-
-
-
-
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -200,10 +185,10 @@ class HomeController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getBusinessList();
     });
-     Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });
-     Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       getEmployeeList();
     });
     super.onInit();
@@ -218,7 +203,7 @@ class HomeController extends GetxController {
       }
 
       selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.add(facilityList[0]?.id ?? 0);
+      _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
   }
 
@@ -245,7 +230,7 @@ class HomeController extends GetxController {
     final _equipmentCategoryList = await homePresenter.getInventoryCategoryList(
       isLoading: true,
     );
-    //  print('equipment category:$equipmentCategoryList');
+
     if (_equipmentCategoryList != null) {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
@@ -260,12 +245,9 @@ class HomeController extends GetxController {
       categoryIds: categoryIds,
       facilityId: facilityId,
     );
-     print('equipment Name List:$eqipmentNameList');
     //  print('equipment Name List:$inventoryNameList');
-    if (_inventoryList != null) {
-      for (var inventory_list in _inventoryList) {
-        eqipmentNameList.add(inventory_list);
-      }
+    for (var inventory_list in _inventoryList) {
+      eqipmentNameList.add(inventory_list);
     }
     inventoryList = _inventoryList;
     paginationController = PaginationController(
@@ -283,10 +265,8 @@ class HomeController extends GetxController {
       businessType: 5,
     );
     //  print('Supplier Name List:$supplierNameList');
-    if (_supplierNameList != null) {
-      for (var supplier_list in _supplierNameList) {
-        supplierNameList.add(supplier_list);
-      }
+    for (var supplier_list in _supplierNameList) {
+      supplierNameList.add(supplier_list);
     }
     // supplierNameList = _supplierNameList;
     // paginationBusinessListController = PaginationController(
@@ -303,11 +283,9 @@ class HomeController extends GetxController {
       // categoryIds: categoryIds,
       facilityId: facilityId,
     );
-     print('Unit Currency List:$unitCurrencyList');
-    if (_unitCUrrencyList != null) {
-      for (var unit_currency_list in _unitCUrrencyList) {
-        unitCurrencyList.add(unit_currency_list);
-      }
+    print('Unit Currency List:$unitCurrencyList');
+    for (var unit_currency_list in _unitCUrrencyList) {
+      unitCurrencyList.add(unit_currency_list);
     }
     // supplierNameList = _supplierNameList;
     // paginationBusinessListController = PaginationController(
@@ -324,11 +302,9 @@ class HomeController extends GetxController {
       // categoryIds: categoryIds,
       facility_id: 45,
     );
-     print('Employee List:$employeeList');
-    if (_employeeList != null) {
-      for (var employee_list in _employeeList) {
-        employeeList.add(employee_list);
-      }
+    print('Employee List:$employeeList');
+    for (var employee_list in _employeeList) {
+      employeeList.add(employee_list);
     }
     // supplierNameList = _supplierNameList;
     // paginationBusinessListController = PaginationController(
@@ -338,32 +314,55 @@ class HomeController extends GetxController {
     update(['employee_list']);
   }
 
+  // void getUnitCurrencyList() async {
+  //   unitCurrencyList.value = <CurrencyListModel>[];
+  //   final _unitCUrrencyList = await homePresenter.getUnitCurrencyList(
+  //     isLoading: true,
+  //     // categoryIds: categoryIds,
+  //     facilityId: facilityId,
+  //   );
+  //   print('Unit Currency List:$unitCurrencyList');
+  //   for (var unit_currency_list in _unitCUrrencyList) {
+  //     unitCurrencyList.add(unit_currency_list);
+  //   }
+  //   // supplierNameList = _supplierNameList;
+  //   // paginationBusinessListController = PaginationController(
+  //   //   rowCount: supplierNameList.length,
+  //   //   rowsPerPage: 10,
+  //   // );
+  //   update(['unit_currency_list']);
+  // }
+
+  // void getEmployeeList() async {
+  //   employeeList.value = <EmployeeListModel>[];
+  //   final _employeeList = await homePresenter.getEmployeeList(
+  //     isLoading: true,
+  //     // categoryIds: categoryIds,
+  //     facility_id: 45,
+  //   );
+  //   print('Employee List:$employeeList');
+  //   for (var employee_list in _employeeList) {
+  //     employeeList.add(employee_list);
+  //   }
+  //   // supplierNameList = _supplierNameList;
+  //   // paginationBusinessListController = PaginationController(
+  //   //   rowCount: supplierNameList.length,
+  //   //   rowsPerPage: 10,
+  //   // );
+  //   update(['employee_list']);
+  // }
+
   void getWarrantyClaimList() async {
     // supplierNameList.value = <WarrantyClaimModel>[];
 
     final list = await homePresenter.getWarrantyClaimList(
-      isLoading: true,
-      categoryIds: categoryIds,
-      facilityId: facilityId
-    );
+        isLoading: true, categoryIds: categoryIds, facilityId: facilityId);
     print('Supplier Name List:$supplierNameList');
-    if (list != null) {
-      // selectedSupplierNameList.clear();
-      // supplierNameList.clear();
-      Set<String> supplierNameSet = {};
-      for (var _supplierNameList in list) {
-        if (_supplierNameList.supplier_name != null) {
-          supplierNameSet.add(_supplierNameList.supplier_name ?? "");
-          // supplierNameList.add(_supplierNameList);
-        }
-        //  print('Supplier Name Data:$supplierNameSet');
-        // selectedSupplierNameList.addAll(supplierNameSet.toList());
-        //  print('Supplier Name5:$selectedSupplierNameList');
+    Set<String> supplierNameSet = {};
+    for (var _supplierNameList in list) {
+      if (_supplierNameList.supplier_name != null) {
+        supplierNameSet.add(_supplierNameList.supplier_name ?? "");
       }
-
-      // for (var supplier_name_list in list) {
-      //   supplierNameList.add(supplier_name_list);
-      // }
     }
     warrantyClaimList = list;
     paginationWarrantyController = PaginationController(
