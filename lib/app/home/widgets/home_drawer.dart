@@ -8,10 +8,8 @@ import '../../utils/responsive.dart';
 import '../home_controller.dart';
 import '../../theme/color_values.dart';
 
-class HomeDrawer extends GetView<HomeController> {
+class HomeDrawer extends GetView {
   HomeDrawer({super.key});
-  
-  
 
   ///
   @override
@@ -54,7 +52,7 @@ class HomeDrawer extends GetView<HomeController> {
                         title: "Inventory",
                         icon: "assets/files/warranty.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.inventory);
                         },
                       ),
                       MenuItem(
@@ -64,17 +62,17 @@ class HomeDrawer extends GetView<HomeController> {
                           Get.offNamed(Routes.breakdown);
                         },
                       ),
-                      MenuItem(
-                        title: "Warranty claim",
-                        icon: "assets/files/warranty.png",
-                        press: () {
-                           Get.offNamed(Routes.warrantyClaimList);
-                          //  Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //             builder: (context) => WarrantyClaimListWeb()));
-                        },
-                      ),
+                      // MenuItem(
+                      //   title: "Warranty claim",
+                      //   icon: "assets/files/warranty.png",
+                      //   press: () {
+                      //     Get.offNamed(Routes.warrantyClaimList);
+                      //     //  Navigator.push(
+                      //     //         context,
+                      //     //         MaterialPageRoute(
+                      //     //             builder: (context) => WarrantyClaimListWeb()));
+                      //   },
+                      // ),
                       MenuItem(
                         title: "Preventive Maintenance",
                         icon: "assets/files/preventive.png",

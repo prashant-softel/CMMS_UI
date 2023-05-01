@@ -31,6 +31,7 @@ dependencies:
   firebase_core: ^2.1.0
   firebase_crashlytics: ^3.0.2
   flowder: ^0.2.0
+  
   flutter:
     sdk: flutter
   flutter_admin_scaffold: ^1.1.2
@@ -115,6 +116,9 @@ dependencies:
   rxdart: ^0.27.7
   filesize: ^2.0.1
   synchronized: ^3.0.1
+  printing: ^5.6.0
+  syncfusion_flutter_datepicker: ^19.1.55-beta
+
 
 dev_dependencies:
   hive_generator: 

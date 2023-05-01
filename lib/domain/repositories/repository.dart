@@ -22,6 +22,8 @@ import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
+import 'package:cmms/domain/models/pm_task_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
@@ -866,7 +868,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'permitIssueButton');
       }
     } catch (error) {
       log(error.toString());
@@ -1056,7 +1058,8 @@ class Repository {
 
         return _inventoryIsolationModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(
+            res.errorCode.toString() + 'getInventoryIsolationList');
         return null;
       }
     } catch (error) {
@@ -1093,7 +1096,8 @@ class Repository {
 
         return _inventoryNameModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(
+            res.errorCode.toString() + 'getInventoryEquipmentNameList');
         return null;
       }
     } catch (error) {
@@ -1785,7 +1789,7 @@ class Repository {
 
         return _CalibrationListModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
         return [];
       }
     } catch (error) {
@@ -1838,7 +1842,7 @@ class Repository {
 
         return _setPmSchedultModelList;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString() + 'getPMScheduleData');
         return [];
       }
     } catch (error) {
@@ -1872,6 +1876,66 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<List<PmTaskListModel?>?> getPmTaskList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmTaskList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+      // print(res.data);
+      if (!res.hasError) {
+        final jsonPmTaskListModelModels = jsonDecode(res.data);
+
+        final List<PmTaskListModel> _PmTaskListModelList =
+            jsonPmTaskListModelModels
+                .map<PmTaskListModel>((m) =>
+                    PmTaskListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        print({"object", _PmTaskListModelList});
+        return _PmTaskListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<PmtaskViewModel?> getPmtaskViewList(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmtaskViewList(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final PmtaskViewModel _permitDetailsModel =
+            pmtaskViewModelFromJson(res.data);
+        return _permitDetailsModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 

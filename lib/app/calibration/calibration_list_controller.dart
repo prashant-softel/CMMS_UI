@@ -52,10 +52,10 @@ class CalibrationListController extends GetxController {
 
   Future<void> getCalibrationList(int facilityId, bool isLoading) async {
     calibrationList?.value = <CalibrationListModel>[];
-    final _preventiveCheckList = await calibrationListPresenter
-        .getCalibrationList(facilityId: facilityId, isLoading: isLoading);
-    if (_preventiveCheckList != null) {
-      calibrationList!.value = _preventiveCheckList;
+    final _calibrationList = await calibrationListPresenter.getCalibrationList(
+        facilityId: facilityId, isLoading: isLoading);
+    if (_calibrationList != null) {
+      calibrationList!.value = _calibrationList;
       paginationController = PaginationController(
         rowCount: calibrationList?.length ?? 0,
         rowsPerPage: 10,
