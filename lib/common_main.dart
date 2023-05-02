@@ -150,17 +150,17 @@ Future<void> initServices() async {
           permanent: true),
     ),
   );
-  Get.put(
-    () => HomeController(
-      Get.put(
-        HomePresenter(
-          Get.put(HomeUsecase(repository)),
+  Get.lazyPut(() => Get.put(
+        () => HomeController(
+          Get.put(
+            HomePresenter(
+              Get.put(HomeUsecase(repository)),
+            ),
+            permanent: true,
+          ),
         ),
         permanent: true,
-      ),
-    ),
-    permanent: true,
-  );
+      ));
 
   Get.lazyPut(
     () => BreakdownMaintenanceController(

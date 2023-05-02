@@ -350,6 +350,7 @@ class PreventiveChecklistListContentWeb
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
+                                        height: 40,
                                         width: (Get.width * .1),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -360,6 +361,7 @@ class PreventiveChecklistListContentWeb
                                       width: 10,
                                     ),
                                     Container(
+                                        height: 40,
                                         width: (Get.width * .2) - 70,
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -413,6 +415,7 @@ class PreventiveChecklistListContentWeb
                                   Row(
                                     children: [
                                       Container(
+                                        height: 45,
                                         width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -430,6 +433,7 @@ class PreventiveChecklistListContentWeb
                                       ),
                                       Container(
                                         width: (Get.width * .1) - 60,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -439,6 +443,7 @@ class PreventiveChecklistListContentWeb
                                       ),
                                       Container(
                                         width: (Get.width * .1) - 70,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -448,6 +453,7 @@ class PreventiveChecklistListContentWeb
                                       ),
                                       Container(
                                         width: (Get.width * .2) - 100,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:

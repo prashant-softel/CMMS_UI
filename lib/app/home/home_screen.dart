@@ -49,7 +49,9 @@ class HomeScreen extends GetView<HomeController> {
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: InventoryListScreen(),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
                       )
                   ],
                 ),
