@@ -7,6 +7,9 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/edit_permit/edit_permit_binding.dart';
+import 'package:cmms/app/edit_permit/view/web/edit_permit_screen_web.dart';
+import 'package:cmms/app/inventory/view/inventory_screen.dart';
 import 'package:cmms/app/new_permit/new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
@@ -30,6 +33,8 @@ import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
+import '../inventory/inventory_binding.dart';
+import '../inventory_list/views/inventory_list_screen.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_details/job_details_binding.dart';
@@ -42,6 +47,8 @@ import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
 import '../pm_schedule/view/pm_schedule_screen.dart';
+import '../pm_task_view/pm_task_view_binding.dart';
+import '../pm_task_view/view/pm_task_view_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
@@ -159,6 +166,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.warrantyClaimList,
       page: WarrantyClaimListScreen.new,
+      binding: HomeBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.calibrationList,
@@ -217,5 +225,20 @@ class AppPages {
     //   page: EditPermitWebScreen.new,
     //   binding: EditPermitBinding()
     // ),
+    GetPage<dynamic>(
+      name: _Paths.pmTaskView,
+      page: PreventiveMaintenanceTaskViewScreen.new,
+      binding: PreventiveMaintenanceTaskViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventory,
+      page: InventoryScreen.new,
+      binding: InventoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventoryList,
+      page: InventoryListScreen.new,
+      binding: HomeBinding(),
+    ),
   ];
 }

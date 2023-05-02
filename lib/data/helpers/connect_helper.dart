@@ -1059,5 +1059,41 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPmTaskList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/GetPMTaskList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPmtaskViewList({
+    required String? auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   ///
 }

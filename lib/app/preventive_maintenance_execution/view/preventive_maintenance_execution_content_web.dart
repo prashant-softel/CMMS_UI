@@ -578,15 +578,19 @@ class PreventiveMaintenanceExecutionContentWeb
               ),
               Dimens.boxHeight12,
               //  Text("PM Execution Submitted with code PMSC87456"),
-              CustomElevatedButton(
-                text: "PM Execution View",
-                onPressed: () {
-                  Get.toNamed(
-                    Routes.pmExecutionView,
-                  );
-                },
-                backgroundColor: ColorValues.appDarkBlueColor,
-                textColor: ColorValues.whiteColor,
+              Container(
+                height: 40,
+                width: (Get.width * .2) - 60,
+                child: CustomElevatedButton(
+                  text: "PM Execution View",
+                  onPressed: () {
+                    Get.toNamed(
+                      Routes.pmExecutionView,
+                    );
+                  },
+                  backgroundColor: ColorValues.appDarkBlueColor,
+                  textColor: ColorValues.whiteColor,
+                ),
               ),
             ],
           ),

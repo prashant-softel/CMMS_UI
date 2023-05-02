@@ -770,6 +770,27 @@ class DataRepository extends DomainRepository {
         pmScheduleJsonString: pmScheduleJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getPmTaskList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPmTaskList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getPmtaskViewList({
+    String? auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getPmtaskViewList(
+      auth: auth,
+      scheduleId: scheduleId,
+      isLoading: isLoading,
+    );
+  }
 
   ///
 }

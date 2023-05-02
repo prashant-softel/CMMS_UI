@@ -19,7 +19,7 @@ class PreventiveListController extends GetxController {
   );
   PreventiveListPresenter preventiveListPresenter;
   final HomeController homecontroller = Get.find();
-
+  // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
@@ -53,7 +53,9 @@ class PreventiveListController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      getPreventiveCheckList(facilityId, type, true);
+      Future.delayed(Duration(seconds: 1), () {
+        getPreventiveCheckList(facilityId, type, true);
+      });
     });
     super.onInit();
   }
