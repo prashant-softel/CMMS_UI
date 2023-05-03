@@ -102,6 +102,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                       children: [
                         Container(
                           width: (Get.width * .1) - 60,
+                          height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -110,6 +111,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                         ),
                         Container(
                           width: (Get.width * .1) - 60,
+                          height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -118,6 +120,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                         ),
                         Container(
                           width: (Get.width * .1) - 70,
+                          height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -126,6 +129,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                         ),
                         Container(
                           width: (Get.width * .2) - 100,
+                          height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,

@@ -9,8 +9,6 @@ import '../../theme/color_values.dart';
 
 class HomeDrawer extends GetView {
   HomeDrawer({super.key});
-  
-  
 
   ///
   @override
@@ -55,7 +53,7 @@ class HomeDrawer extends GetView {
                         title: "Inventory",
                         icon: "assets/files/warranty.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.inventory);
                         },
                       ),
                       MenuItem(
@@ -65,17 +63,17 @@ class HomeDrawer extends GetView {
                           Get.offNamed(Routes.breakdown);
                         },
                       ),
-                      MenuItem(
-                        title: "Warranty claim",
-                        icon: "assets/files/warranty.png",
-                        press: () {
-                           Get.offNamed(Routes.warrantyClaimList);
-                          //  Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //             builder: (context) => WarrantyClaimListWeb()));
-                        },
-                      ),
+                      // MenuItem(
+                      //   title: "Warranty claim",
+                      //   icon: "assets/files/warranty.png",
+                      //   press: () {
+                      //     Get.offNamed(Routes.warrantyClaimList);
+                      //     //  Navigator.push(
+                      //     //         context,
+                      //     //         MaterialPageRoute(
+                      //     //             builder: (context) => WarrantyClaimListWeb()));
+                      //   },
+                      // ),
                       MenuItem(
                         title: "Preventive Maintenance",
                         icon: "assets/files/preventive.png",

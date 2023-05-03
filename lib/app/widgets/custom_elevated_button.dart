@@ -2,11 +2,14 @@ import 'package:cmms/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../theme/dimens.dart';
+
 class CustomElevatedButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Color? backgroundColor;
   final Color? textColor;
+  final IconData? icon;
 
   const CustomElevatedButton({
     Key? key,
@@ -14,6 +17,7 @@ class CustomElevatedButton extends StatelessWidget {
     required this.onPressed,
     this.backgroundColor,
     this.textColor,
+    this.icon,
   }) : super(key: key);
 
   ///
@@ -36,13 +40,30 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
       ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 16.0,
-          fontWeight: FontWeight.w400,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon != null
+              ? Row(
+                  children: [
+                    Icon(
+                      icon,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    Dimens.boxWidth2,
+                  ],
+                )
+              : Container(),
+          Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 16.0,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
       ),
     );
   }

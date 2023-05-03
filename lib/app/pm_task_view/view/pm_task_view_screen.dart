@@ -1,17 +1,15 @@
-import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart';
-import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
+import 'package:cmms/app/pm_task_view/view/pm_task_view_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../home/home_controller.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../preventive_list_controller.dart';
+import '../pm_task_view_controller.dart';
 
-class PreventiveListScreen extends GetView<PreventiveListController> {
-  PreventiveListScreen({super.key});
+class PreventiveMaintenanceTaskViewScreen
+    extends GetView<PreventiveMaintenanceTaskViewController> {
+  PreventiveMaintenanceTaskViewScreen({super.key});
 
   ///
   @override
@@ -25,7 +23,7 @@ class PreventiveListScreen extends GetView<PreventiveListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive List'),
+              title: Text('PM Task View'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -40,20 +38,21 @@ class PreventiveListScreen extends GetView<PreventiveListController> {
               Expanded(
                 child: Column(
                   children: [
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
-                      Expanded(
-                        child: PreventiveChecklistListContentMobile(),
-                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PreventiveChecklistListContentWeb(),
+                        child: PreventiveMaintenanceTaskViewContentWeb(),
                       )
                   ],
                 ),
               ),
             ],
           )),
+    );
+  }
+
+  Widget buildDocument() {
+    return Container(
+      child: Text('This is the body of the document.'),
     );
   }
 }
