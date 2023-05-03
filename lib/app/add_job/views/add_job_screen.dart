@@ -8,7 +8,6 @@ import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../add_job_controller.dart';
-import '../../widgets/dropdown.dart';
 
 class AddJobScreen extends GetView<AddJobController> {
   AddJobScreen({Key? key}) : super(key: key);
@@ -18,75 +17,28 @@ class AddJobScreen extends GetView<AddJobController> {
   Widget build(BuildContext context) {
     ///
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Job'),
-        // automaticallyImplyLeading: false,
-        centerTitle: true,
-        actions: [
-          Responsive.isDesktop(context)
+      appBar: Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),
+              automaticallyImplyLeading: false,
               elevation: 0,
               toolbarHeight: 90,
-              automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Jobs'),
+              title: Text('Add Job'),
               centerTitle: true,
               elevation: 0,
             ),
-
-        ],
-      ),
-    
       body:
           //
-          Row(//
-              children: [
+          Row(children: [
         (Responsive.isMobile(context) || Responsive.isTablet(context))
-            ? //
-            Dimens.box0
-            :
-            //
-            HomeDrawer(),
-
-        /// CONTENT
-        // Obx(
-        //   () => //
-        //   Expanded(
-        // child: Container(
-        //   height: double.infinity,
-        //   width: Get.width,
-        //   margin: Dimens.edgeInsets10_0_10_0,
-        //   child: //
-        // Column(
-        //     mainAxisSize: MainAxisSize.max,
-        //     //
-        //     children: [
-        // /// SELECT PLANT DropDown
-        // Row(
-        //     //
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       Align(
-        //         alignment: Alignment.centerLeft,
-        //         child: Text(
-        //           'Select Plant:',
-        //         ),
-        //       ),
-        //       Expanded(
-        //         child: DropdownWidget(
-        //           dropdownList: controller.facilityList,
-        //           isValueSelected:
-        //               controller.isFacilitySelected.value,
-        //           selectedValue: controller.selectedFacility.value,
-        //           onValueChanged: controller.onValueChanged,
-        //         ),
-        //       ),
-        //     ]),
-        // Dimens.boxHeight20,
+            ? Dimens.box0
+            : HomeDrawer(),
 
         /// CARD
+        // Obx(
+        //   () => //
         Expanded(
           child: Container(
             // child: Expanded(
@@ -114,10 +66,6 @@ class AddJobScreen extends GetView<AddJobController> {
             ),
           ),
         ),
-        // ),
-        // ]),
-        // ),
-        //   ),
         // ),
       ]),
     );

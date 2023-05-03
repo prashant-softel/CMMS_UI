@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
@@ -1644,6 +1643,7 @@ class Repository {
     jobCard,
     bool? isLoading,
   ) async {
+    final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateJobCard(
@@ -1665,6 +1665,7 @@ class Repository {
     } //
     catch (error) {
       print(error.toString());
+      Utility.showDialog(res.errorCode.toString() + 'updateJobCard');
       return Map();
     }
   }
