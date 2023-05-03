@@ -30,25 +30,25 @@ class JobListScreen extends StatelessWidget {
               elevation: 0,
             ),
       body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
-                  children: [
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: JobListContentWeb(),
-                      )
-                  ],
-                ),
-              ),
-            ],
-          )),
+        width: Get.width,
+        height: Get.height,
+        child: Row(children: [
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? Dimens.box0
+              : HomeDrawer(),
+          Expanded(
+            child: Column(children: [
+              if (Responsive.isDesktop(context))
+                Expanded(
+                  child: KeyedSubtree(
+                    key: UniqueKey(),
+                    child: JobListContentWeb(),
+                  ),
+                )
+            ]),
+          ),
+        ]),
+      ),
     );
 
     ///
