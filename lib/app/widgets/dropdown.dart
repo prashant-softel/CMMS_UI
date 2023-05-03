@@ -79,7 +79,6 @@ class DropdownWidget extends StatelessWidget {
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
                 ),
-
               ),
             ),
             showSearchBox: true,

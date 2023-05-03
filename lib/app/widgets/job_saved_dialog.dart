@@ -36,6 +36,7 @@ class JobSavedDialog extends GetView<AddJobController> {
               thickness: 1,
             ),
             Spacer(),
+            Text('Job created with Job Id: ${controller.intJobId}'),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,

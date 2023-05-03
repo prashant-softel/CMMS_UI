@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
@@ -21,7 +20,6 @@ import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
-import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
@@ -1565,6 +1563,7 @@ class Repository {
     jobCard,
     bool? isLoading,
   ) async {
+    final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateJobCard(
@@ -1586,6 +1585,7 @@ class Repository {
     } //
     catch (error) {
       print(error.toString());
+      Utility.showDialog(res.errorCode.toString() + 'updateJobCard');
       return Map();
     }
   }

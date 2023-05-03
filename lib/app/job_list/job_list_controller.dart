@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
+import 'package:excel/excel.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
+import 'dart:html' as html;
 import '../../domain/models/block_model.dart';
 import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
@@ -21,7 +22,7 @@ class JobListController extends GetxController {
   HomeController homeController = Get.find();
 
   ///
-  RxList<JobModel?>? jobList = <JobModel?>[].obs;
+  RxList<JobModel?> jobList = <JobModel?>[].obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
@@ -30,11 +31,27 @@ class JobListController extends GetxController {
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
   Rx<int> jobId = 0.obs;
+  // Add variables to store filter text for each column
+  RxString idFilterText = ''.obs;
+  RxString facilityNameFilterText = ''.obs;
+  RxString jobDateFilterText = ''.obs;
+  RxString equipmentCategoryFilterText = ''.obs;
+  RxString workAreaFilterText = ''.obs;
+  RxString descriptionFilterText = ''.obs;
+  RxString jobDetailsFilterText = ''.obs;
+  RxString workTypeFilterText = ''.obs;
+  RxString raisedByNameFilterText = ''.obs;
+  RxString breakdownTimeFilterText = ''.obs;
+  RxString breakdownTypeFilterText = ''.obs;
+  RxString permitIdFilterText = ''.obs;
+  RxString assignedToNameFilterText = ''.obs;
+  RxString statusFilterText = ''.obs;
 
   ///
+  final excel = Excel.createExcel();
   int facilityId = 0;
   int userId = 0;
-  var breakdownTime;
+  // var breakdownTime;
   JobModel? jobModel;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -76,7 +93,7 @@ class JobListController extends GetxController {
   }
 
   Future<void> getJobList(int userId) async {
-    jobList?.value = <JobModel>[];
+    jobList.value = <JobModel>[];
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
@@ -85,14 +102,14 @@ class JobListController extends GetxController {
       );
 
       if (_jobList != null && _jobList.isNotEmpty) {
-        jobList!.value = _jobList;
+        jobList.value = _jobList;
         update(["jobList"]);
         paginationController = PaginationController(
-          rowCount: jobList!.length,
+          rowCount: jobList.length,
           rowsPerPage: 10,
         );
 
-        jobModel = jobList![0];
+        jobModel = jobList[0];
         var jobJson = jobModel?.toJson();
         jobListTableColumns.value = <String>[];
         for (var key in jobJson?.keys.toList() ?? []) {
@@ -118,11 +135,13 @@ class JobListController extends GetxController {
     Get.toNamed(Routes.jobDetails, arguments: _jobId);
   }
 
-  String formatDate(String inputDateTime) {
+  String formatDate(String? inputDateTime) {
     ///
     String formattedDateTimeString = '';
 
-    if (inputDateTime.isNotEmpty)
+    if (inputDateTime != null &&
+        inputDateTime.isNotEmpty &&
+        inputDateTime != "null")
     // Parse the input DateTime string
     {
       DateFormat inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss.SSS");
@@ -134,6 +153,109 @@ class JobListController extends GetxController {
     }
 
     return formattedDateTimeString;
+  }
+
+  Future<void> exportToExcel() async {
+    final sheetName = 'Job Data';
+    excel.rename(sheetName, sheetName);
+
+    excel.updateCell(sheetName, CellIndex.indexByString('A1'), 'Id');
+    excel.updateCell(sheetName, CellIndex.indexByString('B1'), 'Facility');
+    excel.updateCell(sheetName, CellIndex.indexByString('C1'), 'Job Date');
+    excel.updateCell(
+        sheetName, CellIndex.indexByString('D1'), 'Equipment Category');
+    excel.updateCell(
+        sheetName, CellIndex.indexByString('E1'), 'Work Area / Equipment');
+    excel.updateCell(sheetName, CellIndex.indexByString('F1'), 'Description');
+    excel.updateCell(sheetName, CellIndex.indexByString('G1'), 'Job Details');
+    excel.updateCell(sheetName, CellIndex.indexByString('H1'), 'Work Type');
+    excel.updateCell(sheetName, CellIndex.indexByString('I1'), 'Raised By');
+    excel.updateCell(
+        sheetName, CellIndex.indexByString('J1'), 'Breakdown Time');
+    excel.updateCell(
+        sheetName, CellIndex.indexByString('K1'), 'Breakdown Type');
+    excel.updateCell(sheetName, CellIndex.indexByString('L1'), 'Permit ID');
+    excel.updateCell(sheetName, CellIndex.indexByString('M1'), 'Assigned To');
+    excel.updateCell(sheetName, CellIndex.indexByString('N1'), 'Status');
+    // Add the data to the sheet
+    for (var i = 0; i < jobList.length; i++) {
+      final job = jobList[i];
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 1),
+          job?.id ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 1),
+          job?.facilityName ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 1),
+          job?.jobDate ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 1),
+          job?.equipmentCat ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 1),
+          job?.workingArea ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: i + 1),
+          job?.description ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: i + 1),
+          job?.jobDetails ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 7, rowIndex: i + 1),
+          job?.workType ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 8, rowIndex: i + 1),
+          job?.raisedByName ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 9, rowIndex: i + 1),
+          job?.breakdownTime ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 10, rowIndex: i + 1),
+          job?.breakdownType ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 11, rowIndex: i + 1),
+          job?.permitId ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 12, rowIndex: i + 1),
+          job?.assignedToName ?? '');
+      excel.updateCell(
+          sheetName,
+          CellIndex.indexByColumnRow(columnIndex: 13, rowIndex: i + 1),
+          job?.status ?? '');
+    }
+    downloadExcelFile();
+  }
+
+  downloadExcelFile() async {
+    // Convert the Excel data to bytes
+    final excelBytes = excel.encode();
+
+    // Serve the file as a download
+    final blob = html.Blob([excelBytes],
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    final anchorElement = html.AnchorElement(href: url)
+      ..setAttribute('download', 'Job_Data_Export.xlsx')
+      ..click();
+
+    // Clean up and release the object URL
+    await Future.delayed(Duration(seconds: 1));
+    anchorElement.remove();
+    html.Url.revokeObjectUrl(url);
   }
 
   ///

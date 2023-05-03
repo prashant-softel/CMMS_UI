@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -136,7 +138,7 @@ class JobCardDetailsController extends GetxController {
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 3;
-    int jobCardId = 1;
+    jobCardId = 1;
     historyList?.value = await jobCardDetailsPresenter.getJobCardHistory(
           moduleType,
           jobCardId,
@@ -247,7 +249,7 @@ class JobCardDetailsController extends GetxController {
           in isolationAssetsCategoryList) {
         _isolatedAssetCatList.add({
           "isolation_id": isolationAssetsCategory.isolationAssetsCatId,
-          "normalisedStatus": isolationAssetsCategory.isNormalized
+          "normalisedStatus": isolationAssetsCategory.isNormalized ?? 0,
         });
       }
       // lots assets
@@ -275,14 +277,18 @@ class JobCardDetailsController extends GetxController {
         "id": jobCardId,
         "comment": "Job Card Updated",
         "status": 1,
-        "is_isolation_required": "",
+        "is_isolation_required": true,
         "isolated_list": _isolatedAssetCatList,
         "loto_list": _lotoAssetList,
         "employee_list": _employeeList
       };
       //await jobCardDetailsPresenter.createJobCard();
       Map<String, dynamic>? response =
-          await jobCardDetailsPresenter.updateJobCard(jobCard, true);
+          await jobCardDetailsPresenter.updateJobCard(
+        json.encode(jobCard),
+        false,
+      );
+      print('Response = $response');
     } //
     catch (e) {
       print(e);

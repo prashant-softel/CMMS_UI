@@ -64,7 +64,23 @@ class WorkTypeWidget extends StatelessWidget {
           child: //
 
               MultiSelectDialogField(
-            decoration: BoxDecoration(border: Border()),
+            validator: (selectedItems) {
+              if (controller.isWorkTypeSelected.value == false) {
+                return "Required field";
+              } else {
+                return null;
+              }
+            },
+            autovalidateMode: AutovalidateMode.always,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: controller.isWorkTypeSelected.value == false
+                    ? Colors.red
+                    : Colors.transparent,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(5),
+            ),
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.workTypeList
                 .map((e) => MultiSelectItem(e, e?.workType ?? ''))

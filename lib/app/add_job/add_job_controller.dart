@@ -44,8 +44,8 @@ class AddJobController extends GetxController {
   Rx<bool> isEquipmentSelected = true.obs;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
   //
-  Rx<String> selectedWorkTypeCategory = ''.obs;
-  Rx<bool> isWorkTypeCategorySelected = false.obs;
+  Rx<String> selectedWorkType = ''.obs;
+  Rx<bool> isWorkTypeSelected = true.obs;
   RxList<WorkTypeModel?> selectedWorkTypeList = <WorkTypeModel>[].obs;
   RxList<WorkTypeModel?> workTypeList = <WorkTypeModel>[].obs;
   RxList<int> selectedWorkTypeIdList = <int>[].obs;
@@ -89,7 +89,7 @@ class AddJobController extends GetxController {
   var jobTitleCtrlr = TextEditingController();
   var breakdownTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
-  int intJobId = 0;
+  Rx<int> intJobId = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
@@ -219,11 +219,17 @@ class AddJobController extends GetxController {
   }
 
   void checkForm() {
-    // if (selectedFacility.value == '') {
-    //   isFacilitySelected.value = false;
-    // }
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
+    }
+    if (selectedWorkTypeIdList.length < 1) {
+      isWorkTypeSelected.value = false;
+    }
+    if (selectedEquipmentCategoryIdList.length < 1) {
+      isEquipmentCategorySelected.value = false;
+    }
+    if (selectedWorkAreaList.length < 1) {
+      isWorkAreaSelected.value = false;
     }
     if (selectedAssignedTo.value == '') {
       isAssignedToSelected.value = false;
@@ -234,19 +240,15 @@ class AddJobController extends GetxController {
     if (jobDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
     }
-    if (selectedEquipmentCategoryIdList.length < 1) {
-      isEquipmentCategorySelected.value = false;
-    }
-    if (selectedWorkAreaList.length < 1) {
-      isWorkAreaSelected.value = false;
-    }
+
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
         isJobTitleInvalid.value == true ||
         isJobDescriptionInvalid == true ||
         isEquipmentCategorySelected.value == false ||
-        isWorkAreaSelected.value == false) //
+        isWorkAreaSelected.value == false ||
+        isWorkTypeSelected.value == false) //
     {
       isFormInvalid.value = true;
     } //
@@ -297,7 +299,7 @@ class AddJobController extends GetxController {
       );
       if (responseMapJobCreated != null) {
         var _jobId = responseMapJobCreated["id"];
-
+        intJobId = _jobId;
         showAlertDialog(jobId: _jobId);
       }
     }
