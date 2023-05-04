@@ -327,6 +327,21 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> permitApprovedButton({
+    required String auth,
+    String? comment,
+    String? employee_id,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitApprovedButton(
+        auth: auth,
+        comment: comment,
+        employee_id: employee_id,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
   //  @override
   // Future<ResponseModel> getNewPermitList({
   //   int? facilityId,
@@ -529,6 +544,30 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+
+ Future<ResponseModel> getNewPermitDetail({
+    required String auth,
+   
+      bool? isLoading,   int? permitId,
+  }) async =>
+      await connectHelper.getNewPermitDetail(
+        auth: auth,
+       permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getViewPermitDetail({
+    required String auth,
+   
+      bool? isLoading,   int? permitId,
+  }) async =>
+      await connectHelper.getViewPermitDetail(
+        auth: auth,
+       permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -542,6 +581,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  
 
   Future<ResponseModel> deleteCkeckpoint({
     auth,

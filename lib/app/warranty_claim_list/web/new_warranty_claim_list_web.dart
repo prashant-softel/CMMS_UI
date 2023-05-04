@@ -755,6 +755,7 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                               ),
                                             ),
                                           ),
+                                      
                                         ],
                                       ),
                                       SizedBox(

@@ -39,6 +39,20 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
+   Future<void> permitApprovedButton({
+    String? comment,
+    String? employee_id,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitApprovedButton(
+        comment: comment,
+        employee_id: employee_id,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+
 
   // Future<List<NewPermitListModel>>getNewPermitList({
   //   required bool isLoading,
