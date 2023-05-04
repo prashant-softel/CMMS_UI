@@ -39,6 +39,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
   NewPermitScreen({super.key});
   bool valuefirst = false;
   final NewPermitController _controller = Get.find();
+  
+
 
   DateTime? _dateTime1;
   DateTime? _dateTime2;
@@ -46,6 +48,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
   TimeOfDay? time2;
 
   String dropdownvalue = 'Item 1';
+  int? i = 0;
+  int? j = 0;
+
 
   // List of items in our dropdown menu
   var items = [
@@ -512,7 +517,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         .add,
                                                                     onPressed:
                                                                         () {
+                                                                          
                                                                       //  showEquipmentNameAlertBox();
+
                                                                       Get.dialog<
                                                                               void>(
                                                                           showEquipmentNameAlertBox());
@@ -1424,7 +1431,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                 ),
                                                                               ],
                                                                             ),
-                                                                            Padding(
+                                                                         Padding(
                                                                                   padding: const EdgeInsets.only(left: 10, top: 30),
                                                                                   child: CircleAvatar(
                                                                                     backgroundColor: Color.fromARGB(255, 160, 160, 160),
@@ -1857,19 +1864,21 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 'Equipment Isolation',
                                                             initialValue: 
                                                             (controller
-                                                                    .selectedEquipmentIsolationIdList
+                                                                    .selectedEditEquipemntIsolationIdList
                                                                     .isNotEmpty)
                                                                 ? 
                                                                 controller
-                                                                    .selectedEquipmentIsolationIdList
+                                                                    .selectedEditEquipemntIsolationIdList
                                                                 : [],
                                                             items: controller
-                                                                .listIsolationCategory!
+                                                                .equipmentIsolationList
                                                                 .map(
                                                                   (equipmentIsolation) =>
                                                                       MultiSelectItem(
-                                                                    equipmentIsolation?.isolationAssetsCatID,
-                                                                    equipmentIsolation ?.isolationAssetsCatName ?? 
+                                                                    equipmentIsolation
+                                                                        ?.id,
+                                                                    equipmentIsolation
+                                                                            ?.name ??
                                                                         '',
                                                                   ),
                                                                 )
@@ -1881,7 +1890,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .equipmentIsolationSelected(
                                                                       selectedOptionsList),
                                                               print(
-                                                                  'Equipment Isolation list5: ${controller.equipmentIsolationList}')
+                                                                  'Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
                                                             },
                                                           ),
                                                         )
@@ -2441,8 +2450,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               children: [
                                                                                 Row(
                                                                                   children: [
-                                                                                    checkBoxMethod(1),
-                                                                                Text("${element.name}")
+                                                                                    // checkBoxMethod(1),
+                                                                                    Text("${i= i! + 1}. "),
+                                                                                    Text("${element.name}")
                                                                                   ],
                                                                                 )
                                                                               ],
@@ -2464,7 +2474,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               children: [
                                                                                 Row(
                                                                                   children: [
-                                                                                    checkBoxMethod(1),
+                                                                                    // checkBoxMethod(1),
+                                                                                    Text("${j= j! + 1}. "),
                                                                                 Text("${element?.saftyQuestionName}")
                                                                                   ],
                                                                                 )
@@ -3069,7 +3080,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
-                                                                                4,
+                                                                                4.5,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3097,7 +3108,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
-                                                                                4,
+                                                                                4.5,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3163,22 +3174,20 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     height: 22,
                                                                   ),
                                                                   Row(
+                                                                     mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
                                                                     children: [
-                                                                      SizedBox(
-                                                                        width:
-                                                                            40,
-                                                                      ),
+                                                                      
                                                                       CustomRichText(
                                                                           title:
                                                                               'Permit Issuer: '),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
+                                                                      
+                                                                      
                                                                       SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
-                                                                                4,
+                                                                                4.5,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3215,21 +3224,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         //   },
                                                                         // ),
                                                                       ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            40,
-                                                                      ),
+                                                                     
                                                                       CustomRichText(
                                                                           title:
                                                                               'Permit Approver: '),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            23,
-                                                                      ),
+                                                                      
                                                                       SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
-                                                                                4,
+                                                                                4.5,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -4424,34 +4427,34 @@ class NewPermitScreen extends GetView<NewPermitController> {
     return Checkbox(
         value: position == 1
             ? controller.isChecked1.value
-            : position == 2
-                ? controller.isChecked2.value
-                : position == 3
-                    ? controller.isChecked3.value
-                    : position == 4
-                        ? controller.isChecked4.value
-                        : position == 5
-                            ? controller.isChecked5.value
-                            : position == 6
-                                ? controller.isChecked6.value
-                                : position == 7
-                                    ? controller.isChecked7.value
+            // : position == 2
+            //     ? controller.isChecked2.value
+            //     : position == 3
+            //         ? controller.isChecked3.value
+            //         : position == 4
+            //             ? controller.isChecked4.value
+            //             : position == 5
+            //                 ? controller.isChecked5.value
+            //                 : position == 6
+            //                     ? controller.isChecked6.value
+            //                     : position == 7
+            //                         ? controller.isChecked7.value
                                     : null,
         onChanged: (bool? value) {
           position == 1
               ? controller.toggleCheckbox1()
-              : position == 2
-                  ? controller.toggleCheckbox2()
-                  : position == 3
-                      ? controller.toggleCheckbox3()
-                      : position == 4
-                          ? controller.toggleCheckbox4()
-                          : position == 5
-                              ? controller.toggleCheckbox5()
-                              : position == 6
-                                  ? controller.toggleCheckbox6()
-                                  : position == 7
-                                      ? controller.toggleCheckbox7()
+              // : position == 2
+              //     ? controller.toggleCheckbox2()
+              //     : position == 3
+              //         ? controller.toggleCheckbox3()
+              //         : position == 4
+              //             ? controller.toggleCheckbox4()
+              //             : position == 5
+              //                 ? controller.toggleCheckbox5()
+              //                 : position == 6
+              //                     ? controller.toggleCheckbox6()
+              //                     : position == 7
+              //                         ? controller.toggleCheckbox7()
                                       : null;
         });
   }

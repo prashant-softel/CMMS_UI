@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,10 @@ class BreakdownMaintenanceScreen
     extends GetView<BreakdownMaintenanceController> {
   ///
   BreakdownMaintenanceScreen({super.key});
+  final NewPermitController _controller = Get.find();
+  final BreakdownMaintenanceController controller = Get.find();
+
+
 
   ///
   @override

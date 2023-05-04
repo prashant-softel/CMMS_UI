@@ -17,9 +17,9 @@ class HomeDrawer extends GetView {
         //
         Drawer(
       width: Responsive.isDesktop(context) ? Get.width * 0.19 : Get.height * 0.35,
-      width: (Responsive.isMobile(context) || Responsive.isTablet(context))
-          ? Get.width * 0.75
-          : Get.width * 0.19,
+      // width: (Responsive.isMobile(context) || Responsive.isTablet(context))
+      //     ? Get.width * 0.75
+      //     : Get.width * 0.19,
       child: //
           ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),

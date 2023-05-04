@@ -36,6 +36,7 @@ class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
   
   final HomeController homeController = Get.find();
+  // final NewPermitController _controller = Get.find();
   
 
   
@@ -201,7 +202,12 @@ class NewPermitController extends GetxController {
   RxList<ListCategory?>? listCategory = <ListCategory?>[].obs;//ListCategory
   RxList<LotoLists?>? listLoto = <LotoLists?>[].obs;//ListsLoto
   RxList<ListIsolation?>? listIsolationCategory = <ListIsolation?>[].obs;//ListIsolation
-  RxList<int> selectedIsolationIdList = <int>[].obs;
+  RxList<int?> selectedEditEquipemntIsolationIdList = <int?>[].obs;
+  RxList<ListIsolation?> selectedEditEquipmentIsolationList =
+      <ListIsolation>[].obs;
+  int selectedIsolationEquipmentsId = 0;
+  
+
 
 
 
@@ -309,6 +315,9 @@ class NewPermitController extends GetxController {
   Rx<NewPermitDetailModel?> newPermitDetailsModel = NewPermitDetailModel().obs;
   RxList<NewPermitDetailModel?>? newPermitDetailsList = <NewPermitDetailModel?>[].obs;
 
+  
+
+
 
 
   
@@ -408,6 +417,11 @@ class NewPermitController extends GetxController {
       listCategory?.value = newPermitDetailsModel.value?.lstCategory ?? [];
       listLoto?.value = newPermitDetailsModel.value?.loto_list ?? [];
       listIsolationCategory?.value = newPermitDetailsModel.value?.lstIsolation ?? [];
+      List<int?> idList = listIsolationCategory!.map((obj) => obj!.isolationAssetsCatID).toList();
+      print('Islation id:$idList');
+      selectedEditEquipemntIsolationIdList.value = idList;
+      print('Islation id:$selectedEditEquipemntIsolationIdList');
+      
       
       // print('EmployeeList:${listEmployee}');
       
