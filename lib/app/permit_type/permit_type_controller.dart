@@ -69,9 +69,12 @@ class PermitTypeController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
+       Future.delayed(Duration(seconds: 1), () {
+        getTypePermitList();
+      });
       // getPreventiveCheckList(facilityId, type, true);
     });
-    await getTypePermitList();
+    
     super.onInit();
   }
 
