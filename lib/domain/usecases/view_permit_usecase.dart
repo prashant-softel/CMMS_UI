@@ -6,17 +6,15 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
-import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 
-import '../models/create_permit_model.dart';
 import '../models/facility_model.dart';
 
-class NewPermitUsecase {
-  NewPermitUsecase(this.repository);
+class ViewPermitUsecase {
+  ViewPermitUsecase(this.repository);
   Repository repository;
 
 
@@ -31,18 +29,27 @@ class NewPermitUsecase {
         isLoading,
       );
 
-  Future<List<NewPermitListModel?>?> getNewPermitList({
-    required String auth,
-    int? facilityId,
-    int? userId,
-    bool? isLoading,
+  Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
+    required bool isLoading,
+    required int? permit_type_id
+   
+  }) async {
+    return repository.getSafetyMeasureList(
+      isLoading: isLoading,
+      permit_type_id: permit_type_id,
+  
+    );
+  }
+
+  Future<NewPermitDetailModel?> getViewPermitDetail({
+    bool? isLoading,  
+    required int permitId,
   }) async =>
-      await repository.getNewPermitList(
-        auth,
-        facilityId,
-        isLoading,
-        
+      await repository.getViewPermitDetail(
+        permitId: permitId,
+        isLoading: isLoading ?? false,
       );
+
 
    Future<List<EmployeeListModel>> getEmployeePermitList({
     required bool isLoading,
@@ -104,18 +111,6 @@ class NewPermitUsecase {
     );
   }
 
-   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
-    required bool isLoading,
-    required int? permit_type_id
-   
-  }) async {
-    return repository.getSafetyMeasureList(
-      isLoading: isLoading,
-      permit_type_id: permit_type_id,
-  
-    );
-  }
-
   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     required String auth,
     int? id,
@@ -155,8 +150,6 @@ class NewPermitUsecase {
         facilityId,
         isLoading,
       );
-
-  
 
 
    Future<List<InventoryModel?>?> getInventoryEquipmentNameList({
@@ -204,12 +197,5 @@ class NewPermitUsecase {
          newPermit,
         isLoading,
       );
-Future<NewPermitDetailModel?> getNewPermitDetail({
-    bool? isLoading,  
-    required int permitId,
-  }) async =>
-      await repository.getNewPermitDetail(
-        permitId: permitId,
-        isLoading: isLoading ?? false,
-      );
+
 }

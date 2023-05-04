@@ -21,4 +21,5 @@ class JobListPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+      
 }

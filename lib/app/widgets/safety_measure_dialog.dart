@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -24,7 +25,6 @@ class SafetyMeasureDialog extends GetView {
   final NewPermitController _controller = Get.find();
 
 
-  @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: ((context, setState) {
       return AlertDialog(
@@ -34,7 +34,7 @@ class SafetyMeasureDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Following Safety Measure taken to carry out the work',
+          'SOP',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -45,7 +45,7 @@ class SafetyMeasureDialog extends GetView {
             ()=> Container(
               padding: Dimens.edgeInsets05_0_5_0,
               height: 250,
-              width: double.infinity,
+              width: Responsive.isDesktop(context) ? double.infinity : MediaQuery.of(context).size.width / 2,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -55,130 +55,75 @@ class SafetyMeasureDialog extends GetView {
                     ),
                     Column(
                       children: [
+                        SizedBox(
+                          height: 70,
+                          width: 150,
+                          child: Image.asset('assets/files/pdf2.png')),
+                          SizedBox(height: 10,),
+                          Text('Upload File !!'),
+                          SizedBox(height: 20,),
+
+                        Responsive.isDesktop(context)
+                        ?
                         Row(
                           children: [
-                            Text('1. Safety helmet and safety shoes'),
-                             Switch(
-                                value: _controller.isToggleOn1.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn1.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
+                            Checkbox(
+                              value: _controller.isCheckedSOP.value, 
+                              onChanged: (bool? value){
+                                _controller.soptoggleCheckbox();
+                              },
                               ),
-                            SizedBox(width: 10,),
-                            Text('2. Arc flash shoes'),
-                           Switch(
-                                value: _controller.isToggleOn2.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn2.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            Text('3. Face Visor'),
-                            Switch(
-                                value: _controller.isToggleOn3.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn3.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                            SizedBox(width: 175,),
-                            Text('4. Reflective jacket'),
-                            Switch(
-                                value: _controller.isToggleOn4.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn4.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            Text('5. Headlight'),
-                            Switch(
-                                value: _controller.isToggleOn5.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn5.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                            SizedBox(width: 180,),
-                            Text('6. Gumboot'),
-                            Switch(
-                                value: _controller.isToggleOn6.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn6.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            Text('7. Other safety measures'),
-                            Switch(
-                                value: _controller.isToggleOn7.value,
-                                onChanged: (value) {
-                                  _controller.isToggleOn7.value =value;
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                            SizedBox(width: 10,),
-                            
+                            Text('I have read and accept terms and conditions')
                           ],
                         )
+                        :
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: _controller.isCheckedSOP.value, 
+                              onChanged: (bool? value){
+                                _controller.soptoggleCheckbox();
+                              },
+                              ),
+                            Text('I have read and accept\nterms and conditions')
+                          ],
+                        )
+
+
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                             width: 15,
                           ),
+                          _controller.isCheckedSOP.value == true
+                          ?
                           ElevatedButton(
-                            style: Styles.blueElevatedButtonStyle,
-                            onPressed: () => {},
-                            child: const Text('Edit'),
-                          ),
-                          Dimens.boxWidth10,
+                            style: Styles.navyBlueElevatedButtonStyle,
+                            onPressed: (){
+                              Get.back();
+                            },
+                            child: const Text('Ok'),
+                          )
+                          :
                           ElevatedButton(
-                            style: Styles.greenElevatedButtonStyle,
-                            onPressed: () => {},
-                            child: const Text('Save'),
-                          ),
-                          Dimens.boxWidth10,
+                            style: Styles.navyBlueElevatedButtonStyle,
+                            onPressed: null,
+                            child: const Text('Ok'),
+                          )
+
+                          // Dimens.boxWidth10,
+                          // ElevatedButton(
+                          //   style: Styles.greenElevatedButtonStyle,
+                          //   onPressed: () => {},
+                          //   child: const Text('Save'),
+                          // ),
+                          // Dimens.boxWidth10,
                           // ElevatedButton(
                           //   style: Styles.redElevatedButtonStyle,
                           //   onPressed: () => Get.offAndToNamed(Routes.addJob),
@@ -194,4 +139,5 @@ class SafetyMeasureDialog extends GetView {
     }));
  
   }
+
 }

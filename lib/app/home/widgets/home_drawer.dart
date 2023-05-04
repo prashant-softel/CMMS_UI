@@ -18,9 +18,8 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return
         //
-
         Drawer(
-      width: Get.width * 0.19,
+      width: Responsive.isDesktop(context) ? Get.width * 0.19 : Get.height * 0.35,
       child: //
           ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),
@@ -116,10 +115,10 @@ class HomeDrawer extends GetView<HomeController> {
                         },
                       ),
                       MenuItem(
-                        title: "Misc",
+                        title: "Masters",
                         icon: "assets/files/misc.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.masterDashboard);
                         },
                       ),
                       MenuItem(

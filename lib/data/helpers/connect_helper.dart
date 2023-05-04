@@ -1,5 +1,10 @@
 // coverage:ignore-file
 
+import 'dart:convert';
+
+import 'package:cmms/app/widgets/create_permit_dialog.dart';
+import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 
@@ -414,17 +419,48 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
     Request.put,
-    {'comment': "comment", 'employee_id': "136",'id':"59616"},
+    {'comment': "$comment", 'employee_id': "136",'id':"59616"},
 
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitIssueResponse: ${responseModel.data}');
+    var res = responseModel.data; 
+    var parsedJson = json.decode(res);
+    print('PermitIssueResponse: ${res}');
+    Get.dialog<void>(PermitMessageIssueDialog(data:parsedJson['message']));
 
     return responseModel;
   }
+
+   Future<ResponseModel> permitApprovedButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? employee_id,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitApprove',
+    Request.put,
+    {'comment': "$comment", 'employee_id': "136",'id':"59616"},
+
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitApprovedResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageApproveDialog(data:parsedJson['message']));
+
+
+    return responseModel;
+  }
+
 
 
 //   Future<ResponseModel> getNewPermitList({
@@ -798,7 +834,16 @@ class ConnectHelper {
       },
     );
 
+    print('CreateNewPermitResponse5:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateNewPermitDialog(
+      data:parsedJson['message'],
+      PtwId: parsedJson['id'],
+      ));
+
     return responseModel;
+
   }
 
   Future<ResponseModel> getUserAccessList({
@@ -818,6 +863,41 @@ class ConnectHelper {
     );
     return responseModel;
   }
+ Future<ResponseModel> getNewPermitDetail({
+    required String auth,
+         bool? isLoading,    int? permitId,
+
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitDetails?permit_id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getViewPermitDetail({
+    required String auth,
+         bool? isLoading,    int? permitId,
+
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitDetails?permit_id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getHistory({
     String? auth,
