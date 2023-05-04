@@ -38,6 +38,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
     'Item 4',
     'Item 5',
   ];
+  int? l = 0;
 
   ///
   @override
@@ -523,7 +524,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     // _buildStartValidTillDateField_web(
                                                     //     context, 0,),
                                                     SizedBox(
-                                                      width: 297,
+                                                      width: 275,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -543,7 +544,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ],
                                                     ),
                                                     SizedBox(
-                                                      width: 200,
+                                                      width: 197,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -615,7 +616,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             255, 5, 92, 163)),
                                                   ),
                                                   SizedBox(
-                                                    width: 122,
+                                                    width: 250,
                                                   ),
                                                   CustomRichText(
                                                       title: 'Block: '),
@@ -1265,8 +1266,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                              children: [
                                                                       Row(
                                                                         children: [
-                                                                          checkBoxMethod(
-                                                                          1),
+                                                                          // checkBoxMethod(
+                                                                          // 1),
+                                                                          Text("${l = l! + 1}. "),
                                                                           Text("${element.name}")
                                                                         ],
                                                                       )
@@ -1290,7 +1292,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               ),
                                               //Tool box talk
                                               SizedBox(
-                                                height: 480,
+                                                height: 250,
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -1354,7 +1356,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       SizedBox(
                                                                         width: 200,
                                                                         child: Text(
-                                                                          '${controller.viewPermitDetailsModel.value?.sop_type_name}',
+                                                                          '${controller.viewPermitDetailsModel.value?.sop_type_name?? 'No Data Found'}',
                                                                           style: TextStyle(
                                                                               color: Color.fromARGB(
                                                                                   255,
@@ -1363,13 +1365,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                   163)),
                                                                         ),
                                                                       ),
-                                                                      Checkbox(
-                                                                        value: controller
-                                                                            .isCheckedLoto
-                                                                            .value,
-                                                                        onChanged:
-                                                                            (value) {},
-                                                                      ),
+                                                                      // Checkbox(
+                                                                      //   value: controller
+                                                                      //       .isCheckedLoto
+                                                                      //       .value,
+                                                                      //   onChanged:
+                                                                      //       (value) {},
+                                                                      // ),
                                                                       SizedBox(width: 160,),
                                                                       CustomRichText(
                                                                           title:
@@ -1392,13 +1394,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       // )
                                                                     ],
                                                                   ),
-
+                                                                SizedBox(height: 30,),
                                                                   Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
-                                                                      SizedBox(
-                                                                        width:
-                                                                            420,
-                                                                      ),
+                                                                      
                                                                       Container(
                                                                           height:
                                                                               30,
@@ -1416,7 +1416,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                           )),
                                                                       SizedBox(
                                                                         width:
-                                                                            230,
+                                                                            150,
                                                                       ),
                                                                       Container(
                                                                           height:
@@ -1812,12 +1812,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 Dimens
                                                                     .boxWidth20,
                                                                 Text(
-                                                                  'PTW approved',
+                                                                  'PTW closed',
                                                                 ),
                                                                 Dimens
                                                                     .boxWidth20,
                                                                 Text(
-                                                                  'approved',
+                                                                  'Closed',
                                                                 ),
                                                                 Dimens
                                                                     .boxWidth20,
@@ -1828,28 +1828,24 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   MainAxisAlignment
                                                                       .spaceEvenly,
                                                               children: [
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                SizedBox(width: 18,),
                                                                 Text(
                                                                   '2023-04-15',
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                 SizedBox(width: 20,),
                                                                 Text(
                                                                   'Sujit Kumar',
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                 SizedBox(width: 18,),
                                                                 Text(
-                                                                  'PTW submitted',
+                                                                  'PTW closed',
+                                                                ),
+                                                                 SizedBox(width: 18,),
+                                                                Text(
+                                                                  'Approved',
                                                                 ),
                                                                 Dimens
-                                                                    .boxWidth20,
-                                                                Text(
-                                                                  'Submitted',
-                                                                ),
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                    .boxWidth5,
                                                               ],
                                                             ),
                                                             Row(
@@ -1895,8 +1891,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   MainAxisAlignment
                                                                       .spaceEvenly,
                                                               children: [
-                                                                Dimens
-                                                                    .boxWidth10,
+                                                               
                                                                 CustomRichText(title: 'Requested By: '),
                                                                 Text(
                                                                   'Prashant Shetya',
@@ -1904,12 +1899,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 Dimens
                                                                     .boxWidth10,
                                                                 CustomRichText(title: 'Date / Time: '),
-                                                                
                                                                 Text(
                                                                   '2022-05-01 17:25',
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth10,
+                                                                
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -1920,19 +1913,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               //     MainAxisAlignment
                                                               //         .spaceEvenly,
                                                               children: [
-                                                                SizedBox(width: 135,),
+                                                                SizedBox(width: 110,),
                                                                 CustomRichText(title: 'Issued By: '),
                                                                 SizedBox(width:85),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.issuedByName}',
                                                                 ),
-                                                                SizedBox(width:160),
+                                                                SizedBox(width:260),
                                                                 CustomRichText(title: 'Date / Time: '),
-                                                                SizedBox(width:60),
+                                                                SizedBox(width:80),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                                 ),
-                                                                SizedBox(width: 115,),
+                                                                SizedBox(width: 180,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -1943,19 +1936,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               //     MainAxisAlignment
                                                               //         .spaceEvenly,
                                                               children: [
-                                                                SizedBox(width: 135,),
+                                                                SizedBox(width: 90,),
                                                                 CustomRichText(title: 'Approved By: '),
-                                                                SizedBox(width:67),
+                                                                SizedBox(width:90),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.approvedByName}',
                                                                 ),
-                                                                SizedBox(width:130),
+                                                                SizedBox(width:260),
                                                                 CustomRichText(title: 'Date / Time: '),
-                                                                SizedBox(width:60),
+                                                                SizedBox(width:80),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.approve_at}',
                                                                 ),
-                                                                SizedBox(width: 120,),
+                                                                SizedBox(width: 178,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -1966,19 +1959,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               //     MainAxisAlignment
                                                               //         .spaceEvenly,
                                                               children: [
-                                                                SizedBox(width: 135,),
+                                                                SizedBox(width: 110,),
                                                                 CustomRichText(title: 'Closed By: '),
                                                                 SizedBox(width:85),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.closedByName}',
                                                                 ),
-                                                                SizedBox(width:165),
+                                                                SizedBox(width:260),
                                                                 CustomRichText(title: 'Date / Time: '),
-                                                                SizedBox(width:60),
+                                                                SizedBox(width:80),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.close_at}',
                                                                 ),
-                                                                SizedBox(width: 123,),
+                                                                SizedBox(width: 180,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -1989,19 +1982,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               //     MainAxisAlignment
                                                               //         .spaceEvenly,
                                                               children: [
-                                                                SizedBox(width: 135,),
+                                                                SizedBox(width: 90,),
                                                                 CustomRichText(title: 'Cancelled By: '),
                                                                 SizedBox(width:65),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
                                                                 ),
-                                                                SizedBox(width:250),
+                                                                SizedBox(width:310),
                                                                 CustomRichText(title: 'Date / Time: '),
                                                                 SizedBox(width:60),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
                                                                 ),
-                                                                SizedBox(width: 257,),
+                                                                SizedBox(width: 226,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],

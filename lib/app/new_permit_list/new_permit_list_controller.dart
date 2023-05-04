@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -51,18 +53,26 @@ class NewPermitListController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   int userId = varUserAccessModel.value.user_id ?? 0;
 
+  StreamSubscription<int>? facilityIdStreamSubscription;
+
+
   
 
   ///
   @override
   void onInit() async {
     //homePresenter.generateToken();
+    facilityIdStreamSubscription = controller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        getNewPermitList(facilityId, userId);
+      });
+      
+    });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
-      Future.delayed(Duration(milliseconds: 500), () {
-        getNewPermitList(facilityId, userId);
-      });
+      
       // Future.delayed(Duration(milliseconds: 500), () {
       //   getPermitIssueButton();
       // });
@@ -102,10 +112,7 @@ class NewPermitListController extends GetxController {
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
-      newPermitPaginationController = PaginationController(
-        rowCount: newPermitList!.length,
-        rowsPerPage: 10,
-      );
+     
 
       if (newPermitList != null && newPermitList!.isNotEmpty) {
         newPermitListModel = newPermitList![0];
@@ -116,6 +123,10 @@ class NewPermitListController extends GetxController {
         }
       }
     }
+     newPermitPaginationController = PaginationController(
+        rowCount: newPermitList!.length,
+        rowsPerPage: 10,
+      );
 
     update(['new_permit_list']);
   }

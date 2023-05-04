@@ -292,17 +292,17 @@ class PermitTypeContentWeb
                                         //     ),
                                         //   ],
                                         // ),
+                                         CustomRichText(title: 'Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "Title",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            // Text(
+                                            //   "Title",
+                                            //   style: Styles.blackBold16,
+                                            // ),
+                                           
+                                            
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -347,17 +347,16 @@ class PermitTypeContentWeb
                                         SizedBox(
                                           height: 10,
                                         ),
+                                            CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              "Description ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            // Text(
+                                            //   "Description ",
+                                            //   style: Styles.blackBold16,
+                                            // ),
+                                            
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
