@@ -1,7 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
-import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,22 +12,26 @@ class HeaderWidget extends GetView<HomeController> {
     /////////
     //Note: Here i have changed the controller from HomeController to NewPermitController
   });
-  var controller = Get.find<HomeController>();
-
-  ///
   // var controller = Get.find<HomeController>();
 
+  ///
+  var controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
-        decoration:
-            new BoxDecoration(color: ColorValues.whiteColor, boxShadow: [
-          new BoxShadow(
+    return //
+        Obx(
+      () => //
+          Container(
+        decoration: BoxDecoration(
+          color: ColorValues.whiteColor,
+          boxShadow: [
+            BoxShadow(
               color: Color.fromARGB(255, 240, 237, 237),
-              offset: Offset(0.0, 0.0)),
-        ]),
+              offset: Offset(0.0, 0.0),
+            ),
+          ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -60,7 +62,6 @@ class HeaderWidget extends GetView<HomeController> {
                   ),
                 ),
               ),
-            // Text('My BEST DATA: ${controller.blockList}'),
             Spacer(),
             if (Responsive.isDesktop(context))
               Icon(Icons.notifications_active,
@@ -100,90 +101,86 @@ class HeaderWidget extends GetView<HomeController> {
                     GestureDetector(
                       onTap: () {
                         Get.dialog(
-                          Stack(
-                            children: [
-                              Positioned(
-                                right: 1,
-                                top: 70,
-                                child: Container(
-                                  width: 200,
-                                  child: AlertDialog(
-                                    insetPadding: Dimens.edgeInsets10_0_10_0,
-                                    contentPadding: EdgeInsets.all(20),
-                                    backgroundColor:
-                                        ColorValues.appDarkBlueColor,
-                                    content: Column(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.person,
-                                                color: Color(0xffD2D0D0),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Profile",
-                                                  style: TextStyle(
-                                                    color: Color(0xffD2D0D0),
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w600,
-                                                  )),
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: Color(0xffD2D0D0),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.settings,
-                                                color: Color(0xffD2D0D0),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Settings",
-                                                  style: TextStyle(
-                                                    color: Color(0xffD2D0D0),
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w600,
-                                                  )),
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: Color(0xffD2D0D0),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              _isDeleteDialog();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.logout,
-                                                  color: Color(0xffD2D0D0),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text("Log Out",
-                                                    style: TextStyle(
-                                                      color: Color(0xffD2D0D0),
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    )),
-                                              ],
+                          Stack(children: [
+                            Positioned(
+                              right: 1,
+                              top: 70,
+                              child: Container(
+                                width: 200,
+                                child: AlertDialog(
+                                  insetPadding: Dimens.edgeInsets10_0_10_0,
+                                  contentPadding: EdgeInsets.all(20),
+                                  backgroundColor: ColorValues.appDarkBlueColor,
+                                  content: Column(
+                                      // mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.person,
+                                              color: Color(0xffD2D0D0),
                                             ),
-                                          )
-                                        ]),
-                                  ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text("Profile",
+                                                style: TextStyle(
+                                                  color: Color(0xffD2D0D0),
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w600,
+                                                )),
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: Color(0xffD2D0D0),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.settings,
+                                              color: Color(0xffD2D0D0),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text("Settings",
+                                                style: TextStyle(
+                                                  color: Color(0xffD2D0D0),
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w600,
+                                                )),
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: Color(0xffD2D0D0),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            _isDeleteDialog();
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.logout,
+                                                color: Color(0xffD2D0D0),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text("Log Out",
+                                                  style: TextStyle(
+                                                    color: Color(0xffD2D0D0),
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600,
+                                                  )),
+                                            ],
+                                          ),
+                                        )
+                                      ]),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ]),
                         );
                       },
                       child: Icon(Icons.keyboard_arrow_down_outlined,

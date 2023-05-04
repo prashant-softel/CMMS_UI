@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/pm_mapping/pm_mapping_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/pm_mapping_list_model.dart';
@@ -23,6 +24,7 @@ class PmMappingController extends GetxController {
   int type = 1;
   StreamSubscription<int>? facilityIdStreamSubscription;
   RxList<PmMappingListModel?> mappingList = <PmMappingListModel>[].obs;
+  RxList<PmMappingListModel?> selectedMappingList = <PmMappingListModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   RxList<String?> equipmentCategoryNameList = <String>[].obs;
@@ -31,20 +33,21 @@ class PmMappingController extends GetxController {
       <PreventiveCheckListModel>[].obs;
   RxList<PreventiveCheckListModel?> selectedChecklistList =
       <PreventiveCheckListModel>[].obs;
+  List<String> checkListmapdata = [];
   Map<int, dynamic> checklist_map = {};
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
+      Future.delayed(Duration(seconds: 1), () async {
+        await getPmMappingList(facilityId);
 
-      Future.delayed(Duration(seconds: 1), () {
         getPreventiveCheckList(
           facilityId,
           type,
         );
       });
-    }
-    );
+    });
     super.onInit();
   }
 
@@ -68,6 +71,7 @@ class PmMappingController extends GetxController {
         }
       }
       equipmentCategoryNameList.addAll(equipmentCategoryNameSet.toList());
+      // getPmMappingList(facilityId);
     }
   }
 
@@ -84,12 +88,16 @@ class PmMappingController extends GetxController {
   Future<void> getPmMappingList(facilityId) async {
     final list = await pmMappingPresenter.getPmMappingList(
         facilityId: facilityId, isLoading: true);
-
+    selectedMappingList.value = list ?? [];
     if (list != null) {
-      mappingList.clear();
-
       for (var _mappingList in list) {
-        mappingList.add(_mappingList);
+        [...(_mappingList?.checklists ?? [])].forEach((element) {
+          mappingList.add(_mappingList);
+          selectedchecklistIdList.add(element.checklist_id!);
+
+          checkListmapdata.add(element.checklist_name!);
+          // print({"checkListmapdata", checkListmapdata});
+        });
       }
     }
   }
@@ -108,7 +116,7 @@ class PmMappingController extends GetxController {
   }
 
   void savePmMapping() async {
-    print({"checklist_map": checklist_map});
+    // print({"checklist_map": checklist_map});
     late List<ChecklistMapList> checklist_map_list = [];
 
     checklist_map.forEach((category_id, checklist_ids) {
@@ -121,7 +129,7 @@ class PmMappingController extends GetxController {
       checklist_map_list: checklist_map_list,
     );
     var pmJsonString = savePmModel.toJson();
-    print({"redddd", checklist_map_list});
+    print({"redddd", pmJsonString});
     if (checklist_map_list.isNotEmpty) {
       Map<String, dynamic>? responsePmMapCreated =
           await pmMappingPresenter.savePmMapping(
@@ -168,5 +176,55 @@ class PmMappingController extends GetxController {
         ],
       ),
     );
+  }
+
+  // List<dynamic> selectedOptionID(String? equipmentCategoryNameList) {
+  //   print({
+  //     "selectedOption equipmentCategoryNameList": equipmentCategoryNameList
+  //   });
+  //   late PmMappingListModel? selectedData = selectedMappingList.firstWhere(
+  //     (element) => element?.category_name == equipmentCategoryNameList,
+  //     orElse: () => null,
+  //   );
+  //   if (selectedData != null) {
+  //     List<dynamic>? selectedOption =
+  //         selectedData.checklists?.map((e) => e.checklist_id).toList();
+  //     print({
+  //       "equipmentCategoryNameList0": equipmentCategoryNameList,
+  //       "selectedOption": selectedOption?.length
+  //     });
+  //     return selectedOption ?? [];
+  //   }
+
+  //   return [];
+  // }
+
+  selectedOption(String? equipmentCategoryName) {
+    late PmMappingListModel? selectedData = selectedMappingList.firstWhere(
+      (element) => element?.category_name == equipmentCategoryName,
+      orElse: () => null,
+    );
+    if (selectedData != null) {
+      List<int?> selectedOptionList =
+          selectedData.checklists?.map((e) => e.checklist_id).toList() ?? [];
+      // print({
+      //   "equipmentCategoryNameList1": equipmentCategoryName,
+      //   "selectedOption": selectedOptionList.length
+      // });
+      late List<PreventiveCheckListModel?> totalOption =
+          (checkList.where((element) {
+        print((element?.category_name == equipmentCategoryName) &&
+            selectedOptionList.contains(element?.id));
+        return (element?.category_name == equipmentCategoryName) &&
+            selectedOptionList.contains(element?.id);
+      })).toList();
+      // print({
+      //   "equipmentCategoryNameList2": equipmentCategoryName,
+      //   "selectedOption": totalOption.length
+      // });
+      checklist_map[totalOption[0]?.category_id ?? -1] = selectedOptionList;
+      return totalOption;
+    } else {}
+    return [];
   }
 }

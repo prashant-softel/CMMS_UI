@@ -1,8 +1,7 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_binding.dart';
-import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance.dart';
+import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
@@ -14,6 +13,9 @@ import 'package:cmms/app/permit_type/permit_type_binding.dart';
 import 'package:cmms/app/permit_type/view/permit_type_screen.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
+import 'package:cmms/app/edit_permit/edit_permit_binding.dart';
+import 'package:cmms/app/edit_permit/view/web/edit_permit_screen_web.dart';
+import 'package:cmms/app/inventory/view/inventory_screen.dart';
 import 'package:cmms/app/new_permit/new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
@@ -21,7 +23,6 @@ import 'package:cmms/app/preventive_check_point/view/preventive_check_point_scre
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dart';
@@ -30,6 +31,7 @@ import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:get/get.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
+import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
@@ -37,6 +39,8 @@ import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
+import '../inventory/inventory_binding.dart';
+import '../inventory_list/views/inventory_list_screen.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_details/job_details_binding.dart';
@@ -49,6 +53,8 @@ import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
 import '../pm_schedule/view/pm_schedule_screen.dart';
+import '../pm_task_view/pm_task_view_binding.dart';
+import '../pm_task_view/view/pm_task_view_screen.dart';
 import '../preventive_List/preventive_list_binding.dart';
 import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
@@ -58,8 +64,6 @@ import '../preventive_maintenance_execution_view/preventive_maintenance_executio
 import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
-import '../warranty_claim_list/warranty_claim_list_screen.dart';
-import '../warranty_claim_list/warranty_claim_list_screen.dart';
 
 // coverage:ignore-file
 
@@ -168,6 +172,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.warrantyClaimList,
       page: WarrantyClaimListScreen.new,
+      binding: HomeBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.calibrationList,
@@ -180,10 +185,9 @@ class AppPages {
       binding: CalibrationHistoryBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.breakdown,
-      page: BreakdownMaintenanceScreen.new,
-      binding: BreakdownMaintenanceBinding()
-    ),
+        name: _Paths.breakdown,
+        page: BreakdownMaintenanceScreen.new,
+        binding: BreakdownMaintenanceBinding()),
     GetPage<dynamic>(
       name: _Paths.viewWarrantyClaim,
       page: ViewWarrantyClaimWeb.new,
@@ -215,10 +219,9 @@ class AppPages {
       binding: PreventiveMaintenanceExecutionViewBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.newWarrantyClaimList,
-      page: NewWarrantyClaimListWeb.new,
-      binding: HomeBinding()
-    ),
+        name: _Paths.newWarrantyClaimList,
+        page: NewWarrantyClaimListWeb.new,
+        binding: HomeBinding()),
     GetPage<dynamic>(
       name: _Paths.warrantyClaimListWeb,
       page: WarrantyClaimListWeb.new,
@@ -229,7 +232,7 @@ class AppPages {
       page: ViewPermitWebScreen.new,
       binding: ViewPermitBinding()
     ),
-     
+
      GetPage<dynamic>(
       name: _Paths.masterDashboard,
       page: MastersDashboard.new,
@@ -239,6 +242,29 @@ class AppPages {
       name: _Paths.permitTypeScreen,
       page: PermitTypeScreen.new,
       binding: PermitTypeBinding()
+    ),
+        name: _Paths.warrantyClaimListWeb,
+        page: WarrantyClaimListWeb.new,
+        binding: HomeBinding()),
+    // GetPage<dynamic>(
+    //   name: _Paths.editPermitWebScreen,
+    //   page: EditPermitWebScreen.new,
+    //   binding: EditPermitBinding()
+    // ),
+    GetPage<dynamic>(
+      name: _Paths.pmTaskView,
+      page: PreventiveMaintenanceTaskViewScreen.new,
+      binding: PreventiveMaintenanceTaskViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventory,
+      page: InventoryScreen.new,
+      binding: InventoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventoryList,
+      page: InventoryListScreen.new,
+      binding: HomeBinding(),
     ),
   ];
 }

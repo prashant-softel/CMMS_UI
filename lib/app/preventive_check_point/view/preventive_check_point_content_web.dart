@@ -319,6 +319,7 @@ class PreventiveCheckPointContentWeb
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
+                                      height: 40,
                                       width: (Get.width * .1),
                                       child: CustomElevatedButton(
                                           backgroundColor:
@@ -331,6 +332,7 @@ class PreventiveCheckPointContentWeb
                                     ),
                                     Container(
                                         width: (Get.width * .2) - 80,
+                                        height: 40,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
@@ -397,6 +399,7 @@ class PreventiveCheckPointContentWeb
                                   Row(
                                     children: [
                                       Container(
+                                        height: 45,
                                         width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -407,6 +410,7 @@ class PreventiveCheckPointContentWeb
                                       ),
                                       Container(
                                         width: (Get.width * .1) - 60,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -415,6 +419,7 @@ class PreventiveCheckPointContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        height: 45,
                                         width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -424,6 +429,7 @@ class PreventiveCheckPointContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        height: 45,
                                         width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(

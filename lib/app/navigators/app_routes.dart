@@ -37,6 +37,11 @@ abstract class Routes {
   static const viewPermitWebScreen = _Paths.viewPermitWebScreen;
   static const permitTypeScreen = _Paths.permitTypeScreen;
   static const masterDashboard = _Paths.masterDashboard;
+  static const pmTaskView = _Paths.pmTaskView;
+  static const inventory = _Paths.inventory;
+  static const inventoryList = _Paths.inventoryList;
+
+  // static const editPermitWebScreen = _Paths.editPermitWebScreen;
 }
 
 abstract class _Paths {
@@ -49,13 +54,14 @@ abstract class _Paths {
   static const facility = '/facility';
   static const jobCardDetails = '/job-card-details';
   static const login = '/login-screen';
-  static const preventive = '/preventive-screen';
+  static const preventive = '/preventive-maintenance';
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
   static const newPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
-  static const preventiveList = '/preventive-list-screen';
+  static const preventiveList =
+      '/preventive-maintenance/preventive-list-screen';
   static const preventiveCheckPoint = '/preventive-check-point';
   static const newPermitList = '/new-permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
@@ -74,4 +80,9 @@ abstract class _Paths {
   static const viewPermitWebScreen = '/view-permit-web-screen';
   static const permitTypeScreen = '/permit-type-screen';
   static const masterDashboard = '/master-dashboard';
+  static const pmTaskView = '/pm-task-view-screen';
+  static const inventory = '/inventory';
+  static const inventoryList = '/inventoryList';
+
+  // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

@@ -8,7 +8,9 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/frequency_model.dart';
+import '../../domain/models/save_pm_schedule_model.dart';
 import '../home/home_controller.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PmScheduleController extends GetxController {
   PmScheduleController(
@@ -41,10 +43,10 @@ class PmScheduleController extends GetxController {
     getInventoryCategoryList();
     getFrequencyList();
 
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 2), () {
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        getPMScheduleData(facilityId, 45, true);
+        getPMScheduleData(facilityId, selectedEquipmentId);
       });
     });
     super.onInit();
@@ -80,7 +82,10 @@ class PmScheduleController extends GetxController {
           int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-          getPMScheduleData(facilityId, selectedEquipmentId, true);
+          getPMScheduleData(
+            facilityId,
+            selectedEquipmentId,
+          );
         }
 
         break;
@@ -94,15 +99,17 @@ class PmScheduleController extends GetxController {
   }
 
   Future<void> getPMScheduleData(
-      int facilityId, int selectedEquipmentId, bool isLoading) async {
+      int facilityId, int selectedEquipmentId) async {
+    getPmScheduleList?.clear();
     getPmScheduleList?.value = <GetPmScheduleListModel>[];
     final _getPmScheduleList = await pmSchedulePresenter.getPMScheduleData(
         facilityId: facilityId,
         selectedEquipmentId: selectedEquipmentId,
-        isLoading: isLoading);
+        isLoading: true);
 
     if (_getPmScheduleList != null) {
       getPmScheduleList!.value = _getPmScheduleList;
+
       paginationController = PaginationController(
         rowCount: getPmScheduleList?.length ?? 0,
         rowsPerPage: 10,
@@ -116,6 +123,39 @@ class PmScheduleController extends GetxController {
           preventiveCheckListTableColumns.add(key);
         }
       }
+    }
+  }
+
+  void savePmSchedule() async {
+    List<AssetScheduleList> assetScheduleList = <AssetScheduleList>[];
+
+    getPmScheduleList?.forEach((element) {
+      List<FrequencyDatesList> frequencyDatesList = <FrequencyDatesList>[];
+
+      element?.frequency_dates?.forEach((e) {
+        if (e.schedule_date != null) {
+          frequencyDatesList.add(FrequencyDatesList(
+              frequency_id: e.frequency_id ?? 0,
+              schedule_date: e.schedule_date_value_controller!.text));
+        }
+      });
+      assetScheduleList.add(AssetScheduleList(
+          asset_id: element?.asset_id ?? 0,
+          frequency_dates: frequencyDatesList));
+    });
+
+    SavePmScheduleModel savePmScheduleModel = SavePmScheduleModel(
+        facilityId: facilityId, asset_schedules: assetScheduleList);
+    var pmScheduleJsonString = savePmScheduleModel.toJson();
+    print({"pmScheduleJsonString", pmScheduleJsonString});
+    List<dynamic>? responsePmScheduleCreated =
+        await pmSchedulePresenter.savePmSchedule(
+      pmScheduleJsonString: pmScheduleJsonString,
+      isLoading: true,
+    );
+    if (responsePmScheduleCreated == []) {
+      Fluttertoast.showToast(
+          msg: "PM Schedule Successfully...", fontSize: 16.0);
     }
   }
 }

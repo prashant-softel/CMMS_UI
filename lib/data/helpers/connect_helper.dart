@@ -133,9 +133,7 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? businessType,
-
   }) async {
-
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetBusinessList?businessType=$businessType',
       Request.getMultiparts,
@@ -148,13 +146,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getUnitCurrencyList({
-    required bool isLoading,
-    required String auth,
-    int? facilityId
-
-  }) async {
-
+  Future<ResponseModel> getUnitCurrencyList(
+      {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Utils/GetCurrencyList',
       Request.getMultiparts,
@@ -167,14 +160,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-  Future<ResponseModel> getEmployeeList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id
-
-  }) async {
-
+  Future<ResponseModel> getEmployeeList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -187,14 +174,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-  Future<ResponseModel> getEmployeePermitList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id
-
-  }) async {
-
+  Future<ResponseModel> getEmployeePermitList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -207,14 +188,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> getPermitIssuerList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id
-
-  }) async {
-
+  Future<ResponseModel> getPermitIssuerList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -227,14 +202,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-  Future<ResponseModel> getPermitApproverList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id
-
-  }) async {
-
+  Future<ResponseModel> getPermitApproverList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       // 'CMMS/GetBusinessList?businessType=$businessType' +
       //     blockIdParam +
@@ -251,13 +220,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getJobTypePermitList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id
-
-  }) async {
-
+  Future<ResponseModel> getJobTypePermitList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetJobTypeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -270,13 +234,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> getSopPermitList({
-    required bool isLoading,
-    required String auth,
-    int? job_type_id
-
-  }) async {
-
+  Future<ResponseModel> getSopPermitList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSOPList?job_type_id=$job_type_id',
       Request.getMultiparts,
@@ -289,13 +248,10 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> getSafetyMeasureList({
-    required bool isLoading,
-    required String auth,
-    int? permit_type_id
-
-  }) async {
-
+  Future<ResponseModel> getSafetyMeasureList(
+      {required bool isLoading,
+      required String auth,
+      int? permit_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSafetyMeasurementQuestionList?permit_type_id=$permit_type_id',
       Request.getMultiparts,
@@ -307,11 +263,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
-
-
-
-
 
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
@@ -418,15 +369,15 @@ class ConnectHelper {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
-    Request.put,
-    {'comment': "$comment", 'employee_id': "136",'id':"59616"},
+      Request.put,
+      {'comment': "$comment", 'employee_id': "136",'id':"59616"},
 
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
       },
     );
-    var res = responseModel.data; 
+    var res = responseModel.data;
     var parsedJson = json.decode(res);
     print('PermitIssueResponse: ${res}');
     Get.dialog<void>(PermitMessageIssueDialog(data:parsedJson['message']));
@@ -446,7 +397,6 @@ class ConnectHelper {
       'Permit/PermitApprove',
     Request.put,
     {'comment': "$comment", 'employee_id': "136",'id':"59616"},
-
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -460,7 +410,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
 
 //   Future<ResponseModel> getNewPermitList({
@@ -491,9 +440,6 @@ class ConnectHelper {
 //     return responseModel;
 //   }
 
-
-
-
   Future<ResponseModel> getInventoryDetailList({
     required String auth,
     bool? isLoading,
@@ -514,7 +460,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getPreventiveCheckList({
     required String auth,
@@ -648,7 +593,7 @@ class ConnectHelper {
         },
       );
 
-   Future<ResponseModel> getInventoryIsolationList({
+  Future<ResponseModel> getInventoryIsolationList({
     String? auth,
     bool? isLoading,
     int? facilityId,
@@ -663,7 +608,7 @@ class ConnectHelper {
         },
       );
 
-    Future<ResponseModel> getInventoryEquipmentNameList({
+  Future<ResponseModel> getInventoryEquipmentNameList({
     required bool isLoading,
     required String auth,
     int? facilityId,
@@ -1173,6 +1118,60 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> savePmSchedule({
+    required String auth,
+    pmScheduleJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/SetScheduleData',
+      Request.post,
+      pmScheduleJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPmTaskList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/GetPMTaskList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPmtaskViewList({
+    required String? auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 
