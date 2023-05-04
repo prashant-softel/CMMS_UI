@@ -11,9 +11,11 @@ String addCreatePermitModelToJson(CreatePermitModel data) => json.encode(data.to
 class CreatePermitModel {
   int? facility_id;
   int? blockId;
-  int? work_type_id;
+  int? job_type_id;
   int? lotoId;
-  int? typeId;
+  int? latitude;
+  int? longitude;
+  int? permitTypeId;
   int? sop_type_id;
   int? issuer_id;
   int? approver_id;
@@ -36,6 +38,8 @@ class CreatePermitModel {
       this.approver_id,
       this.blockId,
       this.block_ids,
+      this.latitude,
+      this.longitude,
       this.category_ids,
       this.description,
       this.title,
@@ -49,9 +53,9 @@ class CreatePermitModel {
       this.safety_question_list,
       this.sop_type_id,
       this.start_datetime,
-      this.typeId,
+      this.permitTypeId,
       this.user_id,
-      this.work_type_id
+      this.job_type_id
        });
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
@@ -60,27 +64,29 @@ class CreatePermitModel {
         issuer_id: json["issuer_id"],
         facility_id: json["facility_id"],
         blockId: json["blockId"],
-        work_type_id: json["work_type_id"],
+        job_type_id: json["job_type_id"],
+        latitude: json['latitude'] ?? '',
+        longitude: json['longitude'] ?? '',
         lotoId: json["lotoId"],
-        typeId: json["typeId"],
+        permitTypeId: json["permitTypeId"],
         sop_type_id: json["sop_type_id"],
         user_id: json["user_id"],
-        start_datetime: json["start_datetime"],
-        end_datetime: json["end_datetime"],
+        start_datetime: json["start_datetime"]??json['startDate'],
+        end_datetime: json["end_datetime"]??json['tillDate'],
         description: json["description"],
         title: json["title"],
         is_isolation_required: json["is_isolation_required"],
-        Loto_list: List<LotoList>.from(
-            json["Loto_list"].map((x) => LotoList.fromJson(x))),
-        employee_list: List<Employeelist>.from(
-            json["employee_list"].map((x) => Employeelist.fromJson(x))),
-        safety_question_list: List<Safetyquestionlist>.from(
+        Loto_list: json["Loto_list"]!=null? List<LotoList>.from(
+            json["Loto_list"]?.map((x) => LotoList.fromJson(x))):[],
+        employee_list: json["employee_list"]!=null? List<Employeelist>.from(
+            json["employee_list"].map((x) => Employeelist.fromJson(x))):[],
+        safety_question_list:json["safety_question_list"]!=null? List<Safetyquestionlist>.from(
             json["safety_question_list"]
-                .map((x) => Safetyquestionlist.fromJson(x))),
-        block_ids: List<int>.from(json["block_ids"].map((x) => x)),
-        isolated_category_ids:
-            List<int>.from(json["isolated_category_ids"].map((x) => x)),
-        category_ids: List<int>.from(json["category_ids"].map((x) => x)),
+                .map((x) => Safetyquestionlist.fromJson(x))):[],
+        block_ids:json["block_ids"]!=null? List<int>.from(json["block_ids"].map((x) => x)):[],
+        isolated_category_ids:json["isolated_category_ids"]!=null?
+            List<int>.from(json["isolated_category_ids"].map((x) => x)):[],
+        category_ids:json["category_ids"]!=null? List<int>.from(json["category_ids"].map((x) => x)):[],
       );
 
   Map<String, dynamic> toJson() => {
@@ -88,9 +94,10 @@ class CreatePermitModel {
         "issuer_id": issuer_id,
         "facility_id": facility_id,
         "block_id": blockId,
-        "work_type_id": work_type_id,
+        "latitude": latitude,
+        "job_type_id": job_type_id,
         "lotoId": lotoId,
-        "typeId": typeId,
+        "permitTypeId": permitTypeId,
         "sop_type_id": sop_type_id,
         "user_id": user_id,
         "start_datetime": start_datetime,

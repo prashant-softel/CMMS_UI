@@ -15,7 +15,6 @@ class HomeDrawer extends GetView {
   Widget build(BuildContext context) {
     return
         //
-
         Drawer(
       width: (Responsive.isMobile(context) || Responsive.isTablet(context))
           ? Get.width * 0.75
@@ -115,10 +114,10 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Misc",
+                        title: "Masters",
                         icon: "assets/files/misc.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.masterDashboard);
                         },
                       ),
                       MenuItem(

@@ -8,11 +8,11 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitMessageIssueDialog extends GetView {
+class PermitMessageApproveDialog extends GetView {
   String? createPermitData;
   String? data;
 
-  PermitMessageIssueDialog({super.key, this.createPermitData, this.data});
+  PermitMessageApproveDialog({super.key, this.createPermitData, this.data});
 
   @override
   Widget build(BuildContext context) {

@@ -21,7 +21,7 @@ class FileUploadController extends GetxController {
   Rx<int> progress = 0.obs;
   Rx<int> index = 0.obs;
   RxList<XFile> pickedFiles = <XFile>[].obs;
-  var selectedEvent = FileUploadEvents.BEFORE.obs;
+  // var selectedEvent = FileUploadEvents.BEFORE.obs;
   var token = '';
   List<TextEditingController> descriptionCtrlrs = [];
 
@@ -151,9 +151,9 @@ class FileUploadController extends GetxController {
     }
   } //
 
-  void setSelectedEvent(FileUploadEvents event) {
-    selectedEvent.value = event;
-  }
+  // void setSelectedEvent(FileUploadEvents event) {
+  //   selectedEvent.value = event;
+  // }
 
   void initializeDescriptionControllers(List<XFile> files) {
     descriptionCtrlrs = List<TextEditingController>.generate(

@@ -12,18 +12,11 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitIssueDialog extends GetView {
- String? permitIssueDialog;
-  bool safetyValue1 = true;
-  bool safetyValue2 = true;
-  bool safetyValue3 = true;
-  bool safetyValue4 = true;
-  bool safetyValue5 = false;
-  bool safetyValue6 = false;
-  bool safetyValue7 = true;
-String? permitId;
+class PermitApprovedDialog extends GetView {
+ String? permitApprovedDialog;
+ String? permitId;
  
-  PermitIssueDialog({super.key, this.permitIssueDialog, this. permitId});
+  PermitApprovedDialog({super.key, this.permitApprovedDialog, this. permitId});
   final NewPermitListController _controller = Get.find();
 
 
@@ -37,7 +30,7 @@ String? permitId;
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Issue Permit',
+          'Approve Permit',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -63,7 +56,7 @@ String? permitId;
                        CustomRichText(title: 'Comment'),
                        SizedBox(height: 20,),
                        TextField(
-                        controller: _controller.commentTextFieldCtrlr,
+                        controller: _controller.approveCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -82,13 +75,36 @@ String? permitId;
 
                       ],
                     ),
-                    
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                          
+                          
+                    //       Dimens.boxWidth10,
+                    //       ElevatedButton(
+                    //         style: Styles.greenElevatedButtonStyle,
+                    //         onPressed: () {
+                    //           _controller.permitApprovedButton(permitId:permitId);
+                    //           Get.back();
+                    //         },
+                    //         child: const Text('Permit Approve'),
+                    //       ),
+                    //       // Dimens.boxWidth10,
+                    //       // ElevatedButton(
+                    //       //   style: Styles.redElevatedButtonStyle,
+                    //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                    //       //   child: const Text('Add New Job'),
+                    //       // ),
+                    //     ]),
                   ]),
             );
           
         }),
         actions: [
-            SizedBox(
+           SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -107,10 +123,10 @@ String? permitId;
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
-                              _controller.permitIssueButton(permitId:permitId);
+                              _controller.permitApprovedButton(permitId:permitId);
                               Get.back();
                             },
-                            child: const Text('Issue Permit'),
+                            child: const Text('Approve Permit'),
                           ),
                         ]),
         ],

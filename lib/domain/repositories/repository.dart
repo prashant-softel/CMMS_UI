@@ -20,6 +20,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
@@ -37,6 +38,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
+import '../models/create_permit_model.dart';
 import '../models/frequency_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
@@ -242,15 +244,18 @@ class Repository {
         newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
-      var data = res.data;
-      //print('Response Create Permit: ${data}');
-      Get.dialog(
-        CreateNewPermitDialog(
-          createPermitData: 'Dialog Title',
-        ),
-      );
 
-      data = res.data;
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Permit: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
       //print('Response Create Permit: ${data}');
 
       if (!res.hasError) {
@@ -389,7 +394,44 @@ class Repository {
     }
   }
 
-  Future<List<CurrencyListModel>> getUnitCurrencyList({
+
+  Future<NewPermitDetailModel?> getViewPermitDetail({
+      bool? isLoading,   int? permitId,}
+
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getViewPermitDetail(
+        auth: auth,
+
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"Viewpermitdetail",res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+            final NewPermitDetailModel _viewPermitDetailModel =
+            newPermitDetailModelFromJson(res.data);
+
+           var responseMap = _viewPermitDetailModel;
+           print({"ViewResponseData",responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+     return null;
+    }
+  }
+
+
+   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
     // int? blockId,
     // required String categoryIds,
@@ -857,12 +899,44 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.permitIssueButton(
-        auth: auth,
+       auth: auth,
         comment: comment,
         id: id,
         employee_id: employee_id,
-        isLoading: isLoading ?? false,
+       isLoading: isLoading ?? false,
       );
+      print('PermitIssuerResponse5: ${res.data}');
+
+      if (!res.hasError) {
+
+
+      //  return _permitIssueModel;
+      } else {
+        Utility.showDialog('Something Went Wrong!!');
+      }
+    } catch (error) {
+      log(error.toString());
+
+    }
+  }
+
+   Future<void> permitApprovedButton(
+    String? comment,
+    String? employee_id,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitApprovedButton(
+       auth: auth,
+       comment: comment,
+       id: id,
+       employee_id: employee_id,
+       isLoading: isLoading ?? false,
+      );
+      print('PermitApprovedResponse5: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -873,6 +947,7 @@ class Repository {
       log(error.toString());
     }
   }
+
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,
@@ -1850,7 +1925,40 @@ class Repository {
       return [];
     }
   }
+ Future<NewPermitDetailModel?> getNewPermitDetail({
+      bool? isLoading,   int? permitId,}
 
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getNewPermitDetail(
+        auth: auth,
+
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"permitdetail",res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+            final NewPermitDetailModel _newPermitDetailModel =
+            newPermitDetailModelFromJson(res.data);
+
+           var responseMap = _newPermitDetailModel;
+           print({"responsedata",responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+     return null;
+    }
+  }
   Future<List<dynamic>> savePmSchedule(
     pmScheduleJsonString,
     bool? isLoading,

@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,10 @@ import '../theme/styles.dart';
 
 class CreateNewPermitDialog extends GetView {
   String? createPermitData;
+  String? data;
+  List<dynamic>? PtwId;
 
-  CreateNewPermitDialog({super.key, this.createPermitData});
+  CreateNewPermitDialog({super.key, this.createPermitData, this.data, this.PtwId});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class CreateNewPermitDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Success !!',
+          '$data',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.green),
         ),
@@ -32,7 +35,7 @@ class CreateNewPermitDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 170,
+            height: Responsive.isDesktop(context) ? 120 : 160,
             width: double.infinity,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,8 +44,22 @@ class CreateNewPermitDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                      'New Permit Created Successfully.\nPlease wait for Approval, you can start \nthe job only after PTW is approved '),
+              RichText(
+      text: TextSpan(
+        text: 'Permit Generated with Permit Id ',
+        style: DefaultTextStyle.of(context).style,
+        children: <TextSpan>[
+          TextSpan(
+            text: '$PtwId',
+            style: TextStyle(
+              color: Colors.blue, // Set the desired text color
+              fontWeight: FontWeight.bold, // Set any additional styles as needed
+            ),
+          ),
+          TextSpan(text: '. Please wait for Approval, you can start \nthe job only after PTW is approved'),
+        ],
+      ),
+    ),
                       SizedBox(height: 20,),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

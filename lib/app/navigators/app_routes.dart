@@ -34,6 +34,9 @@ abstract class Routes {
   static const pmTask = _Paths.pmTask;
   static const pmExecution = _Paths.pmExecution;
   static const pmExecutionView = _Paths.pmExecutionView;
+  static const viewPermitWebScreen = _Paths.viewPermitWebScreen;
+  static const permitTypeScreen = _Paths.permitTypeScreen;
+  static const masterDashboard = _Paths.masterDashboard;
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
@@ -74,6 +77,9 @@ abstract class _Paths {
   static const pmTask = '/pm-task-screen';
   static const pmExecution = '/pm-execution-screen';
   static const pmExecutionView = '/pm-execution-view-screen';
+  static const viewPermitWebScreen = '/view-permit-web-screen';
+  static const permitTypeScreen = '/permit-type-screen';
+  static const masterDashboard = '/master-dashboard';
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
