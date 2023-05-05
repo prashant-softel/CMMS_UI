@@ -37,20 +37,25 @@ class JobDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
-    // Read jobId
-    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
-    if (_jobId == null || _jobId == '' || _jobId == "null") {
-      jobId.value = Get.arguments;
-      await _flutterSecureStorage.write(
-        key: "jobId",
-        value: jobId.value == null ? '' : jobId.value.toString(),
-      );
-    } else {
-      jobId.value = int.tryParse(_jobId) ?? 0;
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+      if (_jobId == null || _jobId == '' || _jobId == "null") {
+        jobId.value = Get.arguments["jobId"];
+        await _flutterSecureStorage.write(
+          key: "jobId",
+          value: jobId.value == null ? '' : jobId.value.toString(),
+        );
+      } else {
+        jobId.value = int.tryParse(_jobId) ?? 0;
+      }
+      getJobDetails(jobId.value);
+      super.onInit();
+    } //
+    catch (e) {
+      print(e);
     }
-    getJobDetails(jobId.value);
-    super.onInit();
   }
 
   setDropdownValue(int index, String value) {

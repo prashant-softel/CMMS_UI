@@ -19,6 +19,7 @@ class AddJobModel {
     required this.description,
     required this.status,
     required this.createdBy,
+    required this.breakdownTime,
     required this.assetsIds,
     required this.workTypeIds,
   });
@@ -30,7 +31,8 @@ class AddJobModel {
   String title;
   String description;
   int status;
-  String createdBy;
+  int createdBy;
+  String? breakdownTime;
   List<AssetsId> assetsIds;
   List<int?> workTypeIds;
 
@@ -43,6 +45,9 @@ class AddJobModel {
         description: json["description"],
         status: json["status"],
         createdBy: json["createdBy"],
+        breakdownTime: (json['breakdown_time'] == null)
+            ? null
+            : json['breakdown_time'] as String,
         assetsIds: List<AssetsId>.from(
             json["AssetsIds"].map((x) => AssetsId.fromJson(x))),
         workTypeIds: List<int>.from(json["WorkType_Ids"].map((x) => x)),
@@ -57,6 +62,7 @@ class AddJobModel {
         "description": description,
         "status": status,
         "createdBy": createdBy,
+        "breakdown_time": breakdownTime,
         "AssetsIds": List<dynamic>.from(assetsIds.map((x) => x.toJson())),
         "WorkType_Ids": List<dynamic>.from(workTypeIds.map((x) => x)),
       };
