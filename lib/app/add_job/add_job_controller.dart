@@ -231,9 +231,7 @@ class AddJobController extends GetxController {
     if (selectedWorkAreaList.length < 1) {
       isWorkAreaSelected.value = false;
     }
-    if (selectedAssignedTo.value == '') {
-      isAssignedToSelected.value = false;
-    }
+
     if (jobTitleCtrlr.text.trim().length < 3) {
       isJobTitleInvalid.value = true;
     }
@@ -241,8 +239,7 @@ class AddJobController extends GetxController {
       isJobDescriptionInvalid.value = true;
     }
 
-    if (isAssignedToSelected.value == false ||
-        isFacilitySelected.value == false ||
+    if (isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
         isJobTitleInvalid.value == true ||
         isJobDescriptionInvalid == true ||
@@ -384,7 +381,7 @@ class AddJobController extends GetxController {
 
     getInventoryList(
       facilityId: facilityId,
-      blockId: 72, //selectedBlockId,
+      blockId: selectedBlockId,
       receivedCategoryIds: selectedEquipmentCategoryIdList,
     );
     getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);

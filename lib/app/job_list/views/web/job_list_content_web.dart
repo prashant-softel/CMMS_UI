@@ -302,7 +302,7 @@ class JobDataSource extends DataTableSource {
           '${jobDetails?.breakdownType ?? ''}',
           '${jobDetails?.permitId ?? ''}',
           '${jobDetails?.assignedToName ?? ''}',
-          '${jobDetails?.status ?? ''}',
+        '${statusValues.reverse[jobDetails?.status] ?? ''}',
           'Actions',
         ].map((value) {
           return DataCell(
@@ -345,7 +345,7 @@ class JobDataSource extends DataTableSource {
         }).toList(),
       ],
       onSelectChanged: (_) {
-        controller.goToJobCardScreen(int.tryParse('${jobDetails?.id}'));
+        controller.showJobDetails(int.tryParse('${jobDetails?.id}'));
       },
     );
   }
