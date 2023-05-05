@@ -2,6 +2,8 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'header_widget.dart';
+
 class AddInventory extends StatelessWidget {
   AddInventory({super.key});
 
@@ -9,9 +11,18 @@ class AddInventory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('${'hello'.tr}'),
-        ),
+        appBar: Responsive.isDesktop(context)
+            ? AppBar(
+                title: HeaderWidget(),
+                elevation: 0,
+                toolbarHeight: 90,
+                automaticallyImplyLeading: false,
+              )
+            : AppBar(
+                title: Text('Calibration History'),
+                centerTitle: true,
+                elevation: 0,
+              ),
         drawer: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? HomeDrawer()
             : null,
@@ -40,7 +51,7 @@ class AddInventory extends StatelessWidget {
                             icon: Icons.menu,
                             label: 'Inventory List',
                             onPressed: () async {},
-                            color: Colors.green, 
+                            color: Colors.green,
                           ),
                         ),
                         Dimens.boxHeight10,
@@ -130,7 +141,9 @@ class AddInventory extends StatelessWidget {
                                                 (index) => ListTile(
                                                   onTap: () {
                                                     _controller.onSelectEquipment(
-                                                        _controller.equipmentList[index]);
+                                                        _controller
+                                                                .equipmentList[
+                                                            index]);
                                                     Get.back();
                                                   },
                                                   title: Text(
@@ -357,7 +370,6 @@ class AddInventory extends StatelessWidget {
                 ),
               ),
             ),
-        
           ],
         ),
       );

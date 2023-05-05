@@ -14,6 +14,7 @@ import '../preventive_list_controller.dart';
 class PreventiveChecklistListContentWeb
     extends GetView<PreventiveListController> {
   PreventiveChecklistListContentWeb({Key? key}) : super(key: key);
+  final PreventiveListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -121,10 +122,9 @@ class PreventiveChecklistListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'CheckList Number: '),
+                                            CustomRichText(title: 'CheckList:'),
                                             SizedBox(
-                                              width: 10,
+                                              width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
@@ -405,7 +405,7 @@ class PreventiveChecklistListContentWeb
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Checklist Number List",
+                                      "Check List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -471,7 +471,8 @@ class PreventiveChecklistListContentWeb
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Checklist Number ",
+                                              "Checklist Id",
+                                              "Checklist ",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",
@@ -491,6 +492,7 @@ class PreventiveChecklistListContentWeb
                                                     0,
                                                 (index) {
                                                   return [
+                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -517,7 +519,8 @@ class PreventiveChecklistListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Checklist Number ",
+                                              "Checklist Id",
+                                              "Checklist ",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",
@@ -542,6 +545,8 @@ class PreventiveChecklistListContentWeb
                                                               .preventiveCheckList?[
                                                           index];
                                                   return [
+                                                    '${preventiveCheckListModelListDetails?.id}',
+
                                                     '${preventiveCheckListModelListDetails?.checklist_number}',
                                                     "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
                                                     '${preventiveCheckListModelListDetails?.category_name}',
@@ -580,14 +585,16 @@ class PreventiveChecklistListContentWeb
                                                                                 onPress: () {},
                                                                               )
                                                                             : Container(),
-                                                                        // :Container(),
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,
                                                                                 icon: Icons.delete,
                                                                                 label: 'Delete',
-                                                                                onPress: () {},
+                                                                                onPress: () {
+                                                                                  print(_preventiveCheckList[0]);
+                                                                                  controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
+                                                                                },
                                                                               )
                                                                             : Container()
                                                                       ])

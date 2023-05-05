@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -53,7 +52,7 @@ class PreventiveListController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 2), () {
         getPreventiveCheckList(facilityId, type, true);
       });
     });
@@ -189,5 +188,63 @@ class PreventiveListController extends GetxController {
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
+  }
+
+  void isDeleteDialog({String? checklist_id, String? checklist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the checkpoint ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: checklist,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteCkecklist(checklist_id).then((value) {
+                    Get.back();
+                    getPreventiveCheckList(facilityId, type, true);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteCkecklist(String? checklist_id) async {
+    {
+      await preventiveListPresenter.deleteCkecklist(
+        checklist_id,
+        isLoading: true,
+      );
+    }
   }
 }

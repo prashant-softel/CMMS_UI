@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 
@@ -544,29 +546,27 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
- Future<ResponseModel> getNewPermitDetail({
+  Future<ResponseModel> getNewPermitDetail({
     required String auth,
-   
-      bool? isLoading,   int? permitId,
+    bool? isLoading,
+    int? permitId,
   }) async =>
       await connectHelper.getNewPermitDetail(
         auth: auth,
-       permitId: permitId,
+        permitId: permitId,
         isLoading: isLoading ?? false,
       );
 
   Future<ResponseModel> getViewPermitDetail({
     required String auth,
-   
-      bool? isLoading,   int? permitId,
+    bool? isLoading,
+    int? permitId,
   }) async =>
       await connectHelper.getViewPermitDetail(
         auth: auth,
-       permitId: permitId,
+        permitId: permitId,
         isLoading: isLoading ?? false,
       );
-
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -581,8 +581,6 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
-
-  
 
   Future<ResponseModel> deleteCkeckpoint({
     auth,
@@ -831,6 +829,30 @@ class DataRepository extends DomainRepository {
       scheduleId: scheduleId,
       isLoading: isLoading,
     );
+  }
+
+  Future<bool> browseFiles(
+      {required String auth,
+      Uint8List? fileBytes,
+      required String fileName,
+      required bool isLoading}) async {
+    await connectHelper.browseFiles(
+      auth: auth,
+      fileBytes: fileBytes,
+      fileName: fileName,
+      isLoading: true,
+    );
+    return true;
+  }
+
+  Future<ResponseModel> deleteCkecklist({
+    auth,
+    bool? isLoading,
+    checklist_id,
+  }) async {
+    var response = await connectHelper.deleteCkecklist(
+        auth: auth, isLoading: isLoading, checklist_id: checklist_id);
+    return response;
   }
 
   ///
