@@ -52,6 +52,12 @@ class PreventiveMaintenanceTaskController extends GetxController {
     );
   }
 
+  Future<void> pmTaskHistory() async {
+    Get.toNamed(
+      Routes.customHistory,
+    );
+  }
+
   Future<void> getPmTaskList(int facilityId, bool isLoading) async {
     pmTaskList?.value = <PmTaskListModel>[];
     // pmTaskList?.clear();

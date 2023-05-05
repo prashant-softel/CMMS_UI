@@ -16,7 +16,6 @@ class HeaderWidget extends GetView<HomeController> {
 
   ///
   var controller = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) {
     return //
@@ -89,12 +88,14 @@ class HeaderWidget extends GetView<HomeController> {
                         onTap: () {
                           print("${varUserAccessModel.value.user_name ?? ""}");
                         },
-                        child: Text(
+                        child: Obx(
+                        () => Text(
                           "${varUserAccessModel.value.user_name}",
                           style: TextStyle(
                             color: Colors.black, // text color
                             fontSize: 12, // text size
                             fontWeight: FontWeight.w500, // text weight
+                          ),
                           ),
                         ),
                       ),

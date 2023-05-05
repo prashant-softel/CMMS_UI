@@ -1616,7 +1616,6 @@ class Repository {
         jobCardId: jobCardId,
         isLoading: isLoading,
       );
-
       if (!res.hasError) {
         final jsonJobCardDetailsModels = jsonDecode(res.data);
         final List<HistoryModel> _jobCardDetailsList = jsonJobCardDetailsModels
@@ -1626,11 +1625,12 @@ class Repository {
               ),
             )
             .toList();
+        print({"redd1", _jobCardDetailsList});
 
         return _jobCardDetailsList;
       } else {
         Utility.showDialog(res.errorCode.toString());
-        return null;
+        return [];
       }
     } catch (error) {
       print(error.toString());

@@ -86,7 +86,7 @@ class PreventiveMaintenanceTaskContentWeb
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
                               onPressed: () async {
-                                Get.dialog(
+                                await Get.dialog(
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 350,
@@ -99,14 +99,14 @@ class PreventiveMaintenanceTaskContentWeb
                                         cancelText: "CANCEL",
                                         confirmText: "Ok",
                                         showActionButtons: true,
-                                        onSelectionChanged:
-                                            (DateRangePickerSelectionChangedArgs
-                                                args) {
-                                          controller.fromDate.value =
-                                              args.value.startDate;
-                                          controller.toDate.value =
-                                              args.value.endDate;
-                                        },
+                                        // onSelectionChanged:
+                                        //     (DateRangePickerSelectionChangedArgs
+                                        //         args) {
+                                        //   controller.fromDate.value =
+                                        //       args.value.startDate;
+                                        //   controller.toDate.value =
+                                        //       args.value.endDate;
+                                        // },
                                         initialSelectedRange: PickerDateRange(
                                           controller.fromDate.value,
                                           controller.toDate.value,
@@ -126,11 +126,18 @@ class PreventiveMaintenanceTaskContentWeb
 
                                           var pickUpDate = DateTime.parse(
                                               data.startDate.toString());
+                                          controller.fromDate.value =
+                                              pickUpDate;
                                           var dropDate = DateTime.parse(
                                               data.endDate.toString());
-
+                                          dropDate != null
+                                              ? controller.toDate.value =
+                                                  dropDate
+                                              : controller.toDate.value =
+                                                  pickUpDate;
                                           Get.back();
                                         },
+                                        onCancel: () => Get.back(),
                                       ),
                                     ),
                                   ),
@@ -231,6 +238,7 @@ class PreventiveMaintenanceTaskContentWeb
                         child: controller.pmTaskList!.isEmpty
                             ? ScrollableTableView(
                                 columns: [
+                                  "Sr. No.",
                                   "Order Number",
                                   "Due Date",
                                   "Done Date",
@@ -258,12 +266,13 @@ class PreventiveMaintenanceTaskContentWeb
                                         '',
                                         '',
                                         '',
+                                        '',
                                       ];
                                     },
                                   ),
                                 ].map((record) {
                                   return TableViewRow(
-                                    height: 60,
+                                    height: 100,
                                     cells: record.map((value) {
                                       return TableViewCell(
                                         child: Text(value),
@@ -276,6 +285,7 @@ class PreventiveMaintenanceTaskContentWeb
                                 paginationController:
                                     controller.paginationController,
                                 columns: [
+                                  "Sr. No.",
                                   "Order Number",
                                   "Due Date",
                                   "Done Date",
@@ -286,7 +296,7 @@ class PreventiveMaintenanceTaskContentWeb
                                   "Action",
                                 ].map((column) {
                                   return TableViewColumn(
-                                    minWidth: Get.width * 0.15,
+                                    minWidth: Get.width * 0.16,
                                     label: column,
                                   );
                                 }).toList(),
@@ -298,6 +308,7 @@ class PreventiveMaintenanceTaskContentWeb
                                       var pmtaskListDetails =
                                           controller.pmTaskList?[index];
                                       return [
+                                        "${index + 1}",
                                         '${pmtaskListDetails?.maintenance_order_number}',
                                         '${pmtaskListDetails?.schedule_date}',
                                         '${pmtaskListDetails?.completed_date}',
@@ -311,11 +322,36 @@ class PreventiveMaintenanceTaskContentWeb
                                   ),
                                 ].map((record) {
                                   return TableViewRow(
-                                    height: 90,
+                                    height: 100,
                                     cells: record.map((value) {
                                       return TableViewCell(
                                         child: (value == "Action")
                                             ? Wrap(children: [
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.delete,
+                                                  label: 'Delete',
+                                                  onPress: () {},
+                                                ),
+                                                // TableActionButton(
+                                                //   color: ColorValues
+                                                //       .appLightBlueColor,
+                                                //   icon: Icons
+                                                //       .access_time_filled_outlined,
+                                                //   label: 'History',
+                                                //   onPress: () {
+                                                //     controller.pmTaskHistory();
+                                                //   },
+                                                // ),
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appGreenColor,
+                                                  icon: Icons
+                                                      .remove_red_eye_outlined,
+                                                  label: 'Execute',
+                                                  onPress: () {},
+                                                ),
                                                 TableActionButton(
                                                   color:
                                                       ColorValues.appGreenColor,
@@ -327,33 +363,13 @@ class PreventiveMaintenanceTaskContentWeb
                                                   },
                                                 ),
                                                 TableActionButton(
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                  icon: Icons.delete,
-                                                  label: 'Delete',
-                                                  onPress: () {},
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appLightBlueColor,
-                                                  icon: Icons
-                                                      .access_time_filled_outlined,
-                                                  label: 'History',
-                                                  onPress: () {},
-                                                ),
-                                                // TableActionButton(
-                                                //   color: ColorValues.appGreenColor,
-                                                //   icon: Icons.remove_red_eye_outlined,
-                                                //   label: 'Execute',
-                                                //   onPress: () {},
-                                                // ),
-                                                TableActionButton(
                                                   color: ColorValues
                                                       .appDarkBlueColor,
                                                   icon: Icons.link_sharp,
                                                   label: 'Link To Permit',
                                                   onPress: () {},
                                                 ),
+
                                                 TableActionButton(
                                                   color: ColorValues
                                                       .appYellowColor,

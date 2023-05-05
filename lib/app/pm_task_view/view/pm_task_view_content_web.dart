@@ -55,7 +55,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                   onTap: () {
                     Get.back();
                   },
-                  child: Text(" / Preventive Maintenance".toUpperCase(),
+                  child: Text(" / PREVENTIVE MAINTENANCE",
                       style: Styles.greyMediumLight12),
                 ),
                 Text(" / PM TASK VIEW", style: Styles.greyMediumLight12)
@@ -116,7 +116,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ),
                                   Dimens.boxWidth30,
                                   Text(
-                                      "${controller.pmtaskViewModel.value?.maintenance_order_number}",
+                                      "${controller.pmtaskViewModel.value?.maintenance_order_number ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                   Text(
@@ -125,7 +125,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ),
                                   Dimens.boxWidth30,
                                   Text(
-                                      "${controller.pmtaskViewModel.value?.equipment_name}",
+                                      "${controller.pmtaskViewModel.value?.equipment_name ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                 ],
@@ -140,7 +140,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ),
                                   Dimens.boxWidth30,
                                   Text(
-                                      "${controller.pmtaskViewModel.value?.assigned_to_name}",
+                                      "${controller.pmtaskViewModel.value?.assigned_to_name ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                   Text(
@@ -149,7 +149,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ),
                                   Dimens.boxWidth30,
                                   Text(
-                                      " ${controller.pmtaskViewModel.value?.completed_date}",
+                                      " ${controller.pmtaskViewModel.value?.completed_date ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                 ],
@@ -164,7 +164,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ),
                                   Dimens.boxWidth30,
                                   Text(
-                                      "${controller.pmtaskViewModel.value?.schedule_date}",
+                                      "${controller.pmtaskViewModel.value?.schedule_date ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                   Text(
@@ -173,7 +173,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ),
                                   Dimens.boxWidth30,
                                   Text(
-                                      "${controller.pmtaskViewModel.value?.completed_date}",
+                                      "${controller.pmtaskViewModel.value?.completed_date ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                 ],
@@ -244,6 +244,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               paginationController: controller
                                                   .schedulePaginationController,
                                               columns: [
+                                                "Sr. No.",
                                                 "Check Point No.",
                                                 "Check Point",
                                                 "Requirement",
@@ -268,6 +269,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                 .scheduleCheckList?[
                                                             index];
                                                     return [
+                                                      "${index + 1}",
                                                       '${scheduleCheckListDetails?.check_point_id}',
                                                       '${scheduleCheckListDetails?.check_point_name}',
                                                       '${scheduleCheckListDetails?.requirement}',
@@ -331,6 +333,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     Expanded(
                                       child: ScrollableTableView(
                                         columns: [
+                                          "Sr. No.",
                                           "Job ID",
                                           "Check Point No.",
                                           "Job Title",
@@ -344,6 +347,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         }).toList(),
                                         rows: [
                                           [
+                                            "1",
                                             "JQ325890",
                                             "2234",
                                             "Check and clean charging module",
@@ -403,6 +407,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     Expanded(
                                       child: ScrollableTableView(
                                         columns: [
+                                          "Sr. No.",
                                           "Time Stamp",
                                           "Posted By",
                                           "Comment",
@@ -421,6 +426,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               var getHistoryListDetails =
                                                   controller.historyLog?[index];
                                               return [
+                                                "${index + 1}",
                                                 '${getHistoryListDetails?.created_at}',
                                                 '${getHistoryListDetails?.created_by_name ?? ''}',
                                                 '${getHistoryListDetails?.comment ?? ''}',

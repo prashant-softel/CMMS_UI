@@ -112,7 +112,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _priventiveList(
-                            tittle: "Create CheckList Number",
+                            tittle: "Create CheckList",
                             ontap: () {
                               controller.createChecklist();
                             }),

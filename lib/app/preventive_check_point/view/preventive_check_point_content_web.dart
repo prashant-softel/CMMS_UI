@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../constant/constant.dart';
+import '../../navigators/app_pages.dart';
 import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -384,7 +385,9 @@ class PreventiveCheckPointContentWeb
                                         ActionButton(
                                           icon: Icons.upload,
                                           label: 'Import Check Point',
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Get.toNamed(Routes.importInventory);
+                                          },
                                           color: ColorValues.appDarkBlueColor,
                                         ),
                                       ],

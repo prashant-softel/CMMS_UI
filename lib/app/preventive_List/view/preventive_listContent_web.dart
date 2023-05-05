@@ -14,6 +14,7 @@ import '../preventive_list_controller.dart';
 class PreventiveChecklistListContentWeb
     extends GetView<PreventiveListController> {
   PreventiveChecklistListContentWeb({Key? key}) : super(key: key);
+  final PreventiveListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +58,7 @@ class PreventiveChecklistListContentWeb
                     child: Text(" / PREVENTIVE MAINTENANCE",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE CHECKLIST NUMBER",
-                      style: Styles.greyMediumLight12)
+                  Text(" / CREATE CHECKLIST", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -122,9 +122,9 @@ class PreventiveChecklistListContentWeb
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomRichText(
-                                                title: 'CheckList Number: '),
+                                                title: 'CheckList: '),
                                             SizedBox(
-                                              width: 10,
+                                              width: 65,
                                             ),
                                             Expanded(
                                               child: Container(
@@ -405,7 +405,7 @@ class PreventiveChecklistListContentWeb
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Checklist Number List",
+                                      "Check List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -471,7 +471,7 @@ class PreventiveChecklistListContentWeb
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Checklist Number ",
+                                              "Checklist ",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",
@@ -517,7 +517,7 @@ class PreventiveChecklistListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Checklist Number ",
+                                              "Checklist ",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",

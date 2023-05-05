@@ -33,8 +33,8 @@ class HistoryModel {
   int? secondaryModuleRefId;
   String? comment;
   int? createdById;
-  CreatedByName? createdByName;
-  DateTime? createdAt;
+  String? createdByName;
+  String? createdAt;
   int? status;
   dynamic latitude;
   dynamic longitude;
@@ -47,11 +47,11 @@ class HistoryModel {
         secondaryModuleRefId: json["secondary_module_ref_id"],
         comment: json["comment"],
         createdById: json["created_by_id"],
-        createdByName: createdByNameValues.map[json["created_by_name"]]!,
-        createdAt: DateTime.parse(json["created_at"]),
+        createdByName: json["created_by_name"],
+        createdAt: json["created_at"],
         status: json["status"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        latitude: json["latitude"] ?? "",
+        longitude: json["longitude"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,8 +62,8 @@ class HistoryModel {
         "secondary_module_ref_id": secondaryModuleRefId,
         "comment": comment,
         "created_by_id": createdById,
-        "created_by_name": createdByNameValues.reverse[createdByName],
-        "created_at": createdAt?.toIso8601String(),
+        "created_by_name": createdByName,
+        "created_at": createdAt,
         "status": status,
         "latitude": latitude,
         "longitude": longitude,

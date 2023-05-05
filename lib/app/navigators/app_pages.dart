@@ -21,7 +21,6 @@ import 'package:cmms/app/preventive_check_point/view/preventive_check_point_scre
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
-// import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dart';
 import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
@@ -33,10 +32,14 @@ import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
+import '../custom_history/custom_history_binding.dart';
+import '../custom_history/view/custom_history_screen.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
+import '../import_inventory/import_inventory_binding.dart';
+import '../import_inventory/view/import_inventory_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../job_card_details/job_card_details_binding.dart';
@@ -259,6 +262,16 @@ class AppPages {
       name: _Paths.inventoryList,
       page: InventoryListScreen.new,
       binding: HomeBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.customHistory,
+      page: CustomHistoryScreen.new,
+      binding: CustomHistoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.importInventory,
+      page: ImportInventoryScreen.new,
+      binding: ImportInventoryBinding(),
     ),
   ];
 }
