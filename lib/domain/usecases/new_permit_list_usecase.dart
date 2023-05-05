@@ -38,6 +38,22 @@ class NewPermitListUsecase {
         id,
         isLoading,
         
+      );
+      }
+      
+
+  Future<void> permitApprovedButton({
+    String? comment,
+    String? employee_id,
+    String? id,
+    bool? isLoading,
+  }) async {
+      await repository.permitApprovedButton(
+        comment,
+        employee_id,
+        id,
+        isLoading,
+        
       );}
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required bool isLoading,

@@ -1,46 +1,43 @@
 import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/master_dashboard/master_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/widgets/header_widget.dart';
 
 // import '../../navigators/app_pages.dart';
 
-class BreakdownMaintenanceScreen
-    extends GetView<BreakdownMaintenanceController> {
-  ///
-  BreakdownMaintenanceScreen({super.key});
-  final NewPermitController _controller = Get.find();
-  final BreakdownMaintenanceController controller = Get.find();
+class MastersDashboard
+    extends GetView<MastersController> {
+  MastersDashboard({super.key});
+
+  // final BreakdownMaintenanceController controller = Get.find();
+  
 
 
-
-  ///
   @override
   Widget build(BuildContext context) {
-    ///
     var size = MediaQuery.of(context).size;
+
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
+
     final double itemWidth = size.width / 2;
 
-    return //
-        Scaffold(
-      appBar: //
-          Responsive.isDesktop(context)
-              ? AppBar(
-                  title: HeaderWidget(),
-                  elevation: 0,
-                  toolbarHeight: 100,
-                  automaticallyImplyLeading: false,
-                )
-              : AppBar(
-                  title: HeaderWidget(),
-                  elevation: 0,
-                ),
+    return Scaffold(
+      appBar: Responsive.isDesktop(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 100,
+              automaticallyImplyLeading: false,
+            )
+          : AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+            ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -62,11 +59,9 @@ class BreakdownMaintenanceScreen
                     SizedBox(
                       height: 40,
                     ),
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
+                    if (Responsive.isMobile(context))
                       Obx(
-                        () => //
-                            Container(
+                        () => Container(
                           width: MediaQuery.of(context).size.width,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -108,16 +103,13 @@ class BreakdownMaintenanceScreen
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Text(
-                          "Breakdown Maintenance",
+                          "Permit List",
                           style: TextStyle(
-                            color: Color.fromARGB(255, 159, 156, 156),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                          ),
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 24,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
-
-                    /// GRID TILES
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
@@ -130,29 +122,32 @@ class BreakdownMaintenanceScreen
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         createContentTile(
+                            title: "Permit Type",
+                            onTap: () {
+                              controller.goToPermitTypeScreen();
+                            }),
+                        createContentTile(
+                          title: 'Safety Questions',
+                          onTap: (){
+                            // controller.addNewJob();
+                          }),
+                          createContentTile(
+                            title: "Job Type",
+                            onTap: () {
+                              // controller.newPermitList();
+                            }),
+                        createContentTile(
                             title: "Job List",
                             onTap: () {
-                              controller.goToJobListScreen();
+                              // controller.createNewPermit();
                             }),
-                        createContentTile(
-                            title: 'Add New Job',
-                            onTap: () {
-                              controller.addNewJob();
-                            }),
-                        createContentTile(
-                            title: "Permit List",
-                            onTap: () {
-                              controller.newPermitList();
-                            }),
-                        createContentTile(
-                            title: "Add New Permit",
-                            onTap: () {
-                              controller.createNewPermit();
-                            }),
-                        createContentTile(title: "Job Card List"),
+                        // createContentTile(title: "Job Card List"),
+                        // _priventiveList(tittle: "PM Schedule View"),
+                        // _priventiveList(tittle: "PM Report"),
+                        // _priventiveList(tittle: "PM Report"),
+                        // _priventiveList(tittle: "PM "),
                       ],
                     )
-                    //
                   ]),
             ),
           ],
@@ -161,7 +156,7 @@ class BreakdownMaintenanceScreen
     );
   }
 
-  Widget createContentTile({required String title, Function()? onTap}) {
+  createContentTile({required String title, Function()? onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

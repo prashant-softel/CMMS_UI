@@ -180,7 +180,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        newPermitListModel?.equipment ?? '',
+                                        newPermitListModel?.equipmentCategory ?? '',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),

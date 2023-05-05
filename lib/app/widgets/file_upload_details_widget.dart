@@ -67,22 +67,26 @@ class FileUploadDetailsWidget extends StatelessWidget {
                       if (selected ?? true) {}
                     },
                     cells: [
-                      DataCell(
-                        DropdownButton<FileUploadEvents>(
-                          isExpanded: true,
-                          value: _fileUploadController.selectedEvent.value,
-                          onChanged: (FileUploadEvents? newValue) {
-                            _fileUploadController.setSelectedEvent(
-                                newValue ?? FileUploadEvents.BEFORE);
-                          },
-                          items: FileUploadEvents.values.map((event) {
-                            return DropdownMenuItem<FileUploadEvents>(
-                              value: event,
-                              child: Text(event.toString().split('.').last),
-                            );
-                          }).toList(),
-                        ),
-                      ),
+
+                      ///Commented by Anas
+                      
+                      // DataCell(
+                      //   DropdownButton<FileUploadEvents>(
+                      //     isExpanded: true,
+                      //     value: _fileUploadController.selectedEvent.value,
+                      //     onChanged: (FileUploadEvents? newValue) {
+                      //       _fileUploadController.setSelectedEvent(
+                      //           newValue ?? FileUploadEvents.BEFORE);
+                      //     },
+                      //     items: FileUploadEvents.values.map((event) {
+                      //       return DropdownMenuItem<FileUploadEvents>(
+                      //         value: event,
+                      //         child: Text(event.toString().split('.').last),
+                      //       );
+                      //     }).toList(),
+                      //   ),
+                      // ),
+                   
                       DataCell(
                         TextFormField(
                           decoration: InputDecoration(

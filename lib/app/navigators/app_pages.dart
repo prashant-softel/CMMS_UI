@@ -7,8 +7,12 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
-import 'package:cmms/app/edit_permit/edit_permit_binding.dart';
-import 'package:cmms/app/edit_permit/view/web/edit_permit_screen_web.dart';
+import 'package:cmms/app/master_dashboard/master_binding.dart';
+import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
+import 'package:cmms/app/permit_type/permit_type_binding.dart';
+import 'package:cmms/app/permit_type/view/permit_type_screen.dart';
+import 'package:cmms/app/view_permit/view_permit_binding.dart';
+import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
 import 'package:cmms/app/new_permit/new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
@@ -217,9 +221,29 @@ class AppPages {
         page: NewWarrantyClaimListWeb.new,
         binding: HomeBinding()),
     GetPage<dynamic>(
-        name: _Paths.warrantyClaimListWeb,
-        page: WarrantyClaimListWeb.new,
-        binding: HomeBinding()),
+      name: _Paths.warrantyClaimListWeb,
+      page: WarrantyClaimListWeb.new,
+      binding: HomeBinding()
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewPermitWebScreen,
+      page: ViewPermitWebScreen.new,
+      binding: ViewPermitBinding()
+    ),
+
+     GetPage<dynamic>(
+      name: _Paths.masterDashboard,
+      page: MastersDashboard.new,
+      binding: MastersBinding()
+    ),
+    GetPage<dynamic>(
+      name: _Paths.permitTypeScreen,
+      page: PermitTypeScreen.new,
+      binding: PermitTypeBinding()
+    ),
+        // name: _Paths.warrantyClaimListWeb,
+        // page: WarrantyClaimListWeb.new,
+        // binding: HomeBinding()),
     // GetPage<dynamic>(
     //   name: _Paths.editPermitWebScreen,
     //   page: EditPermitWebScreen.new,

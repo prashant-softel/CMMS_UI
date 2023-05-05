@@ -1,10 +1,15 @@
+import 'dart:async';
+
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_presenter.dart';
+import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -32,18 +37,24 @@ class NewPermitListController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
   int facilityId = 45;
-  int userId = 33;
+  // int userId = 33;
   Rx<int> permitId = 0.obs;
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
   NewPermitListModel? newPermitListModel;
+  PermitIssueModel? permitIssueModel;
   RxList<String> newPermitListTableColumns = <String>[].obs;
   PaginationController newPermitPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
   TextEditingController commentTextFieldCtrlr = TextEditingController();
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  int userId = varUserAccessModel.value.user_id ?? 0;
+
+  StreamSubscription<int>? facilityIdStreamSubscription;
+
 
   
 
@@ -51,12 +62,17 @@ class NewPermitListController extends GetxController {
   @override
   void onInit() async {
     //homePresenter.generateToken();
+    facilityIdStreamSubscription = controller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        getNewPermitList(facilityId, userId);
+      });
+      
+    });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
-      Future.delayed(Duration(milliseconds: 500), () {
-        getNewPermitList(facilityId, userId);
-      });
+      
       // Future.delayed(Duration(milliseconds: 500), () {
       //   getPermitIssueButton();
       // });
@@ -96,10 +112,7 @@ class NewPermitListController extends GetxController {
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
-      newPermitPaginationController = PaginationController(
-        rowCount: newPermitList!.length,
-        rowsPerPage: 10,
-      );
+     
 
       if (newPermitList != null && newPermitList!.isNotEmpty) {
         newPermitListModel = newPermitList![0];
@@ -110,21 +123,58 @@ class NewPermitListController extends GetxController {
         }
       }
     }
+     newPermitPaginationController = PaginationController(
+        rowCount: newPermitList!.length,
+        rowsPerPage: 10,
+      );
 
     update(['new_permit_list']);
   }
 
-  Future<void> permitIssueButton({String? permitId}) async{    String _comment = commentTextFieldCtrlr.text.trim();
+  Future<void> permitIssueButton({String? permitId}) async{ 
+    String _comment = commentTextFieldCtrlr.text.trim();
 
     final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
-    comment: _comment,id:permitId ,employee_id: "136",
+    comment: _comment,
+    id:permitId,
+    employee_id: "136",
         );
+        // showAlertPermitIssueDialog();
+    print('Issue Data1:${_comment}');
+    print('Issue Data:${permitId}');
+    print('Issue Data:${136}');
+        
+
+  }
+
+  Future<void> permitApprovedButton({String? permitId}) async{    
+    String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+
+    final _permitApprovedBtn = await newPermitListPresenter.permitApprovedButton(
+    comment: _approveComment,
+    id:permitId,
+    employee_id: "136",
+        );
+        // showAlertPermitApproveDialog();
+    print('Approved Data:${_approveComment}');
+    print('Approved Data:${permitId}');
+    print('Approved Data:${136}');
+
+        
 
   }
 
  
-  Future<void> addNewPermitList() async {
-    Get.toNamed(Routes.newPermit, arguments: facilityId);
+  Future<void> addNewPermitList({ String? permitId}) async {
+    Get.toNamed(Routes.newPermit, arguments: permitId);
+  }
+
+  Future<void> editNewPermit({ int? permitId}) async {
+    Get.toNamed(Routes.newPermit, arguments: permitId);
+  }
+
+  Future<void> viewNewPermitList({int? permitId}) async {
+    Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
   }
 
   void goToJobCardScreen(int? jobId) {
@@ -136,14 +186,23 @@ class NewPermitListController extends GetxController {
     // Get.toNamed(Routes.jobDetails, arguments: _jobId);
   }
   
-   static void showAlertDialog({
-    String? comment,
-    int? employee_id,
-    int? id,
-    Function()? onPress,
-  }) async {
-    await Get.dialog<void>(PermitMessageIssueDialog());
-  }
+  //  static void showAlertPermitIssueDialog({
+  //   String? comment,
+  //   int? employee_id,
+  //   int? id,
+  //   Function()? onPress,
+  // }) async {
+  //   await Get.dialog<void>(PermitMessageIssueDialog());
+  // }
+
+  // static void showAlertPermitApproveDialog({
+  //   String? comment,
+  //   int? employee_id,
+  //   int? id,
+  //   Function()? onPress,
+  // }) async {
+  //   await Get.dialog<void>(PermitMessageApproveDialog());
+  // }
 
   ///
 }
