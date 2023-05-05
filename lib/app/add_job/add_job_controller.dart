@@ -264,6 +264,7 @@ class AddJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
+      String _breakdownTime = breakdownTimeCtrlr.text;
 
       List<AssetsId> assetIds = <AssetsId>[];
 
@@ -276,27 +277,28 @@ class AddJobController extends GetxController {
       }
 
       AddJobModel addJobModel = AddJobModel(
-        facilityId: selectedFacilityId,
+        facilityId: facilityId,
         blockId: selectedBlockId,
         permitId: _permitId,
         assignedId: selectedAssignedToId,
         title: _title,
         description: _description,
         status: 2,
-        createdBy: "",
+        createdBy: 2,
+        breakdownTime: _breakdownTime,
         assetsIds: assetIds,
         workTypeIds: selectedWorkAreaIdList,
       );
-      var jobJsonString = addJobModelToJson(addJobModel);
+      // var jobJsonString = addJobModelToJson(addJobModel);
 
       Map<String, dynamic>? responseMapJobCreated =
           await addJobPresenter.saveJob(
-        job: jobJsonString,
+        job: addJobModel,
         isLoading: false,
       );
       if (responseMapJobCreated != null) {
-        var _jobId = responseMapJobCreated["id"];
-        intJobId = _jobId;
+        var _jobId = responseMapJobCreated["id"][0];
+        intJobId.value = _jobId; // intJobId is used in the UI (popup)
         showAlertDialog(jobId: _jobId);
       }
     }

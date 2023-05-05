@@ -293,7 +293,8 @@ class EditJobController extends GetxController {
         title: _title,
         description: _description,
         status: 2,
-        createdBy: "",
+        createdBy: 0,
+        breakdownTime: "",
         assetsIds: assetIds,
         workTypeIds: selectedWorkAreaIdList,
       );
