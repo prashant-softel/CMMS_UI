@@ -131,7 +131,7 @@ class JobListController extends GetxController {
     Get.toNamed(Routes.editJob, arguments: jobId);
   }
 
-  void showJobDetails(int _jobId) {
+  void showJobDetails(int? _jobId) {
     Get.toNamed(Routes.jobDetails, arguments: _jobId);
   }
 
