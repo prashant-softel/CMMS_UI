@@ -40,6 +40,7 @@ abstract class Routes {
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
+  static const importInventory = _Paths.importInventory;
 
   // static const editPermitWebScreen = _Paths.editPermitWebScreen;
 }
@@ -83,6 +84,7 @@ abstract class _Paths {
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
+  static const importInventory = '/importInventory';
 
   // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

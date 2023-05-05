@@ -35,10 +35,16 @@ class PreventiveListPresenter {
     required bool isLoading,
   }) async {
     print("presenter");
-     preventivelistUsecase.createChecklistNumber(
+    preventivelistUsecase.createChecklistNumber(
       checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );
     return true;
   }
+
+  deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
+      await preventivelistUsecase.deleteCkecklist(
+        checklist_id: checklist_id ?? 0,
+        isLoading: isLoading,
+      );
 }

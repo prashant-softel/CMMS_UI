@@ -37,6 +37,8 @@ import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
+import '../import_inventory/import_inventory_binding.dart';
+import '../import_inventory/view/import_inventory_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../job_card_details/job_card_details_binding.dart';
@@ -221,29 +223,25 @@ class AppPages {
         page: NewWarrantyClaimListWeb.new,
         binding: HomeBinding()),
     GetPage<dynamic>(
-      name: _Paths.warrantyClaimListWeb,
-      page: WarrantyClaimListWeb.new,
-      binding: HomeBinding()
-    ),
+        name: _Paths.warrantyClaimListWeb,
+        page: WarrantyClaimListWeb.new,
+        binding: HomeBinding()),
     GetPage<dynamic>(
-      name: _Paths.viewPermitWebScreen,
-      page: ViewPermitWebScreen.new,
-      binding: ViewPermitBinding()
-    ),
+        name: _Paths.viewPermitWebScreen,
+        page: ViewPermitWebScreen.new,
+        binding: ViewPermitBinding()),
 
-     GetPage<dynamic>(
-      name: _Paths.masterDashboard,
-      page: MastersDashboard.new,
-      binding: MastersBinding()
-    ),
     GetPage<dynamic>(
-      name: _Paths.permitTypeScreen,
-      page: PermitTypeScreen.new,
-      binding: PermitTypeBinding()
-    ),
-        // name: _Paths.warrantyClaimListWeb,
-        // page: WarrantyClaimListWeb.new,
-        // binding: HomeBinding()),
+        name: _Paths.masterDashboard,
+        page: MastersDashboard.new,
+        binding: MastersBinding()),
+    GetPage<dynamic>(
+        name: _Paths.permitTypeScreen,
+        page: PermitTypeScreen.new,
+        binding: PermitTypeBinding()),
+    // name: _Paths.warrantyClaimListWeb,
+    // page: WarrantyClaimListWeb.new,
+    // binding: HomeBinding()),
     // GetPage<dynamic>(
     //   name: _Paths.editPermitWebScreen,
     //   page: EditPermitWebScreen.new,
@@ -263,6 +261,11 @@ class AppPages {
       name: _Paths.inventoryList,
       page: InventoryListScreen.new,
       binding: HomeBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.importInventory,
+      page: ImportInventoryScreen.new,
+      binding: ImportInventoryBinding(),
     ),
   ];
 }

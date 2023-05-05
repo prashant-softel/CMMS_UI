@@ -82,15 +82,14 @@ class InventoryScreen extends GetView<InventoryController> {
                         _inventoryList(
                             tittle: "Add Inventory",
                             ontap: () {
+                              Get.to(() => AddInventory());
+
                               //  controller.checkPoint();
                             }),
                         _inventoryList(
                             tittle: "Import Inventory",
                             ontap: () {
-                              // Get.toNamed(
-                              //   Routes.preventiveMaintenanceMapping,
-                              // );
-                              //    controller.pmMapping();
+                              Get.toNamed(Routes.importInventory, arguments: 1);
                             }),
                         _inventoryList(
                             tittle: "Warranty Certificates",
