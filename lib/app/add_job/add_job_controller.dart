@@ -89,7 +89,7 @@ class AddJobController extends GetxController {
   var jobTitleCtrlr = TextEditingController();
   var breakdownTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
-  Rx<int> intJobId = 0.obs;
+  Rx<int> jobID = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
@@ -298,7 +298,7 @@ class AddJobController extends GetxController {
       );
       if (responseMapJobCreated != null) {
         var _jobId = responseMapJobCreated["id"][0];
-        intJobId.value = _jobId; // intJobId is used in the UI (popup)
+        jobID.value = _jobId; // intJobId is used in the UI (popup)
         showAlertDialog(jobId: _jobId);
       }
     }

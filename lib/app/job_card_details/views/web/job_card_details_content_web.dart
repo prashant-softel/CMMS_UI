@@ -64,7 +64,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                       children: [
                     Text('Job Details', style: Styles.blackBold16),
                   ]),
-                  TransposedTable(controller.jobDetails),
+                  TransposedTable(controller.jobDetails.value),
                   Dimens.boxHeight20,
 
                   /// TABLE - PERMIT DETAILS

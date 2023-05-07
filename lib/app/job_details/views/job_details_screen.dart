@@ -1,6 +1,7 @@
 import 'package:cmms/app/job_details/job_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../domain/models/job_model.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
@@ -75,16 +76,17 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
               Padding(
             padding: Dimens.edgeInsets20,
             child: (controller.jobDetailsModel.value != null)
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    //
-                    children: [
-                        Obx(
-                          () => //
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  //
-                                  children: [
+                ? //
+                Obx(
+                    () => //
+                        Column(
+                            mainAxisSize: MainAxisSize.min,
+                            //
+                            children: [
+                          Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              //
+                              children: [
                                 /// LEFT COLUMN
                                 Expanded(
                                   child: //
@@ -174,9 +176,11 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                           children: [
                                         JobDetailField(
                                           title: 'Current Status',
-                                          value: controller.jobDetailsModel
-                                                  .value?.statusShort ??
-                                              '',
+                                          value: JobStatusData
+                                              .getStatusStringFromInt(controller
+                                                  .jobDetailsModel
+                                                  .value
+                                                  ?.status),
                                         ),
                                         JobDetailField(
                                           title: 'Raised By',
@@ -235,30 +239,31 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                       ]),
                                 ),
                               ]),
-                        ),
 
-                        /// ASSIGN/RE-ASSIGN BUTTON
+                          /// ASSIGN/RE-ASSIGN BUTTON
 
-                        if (controller.jobDetailsModel.value?.statusShort
-                                ?.toLowerCase() ==
-                            "created") ...[
-                          ElevatedButton(
-                            style: editButtonStyle,
-                            onPressed: () => controller.editJob(),
-                            child: Text('Assign'),
-                          )
-                        ] else if (controller.jobDetailsModel.value?.statusShort
-                                ?.toLowerCase() ==
-                            "assigned") ...[
-                          ElevatedButton(
-                            style: editButtonStyle,
-                            onPressed: () => controller.editJob(),
-                            child: Text(
-                              'Re-Assign',
+                          if (controller.jobDetailsModel.value?.assignedId ==
+                              0) ...[
+                            ElevatedButton(
+                              style: editButtonStyle,
+                              onPressed: () => controller.editJob(),
+                              child: Text('Assign'),
+                            )
+                          ] //
+                          else if ((controller
+                                      .jobDetailsModel.value?.assignedId ??
+                                  0) >
+                              0) ...[
+                            ElevatedButton(
+                              style: editButtonStyle,
+                              onPressed: () => controller.editJob(),
+                              child: Text(
+                                'Re-Assign',
+                              ),
                             ),
-                          )
-                        ],
-                      ])
+                          ],
+                        ]),
+                  )
                 : Dimens.box0,
           ),
         ),

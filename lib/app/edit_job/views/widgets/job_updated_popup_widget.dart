@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../add_job/add_job_controller.dart';
-import '../navigators/app_pages.dart';
-import '../theme/color_values.dart';
-import '../theme/dimens.dart';
-import '../theme/styles.dart';
 
-class JobSavedDialog extends GetView<AddJobController> {
-  const JobSavedDialog({
+import '../../../navigators/app_pages.dart';
+import '../../../theme/color_values.dart';
+import '../../../theme/dimens.dart';
+import '../../../theme/styles.dart';
+import '../../edit_job_controller.dart';
+
+class JobUpdatedDialog extends GetView<EditJobController> {
+  JobUpdatedDialog({
     super.key,
   });
 
@@ -35,7 +36,7 @@ class JobSavedDialog extends GetView<AddJobController> {
               thickness: 1,
             ),
             Spacer(),
-            Text('Job created with Job Id: ${controller.jobID}'),
+            Text('Job updated for Job Id: ${controller.jobID}'),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
@@ -62,6 +63,4 @@ class JobSavedDialog extends GetView<AddJobController> {
       actions: [],
     );
   }
-
-  ///
 }

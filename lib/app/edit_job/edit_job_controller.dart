@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
@@ -24,6 +28,7 @@ class EditJobController extends GetxController {
   HomePresenter homePresenter;
   JobListPresenter jobListPresenter;
   JobDetailsPresenter jobDetailsPresenter;
+  HomeController homeController = Get.find<HomeController>();
 
   ///
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
@@ -44,6 +49,7 @@ class EditJobController extends GetxController {
 
   //
   Rx<String> selectedWorkTypeCategory = ''.obs;
+  Rx<bool> isWorkTypeSelected = true.obs;
   Rx<bool> isWorkTypeCategorySelected = false.obs;
   RxList<WorkTypeModel?> selectedWorkTypeList = <WorkTypeModel>[].obs;
   RxList<WorkTypeModel?> workTypeList = <WorkTypeModel>[].obs;
@@ -59,7 +65,7 @@ class EditJobController extends GetxController {
 
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
-  Rx<bool> isEquipmentCategorySelected = false.obs;
+  Rx<bool> isEquipmentCategorySelected = true.obs;
   RxList<InventoryCategoryModel?> selectedEquipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -81,7 +87,7 @@ class EditJobController extends GetxController {
 
   ///
   int selectedPermitId = 0;
-  int facilityId = 45;
+  int facilityId = 0;
   int blockId = 72;
   List<int> categoryIds = <int>[];
   Rx<bool> isFormInvalid = false.obs;
@@ -93,41 +99,73 @@ class EditJobController extends GetxController {
   var breakdownTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
-  var jobId = 0;
+  Rx<int> jobID = 0.obs;
+
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
   @override
   void onInit() async {
-    jobId = Get.arguments;
-    await getJobDetails(jobId);
-    await getFacilityList();
-    await getBlocksList(selectedFacilityId);
-    await getInventoryCategoryList(selectedFacilityId.toString());
-    await getInventoryList(
-      facilityId: selectedFacilityId,
-      blockId: selectedBlockId,
-    );
-    await getWorkTypeList();
-    await getAssignedToList();
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+      if (_jobId == null || _jobId == '' || _jobId == "null") {
+        jobID.value = Get.arguments["jobId"];
+        await _flutterSecureStorage.write(
+          key: "jobId",
+          value: jobID.value == null ? '' : jobID.value.toString(),
+        );
+      } else {
+        jobID.value = int.tryParse(_jobId) ?? 0;
+      }
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        selectedFacilityId = event;
+        if (selectedFacilityId > 0) {
+          isFacilitySelected.value = true;
+        }
+        await getJobDetails(jobID.value);
+        await getFacilityList();
+        await getBlocksList(selectedFacilityId);
+        await getInventoryCategoryList(selectedFacilityId.toString());
+        await getInventoryList(
+          facilityId: selectedFacilityId,
+          blockId: selectedBlockId,
+        );
+        await getWorkTypeList();
+        await getAssignedToList();
+      });
+    } catch (e) {
+      print(e);
+    }
     super.onInit();
   }
 
-  Future<void> getJobDetails(int jobId) async {
-    //jobId = 3158;
+  Future<void> getJobDetails(int _jobId) async {
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
-        await jobDetailsPresenter.getJobDetails(jobId: jobId);
+        await jobDetailsPresenter.getJobDetails(jobId: _jobId);
 
     if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
       jobDetailsModel.value = _jobDetailsList[0];
       update(["jobDetailsModel"]);
-      // Fill Job Title and Job Description
+      // Fill Job Title and Job Description and Breakdown Time
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
+      breakdownTimeCtrlr.text =
+          formatDateTime(jobDetailsModel.value?.breakdownTime);
     }
 
     associatedPermitList?.value =
         jobDetailsModel.value?.associatedPermitList ?? <AssociatedPermit>[];
+  }
+
+  String formatDateTime(timestamp) {
+    // Format the DateTime object without milliseconds
+    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    String formattedDateTime = formatter.format(timestamp);
+    return formattedDateTime;
   }
 
   Future<void> getFacilityList() async {
@@ -156,8 +194,9 @@ class EditJobController extends GetxController {
   }
 
   Future<void> getAssignedToList() async {
-    final _assignedToList =
-        await editJobPresenter.getAssignedToList(facilityId: facilityId);
+    final _assignedToList = await editJobPresenter.getAssignedToList(
+      facilityId: selectedFacilityId,
+    );
 
     if (_assignedToList != null) {
       for (var block in _assignedToList) {
@@ -222,6 +261,7 @@ class EditJobController extends GetxController {
         if (_selectedWorkAreaId > 0) {
           selectedWorkAreaIdList.add(_selectedWorkAreaId);
         }
+        update();
       }
   }
 
@@ -239,33 +279,54 @@ class EditJobController extends GetxController {
   }
 
   void checkForm() {
-    if (selectedFacilityName.value == '') {
-      isFacilitySelected.value = false;
+    if (selectedAssignedTo.value == '') {
+      isAssignedToSelected.value = false;
     }
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if (selectedAssignedTo.value == '') {
-      isAssignedToSelected.value = false;
+    if (selectedWorkTypeIdList.length < 1) {
+      isWorkTypeSelected.value = false;
     }
+    if (selectedEquipmentCategoryIdList.length < 1) {
+      isEquipmentCategorySelected.value = false;
+    }
+    if (selectedWorkAreaList.length < 1) {
+      isWorkAreaSelected.value = false;
+    }
+
     if (jobTitleCtrlr.text.trim().length < 3) {
       isJobTitleInvalid.value = true;
     }
     if (jobDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
     }
-    if (isAssignedToSelected.value == false ||
-        isFacilitySelected.value == false ||
+    if (isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
         isJobTitleInvalid.value == true ||
-        isJobDescriptionInvalid == true) {
+        isJobDescriptionInvalid == true ||
+        isEquipmentCategorySelected.value == false ||
+        isWorkAreaSelected.value == false ||
+        isWorkTypeSelected.value == false) //
+    {
       isFormInvalid.value = true;
-    } else {
+    } //
+    else {
       isFormInvalid.value = false;
     }
   }
 
-  void saveJob() async {
+  String getFormattedBreakdownTime() {
+    var _breakdownTime = breakdownTimeCtrlr.text;
+    // Parse the timestamp string into a DateTime object
+    DateTime parsedDateTime = DateTime.parse(_breakdownTime);
+    // Format the DateTime object with the desired format
+    DateFormat formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    String formattedDateTime = formatter.format(parsedDateTime.toUtc());
+    return formattedDateTime;
+  }
+
+  void updateJob() async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -275,6 +336,7 @@ class EditJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
+      String _breakdownTime = getFormattedBreakdownTime();
       List<AssetsId> assetIds = <AssetsId>[];
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
@@ -293,20 +355,21 @@ class EditJobController extends GetxController {
         title: _title,
         description: _description,
         status: 2,
-        createdBy: 0,
-        breakdownTime: "",
+        createdBy: 2,
+        breakdownTime: _breakdownTime,
         assetsIds: assetIds,
         workTypeIds: selectedWorkAreaIdList,
       );
-      var jobJsonString = addJobModelToJson(addJobModel);
+      // var jobJsonString = addJobModelToJson(addJobModel);
 
-      Map<String, dynamic>? response = await editJobPresenter.saveJob(
-        job: jobJsonString,
-        isLoading: true,
+      Map<String, dynamic>? responseMapJobCreated =
+          await editJobPresenter.saveJob(
+        job: addJobModel,
+        isLoading: false,
       );
-      if (response.isNotEmpty) {
-        showAlertDialog();
-      }
+      var _jobId = responseMapJobCreated["id"][0];
+      // intJobId.value = _jobId; // intJobId is used in the UI (popup)
+      showAlertDialog(jobId: _jobId);
     }
   }
 
@@ -411,13 +474,12 @@ class EditJobController extends GetxController {
 
   /// Show alert dialog
   static void showAlertDialog({
+    int? jobId,
     String? message,
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(
-      JobSavedDialog(),
-    );
+    await Get.dialog<void>(JobSavedDialog());
   }
 
   ///

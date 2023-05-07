@@ -1,6 +1,7 @@
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/job_details_model.dart';
+import '../models/new_permit_list_model.dart';
 
 class JobDetailsUsecase {
   JobDetailsUsecase(this.repository);
@@ -18,6 +19,18 @@ class JobDetailsUsecase {
         auth,
         jobId,
         userId,
+        isLoading,
+      );
+
+  ///
+  Future<List<NewPermitModel?>?> getPermitList({
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async =>
+      await repository.getPermitList(
+        facilityId,
+        selfView,
         isLoading,
       );
 }

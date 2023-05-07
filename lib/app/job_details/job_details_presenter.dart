@@ -1,14 +1,13 @@
 import '../../domain/models/job_details_model.dart';
+import '../../domain/models/new_permit_list_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
 
 class JobDetailsPresenter {
+  ///
   JobDetailsPresenter(this.jobDetailsUsecase);
   JobDetailsUsecase jobDetailsUsecase;
-  //   FacilityPresenter(this.facilityUsecase);
-  // FacilityUsecase facilityUsecase;
 
   ///
-
   Future<List<JobDetailsModel?>?> getJobDetails({
     String? auth,
     int? jobId,
@@ -19,6 +18,18 @@ class JobDetailsPresenter {
         auth: auth ?? "",
         jobId: jobId ?? 0,
         userId: userId,
+        isLoading: isLoading,
+      );
+
+  ///
+  Future<List<NewPermitModel?>?> getPermitList({
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async =>
+      await jobDetailsUsecase.getPermitList(
+        facilityId: facilityId,
+        selfView: selfView,
         isLoading: isLoading,
       );
 }

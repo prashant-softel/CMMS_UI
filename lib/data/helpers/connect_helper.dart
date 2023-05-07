@@ -370,8 +370,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
       Request.put,
-      {'comment': "$comment", 'employee_id': "136",'id':"59616"},
-
+      {'comment': "$comment", 'employee_id': "136", 'id': "59616"},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -380,12 +379,12 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     print('PermitIssueResponse: ${res}');
-    Get.dialog<void>(PermitMessageIssueDialog(data:parsedJson['message']));
+    Get.dialog<void>(PermitMessageIssueDialog(data: parsedJson['message']));
 
     return responseModel;
   }
 
-   Future<ResponseModel> permitApprovedButton({
+  Future<ResponseModel> permitApprovedButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -395,8 +394,8 @@ class ConnectHelper {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitApprove',
-    Request.put,
-    {'comment': "$comment", 'employee_id': "136",'id':"59616"},
+      Request.put,
+      {'comment': "$comment", 'employee_id': "136", 'id': "59616"},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -405,12 +404,10 @@ class ConnectHelper {
     print('PermitApprovedResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageApproveDialog(data:parsedJson['message']));
-
+    Get.dialog<void>(PermitMessageApproveDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -506,6 +503,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobDetails?job_id=$jobId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPermitList({
+    required String auth,
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitList?facility_id=$facilityId&self_view=$selfView',
       Request.get,
       null,
       isLoading ?? false,
@@ -783,12 +799,11 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(CreateNewPermitDialog(
-      data:parsedJson['message'],
+      data: parsedJson['message'],
       PtwId: parsedJson['id'],
-      ));
+    ));
 
     return responseModel;
-
   }
 
   Future<ResponseModel> getUserAccessList({
@@ -808,10 +823,11 @@ class ConnectHelper {
     );
     return responseModel;
   }
- Future<ResponseModel> getNewPermitDetail({
-    required String auth,
-         bool? isLoading,    int? permitId,
 
+  Future<ResponseModel> getNewPermitDetail({
+    required String auth,
+    bool? isLoading,
+    int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitDetails?permit_id=$permitId',
@@ -827,8 +843,8 @@ class ConnectHelper {
 
   Future<ResponseModel> getViewPermitDetail({
     required String auth,
-         bool? isLoading,    int? permitId,
-
+    bool? isLoading,
+    int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitDetails?permit_id=$permitId',
@@ -842,7 +858,6 @@ class ConnectHelper {
     print('ViewResponseModel${responseModel.data}');
     return responseModel;
   }
-
 
   Future<ResponseModel> getHistory({
     String? auth,

@@ -473,6 +473,21 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  ///
+  Future<ResponseModel> getPermitList({
+    required String auth,
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPermitList(
+        auth: auth,
+        facilityId: facilityId,
+        selfView: selfView,
+        isLoading: isLoading,
+      );
+
+  ///
   Future<ResponseModel> getAssignedToList({
     required String auth,
     int? facilityId,
@@ -544,29 +559,27 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
- Future<ResponseModel> getNewPermitDetail({
+  Future<ResponseModel> getNewPermitDetail({
     required String auth,
-   
-      bool? isLoading,   int? permitId,
+    bool? isLoading,
+    int? permitId,
   }) async =>
       await connectHelper.getNewPermitDetail(
         auth: auth,
-       permitId: permitId,
+        permitId: permitId,
         isLoading: isLoading ?? false,
       );
 
   Future<ResponseModel> getViewPermitDetail({
     required String auth,
-   
-      bool? isLoading,   int? permitId,
+    bool? isLoading,
+    int? permitId,
   }) async =>
       await connectHelper.getViewPermitDetail(
         auth: auth,
-       permitId: permitId,
+        permitId: permitId,
         isLoading: isLoading ?? false,
       );
-
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -581,8 +594,6 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
-
-  
 
   Future<ResponseModel> deleteCkeckpoint({
     auth,

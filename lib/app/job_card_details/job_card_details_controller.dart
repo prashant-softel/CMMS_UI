@@ -59,6 +59,7 @@ class JobCardDetailsController extends GetxController {
   Rx<int?> jobId = 0.obs;
   RxMap jobDetails = {}.obs;
   RxString strWorkTypes = ''.obs;
+  RxString strWorkAreasOrEquipments = ''.obs;
   RxString strToolsRequired = ''.obs;
   RxString strEquipmentCategories = ''.obs;
   List<String> workTypeNames = [];
@@ -97,7 +98,7 @@ class JobCardDetailsController extends GetxController {
       jobId.value = Get.arguments ?? 0;
 
       /// TODO: Remove this line later
-      jobId.value = 3158;
+
       jobList.value = await jobDetailsPresenter.getJobDetails(
             jobId: jobId.value,
             isLoading: true,
@@ -196,14 +197,30 @@ class JobCardDetailsController extends GetxController {
             strWorkTypes.value.length - 1,
           );
         }
+
+        // Convert work area(s)/equipment(s) to comma separated list
+        var workAreaNames = <String>[];
+        for (var workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+          workAreaNames.add(workArea.name);
+        }
+        strWorkAreasOrEquipments.value = workAreaNames.join(', ');
+        //remove extra comma at the end
+        if (strWorkAreasOrEquipments.value.length > 0) {
+          strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
+            0,
+            strWorkAreasOrEquipments.value.length - 1,
+          );
+        }
+
         jobDetails.value = {
           "Job ID": jobDetailsModel.value?.id.toString(),
           "Job Title": jobDetailsModel.value?.jobTitle,
           "Job Description": jobDetailsModel.value?.jobDescription,
           "Job Assigned To": jobDetailsModel.value?.assignedName,
+          "Work Area / Equipments": strWorkAreasOrEquipments.value,
           "Work Type": strWorkTypes.value,
           "Linked Tool To  Work Type": strToolsRequired.value,
-          "Standard Action": jobDetailsModel.value?.standardAction,
+          // "Standard Action": jobDetailsModel.value?.standardAction,
           "Job Created By": jobDetailsModel.value?.createdByName,
         };
         //var x = jobDetails.value;
@@ -309,7 +326,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   void toggleIsNormalizedSwitch(bool value, int index) {
-    //isolationAssetsCategoryList[index].isNormalized = (value == true) ? 1 : 0;
     List<IsolationAssetsCategory> isolationList =
         List.from(isolationAssetsCategoryList);
     isolationList[index].isNormalized = (value == true) ? 1 : 0;
@@ -329,7 +345,7 @@ class JobCardDetailsController extends GetxController {
     permitId = 59616;
     final _permitDetails =
         await jobCardDetailsPresenter.getPermitDetails(permitId: permitId);
-    var x = _permitDetails;
+
     isolationAssetsCategoryList.value = _permitDetails?.lstIsolation ?? [];
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
   }

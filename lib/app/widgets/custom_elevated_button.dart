@@ -25,7 +25,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _buttonWidth =
         Responsive.isDesktop(context) ? (Get.width * 0.25) : (Get.width * 0.9);
-    final _buttonHeight = Get.height * 0.08;
+    final _buttonHeight = Get.height * 0.06;
 
     ///
     return //

@@ -1,13 +1,11 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
-import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
@@ -20,8 +18,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
   NewPermitListWeb({super.key});
   //var controller;
   var controller = Get.find<NewPermitListController>();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -85,25 +81,20 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                             color: Colors.green,
                           ),
                           Dimens.boxWidth10,
-                          varUserAccessModel.value
-                              .access_list!
-                              .where((e) =>
-                              e.feature_id ==
-                              3 &&
-                              e.add == 1)
-                              .length >
-                              0 
-                              ?
-                          ActionButton(
-                            icon: Icons.upload,
-                            label: 'Add New Permit',
-                            onPressed: () {
-                              controller.addNewPermitList();
-                            },
-                            color: Colors.blue,
-                          )
-                          :
-                          Container(),
+                          varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 3 && e.add == 1)
+                                      .length >
+                                  0
+                              ? ActionButton(
+                                  icon: Icons.upload,
+                                  label: 'Add New Permit',
+                                  onPressed: () {
+                                    controller.addNewPermitList();
+                                  },
+                                  color: Colors.blue,
+                                )
+                              : Container(),
                           Dimens.boxWidth10,
                         ]),
                       ),
@@ -165,25 +156,24 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 "approved_datetime"
                                                                             ? "Approved Date & Time"
                                                                             : column == "current_status"
-                                                                              ? "Status"
+                                                                                ? "Status"
 
-
-                                                                            //             : column ==
-                                                                            //                     "breakdownTime"
-                                                                            //                 ? "Breakdown Time"
-                                                                            //                 : column ==
-                                                                            //                         "breakdownType"
-                                                                            //                     ? "Breakdown Type"
-                                                                            //                     : column ==
-                                                                            //                             "permitId"
-                                                                            //                         ? "Permit ID"
-                                                                            //                         : column ==
-                                                                            //                                 "assignedToName"
-                                                                            //                             ? "Assigned To"
-                                                                            //                             
-                                                                            // : column == "Actions"
-                                                                            //     ? "Actions"
-                                                                            : "",
+                                                                                //             : column ==
+                                                                                //                     "breakdownTime"
+                                                                                //                 ? "Breakdown Time"
+                                                                                //                 : column ==
+                                                                                //                         "breakdownType"
+                                                                                //                     ? "Breakdown Type"
+                                                                                //                     : column ==
+                                                                                //                             "permitId"
+                                                                                //                         ? "Permit ID"
+                                                                                //                         : column ==
+                                                                                //                                 "assignedToName"
+                                                                                //                             ? "Assigned To"
+                                                                                //
+                                                                                // : column == "Actions"
+                                                                                //     ? "Actions"
+                                                                                : "",
                                   );
                                 }).toList(),
                                 rows: [
@@ -206,15 +196,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         '${newPermitDetails?.requestByName}',
                                         '${newPermitDetails?.requestDatetime}',
                                         '${newPermitDetails?.approvedByName}',
-                                        '${newPermitDetails?.approved_datetime}',
-                                        '${newPermitDetails?.current_status}',
-                                        '${newPermitDetails?.current_status}' ==
+                                        '${newPermitDetails?.approvedDatetime}',
+                                        '${newPermitDetails?.currentStatus}',
+                                        '${newPermitDetails?.currentStatus}' ==
                                                 "Permit Created"
-                                            ?
-                                        
-                                            'Actions'
+                                            ? 'Actions'
                                             : '',
-                                       
                                       ];
                                     },
                                   ),
@@ -239,14 +226,17 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                     e.view == 1)
                                                                 .length >
                                                             0
-                                                        ? 
-                                                        TableActionButton(
+                                                        ? TableActionButton(
                                                             color: Colors.green,
                                                             icon: Icons
                                                                 .visibility,
                                                             label: 'View',
                                                             onPress: () {
-                                                              controller.viewNewPermitList(permitId:int.tryParse(_newPermitList[0]));
+                                                              controller.viewNewPermitList(
+                                                                  permitId: int
+                                                                      .tryParse(
+                                                                          _newPermitList[
+                                                                              0]));
                                                             },
                                                           )
                                                         : Container(),
@@ -258,8 +248,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                         e.issue ==
                                                                             1)
                                                                     .length >
-                                                                0 
-                                                                &&
+                                                                0 &&
                                                             controller
                                                                     .newPermitList!
                                                                     .where((e) =>
@@ -272,7 +261,10 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             icon: Icons.check,
                                                             label: 'Issue',
                                                             onPress: () {
-                                                              Get.dialog(PermitIssueDialog(permitId:_newPermitList[0]));
+                                                              Get.dialog(PermitIssueDialog(
+                                                                  permitId:
+                                                                      _newPermitList[
+                                                                          0]));
                                                             },
                                                           )
                                                         : Container(),
@@ -284,8 +276,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                         e.approve ==
                                                                             1)
                                                                     .length >
-                                                                0 
-                                                                &&
+                                                                0 &&
                                                             controller
                                                                     .newPermitList!
                                                                     .where((e) =>
@@ -322,8 +313,13 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             icon: Icons.edit,
                                                             label: 'Edit PTW',
                                                             onPress: () {
-                                                               controller.editNewPermit(permitId:int.tryParse(_newPermitList[0]) );
-                                                               print('PermitTest:${controller.newPermitListModel?.permitId}');
+                                                              controller.editNewPermit(
+                                                                  permitId: int
+                                                                      .tryParse(
+                                                                          _newPermitList[
+                                                                              0]));
+                                                              print(
+                                                                  'PermitTest:${controller.newPermitListModel?.permitId}');
                                                             },
                                                           )
                                                         : Container()
