@@ -46,4 +46,12 @@ class PreventivelistUsecase {
         checklist_id,
         isLoading,
       );
+  Future<bool> updateChecklistNumber({
+    checklistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateChecklistNumber(
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
 }

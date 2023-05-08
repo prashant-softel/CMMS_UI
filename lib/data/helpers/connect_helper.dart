@@ -1295,5 +1295,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateChecklistNumber({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/UpdateCheckList',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   ///
 }
