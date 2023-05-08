@@ -17,7 +17,7 @@ class AddJobModel {
     required this.assignedId,
     required this.title,
     required this.description,
-    required this.status,
+    this.status,
     required this.createdBy,
     required this.breakdownTime,
     required this.assetsIds,
@@ -30,7 +30,7 @@ class AddJobModel {
   int assignedId;
   String title;
   String description;
-  int status;
+  int? status;
   int createdBy;
   String? breakdownTime;
   List<AssetsId> assetsIds;

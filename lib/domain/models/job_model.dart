@@ -41,16 +41,10 @@ class JobModel {
             ? null
             : JobStatusData.statusValues.entries
                 .firstWhere(
-                  (x) => x.key == json['status'] - 101,
+                  (x) => x.value.index == json['status'] - 101,
                   orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
                 )
                 .value,
-        // status: json['status'] == null
-        //     ? null
-        //     : JobStatus.values.firstWhere(
-        //         (x) => x.index == json['status'] - 101,
-        //         orElse: () => JobStatus.JOB_CREATED, // Provide a default value
-        //       ),
       );
 
   ///
@@ -120,33 +114,6 @@ class JobModel {
       };
 
   ///
-  // static Color getStatusColor(strJobStatus) {
-  //   if (strJobStatus == null) {
-  //     return Colors.grey;
-  //   }
-  //   switch (strJobStatus) {
-  //     case "CREATED":
-  //       return Color(0xff58c3ca);
-  //     case "ASSIGNED":
-  //       return Color(0xff58c352);
-  //     case "LINKED TO PERMIT":
-  //       return Color(0xff787099);
-  //     case "IN PROGRESS":
-  //       return Color(0xffbf8c4b);
-  //     case "CARRY FORWARD":
-  //       return Colors.orange;
-  //     case "CLOSED":
-  //       return Color(0xff3438cd);
-  //     case "CANCELLED":
-  //       return Color(0xffbf4844);
-  //     case "DELETED":
-  //       return Colors.red;
-  //     default:
-  //       return Colors.grey;
-  //   }
-  // }
-
-  ///
 }
 
 class JobStatusData {
@@ -164,7 +131,7 @@ class JobStatusData {
   static const Map<JobStatus, Color> statusColors = {
     JobStatus.JOB_CREATED: Color(0xff58c3ca),
     JobStatus.JOB_ASSIGNED: Color(0xff58c352),
-    JobStatus.JOB_LINKED: Color(0xff787099),
+    JobStatus.JOB_LINKED: Color.fromARGB(255, 175, 170, 195),
     JobStatus.JOB_IN_PROGRESS: Color(0xffbf8c4b),
     JobStatus.JOB_CARRY_FORWARD: Colors.orange,
     JobStatus.JOB_CLOSED: Color(0xff3438cd),
@@ -196,6 +163,20 @@ class JobStatusData {
         .key;
     return statusString;
   }
+
+  static String getStatusStringFromStatusEnumValue(JobStatus? statusEnum) {
+    if (statusEnum == null) {
+      return 'UNKNOWN';
+    }
+
+    final statusString = JobStatusData.statusValues.entries
+        .firstWhere((x) => x.value == statusEnum,
+            orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+        .key;
+    return statusString;
+  }
+
+  ///
 }
 
 enum JobStatus {

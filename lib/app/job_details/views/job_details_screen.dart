@@ -289,17 +289,26 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                         MainAxisAlignment.center, //
                                     children: [
                                       /// ASSIGN/RE-ASSIGN BUTTON
-
+// If assignedId is present means it is already assigned
                                       if (controller.jobDetailsModel.value
                                               ?.assignedId ==
                                           0) ...[
+                                        //check if status is "CREATED"
                                         if (controller.jobDetailsModel.value
-                                                ?.status ==
-                                            JobStatus.JOB_CREATED)
+                                                    ?.status !=
+                                                null &&
+                                            JobStatusData
+                                                    .getStatusStringFromInt(
+                                                        controller
+                                                            .jobDetailsModel
+                                                            .value
+                                                            ?.status) ==
+                                                "CREATED")
                                           CustomElevatedButton(
                                             // style: editButtonStyle,
-                                            onPressed: () =>
-                                                controller.editJob(),
+                                            onPressed: () => controller
+                                                .goToEditJobScreen(controller
+                                                    .jobDetailsModel.value?.id),
                                             text: 'Assign', //),
                                           )
                                       ] //
@@ -307,21 +316,35 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                                   ?.assignedId ??
                                               0) >
                                           0) ...[
+                                        //check if status is "ASSIGNED"
                                         if (controller.jobDetailsModel.value
-                                                ?.status ==
-                                            JobStatus.JOB_ASSIGNED)
+                                                    ?.status !=
+                                                null &&
+                                            JobStatusData
+                                                    .getStatusStringFromInt(
+                                                        controller
+                                                            .jobDetailsModel
+                                                            .value
+                                                            ?.status) ==
+                                                "ASSIGNED")
                                           CustomElevatedButton(
                                             // style: editButtonStyle,
-                                            onPressed: () =>
-                                                controller.editJob(),
+                                            onPressed: () => controller
+                                                .goToEditJobScreen(controller
+                                                    .jobDetailsModel.value?.id),
                                             text: 'Re-Assign',
                                             // ),
                                           ),
                                       ],
                                       Dimens.boxWidth10,
-                                      if (controller
-                                              .jobDetailsModel.value?.status ==
-                                          JobStatus.JOB_ASSIGNED)
+                                      //check if status is "ASSIGNED"
+                                      if (controller.jobDetailsModel.value
+                                                  ?.status !=
+                                              null &&
+                                          JobStatusData.getStatusStringFromInt(
+                                                  controller.jobDetailsModel
+                                                      .value?.status) ==
+                                              "ASSIGNED")
                                         CustomElevatedButton(
                                           text: "Link to Existing Permit",
                                           icon: Icons.link,

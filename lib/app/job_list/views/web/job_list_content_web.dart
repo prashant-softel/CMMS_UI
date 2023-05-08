@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/models/job_model.dart';
-import '../../../navigators/app_pages.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
@@ -62,7 +61,7 @@ class JobListContentWeb extends StatelessWidget {
             icon: Icons.upload,
             label: 'Add New Job',
             onPressed: () {
-              controller.addJob();
+              controller.goToAddJobScreen();
             },
             color: ColorValues.appDarkBlueColor,
           ),
@@ -281,7 +280,7 @@ class JobDataSource extends DataTableSource {
 
     controller.jobId.value = jobDetails?.id ?? 0;
     var _statusString =
-        '${JobStatusData.statusValues.entries.firstWhere((x) => x.value == jobDetails?.status, orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED)).key}';
+        JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
 
     ///
     return DataRow.byIndex(
@@ -344,7 +343,8 @@ class JobDataSource extends DataTableSource {
                                     label: 'View',
                                     onPress: () {
                                       controller.goToJobDetailsScreen(
-                                          controller.jobId.value);
+                                        int.tryParse('${jobDetails?.id}'),
+                                      );
                                     },
                                   ),
                                 ),
@@ -364,7 +364,7 @@ class JobDataSource extends DataTableSource {
                                     ),
                                   ),
                               ]),
-                          if (jobDetails?.status == JobStatus.JOB_CREATED)
+                          if (jobDetails?.status == JobStatus.JOB_ASSIGNED)
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center, //
                                 children: [
@@ -375,40 +375,33 @@ class JobDataSource extends DataTableSource {
                                       label: 'Link Permit',
                                       onPress: () {
                                         controller.goToJobDetailsScreen(
-                                            controller.jobId.value);
+                                            int.tryParse('${jobDetails?.id}'));
                                       },
                                     ),
                                   ),
-                                  if (jobDetails?.assignedToName == null ||
-                                      jobDetails?.assignedToName == '')
-                                    Flexible(
-                                      child: //
-                                      TableActionButton(
-                                        color: ColorValues.appYellowColor,
-                                        // icon: Icons.add,
-                                        label: 'Assign',
-                                        onPress: () {
-                                          Get.offAndToNamed(Routes.editJob,
-                                              arguments: {
-                                                "jobId": jobDetails?.id
-                                              });
-                                        },
-                                      ),
-                                      
-                                    ),
+                                  TableActionButton(
+                                    color: ColorValues.appYellowColor,
+                                    // icon: Icons.add,
+                                    label: 'Re-Assign',
+                                    onPress: () {
+                                      controller.goToEditJobScreen(
+                                          int.tryParse('${jobDetails?.id}'));
+                                    },
+                                  ),
                                 ]),
-                                                          if (jobDetails?.status == JobStatus.JOB_ASSIGNED)
-                                                                      TableActionButton(
-                                        color: ColorValues.appYellowColor,
-                                        // icon: Icons.add,
-                                        label: 'Assign',
-                                        onPress: () {
-                                          Get.offAndToNamed(Routes.editJob,
-                                              arguments: {
-                                                "jobId": jobDetails?.id
-                                              });
-                                        },
-                                      ),
+                          if (jobDetails?.status == JobStatus.JOB_CREATED)
+                            Flexible(
+                              child: //
+                                  TableActionButton(
+                                color: ColorValues.appYellowColor,
+                                // icon: Icons.add,
+                                label: 'Assign',
+                                onPress: () {
+                                  controller.goToEditJobScreen(
+                                      int.tryParse('${jobDetails?.id}'));
+                                },
+                              ),
+                            ),
                         ])
                   : Text(value.toString()),
             ),

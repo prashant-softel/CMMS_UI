@@ -228,7 +228,7 @@ class JobListContentMobile extends GetView<JobListController> {
       ),
       //
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.addJob(),
+        onPressed: () => controller.goToAddJobScreen(),
         backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,

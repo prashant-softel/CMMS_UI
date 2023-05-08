@@ -121,7 +121,7 @@ class JobListController extends GetxController {
     }
   }
 
-  Future<void> addJob() async {
+  void goToAddJobScreen() {
     Get.toNamed(Routes.addJob, arguments: facilityId);
   }
 
@@ -129,8 +129,8 @@ class JobListController extends GetxController {
     Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
   }
 
-  void goToEditJobScreen(int? jobId) {
-    Get.toNamed(Routes.editJob, arguments: jobId);
+  void goToEditJobScreen(int? _jobId) {
+    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
   }
 
   void goToJobDetailsScreen(int? _jobId) {
