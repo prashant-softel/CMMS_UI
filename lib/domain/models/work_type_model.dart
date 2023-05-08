@@ -13,18 +13,18 @@ String workTypeModelToJson(List<WorkTypeModel> data) =>
 
 class WorkTypeModel {
   WorkTypeModel({
-    required this.id,
-    required this.categoryid,
-    required this.categoryName,
-    required this.workType,
-    required this.status,
+    this.id,
+    this.categoryid,
+    this.categoryName,
+    this.workType,
+    this.status,
   });
 
-  int id;
-  int categoryid;
-  String categoryName;
-  String workType;
-  int status;
+  int? id;
+  int? categoryid;
+  String? categoryName;
+  String? workType;
+  int? status;
 
   factory WorkTypeModel.fromJson(Map<String, dynamic> json) => WorkTypeModel(
         id: json["id"],

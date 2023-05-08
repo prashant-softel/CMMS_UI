@@ -14,7 +14,6 @@ class BreakdownMaintenanceController extends GetxController {
 
   final HomeController controller = Get.find();
 
-
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
   late JobListController jobListController;
 
@@ -59,7 +58,7 @@ class BreakdownMaintenanceController extends GetxController {
     );
   }
 
-  Future<void> addNewJob() async {
+  void addNewJob() {
     Get.toNamed(
       Routes.addJob,
     );

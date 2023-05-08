@@ -74,21 +74,23 @@ class JobDetailsController extends GetxController {
 
   Future<void> setJobId() async {
     final _flutterSecureStorage = const FlutterSecureStorage();
-    // Read jobId from storage
-    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+    String? _jobId = '';
+// Read jobId from storage
+    _jobId = await _flutterSecureStorage.read(key: "jobId");
 
-    // If jobId is unavailable, take it from the arguments received
+// If jobId is unavailable, take it from the arguments received
     if (_jobId == null || _jobId == '' || _jobId == "null") {
       var data = Get.arguments;
       jobId.value = data["jobId"];
+      // Update jobId in storage with the new value
       await _flutterSecureStorage.write(
         key: "jobId",
         value: jobId.value == null ? '' : jobId.value.toString(),
       );
-    } //
-    else {
+    } else {
       jobId.value = int.tryParse(_jobId) ?? 0;
     }
+    await _flutterSecureStorage.delete(key: "jobId");
   }
 
   void getJobDetails(int? jobId) async {
@@ -104,8 +106,8 @@ class JobDetailsController extends GetxController {
     }
   }
 
-  void editJob() {
-    Get.toNamed(Routes.editJob, arguments: jobId.value);
+  void goToEditJobScreen(int? _jobId) {
+    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
   }
 
   void showPermitsDialog() {

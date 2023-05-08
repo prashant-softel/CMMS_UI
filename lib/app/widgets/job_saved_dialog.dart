@@ -45,8 +45,11 @@ class JobSavedDialog extends GetView<AddJobController> {
               Dimens.boxWidth10,
               ElevatedButton(
                 style: Styles.yellowElevatedButtonStyle,
-                onPressed: () => Get.offAndToNamed(Routes.jobDetails,
-                    arguments: {"jobId": controller.jobID.value}),
+                onPressed: () {
+                  var _jobID = controller.jobID.value;
+                  Get.offAndToNamed(Routes.jobDetails,
+                      arguments: {"jobId": _jobID});
+                },
                 child: const Text('View Job'),
               ),
               Dimens.boxWidth10,
