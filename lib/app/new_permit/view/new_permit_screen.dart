@@ -1564,6 +1564,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             3.75,
+                                                    height: 35,
                                                     child: Obx(
                                                       () => DropdownWidget(
                                                         dropdownList: controller
@@ -1600,6 +1601,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             3.7,
+                                                    
                                                     child:
                                                         CustomMultiSelectDialogField(
                                                       title:
@@ -1643,6 +1645,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             3.7,
+                                                    
                                                     child:
                                                         CustomMultiSelectDialogField(
                                                       title:
@@ -1719,6 +1722,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .size
                                                                   .width /
                                                               3.75,
+                                                      height: 35,
                                                       child: Obx(
                                                         () => DropdownWidget(
                                                           dropdownList: controller
@@ -1856,6 +1860,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .size
                                                                   .width /
                                                               2.5,
+                                                         
                                                           child:
                                                               CustomMultiSelectDialogField(
                                                             buttonText:
@@ -1901,6 +1906,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .size
                                                                   .width /
                                                               2.5,
+                                                         
                                                           child:
                                                               CustomMultiSelectDialogField(
                                                             buttonText:
@@ -2405,7 +2411,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                               ///Safety measures
                                               SizedBox(
-                                                height: 230,
+                                                height: 150,
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -2450,8 +2456,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               children: [
                                                                                 Row(
                                                                                   children: [
-                                                                                    // checkBoxMethod(1),
-                                                                                    Text("${i= i! + 1}. "),
+                                                                                    checkBoxMethod(1),
+                                                                                    // Text("${i= i! + 1}. "),
                                                                                     Text("${element.name}")
                                                                                   ],
                                                                                 )
@@ -2474,8 +2480,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               children: [
                                                                                 Row(
                                                                                   children: [
-                                                                                    // checkBoxMethod(1),
-                                                                                    Text("${j= j! + 1}. "),
+                                                                                    checkBoxMethod(1),
+                                                                                    // Text("${j= j! + 1}. "),
                                                                                 Text("${element?.saftyQuestionName}")
                                                                                   ],
                                                                                 )
@@ -3081,6 +3087,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
                                                                                 4.5,
+                                                                        height: 35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3109,6 +3116,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
                                                                                 4.5,
+                                                                        height: 35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3188,6 +3196,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
                                                                                 4.5,
+                                                                        height: 35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3233,6 +3242,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
                                                                                 4.5,
+                                                                        height: 35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3422,321 +3432,321 @@ class NewPermitScreen extends GetView<NewPermitController> {
   }
 
   ////Below All for Mobile
-  Widget _buildStartDateField_mobile(BuildContext context) {
-    return Column(//
-        children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: RichText(
-            text: TextSpan(
-                text: 'Start Date: ', style: Styles.blackBold16, children: []),
-          ),
-        ),
-      ),
-      Dimens.boxHeight5,
-      Padding(
-        padding: const EdgeInsets.only(right: 10, left: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ), //BoxShadow
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 1.1,
-            child: TextField(
-              onTap: () {
-                pickDateTime_mobile(context);
-              },
-              controller: controller.startDateTimeCtrlr,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                // focusedErrorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-              ),
-              onChanged: (value) {
-                // if (value.trim().length > 3) {
-                //   controller.isJobTitleInvalid.value = false;
-                // } else {
-                //   controller.isJobTitleInvalid.value = true;
-                // }
-              },
-            ),
-          ),
-        ),
-      ),
-      Dimens.boxHeight20,
-    ]);
-  }
+//   Widget _buildStartDateField_mobile(BuildContext context) {
+//     return Column(//
+//         children: [
+//       Align(
+//         alignment: Alignment.centerLeft,
+//         child: Padding(
+//           padding: const EdgeInsets.only(left: 10),
+//           child: RichText(
+//             text: TextSpan(
+//                 text: 'Start Date: ', style: Styles.blackBold16, children: []),
+//           ),
+//         ),
+//       ),
+//       Dimens.boxHeight5,
+//       Padding(
+//         padding: const EdgeInsets.only(right: 10, left: 10),
+//         child: Container(
+//           decoration: BoxDecoration(
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.black26,
+//                 offset: const Offset(
+//                   5.0,
+//                   5.0,
+//                 ),
+//                 blurRadius: 5.0,
+//                 spreadRadius: 1.0,
+//               ), //BoxShadow
+//               BoxShadow(
+//                 color: ColorValues.whiteColor,
+//                 offset: const Offset(0.0, 0.0),
+//                 blurRadius: 0.0,
+//                 spreadRadius: 0.0,
+//               ), //BoxShadow
+//             ],
+//             color: ColorValues.whiteColor,
+//             borderRadius: BorderRadius.circular(5),
+//           ),
+//           child: SizedBox(
+//             width: MediaQuery.of(context).size.width / 1.1,
+//             child: TextField(
+//               onTap: () {
+//                 pickDateTime_mobile(context);
+//               },
+//               controller: controller.startDateTimeCtrlr,
+//               autofocus: false,
+//               decoration: InputDecoration(
+//                 fillColor: ColorValues.whiteColor,
+//                 filled: true,
+//                 contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+//                 border: InputBorder.none,
+//                 enabledBorder: InputBorder.none,
+//                 focusedBorder: InputBorder.none,
+//                 // focusedErrorBorder:
+//                 //     controller.isJobTitleInvalid.value
+//                 //         ? OutlineInputBorder(
+//                 //             borderRadius:
+//                 //                 BorderRadius.circular(5),
+//                 //             borderSide: BorderSide(
+//                 //               color: ColorsValue.redColorDark,
+//                 //             ),
+//                 //           )
+//                 //         : InputBorder.none,
+//                 // errorBorder:
+//                 //     controller.isJobTitleInvalid.value
+//                 //         ? OutlineInputBorder(
+//                 //             borderRadius:
+//                 //                 BorderRadius.circular(5),
+//                 //             borderSide: BorderSide(
+//                 //               color: ColorsValue.redColorDark,
+//                 //             ),
+//                 //           )
+//                 //         : null,
+//                 // errorText: controller.isJobTitleInvalid.value
+//                 //     ? "Required field"
+//                 //     : null,
+//               ),
+//               onChanged: (value) {
+//                 // if (value.trim().length > 3) {
+//                 //   controller.isJobTitleInvalid.value = false;
+//                 // } else {
+//                 //   controller.isJobTitleInvalid.value = true;
+//                 // }
+//               },
+//             ),
+//           ),
+//         ),
+//       ),
+//       Dimens.boxHeight20,
+//     ]);
+//   }
 
-  Widget _buildValidTillField_mobile(BuildContext context) {
-    return Column(//
-        children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: RichText(
-            text: TextSpan(
-                text: 'Valid Till: ', style: Styles.blackBold16, children: []),
-          ),
-        ),
-      ),
-      Dimens.boxHeight5,
-      Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ), //BoxShadow
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 1.1,
-            child: TextField(
-              onTap: () {
-                pickDateTimeTill_mobile(context);
-              },
-              controller: controller.validTillTimeCtrlr,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                // focusedErrorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-              ),
-              onChanged: (value) {
-                // if (value.trim().length > 3) {
-                //   controller.isJobTitleInvalid.value = false;
-                // } else {
-                //   controller.isJobTitleInvalid.value = true;
-                // }
-              },
-            ),
-          ),
-        ),
-      ),
-      Dimens.boxHeight20,
-    ]);
-  }
+//   Widget _buildValidTillField_mobile(BuildContext context) {
+//     return Column(//
+//         children: [
+//       Align(
+//         alignment: Alignment.centerLeft,
+//         child: Padding(
+//           padding: const EdgeInsets.only(left: 10),
+//           child: RichText(
+//             text: TextSpan(
+//                 text: 'Valid Till: ', style: Styles.blackBold16, children: []),
+//           ),
+//         ),
+//       ),
+//       Dimens.boxHeight5,
+//       Padding(
+//         padding: const EdgeInsets.only(left: 10, right: 10),
+//         child: Container(
+//           decoration: BoxDecoration(
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.black26,
+//                 offset: const Offset(
+//                   5.0,
+//                   5.0,
+//                 ),
+//                 blurRadius: 5.0,
+//                 spreadRadius: 1.0,
+//               ), //BoxShadow
+//               BoxShadow(
+//                 color: ColorValues.whiteColor,
+//                 offset: const Offset(0.0, 0.0),
+//                 blurRadius: 0.0,
+//                 spreadRadius: 0.0,
+//               ), //BoxShadow
+//             ],
+//             color: ColorValues.whiteColor,
+//             borderRadius: BorderRadius.circular(5),
+//           ),
+//           child: SizedBox(
+//             width: MediaQuery.of(context).size.width / 1.1,
+//             child: TextField(
+//               onTap: () {
+//                 pickDateTimeTill_mobile(context);
+//               },
+//               controller: controller.validTillTimeCtrlr,
+//               autofocus: false,
+//               decoration: InputDecoration(
+//                 fillColor: ColorValues.whiteColor,
+//                 filled: true,
+//                 contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+//                 border: InputBorder.none,
+//                 enabledBorder: InputBorder.none,
+//                 focusedBorder: InputBorder.none,
+//                 // focusedErrorBorder:
+//                 //     controller.isJobTitleInvalid.value
+//                 //         ? OutlineInputBorder(
+//                 //             borderRadius:
+//                 //                 BorderRadius.circular(5),
+//                 //             borderSide: BorderSide(
+//                 //               color: ColorsValue.redColorDark,
+//                 //             ),
+//                 //           )
+//                 //         : InputBorder.none,
+//                 // errorBorder:
+//                 //     controller.isJobTitleInvalid.value
+//                 //         ? OutlineInputBorder(
+//                 //             borderRadius:
+//                 //                 BorderRadius.circular(5),
+//                 //             borderSide: BorderSide(
+//                 //               color: ColorsValue.redColorDark,
+//                 //             ),
+//                 //           )
+//                 //         : null,
+//                 // errorText: controller.isJobTitleInvalid.value
+//                 //     ? "Required field"
+//                 //     : null,
+//               ),
+//               onChanged: (value) {
+//                 // if (value.trim().length > 3) {
+//                 //   controller.isJobTitleInvalid.value = false;
+//                 // } else {
+//                 //   controller.isJobTitleInvalid.value = true;
+//                 // }
+//               },
+//             ),
+//           ),
+//         ),
+//       ),
+//       Dimens.boxHeight20,
+//     ]);
+//   }
 
-//Start Date for mobile
-  Future pickDateTime_mobile(BuildContext context) async {
-    var dateTime = controller.selectedBreakdownTime.value;
-    final date = await pickDate_mobile(context);
-    if (date == null) {
-      return;
-    }
+// //Start Date for mobile
+//   Future pickDateTime_mobile(BuildContext context) async {
+//     var dateTime = controller.selectedBreakdownTime.value;
+//     final date = await pickDate_mobile(context);
+//     if (date == null) {
+//       return;
+//     }
 
-    final time = await pickTime_mobile(context);
-    if (time == null) {
-      return;
-    }
+//     final time = await pickTime_mobile(context);
+//     if (time == null) {
+//       return;
+//     }
 
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedBreakdownTime.value = dateTime;
-    controller.startDateTimeCtrlr
-      ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.startDateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-  }
+//     dateTime = DateTime(
+//       date.year,
+//       date.month,
+//       date.day,
+//       time.hour,
+//       time.minute,
+//     );
+//     controller.selectedBreakdownTime.value = dateTime;
+//     controller.startDateTimeCtrlr
+//       ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
+//       ..selection = TextSelection.fromPosition(
+//         TextPosition(
+//           offset: controller.startDateTimeCtrlr.text.length,
+//           affinity: TextAffinity.upstream,
+//         ),
+//       );
+//   }
 
-  Future<DateTime?> pickDate_mobile(BuildContext context) async {
-    DateTime? dateTime = controller.selectedBreakdownTime.value;
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
+//   Future<DateTime?> pickDate_mobile(BuildContext context) async {
+//     DateTime? dateTime = controller.selectedBreakdownTime.value;
+//     //final initialDate = DateTime.now();
+//     final newDate = await showDatePicker(
+//       context: context,
+//       initialDate: dateTime,
+//       firstDate: DateTime(DateTime.now().year - 5),
+//       lastDate: DateTime(DateTime.now().year + 5),
+//     );
 
-    if (newDate == null) return null;
+//     if (newDate == null) return null;
 
-    return newDate;
-  }
+//     return newDate;
+//   }
 
-  Future<TimeOfDay?> pickTime_mobile(BuildContext context) async {
-    DateTime dateTime = controller.selectedBreakdownTime.value;
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
+//   Future<TimeOfDay?> pickTime_mobile(BuildContext context) async {
+//     DateTime dateTime = controller.selectedBreakdownTime.value;
+//     //final initialTime = TimeOfDay(hour: 12, minute: 0);
+//     final newTime = await showTimePicker(
+//         context: context,
+//         initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+//         builder: (BuildContext context, Widget? child) {
+//           return Theme(
+//             data: ThemeData.light(),
+//             child: child!,
+//           );
+//         });
 
-    if (newTime == null) {
-      return null;
-    }
+//     if (newTime == null) {
+//       return null;
+//     }
 
-    return newTime;
-  }
+//     return newTime;
+//   }
 
-  // Valid Till for mobile
-  Future pickDateTimeTill_mobile(BuildContext context) async {
-    var dateTime = controller.selectedValidTillTime.value;
-    final date = await pickDateTill_mobile(context);
-    if (date == null) {
-      return;
-    }
+//   // Valid Till for mobile
+//   Future pickDateTimeTill_mobile(BuildContext context) async {
+//     var dateTime = controller.selectedValidTillTime.value;
+//     final date = await pickDateTill_mobile(context);
+//     if (date == null) {
+//       return;
+//     }
 
-    final time = await pickTimeTill_mobile(context);
-    if (time == null) {
-      return;
-    }
+//     final time = await pickTimeTill_mobile(context);
+//     if (time == null) {
+//       return;
+//     }
 
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedValidTillTime.value = dateTime;
-    controller.validTillTimeCtrlr
-      ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.validTillTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-  }
+//     dateTime = DateTime(
+//       date.year,
+//       date.month,
+//       date.day,
+//       time.hour,
+//       time.minute,
+//     );
+//     controller.selectedValidTillTime.value = dateTime;
+//     controller.validTillTimeCtrlr
+//       ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
+//       ..selection = TextSelection.fromPosition(
+//         TextPosition(
+//           offset: controller.validTillTimeCtrlr.text.length,
+//           affinity: TextAffinity.upstream,
+//         ),
+//       );
+//   }
 
-  Future<DateTime?> pickDateTill_mobile(BuildContext context) async {
-    DateTime? dateTime = controller.selectedValidTillTime.value;
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
+//   Future<DateTime?> pickDateTill_mobile(BuildContext context) async {
+//     DateTime? dateTime = controller.selectedValidTillTime.value;
+//     //final initialDate = DateTime.now();
+//     final newDate = await showDatePicker(
+//       context: context,
+//       initialDate: dateTime,
+//       firstDate: DateTime(DateTime.now().year - 5),
+//       lastDate: DateTime(DateTime.now().year + 5),
+//     );
 
-    if (newDate == null) return null;
+//     if (newDate == null) return null;
 
-    return newDate;
-  }
+//     return newDate;
+//   }
 
-  Future<TimeOfDay?> pickTimeTill_mobile(BuildContext context) async {
-    DateTime dateTime = controller.selectedValidTillTime.value;
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
+//   Future<TimeOfDay?> pickTimeTill_mobile(BuildContext context) async {
+//     DateTime dateTime = controller.selectedValidTillTime.value;
+//     //final initialTime = TimeOfDay(hour: 12, minute: 0);
+//     final newTime = await showTimePicker(
+//         context: context,
+//         initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+//         builder: (BuildContext context, Widget? child) {
+//           return Theme(
+//             data: ThemeData.light(),
+//             child: child!,
+//           );
+//         });
 
-    if (newTime == null) {
-      return null;
-    }
+//     if (newTime == null) {
+//       return null;
+//     }
 
-    return newTime;
-  }
+//     return newTime;
+//   }
 
   Widget _buildPermitDescriptionField_mobile(BuildContext context) {
     return Column(//
@@ -3837,6 +3847,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
   Widget _buildStartValidTillDateField_web(
     BuildContext context,
     int position,
+    
   ) {
     return Column(//
         children: [
@@ -3863,6 +3874,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
+          height: 35,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -3893,10 +3905,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 position == 0
                     ? pickDateTime_web(context, 0)
                     : pickDateTime_web(context, 1);
+                    // : null;
+
               },
               controller: position == 0
                   ? controller.startDateTimeCtrlr
                   : controller.validTillTimeCtrlr,
+                  
+                  // :null,
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
@@ -3906,6 +3922,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 // focusedErrorBorder:
+                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
                 //     controller.isJobTitleInvalid.value
                 //         ? OutlineInputBorder(
                 //             borderRadius:
@@ -3929,13 +3946,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 //     ? "Required field"
                 //     : null,
               ),
-              onChanged: (value) {
-                // if (value.trim().length > 3) {
-                //   controller.isJobTitleInvalid.value = false;
-                // } else {
-                //   controller.isJobTitleInvalid.value = true;
-                // }
-              },
+              
             ),
           ),
         ),
@@ -3949,12 +3960,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
     var dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
-    final date = await pickDate_web(context, 0);
+    final date = await pickDate_web(context, position);
     if (date == null) {
       return;
     }
 
-    final time = await pickTime_web(context, 0);
+    final time = await pickTime_web(context, position);
     if (time == null) {
       return;
     }
@@ -3981,6 +3992,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           affinity: TextAffinity.upstream,
         ),
       );
+      controller.validTillTimeCtrlr.text = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime.add(Duration(hours: 8)));
   }
 
   Future<DateTime?> pickDate_web(BuildContext context, int position) async {
@@ -4145,6 +4157,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Padding(
         padding: const EdgeInsets.only(left: 1),
         child: Container(
+          height: 35,
           width: Responsive.isDesktop(context)
               ? MediaQuery.of(context).size.width / 1.44
               : MediaQuery.of(context).size.width / 1.1,
@@ -4426,7 +4439,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
   checkBoxMethod(int position) {
     return Checkbox(
         value: position == 1
-            ? controller.isChecked1.value
+            ? controller.isChecked1.value = true
             // : position == 2
             //     ? controller.isChecked2.value
             //     : position == 3

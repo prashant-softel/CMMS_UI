@@ -4,10 +4,12 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/permit_type/permit_type_presenter.dart';
 import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/domain/models/create_checklist_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -36,6 +38,14 @@ class PermitTypeController extends GetxController {
     rowsPerPage: 10,
   );
   // PreventiveCheckListModel? preventiveCheckListModel;
+
+  ///Facility list / demo plant
+  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
+  Rx<bool> isFacilitySelected = true.obs;
+  Rx<String> selectedFacility = ''.obs;
+  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  Stream<int> get facilityId$ => _facilityId.stream;
+  // int get facilityId => _facilityId.value;
 
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<TypePermitModel?> typePermitModel = TypePermitModel().obs;
@@ -73,9 +83,25 @@ class PermitTypeController extends GetxController {
         getTypePermitList();
       });
       // getPreventiveCheckList(facilityId, type, true);
+      Future.delayed(Duration(seconds: 1), () {
+      getFacilityList();
+    });
     });
     
     super.onInit();
+  }
+
+   Future<void> getFacilityList() async {
+    final _facilityList = await permitTypePresenter.getFacilityList();
+    //print('Facility25:$_facilityList');
+    if (_facilityList != null) {
+      for (var facility in _facilityList) {
+        facilityList.add(facility);
+      }
+
+      selectedFacility.value = facilityList[0]?.name ?? '';
+      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
   }
 
   Future<void> getTypePermitList() async {
@@ -161,6 +187,13 @@ class PermitTypeController extends GetxController {
           // int frequencyIndex =
               // frequencyList.indexWhere((x) => x?.name == value);
           // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+        }
+        break;
+       case RxList<FacilityModel>:
+        {
+          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+
+          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
       default:

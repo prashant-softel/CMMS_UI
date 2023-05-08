@@ -1,21 +1,20 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/permit_type/permit_type_controller.dart';
+import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
+import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_swich_toggle.dart';
-import '../../widgets/dropdown.dart';
 
-class PermitTypeContentWeb
-    extends GetView<PermitTypeController> {
-  PermitTypeContentWeb({Key? key}) : super(key: key);
 
-  final PermitTypeController controller = Get.find();
+class SafetyQuestionsListContentWeb
+    extends GetView<SafetyQuestionsListController> {
+  SafetyQuestionsListContentWeb({Key? key}) : super(key: key);
+  final SafetyQuestionsListController controller = Get.find();
 
 
   @override
@@ -60,7 +59,7 @@ class PermitTypeContentWeb
                     child: Text(" / Masters",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Permit Type",
+                  Text(" / Safety Questions",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -76,7 +75,7 @@ class PermitTypeContentWeb
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.5,
+                          height: Get.height / 1.0,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -95,207 +94,16 @@ class PermitTypeContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Permit Type",
+                                          "Add Permit Safety Measurement",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 30,
+                                          height: 10,
                                         ),
                                         
-                                       
-                                        // Visibility(
-                                        //   visible: controller.isSuccess.value,
-                                        //   child: Center(
-                                        //     child: Wrap(
-                                        //       children: [
-                                        //         Text(
-                                        //           "CheckList added Successfully in the List.",
-                                        //           style: TextStyle(
-                                        //               fontSize: 16,
-                                        //               color: Color.fromARGB(
-                                        //                   255, 24, 243, 123)),
-                                        //         ),
-                                        //         SizedBox(
-                                        //           height: 5,
-                                        //         ),
-                                        //       ],
-                                        //     ),
-                                        //   ),
-                                        // ),
-                                        // // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'CheckList Number: '),
-                                        //     SizedBox(
-                                        //       width: 10,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //           width: (MediaQuery.of(context)
-                                        //                       .size
-                                        //                       .width *
-                                        //                   .2) -
-                                        //               30,
-                                        //           decoration: BoxDecoration(
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Colors.black26,
-                                        //                 offset: const Offset(
-                                        //                   5.0,
-                                        //                   5.0,
-                                        //                 ),
-                                        //                 blurRadius: 5.0,
-                                        //                 spreadRadius: 1.0,
-                                        //               ),
-                                        //               BoxShadow(
-                                        //                 color: ColorValues
-                                        //                     .whiteColor,
-                                        //                 offset: const Offset(
-                                        //                     0.0, 0.0),
-                                        //                 blurRadius: 0.0,
-                                        //                 spreadRadius: 0.0,
-                                        //               ),
-                                        //             ],
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     5),
-                                        //           ),
-                                        //           child: LoginCustomTextfield(
-                                        //             textController: controller
-                                        //                 .checklistNumberCtrlr,
-                                        //           )),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                      
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Equipment Category: '),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //         width: (MediaQuery.of(context)
-                                        //                     .size
-                                        //                     .width *
-                                        //                 .2) -
-                                        //             35,
-                                        //         child: DropdownWidget(
-                                        //           controller: controller,
-                                        //           dropdownList: controller
-                                        //               .equipmentCategoryList,
-                                        //           isValueSelected: controller
-                                        //               .isSelectedequipment
-                                        //               .value,
-                                        //           selectedValue: controller
-                                        //               .selectedequipment.value,
-                                        //           onValueChanged:
-                                        //               controller.onValueChanged,
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                       
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Frequency: '),
-                                        //     SizedBox(
-                                        //       width: 64,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //         width: (MediaQuery.of(context)
-                                        //                     .size
-                                        //                     .width *
-                                        //                 .2) -
-                                        //             30,
-                                        //         child: DropdownWidget(
-                                        //           controller: controller,
-                                        //           dropdownList:
-                                        //               controller.frequencyList,
-                                        //           isValueSelected: controller
-                                        //               .isSelectedfrequency
-                                        //               .value,
-                                        //           selectedValue: controller
-                                        //               .selectedfrequency.value,
-                                        //           onValueChanged:
-                                        //               controller.onValueChanged,
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                      
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Text(
-                                        //       "Manpower: ",
-                                        //       style: Styles.blackBold16,
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 60,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //           decoration: BoxDecoration(
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Colors.black26,
-                                        //                 offset: const Offset(
-                                        //                   5.0,
-                                        //                   5.0,
-                                        //                 ),
-                                        //                 blurRadius: 5.0,
-                                        //                 spreadRadius: 1.0,
-                                        //               ),
-                                        //               BoxShadow(
-                                        //                 color: ColorValues
-                                        //                     .whiteColor,
-                                        //                 offset: const Offset(
-                                        //                     0.0, 0.0),
-                                        //                 blurRadius: 0.0,
-                                        //                 spreadRadius: 0.0,
-                                        //               ),
-                                        //             ],
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     5),
-                                        //           ),
-                                        //           width: (MediaQuery.of(context)
-                                        //                       .size
-                                        //                       .width *
-                                        //                   .2) -
-                                        //               30,
-                                        //           child: LoginCustomTextfield(
-                                        //             textController: controller
-                                        //                 .manpowerCtrlr,
-                                        //           )),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                         CustomRichText(title: 'Permit Type Title '),
+                                  
+                                        
+                                         CustomRichText(title: 'Safety Measurement Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -340,8 +148,8 @@ class PermitTypeContentWeb
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
+                                                    // textController: controller
+                                                    //     .durationCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -351,7 +159,7 @@ class PermitTypeContentWeb
                                         ),
                                         CustomRichText(
                                                       title:
-                                                          'Facility: '),
+                                                          'Select permit type: '),
                                                   SizedBox(
                                                     width: 5,
                                                   ),
@@ -363,17 +171,18 @@ class PermitTypeContentWeb
                                                             1.82,
                                                     child: DropdownWidget(
                                                       dropdownList: controller
-                                                          .facilityList,
+                                                          .typePermitList,
                                                       isValueSelected: controller
-                                                          .isFacilitySelected
+                                                          .isTypePermitSelected
                                                           .value,
                                                       selectedValue: controller
-                                                          .selectedFacility
+                                                          .selectedTypePermit
                                                           .value,
                                                       onValueChanged: controller
                                                           .onValueChanged,
                                                     ),
                                                   ),
+                                        
                                        
                                         SizedBox(
                                           height: 10,
@@ -422,12 +231,71 @@ class PermitTypeContentWeb
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
+                                                    // textController: controller
+                                                    //     .durationCtrlr,
                                                   )),
                                             ),
                                           ],
                                         ),
+                                         SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomRichText(
+                                                      title:
+                                                          'Select confirmation type: '),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.82,
+                                                    child: DropdownWidget(
+                                                      dropdownList: controller
+                                                          .typePermitList,
+                                                      isValueSelected: controller
+                                                          .isTypePermitSelected
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedTypePermit
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
+                                                  ),
+                                                
+                                                 SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomRichText(
+                                                      title:
+                                                          'Required: '),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.82,
+                                                    child: DropdownWidget(
+                                                      dropdownList: controller
+                                                          .typePermitList,
+                                                      isValueSelected: controller
+                                                          .isTypePermitSelected
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedTypePermit
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
+                                                  ),
+
+
                                        
                                         SizedBox(
                                           height: 20,
@@ -440,6 +308,7 @@ class PermitTypeContentWeb
                                   children: [
                                     Container(
                                         width: (Get.width * .1),
+                                        height: 30,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -449,7 +318,8 @@ class PermitTypeContentWeb
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .2) - 70,
+                                        width: (Get.width * .2) - 50,
+                                        height: 30,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
@@ -463,7 +333,7 @@ class PermitTypeContentWeb
                                               //   //       .issuccessCreatechecklist();
                                               // });
                                             },
-                                            text: 'submit')),
+                                            text: 'Submit')),
                                   ],
                                 ),
                               ],
@@ -492,7 +362,7 @@ class PermitTypeContentWeb
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of Permit Type",
+                                      "List of Permit Safety Measurement",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -508,9 +378,11 @@ class PermitTypeContentWeb
                                             backgroundColor:
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
-                                              FlutterClipboard.copy(controller
-                                                      .preventiveCheckList![0]
-                                                      .toString())
+                                              FlutterClipboard.copy(
+                                                controller
+                                                      // .preventiveCheckList![0]
+                                                      .toString()
+                                                      )
                                                   .then((value) {
                                                 print("copy data");
                                               });
@@ -599,12 +471,13 @@ class PermitTypeContentWeb
                                       Expanded(
                                           child: ScrollableTableView(
                                             paginationController:
-                                                controller.permitTypePaginationController,
+                                                controller.safetyQuestionListPaginationController,
                                             columns: [
                                               "Sr.No.",
-                                              "Title",  
-                                              "Description",
-                                              "Facility",
+                                              "Title",
+                                              "Type",  
+                                              "Confirmation",
+                                              "Required",
                                               "Action"
                                             ].map((column) {
                                               return TableViewColumn(
@@ -615,17 +488,16 @@ class PermitTypeContentWeb
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller.typePermitList.length,
+                                                controller.safetyMeasureList.length,
                                                 (index) {
-                                                  var typePermitListDetails =
-                                                      controller.typePermitList[index];
+                                                  var safetyQuestionsListDetails =
+                                                      controller.safetyMeasureList[index];
                                                   return [
-                                                    '${typePermitListDetails?.id}',
-                                                     //'${typePermitListDetails?.status ?? ''}',
-                                                    '${typePermitListDetails?.name}',
-                                                    'No Data !!',
-                                                    'Hero Future Solar Plant 100MW',
-                                                    // '${preventiveCheckListModelListDetails?.duration}',
+                                                    '${safetyQuestionsListDetails.id}',
+                                                    '${safetyQuestionsListDetails.name}',
+                                                    '${safetyQuestionsListDetails.permitType}',
+                                                    'yes/no',
+                                                    'yes',
                                                     "Action"
                                                   ];
                                                 },
@@ -686,21 +558,21 @@ class PermitTypeContentWeb
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
                                         valueListenable:
-                                            controller.permitTypePaginationController,
+                                            controller.safetyQuestionListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(
-                                                "${controller.permitTypePaginationController.currentPage}  of ${controller.permitTypePaginationController.pageCount}"),
+                                                "${controller.safetyQuestionListPaginationController.currentPage}  of ${controller.safetyQuestionListPaginationController.pageCount}"),
                                             Row(children: [
                                               IconButton(
                                                 onPressed: controller
-                                                            .permitTypePaginationController
+                                                            .safetyQuestionListPaginationController
                                                             .currentPage <=
                                                         1
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .permitTypePaginationController
+                                                            .safetyQuestionListPaginationController
                                                             .previous();
                                                       },
                                                 iconSize: 20,
@@ -709,7 +581,7 @@ class PermitTypeContentWeb
                                                   Icons
                                                       .arrow_back_ios_new_rounded,
                                                   color: controller
-                                                              .permitTypePaginationController
+                                                              .safetyQuestionListPaginationController
                                                               .currentPage <=
                                                           1
                                                       ? Colors.black26
@@ -719,15 +591,15 @@ class PermitTypeContentWeb
                                               ),
                                               IconButton(
                                                 onPressed: controller
-                                                            .permitTypePaginationController
+                                                            .safetyQuestionListPaginationController
                                                             .currentPage >=
                                                         controller
-                                                            .permitTypePaginationController
+                                                            .safetyQuestionListPaginationController
                                                             .pageCount
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .permitTypePaginationController
+                                                            .safetyQuestionListPaginationController
                                                             .next();
                                                       },
                                                 iconSize: 20,
@@ -736,10 +608,10 @@ class PermitTypeContentWeb
                                                   Icons
                                                       .arrow_forward_ios_rounded,
                                                   color: controller
-                                                              .permitTypePaginationController
+                                                              .safetyQuestionListPaginationController
                                                               .currentPage >=
                                                           controller
-                                                              .permitTypePaginationController
+                                                              .safetyQuestionListPaginationController
                                                               .pageCount
                                                       ? Colors.black26
                                                       : Theme.of(context)

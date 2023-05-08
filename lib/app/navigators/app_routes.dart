@@ -40,10 +40,12 @@ abstract class Routes {
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
+  static const safetyQuestionsList = _Paths.safetyQuestionsList;
+  static const jobTypeListScreen = _Paths.jobTypeListScreen;
+  static const jobSOPListScreen = _Paths.jobSOPListScreen;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
 
-  // static const editPermitWebScreen = _Paths.editPermitWebScreen;
 }
 
 abstract class _Paths {
@@ -85,6 +87,9 @@ abstract class _Paths {
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
+  static const safetyQuestionsList = '/safety-question-list-screen';
+  static const jobTypeListScreen = '/job-type-list-screen';
+  static const jobSOPListScreen = '/job-sop-list-screen';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
 

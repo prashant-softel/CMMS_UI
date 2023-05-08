@@ -7,10 +7,16 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/job_list_sop/job_list_sop_binding.dart';
+import 'package:cmms/app/job_list_sop/view/job_list_sop_screen.dart';
+import 'package:cmms/app/job_type_list/job_type_list_binding.dart';
+import 'package:cmms/app/job_type_list/view/job_type_list_screen.dart';
 import 'package:cmms/app/master_dashboard/master_binding.dart';
 import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
 import 'package:cmms/app/permit_type/permit_type_binding.dart';
 import 'package:cmms/app/permit_type/view/permit_type_screen.dart';
+import 'package:cmms/app/safety_questions_list/safety_questions_list_binding.dart';
+import 'package:cmms/app/safety_questions_list/view/safety_question_list_screen.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
@@ -263,6 +269,21 @@ class AppPages {
       name: _Paths.inventoryList,
       page: InventoryListScreen.new,
       binding: HomeBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.safetyQuestionsList,
+      page: SafetyQestionsListScreen.new,
+      binding: SafetyQuestionsListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.jobTypeListScreen,
+      page: JobTypeListScreen.new,
+      binding: JobTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.jobSOPListScreen,
+      page: JobSOPListScreen.new,
+      binding: JobSOPListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.importInventory,

@@ -237,7 +237,10 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getSopPermitList(
-      {required bool isLoading, required String auth, int? job_type_id}) async {
+      {required bool isLoading,
+      required String auth,
+      int? job_type_id
+      }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSOPList?job_type_id=$job_type_id',
       Request.getMultiparts,
@@ -372,7 +375,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
       Request.put,
-      {'comment': "$comment", 'employee_id': "136", 'id': "59616"},
+      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -397,7 +400,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitApprove',
       Request.put,
-      {'comment': "$comment", 'employee_id': "136", 'id': "59616"},
+      {'comment': "$comment", 'employee_id': employee_id,'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',

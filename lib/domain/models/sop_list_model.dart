@@ -15,6 +15,7 @@ class SOPListModel {
   SOPListModel({
     this.id,
     this.name,
+    this.jobTypeName,
     
    
 
@@ -22,12 +23,14 @@ class SOPListModel {
 
   int? id;
   String? name;
+  String? jobTypeName;
  
   
 
   factory SOPListModel.fromJson(Map<String, dynamic> json) => SOPListModel(
         id: json["id"],
         name: json["name"],
+        jobTypeName: json['jobTypeName'],
        
         
       );
@@ -35,6 +38,7 @@ class SOPListModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "jobTypeName": jobTypeName,
        
       };
 }
