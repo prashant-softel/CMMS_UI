@@ -43,6 +43,7 @@ class JobDetailsController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
   Rx<int> jobId = 0.obs;
+  Rx<bool> isDataLoading = true.obs;
   int userId = 36;
   var breakdownTime;
   var facilityId = 0;
@@ -51,20 +52,6 @@ class JobDetailsController extends GetxController {
   @override
   void onInit() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _jobId = await _flutterSecureStorage.read(key: "jobId");
-      if (_jobId == null || _jobId == '' || _jobId == "null") {
-        jobId.value = Get.arguments["jobId"];
-        await _flutterSecureStorage.write(
-          key: "jobId",
-          value: jobId.value == null ? '' : jobId.value.toString(),
-        );
-      } else {
-        jobId.value = int.tryParse(_jobId) ?? 0;
-      }
-      getJobDetails(jobId.value);
-
       super.onInit();
     } //
     catch (e) {
@@ -72,22 +59,49 @@ class JobDetailsController extends GetxController {
     }
   }
 
-  // void setTextValue(int index, String value) {
-  //   // Update the value for the corresponding index
-  // }
+  @override
+  void onReady() async {
+    try {
+      await setJobId();
+      getJobDetails(jobId.value);
+      isDataLoading.value = false;
+    } //
+    catch (e) {
+      print(e);
+    }
+    super.onReady();
+  }
 
-  Future<void> getJobDetails(int? jobId) async {
+  Future<void> setJobId() async {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    // Read jobId from storage
+    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+
+    // If jobId is unavailable, take it from the arguments received
+    if (_jobId == null || _jobId == '' || _jobId == "null") {
+      var data = Get.arguments;
+      jobId.value = data["jobId"];
+      await _flutterSecureStorage.write(
+        key: "jobId",
+        value: jobId.value == null ? '' : jobId.value.toString(),
+      );
+    } //
+    else {
+      jobId.value = int.tryParse(_jobId) ?? 0;
+    }
+  }
+
+  void getJobDetails(int? jobId) async {
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
         await jobDetailsPresenter.getJobDetails(jobId: jobId, isLoading: true);
 
     if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
       jobDetailsModel.value = _jobDetailsList[0];
+      associatedPermitList?.value =
+          jobDetailsModel.value?.associatedPermitList ?? [];
       update(["jobDetailsModel"]);
     }
-
-    associatedPermitList?.value =
-        jobDetailsModel.value?.associatedPermitList ?? [];
   }
 
   void editJob() {
