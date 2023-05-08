@@ -64,11 +64,11 @@ class EditJobUsecase {
       );
 
   ///
-  Future<Map<String, dynamic>> saveJob({
+  Future<Map<String, dynamic>> updateJob({
     job,
     bool? isLoading,
   }) async =>
-      await repository.saveJob(
+      await repository.updateJob(
         job,
         isLoading,
       );

@@ -20,6 +20,5 @@
 //   ///
 // }
 
-
-// ///
-// enum FileUploadEvents { BEFORE, DURING, AFTER }
+///
+enum FileUploadEvents { BEFORE, DURING, AFTER }

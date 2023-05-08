@@ -1,0 +1,8 @@
+git config user.name "cmmswebtest"
+git config user.email "softelcmms@gmail.com"
+
+git commit -m "Initial commit for Web Test Upload"
+
+git config --global user.email "softelcmms@gmail.com"
+git config --global user.name "cmmswebtest"
+git config --global user.password "Softel@1"

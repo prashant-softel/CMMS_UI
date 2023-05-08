@@ -475,6 +475,21 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  ///
+  Future<ResponseModel> getPermitList({
+    required String auth,
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPermitList(
+        auth: auth,
+        facilityId: facilityId,
+        selfView: selfView,
+        isLoading: isLoading,
+      );
+
+  ///
   Future<ResponseModel> getAssignedToList({
     required String auth,
     int? facilityId,
@@ -511,6 +526,33 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  ///
+  Future<ResponseModel> updateJob({
+    required String auth,
+    job,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateJob(
+        auth: auth,
+        job: job,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
+  Future<ResponseModel> linkToPermit({
+    required String auth,
+    jobId,
+    permitId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.linkToPermit(
+        auth: auth,
+        jobId: jobId,
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
   Future<ResponseModel> createCheckList({
     auth,
     bool? isLoading,

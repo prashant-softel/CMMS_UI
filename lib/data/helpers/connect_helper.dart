@@ -516,6 +516,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPermitList({
+    required String auth,
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitList?facility_id=$facilityId&self_view=$selfView',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getFacilityList({
     String? auth,
     bool? isLoading,
@@ -721,6 +740,45 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateJob({
+    required String auth,
+    job,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/UpdateJob?job=$job',
+      Request.post,
+      job,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///
+  Future<ResponseModel> linkToPermit({
+    required String auth,
+    jobId,
+    permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/LinkToPTW?job_id=$jobId&ptw_id=$permitId',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///
   Future<ResponseModel> createJobCard({
     String? auth,
     int? jobId,

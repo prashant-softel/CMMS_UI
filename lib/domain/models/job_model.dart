@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 List<JobModel> jobListFromJson(String str) =>
     List<JobModel>.from(json.decode(str).map(JobModel.fromJson));
 
@@ -37,10 +39,18 @@ class JobModel {
             json['assignedToId'] == null ? null : json['assignedToId'] ?? '',
         status: json['status'] == null
             ? null
-            : JobStatus.values.firstWhere(
-                (x) => x.index == json['status'],
-                orElse: () => JobStatus.Invalid, // Provide a default value
-              ),
+            : JobStatusData.statusValues.entries
+                .firstWhere(
+                  (x) => x.key == json['status'] - 101,
+                  orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
+                )
+                .value,
+        // status: json['status'] == null
+        //     ? null
+        //     : JobStatus.values.firstWhere(
+        //         (x) => x.index == json['status'] - 101,
+        //         orElse: () => JobStatus.JOB_CREATED, // Provide a default value
+        //       ),
       );
 
   ///
@@ -103,42 +113,94 @@ class JobModel {
         'permitId': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
-        'status': statusValues.reverse[status],
+        'status': JobStatusData.statusValues.entries
+            .firstWhere((x) => x.value == status,
+                orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+            .key,
       };
+
+  ///
+  // static Color getStatusColor(strJobStatus) {
+  //   if (strJobStatus == null) {
+  //     return Colors.grey;
+  //   }
+  //   switch (strJobStatus) {
+  //     case "CREATED":
+  //       return Color(0xff58c3ca);
+  //     case "ASSIGNED":
+  //       return Color(0xff58c352);
+  //     case "LINKED TO PERMIT":
+  //       return Color(0xff787099);
+  //     case "IN PROGRESS":
+  //       return Color(0xffbf8c4b);
+  //     case "CARRY FORWARD":
+  //       return Colors.orange;
+  //     case "CLOSED":
+  //       return Color(0xff3438cd);
+  //     case "CANCELLED":
+  //       return Color(0xffbf4844);
+  //     case "DELETED":
+  //       return Colors.red;
+  //     default:
+  //       return Colors.grey;
+  //   }
+  // }
+
+  ///
+}
+
+class JobStatusData {
+  static const Map<String, JobStatus> statusValues = {
+    "CREATED": JobStatus.JOB_CREATED,
+    "ASSIGNED": JobStatus.JOB_ASSIGNED,
+    "LINKED TO PERMIT": JobStatus.JOB_LINKED,
+    "IN PROGRESS": JobStatus.JOB_IN_PROGRESS,
+    "CARRY FORWARD": JobStatus.JOB_CARRY_FORWARD,
+    "CLOSED": JobStatus.JOB_CLOSED,
+    "CANCELLED": JobStatus.JOB_CANCELLED,
+    "DELETED": JobStatus.JOB_DELETED,
+  };
+
+  static const Map<JobStatus, Color> statusColors = {
+    JobStatus.JOB_CREATED: Color(0xff58c3ca),
+    JobStatus.JOB_ASSIGNED: Color(0xff58c352),
+    JobStatus.JOB_LINKED: Color(0xff787099),
+    JobStatus.JOB_IN_PROGRESS: Color(0xffbf8c4b),
+    JobStatus.JOB_CARRY_FORWARD: Colors.orange,
+    JobStatus.JOB_CLOSED: Color(0xff3438cd),
+    JobStatus.JOB_CANCELLED: Color(0xffbf4844),
+    JobStatus.JOB_DELETED: Colors.red,
+  };
+  static Color getStatusColor(String strJobStatus) {
+    if (strJobStatus == null) {
+      return Colors.grey;
+    }
+
+    JobStatus? status = JobStatusData.statusValues[strJobStatus];
+    return status != null
+        ? JobStatusData.statusColors[status] ?? Colors.grey
+        : Colors.grey;
+  }
+
+  static String getStatusStringFromInt(intStatus) {
+    final jobStatus = JobStatus.values.firstWhere(
+        (x) => x.index == (intStatus - 101),
+        orElse: () => JobStatus.JOB_CREATED);
+    final statusString = JobStatusData.statusValues.entries
+        .firstWhere((x) => x.value == jobStatus,
+            orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+        .key;
+    return statusString;
+  }
 }
 
 enum JobStatus {
-  Invalid,
-  CREATED,
-  UPDATED,
-  DELETED,
-  CANCELLED,
-  ASSIGNED,
-  ISSUED,
-  APPROVED,
-  REJECTED,
-}
-
-final statusValues = EnumValues({
-  "Invalid": JobStatus.Invalid,
-  "Created": JobStatus.CREATED,
-  "Updated": JobStatus.UPDATED,
-  "Deleted": JobStatus.DELETED,
-  "Cancelled": JobStatus.CANCELLED,
-  "Assigned": JobStatus.ASSIGNED,
-  "Issued": JobStatus.ISSUED,
-  "Approved": JobStatus.APPROVED,
-  "Rejected": JobStatus.REJECTED,
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
+  JOB_CREATED,
+  JOB_ASSIGNED,
+  JOB_LINKED,
+  JOB_IN_PROGRESS,
+  JOB_CARRY_FORWARD,
+  JOB_CLOSED,
+  JOB_CANCELLED,
+  JOB_DELETED,
 }

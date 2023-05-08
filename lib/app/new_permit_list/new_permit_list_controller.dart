@@ -30,8 +30,8 @@ class NewPermitListController extends GetxController {
 
   ///
   // var newPermitLists = <NewPermitListModel>[];
-  
-  RxList<NewPermitListModel?>? newPermitList = <NewPermitListModel?>[].obs;
+
+  RxList<NewPermitModel?>? newPermitList = <NewPermitModel?>[].obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
@@ -42,7 +42,7 @@ class NewPermitListController extends GetxController {
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
-  NewPermitListModel? newPermitListModel;
+  NewPermitModel? newPermitListModel;
   PermitIssueModel? permitIssueModel;
   RxList<String> newPermitListTableColumns = <String>[].obs;
   PaginationController newPermitPaginationController = PaginationController(
@@ -55,9 +55,6 @@ class NewPermitListController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
 
-
-  
-
   ///
   @override
   void onInit() async {
@@ -67,12 +64,11 @@ class NewPermitListController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getNewPermitList(facilityId, userId);
       });
-      
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
-      
+
       // Future.delayed(Duration(milliseconds: 500), () {
       //   getPermitIssueButton();
       // });
@@ -101,18 +97,15 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> getNewPermitList(int facilityId, int userId) async {
-    newPermitList!.value = <NewPermitListModel>[];
+    newPermitList!.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
         // facilityId: 45,
         // userId: userId,
-        userId: userId
-        );
-
+        userId: userId);
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
-     
 
       if (newPermitList != null && newPermitList!.isNotEmpty) {
         newPermitListModel = newPermitList![0];
@@ -123,53 +116,48 @@ class NewPermitListController extends GetxController {
         }
       }
     }
-     newPermitPaginationController = PaginationController(
-        rowCount: newPermitList!.length,
-        rowsPerPage: 10,
-      );
+    newPermitPaginationController = PaginationController(
+      rowCount: newPermitList!.length,
+      rowsPerPage: 10,
+    );
 
     update(['new_permit_list']);
   }
 
-  Future<void> permitIssueButton({String? permitId}) async{ 
+  Future<void> permitIssueButton({String? permitId}) async {
     String _comment = commentTextFieldCtrlr.text.trim();
 
     final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
-    comment: _comment,
-    id:permitId,
-    employee_id: "136",
-        );
-        // showAlertPermitIssueDialog();
+      comment: _comment,
+      id: permitId,
+      employee_id: "136",
+    );
+    // showAlertPermitIssueDialog();
     print('Issue Data1:${_comment}');
     print('Issue Data:${permitId}');
     print('Issue Data:${136}');
-        
-
   }
 
-  Future<void> permitApprovedButton({String? permitId}) async{    
+  Future<void> permitApprovedButton({String? permitId}) async {
     String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _permitApprovedBtn = await newPermitListPresenter.permitApprovedButton(
-    comment: _approveComment,
-    id:permitId,
-    employee_id: "136",
-        );
-        // showAlertPermitApproveDialog();
+    final _permitApprovedBtn =
+        await newPermitListPresenter.permitApprovedButton(
+      comment: _approveComment,
+      id: permitId,
+      employee_id: "136",
+    );
+    // showAlertPermitApproveDialog();
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');
     print('Approved Data:${136}');
-
-        
-
   }
 
- 
-  Future<void> addNewPermitList({ String? permitId}) async {
+  Future<void> addNewPermitList({String? permitId}) async {
     Get.toNamed(Routes.newPermit, arguments: permitId);
   }
 
-  Future<void> editNewPermit({ int? permitId}) async {
+  Future<void> editNewPermit({int? permitId}) async {
     Get.toNamed(Routes.newPermit, arguments: permitId);
   }
 
@@ -181,11 +169,10 @@ class NewPermitListController extends GetxController {
     Get.toNamed(Routes.jobCard, arguments: jobId);
   }
 
-   
   void showNewPermitListDetails(int _jobId) {
     // Get.toNamed(Routes.jobDetails, arguments: _jobId);
   }
-  
+
   //  static void showAlertPermitIssueDialog({
   //   String? comment,
   //   int? employee_id,
