@@ -118,6 +118,7 @@ dependencies:
   synchronized: ^3.0.1
   printing: ^5.6.0
   syncfusion_flutter_datepicker: ^19.1.55-beta
+  html_unescape: ^2.0.0
 
 
 dev_dependencies:
