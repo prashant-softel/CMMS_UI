@@ -182,7 +182,11 @@ class JobStatusData {
         : Colors.grey;
   }
 
-  static String getStatusStringFromInt(intStatus) {
+  static String getStatusStringFromInt(int? intStatus) {
+    if (intStatus == null) {
+      return 'UNKNOWN';
+    }
+
     final jobStatus = JobStatus.values.firstWhere(
         (x) => x.index == (intStatus - 101),
         orElse: () => JobStatus.JOB_CREATED);

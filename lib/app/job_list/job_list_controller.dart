@@ -100,7 +100,7 @@ class JobListController extends GetxController {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
         userId: userId,
-        isLoading: false,
+        isLoading: true,
       );
 
       if (_jobList != null && _jobList.isNotEmpty) {
