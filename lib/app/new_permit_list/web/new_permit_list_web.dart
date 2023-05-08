@@ -130,7 +130,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   'action'.tr,
                                 ].map((column) {
                                   return TableViewColumn(
-                                    minWidth: Get.width * 0.12,
+                                    minWidth: Get.width * 0.15,
                                     label: column == "permitId"
                                         ? "Permit Id"
                                         : column == "permit_site_no"
