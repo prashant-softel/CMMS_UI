@@ -131,7 +131,7 @@ class JobStatusData {
   static const Map<JobStatus, Color> statusColors = {
     JobStatus.JOB_CREATED: Color(0xff58c3ca),
     JobStatus.JOB_ASSIGNED: Color(0xff58c352),
-    JobStatus.JOB_LINKED: Color(0xff787099),
+    JobStatus.JOB_LINKED: Color.fromARGB(255, 175, 170, 195),
     JobStatus.JOB_IN_PROGRESS: Color(0xffbf8c4b),
     JobStatus.JOB_CARRY_FORWARD: Colors.orange,
     JobStatus.JOB_CLOSED: Color(0xff3438cd),
