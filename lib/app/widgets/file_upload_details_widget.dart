@@ -1,9 +1,9 @@
-import 'package:cmms/domain/models/file_upload_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:filesize/filesize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../domain/models/file_upload_model.dart';
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
@@ -67,26 +67,22 @@ class FileUploadDetailsWidget extends StatelessWidget {
                       if (selected ?? true) {}
                     },
                     cells: [
-
-                      ///Commented by Anas
-                      
-                      // DataCell(
-                      //   DropdownButton<FileUploadEvents>(
-                      //     isExpanded: true,
-                      //     value: _fileUploadController.selectedEvent.value,
-                      //     onChanged: (FileUploadEvents? newValue) {
-                      //       _fileUploadController.setSelectedEvent(
-                      //           newValue ?? FileUploadEvents.BEFORE);
-                      //     },
-                      //     items: FileUploadEvents.values.map((event) {
-                      //       return DropdownMenuItem<FileUploadEvents>(
-                      //         value: event,
-                      //         child: Text(event.toString().split('.').last),
-                      //       );
-                      //     }).toList(),
-                      //   ),
-                      // ),
-                   
+                      DataCell(
+                        DropdownButton<FileUploadEvents>(
+                          isExpanded: true,
+                          value: _fileUploadController.selectedEvent.value,
+                          onChanged: (FileUploadEvents? newValue) {
+                            _fileUploadController.setSelectedEvent(
+                                newValue ?? FileUploadEvents.BEFORE);
+                          },
+                          items: FileUploadEvents.values.map((event) {
+                            return DropdownMenuItem<FileUploadEvents>(
+                              value: event,
+                              child: Text(event.toString().split('.').last),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                       DataCell(
                         TextFormField(
                           decoration: InputDecoration(

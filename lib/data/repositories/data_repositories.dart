@@ -524,6 +524,33 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  ///
+  Future<ResponseModel> updateJob({
+    required String auth,
+    job,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateJob(
+        auth: auth,
+        job: job,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
+  Future<ResponseModel> linkToPermit({
+    required String auth,
+    jobId,
+    permitId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.linkToPermit(
+        auth: auth,
+        jobId: jobId,
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
   Future<ResponseModel> createCheckList({
     auth,
     bool? isLoading,

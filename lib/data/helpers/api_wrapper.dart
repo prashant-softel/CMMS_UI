@@ -79,11 +79,6 @@ class ApiWrapper {
               return ResponseModel(
                   data: '{"message":"Request timed out"}', hasError: true);
             }
-            //  on TimeoutException catch (_) {
-            //   Utility.closeDialog();
-            //   return ResponseModel(
-            //       data: '{"message":"Request timed out"}', hasError: true);
-            // }
           }
         case Request.put:
 
@@ -92,16 +87,15 @@ class ApiWrapper {
             var uri = _baseUrl + url;
 
             try {
-            
               if (isLoading) Utility.showLoader();
               final response = await http
                   .put(
                     Uri.parse(uri),
-                    body: data,//json.encode(data),
+                    body: data, //json.encode(data),
                     headers: headers,
                   )
                   .timeout(const Duration(seconds: 120));
-              
+
               if (isLoading) Utility.closeDialog();
 
               Utility.printILog(uri);

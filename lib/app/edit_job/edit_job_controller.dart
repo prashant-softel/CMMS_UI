@@ -363,7 +363,7 @@ class EditJobController extends GetxController {
       // var jobJsonString = addJobModelToJson(addJobModel);
 
       Map<String, dynamic>? responseMapJobCreated =
-          await editJobPresenter.saveJob(
+          await editJobPresenter.updateJob(
         job: addJobModel,
         isLoading: false,
       );

@@ -32,4 +32,16 @@ class JobDetailsPresenter {
         selfView: selfView,
         isLoading: isLoading,
       );
+
+  ///
+  Future<Map<String, dynamic>?> linkToPermit({
+    int? jobId,
+    int? permitId,
+    bool? isLoading,
+  }) async =>
+      await jobDetailsUsecase.linkToPermit(
+        jobId: jobId,
+        permitId: permitId,
+        isLoading: isLoading,
+      );
 }

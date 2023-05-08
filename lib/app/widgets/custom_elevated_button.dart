@@ -1,4 +1,3 @@
-import 'package:cmms/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final IconData? icon;
+  final double? width; // Add width parameter
 
   const CustomElevatedButton({
     Key? key,
@@ -18,31 +18,28 @@ class CustomElevatedButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.icon,
+    this.width, // Add width parameter
   }) : super(key: key);
 
-  ///
   @override
   Widget build(BuildContext context) {
-    final _buttonWidth =
-        Responsive.isDesktop(context) ? (Get.width * 0.25) : (Get.width * 0.9);
     final _buttonHeight = Get.height * 0.06;
 
-    ///
     return //
         ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        maximumSize: Size(_buttonWidth, _buttonHeight),
-        minimumSize: Size(_buttonWidth / 2, _buttonHeight * 0.8),
+        maximumSize: width != null ? Size(width!, _buttonHeight) : null,
+        minimumSize:
+            width != null ? Size(width! / 2, _buttonHeight * 0.8) : null,
         backgroundColor: backgroundColor,
         elevation: 25.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+      child: IntrinsicWidth(
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           icon != null
               ? Row(
                   children: [
@@ -63,7 +60,7 @@ class CustomElevatedButton extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-        ],
+        ]),
       ),
     );
   }

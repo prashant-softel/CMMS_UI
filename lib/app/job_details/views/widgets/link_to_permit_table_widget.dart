@@ -18,18 +18,14 @@ class LinkToPermitTableWidget extends StatelessWidget {
         Container(
       height: Get.height,
       child: //
-          //     Obx(
-          //   () => //
-          //       Column(
-          //           crossAxisAlignment: CrossAxisAlignment.end, //
-          //           children: [
+
           Row(
               mainAxisAlignment: MainAxisAlignment.end, //
               children: [
             ActionButton(
               label: "Link to Existing Permit",
               icon: Icons.link,
-              onPressed: () => controller.linkToExistingPermit(),
+              onPressed: () => controller.showPermitsDialog(),
               color: ColorValues.appYellowColor,
             ),
             ActionButton(

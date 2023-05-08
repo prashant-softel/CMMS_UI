@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../domain/models/job_details_model.dart';
 import '../../domain/models/new_permit_list_model.dart';
@@ -27,6 +28,17 @@ class JobDetailsController extends GetxController {
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
 
+  /// Permit
+  RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
+  var permitDropdownValues = <String?>[].obs;
+  List<TextEditingController> textControllers =
+      List.generate(5, (_) => TextEditingController());
+  final selectedPermit = Rx<NewPermitModel?>(null);
+  Rx<int?> selectedPermitId = 0.obs;
+
+  final permitValues = RxList<String>.filled(5, '');
+  RxString responseMessage = ''.obs;
+
   /// Others
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
@@ -34,14 +46,6 @@ class JobDetailsController extends GetxController {
   int userId = 36;
   var breakdownTime;
   var facilityId = 0;
-
-  /// Permit
-  RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
-  var permitDropdownValues = <String?>[].obs;
-  List<TextEditingController> textControllers =
-      List.generate(5, (_) => TextEditingController());
-
-  final selectedPermit = Rx<NewPermitModel?>(null);
 
   ///
   @override
@@ -90,22 +94,25 @@ class JobDetailsController extends GetxController {
     Get.toNamed(Routes.editJob, arguments: jobId.value);
   }
 
-  void linkToExistingPermit() {
+  void showPermitsDialog() {
     getPermitList();
     showAlertDialog();
-    // Initialize dropdown and text field values
-    // associatedPermitList?.forEach((data) {
-    //   permitDropdownValues.add(data.permitTypeName ?? '');
-    //   final textControllerList = <TextEditingController>[];
-    //   textControllerList.add(TextEditingController(text: ''));
-    //   textControllerList.add(TextEditingController(text: ''));
-    //   textControllerList.add(TextEditingController(text: ''));
-    //   textControllerList.add(TextEditingController(text: ''));
-    //   textControllerList.add(TextEditingController(text: ''));
-    //   textControllers.add(textControllerList);
-    // });
   }
 
+  void linkToPermit() async {
+    Map<String, dynamic>? responseMapPermitLinked =
+        await jobDetailsPresenter.linkToPermit(
+      permitId: selectedPermitId.value,
+      jobId: jobId.value,
+      isLoading: false,
+    );
+    if (responseMapPermitLinked != null) {
+      var _jobId = responseMapPermitLinked["id"][0];
+      responseMessage.value = responseMapPermitLinked["message"];
+    }
+  }
+
+  ///
   Future<void> getPermitList() async {
     facilityId = jobDetailsModel.value?.facilityId ?? 0;
     final _permitList = await jobDetailsPresenter.getPermitList(
@@ -126,6 +133,30 @@ class JobDetailsController extends GetxController {
 
   void goToJobCardScreen() {
     Get.toNamed(Routes.jobCard, arguments: jobId);
+  }
+
+  void goToJobDetailsScreen() {
+    Get.offNamed(Routes.jobDetails, arguments: {'jobId': jobId});
+  }
+
+  onPermitSelected(NewPermitModel? newPermitModel) {
+    if (newPermitModel != null) {
+      selectedPermit.value = newPermitModel;
+      // Get the selected permitId
+      selectedPermitId.value = newPermitModel.permitId;
+      // Set the values of the permitValues list based on the selected permit
+
+      permitValues[0] = newPermitModel.permitSiteNo.toString();
+      permitValues[1] = newPermitModel.permitTypeName ?? '';
+      permitValues[2] = newPermitModel.requestByName ?? '';
+      permitValues[3] = newPermitModel.ptwStatus.toString();
+      permitValues[4] = DateFormat('yyyy-MM-dd').format(
+          newPermitModel.requestDatetime ??
+              DateTime.now()); // Format date as needed
+    } else {
+      permitValues.fillRange(
+          0, 5, ''); // Clear the values if no permit is selected
+    }
   }
 
   /// Show alert dialog

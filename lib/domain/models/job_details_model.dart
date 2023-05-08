@@ -10,6 +10,12 @@ JobDetailsModel jobDetailsModelFromJson(String str) =>
 String jobDetailsModelToJson(JobDetailsModel data) =>
     json.encode(data.toJson());
 
+List<JobDetailsModel> jobDetailsModelListFromJson(String str) =>
+    List<JobDetailsModel>.from(json.decode(str).map(JobDetailsModel.fromJson));
+
+String jobDetailsModelListToJson(List<JobDetailsModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class JobDetailsModel {
   JobDetailsModel({
     this.id,
@@ -107,8 +113,8 @@ class JobDetailsModel {
             ? List<WorkingAreaList>.from(json["associated_permit"]
                 .map((x) => WorkingAreaList.fromJson(x)))
             : [],
-        associatedPermitList: (json["working_area_name_list"] != null)
-            ? List<AssociatedPermit>.from(json["working_area_name_list"]
+        associatedPermitList: (json["associated_permit_list"] != null)
+            ? List<AssociatedPermit>.from(json["associated_permit_list"]
                 .map((x) => AssociatedPermit.fromJson(x)))
             : [],
       );

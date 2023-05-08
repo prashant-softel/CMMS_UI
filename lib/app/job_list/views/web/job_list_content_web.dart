@@ -1,4 +1,5 @@
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +30,9 @@ class JobListContentWeb extends StatelessWidget {
             icon: Icons.download,
             label: 'BM Report',
             onPressed: () {
-              controller.exportToExcel();
+              if (kIsWeb) {
+                controller.exportToExcel();
+              }
             },
             color: ColorValues.appYellowColor,
           ),
@@ -75,7 +78,7 @@ class JobListContentWeb extends StatelessWidget {
               : Expanded(
                   child: PaginatedDataTable2(
                     dataRowHeight: Get.height * 0.1,
-
+                    columnSpacing: 10,
                     source: dataSource, // Custom DataSource class
                     headingRowHeight: Get.height * 0.12,
                     minWidth: Get.width * 2,
@@ -90,11 +93,17 @@ class JobListContentWeb extends StatelessWidget {
                         controller.idFilterText,
                       ),
                       buildDataColumn(
-                        'facilityName',
-                        'Facility',
+                        'jobDetails',
+                        'Job Title',
                         ColumnSize.L,
-                        controller.facilityNameFilterText,
+                        controller.jobDetailsFilterText,
                       ),
+                      // buildDataColumn(
+                      //   'facilityName',
+                      //   'Facility',
+                      //   ColumnSize.L,
+                      //   controller.facilityNameFilterText,
+                      // ),
                       buildDataColumn(
                         'jobDate',
                         'Job Date',
@@ -109,22 +118,17 @@ class JobListContentWeb extends StatelessWidget {
                       ),
                       buildDataColumn(
                         'workingArea',
-                        'Work Area /\n Equipment',
+                        'Equipment',
                         ColumnSize.L,
                         controller.workAreaFilterText,
                       ),
-                      buildDataColumn(
-                        'description',
-                        'Description',
-                        ColumnSize.L,
-                        controller.descriptionFilterText,
-                      ),
-                      buildDataColumn(
-                        'jobDetails',
-                        'Job Details',
-                        ColumnSize.L,
-                        controller.jobDetailsFilterText,
-                      ),
+                      // buildDataColumn(
+                      //   'description',
+                      //   'Description',
+                      //   ColumnSize.L,
+                      //   controller.descriptionFilterText,
+                      // ),
+
                       buildDataColumn(
                         'workType',
                         'Work Type',
@@ -139,7 +143,7 @@ class JobListContentWeb extends StatelessWidget {
                       ),
                       buildDataColumn(
                         'breakdownTime',
-                        'Breakdown \n Time',
+                        'Breakdown Time',
                         ColumnSize.M,
                         controller.breakdownTimeFilterText,
                       ),
@@ -192,7 +196,7 @@ class JobListContentWeb extends StatelessWidget {
             onChanged: (value) {
               filterText?.value = value;
             },
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             style: TextStyle(
                 height: 1.0), // Adjust the height by modifying this value
             decoration: InputDecoration(
@@ -214,9 +218,12 @@ class JobListContentWeb extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          header,
-          style: Styles.black15W600,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            header,
+            style: Styles.black15W600,
+          ),
         ),
       ]),
       // ),
@@ -237,9 +244,13 @@ class JobDataSource extends DataTableSource {
   void filterJobs() {
     filteredJobList = <JobModel?>[];
     filteredJobList = controller.jobList.where((job) {
-      return (job?.id ?? '').toString().toLowerCase().contains(controller.idFilterText.value.toLowerCase()) &&
-          (job?.facilityName ?? '').toLowerCase().contains(
-              controller.facilityNameFilterText.value.toLowerCase()) &&
+      return (job?.id ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.idFilterText.value.toLowerCase()) &&
+          (job?.jobDetails ?? '')
+              .toLowerCase()
+              .contains(controller.jobDetailsFilterText.value.toLowerCase()) &&
           (job?.jobDate ?? '')
               .toString()
               .toLowerCase()
@@ -249,27 +260,30 @@ class JobDataSource extends DataTableSource {
           (job?.workingArea ?? '')
               .toLowerCase()
               .contains(controller.workAreaFilterText.value.toLowerCase()) &&
-          (job?.description ?? '')
-              .toLowerCase()
-              .contains(controller.descriptionFilterText.value.toLowerCase()) &&
-          (job?.jobDetails ?? '')
-              .toLowerCase()
-              .contains(controller.jobDetailsFilterText.value.toLowerCase()) &&
+          // (job?.description ?? '')
+          //     .toLowerCase()
+          //     .contains(controller.descriptionFilterText.value.toLowerCase()) &&
+
           (job?.workType ?? '').contains(controller.workTypeFilterText.value) &&
           (job?.raisedByName ?? '').toLowerCase().contains(
               controller.raisedByNameFilterText.value.toLowerCase()) &&
-          controller.formatDate(job?.breakdownTime.toString() ?? '').toLowerCase().contains(
-              controller.breakdownTimeFilterText.value.toLowerCase()) &&
+          controller
+              .formatDate(job?.breakdownTime.toString() ?? '')
+              .toLowerCase()
+              .contains(
+                  controller.breakdownTimeFilterText.value.toLowerCase()) &&
           (job?.breakdownType ?? '').toLowerCase().contains(
               controller.breakdownTypeFilterText.value.toLowerCase()) &&
           (job?.permitId ?? '')
               .toLowerCase()
               .toString()
               .contains(controller.permitIdFilterText.value.toLowerCase()) &&
-          (job?.assignedToName ?? '')
+          (job?.assignedToName ?? '').toLowerCase().contains(
+              controller.assignedToNameFilterText.value.toLowerCase()) &&
+          (job?.status ?? '')
+              .toString()
               .toLowerCase()
-              .contains(controller.assignedToNameFilterText.value.toLowerCase()) &&
-          (job?.status ?? '').toString().toLowerCase().contains(controller.statusFilterText.value.toLowerCase());
+              .contains(controller.statusFilterText.value.toLowerCase());
       // Add other filter conditions as needed
     }).toList();
   }
@@ -277,6 +291,7 @@ class JobDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     final jobDetails = filteredJobList[index];
+
     controller.jobId.value = jobDetails?.id ?? 0;
     var _statusString =
         '${JobStatusData.statusValues.entries.firstWhere((x) => x.value == jobDetails?.status, orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED)).key}';
@@ -286,10 +301,16 @@ class JobDataSource extends DataTableSource {
       index: index,
       cells: [
         DataCell(
+          Text(
+            '${jobDetails?.id ?? ''}',
+          ),
+        ),
+        DataCell(
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${jobDetails?.id ?? ''}'),
+              Text('${jobDetails?.jobDetails ?? ''}'),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
@@ -306,78 +327,87 @@ class JobDataSource extends DataTableSource {
           ),
         ),
         ...[
-          // '${jobDetails?.id ?? ''}',
-          '${jobDetails?.facilityName ?? ''}',
           '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',
           '${jobDetails?.equipmentCat ?? ''}',
           '${jobDetails?.workingArea ?? ''}',
-          '${jobDetails?.description ?? ''}',
-          '${jobDetails?.jobDetails ?? ''}',
           '${jobDetails?.workType ?? ''}',
           '${jobDetails?.raisedByName ?? ''}',
           '${controller.formatDate(jobDetails?.breakdownTime.toString() ?? '')}',
           '${jobDetails?.breakdownType ?? ''}',
           '${jobDetails?.permitId ?? ''}',
           '${jobDetails?.assignedToName ?? ''}',
-          // '${statusValues.reverse[jobDetails?.status] ?? ''}',
           'Actions',
         ].map((value) {
           return DataCell(
             Padding(
               padding: EdgeInsets.zero,
               child: (value == 'Actions')
-                  ? Wrap(//
+                  ? Column(
+                      //
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                      Row(children: [
-                        TableActionButton(
-                          color: ColorValues.appGreenColor,
-                          icon: Icons.visibility,
-                          label: 'View',
-                          onPress: () {
-                            controller
-                                .goToJobDetailsScreen(controller.jobId.value);
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.appPurpleColor,
-                          icon: Icons.add,
-                          label: 'Job Card',
-                          onPress: () {
-                            controller.goToJobCardScreen(
-                              int.tryParse('${jobDetails?.id}'),
-                            );
-                          },
-                        ),
-                      ]),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center, //
-                          children: [
-                            Expanded(
-                              child: TableActionButton(
-                                color: ColorValues.appGreenColor,
-                                icon: Icons.link,
-                                label: 'Link to Permit',
-                                onPress: () {
-                                  controller.goToJobDetailsScreen(
-                                      controller.jobId.value);
-                                },
-                              ),
-                            ),
-                            if (jobDetails?.assignedToName == null ||
-                                jobDetails?.assignedToName == '')
-                              Expanded(
-                                child: TableActionButton(
-                                  color: ColorValues.appYellowColor,
-                                  icon: Icons.add,
-                                  label: 'Assign',
-                                  onPress: () {
-                                    Get.offAndToNamed(Routes.editJob,
-                                        arguments: {"jobId": jobDetails?.id});
-                                  },
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center, //
+                              children: [
+                                Flexible(
+                                  child: TableActionButton(
+                                    color: ColorValues.appGreenColor,
+                                    icon: Icons.visibility,
+                                    label: 'View',
+                                    onPress: () {
+                                      controller.goToJobDetailsScreen(
+                                          controller.jobId.value);
+                                    },
+                                  ),
                                 ),
-                              ),
-                          ]),
-                    ])
+
+                                /// if job is linked, only then show Job Card button
+                                // if (jobDetails?.status == JobStatus.JOB_LINKED)
+                                Flexible(
+                                  child: TableActionButton(
+                                    color: ColorValues.appPurpleColor,
+                                    icon: Icons.add,
+                                    label: 'Job Card',
+                                    onPress: () {
+                                      controller.goToJobCardScreen(
+                                        int.tryParse('${jobDetails?.id}'),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center, //
+                              children: [
+                                Flexible(
+                                  child: TableActionButton(
+                                    color: ColorValues.appGreenColor,
+                                    icon: Icons.link,
+                                    label: 'Link Permit',
+                                    onPress: () {
+                                      controller.goToJobDetailsScreen(
+                                          controller.jobId.value);
+                                    },
+                                  ),
+                                ),
+                                if (jobDetails?.assignedToName == null ||
+                                    jobDetails?.assignedToName == '')
+                                  Flexible(
+                                    child: TableActionButton(
+                                      color: ColorValues.appYellowColor,
+                                      // icon: Icons.add,
+                                      label: 'Assign',
+                                      onPress: () {
+                                        Get.offAndToNamed(Routes.editJob,
+                                            arguments: {
+                                              "jobId": jobDetails?.id
+                                            });
+                                      },
+                                    ),
+                                  ),
+                              ]),
+                        ])
                   : Text(value.toString()),
             ),
           );

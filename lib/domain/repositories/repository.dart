@@ -829,23 +829,12 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      // final newPermitListData =
-      //     await getNewPermitAccessData(LocalKeys.userAccess);
-      // final newPermitModelList = jsonDecode(newPermitListData);
-      // var newPermitList = NewPermitListModel.fromJson(newPermitModelList);
-      // int permitId = newPermitList.permitId ?? 0;
-      // print({"NewPermitList:", newPermitList.permitId});
+
       final userAcessData = await getUserAccessData(LocalKeys.userAccess);
       final userAccessModelList = jsonDecode(userAcessData);
       var userAccess = AccessListModel.fromJson(userAccessModelList);
       int userId = userAccess.user_id ?? 0;
-      // int userId = varUserAccessModel.value.user_id ?? 0;
 
-      final newPermitListData =
-          await getNewPermitAccessData(LocalKeys.userAccess);
-      final newPermitModelList = jsonDecode(newPermitListData);
-      var newPermitList = NewPermitModel.fromJson(newPermitModelList);
-      int permitId = newPermitList.permitId ?? 0;
       final res = await _dataRepository.getNewPermitList(
         auth: auth,
         // facilityId: 45,
@@ -861,10 +850,6 @@ class Repository {
             .map<NewPermitModel>(
                 (m) => NewPermitModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
-        // var newPermitList = newPermitListFromJson(res.data);
-        // print('Permit Data:${newPermitList}');
-
-        // return newPermitList;
 
         return _newPermitModelList;
       } //
@@ -1206,7 +1191,7 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      log(auth);
+
       final res = await _dataRepository.getJobDetails(
         auth: auth,
         jobId: jobId,
@@ -1215,11 +1200,10 @@ class Repository {
       );
 
       if (!res.hasError) {
-        final JobDetailsModel _jobDetailsModel =
-            jobDetailsModelFromJson(res.data);
-        List<JobDetailsModel> _jobDetailsModelList = [];
-        _jobDetailsModelList.add(_jobDetailsModel);
+        final _jsonJobDetailsModel = jobDetailsModelFromJson(res.data);
 
+        List<JobDetailsModel> _jobDetailsModelList = [];
+        _jobDetailsModelList.add(_jsonJobDetailsModel);
         return _jobDetailsModelList;
       } //
       else {
@@ -1331,6 +1315,38 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> linkToPermit(
+    jobId,
+    permitId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.linkToPermit(
+        auth: auth,
+        jobId: jobId,
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'linkToPermit');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString() + 'linkToPermit');
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> saveJob(
     job,
     bool? isLoading,
@@ -1357,6 +1373,36 @@ class Repository {
     } //
     catch (error) {
       Utility.showDialog(error.toString() + 'saveJob');
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> updateJob(
+    job,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateJob(
+        auth: auth,
+        job: job,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateJob');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString() + 'updateJob');
       return Map();
     }
   }
