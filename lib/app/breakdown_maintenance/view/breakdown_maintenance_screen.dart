@@ -13,7 +13,7 @@ class BreakdownMaintenanceScreen
     extends GetView<BreakdownMaintenanceController> {
   ///
   BreakdownMaintenanceScreen({super.key});
-  final NewPermitController _controller = Get.find();
+  // final NewPermitController _controller = Get.find();
   final BreakdownMaintenanceController controller = Get.find();
 
 

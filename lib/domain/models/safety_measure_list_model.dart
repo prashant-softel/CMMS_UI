@@ -15,6 +15,9 @@ class SafetyMeasureListModel {
   SafetyMeasureListModel({
     this.id,
     this.name,
+    this.inputID,
+    this.inputName,
+    this.permitType,
     
    
 
@@ -22,12 +25,18 @@ class SafetyMeasureListModel {
 
   int? id;
   String? name;
+  int? inputID;
+  String? inputName;
+  String? permitType;
  
   
 
   factory SafetyMeasureListModel.fromJson(Map<String, dynamic> json) => SafetyMeasureListModel(
         id: json["id"],
         name: json["name"],
+        inputID: json['inputID'],
+        inputName: json['inputName'],
+        permitType: json['permitType'],
        
         
       );
@@ -35,6 +44,9 @@ class SafetyMeasureListModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "inputID": inputID,
+        "inputName": inputName,
+        "permitType": permitType,
        
       };
 }

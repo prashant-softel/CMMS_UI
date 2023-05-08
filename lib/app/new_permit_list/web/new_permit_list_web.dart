@@ -200,7 +200,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         '${newPermitDetails?.permitId}',
                                         '${newPermitDetails?.permitSiteNo}',
                                         '${newPermitDetails?.permitTypeName}',
-                                        '${newPermitDetails?.equipmentCategory}',
+                                        '${newPermitDetails?.equipment_categories}',
                                         '${newPermitDetails?.workingAreaName ?? ''}',
                                         '${newPermitDetails?.description}',
                                         '${newPermitDetails?.requestByName}',
@@ -208,12 +208,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         '${newPermitDetails?.approvedByName}',
                                         '${newPermitDetails?.approved_datetime}',
                                         '${newPermitDetails?.current_status}',
-                                        '${newPermitDetails?.current_status}' ==
-                                                "Permit Created"
-                                            ?
+                                        // '${newPermitDetails?.current_status}' ==
+                                        //         "Permit Created" || '${newPermitDetails?.current_status}' == 'Permit Issued'
+                                        //     ?
                                         
                                             'Actions'
-                                            : '',
+                                            // : '',
                                        
                                       ];
                                     },
@@ -223,7 +223,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                       onTap: () => {
                                             print('ZERO = ${_newPermitList[0]}')
                                           },
-                                      height: 70,
+                                      height: 110,
                                       cells: _newPermitList.map((value) {
                                         var index;
                                         return TableViewCell(
@@ -250,6 +250,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
+
+                                            
                                                     varUserAccessModel.value
                                                                     .access_list!
                                                                     .where((e) =>
@@ -264,9 +266,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                     .newPermitList!
                                                                     .where((e) =>
                                                                         e?.ptwStatus ==
-                                                                        121)
-                                                                    .length >
-                                                                0
+                                                                        121) != null 
+                                                                    
+                                                                
                                                         ? TableActionButton(
                                                             color: Colors.green,
                                                             icon: Icons.check,
@@ -276,6 +278,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
+                                                     
                                                     varUserAccessModel.value
                                                                     .access_list!
                                                                     .where((e) =>
@@ -290,7 +293,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                     .newPermitList!
                                                                     .where((e) =>
                                                                         e?.ptwStatus ==
-                                                                        122)
+                                                                        131)
                                                                     .length >
                                                                 0
                                                         ? TableActionButton(
@@ -309,12 +312,44 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
+                                                          varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            3 &&
+                                                                        e.delete ==
+                                                                            0)
+                                                                    .length >
+                                                                0 
+                                                                &&
+                                                            controller
+                                                                    .newPermitList!
+                                                                    .where((e) =>
+                                                                        e?.ptwStatus ==
+                                                                        121)
+                                                                    .length >
+                                                                0
+                                                        ? Container()
+                                                        : TableActionButton(
+                                                            color: Colors.red,
+                                                            icon: Icons.delete,
+                                                            label: 'Reject',
+                                                            onPress: () {
+                                                              // controller.goToJobCardScreen(
+                                                              //   int.tryParse(_newPermitList[0]),
+                                                              // );
+                                                              // Get.dialog(PermitApprovedDialog(
+                                                              //     permitId:
+                                                              //         _newPermitList[
+                                                              //             0]));
+                                                            },
+                                                          ),
                                                     varUserAccessModel.value
                                                                 .access_list!
                                                                 .where((e) =>
                                                                     e.feature_id ==
                                                                         3 &&
-                                                                    e.edit == 0)
+                                                                    e.edit == 1)
                                                                 .length >
                                                             0
                                                         ? TableActionButton(

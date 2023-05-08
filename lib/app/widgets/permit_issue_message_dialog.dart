@@ -1,3 +1,4 @@
+import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class PermitMessageIssueDialog extends GetView {
   String? data;
 
   PermitMessageIssueDialog({super.key, this.createPermitData, this.data});
+  final NewPermitListController _controller = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +82,7 @@ class PermitMessageIssueDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.back();
+                
               },
               child: const Text('Ok'),
             ),

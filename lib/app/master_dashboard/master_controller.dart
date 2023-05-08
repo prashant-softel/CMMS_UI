@@ -65,21 +65,21 @@ class MastersController extends GetxController {
     );
   }
 
-  Future<void> addNewJob() async {
+  Future<void> gotToSafetyQuestionsList() async {
     Get.toNamed(
-      Routes.addJob,
+      Routes.safetyQuestionsList,
     );
   }
 
-  Future<void> newPermitList() async {
+  Future<void> goToJobTypeList() async {
     Get.toNamed(
-      Routes.newPermitList,
+      Routes.jobTypeListScreen,
     );
   }
 
-  Future<void> createNewPermit() async {
+  Future<void> goToJobSOPList() async {
     Get.toNamed(
-      Routes.newPermit,
+      Routes.jobSOPListScreen,
     );
   }
 

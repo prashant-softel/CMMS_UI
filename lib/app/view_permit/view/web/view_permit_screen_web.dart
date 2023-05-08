@@ -587,47 +587,56 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   ),
                                                   controller.permitId != null
                                                   ?
-                                                  Wrap(
-                                                                  alignment:
-                                                                      WrapAlignment
-                                                                          .start,
-                                                                  spacing: 100,
-                                                                  children: []
-                                                                    ..addAll(controller
-                                                                        .listCategory!
-                                                                        .map((element) =>
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.min,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                
-                                                                                Text("${element?.equipmentCat}", style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 5, 92, 163)),)
-                                                                              ],
-                                                                            ))),
-                                                                )
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: Wrap(
+                                                                    alignment:
+                                                                        WrapAlignment
+                                                                            .start,
+                                                                    spacing: 100,
+                                                                    children: []
+                                                                      ..addAll(controller
+                                                                          .listCategory!
+                                                                          .map((element) =>
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  
+                                                                                  Text("${element?.equipmentCat}", style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 5, 92, 163)),)
+                                                                                ],
+                                                                              ))),
+                                                                  ),
+                                                  )
                                                                 :
-                                                  Text(
-                                                    'Inverter, SCADA',
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 5, 92, 163)),
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Text(
+                                                      'Inverter, SCADA',
+                                                      style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 5, 92, 163)),
+                                                    ),
                                                   ),
                                                   SizedBox(
-                                                    width: 250,
+                                                    width: 150,
                                                   ),
                                                   CustomRichText(
                                                       title: 'Block: '),
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 5, 92, 163)),
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Text(
+                                                      '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                      style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 5, 92, 163)),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -1266,9 +1275,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                              children: [
                                                                       Row(
                                                                         children: [
-                                                                          // checkBoxMethod(
-                                                                          // 1),
-                                                                          Text("${l = l! + 1}. "),
+                                                                          checkBoxMethod(
+                                                                          1),
+                                                                          // Text("${l = l! + 1}. "),
                                                                           Text("${element.name}")
                                                                         ],
                                                                       )
@@ -1916,16 +1925,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 SizedBox(width: 110,),
                                                                 CustomRichText(title: 'Issued By: '),
                                                                 SizedBox(width:85),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                                  ),
                                                                 ),
-                                                                SizedBox(width:260),
+                                                                SizedBox(width:187),
                                                                 CustomRichText(title: 'Date / Time: '),
                                                                 SizedBox(width:80),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                                                  ),
                                                                 ),
-                                                                SizedBox(width: 180,),
+                                                                SizedBox(width: 105,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -1939,16 +1954,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 SizedBox(width: 90,),
                                                                 CustomRichText(title: 'Approved By: '),
                                                                 SizedBox(width:90),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.approvedByName}',
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.approvedByName}',
+                                                                  ),
                                                                 ),
-                                                                SizedBox(width:260),
+                                                                SizedBox(width:186),
                                                                 CustomRichText(title: 'Date / Time: '),
                                                                 SizedBox(width:80),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                                  ),
                                                                 ),
-                                                                SizedBox(width: 178,),
+                                                                SizedBox(width: 105,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -1962,16 +1983,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 SizedBox(width: 110,),
                                                                 CustomRichText(title: 'Closed By: '),
                                                                 SizedBox(width:85),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.closedByName}',
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.closedByName}',
+                                                                  ),
                                                                 ),
-                                                                SizedBox(width:260),
+                                                                SizedBox(width:187),
                                                                 CustomRichText(title: 'Date / Time: '),
                                                                 SizedBox(width:80),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.close_at}',
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.close_at}',
+                                                                  ),
                                                                 ),
-                                                                SizedBox(width: 180,),
+                                                                SizedBox(width: 105,),
                                                                 CustomRichText(title: 'Signature: '),
                                                                
                                                               ],
@@ -3002,19 +3029,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
   checkBoxMethod(int position) {
     return Checkbox(
         value: position == 1
-            ? controller.isChecked1.value
+            ? controller.isChecked1.value = true
             : position == 2
-                ? controller.isChecked2.value
+                ? controller.isChecked2.value = true
                 : position == 3
-                    ? controller.isChecked3.value
+                    ? controller.isChecked3.value = true
                     : position == 4
-                        ? controller.isChecked4.value
+                        ? controller.isChecked4.value = true
                         : position == 5
-                            ? controller.isChecked5.value
+                            ? controller.isChecked5.value = true
                             : position == 6
-                                ? controller.isChecked6.value
+                                ? controller.isChecked6.value = true
                                 : position == 7
-                                    ? controller.isChecked7.value
+                                    ? controller.isChecked7.value = true
                                     : null,
         onChanged: (bool? value) {
           position == 1

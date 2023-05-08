@@ -13,7 +13,7 @@ class MastersDashboard
     extends GetView<MastersController> {
   MastersDashboard({super.key});
 
-  // final BreakdownMaintenanceController controller = Get.find();
+  final MastersController controller = Get.find();
   
 
 
@@ -56,9 +56,6 @@ class MastersDashboard
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 40,
-                    ),
                     if (Responsive.isMobile(context))
                       Obx(
                         () => Container(
@@ -100,13 +97,24 @@ class MastersDashboard
                         ),
                       ),
                     if (Responsive.isDesktop(context))
+                    Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text(
+                          "Masters",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(height: 15,),
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Text(
-                          "Permit List",
+                          "Permit To Work",
                           style: TextStyle(
                               color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 24,
+                              fontSize: 20,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
@@ -129,17 +137,17 @@ class MastersDashboard
                         createContentTile(
                           title: 'Safety Questions',
                           onTap: (){
-                            // controller.addNewJob();
+                            controller.gotToSafetyQuestionsList();
                           }),
                           createContentTile(
                             title: "Job Type",
                             onTap: () {
-                              // controller.newPermitList();
+                              controller.goToJobTypeList();
                             }),
                         createContentTile(
                             title: "Job List",
                             onTap: () {
-                              // controller.createNewPermit();
+                              controller.goToJobSOPList();
                             }),
                         // createContentTile(title: "Job Card List"),
                         // _priventiveList(tittle: "PM Schedule View"),

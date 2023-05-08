@@ -5,7 +5,7 @@ class NewPermitListModel {
   int? permitType;
   String? permitTypeName;
   int? equipmentCategoryId;
-  String? equipmentCategory;
+  String? equipment_categories;
   int? workingAreaId;
   String? workingAreaName;
   String? description;
@@ -22,7 +22,7 @@ class NewPermitListModel {
       this.permitType,
       this.permitTypeName,
       this.equipmentCategoryId,
-      this.equipmentCategory,
+      this.equipment_categories,
       this.workingAreaId,
       this.workingAreaName,
       this.description,
@@ -39,7 +39,7 @@ class NewPermitListModel {
     permitType = json['permit_type'];
     permitTypeName = json['permitTypeName'];
     equipmentCategoryId = json['equipment_category_id'];
-    equipmentCategory = json['equipment_category'];
+    equipment_categories = json['equipment_categories'];
     workingAreaId = json['workingAreaId'];
     workingAreaName = json['workingAreaName'];
     description = json['description'];
@@ -62,7 +62,7 @@ class NewPermitListModel {
     data['permit_type'] = this.permitType;
     data['permitTypeName'] = this.permitTypeName;
     data['equipment_category_id'] = this.equipmentCategoryId;
-    data['equipment_category'] = this.equipmentCategory;
+    data['equipment_categories'] = this.equipment_categories;
     data['workingAreaId'] = this.workingAreaId;
     data['workingAreaName'] = this.workingAreaName;
     data['description'] = this.description;

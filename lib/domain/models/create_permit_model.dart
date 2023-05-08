@@ -93,7 +93,7 @@ class CreatePermitModel {
         "approver_id": approver_id,
         "issuer_id": issuer_id,
         "facility_id": facility_id,
-        "block_id": blockId,
+        "blockId": blockId,
         "latitude": latitude,
         "job_type_id": job_type_id,
         "lotoId": lotoId,

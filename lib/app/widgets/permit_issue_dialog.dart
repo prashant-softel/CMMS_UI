@@ -109,6 +109,8 @@ String? permitId;
                             onPressed: () {
                               _controller.permitIssueButton(permitId:permitId);
                               Get.back();
+                              // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+
                             },
                             child: const Text('Issue Permit'),
                           ),
