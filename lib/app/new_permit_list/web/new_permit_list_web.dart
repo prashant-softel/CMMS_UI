@@ -130,53 +130,54 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   'action'.tr,
                                 ].map((column) {
                                   return TableViewColumn(
-                                    minWidth: Get.width * 0.12,
-                                    label: column == "permitId"
-                                        ? "Permit Id"
-                                        : column == "permit_site_no"
-                                            ? "Site Permit No."
-                                            : column == "permitTypeName"
-                                                ? "Permit Type Name"
-                                                : column == "equipment_category"
-                                                    ? "Equipment Category"
-                                                    : column ==
-                                                            "workingAreaName"
-                                                        ? "Facility / Working Area"
-                                                        : column ==
-                                                                "description"
-                                                            ? "Title"
-                                                            : column ==
-                                                                    "request_by_name"
-                                                                ? "Permit Requested By"
-                                                                : column ==
-                                                                        "request_datetime"
-                                                                    ? "Requested Date & Time"
-                                                                    : column ==
-                                                                            "approved_by_name"
-                                                                        ? "Approved By"
-                                                                        : column ==
-                                                                                "approved_datetime"
-                                                                            ? "Approved Date & Time"
-                                                                            : column == "current_status"
-                                                                                ? "Status"
+                                      minWidth: Get.width * 0.15,
+                                      label: column == "permitId"
+                                          ? "Permit Id"
+                                          : column == "permit_site_no"
+                                              ? "Site Permit No."
+                                              : column == "permitTypeName"
+                                                  ? "Permit Type Name"
+                                                  : column ==
+                                                          "equipment_category"
+                                                      ? "Equipment Category"
+                                                      : column ==
+                                                              "workingAreaName"
+                                                          ? "Facility / Working Area"
+                                                          : column ==
+                                                                  "description"
+                                                              ? "Title"
+                                                              : column ==
+                                                                      "request_by_name"
+                                                                  ? "Permit Requested By"
+                                                                  : column ==
+                                                                          "request_datetime"
+                                                                      ? "Requested Date & Time"
+                                                                      : column ==
+                                                                              "approved_by_name"
+                                                                          ? "Approved By"
+                                                                          : column == "approved_datetime"
+                                                                              ? "Approved Date & Time"
+                                                                              : column == "current_status"
+                                                                                  ? "Status"
+                                                                                  : ""
 
-                                                                                //             : column ==
-                                                                                //                     "breakdownTime"
-                                                                                //                 ? "Breakdown Time"
-                                                                                //                 : column ==
-                                                                                //                         "breakdownType"
-                                                                                //                     ? "Breakdown Type"
-                                                                                //                     : column ==
-                                                                                //                             "permitId"
-                                                                                //                         ? "Permit ID"
-                                                                                //                         : column ==
-                                                                                //                                 "assignedToName"
-                                                                                //                             ? "Assigned To"
-                                                                                //
-                                                                                // : column == "Actions"
-                                                                                //     ? "Actions"
-                                                                                : "",
-                                  );
+                                                                                      //             : column ==
+                                                                                      //                     "breakdownTime"
+                                                                                      //                 ? "Breakdown Time"
+                                                                                      //                 : column ==
+                                                                                      //                         "breakdownType"
+                                                                                      //                     ? "Breakdown Type"
+                                                                                      //                     : column ==
+                                                                                      //                             "permitId"
+                                                                                      //                         ? "Permit ID"
+                                                                                      //                         : column ==
+                                                                                      //                                 "assignedToName"
+                                                                                      //                             ? "Assigned To"
+                                                                                      //
+                                                                                      // : column == "Actions"
+                                                                                      "Actions"
+                                      // : "",
+                                      );
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
