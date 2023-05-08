@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
+import '../../../domain/models/new_permit_list_model.dart';
+
 class NewPermitListWeb extends GetView<NewPermitListController> {
   NewPermitListWeb({super.key});
   //var controller;
@@ -32,7 +34,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('New Prmit List'),
+              title: Text('Prmit List'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -51,7 +53,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                     children: [
                       ///
                       CustomAppBar(
-                        title: 'New Permit List',
+                        title: 'Permit List',
                         action: Row(children: [
                           ActionButton(
                             icon: Icons.download,
@@ -128,7 +130,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   'action'.tr,
                                 ].map((column) {
                                   return TableViewColumn(
-                                    minWidth: Get.width * 0.12,
+                                    minWidth: Get.width * 0.15,
                                     label: column == "permitId"
                                         ? "Permit Id"
                                         : column == "permit_site_no"
@@ -198,10 +200,11 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         '${newPermitDetails?.approvedByName}',
                                         '${newPermitDetails?.approvedDatetime}',
                                         '${newPermitDetails?.currentStatus}',
-                                        '${newPermitDetails?.currentStatus}' ==
-                                                "Permit Created"
-                                            ? 'Actions'
-                                            : '',
+                                        // '${newPermitDetails?.currentStatus}' ==
+                                        //         "Permit Created"
+                                        //     ?
+                                        'Actions'
+                                        //  : '',
                                       ];
                                     },
                                   ),
@@ -210,7 +213,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                       onTap: () => {
                                             print('ZERO = ${_newPermitList[0]}')
                                           },
-                                      height: 70,
+                                      height: 110,
                                       cells: _newPermitList.map((value) {
                                         var index;
                                         return TableViewCell(
@@ -251,11 +254,17 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                 0 &&
                                                             controller
                                                                     .newPermitList!
-                                                                    .where((e) =>
-                                                                        e?.ptwStatus ==
-                                                                        121)
-                                                                    .length >
-                                                                0
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          "${e?.permitId}" ==
+                                                                          _newPermitList[
+                                                                              0],
+                                                                      orElse: () =>
+                                                                          NewPermitModel(
+                                                                              permitId: 000),
+                                                                    )
+                                                                    ?.ptwStatus ==
+                                                                121
                                                         ? TableActionButton(
                                                             color: Colors.green,
                                                             icon: Icons.check,
@@ -279,11 +288,17 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                 0 &&
                                                             controller
                                                                     .newPermitList!
-                                                                    .where((e) =>
-                                                                        e?.ptwStatus ==
-                                                                        122)
-                                                                    .length >
-                                                                0
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          "${e?.permitId}" ==
+                                                                          _newPermitList[
+                                                                              0],
+                                                                      orElse: () =>
+                                                                          NewPermitModel(
+                                                                              permitId: 000),
+                                                                    )
+                                                                    ?.ptwStatus ==
+                                                                123
                                                         ? TableActionButton(
                                                             color: ColorValues
                                                                 .purpleColor,
@@ -300,6 +315,28 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appRedColor,
+                                                      icon: Icons.close,
+                                                      label: 'Close',
+                                                      onPress: () {},
+                                                    ),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      icon:
+                                                          Icons.expand_outlined,
+                                                      label: 'Extend',
+                                                      onPress: () {},
+                                                    ),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appRedColor,
+                                                      icon: Icons.close,
+                                                      label: 'Cancel',
+                                                      onPress: () {},
+                                                    ),
                                                     varUserAccessModel.value
                                                                 .access_list!
                                                                 .where((e) =>
@@ -322,7 +359,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                   'PermitTest:${controller.newPermitListModel?.permitId}');
                                                             },
                                                           )
-                                                        : Container()
+                                                        : Container(),
 
                                                     // TableActionButton(
                                                     //   color: Colors.green,

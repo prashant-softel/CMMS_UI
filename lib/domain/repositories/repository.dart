@@ -2155,5 +2155,30 @@ class Repository {
     }
   }
 
+  Future<bool> updateChecklistNumber({
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateChecklistNumber(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   ///
 }

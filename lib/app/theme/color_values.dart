@@ -22,6 +22,7 @@ abstract class ColorValues {
   static const Color greyDividerColor = Color(lightGreyDividerColorHex);
   static const Color lightGreyTextColor = Color(lightGreyTextColorHex);
   static const Color transparent = Colors.transparent;
+  static const Color greenlightColor = Color.fromARGB(255, 86, 234, 72);
 
   // ============================================
 

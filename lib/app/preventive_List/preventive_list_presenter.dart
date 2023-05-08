@@ -47,4 +47,13 @@ class PreventiveListPresenter {
         checklist_id: checklist_id ?? 0,
         isLoading: isLoading,
       );
+  Future<bool> updateChecklistNumber(
+      {checklistJsonString, required bool isLoading, checklistId}) async {
+    print("presenter");
+    preventivelistUsecase.updateChecklistNumber(
+      checklistJsonString: checklistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

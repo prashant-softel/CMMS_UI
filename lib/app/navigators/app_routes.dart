@@ -41,6 +41,7 @@ abstract class Routes {
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
   static const importInventory = _Paths.importInventory;
+  static const userList = _Paths.userList;
 
   // static const editPermitWebScreen = _Paths.editPermitWebScreen;
 }
@@ -85,6 +86,7 @@ abstract class _Paths {
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
   static const importInventory = '/importInventory';
+  static const userList = '/userList';
 
   // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

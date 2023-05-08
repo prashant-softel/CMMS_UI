@@ -84,6 +84,7 @@ class PreventiveCheckListController extends GetxController {
           frequency_id: selectedfrequencyId,
           status: 1,
           type: 1,
+          id: 0,
           checklist_number: _checklistNumber);
       var checklistJsonString = [createChecklist.toJson()];
 

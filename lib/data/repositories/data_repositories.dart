@@ -897,5 +897,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateChecklistNumber({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateChecklistNumber(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+
   ///
 }
