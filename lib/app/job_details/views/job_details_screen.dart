@@ -293,42 +293,66 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                       if (controller.jobDetailsModel.value
                                               ?.assignedId ==
                                           0) ...[
-                                        CustomElevatedButton(
-                                          // style: editButtonStyle,
-                                          onPressed: () => controller.editJob(),
-                                          text: 'Assign', //),
-                                        )
+                                        if (controller.jobDetailsModel.value
+                                                ?.status ==
+                                            JobStatus.JOB_CREATED)
+                                          CustomElevatedButton(
+                                            // style: editButtonStyle,
+                                            onPressed: () =>
+                                                controller.editJob(),
+                                            text: 'Assign', //),
+                                          )
                                       ] //
                                       else if ((controller.jobDetailsModel.value
                                                   ?.assignedId ??
                                               0) >
                                           0) ...[
-                                        CustomElevatedButton(
-                                          // style: editButtonStyle,
-                                          onPressed: () => controller.editJob(),
-                                          text: 'Re-Assign',
-                                          // ),
-                                        ),
+                                        if (controller.jobDetailsModel.value
+                                                ?.status ==
+                                            JobStatus.JOB_ASSIGNED)
+                                          CustomElevatedButton(
+                                            // style: editButtonStyle,
+                                            onPressed: () =>
+                                                controller.editJob(),
+                                            text: 'Re-Assign',
+                                            // ),
+                                          ),
                                       ],
                                       Dimens.boxWidth10,
-                                      CustomElevatedButton(
-                                        text: "Link to Existing Permit",
-                                        icon: Icons.link,
-                                        onPressed: () =>
-                                            controller.showPermitsDialog(),
-                                        backgroundColor:
-                                            ColorValues.appYellowColor,
-                                      ),
+                                      if (controller
+                                              .jobDetailsModel.value?.status ==
+                                          JobStatus.JOB_ASSIGNED)
+                                        CustomElevatedButton(
+                                          text: "Link to Existing Permit",
+                                          icon: Icons.link,
+                                          onPressed: () =>
+                                              controller.showPermitsDialog(),
+                                          backgroundColor:
+                                              ColorValues.appYellowColor,
+                                        ),
                                       Dimens.boxWidth10,
-                                      CustomElevatedButton(
-                                        text: "Create New Permit",
-                                        icon: Icons.add,
-                                        onPressed: () =>
-                                            controller.createNewPermit(),
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                      ),
+                                      if (controller
+                                              .jobDetailsModel.value?.status ==
+                                          JobStatus.JOB_ASSIGNED)
+                                        CustomElevatedButton(
+                                          text: "Create New Permit",
+                                          icon: Icons.add,
+                                          onPressed: () =>
+                                              controller.createNewPermit(),
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                        ),
                                     ]),
+                                if (controller.jobDetailsModel.value?.status ==
+                                    JobStatus.JOB_LINKED)
+                                  CustomElevatedButton(
+                                    text: "Job Card",
+                                    icon: Icons.add,
+                                    onPressed: () =>
+                                        controller.goToJobCardScreen(),
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                  ),
                               ]),
                         )
                       : Dimens.box0,

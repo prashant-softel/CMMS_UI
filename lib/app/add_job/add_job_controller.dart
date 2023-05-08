@@ -383,7 +383,7 @@ class AddJobController extends GetxController {
 
     getInventoryList(
       facilityId: facilityId,
-      blockId: 72, // selectedBlockId,
+      blockId: selectedBlockId,
       receivedCategoryIds: selectedEquipmentCategoryIdList,
     );
     getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);
