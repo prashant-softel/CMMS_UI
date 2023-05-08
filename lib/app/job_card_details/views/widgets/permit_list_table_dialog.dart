@@ -99,8 +99,7 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                               DataCell(
                                 Obx(
                                   () => //
-                                      //   Expanded(
-                                      // child: //
+
                                       TextFormField(
                                     textAlign: TextAlign.center,
                                     controller: TextEditingController(
