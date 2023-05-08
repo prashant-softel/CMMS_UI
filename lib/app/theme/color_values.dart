@@ -12,6 +12,8 @@ abstract class ColorValues {
   static const Color blackColor = Color(blackColorHex);
   static const Color whiteColor = Color(whiteColorHex);
   static const Color greenColor = Color(greenColorHex);
+  static const Color greenlightColor = Color.fromARGB(255, 86, 234, 72);
+
   static const Color redColor = Color(redColorHex);
   static const Color redColorDark = Color(redColorDarkHex);
   static const Color orangeColor = Color(orangeColorHex);

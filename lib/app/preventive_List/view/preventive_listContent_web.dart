@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -105,7 +106,10 @@ class PreventiveChecklistListContentWeb
                                             child: Wrap(
                                               children: [
                                                 Text(
-                                                  "CheckList added Successfully in the List.",
+                                                  controller.selectedItem ==
+                                                          null
+                                                      ? "CheckList added Successfully in the List."
+                                                      : "CheckList updated Successfully in the List.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -363,20 +367,37 @@ class PreventiveChecklistListContentWeb
                                     Container(
                                         height: 40,
                                         width: (Get.width * .2) - 70,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createChecklistNumber()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Create CheckList')),
+                                                      .createChecklistNumber()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Create CheckList')
+                                            : CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .updateChecklistNumber(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -520,7 +541,7 @@ class PreventiveChecklistListContentWeb
                                                 controller.paginationController,
                                             columns: [
                                               "Checklist Id",
-                                              "Checklist ",
+                                              "Checklist",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",
@@ -582,10 +603,20 @@ class PreventiveChecklistListContentWeb
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
-                                                                                onPress: () {},
+                                                                                onPress: () {
+                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
+
+                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
+                                                                                  controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
+                                                                                  controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                  controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
+                                                                                  controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                                  controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                                  controller.selectedfrequencyId = controller.selectedItem?.facility_id ?? 0;
+                                                                                },
                                                                               )
                                                                             : Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,

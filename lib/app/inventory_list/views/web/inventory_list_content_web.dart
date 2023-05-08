@@ -103,10 +103,10 @@ class InventoryListContentWeb extends GetView<HomeController> {
                     label: 'treeView'.tr,
                     icon: Icons.account_tree_sharp,
                   ),
-                  CustomTabBar(
-                    label: 'mapView'.tr,
-                    icon: Icons.location_on,
-                  ),
+                  // CustomTabBar(
+                  //   label: 'mapView'.tr,
+                  //   icon: Icons.location_on,
+                  // ),
                 ],
               ),
             ),

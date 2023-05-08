@@ -12,6 +12,7 @@ class CreateChecklist {
   int manPower;
   int duration;
   int status;
+  int id;
 
   CreateChecklist(
       {required this.category_id,
@@ -21,7 +22,8 @@ class CreateChecklist {
       required this.facility_id,
       required this.frequency_id,
       required this.manPower,
-      required this.status});
+      required this.status,
+      required this.id});
 
   factory CreateChecklist.fromJson(Map<String, dynamic> json) =>
       CreateChecklist(
@@ -33,6 +35,7 @@ class CreateChecklist {
         frequency_id: json['frequency_id'],
         status: json['status'],
         type: json['type'],
+        id: json['id'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,5 +47,6 @@ class CreateChecklist {
         'frequency_id': frequency_id,
         'status': status,
         'type': type,
+        'id': id,
       };
 }
