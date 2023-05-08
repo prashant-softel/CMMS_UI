@@ -1,6 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 
+import '../home/home_controller.dart';
 import '../home/home_presenter.dart';
 import '../job_details/job_details_presenter.dart';
 import '../job_list/job_list_presenter.dart';
@@ -30,6 +31,17 @@ class EditJobBinding extends Bindings {
         JobDetailsPresenter(
           JobDetailsUsecase(
             Get.find(),
+          ),
+        ),
+      ),
+    );
+    Get.lazyPut(
+      () => HomeController(
+        Get.put(
+          HomePresenter(
+            HomeUsecase(
+              Get.find(),
+            ),
           ),
         ),
       ),

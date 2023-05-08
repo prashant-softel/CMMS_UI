@@ -70,11 +70,11 @@ class EditJobPresenter {
   }
 
   ///
-  Future<Map<String, dynamic>> saveJob({
+  Future<Map<String, dynamic>> updateJob({
     job,
     required bool isLoading,
   }) async {
-    return editJobUsecase.saveJob(
+    return editJobUsecase.updateJob(
       job: job,
       isLoading: isLoading,
     );

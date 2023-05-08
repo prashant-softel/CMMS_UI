@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -40,6 +39,7 @@ class PreventiveListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var checklistNumberCtrlr = TextEditingController();
+  PreventiveCheckListModel? selectedItem;
   var manpowerCtrlr = TextEditingController();
   var durationCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
@@ -53,7 +53,7 @@ class PreventiveListController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 2), () {
         getPreventiveCheckList(facilityId, type, true);
       });
     });
@@ -155,6 +155,7 @@ class PreventiveListController extends GetxController {
           frequency_id: selectedfrequencyId,
           status: 1,
           type: 1,
+          id: 0,
           checklist_number: _checklistNumber);
       var checklistJsonString = [
         createChecklist.toJson()
@@ -172,6 +173,7 @@ class PreventiveListController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
+
     await {_cleardata()};
   }
 
@@ -189,5 +191,97 @@ class PreventiveListController extends GetxController {
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
+  }
+
+  void isDeleteDialog({String? checklist_id, String? checklist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the checkpoint ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: checklist,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteCkecklist(checklist_id).then((value) {
+                    Get.back();
+                    getPreventiveCheckList(facilityId, type, true);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteCkecklist(String? checklist_id) async {
+    {
+      await preventiveListPresenter.deleteCkecklist(
+        checklist_id,
+        isLoading: true,
+      );
+    }
+  }
+
+  Future<bool> updateChecklistNumber(checklistId) async {
+    // if (checklistNumberCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    String _checklistNumber = checklistNumberCtrlr.text.trim();
+    String _duration = durationCtrlr.text.trim();
+    String _manpower = manpowerCtrlr.text.trim();
+
+    CreateChecklist createChecklist = CreateChecklist(
+        category_id: selectedEquipmentId,
+        duration: int.tryParse(_duration) ?? 0,
+        manPower: int.tryParse(_manpower) ?? 0,
+        facility_id: facilityId,
+        frequency_id: selectedfrequencyId,
+        status: 1,
+        type: 1,
+        id: checklistId,
+        checklist_number: _checklistNumber);
+    var checklistJsonString =
+        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"checklistJsonString", checklistJsonString});
+    await preventiveListPresenter.updateChecklistNumber(
+      checklistJsonString: checklistJsonString,
+      isLoading: true,
+    );
+    return true;
+    //  }
+    //   return true;
   }
 }

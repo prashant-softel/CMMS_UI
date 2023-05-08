@@ -41,7 +41,7 @@ class JobListContentMobile extends GetView<JobListController> {
                       return GestureDetector(
                         onTap: () {
                           var _jobId = jobModel?.id ?? 0;
-                          controller.showJobDetails(_jobId);
+                          controller.goToJobDetailsScreen(_jobId);
                         },
                         child: SizedBox(
                           width: double.infinity,

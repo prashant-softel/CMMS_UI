@@ -1,12 +1,14 @@
 // coverage:ignore-file
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 
@@ -235,8 +237,8 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getSopPermitList(
-      {required bool isLoading, 
-      required String auth, 
+      {required bool isLoading,
+      required String auth,
       int? job_type_id
       }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -373,8 +375,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
       Request.put,
-      {'comment': "$comment", 'employee_id': employee_id,'id':id},
-
+      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -383,12 +384,12 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     print('PermitIssueResponse: ${res}');
-    Get.dialog<void>(PermitMessageIssueDialog(data:parsedJson['message']));
+    Get.dialog<void>(PermitMessageIssueDialog(data: parsedJson['message']));
 
     return responseModel;
   }
 
-   Future<ResponseModel> permitApprovedButton({
+  Future<ResponseModel> permitApprovedButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -398,8 +399,8 @@ class ConnectHelper {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitApprove',
-    Request.put,
-    {'comment': "$comment", 'employee_id': employee_id,'id': id},
+      Request.put,
+      {'comment': "$comment", 'employee_id': employee_id,'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -408,12 +409,10 @@ class ConnectHelper {
     print('PermitApprovedResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageApproveDialog(data:parsedJson['message']));
-
+    Get.dialog<void>(PermitMessageApproveDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -509,6 +508,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobDetails?job_id=$jobId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPermitList({
+    required String auth,
+    int? facilityId,
+    bool? selfView,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitList?facility_id=$facilityId&self_view=$selfView',
       Request.get,
       null,
       isLoading ?? false,
@@ -725,6 +743,45 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateJob({
+    required String auth,
+    job,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/UpdateJob?job=$job',
+      Request.post,
+      job,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///
+  Future<ResponseModel> linkToPermit({
+    required String auth,
+    jobId,
+    permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/LinkToPTW?job_id=$jobId&ptw_id=$permitId',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///
   Future<ResponseModel> createJobCard({
     String? auth,
     int? jobId,
@@ -786,12 +843,11 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(CreateNewPermitDialog(
-      data:parsedJson['message'],
+      data: parsedJson['message'],
       PtwId: parsedJson['id'],
-      ));
+    ));
 
     return responseModel;
-
   }
 
   Future<ResponseModel> getUserAccessList({
@@ -811,10 +867,11 @@ class ConnectHelper {
     );
     return responseModel;
   }
- Future<ResponseModel> getNewPermitDetail({
-    required String auth,
-         bool? isLoading,    int? permitId,
 
+  Future<ResponseModel> getNewPermitDetail({
+    required String auth,
+    bool? isLoading,
+    int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitDetails?permit_id=$permitId',
@@ -830,8 +887,8 @@ class ConnectHelper {
 
   Future<ResponseModel> getViewPermitDetail({
     required String auth,
-         bool? isLoading,    int? permitId,
-
+    bool? isLoading,
+    int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitDetails?permit_id=$permitId',
@@ -845,7 +902,6 @@ class ConnectHelper {
     print('ViewResponseModel${responseModel.data}');
     return responseModel;
   }
-
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -1175,6 +1231,89 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<bool> browseFiles({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    bool? isLoading,
+  }) async {
+    final request = http.MultipartRequest('POST',
+        Uri.parse('http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile'));
+    request.files.add(
+        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+    request.headers.addAll({'Authorization': 'Bearer $auth'});
+
+    // Send the request and wait for the response
+    final response = await request.send();
+    var respStr = await response.stream.bytesToString();
+    var jsonResponse = json.decode(respStr);
+
+    // Check if the upload was successful
+    if (response.statusCode == 200) {
+      importInventory(
+          auth: auth,
+          fileId: jsonResponse["id"][0].toString(),
+          isLoading: true);
+    }
+    return true;
+  }
+
+  Future<ResponseModel> importInventory({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/ImportInventories?file_id=$fileId',
+      Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteCkecklist({
+    required String auth,
+    bool? isLoading,
+    required checklist_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/DeleteCheckList?id=$checklist_id',
+      Request.delete,
+      checklist_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateChecklistNumber({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/UpdateCheckList',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 

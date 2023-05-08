@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
@@ -12,7 +11,7 @@ import 'package:intl/intl.dart';
 class NewPermitListMobile extends GetView<NewPermitListController> {
   NewPermitListMobile({Key? key, this.newPermitListModel}) : super(key: key);
 
-  final NewPermitListModel? newPermitListModel;
+  final NewPermitModel? newPermitListModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +20,13 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
         Scaffold(
       body: //
           Container(
-                child: 
-            Column(
+        child: Column(
           children: [
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             //DropDown
-             FacilitySelectionDropdownWidget(),
+            FacilitySelectionDropdownWidget(),
             Expanded(
               child: ListView.builder(
                   //physics: const NeverScrollableScrollPhysics(),
@@ -35,14 +35,17 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                       ? controller.newPermitList?.length
                       : 0,
                   itemBuilder: (context, index) {
-                    final newPermitListModel = (controller.newPermitList != null)
-                        ? controller.newPermitList![index]
-                        : NewPermitListModel();
-                    var status = newPermitListModel?.current_status.toString() ?? '';
+                    final newPermitListModel =
+                        (controller.newPermitList != null)
+                            ? controller.newPermitList![index]
+                            : NewPermitModel();
+                    var status =
+                        newPermitListModel?.currentStatus.toString() ?? '';
                     print('Current Status: $status');
                     return GestureDetector(
                       onTap: () {
-                        var _newPermitListId = newPermitListModel?.permitId ?? 0;
+                        var _newPermitListId =
+                            newPermitListModel?.permitId ?? 0;
                         controller.showNewPermitListDetails(_newPermitListId);
                       },
                       child: SizedBox(
@@ -97,7 +100,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                                       0xff3438cd)
                                                                   : (status.toLowerCase() ==
                                                                           "cancelled")
-                                                                      ? Color(0xFFBF4844)
+                                                                      ? Color(
+                                                                          0xFFBF4844)
                                                                       : Color.fromARGB(
                                                                           255,
                                                                           227,
@@ -141,7 +145,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                       children: [
                                     Expanded(
                                       child: Text(
-                                         '${newPermitListModel?.workingAreaName ?? ''}',
+                                        '${newPermitListModel?.workingAreaName ?? ''}',
                                         // 'Not Assigned',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -180,7 +184,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        newPermitListModel?.equipment_categories ?? '',
+                                        newPermitListModel?.equipment_categories ??
+                                            '',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -200,8 +205,9 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           ),
                                         ),
                                         Expanded(
-                                          child: Text(
-                                              newPermitListModel?.workingAreaName ?? ''),
+                                          child: Text(newPermitListModel
+                                                  ?.workingAreaName ??
+                                              ''),
                                         ),
                                       ]),
                                   Row(//
@@ -214,10 +220,11 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     ),
                                     Flexible(
                                       child: Text(
-                                        (newPermitListModel?.approved_datetime != null)
+                                        (newPermitListModel?.approvedDatetime !=
+                                                null)
                                             ? DateFormat('dd-MMM-yyyy hh:mm')
-                                                .format(
-                                                    newPermitListModel!.approved_datetime!)
+                                                .format(newPermitListModel!
+                                                    .approvedDatetime!)
                                             : '',
                                         style: TextStyle(color: Colors.grey),
                                         // 'Time djhb'
@@ -232,9 +239,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                   }),
             ),
           ],
-                ),
-              ),
-      
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.addNewPermitList(),
         backgroundColor: ColorValues.navyBlueColor,

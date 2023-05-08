@@ -1,4 +1,12 @@
-class NewPermitListModel {
+import 'dart:convert';
+
+List<NewPermitModel> newPermitListFromJson(String str) =>
+    List<NewPermitModel>.from(json.decode(str).map(NewPermitModel.fromJson));
+
+String newPermitListToJson(List<NewPermitModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class NewPermitModel {
   int? permitId;
   int? ptwStatus;
   int? permitSiteNo;
@@ -12,10 +20,10 @@ class NewPermitListModel {
   String? requestByName;
   DateTime? requestDatetime;
   String? approvedByName;
-  DateTime? approved_datetime;
-  String? current_status;
+  DateTime? approvedDatetime;
+  String? currentStatus;
 
-  NewPermitListModel(
+  NewPermitModel(
       {this.permitId,
       this.ptwStatus,
       this.permitSiteNo,
@@ -29,10 +37,10 @@ class NewPermitListModel {
       this.requestByName,
       this.requestDatetime,
       this.approvedByName,
-      this.approved_datetime,
-      this.current_status});
+      this.approvedDatetime,
+      this.currentStatus});
 
-  NewPermitListModel.fromJson(Map<String, dynamic> json) {
+  NewPermitModel.fromJson(Map<String, dynamic> json) {
     permitId = json['permitId'];
     ptwStatus = json['ptwStatus'];
     permitSiteNo = json['permit_site_no'];
@@ -45,13 +53,13 @@ class NewPermitListModel {
     description = json['description'];
     requestByName = json['request_by_name'];
     requestDatetime = json['request_datetime'] == null
-          ? null
-          : DateTime.parse(json['request_datetime'] as String);
+        ? null
+        : DateTime.parse(json['request_datetime'] as String);
     approvedByName = json['approved_by_name'];
-    approved_datetime=  json['approved_datetime'] == null
-          ? null
-          : DateTime.parse(json['approved_datetime'] as String);
-    current_status = json['current_status'];
+    approvedDatetime = json['approved_datetime'] == null
+        ? null
+        : DateTime.parse(json['approved_datetime'] as String);
+    currentStatus = json['current_status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,8 +77,8 @@ class NewPermitListModel {
     data['request_by_name'] = this.requestByName;
     data['request_datetime'] = this.requestDatetime;
     data['approved_by_name'] = this.approvedByName;
-    data['approved_datetime'] = this.approved_datetime;
-    data['current_status'] = this.current_status;
+    data['approved_datetime'] = this.approvedDatetime;
+    data['current_status'] = this.currentStatus;
     return data;
   }
 }

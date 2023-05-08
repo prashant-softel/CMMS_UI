@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -14,6 +15,7 @@ import '../preventive_list_controller.dart';
 class PreventiveChecklistListContentWeb
     extends GetView<PreventiveListController> {
   PreventiveChecklistListContentWeb({Key? key}) : super(key: key);
+  final PreventiveListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,10 @@ class PreventiveChecklistListContentWeb
                                             child: Wrap(
                                               children: [
                                                 Text(
-                                                  "CheckList added Successfully in the List.",
+                                                  controller.selectedItem ==
+                                                          null
+                                                      ? "CheckList added Successfully in the List."
+                                                      : "CheckList updated Successfully in the List.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -121,10 +126,9 @@ class PreventiveChecklistListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'CheckList Number: '),
+                                            CustomRichText(title: 'CheckList:'),
                                             SizedBox(
-                                              width: 10,
+                                              width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
@@ -363,20 +367,37 @@ class PreventiveChecklistListContentWeb
                                     Container(
                                         height: 40,
                                         width: (Get.width * .2) - 70,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createChecklistNumber()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Create CheckList')),
+                                                      .createChecklistNumber()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Create CheckList')
+                                            : CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .updateChecklistNumber(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -405,7 +426,7 @@ class PreventiveChecklistListContentWeb
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Checklist Number List",
+                                      "Check List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -471,7 +492,8 @@ class PreventiveChecklistListContentWeb
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Checklist Number ",
+                                              "Checklist Id",
+                                              "Checklist ",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",
@@ -491,6 +513,7 @@ class PreventiveChecklistListContentWeb
                                                     0,
                                                 (index) {
                                                   return [
+                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -517,7 +540,8 @@ class PreventiveChecklistListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Checklist Number ",
+                                              "Checklist Id",
+                                              "Checklist",
                                               "Active Status ",
                                               "Category ",
                                               "Frequency ",
@@ -542,6 +566,8 @@ class PreventiveChecklistListContentWeb
                                                               .preventiveCheckList?[
                                                           index];
                                                   return [
+                                                    '${preventiveCheckListModelListDetails?.id}',
+
                                                     '${preventiveCheckListModelListDetails?.checklist_number}',
                                                     "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
                                                     '${preventiveCheckListModelListDetails?.category_name}',
@@ -577,17 +603,29 @@ class PreventiveChecklistListContentWeb
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
-                                                                                onPress: () {},
+                                                                                onPress: () {
+                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
+
+                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
+                                                                                  controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
+                                                                                  controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                  controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
+                                                                                  controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                                  controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                                  controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                                },
                                                                               )
                                                                             : Container(),
-                                                                        // :Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,
                                                                                 icon: Icons.delete,
                                                                                 label: 'Delete',
-                                                                                onPress: () {},
+                                                                                onPress: () {
+                                                                                  print(_preventiveCheckList[0]);
+                                                                                  controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
+                                                                                },
                                                                               )
                                                                             : Container()
                                                                       ])

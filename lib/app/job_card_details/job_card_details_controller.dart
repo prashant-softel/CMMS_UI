@@ -4,7 +4,9 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:html_unescape/html_unescape.dart';
 import '../../domain/models/history_model.dart';
 import '../../domain/models/job_details_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
@@ -59,6 +61,7 @@ class JobCardDetailsController extends GetxController {
   Rx<int?> jobId = 0.obs;
   RxMap jobDetails = {}.obs;
   RxString strWorkTypes = ''.obs;
+  RxString strWorkAreasOrEquipments = ''.obs;
   RxString strToolsRequired = ''.obs;
   RxString strEquipmentCategories = ''.obs;
   List<String> workTypeNames = [];
@@ -79,6 +82,7 @@ class JobCardDetailsController extends GetxController {
 
   /// Other
   Rx<int> currentIndex = 0.obs;
+  final unescape = HtmlUnescape();
 
   ///
   @override
@@ -93,11 +97,8 @@ class JobCardDetailsController extends GetxController {
           ),
         ),
       );
+      await setJobId();
 
-      jobId.value = Get.arguments ?? 0;
-
-      /// TODO: Remove this line later
-      jobId.value = 3158;
       jobList.value = await jobDetailsPresenter.getJobDetails(
             jobId: jobId.value,
             isLoading: true,
@@ -114,6 +115,24 @@ class JobCardDetailsController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> setJobId() async {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    // Read jobId
+    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+    if (_jobId == null || _jobId == '' || _jobId == "null") {
+      var dataFromPreviousScreen = Get.arguments;
+
+      jobId.value = dataFromPreviousScreen['jobId'];
+      await _flutterSecureStorage.write(
+        key: "jobId",
+        value: jobId.value == null ? '' : jobId.value.toString(),
+      );
+    } else {
+      jobId.value = int.tryParse(_jobId) ?? 0;
+    }
+    // return jobId;
   }
 
   @override
@@ -196,17 +215,31 @@ class JobCardDetailsController extends GetxController {
             strWorkTypes.value.length - 1,
           );
         }
+
+        // Convert work area(s)/equipment(s) to comma separated list
+        var workAreaNames = <String>[];
+        for (var workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+          workAreaNames.add(workArea.name);
+        }
+        strWorkAreasOrEquipments.value = workAreaNames.join(', ');
+        //remove extra comma at the end
+        if (strWorkAreasOrEquipments.value.length > 0) {
+          strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
+            0,
+            strWorkAreasOrEquipments.value.length - 1,
+          );
+        }
+
         jobDetails.value = {
           "Job ID": jobDetailsModel.value?.id.toString(),
           "Job Title": jobDetailsModel.value?.jobTitle,
           "Job Description": jobDetailsModel.value?.jobDescription,
           "Job Assigned To": jobDetailsModel.value?.assignedName,
+          "Work Area / Equipments": strWorkAreasOrEquipments.value,
           "Work Type": strWorkTypes.value,
           "Linked Tool To  Work Type": strToolsRequired.value,
-          "Standard Action": jobDetailsModel.value?.standardAction,
           "Job Created By": jobDetailsModel.value?.createdByName,
         };
-        //var x = jobDetails.value;
       }
     } //
     catch (e) {
@@ -222,13 +255,16 @@ class JobCardDetailsController extends GetxController {
         permitList?.value = jobDetailsModel.value?.associatedPermitList ?? [];
 
         AssociatedPermit? permit = permitList?[0];
+        String decodedPermitDescription = unescape.convert(
+          permit?.title ?? '',
+        );
         permitDetails.value = {
           "Permit ID": permit?.permitId.toString(),
           "Site Permit No.": permit?.sitePermitNo,
           "Permit Type": permit?.permitTypeName,
-          "Permit Description": permit?.title,
+          "Permit Description": decodedPermitDescription,
           "Permit Issued By": permit?.issuedByName,
-          "Permit Approved By": '',
+          // "Permit Approved By": '',
           // "Work Type": strWorkTypes.value,
           // "Linked Tool To  Work Type": strToolsRequired.value,
           // "Standard Action": jobDetailsModel.value?.standardAction,
@@ -309,7 +345,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   void toggleIsNormalizedSwitch(bool value, int index) {
-    //isolationAssetsCategoryList[index].isNormalized = (value == true) ? 1 : 0;
     List<IsolationAssetsCategory> isolationList =
         List.from(isolationAssetsCategoryList);
     isolationList[index].isNormalized = (value == true) ? 1 : 0;
@@ -329,7 +364,7 @@ class JobCardDetailsController extends GetxController {
     permitId = 59616;
     final _permitDetails =
         await jobCardDetailsPresenter.getPermitDetails(permitId: permitId);
-    var x = _permitDetails;
+
     isolationAssetsCategoryList.value = _permitDetails?.lstIsolation ?? [];
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
   }

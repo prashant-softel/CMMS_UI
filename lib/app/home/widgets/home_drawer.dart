@@ -16,7 +16,8 @@ class HomeDrawer extends GetView {
     return
         //
         Drawer(
-      width: Responsive.isDesktop(context) ? Get.width * 0.19 : Get.height * 0.35,
+      width:
+          Responsive.isDesktop(context) ? Get.width * 0.19 : Get.height * 0.35,
       // width: (Responsive.isMobile(context) || Responsive.isTablet(context))
       //     ? Get.width * 0.75
       //     : Get.width * 0.19,
@@ -125,7 +126,7 @@ class HomeDrawer extends GetView {
                         title: "Settings",
                         icon: "assets/files/setting.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.userList);
                         },
                       ),
                       MenuItem(

@@ -1,7 +1,5 @@
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
-import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class NewPermitListUsecase {
@@ -13,7 +11,7 @@ class NewPermitListUsecase {
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await repository.getFacilityList(isLoading);
 
-  Future<List<NewPermitListModel?>?> getNewPermitList({
+  Future<List<NewPermitModel?>?> getNewPermitList({
     required String auth,
     int? facilityId,
     int? userId,
@@ -23,24 +21,21 @@ class NewPermitListUsecase {
         auth,
         facilityId,
         isLoading,
-        
       );
 
-   Future<void> permitIssueButton({
+  Future<void> permitIssueButton({
     String? comment,
     String? employee_id,
     String? id,
     bool? isLoading,
   }) async {
-      await repository.permitIssueButton(
-        comment,
-        employee_id,
-        id,
-        isLoading,
-        
-      );
-      }
-      
+    await repository.permitIssueButton(
+      comment,
+      employee_id,
+      id,
+      isLoading,
+    );
+  }
 
   Future<void> permitApprovedButton({
     String? comment,
@@ -48,13 +43,13 @@ class NewPermitListUsecase {
     String? id,
     bool? isLoading,
   }) async {
-      await repository.permitApprovedButton(
-        comment,
-        employee_id,
-        id,
-        isLoading,
-        
-      );}
+    await repository.permitApprovedButton(
+      comment,
+      employee_id,
+      id,
+      isLoading,
+    );
+  }
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required bool isLoading,
   //   required int? facilityId,
@@ -70,5 +65,4 @@ class NewPermitListUsecase {
   //     // categoryIds: categoryIds,
   //   );
   // }
-
 }

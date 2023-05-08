@@ -163,16 +163,24 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   ]),
                   Dimens.boxHeight20,
 
-                  /// SAVE JOB CARD BUTTON
+                  /// START JOB CARD BUTTON
                   (controller.isJobCardStarted == false)
                       ? //
-                      Center(
-                          child: CustomElevatedButton(
-                            text: 'Start Job Card',
-                            onPressed: () => controller.startStopJobCard(),
-                            backgroundColor: ColorValues.appGreenColor,
-                          ),
-                        )
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center, //
+                          children: [
+                              CustomElevatedButton(
+                                text: 'Start Job Card',
+                                onPressed: () => controller.startStopJobCard(),
+                                backgroundColor: ColorValues.appGreenColor,
+                              ),
+                              Dimens.boxWidth10,
+                              CustomElevatedButton(
+                                text: 'Update',
+                                onPressed: () => controller.updateJobCard(),
+                                backgroundColor: ColorValues.appYellowColor,
+                              ),
+                            ])
                       : //
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -207,8 +215,6 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   Dimens.boxHeight20,
                 ]),
           );
-          // ),
-          // ]);
         } //
         catch (e) {
           print(e);

@@ -38,6 +38,20 @@ class PreventivelistUsecase {
     checklistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckListNumber(isLoading: isLoading,checklistJsonString:checklistJsonString);
-      
+      await repository.createCheckListNumber(
+          isLoading: isLoading, checklistJsonString: checklistJsonString);
+  deleteCkecklist(
+          {required Object checklist_id, required bool isLoading}) async =>
+      await repository.deleteCkecklist(
+        checklist_id,
+        isLoading,
+      );
+  Future<bool> updateChecklistNumber({
+    checklistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateChecklistNumber(
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
 }

@@ -144,16 +144,13 @@ class EmployeeTableWidget extends GetView<JobCardDetailsController> {
                   ),
                 ),
               ),
-              // ),
-              // ),
             ]);
-      } catch (e) {
+      } //
+      catch (e) {
         print(e);
         return Container();
       }
-    } //
-
-            );
+    });
   }
 
   ///

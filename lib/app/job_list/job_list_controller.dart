@@ -1,13 +1,15 @@
 import 'dart:async';
-
+// import 'dart:ui' as kIsWeb;
+import 'dart:html' as html;
+import 'dart:io';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:excel/excel.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import 'dart:html' as html;
 import '../../domain/models/block_model.dart';
 import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
@@ -124,15 +126,15 @@ class JobListController extends GetxController {
   }
 
   void goToJobCardScreen(int? jobId) {
-    Get.toNamed(Routes.jobCard, arguments: jobId);
+    Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
   }
 
   void goToEditJobScreen(int? jobId) {
     Get.toNamed(Routes.editJob, arguments: jobId);
   }
 
-  void showJobDetails(int _jobId) {
-    Get.toNamed(Routes.jobDetails, arguments: _jobId);
+  void goToJobDetailsScreen(int? _jobId) {
+    Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 
   String formatDate(String? inputDateTime) {
@@ -244,18 +246,24 @@ class JobListController extends GetxController {
     // Convert the Excel data to bytes
     final excelBytes = excel.encode();
 
-    // Serve the file as a download
-    final blob = html.Blob([excelBytes],
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    final anchorElement = html.AnchorElement(href: url)
-      ..setAttribute('download', 'Job_Data_Export.xlsx')
-      ..click();
+    if (kIsWeb) {
+      // Serve the file as a download (web implementation)
+      final blob = html.Blob([excelBytes],
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      final anchorElement = html.AnchorElement(href: url)
+        ..setAttribute('download', 'Job_Data_Export.xlsx')
+        ..click();
 
-    // Clean up and release the object URL
-    await Future.delayed(Duration(seconds: 1));
-    anchorElement.remove();
-    html.Url.revokeObjectUrl(url);
+      // Clean up and release the object URL
+      await Future.delayed(Duration(seconds: 1));
+      anchorElement.remove();
+      html.Url.revokeObjectUrl(url);
+    } else {
+      // Write the data to a file (mobile implementation)
+      final file = File('Job_Data_Export.xlsx');
+      await file.writeAsBytes(excelBytes ?? []);
+    }
   }
 
   ///

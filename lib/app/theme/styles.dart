@@ -81,11 +81,15 @@ abstract class Styles {
   );
 
   static TextStyle blackBold15 = TextStyle(
-    // color: ColorValues.blackColor,
+    color: ColorValues.blackColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.fifteen,
   );
-
+  static TextStyle black15W600 = TextStyle(
+    color: ColorValues.blackColor,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.fifteen,
+  );
   static TextStyle black16 = TextStyle(
     color: ColorValues.blackColor,
     fontSize: Dimens.sixteen,
@@ -108,16 +112,14 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
     fontSize: Dimens.sixteen,
   );
-
+  static TextStyle blackMediumBold16 = TextStyle(
+    color: ColorValues.blackColor,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.sixteen,
+  );
   static TextStyle blueBold16 = const TextStyle(
     color: ColorValues.blueDarkColor,
     fontWeight: FontWeight.bold,
-  );
-
-  static TextStyle blackMediumBold16 = TextStyle(
-    // color: ColorValues.blackColor,
-    fontWeight: FontWeight.w600,
-    fontSize: Dimens.sixteen,
   );
 
   static TextStyle blue16 = TextStyle(

@@ -29,12 +29,10 @@ class TableActionButton extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(
-                icon,
-                color: Colors.white,
-                size: 14,
-              ),
-              Dimens.boxWidth2,
+              icon != null
+                  ? Icon(icon, color: Colors.white, size: 14)
+                  : SizedBox.shrink(),
+              icon != null ? Dimens.boxWidth2 : SizedBox.shrink(),
               Text(
                 '$label',
                 style: Styles.white12.copyWith(
