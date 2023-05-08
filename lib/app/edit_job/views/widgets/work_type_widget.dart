@@ -64,6 +64,11 @@ class WorkTypeWidget extends StatelessWidget {
           child: //
 
               MultiSelectDialogField(
+            initialValue: //
+                controller.selectedWorkTypeList
+                    .map((workType) => workType
+                        ?.id) // Extract the IDs from the list of WorkTypeModel objects
+                    .toList(),
             validator: (selectedItems) {
               if (controller.isWorkTypeSelected.value == false) {
                 return "Required field";
@@ -83,7 +88,8 @@ class WorkTypeWidget extends StatelessWidget {
             ),
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.workTypeList
-                .map((e) => MultiSelectItem(e, e?.workType ?? ''))
+                .map((workType) =>
+                    MultiSelectItem(workType?.id, workType?.workType ?? ''))
                 .toList(),
             onConfirm: (selectedOptionsList) =>
                 {controller.workTypesSelected(selectedOptionsList)},

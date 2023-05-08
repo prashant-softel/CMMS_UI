@@ -41,6 +41,7 @@ class JobDetailsModel {
     this.currentPtwTitle,
     this.equipmentCatList,
     this.workingAreaList,
+    this.workTypeList,
     this.associatedPermitList,
     this.lstToolsRequired,
   });
@@ -68,7 +69,9 @@ class JobDetailsModel {
   String? currentPtwTitle;
   List<EquipmentCatList>? equipmentCatList;
   List<WorkingAreaList>? workingAreaList;
+  List<WorkTypeList>? workTypeList;
   List<AssociatedPermit>? associatedPermitList;
+
   dynamic lstToolsRequired;
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
@@ -109,8 +112,13 @@ class JobDetailsModel {
             ? List<EquipmentCatList>.from(json["equipment_cat_list"]
                 .map((x) => EquipmentCatList.fromJson(x)))
             : [],
-        workingAreaList: (json["associated_permit"] != null)
-            ? List<WorkingAreaList>.from(json["associated_permit"]
+        workTypeList: json["work_type_list"] != null
+            ? List<WorkTypeList>.from(
+                json["work_type_list"].map((x) => WorkTypeList.fromJson(x)))
+            : [],
+
+        workingAreaList: (json["working_area_name_list"] != null)
+            ? List<WorkingAreaList>.from(json["working_area_name_list"]
                 .map((x) => WorkingAreaList.fromJson(x)))
             : [],
         associatedPermitList: (json["associated_permit_list"] != null)
@@ -145,6 +153,8 @@ class JobDetailsModel {
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
         "working_area_name_list":
             List<dynamic>.from(workingAreaList?.map((x) => x.toJson()) ?? []),
+        "work_type_list":
+            List<dynamic>.from(workTypeList?.map((x) => x.toJson()) ?? []),
         "associated_permit_list": List<dynamic>.from(
             associatedPermitList?.map((x) => x.toJson()) ?? []),
         "lst_tools_required": lstToolsRequired,
@@ -253,3 +263,23 @@ class WorkingAreaList {
 
   ///
 }
+
+class WorkTypeList {
+  int? workTypeId;
+  String? workTypeName;
+
+  WorkTypeList({this.workTypeId, this.workTypeName});
+
+  factory WorkTypeList.fromJson(Map<String, dynamic> json) => WorkTypeList(
+        workTypeId: json['workTypeId'],
+        workTypeName: json['workTypeName'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'workTypeId': workTypeId,
+        'workTypeName': workTypeName,
+      };
+}
+
+  ///
+

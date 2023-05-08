@@ -96,15 +96,16 @@ class AddJobController extends GetxController {
   @override
   void onInit() async {
     // await getFacilityList();
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
       facilityId = event;
       if (facilityId > 0) {
         isFacilitySelected.value = true;
-      }
-      Future.delayed(Duration(seconds: 1), () {
-        getBlocksList(facilityId);
+        // Future.delayed(Duration(seconds: 1), () async {
+        await getBlocksList(facilityId);
         getAssignedToList(facilityId);
-      });
+        // });
+      }
     });
 
     super.onInit();
@@ -129,6 +130,7 @@ class AddJobController extends GetxController {
 
   Future<void> getBlocksList(int _facilityId) async {
     blockList.value = <BlockModel>[];
+    selectedBlock.value = '';
     final _blockList =
         await addJobPresenter.getBlocksList(facilityId: _facilityId);
 
@@ -150,17 +152,6 @@ class AddJobController extends GetxController {
       }
       update(["assignedToList"]);
     }
-  }
-
-  Future<void> getEquipmentList({
-    required String facilityId,
-  }) async {
-    final list = await homePresenter.getEquipmentList(
-      isLoading: false,
-      facilityId: facilityId,
-    );
-    equipmentList.value = list;
-    selectedEquipment.value = equipmentList[0]?.name ?? '';
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
@@ -190,7 +181,7 @@ class AddJobController extends GetxController {
     required int blockId,
     receivedCategoryIds,
   }) async {
-    workAreaList.value = <InventoryModel?>[];
+    workAreaList.value = <InventoryModel>[];
     if (receivedCategoryIds == null || receivedCategoryIds.isEmpty) {
       receivedCategoryIds = selectedEquipmentCategoryIdList;
     }
@@ -209,7 +200,7 @@ class AddJobController extends GetxController {
   Future<void> getWorkTypeList({
     List<int>? receivedCategoryIds,
   }) async {
-    workTypeList.value = <WorkTypeModel?>[];
+    workTypeList.value = <WorkTypeModel>[];
     String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
     final _workTypeList = await addJobPresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
@@ -283,7 +274,7 @@ class AddJobController extends GetxController {
         assignedId: selectedAssignedToId,
         title: _title,
         description: _description,
-        status: 2,
+        // status: 2,
         createdBy: 2,
         breakdownTime: _breakdownTime,
         assetsIds: assetIds,
