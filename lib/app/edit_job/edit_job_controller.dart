@@ -326,6 +326,13 @@ class EditJobController extends GetxController {
     return formattedDateTime;
   }
 
+  int? getAssignedToId(String selectedValue) {
+    final item =
+        assignedToList.firstWhere((item) => item?.name == selectedValue);
+    final _assignedToId = item?.id ?? 0;
+    return _assignedToId;
+  }
+
   void updateJob() async {
     {
       checkForm();
@@ -333,6 +340,9 @@ class EditJobController extends GetxController {
         return;
       }
       //
+      if (selectedAssignedToId <= 0) {
+        getAssignedToId(selectedAssignedTo.value);
+      }
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
@@ -428,7 +438,7 @@ class EditJobController extends GetxController {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
           selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId != 0) {
+          if (selectedAssignedToId > 0) {
             isAssignedToSelected.value = true;
           }
           selectedAssignedTo.value = value;
