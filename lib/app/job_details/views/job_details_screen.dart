@@ -289,36 +289,26 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                         MainAxisAlignment.center, //
                                     children: [
                                       /// ASSIGN/RE-ASSIGN BUTTON
-// If assignedId is present means it is already assigned
-// If assignedId is present means it is already assigned
+
+                                      //check if status is "CREATED"
                                       if (controller.jobDetailsModel.value
-                                              ?.assignedId ==
-                                          0) ...[
-                                        //check if status is "CREATED"
-                                        //check if status is "CREATED"
-                                        if (controller.jobDetailsModel.value
-                                                    ?.status !=
-                                                null &&
-                                            JobStatusData
-                                                    .getStatusStringFromInt(
-                                                        controller
-                                                            .jobDetailsModel
-                                                            .value
-                                                            ?.status) ==
-                                                AppConstants.kJobStatusCreated)
-                                          CustomElevatedButton(
-                                            // style: editButtonStyle,
-                                            onPressed: () => controller
-                                                .goToEditJobScreen(controller
-                                                    .jobDetailsModel.value?.id),
-                                            text: 'Assign', //),
-                                          )
-                                      ] //
-                                      else if ((controller.jobDetailsModel.value
+                                                  ?.status !=
+                                              null &&
+                                          JobStatusData.getStatusStringFromInt(
+                                                  controller.jobDetailsModel
+                                                      .value?.status) ==
+                                              AppConstants.kJobStatusCreated)
+                                        CustomElevatedButton(
+                                          onPressed: () => controller
+                                              .goToEditJobScreen(controller
+                                                  .jobDetailsModel.value?.id),
+                                          text: 'Assign',
+                                        ),
+
+                                      if ((controller.jobDetailsModel.value
                                                   ?.assignedId ??
                                               0) >
                                           0) ...[
-                                        //check if status is "ASSIGNED"
                                         //check if status is "ASSIGNED"
                                         if (controller.jobDetailsModel.value
                                                     ?.status !=
@@ -331,12 +321,11 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                                             ?.status) ==
                                                 AppConstants.kJobStatusAssigned)
                                           CustomElevatedButton(
-                                            // style: editButtonStyle,
                                             onPressed: () => controller
                                                 .goToEditJobScreen(controller
                                                     .jobDetailsModel.value?.id),
                                             text: 'Re-Assign',
-                                            // ),
+                                            icon: Icons.edit,
                                           ),
                                       ],
                                       Dimens.boxWidth10,
@@ -358,8 +347,9 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                         ),
                                       Dimens.boxWidth10,
                                       //check if status is "ASSIGNED"
-                                      if (controller
-                                              .jobDetailsModel.value?.status ==
+                                      if (JobStatusData.getStatusStringFromInt(
+                                              controller.jobDetailsModel.value
+                                                  ?.status) ==
                                           AppConstants.kJobStatusAssigned)
                                         CustomElevatedButton(
                                           text: "Create New Permit",
@@ -368,20 +358,20 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                               controller.createNewPermit(),
                                           backgroundColor:
                                               ColorValues.appLightBlueColor,
+                                        ), //check if status is "LINKED TO PERMIT"
+                                      if (JobStatusData.getStatusStringFromInt(
+                                              controller.jobDetailsModel.value
+                                                  ?.status) ==
+                                          AppConstants.kJobStatusLinkedToPermit)
+                                        CustomElevatedButton(
+                                          text: "Job Card",
+                                          icon: Icons.add,
+                                          onPressed: () =>
+                                              controller.goToJobCardScreen(),
+                                          backgroundColor:
+                                              ColorValues.appPurpleColor,
                                         ),
                                     ]),
-                                //check if status is "LINKED TO PERMIT"
-                                if (JobStatusData.getStatusStringFromInt(
-                                        controller
-                                            .jobDetailsModel.value?.status) ==
-                                    AppConstants.kJobStatusLinkedToPermit)
-                                  CustomElevatedButton(
-                                    text: "Job Card",
-                                    icon: Icons.add,
-                                    onPressed: () =>
-                                        controller.goToJobCardScreen(),
-                                    backgroundColor: ColorValues.appPurpleColor,
-                                  ),
                               ]),
                         )
                       : Dimens.box0,
