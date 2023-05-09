@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../../app/utils/app_constants.dart';
+
 List<JobModel> jobListFromJson(String str) =>
     List<JobModel>.from(json.decode(str).map(JobModel.fromJson));
 
@@ -117,15 +119,15 @@ class JobModel {
 }
 
 class JobStatusData {
-  static const Map<String, JobStatus> statusValues = {
-    "CREATED": JobStatus.JOB_CREATED,
-    "ASSIGNED": JobStatus.JOB_ASSIGNED,
-    "LINKED TO PERMIT": JobStatus.JOB_LINKED,
-    "IN PROGRESS": JobStatus.JOB_IN_PROGRESS,
-    "CARRY FORWARD": JobStatus.JOB_CARRY_FORWARD,
-    "CLOSED": JobStatus.JOB_CLOSED,
-    "CANCELLED": JobStatus.JOB_CANCELLED,
-    "DELETED": JobStatus.JOB_DELETED,
+  static Map<String, JobStatus> statusValues = {
+    AppConstants.kJobStatusCreated: JobStatus.JOB_CREATED,
+    AppConstants.kJobStatusAssigned: JobStatus.JOB_ASSIGNED,
+    AppConstants.kJobStatusLinkedToPermit: JobStatus.JOB_LINKED,
+    AppConstants.kJobStatusInProgress: JobStatus.JOB_IN_PROGRESS,
+    AppConstants.kJobStatusCaryForward: JobStatus.JOB_CARRY_FORWARD,
+    AppConstants.kJobStatusClosed: JobStatus.JOB_CLOSED,
+    AppConstants.kJobStatusCancelled: JobStatus.JOB_CANCELLED,
+    AppConstants.kJobStatusDeleted: JobStatus.JOB_DELETED,
   };
 
   static const Map<JobStatus, Color> statusColors = {
