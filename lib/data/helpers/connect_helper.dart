@@ -237,10 +237,7 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getSopPermitList(
-      {required bool isLoading,
-      required String auth,
-      int? job_type_id
-      }) async {
+      {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSOPList?job_type_id=$job_type_id',
       Request.getMultiparts,
@@ -400,7 +397,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitApprove',
       Request.put,
-      {'comment': "$comment", 'employee_id': employee_id,'id': id},
+      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -1307,6 +1304,25 @@ class ConnectHelper {
       'CheckList/UpdateCheckList',
       Request.patch,
       checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateCheckPoint({
+    required String auth,
+    bool? isLoading,
+    required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/UpdateCheckPoint',
+      Request.patch,
+      checkpointJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

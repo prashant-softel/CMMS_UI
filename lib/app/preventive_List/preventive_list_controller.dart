@@ -252,12 +252,6 @@ class PreventiveListController extends GetxController {
   }
 
   Future<bool> updateChecklistNumber(checklistId) async {
-    // if (checklistNumberCtrlr.text.trim() == '' ||
-    //     selectedEquipmentId == 0 ||
-    //     selectedfrequencyId == 0) {
-    //   Fluttertoast.showToast(
-    //       msg: "Please enter required field", fontSize: 16.0);
-    // } else {
     String _checklistNumber = checklistNumberCtrlr.text.trim();
     String _duration = durationCtrlr.text.trim();
     String _manpower = manpowerCtrlr.text.trim();
@@ -281,7 +275,5 @@ class PreventiveListController extends GetxController {
       isLoading: true,
     );
     return true;
-    //  }
-    //   return true;
   }
 }
