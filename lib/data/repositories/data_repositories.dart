@@ -910,5 +910,17 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateCheckPoint({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.updateCheckPoint(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
   ///
 }

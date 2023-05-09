@@ -15,12 +15,13 @@ class PreventiveCheckPointUsecase {
         facilityId,
         isLoading,
       );
-       Future<bool> createCheckpoint({
+  Future<bool> createCheckpoint({
     checkpointJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckpoint(isLoading: isLoading,checkpointJsonString:checkpointJsonString);
-     getCheckPointlist({
+      await repository.createCheckpoint(
+          isLoading: isLoading, checkpointJsonString: checkpointJsonString);
+  getCheckPointlist({
     int? selectedchecklistId,
     bool? isLoading,
   }) async =>
@@ -29,11 +30,16 @@ class PreventiveCheckPointUsecase {
         isLoading,
       );
 
-  deleteCkeckpoint({required Object check_point_id, required bool isLoading})  async =>
+  deleteCkeckpoint(
+          {required Object check_point_id, required bool isLoading}) async =>
       await repository.deleteCkeckpoint(
         check_point_id,
         isLoading,
       );
-
-  
+  Future<bool> updateCheckPoint({
+    checkpointJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateCheckPoint(
+          isLoading: isLoading, checkpointJsonString: checkpointJsonString);
 }

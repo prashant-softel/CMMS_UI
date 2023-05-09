@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/add_user/add_user_binding.dart';
+import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
@@ -72,6 +74,8 @@ import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart'
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
+import '../view_user_detail/view/view_user_detail_screen.dart';
+import '../view_user_detail/view_user_detail_binding.dart';
 
 // coverage:ignore-file
 
@@ -294,6 +298,16 @@ class AppPages {
       name: _Paths.userList,
       page: UserListScreen.new,
       binding: UserListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addUser,
+      page: AddUserScreen.new,
+      binding: AddUserBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewUserDetail,
+      page: ViewUserDetailScreen.new,
+      binding: ViewUserDetailBinding(),
     ),
   ];
 }

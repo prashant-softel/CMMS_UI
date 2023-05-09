@@ -788,6 +788,11 @@ abstract class Styles {
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 7, 63, 115),
   );
+  static TextStyle blue17 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.seventeen,
+  );
 
   ///
 }

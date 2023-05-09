@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 // String createCheckPointToJson(List<CreateCheckpoint> data) =>
@@ -10,14 +9,15 @@ class CreateCheckpoint {
   String requirement;
   int is_document_required;
   int status;
- 
-  CreateCheckpoint(
-      {required this.check_point,
-      required this.checklist_id,
-      required this.status,
-      required this.requirement,
-      required this.is_document_required,
-    });
+  int id;
+  CreateCheckpoint({
+    required this.check_point,
+    required this.checklist_id,
+    required this.status,
+    required this.requirement,
+    required this.id,
+    required this.is_document_required,
+  });
 
   factory CreateCheckpoint.fromJson(Map<String, dynamic> json) =>
       CreateCheckpoint(
@@ -25,8 +25,8 @@ class CreateCheckpoint {
         checklist_id: json['checklist_id'],
         status: json['status'],
         requirement: json['requirement'],
+        id: json['id'],
         is_document_required: json['is_document_required'],
-      
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,6 +35,6 @@ class CreateCheckpoint {
         'status': status,
         'requirement': requirement,
         'is_document_required': is_document_required,
-       
+        'id': id,
       };
 }

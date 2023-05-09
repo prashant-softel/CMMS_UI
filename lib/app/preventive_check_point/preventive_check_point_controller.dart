@@ -31,6 +31,8 @@ class PreventiveCheckPointController extends GetxController {
   Rx<int> selectedchecklistId = 0.obs;
   RxList<CheckPointModel?>? preventiveCheckpoint = <CheckPointModel?>[].obs;
   CheckPointModel? preventiveCheckpointmodel;
+  CheckPointModel? selectedItem;
+
   RxList<String> preventiveCheckPointTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -94,6 +96,7 @@ class PreventiveCheckPointController extends GetxController {
           requirement: _requirement,
           checklist_id: _checklistId,
           is_document_required: isToggleOn.value ? 1 : 0,
+          id: 0,
           status: 1);
       var checkpointJsonString = [
         createCheckpoint.toJson()
@@ -204,5 +207,27 @@ class PreventiveCheckPointController extends GetxController {
         isLoading: true,
       );
     }
+  }
+
+  Future<bool> updateCheckPoint(checkPontId) async {
+    String _checkPoint = checkPointCtrlr.text.trim();
+    String _requirement = requirementCtrlr.text.trim();
+    int _checklistId = int.tryParse(selectedchecklist.value) ?? 0;
+    CreateCheckpoint createCheckpoint = CreateCheckpoint(
+        check_point: _checkPoint,
+        requirement: _requirement,
+        checklist_id: _checklistId,
+        id: checkPontId,
+        is_document_required: isToggleOn.value ? 1 : 0,
+        status: 1);
+    var checkpointJsonString =
+        createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
+
+    print({"checkpointJsonString", checkpointJsonString});
+    await preventiveCheckPointPresenter.updateCheckPoint(
+      checkpointJsonString: checkpointJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 }
