@@ -5,6 +5,7 @@ import '../../../domain/models/job_model.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'widgets/job_detail_field.dart';
@@ -21,7 +22,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
     return Scaffold(
       body:
           //
-
           Container(
         height: Get.height,
         width: Get.width,
@@ -290,9 +290,11 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                     children: [
                                       /// ASSIGN/RE-ASSIGN BUTTON
 // If assignedId is present means it is already assigned
+// If assignedId is present means it is already assigned
                                       if (controller.jobDetailsModel.value
                                               ?.assignedId ==
                                           0) ...[
+                                        //check if status is "CREATED"
                                         //check if status is "CREATED"
                                         if (controller.jobDetailsModel.value
                                                     ?.status !=
@@ -303,7 +305,7 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                                             .jobDetailsModel
                                                             .value
                                                             ?.status) ==
-                                                "CREATED")
+                                                AppConstants.kJobStatusCreated)
                                           CustomElevatedButton(
                                             // style: editButtonStyle,
                                             onPressed: () => controller
@@ -317,6 +319,7 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                               0) >
                                           0) ...[
                                         //check if status is "ASSIGNED"
+                                        //check if status is "ASSIGNED"
                                         if (controller.jobDetailsModel.value
                                                     ?.status !=
                                                 null &&
@@ -326,7 +329,7 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                                             .jobDetailsModel
                                                             .value
                                                             ?.status) ==
-                                                "ASSIGNED")
+                                                AppConstants.kJobStatusAssigned)
                                           CustomElevatedButton(
                                             // style: editButtonStyle,
                                             onPressed: () => controller
@@ -344,7 +347,7 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                           JobStatusData.getStatusStringFromInt(
                                                   controller.jobDetailsModel
                                                       .value?.status) ==
-                                              "ASSIGNED")
+                                              AppConstants.kJobStatusAssigned)
                                         CustomElevatedButton(
                                           text: "Link to Existing Permit",
                                           icon: Icons.link,
@@ -354,9 +357,10 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                               ColorValues.appYellowColor,
                                         ),
                                       Dimens.boxWidth10,
+                                      //check if status is "ASSIGNED"
                                       if (controller
                                               .jobDetailsModel.value?.status ==
-                                          JobStatus.JOB_ASSIGNED)
+                                          AppConstants.kJobStatusAssigned)
                                         CustomElevatedButton(
                                           text: "Create New Permit",
                                           icon: Icons.add,
@@ -366,15 +370,17 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                               ColorValues.appLightBlueColor,
                                         ),
                                     ]),
-                                if (controller.jobDetailsModel.value?.status ==
-                                    JobStatus.JOB_LINKED)
+                                //check if status is "LINKED TO PERMIT"
+                                if (JobStatusData.getStatusStringFromInt(
+                                        controller
+                                            .jobDetailsModel.value?.status) ==
+                                    AppConstants.kJobStatusLinkedToPermit)
                                   CustomElevatedButton(
                                     text: "Job Card",
                                     icon: Icons.add,
                                     onPressed: () =>
                                         controller.goToJobCardScreen(),
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
+                                    backgroundColor: ColorValues.appPurpleColor,
                                   ),
                               ]),
                         )
