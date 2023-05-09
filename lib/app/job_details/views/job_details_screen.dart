@@ -290,9 +290,11 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                     children: [
                                       /// ASSIGN/RE-ASSIGN BUTTON
 // If assignedId is present means it is already assigned
+// If assignedId is present means it is already assigned
                                       if (controller.jobDetailsModel.value
                                               ?.assignedId ==
                                           0) ...[
+                                        //check if status is "CREATED"
                                         //check if status is "CREATED"
                                         if (controller.jobDetailsModel.value
                                                     ?.status !=
@@ -316,6 +318,7 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                                   ?.assignedId ??
                                               0) >
                                           0) ...[
+                                        //check if status is "ASSIGNED"
                                         //check if status is "ASSIGNED"
                                         if (controller.jobDetailsModel.value
                                                     ?.status !=
