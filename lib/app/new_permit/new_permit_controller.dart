@@ -306,20 +306,34 @@ class NewPermitController extends GetxController {
   Map<int, dynamic> loto_map = {};
   int userId = varUserAccessModel.value.user_id ?? 0;
   bool isFromJobDetails = false;
-  int? permitId = 0;
+  Rx<int> permitId = 0.obs;
 
   ///
   @override
   void onInit() async {
+    
     try {
-      var data = Get.arguments;
-      jobModel = data["jobModel"];
-      isFromJobDetails = Get.arguments["isFromJobDetails"];
-      if (isFromJobDetails == true) {
+    final arguments = Get.arguments;
+     JobDetailsModel? jobModel = JobDetailsModel();
+if(arguments != null){
+   if (arguments.containsKey('permitId')) {
+ 
+      permitId.value = arguments['permitId'];
+     }
+
+     if (arguments.containsKey('jobModel')) {
+
+      jobModel = arguments['jobModel'];
+     }
+
+      if (jobModel != null) {
         loadPermitDetails(jobModel);
       }
-      permitId = Get.arguments;
-      print({"prmitid", permitId});
+
+}
+   
+      
+      
       //homePresenter.generateToken();
       //  Future.delayed(Duration(seconds: 1), () {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
@@ -329,10 +343,11 @@ class NewPermitController extends GetxController {
           getBlocksList(facilityId);
         });
       });
-      if (permitId != null) {
-        await getNewPermitDetail(permitId: permitId!);
-      }
 
+      if (permitId.value > 0) {
+        await getNewPermitDetail(intPermitId: permitId.value);
+      }
+      
       await getInventoryCategoryList();
       await getInventoryIsolationList();
       // await getInventoryEquipmentNameList();
@@ -346,8 +361,10 @@ class NewPermitController extends GetxController {
       await getPermitIssuerList();
       await getPermitApproverList();
       await getSafetyMeasureList();
+
+     
     } catch (e) {
-      print(e);
+      print('jobModelError: $e');
     }
     super.onInit();
   }
@@ -369,12 +386,12 @@ class NewPermitController extends GetxController {
     }
   }
 
-  Future<void> getNewPermitDetail({required int permitId}) async {
+  Future<void> getNewPermitDetail({required int intPermitId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     newPermitDetailsList?.value = <NewPermitDetailModel>[];
 
     final _newPermitDetails =
-        await permitPresenter.getNewPermitDetail(permitId: permitId);
+        await permitPresenter.getNewPermitDetail(permitId: intPermitId);
     print('New Permit Detail:$_newPermitDetails');
 
     if (_newPermitDetails != null) {
@@ -757,6 +774,7 @@ class NewPermitController extends GetxController {
     final _blockList =
         await permitPresenter.getBlocksList(facilityId: _facilityId);
 
+    
     if (_blockList != null) {
       for (var block in _blockList) {
         blockList.add(block);
@@ -1010,7 +1028,7 @@ class NewPermitController extends GetxController {
   loadPermitDetails(jobModel) {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
     selectedBlock.value = jobModel.facilityName ?? '';
-    selectedEquipmentCategoryIdList = jobModel.equipmentCatList;
+    // selectedEquipmentCategoryIdList = jobModel.equipmentCatList;
   }
 
   /// class ends
