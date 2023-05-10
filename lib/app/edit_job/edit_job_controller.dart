@@ -107,18 +107,8 @@ class EditJobController extends GetxController {
   @override
   void onInit() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _jobId = await _flutterSecureStorage.read(key: "jobId");
-      if (_jobId == null || _jobId == '' || _jobId == "null") {
-        jobID.value = Get.arguments["jobId"];
-        await _flutterSecureStorage.write(
-          key: "jobId",
-          value: jobID.value == null ? '' : jobID.value.toString(),
-        );
-      } else {
-        jobID.value = int.tryParse(_jobId) ?? 0;
-      }
+      await setJobId();
+      //
       facilityIdStreamSubscription =
           homeController.facilityId$.listen((event) async {
         selectedFacilityId = event;
@@ -142,6 +132,28 @@ class EditJobController extends GetxController {
     super.onInit();
   }
 
+  ///
+  Future<void> setJobId() async {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    String? _jobId = '';
+    // Read jobId from storage
+    _jobId = await _flutterSecureStorage.read(key: "jobId");
+
+    // If jobId is unavailable, take it from the arguments received
+    if (_jobId == null || _jobId == '' || _jobId == "null") {
+      var data = Get.arguments;
+      jobID.value = data["jobId"];
+      // Update jobId in storage with the new value
+      await _flutterSecureStorage.write(
+        key: "jobId",
+        value: jobID.value == null ? '' : jobID.value.toString(),
+      );
+    } else {
+      jobID.value = int.tryParse(_jobId) ?? 0;
+    }
+    await _flutterSecureStorage.delete(key: "jobId");
+  }
+
   Future<void> getJobDetails(int _jobId) async {
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
@@ -155,6 +167,7 @@ class EditJobController extends GetxController {
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
       breakdownTimeCtrlr.text =
           formatDateTime(jobDetailsModel.value?.breakdownTime);
+      // jobDetailsModel.value.workType
     }
 
     associatedPermitList?.value =
@@ -254,28 +267,50 @@ class EditJobController extends GetxController {
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
-    workAreaList.value = _workAreaList;
-    if (jobDetailsModel.value?.workingAreaList != null)
-      for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
-        int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
-        if (_selectedWorkAreaId > 0) {
-          selectedWorkAreaIdList.add(_selectedWorkAreaId);
+    if (_workAreaList.isNotEmpty) {
+      workAreaList.value = _workAreaList;
+      if (jobDetailsModel.value?.workingAreaList != null)
+        for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+          int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
+          if (_selectedWorkAreaId > 0) {
+            selectedWorkAreaIdList.add(_selectedWorkAreaId);
+          }
+          update();
         }
-        update();
-      }
+    }
   }
 
   Future<void> getWorkTypeList({
     List<int>? categoryIds,
   }) async {
-    //String lststrCategoryIds = categoryIds?.join(', ').toString() ?? '';
-    categoryIds = selectedEquipmentCategoryIdList;
-    String lststrCategoryIds = categoryIds.join(', ').toString();
-    final _workTypeList = await editJobPresenter.getWorkTypeList(
-      categoryIds: lststrCategoryIds,
-      isLoading: true,
-    );
-    workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
+    try {
+      workTypeList.clear();
+
+      categoryIds = selectedEquipmentCategoryIdList;
+      String lststrCategoryIds = categoryIds.join(', ').toString();
+      final _workTypeList = await editJobPresenter.getWorkTypeList(
+        categoryIds: lststrCategoryIds,
+        isLoading: true,
+      );
+      //bind worktype list
+      if (_workTypeList != null) {
+        workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
+      }
+      // pre-fill worktype values
+      if (jobDetailsModel.value?.workTypeList != null)
+        for (var _workType in jobDetailsModel.value?.workTypeList ?? []) {
+          WorkTypeModel workType = WorkTypeModel(
+            id: _workType.workTypeId,
+            workType: _workType.workTypeName,
+          );
+          selectedWorkTypeList.add(workType);
+          selectedWorkTypeIdList.add(workType.id ?? 0);
+        }
+      update();
+    } //
+    catch (e) {
+      print(e);
+    }
   }
 
   void checkForm() {
@@ -291,7 +326,7 @@ class EditJobController extends GetxController {
     if (selectedEquipmentCategoryIdList.length < 1) {
       isEquipmentCategorySelected.value = false;
     }
-    if (selectedWorkAreaList.length < 1) {
+    if (selectedWorkAreaIdList.length < 1) {
       isWorkAreaSelected.value = false;
     }
 
@@ -326,6 +361,13 @@ class EditJobController extends GetxController {
     return formattedDateTime;
   }
 
+  int? getAssignedToId(String selectedValue) {
+    final item =
+        assignedToList.firstWhere((item) => item?.name == selectedValue);
+    final _assignedToId = item?.id ?? 0;
+    return _assignedToId;
+  }
+
   void updateJob() async {
     {
       checkForm();
@@ -333,6 +375,9 @@ class EditJobController extends GetxController {
         return;
       }
       //
+      if (selectedAssignedToId <= 0) {
+        getAssignedToId(selectedAssignedTo.value);
+      }
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
@@ -428,7 +473,7 @@ class EditJobController extends GetxController {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
           selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId != 0) {
+          if (selectedAssignedToId > 0) {
             isAssignedToSelected.value = true;
           }
           selectedAssignedTo.value = value;

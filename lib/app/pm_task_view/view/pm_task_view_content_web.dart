@@ -1,14 +1,11 @@
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_swich_toggle.dart';
-import '../../widgets/table_action_button.dart';
 
 class PreventiveMaintenanceTaskViewContentWeb
     extends GetView<PreventiveMaintenanceTaskViewController> {
@@ -103,105 +100,98 @@ class PreventiveMaintenanceTaskViewContentWeb
                     ),
                     Expanded(
                       child: Container(
-                        //margin: Dimens.edgeInsets20,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  Text(
-                                    "Maintenance Order Number: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      "${controller.pmtaskViewModel.value?.maintenance_order_number}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                  Text(
-                                    "Equipment Name: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      "${controller.pmtaskViewModel.value?.equipment_name}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                ],
+                              Container(
+                                margin: Dimens.edgeInsets40_0_40_0,
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "Maintenance Order Number: ",
+                                          style: Styles.black17,
+                                        ),
+                                        Text(
+                                          "Responsible Person: ",
+                                          style: Styles.black17,
+                                        ),
+                                        Text(
+                                          "Due Date: ",
+                                          style: Styles.black17,
+                                        ),
+                                        Text(
+                                          "Check List: ",
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxWidth10,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.maintenance_order_number}",
+                                            style: Styles.blue17),
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.assigned_to_name}",
+                                            style: Styles.blue17),
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.schedule_date}",
+                                            style: Styles.blue17),
+                                        Text("Iv_checklist_001",
+                                            style: Styles.blue17),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "Equipment Name: ",
+                                          style: Styles.black17,
+                                        ),
+                                        Text(
+                                          "Last Done Date: ",
+                                          style: Styles.black17,
+                                        ),
+                                        Text(
+                                          "Done Date: ",
+                                          style: Styles.black17,
+                                        ),
+                                        Text(
+                                          "frequency_name: ",
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxWidth10,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.equipment_name}",
+                                            style: Styles.blue17),
+                                        Text(
+                                            " ${controller.pmtaskViewModel.value?.completed_date}",
+                                            style: Styles.blue17),
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.completed_date}",
+                                            style: Styles.blue17),
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.frequency_name}",
+                                            style: Styles.blue17),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Dimens.boxHeight8,
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  Text(
-                                    "Responsible Person: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      "${controller.pmtaskViewModel.value?.assigned_to_name}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                  Text(
-                                    "Last Done Date: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      " ${controller.pmtaskViewModel.value?.completed_date}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                ],
-                              ),
-                              Dimens.boxHeight8,
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  Text(
-                                    "Due Date: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      "${controller.pmtaskViewModel.value?.schedule_date}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                  Text(
-                                    "Done Date: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      "${controller.pmtaskViewModel.value?.completed_date}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                ],
-                              ),
-                              Dimens.boxHeight8,
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  Text(
-                                    "Check List: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text("Iv_checklist_001",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                  Text(
-                                    "frequency_name: ",
-                                    style: Styles.black17,
-                                  ),
-                                  Dimens.boxWidth30,
-                                  Text(
-                                      "${controller.pmtaskViewModel.value?.frequency_name}",
-                                      style: Styles.blue700),
-                                  Spacer(),
-                                ],
-                              ),
-                              Dimens.boxHeight30,
                               (controller.scheduleCheckList != null &&
                                       controller.scheduleCheckList!.isNotEmpty)
                                   ? Container(

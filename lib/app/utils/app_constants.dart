@@ -16,6 +16,14 @@ abstract class AppConstants {
   static String mixPannelId = appFlavor == AppFlavor.PROD ? '' : '';
   static String appStoreId = '';
   static String androidPackageName = 'com.cmms';
+  static String kJobStatusCreated = "CREATED";
+  static String kJobStatusAssigned = "ASSIGNED";
+  static String kJobStatusLinkedToPermit = "LINKED TO PERMIT";
+  static String kJobStatusInProgress = "IN PROGRESS";
+  static String kJobStatusCaryForward = "CARRY FORWARD";
+  static String kJobStatusClosed = "CLOSED";
+  static String kJobStatusCancelled = "CANCELLED";
+  static String kJobStatusDeleted = "DELETED";
 }
 
 AppFlavor? appFlavor;

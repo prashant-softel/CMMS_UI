@@ -10,6 +10,7 @@ import '../../domain/models/new_permit_list_model.dart';
 import '../home/home_presenter.dart';
 import '../job_card_details/views/widgets/permit_list_table_dialog.dart';
 import '../navigators/app_pages.dart';
+import '../utils/utility.dart';
 import 'job_details_presenter.dart';
 
 class JobDetailsController extends GetxController {
@@ -67,45 +68,59 @@ class JobDetailsController extends GetxController {
       isDataLoading.value = false;
     } //
     catch (e) {
+      Utility.showDialog(e.toString() + 'onReady');
       print(e);
     }
     super.onReady();
   }
 
   Future<void> setJobId() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
-    // Read jobId from storage
-    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      String? _jobId = '';
 
-    // If jobId is unavailable, take it from the arguments received
-    if (_jobId == null || _jobId == '' || _jobId == "null") {
-      var data = Get.arguments;
-      jobId.value = data["jobId"];
-      await _flutterSecureStorage.write(
-        key: "jobId",
-        value: jobId.value == null ? '' : jobId.value.toString(),
-      );
-    } //
-    else {
-      jobId.value = int.tryParse(_jobId) ?? 0;
+      // Read jobId from storage
+      _jobId = await _flutterSecureStorage.read(key: "jobId");
+
+      // If jobId is unavailable, take it from the arguments received
+      if (_jobId == null || _jobId == '' || _jobId == "null") {
+        var data = Get.arguments;
+        if (data != null) {
+          jobId.value = data["jobId"];
+          // Update jobId in storage with the new value
+          await _flutterSecureStorage.write(
+            key: "jobId",
+            value: jobId.value == null ? '' : jobId.value.toString(),
+          );
+        }
+      } else {
+        jobId.value = int.tryParse(_jobId) ?? 0;
+      }
+      await _flutterSecureStorage.delete(key: "jobId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'setJobId');
     }
   }
 
   void getJobDetails(int? jobId) async {
-    jobDetailsList?.value = <JobDetailsModel>[];
-    final _jobDetailsList =
-        await jobDetailsPresenter.getJobDetails(jobId: jobId, isLoading: true);
+    try {
+      jobDetailsList?.value = <JobDetailsModel>[];
+      final _jobDetailsList = await jobDetailsPresenter.getJobDetails(
+          jobId: jobId, isLoading: true);
 
-    if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
-      jobDetailsModel.value = _jobDetailsList[0];
-      associatedPermitList?.value =
-          jobDetailsModel.value?.associatedPermitList ?? [];
-      update(["jobDetailsModel"]);
+      if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
+        jobDetailsModel.value = _jobDetailsList[0];
+        associatedPermitList?.value =
+            jobDetailsModel.value?.associatedPermitList ?? [];
+        update(["jobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'getJobDetails');
     }
   }
 
-  void editJob() {
-    Get.toNamed(Routes.editJob, arguments: jobId.value);
+  void goToEditJobScreen(int? _jobId) {
+    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
   }
 
   void showPermitsDialog() {
@@ -146,11 +161,13 @@ class JobDetailsController extends GetxController {
   }
 
   void goToJobCardScreen() {
-    Get.toNamed(Routes.jobCard, arguments: jobId);
+    Get.toNamed(Routes.jobCard, arguments: jobId.value);
   }
 
   void goToJobDetailsScreen() {
-    Get.offNamed(Routes.jobDetails, arguments: {'jobId': jobId});
+    Get.back();
+    getJobDetails(jobId.value);
+    // Get.offNamed(Routes.jobDetails, arguments: {'jobId': jobId.value});
   }
 
   onPermitSelected(NewPermitModel? newPermitModel) {

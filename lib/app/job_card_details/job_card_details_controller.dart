@@ -76,7 +76,7 @@ class JobCardDetailsController extends GetxController {
   RxMap plantDetails = {}.obs;
 
   /// Job Card
-  int? jobCardId = 0;
+  Rx<int> jobCardId = 0.obs;
   Rx<bool> isJobCardStarted = false.obs;
   var comment = '';
 
@@ -157,10 +157,10 @@ class JobCardDetailsController extends GetxController {
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 3;
-    jobCardId = 1;
+    jobCardId.value = 1;
     historyList?.value = await jobCardDetailsPresenter.getJobCardHistory(
           moduleType,
-          jobCardId,
+          jobCardId.value,
           true,
         ) ??
         [];
@@ -310,7 +310,7 @@ class JobCardDetailsController extends GetxController {
       }
       // create jobcard object
       var jobCard = {
-        "id": jobCardId,
+        "id": jobCardId.value,
         "comment": "Job Card Updated",
         "status": 1,
         "is_isolation_required": true,
@@ -335,13 +335,24 @@ class JobCardDetailsController extends GetxController {
 
   void startStopJobCard() async {
     isJobCardStarted.value = !isJobCardStarted.value;
-    // Map<String, dynamic> responseMap =
-    //     await jobCardDetailsPresenter.createJobCard() ?? Map();
-    // jobCardId = responseMap["id"];
+  }
+
+  void createJobCard() async {
+    if (isJobCardStarted.value == true) {
+      Map<String, dynamic>? responseMapJobCardStarted =
+          await jobCardDetailsPresenter.createJobCard(
+        jobId: jobId.value,
+        isLoading: false,
+      );
+
+      if (responseMapJobCardStarted != null) {
+        final _jobCardId = responseMapJobCardStarted["id"][0];
+        jobCardId.value = _jobCardId;
+      }
+    }
 
     /// Get History
     getHistory();
-    //jobCardDetailsPresenter.getJobCardDetails(jobCardId: jobCardId);
   }
 
   void toggleIsNormalizedSwitch(bool value, int index) {
@@ -406,15 +417,15 @@ class JobCardDetailsController extends GetxController {
 
   void approveJob() async {
     final response = await jobCardDetailsPresenter.approveJobCard(
-      jobCardId: jobCardId,
+      jobCardId: jobCardId.value,
       comment: comment,
       isLoading: true,
     );
   }
 
   void rejectJob() async {
-    final response =
-        await jobCardDetailsPresenter.rejectJobCard(jobCardId, comment, true);
+    final response = await jobCardDetailsPresenter.rejectJobCard(
+        jobCardId.value, comment, true);
   }
 
   void addNewTextEditingController() {

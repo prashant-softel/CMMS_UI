@@ -45,7 +45,8 @@ abstract class Routes {
   static const jobSOPListScreen = _Paths.jobSOPListScreen;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
-
+  static const addUser = _Paths.addUser;
+  static const viewUserDetail = _Paths.viewUserDetail;
 }
 
 abstract class _Paths {
@@ -92,6 +93,8 @@ abstract class _Paths {
   static const jobSOPListScreen = '/job-sop-list-screen';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
+  static const addUser = '/addUser';
+  static const viewUserDetail = '/view-user-detail';
 
   // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

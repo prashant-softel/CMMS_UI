@@ -5,6 +5,7 @@ import '../../../domain/models/job_model.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'widgets/job_detail_field.dart';
@@ -21,7 +22,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
     return Scaffold(
       body:
           //
-
           Container(
         height: Get.height,
         width: Get.width,
@@ -290,44 +290,87 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                     children: [
                                       /// ASSIGN/RE-ASSIGN BUTTON
 
+                                      //check if status is "CREATED"
                                       if (controller.jobDetailsModel.value
-                                              ?.assignedId ==
-                                          0) ...[
+                                                  ?.status !=
+                                              null &&
+                                          JobStatusData.getStatusStringFromInt(
+                                                  controller.jobDetailsModel
+                                                      .value?.status) ==
+                                              AppConstants.kJobStatusCreated)
                                         CustomElevatedButton(
-                                          // style: editButtonStyle,
-                                          onPressed: () => controller.editJob(),
-                                          text: 'Assign', //),
-                                        )
-                                      ] //
-                                      else if ((controller.jobDetailsModel.value
+                                          onPressed: () => controller
+                                              .goToEditJobScreen(controller
+                                                  .jobDetailsModel.value?.id),
+                                          text: 'Assign',
+                                        ),
+
+                                      if ((controller.jobDetailsModel.value
                                                   ?.assignedId ??
                                               0) >
                                           0) ...[
-                                        CustomElevatedButton(
-                                          // style: editButtonStyle,
-                                          onPressed: () => controller.editJob(),
-                                          text: 'Re-Assign',
-                                          // ),
-                                        ),
+                                        //check if status is "ASSIGNED"
+                                        if (controller.jobDetailsModel.value
+                                                    ?.status !=
+                                                null &&
+                                            JobStatusData
+                                                    .getStatusStringFromInt(
+                                                        controller
+                                                            .jobDetailsModel
+                                                            .value
+                                                            ?.status) ==
+                                                AppConstants.kJobStatusAssigned)
+                                          CustomElevatedButton(
+                                            onPressed: () => controller
+                                                .goToEditJobScreen(controller
+                                                    .jobDetailsModel.value?.id),
+                                            text: 'Re-Assign',
+                                            icon: Icons.edit,
+                                          ),
                                       ],
                                       Dimens.boxWidth10,
-                                      CustomElevatedButton(
-                                        text: "Link to Existing Permit",
-                                        icon: Icons.link,
-                                        onPressed: () =>
-                                            controller.showPermitsDialog(),
-                                        backgroundColor:
-                                            ColorValues.appYellowColor,
-                                      ),
+                                      //check if status is "ASSIGNED"
+                                      if (controller.jobDetailsModel.value
+                                                  ?.status !=
+                                              null &&
+                                          JobStatusData.getStatusStringFromInt(
+                                                  controller.jobDetailsModel
+                                                      .value?.status) ==
+                                              AppConstants.kJobStatusAssigned)
+                                        CustomElevatedButton(
+                                          text: "Link to Existing Permit",
+                                          icon: Icons.link,
+                                          onPressed: () =>
+                                              controller.showPermitsDialog(),
+                                          backgroundColor:
+                                              ColorValues.appYellowColor,
+                                        ),
                                       Dimens.boxWidth10,
-                                      CustomElevatedButton(
-                                        text: "Create New Permit",
-                                        icon: Icons.add,
-                                        onPressed: () =>
-                                            controller.createNewPermit(),
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                      ),
+                                      //check if status is "ASSIGNED"
+                                      if (JobStatusData.getStatusStringFromInt(
+                                              controller.jobDetailsModel.value
+                                                  ?.status) ==
+                                          AppConstants.kJobStatusAssigned)
+                                        CustomElevatedButton(
+                                          text: "Create New Permit",
+                                          icon: Icons.add,
+                                          onPressed: () =>
+                                              controller.createNewPermit(),
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                        ), //check if status is "LINKED TO PERMIT"
+                                      if (JobStatusData.getStatusStringFromInt(
+                                              controller.jobDetailsModel.value
+                                                  ?.status) ==
+                                          AppConstants.kJobStatusLinkedToPermit)
+                                        CustomElevatedButton(
+                                          text: "Job Card",
+                                          icon: Icons.add,
+                                          onPressed: () =>
+                                              controller.goToJobCardScreen(),
+                                          backgroundColor:
+                                              ColorValues.appPurpleColor,
+                                        ),
                                     ]),
                               ]),
                         )
