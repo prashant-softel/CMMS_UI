@@ -42,7 +42,7 @@ class AssignedToWidget extends StatelessWidget {
           dropdownList: controller.assignedToList,
           isValueSelected: controller.isAssignedToSelected.value,
           selectedValue: controller.selectedAssignedTo.value,
-          onValueChanged: controller.onValueChanged,
+          onValueChanged: controller.onDropdownValueChanged,
         ),
         Dimens.boxHeight20,
       ]),

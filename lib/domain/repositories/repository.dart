@@ -1492,13 +1492,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'saveJob');
+        Utility.showDialog(res.errorCode.toString() + ' saveJob');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + 'saveJob');
+      Utility.showDialog(error.toString() + ' saveJob');
       return Map();
     }
   }
@@ -1522,13 +1522,46 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateJob');
+        Utility.showDialog(res.errorCode.toString() + ' updateJob');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + 'updateJob');
+      Utility.showDialog(error.toString() + ' updateJob');
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> assignReAssignJob(
+    jobId,
+    assignedToId,
+    isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.assignReAssignJob(
+        auth: auth,
+        jobId: jobId,
+        assignedToId: assignedToId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' repo - assignReAssignJob');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString() + ' repo - assignReAssignJob');
       return Map();
     }
   }
@@ -1551,11 +1584,11 @@ class Repository {
         return null;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getUserAccessList');
+        Utility.showDialog(res.errorCode.toString() + ' getUserAccessList');
         return null;
       }
     } catch (error) {
-      Utility.showDialog(error.toString() + 'getUserAccessList');
+      Utility.showDialog(error.toString() + ' getUserAccessList');
       return null;
     }
   }
@@ -1573,7 +1606,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -1608,7 +1641,8 @@ class Repository {
 
         return _PreventiveCheckListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getPreventiveCheckList');
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
         return [];
       }
     } catch (error) {
@@ -1847,13 +1881,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateJobCard');
+        Utility.showDialog(res.errorCode.toString() + ' repo- updateJobCard');
       }
       return Map();
     } //
     catch (error) {
       print(error.toString());
-      Utility.showDialog(res.errorCode.toString() + 'updateJobCard');
+      Utility.showDialog(res.errorCode.toString() + ' repo - updateJobCard');
       return Map();
     }
   }

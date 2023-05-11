@@ -42,7 +42,7 @@ class BlockWidget extends StatelessWidget {
           dropdownList: controller.blockList,
           isValueSelected: controller.isBlockSelected.value,
           selectedValue: controller.selectedBlock.value,
-          onValueChanged: controller.onValueChanged,
+          onValueChanged: controller.onDropdownValueChanged,
         ),
         Dimens.boxHeight20,
       ]),

@@ -30,7 +30,7 @@ class JobListContentWeb extends StatelessWidget {
             label: 'BM Report',
             onPressed: () {
               if (kIsWeb) {
-                controller.exportToExcel();
+                controller.exportToExcelWeb();
               }
             },
             color: ColorValues.appYellowColor,

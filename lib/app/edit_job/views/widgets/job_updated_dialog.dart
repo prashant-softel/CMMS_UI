@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../navigators/app_pages.dart';
+import '../../edit_job_controller.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
-import '../../edit_job_controller.dart';
 
 class JobUpdatedDialog extends GetView<EditJobController> {
-  JobUpdatedDialog({
+  const JobUpdatedDialog({
+    this.jobId,
+    this.message,
     super.key,
   });
 
+  ///
+  final int? jobId;
+  final String? message;
+
+  ///
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -21,7 +26,7 @@ class JobUpdatedDialog extends GetView<EditJobController> {
       insetPadding: Dimens.edgeInsets10_0_10_0,
       contentPadding: EdgeInsets.zero,
       title: Text(
-        'Job Saved',
+        'Job Updated',
         textAlign: TextAlign.center,
       ),
       content: Builder(builder: (context) {
@@ -36,24 +41,26 @@ class JobUpdatedDialog extends GetView<EditJobController> {
               thickness: 1,
             ),
             Spacer(),
-            Text('Job updated for Job Id: ${controller.jobID}'),
+            Text(message ?? ''),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
-                onPressed: () => Get.offAllNamed(Routes.jobList),
+                onPressed: () => controller.goToJobListScreen(),
                 child: const Text('Job List'),
               ),
               Dimens.boxWidth10,
               ElevatedButton(
                 style: Styles.yellowElevatedButtonStyle,
-                onPressed: () => Get.offAndToNamed(Routes.jobDetails,
-                    arguments: {"jobId": controller.jobID.value}),
+                onPressed: () {
+                  controller.goToJobDetailsScreen(jobId ?? 0);
+                },
                 child: const Text('View Job'),
               ),
               Dimens.boxWidth10,
               ElevatedButton(
                 style: Styles.redElevatedButtonStyle,
-                onPressed: () => Get.offAndToNamed(Routes.addJob),
+                onPressed: () => //
+                    controller.goToAddJobScreen(),
                 child: const Text('Add New Job'),
               ),
             ]),
@@ -63,4 +70,6 @@ class JobUpdatedDialog extends GetView<EditJobController> {
       actions: [],
     );
   }
+
+  ///
 }
