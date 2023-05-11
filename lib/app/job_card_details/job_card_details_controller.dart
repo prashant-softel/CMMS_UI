@@ -318,7 +318,7 @@ class JobCardDetailsController extends GetxController {
         "loto_list": _lotoAssetList,
         "employee_list": _employeeList
       };
-      //await jobCardDetailsPresenter.createJobCard();
+
       Map<String, dynamic>? response =
           await jobCardDetailsPresenter.updateJobCard(
         json.encode(jobCard),

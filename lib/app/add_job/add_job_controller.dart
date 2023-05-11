@@ -2,17 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/widgets/job_saved_dialog.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
 import '../job_list/job_list_presenter.dart';
+import '../navigators/app_pages.dart';
 import 'add_job_presenter.dart';
+import 'views/widgets/job_created_dialog.dart';
 
 class AddJobController extends GetxController {
   ///
@@ -56,6 +58,7 @@ class AddJobController extends GetxController {
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
+  List<int> selectedAssetsIdList = [];
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
   Rx<bool> isEquipmentCategorySelected = true.obs;
@@ -95,7 +98,6 @@ class AddJobController extends GetxController {
   ///
   @override
   void onInit() async {
-    // await getFacilityList();
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
       facilityId = event;
@@ -246,7 +248,7 @@ class AddJobController extends GetxController {
   }
 
   void saveJob() async {
-    {
+    try {
       checkForm();
       if (isFormInvalid.value) {
         return;
@@ -255,32 +257,25 @@ class AddJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
-      String _breakdownTime = breakdownTimeCtrlr.text;
-
-      List<AssetsId> assetIds = <AssetsId>[];
+      String _breakdownTime = formatDate(breakdownTimeCtrlr.text.trim());
+      selectedAssetsIdList.clear();
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
-        var json = '{"asset_id": ${_selectedWorkArea?.id},'
-            '"category_ids": ${_selectedWorkArea?.categoryId}}';
-
-        AssetsId _assetId = addAssetsIdFromJson(json);
-        assetIds.add(_assetId);
+        selectedAssetsIdList.add(_selectedWorkArea?.id ?? 0);
       }
 
       AddJobModel addJobModel = AddJobModel(
+        id: 0,
         facilityId: facilityId,
         blockId: selectedBlockId,
         permitId: _permitId,
         assignedId: selectedAssignedToId,
         title: _title,
         description: _description,
-        // status: 2,
-        createdBy: 2,
         breakdownTime: _breakdownTime,
-        assetsIds: assetIds,
+        assetsIds: selectedAssetsIdList,
         workTypeIds: selectedWorkAreaIdList,
       );
-      // var jobJsonString = addJobModelToJson(addJobModel);
 
       Map<String, dynamic>? responseMapJobCreated =
           await addJobPresenter.saveJob(
@@ -288,14 +283,32 @@ class AddJobController extends GetxController {
         isLoading: false,
       );
       if (responseMapJobCreated != null) {
-        var _jobId = responseMapJobCreated["id"][0];
-        jobID.value = _jobId; // intJobId is used in the UI (popup)
-        showAlertDialog(jobId: _jobId);
+        var _jobId = 0;
+        var _message = '';
+        if (responseMapJobCreated["id"] != null &&
+            responseMapJobCreated["id"].isNotEmpty) {
+          _jobId = responseMapJobCreated["id"][0];
+        }
+        if (responseMapJobCreated["message"] != null) {
+          _message = responseMapJobCreated["message"];
+        }
+        showAlertDialog(jobId: _jobId, message: _message);
       }
+    } catch (e) {
+      Utility.showDialog(e.toString());
     }
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
+  String formatDate(String dateString) {
+    var inputFormat = DateFormat("dd-MM-yyyy HH:mm");
+    var inputDate = inputFormat.parse(dateString);
+    var outputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    String outputDate = outputFormat.format(inputDate);
+    return outputDate;
+  }
+
+  ///Value changed in any of the dropdowns - single select
+  void onDropdownValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -366,6 +379,7 @@ class AddJobController extends GetxController {
     }
   }
 
+  /// Equipment categories selected - multi select
   void equipmentCategoriesSelected(_selectedEquipmentCategories) {
     selectedEquipmentCategoryIdList.value = <int>[];
     for (var _selectedCategory in _selectedEquipmentCategories) {
@@ -380,10 +394,12 @@ class AddJobController extends GetxController {
     getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);
   }
 
+  /// Work-areas / Equipments selected - multi select
   void workAreasSelected(_selectedWorkAreaList) {
     selectedWorkAreaList.value = _selectedWorkAreaList.cast<InventoryModel>();
   }
 
+  /// Work-types selected - multi select
   void workTypesSelected(_selectedWorkTypesList) {
     selectedWorkTypeList.value = _selectedWorkTypesList.cast<WorkTypeModel>();
     selectedWorkTypeIdList.value = <int>[];
@@ -402,7 +418,20 @@ class AddJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(JobSavedDialog());
+    await Get.dialog<void>(JobCreatedDialog(jobId: jobId, message: message));
+  }
+
+  ///
+  goToAddJobScreen() {
+    Get.offAndToNamed(Routes.addJob);
+  }
+
+  goToJobDetailsScreen(int _jobId) {
+    Get.offAndToNamed(Routes.jobDetails, arguments: {"jobId": _jobId});
+  }
+
+  goToJobListScreen() {
+    Get.offAllNamed(Routes.jobList);
   }
 
   ///

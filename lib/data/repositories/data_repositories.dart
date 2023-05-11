@@ -539,6 +539,20 @@ class DataRepository extends DomainRepository {
       );
 
   ///
+  Future<ResponseModel> assignReAssignJob({
+    required String auth,
+    jobId,
+    assignedToId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.assignReAssignJob(
+        auth: auth,
+        jobId: jobId,
+        assignedToId: assignedToId,
+        isLoading: isLoading ?? false,
+      );
+
+  ///
   Future<ResponseModel> linkToPermit({
     required String auth,
     jobId,

@@ -206,7 +206,7 @@ class EditJobContentWeb extends GetView<EditJobController> {
         dropdownList: controller.assignedToList,
         isValueSelected: controller.isAssignedToSelected.value,
         selectedValue: controller.selectedAssignedTo.value,
-        onValueChanged: controller.onValueChanged,
+        onValueChanged: controller.onDropdownValueChanged,
       ),
       Dimens.boxHeight20,
     ]);
@@ -505,7 +505,7 @@ class EditJobContentWeb extends GetView<EditJobController> {
       DropdownWidget(
         dropdownList: controller.toolsRequiredToWorkTypeList,
         selectedValue: controller.selectedToolRequiredToWorkType.value,
-        onValueChanged: controller.onValueChanged,
+        onValueChanged: controller.onDropdownValueChanged,
       ),
       Dimens.boxHeight20,
     ]);
@@ -603,7 +603,7 @@ class EditJobContentWeb extends GetView<EditJobController> {
         dropdownList: controller.blockList,
         isValueSelected: controller.isBlockSelected.value,
         selectedValue: controller.selectedBlock.value,
-        onValueChanged: controller.onValueChanged,
+        onValueChanged: controller.onDropdownValueChanged,
       ),
       Dimens.boxHeight20,
     ]);

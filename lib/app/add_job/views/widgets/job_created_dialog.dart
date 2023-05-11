@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../add_job/add_job_controller.dart';
-import '../navigators/app_pages.dart';
-import '../theme/color_values.dart';
-import '../theme/dimens.dart';
-import '../theme/styles.dart';
+import '../../add_job_controller.dart';
+import '../../../theme/color_values.dart';
+import '../../../theme/dimens.dart';
+import '../../../theme/styles.dart';
 
-class JobSavedDialog extends GetView<AddJobController> {
-  const JobSavedDialog({
+class JobCreatedDialog extends GetView<AddJobController> {
+  const JobCreatedDialog({
+    this.jobId,
+    this.message,
     super.key,
   });
 
+  ///
+  final int? jobId;
+  final String? message;
+
+  ///
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -35,27 +41,25 @@ class JobSavedDialog extends GetView<AddJobController> {
               thickness: 1,
             ),
             Spacer(),
-            Text('Job created with Job Id: ${controller.jobID}'),
+            Text(message ?? ''),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
-                onPressed: () => Get.offAllNamed(Routes.jobList),
+                onPressed: () => controller.goToJobListScreen(),
                 child: const Text('Job List'),
               ),
               Dimens.boxWidth10,
               ElevatedButton(
                 style: Styles.yellowElevatedButtonStyle,
                 onPressed: () {
-                  var _jobID = controller.jobID.value;
-                  Get.offAndToNamed(Routes.jobDetails,
-                      arguments: {"jobId": _jobID});
+                  controller.goToJobDetailsScreen(jobId ?? 0);
                 },
                 child: const Text('View Job'),
               ),
               Dimens.boxWidth10,
               ElevatedButton(
                 style: Styles.redElevatedButtonStyle,
-                onPressed: () => Get.offAndToNamed(Routes.addJob),
+                onPressed: () => controller.goToAddJobScreen(),
                 child: const Text('Add New Job'),
               ),
             ]),

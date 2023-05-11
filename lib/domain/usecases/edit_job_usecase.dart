@@ -74,4 +74,16 @@ class EditJobUsecase {
       );
 
   ///
+  Future<Map<String, dynamic>> assignReAssignJob(
+    jobId,
+    assignedToId,
+    isLoading,
+  ) async =>
+      await repository.assignReAssignJob(
+        jobId,
+        assignedToId,
+        isLoading,
+      );
+
+  ///
 }
