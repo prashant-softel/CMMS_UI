@@ -70,13 +70,26 @@ class EditJobPresenter {
   }
 
   ///
-  Future<Map<String, dynamic>> updateJob({
+  Future<Map<String, dynamic>?> updateJob({
     job,
     required bool isLoading,
   }) async {
     return editJobUsecase.updateJob(
       job: job,
       isLoading: isLoading,
+    );
+  }
+
+  ///
+  Future<Map<String, dynamic>?> assignReAssignJob({
+    jobId,
+    assignedToId,
+    required bool isLoading,
+  }) async {
+    return editJobUsecase.assignReAssignJob(
+      jobId,
+      assignedToId,
+      isLoading,
     );
   }
 

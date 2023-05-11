@@ -18,7 +18,7 @@ class UpdateJobButtonWidget extends StatelessWidget {
     return //
         CustomElevatedButton(
       text: 'Update',
-      onPressed: controller.updateJob,
+      onPressed: () => controller.assignReAssignJob(),
       backgroundColor: ColorValues.appDarkBlueColor,
     );
   }

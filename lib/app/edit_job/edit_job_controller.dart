@@ -13,8 +13,9 @@ import '../../domain/models/tools_model.dart';
 import '../../domain/models/work_type_model.dart';
 import '../job_details/job_details_presenter.dart';
 import '../job_list/job_list_presenter.dart';
-import '../widgets/job_saved_dialog.dart';
+import '../navigators/app_pages.dart';
 import 'edit_job_presenter.dart';
+import 'views/widgets/job_updated_dialog.dart';
 
 class EditJobController extends GetxController {
   ///
@@ -62,6 +63,7 @@ class EditJobController extends GetxController {
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
+  List<int> selectedAssetsIdList = [];
 
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
@@ -166,7 +168,7 @@ class EditJobController extends GetxController {
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
       breakdownTimeCtrlr.text =
-          formatDateTime(jobDetailsModel.value?.breakdownTime);
+          formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
       // jobDetailsModel.value.workType
     }
 
@@ -174,9 +176,9 @@ class EditJobController extends GetxController {
         jobDetailsModel.value?.associatedPermitList ?? <AssociatedPermit>[];
   }
 
-  String formatDateTime(timestamp) {
+  String formatDateTimeForUI(timestamp) {
     // Format the DateTime object without milliseconds
-    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm');
     String formattedDateTime = formatter.format(timestamp);
     return formattedDateTime;
   }
@@ -207,15 +209,17 @@ class EditJobController extends GetxController {
   }
 
   Future<void> getAssignedToList() async {
+    assignedToList.clear();
     final _assignedToList = await editJobPresenter.getAssignedToList(
       facilityId: selectedFacilityId,
     );
 
     if (_assignedToList != null) {
-      for (var block in _assignedToList) {
-        assignedToList.add(block);
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
       }
-      selectedAssignedTo.value = jobDetailsModel.value?.assignedName ?? '';
+      selectedAssignedTo.value =
+          getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
     }
   }
 
@@ -351,7 +355,7 @@ class EditJobController extends GetxController {
     }
   }
 
-  String getFormattedBreakdownTime() {
+  String convertDateTimeToAPIFormat() {
     var _breakdownTime = breakdownTimeCtrlr.text;
     // Parse the timestamp string into a DateTime object
     DateTime parsedDateTime = DateTime.parse(_breakdownTime);
@@ -361,64 +365,103 @@ class EditJobController extends GetxController {
     return formattedDateTime;
   }
 
-  int? getAssignedToId(String selectedValue) {
+  String? getAssignedToName(int _selectedAssignedToId) {
     final item =
-        assignedToList.firstWhere((item) => item?.name == selectedValue);
-    final _assignedToId = item?.id ?? 0;
-    return _assignedToId;
+        assignedToList.firstWhere((item) => item?.id == _selectedAssignedToId);
+    final _selectedAssignedToName = item?.name ?? '';
+    return _selectedAssignedToName;
+  }
+
+  int? getAssignedToId(String _selectedAssignedToName) {
+    final item = assignedToList
+        .firstWhere((item) => item?.name == _selectedAssignedToName);
+    final _selectedAssignedToId = item?.id ?? 0;
+    return _selectedAssignedToId;
+  }
+
+  void assignReAssignJob() async {
+    try {
+      Map<String, dynamic>? responseMapJobUpdated =
+          await editJobPresenter.assignReAssignJob(
+        jobId: jobID.value,
+        assignedToId: selectedAssignedToId,
+        isLoading: false,
+      );
+      if (responseMapJobUpdated != null && responseMapJobUpdated.length > 0) {
+        var _jobId = 0;
+        var _message = '';
+        if (responseMapJobUpdated["id"] != null &&
+            responseMapJobUpdated["id"].isNotEmpty) {
+          _jobId = responseMapJobUpdated["id"][0];
+        }
+        if (responseMapJobUpdated["message"] != null) {
+          _message = responseMapJobUpdated["message"];
+        }
+        showAlertDialog(jobId: _jobId, message: _message);
+      }
+    } //
+    catch (e) {
+      Utility.showDialog(e.toString() + ' updateJob');
+    }
   }
 
   void updateJob() async {
-    {
+    try {
       checkForm();
       if (isFormInvalid.value) {
         return;
       }
       //
       if (selectedAssignedToId <= 0) {
-        getAssignedToId(selectedAssignedTo.value);
+        selectedAssignedToId = getAssignedToId(selectedAssignedTo.value) ?? 0;
       }
       int _permitId = selectedPermitId;
       String _title = jobTitleCtrlr.text.trim();
       String _description = jobDescriptionCtrlr.text.trim();
-      String _breakdownTime = getFormattedBreakdownTime();
-      List<AssetsId> assetIds = <AssetsId>[];
+      String _breakdownTime = convertDateTimeToAPIFormat();
+      selectedAssetsIdList.clear();
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
-        var json = '{"asset_id": ${_selectedWorkArea?.id},'
-            '"category_ids": ${_selectedWorkArea?.categoryId}}';
-
-        AssetsId _assetId = addAssetsIdFromJson(json);
-        assetIds.add(_assetId);
+        selectedAssetsIdList.add(_selectedWorkArea?.id ?? 0);
       }
 
       AddJobModel addJobModel = AddJobModel(
+        id: jobID.value,
         facilityId: selectedFacilityId,
         blockId: selectedBlockId,
         permitId: _permitId,
         assignedId: selectedAssignedToId,
         title: _title,
         description: _description,
-        status: 2,
-        createdBy: 2,
         breakdownTime: _breakdownTime,
-        assetsIds: assetIds,
+        assetsIds: selectedAssetsIdList,
         workTypeIds: selectedWorkAreaIdList,
       );
-      // var jobJsonString = addJobModelToJson(addJobModel);
 
-      Map<String, dynamic>? responseMapJobCreated =
+      Map<String, dynamic>? responseMapJobUpdated =
           await editJobPresenter.updateJob(
         job: addJobModel,
         isLoading: false,
       );
-      var _jobId = responseMapJobCreated["id"][0];
-      // intJobId.value = _jobId; // intJobId is used in the UI (popup)
-      showAlertDialog(jobId: _jobId);
+      if (responseMapJobUpdated != null) {
+        var _jobId = 0;
+        var _message = '';
+        if (responseMapJobUpdated["id"] != null &&
+            responseMapJobUpdated["id"].isNotEmpty) {
+          _jobId = responseMapJobUpdated["id"][0];
+        }
+        if (responseMapJobUpdated["message"] != null) {
+          _message = responseMapJobUpdated["message"];
+        }
+        showAlertDialog(jobId: _jobId, message: _message);
+      }
+    } //
+    catch (e) {
+      Utility.showDialog(e.toString() + ' updateJob');
     }
   }
 
-  void onValueChanged(list, value) {
+  void onDropdownValueChanged(list, value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -524,7 +567,21 @@ class EditJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(JobSavedDialog());
+    await Get.dialog<void>(JobUpdatedDialog(jobId: jobId, message: message));
+  }
+
+  ///
+  goToAddJobScreen() {
+    Get.offAndToNamed(Routes.addJob);
+  }
+
+  goToJobDetailsScreen(int _jobId) {
+    Get.back();
+    Get.toNamed(Routes.jobDetails, arguments: {"jobId": _jobId});
+  }
+
+  goToJobListScreen() {
+    Get.offAllNamed(Routes.jobList);
   }
 
   ///

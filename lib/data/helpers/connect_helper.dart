@@ -747,8 +747,27 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Job/UpdateJob?job=$job',
-      Request.post,
+      Request.patch,
       job,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> assignReAssignJob({
+    required String auth,
+    jobId,
+    assignedToId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/ReAssignJob?job_id=$jobId&assignedTo=$assignedToId',
+      Request.put,
+      null,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

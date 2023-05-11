@@ -99,7 +99,7 @@ class BreakdownTimeWidget extends StatelessWidget {
     );
     controller.selectedBreakdownTime.value = dateTime;
     controller.breakdownTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(dateTime)
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: controller.breakdownTimeCtrlr.text.length,
