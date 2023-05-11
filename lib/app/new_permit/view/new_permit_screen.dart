@@ -4165,7 +4165,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Padding(
         padding: const EdgeInsets.only(left: 1),
         child: Container(
-          height: 35,
+          height: 60,
           width: Responsive.isDesktop(context)
               ? MediaQuery.of(context).size.width / 1.44
               : MediaQuery.of(context).size.width / 1.1,
@@ -4195,7 +4195,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
             child: TextField(
               controller: controller.titleTextCtrlr,
               keyboardType: TextInputType.multiline,
-              // maxLines: 5,
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,

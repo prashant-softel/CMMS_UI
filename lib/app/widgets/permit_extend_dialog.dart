@@ -53,14 +53,14 @@ class PermitExtendDialog extends GetView {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                        
-                       CustomRichText(title: 'Enter Hours to extend permit '),
+                       CustomRichText(title: 'Enter reason for extension '),
                        SizedBox(height: 20,),
                        TextField(
                         // keyboardType: TextInputType.number,
                         // controller: _controller.approveCommentTextFieldCtrlr,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          hintText: 'Enter Hour....',
+                          hintText: 'Enter Reason....',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black,),
                           

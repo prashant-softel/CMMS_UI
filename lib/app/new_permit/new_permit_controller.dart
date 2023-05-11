@@ -205,6 +205,12 @@ class NewPermitController extends GetxController {
       <ListIsolation>[].obs;
   int selectedIsolationEquipmentsId = 0;
 
+  RxList<int?> selectedJobModelEquipemntIsolationIdList = <int?>[].obs;
+
+  RxList<EquipmentCatList?> listJobModelCategory =
+      <EquipmentCatList?>[].obs;
+
+
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
   RxList<String?> selectedEmployeeDataList = <String>[].obs;
@@ -1124,7 +1130,15 @@ if(arguments != null){
   loadPermitDetails(jobModel) {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
     selectedBlock.value = jobModel.facilityName ?? '';
-    // selectedEquipmentCategoryIdList = jobModel.equipmentCatList;
+    listJobModelCategory.value = jobModel.equipmentCatList ?? [];
+     List<int> idList = listJobModelCategory
+          .map((obj) => obj!.equipmentCatId)
+          .toList();
+
+    selectedEquipmentCategoryIdList.value = idList;
+    // selectedJobModelEquipemntIsolationIdList.value = idList;
+    print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
+
   }
 
   /// class ends
