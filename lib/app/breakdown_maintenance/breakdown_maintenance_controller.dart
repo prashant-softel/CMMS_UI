@@ -37,13 +37,18 @@ class BreakdownMaintenanceController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await breakdownMaintenancePresenter.getFacilityList();
+    try {
+      final _facilityList =
+          await breakdownMaintenancePresenter.getFacilityList();
 
-    if (_facilityList != null) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
+      if (_facilityList != null) {
+        for (var facility in _facilityList) {
+          facilityList.add(facility);
+        }
+        selectedFacility.value = facilityList[0]?.name ?? '';
       }
-      selectedFacility.value = facilityList[0]?.name ?? '';
+    } catch (e) {
+      Utility.showDialog(e.toString() + ' BMController - getFacilityList');
     }
   }
 

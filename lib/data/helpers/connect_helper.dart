@@ -1020,7 +1020,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/UpdateJC',
-      Request.post,
+      Request.put,
       jobCard,
       isLoading ?? false,
       {
@@ -1039,7 +1039,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/ApproveJC',
-      Request.post,
+      Request.put,
       null,
       isLoading ?? false,
       {
@@ -1058,7 +1058,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/RejectJC',
-      Request.post,
+      Request.put,
       null,
       isLoading ?? false,
       {

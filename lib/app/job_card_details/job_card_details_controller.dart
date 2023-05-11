@@ -55,7 +55,6 @@ class JobCardDetailsController extends GetxController {
   int? permitId = 0;
   RxMap permitDetails = {}.obs;
   RxList<AssociatedPermit>? permitList = <AssociatedPermit>[].obs;
-  //RxList<AssociatedPermit>? permitList = <AssociatedPermit>[].obs;
 
   /// Job Details
   Rx<int?> jobId = 0.obs;
@@ -83,6 +82,7 @@ class JobCardDetailsController extends GetxController {
   /// Other
   Rx<int> currentIndex = 0.obs;
   final unescape = HtmlUnescape();
+  var descriptionOfWorkDoneCtrlr = TextEditingController();
 
   ///
   @override
@@ -219,7 +219,7 @@ class JobCardDetailsController extends GetxController {
         // Convert work area(s)/equipment(s) to comma separated list
         var workAreaNames = <String>[];
         for (var workArea in jobDetailsModel.value?.workingAreaList ?? []) {
-          workAreaNames.add(workArea.name);
+          workAreaNames.add(workArea.workingAreaName);
         }
         strWorkAreasOrEquipments.value = workAreaNames.join(', ');
         //remove extra comma at the end
@@ -255,6 +255,11 @@ class JobCardDetailsController extends GetxController {
         permitList?.value = jobDetailsModel.value?.associatedPermitList ?? [];
 
         AssociatedPermit? permit = permitList?[0];
+
+        if (permit != null) {
+          permitId = permit.permitId;
+        }
+
         String decodedPermitDescription = unescape.convert(
           permit?.title ?? '',
         );
@@ -264,10 +269,6 @@ class JobCardDetailsController extends GetxController {
           "Permit Type": permit?.permitTypeName,
           "Permit Description": decodedPermitDescription,
           "Permit Issued By": permit?.issuedByName,
-          // "Permit Approved By": '',
-          // "Work Type": strWorkTypes.value,
-          // "Linked Tool To  Work Type": strToolsRequired.value,
-          // "Standard Action": jobDetailsModel.value?.standardAction,
         };
         //var x = jobDetails.value;
       }
@@ -308,10 +309,11 @@ class JobCardDetailsController extends GetxController {
           "responsibility": _responsibility,
         });
       }
+      var _comment = descriptionOfWorkDoneCtrlr.text.trim();
       // create jobcard object
       var jobCard = {
         "id": jobCardId.value,
-        "comment": "Job Card Updated",
+        "comment": _comment,
         "status": 1,
         "is_isolation_required": true,
         "isolated_list": _isolatedAssetCatList,
@@ -333,11 +335,14 @@ class JobCardDetailsController extends GetxController {
 
   void onValueChanged() {}
 
-  void startStopJobCard() async {
+  startStopJobCard() {
     isJobCardStarted.value = !isJobCardStarted.value;
   }
 
-  void createJobCard() async {
+  Future<void> createJobCard() async {
+    await startStopJobCard();
+
+    ///
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.createJobCard(
@@ -372,7 +377,8 @@ class JobCardDetailsController extends GetxController {
 
   void getPermitDetails() async {
     // TODO: CHANGE THIS LATER
-    permitId = 59616;
+    // permitId = 59616;
+
     final _permitDetails =
         await jobCardDetailsPresenter.getPermitDetails(permitId: permitId);
 

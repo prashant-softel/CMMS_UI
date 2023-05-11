@@ -1,15 +1,14 @@
 import 'dart:async';
 // import 'dart:ui' as kIsWeb;
-import 'dart:html' as html;
 import 'dart:io';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:excel/excel.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:share/share.dart';
 import '../../domain/models/block_model.dart';
 import '../constant/constant.dart';
 import '../navigators/app_pages.dart';
@@ -157,6 +156,11 @@ class JobListController extends GetxController {
     return formattedDateTimeString;
   }
 
+  Future<void> exportToExcelWeb() async {
+    exportToExcel();
+    downloadExcelFileWeb();
+  }
+
   Future<void> exportToExcel() async {
     final sheetName = 'Job Data';
     excel.rename(sheetName, sheetName);
@@ -239,30 +243,27 @@ class JobListController extends GetxController {
           CellIndex.indexByColumnRow(columnIndex: 13, rowIndex: i + 1),
           job?.status ?? '');
     }
-    downloadExcelFile();
+    // downloadExcelFileWeb();
   }
 
-  downloadExcelFile() async {
-    // Convert the Excel data to bytes
-    final excelBytes = excel.encode();
+  void downloadExcelFileWeb() async {
+    try {
+// Convert the Excel data to bytes
+      final excelBytes = excel.encode();
 
-    if (kIsWeb) {
-      // Serve the file as a download (web implementation)
-      final blob = html.Blob([excelBytes],
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-      final url = html.Url.createObjectUrlFromBlob(blob);
-      final anchorElement = html.AnchorElement(href: url)
-        ..setAttribute('download', 'Job_Data_Export.xlsx')
-        ..click();
-
-      // Clean up and release the object URL
-      await Future.delayed(Duration(seconds: 1));
-      anchorElement.remove();
-      html.Url.revokeObjectUrl(url);
-    } else {
-      // Write the data to a file (mobile implementation)
+// Write the data to a file (mobile implementation)
       final file = File('Job_Data_Export.xlsx');
-      await file.writeAsBytes(excelBytes ?? []);
+      await file.writeAsBytes(excelBytes!);
+
+      // Share the file on mobile
+      final filePath = file.path;
+
+      await Share.shareFiles(
+        [filePath],
+        text: 'Please Check exported data.',
+      );
+    } catch (e) {
+      Utility.showDialog(e.toString());
     }
   }
 

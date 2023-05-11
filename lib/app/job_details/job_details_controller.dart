@@ -161,7 +161,7 @@ class JobDetailsController extends GetxController {
   }
 
   void goToJobCardScreen() {
-    Get.toNamed(Routes.jobCard, arguments: jobId.value);
+    Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId.value});
   }
 
   void goToJobDetailsScreen() {
