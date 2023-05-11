@@ -133,6 +133,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                     Text('Description of work done: '),
                     Expanded(
                       child: TextField(
+                        controller: controller.descriptionOfWorkDoneCtrlr,
                         enabled: controller.isJobCardStarted.value,
                         decoration: InputDecoration(
                           disabledBorder: OutlineInputBorder(
@@ -170,15 +171,15 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           children: [
                               CustomElevatedButton(
                                 text: 'Start Job Card',
-                                onPressed: () => controller.startStopJobCard(),
+                                onPressed: () => controller.createJobCard(),
                                 backgroundColor: ColorValues.appGreenColor,
                               ),
                               Dimens.boxWidth10,
-                              CustomElevatedButton(
-                                text: 'Update',
-                                onPressed: () => controller.updateJobCard(),
-                                backgroundColor: ColorValues.appYellowColor,
-                              ),
+                              // CustomElevatedButton(
+                              //   text: 'Update',
+                              //   onPressed: () => controller.updateJobCard(),
+                              //   backgroundColor: ColorValues.appYellowColor,
+                              // ),
                             ])
                       : //
                       Row(

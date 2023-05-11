@@ -46,7 +46,10 @@ class EmployeeTableWidget extends GetView<JobCardDetailsController> {
                       ActionButton(
                         label: "Add Employee",
                         onPressed: () {
+                          controller.addNewTextEditingController();
+                          final rowIndex = controller.currentIndex.value;
                           controller.currentIndex.value += 1;
+
                           // Create a new DataRow with the same cells as the first row
                           final newRow = DataRow2(//
                               cells: [
@@ -84,7 +87,8 @@ class EmployeeTableWidget extends GetView<JobCardDetailsController> {
                                 ),
                                 minLines: 3,
                                 maxLines: null,
-                                controller: responsibilityCtrlrs[currentIndex],
+                                controller: responsibilityCtrlrs[
+                                    employeeTableRows.length],
                               ),
                             ),
                             DataCell(
@@ -106,7 +110,7 @@ class EmployeeTableWidget extends GetView<JobCardDetailsController> {
                           // Add the new row to the DataTable2
                           employeeTableRows.add(newRow);
                           // Increment the current index
-                          controller.currentIndex.value = currentIndex + 1;
+                          // controller.currentIndex.value = currentIndex + 1;
                           // Add a new text editing controller
                           controller.addNewTextEditingController();
                         },
