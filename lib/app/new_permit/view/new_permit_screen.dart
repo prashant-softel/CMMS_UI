@@ -1593,7 +1593,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   SizedBox(
                                                     width: 8,
                                                   ),
-                                                  controller.permitId != null
+                                                  controller.permitId.value > 0
                                                   ?
                                                    SizedBox(
                                                     width:
@@ -1852,7 +1852,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         SizedBox(
                                                           width: 5,
                                                         ),
-                                                        controller.permitId != null
+                                                        controller.permitId.value > 0
                                                         ?
                                                           SizedBox(
                                                           width: MediaQuery.of(
@@ -2021,7 +2021,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         //         2,
                                                                         //   ),
                                                                         // ),
-                                                                        controller.permitId != null
+                                                                        controller.permitId.value > 0
                                                                         ?   SizedBox(
                                                                           width:
                                                                               MediaQuery.of(context).size.height * 2,
@@ -2438,8 +2438,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     .tr,
                                                           ),
                                                           Dimens.boxHeight10,
-                                                          controller.permitId ==
-                                                                  null
+                                                          controller.permitId.value <=
+                                                                  0
                                                               ? Wrap(
                                                                   alignment:
                                                                       WrapAlignment
@@ -2499,7 +2499,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ),
 
                                               ///Team Deploying
-                                              controller.permitId == null
+                                              controller.permitId.value <= 0
                                                   ? SizedBox(
                                                       height: 230,
                                                       width:
@@ -3364,7 +3364,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 ),
                                               ),
 
-                                              controller.permitId == null
+                                              controller.permitId.value <= 0
                                                   ? Center(
                                                       child: Container(
                                                           height: 45,

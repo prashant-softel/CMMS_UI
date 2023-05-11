@@ -157,9 +157,11 @@ class NewPermitListController extends GetxController {
     Get.toNamed(Routes.newPermit, arguments: permitId);
   }
 
+// {'permitId':permitId}
   Future<void> editNewPermit({int? permitId}) async {
-    Get.toNamed(Routes.newPermit, arguments: permitId);
+    Get.toNamed(Routes.newPermit, arguments: {'permitId':permitId});
   }
+
 
   Future<void> viewNewPermitList({int? permitId}) async {
     Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);

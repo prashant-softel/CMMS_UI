@@ -1333,5 +1333,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateCheckPoint({
+    required String auth,
+    bool? isLoading,
+    required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/UpdateCheckPoint',
+      Request.patch,
+      checkpointJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   ///
 }

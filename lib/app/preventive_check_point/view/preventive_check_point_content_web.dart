@@ -334,19 +334,36 @@ class PreventiveCheckPointContentWeb
                                     Container(
                                         width: (Get.width * .2) - 80,
                                         height: 40,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createCheckpoint()
-                                                  .then((value) {
-                                                if (value)
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .issuccessCreatecheckpont();
-                                              });
-                                            },
-                                            text: 'Create Check Point')),
+                                                      .createCheckpoint()
+                                                      .then((value) {
+                                                    if (value)
+                                                      controller
+                                                          .issuccessCreatecheckpont();
+                                                  });
+                                                },
+                                                text: 'Create Check Point')
+                                            : CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .updateCheckPoint(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatecheckpont();
+                                                  });
+                                                },
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -535,26 +552,52 @@ class PreventiveCheckPointContentWeb
                                                 return TableViewCell(
                                                   child: (value == "Action")
                                                       ? Wrap(children: [
-                                                          varUserAccessModel
-                                                                      .value
-                                                                      .access_list!
-                                                                      .where((e) =>
-                                                                          e.feature_id ==
-                                                                              6 &&
-                                                                          e.edit ==
-                                                                              1)
-                                                                      .length >
-                                                                  0
-                                                              ? TableActionButton(
-                                                                  color: ColorValues
-                                                                      .appLightBlueColor,
-                                                                  icon: Icons
-                                                                      .edit,
-                                                                  label: 'Edit',
-                                                                  onPress:
-                                                                      () {},
-                                                                )
-                                                              : Container(),
+                                                          // varUserAccessModel
+                                                          //             .value
+                                                          //             .access_list!
+                                                          //             .where((e) =>
+                                                          //                 e.feature_id ==
+                                                          //                     6 &&
+                                                          //                 e.edit ==
+                                                          //                     1)
+                                                          //             .length >
+                                                          //         0
+                                                          //   ?
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appLightBlueColor,
+                                                            icon: Icons.edit,
+                                                            label: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .preventiveCheckpoint!
+                                                                  .firstWhere(
+                                                                      (element) =>
+                                                                          "${element?.id}" ==
+                                                                          record[
+                                                                              0]);
+
+                                                              controller
+                                                                      .checkPointCtrlr
+                                                                      .text =
+                                                                  "${controller.selectedItem?.check_point}";
+                                                              controller
+                                                                  .requirementCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.requirement ??
+                                                                  "";
+                                                              controller
+                                                                  .isToggleOn
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.is_document_required ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                            },
+                                                          ),
+                                                          // : Container(),
                                                           varUserAccessModel
                                                                       .value
                                                                       .access_list!

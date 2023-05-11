@@ -2214,5 +2214,26 @@ class Repository {
     }
   }
 
+  Future<bool> updateCheckPoint({bool? isLoading, checkpointJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.updateCheckPoint(
+          auth: auth,
+          isLoading: isLoading,
+          checkpointJsonString: checkpointJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   ///
 }

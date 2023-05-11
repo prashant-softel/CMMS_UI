@@ -2,7 +2,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../calibration_history/calibration_history_controller.dart';
+import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';
@@ -49,9 +49,9 @@ class UserListContentWeb extends GetView<UserListController> {
                 onTap: () {
                   Get.back();
                 },
-                child: Text(" / CALIBRATION HISTORY",
-                    style: Styles.greyMediumLight12),
+                child: Text(" / SETTING", style: Styles.greyMediumLight12),
               ),
+              Text(" / USER LIST", style: Styles.greyMediumLight12),
             ],
           ),
         ),
@@ -81,7 +81,9 @@ class UserListContentWeb extends GetView<UserListController> {
                         ActionButton(
                           icon: Icons.add,
                           label: "Add New",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.offNamed(Routes.addUser);
+                          },
                           color: ColorValues.greenlightColor,
                         ),
                       ],
@@ -270,13 +272,17 @@ class UserListContentWeb extends GetView<UserListController> {
                                           color: ColorValues.appDarkBlueColor,
                                           icon: Icons.remove_red_eye_outlined,
                                           label: 'view',
-                                          onPress: () {},
+                                          onPress: () {
+                                            Get.offNamed(Routes.viewUserDetail);
+                                          },
                                         ),
                                         TableActionButton(
                                           color: ColorValues.appYellowColor,
                                           icon: Icons.edit,
                                           label: 'Edit',
-                                          onPress: () {},
+                                          onPress: () {
+                                            Get.offNamed(Routes.addUser);
+                                          },
                                         ),
                                         TableActionButton(
                                           color: ColorValues.appRedColor,

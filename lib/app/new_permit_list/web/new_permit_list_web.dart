@@ -102,10 +102,11 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                       ),
 
                       ///
-                      Expanded(
+                       Expanded(
                         child: Container(
                           height: Get.height,
-                          child: Column(children: [
+                          child: Column(
+                            children: [
                             Expanded(
                               child: ScrollableTableView(
                                 paginationController:
@@ -160,7 +161,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                               : column == "current_status"
                                                                                   ? "Status"
                                                                                   : ""
-
+                            
                                                                                       //             : column ==
                                                                                       //                     "breakdownTime"
                                                                                       //                 ? "Breakdown Time"
@@ -185,7 +186,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                     (index) {
                                       var newPermitDetails =
                                           controller.newPermitList?[index];
-
+                            
                                       //_jobId = jobDetails?.id;
                                       controller.permitId.value =
                                           newPermitDetails?.permitId ?? 0;
@@ -207,16 +208,24 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         'Actions'
                                         // : '',
                                       ];
+                                      
                                     },
                                   ),
-                                ].map((_newPermitList) {
+                                ].map((_newPermitList) { 
+                                     
                                   return TableViewRow(
                                       onTap: () => {
-                                            print('ZERO = ${_newPermitList[0]}')
+                                            print('ZERO = ${_newPermitList[0]}'),
+                                                controller.viewNewPermitList(
+                                                                    permitId: int
+                                                                        .tryParse(
+                                                                            _newPermitList[0]))
+                                             
                                           },
                                       height: 110,
                                       cells: _newPermitList.map((value) {
                                         var index;
+                                      
                                         return TableViewCell(
                                           //key: ,
                                           child: (value == 'Actions')
@@ -244,7 +253,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
-
+                                                                        
                                                     varUserAccessModel.value
                                                                     .access_list!
                                                                     .where((e) =>
@@ -279,7 +288,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
-
+                                                                        
                                                     varUserAccessModel.value
                                                                     .access_list!
                                                                     .where((e) =>
@@ -350,8 +359,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           ),
                                                     TableActionButton(
-                                                      color: ColorValues
-                                                          .appRedColor,
+                                                      color: Colors.red,
                                                       icon: Icons.close,
                                                       label: 'Close',
                                                       onPress: () {},
@@ -394,7 +402,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
-
+                                                                        
                                                     // TableActionButton(
                                                     //   color: Colors.green,
                                                     //   icon: Icons.visibility,
@@ -408,11 +416,15 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                     //   onPress: () {},
                                                     // ),
                                                   ],
+                                                  
                                                 )
                                               : Text(value.toString()),
                                         );
-                                      }).toList());
+                                        
+                                      }
+                                      ).toList());
                                 }).toList(),
+                                
                               ),
                             ),
 
@@ -481,14 +493,17 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                           ),
                                         ),
                                       ]),
-                                    ]);
+                                    ]
+                                    );
                                   }),
                             ),
                           ]),
                         ),
                         //),
                       ),
-                    ]),
+                    ]
+                    
+                    ),
               ),
             ),
           ),
