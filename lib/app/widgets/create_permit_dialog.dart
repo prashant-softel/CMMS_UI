@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/domain/repositories/repository.dart';
+import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +14,8 @@ class CreateNewPermitDialog extends GetView {
   List<dynamic>? PtwId;
 
   CreateNewPermitDialog({super.key, this.createPermitData, this.data, this.PtwId});
+  // final NewPermitListController _controller = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +70,18 @@ class CreateNewPermitDialog extends GetView {
                         ),
                         ElevatedButton(
                           style: Styles.greenElevatedButtonStyle,
-                          onPressed: () => Get.offAllNamed(Routes.newPermit),
+                          onPressed: () {
+                            Get.offAllNamed(Routes.newPermitList);
+                            // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+                            
+                          },
                           child: const Text('Permit List'),
                         ),
                         Dimens.boxWidth10,
                         ElevatedButton(
                           style: Styles.blueElevatedButtonStyle,
-                          onPressed: () => Get.offAndToNamed(Routes.newPermitList),
+                          onPressed: () {},
+                          //  Get.offAndToNamed(Routes.newPermitList),
                           child: const Text('View This Permit'),
                         ),
                         Dimens.boxWidth10,

@@ -270,6 +270,49 @@ class Repository {
     }
   }
 
+
+   //Update New Permit
+  Future<Map<String, dynamic>> updateNewPermit(
+    newPermit,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateNewPermit(
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Permit: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateNewPermit');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -920,6 +963,88 @@ class Repository {
       log(error.toString());
     }
   }
+
+
+   Future<void> permitCancelButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCancelButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCancelResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitCancelButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> permitCloseButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCloseButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCloseResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitCloseButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
+  Future<void> permitRejectButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitRejectResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitRejectButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,

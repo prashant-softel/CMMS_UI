@@ -52,6 +52,40 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
+  Future<void> permitCancelButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitCancelButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<void> permitCloseButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitCloseButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<void> permitRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitRejectButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+
   // Future<List<NewPermitListModel>>getNewPermitList({
   //   required bool isLoading,
   //   required int? facilityId,

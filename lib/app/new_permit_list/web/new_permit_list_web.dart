@@ -7,7 +7,11 @@ import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_dialog.dart';
+import 'package:cmms/app/widgets/permit_close_dialog.dart';
+import 'package:cmms/app/widgets/permit_extend_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_dialog.dart';
+import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:flutter/material.dart';
@@ -113,15 +117,14 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                     controller.newPermitPaginationController,
                                 columns: [
                                   'permitId',
-                                  'permit_site_no',
+                                  'description',
                                   'permitTypeName',
                                   'equipment_category',
                                   'workingAreaName',
-                                  'description',
                                   'request_by_name',
-                                  'request_datetime',
+                                  // 'request_datetime',
                                   'approved_by_name',
-                                  'approved_datetime',
+                                  // 'approved_datetime',
                                   'current_status',
                                   // 'breakdownTime',
                                   // 'breakdownType',
@@ -134,8 +137,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                       minWidth: Get.width * 0.15,
                                       label: column == "permitId"
                                           ? "Permit Id"
-                                          : column == "permit_site_no"
-                                              ? "Site Permit No."
+                                         : column == "description"
+                                             ? "Title"
                                               : column == "permitTypeName"
                                                   ? "Permit Type Name"
                                                   : column ==
@@ -144,20 +147,18 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                       : column ==
                                                               "workingAreaName"
                                                           ? "Facility / Working Area"
-                                                          : column ==
-                                                                  "description"
-                                                              ? "Title"
+                                                          
                                                               : column ==
                                                                       "request_by_name"
                                                                   ? "Permit Requested By"
-                                                                  : column ==
-                                                                          "request_datetime"
-                                                                      ? "Requested Date & Time"
+                                                                  // : column ==
+                                                                  //         "request_datetime"
+                                                                  //     ? "Requested Date & Time"
                                                                       : column ==
                                                                               "approved_by_name"
                                                                           ? "Approved By"
-                                                                          : column == "approved_datetime"
-                                                                              ? "Approved Date & Time"
+                                                                          // : column == "approved_datetime"
+                                                                          //     ? "Approved Date & Time"
                                                                               : column == "current_status"
                                                                                   ? "Status"
                                                                                   : ""
@@ -192,15 +193,15 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                           newPermitDetails?.permitId ?? 0;
                                       return [
                                         '${newPermitDetails?.permitId}',
-                                        '${newPermitDetails?.permitSiteNo}',
+                                        '${newPermitDetails?.description}',
+                                        // '${newPermitDetails?.permitSiteNo}',
                                         '${newPermitDetails?.permitTypeName}',
                                         '${newPermitDetails?.equipment_categories}',
                                         '${newPermitDetails?.workingAreaName ?? ''}',
-                                        '${newPermitDetails?.description}',
-                                        '${newPermitDetails?.requestByName}',
-                                        '${newPermitDetails?.requestDatetime}',
-                                        '${newPermitDetails?.approvedByName}',
-                                        '${newPermitDetails?.approvedDatetime}',
+                                        '${newPermitDetails?.requestByName}\n${newPermitDetails?.requestDatetime}',
+                                        // '${newPermitDetails?.requestDatetime}',
+                                        '${newPermitDetails?.approvedByName}\n${newPermitDetails?.approvedDatetime}',
+                                        // '${newPermitDetails?.approvedDatetime}',
                                         '${newPermitDetails?.currentStatus}',
                                         // '${newPermitDetails?.current_status}' ==
                                         //         "Permit Created"
@@ -222,7 +223,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                             _newPermitList[0]))
                                              
                                           },
-                                      height: 110,
+                                      height: 135,
                                       cells: _newPermitList.map((value) {
                                         var index;
                                       
@@ -352,17 +353,22 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                               // controller.goToJobCardScreen(
                                                               //   int.tryParse(_newPermitList[0]),
                                                               // );
-                                                              // Get.dialog(PermitApprovedDialog(
-                                                              //     permitId:
-                                                              //         _newPermitList[
-                                                              //             0]));
+                                                              Get.dialog(PermitRejectDialog(
+                                                                  permitId:
+                                                                      _newPermitList[
+                                                                          0]));
                                                             },
                                                           ),
                                                     TableActionButton(
                                                       color: Colors.red,
                                                       icon: Icons.close,
                                                       label: 'Close',
-                                                      onPress: () {},
+                                                      onPress: () {
+                                                         Get.dialog(PermitCloseDialog(
+                                                                  permitId:
+                                                                      _newPermitList[
+                                                                          0]));
+                                                      },
                                                     ),
                                                     TableActionButton(
                                                       color: ColorValues
@@ -370,15 +376,38 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                       icon:
                                                           Icons.expand_outlined,
                                                       label: 'Extend',
-                                                      onPress: () {},
+                                                      onPress: () {
+                                                         Get.dialog(PermitExtendDialog(
+                                                                  permitId:
+                                                                      _newPermitList[
+                                                                          0]));
+                                                      },
                                                     ),
                                                     TableActionButton(
                                                       color: ColorValues
                                                           .appRedColor,
                                                       icon: Icons.close,
                                                       label: 'Cancel',
-                                                      onPress: () {},
+                                                      onPress: () {
+                                                         Get.dialog(PermitCancelDialog(
+                                                                  permitId:
+                                                                      _newPermitList[
+                                                                          0]));
+                                                        
+                                                      },
                                                     ),
+                                                     TableActionButton(
+                                                      color: Colors.red,
+                                                      icon: Icons.close,
+                                                      label: 'Reject',
+                                                      onPress: () {
+                                                        Get.dialog(PermitRejectDialog(
+                                                                  permitId:
+                                                                      _newPermitList[
+                                                                          0]));
+                                                      },
+                                                    ),
+
                                                     varUserAccessModel.value
                                                                 .access_list!
                                                                 .where((e) =>

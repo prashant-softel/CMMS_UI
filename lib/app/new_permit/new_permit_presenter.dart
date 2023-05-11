@@ -186,6 +186,17 @@ class NewPermitPresenter {
       isLoading: isLoading,
     );
   }
+
+   Future<Map<String, dynamic>?> updateNewPermit({
+     newPermit,
+    required bool isLoading,
+  }) async {
+    return newPermitUsecase.updateNewPermit(
+       newPermit: newPermit,
+      isLoading: isLoading,
+    );
+  }
+
 Future<NewPermitDetailModel?> getNewPermitDetail({
   
     bool? isLoading,  

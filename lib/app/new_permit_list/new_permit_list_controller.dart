@@ -53,6 +53,14 @@ class NewPermitListController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   int userId = varUserAccessModel.value.user_id ?? 0;
 
+  ///Buttons Cancel, Close Reject
+  TextEditingController cancelCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+
+
+  
+
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
@@ -151,6 +159,50 @@ class NewPermitListController extends GetxController {
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');
     print('Approved Data:${136}');
+  }
+
+
+  Future<void> permitCancelButton({String? permitId}) async {
+    String _cancelComment = cancelCommentTextFieldCtrlr.text.trim();
+
+    final _permitCancelBtn =
+        await newPermitListPresenter.permitCancelButton(
+      comment: _cancelComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Cancel Button Data:${_cancelComment}');
+    print('Cancel Button Data:${permitId}');
+    
+  }
+
+  Future<void> permitCloseButton({String? permitId}) async {
+    String _closeComment = closeCommentTextFieldCtrlr.text.trim();
+
+    final _permitCloseBtn =
+        await newPermitListPresenter.permitCloseButton(
+      comment: _closeComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Close Button Data:${_closeComment}');
+    print('Close Button Data:${permitId}');
+    
+  }
+
+
+   Future<void> permitRejectButton({String? permitId}) async {
+    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+    final _permitRejectBtn =
+        await newPermitListPresenter.permitRejectButton(
+      comment: _rejectComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Reject Button Data:${_rejectComment}');
+    print('Reject Button Data:${permitId}');
+    
   }
 
   Future<void> addNewPermitList({String? permitId}) async {

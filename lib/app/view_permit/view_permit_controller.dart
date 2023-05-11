@@ -29,6 +29,7 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/app/new_permit/new_permit_presenter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
@@ -387,8 +388,8 @@ int? permitId = 0;
       listLoto?.value = viewPermitDetailsModel.value?.loto_list ?? [];
       // titleTextCtrlr.text = newPermitDetailsModel.value?.title ?? '';
       // permitDescriptionCtrlr.text = newPermitDetailsModel.value?.description ?? '';
-      // startDateTimeCtrlr.text = newPermitDetailsModel.value?.startDate ?? '';
-      // validTillTimeCtrlr.text = newPermitDetailsModel.value?.tillDate ?? '';
+      startDateTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';
+      validTillTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';;
       // selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.

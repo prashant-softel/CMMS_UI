@@ -24,12 +24,14 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/app/new_permit/new_permit_presenter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/job_details_model.dart';
 
 class NewPermitController extends GetxController {
+
   NewPermitController(this.permitPresenter, this.jobListPresenter);
 
   final HomeController homeController = Get.find();
@@ -144,6 +146,8 @@ class NewPermitController extends GetxController {
 
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
+  var validTillTimeCtrlrBuffer;
+  var startDateTimeCtrlrBuffer;
 
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
@@ -200,6 +204,12 @@ class NewPermitController extends GetxController {
   RxList<ListIsolation?> selectedEditEquipmentIsolationList =
       <ListIsolation>[].obs;
   int selectedIsolationEquipmentsId = 0;
+
+  RxList<int?> selectedJobModelEquipemntIsolationIdList = <int?>[].obs;
+
+  RxList<EquipmentCatList?> listJobModelCategory =
+      <EquipmentCatList?>[].obs;
+
 
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
@@ -350,10 +360,8 @@ if(arguments != null){
       
       await getInventoryCategoryList();
       await getInventoryIsolationList();
-      // await getInventoryEquipmentNameList();
       await getAssignedToList();
       await getFacilityLists();
-      await getFacilitiesLists();
       await getTypePermitList();
       await getInventoryDetailList();
       await getEmployeePermitList();
@@ -369,22 +377,7 @@ if(arguments != null){
     super.onInit();
   }
 
-  Future<void> getFacilitiesLists() async {
-    facilityList.value = <FacilityModel>[];
-    blockList.value = <BlockModel>[];
-    final _facilityList = await jobListPresenter.getFacilityList();
-    selectedFacilityId = Get.arguments;
-    if (_facilityList != null) {
-      facilityList.value = _facilityList;
-
-      int facilityIndex =
-          facilityList.indexWhere((x) => x?.id == selectedFacilityId);
-      if (facilityIndex > -1) {
-        selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
-        getBlocksList(selectedFacilityId!);
-      }
-    }
-  }
+ 
 
   Future<void> getNewPermitDetail({required int intPermitId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
@@ -399,9 +392,21 @@ if(arguments != null){
       titleTextCtrlr.text = newPermitDetailsModel.value?.title ?? '';
       permitDescriptionCtrlr.text =
           newPermitDetailsModel.value?.description ?? '';
+
+      ///// Start Date Time    
       startDateTimeCtrlr.text =
-          newPermitDetailsModel.value?.start_datetime ?? '';
-      validTillTimeCtrlr.text = newPermitDetailsModel.value?.end_datetime ?? '';
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}'; 
+          
+          startDateTimeCtrlrBuffer = '${newPermitDetailsModel.value?.start_datetime }';
+          
+      ///
+    
+      ///End date Time
+      validTillTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.end_datetime ?? ''}')).toString()}';
+
+      validTillTimeCtrlrBuffer = newPermitDetailsModel.value?.end_datetime ?? '';
+
+      ///
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
       selectedTypePermit.value =
           newPermitDetailsModel.value?.permitTypeName ?? '';
@@ -690,7 +695,7 @@ if(arguments != null){
                 equipmentCategoryList.indexWhere((x) => x?.name == value);
             selectedEquipmentCategoryIdList.add(equipCatIndex);
             // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
-            // print('First Category Id:$selectedInventoryCategoryId');
+            print('First Category Id:$selectedInventoryCategoryId');
           }
         }
         break;
@@ -952,11 +957,9 @@ if(arguments != null){
         facility_id: facilityId,
         blockId: selectedBlockId,
         lotoId: selectedEquipmentCategoryIdList.first,
-        permitTypeId: selectedPermitTypeId,
-
-        ///Permit Type Id
-        start_datetime: startDateTimeCtrlr.text,
-        end_datetime: validTillTimeCtrlr.text,
+        permitTypeId: selectedPermitTypeId, ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
         title: _title,
         description: _description,
         job_type_id: selectedJobTypesId, ////Job type Id
@@ -1019,6 +1022,105 @@ if(arguments != null){
   //         }
   //         selectedFacility.value = value;
   //       }
+
+
+///Update New Permit
+   void updateNewPermit() async {
+    {
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+
+      String _description =
+          htmlEscape.convert(permitDescriptionCtrlr.text.trim());
+      String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
+      String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
+      List<Employeelist> employee_map_list = [];
+      //UserId
+      int userId = varUserAccessModel.value.user_id ?? 0;
+
+      filteredEmployeeNameList.forEach((e) {
+        employee_map_list
+            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+      });
+
+      late List<LotoList> loto_map_list = [];
+
+      filteredEquipmentNameList.forEach((e) {
+        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
+      });
+
+      late List<Safetyquestionlist> safety_measure_map_list = [];
+
+      safetyMeasureList.forEach((e) {
+        safety_measure_map_list.add(Safetyquestionlist(
+            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+      });
+
+      //  List<Employeelist> employee_list= <Employeelist>[];
+      // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
+      // List<LotoList> loto_list = <LotoList>[];
+
+      // for (var _selectedWorkArea in selectedWorkAreaList) {
+      //   var json = '{"asset_id": ${_selectedWorkArea?.id},'
+      //       '"category_ids": ${_selectedWorkArea?.categoryId}}';
+
+      //   // CreatePermitModel _employeeList = addCreatePermitModelFromJson(json);
+      //   // employee_list.add(_employeeList as Employeelist);
+      //   // CreatePermitModel _safetyQuestionList = addCreatePermitModelFromJson(json);
+      //   // safety_question_list.add(_safetyQuestionList as Safetyquestionlist);
+      //   // CreatePermitModel _lotoList = addCreatePermitModelFromJson(json);
+      //   // loto_list.add(_lotoList as LotoList);
+
+      //   // SafetyQuestionList _safetyQuestionList = addSafetyQuestionListFromJson(json);
+      //   // safety_question_list.add(_safetyQuestionList);
+      // }
+
+      CreatePermitModel updatePermitModel = CreatePermitModel(
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permit_id: permitId.value,
+        permitTypeId: selectedPermitTypeId, ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        user_id: userId,
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        is_isolation_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+      );
+      var jobJsonString = updatePermitModel.toJson();
+      Map<String, dynamic>? responseUpdatePermit =
+          await permitPresenter.updateNewPermit(
+        newPermit: jobJsonString,
+        isLoading: true,
+      );
+      if (responseUpdatePermit != null) {
+        //  CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print('Update permit data: $jobJsonString');
+    }
+  }
+
+
+
+
+
+
   Future<void> createNewPermits() async {
     Get.toNamed(
       Routes.newPermit,
@@ -1028,7 +1130,15 @@ if(arguments != null){
   loadPermitDetails(jobModel) {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
     selectedBlock.value = jobModel.facilityName ?? '';
-    // selectedEquipmentCategoryIdList = jobModel.equipmentCatList;
+    listJobModelCategory.value = jobModel.equipmentCatList ?? [];
+     List<int> idList = listJobModelCategory
+          .map((obj) => obj!.equipmentCatId)
+          .toList();
+
+    selectedEquipmentCategoryIdList.value = idList;
+    // selectedJobModelEquipemntIsolationIdList.value = idList;
+    print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
+
   }
 
   /// class ends

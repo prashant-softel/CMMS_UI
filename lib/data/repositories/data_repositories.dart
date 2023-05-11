@@ -344,6 +344,47 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> permitCancelButton({
+    required String auth,
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitCancelButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<ResponseModel> permitCloseButton({
+    required String auth,
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitCloseButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+
+   Future<ResponseModel> permitRejectButton({
+    required String auth,
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+
   //  @override
   // Future<ResponseModel> getNewPermitList({
   //   int? facilityId,
@@ -601,6 +642,18 @@ class DataRepository extends DomainRepository {
         newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> updateNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateNewPermit(
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+      );
+
 
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
