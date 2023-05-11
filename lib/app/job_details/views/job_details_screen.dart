@@ -247,21 +247,18 @@ class JobDetailsWidgetContent extends GetView<JobDetailsController> {
                                               ),
                                               JobDetailMultiValueField(
                                                 title: 'Work Type',
-                                                values:
-                                                    (controller
-                                                                .jobDetailsModel
-                                                                .value
-                                                                ?.workType !=
-                                                            null)
-                                                        ? controller
-                                                                .jobDetailsModel
-                                                                .value
-                                                                ?.workType
-                                                                ?.map((item) =>
-                                                                    (item))
-                                                                .toList()
-                                                            as List<String>
-                                                        : [],
+                                                values: (controller
+                                                            .jobDetailsModel
+                                                            .value
+                                                            ?.workType !=
+                                                        null)
+                                                    ? controller.jobDetailsModel
+                                                            .value?.workType
+                                                            ?.map((item) =>
+                                                                item ?? '')
+                                                            .toList()
+                                                        as List<String>
+                                                    : [],
                                               ),
                                               if (controller
                                                       .jobDetailsModel
