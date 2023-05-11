@@ -5,7 +5,11 @@ import 'dart:typed_data';
 
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:http/http.dart' as http;
@@ -410,6 +414,83 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+   Future<ResponseModel> permitCancelButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitCancelRequest',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitCancelResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageCancelDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+   Future<ResponseModel> permitCloseButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitClose',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitCloseResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
+   Future<ResponseModel> permitRejectButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitReject',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitRejectResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
+
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -846,6 +927,35 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+   //Update New Permit
+  Future<ResponseModel> updateNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdatePermit',
+      Request.patch,
+      newPermit,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('UpdateNewPermitResponse5:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(UpdateNewPermitDialog(
+      data: parsedJson['message'],
+      PtwId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getUserAccessList({
     required String auth,

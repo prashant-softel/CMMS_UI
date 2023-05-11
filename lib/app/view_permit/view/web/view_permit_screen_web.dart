@@ -438,7 +438,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         SizedBox(width: 10,),
                                                   
                                                     Text(
-                                                      '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                      '${controller.startDateTimeCtrlr.text}',
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 5, 92, 163)),
@@ -460,7 +460,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       width: 10,
                                                     ),
                                                     Text(
-                                                      '${controller.viewPermitDetailsModel.value?.end_datetime}',
+                                                      '${controller.validTillTimeCtrlr.text}',
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 5, 92, 163)),

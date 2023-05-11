@@ -50,6 +50,45 @@ class NewPermitListUsecase {
       isLoading,
     );
   }
+
+
+   Future<void> permitCancelButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await repository.permitCancelButton(
+      comment,
+      id,
+      isLoading,
+    );
+  }
+
+  Future<void> permitCloseButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await repository.permitCloseButton(
+      comment,
+      id,
+      isLoading,
+    );
+  }
+
+
+   Future<void> permitRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await repository.permitRejectButton(
+      comment,
+      id,
+      isLoading,
+    );
+  }
+
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required bool isLoading,
   //   required int? facilityId,

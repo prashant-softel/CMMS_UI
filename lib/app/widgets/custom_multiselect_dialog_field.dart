@@ -42,6 +42,7 @@ class _CustomMultiSelectDialogFieldState
         ],
       ),
       child: MultiSelectDialogField(
+        searchable: true,
         title: Text('${widget.title}'),
         buttonText: Text('${widget.buttonText}'),
         initialValue: widget.initialValue,

@@ -317,9 +317,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               equipmentCategory
                                                                       ?.name ??
                                                                   '',
+                                                                  
                                                             ),
+                                                            
                                                           )
                                                           .toList(),
+                                                  
                                                       onConfirm:
                                                           (selectedOptionsList) =>
                                                               {
@@ -1608,7 +1611,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           'Select Equipment Category',
                                                       buttonText:
                                                           'Equipment Category',
-                                                      initialValue:true?[2]: ((controller
+                                                      initialValue: ((controller
                                                               .selectedEquipmentCategoryIdList
                                                               .isNotEmpty)
                                                           ? controller
@@ -1956,7 +1959,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   ?
                                                   //Loto apply
                                                   SizedBox(
-                                                      height: 230,
+                                                      height: MediaQuery.of(context).size.height / 3,
                                                       width:
                                                           MediaQuery.of(context)
                                                                   .size
@@ -1981,429 +1984,429 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           ),
                                                           child:
                                                               SingleChildScrollView(
-                                                            child: Column(
-                                                              children: [
-                                                                CustomAppBar(
-                                                                  title: ''.tr,
-                                                                  action:
-                                                                      ActionButton(
-                                                                    label:
-                                                                        'Add New',
-                                                                    icon: Icons
-                                                                        .add,
-                                                                    onPressed:
-                                                                        () {
-                                                                      //  showEquipmentNameAlertBox();
-                                                                      Get.dialog<
-                                                                              void>(
-                                                                          showEquipmentNameAlertBox());
-                                                                    },
-                                                                    color: Colors
-                                                                        .green,
-                                                                  ),
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Wrap(
+                                                                child: Column(
                                                                   children: [
-                                                                    Column(
+                                                                    CustomAppBar(
+                                                                      title: ''.tr,
+                                                                      action:
+                                                                          ActionButton(
+                                                                        label:
+                                                                            'Add New',
+                                                                        icon: Icons
+                                                                            .add,
+                                                                        onPressed:
+                                                                            () {
+                                                                          //  showEquipmentNameAlertBox();
+                                                                          Get.dialog<
+                                                                                  void>(
+                                                                              showEquipmentNameAlertBox());
+                                                                        },
+                                                                        color: Colors
+                                                                            .green,
+                                                                      ),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Wrap(
                                                                       children: [
-                                                                        ///Put Loto applied here
-
-                                                                        // SizedBox(
-                                                                        //   width: MediaQuery.of(context)
-                                                                        //           .size
-                                                                        //           .width /
-                                                                        //       1.2,
-                                                                        //   child:
-                                                                        //       Divider(
-                                                                        //     thickness:
-                                                                        //         2,
-                                                                        //   ),
-                                                                        // ),
-                                                                        controller.permitId.value > 0
-                                                                        ?   SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.height * 2,
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                Get.height,
-                                                                            child: Column(
-                                                                                //
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    child: //
-                                                                                        ScrollableTableView(
-                                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                                      columns: [
-                                                                                        'name',
-                                                                                        'serialNumber',
-                                                                                        // 'approved_datetime',
-                                                                                        // 'equipment',
-                                                                                        // 'workingAreaId',
-                                                                                        // 'description',
-                                                                                        // 'permitTypeName',
-                                                                                        // 'raisedByName',
-                                                                                        // 'breakdownTime',
-                                                                                        // 'breakdownType',
-                                                                                        // 'permitId',
-                                                                                        // 'assignedToName',
-                                                                                        // 'status',
-                                                                                        'action'.tr,
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(
-                                                                                          minWidth: Get.width * 0.25,
-                                                                                          label: column == "name"
-                                                                                              ? "Loto Applied On"
-                                                                                              : column == "serialNumber"
-                                                                                                  ? "Serial Number"
-                                                                                                  //     : column == "approved_datetime"
-                                                                                                  //         ? "Approved Time"
-                                                                                                  //         : column == "equipment"
-                                                                                                  //             ? "Equipment" //
-                                                                                                  //             : column == "workingAreaId"
-                                                                                                  //                 ? "Working Area Id"
-                                                                                                  //                 : column == "description"
-                                                                                                  //                     ? "Description"
-                                                                                                  //                     : column == "permitTypeName"
-                                                                                                  //                         ? "Work Type"
-
-                                                                                                  : "Action",
-                                                                                        );
-                                                                                      }).toList(),
-                                                                                      rows: //
-                                                                                          [
-                                                                                        ...List.generate(
-                                                                                          ///controller.selectedEquipmentNameIdList
-                                                                                          controller.listLoto!.length,
-
-                                                                                          (index) {
-                                                                                            var inventoryEquipmentName = controller.listLoto![index];
-
-                                                                                            //_jobId = jobDetails?.id;
-
-                                                                                            // controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                            print('Equipment Isss5:${controller.id.value}');
-                                                                                            return [
-                                                                                              '${inventoryEquipmentName?.asset_name ?? ''}',
-                                                                                              '${inventoryEquipmentName?.locksrno ?? ''}',
-                                                                                              // '${newPermitDetails?.approved_datetime}',
-                                                                                              // '${newPermitDetails?.equipment}',
-                                                                                              // '${newPermitDetails?.workingAreaId}',
-                                                                                              // '${newPermitDetails?.description}',
-                                                                                              // '${newPermitDetails?.permitTypeName}',
-                                                                                              // '${jobDetails?.workType}',
-                                                                                              // '${jobDetails?.raisedByName}',
-                                                                                              // '${jobDetails?.breakdownTime ?? ''}',
-                                                                                              // '${jobDetails?.breakdownType}',
-                                                                                              // '${jobDetails?.permitId}',
-                                                                                              // '${jobDetails?.assignedToName}',
-                                                                                              // '${jobDetails?.status}',
-                                                                                              'Actions'
-                                                                                            ];
-                                                                                          },
+                                                                        Column(
+                                                                          children: [
+                                                                            ///Put Loto applied here
+                                                                
+                                                                            // SizedBox(
+                                                                            //   width: MediaQuery.of(context)
+                                                                            //           .size
+                                                                            //           .width /
+                                                                            //       1.2,
+                                                                            //   child:
+                                                                            //       Divider(
+                                                                            //     thickness:
+                                                                            //         2,
+                                                                            //   ),
+                                                                            // ),
+                                                                            controller.permitId.value > 0
+                                                                            ?   SizedBox(
+                                                                              width:
+                                                                                  MediaQuery.of(context).size.height * 2,
+                                                                              child:
+                                                                                  Container(
+                                                                                height:
+                                                                                    Get.height,
+                                                                                child: Column(
+                                                                                    //
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: //
+                                                                                            ScrollableTableView(
+                                                                                          // paginationController: controller.equipmentNamepaginationController,
+                                                                                          columns: [
+                                                                                            'name',
+                                                                                            'serialNumber',
+                                                                                            // 'approved_datetime',
+                                                                                            // 'equipment',
+                                                                                            // 'workingAreaId',
+                                                                                            // 'description',
+                                                                                            // 'permitTypeName',
+                                                                                            // 'raisedByName',
+                                                                                            // 'breakdownTime',
+                                                                                            // 'breakdownType',
+                                                                                            // 'permitId',
+                                                                                            // 'assignedToName',
+                                                                                            // 'status',
+                                                                                            'action'.tr,
+                                                                                          ].map((column) {
+                                                                                            return TableViewColumn(
+                                                                                              minWidth: Get.width * 0.25,
+                                                                                              label: column == "name"
+                                                                                                  ? "Loto Applied On"
+                                                                                                  : column == "serialNumber"
+                                                                                                      ? "Serial Number"
+                                                                                                      //     : column == "approved_datetime"
+                                                                                                      //         ? "Approved Time"
+                                                                                                      //         : column == "equipment"
+                                                                                                      //             ? "Equipment" //
+                                                                                                      //             : column == "workingAreaId"
+                                                                                                      //                 ? "Working Area Id"
+                                                                                                      //                 : column == "description"
+                                                                                                      //                     ? "Description"
+                                                                                                      //                     : column == "permitTypeName"
+                                                                                                      //                         ? "Work Type"
+                                                                
+                                                                                                      : "Action",
+                                                                                            );
+                                                                                          }).toList(),
+                                                                                          rows: //
+                                                                                              [
+                                                                                            ...List.generate(
+                                                                                              ///controller.selectedEquipmentNameIdList
+                                                                                              controller.listLoto!.length,
+                                                                
+                                                                                              (index) {
+                                                                                                var inventoryEquipmentName = controller.listLoto![index];
+                                                                
+                                                                                                //_jobId = jobDetails?.id;
+                                                                
+                                                                                                // controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                                                print('Equipment Isss5:${controller.id.value}');
+                                                                                                return [
+                                                                                                  '${inventoryEquipmentName?.asset_name ?? ''}',
+                                                                                                  '${inventoryEquipmentName?.locksrno ?? ''}',
+                                                                                                  // '${newPermitDetails?.approved_datetime}',
+                                                                                                  // '${newPermitDetails?.equipment}',
+                                                                                                  // '${newPermitDetails?.workingAreaId}',
+                                                                                                  // '${newPermitDetails?.description}',
+                                                                                                  // '${newPermitDetails?.permitTypeName}',
+                                                                                                  // '${jobDetails?.workType}',
+                                                                                                  // '${jobDetails?.raisedByName}',
+                                                                                                  // '${jobDetails?.breakdownTime ?? ''}',
+                                                                                                  // '${jobDetails?.breakdownType}',
+                                                                                                  // '${jobDetails?.permitId}',
+                                                                                                  // '${jobDetails?.assignedToName}',
+                                                                                                  // '${jobDetails?.status}',
+                                                                                                  'Actions'
+                                                                                                ];
+                                                                                              },
+                                                                                            ),
+                                                                                          ].map((_inventoryDetailList) {
+                                                                                            return TableViewRow(
+                                                                                                onTap: () => {
+                                                                                                      print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                    },
+                                                                                                height: 45,
+                                                                                                cells: _inventoryDetailList.map((value) {
+                                                                                                  return TableViewCell(
+                                                                                                    //key: ,
+                                                                                                    child: (value == 'Actions')
+                                                                                                        ? Wrap(
+                                                                                                            children: [
+                                                                                                              TableActionButton(
+                                                                                                                color: Colors.red,
+                                                                                                                icon: Icons.delete_outline,
+                                                                                                                label: 'Delete',
+                                                                                                                onPress: () {
+                                                                                                                  // controller.showNewPermitListDetails(
+                                                                                                                  //     controller.permitId.value);
+                                                                                                                },
+                                                                                                              ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: ColorValues.purpleColor,
+                                                                                                              //   icon: Icons.add,
+                                                                                                              //   label: 'Job Card',
+                                                                                                              //   onPress: () {
+                                                                                                              //     // controller.goToJobCardScreen(
+                                                                                                              //     //   int.tryParse(_newPermitList[0]),
+                                                                                                              //     // );
+                                                                                                              //   },
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.blue,
+                                                                                                              //   icon: Icons.edit,
+                                                                                                              //   label: 'Edit PTW',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.green,
+                                                                                                              //   icon: Icons.visibility,
+                                                                                                              //   label: 'Approve Request',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.red,
+                                                                                                              //   icon: Icons.visibility,
+                                                                                                              //   label: 'Reject Request',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                            ],
+                                                                                                          )
+                                                                                                        : Text(value.toString()),
+                                                                                                  );
+                                                                                                }).toList());
+                                                                                          }).toList(),
                                                                                         ),
-                                                                                      ].map((_inventoryDetailList) {
-                                                                                        return TableViewRow(
-                                                                                            onTap: () => {
-                                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                },
-                                                                                            height: 45,
-                                                                                            cells: _inventoryDetailList.map((value) {
-                                                                                              return TableViewCell(
-                                                                                                //key: ,
-                                                                                                child: (value == 'Actions')
-                                                                                                    ? Wrap(
-                                                                                                        children: [
-                                                                                                          TableActionButton(
-                                                                                                            color: Colors.red,
-                                                                                                            icon: Icons.delete_outline,
-                                                                                                            label: 'Delete',
-                                                                                                            onPress: () {
-                                                                                                              // controller.showNewPermitListDetails(
-                                                                                                              //     controller.permitId.value);
-                                                                                                            },
-                                                                                                          ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: ColorValues.purpleColor,
-                                                                                                          //   icon: Icons.add,
-                                                                                                          //   label: 'Job Card',
-                                                                                                          //   onPress: () {
-                                                                                                          //     // controller.goToJobCardScreen(
-                                                                                                          //     //   int.tryParse(_newPermitList[0]),
-                                                                                                          //     // );
-                                                                                                          //   },
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.blue,
-                                                                                                          //   icon: Icons.edit,
-                                                                                                          //   label: 'Edit PTW',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.green,
-                                                                                                          //   icon: Icons.visibility,
-                                                                                                          //   label: 'Approve Request',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.red,
-                                                                                                          //   icon: Icons.visibility,
-                                                                                                          //   label: 'Reject Request',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                        ],
-                                                                                                      )
-                                                                                                    : Text(value.toString()),
-                                                                                              );
-                                                                                            }).toList());
-                                                                                      }).toList(),
-                                                                                    ),
-                                                                                  ),
-
-                                                                                  /// PAGINATION
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                    child: ValueListenableBuilder(
-                                                                                        valueListenable: controller.inventoryDetailPaginationController,
-                                                                                        builder: (context, value, child) {
-                                                                                          return Row(children: [
-                                                                                            Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                            Row(children: [
-                                                                                              IconButton(
-                                                                                                onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                                    ? null
-                                                                                                    : () {
-                                                                                                        controller.inventoryDetailPaginationController.previous();
-                                                                                                      },
-                                                                                                iconSize: 20,
-                                                                                                splashRadius: 20,
-                                                                                                icon: Icon(
-                                                                                                  Icons.arrow_back_ios_new_rounded,
-                                                                                                  color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                              IconButton(
-                                                                                                onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                                    ? null
-                                                                                                    : () {
-                                                                                                        controller.inventoryDetailPaginationController.next();
-                                                                                                      },
-                                                                                                iconSize: 20,
-                                                                                                splashRadius: 20,
-                                                                                                icon: Icon(
-                                                                                                  Icons.arrow_forward_ios_rounded,
-                                                                                                  color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                            ]),
-                                                                                          ]);
-                                                                                        }),
-                                                                                  ),
-                                                                                ]),
-                                                                          ),
+                                                                                      ),
+                                                                
+                                                                                      /// PAGINATION
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                        child: ValueListenableBuilder(
+                                                                                            valueListenable: controller.inventoryDetailPaginationController,
+                                                                                            builder: (context, value, child) {
+                                                                                              return Row(children: [
+                                                                                                Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                                Row(children: [
+                                                                                                  IconButton(
+                                                                                                    onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                                        ? null
+                                                                                                        : () {
+                                                                                                            controller.inventoryDetailPaginationController.previous();
+                                                                                                          },
+                                                                                                    iconSize: 20,
+                                                                                                    splashRadius: 20,
+                                                                                                    icon: Icon(
+                                                                                                      Icons.arrow_back_ios_new_rounded,
+                                                                                                      color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                  IconButton(
+                                                                                                    onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                                        ? null
+                                                                                                        : () {
+                                                                                                            controller.inventoryDetailPaginationController.next();
+                                                                                                          },
+                                                                                                    iconSize: 20,
+                                                                                                    splashRadius: 20,
+                                                                                                    icon: Icon(
+                                                                                                      Icons.arrow_forward_ios_rounded,
+                                                                                                      color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ]),
+                                                                                              ]);
+                                                                                            }),
+                                                                                      ),
+                                                                                    ]),
+                                                                              ),
+                                                                            )
+                                                                            :
+                                                                            SizedBox(
+                                                                              width:
+                                                                                  MediaQuery.of(context).size.height * 2,
+                                                                              child:
+                                                                                  Container(
+                                                                                height:
+                                                                                    Get.height,
+                                                                                child: Column(
+                                                                                    //
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: //
+                                                                                            ScrollableTableView(
+                                                                                          // paginationController: controller.equipmentNamepaginationController,
+                                                                                          columns: [
+                                                                                            'name',
+                                                                                            'serialNumber',
+                                                                                            // 'approved_datetime',
+                                                                                            // 'equipment',
+                                                                                            // 'workingAreaId',
+                                                                                            // 'description',
+                                                                                            // 'permitTypeName',
+                                                                                            // 'raisedByName',
+                                                                                            // 'breakdownTime',
+                                                                                            // 'breakdownType',
+                                                                                            // 'permitId',
+                                                                                            // 'assignedToName',
+                                                                                            // 'status',
+                                                                                            'action'.tr,
+                                                                                          ].map((column) {
+                                                                                            return TableViewColumn(
+                                                                                              minWidth: Get.width * 0.25,
+                                                                                              label: column == "name"
+                                                                                                  ? "Loto Applied On"
+                                                                                                  : column == "serialNumber"
+                                                                                                      ? "Serial Number"
+                                                                                                      //     : column == "approved_datetime"
+                                                                                                      //         ? "Approved Time"
+                                                                                                      //         : column == "equipment"
+                                                                                                      //             ? "Equipment" //
+                                                                                                      //             : column == "workingAreaId"
+                                                                                                      //                 ? "Working Area Id"
+                                                                                                      //                 : column == "description"
+                                                                                                      //                     ? "Description"
+                                                                                                      //                     : column == "permitTypeName"
+                                                                                                      //                         ? "Work Type"
+                                                                
+                                                                                                      : "Action",
+                                                                                            );
+                                                                                          }).toList(),
+                                                                                          rows: //
+                                                                                              [
+                                                                                            ...List.generate(
+                                                                                              ///controller.selectedEquipmentNameIdList
+                                                                                              controller.filteredEquipmentNameList.length,
+                                                                
+                                                                                              (index) {
+                                                                                                var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
+                                                                
+                                                                                                //_jobId = jobDetails?.id;
+                                                                
+                                                                                                controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                                                print('Equipment Isss5:${controller.id.value}');
+                                                                                                return [
+                                                                                                  '${inventoryEquipmentName?.name ?? ''}',
+                                                                                                  '${inventoryEquipmentName?.serialNumber ?? ''}',
+                                                                                                  // '${newPermitDetails?.approved_datetime}',
+                                                                                                  // '${newPermitDetails?.equipment}',
+                                                                                                  // '${newPermitDetails?.workingAreaId}',
+                                                                                                  // '${newPermitDetails?.description}',
+                                                                                                  // '${newPermitDetails?.permitTypeName}',
+                                                                                                  // '${jobDetails?.workType}',
+                                                                                                  // '${jobDetails?.raisedByName}',
+                                                                                                  // '${jobDetails?.breakdownTime ?? ''}',
+                                                                                                  // '${jobDetails?.breakdownType}',
+                                                                                                  // '${jobDetails?.permitId}',
+                                                                                                  // '${jobDetails?.assignedToName}',
+                                                                                                  // '${jobDetails?.status}',
+                                                                                                  'Actions'
+                                                                                                ];
+                                                                                              },
+                                                                                            ),
+                                                                                          ].map((_inventoryDetailList) {
+                                                                                            return TableViewRow(
+                                                                                                onTap: () => {
+                                                                                                      print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                    },
+                                                                                                height: 45,
+                                                                                                cells: _inventoryDetailList.map((value) {
+                                                                                                  return TableViewCell(
+                                                                                                    //key: ,
+                                                                                                    child: (value == 'Actions')
+                                                                                                        ? Wrap(
+                                                                                                            children: [
+                                                                                                              TableActionButton(
+                                                                                                                color: Colors.red,
+                                                                                                                icon: Icons.delete_outline,
+                                                                                                                label: 'Delete',
+                                                                                                                onPress: () {
+                                                                                                                  // controller.showNewPermitListDetails(
+                                                                                                                  //     controller.permitId.value);
+                                                                                                                },
+                                                                                                              ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: ColorValues.purpleColor,
+                                                                                                              //   icon: Icons.add,
+                                                                                                              //   label: 'Job Card',
+                                                                                                              //   onPress: () {
+                                                                                                              //     // controller.goToJobCardScreen(
+                                                                                                              //     //   int.tryParse(_newPermitList[0]),
+                                                                                                              //     // );
+                                                                                                              //   },
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.blue,
+                                                                                                              //   icon: Icons.edit,
+                                                                                                              //   label: 'Edit PTW',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.green,
+                                                                                                              //   icon: Icons.visibility,
+                                                                                                              //   label: 'Approve Request',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.red,
+                                                                                                              //   icon: Icons.visibility,
+                                                                                                              //   label: 'Reject Request',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                            ],
+                                                                                                          )
+                                                                                                        : Text(value.toString()),
+                                                                                                  );
+                                                                                                }).toList());
+                                                                                          }).toList(),
+                                                                                        ),
+                                                                                      ),
+                                                                
+                                                                                      /// PAGINATION
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                        child: ValueListenableBuilder(
+                                                                                            valueListenable: controller.inventoryDetailPaginationController,
+                                                                                            builder: (context, value, child) {
+                                                                                              return Row(children: [
+                                                                                                Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                                Row(children: [
+                                                                                                  IconButton(
+                                                                                                    onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                                        ? null
+                                                                                                        : () {
+                                                                                                            controller.inventoryDetailPaginationController.previous();
+                                                                                                          },
+                                                                                                    iconSize: 20,
+                                                                                                    splashRadius: 20,
+                                                                                                    icon: Icon(
+                                                                                                      Icons.arrow_back_ios_new_rounded,
+                                                                                                      color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                  IconButton(
+                                                                                                    onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                                        ? null
+                                                                                                        : () {
+                                                                                                            controller.inventoryDetailPaginationController.next();
+                                                                                                          },
+                                                                                                    iconSize: 20,
+                                                                                                    splashRadius: 20,
+                                                                                                    icon: Icon(
+                                                                                                      Icons.arrow_forward_ios_rounded,
+                                                                                                      color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ]),
+                                                                                              ]);
+                                                                                            }),
+                                                                                      ),
+                                                                                    ]),
+                                                                              ),
+                                                                            ),
+                                                                
+                                                                            SizedBox(
+                                                                              width:
+                                                                                  MediaQuery.of(context).size.width / 1.2,
+                                                                              child:
+                                                                                  Divider(
+                                                                                thickness:
+                                                                                    2,
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         )
-                                                                        :
-                                                                        SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.height * 2,
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                Get.height,
-                                                                            child: Column(
-                                                                                //
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    child: //
-                                                                                        ScrollableTableView(
-                                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                                      columns: [
-                                                                                        'name',
-                                                                                        'serialNumber',
-                                                                                        // 'approved_datetime',
-                                                                                        // 'equipment',
-                                                                                        // 'workingAreaId',
-                                                                                        // 'description',
-                                                                                        // 'permitTypeName',
-                                                                                        // 'raisedByName',
-                                                                                        // 'breakdownTime',
-                                                                                        // 'breakdownType',
-                                                                                        // 'permitId',
-                                                                                        // 'assignedToName',
-                                                                                        // 'status',
-                                                                                        'action'.tr,
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(
-                                                                                          minWidth: Get.width * 0.25,
-                                                                                          label: column == "name"
-                                                                                              ? "Loto Applied On"
-                                                                                              : column == "serialNumber"
-                                                                                                  ? "Serial Number"
-                                                                                                  //     : column == "approved_datetime"
-                                                                                                  //         ? "Approved Time"
-                                                                                                  //         : column == "equipment"
-                                                                                                  //             ? "Equipment" //
-                                                                                                  //             : column == "workingAreaId"
-                                                                                                  //                 ? "Working Area Id"
-                                                                                                  //                 : column == "description"
-                                                                                                  //                     ? "Description"
-                                                                                                  //                     : column == "permitTypeName"
-                                                                                                  //                         ? "Work Type"
-
-                                                                                                  : "Action",
-                                                                                        );
-                                                                                      }).toList(),
-                                                                                      rows: //
-                                                                                          [
-                                                                                        ...List.generate(
-                                                                                          ///controller.selectedEquipmentNameIdList
-                                                                                          controller.filteredEquipmentNameList.length,
-
-                                                                                          (index) {
-                                                                                            var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
-
-                                                                                            //_jobId = jobDetails?.id;
-
-                                                                                            controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                            print('Equipment Isss5:${controller.id.value}');
-                                                                                            return [
-                                                                                              '${inventoryEquipmentName?.name ?? ''}',
-                                                                                              '${inventoryEquipmentName?.serialNumber ?? ''}',
-                                                                                              // '${newPermitDetails?.approved_datetime}',
-                                                                                              // '${newPermitDetails?.equipment}',
-                                                                                              // '${newPermitDetails?.workingAreaId}',
-                                                                                              // '${newPermitDetails?.description}',
-                                                                                              // '${newPermitDetails?.permitTypeName}',
-                                                                                              // '${jobDetails?.workType}',
-                                                                                              // '${jobDetails?.raisedByName}',
-                                                                                              // '${jobDetails?.breakdownTime ?? ''}',
-                                                                                              // '${jobDetails?.breakdownType}',
-                                                                                              // '${jobDetails?.permitId}',
-                                                                                              // '${jobDetails?.assignedToName}',
-                                                                                              // '${jobDetails?.status}',
-                                                                                              'Actions'
-                                                                                            ];
-                                                                                          },
-                                                                                        ),
-                                                                                      ].map((_inventoryDetailList) {
-                                                                                        return TableViewRow(
-                                                                                            onTap: () => {
-                                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                },
-                                                                                            height: 45,
-                                                                                            cells: _inventoryDetailList.map((value) {
-                                                                                              return TableViewCell(
-                                                                                                //key: ,
-                                                                                                child: (value == 'Actions')
-                                                                                                    ? Wrap(
-                                                                                                        children: [
-                                                                                                          TableActionButton(
-                                                                                                            color: Colors.red,
-                                                                                                            icon: Icons.delete_outline,
-                                                                                                            label: 'Delete',
-                                                                                                            onPress: () {
-                                                                                                              // controller.showNewPermitListDetails(
-                                                                                                              //     controller.permitId.value);
-                                                                                                            },
-                                                                                                          ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: ColorValues.purpleColor,
-                                                                                                          //   icon: Icons.add,
-                                                                                                          //   label: 'Job Card',
-                                                                                                          //   onPress: () {
-                                                                                                          //     // controller.goToJobCardScreen(
-                                                                                                          //     //   int.tryParse(_newPermitList[0]),
-                                                                                                          //     // );
-                                                                                                          //   },
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.blue,
-                                                                                                          //   icon: Icons.edit,
-                                                                                                          //   label: 'Edit PTW',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.green,
-                                                                                                          //   icon: Icons.visibility,
-                                                                                                          //   label: 'Approve Request',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.red,
-                                                                                                          //   icon: Icons.visibility,
-                                                                                                          //   label: 'Reject Request',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                        ],
-                                                                                                      )
-                                                                                                    : Text(value.toString()),
-                                                                                              );
-                                                                                            }).toList());
-                                                                                      }).toList(),
-                                                                                    ),
-                                                                                  ),
-
-                                                                                  /// PAGINATION
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                    child: ValueListenableBuilder(
-                                                                                        valueListenable: controller.inventoryDetailPaginationController,
-                                                                                        builder: (context, value, child) {
-                                                                                          return Row(children: [
-                                                                                            Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                            Row(children: [
-                                                                                              IconButton(
-                                                                                                onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                                    ? null
-                                                                                                    : () {
-                                                                                                        controller.inventoryDetailPaginationController.previous();
-                                                                                                      },
-                                                                                                iconSize: 20,
-                                                                                                splashRadius: 20,
-                                                                                                icon: Icon(
-                                                                                                  Icons.arrow_back_ios_new_rounded,
-                                                                                                  color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                              IconButton(
-                                                                                                onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                                    ? null
-                                                                                                    : () {
-                                                                                                        controller.inventoryDetailPaginationController.next();
-                                                                                                      },
-                                                                                                iconSize: 20,
-                                                                                                splashRadius: 20,
-                                                                                                icon: Icon(
-                                                                                                  Icons.arrow_forward_ios_rounded,
-                                                                                                  color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                            ]),
-                                                                                          ]);
-                                                                                        }),
-                                                                                  ),
-                                                                                ]),
-                                                                          ),
-                                                                        ),
-
-                                                                        SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 1.2,
-                                                                          child:
-                                                                              Divider(
-                                                                            thickness:
-                                                                                2,
-                                                                          ),
-                                                                        ),
                                                                       ],
-                                                                    )
+                                                                    ),
                                                                   ],
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ),
+                                                              ),
                                                         ),
                                                       ),
                                                     )
@@ -3399,7 +3402,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ColorValues
                                                                     .navyBlueColor,
                                                             text: "Update",
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              controller.updateNewPermit();
+                                                            },
                                                           )),
                                                     ),
 
@@ -3983,7 +3988,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
     position == 0
         ? controller.startDateTimeCtrlr
         : controller.validTillTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime)
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: position == 0
@@ -3992,7 +3997,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
           affinity: TextAffinity.upstream,
         ),
       );
-      controller.validTillTimeCtrlr.text = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime.add(Duration(hours: 8)));
+      controller.validTillTimeCtrlr.text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+      controller.validTillTimeCtrlrBuffer = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime.add(Duration(hours: 8)));
+      controller.startDateTimeCtrlrBuffer = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime.add(Duration(hours: 8)));
+
   }
 
   Future<DateTime?> pickDate_web(BuildContext context, int position) async {

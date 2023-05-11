@@ -9,6 +9,7 @@ String addCreatePermitModelToJson(CreatePermitModel data) => json.encode(data.to
 
 
 class CreatePermitModel {
+  int? permit_id;
   int? facility_id;
   int? blockId;
   int? job_type_id;
@@ -34,6 +35,7 @@ class CreatePermitModel {
 
    CreatePermitModel(
        {
+      this.permit_id,
       this.Loto_list,
       this.approver_id,
       this.blockId,
@@ -60,6 +62,7 @@ class CreatePermitModel {
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
       CreatePermitModel(
+        permit_id: json['permit_id'],
         approver_id: json["approver_id"],
         issuer_id: json["issuer_id"],
         facility_id: json["facility_id"],
@@ -90,6 +93,7 @@ class CreatePermitModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "permit_id": permit_id,
         "approver_id": approver_id,
         "issuer_id": issuer_id,
         "facility_id": facility_id,
