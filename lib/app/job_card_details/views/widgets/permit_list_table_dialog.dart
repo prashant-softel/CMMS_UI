@@ -66,30 +66,36 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                         DataRow(
                           cells: [
                             DataCell(
-                              DropdownButtonFormField<NewPermitModel>(
-                                items: controller.permitList?.map((item) {
-                                  return DropdownMenuItem(
-                                    child: Text(item?.permitTypeName ?? ''),
-                                    value: item,
-                                  );
-                                }).toList(),
-                                value: controller.selectedPermit.value,
-                                onChanged: (NewPermitModel? value) {
-                                  controller.onPermitSelected(value);
-                                  // print('Selected Permit ID: $selectedPermitId');
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    borderSide: BorderSide(color: Colors.black),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    borderSide: BorderSide(color: Colors.black),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    borderSide: BorderSide(color: Colors.black),
+                              Expanded(
+                                child: DropdownButtonFormField<NewPermitModel>(
+                                  isExpanded: true,
+                                  items: controller.permitList?.map((item) {
+                                    return DropdownMenuItem(
+                                      child: Text(item?.permitTypeName ?? ''),
+                                      value: item,
+                                    );
+                                  }).toList(),
+                                  value: controller.selectedPermit.value,
+                                  onChanged: (NewPermitModel? value) {
+                                    controller.onPermitSelected(value);
+                                    // print('Selected Permit ID: $selectedPermitId');
+                                  },
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide:
+                                          BorderSide(color: Colors.black),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide:
+                                          BorderSide(color: Colors.black),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide:
+                                          BorderSide(color: Colors.black),
+                                    ),
                                   ),
                                 ),
                               ),
