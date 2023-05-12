@@ -9,8 +9,6 @@ import 'caliobration_detail_presenter.dart';
 class CalibrationDetailBinding extends Bindings {
   @override
   void dependencies() {
-    Get.find<HomeController>();
-
     Get.lazyPut<CalibrationDetailController>(
       () => CalibrationDetailController(
         CalibrationDetailPresenter(

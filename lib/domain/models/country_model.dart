@@ -10,21 +10,21 @@ class CountryModel {
   factory CountryModel.fromJson(Map<String, dynamic> json) => CountryModel(
         id: json['id'],
         name: json['name'],
-        input: json['input'],
+        // input: json['input'],
       );
   CountryModel({
     this.id,
     this.name,
-    this.input,
+    // this.input,
   });
 
   int? id;
   String? name;
-  int? input;
+  // int? input;
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
-        'input': input,
+        // 'input': input,
       };
 }

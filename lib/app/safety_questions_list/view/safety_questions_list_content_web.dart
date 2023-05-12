@@ -10,12 +10,10 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
-
 class SafetyQuestionsListContentWeb
     extends GetView<SafetyQuestionsListController> {
   SafetyQuestionsListContentWeb({Key? key}) : super(key: key);
   final SafetyQuestionsListController controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +54,9 @@ class SafetyQuestionsListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / Masters", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Safety Questions",
-                      style: Styles.greyMediumLight12)
+                  Text(" / Safety Questions", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -100,10 +96,8 @@ class SafetyQuestionsListContentWeb
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        
-                                  
-                                        
-                                         CustomRichText(title: 'Safety Measurement Title '),
+                                        CustomRichText(
+                                            title: 'Safety Measurement Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -112,8 +106,7 @@ class SafetyQuestionsListContentWeb
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-                                           
-                                            
+
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -148,46 +141,40 @@ class SafetyQuestionsListContentWeb
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                    // textController: controller
-                                                    //     .durationCtrlr,
-                                                  )),
+                                                      // textController: controller
+                                                      //     .durationCtrlr,
+                                                      )),
                                             ),
                                           ],
                                         ),
-                                         SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomRichText(
-                                                      title:
-                                                          'Select permit type: '),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.82,
-                                                    child: DropdownWidget(
-                                                      dropdownList: controller
-                                                          .typePermitList,
-                                                      isValueSelected: controller
-                                                          .isTypePermitSelected
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedTypePermit
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
-                                                  ),
-                                        
-                                       
                                         SizedBox(
                                           height: 10,
                                         ),
-                                            CustomRichText(title: 'Description '),
+                                        CustomRichText(
+                                            title: 'Select permit type: '),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.82,
+                                          child: DropdownWidget(
+                                            dropdownList:
+                                                controller.typePermitList,
+                                            isValueSelected: controller
+                                                .isTypePermitSelected.value,
+                                            selectedValue: controller
+                                                .selectedTypePermit.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -196,7 +183,7 @@ class SafetyQuestionsListContentWeb
                                             //   "Description ",
                                             //   style: Styles.blackBold16,
                                             // ),
-                                            
+
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -231,77 +218,64 @@ class SafetyQuestionsListContentWeb
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                    // textController: controller
-                                                    //     .durationCtrlr,
-                                                  )),
+                                                      // textController: controller
+                                                      //     .durationCtrlr,
+                                                      )),
                                             ),
                                           ],
                                         ),
-                                         SizedBox(
+                                        SizedBox(
                                           height: 10,
                                         ),
                                         CustomRichText(
-                                                      title:
-                                                          'Select confirmation type: '),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.82,
-                                                    child: DropdownWidget(
-                                                      dropdownList: controller
-                                                          .typePermitList,
-                                                      isValueSelected: controller
-                                                          .isTypePermitSelected
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedTypePermit
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
-                                                  ),
-                                                
-                                                 SizedBox(
+                                            title:
+                                                'Select confirmation type: '),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.82,
+                                          child: DropdownWidget(
+                                            dropdownList:
+                                                controller.typePermitList,
+                                            isValueSelected: controller
+                                                .isTypePermitSelected.value,
+                                            selectedValue: controller
+                                                .selectedTypePermit.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                        SizedBox(
                                           height: 10,
                                         ),
-                                        CustomRichText(
-                                                      title:
-                                                          'Required: '),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.82,
-                                                    child: DropdownWidget(
-                                                      dropdownList: controller
-                                                          .typePermitList,
-                                                      isValueSelected: controller
-                                                          .isTypePermitSelected
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedTypePermit
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
-                                                  ),
-
-
-                                       
+                                        CustomRichText(title: 'Required: '),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.82,
+                                          child: DropdownWidget(
+                                            dropdownList:
+                                                controller.typePermitList,
+                                            isValueSelected: controller
+                                                .isTypePermitSelected.value,
+                                            selectedValue: controller
+                                                .selectedTypePermit.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
                                         SizedBox(
                                           height: 20,
                                         ),
-                                      ]
-                                      ),
+                                      ]),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -372,17 +346,14 @@ class SafetyQuestionsListContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
-                                              FlutterClipboard.copy(
-                                                controller
+                                              FlutterClipboard.copy(controller
                                                       // .preventiveCheckList![0]
-                                                      .toString()
-                                                      )
+                                                      .toString())
                                                   .then((value) {
                                                 print("copy data");
                                               });
@@ -390,7 +361,6 @@ class SafetyQuestionsListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -399,7 +369,6 @@ class SafetyQuestionsListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -408,7 +377,6 @@ class SafetyQuestionsListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -467,98 +435,100 @@ class SafetyQuestionsListContentWeb
                                   //           }).toList(),
                                   //         ),
                                   //       )
-                                  //     : 
-                                      Expanded(
-                                          child: ScrollableTableView(
-                                            paginationController:
-                                                controller.safetyQuestionListPaginationController,
-                                            columns: [
-                                              "Sr.No.",
-                                              "Title",
-                                              "Type",  
-                                              "Confirmation",
-                                              "Required",
+                                  //     :
+                                  Expanded(
+                                    child: ScrollableTableView(
+                                      paginationController: controller
+                                          .safetyQuestionListPaginationController,
+                                      columns: [
+                                        "Sr.No.",
+                                        "Title",
+                                        "Type",
+                                        "Confirmation",
+                                        "Required",
+                                        "Action"
+                                      ].map((column) {
+                                        return TableViewColumn(
+                                          minWidth: Get.width * 0.12,
+                                          label: column,
+                                        );
+                                      }).toList(),
+                                      rows: //
+                                          [
+                                        ...List.generate(
+                                          controller.safetyMeasureList.length,
+                                          (index) {
+                                            var safetyQuestionsListDetails =
+                                                controller
+                                                    .safetyMeasureList[index];
+                                            return [
+                                              '${safetyQuestionsListDetails.id}',
+                                              '${safetyQuestionsListDetails.name}',
+                                              '${safetyQuestionsListDetails.permitType}',
+                                              'yes/no',
+                                              'yes',
                                               "Action"
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                minWidth: Get.width * 0.12,
-                                                label: column,
-                                              );
-                                            }).toList(),
-                                            rows: //
-                                                [
-                                              ...List.generate(
-                                                controller.safetyMeasureList.length,
-                                                (index) {
-                                                  var safetyQuestionsListDetails =
-                                                      controller.safetyMeasureList[index];
-                                                  return [
-                                                    '${safetyQuestionsListDetails.id}',
-                                                    '${safetyQuestionsListDetails.name}',
-                                                    '${safetyQuestionsListDetails.permitType}',
-                                                    'yes/no',
-                                                    'yes',
-                                                    "Action"
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((_permitTypeList) {
-                                              return TableViewRow(
-                                                  height: 60,
-                                                  cells: _permitTypeList
-                                                      .map((value) {
-                                                    return TableViewCell(
-                                                        child: 
-                                                        // (value == 'Action')
-                                                        
-                                                        //     ? CustomSwitchTroggle(
-                                                        //         value: value ==
-                                                        //                 'No'
-                                                        //             ? true
-                                                        //             : false,
-                                                        //         onChanged:
-                                                        //             (value) {},
-                                                        //       )
-                                                        //     :
-                                                             (value ==
-                                                                    "Action")
-                                                                ? Wrap(
-                                                                    children: [
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                        //         0
-                                                                        //     ? 
-                                                                            TableActionButton(
-                                                                                color: ColorValues.appLightBlueColor,
-                                                                                icon: Icons.edit,
-                                                                                label: 'Edit',
-                                                                                onPress: () {},
-                                                                              ),
-                                                                            // : Container(),
-                                                                        // :Container(),
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
-                                                                        //         0
-                                                                        //     ? 
-                                                                            TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.delete,
-                                                                                label: 'Delete',
-                                                                                onPress: () {},
-                                                                              )
-                                                                            // : Container()
-                                                                      ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
-                                                  }).toList());
-                                            }).toList(),
-                                          ),
+                                            ];
+                                          },
                                         ),
+                                      ].map((_permitTypeList) {
+                                        return TableViewRow(
+                                            height: 60,
+                                            cells: _permitTypeList.map((value) {
+                                              return TableViewCell(
+                                                  child:
+                                                      // (value == 'Action')
+
+                                                      //     ? CustomSwitchTroggle(
+                                                      //         value: value ==
+                                                      //                 'No'
+                                                      //             ? true
+                                                      //             : false,
+                                                      //         onChanged:
+                                                      //             (value) {},
+                                                      //       )
+                                                      //     :
+                                                      (value == "Action")
+                                                          ? Wrap(children: [
+                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                              //         0
+                                                              //     ?
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                label: 'Edit',
+                                                                onPress: () {},
+                                                              ),
+                                                              // : Container(),
+                                                              // :Container(),
+                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                              //         0
+                                                              //     ?
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appRedColor,
+                                                                icon: Icons
+                                                                    .delete,
+                                                                label: 'Delete',
+                                                                onPress: () {},
+                                                              )
+                                                              // : Container()
+                                                            ])
+                                                          : Text(
+                                                              value,
+                                                            ));
+                                            }).toList());
+                                      }).toList(),
+                                    ),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
-                                        valueListenable:
-                                            controller.safetyQuestionListPaginationController,
+                                        valueListenable: controller
+                                            .safetyQuestionListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(

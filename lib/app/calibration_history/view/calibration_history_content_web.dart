@@ -6,7 +6,6 @@ import '../../calibration_history/calibration_history_controller.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/table_action_button.dart';
 
 class CalibrationHistoryContentWeb
     extends GetView<CalibrationHistoryController> {
@@ -89,7 +88,7 @@ class CalibrationHistoryContentWeb
                   Row(
                     children: [
                       Container(
-                        width: (Get.width * .1) - 60,
+                        height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -97,7 +96,7 @@ class CalibrationHistoryContentWeb
                             text: 'Copy'),
                       ),
                       Container(
-                        width: (Get.width * .1) - 60,
+                        height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -105,7 +104,7 @@ class CalibrationHistoryContentWeb
                             text: 'Excel'),
                       ),
                       Container(
-                        width: (Get.width * .1) - 70,
+                        height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -113,7 +112,7 @@ class CalibrationHistoryContentWeb
                             text: 'PDF'),
                       ),
                       Container(
-                        width: (Get.width * .2) - 100,
+                        height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
                           backgroundColor: ColorValues.appLightBlueColor,

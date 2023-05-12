@@ -97,8 +97,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                         SizedBox(
                                           height: 40,
                                         ),
-                                        CustomRichText(
-                                            title: 'Title '),
+                                        CustomRichText(title: 'Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -315,7 +314,6 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -331,7 +329,6 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -340,7 +337,6 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -349,7 +345,6 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -444,12 +439,12 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             height: 60,
                                             cells: _permitTypeList.map((value) {
                                               return TableViewCell(
-                                                  child:
-                                                      (value == 'Checkbox')
-
-                                                          ? Checkbox(value: controller.isChecked.value, onChanged: (val){})
-                                                          :
-                                                      (value == "Action")
+                                                  child: (value == 'Checkbox')
+                                                      ? Checkbox(
+                                                          value: controller
+                                                              .isChecked.value,
+                                                          onChanged: (val) {})
+                                                      : (value == "Action")
                                                           ? Wrap(children: [
                                                               // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                               //         0
@@ -477,7 +472,6 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                                               )
                                                               // : Container()
                                                             ])
-                                                            
                                                           : Text(
                                                               value,
                                                             ));

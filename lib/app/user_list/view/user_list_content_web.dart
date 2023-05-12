@@ -95,7 +95,6 @@ class UserListContentWeb extends GetView<UserListController> {
                   Row(
                     children: [
                       Container(
-                        width: (Get.width * .2) - 100,
                         height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
@@ -105,7 +104,6 @@ class UserListContentWeb extends GetView<UserListController> {
                         ),
                       ),
                       Container(
-                        width: (Get.width * .1) - 60,
                         height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
@@ -114,7 +112,6 @@ class UserListContentWeb extends GetView<UserListController> {
                             text: 'Copy'),
                       ),
                       Container(
-                        width: (Get.width * .1) - 60,
                         height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(
@@ -123,7 +120,6 @@ class UserListContentWeb extends GetView<UserListController> {
                             text: 'Excel'),
                       ),
                       Container(
-                        width: (Get.width * .1) - 70,
                         height: 45,
                         margin: EdgeInsets.only(left: 10),
                         child: CustomElevatedButton(

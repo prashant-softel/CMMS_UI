@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-List<StateModel> facilityListFromJson(String str) =>
-    List<StateModel>.from(json.decode(str).map(StateModel.fromJson));
+List<RoleModel> roleListFromJson(String str) =>
+    List<RoleModel>.from(json.decode(str).map(RoleModel.fromJson));
 
-String facilityListToJson(List<StateModel> data) =>
+String roleListToJson(List<RoleModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class StateModel {
-  factory StateModel.fromJson(Map<String, dynamic> json) => StateModel(
+class RoleModel {
+  factory RoleModel.fromJson(Map<String, dynamic> json) => RoleModel(
         id: json['id'],
         name: json['name'],
         // input: json['input'],
       );
-  StateModel({
+  RoleModel({
     this.id,
     this.name,
     // this.input,

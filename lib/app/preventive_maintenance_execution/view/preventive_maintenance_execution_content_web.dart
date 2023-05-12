@@ -477,7 +477,6 @@ class PreventiveMaintenanceExecutionContentWeb
                                     children: [
                                       Container(
                                         height: 35,
-                                        width: (Get.width * .1) - 50,
                                         child: CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appRedColor,
@@ -490,7 +489,6 @@ class PreventiveMaintenanceExecutionContentWeb
                                       ),
                                       Container(
                                         height: 35,
-                                        width: (Get.width * .1) - 60,
                                         child: CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.greenColor,
@@ -505,7 +503,6 @@ class PreventiveMaintenanceExecutionContentWeb
                                       ),
                                       Container(
                                         height: 35,
-                                        width: (Get.width * .2) - 170,
                                         child: CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appDarkBlueColor,
@@ -559,7 +556,7 @@ class PreventiveMaintenanceExecutionContentWeb
         return Container(
           // margin: Dimens.edgeInsets15,
           // padding: Dimens.edgeInsets25,
-          height: height / 8,
+          height: height / 7,
           width: double.infinity,
 
           child: Column(
@@ -580,7 +577,6 @@ class PreventiveMaintenanceExecutionContentWeb
               //  Text("PM Execution Submitted with code PMSC87456"),
               Container(
                 height: 40,
-                width: (Get.width * .2) - 60,
                 child: CustomElevatedButton(
                   text: "PM Execution View",
                   onPressed: () {

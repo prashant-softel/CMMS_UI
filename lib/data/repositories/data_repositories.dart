@@ -989,5 +989,55 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getCountryList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getCountryList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getStateListnew({
+    required String auth,
+    bool? isLoading,
+    int? selectedCountryId,
+  }) async {
+    return await connectHelper.getStateListnew(
+        auth: auth, isLoading: isLoading, selectedCountryId: selectedCountryId);
+  }
+
+  Future<ResponseModel> getCityList({
+    required String auth,
+    bool? isLoading,
+    int? selectedStateId,
+  }) async {
+    return await connectHelper.getCityList(
+        auth: auth, isLoading: isLoading, selectedStateId: selectedStateId);
+  }
+
+  Future<ResponseModel> getRoleAccessList({
+    String? auth,
+    int? roleId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoleAccessList(
+      auth: auth,
+      roleId: roleId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getRoleList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoleList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
   ///
 }
