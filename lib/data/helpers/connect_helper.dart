@@ -254,6 +254,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAssetTypeList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetAssetCategoryList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getSafetyMeasureList(
       {required bool isLoading,
       required String auth,
@@ -415,8 +429,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -440,7 +453,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> permitCloseButton({
+  Future<ResponseModel> permitCloseButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -464,8 +477,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> permitRejectButton({
+  Future<ResponseModel> permitRejectButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -488,9 +500,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
-
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -947,7 +956,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Update New Permit
+  //Update New Permit
   Future<ResponseModel> updateNewPermit({
     required String auth,
     newPermit,
@@ -974,7 +983,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,

@@ -82,6 +82,12 @@ class MastersController extends GetxController {
       Routes.jobSOPListScreen,
     );
   }
+  //goToAssetTypeList
+  Future<void> goToAssetTypeList() async {
+    Get.toNamed(
+      Routes.assetTypeListScreen,
+    );
+  }
 
   
 }

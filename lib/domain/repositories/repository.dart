@@ -25,6 +25,7 @@ import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -270,8 +271,7 @@ class Repository {
     }
   }
 
-
-   //Update New Permit
+  //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
     newPermit,
     bool? isLoading,
@@ -692,6 +692,32 @@ class Repository {
     }
   }
 
+  Future<List<AssetTypeListModel>> getAssetTypeList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssetTypeList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var assetTypeList = assetTypeListModelFromJson(res.data);
+        return assetTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required int? permit_type_id,
     required bool isLoading,
@@ -964,8 +990,7 @@ class Repository {
     }
   }
 
-
-   Future<void> permitCancelButton(
+  Future<void> permitCancelButton(
     String? comment,
     String? id,
     bool? isLoading,
@@ -1017,7 +1042,6 @@ class Repository {
     }
   }
 
-
   Future<void> permitRejectButton(
     String? comment,
     String? id,
@@ -1043,8 +1067,6 @@ class Repository {
       log(error.toString());
     }
   }
-
-
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,

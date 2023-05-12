@@ -6,16 +6,12 @@ import 'package:cmms/app/master_dashboard/master_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 // import '../../navigators/app_pages.dart';
 
-class MastersDashboard
-    extends GetView<MastersController> {
+class MastersDashboard extends GetView<MastersController> {
   MastersDashboard({super.key});
 
   final MastersController controller = Get.find();
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +93,7 @@ class MastersDashboard
                         ),
                       ),
                     if (Responsive.isDesktop(context))
-                    Container(
+                      Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Text(
                           "Masters",
@@ -107,17 +103,19 @@ class MastersDashboard
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 15,),
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Permit To Work",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400),
-                        ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "Permit To Work",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 159, 156, 156),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400),
                       ),
+                    ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
@@ -135,11 +133,11 @@ class MastersDashboard
                               controller.goToPermitTypeScreen();
                             }),
                         createContentTile(
-                          title: 'Safety Questions',
-                          onTap: (){
-                            controller.gotToSafetyQuestionsList();
-                          }),
-                          createContentTile(
+                            title: 'Safety Questions',
+                            onTap: () {
+                              controller.gotToSafetyQuestionsList();
+                            }),
+                        createContentTile(
                             title: "Job Type",
                             onTap: () {
                               controller.goToJobTypeList();
@@ -148,6 +146,11 @@ class MastersDashboard
                             title: "Job List",
                             onTap: () {
                               controller.goToJobSOPList();
+                            }),
+                        createContentTile(
+                            title: "Asset Type",
+                            onTap: () {
+                              controller.goToAssetTypeList();
                             }),
                         // createContentTile(title: "Job Card List"),
                         // _priventiveList(tittle: "PM Schedule View"),

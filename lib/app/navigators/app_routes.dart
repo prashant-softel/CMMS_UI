@@ -43,6 +43,7 @@ abstract class Routes {
   static const safetyQuestionsList = _Paths.safetyQuestionsList;
   static const jobTypeListScreen = _Paths.jobTypeListScreen;
   static const jobSOPListScreen = _Paths.jobSOPListScreen;
+  static const assetTypeListScreen = _Paths.assetTypeListScreen;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
@@ -91,6 +92,7 @@ abstract class _Paths {
   static const safetyQuestionsList = '/safety-question-list-screen';
   static const jobTypeListScreen = '/job-type-list-screen';
   static const jobSOPListScreen = '/job-sop-list-screen';
+  static const assetTypeListScreen = '/asset-type-list-screen';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
   static const addUser = '/addUser';

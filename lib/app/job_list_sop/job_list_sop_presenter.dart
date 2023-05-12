@@ -1,10 +1,6 @@
-
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/usecases/job_list_sop_usecase.dart';
 import 'package:cmms/domain/usecases/job_type_list_usecase.dart';
-
-
-
 
 class JobSOPListPresenter {
   JobSOPListPresenter(this.jobSOPListUsecase);
@@ -24,8 +20,4 @@ class JobSOPListPresenter {
       job_type_id: job_type_id,
     );
   }
-
-
- 
- 
 }
