@@ -784,7 +784,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                               ),
                                             ),
                                             Container(
-                                              height: Get.height,
+                                              height: Get.height + 50,
 
                                               //  height: 500,
                                               decoration: BoxDecoration(
@@ -859,100 +859,48 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                                         ? controller
                                                                             .accesslevel
                                                                             .map((getAccesslevelDetails) =>
-                                                                                TableViewRow(height: 60, cells: [
+                                                                                TableViewRow(height: 90, cells: [
                                                                                   TableViewCell(
-                                                                                      child: Checkbox(
-                                                                                          value: '${getAccesslevelDetails?.feature_name}' == "1" ? true : false,
-                                                                                          checkColor: Colors.white,
-                                                                                          activeColor: ColorValues.blackColor,
-                                                                                          shape: RoundedRectangleBorder(
-                                                                                            borderRadius: BorderRadius.circular(2.0),
+                                                                                    child: Checkbox(
+                                                                                        value: '${getAccesslevelDetails?.feature_name}' == "1" ? true : false,
+                                                                                        checkColor: Colors.white,
+                                                                                        activeColor: ColorValues.blackColor,
+                                                                                        shape: RoundedRectangleBorder(
+                                                                                          borderRadius: BorderRadius.circular(2.0),
+                                                                                        ),
+                                                                                        side: MaterialStateBorderSide.resolveWith(
+                                                                                          (states) => BorderSide(
+                                                                                            width: 1.0,
+                                                                                            color: ColorValues.blackColor,
                                                                                           ),
-                                                                                          side: MaterialStateBorderSide.resolveWith(
-                                                                                            (states) => BorderSide(
-                                                                                              width: 1.0,
-                                                                                              color: ColorValues.blackColor,
-                                                                                            ),
-                                                                                          ),
-                                                                                          onChanged: (val) {
-                                                                                            getAccesslevelDetails?.feature_name = val == true ? "1" : "0";
-                                                                                          })),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.add, onCheck: (val) {})),
+                                                                                        ),
+                                                                                        onChanged: (val) {
+                                                                                          getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
+                                                                                          controller.update();
+                                                                                        }),
+                                                                                  ),
                                                                                   TableViewCell(
-                                                                                      child: _rowItem(getAccesslevelDetails?.edit, onCheck: (val) {
-                                                                                    getAccesslevelDetails?.edit = val == true ? 1 : 0;
-                                                                                  })),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.delete, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.view, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.issue, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.approve, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.selfView, onCheck: (val) {})),
+                                                                                    child: Obx(() {
+                                                                                      return _rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
+                                                                                        getAccesslevelDetails?.add.value = val == true ? 1 : 0;
+                                                                                      });
+                                                                                    }),
+                                                                                  ),
+                                                                                  TableViewCell(
+                                                                                    child: Obx(() {
+                                                                                      return _rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
+                                                                                        getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
+                                                                                      });
+                                                                                    }),
+                                                                                  ),
+                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {})),
+                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {})),
+                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {})),
+                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {})),
+                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {})),
                                                                                 ]))
                                                                             .toList()
-                                                                        : [
-                                                                            ...List.generate(
-                                                                              controller.accesslevel?.length ?? 0,
-                                                                              (index) {
-                                                                                var getAccesslevelDetails = controller.accesslevel?[index];
-                                                                                return [
-                                                                                  '${getAccesslevelDetails?.feature_name}',
-                                                                                  '${getAccesslevelDetails?.add ?? ''}',
-                                                                                  '${getAccesslevelDetails?.edit ?? ''}',
-                                                                                  '${getAccesslevelDetails?.delete ?? ''}',
-                                                                                  '${getAccesslevelDetails?.view ?? ''}',
-                                                                                  '${getAccesslevelDetails?.issue ?? ''}',
-                                                                                  '${getAccesslevelDetails?.approve ?? ''}',
-                                                                                  '${getAccesslevelDetails?.selfView ?? ''}',
-                                                                                ];
-                                                                              },
-                                                                            ),
-                                                                          ].map((record) {
-                                                                            return TableViewRow(
-                                                                              height: 60,
-                                                                              cells: record.map((value) {
-                                                                                return TableViewCell(
-                                                                                    child: (value == "1" || value == "0")
-                                                                                        ? Checkbox(
-                                                                                            value: value == "1" ? controller.isChecked.value = true : controller.isChecked.value = false,
-                                                                                            checkColor: Colors.white,
-                                                                                            activeColor: ColorValues.blackColor,
-                                                                                            shape: RoundedRectangleBorder(
-                                                                                              borderRadius: BorderRadius.circular(2.0),
-                                                                                            ),
-                                                                                            side: MaterialStateBorderSide.resolveWith(
-                                                                                              (states) => BorderSide(
-                                                                                                width: 1.0,
-                                                                                                color: ColorValues.blackColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                            onChanged: (val) {
-                                                                                              print({"obj122", val});
-                                                                                              //value = "1";
-                                                                                              controller.isChecked.value = val!;
-                                                                                            })
-                                                                                        : Row(
-                                                                                            children: [
-                                                                                              Checkbox(
-                                                                                                  value: value == "1" ? true : false,
-                                                                                                  checkColor: Colors.white,
-                                                                                                  activeColor: ColorValues.blackColor,
-                                                                                                  shape: RoundedRectangleBorder(
-                                                                                                    borderRadius: BorderRadius.circular(2.0),
-                                                                                                  ),
-                                                                                                  side: MaterialStateBorderSide.resolveWith(
-                                                                                                    (states) => BorderSide(
-                                                                                                      width: 1.0,
-                                                                                                      color: ColorValues.blackColor,
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                  onChanged: (value) {}),
-                                                                                              Dimens.boxWidth5,
-                                                                                              Expanded(child: Text(value)),
-                                                                                            ],
-                                                                                          ));
-                                                                              }).toList(),
-                                                                            );
-                                                                          }).toList(),
+                                                                        : [],
                                                                   )
                                                                 : Container())),
                                                   ],

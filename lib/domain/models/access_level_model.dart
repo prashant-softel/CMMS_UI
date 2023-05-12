@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 AccessLevelModel accessLevelModelFromJson(String str) =>
     AccessLevelModel.fromJson(json.decode(str));
 
@@ -24,27 +26,36 @@ class AccessLevelModel {
 }
 
 class AccessLevel {
-  int? feature_id;
-  String? feature_name;
-  int? add;
-  int? edit;
-  int? delete;
-  int? view;
-  int? issue;
-  int? selfView;
-  int? approve;
+  RxInt feature_id = RxInt(0);
+  RxString feature_name = RxString('');
+  RxInt add = RxInt(0);
+  RxInt edit = RxInt(0);
+  RxInt delete = RxInt(0);
+  RxInt view = RxInt(0);
+  RxInt issue = RxInt(0);
+  RxInt selfView = RxInt(0);
+  RxInt approve = RxInt(0);
 
   AccessLevel(
-      {this.feature_id,
-      this.feature_name,
-      this.add,
-      this.delete,
-      this.edit,
-      this.issue,
-      this.selfView,
-      this.approve,
-      this.view});
-
+      {required int feature_id,
+      required String feature_name,
+      required int add,
+      required int delete,
+      required int edit,
+      required int issue,
+      required int selfView,
+      required int approve,
+      required int view}) {
+    this.feature_id.value = feature_id;
+    this.feature_name.value = feature_name;
+    this.add.value = add;
+    this.delete.value = delete;
+    this.edit.value = edit;
+    this.issue.value = issue;
+    this.selfView.value = selfView;
+    this.approve.value = approve;
+    this.view.value = view;
+  }
   factory AccessLevel.fromJson(Map<String, dynamic> parsedJson) {
     return AccessLevel(
       feature_id: parsedJson['feature_id'],

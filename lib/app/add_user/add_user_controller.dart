@@ -97,14 +97,12 @@ class AddUserController extends GetxController {
     if (_accessLevelModel != null) {
       accessLevelModel.value = _accessLevelModel;
       accesslevel.value = accessLevelModel.value?.access_list ?? [];
-      if (accesslevel != null) {
-        for (var _accesslevel in accesslevel) {
-          if (_accesslevel?.feature_name != null) {
-            moduleNameSet.add(_accesslevel?.feature_name ?? "");
-          }
+      for (var _accesslevel in accesslevel) {
+        if (_accesslevel?.feature_name != null) {
+          moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
         }
-        moduleNameList.addAll(moduleNameSet.toList());
       }
+      moduleNameList.addAll(moduleNameSet.toList());
     }
   }
 
