@@ -93,7 +93,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                   /// FILE UPLOAD WIDGET
                   Container(
-                    height: Get.height * 0.3,
+                    height: Get.height * 0.2,
                     width: Get.width,
                     child: Row(//
                         children: [
