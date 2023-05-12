@@ -436,10 +436,22 @@ class JobCardDetailsController extends GetxController {
 
   void addNewTextEditingController() {
     responsibilityCtrlrs.add(TextEditingController());
-    //currentIndex.value = responsibilityCtrlrs.length - 1;
   }
 
-  deleteEmployee() {}
+  void deleteEmployee(int rowIndex) {
+    if (rowIndex < 0 || rowIndex >= employeeTableRows.length) {
+      // Invalid row index
+      return;
+    }
+
+    // Remove the row from the DataTable2
+    employeeTableRows.removeAt(rowIndex);
+
+    // Remove the corresponding text editing controller
+    if (rowIndex < responsibilityCtrlrs.length) {
+      responsibilityCtrlrs.removeAt(rowIndex);
+    }
+  }
 
   String? getResponsibility(index) {
     final responsibitlity = responsibilityCtrlrs[index].text;

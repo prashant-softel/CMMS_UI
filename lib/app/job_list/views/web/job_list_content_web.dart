@@ -80,7 +80,7 @@ class JobListContentWeb extends StatelessWidget {
                     columnSpacing: 10,
                     source: dataSource, // Custom DataSource class
                     headingRowHeight: Get.height * 0.12,
-                    minWidth: Get.width * 2,
+                    minWidth: Get.width * 1.2,
                     showCheckboxColumn: false,
                     rowsPerPage: 10, // Number of rows per page
                     availableRowsPerPage: [10, 20, 30, 50],
@@ -94,14 +94,14 @@ class JobListContentWeb extends StatelessWidget {
                       buildDataColumn(
                         'jobDetails',
                         'Job Title',
-                        ColumnSize.L,
+                        ColumnSize.M,
                         controller.jobDetailsFilterText,
                       ),
                       buildDataColumn(
-                        'jobDate',
-                        'Job Date',
-                        ColumnSize.L,
-                        controller.jobDateFilterText,
+                        'breakdownTime',
+                        'Breakdown Time',
+                        ColumnSize.S,
+                        controller.breakdownTimeFilterText,
                       ),
                       buildDataColumn(
                         'equipmentCat',
@@ -124,21 +124,16 @@ class JobListContentWeb extends StatelessWidget {
                       buildDataColumn(
                         'raisedByName',
                         'Raised By',
-                        ColumnSize.M,
+                        ColumnSize.S,
                         controller.raisedByNameFilterText,
                       ),
-                      buildDataColumn(
-                        'breakdownTime',
-                        'Breakdown Time',
-                        ColumnSize.M,
-                        controller.breakdownTimeFilterText,
-                      ),
-                      buildDataColumn(
-                        'breakdownType',
-                        'Breakdown Type',
-                        ColumnSize.L,
-                        controller.breakdownTypeFilterText,
-                      ),
+
+                      // buildDataColumn(
+                      //   'breakdownType',
+                      //   'Breakdown Type',
+                      //   ColumnSize.L,
+                      //   controller.breakdownTypeFilterText,
+                      // ),
                       buildDataColumn(
                         'permitId',
                         'Permit ID',
@@ -148,7 +143,7 @@ class JobListContentWeb extends StatelessWidget {
                       buildDataColumn(
                         'assignedToName',
                         'Assigned To',
-                        ColumnSize.L,
+                        ColumnSize.S,
                         controller.assignedToNameFilterText,
                       ),
                       buildDataColumn(
@@ -309,17 +304,20 @@ class JobDataSource extends DataTableSource {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              Text(
+                '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',
+              ),
             ],
           ),
         ),
         ...[
-          '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',
+          '${controller.formatDate(jobDetails?.breakdownTime.toString() ?? '')}',
           '${jobDetails?.equipmentCat ?? ''}',
           '${jobDetails?.workingArea ?? ''}',
           '${jobDetails?.workType ?? ''}',
           '${jobDetails?.raisedByName ?? ''}',
-          '${controller.formatDate(jobDetails?.breakdownTime.toString() ?? '')}',
-          '${jobDetails?.breakdownType ?? ''}',
+
+          // '${jobDetails?.breakdownType ?? ''}',
           '${jobDetails?.permitId ?? ''}',
           '${jobDetails?.assignedToName ?? ''}',
           'Actions',

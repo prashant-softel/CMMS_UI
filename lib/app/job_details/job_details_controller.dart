@@ -32,12 +32,14 @@ class JobDetailsController extends GetxController {
   /// Permit
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;
-  List<TextEditingController> textControllers =
-      List.generate(5, (_) => TextEditingController());
+
   final selectedPermit = Rx<NewPermitModel?>(null);
   Rx<int?> selectedPermitId = 0.obs;
+  Rx<bool> isPermitLinked = false.obs;
+  int permitValuesCount = 6;
+  var permitValues;
+  late List<TextEditingController> textControllers;
 
-  final permitValues = RxList<String>.filled(5, '');
   RxString responseMessage = ''.obs;
 
   /// Others
@@ -66,6 +68,9 @@ class JobDetailsController extends GetxController {
       await setJobId();
       getJobDetails(jobId.value);
       isDataLoading.value = false;
+      textControllers =
+          List.generate(permitValuesCount, (_) => TextEditingController());
+      permitValues = RxList<String>.filled(permitValuesCount, '');
     } //
     catch (e) {
       Utility.showDialog(e.toString() + 'onReady');
@@ -135,9 +140,10 @@ class JobDetailsController extends GetxController {
       jobId: jobId.value,
       isLoading: false,
     );
-    if (responseMapPermitLinked != null) {
+    if (responseMapPermitLinked != null && responseMapPermitLinked.length > 0) {
       var _jobId = responseMapPermitLinked["id"][0];
       responseMessage.value = responseMapPermitLinked["message"];
+      isPermitLinked.value = true;
     }
   }
 
@@ -178,15 +184,17 @@ class JobDetailsController extends GetxController {
       // Set the values of the permitValues list based on the selected permit
 
       permitValues[0] = newPermitModel.permitSiteNo.toString();
-      permitValues[1] = newPermitModel.permitTypeName ?? '';
-      permitValues[2] = newPermitModel.requestByName ?? '';
-      permitValues[3] = newPermitModel.ptwStatus.toString();
-      permitValues[4] = DateFormat('yyyy-MM-dd').format(
+      permitValues[1] = newPermitModel.permitId.toString() ?? '';
+      permitValues[2] = newPermitModel.permitTypeName ?? '';
+      // permitValues[3] = newPermitModel.permitTypeName ?? '';
+      permitValues[3] = newPermitModel.requestByName ?? '';
+      permitValues[4] = newPermitModel.ptwStatus.toString();
+      permitValues[5] = DateFormat('yyyy-MM-dd').format(
           newPermitModel.requestDatetime ??
               DateTime.now()); // Format date as needed
     } else {
-      permitValues.fillRange(
-          0, 5, ''); // Clear the values if no permit is selected
+      permitValues.fillRange(0, permitValuesCount,
+          ''); // Clear the values if no permit is selected
     }
   }
 

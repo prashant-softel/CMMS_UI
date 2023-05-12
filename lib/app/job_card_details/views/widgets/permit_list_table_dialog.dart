@@ -52,6 +52,10 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                         DataColumn2(
                             label: Text('Site Permit No.'), size: ColumnSize.S),
                         DataColumn2(
+                            label: Text('Permit ID'), size: ColumnSize.S),
+                        // DataColumn2(
+                        //     label: Text('Permit Name'), size: ColumnSize.S),
+                        DataColumn2(
                             label: Text('Permit Type'), size: ColumnSize.L),
                         DataColumn2(
                             label: Text('Assigned To'), size: ColumnSize.L),
@@ -100,8 +104,7 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                                 ),
                               ),
                             ),
-
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 6; i++)
                               DataCell(
                                 Obx(
                                   () => //
@@ -133,24 +136,23 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                                   ),
                                 ),
                               ),
-                            // ),
-                            DataCell(
-                              TableActionButton(
-                                color: ColorValues.appPurpleColor,
-                                icon: Icons.add,
-                                label: 'Job Card',
-                                onPress: () {
-                                  controller.goToJobCardScreen();
-                                },
-                              ),
-                            ),
+                            (controller.isPermitLinked.value == true)
+                                ? DataCell(
+                                    TableActionButton(
+                                      color: ColorValues.appPurpleColor,
+                                      icon: Icons.add,
+                                      label: 'Job Card',
+                                      onPress: () {
+                                        controller.goToJobCardScreen();
+                                      },
+                                    ),
+                                  )
+                                : DataCell(Dimens.box0)
                           ],
                         ),
                       ],
                     ),
                   ),
-//
-
                   Text(controller.responseMessage.value),
                   controller.responseMessage.value.isEmpty
                       ? CustomElevatedButton(

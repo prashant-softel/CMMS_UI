@@ -2,7 +2,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
@@ -43,9 +42,8 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                   DropzoneView(
                     onCreated: (controller) => this.dzvcontroller = controller,
                     onDrop: (dynamic event) {},
-                    onDropMultiple: (List<dynamic>? events) {
-                      // controller.files.value = events?.cast<File>() ?? [];
-                      // controller.onFilesAdded();
+                    onDropMultiple: (List<dynamic>? events) async {
+                      await controller.selectFiles();
                     },
                     onHover: () => controller.blnHiglight.value = true,
                     onLeave: () => controller.blnHiglight.value = false,
@@ -57,66 +55,48 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.cloud_upload_outlined,
-                            size: 60,
+                            size: 32,
                             color: Colors.white,
                           ),
                           Text(
                             'Drop Files Here',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 14,
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 5),
 
                           /// CHOOSE FILE BUTTON
-                          ElevatedButton.icon(
-                            onPressed: () async {
-                              List<XFile> pickedFiles =
-                                  await controller.addFiles();
-                              List<List<int>> bytesDataList = [];
-
-                              for (var file in pickedFiles) {
-                                bytesDataList.add(await file.readAsBytes());
-                              }
-
-                              if (pickedFiles.isNotEmpty &&
-                                  pickedFiles.length == bytesDataList.length) {
-                                await controller.uploadFiles(
-                                  pickedFiles,
-                                  bytesDataList,
-                                  controller.token,
-                                  uploadProgressCallback: (progress) {
-                                    print('Upload progress: $progress%');
-                                  },
-                                );
-                              } else {
-                                print(
-                                    'No files selected or failed to read bytes data');
-                              }
-                              ;
-                            },
-                            icon: Icon(Icons.search),
-                            label: Text(
-                              'Choose File',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: Dimens.edgeInsets20,
-                              backgroundColor: (controller.blnHiglight.value ==
-                                      true)
-                                  ? ColorValues.appGreenColor.withOpacity(0.3)
-                                  : ColorValues.appLightBlueColor
-                                      .withOpacity(0.1),
-                              shape: RoundedRectangleBorder(),
+                          SizedBox(
+                            height: Dimens.thirtyFive,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                controller.selectFiles();
+                              },
+                              icon: Icon(Icons.search),
+                              label: Text(
+                                'Choose File',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                padding: Dimens.edgeInsets10,
+                                backgroundColor:
+                                    (controller.blnHiglight.value == true)
+                                        ? ColorValues.appGreenColor
+                                            .withOpacity(0.3)
+                                        : ColorValues.appLightBlueColor
+                                            .withOpacity(0.1),
+                                shape: RoundedRectangleBorder(),
+                              ),
                             ),
                           ),
-                          Dimens.boxHeight10,
+                          Dimens.boxHeight5,
 
                           /// UPLOAD BUTTON
                           ElevatedButton(
-                            onPressed: () => {},
+                            onPressed: () => {controller.uploadSelectedFiles()},
                             child: const Text('Upload'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorValues.appDarkBlueColor,
