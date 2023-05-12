@@ -1333,5 +1333,76 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getCountryList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Utils/GetCountryList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getStateListnew(
+          {String? auth, bool? isLoading, int? selectedCountryId}) async =>
+      await apiWrapper.makeRequest(
+        'Utils/GetStateList?country_id=$selectedCountryId',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getCityList(
+          {String? auth, bool? isLoading, int? selectedStateId}) async =>
+      await apiWrapper.makeRequest(
+        'Utils/GetCityList?state_id=$selectedStateId',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getRoleAccessList({
+    required String? auth,
+    int? roleId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/GetRoleAccess?role_id=$roleId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getRoleList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'RoleAccess/GetRoleList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
   ///
 }

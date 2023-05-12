@@ -208,7 +208,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                       children: [
                         Container(
                           height: 40,
-                          width: (MediaQuery.of(context).size.width * .1) - 60,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -217,7 +216,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                         ),
                         Container(
                           height: 40,
-                          width: (MediaQuery.of(context).size.width * .1) - 60,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -225,7 +223,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                               text: 'Excel'),
                         ),
                         Container(
-                          width: (MediaQuery.of(context).size.width * .1) - 60,
                           height: 40,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -234,7 +231,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                               text: 'PDF'),
                         ),
                         Container(
-                          width: (MediaQuery.of(context).size.width * .2) - 100,
                           height: 40,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -504,7 +500,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                     // ),
                                     Container(
                                       height: 35,
-                                      width: (Get.width * .1) - 50,
                                       child: CustomElevatedButton(
                                         backgroundColor: ColorValues.greenColor,
                                         text: 'Submit',
@@ -518,7 +513,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                     ),
                                     Container(
                                       height: 35,
-                                      width: (Get.width * .2) - 150,
                                       child: CustomElevatedButton(
                                         backgroundColor:
                                             ColorValues.appDarkBlueColor,

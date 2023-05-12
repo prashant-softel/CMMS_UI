@@ -11,12 +11,10 @@ import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
 
-class PermitTypeContentWeb
-    extends GetView<PermitTypeController> {
+class PermitTypeContentWeb extends GetView<PermitTypeController> {
   PermitTypeContentWeb({Key? key}) : super(key: key);
 
   final PermitTypeController controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +55,9 @@ class PermitTypeContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / Masters", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Permit Type",
-                      style: Styles.greyMediumLight12)
+                  Text(" / Permit Type", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -101,8 +97,7 @@ class PermitTypeContentWeb
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        
-                                       
+
                                         // Visibility(
                                         //   visible: controller.isSuccess.value,
                                         //   child: Center(
@@ -171,7 +166,7 @@ class PermitTypeContentWeb
                                         //     ),
                                         //   ],
                                         // ),
-                                      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -204,7 +199,7 @@ class PermitTypeContentWeb
                                         //     ),
                                         //   ],
                                         // ),
-                                       
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -240,7 +235,7 @@ class PermitTypeContentWeb
                                         //     ),
                                         //   ],
                                         // ),
-                                      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -295,7 +290,8 @@ class PermitTypeContentWeb
                                         //     ),
                                         //   ],
                                         // ),
-                                         CustomRichText(title: 'Permit Type Title '),
+                                        CustomRichText(
+                                            title: 'Permit Type Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -304,8 +300,7 @@ class PermitTypeContentWeb
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-                                           
-                                            
+
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -346,39 +341,34 @@ class PermitTypeContentWeb
                                             ),
                                           ],
                                         ),
-                                         SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomRichText(
-                                                      title:
-                                                          'Facility: '),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.82,
-                                                    child: DropdownWidget(
-                                                      dropdownList: controller
-                                                          .facilityList,
-                                                      isValueSelected: controller
-                                                          .isFacilitySelected
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedFacility
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
-                                                  ),
-                                       
                                         SizedBox(
                                           height: 10,
                                         ),
-                                            CustomRichText(title: 'Description '),
+                                        CustomRichText(title: 'Facility: '),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.82,
+                                          child: DropdownWidget(
+                                            dropdownList:
+                                                controller.facilityList,
+                                            isValueSelected: controller
+                                                .isFacilitySelected.value,
+                                            selectedValue: controller
+                                                .selectedFacility.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -387,7 +377,7 @@ class PermitTypeContentWeb
                                             //   "Description ",
                                             //   style: Styles.blackBold16,
                                             // ),
-                                            
+
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -428,12 +418,11 @@ class PermitTypeContentWeb
                                             ),
                                           ],
                                         ),
-                                       
+
                                         SizedBox(
                                           height: 20,
                                         ),
-                                      ]
-                                      ),
+                                      ]),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -502,7 +491,6 @@ class PermitTypeContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -518,7 +506,6 @@ class PermitTypeContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -527,7 +514,6 @@ class PermitTypeContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -536,7 +522,6 @@ class PermitTypeContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -595,98 +580,100 @@ class PermitTypeContentWeb
                                   //           }).toList(),
                                   //         ),
                                   //       )
-                                  //     : 
-                                      Expanded(
-                                          child: ScrollableTableView(
-                                            paginationController:
-                                                controller.permitTypePaginationController,
-                                            columns: [
-                                              "Sr.No.",
-                                              "Title",  
-                                              "Description",
-                                              "Facility",
+                                  //     :
+                                  Expanded(
+                                    child: ScrollableTableView(
+                                      paginationController: controller
+                                          .permitTypePaginationController,
+                                      columns: [
+                                        "Sr.No.",
+                                        "Title",
+                                        "Description",
+                                        "Facility",
+                                        "Action"
+                                      ].map((column) {
+                                        return TableViewColumn(
+                                          minWidth: Get.width * 0.12,
+                                          label: column,
+                                        );
+                                      }).toList(),
+                                      rows: //
+                                          [
+                                        ...List.generate(
+                                          controller.typePermitList.length,
+                                          (index) {
+                                            var typePermitListDetails =
+                                                controller
+                                                    .typePermitList[index];
+                                            return [
+                                              '${typePermitListDetails?.id}',
+                                              //'${typePermitListDetails?.status ?? ''}',
+                                              '${typePermitListDetails?.name}',
+                                              'No Data !!',
+                                              'Hero Future Solar Plant 100MW',
+                                              // '${preventiveCheckListModelListDetails?.duration}',
                                               "Action"
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                minWidth: Get.width * 0.12,
-                                                label: column,
-                                              );
-                                            }).toList(),
-                                            rows: //
-                                                [
-                                              ...List.generate(
-                                                controller.typePermitList.length,
-                                                (index) {
-                                                  var typePermitListDetails =
-                                                      controller.typePermitList[index];
-                                                  return [
-                                                    '${typePermitListDetails?.id}',
-                                                     //'${typePermitListDetails?.status ?? ''}',
-                                                    '${typePermitListDetails?.name}',
-                                                    'No Data !!',
-                                                    'Hero Future Solar Plant 100MW',
-                                                    // '${preventiveCheckListModelListDetails?.duration}',
-                                                    "Action"
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((_permitTypeList) {
-                                              return TableViewRow(
-                                                  height: 60,
-                                                  cells: _permitTypeList
-                                                      .map((value) {
-                                                    return TableViewCell(
-                                                        child: 
-                                                        // (value == 'Action')
-                                                        
-                                                        //     ? CustomSwitchTroggle(
-                                                        //         value: value ==
-                                                        //                 'No'
-                                                        //             ? true
-                                                        //             : false,
-                                                        //         onChanged:
-                                                        //             (value) {},
-                                                        //       )
-                                                        //     :
-                                                             (value ==
-                                                                    "Action")
-                                                                ? Wrap(
-                                                                    children: [
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                        //         0
-                                                                        //     ? 
-                                                                            TableActionButton(
-                                                                                color: ColorValues.appLightBlueColor,
-                                                                                icon: Icons.edit,
-                                                                                label: 'Edit',
-                                                                                onPress: () {},
-                                                                              ),
-                                                                            // : Container(),
-                                                                        // :Container(),
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
-                                                                        //         0
-                                                                        //     ? 
-                                                                            TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.delete,
-                                                                                label: 'Delete',
-                                                                                onPress: () {},
-                                                                              )
-                                                                            // : Container()
-                                                                      ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
-                                                  }).toList());
-                                            }).toList(),
-                                          ),
+                                            ];
+                                          },
                                         ),
+                                      ].map((_permitTypeList) {
+                                        return TableViewRow(
+                                            height: 60,
+                                            cells: _permitTypeList.map((value) {
+                                              return TableViewCell(
+                                                  child:
+                                                      // (value == 'Action')
+
+                                                      //     ? CustomSwitchTroggle(
+                                                      //         value: value ==
+                                                      //                 'No'
+                                                      //             ? true
+                                                      //             : false,
+                                                      //         onChanged:
+                                                      //             (value) {},
+                                                      //       )
+                                                      //     :
+                                                      (value == "Action")
+                                                          ? Wrap(children: [
+                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                              //         0
+                                                              //     ?
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                label: 'Edit',
+                                                                onPress: () {},
+                                                              ),
+                                                              // : Container(),
+                                                              // :Container(),
+                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                              //         0
+                                                              //     ?
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appRedColor,
+                                                                icon: Icons
+                                                                    .delete,
+                                                                label: 'Delete',
+                                                                onPress: () {},
+                                                              )
+                                                              // : Container()
+                                                            ])
+                                                          : Text(
+                                                              value,
+                                                            ));
+                                            }).toList());
+                                      }).toList(),
+                                    ),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
-                                        valueListenable:
-                                            controller.permitTypePaginationController,
+                                        valueListenable: controller
+                                            .permitTypePaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(

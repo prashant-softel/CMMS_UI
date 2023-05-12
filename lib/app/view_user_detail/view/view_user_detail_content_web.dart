@@ -209,103 +209,124 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                               Text("1994-04-05", style: Styles.blue17),
                               Text("1935464763", style: Styles.blue17),
                               Text("Maharastra", style: Styles.blue17),
-                              Text("User", style: Styles.blue17),
+                              Text("Portfolio Head", style: Styles.blue17),
                             ],
                           )
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 400,
-                      child: Column(
-                        children: [
-                          Wrap(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.5,
-                                    child: DefaultTabController(
-                                      length: 3,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 45,
-                                            decoration: BoxDecoration(
+                    Column(
+                      children: [
+                        Wrap(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  child: DefaultTabController(
+                                    length: 3,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 45,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.white,
+                                                blurRadius:
+                                                    15.0, // soften the shadow
+                                                spreadRadius:
+                                                    5.0, //extend the shadow
+                                                offset: Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                              )
+                                            ],
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(40),
+                                                topRight: Radius.circular(40)),
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                          ),
+                                          child: TabBar(
+                                            labelPadding: EdgeInsets.symmetric(
+                                                horizontal: 10.0),
+                                            labelColor: Colors.black,
+                                            indicator: BoxDecoration(
                                               borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
+                                                  topLeft: Radius.circular(40),
                                                   topRight:
-                                                      Radius.circular(10)),
-                                              color: Color.fromARGB(
-                                                  255, 245, 248, 250),
-                                            ),
-                                            child: TabBar(
-                                              labelPadding:
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 10.0),
-                                              labelColor: Colors.black,
-                                              indicator: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  10),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  10)),
-                                                  color: Colors.white),
-                                              unselectedLabelColor:
-                                                  Colors.black,
-                                              tabs: [
-                                                Tab(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(Icons
-                                                          .analytics_outlined),
-                                                      Dimens.boxWidth5,
-                                                      Text('Plant Access'),
-                                                    ],
+                                                      Radius.circular(40)),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
                                                   ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                Tab(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(Icons
-                                                          .account_tree_outlined),
-                                                      Dimens.boxWidth5,
-                                                      Text(
-                                                        'Access Level',
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Tab(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(Icons.notifications),
-                                                      Dimens.boxWidth5,
-                                                      Text(
-                                                        'Notification',
-                                                      ),
-                                                    ],
-                                                  ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
                                                 ),
                                               ],
                                             ),
+                                            unselectedLabelColor: Colors.black,
+                                            tabs: [
+                                              Tab(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(Icons
+                                                        .analytics_outlined),
+                                                    Dimens.boxWidth5,
+                                                    Text('Plant Access'),
+                                                  ],
+                                                ),
+                                              ),
+                                              Tab(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(Icons
+                                                        .account_tree_outlined),
+                                                    Dimens.boxWidth5,
+                                                    Text(
+                                                      'Access Level',
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Tab(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(Icons.notifications),
+                                                    Dimens.boxWidth5,
+                                                    Text(
+                                                      'Notification',
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            height: 250,
+                                        ),
+                                        SizedBox(
+                                          height: 250,
+                                          child: Expanded(
                                             child: TabBarView(children: [
                                               ///First TabBar View
                                               Container(
@@ -334,20 +355,21 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                     children: [Text('3 Tab')],
                                                   )),
                                             ]),
-                                          )
-                                        ],
-                                      ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
+                            ),
 
-                              /// Employee
-                            ],
-                          ),
-                        ],
-                      ),
+                            /// Employee
+                          ],
+                        ),
+                      ],
                     ),
+                    Dimens.boxHeight15
                   ],
                 ),
               ),

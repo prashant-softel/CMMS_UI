@@ -138,8 +138,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                         ),
                         Dimens.boxWidth5,
                         Container(
-                          height: 35,
-                          width: (Get.width * .2) - 170,
+                          height: 45,
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appDarkBlueColor,
                             text: "Browse",
@@ -178,7 +177,6 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                         children: [
                           Container(
                             height: 35,
-                            width: (Get.width * .1) - 40,
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appDarkBlueColor,
                               text: "Validate",
@@ -190,7 +188,6 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                           ),
                           Container(
                             height: 35,
-                            width: (Get.width * .1) - 40,
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.greenColor,
                               text: 'Import',
@@ -204,7 +201,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                     controller.fileName.value = "";
                                   });
                                   Fluttertoast.showToast(
-                                      msg: "Please enter required field",
+                                      msg: "file upload  Successfully",
                                       fontSize: 16.0);
                                 });
                                 //  controller.savePmMapping();
@@ -216,7 +213,6 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                           ),
                           Container(
                             height: 35,
-                            width: (Get.width * .1) - 40,
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appRedColor,
                               text: "Close",

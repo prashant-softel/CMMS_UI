@@ -321,7 +321,6 @@ class PreventiveCheckPointContentWeb
                                   children: [
                                     Container(
                                       height: 40,
-                                      width: (Get.width * .1),
                                       child: CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appRedColor,
@@ -332,7 +331,6 @@ class PreventiveCheckPointContentWeb
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .2) - 80,
                                         height: 40,
                                         child: controller.selectedItem == null
                                             ? CustomElevatedButton(
@@ -420,7 +418,6 @@ class PreventiveCheckPointContentWeb
                                     children: [
                                       Container(
                                         height: 45,
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -429,7 +426,6 @@ class PreventiveCheckPointContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -440,7 +436,6 @@ class PreventiveCheckPointContentWeb
                                       ),
                                       Container(
                                         height: 45,
-                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -450,7 +445,6 @@ class PreventiveCheckPointContentWeb
                                       ),
                                       Container(
                                         height: 45,
-                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -552,52 +546,48 @@ class PreventiveCheckPointContentWeb
                                                 return TableViewCell(
                                                   child: (value == "Action")
                                                       ? Wrap(children: [
-                                                          // varUserAccessModel
-                                                          //             .value
-                                                          //             .access_list!
-                                                          //             .where((e) =>
-                                                          //                 e.feature_id ==
-                                                          //                     6 &&
-                                                          //                 e.edit ==
-                                                          //                     1)
-                                                          //             .length >
-                                                          //         0
-                                                          //   ?
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appLightBlueColor,
-                                                            icon: Icons.edit,
-                                                            label: 'Edit',
-                                                            onPress: () {
-                                                              controller.selectedItem = controller
-                                                                  .preventiveCheckpoint!
-                                                                  .firstWhere(
-                                                                      (element) =>
-                                                                          "${element?.id}" ==
-                                                                          record[
-                                                                              0]);
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              6 &&
+                                                                          e.edit ==
+                                                                              1)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .appLightBlueColor,
+                                                                  icon: Icons
+                                                                      .edit,
+                                                                  label: 'Edit',
+                                                                  onPress: () {
+                                                                    controller.selectedItem = controller
+                                                                        .preventiveCheckpoint!
+                                                                        .firstWhere((element) =>
+                                                                            "${element?.id}" ==
+                                                                            record[0]);
 
-                                                              controller
-                                                                      .checkPointCtrlr
-                                                                      .text =
-                                                                  "${controller.selectedItem?.check_point}";
-                                                              controller
-                                                                  .requirementCtrlr
-                                                                  .text = controller
-                                                                      .selectedItem
-                                                                      ?.requirement ??
-                                                                  "";
-                                                              controller
-                                                                  .isToggleOn
-                                                                  .value = controller
-                                                                          .selectedItem
-                                                                          ?.is_document_required ==
-                                                                      1
-                                                                  ? true
-                                                                  : false;
-                                                            },
-                                                          ),
-                                                          // : Container(),
+                                                                    controller
+                                                                            .checkPointCtrlr
+                                                                            .text =
+                                                                        "${controller.selectedItem?.check_point}";
+                                                                    controller
+                                                                        .requirementCtrlr
+                                                                        .text = controller
+                                                                            .selectedItem
+                                                                            ?.requirement ??
+                                                                        "";
+                                                                    controller
+                                                                        .isToggleOn
+                                                                        .value = controller.selectedItem?.is_document_required ==
+                                                                            1
+                                                                        ? true
+                                                                        : false;
+                                                                  },
+                                                                )
+                                                              : Container(),
                                                           varUserAccessModel
                                                                       .value
                                                                       .access_list!

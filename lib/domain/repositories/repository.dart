@@ -9,6 +9,7 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
+import 'package:cmms/domain/models/country_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
@@ -35,10 +36,13 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
+import '../models/access_level_model.dart';
+import '../models/city_model.dart';
 import '../models/frequency_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
+import '../models/role_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -2198,6 +2202,151 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<List<CountryModel?>?> getCountryList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCountryList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonCountryModels = jsonDecode(res.data);
+        final List<CountryModel> _countryModelList = jsonCountryModels
+            .map<CountryModel>(
+              (m) => CountryModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _countryModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getCountryList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<StateModel?>?> getStateListnew(
+      bool? isLoading, int? selectedCountryId) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getStateListnew(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          selectedCountryId: selectedCountryId);
+
+      if (!res.hasError) {
+        final jsonStateModels = jsonDecode(res.data);
+        final List<StateModel> _stateModelList = jsonStateModels
+            .map<StateModel>(
+              (m) => StateModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _stateModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getStateListnew');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<CityModel?>?> getCityList(
+      bool? isLoading, int? selectedStateId) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCityList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          selectedStateId: selectedStateId);
+
+      if (!res.hasError) {
+        final jsoncityModels = jsonDecode(res.data);
+        final List<CityModel> _cityModelList = jsoncityModels
+            .map<CityModel>(
+              (m) => CityModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _cityModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getCityList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<AccessLevelModel?> getRoleAccessList(
+    int? roleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoleAccessList(
+        auth: auth,
+        roleId: roleId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final AccessLevelModel _accessLevelModel =
+            accessLevelModelFromJson(res.data);
+        return _accessLevelModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getRoleAccessList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<List<RoleModel?>?> getRoleList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoleList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonRoleModels = jsonDecode(res.data);
+        final List<RoleModel> _roleModelList = jsonRoleModels
+            .map<RoleModel>(
+              (m) => RoleModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _roleModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getRoleList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 

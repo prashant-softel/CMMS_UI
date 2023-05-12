@@ -185,6 +185,8 @@ class PreventiveListController extends GetxController {
     selectedequipment.value = '';
 
     selectedfrequency.value = '';
+    selectedItem = null;
+
     Future.delayed(Duration(seconds: 1), () {
       getPreventiveCheckList(facilityId, type, true);
     });

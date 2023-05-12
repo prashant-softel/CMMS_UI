@@ -85,7 +85,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                           Spacer(),
                           Container(
                             height: 30,
-                            width: (Get.width * .2) - 20,
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
                               onPressed: () async {},
@@ -135,13 +134,13 @@ class PreventiveMaintenanceTaskViewContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.maintenance_order_number}",
+                                            "${controller.pmtaskViewModel.value?.maintenance_order_number ?? ""}",
                                             style: Styles.blue17),
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.assigned_to_name}",
+                                            "${controller.pmtaskViewModel.value?.assigned_to_name ?? ""}",
                                             style: Styles.blue17),
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.schedule_date}",
+                                            "${controller.pmtaskViewModel.value?.schedule_date ?? ""}",
                                             style: Styles.blue17),
                                         Text("Iv_checklist_001",
                                             style: Styles.blue17),
@@ -176,16 +175,16 @@ class PreventiveMaintenanceTaskViewContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.equipment_name}",
+                                            "${controller.pmtaskViewModel.value?.equipment_name ?? ""}",
                                             style: Styles.blue17),
                                         Text(
-                                            " ${controller.pmtaskViewModel.value?.completed_date}",
+                                            " ${controller.pmtaskViewModel.value?.completed_date ?? ""}",
                                             style: Styles.blue17),
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.completed_date}",
+                                            "${controller.pmtaskViewModel.value?.completed_date ?? ""}",
                                             style: Styles.blue17),
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.frequency_name}",
+                                            "${controller.pmtaskViewModel.value?.frequency_name ?? ""}",
                                             style: Styles.blue17),
                                       ],
                                     ),
@@ -443,7 +442,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   children: [
                                     Container(
                                       height: 35,
-                                      width: (Get.width * .2) - 170,
                                       child: CustomElevatedButton(
                                         icon: Icons.print_outlined,
                                         backgroundColor:
@@ -455,7 +453,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     Dimens.boxWidth50,
                                     Container(
                                       height: 35,
-                                      width: (Get.width * .2) - 170,
                                       child: CustomElevatedButton(
                                         icon: Icons.close,
                                         backgroundColor:

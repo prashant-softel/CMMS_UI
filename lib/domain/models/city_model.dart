@@ -10,21 +10,21 @@ class CityModel {
   factory CityModel.fromJson(Map<String, dynamic> json) => CityModel(
         id: json['id'],
         name: json['name'],
-        input: json['input'],
+        // input: json['input'],
       );
   CityModel({
     this.id,
     this.name,
-    this.input,
+    // this.input,
   });
 
   int? id;
   String? name;
-  int? input;
+  // int? input;
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
-        'input': input,
+        // 'input': input,
       };
 }
