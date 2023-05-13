@@ -83,6 +83,7 @@ class JobDetailsController extends GetxController {
     try {
       final _flutterSecureStorage = const FlutterSecureStorage();
       String? _jobId = '';
+      jobId.value = 0;
 
       // Read jobId from storage
       _jobId = await _flutterSecureStorage.read(key: "jobId");
@@ -181,14 +182,15 @@ class JobDetailsController extends GetxController {
       selectedPermit.value = newPermitModel;
       // Get the selected permitId
       selectedPermitId.value = newPermitModel.permitId;
+      // convert status to string
+      final _status =
+          PermitStatusData.getStatusStringFromInt(newPermitModel.ptwStatus);
       // Set the values of the permitValues list based on the selected permit
-
       permitValues[0] = newPermitModel.permitSiteNo.toString();
       permitValues[1] = newPermitModel.permitId.toString() ?? '';
       permitValues[2] = newPermitModel.permitTypeName ?? '';
-      // permitValues[3] = newPermitModel.permitTypeName ?? '';
       permitValues[3] = newPermitModel.requestByName ?? '';
-      permitValues[4] = newPermitModel.ptwStatus.toString();
+      permitValues[4] = _status;
       permitValues[5] = DateFormat('yyyy-MM-dd').format(
           newPermitModel.requestDatetime ??
               DateTime.now()); // Format date as needed
