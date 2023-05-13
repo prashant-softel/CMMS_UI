@@ -90,8 +90,8 @@ class AddUserController extends GetxController {
   }
 
   Future<void> getRoleAccessList({int? roleId, bool? isloading}) async {
-    final _accessLevelModel =
-        await addUserPresenter.getRoleAccessList(roleId: roleId);
+    final _accessLevelModel = await addUserPresenter.getRoleAccessList(
+        roleId: roleId, isLoading: isloading);
     Set<String> moduleNameSet = {};
 
     if (_accessLevelModel != null) {
