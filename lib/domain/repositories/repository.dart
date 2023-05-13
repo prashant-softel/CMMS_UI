@@ -29,6 +29,7 @@ import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -46,6 +47,8 @@ import '../models/role_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../models/user_list_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -274,8 +277,7 @@ class Repository {
     }
   }
 
-
-   //Update New Permit
+  //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
     newPermit,
     bool? isLoading,
@@ -968,8 +970,7 @@ class Repository {
     }
   }
 
-
-   Future<void> permitCancelButton(
+  Future<void> permitCancelButton(
     String? comment,
     String? id,
     bool? isLoading,
@@ -1021,7 +1022,6 @@ class Repository {
     }
   }
 
-
   Future<void> permitRejectButton(
     String? comment,
     String? id,
@@ -1047,8 +1047,6 @@ class Repository {
       log(error.toString());
     }
   }
-
-
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,
@@ -2506,6 +2504,64 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<List<UserListModel?>?> getUserList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonUserListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<UserListModel> _UserListModelList = jsonUserListModelModels
+            .map<UserListModel>(
+                (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _UserListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<UserDetailsModel?> getUserDetails(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserDetails(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final UserDetailsModel _userDetailModel =
+            userDetailsModelFromJson(res.data);
+        return _userDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getUserDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 

@@ -344,7 +344,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelButton({
     required String auth,
     String? comment,
     String? id,
@@ -357,7 +357,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitCloseButton({
+  Future<ResponseModel> permitCloseButton({
     required String auth,
     String? comment,
     String? id,
@@ -370,8 +370,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
-   Future<ResponseModel> permitRejectButton({
+  Future<ResponseModel> permitRejectButton({
     required String auth,
     String? comment,
     String? id,
@@ -383,7 +382,6 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
-
 
   //  @override
   // Future<ResponseModel> getNewPermitList({
@@ -653,7 +651,6 @@ class DataRepository extends DomainRepository {
         newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
-
 
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
@@ -1035,6 +1032,28 @@ class DataRepository extends DomainRepository {
   }) async {
     return await connectHelper.getRoleList(
       auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getUserList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getUserDetails({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserDetails(
+      auth: auth,
+      userId: userId,
       isLoading: isLoading,
     );
   }
