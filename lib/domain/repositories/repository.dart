@@ -37,6 +37,7 @@ import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/frequency_model.dart';
+import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
@@ -1665,6 +1666,41 @@ class Repository {
       } else {
         Utility.showDialog(
             res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryTypeListModel?>?> getInventoryTypeList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryTypeList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryTypeListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<InventoryTypeListModel> _InventoryTypeListModelList =
+            jsonInventoryTypeListModelModels
+                .map<InventoryTypeListModel>((m) =>
+                    InventoryTypeListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _InventoryTypeListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
         return [];
       }
     } catch (error) {

@@ -152,6 +152,11 @@ class MastersDashboard extends GetView<MastersController> {
                             onTap: () {
                               controller.goToAssetTypeList();
                             }),
+                        createContentTile(
+                            title: "Asset Type List",
+                            onTap: () {
+                              controller.goToInventoryTypeList();
+                            }),
                         // createContentTile(title: "Job Card List"),
                         // _priventiveList(tittle: "PM Schedule View"),
                         // _priventiveList(tittle: "PM Report"),
