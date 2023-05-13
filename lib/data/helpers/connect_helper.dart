@@ -254,6 +254,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAssetTypeList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetAssetCategoryList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getSafetyMeasureList(
       {required bool isLoading,
       required String auth,
@@ -544,6 +558,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getInventoryTypeList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryTypeList',
       Request.get,
       null,
       isLoading ?? false,

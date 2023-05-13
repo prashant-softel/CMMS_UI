@@ -217,6 +217,22 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getAssetTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getAssetTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  @override
   Future<ResponseModel> getSafetyMeasureList({
     int? permit_type_id,
     required bool isLoading,
@@ -429,6 +445,20 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getInventoryTypeList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getInventoryTypeList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getCheckPointlist({
     required String auth,
     int? selectedchecklistId,

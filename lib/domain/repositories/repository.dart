@@ -26,6 +26,7 @@ import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -40,6 +41,7 @@ import '../../app/navigators/app_pages.dart';
 import '../models/access_level_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
+import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
@@ -690,6 +692,32 @@ class Repository {
       if (!res.hasError) {
         var sopPermitList = sopListModelFromJson(res.data);
         return sopPermitList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<AssetTypeListModel>> getAssetTypeList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssetTypeList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var assetTypeList = assetTypeListModelFromJson(res.data);
+        return assetTypeList;
       }
       return [];
     } catch (error) {
@@ -1645,6 +1673,41 @@ class Repository {
       } else {
         Utility.showDialog(
             res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryTypeListModel?>?> getInventoryTypeList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryTypeList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryTypeListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<InventoryTypeListModel> _InventoryTypeListModelList =
+            jsonInventoryTypeListModelModels
+                .map<InventoryTypeListModel>((m) =>
+                    InventoryTypeListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _InventoryTypeListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
         return [];
       }
     } catch (error) {
