@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 List<EmployeeModel> employeeModelFromJson(String str) =>
     List<EmployeeModel>.from(
         json.decode(str).map((x) => EmployeeModel.fromJson(x)));
@@ -81,4 +83,14 @@ class EnumValues<T> {
     reverseMap = map?.map((k, v) => MapEntry(v, k));
     return reverseMap ?? Map<T, String>();
   }
+}
+
+class EmployeeRow {
+  EmployeeRow({
+    required this.employeeName,
+    required this.responsibilities,
+  });
+
+  final String employeeName;
+  final TextEditingController responsibilities;
 }

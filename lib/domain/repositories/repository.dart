@@ -1889,7 +1889,7 @@ class Repository {
     } //
     catch (error) {
       print(error.toString());
-      Utility.showDialog(res.errorCode.toString() + ' repo - updateJobCard');
+      Utility.showDialog(error.toString() + ' repo - updateJobCard');
       return Map();
     }
   }

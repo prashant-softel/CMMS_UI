@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../app/utils/app_constants.dart';
+
 List<NewPermitModel> newPermitListFromJson(String str) =>
     List<NewPermitModel>.from(json.decode(str).map(NewPermitModel.fromJson));
 
@@ -80,5 +82,77 @@ class NewPermitModel {
     data['approved_datetime'] = this.approvedDatetime;
     data['current_status'] = this.currentStatus;
     return data;
+  }
+}
+
+enum PermitStatus {
+  PTW_CREATED,
+  PTW_REJECTED_BY_ISSUER,
+  PTW_ISSUED,
+  PTW_REJECTED_BY_APPROVER,
+  PTW_APPROVE,
+  PTW_CLOSED,
+  PTW_CANCELLED_BY_ISSUER,
+  PTW_CANCELLED_BY_HSE,
+  PTW_CANCELLED_BY_APPROVER,
+  PTW_CANCEL_REQUESTED,
+  PTW_CANCEL_REQUEST_REJECTED,
+  PTW_EDIT,
+  PTW_EXTEND_REQUESTED,
+  PTW_EXTEND_REQUEST_APPROVE,
+  PTW_EXTEND_REQUEST_REJECTED,
+  PTW_LINKED_TO_JOB,
+  PTW_LINKED_TO_PM,
+  PTW_LINKED_TO_AUDIT,
+  PTW_LINKED_TO_HOTO,
+  PTW_EXPIRED,
+}
+
+class PermitStatusData {
+  static Map<String, PermitStatus> permitStatusValues = {
+    AppConstants.kPermitStatusCreated: PermitStatus.PTW_CREATED,
+    AppConstants.kPermitStatusRejectedByIssuer:
+        PermitStatus.PTW_REJECTED_BY_ISSUER,
+    AppConstants.kPermitStatusIssued: PermitStatus.PTW_ISSUED,
+    AppConstants.kPermitStatusRejectedByApprover:
+        PermitStatus.PTW_REJECTED_BY_APPROVER,
+    AppConstants.kPermitStatusApproved: PermitStatus.PTW_APPROVE,
+    AppConstants.kPermitStatusClosed: PermitStatus.PTW_CLOSED,
+    AppConstants.kPermitStatusCancelledByIssuer:
+        PermitStatus.PTW_CANCELLED_BY_ISSUER,
+    AppConstants.kPermitStatusCancelledByHSE: PermitStatus.PTW_CANCELLED_BY_HSE,
+    AppConstants.kPermitStatusCancelledByApprover:
+        PermitStatus.PTW_CANCELLED_BY_APPROVER,
+    AppConstants.kPermitStatusCancelRequested:
+        PermitStatus.PTW_CANCEL_REQUESTED,
+    AppConstants.kPermitStatusCancelRequestRejected:
+        PermitStatus.PTW_CANCEL_REQUEST_REJECTED,
+    AppConstants.kPermitStatusEdit: PermitStatus.PTW_EDIT,
+    AppConstants.kPermitStatusExtendRequested:
+        PermitStatus.PTW_EXTEND_REQUESTED,
+    AppConstants.kPermitStatusExtendRequestApproved:
+        PermitStatus.PTW_EXTEND_REQUEST_APPROVE,
+    AppConstants.kPermitStatusExtendRequestRejected:
+        PermitStatus.PTW_EXTEND_REQUEST_REJECTED,
+    AppConstants.kPermitStatusLinkedToJob: PermitStatus.PTW_LINKED_TO_JOB,
+    AppConstants.kPermitStatusLinkedToPM: PermitStatus.PTW_LINKED_TO_PM,
+    AppConstants.kPermitStatusLinkedToAudit: PermitStatus.PTW_LINKED_TO_AUDIT,
+    AppConstants.kPermitStatusLinkedToHOTO: PermitStatus.PTW_LINKED_TO_HOTO,
+    AppConstants.kPermitStatusExpired: PermitStatus.PTW_EXPIRED,
+  };
+
+  static String getStatusStringFromInt(int? intStatus) {
+    if (intStatus == null) {
+      return 'UNKNOWN';
+    }
+
+    final permitStatus = PermitStatus.values.firstWhere(
+        (x) => x.index == (intStatus - 101),
+        orElse: () => PermitStatus.PTW_CREATED);
+    final statusString = PermitStatusData.permitStatusValues.entries
+        .firstWhere((x) => x.value == permitStatus,
+            orElse: () => MapEntry("CREATED", PermitStatus.PTW_CREATED))
+        .key;
+    return statusString;
   }
 }
