@@ -148,7 +148,7 @@ class MastersDashboard extends GetView<MastersController> {
                               controller.goToJobSOPList();
                             }),
                         createContentTile(
-                            title: "Asset Type",
+                            title: "Asset Category List",
                             onTap: () {
                               controller.goToAssetTypeList();
                             }),

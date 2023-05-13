@@ -54,9 +54,9 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Asset Type", style: Styles.greyMediumLight12)
+                  Text(" / ASSET CATEGORY", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -90,7 +90,7 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add Asset Type ",
+                                          "Add Asset Category ",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -303,7 +303,7 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of Asset Types",
+                                      "List of Asset Categories",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
