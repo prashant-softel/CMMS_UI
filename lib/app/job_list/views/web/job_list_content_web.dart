@@ -241,18 +241,11 @@ class JobDataSource extends DataTableSource {
           (job?.workingArea ?? '')
               .toLowerCase()
               .contains(controller.workAreaFilterText.value.toLowerCase()) &&
-          // (job?.description ?? '')
-          //     .toLowerCase()
-          //     .contains(controller.descriptionFilterText.value.toLowerCase()) &&
-
           (job?.workType ?? '').contains(controller.workTypeFilterText.value) &&
           (job?.raisedByName ?? '').toLowerCase().contains(
               controller.raisedByNameFilterText.value.toLowerCase()) &&
-          controller
-              .formatDate(job?.breakdownTime.toString() ?? '')
-              .toLowerCase()
-              .contains(
-                  controller.breakdownTimeFilterText.value.toLowerCase()) &&
+          controller.formatDate(job?.breakdownTime.toString() ?? '').toLowerCase().contains(
+              controller.breakdownTimeFilterText.value.toLowerCase()) &&
           (job?.breakdownType ?? '').toLowerCase().contains(
               controller.breakdownTypeFilterText.value.toLowerCase()) &&
           (job?.permitId ?? '')
@@ -316,8 +309,6 @@ class JobDataSource extends DataTableSource {
           '${jobDetails?.workingArea ?? ''}',
           '${jobDetails?.workType ?? ''}',
           '${jobDetails?.raisedByName ?? ''}',
-
-          // '${jobDetails?.breakdownType ?? ''}',
           '${jobDetails?.permitId ?? ''}',
           '${jobDetails?.assignedToName ?? ''}',
           'Actions',

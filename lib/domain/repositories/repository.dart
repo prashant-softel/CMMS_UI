@@ -274,8 +274,7 @@ class Repository {
     }
   }
 
-
-   //Update New Permit
+  //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
     newPermit,
     bool? isLoading,
@@ -968,8 +967,7 @@ class Repository {
     }
   }
 
-
-   Future<void> permitCancelButton(
+  Future<void> permitCancelButton(
     String? comment,
     String? id,
     bool? isLoading,
@@ -1021,7 +1019,6 @@ class Repository {
     }
   }
 
-
   Future<void> permitRejectButton(
     String? comment,
     String? id,
@@ -1047,8 +1044,6 @@ class Repository {
       log(error.toString());
     }
   }
-
-
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,
@@ -1869,7 +1864,7 @@ class Repository {
     jobCard,
     bool? isLoading,
   ) async {
-    final res = ResponseModel(data: '', hasError: false);
+    // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateJobCard(

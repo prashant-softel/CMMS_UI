@@ -13,6 +13,9 @@ class JobListContentMobile extends GetView<JobListController> {
 
   @override
   Widget build(BuildContext context) {
+    var _statusString =
+        JobStatusData.getStatusStringFromStatusEnumValue(jobModel?.status);
+
     ///
     return //
         Scaffold(
@@ -30,11 +33,11 @@ class JobListContentMobile extends GetView<JobListController> {
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.jobList != null
-                        ? controller.jobList?.length
+                        ? controller.jobList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final jobModel = (controller.jobList != null)
-                          ? controller.jobList![index]
+                          ? controller.jobList[index]
                           : JobModel();
                       var status = jobModel?.status?.name.toString() ?? '';
                       print('Status: $status');
@@ -77,32 +80,9 @@ class JobListContentMobile extends GetView<JobListController> {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                color: (status.toLowerCase() ==
-                                                        "created")
-                                                    ? Color(0xff58c3ca)
-                                                    : (status.toLowerCase() ==
-                                                            "assigned")
-                                                        ? Color(0xff58c352)
-                                                        : (status.toLowerCase() ==
-                                                                "linked")
-                                                            ? Color(0xff787099)
-                                                            : (status.toLowerCase() ==
-                                                                    "in progress")
-                                                                ? Color(
-                                                                    0xffbf8c4b)
-                                                                : (status.toLowerCase() ==
-                                                                        "closed")
-                                                                    ? Color(
-                                                                        0xff3438cd)
-                                                                    : (status.toLowerCase() ==
-                                                                            "cancelled")
-                                                                        ? Color(
-                                                                            0xffbf4844)
-                                                                        : Color.fromARGB(
-                                                                            255,
-                                                                            227,
-                                                                            223,
-                                                                            108),
+                                                color: JobStatusData
+                                                    .getStatusColor(
+                                                        _statusString),
                                               ),
                                               padding:
                                                   const EdgeInsets.symmetric(

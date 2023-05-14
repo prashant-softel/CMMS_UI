@@ -9,6 +9,7 @@ abstract class Routes {
   static const jobList = _Paths.jobList;
   static const jobCard = _Paths.jobCardDetails;
   static const jobDetails = _Paths.jobDetails;
+  static const jobCardList = _Paths.jobCardList;
   static const addJob = _Paths.addJob;
   static const editJob = _Paths.editJob;
   static const facility = _Paths.facility;
@@ -58,6 +59,7 @@ abstract class _Paths {
   static const editJob = '/edit-job-screen';
   static const facility = '/facility';
   static const jobCardDetails = '/job-card-details';
+  static const jobCardList = '/job-card-list-screen';
   static const login = '/login-screen';
   static const preventive = '/preventive-maintenance';
   // static const create_checkList = '/create_preventive_checklist-screen';
