@@ -1930,7 +1930,7 @@ class Repository {
     jobCard,
     bool? isLoading,
   ) async {
-    final res = ResponseModel(data: '', hasError: false);
+    // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateJobCard(

@@ -1,3 +1,4 @@
+import 'package:cmms/app/job_list/views/mobile/job_list_content_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
@@ -45,6 +46,8 @@ class JobListScreen extends StatelessWidget {
                     child: JobListContentWeb(),
                   ),
                 )
+              else
+                Expanded(child: JobListContentMobile())
             ]),
           ),
         ]),
