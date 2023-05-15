@@ -1058,5 +1058,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> saveAccessLevel({
+    required String auth,
+    accessLevelJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveAccessLevel(
+        auth: auth,
+        accessLevelJsonString: accessLevelJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   ///
 }

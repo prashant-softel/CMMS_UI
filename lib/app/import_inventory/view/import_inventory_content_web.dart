@@ -197,12 +197,11 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                   fileBytes: controller.fileBytes,
                                 )
                                     .then((value) {
-                                  Future.delayed(Duration(seconds: 3), () {
-                                    controller.fileName.value = "";
-                                  });
-                                  Fluttertoast.showToast(
-                                      msg: "file upload  Successfully",
-                                      fontSize: 16.0);
+                                  controller.isSuccessDialog();
+
+                                  // Fluttertoast.showToast(
+                                  //     msg: "file upload  Successfully",
+                                  //     fontSize: 16.0);
                                 });
                                 //  controller.savePmMapping();
                               },

@@ -35,4 +35,12 @@ class AddUserUsecase {
         roleId,
         isLoading,
       );
+  Future<Map<String, dynamic>> saveAccessLevel({
+    accessLevelJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.saveAccessLevel(
+        accessLevelJsonString,
+        isLoading,
+      );
 }

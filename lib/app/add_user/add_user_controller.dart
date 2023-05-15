@@ -1,4 +1,5 @@
 import 'package:cmms/app/add_user/add_user_presenter.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/access_level_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
@@ -6,6 +7,8 @@ import 'package:get/get.dart';
 
 import '../../domain/models/city_model.dart';
 import '../../domain/models/role_model.dart';
+import '../../domain/models/save_access_level_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddUserController extends GetxController {
   AddUserController(
@@ -36,6 +39,7 @@ class AddUserController extends GetxController {
   final RxBool isChecked = false.obs;
   final RxBool isCheckedmodule = false.obs;
   var gender = 'Select Gender'.obs;
+  AccessLevel? selectedItem;
   void onInit() async {
     await getCountryList();
     await getRoleList();
@@ -97,12 +101,12 @@ class AddUserController extends GetxController {
     if (_accessLevelModel != null) {
       accessLevelModel.value = _accessLevelModel;
       accesslevel.value = accessLevelModel.value?.access_list ?? [];
-      for (var _accesslevel in accesslevel) {
-        if (_accesslevel?.feature_name != null) {
-          moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
-        }
-      }
-      moduleNameList.addAll(moduleNameSet.toList());
+      // for (var _accesslevel in accesslevel) {
+      //   if (_accesslevel?.feature_name != null) {
+      //     moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
+      //   }
+      // }
+      // moduleNameList.addAll(moduleNameSet.toList());
     }
   }
 
@@ -151,6 +155,39 @@ class AddUserController extends GetxController {
           //statements;
         }
         break;
+    }
+  }
+
+  void saveAccessLevel() async {
+    List<AccessList> accessList = <AccessList>[];
+    accesslevel.forEach((e) {
+      accessList.add(AccessList(
+          feature_id: e?.feature_id.value ?? 0,
+          add: e?.add.value ?? 0,
+          delete: e?.delete.value ?? 0,
+          edit: e?.edit.value ?? 0,
+          selfView: e?.selfView.value ?? 0,
+          approve: e?.approve.value ?? 0,
+          issue: e?.issue.value ?? 0,
+          view: e?.view.value ?? 0));
+    });
+    SaveAccessLevelModel saveAccessLevelModel = SaveAccessLevelModel(
+        user_id: varUserAccessModel.value.user_id ?? 0,
+        access_list: accessList);
+    var accessLevelJsonString = saveAccessLevelModel.toJson();
+    print({"accessLevelJsonString", accessLevelJsonString});
+    if (accessList.isNotEmpty) {
+      Map<String, dynamic>? responsePmMapCreated =
+          await addUserPresenter.saveAccessLevel(
+        accessLevelJsonString: accessLevelJsonString,
+        isLoading: true,
+      );
+      if (responsePmMapCreated != null) {
+        getRoleAccessList(roleId: selectedRoleId, isloading: true);
+        // isSuccessDialog();
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Please Map the Checklist", fontSize: 16.0);
     }
   }
 }
