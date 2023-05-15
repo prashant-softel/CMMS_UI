@@ -369,6 +369,7 @@ if(arguments != null){
       await getPermitIssuerList();
       await getPermitApproverList();
       await getSafetyMeasureList();
+      
 
      
     } catch (e) {
@@ -754,7 +755,6 @@ if(arguments != null){
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           selectedJobTypesId = jobTypeList[jobTypeListIndex].id ?? 0;
           getSopPermitList();
-
           //}
         }
         break;
@@ -901,12 +901,29 @@ if(arguments != null){
     }
   }
 
+  //  int?   getAssignedBlockId(String _selectedBlockName) {
+  //   final item = blockList
+  //   .firstWhere((item) => item?.name == _selectedBlockName);
+  //   final _selectedAssignBlockId = item?.id ?? 0;
+  //   return _selectedAssignBlockId;
+  //   }
+
+
+
+
+
   void createNewPermit() async {
     {
       checkForm();
       if (isFormInvalid.value) {
         return;
       }
+      //   if(selectedBlockId <= 0){
+      //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
+      //   }
+
+
+      // print('JobList BlockId:$selectedBlockId');
 
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
@@ -1058,6 +1075,8 @@ if(arguments != null){
             safetyMeasureId: e.id, safetyMeasureValue: e.name));
       });
 
+   
+
       //  List<Employeelist> employee_list= <Employeelist>[];
       // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
       // List<LotoList> loto_list = <LotoList>[];
@@ -1129,15 +1148,22 @@ if(arguments != null){
 
   loadPermitDetails(jobModel) {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
-    selectedBlock.value = jobModel.facilityName ?? '';
+    selectedBlock.value = jobModel.blockName ?? '';
+    selectedBlockId = jobModel.blockId ?? 0;
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
      List<int> idList = listJobModelCategory
           .map((obj) => obj!.equipmentCatId)
           .toList();
+          
+   
+    print("Selected Block Id:${selectedBlockId}");
 
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
+    print("Selected Block Name:${selectedBlock}");
+    
+
 
   }
 

@@ -5,8 +5,8 @@ import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 
-class JobTypeListUsecase {
-  JobTypeListUsecase(this.repository);
+class TBTTypeListUsecase {
+  TBTTypeListUsecase(this.repository);
   Repository repository;
 
  Future<List<JobTypeListModel>> getJobTypePermitList({

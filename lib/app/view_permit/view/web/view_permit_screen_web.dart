@@ -9,7 +9,8 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:cmms/app/widgets/safety_measure_dialog.dart';
+import 'package:cmms/app/widgets/history_table_widget.dart';
+import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:flutter/material.dart';
@@ -1893,7 +1894,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   ),
                                                 ),
                                               ),
-
+                                              // HistoryTableWidget(historyList: []),
                                               SizedBox(height: 20,),
                                               Row(
                                                               mainAxisAlignment:

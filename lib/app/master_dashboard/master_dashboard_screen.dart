@@ -140,12 +140,12 @@ class MastersDashboard
                             controller.gotToSafetyQuestionsList();
                           }),
                           createContentTile(
-                            title: "Job Type",
+                            title: "TBT Type",
                             onTap: () {
                               controller.goToJobTypeList();
                             }),
                         createContentTile(
-                            title: "Job List",
+                            title: "TBT SOP List",
                             onTap: () {
                               controller.goToJobSOPList();
                             }),

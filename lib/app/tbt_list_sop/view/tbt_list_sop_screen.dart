@@ -1,5 +1,5 @@
-import 'package:cmms/app/job_list_sop/job_list_sop_controller.dart';
-import 'package:cmms/app/job_list_sop/view/job_list_sop_content_web.dart';
+import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
+import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,8 +9,8 @@ import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
 
-class JobSOPListScreen extends GetView<JobSOPListController> {
-  JobSOPListScreen({super.key});
+class TBTSOPListScreen extends GetView<TBTSOPListController> {
+  TBTSOPListScreen({super.key});
 
   ///
   @override
@@ -46,7 +46,7 @@ class JobSOPListScreen extends GetView<JobSOPListController> {
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: JobSOPListContentWeb(),
+                        child: TBTSOPListContentWeb(),
                       )
                   ],
                 ),
