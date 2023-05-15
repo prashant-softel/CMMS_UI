@@ -218,6 +218,9 @@ class UserListContentWeb extends GetView<UserListController> {
                                     ),
                                   ].map((_userList) {
                                     return TableViewRow(
+                                        onTap: () {
+                                          Get.offNamed(Routes.viewUserDetail);
+                                        },
                                         height: 60,
                                         cells: _userList.map((value) {
                                           return TableViewCell(

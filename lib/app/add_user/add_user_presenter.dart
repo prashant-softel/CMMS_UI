@@ -37,4 +37,13 @@ class AddUserPresenter {
         roleId: roleId,
         isLoading: isLoading,
       );
+  Future<Map<String, dynamic>> saveAccessLevel({
+    accessLevelJsonString,
+    required bool isLoading,
+  }) async {
+    return addUserUsecase.saveAccessLevel(
+      accessLevelJsonString: accessLevelJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

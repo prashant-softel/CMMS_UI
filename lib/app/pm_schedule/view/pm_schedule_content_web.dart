@@ -142,67 +142,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                         ),
                       ),
                     ),
-                    // Dimens.boxHeight40,
-                    // Container(
-                    //   margin: EdgeInsets.all(10),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           RichText(
-                    //             text: TextSpan(
-                    //                 text: 'Note: ',
-                    //                 style: TextStyle(
-                    //                   color: ColorValues.blueColor,
-                    //                   fontWeight: FontWeight.bold,
-                    //                 ),
-                    //                 children: [
-                    //                   TextSpan(
-                    //                     text:
-                    //                         'Date Should be ${'"YYYY-MM-DD"'} Format in Excel File',
-                    //                     style: TextStyle(
-                    //                       color: ColorValues.appRedColor,
-                    //                       fontWeight: FontWeight.bold,
-                    //                     ),
-                    //                   ),
-                    //                 ]),
-                    //           ),
-                    //           Dimens.boxHeight20,
-                    //           Container(
-                    //             decoration: BoxDecoration(
-                    //               color: ColorValues.yellowColor,
-                    //               borderRadius: BorderRadius.circular(10),
-                    //               boxShadow: [
-                    //                 BoxShadow(
-                    //                   color: ColorValues.yellowColor,
-                    //                   spreadRadius: 2,
-                    //                   blurRadius: 5,
-                    //                   offset: Offset(0, 2),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //             child: Padding(
-                    //               padding: const EdgeInsets.all(5.0),
-                    //               child: Text(
-                    //                 "PM Execution will be scheduled for mapped frequencies only",
-                    //                 style: TextStyle(fontSize: 12),
-                    //               ),
-                    //             ),
-                    //           )
-                    //         ],
-                    //       ),
-                    //       ActionButton(
-                    //         icon: Icons.upload,
-                    //         label: 'Import Schedule',
-                    //         onPressed: () {},
-                    //         color: ColorValues.appLightBlueColor,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-
                     Dimens.boxHeight20,
                     Row(
                       children: [
@@ -322,25 +261,9 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         return [
                                           '${getPmScheduleListListDetails?.asset_id}',
                                           '${getPmScheduleListListDetails?.asset_name ?? ''}',
-                                          //  ...controller.frequencyListName,
                                           ...(getPmScheduleListListDetails
                                                   ?.frequency_dates ??
                                               []),
-                                          // "Day",
-                                          // "Week",
-                                          // "FortNight",
-                                          // "Monthly",
-                                          // "Quarterly",
-                                          // "Half Yearly",
-                                          // "Yearly",
-                                          // "2 Years",
-                                          // "5 Years",
-                                          // "10 Years",
-                                          // "3 Years",
-                                          // "6 Years",
-                                          // "4 Years",
-                                          // "20 Years",
-                                          // "2 Months"
                                         ];
                                       },
                                     ),
@@ -485,19 +408,6 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    // Container(
-                                    //   height: 35,
-                                    //   width: (Get.width * .1) - 60,
-                                    //   child: CustomElevatedButton(
-                                    //     backgroundColor:
-                                    //         ColorValues.appLightBlueColor,
-                                    //     text: "Save",
-                                    //     onPressed: () {},
-                                    //   ),
-                                    // ),
-                                    // SizedBox(
-                                    //   width: 20,
-                                    // ),
                                     Container(
                                       height: 35,
                                       child: CustomElevatedButton(

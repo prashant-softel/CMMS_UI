@@ -2628,5 +2628,33 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> saveAccessLevel(
+    accessLevelJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.saveAccessLevel(
+        auth: auth,
+        accessLevelJsonString: accessLevelJsonString,
+        isLoading: isLoading ?? false,
+      );
+      print({"resp", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'saveAccessLevel');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   ///
 }
