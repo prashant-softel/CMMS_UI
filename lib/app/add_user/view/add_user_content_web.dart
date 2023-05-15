@@ -417,46 +417,46 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                     ),
                                   ],
                                 ),
-                                Dimens.boxHeight8,
-                                Row(children: [
-                                  CustomRichText(title: 'Access Group: '),
-                                  Dimens.boxWidth10,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
-                                      ),
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                              .2),
-                                      child: LoginCustomTextfield(
-                                        ishint: 'Select Access Group',
-                                      )),
-                                ]),
+                                // Dimens.boxHeight8,
+                                // Row(children: [
+                                //   CustomRichText(title: 'Access Group: '),
+                                //   Dimens.boxWidth10,
+                                //   Container(
+                                //       decoration: BoxDecoration(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         border: Border.all(
+                                //           color: Color.fromARGB(
+                                //               255, 227, 224, 224),
+                                //           width: 1,
+                                //         ),
+                                //         boxShadow: [
+                                //           BoxShadow(
+                                //             color: Colors.black26,
+                                //             offset: const Offset(
+                                //               5.0,
+                                //               5.0,
+                                //             ),
+                                //             blurRadius: 5.0,
+                                //             spreadRadius: 1.0,
+                                //           ),
+                                //           BoxShadow(
+                                //             color: ColorValues.whiteColor,
+                                //             offset: const Offset(0.0, 0.0),
+                                //             blurRadius: 0.0,
+                                //             spreadRadius: 0.0,
+                                //           ),
+                                //         ],
+                                //       ),
+                                //       width:
+                                //           (MediaQuery.of(context).size.width *
+                                //               .2),
+                                //       child: LoginCustomTextfield(
+                                //         ishint: 'Select Access Group',
+                                //       )),
+                                // ]),
                               ],
                             ),
-                            //   Spacer(),
+                            Spacer(),
 
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -861,23 +861,33 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                                             .map((getAccesslevelDetails) =>
                                                                                 TableViewRow(height: 90, cells: [
                                                                                   TableViewCell(
-                                                                                    child: Checkbox(
-                                                                                        value: '${getAccesslevelDetails?.feature_name}' == "1" ? true : false,
-                                                                                        checkColor: Colors.white,
-                                                                                        activeColor: ColorValues.blackColor,
-                                                                                        shape: RoundedRectangleBorder(
-                                                                                          borderRadius: BorderRadius.circular(2.0),
-                                                                                        ),
-                                                                                        side: MaterialStateBorderSide.resolveWith(
-                                                                                          (states) => BorderSide(
-                                                                                            width: 1.0,
-                                                                                            color: ColorValues.blackColor,
-                                                                                          ),
-                                                                                        ),
-                                                                                        onChanged: (val) {
-                                                                                          getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
-                                                                                          controller.update();
-                                                                                        }),
+                                                                                    child: Obx(() {
+                                                                                      return Row(
+                                                                                        children: [
+                                                                                          Checkbox(
+                                                                                              value: controller.isCheckedmodule.value,
+                                                                                              checkColor: Colors.white,
+                                                                                              activeColor: ColorValues.blackColor,
+                                                                                              shape: RoundedRectangleBorder(
+                                                                                                borderRadius: BorderRadius.circular(2.0),
+                                                                                              ),
+                                                                                              side: MaterialStateBorderSide.resolveWith(
+                                                                                                (states) => BorderSide(
+                                                                                                  width: 1.0,
+                                                                                                  color: ColorValues.blackColor,
+                                                                                                ),
+                                                                                              ),
+                                                                                              onChanged: (val) {
+                                                                                                controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
+                                                                                                controller.isCheckedmodule.value = val!;
+
+                                                                                                controller.update();
+                                                                                              }),
+                                                                                          Dimens.boxWidth5,
+                                                                                          Expanded(child: Text("${getAccesslevelDetails?.feature_name}"))
+                                                                                        ],
+                                                                                      );
+                                                                                    }),
                                                                                   ),
                                                                                   TableViewCell(
                                                                                     child: Obx(() {
@@ -893,11 +903,31 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                                                       });
                                                                                     }),
                                                                                   ),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {})),
-                                                                                  TableViewCell(child: _rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {})),
+                                                                                  TableViewCell(child: Obx(() {
+                                                                                    return _rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                      getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                    });
+                                                                                  })),
+                                                                                  TableViewCell(child: Obx(() {
+                                                                                    return _rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                      getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                    });
+                                                                                  })),
+                                                                                  TableViewCell(child: Obx(() {
+                                                                                    return _rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                      getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                    });
+                                                                                  })),
+                                                                                  TableViewCell(child: Obx(() {
+                                                                                    return _rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                      getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                    });
+                                                                                  })),
+                                                                                  TableViewCell(child: Obx(() {
+                                                                                    return _rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                      getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                    });
+                                                                                  })),
                                                                                 ]))
                                                                             .toList()
                                                                         : [],
@@ -943,7 +973,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                 backgroundColor: ColorValues.greenColor,
                                 text: 'Submit',
                                 onPressed: () {
-                                  // controller.savePmMapping();
+                                  controller.saveAccessLevel();
                                 },
                               ),
                             ),

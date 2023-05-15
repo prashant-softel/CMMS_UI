@@ -1426,7 +1426,7 @@ class ConnectHelper {
       'Inventory/ImportInventories?file_id=$fileId',
       Request.post,
       null,
-      isLoading ?? false,
+      false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -1590,6 +1590,24 @@ class ConnectHelper {
       'User/GetUserDetail?user_id=$userId',
       Request.get,
       null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveAccessLevel({
+    required String auth,
+    accessLevelJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/SetUserAccess',
+      Request.post,
+      accessLevelJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

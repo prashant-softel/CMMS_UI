@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../navigators/app_pages.dart';
 
@@ -260,161 +261,255 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                           ],
                         ),
                       ),
-                      // Column(
-                      //   children: [
-                      //     Wrap(
-                      //       children: [
-                      //         Column(
-                      //           crossAxisAlignment: CrossAxisAlignment.center,
-                      //           children: [
-                      //             SizedBox(
-                      //               width:
-                      //                   MediaQuery.of(context).size.width / 1.5,
-                      //               child: DefaultTabController(
-                      //                 length: 3,
-                      //                 child: Column(
-                      //                   children: [
-                      //                     Container(
-                      //                       height: 45,
-                      //                       decoration: BoxDecoration(
-                      //                         boxShadow: [
-                      //                           BoxShadow(
-                      //                             color: Colors.white,
-                      //                             blurRadius:
-                      //                                 15.0, // soften the shadow
-                      //                             spreadRadius:
-                      //                                 5.0, //extend the shadow
-                      //                             offset: Offset(
-                      //                               5.0,
-                      //                               5.0,
-                      //                             ),
-                      //                           )
-                      //                         ],
-                      //                         borderRadius: BorderRadius.only(
-                      //                             topLeft: Radius.circular(40),
-                      //                             topRight: Radius.circular(40)),
-                      //                         color: Color.fromARGB(
-                      //                             255, 245, 248, 250),
-                      //                       ),
-                      //                       child: TabBar(
-                      //                         labelPadding: EdgeInsets.symmetric(
-                      //                             horizontal: 10.0),
-                      //                         labelColor: Colors.black,
-                      //                         indicator: BoxDecoration(
-                      //                           borderRadius: BorderRadius.only(
-                      //                               topLeft: Radius.circular(40),
-                      //                               topRight:
-                      //                                   Radius.circular(40)),
-                      //                           color: Colors.white,
-                      //                           boxShadow: [
-                      //                             BoxShadow(
-                      //                               color: Colors.black26,
-                      //                               offset: const Offset(
-                      //                                 5.0,
-                      //                                 5.0,
-                      //                               ),
-                      //                               blurRadius: 5.0,
-                      //                               spreadRadius: 1.0,
-                      //                             ),
-                      //                             BoxShadow(
-                      //                               color: ColorValues.whiteColor,
-                      //                               offset:
-                      //                                   const Offset(0.0, 0.0),
-                      //                               blurRadius: 0.0,
-                      //                               spreadRadius: 0.0,
-                      //                             ),
-                      //                           ],
-                      //                         ),
-                      //                         unselectedLabelColor: Colors.black,
-                      //                         tabs: [
-                      //                           Tab(
-                      //                             child: Row(
-                      //                               mainAxisAlignment:
-                      //                                   MainAxisAlignment.center,
-                      //                               children: [
-                      //                                 Icon(Icons
-                      //                                     .analytics_outlined),
-                      //                                 Dimens.boxWidth5,
-                      //                                 Text('Plant Access'),
-                      //                               ],
-                      //                             ),
-                      //                           ),
-                      //                           Tab(
-                      //                             child: Row(
-                      //                               mainAxisAlignment:
-                      //                                   MainAxisAlignment.center,
-                      //                               children: [
-                      //                                 Icon(Icons
-                      //                                     .account_tree_outlined),
-                      //                                 Dimens.boxWidth5,
-                      //                                 Text(
-                      //                                   'Access Level',
-                      //                                 ),
-                      //                               ],
-                      //                             ),
-                      //                           ),
-                      //                           Tab(
-                      //                             child: Row(
-                      //                               mainAxisAlignment:
-                      //                                   MainAxisAlignment.center,
-                      //                               children: [
-                      //                                 Icon(Icons.notifications),
-                      //                                 Dimens.boxWidth5,
-                      //                                 Text(
-                      //                                   'Notification',
-                      //                                 ),
-                      //                               ],
-                      //                             ),
-                      //                           ),
-                      //                         ],
-                      //                       ),
-                      //                     ),
-                      //                     SizedBox(
-                      //                       height: 250,
-                      //                       child: Expanded(
-                      //                         child: TabBarView(children: [
-                      //                           ///First TabBar View
-                      //                           Container(
-                      //                               decoration: BoxDecoration(
-                      //                                   color: ColorValues
-                      //                                       .whiteColor),
-                      //                               child: Column(
-                      //                                 children: [
-                      //                                   Text('first Tab')
-                      //                                 ],
-                      //                               )),
+                      SizedBox(
+                        // width: MediaQuery.of(context).size.width / 2,
+                        child: Column(
+                          children: [
+                            Wrap(
+                              children: [
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.5,
+                                      child: DefaultTabController(
+                                        length: 3,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 45,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(40),
+                                                    topRight:
+                                                        Radius.circular(40)),
+                                                color: Color.fromARGB(
+                                                    255, 245, 248, 250),
+                                              ),
+                                              child: TabBar(
+                                                labelPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10.0),
+                                                labelColor: Colors.black,
+                                                indicator: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  40),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  40)),
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        1.0,
+                                                        1.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                unselectedLabelColor:
+                                                    Colors.black,
+                                                tabs: [
+                                                  Tab(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(Icons
+                                                            .analytics_outlined),
+                                                        Dimens.boxWidth5,
+                                                        Text('Plant Access'),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Tab(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(Icons
+                                                            .account_tree_outlined),
+                                                        Dimens.boxWidth5,
+                                                        Text(
+                                                          'Access Level',
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Tab(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(Icons
+                                                            .notifications),
+                                                        Dimens.boxWidth5,
+                                                        Text(
+                                                          'Notification',
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              height: Get.height + 50,
 
-                      //                           ////Second TabBar View
-                      //                           Container(
-                      //                               decoration: BoxDecoration(
-                      //                                   color: ColorValues
-                      //                                       .whiteColor),
-                      //                               child: Column(
-                      //                                 children: [Text('2 Tab')],
-                      //                               )),
-                      //                           Container(
-                      //                               decoration: BoxDecoration(
-                      //                                   color: ColorValues
-                      //                                       .whiteColor),
-                      //                               child: Column(
-                      //                                 children: [Text('3 Tab')],
-                      //                               )),
-                      //                         ]),
-                      //                       ),
-                      //                     )
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         ),
+                                              //  height: 500,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(40),
+                                                    topRight:
+                                                        Radius.circular(40)),
+                                                color: Color.fromARGB(
+                                                    255, 245, 248, 250),
+                                              ),
+                                              child: TabBarView(children: [
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                        color: ColorValues
+                                                            .whiteColor),
+                                                    child: Column(
+                                                      children: [Text('1 Tab')],
+                                                    )),
+                                                Column(
+                                                  children: [
+                                                    Container(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        child: Container(
+                                                            height:
+                                                                Get.height - 30,
+                                                            margin: Dimens
+                                                                .edgeInsets15,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                color: ColorValues
+                                                                    .lightGreyColorWithOpacity35,
+                                                                width: 1,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: ColorValues
+                                                                      .appBlueBackgroundColor,
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            child: controller
+                                                                        .accesslevel
+                                                                        .length >
+                                                                    0
+                                                                ? ScrollableTableView(
+                                                                    columns: [
+                                                                      "Module Name",
+                                                                      "Add",
+                                                                      "Edit",
+                                                                      "Delete",
+                                                                      "View",
+                                                                      "Issue",
+                                                                      "Approve",
+                                                                      "Self View"
+                                                                    ].map(
+                                                                        (column) {
+                                                                      return TableViewColumn(
+                                                                        label:
+                                                                            column,
+                                                                        // width:
+                                                                        //     115, // Set the width of the column to 100
 
-                      //         /// Employee
-                      //       ],
-                      //     ),
-                      //   ],
-                      // ),
-
+                                                                        minWidth:
+                                                                            Get.width *
+                                                                                0.08,
+                                                                      );
+                                                                    }).toList(),
+                                                                    rows: true
+                                                                        ? controller
+                                                                            .accesslevel
+                                                                            .map((getAccesslevelDetails) =>
+                                                                                TableViewRow(height: 90, cells: [
+                                                                                  TableViewCell(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.add.value,
+                                                                                  )),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.edit.value,
+                                                                                  )),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.delete.value,
+                                                                                  )),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.view.value,
+                                                                                  )),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.issue.value,
+                                                                                  )),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.approve.value,
+                                                                                  )),
+                                                                                  TableViewCell(
+                                                                                      child: _rowItem(
+                                                                                    getAccesslevelDetails?.selfView.value,
+                                                                                  )),
+                                                                                ]))
+                                                                            .toList()
+                                                                        : [],
+                                                                  )
+                                                                : Container())),
+                                                  ],
+                                                ),
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                        color: ColorValues
+                                                            .whiteColor),
+                                                    child: Column(
+                                                      children: [Text('3 Tab')],
+                                                    )),
+                                              ]),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       Dimens.boxHeight15
                     ],
                   ),
@@ -425,5 +520,26 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
         ),
       ),
     );
+  }
+
+  _rowItem(
+    int? defaultValue,
+  ) {
+    return Checkbox(
+        tristate: false,
+        value: defaultValue == 1 ? true : false,
+        checkColor: Colors.white,
+        activeColor: defaultValue == 1 ? ColorValues.greyLightColor : null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(2.0),
+        ),
+        side: MaterialStateBorderSide.resolveWith(
+          (states) => BorderSide(
+            width: 2.0,
+            color: ColorValues.greyLightColor,
+          ),
+        ),
+        mouseCursor: SystemMouseCursors.none,
+        onChanged: (val) {});
   }
 }
