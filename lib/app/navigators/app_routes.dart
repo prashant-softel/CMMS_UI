@@ -44,8 +44,8 @@ abstract class Routes {
   static const safetyQuestionsList = _Paths.safetyQuestionsList;
   static const tbtTypeListScreen = _Paths.tbtTypeListScreen;
   static const tbtSOPListScreen = _Paths.tbtSOPListScreen;
-  static const jobTypeListScreen = _Paths.jobTypeListScreen;
-  static const jobSOPListScreen = _Paths.jobSOPListScreen;
+  // static const jobTypeListScreen = _Paths.jobTypeListScreen;
+  // static const jobSOPListScreen = _Paths.jobSOPListScreen;
   static const assetTypeListScreen = _Paths.assetTypeListScreen;
   static const inventoryTypeListScreen = _Paths.inventoryTypeListScreen;
   static const importInventory = _Paths.importInventory;
