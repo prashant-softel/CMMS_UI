@@ -20,12 +20,8 @@ class FileUploadDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return //
         Obx(
-      () => _fileUploadController.pickedFiles.length ==
-                  _fileUploadController.progresses.value.length &&
-              _fileUploadController.pickedFiles.length ==
-                  _fileUploadController.descriptionCtrlrs.length
-          ? //
-          DataTable2(
+      () => _fileUploadController.pickedFiles.isNotEmpty
+          ? DataTable2(
               showCheckboxColumn: false,
               horizontalMargin: 5,
               lmRatio: 2,
@@ -102,33 +98,38 @@ class FileUploadDetailsWidget extends StatelessWidget {
                           minLines: 3,
                           maxLines: null,
                           controller: _fileUploadController
-                              .descriptionCtrlrs[pickedFileIndex],
+                                      .descriptionCtrlrs.length >
+                                  pickedFileIndex
+                              ? _fileUploadController
+                                  .descriptionCtrlrs[pickedFileIndex]
+                              : TextEditingController(text: 'No description'),
                         ),
                       ),
                       DataCell(
                         Column(
-                            mainAxisAlignment: MainAxisAlignment.center, //
-                            children: [
-                              LinearProgressIndicator(
-                                color: ColorValues.appDarkBlueColor,
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                value: _fileUploadController.progresses
-                                            .value[pickedFileIndex] !=
-                                        null
-                                    ? (_fileUploadController
-                                            .progresses.value[pickedFileIndex]
-                                            .toDouble() /
-                                        100)
-                                    : 0.0,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            LinearProgressIndicator(
+                              color: ColorValues.appDarkBlueColor,
+                              backgroundColor: ColorValues.appLightBlueColor,
+                              value: _fileUploadController
+                                          .progresses.value.length >
+                                      pickedFileIndex
+                                  ? (_fileUploadController
+                                          .progresses.value[pickedFileIndex]
+                                          .toDouble() /
+                                      100)
+                                  : 0.0,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              '${(_fileUploadController.progresses.value.length > pickedFileIndex ? _fileUploadController.progresses.value[pickedFileIndex].toStringAsFixed(0) : 'Not yet uploaded')}%',
+                              style: const TextStyle(
+                                fontSize: 14,
                               ),
-                              const SizedBox(height: 5),
-                              Text(
-                                '${(_fileUploadController.progresses.value[pickedFileIndex].toStringAsFixed(0))}%',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ), // Adjust the font size and style as needed
-                              ),
-                            ]),
+                            ),
+                          ],
+                        ),
                       ),
                       DataCell(
                         FutureBuilder<int>(

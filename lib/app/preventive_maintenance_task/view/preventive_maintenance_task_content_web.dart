@@ -82,11 +82,10 @@ class PreventiveMaintenanceTaskContentWeb
                           Spacer(),
                           Container(
                             height: 30,
-                            width: (Get.width * .3) - 10,
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
                               onPressed: () async {
-                                Get.dialog(
+                                await Get.dialog(
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 350,
@@ -99,14 +98,6 @@ class PreventiveMaintenanceTaskContentWeb
                                         cancelText: "CANCEL",
                                         confirmText: "Ok",
                                         showActionButtons: true,
-                                        onSelectionChanged:
-                                            (DateRangePickerSelectionChangedArgs
-                                                args) {
-                                          controller.fromDate.value =
-                                              args.value.startDate;
-                                          controller.toDate.value =
-                                              args.value.endDate;
-                                        },
                                         initialSelectedRange: PickerDateRange(
                                           controller.fromDate.value,
                                           controller.toDate.value,
@@ -126,11 +117,18 @@ class PreventiveMaintenanceTaskContentWeb
 
                                           var pickUpDate = DateTime.parse(
                                               data.startDate.toString());
+                                          controller.fromDate.value =
+                                              pickUpDate;
                                           var dropDate = DateTime.parse(
                                               data.endDate.toString());
-
+                                          dropDate != null
+                                              ? controller.toDate.value =
+                                                  dropDate
+                                              : controller.toDate.value =
+                                                  pickUpDate;
                                           Get.back();
                                         },
+                                        onCancel: () => Get.back(),
                                       ),
                                     ),
                                   ),
@@ -149,7 +147,6 @@ class PreventiveMaintenanceTaskContentWeb
                     Row(
                       children: [
                         Container(
-                          width: (Get.width * .1) - 60,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -158,7 +155,6 @@ class PreventiveMaintenanceTaskContentWeb
                               text: 'Copy'),
                         ),
                         Container(
-                          width: (Get.width * .1) - 60,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -167,7 +163,6 @@ class PreventiveMaintenanceTaskContentWeb
                               text: 'Excel'),
                         ),
                         Container(
-                          width: (Get.width * .1) - 70,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -176,7 +171,6 @@ class PreventiveMaintenanceTaskContentWeb
                               text: 'PDF'),
                         ),
                         Container(
-                          width: (Get.width * .2) - 100,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(

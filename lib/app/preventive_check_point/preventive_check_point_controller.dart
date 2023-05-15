@@ -141,7 +141,7 @@ class PreventiveCheckPointController extends GetxController {
     checkPointCtrlr.text = '';
     requirementCtrlr.text = '';
     isToggleOn.value = false;
-
+    selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
       getCheckPointlist(selectedchecklistId: selectedchecklist.value);
     });

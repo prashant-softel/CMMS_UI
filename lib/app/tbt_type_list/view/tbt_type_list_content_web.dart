@@ -237,7 +237,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                               value: controller
                                                   .isCheckedRequire.value,
                                               onChanged: (bool? value) {
-                                                controller.requiretoggleCheckbox();
+                                                controller
+                                                    .requiretoggleCheckbox();
                                               },
                                             ),
                                           ],
@@ -314,7 +315,6 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -330,7 +330,6 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -339,7 +338,6 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -348,7 +346,6 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -447,12 +444,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             height: 60,
                                             cells: _permitTypeList.map((value) {
                                               return TableViewCell(
-                                                  child:
-                                                      (value == 'Checkbox')
-
-                                                          ? Checkbox(value: controller.isChecked.value, onChanged: (val){})
-                                                          :
-                                                      (value == "Action")
+                                                  child: (value == 'Checkbox')
+                                                      ? Checkbox(
+                                                          value: controller
+                                                              .isChecked.value,
+                                                          onChanged: (val) {})
+                                                      : (value == "Action")
                                                           ? Wrap(children: [
                                                               // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                               //         0
@@ -480,7 +477,6 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                               )
                                                               // : Container()
                                                             ])
-                                                            
                                                           : Text(
                                                               value,
                                                             ));

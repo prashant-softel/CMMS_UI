@@ -82,7 +82,7 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
                       }),
                       border: TableBorder.all(
                           width: .5, color: Color.fromARGB(255, 153, 184, 189)),
-                      dataRowHeight: (Get.height - 89) / 9,
+                      dataRowHeight: (Get.height - 10) / 8,
                       columnSpacing: 12,
                       //horizontalMargin: 12,
                       minWidth: 600,
@@ -189,7 +189,6 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
             children: [
               Container(
                 height: 35,
-                width: (Get.width * .1) - 50,
                 child: CustomElevatedButton(
                   backgroundColor: ColorValues.redColor,
                   text: "Cancel",
@@ -206,7 +205,6 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
               //     ?
               Container(
                 height: 35,
-                width: (Get.width * .2) - 100,
                 child: CustomElevatedButton(
                   backgroundColor: ColorValues.greenColor,
                   text: 'Link and save',
@@ -221,7 +219,6 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
               ),
               Container(
                 height: 35,
-                width: (Get.width * .1) - 70,
                 child: CustomElevatedButton(
                   backgroundColor: ColorValues.appDarkBlueColor,
                   text: "Print",

@@ -217,6 +217,22 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getAssetTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getAssetTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  @override
   Future<ResponseModel> getSafetyMeasureList({
     int? permit_type_id,
     required bool isLoading,
@@ -344,7 +360,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelButton({
     required String auth,
     String? comment,
     String? id,
@@ -357,7 +373,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitCloseButton({
+  Future<ResponseModel> permitCloseButton({
     required String auth,
     String? comment,
     String? id,
@@ -370,8 +386,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
-   Future<ResponseModel> permitRejectButton({
+  Future<ResponseModel> permitRejectButton({
     required String auth,
     String? comment,
     String? id,
@@ -383,7 +398,6 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
-
 
   //  @override
   // Future<ResponseModel> getNewPermitList({
@@ -431,6 +445,20 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getInventoryTypeList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getInventoryTypeList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getCheckPointlist({
     required String auth,
     int? selectedchecklistId,
@@ -653,7 +681,6 @@ class DataRepository extends DomainRepository {
         newPermit: newPermit,
         isLoading: isLoading ?? false,
       );
-
 
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
@@ -987,6 +1014,78 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
         checkpointJsonString: checkpointJsonString);
     return response;
+  }
+
+  Future<ResponseModel> getCountryList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getCountryList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getStateListnew({
+    required String auth,
+    bool? isLoading,
+    int? selectedCountryId,
+  }) async {
+    return await connectHelper.getStateListnew(
+        auth: auth, isLoading: isLoading, selectedCountryId: selectedCountryId);
+  }
+
+  Future<ResponseModel> getCityList({
+    required String auth,
+    bool? isLoading,
+    int? selectedStateId,
+  }) async {
+    return await connectHelper.getCityList(
+        auth: auth, isLoading: isLoading, selectedStateId: selectedStateId);
+  }
+
+  Future<ResponseModel> getRoleAccessList({
+    String? auth,
+    int? roleId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoleAccessList(
+      auth: auth,
+      roleId: roleId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getRoleList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoleList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getUserList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getUserDetails({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserDetails(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
   }
 
   ///

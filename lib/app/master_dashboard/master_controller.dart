@@ -19,11 +19,9 @@ class MastersController extends GetxController {
 
   final HomeController controller = Get.find();
 
-
   MastersPresenter mastersPresenter;
   late JobListController jobListController;
 
-  
   String username = '';
   Rx<String> selectedFacility = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -83,5 +81,17 @@ class MastersController extends GetxController {
     );
   }
 
-  
+  //goToAssetTypeList
+  Future<void> goToAssetTypeList() async {
+    Get.toNamed(
+      Routes.assetTypeListScreen,
+    );
+  }
+
+  //goToInventoryTypeList
+  Future<void> goToInventoryTypeList() async {
+    Get.toNamed(
+      Routes.inventoryTypeListScreen,
+    );
+  }
 }

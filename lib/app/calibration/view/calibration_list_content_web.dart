@@ -101,7 +101,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                     Row(
                       children: [
                         Container(
-                          width: (Get.width * .1) - 60,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -110,7 +109,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                               text: 'Copy'),
                         ),
                         Container(
-                          width: (Get.width * .1) - 60,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -119,7 +117,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                               text: 'Excel'),
                         ),
                         Container(
-                          width: (Get.width * .1) - 70,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
@@ -128,7 +125,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                               text: 'PDF'),
                         ),
                         Container(
-                          width: (Get.width * .2) - 100,
                           height: 45,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(

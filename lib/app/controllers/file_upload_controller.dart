@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../domain/models/file_upload_model.dart';
 import '../../domain/repositories/local_storage_keys.dart';
 import '../../domain/repositories/repository.dart';
+import '../utils/utility.dart';
 
 class FileUploadController extends GetxController {
   ///
@@ -25,6 +26,8 @@ class FileUploadController extends GetxController {
   var token = '';
   List<TextEditingController> descriptionCtrlrs = [];
 
+  List<List<int>>? bytesDataList;
+
   ///
   @override
   void onInit() async {
@@ -36,8 +39,9 @@ class FileUploadController extends GetxController {
   Future<List<XFile>> addFiles() async {
     final ImagePicker picker = ImagePicker();
     pickedFiles.value = await picker.pickMultiImage();
-    if (pickedFiles.isNotEmpty) initializeDescriptionControllers(pickedFiles);
-    return pickedFiles;
+    if (pickedFiles.isNotEmpty)
+      initializeDescriptionControllers(pickedFiles.value);
+    return pickedFiles.value;
   }
 
   Future<void> uploadSingleFile(
@@ -186,4 +190,63 @@ class FileUploadController extends GetxController {
       print(e);
     }
   }
+
+  // selectFiles() async {
+  //   List<XFile> pickedFiles = await addFiles();
+  //   List<List<int>> bytesDataList = [];
+
+  //   for (var file in pickedFiles) {
+  //     bytesDataList.add(await file.readAsBytes());
+  //   }
+
+  //   if (pickedFiles.isNotEmpty && pickedFiles.length == bytesDataList.length) {
+  //     await uploadFiles(
+  //       pickedFiles,
+  //       bytesDataList,
+  //       token,
+  //       uploadProgressCallback: (progress) {
+  //         print('Upload progress: $progress%');
+  //       },
+  //     );
+  //   } else {
+  //     print('No files selected or failed to read bytes data');
+  //   }
+  //   ;
+  // }
+
+  selectFiles() async {
+    try {
+      pickedFiles.value = await addFiles();
+      bytesDataList = [];
+
+      for (var file in pickedFiles) {
+        bytesDataList!.add(await file.readAsBytes());
+      }
+
+      if (pickedFiles.isEmpty || pickedFiles.length != bytesDataList!.length) {
+        print('No files selected or failed to read bytes data');
+        pickedFiles.clear();
+        bytesDataList = null;
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString() + ' selectFiles');
+    }
+  }
+
+  uploadSelectedFiles() async {
+    if (bytesDataList != null) {
+      await uploadFiles(
+        pickedFiles,
+        bytesDataList!,
+        token,
+        uploadProgressCallback: (progress) {
+          print('Upload progress: $progress%');
+        },
+      );
+    } else {
+      print('No files selected');
+    }
+  }
+
+  ///
 }

@@ -9,6 +9,7 @@ abstract class Routes {
   static const jobList = _Paths.jobList;
   static const jobCard = _Paths.jobCardDetails;
   static const jobDetails = _Paths.jobDetails;
+  static const jobCardList = _Paths.jobCardList;
   static const addJob = _Paths.addJob;
   static const editJob = _Paths.editJob;
   static const facility = _Paths.facility;
@@ -43,6 +44,10 @@ abstract class Routes {
   static const safetyQuestionsList = _Paths.safetyQuestionsList;
   static const tbtTypeListScreen = _Paths.tbtTypeListScreen;
   static const tbtSOPListScreen = _Paths.tbtSOPListScreen;
+  static const jobTypeListScreen = _Paths.jobTypeListScreen;
+  static const jobSOPListScreen = _Paths.jobSOPListScreen;
+  static const assetTypeListScreen = _Paths.assetTypeListScreen;
+  static const inventoryTypeListScreen = _Paths.inventoryTypeListScreen;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
@@ -58,6 +63,7 @@ abstract class _Paths {
   static const editJob = '/edit-job-screen';
   static const facility = '/facility';
   static const jobCardDetails = '/job-card-details';
+  static const jobCardList = '/job-card-list-screen';
   static const login = '/login-screen';
   static const preventive = '/preventive-maintenance';
   // static const create_checkList = '/create_preventive_checklist-screen';
@@ -91,6 +97,8 @@ abstract class _Paths {
   static const safetyQuestionsList = '/safety-question-list-screen';
   static const tbtTypeListScreen = '/tbt-type-list-screen';
   static const tbtSOPListScreen = '/tbt-sop-list-screen';
+  static const assetTypeListScreen = '/asset-type-list-screen';
+  static const inventoryTypeListScreen = '/inventory-type-list-screen';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
   static const addUser = '/addUser';

@@ -13,6 +13,14 @@ import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
 import 'package:cmms/app/tbt_type_list/view/tbt_type_list_screen.dart';
+import 'package:cmms/app/job_list_sop/job_list_sop_binding.dart';
+import 'package:cmms/app/job_list_sop/view/job_list_sop_screen.dart';
+import 'package:cmms/app/asset_type_list/asset_type_list_binding.dart';
+import 'package:cmms/app/asset_type_list/view/asset_type_list_screen.dart';
+import 'package:cmms/app/inventory_type_list/view/inventory_type_list.dart';
+import 'package:cmms/app/inventory_type_list/inventory_type_list_binding.dart';
+import 'package:cmms/app/job_type_list/job_type_list_binding.dart';
+import 'package:cmms/app/job_type_list/view/job_type_list_screen.dart';
 import 'package:cmms/app/master_dashboard/master_binding.dart';
 import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
 import 'package:cmms/app/permit_type/permit_type_binding.dart';
@@ -288,6 +296,16 @@ class AppPages {
       name: _Paths.tbtSOPListScreen,
       page: TBTSOPListScreen.new,
       binding: TBTSOPListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.assetTypeListScreen,
+      page: AssetTypeListScreen.new,
+      binding: AssetTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventoryTypeListScreen,
+      page: InventoryTypeListScreen.new,
+      binding: InventoryTypeListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.importInventory,

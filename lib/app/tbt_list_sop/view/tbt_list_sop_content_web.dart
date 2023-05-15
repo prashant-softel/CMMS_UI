@@ -126,8 +126,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                         // LoginCustomTextfield(),
                                                                       ),
                                                                       SizedBox(height: 5,),
-                                        CustomRichText(
-                                            title: 'Title '),
+                                        CustomRichText(title: 'Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -473,7 +472,6 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -489,7 +487,6 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -498,7 +495,6 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -507,7 +503,6 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -598,12 +593,12 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             height: 60,
                                             cells: _permitTypeList.map((value) {
                                               return TableViewCell(
-                                                  child:
-                                                      (value == 'Checkbox')
-
-                                                          ? Checkbox(value: controller.isChecked.value, onChanged: (val){})
-                                                          :
-                                                      (value == "Action")
+                                                  child: (value == 'Checkbox')
+                                                      ? Checkbox(
+                                                          value: controller
+                                                              .isChecked.value,
+                                                          onChanged: (val) {})
+                                                      : (value == "Action")
                                                           ? Wrap(children: [
                                                               // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                               //         0
@@ -631,7 +626,6 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                               )
                                                               // : Container()
                                                             ])
-                                                            
                                                           : Text(
                                                               value,
                                                             ));

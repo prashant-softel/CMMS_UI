@@ -231,7 +231,6 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                   child: LoginCustomTextfield(),
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width / 10,
                                   height: 45,
                                   child: CustomElevatedButton(
                                     text: "Choose Files",

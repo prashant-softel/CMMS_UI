@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -13,11 +11,13 @@ import '../../domain/usecases/job_details_usecase.dart';
 import '../controllers/file_upload_controller.dart';
 import '../controllers/history_controller.dart';
 import '../job_details/job_details_presenter.dart';
+import '../navigators/app_pages.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/dropdown.dart';
 import 'job_card_details_presenter.dart';
+import 'views/widgets/job_card_updated_dialog.dart';
 
 class JobCardDetailsController extends GetxController {
   ///
@@ -156,8 +156,8 @@ class JobCardDetailsController extends GetxController {
 
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
-    int moduleType = 3;
-    jobCardId.value = 1;
+    int moduleType = 4;
+
     historyList?.value = await jobCardDetailsPresenter.getJobCardHistory(
           moduleType,
           jobCardId.value,
@@ -321,12 +321,24 @@ class JobCardDetailsController extends GetxController {
         "employee_list": _employeeList
       };
 
-      Map<String, dynamic>? response =
+      Map<String, dynamic>? responseMapJobCardUpdated =
           await jobCardDetailsPresenter.updateJobCard(
-        json.encode(jobCard),
+        jobCard,
         false,
       );
-      print('Response = $response');
+
+      if (responseMapJobCardUpdated != null) {
+        var _jobId = 0;
+        var _message = '';
+        if (responseMapJobCardUpdated["id"] != null &&
+            responseMapJobCardUpdated["id"].isNotEmpty) {
+          _jobId = responseMapJobCardUpdated["id"][0];
+        }
+        if (responseMapJobCardUpdated["message"] != null) {
+          _message = responseMapJobCardUpdated["message"];
+        }
+        showAlertDialog(jobId: _jobId, message: _message);
+      }
     } //
     catch (e) {
       print(e);
@@ -350,7 +362,8 @@ class JobCardDetailsController extends GetxController {
         isLoading: false,
       );
 
-      if (responseMapJobCardStarted != null) {
+      if (responseMapJobCardStarted != null &&
+          responseMapJobCardStarted.length > 0) {
         final _jobCardId = responseMapJobCardStarted["id"][0];
         jobCardId.value = _jobCardId;
       }
@@ -376,9 +389,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   void getPermitDetails() async {
-    // TODO: CHANGE THIS LATER
-    // permitId = 59616;
-
     final _permitDetails =
         await jobCardDetailsPresenter.getPermitDetails(permitId: permitId);
 
@@ -436,10 +446,22 @@ class JobCardDetailsController extends GetxController {
 
   void addNewTextEditingController() {
     responsibilityCtrlrs.add(TextEditingController());
-    //currentIndex.value = responsibilityCtrlrs.length - 1;
   }
 
-  deleteEmployee() {}
+  void deleteEmployee(int rowIndex) {
+    if (rowIndex < 0 || rowIndex >= employeeTableRows.length) {
+      // Invalid row index
+      return;
+    }
+
+    // Remove the row from the DataTable2
+    employeeTableRows.removeAt(rowIndex);
+
+    // Remove the corresponding text editing controller
+    if (rowIndex < responsibilityCtrlrs.length) {
+      responsibilityCtrlrs.removeAt(rowIndex);
+    }
+  }
 
   String? getResponsibility(index) {
     final responsibitlity = responsibilityCtrlrs[index].text;
@@ -477,6 +499,22 @@ class JobCardDetailsController extends GetxController {
         selectedEmployeeList?.add(_selectedEmployee);
       }
     }
+  }
+
+  /// Show alert dialog
+  static void showAlertDialog({
+    int? jobId,
+    String? message,
+    String? title,
+    Function()? onPress,
+  }) async {
+    await Get.dialog<void>(
+        JobCardUpdatedDialog(jobId: jobId, message: message));
+  }
+
+  goToJobCardListScreen() {
+    Get.back();
+    Get.toNamed(Routes.jobCardList);
   }
 
   ///

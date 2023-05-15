@@ -149,7 +149,6 @@ class BreakdownMaintenanceScreen
                         createContentTile(title: "Job Card List"),
                       ],
                     )
-                    //
                   ]),
             ),
           ],
