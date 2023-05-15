@@ -26,7 +26,7 @@ import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit/view/new_permit_mobile.dart';
 import 'package:cmms/app/new_permit/view/new_permit_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
-import 'package:cmms/app/widgets/safety_measure_dialog.dart';
+import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
@@ -1722,7 +1722,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               backgroundColor: ColorValues.navyBlueColor,
                                                                               text: "View SOP",
                                                                               onPressed: () {
-                                                                                Get.dialog<void>(SafetyMeasureDialog());
+                                                                                Get.dialog<void>(ViewSOPDialog());
                                                                                 // controller.createNewPermit();
                                                                               },
                                                                             )

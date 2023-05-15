@@ -1,5 +1,5 @@
-import 'package:cmms/app/job_type_list/job_type_list_controller.dart';
-import 'package:cmms/app/job_type_list/view/job_type_list_content_web.dart';
+import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
+import 'package:cmms/app/tbt_type_list/view/tbt_type_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,8 +9,8 @@ import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
 
-class JobTypeListScreen extends GetView<JobTypeListController> {
-  JobTypeListScreen({super.key});
+class TBTTypeListScreen extends GetView<TBTTypeListController> {
+  TBTTypeListScreen({super.key});
 
   ///
   @override
@@ -46,7 +46,7 @@ class JobTypeListScreen extends GetView<JobTypeListController> {
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: JobTypeListContentWeb(),
+                        child: TBTTypeListContentWeb(),
                       )
                   ],
                 ),

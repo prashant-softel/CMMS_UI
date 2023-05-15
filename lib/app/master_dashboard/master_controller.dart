@@ -71,13 +71,13 @@ class MastersController extends GetxController {
 
   Future<void> goToJobTypeList() async {
     Get.toNamed(
-      Routes.jobTypeListScreen,
+      Routes.tbtTypeListScreen,
     );
   }
 
   Future<void> goToJobSOPList() async {
     Get.toNamed(
-      Routes.jobSOPListScreen,
+      Routes.tbtSOPListScreen,
     );
   }
 

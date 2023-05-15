@@ -9,6 +9,10 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
+import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
+import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
+import 'package:cmms/app/tbt_type_list/view/tbt_type_list_screen.dart';
 import 'package:cmms/app/job_list_sop/job_list_sop_binding.dart';
 import 'package:cmms/app/job_list_sop/view/job_list_sop_screen.dart';
 import 'package:cmms/app/asset_type_list/asset_type_list_binding.dart';
@@ -284,14 +288,14 @@ class AppPages {
       binding: SafetyQuestionsListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.jobTypeListScreen,
-      page: JobTypeListScreen.new,
-      binding: JobTypeListBinding(),
+      name: _Paths.tbtTypeListScreen,
+      page: TBTTypeListScreen.new,
+      binding: TBTTypeListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.jobSOPListScreen,
-      page: JobSOPListScreen.new,
-      binding: JobSOPListBinding(),
+      name: _Paths.tbtSOPListScreen,
+      page: TBTSOPListScreen.new,
+      binding: TBTSOPListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.assetTypeListScreen,

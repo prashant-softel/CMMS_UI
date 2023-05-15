@@ -6,9 +6,18 @@ import 'package:cmms/domain/repositories/repository.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 
 
-class JobSOPListUsecase {
-  JobSOPListUsecase(this.repository);
+class TBTSOPListUsecase {
+  TBTSOPListUsecase(this.repository);
   Repository repository;
+
+
+   Future<List<JobTypeListModel>> getJobTypePermitList(
+      {required bool isLoading, required int? facility_id}) async {
+    return repository.getJobTypePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
 
  Future<List<SOPListModel>> getSopPermitList({
     required bool isLoading,

@@ -241,7 +241,10 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getSopPermitList(
-      {required bool isLoading, required String auth, int? job_type_id}) async {
+      {required bool isLoading, 
+      required String auth, 
+      int? job_type_id
+      }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetSOPList?job_type_id=$job_type_id',
       Request.getMultiparts,

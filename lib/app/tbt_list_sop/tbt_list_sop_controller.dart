@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/job_type_list/job_type_list_presenter.dart';
+import 'package:cmms/app/tbt_list_sop/tbt_list_sop_presenter.dart';
+import 'package:cmms/app/tbt_type_list/tbt_type_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -12,11 +15,11 @@ import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 
 
-class JobTypeListController extends GetxController {
-  JobTypeListController(
-    this.jobTypeListPresenter,
+class TBTSOPListController extends GetxController {
+  TBTSOPListController(
+    this.tbtSOPListPresenter,
   );
-  JobTypeListPresenter jobTypeListPresenter;
+  TBTSOPListPresenter tbtSOPListPresenter;
   final HomeController homecontroller = Get.find();
 
  RxBool isCheckedRequire = false.obs;
@@ -26,6 +29,14 @@ class JobTypeListController extends GetxController {
 
   //checkbox
    RxBool isChecked = true.obs;
+
+
+   ////File UPload
+  RxString fileName = "".obs;
+  Uint8List? fileBytes;
+  RxString fileName2 = "".obs;
+  Uint8List? fileBytes2;
+   
 
 
   
@@ -51,14 +62,23 @@ class JobTypeListController extends GetxController {
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
-/// Job Type Permit List
-  RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
-  Rx<bool> isJobTypeListSelected = true.obs;
-  Rx<String> selectedJobType = ''.obs;
-  RxList<String?> selectedJobTypeDataList = <String>[].obs;
-  RxList<int?> selectedJobTypeIdList = <int>[].obs;
+
+
+  ///SOP Permit List
+  RxList<SOPListModel> sopPermitList = <SOPListModel>[].obs;
+  Rx<bool> isSopPermitListSelected = true.obs;
+  Rx<String> selectedSopPermit = ''.obs;
+  RxList<String?> selectedSopPermitDataList = <String>[].obs;
+  RxList<int?> selectedSopPermitIdList = <int>[].obs;
+  int selectedSOPId = 0;
+  int selectedJobSOPId = 0;
   
-   PaginationController jobTypeListPaginationController = PaginationController(
+   PaginationController jobSOPListPaginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
+
+   PaginationController jobListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -69,6 +89,14 @@ class JobTypeListController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
+
+  /// Job Type Permit List
+  RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
+  Rx<bool> isJobTypeListSelected = true.obs;
+  Rx<String> selectedJobType = ''.obs;
+  RxList<String?> selectedJobTypeDataList = <String>[].obs;
+  RxList<int?> selectedJobTypeIdList = <int>[].obs;
+    int selectedJobTypesId = 0;
 
 
   @override
@@ -81,9 +109,10 @@ class JobTypeListController extends GetxController {
        Future.delayed(Duration(seconds: 1), () {
         getJobTypePermitList();
       });
-       Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
+      Future.delayed(Duration(seconds: 1), () {
+        getSopPermitList();
+      });
+      
       
     });
     
@@ -91,43 +120,57 @@ class JobTypeListController extends GetxController {
   }
 
 
-   Future<void> getFacilityList() async {
-    final _facilityList = await jobTypeListPresenter.getFacilityList();
-    //print('Facility25:$_facilityList');
-    if (_facilityList != null) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
-      }
+  Future<void> getSopPermitList() async {
+    sopPermitList.value = <SOPListModel>[];
+    final _sopPermitList = await tbtSOPListPresenter.getSopPermitList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      job_type_id: selectedJobSOPId,
+      // job_type_id: 36,
 
-      selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    );
+    if (_sopPermitList != null) {
+      
+      for (var sopPermit_list in _sopPermitList) {
+        sopPermitList.add(sopPermit_list);
+      }
+      // selectedSopPermit.value = _sopPermitList[0].name ?? '';
+
     }
+
+    // supplierNameList = _supplierNameList;
+    jobSOPListPaginationController = PaginationController(
+      rowCount: sopPermitList.length,
+      rowsPerPage: 10,
+    );
+    update(['sop_permit_list']);
   }
 
-
-
-  Future<void> getJobTypePermitList() async {
+   Future<void> getJobTypePermitList() async {
     jobTypeList.value = <JobTypeListModel>[];
-    final _jobTypeList = await jobTypeListPresenter.getJobTypePermitList(
+    final _jobTypeList = await tbtSOPListPresenter.getJobTypePermitList(
       isLoading: true,
       // categoryIds: cPategoryIds,
       facility_id: 45,
     );
-    if (_jobTypeList != null) {
-      for (var jobType_list in _jobTypeList) {
-        jobTypeList.add(jobType_list);
-      }
-      // selectedJobType.value = _jobTypeList[0].name ?? '';
-      
+    for (var jobType_list in _jobTypeList) {
+      jobTypeList.add(jobType_list);
     }
+      // selectedJobType.value = jobTypeList[0].name ?? '';
+
+    // getSopPermitList();
     // supplierNameList = _supplierNameList;
-    jobTypeListPaginationController = PaginationController(
-      rowCount: jobTypeList.length,
-      rowsPerPage: 10,
-    );
+    // jobListPaginationController = PaginationController(
+    //   rowCount: jobTypeList.length,
+    //   rowsPerPage: 10,
+    // );
     update(['job_Type_list']);
   }
 
+
+
+
+ 
 
   
   void onValueChanged(dynamic list, dynamic value) {
@@ -152,6 +195,14 @@ class JobTypeListController extends GetxController {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+        }
+        break;
+         case RxList<JobTypeListModel>:
+        {
+          int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
+          selectedJobSOPId = jobTypeList[jobTypeListIndex].id ?? 0;
+          getSopPermitList();
+          //}
         }
         break;
       default:

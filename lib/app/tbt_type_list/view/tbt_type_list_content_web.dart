@@ -1,8 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/job_list_sop/job_list_sop_controller.dart';
-import 'package:cmms/app/job_type_list/job_type_list_controller.dart';
+import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +11,9 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
-class JobSOPListContentWeb extends GetView<JobSOPListController> {
-  JobSOPListContentWeb({Key? key}) : super(key: key);
-  final JobSOPListController controller = Get.find();
+class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
+  TBTTypeListContentWeb({Key? key}) : super(key: key);
+  final TBTTypeListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                     },
                     child: Text(" / Masters", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Job Type", style: Styles.greyMediumLight12)
+                  Text(" / TBT Type", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -72,7 +71,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.8,
+                          height: Get.height / 1.0,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -91,13 +90,14 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add Job SOP ",
+                                          "Add TBT Type ",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 40,
+                                          height: 70,
                                         ),
-                                        CustomRichText(title: 'Title '),
+                                        CustomRichText(
+                                            title: 'Job Type Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -150,29 +150,29 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        // CustomRichText(title: 'Facility: '),
-                                        // SizedBox(
-                                        //   width: 5,
-                                        // ),
-                                        // SizedBox(
-                                        //   width: MediaQuery.of(context)
-                                        //           .size
-                                        //           .width /
-                                        //       1.82,
-                                        //   child: DropdownWidget(
-                                        //     dropdownList:
-                                        //         controller.facilityList,
-                                        //     isValueSelected: controller
-                                        //         .isFacilitySelected.value,
-                                        //     selectedValue: controller
-                                        //         .selectedFacility.value,
-                                        //     onValueChanged:
-                                        //         controller.onValueChanged,
-                                        //   ),
-                                        // ),
-                                        // SizedBox(
-                                        //   height: 10,
-                                        // ),
+                                        CustomRichText(title: 'Facility: '),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.82,
+                                          child: DropdownWidget(
+                                            dropdownList:
+                                                controller.facilityList,
+                                            isValueSelected: controller
+                                                .isFacilitySelected.value,
+                                            selectedValue: controller
+                                                .selectedFacility.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
                                         CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
@@ -226,22 +226,23 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        // Row(
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Require SOP/JSA: '),
-                                        //     SizedBox(
-                                        //       width: 5,
-                                        //     ),
-                                        //     Checkbox(
-                                        //       value: controller
-                                        //           .isCheckedRequire.value,
-                                        //       onChanged: (bool? value) {
-                                        //         controller.requiretoggleCheckbox();
-                                        //       },
-                                        //     ),
-                                        //   ],
-                                        // ),
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Require SOP/JSA: '),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Checkbox(
+                                              value: controller
+                                                  .isCheckedRequire.value,
+                                              onChanged: (bool? value) {
+                                                controller
+                                                    .requiretoggleCheckbox();
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                         SizedBox(
                                           height: 20,
                                         ),
@@ -304,7 +305,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of Job SOP",
+                                      "List of TBT Type",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -407,11 +408,13 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
-                                          .jobSOPListPaginationController,
+                                          .jobTypeListPaginationController,
                                       columns: [
                                         "Sr.No.",
                                         "Title",
-                                        "Job Type Name",
+                                        "Description",
+                                        "Facility",
+                                        "Require\nSOP/JSA",
                                         "Action"
                                       ].map((column) {
                                         return TableViewColumn(
@@ -422,14 +425,16 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                       rows: //
                                           [
                                         ...List.generate(
-                                          controller.sopPermitList.length,
+                                          controller.jobTypeList.length,
                                           (index) {
-                                            var jobSOPListDetails =
-                                                controller.sopPermitList[index];
+                                            var jobTypeListDetails =
+                                                controller.jobTypeList[index];
                                             return [
-                                              '${jobSOPListDetails.id}',
-                                              '${jobSOPListDetails.name}',
-                                              '${jobSOPListDetails.jobTypeName}',
+                                              '${jobTypeListDetails.id}',
+                                              '${jobTypeListDetails.name}',
+                                              'No Data Found',
+                                              'Hero Future Solar Plant 100MW',
+                                              'Checkbox',
                                               "Action"
                                             ];
                                           },
@@ -484,21 +489,21 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
                                         valueListenable: controller
-                                            .jobSOPListPaginationController,
+                                            .jobTypeListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(
-                                                "${controller.jobSOPListPaginationController.currentPage}  of ${controller.jobSOPListPaginationController.pageCount}"),
+                                                "${controller.jobTypeListPaginationController.currentPage}  of ${controller.jobTypeListPaginationController.pageCount}"),
                                             Row(children: [
                                               IconButton(
                                                 onPressed: controller
-                                                            .jobSOPListPaginationController
+                                                            .jobTypeListPaginationController
                                                             .currentPage <=
                                                         1
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .jobTypeListPaginationController
                                                             .previous();
                                                       },
                                                 iconSize: 20,
@@ -507,7 +512,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                                   Icons
                                                       .arrow_back_ios_new_rounded,
                                                   color: controller
-                                                              .jobSOPListPaginationController
+                                                              .jobTypeListPaginationController
                                                               .currentPage <=
                                                           1
                                                       ? Colors.black26
@@ -517,15 +522,15 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                               ),
                                               IconButton(
                                                 onPressed: controller
-                                                            .jobSOPListPaginationController
+                                                            .jobTypeListPaginationController
                                                             .currentPage >=
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .jobTypeListPaginationController
                                                             .pageCount
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .jobTypeListPaginationController
                                                             .next();
                                                       },
                                                 iconSize: 20,
@@ -534,10 +539,10 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                                   Icons
                                                       .arrow_forward_ios_rounded,
                                                   color: controller
-                                                              .jobSOPListPaginationController
+                                                              .jobTypeListPaginationController
                                                               .currentPage >=
                                                           controller
-                                                              .jobSOPListPaginationController
+                                                              .jobTypeListPaginationController
                                                               .pageCount
                                                       ? Colors.black26
                                                       : Theme.of(context)

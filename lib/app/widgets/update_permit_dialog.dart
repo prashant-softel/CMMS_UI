@@ -14,7 +14,7 @@ class UpdateNewPermitDialog extends GetView {
   List<dynamic>? PtwId;
 
   UpdateNewPermitDialog({super.key, this.createPermitData, this.data, this.PtwId});
-  // final NewPermitListController _controller = Get.find();
+  final NewPermitListController _controller = Get.find();
 
 
   @override
@@ -100,8 +100,10 @@ class UpdateNewPermitDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-               
+                
                 Get.back();
+                Get.offAndToNamed(Routes.newPermitList);
+                _controller.getNewPermitList(_controller.facilityId, _controller.userId);
               },
               child: const Text('Ok'),
             ),
