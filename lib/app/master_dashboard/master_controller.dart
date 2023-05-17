@@ -94,4 +94,11 @@ class MastersController extends GetxController {
       Routes.inventoryTypeListScreen,
     );
   }
+
+  //goToFacilityTypeList
+  Future<void> goToFacilityTypeList() async {
+    Get.toNamed(
+      Routes.facilityTypeListScreen,
+    );
+  }
 }
