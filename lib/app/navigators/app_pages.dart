@@ -17,6 +17,8 @@ import 'package:cmms/app/asset_type_list/asset_type_list_binding.dart';
 import 'package:cmms/app/asset_type_list/view/asset_type_list_screen.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_binding.dart';
 import 'package:cmms/app/facility_type_list/view/facility_type_list_screen.dart';
+import 'package:cmms/app/block_type_list/block_type_list_binding.dart';
+import 'package:cmms/app/block_type_list/view/block_type_list_screen.dart';
 import 'package:cmms/app/inventory_type_list/view/inventory_type_list.dart';
 import 'package:cmms/app/inventory_type_list/inventory_type_list_binding.dart';
 import 'package:cmms/app/master_dashboard/master_binding.dart';
@@ -309,6 +311,11 @@ class AppPages {
       name: _Paths.facilityTypeListScreen,
       page: FacilityTypeListScreen.new,
       binding: FacilityTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.blockTypeListScreen,
+      page: BlockTypeListScreen.new,
+      binding: BlockTypeListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.importInventory,

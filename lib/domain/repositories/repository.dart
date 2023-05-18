@@ -28,6 +28,7 @@ import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
+import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -745,6 +746,32 @@ class Repository {
       if (!res.hasError) {
         var facilityTypeList = FacilityTypeListModelFromJson(res.data);
         return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<BlockTypeListModel>> getBlockTypeList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getBlockTypeList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var blockTypeList = BlockTypeListModelFromJson(res.data);
+        return blockTypeList;
       }
       return [];
     } catch (error) {

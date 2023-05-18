@@ -49,6 +49,7 @@ abstract class Routes {
   static const assetTypeListScreen = _Paths.assetTypeListScreen;
   static const inventoryTypeListScreen = _Paths.inventoryTypeListScreen;
   static const facilityTypeListScreen = _Paths.facilityTypeListScreen;
+  static const blockTypeListScreen = _Paths.blockTypeListScreen;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
@@ -101,6 +102,7 @@ abstract class _Paths {
   static const assetTypeListScreen = '/asset-type-list-screen';
   static const inventoryTypeListScreen = '/inventory-type-list-screen';
   static const facilityTypeListScreen = '/facility-type-list-screen';
+  static const blockTypeListScreen = '/block-type-list-screen';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
   static const addUser = '/addUser';

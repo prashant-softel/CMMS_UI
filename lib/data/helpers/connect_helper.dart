@@ -282,6 +282,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getBlockTypeList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Facility/GetBlockList?parent_id=46',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getSafetyMeasureList(
       {required bool isLoading,
       required String auth,
