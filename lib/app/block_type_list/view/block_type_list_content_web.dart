@@ -1,19 +1,20 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
+import 'package:cmms/app/block_type_list/block_type_list_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
-class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
-  FacilityTypeListContentWeb({Key? key}) : super(key: key);
-  final FacilityTypeListController controller = Get.find();
+class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
+  BlockTypeListContentWeb({Key? key}) : super(key: key);
+  final BlockTypeListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / FACILITY LIST", style: Styles.greyMediumLight12)
+                  Text(" / BLOCK LIST", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -90,7 +91,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add Facility",
+                                          "Add Block",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -300,12 +301,67 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "List of Facilities",
-                                      style: Styles.blackBold16,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(0.0),
+                                        child: Text(
+                                          "List of Blocks",
+                                          style: Styles.blackBold16,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        "Facility Type:",
+                                        style: Styles.black16W500,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .3),
+                                        child:
+                                            // CustomDropDownButton(
+                                            //   value: controller
+                                            //       .selectedchecklist.value,
+                                            //   onChange: (String? selectedValue) {
+                                            //     controller.isSelectedchecklist
+                                            //         .value = true;
+                                            //     controller.selectedchecklist.value =
+                                            //         selectedValue ?? '';
+
+                                            //     controller.getBlocks(
+                                            //         selected:
+                                            //             selectedValue.toString());
+                                            //   },
+                                            //   item: controller.facilityTypeList
+                                            //       .map<DropdownMenuItem<String>>(
+                                            //           (list) {
+                                            //     return DropdownMenuItem<String>(
+                                            //       value: list?.id.toString() ?? '',
+                                            //       child: Text(list.name
+                                            //               .toString() ??
+                                            //           ''),
+                                            //     );
+                                            //   }).toList(),
+                                            // ),
+                                            DropdownWidget(
+                                          controller: controller,
+                                          dropdownList:
+                                              controller.facilityTypeList,
+                                          isValueSelected: controller
+                                              .isSelectedfacility.value,
+                                          selectedValue:
+                                              controller.selectedfacility.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Divider(
                                     color: ColorValues.greyLightColour,
@@ -410,7 +466,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
-                                          .facilityTypeListPaginationController,
+                                          .blockTypeListPaginationController,
                                       columns: [
                                         "Sr.No.",
                                         "Title",
@@ -419,7 +475,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         "State",
                                         "Country",
                                         "Pin",
-                                        "Blocks",
                                         "Action"
                                       ].map((column) {
                                         return TableViewColumn(
@@ -430,11 +485,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       rows: //
                                           [
                                         ...List.generate(
-                                          controller.facilityTypeList.length,
+                                          controller.blockTypeList.length,
                                           (index) {
                                             var facilityTypeListDetails =
-                                                controller
-                                                    .facilityTypeList[index];
+                                                controller.blockTypeList[index];
                                             return [
                                               '${facilityTypeListDetails.id}',
                                               '${facilityTypeListDetails.name}',
@@ -442,7 +496,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               '${facilityTypeListDetails.city}',
                                               '${facilityTypeListDetails.state}',
                                               '${facilityTypeListDetails.country}',
-                                              '${facilityTypeListDetails.blocks}',
                                               '${facilityTypeListDetails.pin}',
                                               "Action"
                                             ];
@@ -470,16 +523,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                             10),
                                                                 child: Column(
                                                                   children: [
-                                                                    TableActionButton(
-                                                                      color: ColorValues
-                                                                          .appLightBlueColor,
-                                                                      icon: Icons
-                                                                          .visibility,
-                                                                      label:
-                                                                          'View Blocks',
-                                                                      onPress:
-                                                                          () {},
-                                                                    ),
                                                                     Container(
                                                                       padding: EdgeInsets.only(
                                                                           bottom:
@@ -517,21 +560,21 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
                                         valueListenable: controller
-                                            .facilityTypeListPaginationController,
+                                            .blockTypeListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(
-                                                "${controller.facilityTypeListPaginationController.currentPage}  of ${controller.facilityTypeListPaginationController.pageCount}"),
+                                                "${controller.blockTypeListPaginationController.currentPage}  of ${controller.blockTypeListPaginationController.pageCount}"),
                                             Row(children: [
                                               IconButton(
                                                 onPressed: controller
-                                                            .facilityTypeListPaginationController
+                                                            .blockTypeListPaginationController
                                                             .currentPage <=
                                                         1
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .facilityTypeListPaginationController
+                                                            .blockTypeListPaginationController
                                                             .previous();
                                                       },
                                                 iconSize: 20,
@@ -540,7 +583,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   Icons
                                                       .arrow_back_ios_new_rounded,
                                                   color: controller
-                                                              .facilityTypeListPaginationController
+                                                              .blockTypeListPaginationController
                                                               .currentPage <=
                                                           1
                                                       ? Colors.black26
@@ -550,15 +593,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                               IconButton(
                                                 onPressed: controller
-                                                            .facilityTypeListPaginationController
+                                                            .blockTypeListPaginationController
                                                             .currentPage >=
                                                         controller
-                                                            .facilityTypeListPaginationController
+                                                            .blockTypeListPaginationController
                                                             .pageCount
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .facilityTypeListPaginationController
+                                                            .blockTypeListPaginationController
                                                             .next();
                                                       },
                                                 iconSize: 20,
@@ -567,10 +610,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   Icons
                                                       .arrow_forward_ios_rounded,
                                                   color: controller
-                                                              .facilityTypeListPaginationController
+                                                              .blockTypeListPaginationController
                                                               .currentPage >=
                                                           controller
-                                                              .facilityTypeListPaginationController
+                                                              .blockTypeListPaginationController
                                                               .pageCount
                                                       ? Colors.black26
                                                       : Theme.of(context)

@@ -106,157 +106,291 @@ class MastersDashboard extends GetView<MastersController> {
                     SizedBox(
                       height: 15,
                     ),
-                    SingleChildScrollView(
-                        child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 20),
-                          child: Text(
-                            "Permit To Work",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 159, 156, 156),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400),
+                    Expanded(
+                      // height: Get.height,
+                      // margin: EdgeInsets.only(left: 20),
+                      child: SingleChildScrollView(
+                          child: Column(
+                        children: [
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 20),
+                          //   child: Text(
+                          //     "Permit To Work",
+                          //     style: TextStyle(
+                          //         color: Color.fromARGB(255, 159, 156, 156),
+                          //         fontSize: 20,
+                          //         fontWeight: FontWeight.w400),
+                          //   ),
+                          // ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Permit To Work",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        GridView.count(
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: Dimens.edgeInsets15,
-                          crossAxisSpacing: 6,
-                          mainAxisSpacing: 6,
-                          crossAxisCount: Responsive.isMobile(context) ? 2 : 2,
-                          childAspectRatio: Responsive.isMobile(context)
-                              ? (itemWidth / itemHeight)
-                              : (itemWidth / itemHeightWeb),
-                          children: <Widget>[
-                            createContentTile(
-                                title: "Permit Type",
-                                onTap: () {
-                                  controller.goToPermitTypeScreen();
-                                }),
-                            createContentTile(
-                                title: 'Safety Questions',
-                                onTap: () {
-                                  controller.gotToSafetyQuestionsList();
-                                }),
-                            createContentTile(
-                                title: "TBT Type",
-                                onTap: () {
-                                  controller.goToJobTypeList();
-                                }),
-                            createContentTile(
-                                title: "TBT SOP List",
-                                onTap: () {
-                                  controller.goToJobSOPList();
-                                }),
-                            // createContentTile(title: "Job Card List"),
-                            // _priventiveList(tittle: "PM Schedule View"),
-                            // _priventiveList(tittle: "PM Report"),
-                            // _priventiveList(tittle: "PM Report"),
-                            // _priventiveList(tittle: "PM "),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 20),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Assets",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 159, 156, 156),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              SizedBox(
-                                  width:
-                                      10), // Add some space between the text and the line
-                              Expanded(
-                                child: Divider(
-                                  color: Colors
-                                      .grey, // Customize the color of the line if needed
-                                  height:
-                                      1, // Adjust the height of the line if needed
-                                ),
-                              ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 2,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              createContentTile(
+                                  title: "Permit Type",
+                                  onTap: () {
+                                    controller.goToPermitTypeScreen();
+                                  }),
+                              createContentTile(
+                                  title: 'Safety Questions',
+                                  onTap: () {
+                                    controller.gotToSafetyQuestionsList();
+                                  }),
+                              createContentTile(
+                                  title: "TBT Type",
+                                  onTap: () {
+                                    controller.goToJobTypeList();
+                                  }),
+                              createContentTile(
+                                  title: "TBT SOP List",
+                                  onTap: () {
+                                    controller.goToJobSOPList();
+                                  }),
+
+                              // createContentTile(title: "Job Card List"),
+                              // _priventiveList(tittle: "PM Schedule View"),
+                              // _priventiveList(tittle: "PM Report"),
+                              // _priventiveList(tittle: "PM Report"),
+                              // _priventiveList(tittle: "PM "),
                             ],
                           ),
-                        ),
-                        GridView.count(
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: Dimens.edgeInsets15,
-                          crossAxisSpacing: 6,
-                          mainAxisSpacing: 6,
-                          crossAxisCount: Responsive.isMobile(context) ? 2 : 2,
-                          childAspectRatio: Responsive.isMobile(context)
-                              ? (itemWidth / itemHeight)
-                              : (itemWidth / itemHeightWeb),
-                          children: <Widget>[
-                            createContentTile(
-                                title: "Asset Category List",
-                                onTap: () {
-                                  controller.goToAssetTypeList();
-                                }),
-                            createContentTile(
-                                title: "Asset Type List",
-                                onTap: () {
-                                  controller.goToInventoryTypeList();
-                                }),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 20),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Facility",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 159, 156, 156),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Assets",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                  width:
-                                      10), // Add some space between the text and the line
-                              Expanded(
-                                child: Divider(
-                                  color: Colors
-                                      .grey, // Customize the color of the line if needed
-                                  height:
-                                      1, // Adjust the height of the line if needed
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
                                 ),
-                              ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 2,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              createContentTile(
+                                  title: "Asset Category List",
+                                  onTap: () {
+                                    controller.goToAssetTypeList();
+                                  }),
+                              createContentTile(
+                                  title: "Asset Type List",
+                                  onTap: () {
+                                    controller.goToInventoryTypeList();
+                                  }),
                             ],
                           ),
-                        ),
-                        GridView.count(
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: Dimens.edgeInsets15,
-                          crossAxisSpacing: 6,
-                          mainAxisSpacing: 6,
-                          crossAxisCount: Responsive.isMobile(context) ? 2 : 2,
-                          childAspectRatio: Responsive.isMobile(context)
-                              ? (itemWidth / itemHeight)
-                              : (itemWidth / itemHeightWeb),
-                          children: <Widget>[
-                            createContentTile(
-                                title: "Facility List",
-                                onTap: () {
-                                  controller.goToFacilityTypeList();
-                                }),
-                            createContentTile(
-                                title: "Block List",
-                                onTap: () {
-                                  controller.goToInventoryTypeList();
-                                }),
-                          ],
-                        ),
-                      ],
-                    )),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Facility",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 2,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              createContentTile(
+                                  title: "Facility List",
+                                  onTap: () {
+                                    controller.goToFacilityTypeList();
+                                  }),
+                              createContentTile(
+                                  title: "Block List",
+                                  onTap: () {
+                                    controller.goToBlockTypeList();
+                                  }),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Five",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 2,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              createContentTile(
+                                  title: "Facility List",
+                                  onTap: () {
+                                    controller.goToFacilityTypeList();
+                                  }),
+                              createContentTile(
+                                  title: "Block List",
+                                  onTap: () {
+                                    controller.goToBlockTypeList();
+                                  }),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Six",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 2,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              createContentTile(
+                                  title: "Facility List",
+                                  onTap: () {
+                                    controller.goToFacilityTypeList();
+                                  }),
+                              createContentTile(
+                                  title: "Block List",
+                                  onTap: () {
+                                    controller.goToBlockTypeList();
+                                  }),
+                            ],
+                          ),
+                        ],
+                      )),
+                    ),
                   ]),
             ),
           ],

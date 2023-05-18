@@ -1,5 +1,5 @@
-import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
-import 'package:cmms/app/facility_type_list/view/facility_type_list_content_web.dart';
+import 'package:cmms/app/block_type_list/block_type_list_controller.dart';
+import 'package:cmms/app/block_type_list/view/block_type_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,8 +8,8 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class FacilityTypeListScreen extends GetView<FacilityTypeListController> {
-  FacilityTypeListScreen({super.key});
+class BlockTypeListScreen extends GetView<BlockTypeListController> {
+  BlockTypeListScreen({super.key});
 
   ///
   @override
@@ -45,7 +45,7 @@ class FacilityTypeListScreen extends GetView<FacilityTypeListController> {
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: FacilityTypeListContentWeb(),
+                        child: BlockTypeListContentWeb(),
                       )
                   ],
                 ),

@@ -101,4 +101,10 @@ class MastersController extends GetxController {
       Routes.facilityTypeListScreen,
     );
   }
+  //goToBlockTypeList
+  Future<void> goToBlockTypeList() async {
+    Get.toNamed(
+      Routes.blockTypeListScreen,
+    );
+  }
 }

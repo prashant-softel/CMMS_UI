@@ -4,22 +4,21 @@
 
 import 'dart:convert';
 
-List<FacilityTypeListModel> FacilityTypeListModelFromJson(String str) =>
-    List<FacilityTypeListModel>.from(
-        json.decode(str).map((x) => FacilityTypeListModel.fromJson(x)));
+List<BlockTypeListModel> BlockTypeListModelFromJson(String str) =>
+    List<BlockTypeListModel>.from(
+        json.decode(str).map((x) => BlockTypeListModel.fromJson(x)));
 
-String FacilityTypeListModelToJson(List<FacilityTypeListModel> data) =>
+String BockTypeListModelToJson(List<BlockTypeListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class FacilityTypeListModel {
-  FacilityTypeListModel({
+class BlockTypeListModel {
+  BlockTypeListModel({
     this.id,
     this.name,
     this.address,
     this.city,
     this.state,
     this.country,
-    this.blocks,
     this.pin,
   });
 
@@ -29,18 +28,16 @@ class FacilityTypeListModel {
   String? city;
   String? state;
   String? country;
-  int? blocks;
   int? pin;
 
-  factory FacilityTypeListModel.fromJson(Map<String, dynamic> json) =>
-      FacilityTypeListModel(
+  factory BlockTypeListModel.fromJson(Map<String, dynamic> json) =>
+      BlockTypeListModel(
         id: json["id"],
         name: json["name"],
         address: json['address'],
         city: json['city'],
         state: json['state'],
         country: json['country'],
-        blocks: json['blocks'],
         pin: json['pin'],
       );
 
@@ -51,7 +48,6 @@ class FacilityTypeListModel {
         "city": city,
         "state": state,
         "country": country,
-        "blocks": blocks,
         "pin": pin,
       };
 }
