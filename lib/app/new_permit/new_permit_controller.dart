@@ -231,11 +231,15 @@ class NewPermitController extends GetxController {
 
   ///SOP Permit List
   RxList<SOPListModel> sopPermitList = <SOPListModel>[].obs;
+  RxList<SOPListModel?> filteredSOPPathList = <SOPListModel>[].obs;
+
   Rx<bool> isSopPermitListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
   int selectedSOPId = 0;
+  String? jsaData;
+  String? sopData;
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -305,6 +309,12 @@ class NewPermitController extends GetxController {
   Rx<NewPermitDetailModel?> newPermitDetailsModel = NewPermitDetailModel().obs;
   RxList<NewPermitDetailModel?>? newPermitDetailsList =
       <NewPermitDetailModel?>[].obs;
+  
+  ///SOP File Path
+  RxList<SOPListModel> sopListFilePathModel = <SOPListModel>[].obs;
+  Rx<String> selectedSOPFilePath = ''.obs;
+
+
 
   var jobModel = JobDetailsModel();
 
@@ -615,9 +625,21 @@ if(arguments != null){
       job_type_id: selectedJobTypesId,
       // job_type_id: 36,
     );
+    
+
     for (var sopPermit_list in _sopPermitList) {
       sopPermitList.add(sopPermit_list);
+      String filePath;
+      
     }
+
+
+     
+
+    print('SOP List 18:${filteredSOPPathList.value}');
+
+   
+    
 
     // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
@@ -647,6 +669,7 @@ if(arguments != null){
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print({ list,  value});
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -762,7 +785,13 @@ if(arguments != null){
         {
           int sopPermitListIndex =
               sopPermitList.indexWhere((x) => x.name == value);
+            jsaData = sopPermitList[sopPermitListIndex].jsa_file_path ?? '';
+            sopData = sopPermitList[sopPermitListIndex].sop_file_path ?? '';
           selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
+          print('JsaPath:$jsaData');
+          print('SopPath:$sopData');
+
+           
         }
         break;
 

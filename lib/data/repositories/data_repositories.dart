@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 
 /// Repositories (retrieve data, heavy processing etc..)
 class DataRepository extends DomainRepository {
@@ -373,6 +374,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  
   Future<ResponseModel> permitCloseButton({
     required String auth,
     String? comment,
@@ -682,6 +684,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> createSOP({
+    required String auth,
+    createSop,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createSOP(
+        auth: auth,
+        createSop: createSop,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
     bool? isLoading,
@@ -967,18 +980,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<bool> browseFiles(
+  Future<CreateSOPModel> browseFiles(
       {required String auth,
       Uint8List? fileBytes,
       required String fileName,
       required bool isLoading}) async {
-    await connectHelper.browseFiles(
+    return await connectHelper.browseFiles(
       auth: auth,
       fileBytes: fileBytes,
       fileName: fileName,
       isLoading: true,
     );
-    return true;
+    // return true;
   }
 
   Future<ResponseModel> deleteCkecklist({

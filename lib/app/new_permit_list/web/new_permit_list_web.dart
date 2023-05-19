@@ -261,7 +261,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         // '${newPermitDetails?.requestDatetime}',
                                         '${newPermitDetails?.approvedByName}\n${newPermitDetails?.approvedDatetime}',
                                         // '${newPermitDetails?.approvedDatetime}',
-                                        '${newPermitDetails?.currentStatus}',
+                                        '${newPermitDetails?.current_status_short}',
                                         // '${newPermitDetails?.current_status}' ==
                                         //         "Permit Created"
                                         //  ?

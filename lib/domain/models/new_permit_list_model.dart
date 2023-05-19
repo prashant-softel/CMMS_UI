@@ -23,7 +23,7 @@ class NewPermitModel {
   DateTime? requestDatetime;
   String? approvedByName;
   DateTime? approvedDatetime;
-  String? currentStatus;
+  String? current_status_short;
 
   NewPermitModel(
       {this.permitId,
@@ -40,7 +40,7 @@ class NewPermitModel {
       this.requestDatetime,
       this.approvedByName,
       this.approvedDatetime,
-      this.currentStatus});
+      this.current_status_short});
 
   NewPermitModel.fromJson(Map<String, dynamic> json) {
     permitId = json['permitId'];
@@ -61,7 +61,7 @@ class NewPermitModel {
     approvedDatetime = json['approved_datetime'] == null
         ? null
         : DateTime.parse(json['approved_datetime'] as String);
-    currentStatus = json['current_status'];
+    current_status_short = json['current_status_short'];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,7 +80,7 @@ class NewPermitModel {
     data['request_datetime'] = this.requestDatetime;
     data['approved_by_name'] = this.approvedByName;
     data['approved_datetime'] = this.approvedDatetime;
-    data['current_status'] = this.currentStatus;
+    data['current_status_short'] = this.current_status_short;
     return data;
   }
 }
