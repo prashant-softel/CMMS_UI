@@ -233,6 +233,35 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getFacilityTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getFacilityTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+  Future<ResponseModel> getBlockTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBlockTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
   @override
   Future<ResponseModel> getSafetyMeasureList({
     int? permit_type_id,
