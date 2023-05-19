@@ -1430,36 +1430,155 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               SizedBox(
                                                 height: 10,
                                               ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 50),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      children: [
+                                                        CustomRichText(
+                                                            title:
+                                                                'Requested By: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Date / Time: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                          title: 'Signature: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title: 'Issued By: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Date / Time: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                          title: 'Signature: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Approved By: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Date / Time: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                          title: 'Signature: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title: 'Closed By: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Date / Time: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                          title: 'Signature: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Cancelled By: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Date / Time: '),
+                                                        SizedBox(height: 1,),
+                                                        CustomRichText(
+                                                          title: 'Signature: '),
+                                                
+                                                      ],
+                                                    ),
+                                                   SizedBox(width: 30,),
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                         Text(
+                                                          'Prashant Shetya',
+                                                        ),
+                                                        Text(
+                                                          '2022-05-01 17:25',
+                                                        ),
+                                                         Text(
+                                                          'No Data !!!',
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                        ),
+                                                        
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                                        ),
+                                                         Text(
+                                                          'No Data !!!',
+                                                        ),
+                                                        Text(
+                                                            '${controller.viewPermitDetailsModel.value?.approvedByName}',
+                                                          ),
+                                                         Text(
+                                                          '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                        ),
+                                                         Text(
+                                                          'No Data !!!',
+                                                        ),
+                                                         Text(
+                                                          '${controller.viewPermitDetailsModel.value?.closedByName}',
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.close_at}',
+                                                        ),
+                                                          Text(
+                                                          'No Data !!!',
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
+                                                        ),
+                                                         Text(
+                                                          '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
+                                                        ),
+                                                         Text(
+                                                          'No Data !!!',
+                                                        ),
+                                                
+                                                      ],
+                                                    )
+                                                
+                                                  ],
+                                                ),
+                                              ),
                                               Column(
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Requested By: '),
-                                                      Text(
-                                                        ' Prashant Shetya',
-                                                      ),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Requested By: '),
+                                                      // Text(
+                                                      //   ' Prashant Shetya',
+                                                      // ),
                                                     ],
                                                   ),
                                                   // Dimens.boxWidth10,
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Date / Time: '),
-                                                      Text(
-                                                        ' 2022-05-01 17:25',
-                                                      ),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Date / Time: '),
+                                                      // Text(
+                                                      //   ' 2022-05-01 17:25',
+                                                      // ),
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 270),
-                                                    child: CustomRichText(
-                                                        title: 'Signature: '),
-                                                  ),
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           right: 270),
+                                                  //   child: CustomRichText(
+                                                  //       title: 'Signature: '),
+                                                  // ),
                                                 ],
                                               ),
                                               SizedBox(
@@ -1472,34 +1591,34 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title: 'Issued By: '),
+                                                      // CustomRichText(
+                                                      //     title: 'Issued By: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.issuedByName}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                      // ),
                                                     ],
                                                   ),
                                                   // SizedBox(width: 187),
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Date / Time: '),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Date / Time: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.issue_at}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                                      // ),
                                                     ],
                                                   ),
 
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 270),
-                                                    child: CustomRichText(
-                                                        title: 'Signature: '),
-                                                  ),
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           right: 270),
+                                                  //   child: CustomRichText(
+                                                  //       title: 'Signature: '),
+                                                  // ),
                                                 ],
                                               ),
                                               SizedBox(
@@ -1512,36 +1631,36 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Approved By: '),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Approved By: '),
                                                       SizedBox(width: 5),
-                                                      SizedBox(
-                                                        width: 100,
-                                                        child: Text(
-                                                          '${controller.viewPermitDetailsModel.value?.approvedByName}',
-                                                        ),
-                                                      ),
+                                                      // SizedBox(
+                                                      //   width: 100,
+                                                      //   child: Text(
+                                                      //     '${controller.viewPermitDetailsModel.value?.approvedByName}',
+                                                      //   ),
+                                                      // ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Date / Time: '),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Date / Time: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.approve_at}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                      // ),
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 270),
-                                                    child: CustomRichText(
-                                                        title: 'Signature: '),
-                                                  ),
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           right: 270),
+                                                  //   child: CustomRichText(
+                                                  //       title: 'Signature: '),
+                                                  // ),
                                                 ],
                                               ),
                                               SizedBox(
@@ -1554,32 +1673,32 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title: 'Closed By: '),
+                                                      // CustomRichText(
+                                                      //     title: 'Closed By: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.closedByName}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.closedByName}',
+                                                      // ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Date / Time: '),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Date / Time: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.close_at}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.close_at}',
+                                                      // ),
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 270),
-                                                    child: CustomRichText(
-                                                        title: 'Signature: '),
-                                                  ),
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           right: 270),
+                                                  //   child: CustomRichText(
+                                                  //       title: 'Signature: '),
+                                                  // ),
                                                 ],
                                               ),
                                               SizedBox(
@@ -1592,33 +1711,33 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Cancelled By: '),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Cancelled By: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
+                                                      // ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Date / Time: '),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Date / Time: '),
                                                       SizedBox(width: 5),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
-                                                      ),
+                                                      // Text(
+                                                      //   '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
+                                                      // ),
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 270),
-                                                    child: CustomRichText(
-                                                        title: 'Signature: '),
-                                                  ),
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           right: 270),
+                                                  //   child: CustomRichText(
+                                                  //       title: 'Signature: '),
+                                                  // ),
                                                 ],
                                               ),
 
