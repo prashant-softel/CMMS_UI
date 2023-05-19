@@ -7,7 +7,7 @@ import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../../widgets/custom_divider.dart';
 import '../../../widgets/custom_elevated_button.dart';
-import '../../../widgets/file_upload_details_widget.dart';
+import '../../../widgets/file_upload_details_widget_web.dart';
 import '../../../widgets/file_upload_with_dropzone_widget.dart';
 import '../../../widgets/history_table_widget.dart';
 import '../../job_card_details_controller.dart';
@@ -87,7 +87,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   CustomDivider(),
 
                   /// EMPLOYEE TABLE
-                  EmployeeTableWidget(controller: controller),
+                  EmployeeTableWidget(controller: controller, isWeb: true),
                   Dimens.boxHeight20,
                   CustomDivider(),
 
@@ -102,7 +102,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                         child: FileUploadWidgetWithDropzone(),
                       ),
                       Dimens.boxWidth10,
-                      Expanded(flex: 8, child: FileUploadDetailsWidget()),
+                      Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
                     ]),
                   ),
                   Dimens.boxHeight20,
