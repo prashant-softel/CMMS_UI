@@ -48,7 +48,7 @@ class ViewSOPDialog extends GetView {
           return Obx(
             ()=> Container(
               padding: Dimens.edgeInsets05_0_5_0,
-              height: 200,
+              height: Responsive.isDesktop(context) ? 200 : 250,
               width: Responsive.isDesktop(context) ? double.infinity : MediaQuery.of(context).size.width / 2,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +64,8 @@ class ViewSOPDialog extends GetView {
                             width: 150,
                             child: InkWell(
                                onTap: () async {
-                                final url = 'http://africau.edu/images/default/sample.pdf';
+                                final url = '${_controller.sopData}';
+                                 print('SOPUrl:$url');
                                 if (await canLaunch(url)) {
                                 await launch(url);
                                  }

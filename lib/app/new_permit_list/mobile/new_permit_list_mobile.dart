@@ -1,10 +1,13 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../../constant/constant.dart';
 // import '../../job_list_controller.dart';
 // import '../widgets/facility_selection_dropdown_widget.dart';
 
@@ -40,13 +43,14 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                             ? controller.newPermitList![index]
                             : NewPermitModel();
                     var status =
-                        newPermitListModel?.currentStatus.toString() ?? '';
+                        newPermitListModel?.current_status_short.toString() ??
+                            '';
                     print('Current Status: $status');
                     return GestureDetector(
                       onTap: () {
                         var _newPermitListId =
                             newPermitListModel?.permitId ?? 0;
-                        controller.showNewPermitListDetails(_newPermitListId);
+                        controller.viewNewPermitList(permitId: _newPermitListId);
                       },
                       child: SizedBox(
                         width: double.infinity,
@@ -72,7 +76,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                             'Permit Id: ${newPermitListModel?.permitId ?? 0}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color: ColorValues.navyBlueColor,
+                                              color:
+                                                  ColorValues.navyBlueColor,
                                             ),
                                           ),
                                         ),
@@ -108,7 +113,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                                           223,
                                                                           108),
                                             ),
-                                            padding: const EdgeInsets.symmetric(
+                                            padding:
+                                                const EdgeInsets.symmetric(
                                               horizontal: 10,
                                               vertical: 5,
                                             ),
@@ -149,8 +155,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                         // 'Not Assigned',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromARGB(255, 239, 87, 27),
+                                          color: Color.fromARGB(
+                                              255, 239, 87, 27),
                                         ),
                                       ),
                                     )
@@ -184,7 +190,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        newPermitListModel?.equipment_categories ??
+                                        newPermitListModel
+                                                ?.equipment_categories ??
                                             '',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -220,7 +227,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     ),
                                     Flexible(
                                       child: Text(
-                                        (newPermitListModel?.approvedDatetime !=
+                                        (newPermitListModel
+                                                    ?.approvedDatetime !=
                                                 null)
                                             ? DateFormat('dd-MMM-yyyy hh:mm')
                                                 .format(newPermitListModel!
@@ -231,6 +239,29 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                       ),
                                     ),
                                   ]),
+                                  ///Edit Button
+                                   varUserAccessModel.value
+                                     .access_list!
+                                     .where((e) =>
+                                     e.feature_id ==
+                                     3 &&
+                                     e.edit == 1)
+                                    .length >
+                                      0
+                                   ?
+                                   CustomElevatedButton(
+                                    onPressed: (){
+                                       var _newPermitListId =
+                                        newPermitListModel?.permitId ?? 0;
+                                        controller.editNewPermit(
+                                                    permitId: _newPermitListId);
+                                    }, 
+                                    text: 'Edit PTW',
+                                    icon: Icons.edit,
+                                    backgroundColor: Colors.blue,
+                                    )
+                                    :
+                                    Container(),
                                 ]),
                           ),
                         ),

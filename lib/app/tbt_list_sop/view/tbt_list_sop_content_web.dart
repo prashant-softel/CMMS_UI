@@ -71,8 +71,9 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                               .where((e) => e.feature_id == 13 && e.add == 1)
                               .length >
                           0
-                      ? Container(
-                          width: (Get.width * .3),
+                      ? 
+                      Container(
+                          width: (Get.width * .303),
                           margin: EdgeInsets.only(left: 30, top: 30),
                           height: Get.height / 1.2,
                           child: Card(
@@ -170,8 +171,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
+                                                      textController: controller.titleTextFieldCtrlr,
                                                       )),
                                             ),
                                           ],
@@ -246,8 +246,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
+                                                      textController: controller.descriptionTextFieldCtrlr,
                                                       )),
                                             ),
                                           ],
@@ -262,7 +261,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                       children: [
                         Container(
                           height: 45,
-                          width: MediaQuery.of(context).size.width / 5,
+                          width: MediaQuery.of(context).size.width / 7.5,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color.fromARGB(255, 227, 224, 224),
@@ -310,12 +309,35 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                 controller.fileBytes =
                                     result.files.single.bytes;
                                 //controller.filePath.value = file.;
-                                //  print({"filepathes", fileBytes});
+                                  print({"filepathes", controller.fileName.value});
                                 // }
                               }
                             },
                           ),
                         ),
+                        Dimens.boxWidth5,
+                        Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.greenColor,
+                              text: 'Upload',
+                              onPressed: () {
+                                controller
+                                    .browseFiles(
+                                  fileBytes: controller.fileBytes,
+                                  position: 0
+                                )
+                                    .then((value) {
+                                  controller.isSuccessDialog();
+
+                                //   // Fluttertoast.showToast(
+                                //   //     msg: "file upload  Successfully",
+                                //   //     fontSize: 16.0);
+                                });
+                                //  controller.savePmMapping();
+                              },
+                            ),
+                          ),
                       ],
                     ),
                      SizedBox(
@@ -328,7 +350,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                       children: [
                         Container(
                           height: 45,
-                          width: MediaQuery.of(context).size.width / 5,
+                          width: MediaQuery.of(context).size.width / 7.5,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color.fromARGB(255, 227, 224, 224),
@@ -382,6 +404,30 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                             },
                           ),
                         ),
+                         Dimens.boxWidth5,
+                        Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.greenColor,
+                              text: 'Upload',
+                              onPressed: () {
+                                controller
+                                    .browseFiles(
+                                  fileBytes: controller.fileBytes2,
+                                  position: 1
+                                  
+                                )
+                                    .then((value) {
+                                  controller.isSuccessDialog2();
+
+                                //   // Fluttertoast.showToast(
+                                //   //     msg: "file upload  Successfully",
+                                //   //     fontSize: 16.0);
+                                });
+                                //  controller.savePmMapping();
+                              },
+                            ),
+                          ),
                       ],
                     ),
                                         // Row(
@@ -424,14 +470,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .createChecklistNumber()
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   // if (value == true)
-                                              //   //   controller
-                                              //   //       .issuccessCreatechecklist();
-                                              // });
+                                              controller.createSOP();
                                             },
                                             text: 'Submit')),
                                   ],
@@ -445,7 +484,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                               .where((e) => e.feature_id == 13 && e.view == 1)
                               .length >
                           0
-                      ? Expanded(
+                      ? 
+                      Expanded(
                           child: Container(
                             width: Get.width * 7,
                             margin: EdgeInsets.only(left: 10, top: 30),
