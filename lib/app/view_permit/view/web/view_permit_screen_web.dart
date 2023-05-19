@@ -206,234 +206,122 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    0.1,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    // SizedBox(
-                                                    //   width: 35,
-                                                    // ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Start Date: '),
-                                                        SizedBox(
-                                                          width: 80,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 150,
-                                                          child: Text(
-                                                            '${controller.startDateTimeCtrlr.text}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    // _buildStartValidTillDateField_web(
-                                                    //     context, 0,),
-                                                   SizedBox(height: 5,),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Valid Till: '),
-                                                        SizedBox(
-                                                          width: 90,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 150,
-                                                          child: Text(
-                                                            '${controller.validTillTimeCtrlr.text}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.start,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title: 'Plant: '),
-                                                        SizedBox(
-                                                          width: 117,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 150,
-                                                          child: Text(
-                                                            '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                    ///
-                                                    // _buildStartValidTillDateField_web(
-                                                    //     context, 1),
-                                                    // _buildValidTillField_web(
-                                                    //     context),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    0.1,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                   
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Permit No.: '),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    // _buildStartValidTillDateField_web(
-                                                    //     context, 0,),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Site Permit No.: '),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.start,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Permit Type: '),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.permitTypeName}',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ],
-                                                    )
-                                                    // _buildStartValidTillDateField_web(
-                                                    //     context, 1),
-                                                    // _buildValidTillField_web(
-                                                    //     context),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                              Row(
                                                 children: [
-                                                
-                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  children: [
-                                                     CustomRichText(
-                                                         title:
-                                                             'Equipment Categories: '),
-                                                  SizedBox(
-                                                    width: 10,
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Start Date: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Valid Till: '),
+                                                      CustomRichText(
+                                                          title: 'Plant: '),
+                                                      CustomRichText(
+                                                          title: 'Permit No: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Permit Type: '),
+                                                      CustomRichText(
+                                                        title:
+                                                            'Equipment Categories: ',
+                                                        maxline: 2,
+                                                      ),
+                                                      CustomRichText(
+                                                          title: 'Block: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Permit Description: '),
+                                                    ],
                                                   ),
-                                                  controller.permitId != null
-                                                      ? SizedBox(
-                                                          width: 100,
-                                                          child: Wrap(
-                                                            alignment:
-                                                                WrapAlignment
-                                                                    .start,
-                                                            spacing: 100,
-                                                            children: []
-                                                              ..addAll(controller
-                                                                  .listCategory!
-                                                                  .map(
-                                                                      (element) =>
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Text(
+                                                        '${controller.startDateTimeCtrlr.text}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.validTillTimeCtrlr.text}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.permitTypeName}',
+                                                        maxLines: 2,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      controller.permitId !=
+                                                              null
+                                                          ? SizedBox(
+                                                              width: 100,
+                                                              child: Wrap(
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                spacing: 100,
+                                                                children: []
+                                                                  ..addAll(controller
+                                                                      .listCategory!
+                                                                      .map((element) =>
                                                                           Row(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.min,
@@ -448,75 +336,46 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               )
                                                                             ],
                                                                           ))),
-                                                          ),
-                                                        )
-                                                      : SizedBox(
-                                                          width: 150,
-                                                          child: Text(
-                                                            'Inverter, SCADA',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                        ),
-
-                                                  ],
-                                                 ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      CustomRichText(
-                                                      title: 'Block: '),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 150,
-                                                    child: Text(
-                                                      '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                  ),
-
+                                                              ),
+                                                            )
+                                                          : SizedBox(
+                                                              width: 150,
+                                                              child: Text(
+                                                                'Inverter, SCADA',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                            ),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.description}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
                                                     ],
-                                                  )
+                                                  ),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  
-                                                  CustomRichText(
-                                                      title:
-                                                          'Permit Description: '),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 180,
-                                                    child: Text(
-                                                      '${controller.viewPermitDetailsModel.value?.description}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                  ),
 
-                                                  // _buildPermitDescriptionField_web(
-                                                  //     context),
-                                                ],
-                                              ),
                                               SizedBox(
                                                 height: 10,
                                               ),
@@ -542,263 +401,262 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     ),
                                                     child:
                                                         SingleChildScrollView(
-                                                          child: Column(
-                                                            children: [
-                                                              CustomAppBar(
-                                                                  title: 'Isolation Required ',
-                                                                  action: Row(   
-                                                                    children: [
-                                                                      
-                                                                      Checkbox(
-                                                                        value: controller
+                                                      child: Column(
+                                                        children: [
+                                                          CustomAppBar(
+                                                              title:
+                                                                  'Isolation Required ',
+                                                              action: Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: controller
                                                                         .isCheckedLoto
                                                                         .value,
-                                                                        onChanged:
+                                                                    onChanged:
                                                                         (value) {},
-                                                                      ),
-                                                                     
-                                                                      // CustomRichText(
-                                                                      // title:
-                                                                      //     'Loto Applied '),
-                                                                      // Checkbox(
-                                                                      //   value: controller
-                                                                      //   .isCheckedLoto
-                                                                      //   .value,
-                                                                      //   onChanged:
-                                                                      //   (value) {},
-                                                                      // ),
-                                                                     
-                                                                      // CustomRichText(
-                                                                      // title:
-                                                                      //     'Isolated Equipments: '),
-                                                                      // Text(
-                                                                      // 'Inverter')
-                                                                    ],
-                                                                  )),
-                                                              Dimens.boxHeight10,
-                                                              Wrap(
-                                                                children: [
-                                                                  Column(
-                                                                    children: [
-                                                                      
-                                                                      Align(
-                                                                          alignment:
-                                                                              Alignment
-                                                                                  .centerLeft,
-                                                                          child:
-                                                                              Text(
-                                                                            'Isolated Category',
-                                                                            style: TextStyle(
-                                                                                color: Color.fromARGB(
-                                                                                    255,
-                                                                                    5,
-                                                                                    92,
-                                                                                    163)),
-                                                                          )),
-                                                                      Divider(
-                                                                        thickness:
-                                                                            2,
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .height *
-                                                                            2,
-                                                                        child:
-                                                                            Container(
-                                                                          height: Get
-                                                                              .height,
-                                                                          child: Column(
-                                                                              //
-                                                                              children: [
-                                                                                Expanded(
-                                                                                  child: //
-                                                                                      ScrollableTableView(
-                                                                                    // paginationController: controller.equipmentNamepaginationController,
-                                                                                    columns: [
-                                                                                      'asset_name',
-                                                                                      'locksrno',
-                                                                                      // 'approved_datetime',
-                                                                                      // 'equipment',
-                                                                                      // 'workingAreaId',
-                                                                                      // 'description',
-                                                                                      // 'permitTypeName',
-                                                                                      // 'raisedByName',
-                                                                                      // 'breakdownTime',
-                                                                                      // 'breakdownType',
-                                                                                      // 'permitId',
-                                                                                      // 'assignedToName',
-                                                                                      // 'status',
-                                                                                      'action'.tr,
-                                                                                    ].map((column) {
-                                                                                      return TableViewColumn(
-                                                                                          minWidth: Get.width * 0.25,
-                                                                                          label: column == "asset_name"
-                                                                                              ? "Loto Applied On"
-                                                                                              : column == "locksrno"
-                                                                                                  ? "Serial Number"
-                                                                                                  //     : column == "approved_datetime"
-                                                                                                  //         ? "Approved Time"
-                                                                                                  //         : column == "equipment"
-                                                                                                  //             ? "Equipment" //
-                                                                                                  //             : column == "workingAreaId"
-                                                                                                  //                 ? "Working Area Id"
-                                                                                                  //                 : column == "description"
-                                                                                                  //                     ? "Description"
-                                                                                                  //                     : column == "permitTypeName"
-                                                                                                  //                         ? "Work Type"
-                                                          
-                                                                                                  // : "Action",
-                                                                                                  : "");
-                                                                                    }).toList(),
-                                                                                    rows: //
-                                                                                        [
-                                                                                      ...List.generate(
-                                                                                        ///controller.selectedEquipmentNameIdList
-                                                                                        controller.listLoto!.length,
-                                                          
-                                                                                        (index) {
-                                                                                          var viewLotoListName = controller.listLoto![index];
-                                                          
-                                                                                          //_jobId = jobDetails?.id;
-                                                          
-                                                                                          // controller.id.value = viewLotoListName?.id ?? 0;
-                                                                                          print('Equipment Isss5:${controller.id.value}');
-                                                                                          return [
-                                                                                            '${viewLotoListName?.asset_name}',
-                                                                                            '${viewLotoListName?.locksrno}',
-                                                                                            // '${newPermitDetails?.workingAreaId}',
-                                                                                            // '${newPermitDetails?.description}',
-                                                                                            // '${newPermitDetails?.permitTypeName}',
-                                                                                            // '${jobDetails?.workType}',
-                                                                                            // '${jobDetails?.raisedByName}',
-                                                                                            // '${jobDetails?.breakdownTime ?? ''}',
-                                                                                            // '${jobDetails?.breakdownType}',
-                                                                                            // '${jobDetails?.permitId}',
-                                                                                            // '${jobDetails?.assignedToName}',
-                                                                                            // '${jobDetails?.status}',
-                                                                                            'Actions'
-                                                                                          ];
-                                                                                        },
-                                                                                      ),
-                                                                                    ].map((_inventoryDetailList) {
-                                                                                      return TableViewRow(
-                                                                                          onTap: () => {
-                                                                                                print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                              },
-                                                                                          height: 45,
-                                                                                          cells: _inventoryDetailList.map((value) {
-                                                                                            return TableViewCell(
-                                                                                              //key: ,
-                                                                                              child: (value == 'Actions')
-                                                                                                  ? Wrap(
-                                                                                                      children: [
-                                                                                                        TableActionButton(
-                                                                                                          color: Colors.red,
-                                                                                                          icon: Icons.delete_outline,
-                                                                                                          label: 'Delete',
-                                                                                                          onPress: () {
-                                                                                                            // controller.showNewPermitListDetails(
-                                                                                                            //     controller.permitId.value);
-                                                                                                          },
-                                                                                                        ),
-                                                                                                        // TableActionButton(
-                                                                                                        //   color: ColorValues.purpleColor,
-                                                                                                        //   icon: Icons.add,
-                                                                                                        //   label: 'Job Card',
-                                                                                                        //   onPress: () {
-                                                                                                        //     // controller.goToJobCardScreen(
-                                                                                                        //     //   int.tryParse(_newPermitList[0]),
-                                                                                                        //     // );
-                                                                                                        //   },
-                                                                                                        // ),
-                                                                                                        // TableActionButton(
-                                                                                                        //   color: Colors.blue,
-                                                                                                        //   icon: Icons.edit,
-                                                                                                        //   label: 'Edit PTW',
-                                                                                                        //   onPress: () {},
-                                                                                                        // ),
-                                                                                                        // TableActionButton(
-                                                                                                        //   color: Colors.green,
-                                                                                                        //   icon: Icons.visibility,
-                                                                                                        //   label: 'Approve Request',
-                                                                                                        //   onPress: () {},
-                                                                                                        // ),
-                                                                                                        // TableActionButton(
-                                                                                                        //   color: Colors.red,
-                                                                                                        //   icon: Icons.visibility,
-                                                                                                        //   label: 'Reject Request',
-                                                                                                        //   onPress: () {},
-                                                                                                        // ),
-                                                                                                      ],
-                                                                                                    )
-                                                                                                  : Text(value.toString()),
-                                                                                            );
-                                                                                          }).toList());
-                                                                                    }).toList(),
-                                                                                  ),
-                                                                                ),
-                                                          
-                                                                                // / PAGINATION
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                  child: ValueListenableBuilder(
-                                                                                      valueListenable: controller.inventoryDetailPaginationController,
-                                                                                      builder: (context, value, child) {
-                                                                                        return Row(children: [
-                                                                                          Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                          Row(children: [
-                                                                                            IconButton(
-                                                                                              onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                                  ? null
-                                                                                                  : () {
-                                                                                                      controller.inventoryDetailPaginationController.previous();
-                                                                                                    },
-                                                                                              iconSize: 20,
-                                                                                              splashRadius: 20,
-                                                                                              icon: Icon(
-                                                                                                Icons.arrow_back_ios_new_rounded,
-                                                                                                color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                            IconButton(
-                                                                                              onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                                  ? null
-                                                                                                  : () {
-                                                                                                      controller.inventoryDetailPaginationController.next();
-                                                                                                    },
-                                                                                              iconSize: 20,
-                                                                                              splashRadius: 20,
-                                                                                              icon: Icon(
-                                                                                                Icons.arrow_forward_ios_rounded,
-                                                                                                color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ]),
-                                                                                        ]);
-                                                                                      }),
-                                                                                ),
-                                                                              ]),
-                                                                        ),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
-                                                                            1.2,
-                                                                        child:
-                                                                            Divider(
-                                                                          thickness:
-                                                                              2,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  )
+                                                                  ),
+
+                                                                  // CustomRichText(
+                                                                  // title:
+                                                                  //     'Loto Applied '),
+                                                                  // Checkbox(
+                                                                  //   value: controller
+                                                                  //   .isCheckedLoto
+                                                                  //   .value,
+                                                                  //   onChanged:
+                                                                  //   (value) {},
+                                                                  // ),
+
+                                                                  // CustomRichText(
+                                                                  // title:
+                                                                  //     'Isolated Equipments: '),
+                                                                  // Text(
+                                                                  // 'Inverter')
                                                                 ],
-                                                              ),
+                                                              )),
+                                                          Dimens.boxHeight10,
+                                                          Wrap(
+                                                            children: [
+                                                              Column(
+                                                                children: [
+                                                                  Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .centerLeft,
+                                                                      child:
+                                                                          Text(
+                                                                        'Isolated Category',
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                5,
+                                                                                92,
+                                                                                163)),
+                                                                      )),
+                                                                  Divider(
+                                                                    thickness:
+                                                                        2,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .height *
+                                                                        2,
+                                                                    child:
+                                                                        Container(
+                                                                      height: Get
+                                                                          .height,
+                                                                      child: Column(
+                                                                          //
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: //
+                                                                                  ScrollableTableView(
+                                                                                // paginationController: controller.equipmentNamepaginationController,
+                                                                                columns: [
+                                                                                  'asset_name',
+                                                                                  'locksrno',
+                                                                                  // 'approved_datetime',
+                                                                                  // 'equipment',
+                                                                                  // 'workingAreaId',
+                                                                                  // 'description',
+                                                                                  // 'permitTypeName',
+                                                                                  // 'raisedByName',
+                                                                                  // 'breakdownTime',
+                                                                                  // 'breakdownType',
+                                                                                  // 'permitId',
+                                                                                  // 'assignedToName',
+                                                                                  // 'status',
+                                                                                  'action'.tr,
+                                                                                ].map((column) {
+                                                                                  return TableViewColumn(
+                                                                                      minWidth: Get.width * 0.25,
+                                                                                      label: column == "asset_name"
+                                                                                          ? "Loto Applied On"
+                                                                                          : column == "locksrno"
+                                                                                              ? "Serial Number"
+                                                                                              //     : column == "approved_datetime"
+                                                                                              //         ? "Approved Time"
+                                                                                              //         : column == "equipment"
+                                                                                              //             ? "Equipment" //
+                                                                                              //             : column == "workingAreaId"
+                                                                                              //                 ? "Working Area Id"
+                                                                                              //                 : column == "description"
+                                                                                              //                     ? "Description"
+                                                                                              //                     : column == "permitTypeName"
+                                                                                              //                         ? "Work Type"
+
+                                                                                              // : "Action",
+                                                                                              : "");
+                                                                                }).toList(),
+                                                                                rows: //
+                                                                                    [
+                                                                                  ...List.generate(
+                                                                                    ///controller.selectedEquipmentNameIdList
+                                                                                    controller.listLoto!.length,
+
+                                                                                    (index) {
+                                                                                      var viewLotoListName = controller.listLoto![index];
+
+                                                                                      //_jobId = jobDetails?.id;
+
+                                                                                      // controller.id.value = viewLotoListName?.id ?? 0;
+                                                                                      print('Equipment Isss5:${controller.id.value}');
+                                                                                      return [
+                                                                                        '${viewLotoListName?.asset_name}',
+                                                                                        '${viewLotoListName?.locksrno}',
+                                                                                        // '${newPermitDetails?.workingAreaId}',
+                                                                                        // '${newPermitDetails?.description}',
+                                                                                        // '${newPermitDetails?.permitTypeName}',
+                                                                                        // '${jobDetails?.workType}',
+                                                                                        // '${jobDetails?.raisedByName}',
+                                                                                        // '${jobDetails?.breakdownTime ?? ''}',
+                                                                                        // '${jobDetails?.breakdownType}',
+                                                                                        // '${jobDetails?.permitId}',
+                                                                                        // '${jobDetails?.assignedToName}',
+                                                                                        // '${jobDetails?.status}',
+                                                                                        'Actions'
+                                                                                      ];
+                                                                                    },
+                                                                                  ),
+                                                                                ].map((_inventoryDetailList) {
+                                                                                  return TableViewRow(
+                                                                                      onTap: () => {
+                                                                                            print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                          },
+                                                                                      height: 45,
+                                                                                      cells: _inventoryDetailList.map((value) {
+                                                                                        return TableViewCell(
+                                                                                          //key: ,
+                                                                                          child: (value == 'Actions')
+                                                                                              ? Wrap(
+                                                                                                  children: [
+                                                                                                    TableActionButton(
+                                                                                                      color: Colors.red,
+                                                                                                      icon: Icons.delete_outline,
+                                                                                                      label: 'Delete',
+                                                                                                      onPress: () {
+                                                                                                        // controller.showNewPermitListDetails(
+                                                                                                        //     controller.permitId.value);
+                                                                                                      },
+                                                                                                    ),
+                                                                                                    // TableActionButton(
+                                                                                                    //   color: ColorValues.purpleColor,
+                                                                                                    //   icon: Icons.add,
+                                                                                                    //   label: 'Job Card',
+                                                                                                    //   onPress: () {
+                                                                                                    //     // controller.goToJobCardScreen(
+                                                                                                    //     //   int.tryParse(_newPermitList[0]),
+                                                                                                    //     // );
+                                                                                                    //   },
+                                                                                                    // ),
+                                                                                                    // TableActionButton(
+                                                                                                    //   color: Colors.blue,
+                                                                                                    //   icon: Icons.edit,
+                                                                                                    //   label: 'Edit PTW',
+                                                                                                    //   onPress: () {},
+                                                                                                    // ),
+                                                                                                    // TableActionButton(
+                                                                                                    //   color: Colors.green,
+                                                                                                    //   icon: Icons.visibility,
+                                                                                                    //   label: 'Approve Request',
+                                                                                                    //   onPress: () {},
+                                                                                                    // ),
+                                                                                                    // TableActionButton(
+                                                                                                    //   color: Colors.red,
+                                                                                                    //   icon: Icons.visibility,
+                                                                                                    //   label: 'Reject Request',
+                                                                                                    //   onPress: () {},
+                                                                                                    // ),
+                                                                                                  ],
+                                                                                                )
+                                                                                              : Text(value.toString()),
+                                                                                        );
+                                                                                      }).toList());
+                                                                                }).toList(),
+                                                                              ),
+                                                                            ),
+
+                                                                            // / PAGINATION
+                                                                            Padding(
+                                                                              padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                              child: ValueListenableBuilder(
+                                                                                  valueListenable: controller.inventoryDetailPaginationController,
+                                                                                  builder: (context, value, child) {
+                                                                                    return Row(children: [
+                                                                                      Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                      Row(children: [
+                                                                                        IconButton(
+                                                                                          onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                              ? null
+                                                                                              : () {
+                                                                                                  controller.inventoryDetailPaginationController.previous();
+                                                                                                },
+                                                                                          iconSize: 20,
+                                                                                          splashRadius: 20,
+                                                                                          icon: Icon(
+                                                                                            Icons.arrow_back_ios_new_rounded,
+                                                                                            color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                          ),
+                                                                                        ),
+                                                                                        IconButton(
+                                                                                          onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                              ? null
+                                                                                              : () {
+                                                                                                  controller.inventoryDetailPaginationController.next();
+                                                                                                },
+                                                                                          iconSize: 20,
+                                                                                          splashRadius: 20,
+                                                                                          icon: Icon(
+                                                                                            Icons.arrow_forward_ios_rounded,
+                                                                                            color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ]),
+                                                                                    ]);
+                                                                                  }),
+                                                                            ),
+                                                                          ]),
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        1.2,
+                                                                    child:
+                                                                        Divider(
+                                                                      thickness:
+                                                                          2,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
                                                             ],
                                                           ),
-                                                        ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -904,7 +762,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                             print('ZERO = ${_inventoryDetailList[0]}')
                                                                                           },
                                                                                       height: 45,
-                                                                                      
                                                                                       cells: _inventoryDetailList.map((value) {
                                                                                         return TableViewCell(
                                                                                           //key: ,
@@ -1146,7 +1003,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     0.1,
                                                 child: Center(
                                                   child: Container(
-                                                     margin: Dimens.edgeInsets16,
+                                                    margin: Dimens.edgeInsets16,
                                                     height: Get.height,
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
@@ -1170,68 +1027,61 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             children: [
                                                               Column(
                                                                 children: [
-                                                                  
                                                                   Row(
                                                                     children: [
                                                                       SizedBox(
-                                                                    width:
-                                                                        15,
-                                                                  ),
+                                                                        width:
+                                                                            15,
+                                                                      ),
                                                                       CustomRichText(
-                                                                      title:
-                                                                          'Job Type: '),
-                                                                  SizedBox(
-                                                                    width:
-                                                                        5,
-                                                                  ),
-
-                                                                  Text(
-                                                                    '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
-                                                                    style: TextStyle(
-                                                                        color: Color.fromARGB(
-                                                                            255,
+                                                                          title:
+                                                                              'Job Type: '),
+                                                                      SizedBox(
+                                                                        width:
                                                                             5,
-                                                                            92,
-                                                                            163)),
-                                                                  ),
-
+                                                                      ),
+                                                                      Text(
+                                                                        '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                5,
+                                                                                92,
+                                                                                163)),
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                   SizedBox(
-                                                                    height:
-                                                                        5,
+                                                                    height: 5,
                                                                   ),
 
-                                                                  
                                                                   Row(
                                                                     children: [
                                                                       SizedBox(
-                                                                    width:
-                                                                        15,
-                                                                  ),
+                                                                        width:
+                                                                            15,
+                                                                      ),
                                                                       CustomRichText(
-                                                                      title:
-                                                                          'SOP: '),
-                                                                  SizedBox(
-                                                                    width:
-                                                                        5,
-                                                                  ),
-
-                                                                  SizedBox(
-                                                                    width:
-                                                                        200,
-                                                                    child:
-                                                                        Text(
-                                                                      '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
-                                                                      style:
-                                                                          TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                    ),
-                                                                  ),
+                                                                          title:
+                                                                              'SOP: '),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            200,
+                                                                        child:
+                                                                            Text(
+                                                                          '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
+                                                                          style:
+                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                        ),
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                   SizedBox(
-                                                                    height:
-                                                                        5,
+                                                                    height: 5,
                                                                   ),
 
                                                                   // Checkbox(
@@ -1241,9 +1091,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   //   onChanged:
                                                                   //       (value) {},
                                                                   // ),
-                                                                 
+
                                                                   Padding(
-                                                                    padding: const EdgeInsets.only(right: 250),
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            250),
                                                                     child: CustomRichText(
                                                                         title:
                                                                             'JSA: '),
@@ -1256,7 +1109,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         MainAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      SizedBox(width: 15,),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            15,
+                                                                      ),
                                                                       Container(
                                                                           height:
                                                                               30,
@@ -1502,7 +1358,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             Divider(
                                                               thickness: 2,
                                                             ),
-                                                            SizedBox(height: 40,),
+                                                            SizedBox(
+                                                              height: 40,
+                                                            ),
                                                             Text(
                                                                 'File List will Appear Here')
                                                           ],
@@ -1519,7 +1377,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                               ///Permit History
                                               SizedBox(
-                                                width: MediaQuery.of(context).size.width / 0.03,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    0.03,
                                                 child: Container(
                                                   // margin: Dimens.edgeInsets20,
                                                   constraints: BoxConstraints(
@@ -1538,33 +1399,35 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 height: 10,
                                               ),
                                               Column(
-                                               
                                                 children: [
                                                   Row(
                                                     children: [
                                                       CustomRichText(
-                                                      title: 'Requested By: '),
-                                                  Text(
-                                                    ' Prashant Shetya',
-                                                  ),
+                                                          title:
+                                                              'Requested By: '),
+                                                      Text(
+                                                        ' Prashant Shetya',
+                                                      ),
                                                     ],
                                                   ),
                                                   // Dimens.boxWidth10,
-                                                 Row(
-                                                  children: [
-                                                     CustomRichText(
-                                                      title: 'Date / Time: '),
-                                                  Text(
-                                                    ' 2022-05-01 17:25',
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Date / Time: '),
+                                                      Text(
+                                                        ' 2022-05-01 17:25',
+                                                      ),
+                                                    ],
                                                   ),
-                                                  
-                                                  ],
-                                                 ),
-                                                 Padding(
-                                                   padding: const EdgeInsets.only(right: 270),
-                                                   child: CustomRichText(
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 270),
+                                                    child: CustomRichText(
                                                         title: 'Signature: '),
-                                                 ),
+                                                  ),
                                                 ],
                                               ),
                                               SizedBox(
@@ -1575,31 +1438,33 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 //     MainAxisAlignment
                                                 //         .spaceEvenly,
                                                 children: [
-                                                  
-                                                 Row(
-                                                  children: [
-                                                     CustomRichText(
-                                                      title: 'Issued By: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'Issued By: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                      ),
+                                                    ],
                                                   ),
-                                                  ],
-                                                 ),
                                                   // SizedBox(width: 187),
-                                                 Row(
-                                                  children: [
-                                                     CustomRichText(
-                                                      title: 'Date / Time: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Date / Time: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                                      ),
+                                                    ],
                                                   ),
-                                                  ],
-                                                 ),
-                                                  
+
                                                   Padding(
-                                                    padding: const EdgeInsets.only(right: 270),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 270),
                                                     child: CustomRichText(
                                                         title: 'Signature: '),
                                                   ),
@@ -1613,34 +1478,35 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 //     MainAxisAlignment
                                                 //         .spaceEvenly,
                                                 children: [
-                                                  
-                                                 Row(
-                                                  children: [
-                                                     CustomRichText(
-                                                      title: 'Approved By: '),
-                                                  SizedBox(width: 5),
-                                                  SizedBox(
-                                                    width: 100,
-                                                    child: Text(
-                                                      '${controller.viewPermitDetailsModel.value?.approvedByName}',
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Approved By: '),
+                                                      SizedBox(width: 5),
+                                                      SizedBox(
+                                                        width: 100,
+                                                        child: Text(
+                                                          '${controller.viewPermitDetailsModel.value?.approvedByName}',
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  ],
-                                                 ),
-                                                  
-                                                 Row(
-                                                  children: [
-                                                     CustomRichText(
-                                                      title: 'Date / Time: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Date / Time: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                      ),
+                                                    ],
                                                   ),
-                                                  ],
-                                                 ),
-                                                 
                                                   Padding(
-                                                    padding: const EdgeInsets.only(right: 270),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 270),
                                                     child: CustomRichText(
                                                         title: 'Signature: '),
                                                   ),
@@ -1654,31 +1520,31 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 //     MainAxisAlignment
                                                 //         .spaceEvenly,
                                                 children: [
-                                                  
                                                   Row(
                                                     children: [
                                                       CustomRichText(
-                                                      title: 'Closed By: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.closedByName}',
-                                                  ),
+                                                          title: 'Closed By: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.closedByName}',
+                                                      ),
                                                     ],
                                                   ),
-                                                  
                                                   Row(
                                                     children: [
                                                       CustomRichText(
-                                                      title: 'Date / Time: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.close_at}',
-                                                  ),
+                                                          title:
+                                                              'Date / Time: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.close_at}',
+                                                      ),
                                                     ],
                                                   ),
-                                                  
                                                   Padding(
-                                                    padding: const EdgeInsets.only(right: 270),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 270),
                                                     child: CustomRichText(
                                                         title: 'Signature: '),
                                                   ),
@@ -1692,31 +1558,32 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 //     MainAxisAlignment
                                                 //         .spaceEvenly,
                                                 children: [
-                                                  
                                                   Row(
                                                     children: [
                                                       CustomRichText(
-                                                      title: 'Cancelled By: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
-                                                  ),
+                                                          title:
+                                                              'Cancelled By: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
+                                                      ),
                                                     ],
                                                   ),
-                                                  
                                                   Row(
                                                     children: [
                                                       CustomRichText(
-                                                      title: 'Date / Time: '),
-                                                  SizedBox(width: 5),
-                                                  Text(
-                                                    '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
-                                                  ),
+                                                          title:
+                                                              'Date / Time: '),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
+                                                      ),
                                                     ],
                                                   ),
-                                                  
                                                   Padding(
-                                                    padding: const EdgeInsets.only(right: 270),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 270),
                                                     child: CustomRichText(
                                                         title: 'Signature: '),
                                                   ),
