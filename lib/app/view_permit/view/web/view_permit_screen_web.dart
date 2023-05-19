@@ -206,7 +206,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              Row(crossAxisAlignment : CrossAxisAlignment.start,
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Column(
                                                     crossAxisAlignment:
@@ -215,38 +217,55 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       CustomRichText(
                                                           title:
                                                               'Start Date: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
                                                       CustomRichText(
                                                           title:
                                                               'Valid Till: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
                                                       CustomRichText(
                                                           title: 'Plant: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
                                                       CustomRichText(
                                                           title: 'Permit No: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
                                                       CustomRichText(
                                                           title:
                                                               'Permit Type: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
                                                       CustomRichText(
                                                           title:
                                                               'Site Permit No.: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       CustomRichText(
                                                         title:
                                                             'Equipment Categories: ',
-                                                        maxline: 2,
                                                       ),
-                                                      
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       CustomRichText(
                                                           title: 'Block: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
                                                       CustomRichText(
                                                           title:
                                                               'Permit Description: '),
-                                                      
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -257,7 +276,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                     
                                                       Text(
                                                         '${controller.startDateTimeCtrlr.text}',
                                                         style: TextStyle(
@@ -268,7 +286,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                      
                                                       Text(
                                                         '${controller.validTillTimeCtrlr.text}',
                                                         style: TextStyle(
@@ -279,7 +296,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                     
                                                       Text(
                                                         '${controller.viewPermitDetailsModel.value?.blockName}',
                                                         style: TextStyle(
@@ -290,7 +306,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                      
                                                       Text(
                                                         '${controller.viewPermitDetailsModel.value?.permitNo}',
                                                         style: TextStyle(
@@ -301,19 +316,21 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                      
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.permitTypeName}',
-                                                        
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                                      Container(
+                                                        width: 150,
+                                                        child: Text(
+                                                          '${controller.viewPermitDetailsModel.value?.permitTypeName}',
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      5,
+                                                                      92,
+                                                                      163)),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
                                                       ),
-                                                      
                                                       Text(
                                                         '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
                                                         style: TextStyle(
@@ -324,8 +341,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                     
-                                                      
                                                       controller.permitId !=
                                                               null
                                                           ? SizedBox(
@@ -368,7 +383,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             163)),
                                                               ),
                                                             ),
-                                                     
                                                       Text(
                                                         '${controller.viewPermitDetailsModel.value?.blockName}',
                                                         style: TextStyle(
@@ -379,7 +393,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                      
                                                       Text(
                                                         '${controller.viewPermitDetailsModel.value?.description}',
                                                         style: TextStyle(
@@ -390,7 +403,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     92,
                                                                     163)),
                                                       ),
-                                                     
                                                     ],
                                                   ),
                                                 ],
