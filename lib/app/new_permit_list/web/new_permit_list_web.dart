@@ -87,6 +87,13 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                             color: Colors.green,
                           ),
                           Dimens.boxWidth10,
+                           ActionButton(
+                            icon: Icons.add,
+                            label: 'Column Visibility'.tr,
+                            onPressed: () {},
+                            color: Colors.blue,
+                          ),
+                          Dimens.boxWidth10,
                           varUserAccessModel.value.access_list!
                                       .where((e) =>
                                           e.feature_id == 3 && e.add == 1)
@@ -106,6 +113,58 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                       ),
 
                       ///
+                       controller.newPermitList!.isEmpty
+                                      ? Expanded(
+                                          child: ScrollableTableView(
+                                            columns: [
+                                              'permitId',
+                                              'description',
+                                              'permitTypeName',
+                                              'equipment_category',
+                                              'workingAreaName',
+                                              'request_by_name',
+                                               // 'request_datetime',
+                                              'approved_by_name',
+                                              // 'approved_datetime',
+                                              'current_status',
+                                              "Action",
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                label: column,
+                                                minWidth: Get.width * 0.16,
+                                              );
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller.newPermitList!
+                                                        .length  ,
+                                                (index) {
+                                                  return [
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((record) {
+                                              return TableViewRow(
+                                                height: 60,
+                                                cells: record.map((value) {
+                                                  return TableViewCell(
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      :
                        Expanded(
                         child: Container(
                           height: Get.height,
@@ -202,7 +261,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         // '${newPermitDetails?.requestDatetime}',
                                         '${newPermitDetails?.approvedByName}\n${newPermitDetails?.approvedDatetime}',
                                         // '${newPermitDetails?.approvedDatetime}',
-                                        '${newPermitDetails?.currentStatus}',
+                                        '${newPermitDetails?.current_status_short}',
                                         // '${newPermitDetails?.current_status}' ==
                                         //         "Permit Created"
                                         //  ?
@@ -328,37 +387,40 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
-                                                    varUserAccessModel.value
-                                                                    .access_list!
-                                                                    .where((e) =>
-                                                                        e.feature_id ==
-                                                                            3 &&
-                                                                        e.delete ==
-                                                                            0)
-                                                                    .length >
-                                                                0 &&
-                                                            controller
-                                                                    .newPermitList!
-                                                                    .where((e) =>
-                                                                        e?.ptwStatus ==
-                                                                        121)
-                                                                    .length >
-                                                                0
-                                                        ? Container()
-                                                        : TableActionButton(
-                                                            color: Colors.red,
-                                                            icon: Icons.delete,
-                                                            label: 'Reject',
-                                                            onPress: () {
-                                                              // controller.goToJobCardScreen(
-                                                              //   int.tryParse(_newPermitList[0]),
-                                                              // );
-                                                              Get.dialog(PermitRejectDialog(
-                                                                  permitId:
-                                                                      _newPermitList[
-                                                                          0]));
-                                                            },
-                                                          ),
+                                                        /// Condition for delete
+                                                    // varUserAccessModel.value
+                                                    //                 .access_list!
+                                                    //                 .where((e) =>
+                                                    //                     e.feature_id ==
+                                                    //                         3 &&
+                                                    //                     e.delete ==
+                                                    //                         0)
+                                                    //                 .length >
+                                                    //             0 &&
+                                                    //         controller
+                                                    //                 .newPermitList!
+                                                    //                 .where((e) =>
+                                                    //                     e?.ptwStatus ==
+                                                    //                     121)
+                                                    //                 .length >
+                                                    //             0
+                                                    //     ? Container()
+                                                    //     : TableActionButton(
+                                                    //         color: Colors.red,
+                                                    //         icon: Icons.delete,
+                                                    //         label: 'Delete',
+                                                    //         onPress: () {
+                                                    //           // controller.goToJobCardScreen(
+                                                    //           //   int.tryParse(_newPermitList[0]),
+                                                    //           // );
+                                                    //           // Get.dialog(PermitRejectDialog(
+                                                    //           //     permitId:
+                                                    //           //         _newPermitList[
+                                                    //           //             0]));
+                                                    //         },
+                                                    //       ),
+                                                          /// Condition For delete ends here
+                                                          
                                                     TableActionButton(
                                                       color: Colors.red,
                                                       icon: Icons.close,

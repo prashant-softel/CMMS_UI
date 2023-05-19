@@ -10,6 +10,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
@@ -26,9 +27,13 @@ import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:cmms/domain/models/asset_type_list_model.dart';
+import 'package:cmms/domain/models/facility_type_list_model.dart';
+import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -39,6 +44,7 @@ import '../../app/navigators/app_pages.dart';
 import '../models/access_level_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
+import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
@@ -46,6 +52,8 @@ import '../models/role_model.dart';
 import '../models/state.dart';
 import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../models/user_list_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -315,6 +323,49 @@ class Repository {
       return Map();
     }
   }
+
+   //Create SOP
+  Future<Map<String, dynamic>> createSOP(
+    createSop,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createSOP(
+        auth: auth,
+        createSop: createSop,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create SOp: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createSOP');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -695,6 +746,84 @@ class Repository {
     }
   }
 
+  Future<List<AssetTypeListModel>> getAssetTypeList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssetTypeList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var assetTypeList = assetTypeListModelFromJson(res.data);
+        return assetTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<FacilityTypeListModel>> getFacilityTypeList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getFacilityTypeList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = FacilityTypeListModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<BlockTypeListModel>> getBlockTypeList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getBlockTypeList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var blockTypeList = BlockTypeListModelFromJson(res.data);
+        return blockTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required int? permit_type_id,
     required bool isLoading,
@@ -993,6 +1122,7 @@ class Repository {
     }
   }
 
+   
   Future<void> permitCloseButton(
     String? comment,
     String? id,
@@ -1650,6 +1780,41 @@ class Repository {
     }
   }
 
+  Future<List<InventoryTypeListModel?>?> getInventoryTypeList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryTypeList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryTypeListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<InventoryTypeListModel> _InventoryTypeListModelList =
+            jsonInventoryTypeListModelModels
+                .map<InventoryTypeListModel>((m) =>
+                    InventoryTypeListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _InventoryTypeListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<CheckPointModel?>?> getCheckPointlist(
     int? selectedchecklistId,
     bool? isLoading,
@@ -2269,7 +2434,7 @@ class Repository {
     }
   }
 
-  Future<bool> browseFiles(
+  Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -2279,18 +2444,18 @@ class Repository {
         fileName: fileName,
         isLoading: isLoading,
       );
-      if (res == true) {
+      if (res != null) {
         print("file upload");
-        return true;
+        return res;
       } //
       else {
         // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
-        return false;
+        return null;
       }
     } //
     catch (error) {
       print(error.toString());
-      return false;
+      return null;
     }
   }
 
@@ -2501,6 +2666,92 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<List<UserListModel?>?> getUserList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonUserListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<UserListModel> _UserListModelList = jsonUserListModelModels
+            .map<UserListModel>(
+                (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _UserListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<UserDetailsModel?> getUserDetails(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserDetails(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final UserDetailsModel _userDetailModel =
+            userDetailsModelFromJson(res.data);
+        return _userDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getUserDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> saveAccessLevel(
+    accessLevelJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.saveAccessLevel(
+        auth: auth,
+        accessLevelJsonString: accessLevelJsonString,
+        isLoading: isLoading ?? false,
+      );
+      print({"resp", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'saveAccessLevel');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 

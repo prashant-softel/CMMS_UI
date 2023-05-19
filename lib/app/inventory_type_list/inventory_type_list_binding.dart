@@ -1,21 +1,20 @@
-import 'package:cmms/app/job_list_sop/job_list_sop_controller.dart';
-import 'package:cmms/app/job_list_sop/job_list_sop_presenter.dart';
-import 'package:cmms/domain/usecases/job_list_sop_usecase.dart';
+import 'package:cmms/app/inventory_type_list/inventory_type_list_controller.dart';
+import 'package:cmms/app/inventory_type_list/inventory_type_list_presenter.dart';
 import 'package:get/get.dart';
+
 import '../../domain/usecases/home_usecase.dart';
+import '../../domain/usecases/inventory_type_list_usecase.dart';
 import '../home/home_controller.dart';
 import '../home/home_presenter.dart';
 
-class JobSOPListBinding extends Bindings {
+class InventoryTypeListBinding extends Bindings {
   @override
   void dependencies() {
-    
-
     Get.lazyPut(
-      () => JobSOPListController(
+      () => InventoryTypeListController(
         Get.put(
-          JobSOPListPresenter(
-            JobSOPListUsecase(
+          InventoryTypeListPresenter(
+            InventoryTypeListUsecase(
               Get.find(),
             ),
           ),

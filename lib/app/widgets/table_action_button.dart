@@ -34,7 +34,7 @@ class TableActionButton extends StatelessWidget {
                   : SizedBox.shrink(),
               icon != null ? Dimens.boxWidth2 : SizedBox.shrink(),
               Text(
-                '$label',
+                label ?? "",
                 style: Styles.white12.copyWith(
                   color: Colors.white,
                 ),

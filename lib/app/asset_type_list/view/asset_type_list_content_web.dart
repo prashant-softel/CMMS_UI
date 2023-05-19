@@ -1,8 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/job_list_sop/job_list_sop_controller.dart';
-import 'package:cmms/app/job_type_list/job_type_list_controller.dart';
+import 'package:cmms/app/asset_type_list/asset_type_list_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +11,9 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
-class JobSOPListContentWeb extends GetView<JobSOPListController> {
-  JobSOPListContentWeb({Key? key}) : super(key: key);
-  final JobSOPListController controller = Get.find();
+class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
+  AssetTypeListContentWeb({Key? key}) : super(key: key);
+  final AssetTypeListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +54,9 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Job Type", style: Styles.greyMediumLight12)
+                  Text(" / ASSET CATEGORY", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -91,7 +90,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add Job SOP ",
+                                          "Add Asset Category ",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -304,7 +303,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of Job SOP",
+                                      "List of Asset Categories",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -314,6 +313,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                   Row(
                                     children: [
                                       Container(
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -329,6 +329,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -337,6 +338,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -345,6 +347,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -407,11 +410,11 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
-                                          .jobSOPListPaginationController,
+                                          .assetTypeListPaginationController,
                                       columns: [
                                         "Sr.No.",
                                         "Title",
-                                        "Job Type Name",
+                                        "Description",
                                         "Action"
                                       ].map((column) {
                                         return TableViewColumn(
@@ -422,14 +425,14 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                       rows: //
                                           [
                                         ...List.generate(
-                                          controller.sopPermitList.length,
+                                          controller.assetTypeList.length,
                                           (index) {
                                             var jobSOPListDetails =
-                                                controller.sopPermitList[index];
+                                                controller.assetTypeList[index];
                                             return [
                                               '${jobSOPListDetails.id}',
                                               '${jobSOPListDetails.name}',
-                                              '${jobSOPListDetails.jobTypeName}',
+                                              '${jobSOPListDetails.description}',
                                               "Action"
                                             ];
                                           },
@@ -484,21 +487,21 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
                                         valueListenable: controller
-                                            .jobSOPListPaginationController,
+                                            .assetTypeListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(
-                                                "${controller.jobSOPListPaginationController.currentPage}  of ${controller.jobSOPListPaginationController.pageCount}"),
+                                                "${controller.assetTypeListPaginationController.currentPage}  of ${controller.assetTypeListPaginationController.pageCount}"),
                                             Row(children: [
                                               IconButton(
                                                 onPressed: controller
-                                                            .jobSOPListPaginationController
+                                                            .assetTypeListPaginationController
                                                             .currentPage <=
                                                         1
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .assetTypeListPaginationController
                                                             .previous();
                                                       },
                                                 iconSize: 20,
@@ -507,7 +510,7 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                                   Icons
                                                       .arrow_back_ios_new_rounded,
                                                   color: controller
-                                                              .jobSOPListPaginationController
+                                                              .assetTypeListPaginationController
                                                               .currentPage <=
                                                           1
                                                       ? Colors.black26
@@ -517,15 +520,15 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                               ),
                                               IconButton(
                                                 onPressed: controller
-                                                            .jobSOPListPaginationController
+                                                            .assetTypeListPaginationController
                                                             .currentPage >=
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .assetTypeListPaginationController
                                                             .pageCount
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .assetTypeListPaginationController
                                                             .next();
                                                       },
                                                 iconSize: 20,
@@ -534,10 +537,10 @@ class JobSOPListContentWeb extends GetView<JobSOPListController> {
                                                   Icons
                                                       .arrow_forward_ios_rounded,
                                                   color: controller
-                                                              .jobSOPListPaginationController
+                                                              .assetTypeListPaginationController
                                                               .currentPage >=
                                                           controller
-                                                              .jobSOPListPaginationController
+                                                              .assetTypeListPaginationController
                                                               .pageCount
                                                       ? Colors.black26
                                                       : Theme.of(context)

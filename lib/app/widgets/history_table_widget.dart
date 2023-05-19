@@ -1,3 +1,4 @@
+import 'package:cmms/app/utils/responsive.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,10 +23,18 @@ class HistoryTableWidget extends StatelessWidget {
       dataRowHeight: Get.height * 0.06,
       horizontalMargin: 12,
       columns: [
-        DataColumn(label: Text('Time Stamp')),
-        DataColumn(label: Text('Posted By')),
-        DataColumn(label: Text('Comments')),
-        DataColumn(label: Text('Status')),
+        Responsive.isDesktop(context) 
+        ? DataColumn(label: Text('Time Stamp')) 
+        : DataColumn(label: Text('Time\nStamp',style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),)),
+        Responsive.isDesktop(context) 
+        ? DataColumn(label: Text('Posted By')) 
+        : DataColumn(label: Text('Post\nBy',style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),)),
+        Responsive.isDesktop(context) 
+        ? DataColumn(label: Text('Comments')) 
+        : DataColumn(label: Text('Com-\nments',style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),)),
+        Responsive.isDesktop(context) 
+        ? DataColumn(label: Text('Status')) 
+        : DataColumn(label: Text('Status',style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),)),
       ],
       rows: List<DataRow>.generate(
         historyList?.length ?? 0,

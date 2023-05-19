@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
+import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
@@ -12,6 +13,7 @@ import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
@@ -254,6 +256,48 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAssetTypeList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetAssetCategoryList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getFacilityTypeList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Facility/GetFacilityList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getBlockTypeList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Facility/GetBlockList?parent_id=46',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getSafetyMeasureList(
       {required bool isLoading,
       required String auth,
@@ -415,8 +459,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -440,7 +483,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> permitCloseButton({
+  Future<ResponseModel> permitCloseButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -464,8 +507,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> permitRejectButton({
+  Future<ResponseModel> permitRejectButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -488,9 +530,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
-
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -549,6 +588,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getInventoryTypeList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryTypeList',
       Request.get,
       null,
       isLoading ?? false,
@@ -897,6 +955,8 @@ class ConnectHelper {
     return responseModel;
   }
 
+  
+
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,
@@ -947,7 +1007,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Update New Permit
+  //Update New Permit
   Future<ResponseModel> updateNewPermit({
     required String auth,
     newPermit,
@@ -970,6 +1030,35 @@ class ConnectHelper {
     Get.dialog<void>(UpdateNewPermitDialog(
       data: parsedJson['message'],
       PtwId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+
+  //Create SOP
+  Future<ResponseModel> createSOP({
+    required String auth,
+    createSop,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/createSOP',
+      Request.post,
+      createSop,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create SOP Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateSopDialog(
+      data: parsedJson['message'],
+      SopId: parsedJson['id'],
     ));
 
     return responseModel;
@@ -1360,7 +1449,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<bool> browseFiles({
+  Future<CreateSOPModel> browseFiles({
     required String auth,
     Uint8List? fileBytes,
     required String fileName,
@@ -1382,9 +1471,18 @@ class ConnectHelper {
       importInventory(
           auth: auth,
           fileId: jsonResponse["id"][0].toString(),
-          isLoading: true);
+          isLoading: true
+          );
     }
-    return true;
+  
+    CreateSOPModel createSOPModel = CreateSOPModel(
+      jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
+      sop_fileId: int.parse(jsonResponse["id"][0].toString())
+    );
+    print('JsaDataId${createSOPModel.jsa_fileId}');
+    print('SOPDataId${createSOPModel.sop_fileId}');
+
+    return createSOPModel;
   }
 
   Future<ResponseModel> importInventory({
@@ -1396,7 +1494,7 @@ class ConnectHelper {
       'Inventory/ImportInventories?file_id=$fileId',
       Request.post,
       null,
-      isLoading ?? false,
+      false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -1532,6 +1630,60 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<ResponseModel> getUserList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetUserList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getUserDetails({
+    required String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetUserDetail?user_id=$userId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveAccessLevel({
+    required String auth,
+    accessLevelJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/SetUserAccess',
+      Request.post,
+      accessLevelJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 
   ///
 }

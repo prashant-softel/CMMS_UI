@@ -231,11 +231,15 @@ class NewPermitController extends GetxController {
 
   ///SOP Permit List
   RxList<SOPListModel> sopPermitList = <SOPListModel>[].obs;
+  RxList<SOPListModel?> filteredSOPPathList = <SOPListModel>[].obs;
+
   Rx<bool> isSopPermitListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
   int selectedSOPId = 0;
+  String? jsaData;
+  String? sopData;
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -305,6 +309,12 @@ class NewPermitController extends GetxController {
   Rx<NewPermitDetailModel?> newPermitDetailsModel = NewPermitDetailModel().obs;
   RxList<NewPermitDetailModel?>? newPermitDetailsList =
       <NewPermitDetailModel?>[].obs;
+  
+  ///SOP File Path
+  RxList<SOPListModel> sopListFilePathModel = <SOPListModel>[].obs;
+  Rx<String> selectedSOPFilePath = ''.obs;
+
+
 
   var jobModel = JobDetailsModel();
 
@@ -369,6 +379,7 @@ if(arguments != null){
       await getPermitIssuerList();
       await getPermitApproverList();
       await getSafetyMeasureList();
+      
 
      
     } catch (e) {
@@ -614,9 +625,21 @@ if(arguments != null){
       job_type_id: selectedJobTypesId,
       // job_type_id: 36,
     );
+    
+
     for (var sopPermit_list in _sopPermitList) {
       sopPermitList.add(sopPermit_list);
+      String filePath;
+      
     }
+
+
+     
+
+    print('SOP List 18:${filteredSOPPathList.value}');
+
+   
+    
 
     // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
@@ -646,6 +669,7 @@ if(arguments != null){
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print({ list,  value});
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -754,7 +778,6 @@ if(arguments != null){
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           selectedJobTypesId = jobTypeList[jobTypeListIndex].id ?? 0;
           getSopPermitList();
-
           //}
         }
         break;
@@ -762,7 +785,13 @@ if(arguments != null){
         {
           int sopPermitListIndex =
               sopPermitList.indexWhere((x) => x.name == value);
+            jsaData = sopPermitList[sopPermitListIndex].jsa_file_path ?? '';
+            sopData = sopPermitList[sopPermitListIndex].sop_file_path ?? '';
           selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
+          print('JsaPath:$jsaData');
+          print('SopPath:$sopData');
+
+           
         }
         break;
 
@@ -901,12 +930,29 @@ if(arguments != null){
     }
   }
 
+  //  int?   getAssignedBlockId(String _selectedBlockName) {
+  //   final item = blockList
+  //   .firstWhere((item) => item?.name == _selectedBlockName);
+  //   final _selectedAssignBlockId = item?.id ?? 0;
+  //   return _selectedAssignBlockId;
+  //   }
+
+
+
+
+
   void createNewPermit() async {
     {
       checkForm();
       if (isFormInvalid.value) {
         return;
       }
+      //   if(selectedBlockId <= 0){
+      //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
+      //   }
+
+
+      // print('JobList BlockId:$selectedBlockId');
 
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
@@ -1058,6 +1104,8 @@ if(arguments != null){
             safetyMeasureId: e.id, safetyMeasureValue: e.name));
       });
 
+   
+
       //  List<Employeelist> employee_list= <Employeelist>[];
       // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
       // List<LotoList> loto_list = <LotoList>[];
@@ -1129,15 +1177,22 @@ if(arguments != null){
 
   loadPermitDetails(jobModel) {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
-    selectedBlock.value = jobModel.facilityName ?? '';
+    selectedBlock.value = jobModel.blockName ?? '';
+    selectedBlockId = jobModel.blockId ?? 0;
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
      List<int> idList = listJobModelCategory
           .map((obj) => obj!.equipmentCatId)
           .toList();
+          
+   
+    print("Selected Block Id:${selectedBlockId}");
 
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
+    print("Selected Block Name:${selectedBlock}");
+    
+
 
   }
 

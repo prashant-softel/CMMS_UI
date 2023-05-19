@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 
 /// Repositories (retrieve data, heavy processing etc..)
 class DataRepository extends DomainRepository {
@@ -217,6 +218,51 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getAssetTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getAssetTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  Future<ResponseModel> getFacilityTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getFacilityTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+  Future<ResponseModel> getBlockTypeList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBlockTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  @override
   Future<ResponseModel> getSafetyMeasureList({
     int? permit_type_id,
     required bool isLoading,
@@ -344,7 +390,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelButton({
     required String auth,
     String? comment,
     String? id,
@@ -357,7 +403,8 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitCloseButton({
+  
+  Future<ResponseModel> permitCloseButton({
     required String auth,
     String? comment,
     String? id,
@@ -370,8 +417,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
-   Future<ResponseModel> permitRejectButton({
+  Future<ResponseModel> permitRejectButton({
     required String auth,
     String? comment,
     String? id,
@@ -383,7 +429,6 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
-
 
   //  @override
   // Future<ResponseModel> getNewPermitList({
@@ -431,6 +476,20 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getInventoryTypeList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getInventoryTypeList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getCheckPointlist({
     required String auth,
     int? selectedchecklistId,
@@ -654,6 +713,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> createSOP({
+    required String auth,
+    createSop,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createSOP(
+        auth: auth,
+        createSop: createSop,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
@@ -940,18 +1009,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<bool> browseFiles(
+  Future<CreateSOPModel> browseFiles(
       {required String auth,
       Uint8List? fileBytes,
       required String fileName,
       required bool isLoading}) async {
-    await connectHelper.browseFiles(
+    return await connectHelper.browseFiles(
       auth: auth,
       fileBytes: fileBytes,
       fileName: fileName,
       isLoading: true,
     );
-    return true;
+    // return true;
   }
 
   Future<ResponseModel> deleteCkecklist({
@@ -1038,6 +1107,39 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  Future<ResponseModel> getUserList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getUserDetails({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserDetails(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> saveAccessLevel({
+    required String auth,
+    accessLevelJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveAccessLevel(
+        auth: auth,
+        accessLevelJsonString: accessLevelJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   ///
 }

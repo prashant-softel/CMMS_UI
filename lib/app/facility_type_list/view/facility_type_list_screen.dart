@@ -1,5 +1,5 @@
-import 'package:cmms/app/job_list_sop/job_list_sop_controller.dart';
-import 'package:cmms/app/job_list_sop/view/job_list_sop_content_web.dart';
+import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
+import 'package:cmms/app/facility_type_list/view/facility_type_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,9 +8,8 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-
-class JobSOPListScreen extends GetView<JobSOPListController> {
-  JobSOPListScreen({super.key});
+class FacilityTypeListScreen extends GetView<FacilityTypeListController> {
+  FacilityTypeListScreen({super.key});
 
   ///
   @override
@@ -24,7 +23,7 @@ class JobSOPListScreen extends GetView<JobSOPListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Safety Questions List'),
+              title: Text('Facility Type List'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -46,7 +45,7 @@ class JobSOPListScreen extends GetView<JobSOPListController> {
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: JobSOPListContentWeb(),
+                        child: FacilityTypeListContentWeb(),
                       )
                   ],
                 ),

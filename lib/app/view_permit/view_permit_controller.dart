@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
@@ -38,6 +39,8 @@ class ViewPermitController extends GetxController {
   ViewPermitController(this.viewPermitPresenter, this.jobListPresenter);
   
   final HomeController homeController = Get.find();
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
   
 
   

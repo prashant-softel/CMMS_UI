@@ -9,10 +9,18 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
-import 'package:cmms/app/job_list_sop/job_list_sop_binding.dart';
-import 'package:cmms/app/job_list_sop/view/job_list_sop_screen.dart';
-import 'package:cmms/app/job_type_list/job_type_list_binding.dart';
-import 'package:cmms/app/job_type_list/view/job_type_list_screen.dart';
+import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
+import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
+import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
+import 'package:cmms/app/tbt_type_list/view/tbt_type_list_screen.dart';
+import 'package:cmms/app/asset_type_list/asset_type_list_binding.dart';
+import 'package:cmms/app/asset_type_list/view/asset_type_list_screen.dart';
+import 'package:cmms/app/facility_type_list/facility_type_list_binding.dart';
+import 'package:cmms/app/facility_type_list/view/facility_type_list_screen.dart';
+import 'package:cmms/app/block_type_list/block_type_list_binding.dart';
+import 'package:cmms/app/block_type_list/view/block_type_list_screen.dart';
+import 'package:cmms/app/inventory_type_list/view/inventory_type_list.dart';
+import 'package:cmms/app/inventory_type_list/inventory_type_list_binding.dart';
 import 'package:cmms/app/master_dashboard/master_binding.dart';
 import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
 import 'package:cmms/app/permit_type/permit_type_binding.dart';
@@ -280,14 +288,34 @@ class AppPages {
       binding: SafetyQuestionsListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.jobTypeListScreen,
-      page: JobTypeListScreen.new,
-      binding: JobTypeListBinding(),
+      name: _Paths.tbtTypeListScreen,
+      page: TBTTypeListScreen.new,
+      binding: TBTTypeListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.jobSOPListScreen,
-      page: JobSOPListScreen.new,
-      binding: JobSOPListBinding(),
+      name: _Paths.tbtSOPListScreen,
+      page: TBTSOPListScreen.new,
+      binding: TBTSOPListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.assetTypeListScreen,
+      page: AssetTypeListScreen.new,
+      binding: AssetTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventoryTypeListScreen,
+      page: InventoryTypeListScreen.new,
+      binding: InventoryTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.facilityTypeListScreen,
+      page: FacilityTypeListScreen.new,
+      binding: FacilityTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.blockTypeListScreen,
+      page: BlockTypeListScreen.new,
+      binding: BlockTypeListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.importInventory,
