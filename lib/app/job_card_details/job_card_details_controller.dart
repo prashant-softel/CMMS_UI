@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -13,9 +14,7 @@ import '../controllers/history_controller.dart';
 import '../job_details/job_details_presenter.dart';
 import '../navigators/app_pages.dart';
 import '../theme/color_values.dart';
-import '../theme/dimens.dart';
 import '../widgets/custom_elevated_button.dart';
-import '../widgets/dropdown.dart';
 import 'job_card_details_presenter.dart';
 import 'views/widgets/job_card_updated_dialog.dart';
 
@@ -36,11 +35,13 @@ class JobCardDetailsController extends GetxController {
   /// Employee Table
   Rx<String> selectedEmployeeName = ''.obs;
   Rx<bool> isEmployeeSelected = true.obs;
+
   RxList<DataRow2> employeeTableRows = <DataRow2>[].obs;
-  var responsibilityCtrlr = TextEditingController();
+  final responsibilityCtrlr = TextEditingController();
   List<TextEditingController> responsibilityCtrlrs = [];
   RxList<EmployeeModel?> employeeList = <EmployeeModel>[].obs;
   RxList<EmployeeModel>? selectedEmployeeList = <EmployeeModel>[].obs;
+  Rx<EmployeeModel> selectedEmployee = EmployeeModel().obs;
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<String> responsibilityList = <String>[].obs;
 
@@ -150,7 +151,7 @@ class JobCardDetailsController extends GetxController {
       for (var employee in _employeeList) {
         employeeList.add(employee);
       }
-      update(["employeeList"]);
+      // update(["employeeList"]);
     }
   }
 
@@ -337,7 +338,8 @@ class JobCardDetailsController extends GetxController {
         if (responseMapJobCardUpdated["message"] != null) {
           _message = responseMapJobCardUpdated["message"];
         }
-        showAlertDialog(jobId: _jobId, message: _message);
+        showAlertDialog(
+            jobId: _jobId, message: _message, dialog: JobCardUpdatedDialog());
       }
     } //
     catch (e) {
@@ -345,7 +347,9 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
-  void onValueChanged() {}
+  void onDropdownValueChanged(dropdownList, selectedValue) {
+    selectedEmployeeName.value = selectedValue;
+  }
 
   startStopJobCard() {
     isJobCardStarted.value = !isJobCardStarted.value;
@@ -444,78 +448,147 @@ class JobCardDetailsController extends GetxController {
         jobCardId.value, comment, true);
   }
 
-  void addNewTextEditingController() {
-    responsibilityCtrlrs.add(TextEditingController());
-  }
-
-  void deleteEmployee(int rowIndex) {
-    if (rowIndex < 0 || rowIndex >= employeeTableRows.length) {
-      // Invalid row index
-      return;
-    }
-
-    // Remove the row from the DataTable2
-    employeeTableRows.removeAt(rowIndex);
-
-    // Remove the corresponding text editing controller
-    if (rowIndex < responsibilityCtrlrs.length) {
-      responsibilityCtrlrs.removeAt(rowIndex);
-    }
-  }
-
   String? getResponsibility(index) {
-    final responsibitlity = responsibilityCtrlrs[index].text;
-    return responsibitlity;
+    return null;
+
+    // final responsibitlity = responsibilityCtrlrs[index].text;
+    // return responsibitlity;
   }
 
-  void onEmployeeSelected(String selectedValueText, int rowIndex) {
-    currentIndex.value = rowIndex;
-    // Update the selected employee value for the corresponding row
-    final rowToUpdate = employeeTableRows[rowIndex];
-    rowToUpdate.cells[0] = DataCell(
-      Container(
-        padding: Dimens.edgeInsets5,
-        child: DropdownWidget(
-          controller: this,
-          dropdownList: employeeList,
-          isValueSelected: true,
-          selectedValue: selectedValueText,
-          onValueChanged: (list, selectedValueText) {
-            onEmployeeSelected(selectedValueText, rowIndex);
-          },
-        ),
-      ),
-    );
-    // Update the observable variables for the selected employee
-    isEmployeeSelected.value = true;
-    final _selectedEmployee = employeeList.firstWhere(
-        (employee) => employee?.name == selectedValueText,
-        orElse: () => null);
-    if (_selectedEmployee != null) {
-      final exists = selectedEmployeeList
-              ?.any((employee) => employee.id == _selectedEmployee.id) ??
-          false;
-      if (!exists) {
-        selectedEmployeeList?.add(_selectedEmployee);
-      }
-    }
-  }
-
-  /// Show alert dialog
-  static void showAlertDialog({
-    int? jobId,
-    String? message,
-    String? title,
-    Function()? onPress,
-  }) async {
-    await Get.dialog<void>(
-        JobCardUpdatedDialog(jobId: jobId, message: message));
-  }
+  // void onEmployeeSelected(selectedValueText, rowIndex) {
+  //   currentIndex.value = rowIndex;
+  //   // Update the selected employee value for the corresponding row
+  //   final rowToUpdate = employeeTableRows[rowIndex];
+  //   rowToUpdate.cells[0] = DataCell(
+  //     Container(
+  //       padding: Dimens.edgeInsets5,
+  //       child: DropdownWidget(
+  //         controller: this,
+  //         dropdownList: employeeList,
+  //         isValueSelected: true,
+  //         selectedValue: selectedValueText,
+  //         onValueChanged: (list, selectedValueText) {
+  //           onEmployeeSelected(selectedValueText, rowIndex);
+  //         },
+  //       ),
+  //     ),
+  //   );
+  //   // Update the observable variables for the selected employee
+  //   isEmployeeSelected.value = true;
+  //   final _selectedEmployee = employeeList.firstWhere(
+  //       (employee) => employee?.name == selectedValueText,
+  //       orElse: () => null);
+  //   if (_selectedEmployee != null) {
+  //     final exists = selectedEmployeeList
+  //             ?.any((employee) => employee.id == _selectedEmployee.id) ??
+  //         false;
+  //     if (!exists) {
+  //       selectedEmployeeList?.add(_selectedEmployee);
+  //     }
+  //   }
+  // }
 
   goToJobCardListScreen() {
     Get.back();
     Get.toNamed(Routes.jobCardList);
   }
 
+  // void addEmployeeDialog(Widget Function(BuildContext) dialogBuilder) {
+  //   Get.dialog(
+  //     AlertDialog(
+  //       title: Text('Add Employee'),
+  //       content: dialogBuilder(Get.context!),
+  //       actions: [
+  //         CustomElevatedButton(
+  //           text: 'Add',
+  //           onPressed: () {
+  //             addNewEmployee();
+  //             Get.back();
+  //           },
+  //         ),
+  //         CustomElevatedButton(
+  //           text: 'Cancel',
+  //           onPressed: () {
+  //             Get.back();
+  //           },
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {
+    ///
+    // Create a new index for this row based on the current number of rows
+    final uniqueKey = UniqueKey();
+    // Create a new DataRow2 with the selected employee and responsibility
+    final newRow = DataRow2(
+      key: uniqueKey,
+      cells: [
+        DataCell(Text('${selectedEmployeeName}')),
+        DataCell(
+          Tooltip(
+            message: responsibility,
+            child: Container(
+              width: double.infinity,
+              child: Text(
+                responsibility,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ),
+        if (kIsWeb)
+          DataCell(
+            ElevatedButton(onPressed: () {}, child: Text('View Competencies')),
+          ),
+        DataCell(
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                deleteEmployee(uniqueKey); // Delete based on the index
+              }),
+        ),
+      ],
+    );
+
+    // Add the new row to the list of rows
+    employeeTableRows.add(newRow);
+
+    // Add the selected employee to the list of selected employees
+    selectedEmployeeList?.add(selectedEmployee);
+
+    responsibilityCtrlr.clear();
+    selectedEmployeeName.value = '';
+  }
+
+  void deleteEmployee(Key key) {
+    // Find the index of the row with this key
+    final index = employeeTableRows.indexWhere((row) => row.key == key);
+    if (index != -1) {
+      // If found, remove the row from the table
+      employeeTableRows.removeAt(index);
+    }
+  }
+
+  /// Show alert dialog
+  void showAlertDialog({
+    int? jobId,
+    String? message,
+    String? title,
+    Function()? onPress,
+    Widget? dialog,
+  }) async {
+    await Get.dialog<void>(dialog ?? SizedBox());
+  }
+
   ///
 }
+
+// class DataRow2 {
+//   final List<DataCell> cells;
+//   final int index;
+
+//   DataRow2({required this.cells, this.index = -1});
+// }

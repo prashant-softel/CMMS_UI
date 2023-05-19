@@ -4,18 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../job_list_controller.dart';
-import '../widgets/facility_selection_dropdown_widget.dart';
 
 class JobListContentMobile extends GetView<JobListController> {
-  JobListContentMobile({Key? key, this.jobModel}) : super(key: key);
-
-  final JobModel? jobModel;
+  JobListContentMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _statusString =
-        JobStatusData.getStatusStringFromStatusEnumValue(jobModel?.status);
-
     ///
     return //
         Scaffold(
@@ -27,7 +21,7 @@ class JobListContentMobile extends GetView<JobListController> {
               Column(
             children: [
               /// DropDown
-              FacilitySelectionDropdownWidget(),
+              // FacilitySelectionDropdownWidget(),
               Expanded(
                 child: ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(),
@@ -39,8 +33,10 @@ class JobListContentMobile extends GetView<JobListController> {
                       final jobModel = (controller.jobList != null)
                           ? controller.jobList[index]
                           : JobModel();
-                      var status = jobModel?.status?.name.toString() ?? '';
-                      print('Status: $status');
+                      var _statusString =
+                          JobStatusData.getStatusStringFromStatusEnumValue(
+                              jobModel?.status);
+
                       return GestureDetector(
                         onTap: () {
                           var _jobId = jobModel?.id ?? 0;
@@ -91,7 +87,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  status,
+                                                  _statusString,
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                   ),

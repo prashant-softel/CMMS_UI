@@ -1,143 +1,261 @@
-import 'package:cmms/app/job_card_details/job_card_details_controller.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
-import '../../../widgets/action_button.dart';
+import '../../../theme/styles.dart';
 import '../../../widgets/dropdown.dart';
+import '../../job_card_details_controller.dart';
 
-class EmployeeTableWidget extends GetView<JobCardDetailsController> {
+class EmployeeTableWidget extends StatelessWidget {
+  ///
   EmployeeTableWidget({
-    super.key,
+    Key? key,
+    required this.isWeb,
     required this.controller,
-  });
+  }) : super(key: key);
 
   ///
-  final controller;
+  final bool isWeb;
+  final JobCardDetailsController controller;
 
-  ///
   @override
   Widget build(BuildContext context) {
     return //
-        Obx(() {
-      try {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
+
+        Column(//
+            children: [
+      isWeb // this line checks if it is web
+          ? Row(
+              // and renders a Row if it is
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Team deployed to carry out the job"),
-                ActionButton(
-                  label: "Add Employee",
-                  onPressed: () {
-                    final index = controller.employeeTableRows.length;
+                  Text("Team deployed to carry out the job"),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AddEmployeeDialog();
+                        },
+                      );
+                    },
+                    child: Text("Add Employee"),
+                  ),
+                ])
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              // and renders a Column if it is not
+              children: [
+                  Text("Team deployed"),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AddEmployeeDialog();
+                        },
+                      );
+                    },
+                    child: Text("Add Employee"),
+                  ),
+                ]),
 
-                    // Add a new row to the observable list
-                    controller.employeeTableRows.add(
-                      DataRow2(cells: [
-                        DataCell(
-                          Container(
-                            padding: Dimens.edgeInsets5,
-                            child: DropdownWidget(
-                              controller: controller,
-                              dropdownList: controller.employeeList,
-                              isValueSelected:
-                                  controller.isEmployeeSelected.value,
-                              selectedValue:
-                                  controller.selectedEmployeeName.value,
-                              onValueChanged: (list, selectedValueText) {
-                                controller.onEmployeeSelected(
-                                    selectedValueText, index);
-                              },
+      Obx(() {
+        // Obx widget to listen for changes in employeeTableRows
+        return //
+            controller.employeeList.length > 0
+                ? Container(
+                    height: (controller.employeeTableRows.length + 1) * 60,
+                    child: //
+                        DataTable2(
+                            dataRowHeight: 60,
+                            columnSpacing: 10,
+                            border: TableBorder.all(
+                                color: ColorValues.appLightGreyColor),
+                            columns: isWeb
+                                ? [
+                                    DataColumn2(
+                                        label: Text('Employee Name'),
+                                        size: ColumnSize.L),
+                                    DataColumn2(
+                                        label: Text('Responsibility'),
+                                        size: ColumnSize.L),
+                                    DataColumn2(
+                                        label: Text('View Competencies'),
+                                        size: ColumnSize.L),
+                                    DataColumn2(
+                                        label: Text('Delete'),
+                                        size: ColumnSize.S),
+                                  ]
+                                : [
+                                    DataColumn2(
+                                        label: Text('Employee'),
+                                        size: ColumnSize.M),
+                                    DataColumn2(
+                                        label: Text('Responsibility'),
+                                        size: ColumnSize.L),
+                                    DataColumn2(
+                                        label: Text(''), size: ColumnSize.S),
+                                  ],
+                            rows: controller
+                                .employeeTableRows // Using the list of rows from the controller
                             ),
-                          ),
-                        ),
-                        DataCell(
-                          TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorValues.appLightBlueColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorValues.appLightBlueColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                            ),
-                            minLines: 3,
-                            maxLines: null,
-                            controller: controller.responsibilityCtrlrs[index],
-                          ),
-                        ),
-                        DataCell(
-                          ActionButton(
-                            label: "View Competencies",
-                            color: ColorValues.appLightBlueColor,
-                            onPressed: () {},
-                          ),
-                        ),
-                        DataCell(
-                          IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              // Remove the row from the observable list
-                              controller.deleteEmployee(index);
-                            },
-                          ),
-                        ),
-                      ]),
-                    );
+                  )
+                : Dimens.box0;
+      }),
+      // ),
+    ]);
+    // );
+  }
+}
 
-                    // Add a new text editing controller
-                    controller.addNewTextEditingController();
-                  },
-                  icon: Icons.add,
-                  color: ColorValues.appGreenColor,
-                ),
-              ],
-            ),
-            Container(
-              height: (controller.employeeTableRows.length + 1) * 60,
-              child: Flexible(
-                child: DataTable2(
-                  headingRowHeight: 50,
-                  border: TableBorder.all(color: ColorValues.appLightBlueColor),
-                  dataRowHeight: 60,
-                  horizontalMargin: 12,
-                  columns: [
-                    DataColumn2(
-                      label: Text('Employee Name / Designation'),
-                      size: ColumnSize.L,
+class AddEmployeeDialog extends StatelessWidget {
+  ///
+
+  final JobCardDetailsController controller = Get.find();
+
+  ///
+
+  Widget build(BuildContext context) {
+    ///
+    return //
+        AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      insetPadding: Dimens.edgeInsets10_0_10_0,
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        'Add Employee',
+        textAlign: TextAlign.center,
+      ),
+      content: //
+          Builder(builder: (context) {
+        return //
+            SingleChildScrollView(
+          child: //
+              Container(
+            width: Get.width * 0.9,
+            margin: Dimens.edgeInsets5,
+            child: //
+                Column(
+                    //
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'Select: ',
+                          style: Styles.blackBold16,
+                          children: [
+                            // TextSpan(
+                            //   text: '*',
+                            //   style: TextStyle(
+                            //     color: ColorValues.orangeColor,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                          ]),
                     ),
-                    DataColumn2(
-                      label: Text('Responsibility'),
+                  ),
+                  DropdownWidget(
+                    controller: controller,
+                    dropdownList: controller.employeeList,
+                    isValueSelected: controller.isEmployeeSelected.value,
+                    selectedValue: controller.selectedEmployeeName.value,
+                    onValueChanged: controller.onDropdownValueChanged,
+                  ),
+                  Dimens.boxHeight20,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'Responsibility: ',
+                          style: Styles.blackBold16,
+                          children: [
+                            // TextSpan(
+                            //   text: '*',
+                            //   style: TextStyle(
+                            //     color: ColorValues.orangeColor,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                          ]),
                     ),
-                    DataColumn2(
-                      label: Text('Competencies'),
+                  ),
+                  Dimens.boxHeight5,
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: const Offset(
+                            5.0,
+                            5.0,
+                          ),
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                        ), //BoxShadow
+                        BoxShadow(
+                          color: ColorValues.whiteColor,
+                          offset: const Offset(0.0, 0.0),
+                          blurRadius: 0.0,
+                          spreadRadius: 0.0,
+                        ), //BoxShadow
+                      ],
+                      color: ColorValues.whiteColor,
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    DataColumn2(
-                      label: Text('Remove'),
+                    child: TextField(
+                      minLines: 3,
+                      maxLines: 5,
+                      controller: controller.responsibilityCtrlr,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                        fillColor: ColorValues.whiteColor,
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                        border: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      // onChanged: (value) {
+                      //   if (value.trim().length > 3) {
+                      //     controller.isJobTitleInvalid.value = false;
+                      //   } else {
+                      //     controller.isJobTitleInvalid.value = true;
+                      //   }
+                      // },
                     ),
-                  ],
-                  rows: controller.employeeTableRows,
-                ),
-              ),
-            ),
-          ],
+                  ),
+                  Dimens.boxHeight20,
+                  ElevatedButton(
+                    onPressed: () {
+                      //if (_formKey.currentState!.validate()) {
+                      controller.addNewEmployee(
+                        controller.selectedEmployee.value,
+                        controller.responsibilityCtrlr.text,
+                      );
+                      Get.back();
+                      //}
+                    },
+                    child: Text('Add'),
+                  ),
+                ]),
+          ),
         );
-      } catch (e) {
-        print(e);
-        return Container();
-      }
-    });
+      }),
+    );
   }
 
   ///

@@ -25,8 +25,8 @@ class FileUploadController extends GetxController {
   var selectedEvent = FileUploadEvents.BEFORE.obs;
   var token = '';
   List<TextEditingController> descriptionCtrlrs = [];
-
   List<List<int>>? bytesDataList;
+  Rx<double?> tileHeight = 0.0.obs;
 
   ///
   @override
