@@ -2027,7 +2027,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     // _buildStartValidTillDateField_web(
                                                     //     context, 0,),
                                                     SizedBox(
-                                                      width: 275,
+                                                      width: 245,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
@@ -2053,7 +2053,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ],
                                                     ),
                                                     SizedBox(
-                                                      width: 197,
+                                                      width: 175,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
@@ -2143,7 +2143,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                         ),
                                                   SizedBox(
-                                                    width: 150,
+                                                    width: 120,
                                                   ),
                                                   CustomRichText(
                                                       title: 'Block: '),
