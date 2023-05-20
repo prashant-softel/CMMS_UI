@@ -6,6 +6,8 @@ import 'package:cmms/app/master_dashboard/master_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../onHover.dart';
+
 // import '../../navigators/app_pages.dart';
 
 class MastersDashboard extends GetView<MastersController> {
@@ -130,7 +132,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   "Permit To Work",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -155,31 +157,39 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 2,
+                                Responsive.isMobile(context) ? 2 : 6,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              createContentTile(
-                                  title: "Permit Type",
-                                  onTap: () {
-                                    controller.goToPermitTypeScreen();
-                                  }),
-                              createContentTile(
-                                  title: 'Safety Questions',
-                                  onTap: () {
-                                    controller.gotToSafetyQuestionsList();
-                                  }),
-                              createContentTile(
-                                  title: "TBT Type",
-                                  onTap: () {
-                                    controller.goToJobTypeList();
-                                  }),
-                              createContentTile(
-                                  title: "TBT SOP List",
-                                  onTap: () {
-                                    controller.goToJobSOPList();
-                                  }),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Permit Type",
+                                    onTap: () {
+                                      controller.goToPermitTypeScreen();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: 'Safety Questions',
+                                    onTap: () {
+                                      controller.gotToSafetyQuestionsList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "TBT Type",
+                                    onTap: () {
+                                      controller.goToJobTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "TBT SOP List",
+                                    onTap: () {
+                                      controller.goToJobSOPList();
+                                    });
+                              }))),
 
                               // createContentTile(title: "Job Card List"),
                               // _priventiveList(tittle: "PM Schedule View"),
@@ -196,7 +206,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   "Assets",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -221,21 +231,25 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 2,
+                                Responsive.isMobile(context) ? 2 : 6,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              createContentTile(
-                                  title: "Asset Category List",
-                                  onTap: () {
-                                    controller.goToAssetTypeList();
-                                  }),
-                              createContentTile(
-                                  title: "Asset Type List",
-                                  onTap: () {
-                                    controller.goToInventoryTypeList();
-                                  }),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Asset Category List",
+                                    onTap: () {
+                                      controller.goToAssetTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Asset Type List",
+                                    onTap: () {
+                                      controller.goToInventoryTypeList();
+                                    });
+                              }))),
                             ],
                           ),
                           Container(
@@ -246,7 +260,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   "Facility",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -271,21 +285,25 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 2,
+                                Responsive.isMobile(context) ? 2 : 6,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              createContentTile(
-                                  title: "Facility List",
-                                  onTap: () {
-                                    controller.goToFacilityTypeList();
-                                  }),
-                              createContentTile(
-                                  title: "Block List",
-                                  onTap: () {
-                                    controller.goToBlockTypeList();
-                                  }),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Facility List",
+                                    onTap: () {
+                                      controller.goToFacilityTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Block List",
+                                    onTap: () {
+                                      controller.goToBlockTypeList();
+                                    });
+                              }))),
                             ],
                           ),
                           Container(
@@ -296,7 +314,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   "Five",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -321,21 +339,27 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 2,
+                                Responsive.isMobile(context) ? 2 : 6,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              createContentTile(
-                                  title: "Facility List",
-                                  onTap: () {
-                                    controller.goToFacilityTypeList();
-                                  }),
-                              createContentTile(
-                                  title: "Block List",
-                                  onTap: () {
-                                    controller.goToBlockTypeList();
-                                  }),
+                              OnHover(
+                                builder: ((isHovered) {
+                                  return createContentTile(
+                                      title: "Facility List",
+                                      onTap: () {
+                                        controller.goToFacilityTypeList();
+                                      });
+                                }),
+                              ),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Block List",
+                                    onTap: () {
+                                      controller.goToBlockTypeList();
+                                    });
+                              })))
                             ],
                           ),
                           Container(
@@ -346,7 +370,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   "Six",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -371,21 +395,25 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 2,
+                                Responsive.isMobile(context) ? 2 : 6,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              createContentTile(
-                                  title: "Facility List",
-                                  onTap: () {
-                                    controller.goToFacilityTypeList();
-                                  }),
-                              createContentTile(
-                                  title: "Block List",
-                                  onTap: () {
-                                    controller.goToBlockTypeList();
-                                  }),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Facility List",
+                                    onTap: () {
+                                      controller.goToFacilityTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Block List",
+                                    onTap: () {
+                                      controller.goToBlockTypeList();
+                                    });
+                              }))),
                             ],
                           ),
                         ],
@@ -433,7 +461,7 @@ class MastersDashboard extends GetView<MastersController> {
               ),
               child: Icon(
                 Icons.format_list_bulleted,
-                size: 30,
+                size: 20,
                 color: ColorValues.appLightBlueColor,
               ),
             ),

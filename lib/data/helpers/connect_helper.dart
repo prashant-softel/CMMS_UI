@@ -285,7 +285,7 @@ class ConnectHelper {
   Future<ResponseModel> getBlockTypeList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Facility/GetBlockList?parent_id=46',
+      'Facility/GetBlockList?parent_id=$job_type_id',
       Request.getMultiparts,
       null,
       isLoading,
