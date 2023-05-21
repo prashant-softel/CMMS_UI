@@ -75,7 +75,7 @@ class ApiWrapper {
               Utility.printILog(uri);
               return returnResponse(response);
             } catch (e) {
-              print({"error": e});
+              print({"error1": e});
               return ResponseModel(
                   data: '{"message":"Request timed out"}', hasError: true);
             }

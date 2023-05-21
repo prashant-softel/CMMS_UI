@@ -1574,6 +1574,20 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<ResponseModel> getBloodList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'CMMS/GetBloodGroupList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
   Future<ResponseModel> getStateListnew(
           {String? auth, bool? isLoading, int? selectedCountryId}) async =>
       await apiWrapper.makeRequest(
@@ -1682,6 +1696,44 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> addUser({
+    required String auth,
+    bool? isLoading,
+    required adduserJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/CreateUser',
+      Request.post,
+      adduserJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateUser({
+    required String auth,
+    bool? isLoading,
+    required adduserJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/UpdateUser',
+      Request.patch,
+      adduserJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 

@@ -9,16 +9,20 @@ class ViewUserDetailController extends GetxController {
     this.viewUserDetailPresenter,
   );
   ViewUserDetailPresenter viewUserDetailPresenter;
-  int userId = 2;
+  int userId = 0;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
-  int selectedRoleId = 2;
+  int selectedRoleId = 0;
   Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
   RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
 
   @override
   void onInit() async {
-    await getUserDetails(userId: userId, isloading: true);
-    await getRoleAccessList(roleId: selectedRoleId, isloading: true);
+    userId = Get.arguments;
+    print('userId:$userId');
+    if (userId != 0) {
+      await getUserDetails(userId: userId, isloading: true);
+    }
+
     super.onInit();
   }
 
@@ -28,6 +32,8 @@ class ViewUserDetailController extends GetxController {
 
     if (_userDetailModel != null) {
       userDetailModel.value = _userDetailModel;
+      selectedRoleId = userDetailModel.value?.role_id ?? 0;
+      await getRoleAccessList(roleId: selectedRoleId, isloading: true);
     }
   }
 

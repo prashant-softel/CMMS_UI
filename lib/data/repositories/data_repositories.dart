@@ -1068,6 +1068,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getBloodList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getBloodList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> getStateListnew({
     required String auth,
     bool? isLoading,
@@ -1140,6 +1150,25 @@ class DataRepository extends DomainRepository {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> addUser({
+    auth,
+    bool? isLoading,
+    adduserJsonString,
+  }) async {
+    var response = await connectHelper.addUser(
+        auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateUser({
+    auth,
+    bool? isLoading,
+    adduserJsonString,
+  }) async {
+    var response = await connectHelper.updateUser(
+        auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
+    return response;
+  }
 
   ///
 }
