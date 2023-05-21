@@ -39,7 +39,7 @@ import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+// import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/access_level_model.dart';
 import '../models/city_model.dart';
@@ -324,7 +324,7 @@ class Repository {
     }
   }
 
-   //Create SOP
+  //Create SOP
   Future<Map<String, dynamic>> createSOP(
     createSop,
     bool? isLoading,
@@ -366,7 +366,6 @@ class Repository {
     }
   }
 
-
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -376,7 +375,7 @@ class Repository {
     }
   }
 
-  Mixpanel? mixPanel;
+  // Mixpanel? mixPanel;
 
   Future<List<CountryState?>?> getStateList(int countryCode) async {
     try {
@@ -1122,7 +1121,6 @@ class Repository {
     }
   }
 
-   
   Future<void> permitCloseButton(
     String? comment,
     String? id,
