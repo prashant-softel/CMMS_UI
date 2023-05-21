@@ -1,12 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_presenter.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_presenter.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -98,6 +102,15 @@ class TBTSOPListController extends GetxController {
   RxList<int?> selectedJobTypeIdList = <int>[].obs;
     int selectedJobTypesId = 0;
 
+  /// TextFields Controller
+  TextEditingController titleTextFieldCtrlr = TextEditingController();
+  TextEditingController descriptionTextFieldCtrlr = TextEditingController();
+
+///Browse File Id's
+  var jsaFileId;
+  var sopFileId;
+  
+
 
   @override
   void onInit() async {
@@ -129,6 +142,7 @@ class TBTSOPListController extends GetxController {
       // job_type_id: 36,
 
     );
+    
     if (_sopPermitList != null) {
       
       for (var sopPermit_list in _sopPermitList) {
@@ -168,6 +182,140 @@ class TBTSOPListController extends GetxController {
   }
 
 
+///For View JSA File
+
+   Future<bool> browseFiles({Uint8List? fileBytes, required int position}) async {
+   CreateSOPModel? createSOPModel = await tbtSOPListPresenter.browseFiles(fileBytes, fileName.value, true);
+  if(position == 0){
+    jsaFileId = createSOPModel?.jsa_fileId;
+  }else{
+    sopFileId = createSOPModel?.sop_fileId;
+  }
+    return true;
+  }
+
+  void isSuccessDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('Import JSA File'),
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color.fromARGB(255, 7, 161, 17),
+              border: Border.all(
+                color: Color.fromARGB(255, 7, 161, 17),
+                width: 1,
+              ),
+            ),
+            child: Icon(Icons.check, size: 35, color: ColorValues.whiteColor),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text(
+                "${fileName.value} \n JSA File import Successfully....",
+                style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
+          )
+        ]),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+              // Get.back();
+              // Future.delayed(Duration(seconds: 2), () {
+              //   fileName.value = "";
+              // });
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///For View Sop Success Dialog
+
+  void isSuccessDialog2() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('Import SOP File'),
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color.fromARGB(255, 7, 161, 17),
+              border: Border.all(
+                color: Color.fromARGB(255, 7, 161, 17),
+                width: 1,
+              ),
+            ),
+            child: Icon(Icons.check, size: 35, color: ColorValues.whiteColor),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text(
+                "${fileName2.value} \n SOP File import Successfully....",
+                style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
+          )
+        ]),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+              // Get.back();
+              // Future.delayed(Duration(seconds: 2), () {
+              //   fileName.value = "";
+              // });
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+///Create SOP
+   void createSOP() async {
+    {
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
+      String _description = htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
+
+      // int? sopFileId = createSOPModel2.sop_fileId;
+      // // int? jsaFileId = data.jsa_fileId;
+      // print('SOPFileId:$sopFileId');
+      
+      CreateSOPModel createSOPModel = CreateSOPModel(
+        title: _title,
+        description: _description,
+        tbt_jobType: selectedJobSOPId,
+        sop_fileId: sopFileId,
+        sop_file_desc: "PM Document",
+        jsa_fileId: jsaFileId
+      );
+      var sopJsonString = createSOPModel.toJson();
+      Map<String, dynamic>? responseSopCreate =
+          await tbtSOPListPresenter.createSOP(
+        createSop: sopJsonString,
+        isLoading: true,
+      );
+    
+      if (responseSopCreate != null) {
+        //  CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print('Create SOP data: $sopJsonString');
+    }
+  }
+
 
 
  
@@ -201,6 +349,7 @@ class TBTSOPListController extends GetxController {
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           selectedJobSOPId = jobTypeList[jobTypeListIndex].id ?? 0;
+          print('TBT_JobType:$selectedJobSOPId');
           getSopPermitList();
           //}
         }

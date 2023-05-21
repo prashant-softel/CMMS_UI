@@ -261,7 +261,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         // '${newPermitDetails?.requestDatetime}',
                                         '${newPermitDetails?.approvedByName}\n${newPermitDetails?.approvedDatetime}',
                                         // '${newPermitDetails?.approvedDatetime}',
-                                        '${newPermitDetails?.currentStatus}',
+                                        '${newPermitDetails?.current_status_short}',
                                         // '${newPermitDetails?.current_status}' ==
                                         //         "Permit Created"
                                         //  ?
@@ -387,37 +387,40 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           )
                                                         : Container(),
-                                                    varUserAccessModel.value
-                                                                    .access_list!
-                                                                    .where((e) =>
-                                                                        e.feature_id ==
-                                                                            3 &&
-                                                                        e.delete ==
-                                                                            0)
-                                                                    .length >
-                                                                0 &&
-                                                            controller
-                                                                    .newPermitList!
-                                                                    .where((e) =>
-                                                                        e?.ptwStatus ==
-                                                                        121)
-                                                                    .length >
-                                                                0
-                                                        ? Container()
-                                                        : TableActionButton(
-                                                            color: Colors.red,
-                                                            icon: Icons.delete,
-                                                            label: 'Reject',
-                                                            onPress: () {
-                                                              // controller.goToJobCardScreen(
-                                                              //   int.tryParse(_newPermitList[0]),
-                                                              // );
-                                                              Get.dialog(PermitRejectDialog(
-                                                                  permitId:
-                                                                      _newPermitList[
-                                                                          0]));
-                                                            },
-                                                          ),
+                                                        /// Condition for delete
+                                                    // varUserAccessModel.value
+                                                    //                 .access_list!
+                                                    //                 .where((e) =>
+                                                    //                     e.feature_id ==
+                                                    //                         3 &&
+                                                    //                     e.delete ==
+                                                    //                         0)
+                                                    //                 .length >
+                                                    //             0 &&
+                                                    //         controller
+                                                    //                 .newPermitList!
+                                                    //                 .where((e) =>
+                                                    //                     e?.ptwStatus ==
+                                                    //                     121)
+                                                    //                 .length >
+                                                    //             0
+                                                    //     ? Container()
+                                                    //     : TableActionButton(
+                                                    //         color: Colors.red,
+                                                    //         icon: Icons.delete,
+                                                    //         label: 'Delete',
+                                                    //         onPress: () {
+                                                    //           // controller.goToJobCardScreen(
+                                                    //           //   int.tryParse(_newPermitList[0]),
+                                                    //           // );
+                                                    //           // Get.dialog(PermitRejectDialog(
+                                                    //           //     permitId:
+                                                    //           //         _newPermitList[
+                                                    //           //             0]));
+                                                    //         },
+                                                    //       ),
+                                                          /// Condition For delete ends here
+                                                          
                                                     TableActionButton(
                                                       color: Colors.red,
                                                       icon: Icons.close,

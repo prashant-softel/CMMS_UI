@@ -1,12 +1,9 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
-import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
-import 'package:cmms/app/widgets/custom_dropdown.dart';
+import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -14,9 +11,9 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
-class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
-  TBTSOPListContentWeb({Key? key}) : super(key: key);
-  final TBTSOPListController controller = Get.find();
+class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
+  FacilityTypeListContentWeb({Key? key}) : super(key: key);
+  final FacilityTypeListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +54,9 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / TBT SOP List", style: Styles.greyMediumLight12)
+                  Text(" / FACILITY LIST", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -68,14 +65,13 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 13 && e.add == 1)
+                              .where((e) => e.feature_id == 5 && e.add == 1)
                               .length >
                           0
-                      ? 
-                      Container(
-                          width: (Get.width * .303),
+                      ? Container(
+                          width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.2,
+                          height: Get.height / 1.8,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -94,39 +90,12 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add TBT SOP ",
+                                          "Add Facility",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 30,
+                                          height: 40,
                                         ),
-                                          CustomRichText(
-                                                                          title:
-                                                                              'TBT Type: '),
-                                                                               SizedBox(height: 5,),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
-                                                                                3.5,
-                                                                        height: 45,
-                                                                        child:
-                                                                            Obx(
-                                                                          () =>
-                                                                              DropdownWidget(
-                                                                            dropdownList:
-                                                                                controller.jobTypeList,
-                                                                            isValueSelected:
-                                                                                controller.isJobTypeListSelected.value,
-                                                                            selectedValue:
-                                                                                controller.selectedJobType.value,
-                                                                            onValueChanged:
-                                                                                controller.onValueChanged,
-                                                                          ),
-                                                                        ),
-
-                                                                        // LoginCustomTextfield(),
-                                                                      ),
-                                                                      SizedBox(height: 5,),
                                         CustomRichText(title: 'Title '),
                                         Row(
                                           mainAxisAlignment:
@@ -171,7 +140,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      textController: controller.titleTextFieldCtrlr,
+                                                      // textController: controller
+                                                      //     .durationCtrlr,
                                                       )),
                                             ),
                                           ],
@@ -246,7 +216,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      textController: controller.descriptionTextFieldCtrlr,
+                                                      // textController: controller
+                                                      //     .durationCtrlr,
                                                       )),
                                             ),
                                           ],
@@ -254,182 +225,6 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        CustomRichText(title: 'View JSA File ',),
-                                        SizedBox(height: 5,),
-                                        Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 45,
-                          width: MediaQuery.of(context).size.width / 7.5,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                controller.fileName.value == ""
-                                    ? 'File Name'
-                                    : controller.fileName.value,
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                          height: 35,
-                          width: (Get.width * .2) - 170,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appDarkBlueColor,
-                            text: "Browse",
-                            onPressed: () async {
-                              final result =
-                                  await FilePicker.platform.pickFiles();
-                              if (result != null) {
-                                // for (var file in result.files) {
-                                controller.fileName.value =
-                                    result.files.single.name;
-                                controller.fileBytes =
-                                    result.files.single.bytes;
-                                //controller.filePath.value = file.;
-                                  print({"filepathes", controller.fileName.value});
-                                // }
-                              }
-                            },
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Upload',
-                              onPressed: () {
-                                controller
-                                    .browseFiles(
-                                  fileBytes: controller.fileBytes,
-                                  position: 0
-                                )
-                                    .then((value) {
-                                  controller.isSuccessDialog();
-
-                                //   // Fluttertoast.showToast(
-                                //   //     msg: "file upload  Successfully",
-                                //   //     fontSize: 16.0);
-                                });
-                                //  controller.savePmMapping();
-                              },
-                            ),
-                          ),
-                      ],
-                    ),
-                     SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomRichText(title: 'View SOP File ',),
-                                        SizedBox(height: 5,),
-                                        Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 45,
-                          width: MediaQuery.of(context).size.width / 7.5,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                controller.fileName2.value == ""
-                                    ? 'File Name'
-                                    : controller.fileName2.value,
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                          height: 35,
-                          width: (Get.width * .2) - 170,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appDarkBlueColor,
-                            text: "Browse",
-                            onPressed: () async {
-                              final result =
-                                  await FilePicker.platform.pickFiles();
-                              if (result != null) {
-                                // for (var file in result.files) {
-                                controller.fileName2.value =
-                                    result.files.single.name;
-                                controller.fileBytes2 =
-                                    result.files.single.bytes;
-                                //controller.filePath.value = file.;
-                                //  print({"filepathes", fileBytes});
-                                // }
-                              }
-                            },
-                          ),
-                        ),
-                         Dimens.boxWidth5,
-                        Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Upload',
-                              onPressed: () {
-                                controller
-                                    .browseFiles(
-                                  fileBytes: controller.fileBytes2,
-                                  position: 1
-                                  
-                                )
-                                    .then((value) {
-                                  controller.isSuccessDialog2();
-
-                                //   // Fluttertoast.showToast(
-                                //   //     msg: "file upload  Successfully",
-                                //   //     fontSize: 16.0);
-                                });
-                                //  controller.savePmMapping();
-                              },
-                            ),
-                          ),
-                      ],
-                    ),
                                         // Row(
                                         //   children: [
                                         //     CustomRichText(
@@ -470,7 +265,14 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              controller.createSOP();
+                                              // controller
+                                              //     .createChecklistNumber()
+                                              //     .then((value) {
+                                              //   print("value,$value");
+                                              //   // if (value == true)
+                                              //   //   controller
+                                              //   //       .issuccessCreatechecklist();
+                                              // });
                                             },
                                             text: 'Submit')),
                                   ],
@@ -481,11 +283,10 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 13 && e.view == 1)
+                              .where((e) => e.feature_id == 5 && e.view == 1)
                               .length >
                           0
-                      ? 
-                      Expanded(
+                      ? Expanded(
                           child: Container(
                             width: Get.width * 7,
                             margin: EdgeInsets.only(left: 10, top: 30),
@@ -502,7 +303,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of TBT SOP",
+                                      "List of Facilities",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -512,6 +313,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   Row(
                                     children: [
                                       Container(
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -527,6 +329,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -535,6 +338,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        width: (Get.width * .1) - 70,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -543,6 +347,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        width: (Get.width * .2) - 100,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -556,56 +361,65 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.sopPermitList.isEmpty
-                                      ? Expanded(
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "Sr.No.",
-                                              "Title",
-                                              "Job Type Name",
-                                              "Action",
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.16,
-                                              );
-                                            }).toList(),
-                                            rows: [
-                                              ...List.generate(
-                                                controller.sopPermitList
-                                                        .length ,
-                                                (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    // '',
-                                                    // '',
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((record) {
-                                              return TableViewRow(
-                                                height: 60,
-                                                cells: record.map((value) {
-                                                  return TableViewCell(
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        )
-                                      :
+                                  // controller.preventiveCheckList!.isEmpty
+                                  //     ? Expanded(
+                                  //         child: ScrollableTableView(
+                                  //           columns: [
+                                  //             "Checklist Number ",
+                                  //             "Active Status ",
+                                  //             "Category ",
+                                  //             "Frequency ",
+                                  //             "PM Manpower",
+                                  //             "PM Duration(in Min.)",
+                                  //             "Action",
+                                  //           ].map((column) {
+                                  //             return TableViewColumn(
+                                  //               label: column,
+                                  //               minWidth: Get.width * 0.16,
+                                  //             );
+                                  //           }).toList(),
+                                  //           rows: [
+                                  //             ...List.generate(
+                                  //               controller.preventiveCheckList
+                                  //                       ?.length ??
+                                  //                   0,
+                                  //               (index) {
+                                  //                 return [
+                                  //                   '',
+                                  //                   '',
+                                  //                   '',
+                                  //                   '',
+                                  //                   '',
+                                  //                   '',
+                                  //                 ];
+                                  //               },
+                                  //             ),
+                                  //           ].map((record) {
+                                  //             return TableViewRow(
+                                  //               height: 60,
+                                  //               cells: record.map((value) {
+                                  //                 return TableViewCell(
+                                  //                   child: Text(value),
+                                  //                 );
+                                  //               }).toList(),
+                                  //             );
+                                  //           }).toList(),
+                                  //         ),
+                                  //       )
+                                  //     :
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
-                                          .jobSOPListPaginationController,
+                                          .facilityTypeListPaginationController,
                                       columns: [
                                         "Sr.No.",
                                         "Title",
-                                        "Job Type Name",
+                                        "Address",
+                                        "City",
+                                        "State",
+                                        "Country",
+                                        "Pin",
+                                        "Blocks",
                                         "Action"
                                       ].map((column) {
                                         return TableViewColumn(
@@ -616,14 +430,20 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                       rows: //
                                           [
                                         ...List.generate(
-                                          controller.sopPermitList.length,
+                                          controller.facilityTypeList.length,
                                           (index) {
-                                            var jobSOPListDetails =
-                                                controller.sopPermitList[index];
+                                            var facilityTypeListDetails =
+                                                controller
+                                                    .facilityTypeList[index];
                                             return [
-                                              '${jobSOPListDetails.id}',
-                                              '${jobSOPListDetails.name}',
-                                              '${jobSOPListDetails.jobTypeName}',
+                                              '${facilityTypeListDetails.id}',
+                                              '${facilityTypeListDetails.name}',
+                                              '${facilityTypeListDetails.address}',
+                                              '${facilityTypeListDetails.city}',
+                                              '${facilityTypeListDetails.state}',
+                                              '${facilityTypeListDetails.country}',
+                                              '${facilityTypeListDetails.blocks}',
+                                              '${facilityTypeListDetails.pin}',
                                               "Action"
                                             ];
                                           },
@@ -643,27 +463,46 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                               // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                               //         0
                                                               //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                label: 'Edit',
-                                                                onPress: () {},
+                                                              Container(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        bottom:
+                                                                            10),
+                                                                child: Column(
+                                                                  children: [
+                                                                    TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      icon: Icons
+                                                                          .visibility,
+                                                                      label:
+                                                                          'View Blocks',
+                                                                      onPress:
+                                                                          () {},
+                                                                    ),
+                                                                    Container(
+                                                                      padding: EdgeInsets.only(
+                                                                          bottom:
+                                                                              10),
+                                                                      child: Row(
+                                                                          children: [
+                                                                            TableActionButton(
+                                                                              color: ColorValues.appLightBlueColor,
+                                                                              icon: Icons.edit,
+                                                                              label: 'Edit',
+                                                                              onPress: () {},
+                                                                            ),
+                                                                            TableActionButton(
+                                                                              color: ColorValues.appRedColor,
+                                                                              icon: Icons.delete,
+                                                                              label: 'Delete',
+                                                                              onPress: () {},
+                                                                            ),
+                                                                          ]),
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
-                                                              // : Container(),
-                                                              // :Container(),
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appRedColor,
-                                                                icon: Icons
-                                                                    .delete,
-                                                                label: 'Delete',
-                                                                onPress: () {},
-                                                              )
                                                               // : Container()
                                                             ])
                                                           : Text(
@@ -678,21 +517,21 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         horizontal: 25),
                                     child: ValueListenableBuilder(
                                         valueListenable: controller
-                                            .jobSOPListPaginationController,
+                                            .facilityTypeListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(
-                                                "${controller.jobSOPListPaginationController.currentPage}  of ${controller.jobSOPListPaginationController.pageCount}"),
+                                                "${controller.facilityTypeListPaginationController.currentPage}  of ${controller.facilityTypeListPaginationController.pageCount}"),
                                             Row(children: [
                                               IconButton(
                                                 onPressed: controller
-                                                            .jobSOPListPaginationController
+                                                            .facilityTypeListPaginationController
                                                             .currentPage <=
                                                         1
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .facilityTypeListPaginationController
                                                             .previous();
                                                       },
                                                 iconSize: 20,
@@ -701,7 +540,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                   Icons
                                                       .arrow_back_ios_new_rounded,
                                                   color: controller
-                                                              .jobSOPListPaginationController
+                                                              .facilityTypeListPaginationController
                                                               .currentPage <=
                                                           1
                                                       ? Colors.black26
@@ -711,15 +550,15 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                               ),
                                               IconButton(
                                                 onPressed: controller
-                                                            .jobSOPListPaginationController
+                                                            .facilityTypeListPaginationController
                                                             .currentPage >=
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .facilityTypeListPaginationController
                                                             .pageCount
                                                     ? null
                                                     : () {
                                                         controller
-                                                            .jobSOPListPaginationController
+                                                            .facilityTypeListPaginationController
                                                             .next();
                                                       },
                                                 iconSize: 20,
@@ -728,10 +567,10 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                   Icons
                                                       .arrow_forward_ios_rounded,
                                                   color: controller
-                                                              .jobSOPListPaginationController
+                                                              .facilityTypeListPaginationController
                                                               .currentPage >=
                                                           controller
-                                                              .jobSOPListPaginationController
+                                                              .facilityTypeListPaginationController
                                                               .pageCount
                                                       ? Colors.black26
                                                       : Theme.of(context)

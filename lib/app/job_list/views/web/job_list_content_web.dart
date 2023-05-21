@@ -76,7 +76,7 @@ class JobListContentWeb extends StatelessWidget {
               ? Center(child: Text('No data'))
               : Expanded(
                   child: PaginatedDataTable2(
-                    dataRowHeight: Get.height * 0.1,
+                    dataRowHeight: Get.height * 0.12,
                     columnSpacing: 10,
                     source: dataSource, // Custom DataSource class
                     headingRowHeight: Get.height * 0.12,

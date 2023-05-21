@@ -1469,7 +1469,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 ),
                                               ),
 
-                                              Center(
+                                              controller.permitId.value <= 0
+                                                  ? Center(
                                                       child: Container(
                                                           height: 45,
                                                           child:
@@ -1493,7 +1494,22 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       checkboxAlertBox());
                                                             },
                                                           )),
+                                                    )
+                                                  : Center(
+                                                      child: Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .navyBlueColor,
+                                                            text: "Update",
+                                                            onPressed: () {
+                                                              controller.updateNewPermit();
+                                                            },
+                                                          )),
                                                     ),
+
                                               // :
                                               // SizedBox(
                                               //   height: 90,

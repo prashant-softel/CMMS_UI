@@ -58,7 +58,7 @@ class BreakdownMaintenanceController extends GetxController {
   //   getJobList(facilityId, userId);
   // }
   Future<void> goToJobListScreen() async {
-    Get.toNamed(
+    Get.offAndToNamed(
       Routes.jobList,
     );
   }

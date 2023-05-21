@@ -8,8 +8,8 @@ import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
-class FileUploadDetailsWidget extends StatelessWidget {
-  FileUploadDetailsWidget({super.key});
+class FileUploadDetailsWidgetWeb extends StatelessWidget {
+  FileUploadDetailsWidgetWeb({super.key});
 
   ///
   final FileUploadController _fileUploadController =
@@ -107,29 +107,28 @@ class FileUploadDetailsWidget extends StatelessWidget {
                       ),
                       DataCell(
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            LinearProgressIndicator(
-                              color: ColorValues.appDarkBlueColor,
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              value: _fileUploadController
-                                          .progresses.value.length >
-                                      pickedFileIndex
-                                  ? (_fileUploadController
-                                          .progresses.value[pickedFileIndex]
-                                          .toDouble() /
-                                      100)
-                                  : 0.0,
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              '${(_fileUploadController.progresses.value.length > pickedFileIndex ? _fileUploadController.progresses.value[pickedFileIndex].toStringAsFixed(0) : 'Not yet uploaded')}%',
-                              style: const TextStyle(
-                                fontSize: 14,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LinearProgressIndicator(
+                                color: ColorValues.appDarkBlueColor,
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                value: _fileUploadController
+                                            .progresses.value.length >
+                                        pickedFileIndex
+                                    ? (_fileUploadController
+                                            .progresses.value[pickedFileIndex]
+                                            .toDouble() /
+                                        100)
+                                    : 0.0,
                               ),
-                            ),
-                          ],
-                        ),
+                              const SizedBox(height: 5),
+                              Text(
+                                '${(_fileUploadController.progresses.value.length > pickedFileIndex ? _fileUploadController.progresses.value[pickedFileIndex].toStringAsFixed(0) : 'Not yet uploaded')}%',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ]),
                       ),
                       DataCell(
                         FutureBuilder<int>(

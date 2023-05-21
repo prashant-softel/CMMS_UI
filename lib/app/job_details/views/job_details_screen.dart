@@ -20,17 +20,6 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
   Widget build(BuildContext context) {
     ///
     return Scaffold(
-      // appBar: (Responsive.isMobile(context) || Responsive.isTablet(context))
-      //     ? AppBar(
-      //         title: HeaderWidget(),
-      //         elevation: 0,
-      //         toolbarHeight: 90,
-      //         automaticallyImplyLeading: false,
-      //       )
-      //     : PreferredSize(
-      //         child: Container(),
-      //         preferredSize: Size(0.0, 0.0), // AppBar will not take any space
-      //       ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
