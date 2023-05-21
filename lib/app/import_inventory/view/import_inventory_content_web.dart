@@ -175,17 +175,17 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appDarkBlueColor,
-                              text: "Validate",
-                              onPressed: () {},
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
+                          // Container(
+                          //   height: 35,
+                          //   child: CustomElevatedButton(
+                          //     backgroundColor: ColorValues.appDarkBlueColor,
+                          //     text: "Validate",
+                          //     onPressed: () {},
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   width: 20,
+                          // ),
                           Container(
                             height: 35,
                             child: CustomElevatedButton(

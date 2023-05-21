@@ -1,9 +1,11 @@
 import 'package:cmms/domain/models/access_level_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
 
+import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/role_model.dart';
 import '../../domain/models/state_model.dart';
+import '../../domain/models/user_detail_model.dart';
 import '../../domain/usecases/add_user_usecase.dart';
 
 class AddUserPresenter {
@@ -13,6 +15,12 @@ class AddUserPresenter {
     bool? isLoading,
   }) async =>
       await addUserUsecase.getCountryList(
+        isLoading: isLoading ?? false,
+      );
+  Future<List<BloodModel?>?> getBloodList({
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getBloodList(
         isLoading: isLoading ?? false,
       );
   Future<List<RoleModel?>?> getRoleList({
@@ -45,5 +53,37 @@ class AddUserPresenter {
       accessLevelJsonString: accessLevelJsonString,
       isLoading: isLoading,
     );
+  }
+
+  Future<bool> addUser({
+    adduserJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    addUserUsecase.addUser(
+      adduserJsonString: adduserJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
+  Future<UserDetailsModel?> getUserDetails({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getUserDetails(
+        userId: userId,
+        isLoading: isLoading,
+      );
+  Future<bool> updateUser({
+    adduserJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    addUserUsecase.updateUser(
+      adduserJsonString: adduserJsonString,
+      isLoading: isLoading,
+    );
+    return true;
   }
 }

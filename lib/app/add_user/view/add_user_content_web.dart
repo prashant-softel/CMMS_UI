@@ -12,7 +12,7 @@ import '../../widgets/dropdown.dart';
 
 class AddUserContentWeb extends GetView<AddUserController> {
   AddUserContentWeb({Key? key}) : super(key: key);
-  // final AddUserController controller = Get.find();
+  final AddUserController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -226,13 +226,15 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                 .2),
                                         child: LoginCustomTextfield(
                                           ishint: 'Enter Email ID',
+                                          textController:
+                                              controller.loginIdCtrlr,
                                         )),
                                   ],
                                 ),
                                 Dimens.boxHeight8,
                                 Row(
                                   children: [
-                                    CustomRichText(title: 'First Name: '),
+                                    CustomRichText(title: 'Password: '),
                                     Dimens.boxWidth10,
                                     Container(
                                         decoration: BoxDecoration(
@@ -265,7 +267,51 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
-                                          ishint: 'Enter First Name',
+                                          ishint: 'Enter Password',
+                                          textController:
+                                              controller.passwordCtrlr,
+                                        )),
+                                  ],
+                                ),
+                                Dimens.boxHeight8,
+                                Row(
+                                  children: [
+                                    CustomRichText(title: 'Last Name: '),
+                                    Dimens.boxWidth10,
+                                    Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 227, 224, 224),
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                            BoxShadow(
+                                              color: ColorValues.whiteColor,
+                                              offset: const Offset(0.0, 0.0),
+                                              blurRadius: 0.0,
+                                              spreadRadius: 0.0,
+                                            ),
+                                          ],
+                                        ),
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .2),
+                                        child: LoginCustomTextfield(
+                                          ishint: 'Enter Last Name',
+                                          textController:
+                                              controller.lastNameCtrlr,
                                         )),
                                   ],
                                 ),
@@ -370,6 +416,8 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                 .2),
                                         child: LoginCustomTextfield(
                                           ishint: 'Enter Mobile Number',
+                                          textController:
+                                              controller.mobileNoCtrlr,
                                         )),
                                   ],
                                 ),
@@ -417,43 +465,28 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                     ),
                                   ],
                                 ),
-                                // Dimens.boxHeight8,
-                                // Row(children: [
-                                //   CustomRichText(title: 'Access Group: '),
-                                //   Dimens.boxWidth10,
-                                //   Container(
-                                //       decoration: BoxDecoration(
-                                //         borderRadius: BorderRadius.circular(10),
-                                //         border: Border.all(
-                                //           color: Color.fromARGB(
-                                //               255, 227, 224, 224),
-                                //           width: 1,
-                                //         ),
-                                //         boxShadow: [
-                                //           BoxShadow(
-                                //             color: Colors.black26,
-                                //             offset: const Offset(
-                                //               5.0,
-                                //               5.0,
-                                //             ),
-                                //             blurRadius: 5.0,
-                                //             spreadRadius: 1.0,
-                                //           ),
-                                //           BoxShadow(
-                                //             color: ColorValues.whiteColor,
-                                //             offset: const Offset(0.0, 0.0),
-                                //             blurRadius: 0.0,
-                                //             spreadRadius: 0.0,
-                                //           ),
-                                //         ],
-                                //       ),
-                                //       width:
-                                //           (MediaQuery.of(context).size.width *
-                                //               .2),
-                                //       child: LoginCustomTextfield(
-                                //         ishint: 'Select Access Group',
-                                //       )),
-                                // ]),
+                                Dimens.boxHeight8,
+                                Row(
+                                  children: [
+                                    CustomRichText(title: 'Role: '),
+                                    Dimens.boxWidth10,
+                                    Container(
+                                      width:
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
+                                      child: DropdownWidget(
+                                        controller: controller,
+                                        dropdownList: controller.roleList,
+                                        isValueSelected:
+                                            controller.isSelectedRole.value,
+                                        selectedValue:
+                                            controller.selectedRole.value,
+                                        onValueChanged:
+                                            controller.onValueChanged,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                             Spacer(),
@@ -498,6 +531,8 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                         child: Expanded(
                                           child: LoginCustomTextfield(
                                             ishint: 'Enter Email ID',
+                                            textController:
+                                                controller.secandoryIdCtrlr,
                                           ),
                                         )),
                                   ],
@@ -505,7 +540,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                 Dimens.boxHeight8,
                                 Row(
                                   children: [
-                                    CustomRichText(title: 'Last Name: '),
+                                    CustomRichText(title: 'First Name: '),
                                     Dimens.boxWidth10,
                                     Container(
                                         decoration: BoxDecoration(
@@ -538,7 +573,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
-                                          ishint: 'Enter Last Name',
+                                          ishint: 'Enter First Name',
+                                          textController:
+                                              controller.firstNameCtrlr,
                                         )),
                                   ],
                                 ),
@@ -579,6 +616,63 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                 .2),
                                         child: LoginCustomTextfield(
                                           ishint: 'Enter Birth Date',
+                                          textController: controller.dobCtrlr,
+                                          ontap: () {
+                                            _selectDate(context, 1);
+                                          },
+                                          widget: Icon(
+                                            Icons.calendar_month,
+                                            color: ColorValues.greyLightColor,
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                                Dimens.boxHeight8,
+                                Row(
+                                  children: [
+                                    CustomRichText(title: 'Date of Joining: '),
+                                    Dimens.boxWidth10,
+                                    Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 227, 224, 224),
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                            BoxShadow(
+                                              color: ColorValues.whiteColor,
+                                              offset: const Offset(0.0, 0.0),
+                                              blurRadius: 0.0,
+                                              spreadRadius: 0.0,
+                                            ),
+                                          ],
+                                        ),
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .2),
+                                        child: LoginCustomTextfield(
+                                          ishint: 'Enter Date of Joining',
+                                          textController:
+                                              controller.joingdateCtrlr,
+                                          ontap: () {
+                                            _selectDate(context, 2);
+                                          },
+                                          widget: Icon(
+                                            Icons.calendar_month,
+                                            color: ColorValues.greyLightColor,
+                                          ),
                                         )),
                                   ],
                                 ),
@@ -619,6 +713,8 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                 .2),
                                         child: LoginCustomTextfield(
                                           ishint: 'Enter Landline Number',
+                                          textController:
+                                              controller.landlineCtrlr,
                                         )),
                                   ],
                                 ),
@@ -645,9 +741,47 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                   ],
                                 ),
                                 Dimens.boxHeight8,
+                                Row(children: [
+                                  CustomRichText(title: 'Zip Code: '),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Color.fromARGB(
+                                              255, 227, 224, 224),
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
+                                      ),
+                                      width:
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
+                                      child: LoginCustomTextfield(
+                                        ishint: 'Enter Zip Code',
+                                        textController: controller.zipcodeCtrlr,
+                                      )),
+                                ]),
+                                Dimens.boxHeight8,
                                 Row(
                                   children: [
-                                    CustomRichText(title: 'Role: '),
+                                    CustomRichText(title: 'Blood Group: '),
                                     Dimens.boxWidth10,
                                     Container(
                                       width:
@@ -655,17 +789,17 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                               .2),
                                       child: DropdownWidget(
                                         controller: controller,
-                                        dropdownList: controller.roleList,
+                                        dropdownList: controller.bloodList,
                                         isValueSelected:
-                                            controller.isSelectedRole.value,
+                                            controller.isSelectedBlood.value,
                                         selectedValue:
-                                            controller.selectedRole.value,
+                                            controller.selectedBlood.value,
                                         onValueChanged:
                                             controller.onValueChanged,
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             )
                           ],
@@ -797,6 +931,13 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                     255, 245, 248, 250),
                                               ),
                                               child: TabBarView(children: [
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                        color: ColorValues
+                                                            .whiteColor),
+                                                    child: Column(
+                                                      children: [Text('1 Tab')],
+                                                    )),
                                                 Column(
                                                   children: [
                                                     Container(
@@ -940,13 +1081,6 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                         color: ColorValues
                                                             .whiteColor),
                                                     child: Column(
-                                                      children: [Text('2 Tab')],
-                                                    )),
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                        color: ColorValues
-                                                            .whiteColor),
-                                                    child: Column(
                                                       children: [Text('3 Tab')],
                                                     )),
                                               ]),
@@ -967,16 +1101,34 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 35,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.greenColor,
-                                text: 'Submit',
-                                onPressed: () {
-                                  controller.saveAccessLevel();
-                                },
-                              ),
-                            ),
+                            controller.userId == 0
+                                ? Container(
+                                    height: 35,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.greenColor,
+                                      text: 'Submit',
+                                      onPressed: () {
+                                        controller.addUser();
+                                        //  controller.saveAccessLevel();
+                                      },
+                                    ),
+                                  )
+                                : Container(
+                                    height: 35,
+                                    child: CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appDarkBlueColor,
+                                      text: 'Update',
+                                      onPressed: () {
+                                        controller.updateUser().then((value) {
+                                          if (value == true) {
+                                            controller.saveAccessLevel();
+                                          }
+                                        });
+                                        //  controller.saveAccessLevel();
+                                      },
+                                    ),
+                                  ),
                             Dimens.boxWidth20,
                             Container(
                               height: 35,
@@ -998,5 +1150,22 @@ class AddUserContentWeb extends GetView<AddUserController> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context, int type) async {
+    DateTime today = DateTime.now();
+    var date = await showDatePicker(
+      context: context,
+      cancelText: "Clear",
+      confirmText: "Ok",
+      initialDate: DateTime(today.year - 18, today.month, today.day),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(today.year - 18, today.month, today.day),
+    );
+    if (type == 1) {
+      controller.dobCtrlr.text = date.toString().substring(0, 10);
+    } else {
+      controller.joingdateCtrlr.text = date.toString().substring(0, 10);
+    }
   }
 }
