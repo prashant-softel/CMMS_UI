@@ -39,6 +39,7 @@ import 'package:get/get.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/access_level_model.dart';
+import '../models/blood_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_type_list_model.dart';
@@ -2455,6 +2456,36 @@ class Repository {
     }
   }
 
+  Future<List<BloodModel?>?> getBloodList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBloodList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonBloodModels = jsonDecode(res.data);
+        final List<BloodModel> _bloodModelList = jsonBloodModels
+            .map<BloodModel>(
+              (m) => BloodModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _bloodModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBloodList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<StateModel?>?> getStateListnew(
       bool? isLoading, int? selectedCountryId) async {
     try {
@@ -2639,7 +2670,6 @@ class Repository {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: isLoading ?? false,
       );
-      print({"resp", res.data});
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -2653,6 +2683,48 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> addUser({bool? isLoading, adduserJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.addUser(
+          auth: auth,
+          isLoading: isLoading,
+          adduserJsonString: adduserJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' addUser');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateUser({bool? isLoading, adduserJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateUser(
+          auth: auth,
+          isLoading: isLoading,
+          adduserJsonString: adduserJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' updateUser');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 

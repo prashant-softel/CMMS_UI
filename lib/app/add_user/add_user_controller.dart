@@ -2,13 +2,21 @@ import 'package:cmms/app/add_user/add_user_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/access_level_model.dart';
+import 'package:cmms/domain/models/add_user_model.dart';
+// import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/role_model.dart';
 import '../../domain/models/save_access_level_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../domain/models/user_detail_model.dart';
+import '../navigators/app_pages.dart';
 
 class AddUserController extends GetxController {
   AddUserController(
@@ -27,7 +35,10 @@ class AddUserController extends GetxController {
   Rx<String> selectedCity = 'Select City'.obs;
   Rx<bool> isSelectedCity = true.obs;
   int selectedCityId = 0;
-
+  RxList<BloodModel?> bloodList = <BloodModel>[].obs;
+  Rx<String> selectedBlood = 'Select Blood'.obs;
+  Rx<bool> isSelectedBlood = true.obs;
+  int selectedBloodId = 0;
   RxList<RoleModel?> roleList = <RoleModel>[].obs;
   Rx<String> selectedRole = 'Select Role'.obs;
   Rx<bool> isSelectedRole = true.obs;
@@ -40,11 +51,58 @@ class AddUserController extends GetxController {
   final RxBool isCheckedmodule = false.obs;
   var gender = 'Select Gender'.obs;
   AccessLevel? selectedItem;
+  Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
+  var loginIdCtrlr = TextEditingController();
+  var firstNameCtrlr = TextEditingController();
+  var mobileNoCtrlr = TextEditingController();
+  var secandoryIdCtrlr = TextEditingController();
+  var lastNameCtrlr = TextEditingController();
+  var dobCtrlr = TextEditingController();
+  var landlineCtrlr = TextEditingController();
+  var zipcodeCtrlr = TextEditingController();
+  var passwordCtrlr = TextEditingController();
+  var joingdateCtrlr = TextEditingController();
+  int userId = 0;
   void onInit() async {
+    userId = Get.arguments;
+    await getBloodList();
     await getCountryList();
     await getRoleList();
-
+    if (userId != null) {
+      // print({"userid123", userId});
+      await getUserDetails(userId: userId, isloading: true);
+    }
     super.onInit();
+  }
+
+  Future<void> getUserDetails({int? userId, bool? isloading}) async {
+    final _userDetailModel = await addUserPresenter.getUserDetails(
+        userId: userId, isLoading: isloading);
+
+    if (_userDetailModel != null) {
+      userDetailModel.value = _userDetailModel;
+      landlineCtrlr.text = userDetailModel.value?.landline_number ?? "";
+      mobileNoCtrlr.text = userDetailModel.value?.contact_no ?? "";
+      loginIdCtrlr.text = userDetailModel.value?.user_name ?? "";
+      secandoryIdCtrlr.text = userDetailModel.value?.secondaryEmail ?? "";
+      firstNameCtrlr.text = userDetailModel.value?.first_name ?? "";
+      lastNameCtrlr.text = userDetailModel.value?.last_name ?? "";
+      zipcodeCtrlr.text = userDetailModel.value?.zipcode.toString() ?? "";
+      dobCtrlr.text = userDetailModel.value?.dob ?? "";
+      joingdateCtrlr.text = userDetailModel.value?.joiningDate ?? "";
+      selectedCity.value = userDetailModel.value?.city_name ?? "";
+      selectedCityId = userDetailModel.value?.city_id ?? 0;
+      selectedState.value = userDetailModel.value?.state_name ?? "";
+      selectedStateId = userDetailModel.value?.state_id ?? 0;
+      selectedCountry.value = userDetailModel.value?.country_name ?? "";
+      selectedCountryId = userDetailModel.value?.country_id ?? 0;
+      selectedBlood.value = userDetailModel.value?.blood_group_name ?? "";
+      selectedBloodId = userDetailModel.value?.blood_group_id ?? 0;
+      selectedRole.value = userDetailModel.value?.role_name ?? "";
+      selectedRoleId = userDetailModel.value?.role_id ?? 0;
+
+      await getRoleAccessList(roleId: selectedRoleId, isloading: true);
+    }
   }
 
   void updateGender(String value) {
@@ -67,6 +125,16 @@ class AddUserController extends GetxController {
     if (list != null) {
       for (var _countryList in list) {
         countryList.add(_countryList);
+      }
+    }
+  }
+
+  Future<void> getBloodList() async {
+    final list = await addUserPresenter.getBloodList();
+
+    if (list != null) {
+      for (var _bloodList in list) {
+        bloodList.add(_bloodList);
       }
     }
   }
@@ -143,6 +211,12 @@ class AddUserController extends GetxController {
           selectedCityId = cityList[cityIndex]?.id ?? 0;
         }
         break;
+      case RxList<BloodModel>:
+        {
+          int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
+          selectedBloodId = bloodList[bloodIndex]?.id ?? 0;
+        }
+        break;
       case RxList<RoleModel>:
         {
           int roleIndex = roleList.indexWhere((x) => x?.name == value);
@@ -183,11 +257,149 @@ class AddUserController extends GetxController {
         isLoading: true,
       );
       if (responsePmMapCreated != null) {
-        getRoleAccessList(roleId: selectedRoleId, isloading: true);
+        Get.offNamed(
+          Routes.userList,
+        );
+        // getRoleAccessList(roleId: selectedRoleId, isloading: true);
         // isSuccessDialog();
       }
     } else {
-      Fluttertoast.showToast(msg: "Please Map the Checklist", fontSize: 16.0);
+      Fluttertoast.showToast(
+          msg: "Unable to update the access level", fontSize: 16.0);
     }
+  }
+
+  Future<bool> addUser() async {
+    // if (checklistNumberCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    List<AddAccessList> add_accessList = <AddAccessList>[];
+    accesslevel.forEach((e) {
+      add_accessList.add(AddAccessList(
+          feature_id: e?.feature_id.value ?? 0,
+          add: e?.add.value ?? 0,
+          delete: e?.delete.value ?? 0,
+          edit: e?.edit.value ?? 0,
+          selfView: e?.selfView.value ?? 0,
+          approve: e?.approve.value ?? 0,
+          issue: e?.issue.value ?? 0,
+          view: e?.view.value ?? 0));
+    });
+    String _loginId = loginIdCtrlr.text.trim();
+    String _firstname = firstNameCtrlr.text.trim();
+    String _mobileno = mobileNoCtrlr.text.trim();
+    String _secandoryId = secandoryIdCtrlr.text.trim();
+    String _lastname = lastNameCtrlr.text.trim();
+    String _dob = dobCtrlr.text.trim();
+    String _landline = landlineCtrlr.text.trim();
+    String _zipcode = zipcodeCtrlr.text.trim();
+    String _password = passwordCtrlr.text.trim();
+    String _joiningdate = joingdateCtrlr.text.trim();
+    Credentials credentials =
+        Credentials(password: _password, user_name: _loginId);
+
+    AddUserModel adduser = AddUserModel(
+        id: 0,
+        secondaryEmail: _secandoryId,
+        first_name: _firstname,
+        landline_number: _landline,
+        last_name: _lastname,
+        // add_access_list: [], //add_accessList,
+        gender_id: gender.value == "Male"
+            ? 1
+            : gender.value == "FeMale"
+                ? 2
+                : 3,
+        DOB: _dob,
+        city_id: selectedCityId,
+        contact_no: _mobileno,
+        country_id: selectedCountryId,
+        joiningDate: _joiningdate,
+        blood_group_id: selectedBloodId,
+        state_id: selectedStateId,
+        photo_id: 3,
+        role_id: selectedRoleId,
+        zipcode: int.parse(_zipcode),
+        isEmployee: 1,
+        credentials: credentials);
+    var adduserJsonString = adduser.toJson();
+
+    print({"adduserJsonString", adduserJsonString});
+    await addUserPresenter.addUser(
+      adduserJsonString: adduserJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
+
+  //return true;
+  // }
+  Future<bool> updateUser() async {
+    // if (checklistNumberCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    List<AddAccessList> add_accessList = <AddAccessList>[];
+    accesslevel.forEach((e) {
+      add_accessList.add(AddAccessList(
+          feature_id: e?.feature_id.value ?? 0,
+          add: e?.add.value ?? 0,
+          delete: e?.delete.value ?? 0,
+          edit: e?.edit.value ?? 0,
+          selfView: e?.selfView.value ?? 0,
+          approve: e?.approve.value ?? 0,
+          issue: e?.issue.value ?? 0,
+          view: e?.view.value ?? 0));
+    });
+    String _loginId = loginIdCtrlr.text.trim();
+    String _firstname = firstNameCtrlr.text.trim();
+    String _mobileno = mobileNoCtrlr.text.trim();
+    String _secandoryId = secandoryIdCtrlr.text.trim();
+    String _lastname = lastNameCtrlr.text.trim();
+    String _dob = dobCtrlr.text.trim();
+    String _landline = landlineCtrlr.text.trim();
+    String _zipcode = zipcodeCtrlr.text.trim();
+    String _password = passwordCtrlr.text.trim();
+    String _joiningdate = joingdateCtrlr.text.trim();
+    Credentials credentials =
+        Credentials(password: _password, user_name: _loginId);
+
+    AddUserModel adduser = AddUserModel(
+        id: userDetailModel.value?.id ?? 0,
+        secondaryEmail: _secandoryId,
+        first_name: _firstname,
+        landline_number: _landline,
+        last_name: _lastname,
+        add_access_list: [], //add_accessList,
+        gender_id: gender.value == "Male"
+            ? 1
+            : gender.value == "FeMale"
+                ? 2
+                : 3,
+        DOB: _dob,
+        city_id: selectedCityId,
+        contact_no: _mobileno,
+        country_id: selectedCountryId,
+        joiningDate: _joiningdate,
+        blood_group_id: selectedBloodId,
+        state_id: selectedStateId,
+        photo_id: 3,
+        role_id: selectedRoleId,
+        zipcode: int.parse(_zipcode),
+        isEmployee: 1,
+        credentials: credentials);
+    var adduserJsonString = adduser.toJson();
+
+    print({"adduserJsonString", adduserJsonString});
+    await addUserPresenter.updateUser(
+      adduserJsonString: adduserJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 }
