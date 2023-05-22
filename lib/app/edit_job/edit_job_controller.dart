@@ -263,6 +263,7 @@ class EditJobController extends GetxController {
     int? facilityId,
     int? blockId,
   }) async {
+    selectedWorkAreaIdList.clear();
     categoryIds = selectedEquipmentCategoryIdList;
     String lststrCategoryIds = categoryIds.join(', ').toString();
     final _workAreaList = await homePresenter.getInventoryList(
@@ -289,7 +290,10 @@ class EditJobController extends GetxController {
   }) async {
     try {
       workTypeList.clear();
+      selectedWorkTypeList.clear();
+      selectedWorkTypeIdList.clear();
 
+      ///
       categoryIds = selectedEquipmentCategoryIdList;
       String lststrCategoryIds = categoryIds.join(', ').toString();
       final _workTypeList = await editJobPresenter.getWorkTypeList(
@@ -487,30 +491,6 @@ class EditJobController extends GetxController {
         }
         break;
 
-      case RxList<InventoryModel>:
-        {
-          selectedWorkAreaIdList.value = <int>[];
-          for (var workAreaName in selectedWorkAreaNameList) {
-            int workAreaIndex =
-                workAreaList.indexWhere((x) => x?.name == workAreaName);
-            int _selectedworkAreaId = workAreaList[workAreaIndex]?.id ?? 0;
-            selectedWorkAreaIdList.add(_selectedworkAreaId);
-          }
-        }
-        break;
-      case RxList<InventoryCategoryModel>:
-        {
-          selectedEquipmentCategoryIdList.value = <int>[];
-          for (var equipCat in selectedEquipmentCategoryList) {
-            int equipCatIndex = selectedEquipmentCategoryList
-                .indexWhere((x) => x?.name == equipCat);
-            int _selectedEquipmentCategoryId =
-                equipmentCategoryList[equipCatIndex]?.id ?? 0;
-            selectedEquipmentCategoryIdList.add(_selectedEquipmentCategoryId);
-          }
-        }
-        break;
-
       case RxList<EmployeeModel>:
         {
           int assignedToIndex =
@@ -540,7 +520,7 @@ class EditJobController extends GetxController {
   }
 
   void workAreasSelected(_selectedWorkAreaIdsList) {
-    selectedWorkAreaList.value = <InventoryModel>[];
+    selectedWorkAreaList.clear();
     for (var selectedWorkAreaId in _selectedWorkAreaIdsList) {
       int workAreaIndex =
           workAreaList.indexWhere((x) => x?.id == selectedWorkAreaId);
@@ -549,11 +529,16 @@ class EditJobController extends GetxController {
     }
   }
 
-  void workTypesSelected(_selectedWorkTypesList) {
-    selectedWorkTypeList.value = _selectedWorkTypesList.cast<WorkTypeModel>();
-    selectedWorkTypeIdList.value = <int>[];
-    for (var _selectedWorkType in _selectedWorkTypesList) {
-      selectedWorkTypeIdList.add(_selectedWorkType.id);
+  void workTypesSelected(_selectedWorkTypeIdList) {
+    selectedWorkTypeList.clear();
+    selectedWorkTypeIdList.clear();
+
+    for (var _selectedWorkTypeId in _selectedWorkTypeIdList) {
+      int workTypeIndex =
+          workTypeList.indexWhere((x) => x?.id == _selectedWorkTypeId);
+      var workType = workTypeList[workTypeIndex];
+      selectedWorkTypeList.add(workType);
+      selectedWorkTypeIdList.add(_selectedWorkTypeId);
     }
 
     String lststrWorkTypeIds = selectedWorkTypeIdList.join(', ').toString();
