@@ -45,6 +45,7 @@ import '../models/access_level_model.dart';
 import '../models/blood_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
+import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
@@ -1804,6 +1805,41 @@ class Repository {
                 .toList();
 
         return _InventoryTypeListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryStatusListModel?>?> getInventoryStatusList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryStatusList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryStatusListModel = jsonDecode(res.data);
+        // print(res.data);
+        final List<InventoryStatusListModel> _InventoryStatusListModelList =
+            jsonInventoryStatusListModel
+                .map<InventoryStatusListModel>((m) =>
+                    InventoryStatusListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _InventoryStatusListModelList;
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
         return [];

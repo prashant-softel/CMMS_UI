@@ -250,6 +250,13 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToInventoryTypeList();
                                     });
                               }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Asset Status List",
+                                    onTap: () {
+                                      controller.goToInventoryStatusList();
+                                    });
+                              }))),
                             ],
                           ),
                           Container(

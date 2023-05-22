@@ -68,7 +68,7 @@ class PreventiveCheckPointContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 6 && e.add == 1)
+                              .where((e) => e.feature_id == 6 && e.add == 0)
                               .length >
                           0
                       ? Container(
@@ -190,7 +190,6 @@ class PreventiveCheckPointContentWeb
                                                 ),
                                               ),
                                             )
-                                         
                                           ],
                                         ),
                                         SizedBox(
