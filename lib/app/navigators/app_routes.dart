@@ -48,6 +48,7 @@ abstract class Routes {
   // static const jobSOPListScreen = _Paths.jobSOPListScreen;
   static const assetTypeListScreen = _Paths.assetTypeListScreen;
   static const inventoryTypeListScreen = _Paths.inventoryTypeListScreen;
+  static const inventoryStatusListScreen = _Paths.inventoryStatusListScreen;
   static const facilityTypeListScreen = _Paths.facilityTypeListScreen;
   static const blockTypeListScreen = _Paths.blockTypeListScreen;
   static const importInventory = _Paths.importInventory;
@@ -101,6 +102,7 @@ abstract class _Paths {
   static const tbtSOPListScreen = '/tbt-sop-list-screen';
   static const assetTypeListScreen = '/asset-type-list-screen';
   static const inventoryTypeListScreen = '/inventory-type-list-screen';
+  static const inventoryStatusListScreen = '/inventory-status-list-screen';
   static const facilityTypeListScreen = '/facility-type-list-screen';
   static const blockTypeListScreen = '/block-type-list-screen';
   static const importInventory = '/importInventory';

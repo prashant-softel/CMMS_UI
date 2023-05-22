@@ -617,6 +617,24 @@ class ConnectHelper {
 
     return responseModel;
   }
+  Future<ResponseModel> getInventoryStatusList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryStatusList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 
   Future<ResponseModel> getCheckPointlist({
     required String auth,

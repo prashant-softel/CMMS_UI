@@ -489,6 +489,18 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getInventoryStatusList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getInventoryStatusList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getCheckPointlist({
     required String auth,

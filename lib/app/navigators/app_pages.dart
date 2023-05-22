@@ -61,6 +61,8 @@ import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
+import '../inventory_status_list/inventory_status_list_binding.dart';
+import '../inventory_status_list/view/inventory_status_list.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_details/job_details_binding.dart';
@@ -310,6 +312,11 @@ class AppPages {
       name: _Paths.inventoryTypeListScreen,
       page: InventoryTypeListScreen.new,
       binding: InventoryTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventoryStatusListScreen,
+      page: InventoryStatusListScreen.new,
+      binding: InventoryStatusListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.facilityTypeListScreen,
