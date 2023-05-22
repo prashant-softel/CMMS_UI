@@ -170,43 +170,44 @@ class JobListContentWeb extends StatelessWidget {
         DataColumn2(
       size: columnSize,
       label: //
-          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(
-          height: Get.height * 0.05,
-          child: TextField(
-            onChanged: (value) {
-              filterText?.value = value;
-            },
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                height: 1.0), // Adjust the height by modifying this value
-            decoration: InputDecoration(
-              hintText: 'Filter',
-              contentPadding:
-                  EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center, //
+              children: [
+            SizedBox(
+              height: Get.height * 0.05,
+              child: TextField(
+                onChanged: (value) {
+                  filterText?.value = value;
+                },
+                textAlign: TextAlign.left,
+                style: TextStyle(height: 1.0),
+                decoration: InputDecoration(
+                  hintText: 'Filter',
+                  contentPadding: EdgeInsets.fromLTRB(
+                      5, 0, 5, 0), // Reduced vertical padding
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            header,
-            style: Styles.black15W600,
-          ),
-        ),
-      ]),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black15W400,
+              ),
+            ),
+          ]),
       // ),
     );
   }
