@@ -27,9 +27,9 @@ dependencies:
   expandable_page_view: ^1.0.17
   file_picker: ^5.2.6
   # firebase_messaging: 12.0.3
-  firebase_analytics: ^10.0.3
-  firebase_core: ^2.1.0
-  firebase_crashlytics: ^3.0.2
+  # firebase_analytics: ^10.0.3
+  # firebase_core: ^2.1.0
+  # firebase_crashlytics: ^3.0.2
   flowder: ^0.2.0
   
   flutter:
@@ -71,9 +71,9 @@ dependencies:
   location: ^4.4.0
   logger: ^1.0.0
   mime: ^1.0.3
-  mixpanel_flutter: ^2.0.0
+  # mixpanel_flutter: ^2.0.0
   mqtt_client: 9.6.1
-  onesignal_flutter: ^3.4.1
+  # onesignal_flutter: ^3.4.1
   open_mail_app: ^0.4.5
   open_store: ^0.5.0
   otp_autofill: ^2.1.0
@@ -101,8 +101,8 @@ dependencies:
   video_player: ^2.4.4
   video_thumbnail: ^0.5.3
   visibility_detector: ^0.3.3
-  wakelock: ^0.6.1+2
-  webview_flutter: ^3.0.4
+  wakelock: ^0.6.2
+  # webview_flutter: ^3.0.4
   json_annotation: ^4.8.0
   device_info_plus_web: ^5.0.0
   multi_select_flutter: ^4.1.3

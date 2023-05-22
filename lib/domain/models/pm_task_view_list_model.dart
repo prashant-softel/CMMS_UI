@@ -28,6 +28,8 @@ class PmtaskViewModel {
   String? schedule_link_job;
   List<ScheduleCheckList>? schedule_check_list;
   List<HistoryLog>? history_log;
+  List<CheckLists>? checklists;
+
   PmtaskViewModel({
     this.assigned_to_name,
     this.category_id,
@@ -192,5 +194,23 @@ class HistoryLog {
         "created_by_id": created_by_id,
         "created_at": created_at,
         "comment": comment,
+      };
+}
+
+class CheckLists {
+  int? id;
+
+  String? name;
+
+  CheckLists({this.id, this.name});
+
+  factory CheckLists.fromJson(Map<String, dynamic> json) => CheckLists(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
       };
 }

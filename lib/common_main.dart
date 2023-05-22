@@ -1,6 +1,5 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/calibration/calibration_list_controller.dart';
@@ -18,8 +17,8 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/calibration_list_usecase.dart';
 import 'package:cmms/domain/usecases/preventive_usecase.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,8 +27,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app/job_list/job_list_controller.dart';
@@ -38,11 +37,11 @@ Future<void> mainCommon(AppConfig appConfig) async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     // FlutterBranchSdk.validateSDKIntegration();
-    if (!GetPlatform.isWeb) {
-      await Firebase.initializeApp();
-      // The following lines are the same as previously explained in "Handling uncaught errors"
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    }
+    // if (!GetPlatform.isWeb) {
+    //   await Firebase.initializeApp();
+    //   // The following lines are the same as previously explained in "Handling uncaught errors"
+    //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // }
 
     appFlavor = (appConfig.flavoredApp == 2) ? AppFlavor.PROD : AppFlavor.DEV;
     await initServices();
@@ -72,59 +71,59 @@ Future<void> mainCommon(AppConfig appConfig) async {
 }
 
 Future<void> initMixpanel() async {
-  await Mixpanel.init(AppConstants.mixPannelId,
-      optOutTrackingDefault: false, trackAutomaticEvents: true);
+  // await Mixpanel.init(AppConstants.mixPannelId,
+  //     optOutTrackingDefault: false, trackAutomaticEvents: true);
 }
 
 Future<void> initPlatformState() async {
-  var oneSignalId = '';
-  if (appFlavor == AppFlavor.PROD) {
-    oneSignalId = '';
-  } else {
-    oneSignalId = '';
-  }
-  await OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-  await OneSignal.shared.setAppId(oneSignalId);
-  await OneSignal.shared
-      .promptUserForPushNotificationPermission()
-      .then((accepted) {
-    log('############ NOTIFICATION $accepted');
-  });
+//   var oneSignalId = '';
+//   if (appFlavor == AppFlavor.PROD) {
+//     oneSignalId = '';
+//   } else {
+//     oneSignalId = '';
+//   }
+//   await OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+//   await OneSignal.shared.setAppId(oneSignalId);
+//   await OneSignal.shared
+//       .promptUserForPushNotificationPermission()
+//       .then((accepted) {
+//     log('############ NOTIFICATION $accepted');
+//   });
 
-  OneSignal.shared.setNotificationWillShowInForegroundHandler(
-      (OSNotificationReceivedEvent event) {
-    // Will be called whenever a notification is received in foreground
-    // Display Notification, pass null param for not displaying the notification
-    event.complete(event.notification);
-    log('############ NOTIFICATION FOREGROUND ${event.notification}');
-  });
+//   OneSignal.shared.setNotificationWillShowInForegroundHandler(
+//       (OSNotificationReceivedEvent event) {
+//     // Will be called whenever a notification is received in foreground
+//     // Display Notification, pass null param for not displaying the notification
+//     event.complete(event.notification);
+//     log('############ NOTIFICATION FOREGROUND ${event.notification}');
+//   });
 
-  OneSignal.shared
-      .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
-    // Will be called whenever a notification is opened/button pressed.
-    log('############ NOTIFICATION OPENHANDLER ${result.notification}');
-  });
+//   OneSignal.shared
+//       .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+//     // Will be called whenever a notification is opened/button pressed.
+//     log('############ NOTIFICATION OPENHANDLER ${result.notification}');
+//   });
 
-  OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
-    // Will be called whenever the permission changes
-    // (ie. user taps Allow on the permission prompt in iOS)
-    log('############ NOTIFICATION setPermissionObserver $changes');
-  });
+//   OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
+//     // Will be called whenever the permission changes
+//     // (ie. user taps Allow on the permission prompt in iOS)
+//     log('############ NOTIFICATION setPermissionObserver $changes');
+//   });
 
-  OneSignal.shared
-      .setSubscriptionObserver((OSSubscriptionStateChanges changes) {
-    // Will be called whenever the subscription changes
-    // (ie. user gets registered with OneSignal and gets a user ID)
-    log('############ NOTIFICATION setSubscriptionObserver $changes');
-  });
+//   OneSignal.shared
+//       .setSubscriptionObserver((OSSubscriptionStateChanges changes) {
+//     // Will be called whenever the subscription changes
+//     // (ie. user gets registered with OneSignal and gets a user ID)
+//     log('############ NOTIFICATION setSubscriptionObserver $changes');
+//   });
 
-  OneSignal.shared.setEmailSubscriptionObserver(
-      (OSEmailSubscriptionStateChanges emailChanges) {
-    // Will be called whenever then user's email subscription changes
-    // (ie. OneSignal.setEmail(email)
-//  is called and the user gets registered
-    log('############ NOTIFICATION setEmailSubscriptionObserver $emailChanges');
-  });
+//   OneSignal.shared.setEmailSubscriptionObserver(
+//       (OSEmailSubscriptionStateChanges emailChanges) {
+//     // Will be called whenever then user's email subscription changes
+//     // (ie. OneSignal.setEmail(email)
+// //  is called and the user gets registered
+//     log('############ NOTIFICATION setEmailSubscriptionObserver $emailChanges');
+//   });
 }
 
 Future<void> initServices() async {
