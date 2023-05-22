@@ -33,3 +33,37 @@ class _OnHoverState extends State<OnHover> {
     });
   }
 }
+
+class OnHoverColor extends StatefulWidget {
+  final Widget Function(bool isHovered) builder;
+
+  const OnHoverColor({Key? key, required this.builder}) : super(key: key);
+
+  @override
+  _OnHoverStates createState() => _OnHoverStates();
+}
+
+class _OnHoverStates extends State<OnHover> {
+  bool isHovered = false;
+  @override
+  Widget build(BuildContext context) {
+    final backgroundColor =
+        isHovered ? Colors.white.withOpacity(0.5) : Colors.transparent;
+
+    return MouseRegion(
+      onEnter: (_) => onEntered(true),
+      onExit: (_) => onEntered(false),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 100),
+        color: backgroundColor,
+        child: widget.builder(isHovered),
+      ),
+    );
+  }
+
+  void onEntered(bool isHovered) {
+    setState(() {
+      this.isHovered = isHovered;
+    });
+  }
+}
