@@ -1,7 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -10,12 +10,12 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
-import '../preventive_list_controller.dart';
+import '../inventory_status_list_controller.dart';
 
-class PreventiveChecklistListContentWeb
-    extends GetView<PreventiveListController> {
-  PreventiveChecklistListContentWeb({Key? key}) : super(key: key);
-  final PreventiveListController controller = Get.find();
+class InventoryStatusListContentWeb
+    extends GetView<InventoryStatusListController> {
+  InventoryStatusListContentWeb({Key? key}) : super(key: key);
+  final InventoryStatusListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +56,9 @@ class PreventiveChecklistListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / PREVENTIVE MAINTENANCE",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE CHECKLIST NUMBER",
+                  Text(" / INVENTORY STATUS LIST",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -69,7 +68,7 @@ class PreventiveChecklistListContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 0)
+                              .where((e) => e.feature_id == 5 && e.add == 1)
                               .length >
                           0
                       ? Container(
@@ -94,7 +93,7 @@ class PreventiveChecklistListContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Checklist",
+                                          "Create Inventory Type",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -108,8 +107,8 @@ class PreventiveChecklistListContentWeb
                                                 Text(
                                                   controller.selectedItem ==
                                                           null
-                                                      ? "CheckList added Successfully in the List."
-                                                      : "CheckList updated Successfully in the List.",
+                                                      ? "Inventory Type added Successfully in the List."
+                                                      : "Inventory Type updated Successfully in the List.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -126,7 +125,8 @@ class PreventiveChecklistListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'CheckList:'),
+                                            CustomRichText(
+                                                title: 'Inventory Name:'),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -245,7 +245,7 @@ class PreventiveChecklistListContentWeb
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Manpower: ",
+                                              "Description : ",
                                               style: Styles.blackBold16,
                                             ),
                                             SizedBox(
@@ -299,7 +299,7 @@ class PreventiveChecklistListContentWeb
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Duration(in Min.): ",
+                                              "Status : ",
                                               style: Styles.blackBold16,
                                             ),
                                             SizedBox(
@@ -381,7 +381,7 @@ class PreventiveChecklistListContentWeb
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                                text: 'Create CheckList')
+                                                text: 'Create Inventory Type')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -406,7 +406,7 @@ class PreventiveChecklistListContentWeb
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 0)
+                              .where((e) => e.feature_id == 5 && e.view == 1)
                               .length >
                           0
                       ? Expanded(
@@ -426,7 +426,7 @@ class PreventiveChecklistListContentWeb
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Check List",
+                                      "Inventory Status List ",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -437,13 +437,14 @@ class PreventiveChecklistListContentWeb
                                     children: [
                                       Container(
                                         height: 45,
+                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
-                                                      .preventiveCheckList![0]
+                                                      .inventoryStatusList![0]
                                                       .toString())
                                                   .then((value) {
                                                 print("copy data");
@@ -452,6 +453,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
+                                        width: (Get.width * .1) - 60,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -461,6 +463,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        width: (Get.width * .1) - 70,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -470,6 +473,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        width: (Get.width * .2) - 100,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -484,17 +488,13 @@ class PreventiveChecklistListContentWeb
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.preventiveCheckList!.isEmpty
+                                  controller.inventoryStatusList!.isEmpty
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Checklist Id",
-                                              "Checklist ",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
+                                              "Status List Id",
+                                              "Name ",
+                                              "Description",
                                               "Action",
                                             ].map((column) {
                                               return TableViewColumn(
@@ -504,14 +504,11 @@ class PreventiveChecklistListContentWeb
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.preventiveCheckList
+                                                controller.inventoryStatusList
                                                         ?.length ??
                                                     0,
                                                 (index) {
                                                   return [
-                                                    '',
-                                                    '',
-                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -536,14 +533,10 @@ class PreventiveChecklistListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Checklist Id",
-                                              "Checklist",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
-                                              "Action"
+                                              "Status Type Id",
+                                              "Name",
+                                              "Description",
+                                              "Action",
                                             ].map((column) {
                                               return TableViewColumn(
                                                 minWidth: Get.width * 0.12,
@@ -553,31 +546,26 @@ class PreventiveChecklistListContentWeb
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller.preventiveCheckList
+                                                controller.inventoryStatusList
                                                         ?.length ??
                                                     0,
                                                 (index) {
-                                                  var preventiveCheckListModelListDetails =
+                                                  var inventoryStatusListModelListDetails =
                                                       controller
-                                                              .preventiveCheckList?[
+                                                              .inventoryStatusList?[
                                                           index];
                                                   return [
-                                                    '${preventiveCheckListModelListDetails?.id}',
-
-                                                    '${preventiveCheckListModelListDetails?.checklist_number}',
-                                                    "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                                    '${preventiveCheckListModelListDetails?.category_name}',
-                                                    '${preventiveCheckListModelListDetails?.frequency_name}',
-                                                    '${preventiveCheckListModelListDetails?.manPower}',
-                                                    '${preventiveCheckListModelListDetails?.duration}',
+                                                    '${inventoryStatusListModelListDetails?.id}',
+                                                    '${inventoryStatusListModelListDetails?.name}',
+                                                    '${inventoryStatusListModelListDetails?.description}',
                                                     "Action"
                                                   ];
                                                 },
                                               ),
-                                            ].map((_preventiveCheckList) {
+                                            ].map((_inventoryStatusList) {
                                               return TableViewRow(
                                                   height: 60,
-                                                  cells: _preventiveCheckList
+                                                  cells: _inventoryStatusList
                                                       .map((value) {
                                                     return TableViewCell(
                                                         child: (value == 'No')
@@ -600,15 +588,15 @@ class PreventiveChecklistListContentWeb
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
-                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
+                                                                                  // controller.selectedItem = controller.inventoryStatusList!.firstWhere((element) => "${element?.id}" == _inventoryStatusList[0]);
 
-                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
-                                                                                  controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
-                                                                                  controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                  controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                                  controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                  controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                  controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                                  // controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
+                                                                                  // controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
+                                                                                  // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                  // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
+                                                                                  // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                                  // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                                  // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
                                                                                 },
                                                                               )
                                                                             : Container(),
@@ -619,8 +607,8 @@ class PreventiveChecklistListContentWeb
                                                                                 icon: Icons.delete,
                                                                                 label: 'Delete',
                                                                                 onPress: () {
-                                                                                  print(_preventiveCheckList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
+                                                                                  // print(_inventoryStatusList[0]);
+                                                                                  // controller.isDeleteDialog(checklist_id: _inventoryStatusList[0], checklist: _inventoryStatusList[1]);
                                                                                 },
                                                                               )
                                                                             : Container()
