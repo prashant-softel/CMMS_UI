@@ -48,6 +48,7 @@ import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
+import '../models/modulelist_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
 import '../models/role_model.dart';
@@ -1769,6 +1770,43 @@ class Repository {
                 .toList();
 
         return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
+  Future<List<ModuleListModel?>?> getModuleList(
+      int? type,
+      int? facilityId,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getModuleList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonModuleListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<ModuleListModel> _ModuleListModelList =
+        jsonModuleListModelModels
+            .map<ModuleListModel>((m) =>
+            ModuleListModel.fromJson(
+                Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _ModuleListModelList;
       } else {
         Utility.showDialog(
             res.errorCode.toString() + ' getPreventiveCheckList');

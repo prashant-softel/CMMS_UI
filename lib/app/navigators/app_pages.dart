@@ -71,6 +71,8 @@ import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
+import '../module_List/module_list_binding.dart';
+import '../module_List/view/module_list_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -194,6 +196,11 @@ class AppPages {
       name: _Paths.preventiveMaintenanceMapping,
       page: PmMappingScreen.new,
       binding: PmMappingBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleTypeListScreen,
+      page: ModuleListScreen.new,
+      binding: ModuleListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.warrantyClaimList,

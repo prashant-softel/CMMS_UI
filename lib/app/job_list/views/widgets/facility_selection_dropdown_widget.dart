@@ -11,8 +11,6 @@ class FacilitySelectionDropdownWidget extends GetView<JobListController> {
   const FacilitySelectionDropdownWidget({
     super.key,
   });
-
-  ///
   @override
   Widget build(BuildContext context) {
     return //

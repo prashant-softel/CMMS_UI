@@ -9,14 +9,17 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
+import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class PreventiveListController extends GetxController {
-  PreventiveListController(
-      this.preventiveListPresenter,
-      );
-  PreventiveListPresenter preventiveListPresenter;
+import 'module_list_presenter.dart';
+
+class ModuleListController extends GetxController {
+  ModuleListController(
+    this.moduleListPresenter,
+  );
+  ModuleListPresenter moduleListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -24,22 +27,23 @@ class PreventiveListController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<PreventiveCheckListModel?>? preventiveCheckList =
-      <PreventiveCheckListModel?>[].obs;
+  RxList<ModuleListModel?>?
+  moduleList =
+      <ModuleListModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PreventiveCheckListModel? preventiveCheckListModel;
+  ModuleListModel? moduleListModel;
 
-  RxList<String> preventiveCheckListTableColumns = <String>[].obs;
+  RxList<String> moduleListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var checklistNumberCtrlr = TextEditingController();
-  PreventiveCheckListModel? selectedItem;
+  ModuleListModel? selectedItem;
   var manpowerCtrlr = TextEditingController();
   var durationCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
@@ -54,14 +58,14 @@ class PreventiveListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getPreventiveCheckList(facilityId, type, true);
+        getModuleList(facilityId, type, true);
       });
     });
     super.onInit();
   }
 
   Future<void> getFrequencyList() async {
-    final list = await preventiveListPresenter.getFrequencyList();
+    final list = await moduleListPresenter.getFrequencyList();
 
     if (list != null) {
       for (var _frequencyList in list) {
@@ -71,7 +75,7 @@ class PreventiveListController extends GetxController {
   }
 
   Future<void> getInventoryCategoryList() async {
-    final list = await preventiveListPresenter.getInventoryCategoryList();
+    final list = await moduleListPresenter.getInventoryCategoryList();
 
     if (list != null) {
       for (var _equipmentCategoryList in list) {
@@ -80,26 +84,27 @@ class PreventiveListController extends GetxController {
     }
   }
 
-  Future<void> getPreventiveCheckList(
-      int facilityId, int type, bool isLoading) async {
-    preventiveCheckList?.value = <PreventiveCheckListModel>[];
-    final _preventiveCheckList =
-    await preventiveListPresenter.getPreventiveCheckList(
-        facilityId: facilityId, type: type, isLoading: isLoading);
 
-    if (_preventiveCheckList != null) {
-      preventiveCheckList!.value = _preventiveCheckList;
+  Future<void> getModuleList(
+      int facilityId, int type, bool isLoading) async {
+    moduleList?.value = <ModuleListModel>[];
+    final _moduleList =
+        await moduleListPresenter.getModuleList(
+            facilityId: facilityId, type: type, isLoading: isLoading);
+
+    if (_moduleList != null) {
+      moduleList!.value = _moduleList.cast<ModuleListModel?>();
       paginationController = PaginationController(
-        rowCount: preventiveCheckList?.length ?? 0,
+        rowCount: moduleList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (preventiveCheckList != null && preventiveCheckList!.isNotEmpty) {
-        preventiveCheckListModel = preventiveCheckList![0];
-        var preventiveCheckListJson = preventiveCheckListModel?.toJson();
-        preventiveCheckListTableColumns.value = <String>[];
+      if (moduleList != null && moduleList!.isNotEmpty) {
+        moduleListModel = moduleList![0];
+        var preventiveCheckListJson = moduleListModel?.toJson();
+        moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          preventiveCheckListTableColumns.add(key);
+          moduleListTableColumns.add(key);
         }
       }
     }
@@ -116,7 +121,7 @@ class PreventiveListController extends GetxController {
       case RxList<InventoryCategoryModel>:
         {
           int equipmentIndex =
-          equipmentCategoryList.indexWhere((x) => x?.name == value);
+              equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
         }
 
@@ -124,7 +129,7 @@ class PreventiveListController extends GetxController {
       case RxList<FrequencyModel>:
         {
           int frequencyIndex =
-          frequencyList.indexWhere((x) => x?.name == value);
+              frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
@@ -162,7 +167,7 @@ class PreventiveListController extends GetxController {
       ]; //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", checklistJsonString});
-      await preventiveListPresenter.createChecklistNumber(
+      await moduleListPresenter.createChecklistNumber(
         checklistJsonString: checklistJsonString,
         isLoading: true,
       );
@@ -188,7 +193,7 @@ class PreventiveListController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getPreventiveCheckList(facilityId, type, true);
+      getModuleList(facilityId, type, true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -230,9 +235,9 @@ class PreventiveListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteCkecklist(checklist_id).then((value) {
+                  deleteChecklist(checklist_id).then((value) {
                     Get.back();
-                    getPreventiveCheckList(facilityId, type, true);
+                    getModuleList(facilityId, type, true);
                   });
                 },
                 child: Text('YES'),
@@ -244,9 +249,9 @@ class PreventiveListController extends GetxController {
     );
   }
 
-  Future<void> deleteCkecklist(String? checklist_id) async {
+  Future<void> deleteChecklist(String? checklist_id) async {
     {
-      await preventiveListPresenter.deleteCkecklist(
+      await moduleListPresenter.deleteCkecklist(
         checklist_id,
         isLoading: true,
       );
@@ -269,10 +274,10 @@ class PreventiveListController extends GetxController {
         id: checklistId,
         checklist_number: _checklistNumber);
     var checklistJsonString =
-    createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"checklistJsonString", checklistJsonString});
-    await preventiveListPresenter.updateChecklistNumber(
+    await moduleListPresenter.updateChecklistNumber(
       checklistJsonString: checklistJsonString,
       isLoading: true,
     );

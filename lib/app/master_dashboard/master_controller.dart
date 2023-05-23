@@ -112,4 +112,9 @@ class MastersController extends GetxController {
       Routes.blockTypeListScreen,
     );
   }
+  Future<void> goToModuleTypeList() async {
+    Get.toNamed(
+      Routes.moduleTypeListScreen,
+    );
+  }
 }

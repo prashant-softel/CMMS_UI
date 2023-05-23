@@ -580,7 +580,9 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPreventiveCheckList({
+  Future<ResponseModel>
+  getPreventiveCheckList({
+
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -598,6 +600,28 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+  Future<ResponseModel>
+  getModuleList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetModuleList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
