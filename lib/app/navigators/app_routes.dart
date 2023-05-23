@@ -54,6 +54,7 @@ abstract class Routes {
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
   static const viewUserDetail = _Paths.viewUserDetail;
+  static const moduleTypeListScreen = _Paths.moduleTypeListScreen;
 }
 
 abstract class _Paths {
@@ -107,6 +108,8 @@ abstract class _Paths {
   static const userList = '/userList';
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
+  static const moduleTypeListScreen = '/module-Type-List-Screen';
 
-  // static const editPermitWebScreen = '/edit-permit-web-screen';
+
+// static const editPermitWebScreen = '/edit-permit-web-screen';
 }

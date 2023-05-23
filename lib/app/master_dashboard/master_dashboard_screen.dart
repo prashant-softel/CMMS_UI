@@ -293,7 +293,7 @@ class MastersDashboard extends GetView<MastersController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Five",
+                                  "Module List",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
                                     fontSize: 20,
@@ -327,9 +327,9 @@ class MastersDashboard extends GetView<MastersController> {
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
                               createContentTile(
-                                  title: "Facility List",
+                                  title: "Module List",
                                   onTap: () {
-                                    controller.goToFacilityTypeList();
+                                    controller.goToModuleTypeList();
                                   }),
                               createContentTile(
                                   title: "Block List",

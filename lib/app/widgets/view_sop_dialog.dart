@@ -1,7 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/widgets/file_upload_details_widget.dart';
+// import 'package:cmms/app/widgets/file_upload_details_widget.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/gestures.dart';
