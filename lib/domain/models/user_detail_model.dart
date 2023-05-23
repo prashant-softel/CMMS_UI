@@ -8,6 +8,8 @@ UserDetailsModel userDetailsModelFromJson(String str) =>
 class UserDetailsModel {
   String? first_name;
   String? last_name;
+  String? secondaryEmail;
+  String? landline_number;
   String? gender_name;
   String? dob;
   String? country_name;
@@ -22,6 +24,16 @@ class UserDetailsModel {
   int? state_id;
   int? city_id;
   int? id;
+  int? zipcode;
+  int? isEmployee;
+  String? joiningDate;
+  int? blood_group_id;
+  String? blood_group_name;
+  int? role_id;
+  String? status;
+  int? photoId;
+  String? photoPath;
+  List<PlantList>? plant_list;
 
   UserDetailsModel(
       {this.city_id,
@@ -39,26 +51,69 @@ class UserDetailsModel {
       this.state_id,
       this.state_name,
       this.user_name,
-      this.id});
+      this.id,
+      this.blood_group_id,
+      this.blood_group_name,
+      this.isEmployee,
+      this.joiningDate,
+      this.landline_number,
+      this.photoId,
+      this.photoPath,
+      this.plant_list,
+      this.role_id,
+      this.secondaryEmail,
+      this.status,
+      this.zipcode});
 
   factory UserDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['plant_list'] as List;
+    List<PlantList> plantList = list.map((i) => PlantList.fromJson(i)).toList();
+
     return UserDetailsModel(
-      city_id: parsedJson['city_id'],
-      role_name: parsedJson['role_name'],
-      city_name: parsedJson['city_name'],
-      contact_no: parsedJson['contact_no'],
-      country_id: parsedJson['country_id'],
-      country_name: parsedJson['country_name'],
-      dob: Utility.getFormatedyearMonthDay(parsedJson['dob']),
-      first_name: parsedJson['first_name'],
-      full_name: parsedJson['full_name'],
-      state_id: parsedJson['state_id'],
-      last_name: parsedJson['last_name'],
-      gender_id: parsedJson['gender_id'],
-      state_name: parsedJson['state_name'],
-      user_name: parsedJson['user_name'],
-      gender_name: parsedJson['gender_name'],
+        city_id: parsedJson['city_id'],
+        role_name: parsedJson['role_name'],
+        city_name: parsedJson['city_name'],
+        contact_no: parsedJson['contact_no'],
+        country_id: parsedJson['country_id'],
+        country_name: parsedJson['country_name'],
+        dob: Utility.getFormatedyearMonthDay(parsedJson['dob']),
+        first_name: parsedJson['first_name'],
+        full_name: parsedJson['full_name'],
+        state_id: parsedJson['state_id'],
+        last_name: parsedJson['last_name'],
+        gender_id: parsedJson['gender_id'],
+        state_name: parsedJson['state_name'],
+        user_name: parsedJson['user_name'],
+        gender_name: parsedJson['gender_name'],
+        id: parsedJson['id'],
+        blood_group_id: parsedJson['blood_group_id'],
+        blood_group_name: parsedJson['blood_group_name'],
+        isEmployee: parsedJson['isEmployee'],
+        joiningDate: Utility.getFormatedyearMonthDay(parsedJson['joiningDate']),
+        landline_number: parsedJson['landline_number'],
+        photoId: parsedJson['photoId'],
+        photoPath: parsedJson['photoPath'],
+        role_id: parsedJson['role_id'],
+        secondaryEmail: parsedJson['secondaryEmail'],
+        status: parsedJson['status'],
+        zipcode: parsedJson['zipcode'],
+        plant_list: plantList);
+  }
+}
+
+class PlantList {
+  int? id;
+  String? name;
+
+  PlantList({
+    this.id,
+    this.name,
+  });
+
+  factory PlantList.fromJson(Map<String, dynamic> parsedJson) {
+    return PlantList(
       id: parsedJson['id'],
+      name: parsedJson['name'],
     );
   }
 }

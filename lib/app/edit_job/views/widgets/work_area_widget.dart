@@ -60,7 +60,8 @@ class WorkAreaWidget extends StatelessWidget {
             color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(5),
           ),
-          child: MultiSelectDialogField(
+          child: //
+              MultiSelectDialogField(
             initialValue: //
                 controller.selectedWorkAreaIdList
                     .map((equipmentId) =>

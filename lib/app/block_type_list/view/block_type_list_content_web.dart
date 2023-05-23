@@ -325,30 +325,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             (MediaQuery.of(context).size.width *
                                                 .3),
                                         child:
-                                            // CustomDropDownButton(
-                                            //   value: controller
-                                            //       .selectedchecklist.value,
-                                            //   onChange: (String? selectedValue) {
-                                            //     controller.isSelectedchecklist
-                                            //         .value = true;
-                                            //     controller.selectedchecklist.value =
-                                            //         selectedValue ?? '';
-
-                                            //     controller.getBlocks(
-                                            //         selected:
-                                            //             selectedValue.toString());
-                                            //   },
-                                            //   item: controller.facilityTypeList
-                                            //       .map<DropdownMenuItem<String>>(
-                                            //           (list) {
-                                            //     return DropdownMenuItem<String>(
-                                            //       value: list?.id.toString() ?? '',
-                                            //       child: Text(list.name
-                                            //               .toString() ??
-                                            //           ''),
-                                            //     );
-                                            //   }).toList(),
-                                            // ),
                                             DropdownWidget(
                                           controller: controller,
                                           dropdownList:
@@ -357,8 +333,13 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                               .isSelectedfacility.value,
                                           selectedValue:
                                               controller.selectedfacility.value,
+                                          // onValueChanged:
+                                          //     controller.onValueChanged(46, 46),
                                           onValueChanged:
-                                              controller.onValueChanged,
+                                              (selectedValue, isValueSelected) {
+                                            controller.onValueChanged(
+                                                selectedValue, isValueSelected);
+                                          },
                                         ),
                                       ),
                                     ],

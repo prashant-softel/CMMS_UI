@@ -53,7 +53,7 @@ class JobListController extends GetxController {
   final excel = Excel.createExcel();
   int facilityId = 0;
   int userId = 0;
-  // var breakdownTime;
+
   JobModel? jobModel;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -66,10 +66,12 @@ class JobListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        userId = varUserAccessModel.value.user_id ?? 0;
+      // Future.delayed(Duration(seconds: 1), () {
+      userId = varUserAccessModel.value.user_id ?? 0;
+      if (userId > 0) {
         getJobList(userId);
-      });
+      }
+      // });
     });
 
     super.onInit();

@@ -13,6 +13,8 @@ import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
 import 'package:cmms/app/tbt_type_list/view/tbt_type_list_screen.dart';
+// import 'package:cmms/app/job_list_sop/job_list_sop_binding.dart';
+// import 'package:cmms/app/job_list_sop/view/job_list_sop_screen.dart';
 import 'package:cmms/app/asset_type_list/asset_type_list_binding.dart';
 import 'package:cmms/app/asset_type_list/view/asset_type_list_screen.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_binding.dart';
@@ -21,6 +23,8 @@ import 'package:cmms/app/block_type_list/block_type_list_binding.dart';
 import 'package:cmms/app/block_type_list/view/block_type_list_screen.dart';
 import 'package:cmms/app/inventory_type_list/view/inventory_type_list.dart';
 import 'package:cmms/app/inventory_type_list/inventory_type_list_binding.dart';
+// import 'package:cmms/app/job_type_list/job_type_list_binding.dart';
+// import 'package:cmms/app/job_type_list/view/job_type_list_screen.dart';
 import 'package:cmms/app/master_dashboard/master_binding.dart';
 import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
 import 'package:cmms/app/permit_type/permit_type_binding.dart';
@@ -57,6 +61,8 @@ import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
+import '../inventory_status_list/inventory_status_list_binding.dart';
+import '../inventory_status_list/view/inventory_status_list.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_details/job_details_binding.dart';
@@ -313,6 +319,11 @@ class AppPages {
       name: _Paths.inventoryTypeListScreen,
       page: InventoryTypeListScreen.new,
       binding: InventoryTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.inventoryStatusListScreen,
+      page: InventoryStatusListScreen.new,
+      binding: InventoryStatusListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.facilityTypeListScreen,

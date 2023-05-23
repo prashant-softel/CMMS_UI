@@ -25,6 +25,7 @@ class UserListController extends GetxController {
   );
   UserListModel? userListModel;
   RxList<String> userListTableColumns = <String>[].obs;
+  UserListModel? selectedItem;
 
   @override
   void onInit() async {
@@ -40,11 +41,11 @@ class UserListController extends GetxController {
 
   Future<void> getUserList(int facilityId, bool isLoading) async {
     userList?.value = <UserListModel>[];
-    final _preventiveCheckList = await userListPresenter.getUserList(
+    final _userList = await userListPresenter.getUserList(
         facilityId: facilityId, isLoading: isLoading);
 
-    if (_preventiveCheckList != null) {
-      userList!.value = _preventiveCheckList;
+    if (_userList != null) {
+      userList!.value = _userList;
       paginationController = PaginationController(
         rowCount: userList?.length ?? 0,
         rowsPerPage: 10,

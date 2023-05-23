@@ -39,11 +39,13 @@ import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+// import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/access_level_model.dart';
+import '../models/blood_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
+import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/modulelist_model.dart';
@@ -325,7 +327,7 @@ class Repository {
     }
   }
 
-   //Create SOP
+  //Create SOP
   Future<Map<String, dynamic>> createSOP(
     createSop,
     bool? isLoading,
@@ -367,7 +369,6 @@ class Repository {
     }
   }
 
-
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -377,7 +378,7 @@ class Repository {
     }
   }
 
-  Mixpanel? mixPanel;
+  // Mixpanel? mixPanel;
 
   Future<List<CountryState?>?> getStateList(int countryCode) async {
     try {
@@ -1123,7 +1124,6 @@ class Repository {
     }
   }
 
-   
   Future<void> permitCloseButton(
     String? comment,
     String? id,
@@ -1843,6 +1843,41 @@ class Repository {
                 .toList();
 
         return _InventoryTypeListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryStatusListModel?>?> getInventoryStatusList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryStatusList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryStatusListModel = jsonDecode(res.data);
+        // print(res.data);
+        final List<InventoryStatusListModel> _InventoryStatusListModelList =
+            jsonInventoryStatusListModel
+                .map<InventoryStatusListModel>((m) =>
+                    InventoryStatusListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _InventoryStatusListModelList;
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
         return [];
@@ -2592,6 +2627,36 @@ class Repository {
     }
   }
 
+  Future<List<BloodModel?>?> getBloodList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBloodList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonBloodModels = jsonDecode(res.data);
+        final List<BloodModel> _bloodModelList = jsonBloodModels
+            .map<BloodModel>(
+              (m) => BloodModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+
+        return _bloodModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBloodList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<StateModel?>?> getStateListnew(
       bool? isLoading, int? selectedCountryId) async {
     try {
@@ -2776,7 +2841,6 @@ class Repository {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: isLoading ?? false,
       );
-      print({"resp", res.data});
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -2790,6 +2854,48 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> addUser({bool? isLoading, adduserJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.addUser(
+          auth: auth,
+          isLoading: isLoading,
+          adduserJsonString: adduserJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' addUser');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateUser({bool? isLoading, adduserJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateUser(
+          auth: auth,
+          isLoading: isLoading,
+          adduserJsonString: adduserJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' updateUser');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 
