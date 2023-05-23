@@ -247,6 +247,20 @@ class DataRepository extends DomainRepository {
       // categoryIds: categoryIds,
     );
   }
+  Future<ResponseModel> getSPVList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getSPVList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
   Future<ResponseModel> getBlockTypeList({
     int? job_type_id,
     required bool isLoading,

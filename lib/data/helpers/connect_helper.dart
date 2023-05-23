@@ -284,6 +284,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getSPVList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetSPVList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getBlockTypeList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -617,6 +631,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> getInventoryStatusList({
     required String auth,
     bool? isLoading,
@@ -973,8 +988,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-  
-
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,
@@ -1053,7 +1066,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create SOP
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1081,7 +1093,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1489,14 +1500,12 @@ class ConnectHelper {
       importInventory(
           auth: auth,
           fileId: jsonResponse["id"][0].toString(),
-          isLoading: true
-          );
+          isLoading: true);
     }
-  
+
     CreateSOPModel createSOPModel = CreateSOPModel(
-      jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
-      sop_fileId: int.parse(jsonResponse["id"][0].toString())
-    );
+        jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
+        sop_fileId: int.parse(jsonResponse["id"][0].toString()));
     print('JsaDataId${createSOPModel.jsa_fileId}');
     print('SOPDataId${createSOPModel.sop_fileId}');
 
