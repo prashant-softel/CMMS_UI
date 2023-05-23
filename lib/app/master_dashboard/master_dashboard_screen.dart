@@ -299,6 +299,13 @@ class MastersDashboard extends GetView<MastersController> {
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
+                                    title: "SPV List",
+                                    onTap: () {
+                                      controller.goToSPVList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
                                     title: "Facility List",
                                     onTap: () {
                                       controller.goToFacilityTypeList();

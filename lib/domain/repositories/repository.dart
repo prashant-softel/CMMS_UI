@@ -41,6 +41,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
+import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
 import '../models/blood_model.dart';
 import '../models/city_model.dart';
@@ -791,6 +792,31 @@ class Repository {
 
       if (!res.hasError) {
         var facilityTypeList = FacilityTypeListModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+  Future<List<SPVListModel>> getSPVList({
+    required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getSPVList(
+        job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = SPVListModelFromJson(res.data);
         return facilityTypeList;
       }
       return [];

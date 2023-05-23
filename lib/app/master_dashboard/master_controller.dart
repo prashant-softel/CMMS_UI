@@ -106,6 +106,11 @@ class MastersController extends GetxController {
       Routes.facilityTypeListScreen,
     );
   }
+  Future<void> goToSPVList() async {
+    Get.toNamed(
+      Routes.SPVListScreen,
+    );
+  }
   //goToBlockTypeList
   Future<void> goToBlockTypeList() async {
     Get.toNamed(

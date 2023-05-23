@@ -47,6 +47,8 @@ import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dar
 import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
 import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:get/get.dart';
+import '../SPV_list/SPV_list_binding.dart';
+import '../SPV_list/view/SPV_list_screen.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
 import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
@@ -329,6 +331,11 @@ class AppPages {
       name: _Paths.facilityTypeListScreen,
       page: FacilityTypeListScreen.new,
       binding: FacilityTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.SPVListScreen,
+      page: SPVListScreen.new,
+      binding: SPVListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.blockTypeListScreen,
