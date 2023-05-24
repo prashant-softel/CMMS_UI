@@ -1171,6 +1171,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getViewWarrantyClaimDetail({
+    required String auth,
+    bool? isLoading,
+    int? wc_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'wc/GetWCDetails?wc_id=$wc_id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewWarrantyClaimResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,

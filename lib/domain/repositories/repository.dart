@@ -34,6 +34,7 @@ import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -523,6 +524,41 @@ class Repository {
       return null;
     }
   }
+
+   Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
+    int? wc_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getViewWarrantyClaimDetail(
+        auth: auth,
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"ViewWarrantyClaimdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final ViewWarrantyClaimModel _viewWarrantyClaimDetailModel =
+              viewWarrantyClaimDetailModelFromJson(res.data);
+
+          var responseMap = _viewWarrantyClaimDetailModel;
+          print({"ViewWarrantyResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
 
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,

@@ -785,6 +785,17 @@ class DataRepository extends DomainRepository {
         permitId: permitId,
         isLoading: isLoading ?? false,
       );
+  
+   Future<ResponseModel> getViewWarrantyClaimDetail({
+    required String auth,
+    bool? isLoading,
+    int? wc_id,
+  }) async =>
+      await connectHelper.getViewWarrantyClaimDetail(
+        auth: auth,
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getHistory({
     String? auth,
