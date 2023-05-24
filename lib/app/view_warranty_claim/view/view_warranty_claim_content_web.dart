@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
@@ -10,13 +11,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class ViewWarrantyClaimWeb extends GetView<HomeController> {
+class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
   ViewWarrantyClaimWeb({super.key});
 
   bool valuefirst = true;
 
   // final controller = Get.find<HomeController>();
-  final HomeController controller = Get.find();
+  final ViewWarrantyClaimController _controller = Get.find();
+  // final HomeController _controller = Get.find();
 
 
   @override
@@ -95,7 +97,7 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                         Dimens.boxHeight10,
                         Wrap(
                           children: [
-                            GetBuilder<HomeController>(
+                            GetBuilder<ViewWarrantyClaimController>(
                                 id: 'block_field',
                                 builder: (controller) {
                                   return Column(
@@ -113,8 +115,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                                     .width /
                                                 2.75,
                                                 child: CustomTextField(
+                                                  textController: controller.categoryTextController,
                                                   readOnly: true,
-                                                  hintText:'Inverter',
+                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.equipment_category}',
                                                   label: 'Equipment Category',
                                                   suffixIcon:
                                                       Icon(Icons.arrow_drop_down),
@@ -129,8 +132,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                                     .width /
                                                 2.72,
                                                child: CustomTextField(
+                                                  textController: controller.equipmentNameTextController,
                                                   readOnly: true,
-                                                  hintText:'Demo_Block_1_inv_2',
+                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}',
                                                   label: 'Equipment Name',
                                                   suffixIcon:
                                                       Icon(Icons.arrow_drop_down),
@@ -154,8 +158,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                                     .width /
                                                 2.75,
                                             child: CustomTextField(
+                                                  textController: controller.supplierNameTextController,
                                                   readOnly: true,
-                                                  hintText:'Risen Energy',
+                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.supplier_name}',
                                                   label: 'Supplier Name',
                                                   suffixIcon:
                                                       Icon(Icons.arrow_drop_down),
@@ -170,8 +175,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                                     .width /
                                                 2.72,
                                             child: CustomTextField(
+                                              textController: controller.equipmentSerialNoTextController,
                                               readOnly: true,
-                                              hintText: '233547',
+                                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}',
                                               label: 'Equipment Sr.No.',
                                             ),
                                           )
@@ -224,7 +230,7 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                               readOnly: true,
                                               hintText: 'Tashan Industry Zone',
                                               label: 'Supplier Address: *',
-                                              maxLine: 6,
+                                              
                                             ),
                                           ),
                                         ],
@@ -552,11 +558,10 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                             Row(
                               children: [
                                 CustomTextField(
+                                  textController: controller.orderReferenceNoTextController,
                                   readOnly: true,
-                                  hintText: '32258469795',
+                                  hintText: '${controller.viewWarrantyClaimDetailsModel.value?.order_reference_number}',
                                   label: 'Order/Contract Reference Number: *',
-                                  textController:
-                                      controller.parentEquipmentTextController,
                                   // readOnly: true,
                                   onTap: () {
                                     // controller.getEquipmentList(facilityId: '45');
@@ -608,19 +613,19 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                 Row(
                                   children: [
                                     CustomTextField(
+                                      textController: controller.failureDateTimeTextController,
                                       readOnly: true,
-                                      hintText: '11-Apr-2023 15:04',
+                                      hintText: '${controller.viewWarrantyClaimDetailsModel.value?.failure_time}',
                                       label: 'Failure Date & Time: *',
                                       suffixIcon: Icon(
                                         Icons.calendar_month,
                                       ),
                                       // textController:
                                       //     controller.categoryTextController,
-                                      textController:
-                                          controller.startDateTimeCtrlrWeb,
-                                      onTap: () {
-                                        pickDateTime_web(context);
-                                      },
+                                      
+                                      // onTap: () {
+                                      //   pickDateTime_web(context);
+                                      // },
                                     ),
                                     SizedBox(
                                       width: MediaQuery.of(context)
@@ -628,8 +633,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                                     .width /
                                                 2.78,
                                       child: CustomTextField(
+                                        textController: controller.costOfReplacementTextController,
                                         readOnly: true,
-                                        hintText: '2000',
+                                        hintText: '${controller.viewWarrantyClaimDetailsModel.value?.cost_of_replacement}',
                                         label: 'Cost Of Replacement: *',
                                         // textController:
                                         //     controller.categoryTextController,
@@ -661,16 +667,16 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                               ],
                             ),
                             CustomTextField(
+                              textController: controller.warrantyStartDateTextController,
                               readOnly: true,
-                              hintText: '11-Apr-2023 15:04',
+                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.date_of_claim}',
                               label: 'Warranty Start Date: *',
-                              textController: controller.startDateTimeCtrlr2Web,
                               suffixIcon: Icon(
                                 Icons.calendar_month,
                               ),
-                              onTap: () {
-                                pickDateTime2_web(context);
-                              },
+                              // onTap: () {
+                              //   pickDateTime2_web(context);
+                              // },
                             ),
                             CustomTextField(
                               readOnly: true,
@@ -680,20 +686,17 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                               suffixIcon: Icon(
                                 Icons.calendar_month,
                               ),
-                              onTap: () {
-                                pickDateTime3_web(context);
-                              },
+                              // onTap: () {
+                              //   pickDateTime3_web(context);
+                              // },
                             ),
-                            Row(
-                              children: [
-                                CustomTextField(
-                                  readOnly: true,
-                                  hintText: 'Replacement Policy',
-                                  label: 'Warranty Claim Title: *',
-                                  textController:
-                                      controller.assetNameTextController,
-                                ),
-                              ],
+                            CustomTextField(
+                              textController: controller.warrantyClaimTitleTextController,
+                              readOnly: true,
+                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.warranty_claim_title}',
+                              label: 'Warranty Claim Title: *',
+                              maxLine: 2,
+                             
                             ),
                             // CustomTextField(
                             //   label: 'Enter Multiplier: ',
@@ -713,15 +716,17 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                             //   ],
                             // ),
                             Row(
+                              
                               children: [
                                 Expanded(
                                   child: CustomTextField(
+                                    alignment: Alignment.topCenter,
+                                    textController: controller.warrantyBriefDescriptionTextController,
                                     readOnly: true,
-                                    hintText: 'Replacement Policy',
+                                    hintText: '${controller.viewWarrantyClaimDetailsModel.value?.warranty_description}',
                                     label: 'Warranty Brief Description: *',
-                                    maxLine: 6,
-                                    textController:
-                                        controller.assetDescpTextController,
+                                    
+                                    
                                   ),
                                 ),
                               ],
@@ -733,11 +738,11 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CustomTextField(
+                                      textController: controller.correctiveActionByBuyerTextController,
                                       readOnly: true,
-                                      hintText: 'Replacement Policy',
-                                      label:
-                                          'Immediate Corrective Action by Buyer: *',
-                                      maxLine: 5,
+                                      hintText: '${controller.viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer}',
+                                      label: 'Immediate Corrective Action by Buyer: *',
+                                      maxLine: 6,
                                     ),
                                   ],
                                 ),
@@ -745,8 +750,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                   width: 210,
                                 ),
                                 CustomTextField(
+                                  textController: controller.requestToSupplierTextController,
                                   readOnly: true,
-                                  hintText: 'Replacement Policy',
+                                  hintText: '${controller.viewWarrantyClaimDetailsModel.value?.request_to_supplier}',
                                   label: 'Request to Supplier: *',
                                   maxLine: 5,
                                 ),
@@ -761,8 +767,9 @@ class ViewWarrantyClaimWeb extends GetView<HomeController> {
                                   //   title: 'Select Approver: '
                                   //   ),
                                   CustomTextField(
+                                    textController: controller.approverNametextController,
                                     readOnly: true,
-                                    hintText: 'Amit Purchase Manager',
+                                    hintText: '${controller.viewWarrantyClaimDetailsModel.value?.approver_name}',
                                     label: 'Select Approver',
                                     suffixIcon: Icon(Icons.arrow_drop_down),
                                   ),
