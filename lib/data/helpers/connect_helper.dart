@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
@@ -1118,6 +1119,36 @@ class ConnectHelper {
     return responseModel;
   }
 
+   //Create Warranty Claim
+  Future<ResponseModel> createWarrantyClaim({
+    required String auth,
+    createWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/CreateWC',
+      Request.post,
+      createWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Warranty Claim Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(NewWarrantyClaimDialog(
+      data: parsedJson['message'],
+      // warrantyId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+
+
   Future<ResponseModel> getUserAccessList({
     required String auth,
     bool? isLoading,
@@ -1170,6 +1201,25 @@ class ConnectHelper {
     print('ViewResponseModel${responseModel.data}');
     return responseModel;
   }
+
+  Future<ResponseModel> getViewWarrantyClaimDetail({
+    required String auth,
+    bool? isLoading,
+    int? wc_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'wc/GetWCDetails?wc_id=$wc_id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewWarrantyClaimResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getHistory({
     String? auth,

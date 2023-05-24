@@ -278,6 +278,8 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.suffixIcon,
     this.hintText,
+    this.decoration,
+    this.alignment,
   }) : super(key: key);
 
   final String? label;
@@ -287,6 +289,8 @@ class CustomTextField extends StatelessWidget {
   final Icon? suffixIcon;
   final String? hintText;
   final Function()? onTap;
+  final InputDecoration? decoration;
+  final Alignment? alignment;
 
   final TextEditingController? textController;
 
@@ -324,6 +328,7 @@ class CustomTextField extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2),
                   ),
                   hintText: hintText,
+                  hintStyle: TextStyle(),
                   suffixIcon: suffixIcon,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),

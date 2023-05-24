@@ -764,6 +764,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> createWarrantyClaim({
+    required String auth,
+    createWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createWarrantyClaim(
+        auth: auth,
+        createWarrantyClaim: createWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
     bool? isLoading,
@@ -783,6 +794,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.getViewPermitDetail(
         auth: auth,
         permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+  
+   Future<ResponseModel> getViewWarrantyClaimDetail({
+    required String auth,
+    bool? isLoading,
+    int? wc_id,
+  }) async =>
+      await connectHelper.getViewWarrantyClaimDetail(
+        auth: auth,
+        wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
 

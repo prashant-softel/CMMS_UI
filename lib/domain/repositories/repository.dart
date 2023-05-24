@@ -34,6 +34,7 @@ import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
@@ -370,6 +371,48 @@ class Repository {
     }
   }
 
+  //Create Warranty claim
+  Future<Map<String, dynamic>> createWarrantyClaim(
+    createWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWarrantyClaim(
+        auth: auth,
+        createWarrantyClaim: createWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Warranty Claim: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -515,6 +558,40 @@ class Repository {
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
+    int? wc_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getViewWarrantyClaimDetail(
+        auth: auth,
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"ViewWarrantyClaimdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final ViewWarrantyClaimModel _viewWarrantyClaimDetailModel =
+              viewWarrantyClaimDetailModelFromJson(res.data);
+
+          var responseMap = _viewWarrantyClaimDetailModel;
+          print({"ViewWarrantyResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
         //return '';
       }
       return null;
@@ -800,6 +877,7 @@ class Repository {
       return [];
     }
   }
+
   Future<List<SPVListModel>> getSPVList({
     required int? job_type_id,
     required bool isLoading,
@@ -1807,12 +1885,11 @@ class Repository {
     }
   }
 
-
   Future<List<ModuleListModel?>?> getModuleList(
-      int? type,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getModuleList(
@@ -1826,11 +1903,10 @@ class Repository {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<ModuleListModel> _ModuleListModelList =
-        jsonModuleListModelModels
-            .map<ModuleListModel>((m) =>
-            ModuleListModel.fromJson(
-                Map<String, dynamic>.from(m)))
-            .toList();
+            jsonModuleListModelModels
+                .map<ModuleListModel>((m) =>
+                    ModuleListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _ModuleListModelList;
       } else {

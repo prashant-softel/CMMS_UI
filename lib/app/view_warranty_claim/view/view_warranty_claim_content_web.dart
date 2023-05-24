@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
@@ -10,14 +11,15 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
+class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
   ViewWarrantyClaimWeb({super.key});
 
   bool valuefirst = true;
 
   // final controller = Get.find<HomeController>();
-  final HomeController _controller = Get.find();
-  final WarrantyClaimController controller = Get.find();
+  final ViewWarrantyClaimController _controller = Get.find();
+  // final HomeController _controller = Get.find();
+
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -95,7 +97,7 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                         Dimens.boxHeight10,
                         Wrap(
                           children: [
-                            GetBuilder<HomeController>(
+                            GetBuilder<ViewWarrantyClaimController>(
                                 id: 'block_field',
                                 builder: (controller) {
                                   return Column(
@@ -109,34 +111,35 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                               ),
                                               SizedBox(
                                                 width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    2.75,
+                                                    .size
+                                                    .width /
+                                                2.75,
                                                 child: CustomTextField(
+                                                  textController: controller.categoryTextController,
                                                   readOnly: true,
-                                                  hintText: 'Inverter',
+                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.equipment_category}',
                                                   label: 'Equipment Category',
-                                                  suffixIcon: Icon(
-                                                      Icons.arrow_drop_down),
+                                                  suffixIcon:
+                                                      Icon(Icons.arrow_drop_down),
                                                 ),
                                               ),
                                               SizedBox(
                                                 width: 20,
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    2.72,
-                                                child: CustomTextField(
+                                             SizedBox(
+                                              width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.72,
+                                               child: CustomTextField(
+                                                  textController: controller.equipmentNameTextController,
                                                   readOnly: true,
-                                                  hintText:
-                                                      'Demo_Block_1_inv_2',
+                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}',
                                                   label: 'Equipment Name',
-                                                  suffixIcon: Icon(
-                                                      Icons.arrow_drop_down),
+                                                  suffixIcon:
+                                                      Icon(Icons.arrow_drop_down),
                                                 ),
-                                              ),
+                                             ),
                                             ],
                                           ),
                                         ],
@@ -155,12 +158,13 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     .width /
                                                 2.75,
                                             child: CustomTextField(
-                                              readOnly: true,
-                                              hintText: 'Risen Energy',
-                                              label: 'Supplier Name',
-                                              suffixIcon:
-                                                  Icon(Icons.arrow_drop_down),
-                                            ),
+                                                  textController: controller.supplierNameTextController,
+                                                  readOnly: true,
+                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.supplier_name}',
+                                                  label: 'Supplier Name',
+                                                  suffixIcon:
+                                                      Icon(Icons.arrow_drop_down),
+                                                ),
                                           ),
                                           SizedBox(
                                             width: 25,
@@ -171,8 +175,9 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     .width /
                                                 2.72,
                                             child: CustomTextField(
+                                              textController: controller.equipmentSerialNoTextController,
                                               readOnly: true,
-                                              hintText: '233547',
+                                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}',
                                               label: 'Equipment Sr.No.',
                                             ),
                                           )
@@ -225,7 +230,7 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                               readOnly: true,
                                               hintText: 'Tashan Industry Zone',
                                               label: 'Supplier Address: *',
-                                              maxLine: 6,
+                                              
                                             ),
                                           ),
                                         ],
@@ -545,17 +550,18 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                           ),
                                         ),
                                       ),
+                                   
                                     ],
                                   );
+                                 
                                 }),
                             Row(
                               children: [
                                 CustomTextField(
+                                  textController: controller.orderReferenceNoTextController,
                                   readOnly: true,
-                                  hintText: '32258469795',
+                                  hintText: '${controller.viewWarrantyClaimDetailsModel.value?.order_reference_number}',
                                   label: 'Order/Contract Reference Number: *',
-                                  textController:
-                                      controller.parentEquipmentTextController,
                                   // readOnly: true,
                                   onTap: () {
                                     // controller.getEquipmentList(facilityId: '45');
@@ -607,26 +613,29 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                 Row(
                                   children: [
                                     CustomTextField(
+                                      textController: controller.failureDateTimeTextController,
                                       readOnly: true,
-                                      hintText: '11-Apr-2023 15:04',
+                                      hintText: '${controller.viewWarrantyClaimDetailsModel.value?.failure_time}',
                                       label: 'Failure Date & Time: *',
                                       suffixIcon: Icon(
                                         Icons.calendar_month,
                                       ),
                                       // textController:
                                       //     controller.categoryTextController,
-                                      textController:
-                                          controller.startDateTimeCtrlrWeb,
-                                      onTap: () {
-                                        pickDateTime_web(context);
-                                      },
+                                      
+                                      // onTap: () {
+                                      //   pickDateTime_web(context);
+                                      // },
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.78,
+                                      width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.78,
                                       child: CustomTextField(
+                                        textController: controller.costOfReplacementTextController,
                                         readOnly: true,
-                                        hintText: '2000',
+                                        hintText: '${controller.viewWarrantyClaimDetailsModel.value?.cost_of_replacement}',
                                         label: 'Cost Of Replacement: *',
                                         // textController:
                                         //     controller.categoryTextController,
@@ -658,16 +667,16 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                               ],
                             ),
                             CustomTextField(
+                              textController: controller.warrantyStartDateTextController,
                               readOnly: true,
-                              hintText: '11-Apr-2023 15:04',
+                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.date_of_claim}',
                               label: 'Warranty Start Date: *',
-                              textController: controller.startDateTimeCtrlr2Web,
                               suffixIcon: Icon(
                                 Icons.calendar_month,
                               ),
-                              onTap: () {
-                                pickDateTime2_web(context);
-                              },
+                              // onTap: () {
+                              //   pickDateTime2_web(context);
+                              // },
                             ),
                             CustomTextField(
                               readOnly: true,
@@ -677,20 +686,17 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                               suffixIcon: Icon(
                                 Icons.calendar_month,
                               ),
-                              onTap: () {
-                                pickDateTime3_web(context);
-                              },
+                              // onTap: () {
+                              //   pickDateTime3_web(context);
+                              // },
                             ),
-                            Row(
-                              children: [
-                                CustomTextField(
-                                  readOnly: true,
-                                  hintText: 'Replacement Policy',
-                                  label: 'Warranty Claim Title: *',
-                                  textController:
-                                      controller.assetNameTextController,
-                                ),
-                              ],
+                            CustomTextField(
+                              textController: controller.warrantyClaimTitleTextController,
+                              readOnly: true,
+                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.warranty_claim_title}',
+                              label: 'Warranty Claim Title: *',
+                              maxLine: 2,
+                             
                             ),
                             // CustomTextField(
                             //   label: 'Enter Multiplier: ',
@@ -710,31 +716,33 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                             //   ],
                             // ),
                             Row(
+                              
                               children: [
                                 Expanded(
                                   child: CustomTextField(
+                                    alignment: Alignment.topCenter,
+                                    textController: controller.warrantyBriefDescriptionTextController,
                                     readOnly: true,
-                                    hintText: 'Replacement Policy',
+                                    hintText: '${controller.viewWarrantyClaimDetailsModel.value?.warranty_description}',
                                     label: 'Warranty Brief Description: *',
-                                    maxLine: 6,
-                                    textController:
-                                        controller.assetDescpTextController,
+                                    
+                                    
                                   ),
                                 ),
                               ],
                             ),
-
+                           
                             Wrap(
                               children: [
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CustomTextField(
+                                      textController: controller.correctiveActionByBuyerTextController,
                                       readOnly: true,
-                                      hintText: 'Replacement Policy',
-                                      label:
-                                          'Immediate Corrective Action by Buyer: *',
-                                      maxLine: 5,
+                                      hintText: '${controller.viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer}',
+                                      label: 'Immediate Corrective Action by Buyer: *',
+                                      maxLine: 6,
                                     ),
                                   ],
                                 ),
@@ -742,125 +750,138 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                   width: 210,
                                 ),
                                 CustomTextField(
+                                  textController: controller.requestToSupplierTextController,
                                   readOnly: true,
-                                  hintText: 'Replacement Policy',
+                                  hintText: '${controller.viewWarrantyClaimDetailsModel.value?.request_to_supplier}',
                                   label: 'Request to Supplier: *',
                                   maxLine: 5,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 30),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      // CustomRichText(
-                                      //   title: 'Select Approver: '
-                                      //   ),
-                                      CustomTextField(
-                                        readOnly: true,
-                                        hintText: 'Amit Purchase Manager',
-                                        label: 'Select Approver',
-                                        suffixIcon: Icon(Icons.arrow_drop_down),
-                                      ),
-                                    ],
+                                 Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 5,
                                   ),
-                                ),
+                                  // CustomRichText(
+                                  //   title: 'Select Approver: '
+                                  //   ),
+                                  CustomTextField(
+                                    textController: controller.approverNametextController,
+                                    readOnly: true,
+                                    hintText: '${controller.viewWarrantyClaimDetailsModel.value?.approver_name}',
+                                    label: 'Select Approver',
+                                    suffixIcon: Icon(Icons.arrow_drop_down),
+                                  ),
+                                  
+                                ],
+                              ),
+                            ),
                               ],
                             ),
                             SizedBox(
-                              height: 170,
-                              width: MediaQuery.of(context).size.width / 1.33,
-                              child: Center(
-                                child: Container(
-                                  margin: Dimens.edgeInsets16,
-                                  height: Get.height,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1100,
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        CustomAppBar(
-                                          title: 'All Files Uploaded'.tr,
+                                        height: 170,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.33,
+                                        child: Center(
+                                          child: Container(
+                                            margin: Dimens.edgeInsets16,
+                                            height: Get.height,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.grey
+                                                      .withOpacity(.3)),
+                                            ),
+                                            constraints: BoxConstraints(
+                                              maxWidth: 1100,
+                                            ),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                children: [
+                                                  CustomAppBar(
+                                                    title: 'All Files Uploaded'.tr,
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Wrap(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 30,
+                                                          ),
+                                                          Text(
+                                                              'Sr.No'),
+                                                          SizedBox(
+                                                            width: 50,
+                                                          ),
+                                                          Text(
+                                                              'View'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text(
+                                                              'File Name'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text('File Size'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text('Status'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text('Description'),
+                                                          SizedBox(
+                                                            height: 30,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Container(
+                                                        height: 0.25,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                           SizedBox(width: 50,),
+                                                            Text('No Attachments'),
+                                                            // SizedBox(width: 50,),
+                                                            // Text('Warranty Claim has Been created'),
+                                                            // SizedBox(width: 50,),
+                                                            // Text('Amit Purchase Manager'),
+                                                            // SizedBox(width: 50,),
+                                                            // Text('2012-12-03 16:19'),
+                                                            // SizedBox(width: 100,),
+                                                            // Text('Created'),
+
+
+
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                        Dimens.boxHeight10,
-                                        Wrap(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                SizedBox(
-                                                  width: 30,
-                                                ),
-                                                Text('Sr.No'),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text('View'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('File Name'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('File Size'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('Status'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('Description'),
-                                                SizedBox(
-                                                  height: 30,
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              height: 0.25,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.2,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.black),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text('No Attachments'),
-                                                // SizedBox(width: 50,),
-                                                // Text('Warranty Claim has Been created'),
-                                                // SizedBox(width: 50,),
-                                                // Text('Amit Purchase Manager'),
-                                                // SizedBox(width: 50,),
-                                                // Text('2012-12-03 16:19'),
-                                                // SizedBox(width: 100,),
-                                                // Text('Created'),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                                      ),
                             SizedBox(
                               height: 400,
                               width: MediaQuery.of(context).size.width / 1.2,
@@ -907,32 +928,14 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   width: 475,
                                                 ),
                                                 Text('Required by Date'),
+                                                
+                                                
                                               ],
                                             ),
-                                            supplierActionData(
-                                              '1',
-                                              'Root Cause Analysis Report',
-                                              '2022-12-04',
-                                              context,
-                                            ),
-                                            supplierActionData(
-                                              '2',
-                                              'Material Replinishment',
-                                              '2022-12-05',
-                                              context,
-                                            ),
-                                            supplierActionData(
-                                              '3',
-                                              'Preventive Action Plan',
-                                              '2022-12-06',
-                                              context,
-                                            ),
-                                            supplierActionData(
-                                              '4',
-                                              'Claim Closure Date',
-                                              '2022-12-07',
-                                              context,
-                                            )
+                                            supplierActionData('1','Root Cause Analysis Report', '2022-12-04', context, ),
+                                            supplierActionData('2', 'Material Replinishment', '2022-12-05', context, ),
+                                            supplierActionData('3', 'Preventive Action Plan', '2022-12-06', context, ),
+                                            supplierActionData('4', 'Claim Closure Date', '2022-12-07', context, )
                                           ],
                                         ),
                                       ],
@@ -941,105 +944,108 @@ class ViewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 200,
-                              width: MediaQuery.of(context).size.width / 1.33,
-                              child: Center(
-                                child: Container(
-                                  margin: Dimens.edgeInsets16,
-                                  height: Get.height,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1100,
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        CustomAppBar(
-                                          title: 'Warranty Claim History'.tr,
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Wrap(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                SizedBox(
-                                                  width: 30,
-                                                ),
-                                                Text('Sr.No'),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text('Comment'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('Posted By'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('Time Stamp'),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text('Status'),
-                                                SizedBox(
-                                                  height: 30,
-                                                ),
-                                              ],
+                               SizedBox(
+                                        height: 200,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.33,
+                                        child: Center(
+                                          child: Container(
+                                            margin: Dimens.edgeInsets16,
+                                            height: Get.height,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.grey
+                                                      .withOpacity(.3)),
                                             ),
-                                            Container(
-                                              height: 0.25,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.2,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.black),
+                                            constraints: BoxConstraints(
+                                              maxWidth: 1100,
                                             ),
-                                            SizedBox(
-                                              height: 30,
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 100,
-                                                ),
-                                                Text('1'),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text(
-                                                    'Warranty Claim has Been created'),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text('Amit Purchase Manager'),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Text('2012-12-03 16:19'),
-                                                SizedBox(
-                                                  width: 100,
-                                                ),
-                                                Text('Created'),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                children: [
+                                                  CustomAppBar(
+                                                    title: 'Warranty Claim History'.tr,
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Wrap(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 30,
+                                                          ),
+                                                          Text(
+                                                              'Sr.No'),
+                                                          SizedBox(
+                                                            width: 50,
+                                                          ),
+                                                          Text(
+                                                              'Comment'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text(
+                                                              'Posted By'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text('Time Stamp'),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text('Status'),
+                                                          SizedBox(
+                                                            height: 30,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Container(
+                                                        height: 0.25,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 30,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                           SizedBox(width: 100,),
+                                                            Text('1'),
+                                                            SizedBox(width: 50,),
+                                                            Text('Warranty Claim has Been created'),
+                                                            SizedBox(width: 50,),
+                                                            Text('Amit Purchase Manager'),
+                                                            SizedBox(width: 50,),
+                                                            Text('2012-12-03 16:19'),
+                                                            SizedBox(width: 100,),
+                                                            Text('Created'),
 
+
+
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                   
+                       
+                           
                             // Row(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             //   children: [

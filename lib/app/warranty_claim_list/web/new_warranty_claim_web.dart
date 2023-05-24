@@ -18,7 +18,6 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   bool valuefirst = false;
 
   // final controller = Get.find<HomeController>();
-  // final HomeController _controller = Get.find();
   final WarrantyClaimController controller = Get.find();
 
   @override
@@ -353,13 +352,36 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                               child:
                                                                   CustomMultiSelectDialogField(
                                                                 buttonText:
-                                                                    'Example_parts',
-                                                                title: 'Email',
-                                                                initialValue: [],
+                                                                    'Affected parts',
+                                                                title:
+                                                                    'Select Affected Part',
+                                                                initialValue: (controller
+                                                                        .selectedWorkAreaIdList
+                                                                        .isNotEmpty)
+                                                                    ? controller
+                                                                        .selectedWorkAreaIdList
+                                                                    : [],
+                                                                items: controller
+                                                                    .eqipmentNameList
+                                                                    .map(
+                                                                      (equipmentList) =>
+                                                                          MultiSelectItem(
+                                                                        equipmentList
+                                                                            ?.id,
+                                                                        equipmentList?.name ??
+                                                                            '',
+                                                                      ),
+                                                                    )
+                                                                    .toList(),
                                                                 onConfirm:
                                                                     (selectedOptionsList) =>
-                                                                        {},
-                                                                items: [],
+                                                                        {
+                                                                  controller
+                                                                      .equipmentSelected(
+                                                                          selectedOptionsList),
+                                                                  print(
+                                                                      'Equipment Name list ${controller.eqipmentNameList}')
+                                                                },
                                                               ),
                                                             ),
                                                             SizedBox(
@@ -377,56 +399,56 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                           ],
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 150,
-                                                                top: 15),
-                                                        child: Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  3.8,
-                                                              child:
-                                                                  CustomMultiSelectDialogField(
-                                                                buttonText:
-                                                                    'Example_part',
-                                                                title: 'Parts',
-                                                                initialValue: [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) =>
-                                                                        {},
-                                                                items: [],
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 30,
-                                                            ),
-                                                            ActionButton(
-                                                              icon:
-                                                                  Icons.remove,
-                                                              label: 'Delete',
-                                                              // onPress:
-                                                              //     () async {},
-                                                              color: Colors.red,
-                                                              onPressed: () {},
-                                                            ),
-                                                            ActionButton(
-                                                              icon: Icons.add,
-                                                              label: 'Add',
-                                                              // onPress:
-                                                              //     () async {},
-                                                              color:
-                                                                  Colors.blue,
-                                                              onPressed: () {},
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding:
+                                                      //       const EdgeInsets
+                                                      //               .only(
+                                                      //           left: 150,
+                                                      //           top: 15),
+                                                      //   child: Row(
+                                                      //     children: [
+                                                      //       SizedBox(
+                                                      //         width: MediaQuery.of(
+                                                      //                     context)
+                                                      //                 .size
+                                                      //                 .width /
+                                                      //             3.8,
+                                                      //         child:
+                                                      //             CustomMultiSelectDialogField(
+                                                      //           buttonText:
+                                                      //               'Example_part',
+                                                      //           title: 'Parts',
+                                                      //           initialValue: [],
+                                                      //           onConfirm:
+                                                      //               (selectedOptionsList) =>
+                                                      //                   {},
+                                                      //           items: [],
+                                                      //         ),
+                                                      //       ),
+                                                      //       SizedBox(
+                                                      //         width: 30,
+                                                      //       ),
+                                                      //       ActionButton(
+                                                      //         icon:
+                                                      //             Icons.remove,
+                                                      //         label: 'Delete',
+                                                      //         // onPress:
+                                                      //         //     () async {},
+                                                      //         color: Colors.red,
+                                                      //         onPressed: () {},
+                                                      //       ),
+                                                      //       ActionButton(
+                                                      //         icon: Icons.add,
+                                                      //         label: 'Add',
+                                                      //         // onPress:
+                                                      //         //     () async {},
+                                                      //         color:
+                                                      //             Colors.blue,
+                                                      //         onPressed: () {},
+                                                      //       ),
+                                                      //     ],
+                                                      //   ),
+                                                      // ),
                                                     ],
                                                   ),
                                                 ],
@@ -1492,7 +1514,8 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                 CustomElevatedButton(
                                   backgroundColor: Colors.green,
                                   onPressed: () {
-                                    showAlertDialog();
+                                    // showAlertDialog();
+                                    controller.createWarrantyClaim();
                                   },
                                   text: 'Submit For Release',
                                 ),
@@ -1612,14 +1635,14 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
       );
 
   ///Alert Dialog
-  static void showAlertDialog({
-    int? facility_id,
-    String? message,
-    String? title,
-    Function()? onPress,
-  }) async {
-    await Get.dialog<void>(NewWarrantyClaimDialog());
-  }
+  // static void showAlertDialog({
+  //   int? facility_id,
+  //   String? message,
+  //   String? title,
+  //   Function()? onPress,
+  // }) async {
+  //   await Get.dialog<void>(NewWarrantyClaimDialog());
+  // }
 
   /// For Failure Date Time
   Future pickDateTime_web(BuildContext context) async {
