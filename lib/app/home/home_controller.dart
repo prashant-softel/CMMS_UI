@@ -66,7 +66,7 @@ class HomeController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-   
+
     super.onInit();
   }
 
