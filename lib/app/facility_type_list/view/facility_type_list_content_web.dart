@@ -65,13 +65,13 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 1)
+                              .where((e) => e.feature_id == 5 && e.add == 0)
                               .length >
                           0
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.8,
+                          height: Get.height,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -96,7 +96,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         SizedBox(
                                           height: 40,
                                         ),
-                                        CustomRichText(title: 'Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -106,6 +105,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             //   style: Styles.blackBold16,
                                             // ),
 
+                                            CustomRichText(title: 'Title '),
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -140,39 +140,267 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
+                                                    ishint: 'Enter Title',
+                                                    textController:
+                                                        controller.titleCtrlr,
+                                                  )),
                                             ),
                                           ],
                                         ),
                                         SizedBox(
+                                          height: 40,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // Text(
+                                            //   "Title",
+                                            //   style: Styles.blackBold16,
+                                            // ),
+
+                                            CustomRichText(title: 'Address '),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      45,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Address',
+                                                    textController:
+                                                        controller.addressCtrlr,
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // Text(
+                                            //   "Title",
+                                            //   style: Styles.blackBold16,
+                                            // ),
+
+                                            CustomRichText(title: 'City '),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      45,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter City',
+                                                    textController:
+                                                        controller.cityCtrlr,
+                                                  )),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            CustomRichText(title: 'State '),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      45,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter State',
+                                                    textController:
+                                                        controller.stateCtrlr,
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // Text(
+                                            //   "Title",
+                                            //   style: Styles.blackBold16,
+                                            // ),
+
+                                            CustomRichText(title: 'Country '),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      45,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Country',
+                                                    textController:
+                                                        controller.countryCtrlr,
+                                                  )),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            CustomRichText(title: 'Pin '),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      45,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Pin',
+                                                    textController:
+                                                        controller.pinCtrlr,
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        ),
+                                        SizedBox(
                                           height: 10,
                                         ),
-                                        // CustomRichText(title: 'Facility: '),
-                                        // SizedBox(
-                                        //   width: 5,
-                                        // ),
-                                        // SizedBox(
-                                        //   width: MediaQuery.of(context)
-                                        //           .size
-                                        //           .width /
-                                        //       1.82,
-                                        //   child: DropdownWidget(
-                                        //     dropdownList:
-                                        //         controller.facilityList,
-                                        //     isValueSelected: controller
-                                        //         .isFacilitySelected.value,
-                                        //     selectedValue: controller
-                                        //         .selectedFacility.value,
-                                        //     onValueChanged:
-                                        //         controller.onValueChanged,
-                                        //   ),
-                                        // ),
-                                        // SizedBox(
-                                        //   height: 10,
-                                        // ),
-                                        CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -182,6 +410,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             //   style: Styles.blackBold16,
                                             // ),
 
+                                            CustomRichText(
+                                                title: 'Description '),
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -216,9 +446,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
+                                                    ishint: 'Enter Description',
+                                                    textController: controller
+                                                        .descriptionCtrlr,
+                                                  )),
                                             ),
                                           ],
                                         ),
@@ -251,6 +482,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                   children: [
                                     Container(
                                         width: (Get.width * .1),
+                                        height: 40,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -261,6 +493,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     ),
                                     Container(
                                         width: (Get.width * .2) - 50,
+                                        height: 40,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,

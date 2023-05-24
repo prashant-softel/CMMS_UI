@@ -39,7 +39,7 @@ class BreakdownMaintenanceController extends GetxController {
   Future<void> getFacilityList() async {
     try {
       final _facilityList =
-          await breakdownMaintenancePresenter.getFacilityList();
+          await breakdownMaintenancePresenter.getFacilityList(false);
 
       if (_facilityList != null) {
         for (var facility in _facilityList) {
@@ -52,13 +52,8 @@ class BreakdownMaintenanceController extends GetxController {
     }
   }
 
-  // void switchFacility(String? facilityName) {
-  //   facilityId =
-  //       facilityList.indexWhere((facility) => facility?.name == facilityName);
-  //   getJobList(facilityId, userId);
-  // }
   Future<void> goToJobListScreen() async {
-    Get.toNamed(
+    Get.offAndToNamed(
       Routes.jobList,
     );
   }

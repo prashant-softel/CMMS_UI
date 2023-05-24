@@ -57,7 +57,7 @@ class BlockTypeListController extends GetxController {
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
   int selectedSOPId = 0;
-  int selectedJobSOPId = 0;
+  int selectedFacilityId = 0;
 
   PaginationController blockTypeListPaginationController = PaginationController(
     rowCount: 0,
@@ -92,7 +92,7 @@ class BlockTypeListController extends GetxController {
     final _FacilityTypeList = await blockTypeListPresenter.getFacilityList(
       isLoading: true,
       // categoryIds: categoryIds,
-      job_type_id: selectedJobSOPId,
+      job_type_id: selectedFacilityId,
       // job_type_id: 36,
     );
     if (_FacilityTypeList != null) {
@@ -112,7 +112,7 @@ class BlockTypeListController extends GetxController {
     final _blockTypePermitList = await blockTypeListPresenter.getBlockTypeList(
       isLoading: true,
       // categoryIds: categoryIds,
-      job_type_id: selectedJobSOPId,
+      job_type_id: selectedFacilityId,
       // job_type_id: 36,
     );
     if (_blockTypePermitList != null) {
@@ -130,40 +130,20 @@ class BlockTypeListController extends GetxController {
     update(['block_type_list']);
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    print("onValueChange function.");
-    print(list + value);
+  dynamic onValueChanged(RxList<FacilityTypeListModel> value, dynamic list) {
+    print("onValueChange function. list : $list and value is : $value");
+    String newValue = list.toString();
     print(" Selected Facility : ");
-    print(selectedfacility);
-    switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          // int equipmentIndex =
-          //     equipmentCategoryList.indexWhere((x) => x?.name == value);
-          // selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          // int frequencyIndex =
-          // frequencyList.indexWhere((x) => x?.name == value);
-          // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
-      case RxList<BlockModel>:
-        {
-          int blockIndex = blockList.indexWhere((x) => x?.name == value);
-
-          _blockId.add(blockList[blockIndex]?.id ?? 0);
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
+    int indexId = facilityTypeList.indexWhere((x) => x.name == newValue);
+    int facilityIds = 0;
+    if (indexId > 0) {
+      facilityIds = facilityTypeList[indexId].id ?? 0;
     }
+    print("index received is : $indexId & facility id  : $facilityIds");
+    print(selectedfacility);
+    selectedFacilityId = facilityIds;
+    getBlockTypeList();
   }
 
   Future<void> issuccessCreatechecklist() async {

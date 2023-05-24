@@ -5,6 +5,6 @@ class BreakdownMaintenancePresenter {
   BreakdownMaintenancePresenter(this.breakdownMaintenanceUsecase);
   BreakdownMaintenanceUsecase breakdownMaintenanceUsecase;
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await breakdownMaintenanceUsecase.getFacilityList();
+  Future<List<FacilityModel?>?> getFacilityList(bool isLoading) async =>
+      await breakdownMaintenanceUsecase.getFacilityList(isLoading);
 }

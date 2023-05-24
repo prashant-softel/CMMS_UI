@@ -26,9 +26,10 @@ class JobListController extends GetxController {
   RxList<JobModel?> jobList = <JobModel?>[].obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
-  Rx<String> selectedFacility = ''.obs;
+  Rx<String> selectedBlock = ''.obs;
   RxList<String> jobListTableColumns = <String>[].obs;
-  Rx<bool> isFacilitySelected = false.obs;
+  Rx<bool> isBlockSelected = false.obs;
+  Rx<int> selectedBlockId = 0.obs;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
   Rx<int> jobId = 0.obs;
@@ -52,7 +53,7 @@ class JobListController extends GetxController {
   final excel = Excel.createExcel();
   int facilityId = 0;
   int userId = 0;
-  // var breakdownTime;
+
   JobModel? jobModel;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -65,10 +66,12 @@ class JobListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        userId = varUserAccessModel.value.user_id ?? 0;
+      // Future.delayed(Duration(seconds: 1), () {
+      userId = varUserAccessModel.value.user_id ?? 0;
+      if (userId > 0) {
         getJobList(userId);
-      });
+      }
+      // });
     });
 
     super.onInit();
@@ -89,7 +92,7 @@ class JobListController extends GetxController {
       facilityList.value = _facilityList;
     }
     if (facilityList.isNotEmpty) {
-      selectedFacility.value = facilityList[0]?.name ?? '';
+      selectedBlock.value = facilityList[0]?.name ?? '';
     }
   }
 
@@ -125,7 +128,7 @@ class JobListController extends GetxController {
   }
 
   void goToJobCardScreen(int? jobId) {
-    Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
+    // Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
   }
 
   void goToEditJobScreen(int? _jobId) {
@@ -133,7 +136,7 @@ class JobListController extends GetxController {
   }
 
   void goToJobDetailsScreen(int? _jobId) {
-    Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
+    Get.offAndToNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 
   String formatDate(String? inputDateTime) {
@@ -265,6 +268,16 @@ class JobListController extends GetxController {
     } catch (e) {
       Utility.showDialog(e.toString());
     }
+  }
+
+  onBlockChanged(dropdownList, selectedValue) {
+    int blockIndex = blockList.indexWhere((x) => x?.name == selectedValue);
+    selectedBlockId.value = blockList[blockIndex]?.id ?? 0;
+    if (selectedBlockId.value > 0) {
+      isBlockSelected.value = true;
+    }
+    selectedBlock.value = selectedValue;
+    getJobList(userId);
   }
 
   ///

@@ -65,9 +65,9 @@ class WorkTypeWidget extends StatelessWidget {
 
               MultiSelectDialogField(
             initialValue: //
-                controller.selectedWorkTypeList
-                    .map((workType) => workType
-                        ?.id) // Extract the IDs from the list of WorkTypeModel objects
+                controller.selectedWorkTypeIdList
+                    .map((workTypeId) =>
+                        workTypeId) // Extract the IDs from the list of WorkTypeModel objects
                     .toList(),
             validator: (selectedItems) {
               if (controller.isWorkTypeSelected.value == false) {

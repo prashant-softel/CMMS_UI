@@ -55,3 +55,6 @@ app.*.map.json
 
 # Dart
 *.orig
+
+# iOS related
+ios/build/

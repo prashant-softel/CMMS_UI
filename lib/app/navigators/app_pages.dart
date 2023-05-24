@@ -13,6 +13,8 @@ import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
 import 'package:cmms/app/tbt_type_list/view/tbt_type_list_screen.dart';
+// import 'package:cmms/app/job_list_sop/job_list_sop_binding.dart';
+// import 'package:cmms/app/job_list_sop/view/job_list_sop_screen.dart';
 import 'package:cmms/app/asset_type_list/asset_type_list_binding.dart';
 import 'package:cmms/app/asset_type_list/view/asset_type_list_screen.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_binding.dart';
@@ -21,6 +23,8 @@ import 'package:cmms/app/block_type_list/block_type_list_binding.dart';
 import 'package:cmms/app/block_type_list/view/block_type_list_screen.dart';
 import 'package:cmms/app/inventory_type_list/view/inventory_type_list.dart';
 import 'package:cmms/app/inventory_type_list/inventory_type_list_binding.dart';
+// import 'package:cmms/app/job_type_list/job_type_list_binding.dart';
+// import 'package:cmms/app/job_type_list/view/job_type_list_screen.dart';
 import 'package:cmms/app/master_dashboard/master_binding.dart';
 import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
 import 'package:cmms/app/permit_type/permit_type_binding.dart';
@@ -43,6 +47,8 @@ import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dar
 import 'package:cmms/app/warranty_claim_list/web/view_warranty_claim_web.dart';
 import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:get/get.dart';
+import '../SPV_list/SPV_list_binding.dart';
+import '../SPV_list/view/SPV_list_screen.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
 import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
@@ -57,6 +63,8 @@ import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
+import '../inventory_status_list/inventory_status_list_binding.dart';
+import '../inventory_status_list/view/inventory_status_list.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_details/job_details_binding.dart';
@@ -65,6 +73,8 @@ import '../job_list/job_list_binding.dart';
 import '../job_list/views/job_list_screen.dart';
 import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
+import '../module_List/module_list_binding.dart';
+import '../module_List/view/module_list_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -190,6 +200,11 @@ class AppPages {
       binding: PmMappingBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.moduleTypeListScreen,
+      page: ModuleListScreen.new,
+      binding: ModuleListBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.warrantyClaimList,
       page: WarrantyClaimListScreen.new,
       binding: HomeBinding(),
@@ -308,9 +323,19 @@ class AppPages {
       binding: InventoryTypeListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.inventoryStatusListScreen,
+      page: InventoryStatusListScreen.new,
+      binding: InventoryStatusListBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.facilityTypeListScreen,
       page: FacilityTypeListScreen.new,
       binding: FacilityTypeListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.SPVListScreen,
+      page: SPVListScreen.new,
+      binding: SPVListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.blockTypeListScreen,

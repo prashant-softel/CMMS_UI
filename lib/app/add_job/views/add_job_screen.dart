@@ -37,11 +37,9 @@ class AddJobScreen extends GetView<AddJobController> {
             : HomeDrawer(),
 
         /// CARD
-        // Obx(
-        //   () => //
+
         Expanded(
           child: Container(
-            // child: Expanded(
             child: Card(
               color: ColorValues.appLightGreyColor,
               elevation: 20,
@@ -66,7 +64,6 @@ class AddJobScreen extends GetView<AddJobController> {
             ),
           ),
         ),
-        // ),
       ]),
     );
 

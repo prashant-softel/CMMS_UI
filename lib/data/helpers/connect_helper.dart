@@ -284,10 +284,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getSPVList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetSPVList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getBlockTypeList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Facility/GetBlockList?parent_id=46',
+      'Facility/GetBlockList?parent_id=$job_type_id',
       Request.getMultiparts,
       null,
       isLoading,
@@ -580,7 +594,9 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPreventiveCheckList({
+  Future<ResponseModel>
+  getPreventiveCheckList({
+
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -599,6 +615,28 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel>
+  getModuleList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetModuleList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
     bool? isLoading,
@@ -607,6 +645,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Inventory/GetInventoryTypeList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getInventoryStatusList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryStatusList',
       Request.get,
       null,
       isLoading ?? false,
@@ -955,8 +1012,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-  
-
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,
@@ -1035,7 +1090,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create SOP
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1063,7 +1117,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1471,14 +1524,12 @@ class ConnectHelper {
       importInventory(
           auth: auth,
           fileId: jsonResponse["id"][0].toString(),
-          isLoading: true
-          );
+          isLoading: true);
     }
-  
+
     CreateSOPModel createSOPModel = CreateSOPModel(
-      jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
-      sop_fileId: int.parse(jsonResponse["id"][0].toString())
-    );
+        jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
+        sop_fileId: int.parse(jsonResponse["id"][0].toString()));
     print('JsaDataId${createSOPModel.jsa_fileId}');
     print('SOPDataId${createSOPModel.sop_fileId}');
 
@@ -1566,6 +1617,20 @@ class ConnectHelper {
   }) async =>
       await apiWrapper.makeRequest(
         'Utils/GetCountryList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getBloodList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'CMMS/GetBloodGroupList',
         Request.get,
         null,
         true,
@@ -1682,6 +1747,44 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> addUser({
+    required String auth,
+    bool? isLoading,
+    required adduserJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/CreateUser',
+      Request.post,
+      adduserJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateUser({
+    required String auth,
+    bool? isLoading,
+    required adduserJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/UpdateUser',
+      Request.patch,
+      adduserJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 

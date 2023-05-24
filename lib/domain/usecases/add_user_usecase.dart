@@ -2,9 +2,11 @@ import 'package:cmms/domain/models/country_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/access_level_model.dart';
+import '../models/blood_model.dart';
 import '../models/city_model.dart';
 import '../models/role_model.dart';
 import '../models/state_model.dart';
+import '../models/user_detail_model.dart';
 
 class AddUserUsecase {
   AddUserUsecase(this.repository);
@@ -13,6 +15,12 @@ class AddUserUsecase {
     bool? isLoading,
   }) async =>
       await repository.getCountryList(
+        isLoading,
+      );
+  Future<List<BloodModel?>?> getBloodList({
+    bool? isLoading,
+  }) async =>
+      await repository.getBloodList(
         isLoading,
       );
   Future<List<RoleModel?>?> getRoleList({
@@ -43,4 +51,24 @@ class AddUserUsecase {
         accessLevelJsonString,
         isLoading,
       );
+  Future<bool> addUser({
+    adduserJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.addUser(
+          isLoading: isLoading, adduserJsonString: adduserJsonString);
+  Future<UserDetailsModel?> getUserDetails({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getUserDetails(
+        userId,
+        isLoading,
+      );
+  Future<bool> updateUser({
+    adduserJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateUser(
+          isLoading: isLoading, adduserJsonString: adduserJsonString);
 }
