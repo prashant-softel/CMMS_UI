@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "867081091588",
-    "project_id": "cmms-f4808",
-    "storage_bucket": "cmms-f4808.appspot.com"
+    "project_number": "3950124460",
+    "project_id": "cmms-dev",
+    "storage_bucket": "cmms-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:867081091588:android:751223b938223b574dd351",
+        "mobilesdk_app_id": "1:3950124460:android:4a28378ee18eaabdd7ae09",
         "android_client_info": {
           "package_name": "com.softel.cmms"
         }
       },
       "oauth_client": [
         {
-          "client_id": "867081091588-c1v3gcqlibn7kt7vjof5us994plfqje3.apps.googleusercontent.com",
+          "client_id": "3950124460-euhl594vbbtggn12tsikc4d5d5pr22v8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAa1e7BbxAAf5zHuaQqIvPWyGvnQFILnTg"
+          "current_key": "AIzaSyDq_fnVgwBYfAHgX0k_UkD0PYZZaTnwiOM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "867081091588-c1v3gcqlibn7kt7vjof5us994plfqje3.apps.googleusercontent.com",
+              "client_id": "3950124460-euhl594vbbtggn12tsikc4d5d5pr22v8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
