@@ -593,7 +593,7 @@ class PreventiveChecklistListContentWeb
                                                                     "Action")
                                                                 ? Wrap(
                                                                     children: [
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appLightBlueColor,
@@ -612,7 +612,7 @@ class PreventiveChecklistListContentWeb
                                                                                 },
                                                                               )
                                                                             : Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,

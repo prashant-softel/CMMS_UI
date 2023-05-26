@@ -31,28 +31,28 @@ class ModuleListPresenter {
       await moduleUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<bool> createChecklistNumber({
-    checklistJsonString,
+  Future<bool> createModulelistNumber({
+    modulelistJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    moduleUsecase.createChecklistNumber(
-      checklistJsonString: checklistJsonString,
+    moduleUsecase.createModulelistNumber(
+      modulelistJsonString: modulelistJsonString,
       isLoading: isLoading,
     );
     return true;
   }
 
-  deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
-      await moduleUsecase.deleteCkecklist(
-        checklist_id: checklist_id ?? 0,
+  deleteModulelist(String? module_id, {required bool isLoading}) async =>
+      await moduleUsecase.deleteModulelist(
+        module_id: module_id ?? 0,
         isLoading: isLoading,
       );
-  Future<bool> updateChecklistNumber(
-      {checklistJsonString, required bool isLoading, checklistId}) async {
+  Future<bool> updateModulelistNumber(
+      {modulelistJsonString, required bool isLoading, moduleId}) async {
     print("presenter");
-    moduleUsecase.updateChecklistNumber(
-      checklistJsonString: checklistJsonString,
+    moduleUsecase.updateModulelistNumber(
+      modulelistJsonString: modulelistJsonString,
       isLoading: isLoading,
     );
     return true;
