@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/modulelist_model.dart';
@@ -36,24 +37,50 @@ class ModuleListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
+
   ModuleListModel? moduleListModel;
+  var isToggleOn = false.obs;
+  var isToggle1On = false.obs;
+  var isToggle2On = false.obs;
+  var isToggle3On = false.obs;
+  var isToggle4On = false.obs;
+  var isToggle5On = false.obs;
+  var isToggle6On = false.obs;
+  final isSuccess = false.obs;
+
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
+  void toggle1() {
+    isToggle1On.value = !isToggle1On.value;
+  }
+  void toggle2() {
+    isToggle2On.value = !isToggle2On.value;
+  }
+  void toggle3() {
+    isToggle3On.value = !isToggle3On.value;
+  }
+  void toggle4() {
+    isToggle4On.value = !isToggle4On.value;
+  }
+  void toggle5() {
+    isToggle5On.value = !isToggle5On.value;
+  }
+  void toggle6() {
+    isToggle6On.value = !isToggle6On.value;
+  }
 
   RxList<String> moduleListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var checklistNumberCtrlr = TextEditingController();
+  var modulelistNumberCtrlr = TextEditingController();
+  var featureCtrlr = TextEditingController();
   ModuleListModel? selectedItem;
-  var manpowerCtrlr = TextEditingController();
-  var durationCtrlr = TextEditingController();
-  int selectedEquipmentId = 0;
-  int selectedfrequencyId = 0;
-  final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-    getInventoryCategoryList();
-    getFrequencyList();
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -64,29 +91,9 @@ class ModuleListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getFrequencyList() async {
-    final list = await moduleListPresenter.getFrequencyList();
-
-    if (list != null) {
-      for (var _frequencyList in list) {
-        frequencyList.add(_frequencyList);
-      }
-    }
-  }
-
-  Future<void> getInventoryCategoryList() async {
-    final list = await moduleListPresenter.getInventoryCategoryList();
-
-    if (list != null) {
-      for (var _equipmentCategoryList in list) {
-        equipmentCategoryList.add(_equipmentCategoryList);
-      }
-    }
-  }
-
-
   Future<void> getModuleList(
-      int facilityId, int type, bool isLoading) async {
+      int facilityId, int type, bool isLoading)
+  async {
     moduleList?.value = <ModuleListModel>[];
     final _moduleList =
         await moduleListPresenter.getModuleList(
@@ -110,88 +117,67 @@ class ModuleListController extends GetxController {
     }
   }
 
-  Future<void> createChecklist() async {
+  Future<void> createModulelist() async {
     Get.toNamed(
       Routes.createCheckList,
     );
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
-  }
-
-  Future<bool> createChecklistNumber() async {
-    if (checklistNumberCtrlr.text.trim() == '' ||
-        selectedEquipmentId == 0 ||
-        selectedfrequencyId == 0) {
+  Future<bool> createModuleListNumber() async {
+    if (modulelistNumberCtrlr.text.trim() == '' ||
+        featureCtrlr.text.trim() == ''  ) {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-      String _checklistNumber = checklistNumberCtrlr.text.trim();
-      String _duration = durationCtrlr.text.trim();
-      String _manpower = manpowerCtrlr.text.trim();
+      String _moduleListNumber = modulelistNumberCtrlr.text.trim();
+      String _featureNumber = featureCtrlr.text.trim();
 
-      CreateChecklist createChecklist = CreateChecklist(
-          category_id: selectedEquipmentId,
-          duration: int.tryParse(_duration) ?? 0,
-          manPower: int.tryParse(_manpower) ?? 0,
-          facility_id: facilityId,
-          frequency_id: selectedfrequencyId,
-          status: 1,
-          type: 1,
-          id: 0,
-          checklist_number: _checklistNumber);
-      var checklistJsonString = [
-        createChecklist.toJson()
-      ]; //createCheckListToJson([createChecklist]);
+      CreateModuleListModel createModuleList = CreateModuleListModel(
+          moduleName : _moduleListNumber,
+          featureName : _featureNumber,
+          menuImage : null,
+          add : isToggleOn.value?1:0,
+          edit: isToggle1On.value?1:0,
+          delete: isToggle2On.value?1:0,
+          view: isToggle3On.value?1:0,
+          approve: isToggle4On.value?1:0,
+          issue: isToggle5On.value?1:0,
+          selfView: isToggle6On.value?1:0,
+      );
 
-      print({"checklistJsonString", checklistJsonString});
-      await moduleListPresenter.createChecklistNumber(
-        checklistJsonString: checklistJsonString,
+      var moduleListJsonString =
+        createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+
+      print({"checklistJsonString", moduleListJsonString});
+      await moduleListPresenter.createModulelistNumber(
+        modulelistJsonString: moduleListJsonString,
         isLoading: true,
       );
       return true;
     }
+    getModuleList(facilityId, type, true);
     return true;
   }
 
-  Future<void> issuccessCreatechecklist() async {
+  Future<void> issuccessCreatemodulelist() async {
     isSuccess.toggle();
 
+    // isToggleOn.value = false;
     await {_cleardata()};
   }
 
   _cleardata() {
-    checklistNumberCtrlr.text = '';
-    durationCtrlr.text = '';
-    manpowerCtrlr.text = '';
-
-    selectedequipment.value = '';
-
-    selectedfrequency.value = '';
+    modulelistNumberCtrlr.text = '';
+    featureCtrlr.text = '';
     selectedItem = null;
-
+    isToggleOn.value = false;
+    isToggle1On.value = false;
+    isToggle2On.value = false;
+    isToggle3On.value = false;
+    isToggle4On.value = false;
+    isToggle5On.value = false;
+    isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
       getModuleList(facilityId, type, true);
     });
@@ -200,7 +186,7 @@ class ModuleListController extends GetxController {
     });
   }
 
-  void isDeleteDialog({String? checklist_id, String? checklist}) {
+  void isDeleteDialog({String? module_id, String? module}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -210,11 +196,11 @@ class ModuleListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the checkpoint ',
+                text: 'Are you sure you want to delete the Module ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: checklist,
+                    text: module,
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
@@ -235,7 +221,7 @@ class ModuleListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteChecklist(checklist_id).then((value) {
+                  deleteModulelist(module_id).then((value) {
                     Get.back();
                     getModuleList(facilityId, type, true);
                   });
@@ -249,38 +235,41 @@ class ModuleListController extends GetxController {
     );
   }
 
-  Future<void> deleteChecklist(String? checklist_id) async {
+  Future<void> deleteModulelist(String? module_id) async {
     {
-      await moduleListPresenter.deleteCkecklist(
-        checklist_id,
+      await moduleListPresenter.deleteModulelist(
+        module_id,
         isLoading: true,
       );
     }
   }
 
-  Future<bool> updateChecklistNumber(checklistId) async {
-    String _checklistNumber = checklistNumberCtrlr.text.trim();
-    String _duration = durationCtrlr.text.trim();
-    String _manpower = manpowerCtrlr.text.trim();
+  Future<bool> updateModulelistNumber(moduleId) async {
+    String _modulelistNumber = modulelistNumberCtrlr.text.trim();
+    String _featurelistNumber = featureCtrlr.text.trim();
 
-    CreateChecklist createChecklist = CreateChecklist(
-        category_id: selectedEquipmentId,
-        duration: int.tryParse(_duration) ?? 0,
-        manPower: int.tryParse(_manpower) ?? 0,
-        facility_id: facilityId,
-        frequency_id: selectedfrequencyId,
-        status: 1,
-        type: 1,
-        id: checklistId,
-        checklist_number: _checklistNumber);
-    var checklistJsonString =
-        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+    ModuleListModel createModulelist = ModuleListModel(
+        id:moduleId,
+        moduleName: _modulelistNumber,
+        featureName: _featurelistNumber,
+        menuImage : null,
+        add : isToggleOn.value?1:0,
+        edit: isToggle1On.value?1:0,
+        delete: isToggle2On.value?1:0,
+        view: isToggle3On.value?1:0,
+        approve: isToggle4On.value?1:0,
+        issue: isToggle5On.value?1:0,
+        selfView: isToggle6On.value?1:0,
+    )  ;
+    var modulelistJsonString =
+        createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
-    print({"checklistJsonString", checklistJsonString});
-    await moduleListPresenter.updateChecklistNumber(
-      checklistJsonString: checklistJsonString,
+    print({"modulelistJsonString", modulelistJsonString});
+    await moduleListPresenter.updateModulelistNumber(
+      modulelistJsonString: modulelistJsonString,
       isLoading: true,
     );
     return true;
   }
 }
+
