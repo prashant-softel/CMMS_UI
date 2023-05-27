@@ -1581,7 +1581,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      'PMScheduleView/GetPMTaskDetail?schedule_id=2444',
       Request.get,
       null,
       isLoading ?? false,
@@ -1894,6 +1894,24 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> updatePmExecution({
+    required String auth,
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/UpdatePMTaskExecution',
+      Request.post,
+      pmExecutionJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 
