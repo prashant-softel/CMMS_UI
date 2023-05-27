@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
@@ -52,7 +51,7 @@ class AddUserController extends GetxController {
   Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
   RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
   RxList<String> moduleNameList = <String>[].obs;
-
+  var selectedImageBytes = Rx<Uint8List>(Uint8List(0));
   final RxBool isChecked = false.obs;
   final RxBool isCheckedmodule = false.obs;
   var gender = 'Select Gender'.obs;
@@ -69,15 +68,15 @@ class AddUserController extends GetxController {
   var passwordCtrlr = TextEditingController();
   var joingdateCtrlr = TextEditingController();
   int userId = 0;
+  double thumbnailSize = Get.height * 0.25;
+
+  ///
   void onInit() async {
     userId = Get.arguments;
     await getBloodList();
     await getCountryList();
     await getRoleList();
-    if (userId != null) {
-      // print({"userid123", userId});
-      await getUserDetails(userId: userId, isloading: true);
-    }
+    await getUserDetails(userId: userId, isloading: true);
     super.onInit();
   }
 
@@ -88,13 +87,7 @@ class AddUserController extends GetxController {
     final pickedFile = await ImagePicker().pickImage(source: imageSource);
     if (pickedFile != null) {
       selectedImagePath.value = pickedFile.path;
-      selectedImageSize.value =
-          "${(File(selectedImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(2)}MB";
-      //  isAvatarSelected = false;
-    } else {
-      print("pick image");
-      // Loader.hideLoading();
-      // Snackbar.show("Error: ", "Please select an image");
+      selectedImageBytes.value = await pickedFile.readAsBytes();
     }
   }
 
@@ -305,13 +298,9 @@ class AddUserController extends GetxController {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: true,
       );
-      if (responsePmMapCreated != null) {
-        Get.offNamed(
-          Routes.userList,
-        );
-        // getRoleAccessList(roleId: selectedRoleId, isloading: true);
-        // isSuccessDialog();
-      }
+      Get.offNamed(
+        Routes.userList,
+      );
     } else {
       Fluttertoast.showToast(
           msg: "Unable to update the access level", fontSize: 16.0);
