@@ -617,6 +617,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> getInventoryStatusList({
     required String auth,
     bool? isLoading,
@@ -973,8 +974,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-  
-
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,
@@ -1053,7 +1052,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create SOP
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1081,7 +1079,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1455,7 +1452,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      'PMScheduleView/GetPMTaskDetail?schedule_id=2444',
       Request.get,
       null,
       isLoading ?? false,
@@ -1489,14 +1486,12 @@ class ConnectHelper {
       importInventory(
           auth: auth,
           fileId: jsonResponse["id"][0].toString(),
-          isLoading: true
-          );
+          isLoading: true);
     }
-  
+
     CreateSOPModel createSOPModel = CreateSOPModel(
-      jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
-      sop_fileId: int.parse(jsonResponse["id"][0].toString())
-    );
+        jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
+        sop_fileId: int.parse(jsonResponse["id"][0].toString()));
     print('JsaDataId${createSOPModel.jsa_fileId}');
     print('SOPDataId${createSOPModel.sop_fileId}');
 
@@ -1752,6 +1747,24 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> updatePmExecution({
+    required String auth,
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/UpdatePMTaskExecution',
+      Request.post,
+      pmExecutionJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

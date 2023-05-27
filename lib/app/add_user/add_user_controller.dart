@@ -1,3 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:cmms/app/add_user/add_user_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
@@ -5,7 +12,6 @@ import 'package:cmms/domain/models/access_level_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 // import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
-import 'package:cmms/domain/models/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -73,6 +79,49 @@ class AddUserController extends GetxController {
       await getUserDetails(userId: userId, isloading: true);
     }
     super.onInit();
+  }
+
+  var selectedImagePath = ''.obs;
+  var selectedImageSize = ''.obs;
+
+  getImage(ImageSource imageSource) async {
+    final pickedFile = await ImagePicker().pickImage(source: imageSource);
+    if (pickedFile != null) {
+      selectedImagePath.value = pickedFile.path;
+      selectedImageSize.value =
+          "${(File(selectedImagePath.value).lengthSync() / 1024 / 1024).toStringAsFixed(2)}MB";
+      //  isAvatarSelected = false;
+    } else {
+      print("pick image");
+      // Loader.hideLoading();
+      // Snackbar.show("Error: ", "Please select an image");
+    }
+  }
+
+  List<PlatformFile>? paths;
+
+  void pickFiles() async {
+    try {
+      paths = (await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowMultiple: false,
+        onFileLoading: (FilePickerStatus status) => print(status),
+        allowedExtensions: ['png', 'jpg', 'jpeg', 'heic'],
+      ))
+          ?.files;
+    } on PlatformException catch (e) {
+      log('Unsupported operation' + e.toString());
+    } catch (e) {
+      log(e.toString());
+    }
+    // setState(() {
+    if (paths != null) {
+      if (paths != null) {
+        //passing file bytes and file name for API call
+        //    ApiClient.uploadFile(_paths!.first.bytes!, _paths!.first.name);
+      }
+    }
+    //});
   }
 
   Future<void> getUserDetails({int? userId, bool? isloading}) async {

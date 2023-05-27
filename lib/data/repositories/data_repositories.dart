@@ -247,6 +247,7 @@ class DataRepository extends DomainRepository {
       // categoryIds: categoryIds,
     );
   }
+
   Future<ResponseModel> getBlockTypeList({
     int? job_type_id,
     required bool isLoading,
@@ -403,7 +404,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  
   Future<ResponseModel> permitCloseButton({
     required String auth,
     String? comment,
@@ -725,7 +725,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> createSOP({
+  Future<ResponseModel> createSOP({
     required String auth,
     createSop,
     bool? isLoading,
@@ -945,7 +945,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getPmMappingList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
   Future<ResponseModel> savePmMapping({
     required String auth,
@@ -1181,6 +1181,17 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
     return response;
   }
+
+  Future<ResponseModel> updatePmExecution({
+    required String auth,
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updatePmExecution(
+        auth: auth,
+        pmExecutionJsonString: pmExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   ///
 }

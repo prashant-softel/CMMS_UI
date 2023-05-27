@@ -2398,7 +2398,7 @@ class Repository {
         print({"object", _PmTaskListModelList});
         return _PmTaskListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
+        Utility.showDialog(res.errorCode.toString() + 'getPmTaskList');
         return [];
       }
     } catch (error) {
@@ -2456,6 +2456,8 @@ class Repository {
       if (!res.hasError) {
         final PmtaskViewModel _permitDetailsModel =
             pmtaskViewModelFromJson(res.data);
+        print({"respqwe", _permitDetailsModel});
+
         return _permitDetailsModel;
       } //
       else {
@@ -2858,6 +2860,33 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<List<dynamic>> updatePmExecution(
+    pmExecutionJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePmExecution(
+        auth: auth,
+        pmExecutionJsonString: pmExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updatePmExecution');
+      }
+      return [];
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 
