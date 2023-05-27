@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cmms/app/add_user/add_user_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +17,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
 
   @override
   Widget build(BuildContext context) {
+    ///
     Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
       return Checkbox(
           value: defaultValue == 1 ? true : false,
@@ -134,24 +133,22 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                           onTap: () => controller
                                               .getImage(ImageSource.gallery),
                                           child: Container(
-                                            height: 100,
-                                            width: 100,
+                                            height: controller.thumbnailSize,
+                                            width: controller.thumbnailSize,
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(100),
-                                              child: Image.file(
-                                                File(
-                                                  controller
-                                                      .selectedImagePath.value,
-                                                ),
+                                              child: Image.memory(
+                                                controller
+                                                    .selectedImageBytes.value,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
                                         )
                                       : Container(
-                                          height: 190,
-                                          width: 190,
+                                          height: controller.thumbnailSize,
+                                          width: controller.thumbnailSize,
                                           decoration: BoxDecoration(
                                             color: Color.fromARGB(
                                                 255, 195, 192, 192),
