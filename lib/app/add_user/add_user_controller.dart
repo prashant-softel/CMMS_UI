@@ -35,7 +35,7 @@ class AddUserController extends GetxController {
   Rx<String> selectedCity = 'Select City'.obs;
   Rx<bool> isSelectedCity = true.obs;
   int selectedCityId = 0;
-  RxList<BloodModel?> bloodList = <BloodModel>[].obs;
+  RxList<BloodListModel?> bloodList = <BloodListModel>[].obs;
   Rx<String> selectedBlood = 'Select Blood'.obs;
   Rx<bool> isSelectedBlood = true.obs;
   int selectedBloodId = 0;
@@ -211,7 +211,7 @@ class AddUserController extends GetxController {
           selectedCityId = cityList[cityIndex]?.id ?? 0;
         }
         break;
-      case RxList<BloodModel>:
+      case RxList<BloodListModel>:
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
           selectedBloodId = bloodList[bloodIndex]?.id ?? 0;

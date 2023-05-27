@@ -122,4 +122,17 @@ class MastersController extends GetxController {
       Routes.moduleTypeListScreen,
     );
   }
+
+  Future<void> goToBloodTypeList() async {
+    Get.toNamed(
+      Routes.bloodTypeListScreen,
+    );
+  }
+
+
+  Future<void> goToCountryTypeList() async {
+    Get.toNamed(
+      Routes.countryTypeListScreen,
+    );
+  }
 }

@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-List<BloodModel> facilityListFromJson(String str) =>
-    List<BloodModel>.from(json.decode(str).map(BloodModel.fromJson));
+List<BloodListModel> facilityListFromJson(String str) =>
+    List<BloodListModel>.from(json.decode(str).map(BloodListModel.fromJson));
 
-String facilityListToJson(List<BloodModel> data) =>
+String facilityListToJson(List<BloodListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class BloodModel {
-  factory BloodModel.fromJson(Map<String, dynamic> json) => BloodModel(
+class BloodListModel {
+  factory BloodListModel.fromJson(Map<String, dynamic> json) => BloodListModel(
         id: json['id'],
         name: json['name'],
         // input: json['input'],
       );
-  BloodModel({
+  BloodListModel({
     this.id,
     this.name,
     // this.input,

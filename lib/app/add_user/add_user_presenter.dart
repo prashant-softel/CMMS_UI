@@ -17,7 +17,7 @@ class AddUserPresenter {
       await addUserUsecase.getCountryList(
         isLoading: isLoading ?? false,
       );
-  Future<List<BloodModel?>?> getBloodList({
+  Future<List<BloodListModel?>?> getBloodList({
     bool? isLoading,
   }) async =>
       await addUserUsecase.getBloodList(

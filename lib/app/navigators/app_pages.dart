@@ -53,9 +53,13 @@ import '../SPV_list/SPV_list_binding.dart';
 import '../SPV_list/view/SPV_list_screen.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
+import '../blood_list/blood_list_binding.dart';
+import '../blood_list/view/blood_list_screen.dart';
 import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
+import '../country_list/country_list_binding.dart';
+import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
@@ -206,6 +210,18 @@ class AppPages {
       page: ModuleListScreen.new,
       binding: ModuleListBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.bloodTypeListScreen,
+      page: BloodListScreen.new,
+      binding: BloodListBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.countryTypeListScreen,
+      page: CountryListScreen.new,
+      binding: CountryListBinding(),
+    ),
+
     GetPage<dynamic>(
       name: _Paths.warrantyClaimList,
       page: WarrantyClaimListScreen.new,

@@ -381,7 +381,7 @@ class MastersDashboard extends GetView<MastersController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Six",
+                                  "Users",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
                                     fontSize: 16,
@@ -416,16 +416,16 @@ class MastersDashboard extends GetView<MastersController> {
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
-                                    title: "Facility List",
+                                    title: "Blood List",
                                     onTap: () {
-                                      controller.goToFacilityTypeList();
+                                      controller.goToBloodTypeList();
                                     });
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
-                                    title: "Block List",
+                                    title: "Country List",
                                     onTap: () {
-                                      controller.goToBlockTypeList();
+                                      controller.goToCountryTypeList();
                                     });
                               }))),
                             ],

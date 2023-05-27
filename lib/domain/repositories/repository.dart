@@ -2796,7 +2796,7 @@ class Repository {
     }
   }
 
-  Future<List<BloodModel?>?> getBloodList(
+  Future<List<BloodListModel?>?> getBloodList(
     bool? isLoading,
   ) async {
     try {
@@ -2808,9 +2808,9 @@ class Repository {
 
       if (!res.hasError) {
         final jsonBloodModels = jsonDecode(res.data);
-        final List<BloodModel> _bloodModelList = jsonBloodModels
-            .map<BloodModel>(
-              (m) => BloodModel.fromJson(Map<String, dynamic>.from(m)),
+        final List<BloodListModel> _bloodModelList = jsonBloodModels
+            .map<BloodListModel>(
+              (m) => BloodListModel.fromJson(Map<String, dynamic>.from(m)),
             )
             .toList();
 

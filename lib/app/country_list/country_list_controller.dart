@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/blood_model.dart';
+import '../../domain/models/country_model.dart';
 import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -14,13 +13,13 @@ import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'module_list_presenter.dart';
+import 'country_list_presenter.dart';
 
-class ModuleListController extends GetxController {
-  ModuleListController(
-    this.moduleListPresenter,
+class CountryListController extends GetxController {
+  CountryListController(
+    this.countryListPresenter,
   );
-  ModuleListPresenter moduleListPresenter;
+  CountryListPresenter countryListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -28,9 +27,9 @@ class ModuleListController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<ModuleListModel?>?
-  moduleList =
-      <ModuleListModel?>[].obs;
+  RxList<CountryModel?>?
+  countryList =
+      <CountryModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -39,7 +38,7 @@ class ModuleListController extends GetxController {
   );
 
 
-  ModuleListModel? moduleListModel;
+  CountryModel? countryListModel;
   var isToggleOn = false.obs;
   var isToggle1On = false.obs;
   var isToggle2On = false.obs;
@@ -77,7 +76,7 @@ class ModuleListController extends GetxController {
   Rx<bool> isSelectedfrequency = true.obs;
   var modulelistNumberCtrlr = TextEditingController();
   var featureCtrlr = TextEditingController();
-  ModuleListModel? selectedItem;
+  CountryModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
@@ -85,30 +84,30 @@ class ModuleListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getModuleList(facilityId, type, true);
+        getCountryList(facilityId, type, true);
       });
     });
     super.onInit();
   }
 
-  Future<void> getModuleList(
+  Future<void> getCountryList(
       int facilityId, int type, bool isLoading)
   async {
-    moduleList?.value = <ModuleListModel>[];
-    final _moduleList =
-        await moduleListPresenter.getModuleList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+    countryList?.value = <CountryModel>[];
+    final _countryList =
+        await countryListPresenter.getCountryList(
+             isLoading: isLoading);
 
-    if (_moduleList != null) {
-      moduleList!.value = _moduleList.cast<ModuleListModel?>();
+    if (_countryList != null) {
+      countryList!.value = _countryList.cast<CountryModel?>();
       paginationController = PaginationController(
-        rowCount: moduleList?.length ?? 0,
+        rowCount: countryList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (moduleList != null && moduleList!.isNotEmpty) {
-        moduleListModel = moduleList![0];
-        var preventiveCheckListJson = moduleListModel?.toJson();
+      if (countryList != null && countryList!.isNotEmpty) {
+        countryListModel = countryList![0];
+        var preventiveCheckListJson = countryListModel?.toJson();
         moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
           moduleListTableColumns.add(key);
@@ -133,7 +132,8 @@ class ModuleListController extends GetxController {
       String _moduleListNumber = modulelistNumberCtrlr.text.trim();
       String _featureNumber = featureCtrlr.text.trim();
 
-      CreateModuleListModel createModuleList = CreateModuleListModel(
+      CreateModuleListModel createModuleList = CreateModuleListModel
+        (
           moduleName : _moduleListNumber,
           featureName : _featureNumber,
           menuImage : null,
@@ -150,13 +150,14 @@ class ModuleListController extends GetxController {
         createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
-      await moduleListPresenter.createModulelistNumber(
+      await countryListPresenter.createModulelistNumber(
         modulelistJsonString: moduleListJsonString,
         isLoading: true,
+
       );
       return true;
     }
-    getModuleList(facilityId, type, true);
+    getCountryList(facilityId, type, true);
     return true;
   }
 
@@ -179,7 +180,7 @@ class ModuleListController extends GetxController {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getModuleList(facilityId, type, true);
+      getCountryList(facilityId, type, true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -191,7 +192,6 @@ class ModuleListController extends GetxController {
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -224,7 +224,7 @@ class ModuleListController extends GetxController {
                 onPressed: () {
                   deleteModulelist(module_id).then((value) {
                     Get.back();
-                    getModuleList(facilityId, type, true);
+                    getCountryList( facilityId, type, true);
                   });
                 },
                 child: Text('YES'),
@@ -238,7 +238,7 @@ class ModuleListController extends GetxController {
 
   Future<void> deleteModulelist(String? module_id) async {
     {
-      await moduleListPresenter.deleteModulelist(
+      await countryListPresenter.deleteModulelist(
         module_id,
         isLoading: true,
       );
@@ -249,24 +249,25 @@ class ModuleListController extends GetxController {
     String _modulelistNumber = modulelistNumberCtrlr.text.trim();
     String _featurelistNumber = featureCtrlr.text.trim();
 
-    ModuleListModel createModulelist = ModuleListModel(
+    BloodListModel createModulelist = BloodListModel(
         id:moduleId,
-        moduleName: _modulelistNumber,
-        featureName: _featurelistNumber,
-        menuImage : null,
-        add : isToggleOn.value?1:0,
-        edit: isToggle1On.value?1:0,
-        delete: isToggle2On.value?1:0,
-        view: isToggle3On.value?1:0,
-        approve: isToggle4On.value?1:0,
-        issue: isToggle5On.value?1:0,
-        selfView: isToggle6On.value?1:0,
+        name:null
+        // moduleName: _modulelistNumber,
+        // featureName: _featurelistNumber,
+        // menuImage : null,
+        // add : isToggleOn.value?1:0,
+        // edit: isToggle1On.value?1:0,
+        // delete: isToggle2On.value?1:0,
+        // view: isToggle3On.value?1:0,
+        // approve: isToggle4On.value?1:0,
+        // issue: isToggle5On.value?1:0,
+        // selfView: isToggle6On.value?1:0,
     )  ;
     var modulelistJsonString =
         createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"modulelistJsonString", modulelistJsonString});
-    await moduleListPresenter.updateModulelistNumber(
+    await countryListPresenter.updateModulelistNumber(
       modulelistJsonString: modulelistJsonString,
       isLoading: true,
     );

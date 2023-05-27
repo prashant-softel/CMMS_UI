@@ -1,10 +1,12 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
+import '../models/blood_model.dart';
 import '../models/frequency_model.dart';
 import '../models/modulelist_model.dart';
 
-class ModulelistUsecase {
-  ModulelistUsecase(this.repository);
+class BloodlistUsecase {
+  BloodlistUsecase(this.repository);
   Repository repository;
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
@@ -28,6 +30,18 @@ class ModulelistUsecase {
         facilityId,
         isLoading,
       );
+
+  Future<List<BloodListModel?>?> getBloodList({
+    // int? type,
+    // int? facility/Id,
+    bool? isLoading,
+  }) async =>
+      await repository.getBloodList(
+        // type,
+        // facilityId,
+        isLoading,
+      );
+
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
   }) async =>
