@@ -14,8 +14,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class PreventiveListController extends GetxController {
   PreventiveListController(
-    this.preventiveListPresenter,
-  );
+      this.preventiveListPresenter,
+      );
   PreventiveListPresenter preventiveListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
@@ -84,8 +84,8 @@ class PreventiveListController extends GetxController {
       int facilityId, int type, bool isLoading) async {
     preventiveCheckList?.value = <PreventiveCheckListModel>[];
     final _preventiveCheckList =
-        await preventiveListPresenter.getPreventiveCheckList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+    await preventiveListPresenter.getPreventiveCheckList(
+        facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_preventiveCheckList != null) {
       preventiveCheckList!.value = _preventiveCheckList;
@@ -116,7 +116,7 @@ class PreventiveListController extends GetxController {
       case RxList<InventoryCategoryModel>:
         {
           int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
+          equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
         }
 
@@ -124,7 +124,7 @@ class PreventiveListController extends GetxController {
       case RxList<FrequencyModel>:
         {
           int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
+          frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
@@ -269,7 +269,7 @@ class PreventiveListController extends GetxController {
         id: checklistId,
         checklist_number: _checklistNumber);
     var checklistJsonString =
-        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+    createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"checklistJsonString", checklistJsonString});
     await preventiveListPresenter.updateChecklistNumber(

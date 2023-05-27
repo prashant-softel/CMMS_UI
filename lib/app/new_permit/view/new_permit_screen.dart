@@ -252,16 +252,16 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   ),
                                                   CustomRichText(
                                                       title:
-                                                          'Type of permit: '),
+                                                          'Type\nof permit: '),
                                                   SizedBox(
-                                                    width: 5,
+                                                    width: 20,
                                                   ),
                                                   SizedBox(
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
-                                                            1.82,
+                                                            1.6,
                                                     child: DropdownWidget(
                                                       dropdownList: controller
                                                           .typePermitList,
@@ -3797,69 +3797,72 @@ class NewPermitScreen extends GetView<NewPermitController> {
         ),
       ),
       Dimens.boxHeight5,
-      Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
+      Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
               ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ),
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 1.1,
+            child: TextField(
+              controller: controller.permitDescriptionCtrlr,
+              keyboardType: TextInputType.multiline,
+              maxLines: 5,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: Dimens.edgeInsets05_10,
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                focusedErrorBorder: controller.isJobDescriptionInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : InputBorder.none,
+                errorBorder: controller.isJobDescriptionInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : null,
+                errorText: controller.isJobDescriptionInvalid.value
+                    ? "Required field"
+                    : null,
+              ),
+              onChanged: (value) {
+                if (value.trim().length > 3) {
+                  controller.isJobDescriptionInvalid.value = false;
+                } else {
+                  controller.isJobDescriptionInvalid.value = true;
+                }
+              },
             ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.1,
-          child: TextField(
-            controller: controller.permitDescriptionCtrlr,
-            keyboardType: TextInputType.multiline,
-            maxLines: 5,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: Dimens.edgeInsets05_10,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              focusedErrorBorder: controller.isJobDescriptionInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : InputBorder.none,
-              errorBorder: controller.isJobDescriptionInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : null,
-              errorText: controller.isJobDescriptionInvalid.value
-                  ? "Required field"
-                  : null,
-            ),
-            onChanged: (value) {
-              if (value.trim().length > 3) {
-                controller.isJobDescriptionInvalid.value = false;
-              } else {
-                controller.isJobDescriptionInvalid.value = true;
-              }
-            },
           ),
         ),
       ),
@@ -4183,7 +4186,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       // ),
       Dimens.boxHeight5,
       Padding(
-        padding: const EdgeInsets.only(left: 1),
+        padding: const EdgeInsets.only(left: 10),
         child: Container(
           height: 60,
           width: Responsive.isDesktop(context)
@@ -4293,8 +4296,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 3.5,
                       child: CustomMultiSelectDialogField(
-                        buttonText: 'Equipment Name',
-                        title: 'Select Equipment Name',
+                        buttonText: 'Select Equipment Name',
+                        title: 'Equipment Name',
                         initialValue:
                             (controller.selectedEquipmentNameList.isNotEmpty)
                                 ? controller.selectedEquipmentNameIdList

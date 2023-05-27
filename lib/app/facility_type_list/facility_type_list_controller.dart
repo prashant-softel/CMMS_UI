@@ -4,10 +4,12 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
-
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/create_facility_type_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 
@@ -26,7 +28,6 @@ class FacilityTypeListController extends GetxController {
 
   //checkbox
   RxBool isChecked = true.obs;
-
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
@@ -48,7 +49,8 @@ class FacilityTypeListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///SOP Permit List
-  RxList<FacilityTypeListModel> facilityTypeList = <FacilityTypeListModel>[].obs;
+  RxList<FacilityTypeListModel> facilityTypeList =
+      <FacilityTypeListModel>[].obs;
   Rx<bool> isfacilityTypeListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -68,6 +70,13 @@ class FacilityTypeListController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
+  var titleCtrlr = TextEditingController();
+  var addressCtrlr = TextEditingController();
+  var cityCtrlr = TextEditingController();
+  var stateCtrlr = TextEditingController();
+  var countryCtrlr = TextEditingController();
+  var pinCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
 
   @override
   void onInit() async {
@@ -108,36 +117,47 @@ class FacilityTypeListController extends GetxController {
     update(['facility_type_list']);
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          // int equipmentIndex =
-          //     equipmentCategoryList.indexWhere((x) => x?.name == value);
-          // selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
+  void onValueChanged(dynamic list, dynamic value) {}
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          // int frequencyIndex =
-          // frequencyList.indexWhere((x) => x?.name == value);
-          // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
-      case RxList<FacilityModel>:
-        {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+  Future<bool> createFacilityType() async {
+    if (titleCtrlr.text.trim() == '' ||
+        addressCtrlr.text.trim() == '' ||
+        cityCtrlr.text.trim() == '' ||
+        stateCtrlr.text.trim() == '' ||
+        countryCtrlr.text.trim() == '' ||
+        pinCtrlr.text.trim() == '' ||
+        descriptionCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _title = titleCtrlr.text.trim();
+      String _address = addressCtrlr.text.trim();
+      String _city = addressCtrlr.text.trim();
+      String _state = addressCtrlr.text.trim();
+      String _country = addressCtrlr.text.trim();
+      String _pin = addressCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
+      CreateFacilityType createCheckpoint = CreateFacilityType(
+        title: _title,
+        address: _address,
+        city: _city,
+        state: _state,
+        country: _country,
+        pin: _pin,
+        description: _description,
+      );
+      var checkpointJsonString = [
+        createCheckpoint.toJson()
+      ]; //createCheckPointToJson([createCheckpoint]);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
+      print({"checkpointJsonString", checkpointJsonString});
+      // await facilityTypeListPresenter.createCheckPoint(
+      //   checkpointJsonString: checkpointJsonString,
+      //   isLoading: true,
+      // );
+      return true;
     }
+    return true;
   }
 
   Future<void> issuccessCreatechecklist() async {

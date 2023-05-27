@@ -2,15 +2,16 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
-import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_list_web.dart';
+import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class WarrantyClaimListWeb extends GetView<HomeController> {
+class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   WarrantyClaimListWeb({super.key});
-  // final WarrantyClaimController controller = Get.find();
+  
+  final WarrantyClaimController controller = Get.find();
   //  final HomeController controller = Get.find();
   // final HomeController controller = Get.find();
 
@@ -265,7 +266,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                       ///
                        Expanded(
                         child: Container(
-                          child: GetBuilder<HomeController>(
+                          child: GetBuilder<WarrantyClaimController>(
                               id: 'warranty_claim_list',
                               builder: (controller) {
                                 return //
@@ -299,13 +300,14 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                             ...List.generate(
                                               controller.warrantyClaimList.length,
                                               (index) => [
-                                                AssetName(
+                                                // AssetName(
                                                   
-                                                   '${controller.warrantyClaimList[index].wc_id}',
-                                                  // 'dummy data',
-                                                  1,
-                                                ),
+                                                //    '${controller.warrantyClaimList[index].wc_id}',
+                                                //   // 'dummy data',
+                                                //   1,
+                                                // ),
                                                 // index + 1,
+                                                '${controller.warrantyClaimList[index].wc_id}',
                                                 '${controller.warrantyClaimList[index].date_of_claim}',
                                                 '${controller.warrantyClaimList[index].warranty_claim_title}',
                                                 '${controller.warrantyClaimList[index].equipment_sr_no}',
@@ -327,67 +329,69 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                     return TableViewCell(
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          print('${value} $record');
+                                                          print('warrantyiddata:$value');
                                                         },
-                                                        child: value.runtimeType
-                                                                    .toString() ==
-                                                                'AssetName'
-                                                            ? Builder(builder: (context) {
-                                                                final val =
-                                                                    value as AssetName;
-                                                                return Column(
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment: Alignment
-                                                                          .centerLeft,
-                                                                      child: Padding(
-                                                                        padding: Dimens
-                                                                            .edgeInsets8,
-                                                                        child: Text(
-                                                                            '${val.name}'),
-                                                                      ),
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Align(
-                                                                      alignment: Alignment
-                                                                          .centerRight,
-                                                                      child: Container(
-                                                                        padding: Dimens
-                                                                            .edgeInsets8_2_8_2,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          // color: val.requirementStatus ==
-                                                                          //         1
-                                                                          //     ? Colors.red
-                                                                          //     : Colors
-                                                                          //         .green,
-                                                                          borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                      4),
-                                                                        ),
-                                                                        child: Text(
-                                                                          // val.name == 1
-                                                                          //     ? 'requirementRejected'
-                                                                          //         .tr
-                                                                          //     : 'requirementAccepted'
-                                                                          //         .tr,
-                                                                          // style: Styles
-                                                                          //     .white10
-                                                                          //     .copyWith(
-                                                                          //   color: Colors
-                                                                          //       .white,
-                                                                          // ),
-                                                                          '',
+                                                        child: 
+                                                        // value.runtimeType
+                                                        //             .toString() ==
+                                                        //         'AssetName'
+                                                        //     ? Builder(builder: (context) {
+                                                        //         final val =
+                                                        //             value as AssetName;
+                                                        //         return Column(
+                                                        //           children: [
+                                                        //             Align(
+                                                        //               alignment: Alignment
+                                                        //                   .centerLeft,
+                                                        //               child: Padding(
+                                                        //                 padding: Dimens
+                                                        //                     .edgeInsets8,
+                                                        //                 child: Text(
+                                                        //                     '${val.name}'),
+                                                        //               ),
+                                                        //             ),
+                                                        //             Spacer(),
+                                                        //             Align(
+                                                        //               alignment: Alignment
+                                                        //                   .centerRight,
+                                                        //               child: Container(
+                                                        //                 padding: Dimens
+                                                        //                     .edgeInsets8_2_8_2,
+                                                        //                 decoration:
+                                                        //                     BoxDecoration(
+                                                        //                   // color: val.requirementStatus ==
+                                                        //                   //         1
+                                                        //                   //     ? Colors.red
+                                                        //                   //     : Colors
+                                                        //                   //         .green,
+                                                        //                   borderRadius:
+                                                        //                       BorderRadius
+                                                        //                           .circular(
+                                                        //                               4),
+                                                        //                 ),
+                                                        //                 child: Text(
+                                                        //                   // val.name == 1
+                                                        //                   //     ? 'requirementRejected'
+                                                        //                   //         .tr
+                                                        //                   //     : 'requirementAccepted'
+                                                        //                   //         .tr,
+                                                        //                   // style: Styles
+                                                        //                   //     .white10
+                                                        //                   //     .copyWith(
+                                                        //                   //   color: Colors
+                                                        //                   //       .white,
+                                                        //                   // ),
+                                                        //                   '',
                 
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Dimens.boxHeight10,
-                                                                  ],
-                                                                );
-                                                              })
-                                                            : value == 'Actions'
+                                                        //                 ),
+                                                        //               ),
+                                                        //             ),
+                                                        //             Dimens.boxHeight10,
+                                                        //           ],
+                                                        //         );
+                                                        //       })
+                                                        //     : 
+                                                        value == 'Actions'
                                                                 ? Wrap(
                                                                     children: [
                                                                       Row(
@@ -400,7 +404,10 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                                                 .visibility,
                                                                             label: 'View',
                                                                             onPress:
-                                                                                () {},
+                                                                                () {
+                                                                                  controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                  print('record:${int.tryParse('${record[0]}')}');
+                                                                                },
                                                                           ),
                                                                           //),
                 
@@ -463,23 +470,23 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                             const EdgeInsets.symmetric(horizontal: 25),
                                         child: ValueListenableBuilder(
                                             valueListenable:
-                                                controller.paginationController,
+                                                controller.paginationWarrantyController,
                                             builder: (context, value, child) {
                                               return Row(
                                                 children: [
                                                   Text(
-                                                      "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                                      "${controller.paginationWarrantyController.currentPage}  of ${controller.paginationWarrantyController.pageCount}"),
                                                   Row(
                                                     children: [
                                                       IconButton(
                                                         onPressed: controller
-                                                                    .paginationController
+                                                                    .paginationWarrantyController
                                                                     .currentPage <=
                                                                 1
                                                             ? null
                                                             : () {
                                                                 controller
-                                                                    .paginationController
+                                                                    .paginationWarrantyController
                                                                     .previous();
                                                               },
                                                         iconSize: 20,
@@ -488,7 +495,7 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                           Icons
                                                               .arrow_back_ios_new_rounded,
                                                           color: controller
-                                                                      .paginationController
+                                                                      .paginationWarrantyController
                                                                       .currentPage <=
                                                                   1
                                                               ? Colors.black26
@@ -498,15 +505,15 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                       ),
                                                       IconButton(
                                                         onPressed: controller
-                                                                    .paginationController
+                                                                    .paginationWarrantyController
                                                                     .currentPage >=
                                                                 controller
-                                                                    .paginationController
+                                                                    .paginationWarrantyController
                                                                     .pageCount
                                                             ? null
                                                             : () {
                                                                 controller
-                                                                    .paginationController
+                                                                    .paginationWarrantyController
                                                                     .next();
                                                               },
                                                         iconSize: 20,
@@ -514,10 +521,10 @@ class WarrantyClaimListWeb extends GetView<HomeController> {
                                                         icon: Icon(
                                                           Icons.arrow_forward_ios_rounded,
                                                           color: controller
-                                                                      .paginationController
+                                                                      .paginationWarrantyController
                                                                       .currentPage >=
                                                                   controller
-                                                                      .paginationController
+                                                                      .paginationWarrantyController
                                                                       .pageCount
                                                               ? Colors.black26
                                                               : Theme.of(context)

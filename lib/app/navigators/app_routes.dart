@@ -50,11 +50,13 @@ abstract class Routes {
   static const inventoryTypeListScreen = _Paths.inventoryTypeListScreen;
   static const inventoryStatusListScreen = _Paths.inventoryStatusListScreen;
   static const facilityTypeListScreen = _Paths.facilityTypeListScreen;
+  static const SPVListScreen = _Paths.SPVListScreen;
   static const blockTypeListScreen = _Paths.blockTypeListScreen;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
   static const viewUserDetail = _Paths.viewUserDetail;
+  static const moduleTypeListScreen = _Paths.moduleTypeListScreen;
 }
 
 abstract class _Paths {
@@ -104,11 +106,14 @@ abstract class _Paths {
   static const inventoryTypeListScreen = '/inventory-type-list-screen';
   static const inventoryStatusListScreen = '/inventory-status-list-screen';
   static const facilityTypeListScreen = '/facility-type-list-screen';
+  static const SPVListScreen = '/spv-list-screen';
   static const blockTypeListScreen = '/block-type-list-screen';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
+  static const moduleTypeListScreen = '/module-Type-List-Screen';
 
-  // static const editPermitWebScreen = '/edit-permit-web-screen';
+
+// static const editPermitWebScreen = '/edit-permit-web-screen';
 }

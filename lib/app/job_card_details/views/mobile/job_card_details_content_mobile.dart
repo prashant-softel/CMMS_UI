@@ -8,6 +8,7 @@ import '../../../widgets/custom_divider.dart';
 import '../../../widgets/custom_elevated_button.dart';
 import '../../../widgets/file_upload_details_widget_mobile.dart';
 import '../../../widgets/file_upload_with_dropzone_widget.dart';
+import '../../../widgets/history_table_widget_mobile.dart';
 import '../../job_card_details_controller.dart';
 import '../widgets/employee_table_widget.dart';
 import '../widgets/isolated_assets_widget.dart';
@@ -31,7 +32,6 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
       child: Container(
         height: Get.height,
         padding: Dimens.edgeInsets10,
-        // margin: Dimens.edgeInsets20,
         decoration: BoxDecoration(
           color: ColorValues.whiteColor,
           border: Border.all(
@@ -95,6 +95,7 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                   CustomDivider(),
 
                   /// FILE UPLOAD WIDGET
+                  (Text('File Upload', style: Styles.blackBold16)),
                   Container(
                     width: Get.width,
                     child: //
@@ -109,28 +110,29 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                           ]),
                     ),
                   ),
-                  Dimens.boxHeight20,
+                  Dimens.boxHeight10,
                   CustomDivider(),
 
-                  // ///HISTORY
-                  // (controller.isJobCardStarted.value == true &&
-                  //         controller.historyList != null &&
-                  //         controller.historyList!.isNotEmpty)
-                  //     ? //
-                  //     Container(
-                  //         margin: Dimens.edgeInsets20,
-                  //         constraints: BoxConstraints(
-                  //           maxHeight: 500,
-                  //           minHeight: 100,
-                  //         ),
-                  //         child: //
-                  //             HistoryTableWidget(
-                  //           historyList: controller.historyList,
-                  //         ),
-                  //       )
-                  //     //)
-                  //     : //
-                  //     Dimens.box0,
+                  ///HISTORY
+                  Text('History', style: Styles.blackBold16),
+                  (controller.isJobCardStarted.value == true &&
+                          controller.historyList != null &&
+                          controller.historyList!.isNotEmpty)
+                      ? //
+                      Container(
+                          constraints: BoxConstraints(
+                            maxHeight: Get.height * 0.4,
+                            minHeight: 100,
+                          ),
+                          child: //
+                              HistoryTableWidgetMobile(
+                            historyList: controller.historyList,
+                          ),
+                        )
+                      //)
+                      : //
+                      Text('No Data'),
+                  Dimens.boxHeight10,
 
                   /// DESCRIPTION OF WORK DONE
                   Wrap(

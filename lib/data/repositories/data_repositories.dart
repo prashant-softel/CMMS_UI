@@ -248,6 +248,20 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getSPVList({
+    int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getSPVList(
+      isLoading: isLoading,
+      auth: auth,
+      job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
   Future<ResponseModel> getBlockTypeList({
     int? job_type_id,
     required bool isLoading,
@@ -477,6 +491,20 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+
+  Future<ResponseModel> getModuleList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getModuleList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
     int? facilityId,
@@ -691,6 +719,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createModuleList({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.createModuleList(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString);
+    return response;
+  }
+
   Future<ResponseModel> createCheckpoint({
     auth,
     bool? isLoading,
@@ -736,6 +776,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> createWarrantyClaim({
+    required String auth,
+    createWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createWarrantyClaim(
+        auth: auth,
+        createWarrantyClaim: createWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
     bool? isLoading,
@@ -755,6 +806,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.getViewPermitDetail(
         auth: auth,
         permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+  
+   Future<ResponseModel> getViewWarrantyClaimDetail({
+    required String auth,
+    bool? isLoading,
+    int? wc_id,
+  }) async =>
+      await connectHelper.getViewWarrantyClaimDetail(
+        auth: auth,
+        wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
 
@@ -1045,6 +1107,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+
+  Future<ResponseModel> deleteModulelist
+  ({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteModulelist(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
+
   Future<ResponseModel> updateChecklistNumber({
     auth,
     bool? isLoading,
@@ -1054,6 +1128,19 @@ class DataRepository extends DomainRepository {
       auth: auth,
       isLoading: isLoading,
       checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> updateModulelistNumber({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateModulelistNumber(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
     );
     return response;
   }

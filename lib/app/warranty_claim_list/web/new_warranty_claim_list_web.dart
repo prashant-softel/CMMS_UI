@@ -12,13 +12,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class NewWarrantyClaimListWeb extends GetView<HomeController> {
+class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   NewWarrantyClaimListWeb({super.key});
 
   bool valuefirst = false;
 
   // final controller = Get.find<HomeController>();
-  final HomeController controller = Get.find();
+  final HomeController _controller = Get.find();
+  final WarrantyClaimController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -96,7 +97,7 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                         Dimens.boxHeight10,
                         Wrap(
                           children: [
-                            GetBuilder<HomeController>(
+                            GetBuilder<WarrantyClaimController>(
                                 id: 'block_field',
                                 builder: (controller) {
                                   return Column(
@@ -470,15 +471,12 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: [
-                                              
                                               Row(
                                                 children: [
                                                   Radio(
                                                       value: 1,
                                                       groupValue: 'null',
-                                                      onChanged: (value) {
-                                                        
-                                                      }),
+                                                      onChanged: (value) {}),
                                                   Text(
                                                     'Critical',
                                                     style: TextStyle(
@@ -494,9 +492,7 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                                   Radio(
                                                       value: 1,
                                                       groupValue: 'null',
-                                                      onChanged: (value) {
-                                                        
-                                                      }),
+                                                      onChanged: (value) {}),
                                                   Text(
                                                     'High',
                                                     style: TextStyle(
@@ -536,8 +532,6 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                                   )
                                                 ],
                                               ),
-                                             
-                                             
                                             ],
                                           ),
                                         ],
@@ -755,7 +749,6 @@ class NewWarrantyClaimListWeb extends GetView<HomeController> {
                                               ),
                                             ),
                                           ),
-                                      
                                         ],
                                       ),
                                       SizedBox(

@@ -158,8 +158,12 @@ class JobCardDetailsController extends GetxController {
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 4;
-
+    int tempModuleType = 21;
+    int tempJobCardId = 5326;
+    //
     historyList?.value = await jobCardDetailsPresenter.getJobCardHistory(
+          // tempModuleType,
+          // tempJobCardId,
           moduleType,
           jobCardId.value,
           true,

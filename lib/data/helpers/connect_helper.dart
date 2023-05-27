@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
@@ -274,6 +275,20 @@ class ConnectHelper {
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Facility/GetFacilityList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getSPVList(
+      {required bool isLoading, required String auth, int? job_type_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetSPVList',
       Request.getMultiparts,
       null,
       isLoading,
@@ -580,7 +595,9 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPreventiveCheckList({
+  Future<ResponseModel>
+  getPreventiveCheckList({
+
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -598,6 +615,28 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+  Future<ResponseModel>
+  getModuleList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetModuleList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
@@ -1080,6 +1119,36 @@ class ConnectHelper {
     return responseModel;
   }
 
+   //Create Warranty Claim
+  Future<ResponseModel> createWarrantyClaim({
+    required String auth,
+    createWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/CreateWC',
+      Request.post,
+      createWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Warranty Claim Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(NewWarrantyClaimDialog(
+      data: parsedJson['message'],
+      // warrantyId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+
+
   Future<ResponseModel> getUserAccessList({
     required String auth,
     bool? isLoading,
@@ -1133,6 +1202,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getViewWarrantyClaimDetail({
+    required String auth,
+    bool? isLoading,
+    int? wc_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'wc/GetWCDetails?wc_id=$wc_id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewWarrantyClaimResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -1148,6 +1236,27 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+  Future<ResponseModel> createModuleList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+
+    var responseModel =
+      // responseModel =
+      await apiWrapper.makeRequest(
+        'CMMS/AddModule',
+        Request.post,
+        modulelistJsonString,
+        isLoading ?? false,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
     return responseModel;
   }
 
@@ -1198,6 +1307,26 @@ class ConnectHelper {
       'CheckList/DeleteCheckPoint?id=$check_point_id',
       Request.delete,
       check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> deleteModulelist({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteModule?id=$module_id',
+      Request.delete,
+      module_id,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -1554,6 +1683,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateModulelistNumber({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateModule',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   Future<ResponseModel> updateCheckPoint({
     required String auth,
     bool? isLoading,
