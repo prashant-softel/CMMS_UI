@@ -9,7 +9,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:cmms/app/widgets/history_table_widget.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -1420,7 +1420,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     minHeight: 100,
                                                   ),
                                                   child: //
-                                                      HistoryTableWidget(
+                                                      HistoryTableWidgetWeb(
                                                     historyList:
                                                         controller.historyList,
                                                   ),
@@ -1431,121 +1431,159 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 height: 10,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 50),
+                                                padding: const EdgeInsets.only(
+                                                    left: 50),
                                                 child: Row(
                                                   children: [
                                                     Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
                                                       children: [
                                                         CustomRichText(
                                                             title:
                                                                 'Requested By: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                          title: 'Signature: '),
-                                                        SizedBox(height: 1,),
+                                                            title:
+                                                                'Signature: '),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                            title: 'Issued By: '),
-                                                        SizedBox(height: 1,),
+                                                            title:
+                                                                'Issued By: '),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                          title: 'Signature: '),
-                                                        SizedBox(height: 1,),
+                                                            title:
+                                                                'Signature: '),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Approved By: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                          title: 'Signature: '),
-                                                        SizedBox(height: 1,),
+                                                            title:
+                                                                'Signature: '),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                            title: 'Closed By: '),
-                                                        SizedBox(height: 1,),
+                                                            title:
+                                                                'Closed By: '),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                          title: 'Signature: '),
-                                                        SizedBox(height: 1,),
+                                                            title:
+                                                                'Signature: '),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Cancelled By: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 1,),
+                                                        SizedBox(
+                                                          height: 1,
+                                                        ),
                                                         CustomRichText(
-                                                          title: 'Signature: '),
-                                                
+                                                            title:
+                                                                'Signature: '),
                                                       ],
                                                     ),
-                                                   SizedBox(width: 30,),
+                                                    SizedBox(
+                                                      width: 30,
+                                                    ),
                                                     Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                         Text(
+                                                        Text(
                                                           'Prashant Shetya',
                                                         ),
                                                         Text(
                                                           '2022-05-01 17:25',
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           'No Data !!!',
                                                         ),
                                                         Text(
                                                           '${controller.viewPermitDetailsModel.value?.issuedByName}',
                                                         ),
-                                                        
                                                         Text(
                                                           '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           'No Data !!!',
                                                         ),
                                                         Text(
-                                                            '${controller.viewPermitDetailsModel.value?.approvedByName}',
-                                                          ),
-                                                         Text(
+                                                          '${controller.viewPermitDetailsModel.value?.approvedByName}',
+                                                        ),
+                                                        Text(
                                                           '${controller.viewPermitDetailsModel.value?.approve_at}',
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           'No Data !!!',
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           '${controller.viewPermitDetailsModel.value?.closedByName}',
                                                         ),
                                                         Text(
                                                           '${controller.viewPermitDetailsModel.value?.close_at}',
                                                         ),
-                                                          Text(
+                                                        Text(
                                                           'No Data !!!',
                                                         ),
                                                         Text(
                                                           '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           'No Data !!!',
                                                         ),
-                                                
                                                       ],
                                                     )
-                                                
                                                   ],
                                                 ),
                                               ),
@@ -1757,13 +1795,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ElevatedButton.icon(
                                                         style: ElevatedButton
                                                             .styleFrom(
-                                                          primary: Color.fromARGB(
-                                                              255,
-                                                              5,
-                                                              92,
-                                                              163), // background
-                                                          onPrimary: Colors
-                                                              .white, // foreground
+                                                          foregroundColor:
+                                                              Colors.white,
+                                                          backgroundColor:
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  5,
+                                                                  92,
+                                                                  163), // foreground
                                                         ),
                                                         onPressed: () {},
                                                         icon: Icon(Icons
@@ -3228,7 +3267,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   minHeight: 100,
                                                 ),
                                                 child: //
-                                                    HistoryTableWidget(
+                                                    HistoryTableWidgetWeb(
                                                   historyList:
                                                       controller.historyList,
                                                 ),
@@ -3640,13 +3679,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ElevatedButton.icon(
                                                         style: ElevatedButton
                                                             .styleFrom(
-                                                          primary: Color.fromARGB(
-                                                              255,
-                                                              5,
-                                                              92,
-                                                              163), // background
-                                                          onPrimary: Colors
-                                                              .white, // foreground
+                                                          foregroundColor:
+                                                              Colors.white,
+                                                          backgroundColor:
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  5,
+                                                                  92,
+                                                                  163), // foreground
                                                         ),
                                                         onPressed: () {},
                                                         icon: Icon(Icons

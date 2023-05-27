@@ -33,25 +33,32 @@ class HistoryModel {
   int? secondaryModuleRefId;
   String? comment;
   int? createdById;
-  CreatedByName? createdByName;
+  String? createdByName;
   DateTime? createdAt;
   int? status;
   dynamic latitude;
   dynamic longitude;
 
   factory HistoryModel.fromJson(Map<String, dynamic> json) => HistoryModel(
-        id: json["id"],
-        moduleType: json["module_type"],
-        moduleRefId: json["module_ref_id"],
-        secondaryModuleType: json["secondary_module_type"],
-        secondaryModuleRefId: json["secondary_module_ref_id"],
-        comment: json["comment"],
-        createdById: json["created_by_id"],
-        createdByName: createdByNameValues.map[json["created_by_name"]]!,
-        createdAt: DateTime.parse(json["created_at"]),
-        status: json["status"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        id: json['id'] == null ? 0 : json['id'],
+        moduleType: json["module_type"] == null ? 0 : json["module_type"],
+        moduleRefId: json["module_ref_id"] == null ? 0 : json["module_ref_id"],
+        secondaryModuleType: json["secondary_module_type"] == null
+            ? 0
+            : json["secondary_module_type"],
+        secondaryModuleRefId: json["secondary_module_ref_id"] == null
+            ? 0
+            : json["secondary_module_ref_id"],
+        comment: json["comment"] == null ? '' : json["comment"],
+        createdById: json["created_by_id"] == null ? 0 : json["created_by_id"],
+        createdByName:
+            json["created_by_name"] == null ? '' : json["created_by_name"],
+        createdAt: json['created_at'] == null
+            ? DateTime.now()
+            : DateTime.parse(json['created_at'] as String),
+        status: json["status"] == null ? 0 : json["status"],
+        latitude: json["latitude"] == null ? '' : json["latitude"],
+        longitude: json["longitude"] == null ? '' : json["longitude"],
       );
 
   Map<String, dynamic> toJson() => {

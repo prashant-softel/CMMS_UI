@@ -24,7 +24,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
         Obx(
       () => //
           Container(
-        height: Get.height * 0.2,
+        height: Get.height * 0.1,
         child: //
             ClipRRect(
           borderRadius: BorderRadius.circular(12),
@@ -42,37 +42,13 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                       //
                       children: [
                     ///
-                    // DropzoneView(
-                    //   onCreated: (controller) => this.dzvcontroller = controller,
-                    //   onDrop: (dynamic event) {},
-                    //   onDropMultiple: (List<dynamic>? events) async {
-                    //     await controller.selectFiles();
-                    //   },
-                    //   onHover: () => controller.blnHiglight.value = true,
-                    //   onLeave: () => controller.blnHiglight.value = false,
-                    // ),
-
                     Center(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Icon(
-                              Icons.cloud_upload_outlined,
-                              size: 32,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Drop Files Here',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-
                             /// CHOOSE FILE BUTTON
                             SizedBox(
-                              height: Dimens.thirtyFive,
+                              height: Get.height * 0.05,
                               child: ElevatedButton.icon(
                                 onPressed: () {
                                   controller.selectFiles();
