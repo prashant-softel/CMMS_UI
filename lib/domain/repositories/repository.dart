@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
@@ -18,6 +19,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
@@ -401,6 +403,8 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
+        }else{
+          Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createWarrantyClaim');
@@ -492,6 +496,38 @@ class Repository {
 //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getInventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryModel2>> getAffectedPartList({
+    required int? facilityId,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAffectedPartList(
+        facilityId: facilityId,
+        blockId: blockId,
+        categoryIds: categoryIds,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var affectedPartList = inventoryModel2FromJson(res.data);
+        return affectedPartList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getAffectedPartList');
         return [];
       }
     } catch (error) {

@@ -10,6 +10,7 @@ import 'package:cmms/domain/models/create_warranty_claim_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class WarrantyClaimController extends GetxController {
   WarrantyClaimController(this.warrantyClaimPresenter);
@@ -24,18 +26,20 @@ class WarrantyClaimController extends GetxController {
 
   final HomeController homeController = Get.find();
 
-  ///
-  var startDateTimeCtrlrWeb = TextEditingController();
-  Rx<DateTime> selectedDateTimeWeb = DateTime.now().obs;
+  ///Failure Date Time For Web
+  var failureDateTimeCtrlrWeb = TextEditingController();
+  var failureDateTimeCtrlrWebBuffer;
+  Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
 
-  ///
-  var startDateTimeCtrlr2 = TextEditingController();
-  var startDateTimeCtrlr2Web = TextEditingController();
-  Rx<DateTime> selectedBreakdownTime2 = DateTime.now().obs;
+  ///Warranty Start date Time for web
+  var warrantyStartDateTimeCtrlrWeb = TextEditingController();
+  var warrantyStartDateTimeCtrlrWebBuffer;
+  Rx<DateTime> selectedWarrantyStartDateTime = DateTime.now().obs;
 
-  ///
-  var startDateTimeCtrlr3 = TextEditingController();
-  Rx<DateTime> selectedBreakdownTime3 = DateTime.now().obs;
+  ///Warranty End date time for web
+  var warrantyEndDateTimeCtrlrWeb = TextEditingController();
+  var warrantyEndDateTimeCtrlrWebBuffer;
+  Rx<DateTime> selectedWarrantyEndDateTime = DateTime.now().obs;
 
   Set<String> supplierNameSet = {};
 
@@ -48,12 +52,25 @@ class WarrantyClaimController extends GetxController {
   RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
   RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<bool> isInventorySelected = true.obs;
-  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   RxList<int> selectedEquipmentIdList = <int>[].obs;
   Rx<String> selectedInventory = ''.obs;
-  RxList<String?> selectedWorkAreaNameList = <String>[].obs;
-  RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
-  RxList<int?> selectedWorkAreaIdList = <int>[].obs;
+
+  ///Equipment name List
+  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  Rx<String> selectedEquipmentName = ''.obs;
+  Rx<bool> isEquipmentNameSelected = true.obs;
+  int selectedEquipmentnameId = 0;
+  // String? selectedEquipmentName = '';
+
+  //Affected Part Equipemnt Name lIst
+  RxList<InventoryModel2?> affectedPartEqipmentNameList =
+      <InventoryModel2>[].obs;
+  RxList<String?> selectedAffectedpartEquipmentNameList = <String>[].obs;
+  RxList<int?> selectedAffectedPartEquipmentIdList = <int>[].obs;
+  Rx<String> selectedAffectedPart = ''.obs;
+  Rx<bool> isAffectedPartSelected = true.obs;
+  int selectedAffectedPartId = 0;
+  String? selectedAffectedPartName = '';
 
   RxList<BusinessListModel?> supplierNameList = <BusinessListModel>[].obs;
   Rx<bool> isSupplierNameSelected = true.obs;
@@ -62,34 +79,43 @@ class WarrantyClaimController extends GetxController {
   RxList<int?> selectedSupplierNameIdList = <int>[].obs;
   Rx<bool> isBlockSelected = true.obs;
 
+  ///Currency List
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
+  int selectedCurrencyId = 0;
 
+  /// Employee List / Approver
   RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
   RxList<String?> selectedEmployeeDataList = <String>[].obs;
   RxList<int?> selectedEmployeeIdList = <int>[].obs;
+  int selectedApproverId = 0;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
+
+  ///Text Editing Controller
+  final warrantyClaimTitleTextController = TextEditingController();
+  final warrantyClaimBriefDescTextController = TextEditingController();
+  final immediateCorrectiveActionTextController = TextEditingController();
+  final requestManufactureTextController = TextEditingController();
+  final costOfReplacementTextController = TextEditingController();
+  final orderReferenceNoTextController = TextEditingController();
+  final affectedSerialNoTextController = TextEditingController();
+
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
-  final typeTextController = TextEditingController();
-  final categoryTextController = TextEditingController();
-  final serialNoTextController = TextEditingController();
-  final statusTextController = TextEditingController();
-  final assetNameTextController = TextEditingController();
-  final enterMultiplierTextController = TextEditingController();
-  final assetDescpTextController = TextEditingController();
+
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
   //int facilityId = 45;
   String categoryIds = '';
+  Rx<bool> isFormInvalid = false.obs;
 
   Rx<String> selectedFacility = ''.obs;
   String username = '';
@@ -186,6 +212,9 @@ class WarrantyClaimController extends GetxController {
       getInventoryList();
     });
     Future.delayed(Duration(seconds: 1), () {
+      getAffectedPartList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
       getWarrantyClaimList();
     });
     Future.delayed(Duration(seconds: 1), () {
@@ -234,11 +263,19 @@ class WarrantyClaimController extends GetxController {
     }
   }
 
-  void equipmentSelected(_selectedEquipmentIds) {
-    // selectedEquipmentIdList.value = <int>[];
+  void affectedPartSelected(_selectedaffectedPartIds) {
+    selectedAffectedPartEquipmentIdList.value = <int>[];
+    for (var _selectedCategoryId in _selectedaffectedPartIds) {
+      selectedAffectedPartEquipmentIdList.add(_selectedCategoryId);
+    }
+
     // for (var _selectedEquipmentNameId in _selectedEquipmentIds) {
     //   selectedEquipmentIdList.add(_selectedEquipmentNameId);
+    //   print('Affected part id:$selectedEquipmentIdList');
     // }
+    // int affectedpartIndex = affectedPartEqipmentNameList.indexWhere((x) => x?.name == _selectedEquipmentName);
+    // selectedAffetctedpart = affectedPartEqipmentNameList[affectedpartIndex]?.name ?? '';
+    // print('Affected part :${selectedAffetctedpart}');
   }
 
   Future<void> getInventoryCategoryList({String? facilityId}) async {
@@ -271,6 +308,25 @@ class WarrantyClaimController extends GetxController {
       rowCount: eqipmentNameList.length,
       rowsPerPage: 10,
     );
+    update(['inventory_list']);
+  }
+
+  void getAffectedPartList() async {
+    affectedPartEqipmentNameList.value = <InventoryModel2>[];
+    final _affectedPartList = await warrantyClaimPresenter.getAffectedPartList(
+      isLoading: true,
+      categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+    //  print('equipment Name List:$inventoryNameList');
+    for (var affected_part_list in _affectedPartList) {
+      affectedPartEqipmentNameList.add(affected_part_list);
+    }
+    // inventoryList = _affectedPartList;
+    // paginationController = PaginationController(
+    //   rowCount: eqipmentNameList.length,
+    //   rowsPerPage: 10,
+    // );
     update(['inventory_list']);
   }
 
@@ -422,6 +478,7 @@ class WarrantyClaimController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print('Valuesd:${value}');
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -432,11 +489,40 @@ class WarrantyClaimController extends GetxController {
         break;
       case RxList<InventoryModel>:
         {
-          for (var workAreaName in selectedWorkAreaNameList) {
-            int workAreaIndex =
-                workAreaList.indexWhere((x) => x?.name == workAreaName);
-            selectedWorkAreaIdList.add(workAreaIndex);
+          // for (var workAreaName in selectedWorkAreaNameList) {
+          int equipmentNameIndex =
+              eqipmentNameList.indexWhere((x) => x?.name == value);
+          selectedEquipmentnameId =
+              eqipmentNameList[equipmentNameIndex]?.id ?? 0;
+
+          if (selectedEquipmentnameId > 0) {
+            isEquipmentNameSelected.value = true;
           }
+          selectedEquipmentName.value = value;
+
+          print('Equipment name Id: $selectedEquipmentnameId');
+
+          // }
+        }
+        break;
+      case RxList<InventoryModel2>:
+        {
+          // for (var workAreaName in selectedWorkAreaNameList) {
+          int affectedPartIndex =
+              affectedPartEqipmentNameList.indexWhere((x) => x?.name == value);
+          selectedAffectedPartId =
+              affectedPartEqipmentNameList[affectedPartIndex]?.id ?? 0;
+          selectedAffectedPartName =
+              affectedPartEqipmentNameList[affectedPartIndex]?.name ?? '';
+
+          if (selectedAffectedPartId > 0) {
+            isAffectedPartSelected.value = true;
+          }
+          selectedAffectedPart.value = value;
+          print('Affected part Id: $selectedAffectedPartId');
+          print('Affected part name : $selectedAffectedPartName');
+
+          // }
         }
         break;
       case RxList<BusinessListModel>:
@@ -450,20 +536,34 @@ class WarrantyClaimController extends GetxController {
         break;
       case RxList<CurrencyListModel>:
         {
-          for (var unitCurrency in selectedUnitCurrencyList) {
-            int unitCurrencyIndex =
-                unitCurrencyList.indexWhere((x) => x?.code == unitCurrency);
-            selectedUnitCurrencyIdList.add(unitCurrencyIndex);
+          // for (var unitCurrency in selectedUnitCurrencyList) {
+          int unitCurrencyIndex =
+              unitCurrencyList.indexWhere((x) => x?.name == value);
+          selectedCurrencyId = unitCurrencyList[unitCurrencyIndex]?.id ?? 0;
+
+          if (selectedCurrencyId > 0) {
+            isUnitCurrencySelected.value = true;
           }
+          selectedUnitCurrency.value = value;
+          print('Unit Currency Id :$selectedCurrencyId');
+
+          // }
         }
         break;
       case RxList<EmployeeListModel>:
         {
-          for (var employeeDataList in selectedEmployeeDataList) {
-            int employeeListIndex =
-                employeeList.indexWhere((x) => x.name == employeeDataList);
-            selectedEmployeeIdList.add(employeeListIndex);
+          // for (var employeeDataList in selectedEmployeeDataList) {
+          int employeeListIndex =
+              employeeList.indexWhere((x) => x.name == value);
+          selectedApproverId = employeeList[employeeListIndex].id ?? 0;
+
+          if (selectedApproverId > 0) {
+            isemployeeListSelected.value = true;
           }
+          selectedEmployeeList.value = value;
+          print('Approver Id: $selectedApproverId');
+
+          // }
         }
         break;
 
@@ -475,16 +575,102 @@ class WarrantyClaimController extends GetxController {
     }
   }
 
+  void checkForm() {
+    if (selectedEquipmentName.value == '') {
+      isEquipmentNameSelected.value = false;
+    }
+    if (selectedAffectedPart.value == '') {
+      isAffectedPartSelected.value = false;
+    }
+    if (selectedUnitCurrency.value == '') {
+      isUnitCurrencySelected.value = false;
+    }
+    if (selectedEmployeeList.value == '') {
+      isemployeeListSelected.value = false;
+    }
+
+    if (warrantyClaimTitleTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
+    }
+    if (warrantyClaimBriefDescTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Description Field cannot be empty', timeInSecForIosWeb: 5);
+    }
+    if (affectedSerialNoTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Affected Serial No Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (failureDateTimeCtrlrWebBuffer == null) {
+      Fluttertoast.showToast(
+          msg: 'Failure Date Time Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (warrantyStartDateTimeCtrlrWebBuffer == null) {
+      Fluttertoast.showToast(
+          msg: 'Warranty Start Date Time Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (warrantyEndDateTimeCtrlrWebBuffer == null) {
+      Fluttertoast.showToast(
+          msg: 'Warranty End Date Time Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (orderReferenceNoTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Order Reference No Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (costOfReplacementTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Cost of Replacement Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (immediateCorrectiveActionTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Corrective Action Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (requestManufactureTextController.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
+    }
+    if (isEquipmentNameSelected.value == false ||
+        isAffectedPartSelected.value == false ||
+        isUnitCurrencySelected.value == false ||
+        isemployeeListSelected.value == false) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   ///Create Warranty Claim
   void createWarrantyClaim() async {
     {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
-      // String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
-      // String _description =
-      //     htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+
+      String _warrantyClaimTitle =
+          htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
+      String _description =
+          htmlEscape.convert(warrantyClaimBriefDescTextController.text.trim());
+      String _immediateCorrectiveByBuyer = htmlEscape
+          .convert(immediateCorrectiveActionTextController.text.trim());
+      String _requestToBuyer =
+          htmlEscape.convert(requestManufactureTextController.text.trim());
+      // String _costOfReplacement =
+      //     htmlEscape.convert(costOfReplacementTextController.text.trim());
+      String _orderReferenceNo =
+          htmlEscape.convert(orderReferenceNoTextController.text.trim());
+      String _affectedSerialNo =
+          htmlEscape.convert(affectedSerialNoTextController.text.trim());
+
+      int costOfReplacement =
+          int.parse(costOfReplacementTextController.text.trim());
 
       // int? sopFileId = createSOPModel2.sop_fileId;
       // // int? jsaFileId = data.jsa_fileId;
@@ -492,23 +678,23 @@ class WarrantyClaimController extends GetxController {
 
       CreateWarrantyClaimModel createwarrantyClaimModel =
           CreateWarrantyClaimModel(
-              facilityId: 45,
-              equipmentId: 13221,
-              goodsOrderId: 14205,
-              affectedPart: "Switch",
-              orderReference: "ORDER14205",
-              affectedSrNo: "25518/09/SWITCH",
-              costOfReplacement: 5000,
-              currencyId: 69,
-              warrantyStartAt: "2023-04-01",
-              warrantyEndAt: "2027-04-01",
-              warrantyClaimTitle: "Burnt Switch Replacement",
-              warrantyDescription:
-                  "A switch in the ACDB is burnt. Please replace it.",
-              correctiveActionByBuyer: "Buyer will have to replace the switch.",
-              requestToSupplier: "Please give another switch at a discount.",
-              approverId: 1,
-              failureTime: "2023-04-05");
+        facilityId: facilityId,
+        equipmentId: selectedEquipmentnameId,
+        goodsOrderId: 14205,
+        affectedPart: selectedAffectedPartName,
+        orderReference: _orderReferenceNo,
+        affectedSrNo: _affectedSerialNo,
+        costOfReplacement: costOfReplacement,
+        currencyId: selectedCurrencyId,
+        warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
+        warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
+        warrantyClaimTitle: _warrantyClaimTitle,
+        warrantyDescription: _description,
+        correctiveActionByBuyer: _immediateCorrectiveByBuyer,
+        requestToSupplier: _requestToBuyer,
+        approverId: selectedApproverId,
+        failureTime: failureDateTimeCtrlrWebBuffer,
+      );
 
       var warrantyClaimJsonString = [createwarrantyClaimModel.toJson()];
       Map<String, dynamic>? responseCreateWarrantyClaim =
@@ -517,7 +703,7 @@ class WarrantyClaimController extends GetxController {
         isLoading: true,
       );
 
-      if (responseCreateWarrantyClaim != null) {
+      if (responseCreateWarrantyClaim == null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
       }

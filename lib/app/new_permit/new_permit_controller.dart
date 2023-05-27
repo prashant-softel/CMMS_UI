@@ -492,7 +492,7 @@ if(arguments != null){
       });
       filteredEquipmentNameList.add(e);
     }
-    // print({"selectedEquipmentNameIdList le":selectedEquipmentNameIdList.value.length,"filteredEquipmentNameList":filteredEquipmentNameList.value.length});
+    //  print({"selectedEquipmentNameIdList le":selectedEquipmentNameIdList.value.length,"filteredEquipmentNameList":filteredEquipmentNameList.value.length});
   }
 
   void employeeNameSelected(_selectedEmployeeNameIds) {

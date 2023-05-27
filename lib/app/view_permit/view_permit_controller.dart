@@ -1034,4 +1034,8 @@ int? permitId = 0;
       Routes.newPermit,
     );
   }
+  void goToNewPermitScreen() {
+    Get.toNamed(Routes.newPermit);
+  }
+
 }
