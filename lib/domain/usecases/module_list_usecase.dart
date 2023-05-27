@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
-
 import '../models/frequency_model.dart';
 import '../models/modulelist_model.dart';
 
@@ -36,25 +35,25 @@ class ModulelistUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<bool> createChecklistNumber({
-    checklistJsonString,
+  Future<bool> createModulelistNumber({
+    modulelistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckListNumber(
-          isLoading: isLoading, checklistJsonString: checklistJsonString);
-  deleteCkecklist(
-          {required Object checklist_id, required bool isLoading}) async =>
-      await repository.deleteCkecklist(
-        checklist_id,
+      await repository.createModuleListNumber(
+          isLoading: isLoading, modulelistJsonString: modulelistJsonString);
+  deleteModulelist(
+          {required Object module_id, required bool isLoading}) async =>
+      await repository.deleteModulelist(
+        module_id,
         isLoading,
       );
-  Future<bool> updateChecklistNumber({
-    checklistJsonString,
+  Future<bool> updateModulelistNumber({
+    modulelistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updateChecklistNumber(
+      await repository.updateModulelistNumber(
         isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
+        modulelistJsonString: modulelistJsonString,
       );
 
 }
