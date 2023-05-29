@@ -13,6 +13,7 @@ class DropdownWidget extends StatelessWidget {
     this.isEditable,
     required this.onValueChanged,
     this.controller,
+    this.focusNode,
   });
 
   String? selectedValue;
@@ -21,7 +22,9 @@ class DropdownWidget extends StatelessWidget {
   final bool? isEditable;
   Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
+  final FocusNode? focusNode;
 
+  ///
   @override
   Widget build(BuildContext context) {
     ///
@@ -62,6 +65,7 @@ class DropdownWidget extends StatelessWidget {
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
+            focusNode: focusNode,
             icon: Icon(
               Icons.arrow_drop_down,
               color: ColorValues.blackColor,

@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:convert';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
@@ -102,6 +102,7 @@ class EditJobController extends GetxController {
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   Rx<int> jobID = 0.obs;
+  HtmlEscape htmlEscape = HtmlEscape();
 
   StreamSubscription<int>? facilityIdStreamSubscription;
 
@@ -405,7 +406,7 @@ class EditJobController extends GetxController {
       }
     } //
     catch (e) {
-      Utility.showDialog(e.toString() + ' updateJob');
+      Utility.showDialog(e.toString() + ' assignReAssignJob');
     }
   }
 
@@ -420,8 +421,8 @@ class EditJobController extends GetxController {
         selectedAssignedToId = getAssignedToId(selectedAssignedTo.value) ?? 0;
       }
       int _permitId = selectedPermitId;
-      String _title = jobTitleCtrlr.text.trim();
-      String _description = jobDescriptionCtrlr.text.trim();
+      String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
+      String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
       String _breakdownTime = convertDateTimeToAPIFormat();
       selectedAssetsIdList.clear();
 
