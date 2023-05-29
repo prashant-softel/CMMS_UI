@@ -64,6 +64,7 @@ class WorkTypeWidget extends StatelessWidget {
           child: //
 
               MultiSelectDialogField(
+            searchable: true,
             validator: (selectedItems) {
               if (controller.isWorkTypeSelected.value == false) {
                 return "Required field";

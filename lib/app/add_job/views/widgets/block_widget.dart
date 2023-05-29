@@ -19,10 +19,12 @@ class BlockWidget extends StatelessWidget {
     return //
         Obx(
       () => //
-          Column(children: [
+          Column(//
+              children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: RichText(
+          child: //
+              RichText(
             text: TextSpan(
                 text: 'Select Block: ',
                 style: Styles.blackBold16,
@@ -43,6 +45,7 @@ class BlockWidget extends StatelessWidget {
           isValueSelected: controller.isBlockSelected.value,
           selectedValue: controller.selectedBlock.value,
           onValueChanged: controller.onDropdownValueChanged,
+          focusNode: controller.focusNode,
         ),
         Dimens.boxHeight20,
       ]),
