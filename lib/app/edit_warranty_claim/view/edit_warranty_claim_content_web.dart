@@ -1,5 +1,6 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/edit_warranty_claim/edit_warranty_claim_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -12,13 +13,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
-  NewWarrantyClaimListWeb({super.key});
+class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
+  EditWarrantyClaimWeb({super.key});
 
   bool valuefirst = false;
 
   // final controller = Get.find<HomeController>();
-  final WarrantyClaimController controller = Get.find();
+  final EditWarrantyClaimController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -82,7 +83,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                 child: Text(" / Warranty Claim List",
                                     style: Styles.greyMediumLight12),
                               ),
-                              Text(" / Add Warranty Claim",
+                              Text(" / Edit Warranty Claim",
                                   style: Styles.greyMediumLight12)
                             ],
                           ),
@@ -91,12 +92,12 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                           height: 30,
                         ),
                         CustomAppBar(
-                          title: 'New Warranty Claim'.tr,
+                          title: 'Edit Warranty Claim'.tr,
                         ),
                         Dimens.boxHeight10,
                         Wrap(
                           children: [
-                            GetBuilder<WarrantyClaimController>(
+                            GetBuilder<EditWarrantyClaimController>(
                                 id: 'block_field',
                                 builder: (controller) {
                                   return Column(
@@ -105,6 +106,9 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                         children: [
                                           CustomTextField(
                                             label: 'Warranty Claim Title: *',
+                                            hintText:
+                                                '${controller.editWarrantyClaimDetailsModel.value?.warranty_claim_title}',
+                                            maxLine: 2,
                                             textController: controller
                                                 .warrantyClaimTitleTextController,
                                           ),
@@ -116,6 +120,8 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             child: CustomTextField(
                                               label:
                                                   'Warranty Brief Description: *',
+                                              hintText:
+                                                  '${controller.editWarrantyClaimDetailsModel.value?.warranty_description}',
                                               textController: controller
                                                   .warrantyClaimBriefDescTextController,
                                             ),
@@ -606,6 +612,8 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                 textController: controller
                                                     .affectedSerialNoTextController,
                                                 label: 'Affected Sr.No.:',
+                                                hintText:
+                                                    '${controller.editWarrantyClaimDetailsModel.value?.affected_sr_no}',
                                               ),
                                               CustomTextField(
                                                 readOnly: true,
@@ -617,6 +625,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                     .orderReferenceNoTextController,
                                                 label:
                                                     'Order/Contract Reference No.:',
+                                                hintText: '${controller.editWarrantyClaimDetailsModel.value?.order_reference_number}',
                                               ),
                                               CustomTextField(
                                                 textController: controller
@@ -644,6 +653,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                 textController: controller
                                                     .costOfReplacementTextController,
                                                 label: 'Cost of Replacement:',
+                                                hintText: '${controller.editWarrantyClaimDetailsModel.value?.cost_of_replacement}',
                                               ),
                                             ],
                                           ),
@@ -977,6 +987,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                     .immediateCorrectiveActionTextController,
                                                 label:
                                                     'Immediate Corrective Action by Buyer: *',
+                                                hintText: '${controller.editWarrantyClaimDetailsModel.value?.corrective_action_by_buyer}',
                                               ),
                                             ],
                                           ),
@@ -986,7 +997,8 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                           CustomTextField(
                                             textController: controller
                                                 .requestManufactureTextController,
-                                            label: 'Request to Manufacturee: *',
+                                            label: 'Request to Manufacturer: *',
+                                            hintText: '${controller.editWarrantyClaimDetailsModel.value?.request_to_supplier}',
                                           ),
                                         ],
                                       ),
@@ -1541,21 +1553,21 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                   height: 150,
                                 ),
                                 CustomElevatedButton(
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: ColorValues.navyBlueColor,
                                   onPressed: () {},
-                                  text: 'Save As Draft',
+                                  text: 'Update',
                                 ),
                                 SizedBox(
                                   width: 20,
                                 ),
-                                CustomElevatedButton(
-                                  backgroundColor: Colors.green,
-                                  onPressed: () {
-                                    // showAlertDialog();
-                                    controller.createWarrantyClaim();
-                                  },
-                                  text: 'Submit For Release',
-                                ),
+                                // CustomElevatedButton(
+                                //   backgroundColor: Colors.green,
+                                //   onPressed: () {
+                                //     // showAlertDialog();
+                                //     // controller.createWarrantyClaim();
+                                //   },
+                                //   text: 'Submit For Release',
+                                // ),
                               ],
                             )
 

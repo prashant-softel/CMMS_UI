@@ -1997,448 +1997,255 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         width: 35,
                                                       ),
                                                       Row(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                           Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                                            children: [
-                                                              CustomRichText(
-                                                              title:
-                                                                  'Start Date: '),
-                                                            CustomRichText(
-                                                              title:
-                                                                  'Permit No.: '),
-                                                            CustomRichText(
-                                                               title:
-                                                              'Equipment Categories: '),
-                                                            CustomRichText(
-                                                            title:
-                                                                'Permit Description: ')
-
-                                                            ],
-                                                           ),
-
-                                                           Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                            '${controller.startDateTimeCtrlr.text}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                            
-                                                          ),
-                                                           Text(
-                                                            '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                          controller.permitId != null
-                                                        ? SizedBox(
-                                                            width: 100,
-                                                            child: Wrap(
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              spacing: 100,
-                                                              children: []
-                                                                ..addAll(controller
-                                                                    .listCategory!
-                                                                    .map(
-                                                                        (element) =>
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.min,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                Text(
-                                                                                  "${element?.equipmentCat}",
-                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                )
-                                                                              ],
-                                                                            ))),
-                                                            ),
-                                                          )
-                                                        : Text('no data'),
-                                                        //  SizedBox(
-                                                        //     width: 150,
-                                                        //     child: Text(
-                                                        //       'Inverter, SCADA',
-                                                        //       style: TextStyle(
-                                                        //           color: Color
-                                                        //               .fromARGB(
-                                                        //                   255,
-                                                        //                   5,
-                                                        //                   92,
-                                                        //                   163)),
-                                                        //     ),
-                                                        //   ),
-                                                          Text(
-                                                      '${controller.viewPermitDetailsModel.value?.description}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-
-                                                            ],
-                                                           ),
-
-                                                           Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                                            children: [
-                                                              CustomRichText(
-                                                              title:
-                                                                  'Valid Till: '),
-                                                              CustomRichText(
-                                                              title:
-                                                                  'Site Permit No.: '),
-                                                               CustomRichText(
-                                                                 title: 'Block: '),
-
-                                                            ],
-                                                           ),
-                                                           Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                            '${controller.validTillTimeCtrlr.text}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                          Text(
-                                                            '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                          SizedBox(
-                                                      width: 150,
-                                                      child: Text(
-                                                        '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                    ),
-
-
-                                                            ],
-                                                           ),
-                                                          
-
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          // CustomRichText(
-                                                          //     title:
-                                                          //         'Start Date: '),
-                                                          SizedBox(
-                                                            width: 10,
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Start Date: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Permit No.: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Equipment Categories: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Permit Description: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                            ],
                                                           ),
-                                                          // Text(
-                                                          //   '${controller.startDateTimeCtrlr.text}',
-                                                          //   style: TextStyle(
-                                                          //       color: Color
-                                                          //           .fromARGB(
-                                                          //               255,
-                                                          //               5,
-                                                          //               92,
-                                                          //               163)),
-                                                          // ),
-                                                        ],
-                                                      ),
-                                                      // _buildStartValidTillDateField_web(
-                                                      //     context, 0,),
-                                                      SizedBox(
-                                                        width: 170,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          // CustomRichText(
-                                                          //     title:
-                                                          //         'Valid Till: '),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          // Text(
-                                                          //   '${controller.validTillTimeCtrlr.text}',
-                                                          //   style: TextStyle(
-                                                          //       color: Color
-                                                          //           .fromARGB(
-                                                          //               255,
-                                                          //               5,
-                                                          //               92,
-                                                          //               163)),
-                                                          // ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        width: 108,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          CustomRichText(
-                                                              title: 'Plant: '),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                        ],
-                                                      )
-                                                      // _buildStartValidTillDateField_web(
-                                                      //     context, 1),
-                                                      // _buildValidTillField_web(
-                                                      //     context),
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      1.2,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 35,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          // CustomRichText(
-                                                          //     title:
-                                                          //         'Permit No.: '),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          // Text(
-                                                          //   '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                                          //   style: TextStyle(
-                                                          //       color: Color
-                                                          //           .fromARGB(
-                                                          //               255,
-                                                          //               5,
-                                                          //               92,
-                                                          //               163)),
-                                                          // ),
-                                                        ],
-                                                      ),
-                                                      // _buildStartValidTillDateField_web(
-                                                      //     context, 0,),
-                                                      SizedBox(
-                                                        width: 245,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          // CustomRichText(
-                                                          //     title:
-                                                          //         'Site Permit No.: '),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          // Text(
-                                                          //   '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
-                                                          //   style: TextStyle(
-                                                          //       color: Color
-                                                          //           .fromARGB(
-                                                          //               255,
-                                                          //               5,
-                                                          //               92,
-                                                          //               163)),
-                                                          // ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        width: 175,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          CustomRichText(
-                                                              title:
-                                                                  'Permit Type: '),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            '${controller.viewPermitDetailsModel.value?.permitTypeName}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
-                                                        ],
-                                                      )
-                                                      // _buildStartValidTillDateField_web(
-                                                      //     context, 1),
-                                                      // _buildValidTillField_web(
-                                                      //     context),
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 35,
-                                                    ),
-                                                    // CustomRichText(
-                                                    //     title:
-                                                    //         'Equipment Categories: '),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    // controller.permitId != null
-                                                    //     ? SizedBox(
-                                                    //         width: 100,
-                                                    //         child: Wrap(
-                                                    //           alignment:
-                                                    //               WrapAlignment
-                                                    //                   .start,
-                                                    //           spacing: 100,
-                                                    //           children: []
-                                                    //             ..addAll(controller
-                                                    //                 .listCategory!
-                                                    //                 .map(
-                                                    //                     (element) =>
-                                                    //                         Row(
-                                                    //                           mainAxisSize: MainAxisSize.min,
-                                                    //                           mainAxisAlignment: MainAxisAlignment.start,
-                                                    //                           crossAxisAlignment: CrossAxisAlignment.start,
-                                                    //                           children: [
-                                                    //                             Text(
-                                                    //                               "${element?.equipmentCat}",
-                                                    //                               style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                    //                             )
-                                                    //                           ],
-                                                    //                         ))),
-                                                    //         ),
-                                                    //       )
-                                                    //     : SizedBox(
-                                                    //         width: 150,
-                                                    //         child: Text(
-                                                    //           'Inverter, SCADA',
-                                                    //           style: TextStyle(
-                                                    //               color: Color
-                                                    //                   .fromARGB(
-                                                    //                       255,
-                                                    //                       5,
-                                                    //                       92,
-                                                    //                       163)),
-                                                    //         ),
-                                                    //       ),
-                                                    SizedBox(
-                                                      width: 120,
-                                                    ),
-                                                    // CustomRichText(
-                                                    //     title: 'Block: '),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    // SizedBox(
-                                                    //   width: 150,
-                                                    //   child: Text(
-                                                    //     '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                    //     style: TextStyle(
-                                                    //         color:
-                                                    //             Color.fromARGB(
-                                                    //                 255,
-                                                    //                 5,
-                                                    //                 92,
-                                                    //                 163)),
-                                                    //   ),
-                                                    // ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 35,
-                                                    ),
-                                                    // SizedBox(
-                                                    //     // width: 90,
-                                                    //     child: CustomRichText(
-                                                    //         title:
-                                                    //             'Permit Description: ')),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    // Text(
-                                                    //   '${controller.viewPermitDetailsModel.value?.description}',
-                                                    //   style: TextStyle(
-                                                    //       color: Color.fromARGB(
-                                                    //           255, 5, 92, 163)),
-                                                    // ),
+                                                          SizedBox(width: 20),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                '${controller.startDateTimeCtrlr.text}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
 
-                                                    // _buildPermitDescriptionField_web(
-                                                    //     context),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              controller.permitId !=
+                                                                      null
+                                                                  ? SizedBox(
+                                                                      width:
+                                                                          100,
+                                                                      child:
+                                                                          Wrap(
+                                                                        alignment:
+                                                                            WrapAlignment.start,
+                                                                        spacing:
+                                                                            100,
+                                                                        children: []
+                                                                          ..addAll(controller.listCategory!.map((element) =>
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "${element?.equipmentCat}",
+                                                                                    style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                  )
+                                                                                ],
+                                                                              ))),
+                                                                      ),
+                                                                    )
+                                                                  : Text(
+                                                                      'no data'),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              //  SizedBox(
+                                                              //     width: 150,
+                                                              //     child: Text(
+                                                              //       'Inverter, SCADA',
+                                                              //       style: TextStyle(
+                                                              //           color: Color
+                                                              //               .fromARGB(
+                                                              //                   255,
+                                                              //                   5,
+                                                              //                   92,
+                                                              //                   163)),
+                                                              //     ),
+                                                              //   ),
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.description}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 50,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Valid Till: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Site Permit No.: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Block: '),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 20,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                '${controller.validTillTimeCtrlr.text}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 150,
+                                                                child: Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                                  style: TextStyle(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 50,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Plant: '),
+                                                              SizedBox(
+                                                                  height: 5),
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Permit Type: '),
+                                                              SizedBox(
+                                                                  height: 5),
+                                                            ],
+                                                          ),
+                                                          SizedBox(width: 20),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.permitTypeName}',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+
+                                                      // _buildStartValidTillDateField_web(
+                                                      //     context, 0,),
+                                                    ],
+                                                  ),
                                                 ),
 
                                                 ///Loto Applied List
@@ -3473,76 +3280,101 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    SizedBox(width: 100,),
+                                                    SizedBox(
+                                                      width: 100,
+                                                    ),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        
                                                         CustomRichText(
                                                             title:
                                                                 'Requested By: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Issued By: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Approved By: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Closed By: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Cancelled By: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                       ],
                                                     ),
-                                                    SizedBox(width: 100,),
+                                                    SizedBox(
+                                                      width: 100,
+                                                    ),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                         SizedBox(
-                                                          width: 100,
-                                                          child: Text(
-                                                            '${controller.viewPermitDetailsModel.value?.issuedByName}',
-                                                          ),
-                                                        ),
-                                                        SizedBox(height: 5,),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.issuedByName}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 100,
+                                                          child: Text(
+                                                            '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.approvedByName}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.closedByName}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         Text(
                                                           '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                       ],
                                                     ),
-                                                    SizedBox(width: 100,),
+                                                    SizedBox(
+                                                      width: 100,
+                                                    ),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -3551,26 +3383,38 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Date / Time: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                       ],
                                                     ),
-                                                    SizedBox(width: 100,),
+                                                    SizedBox(
+                                                      width: 100,
+                                                    ),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -3582,38 +3426,50 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.approve_at}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.close_at}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         SizedBox(
                                                           width: 100,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                       ],
                                                     ),
-                                                    SizedBox(width: 100,),
+                                                    SizedBox(
+                                                      width: 100,
+                                                    ),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -3622,23 +3478,33 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         CustomRichText(
                                                             title:
                                                                 'Signature: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Signature: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Signature: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Signature: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         CustomRichText(
                                                             title:
                                                                 'Signature: '),
-                                                        SizedBox(height: 5,),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
                                                       ],
                                                     ),
                                                   ],
@@ -3650,6 +3516,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 SizedBox(
                                                   height: 50,
                                                 ),
+                                                ////
                                               ]),
                                         );
                                       }
@@ -3667,181 +3534,127 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
             ],
           ),
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 600),
-          child: Row(
+        floatingActionButton: Obx(
+          () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Center(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 250,
-                    ),
-                    Container(
-                      height: 45,
-                      width: 180,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          primary:
-                              Color.fromARGB(255, 5, 92, 163), // background
-                          onPrimary: Colors.white, // foreground
-                        ),
-                        onPressed: () {},
-                        icon: Icon(Icons.print), //icon data for elevated button
-                        label: Text("Print"), //label text
-                        // style: ButtonStyle( backgroundColor:Color(value)),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Container(
-                        height: 45,
-                        child: CustomElevatedButton(
-                          backgroundColor: Colors.red,
-                          text: "Cancel",
-                          onPressed: () {
-                            // controller
-                            //     .createNewPermit();
-                          },
-                        )),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    ////Issue Button
-                    varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 3 && e.issue == 1)
-                                    .length >
-                                0 &&
-                            controller.viewPermitDetailsList!
-                                    .firstWhere(
-                                      (e) =>
-                                          e?.permitNo ==
-                                          controller.viewPermitDetailsModel
-                                              .value?.permitNo,
-                                      // _newPermitList[0],
-                                      orElse: () => NewPermitDetailModel(
-                                          permitNo: 000, ptwStatus: 121),
-                                    )
-                                    ?.ptwStatus ==
-                                121
-                        ? Container(
-                            height: 45,
-                            child: CustomElevatedButton(
-                              backgroundColor: Colors.green,
-                              text: "Issue",
-                              icon: Icons.check,
-                              onPressed: () {
-                                // controller
-                                //     .createNewPermit();
-                                Get.dialog(PermitIssueDialog(
-                                    permitId:
-                                        '${controller.viewPermitDetailsModel.value?.permitNo}'));
-                              },
-                            ))
-                        : Container(),
-                    SizedBox(
-                      width: 30,
-                    ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.19,
+              ),
+              Container(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
 
-                    ///Approve Button
-                    // varUserAccessModel.value
-                    //             .access_list!
-                    //             .where((e) =>
-                    //                 e.feature_id ==
-                    //                     3 &&
-                    //                 e.approve ==
-                    //                     1)
-                    //             .length >
-                    //         0
-                    // && controller
-                    //         .viewPermitDetailsList!
-                    //         .firstWhere(
-                    //           (e) =>
-                    //               e?.permitNo == controller.viewPermitDetailsModel.value?.permitNo,
-                    //               // _newPermitList[0],
-                    //           orElse: () =>
-                    //               NewPermitDetailModel(
-                    //             permitNo: 000,ptwStatus: 123),
-                    //         )
-                    //         ?.ptwStatus ==
-                    //     123
-                    // ? Container(
-                    //     height: 45,
-                    //     child:
-                    //         CustomElevatedButton(
-                    //       backgroundColor:
-                    //           ColorValues
-                    //               .purpleColor,
-                    //       text: "Approve",
-                    //       icon: Icons.add,
-                    //       onPressed: () {
-                    //         // controller
-                    //         //     .createNewPermit();
-                    //         Get.dialog(
-                    //             PermitApprovedDialog(
-                    //                 permitId:
-                    //                     '${controller.viewPermitDetailsModel.value?.permitNo}'));
-                    //       },
-                    //     ))
-                    // : Container(),
-
-                    ///Reject Button
-                    varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 3 && e.issue == 1)
-                                    .length >
-                                0 &&
-                            // controller
-                            //         .viewPermitDetailsList!
-                            //         .firstWhere(
-                            //           (e) =>
-                            //               e?.permitNo ==
-                            //               controller.viewPermitDetailsModel.value?.permitNo,
-                            //           // _newPermitList[
-                            //           //     0],
-                            //           orElse: () =>
-                            //               NewPermitDetailModel(permitNo: 000),
-                            //         )
-                            //         ?.ptwStatus ==
-                            //     121 ||
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 3 && e.approve == 1)
-                                    .length >
-                                0
-                        //      &&
-                        // controller
-                        //         .viewPermitDetailsList!
-                        //         .firstWhere(
-                        //           (e) =>
-                        //               e?.permitNo ==
-                        //               controller.viewPermitDetailsModel.value?.permitNo,
-                        //           // _newPermitList[0],
-                        //           orElse: () =>
-                        //               NewPermitDetailModel(permitNo: 000),
-                        //         )
-                        //         ?.ptwStatus ==
-                        //     123
-                        ? Container(
-                            height: 45,
-                            child: CustomElevatedButton(
-                              backgroundColor: Colors.red,
-                              text: "Reject",
-                              icon: Icons.close,
-                              onPressed: () {
-                                // controller
-                                //     .createNewPermit();
-                                Get.dialog(PermitRejectDialog(
-                                    permitId:
-                                        '${controller.viewPermitDetailsModel.value?.permitNo}'));
-                              },
-                            ))
-                        : Container(),
-                  ],
+                    primary: Color.fromARGB(255, 5, 92, 163), // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {},
+                  icon: Icon(Icons.print), //icon data for elevated button
+                  label: Text("Print"), //label text
+                  // style: ButtonStyle( backgroundColor:Color(value)),
                 ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                  height: 45,
+                  child: CustomElevatedButton(
+                    backgroundColor: Colors.red,
+                    text: "Cancel",
+                    onPressed: () {
+                      // controller
+                      //     .createNewPermit();
+                    },
+                  )),
+              SizedBox(
+                width: 10,
+              ),
+
+              ////Issue Button
+              varUserAccessModel.value.access_list!
+                              .where((e) => e.feature_id == 3 && e.issue == 1)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: Colors.green,
+                        text: "Issue",
+                        icon: Icons.check,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitIssueDialog(
+                              permitId:
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                        },
+                      ))
+                  : Container(),
+              SizedBox(
+                width: 10,
+              ),
+
+              ///Approve Button
+              varUserAccessModel.value.access_list!
+                              .where((e) => e.feature_id == 3 && e.approve == 1)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 123
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.purpleColor,
+                        text: "Approve",
+                        icon: Icons.add,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitApprovedDialog(
+                              permitId:
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                        },
+                      ))
+                  : Container(),
+              SizedBox(
+                width: 10,
+              ),
+
+              ///Reject Button
+              varUserAccessModel.value.access_list!
+                                  .where(
+                                      (e) => e.feature_id == 3 && e.issue == 1)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              121 ||
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id == 3 && e.approve == 1)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              123
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: Colors.red,
+                        text: "Reject",
+                        icon: Icons.close,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitRejectDialog(
+                              permitId:
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                        },
+                      ))
+                  : Container(),
+              SizedBox(
+                width: 10,
               ),
             ],
           ),

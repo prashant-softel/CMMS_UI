@@ -57,6 +57,7 @@ abstract class Routes {
   static const addUser = _Paths.addUser;
   static const viewUserDetail = _Paths.viewUserDetail;
   static const moduleTypeListScreen = _Paths.moduleTypeListScreen;
+  static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
 }
 
 abstract class _Paths {
@@ -113,6 +114,7 @@ abstract class _Paths {
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
   static const moduleTypeListScreen = '/module-Type-List-Screen';
+  static const editWarrantyClaimContentWeb = '/edit-warranty-claim-content-web';
 
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';

@@ -318,18 +318,18 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                   1)
                                                                           .length >
                                                                       0
-                                                                  //      &&
-                                                                  // controller
-                                                                  //         .newPermitList!
-                                                                  //         .firstWhere(
-                                                                  //           (e) =>
-                                                                  //               "${e?.permitId}" ==
-                                                                  //               _newPermitList[0],
-                                                                  //           orElse: () =>
-                                                                  //               NewPermitModel(permitId: 000),
-                                                                  //         )
-                                                                  //         ?.ptwStatus ==
-                                                                  //     121
+                                                                       &&
+                                                                  controller
+                                                                          .newPermitList!
+                                                                          .firstWhere(
+                                                                            (e) =>
+                                                                                "${e?.permitId}" ==
+                                                                                _newPermitList[0],
+                                                                            orElse: () =>
+                                                                                NewPermitModel(permitId: 000),
+                                                                          )
+                                                                          ?.ptwStatus ==
+                                                                      121
                                                               ? TableActionButton(
                                                                   color: Colors
                                                                       .green,
@@ -357,18 +357,18 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                   1)
                                                                           .length >
                                                                       0
-                                                                  //      &&
-                                                                  // controller
-                                                                  //         .newPermitList!
-                                                                  //         .firstWhere(
-                                                                  //           (e) =>
-                                                                  //               "${e?.permitId}" ==
-                                                                  //               _newPermitList[0],
-                                                                  //           orElse: () =>
-                                                                  //               NewPermitModel(permitId: 000),
-                                                                  //         )
-                                                                  //         ?.ptwStatus ==
-                                                                  //     123
+                                                                       &&
+                                                                  controller
+                                                                          .newPermitList!
+                                                                          .firstWhere(
+                                                                            (e) =>
+                                                                                "${e?.permitId}" ==
+                                                                                _newPermitList[0],
+                                                                            orElse: () =>
+                                                                                NewPermitModel(permitId: 000),
+                                                                          )
+                                                                          ?.ptwStatus ==
+                                                                      123
                                                               ? TableActionButton(
                                                                   color: ColorValues
                                                                       .purpleColor,
@@ -471,40 +471,40 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                   1)
                                                                           .length >
                                                                       0 
-                                                                  //     &&
-                                                                  // controller
-                                                                  //         .newPermitList!
-                                                                  //         .firstWhere(
-                                                                  //           (e) =>
-                                                                  //               "${e?.permitId}" ==
-                                                                  //               _newPermitList[0],
-                                                                  //           orElse: () =>
-                                                                  //               NewPermitModel(permitId: 000),
-                                                                  //         )
-                                                                  //         ?.ptwStatus ==
-                                                                  //     121
-                                                              // ||
-                                                              //  varUserAccessModel
-                                                              //             .value
-                                                              //             .access_list!
-                                                              //             .where((e) =>
-                                                              //                 e.feature_id == 3 &&
-                                                              //                 e.approve ==
-                                                              //                     1)
-                                                              //             .length >
-                                                              //         0 
-                                                                  //     &&
-                                                                  // controller
-                                                                  //         .newPermitList!
-                                                                  //         .firstWhere(
-                                                                  //           (e) =>
-                                                                  //               "${e?.permitId}" ==
-                                                                  //               _newPermitList[0],
-                                                                  //           orElse: () =>
-                                                                  //               NewPermitModel(permitId: 000),
-                                                                  //         )
-                                                                  //         ?.ptwStatus ==
-                                                                  //     123
+                                                                      &&
+                                                                  controller
+                                                                          .newPermitList!
+                                                                          .firstWhere(
+                                                                            (e) =>
+                                                                                "${e?.permitId}" ==
+                                                                                _newPermitList[0],
+                                                                            orElse: () =>
+                                                                                NewPermitModel(permitId: 000),
+                                                                          )
+                                                                          ?.ptwStatus ==
+                                                                      121
+                                                              ||
+                                                               varUserAccessModel
+                                                                          .value
+                                                                          .access_list!
+                                                                          .where((e) =>
+                                                                              e.feature_id == 3 &&
+                                                                              e.approve ==
+                                                                                  1)
+                                                                          .length >
+                                                                      0 
+                                                                      &&
+                                                                  controller
+                                                                          .newPermitList!
+                                                                          .firstWhere(
+                                                                            (e) =>
+                                                                                "${e?.permitId}" ==
+                                                                                _newPermitList[0],
+                                                                            orElse: () =>
+                                                                                NewPermitModel(permitId: 000),
+                                                                          )
+                                                                          ?.ptwStatus ==
+                                                                      123
                                                                      
                                                           ?TableActionButton(
                                                             color: Colors.red,

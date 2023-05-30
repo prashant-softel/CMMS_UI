@@ -824,6 +824,8 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
+  
+  
 
   Future<ResponseModel> getHistory({
     String? auth,
