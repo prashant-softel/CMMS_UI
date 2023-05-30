@@ -22,15 +22,19 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   HistoryLog? historyLogModel;
   @override
   void onInit() async {
-    getPmtaskViewList();
+    scheduleId = Get.arguments;
+    print('scheduleId:$scheduleId');
+    if (scheduleId != 0) {
+      await getPmtaskViewList(scheduleId: scheduleId, isloading: true);
+    }
 
     super.onInit();
   }
 
-  void getPmtaskViewList() async {
-    scheduleId = 5326;
+  Future<void> getPmtaskViewList({int? scheduleId, bool? isloading}) async {
+//scheduleId = 5326;
     final _permitDetails = await preventiveMaintenanceTaskViewPresenter
-        .getPmtaskViewList(scheduleId: scheduleId);
+        .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       scheduleCheckList!.value = _permitDetails.schedule_check_list ?? [];

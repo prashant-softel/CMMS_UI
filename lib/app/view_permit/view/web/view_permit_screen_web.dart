@@ -10,7 +10,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:cmms/app/widgets/history_table_widget.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
@@ -1437,7 +1437,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       minHeight: 100,
                                                     ),
                                                     child: //
-                                                        HistoryTableWidget(
+                                                        HistoryTableWidgetWeb(
                                                       historyList: controller
                                                           .historyList,
                                                     ),
@@ -1463,8 +1463,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   'Requested By: '),
                                                           SizedBox(
                                                             height: 1,
-                                                          ),
-                                                          CustomRichText(
+
+                                                          ),CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
@@ -1493,14 +1493,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   'Signature: '),
                                                           SizedBox(
                                                             height: 1,
-                                                          ),
-                                                          CustomRichText(
+
+                                                          ),CustomRichText(
                                                               title:
                                                                   'Approved By: '),
                                                           SizedBox(
                                                             height: 1,
-                                                          ),
-                                                          CustomRichText(
+
+                                                          ),CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
@@ -1817,14 +1817,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               style:
                                                                   ElevatedButton
                                                                       .styleFrom(
-                                                                primary: Color
+                                                                foregroundColor:
+                                                              Colors.white,
+                                                          backgroundColor: Color
                                                                     .fromARGB(
                                                                         255,
                                                                         5,
                                                                         92,
-                                                                        163), // background
-                                                                onPrimary: Colors
-                                                                    .white, // foreground
+                                                                        163), //  foreground
                                                               ),
                                                               onPressed: () {},
                                                               icon: Icon(Icons
@@ -3267,7 +3267,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     minHeight: 100,
                                                   ),
                                                   child: //
-                                                      HistoryTableWidget(
+                                                      HistoryTableWidgetWeb(
                                                     historyList:
                                                         controller.historyList,
                                                   ),
@@ -3547,8 +3547,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
 
-                    primary: Color.fromARGB(255, 5, 92, 163), // background
-                    onPrimary: Colors.white, // foreground
+                    foregroundColor:
+                                                              Colors.white,
+                                                          backgroundColor: Color.fromARGB(255, 5, 92, 163), //  foreground
                   ),
                   onPressed: () {},
                   icon: Icon(Icons.print), //icon data for elevated button

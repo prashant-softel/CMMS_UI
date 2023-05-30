@@ -264,6 +264,7 @@ class DataRepository extends DomainRepository {
       // categoryIds: categoryIds,
     );
   }
+
   Future<ResponseModel> getSPVList({
     int? job_type_id,
     required bool isLoading,
@@ -434,7 +435,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  
   Future<ResponseModel> permitCloseButton({
     required String auth,
     String? comment,
@@ -736,6 +736,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createModuleList({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.createModuleList(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString);
+    return response;
+  }
+
   Future<ResponseModel> createCheckpoint({
     auth,
     bool? isLoading,
@@ -770,7 +782,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> createSOP({
+  Future<ResponseModel> createSOP({
     required String auth,
     createSop,
     bool? isLoading,
@@ -1014,7 +1026,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getPmMappingList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
   Future<ResponseModel> savePmMapping({
     required String auth,
@@ -1114,6 +1126,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+
+  Future<ResponseModel> deleteModulelist
+  ({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteModulelist(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
+
   Future<ResponseModel> updateChecklistNumber({
     auth,
     bool? isLoading,
@@ -1123,6 +1147,19 @@ class DataRepository extends DomainRepository {
       auth: auth,
       isLoading: isLoading,
       checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> updateModulelistNumber({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateModulelistNumber(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
     );
     return response;
   }
@@ -1250,6 +1287,17 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
     return response;
   }
+
+  Future<ResponseModel> updatePmExecution({
+    required String auth,
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updatePmExecution(
+        auth: auth,
+        pmExecutionJsonString: pmExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   ///
 }

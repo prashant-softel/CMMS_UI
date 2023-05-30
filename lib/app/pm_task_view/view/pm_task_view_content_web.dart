@@ -88,7 +88,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
                               onPressed: () async {},
-                              text: 'PM Execution is Approved',
+                              text:
+                                  "${controller.pmtaskViewModel.value?.status_name ?? ""}",
+//'PM Execution is Approved',
                             ),
                           ),
                         ],
@@ -142,7 +144,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         Text(
                                             "${controller.pmtaskViewModel.value?.schedule_date ?? ""}",
                                             style: Styles.blue17),
-                                        Text("Iv_checklist_001",
+                                        Text(
+                                            "${controller.pmtaskViewModel.value?.checklists![0].name ?? ""}",
                                             style: Styles.blue17),
                                       ],
                                     ),
@@ -219,7 +222,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "Demo_Check_List_001",
+                                                  "${controller.pmtaskViewModel.value?.checklists![0].name ?? ""}",
                                                   style: Styles.blue700,
                                                 ),
                                               ],
@@ -355,85 +358,92 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 ),
                               ),
                               Dimens.boxHeight30,
-                              Container(
-                                margin: Dimens.edgeInsets20,
-                                height: 300,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "PM History ",
-                                            style: Styles.blue700,
+                              (controller.historyLog != null &&
+                                      controller.historyLog!.isNotEmpty)
+                                  ? Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height: 300,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Expanded(
-                                      child: ScrollableTableView(
-                                        columns: [
-                                          "Time Stamp",
-                                          "Posted By",
-                                          "Comment",
-                                          "Location",
-                                          "Status",
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            label: column,
-                                            minWidth: Get.width * 0.15,
-                                          );
-                                        }).toList(),
-                                        rows: [
-                                          ...List.generate(
-                                            controller.historyLog?.length ?? 0,
-                                            (index) {
-                                              var getHistoryListDetails =
-                                                  controller.historyLog?[index];
-                                              return [
-                                                '${getHistoryListDetails?.created_at}',
-                                                '${getHistoryListDetails?.created_by_name ?? ''}',
-                                                '${getHistoryListDetails?.comment ?? ''}',
-                                                '--',
-                                                '${getHistoryListDetails?.status ?? ''}',
-                                              ];
-                                            },
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "PM History ",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          // [
-                                        ].map((record) {
-                                          return TableViewRow(
-                                            height: 90,
-                                            cells: record.map((value) {
-                                              return TableViewCell(
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
+                                          Divider(
+                                            color: ColorValues.greyLightColour,
+                                          ),
+                                          Expanded(
+                                            child: ScrollableTableView(
+                                              columns: [
+                                                "Time Stamp",
+                                                "Posted By",
+                                                "Comment",
+                                                "Location",
+                                                "Status",
+                                              ].map((column) {
+                                                return TableViewColumn(
+                                                  label: column,
+                                                  minWidth: Get.width * 0.15,
+                                                );
+                                              }).toList(),
+                                              rows: [
+                                                ...List.generate(
+                                                  controller
+                                                          .historyLog?.length ??
+                                                      0,
+                                                  (index) {
+                                                    var getHistoryListDetails =
+                                                        controller
+                                                            .historyLog?[index];
+                                                    return [
+                                                      '${getHistoryListDetails?.created_at}',
+                                                      '${getHistoryListDetails?.created_by_name ?? ''}',
+                                                      '${getHistoryListDetails?.comment ?? ''}',
+                                                      '--',
+                                                      '${getHistoryListDetails?.status ?? ''}',
+                                                    ];
+                                                  },
+                                                ),
+                                                // [
+                                              ].map((record) {
+                                                return TableViewRow(
+                                                  height: 90,
+                                                  cells: record.map((value) {
+                                                    return TableViewCell(
+                                                      child: Text(value),
+                                                    );
+                                                  }).toList(),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                    )
+                                  : Dimens.box0,
                               Dimens.boxHeight20,
                               Container(
                                 margin: EdgeInsets.only(bottom: 30, top: 20),

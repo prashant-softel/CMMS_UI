@@ -64,6 +64,7 @@ class WorkTypeWidget extends StatelessWidget {
           child: //
 
               MultiSelectDialogField(
+            searchable: true,
             initialValue: //
                 controller.selectedWorkTypeIdList
                     .map((workTypeId) =>

@@ -1,3 +1,9 @@
+import 'dart:developer';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:cmms/app/add_user/add_user_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
@@ -5,7 +11,6 @@ import 'package:cmms/domain/models/access_level_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 // import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
-import 'package:cmms/domain/models/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +51,7 @@ class AddUserController extends GetxController {
   Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
   RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
   RxList<String> moduleNameList = <String>[].obs;
-
+  var selectedImageBytes = Rx<Uint8List>(Uint8List(0));
   final RxBool isChecked = false.obs;
   final RxBool isCheckedmodule = false.obs;
   var gender = 'Select Gender'.obs;
@@ -63,16 +68,53 @@ class AddUserController extends GetxController {
   var passwordCtrlr = TextEditingController();
   var joingdateCtrlr = TextEditingController();
   int userId = 0;
+  double thumbnailSize = Get.height * 0.25;
+
+  ///
   void onInit() async {
     userId = Get.arguments;
     await getBloodList();
     await getCountryList();
     await getRoleList();
-    if (userId != null) {
-      // print({"userid123", userId});
-      await getUserDetails(userId: userId, isloading: true);
-    }
+    await getUserDetails(userId: userId, isloading: true);
     super.onInit();
+  }
+
+  var selectedImagePath = ''.obs;
+  var selectedImageSize = ''.obs;
+
+  getImage(ImageSource imageSource) async {
+    final pickedFile = await ImagePicker().pickImage(source: imageSource);
+    if (pickedFile != null) {
+      selectedImagePath.value = pickedFile.path;
+      selectedImageBytes.value = await pickedFile.readAsBytes();
+    }
+  }
+
+  List<PlatformFile>? paths;
+
+  void pickFiles() async {
+    try {
+      paths = (await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowMultiple: false,
+        onFileLoading: (FilePickerStatus status) => print(status),
+        allowedExtensions: ['png', 'jpg', 'jpeg', 'heic'],
+      ))
+          ?.files;
+    } on PlatformException catch (e) {
+      log('Unsupported operation' + e.toString());
+    } catch (e) {
+      log(e.toString());
+    }
+    // setState(() {
+    if (paths != null) {
+      if (paths != null) {
+        //passing file bytes and file name for API call
+        //    ApiClient.uploadFile(_paths!.first.bytes!, _paths!.first.name);
+      }
+    }
+    //});
   }
 
   Future<void> getUserDetails({int? userId, bool? isloading}) async {
@@ -256,13 +298,9 @@ class AddUserController extends GetxController {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: true,
       );
-      if (responsePmMapCreated != null) {
-        Get.offNamed(
-          Routes.userList,
-        );
-        // getRoleAccessList(roleId: selectedRoleId, isloading: true);
-        // isSuccessDialog();
-      }
+      Get.offNamed(
+        Routes.userList,
+      );
     } else {
       Fluttertoast.showToast(
           msg: "Unable to update the access level", fontSize: 16.0);

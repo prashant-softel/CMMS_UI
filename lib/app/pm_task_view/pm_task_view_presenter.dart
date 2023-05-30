@@ -8,10 +8,10 @@ class PreventiveMaintenanceTaskViewPresenter {
   PreventiveMaintenanceTaskViewUsecase preventiveMaintenanceTaskViewUsecase;
   Future<PmtaskViewModel?> getPmtaskViewList({
     int? scheduleId,
-    bool? isLoading,
+    bool? isloading,
   }) async =>
       await preventiveMaintenanceTaskViewUsecase.getPmtaskViewList(
         scheduleId: scheduleId,
-        isLoading: isLoading,
+        isLoading: isloading,
       );
 }

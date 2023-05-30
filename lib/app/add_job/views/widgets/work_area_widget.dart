@@ -61,6 +61,7 @@ class WorkAreaWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
           child: MultiSelectDialogField(
+            searchable: true,
             validator: (selectedItems) {
               if (controller.isWorkAreaSelected.value == false) {
                 return "Required field";

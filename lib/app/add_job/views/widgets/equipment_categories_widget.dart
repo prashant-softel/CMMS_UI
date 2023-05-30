@@ -62,6 +62,7 @@ class EquipmentCategoriesWidget extends StatelessWidget {
         child: //
             Obx(
           () => MultiSelectDialogField(
+            searchable: true,
             validator: (selectedItems) {
               if (controller.isEquipmentCategorySelected.value == false) {
                 return "Required field";

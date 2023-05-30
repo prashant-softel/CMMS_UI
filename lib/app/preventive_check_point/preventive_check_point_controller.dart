@@ -213,6 +213,7 @@ class PreventiveCheckPointController extends GetxController {
     String _checkPoint = checkPointCtrlr.text.trim();
     String _requirement = requirementCtrlr.text.trim();
     int _checklistId = int.tryParse(selectedchecklist.value) ?? 0;
+
     CreateCheckpoint createCheckpoint = CreateCheckpoint(
         check_point: _checkPoint,
         requirement: _requirement,
