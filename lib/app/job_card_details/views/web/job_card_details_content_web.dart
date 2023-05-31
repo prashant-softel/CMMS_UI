@@ -9,7 +9,7 @@ import '../../../widgets/custom_divider.dart';
 import '../../../widgets/custom_elevated_button.dart';
 import '../../../widgets/file_upload_details_widget_web.dart';
 import '../../../widgets/file_upload_with_dropzone_widget.dart';
-import '../../../widgets/history_table_widget.dart';
+import '../../../widgets/history_table_widget_web.dart';
 import '../../job_card_details_controller.dart';
 import '../widgets/employee_table_widget.dart';
 import '../widgets/isolated_assets_widget.dart';
@@ -120,7 +120,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             minHeight: 100,
                           ),
                           child: //
-                              HistoryTableWidget(
+                              HistoryTableWidgetWeb(
                             historyList: controller.historyList,
                           ),
                         )

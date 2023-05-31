@@ -58,3 +58,7 @@ app.*.map.json
 
 # iOS related
 ios/build/
+
+
+# Android related
+android/build/

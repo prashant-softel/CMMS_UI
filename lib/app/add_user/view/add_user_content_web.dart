@@ -2,6 +2,7 @@ import 'package:cmms/app/add_user/add_user_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../navigators/app_pages.dart';
@@ -16,6 +17,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
 
   @override
   Widget build(BuildContext context) {
+    ///
     Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
       return Checkbox(
           value: defaultValue == 1 ? true : false,
@@ -105,6 +107,8 @@ class AddUserContentWeb extends GetView<AddUserController> {
                               icon: Icons.menu,
                               label: "User List",
                               onPressed: () {
+                                controller.userId = 0;
+
                                 Get.offNamed(Routes.userList);
                               },
                               color: ColorValues.greenlightColor,
@@ -124,39 +128,65 @@ class AddUserContentWeb extends GetView<AddUserController> {
                               height: 210,
                               child: Stack(
                                 children: [
-                                  Container(
-                                    height: 190,
-                                    width: 190,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 195, 192, 192),
-                                      border: Border.all(
-                                        color: ColorValues.appLightGreyColor,
-                                      ),
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.image,
-                                          size: 70,
-                                          color: Color.fromARGB(
-                                              255, 215, 192, 141),
+                                  controller.selectedImagePath.value.isNotEmpty
+                                      ? GestureDetector(
+                                          onTap: () => controller
+                                              .getImage(ImageSource.gallery),
+                                          child: Container(
+                                            height: controller.thumbnailSize,
+                                            width: controller.thumbnailSize,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: Image.memory(
+                                                controller
+                                                    .selectedImageBytes.value,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(
+                                          height: controller.thumbnailSize,
+                                          width: controller.thumbnailSize,
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 195, 192, 192),
+                                            border: Border.all(
+                                              color:
+                                                  ColorValues.appLightGreyColor,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.image,
+                                                size: 70,
+                                                color: Color.fromARGB(
+                                                    255, 215, 192, 141),
+                                              ),
+                                              Dimens.boxHeight10,
+                                              Text("Upload Photo",
+                                                  style:
+                                                      Styles.greyMediumLight12)
+                                            ],
+                                          ),
                                         ),
-                                        Dimens.boxHeight10,
-                                        Text("Upload Photo",
-                                            style: Styles.greyMediumLight12)
-                                      ],
-                                    ),
-                                  ),
                                   Positioned(
                                     top: 150,
                                     left: 100,
                                     right: 0,
                                     child: Center(
                                       child: GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          controller
+                                              .getImage(ImageSource.gallery);
+                                          // controller.pickFiles();
+                                        },
                                         child: Container(
                                           height: 45,
                                           width: 45,
@@ -1101,7 +1131,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            controller.userId == 0
+                            controller.userId == null
                                 ? Container(
                                     height: 35,
                                     child: CustomElevatedButton(
@@ -1122,6 +1152,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                       onPressed: () {
                                         controller.updateUser().then((value) {
                                           if (value == true) {
+                                            controller.userId = 0;
                                             controller.saveAccessLevel();
                                           }
                                         });

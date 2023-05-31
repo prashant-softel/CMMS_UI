@@ -191,29 +191,6 @@ class FileUploadController extends GetxController {
     }
   }
 
-  // selectFiles() async {
-  //   List<XFile> pickedFiles = await addFiles();
-  //   List<List<int>> bytesDataList = [];
-
-  //   for (var file in pickedFiles) {
-  //     bytesDataList.add(await file.readAsBytes());
-  //   }
-
-  //   if (pickedFiles.isNotEmpty && pickedFiles.length == bytesDataList.length) {
-  //     await uploadFiles(
-  //       pickedFiles,
-  //       bytesDataList,
-  //       token,
-  //       uploadProgressCallback: (progress) {
-  //         print('Upload progress: $progress%');
-  //       },
-  //     );
-  //   } else {
-  //     print('No files selected or failed to read bytes data');
-  //   }
-  //   ;
-  // }
-
   selectFiles() async {
     try {
       pickedFiles.value = await addFiles();

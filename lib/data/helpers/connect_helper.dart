@@ -1230,6 +1230,27 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  Future<ResponseModel> createModuleList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+
+    var responseModel =
+      // responseModel =
+      await apiWrapper.makeRequest(
+        'CMMS/AddModule',
+        Request.post,
+        modulelistJsonString,
+        isLoading ?? false,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
+    return responseModel;
+  }
 
   Future<ResponseModel> createCheckList({
     required String auth,
@@ -1278,6 +1299,26 @@ class ConnectHelper {
       'CheckList/DeleteCheckPoint?id=$check_point_id',
       Request.delete,
       check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> deleteModulelist({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteModule?id=$module_id',
+      Request.delete,
+      module_id,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -1532,7 +1573,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      'PMScheduleView/GetPMTaskDetail?schedule_id=2444',
       Request.get,
       null,
       isLoading ?? false,
@@ -1634,6 +1675,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateModulelistNumber({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateModule',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   Future<ResponseModel> updateCheckPoint({
     required String auth,
     bool? isLoading,
@@ -1827,6 +1886,24 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> updatePmExecution({
+    required String auth,
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/UpdatePMTaskExecution',
+      Request.post,
+      pmExecutionJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

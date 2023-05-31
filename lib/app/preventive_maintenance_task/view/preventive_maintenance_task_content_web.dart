@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -317,7 +318,21 @@ class PreventiveMaintenanceTaskContentWeb
                                                       .remove_red_eye_outlined,
                                                   label: 'View',
                                                   onPress: () {
-                                                    controller.pmTaskView();
+                                                    controller.selectedItem = controller
+                                                        .pmTaskList!
+                                                        .firstWhere((element) =>
+                                                            "${element?.maintenance_order_number}" ==
+                                                            record[0]);
+                                                    int scheduleId = controller
+                                                            .selectedItem?.id ??
+                                                        0;
+                                                    if (scheduleId != null) {
+                                                      Get.toNamed(
+                                                          Routes.pmTaskView,
+                                                          arguments:
+                                                              scheduleId);
+                                                    }
+                                                    // controller.pmTaskView();
                                                   },
                                                 ),
                                                 TableActionButton(
@@ -327,20 +342,37 @@ class PreventiveMaintenanceTaskContentWeb
                                                   label: 'Delete',
                                                   onPress: () {},
                                                 ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appLightBlueColor,
-                                                  icon: Icons
-                                                      .access_time_filled_outlined,
-                                                  label: 'History',
-                                                  onPress: () {},
-                                                ),
                                                 // TableActionButton(
-                                                //   color: ColorValues.appGreenColor,
-                                                //   icon: Icons.remove_red_eye_outlined,
-                                                //   label: 'Execute',
+                                                //   color: ColorValues
+                                                //       .appLightBlueColor,
+                                                //   icon: Icons
+                                                //       .access_time_filled_outlined,
+                                                //   label: 'History',
                                                 //   onPress: () {},
                                                 // ),
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appGreenColor,
+                                                  icon: Icons
+                                                      .remove_red_eye_outlined,
+                                                  label: 'Execute',
+                                                  onPress: () {
+                                                    controller.selectedItem = controller
+                                                        .pmTaskList!
+                                                        .firstWhere((element) =>
+                                                            "${element?.maintenance_order_number}" ==
+                                                            record[0]);
+                                                    int scheduleId = controller
+                                                            .selectedItem?.id ??
+                                                        0;
+                                                    if (scheduleId != null) {
+                                                      Get.toNamed(
+                                                          Routes.pmExecution,
+                                                          arguments:
+                                                              scheduleId);
+                                                    }
+                                                  },
+                                                ),
                                                 TableActionButton(
                                                   color: ColorValues
                                                       .appDarkBlueColor,
