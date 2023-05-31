@@ -110,6 +110,23 @@ class DataRepository extends DomainRepository {
     );
   }
 
+   @override
+  Future<ResponseModel> getAffectedPartList({
+    int? facilityId,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getAffectedPartList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
+
   @override
   Future<ResponseModel> getBusinessList({
     int? businessType,
@@ -829,6 +846,8 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
+  
+  
 
   Future<ResponseModel> getHistory({
     String? auth,

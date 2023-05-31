@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,8 +12,11 @@ import '../theme/styles.dart';
 class NewWarrantyClaimDialog extends GetView {
   String? createPermitData;
   String? data;
+  List<dynamic>? warrantyClaimId;
 
-  NewWarrantyClaimDialog({super.key, this.createPermitData, this.data});
+  NewWarrantyClaimDialog(
+      {super.key, this.createPermitData, this.data, this.warrantyClaimId});
+  final WarrantyClaimController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +32,13 @@ class NewWarrantyClaimDialog extends GetView {
           children: [
             Icon(
               Icons.done,
+              color: Colors.green,
             ),
             Center(
               child: Text(
-                'Warranty Claim',
+                '$data',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.green),
               ),
             ),
           ],
@@ -53,11 +58,26 @@ class NewWarrantyClaimDialog extends GetView {
                     thickness: 1,
                   ),
                   Center(
-                    child: Text(
-                      '$data',
-                      // 'Warranty Claim Added Successfully',
-                      style: TextStyle(color: Colors.brown),
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Warranty Claim Added Successfully with Claim ID ',
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: '$warrantyClaimId',
+                            style: TextStyle(
+                              color: Colors.blue, // Set the desired text color
+                              fontWeight: FontWeight
+                                  .bold, // Set any additional styles as needed
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    // Text(
+                    //   'Warranty Claim Added Successfully with ID $warrantyClaimId',
+                    //   style: TextStyle(color: Colors.brown),
+                    // ),
                   ),
                   Divider(
                     color: ColorValues.greyLightColour,
@@ -74,8 +94,10 @@ class NewWarrantyClaimDialog extends GetView {
                         ),
                         ElevatedButton(
                           style: Styles.greenElevatedButtonStyle,
-                          onPressed: () =>
-                              Get.offAllNamed(Routes.warrantyClaimList),
+                          onPressed: () {
+                            Get.offAllNamed(Routes.warrantyClaimList);
+                            controller.getWarrantyClaimList();
+                          },
                           child: const Text('Warranty Claim List'),
                         ),
                         Dimens.boxWidth10,

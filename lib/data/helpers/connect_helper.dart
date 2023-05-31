@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
+import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
@@ -137,6 +138,35 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+
+   Future<ResponseModel> getAffectedPartList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+    int? blockId,
+    String? categoryIds,
+  }) async {
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+
+    var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?' +
+          blockIdParam +
+          categoryIdsParam +
+          statusParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getBusinessList({
     required bool isLoading,
@@ -1151,10 +1181,15 @@ class ConnectHelper {
     print('Create Warranty Claim Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
     Get.dialog<void>(NewWarrantyClaimDialog(
       data: parsedJson['message'],
-      // warrantyId: parsedJson['id'],
+      warrantyClaimId: parsedJson['id'],
     ));
+    // }
 
     return responseModel;
   }

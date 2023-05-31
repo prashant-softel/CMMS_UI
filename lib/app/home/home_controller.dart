@@ -60,6 +60,18 @@ class HomeController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   String username = '';
 
+    RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
+  RxList<int> selectedEquipmentList = <int>[].obs;
+  Rx<bool> isInventorySelected = true.obs;
+  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  Rx<String> selectedInventory = ''.obs;
+
+  ////
+  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  RxList<InventoryCategoryModel?> equipmentCategoryList =
+      <InventoryCategoryModel>[].obs;
+
+
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
   PaginationController paginationController = PaginationController(
@@ -88,10 +100,14 @@ class HomeController extends GetxController {
     Future.delayed(Duration(seconds: 1), () async {
       await getuserAccessData();
     });
+     Future.delayed(Duration(seconds: 1), () {
+      getInventoryList();
+    });
+
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    // await getTypePermitList();
+
 
     super.onInit();
   }
@@ -120,6 +136,39 @@ class HomeController extends GetxController {
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
+  }
+
+   Future<void> getInventoryCategoryList({String? facilityId}) async {
+    equipmentCategoryList.value = <InventoryCategoryModel>[];
+    final _equipmentCategoryList = await homePresenter.getInventoryCategoryList(
+      isLoading: true,
+    );
+
+    if (_equipmentCategoryList != null) {
+      for (var equimentCategory in _equipmentCategoryList) {
+        equipmentCategoryList.add(equimentCategory);
+      }
+    }
+  }
+
+
+  void getInventoryList() async {
+    eqipmentNameList.value = <InventoryModel>[];
+    final _inventoryList = await homePresenter.getInventoryList(
+      isLoading: true,
+      categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+    //  print('equipment Name List:$inventoryNameList');
+    for (var inventory_list in _inventoryList) {
+      eqipmentNameList.add(inventory_list);
+    }
+    inventoryList = _inventoryList;
+    paginationController = PaginationController(
+      rowCount: eqipmentNameList.length,
+      rowsPerPage: 10,
+    );
+    update(['inventory_list']);
   }
 
   Future<void> getTypePermitList() async {

@@ -4,29 +4,38 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
+import 'package:cmms/domain/models/user_access_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
-import 'package:cmms/domain/usecases/warranty_claim_usecase.dart';
 
-import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
+import '../models/facility_model.dart';
 
-class WarrantyClaimPresenter {
-  WarrantyClaimPresenter(this.warrantyClaimUsecase);
-  WarrantyClaimUsecase warrantyClaimUsecase;
+class EditWarrantyClaimUsecase {
+  final Repository _repository;
+
+  EditWarrantyClaimUsecase(this._repository);
 
   Future<void> generateToken() async {
-    return await warrantyClaimUsecase.generateToken();
+    return await _repository.generateToken();
   }
 
-  Future<Map<String, dynamic>?> createWarrantyClaim({
+  Future<Map<String, dynamic>> createWarrantyClaim({
     createWarrantyClaim,
-    required bool isLoading,
-  }) async {
-    return warrantyClaimUsecase.createWarrantyClaim(
-      createWarrantyClaim: createWarrantyClaim,
-      isLoading: isLoading,
-    );
-  }
+    bool? isLoading,
+  }) async =>
+      await _repository.createWarrantyClaim(
+        createWarrantyClaim,
+        isLoading,
+      );
+
+   Future<ViewWarrantyClaimModel?> getEditWarrantyClaimDetail({
+    bool? isLoading,  
+    required int wc_id,
+  }) async =>
+      await _repository.getViewWarrantyClaimDetail(
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -34,7 +43,7 @@ class WarrantyClaimPresenter {
     int? blockId,
     required String categoryIds,
   }) async {
-    return warrantyClaimUsecase.getInventoryList(
+    return _repository.getInventoryList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
@@ -48,7 +57,7 @@ class WarrantyClaimPresenter {
     int? blockId,
     required String categoryIds,
   }) async {
-    return warrantyClaimUsecase.getAffectedPartList(
+    return _repository.getAffectedPartList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
@@ -60,27 +69,23 @@ class WarrantyClaimPresenter {
     required bool isLoading,
     required int? businessType,
   }) async {
-    return warrantyClaimUsecase.getBusinessList(
+    return _repository.getBusinessList(
       isLoading: isLoading,
       businessType: businessType,
     );
   }
 
-  Future<List<CurrencyListModel>> getUnitCurrencyList({
-    required bool isLoading,
-    required int? facilityId,
-  }) async {
-    return warrantyClaimUsecase.getUnitCurrencyList(
+  Future<List<CurrencyListModel>> getUnitCurrencyList(
+      {required bool isLoading, required int? facilityId}) async {
+    return _repository.getUnitCurrencyList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
   }
 
-  Future<List<EmployeeListModel>> getEmployeeList({
-    required bool isLoading,
-    required int? facility_id,
-  }) async {
-    return warrantyClaimUsecase.getEmployeeList(
+  Future<List<EmployeeListModel>> getEmployeeList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getEmployeeList(
       isLoading: isLoading,
       facility_id: facility_id,
     );
@@ -91,7 +96,11 @@ class WarrantyClaimPresenter {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await warrantyClaimUsecase.getInventoryCategoryList();
+      await _repository.getInventoryCategoryList(
+        auth,
+        facilityId,
+        isLoading,
+      );
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,
@@ -99,7 +108,7 @@ class WarrantyClaimPresenter {
     int? blockId,
     required String categoryIds,
   }) async {
-    return warrantyClaimUsecase.getWarrantyClaimList(
+    return _repository.getWarrantyClaimList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
@@ -111,7 +120,7 @@ class WarrantyClaimPresenter {
     required bool isLoading,
     required String facilityId,
   }) async {
-    return warrantyClaimUsecase.getBlockList(
+    return _repository.getBlockList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
@@ -121,16 +130,14 @@ class WarrantyClaimPresenter {
     required bool isLoading,
     required String facilityId,
   }) async {
-    return warrantyClaimUsecase.getEquipmentList(
+    return _repository.getEquipmentList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
   }
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
-      await warrantyClaimUsecase.getFacilityList();
+      await _repository.getFacilityList(true);
   Future<String?> getUserAccessList() async =>
-      await warrantyClaimUsecase.getUserAccessList();
-
-  ///
+      await _repository.getUserAccessData(LocalKeys.userAccess);
 }

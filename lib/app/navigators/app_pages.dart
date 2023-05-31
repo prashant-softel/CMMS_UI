@@ -11,6 +11,8 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
+import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
@@ -372,6 +374,11 @@ class AppPages {
       name: _Paths.viewUserDetail,
       page: ViewUserDetailScreen.new,
       binding: ViewUserDetailBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.editWarrantyClaimContentWeb,
+      page: EditWarrantyClaimWeb.new,
+      binding: EditWarrantyClaimBinding(),
     ),
   ];
 }

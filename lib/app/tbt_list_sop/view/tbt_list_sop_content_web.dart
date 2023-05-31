@@ -524,7 +524,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 13 && e.view == 1)
+                              .where((e) => e.feature_id == 13 && e.view == 0)
                               .length >
                           0
                       ? Expanded(
