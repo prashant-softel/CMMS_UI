@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
@@ -7,6 +8,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,21 @@ class HomeController extends GetxController {
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
+
+  //Permit Type list
+  RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
+  Rx<bool> isTypePermitSelected = true.obs;
+  Rx<String> selectedTypePermit = ''.obs;
+  Rx<String> selectedTypeOfPermit = ''.obs;
+  Rx<bool> isTypePermit = true.obs;
+
+  //block
+  int facilityId = 0;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  RxList<BlockModel?> blocksList = <BlockModel>[].obs;
+  Rx<bool> isBlocksSelected = true.obs;
+  Rx<String> selectedBlocks = ''.obs;
+  Rx<bool> isstartdateFieldSelected = true.obs;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -52,7 +69,7 @@ class HomeController extends GetxController {
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
+  int get facilityId1 => _facilityId.value;
 
   Rx<int> selectedIndex = 0.obs;
 
@@ -60,14 +77,36 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
+    // facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    //   facilityId = event;
+
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getBlocksList(facilityId);
+    //   });
+    // });
+
     Future.delayed(Duration(seconds: 1), () async {
       await getuserAccessData();
     });
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
+    await getTypePermitList();
 
     super.onInit();
+  }
+
+  Future<void> getBlocksList(int _facilityId) async {
+    blocksList.value = <BlockModel>[];
+    final _blockList =
+        await homePresenter.getBlocksList(facilityId: _facilityId);
+
+    if (_blockList != null) {
+      for (var block in _blockList) {
+        blocksList.add(block);
+      }
+      update(["blockList"]);
+    }
   }
 
   Future<void> getFacilityList() async {
@@ -80,6 +119,17 @@ class HomeController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
+  }
+
+  Future<void> getTypePermitList() async {
+    final _permitTypeList = await homePresenter.getTypePermitList();
+
+    if (_permitTypeList != null) {
+      for (var permitType in _permitTypeList) {
+        typePermitList.add(permitType);
+      }
+      // selectedTypePermit.value = typePermitList[0]?.name ?? '';
     }
   }
 

@@ -595,9 +595,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel>
-  getPreventiveCheckList({
-
+  Future<ResponseModel> getPreventiveCheckList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -616,9 +614,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-  Future<ResponseModel>
-  getModuleList({
+  Future<ResponseModel> getModuleList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -636,7 +632,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
@@ -1119,7 +1114,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Create Warranty Claim
+  //Create Warranty Claim
   Future<ResponseModel> createWarrantyClaim({
     required String auth,
     createWarrantyClaim,
@@ -1146,8 +1141,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1219,7 +1212,6 @@ class ConnectHelper {
     print('ViewWarrantyClaimResponseModel${responseModel.data}');
     return responseModel;
   }
-
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -1915,5 +1907,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getWarrantyTypeList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetWarrantyTypeList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
   ///
+
+  Future<ResponseModel> getWarrantyUsageTermList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetWarrantyUsageTermList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
 }
