@@ -56,9 +56,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           CustomAppBar(
-                            title: 'Edit Inventory',
+                            title: 'Add Inventory',
                             action: ActionButton(
-                              label: "Eee",
+                              label: "Inventory List",
                               onPressed: () {},
                               icon: Icons.menu,
                               color: Colors.green,

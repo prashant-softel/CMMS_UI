@@ -91,7 +91,7 @@ class HomeController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    await getTypePermitList();
+    // await getTypePermitList();
 
     super.onInit();
   }

@@ -1,8 +1,10 @@
 import 'package:cmms/app/add_inventory/view/warranty_tab_widget.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_type_list_model.dart';
+import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
@@ -96,5 +98,25 @@ class AddInventoryPresenter {
       blockId: blockId,
       categoryIds: categoryIds,
     );
+  }
+
+//
+  Future<List<CurrencyListModel>> getUnitCurrencyList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return addInventoryUsecase.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  ///
+  Future<List<ManufacturerModel>> getmanufacturerList({
+    required bool isLoading,
+    required int? BusinessType,
+  }) async {
+    return addInventoryUsecase.getmanufacturerList(
+        isLoading: isLoading, BusinessType: BusinessType);
   }
 }

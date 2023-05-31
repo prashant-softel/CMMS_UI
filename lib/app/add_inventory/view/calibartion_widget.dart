@@ -50,7 +50,7 @@ class CalibrationTabWidget extends StatelessWidget {
                   ),
                   CustomTextField(
                     numberTextField: true,
-                    readOnly: true,
+                    // readOnly: true,
                     onTap: () {
                       controller.openLastCalibrationDatePicker =
                           !controller.openLastCalibrationDatePicker;
