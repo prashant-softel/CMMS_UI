@@ -20,11 +20,8 @@ class JobListContentMobile extends GetView<JobListController> {
           () => //
               Column(
             children: [
-              /// DropDown
-              // FacilitySelectionDropdownWidget(),
               Expanded(
                 child: ListView.builder(
-                    //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.jobList != null
                         ? controller.jobList.length
