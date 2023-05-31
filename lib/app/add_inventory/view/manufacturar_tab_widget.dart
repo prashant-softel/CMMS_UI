@@ -39,11 +39,12 @@ class ManufacturarTabWidget extends StatelessWidget {
                               title: "   Manufacturer\n               Name"),
                           SizedBox(
                             child: DropdownWidget(
-                              dropdownList: controller.eqipmentNameList,
-                              isValueSelected:
-                                  controller.isEquipmentNameSelected.value,
+                              dropdownList:
+                                  controller.manufacturerModelNameList,
+                              isValueSelected: controller
+                                  .iswarrantymanufacturerSelected.value,
                               selectedValue:
-                                  controller.selectedEquipmentName.value,
+                                  controller.selectedmanufacturerName.value,
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
@@ -107,11 +108,11 @@ class ManufacturarTabWidget extends StatelessWidget {
                           CustomRichText(title: "Currency"),
                           SizedBox(
                             child: DropdownWidget(
-                              dropdownList: controller.eqipmentNameList,
+                              dropdownList: controller.unitCurrencyList,
                               isValueSelected:
-                                  controller.isEquipmentNameSelected.value,
+                                  controller.isUnitCurrencySelected.value,
                               selectedValue:
-                                  controller.selectedEquipmentName.value,
+                                  controller.selectedUnitCurrency.value,
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),

@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:cmms/domain/models/inventory_type_list_model.dart';
+import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -34,6 +35,17 @@ class AddInventoryUsecase {
       facilityId: facilityId,
       blockId: blockId,
       categoryIds: categoryIds,
+    );
+  }
+
+// getmanufacturerList
+  Future<List<ManufacturerModel>> getmanufacturerList({
+    required bool isLoading,
+    required int? BusinessType,
+  }) async {
+    return _repository.getmanufacturerList(
+      isLoading: isLoading,
+      BusinessType: BusinessType,
     );
   }
 

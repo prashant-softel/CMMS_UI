@@ -155,6 +155,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getmanufacturerList({
+    required bool isLoading,
+    required String auth,
+    int? BusinessType,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessList?BusinessType=$BusinessType',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getUnitCurrencyList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -1230,24 +1247,24 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> createModuleList({
     required String auth,
     bool? isLoading,
     required modulelistJsonString,
   }) async {
-
     var responseModel =
-      // responseModel =
-      await apiWrapper.makeRequest(
-        'CMMS/AddModule',
-        Request.post,
-        modulelistJsonString,
-        isLoading ?? false,
-        {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $auth',
-        },
-      );
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/AddModule',
+      Request.post,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
     return responseModel;
   }
@@ -1308,7 +1325,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> deleteModulelist({
     required String auth,
@@ -1693,6 +1709,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> updateCheckPoint({
     required String auth,
     bool? isLoading,
