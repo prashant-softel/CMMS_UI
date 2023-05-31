@@ -2059,9 +2059,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             92,
                                                                             163)),
                                                               ),
-                                                              SizedBox(
-                                                                height: 5,
-                                                              ),
+                                                             
                                                               controller.permitId !=
                                                                       null
                                                                   ? SizedBox(
@@ -2088,11 +2086,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               ))),
                                                                       ),
                                                                     )
-                                                                  : Text(
-                                                                      'no data'),
-                                                              SizedBox(
-                                                                height: 15,
-                                                              ),
+                                                                  : Container(),
+                                                             
                                                               //  SizedBox(
                                                               //     width: 150,
                                                               //     child: Text(
@@ -3335,7 +3330,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                         SizedBox(
                                                           width: 100,
@@ -3344,7 +3339,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                         SizedBox(
                                                           width: 100,
@@ -3353,7 +3348,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                         SizedBox(
                                                           width: 100,
@@ -3362,7 +3357,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 15,
                                                         ),
                                                         Text(
                                                           '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
@@ -3373,7 +3368,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ],
                                                     ),
                                                     SizedBox(
-                                                      width: 100,
+                                                      width: 70,
                                                     ),
                                                     Column(
                                                       crossAxisAlignment:
@@ -3421,54 +3416,54 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               .end,
                                                       children: [
                                                         SizedBox(
-                                                          width: 100,
+                                                          width: 200,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                         SizedBox(
-                                                          width: 100,
+                                                          width: 200,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                         SizedBox(
-                                                          width: 100,
+                                                          width: 200,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.approve_at}',
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 1,
                                                         ),
                                                         SizedBox(
-                                                          width: 100,
+                                                          width: 200,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.close_at}',
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                         SizedBox(
-                                                          width: 100,
+                                                          width: 200,
                                                           child: Text(
                                                             '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 5,
+                                                          height: 2,
                                                         ),
                                                       ],
                                                     ),
                                                     SizedBox(
-                                                      width: 100,
+                                                      width: 40,
                                                     ),
                                                     Column(
                                                       crossAxisAlignment:
