@@ -5,10 +5,12 @@ import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:cmms/domain/models/inventory_type_list_model.dart';
+import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
@@ -46,6 +48,13 @@ class AddInventoryController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   int selectedfrequencyId = 0;
+
+  //currancy
+  RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
+  Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<String> selectedUnitCurrency = ''.obs;
+  RxList<String?> selectedUnitCurrencyList = <String>[].obs;
+  RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
 
   //Inventory Type list
   RxList<TypePermitModel?> InventoryTypeList = <TypePermitModel>[].obs;
@@ -95,6 +104,13 @@ class AddInventoryController extends GetxController {
   Rx<String> selectedwarrantyUsageTermListName = ''.obs;
   Rx<bool> iswarrantyUsageTermNameSelected = true.obs;
   int selectedwarrantyUsageTermNameId = 0;
+
+  /// manufacturer name
+  RxList<ManufacturerModel?> manufacturerModelNameList =
+      <ManufacturerModel>[].obs;
+  Rx<String> selectedmanufacturerName = ''.obs;
+  Rx<bool> iswarrantymanufacturerSelected = true.obs;
+  int selectedmanufacturerNameId = 0;
 
   ///Parent Equipment
   var parentEquipmentList = <DropdownModel>[];
@@ -167,12 +183,33 @@ class AddInventoryController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getWarrantyUsageTermList();
     });
+    Future.delayed(Duration(seconds: 1), () {
+      getUnitCurrencyList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getmanufacturerList();
+    });
 
     await getTypePermitList();
     await getInventoryCategoryList();
     await getInventoryTypeList(isLoading: true, facilityId: facilityId);
     await getInventoryCategoryList();
     super.onInit();
+  }
+
+  //
+  void getUnitCurrencyList() async {
+    unitCurrencyList.value = <CurrencyListModel>[];
+    final _unitCUrrencyList = await addInventoryPresenter.getUnitCurrencyList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('Unit Currency List:$unitCurrencyList');
+    for (var unit_currency_list in _unitCUrrencyList) {
+      unitCurrencyList.add(unit_currency_list);
+    }
+
+    update(['unit_currency_list']);
   }
 
   void getInventoryList() async {
@@ -246,6 +283,17 @@ class AddInventoryController extends GetxController {
     }
   }
 
+  Future<void> getmanufacturerList() async {
+    manufacturerModelNameList.value = <ManufacturerModel>[];
+    final _manufacturerList = await addInventoryPresenter.getmanufacturerList(
+      isLoading: true,
+      BusinessType: 8,
+    );
+    for (var manufacturerName in _manufacturerList) {
+      manufacturerModelNameList.add(manufacturerName);
+    }
+  }
+
   Future<void> getInventoryStatusList({
     required bool isLoading,
     required int facilityId,
@@ -294,23 +342,8 @@ class AddInventoryController extends GetxController {
       for (var permitType in _permitTypeList) {
         typePermitList.add(permitType);
       }
-      // selectedTypePermit.value = typePermitList[0]?.name ?? '';
     }
   }
-
-  ///
-  ///inventory type list
-  // Future<void> getInventoryTypeList() async {
-  //   final _inventoryTypeList =
-  //       await addInventoryPresenter.getInventoryTypeList();
-
-  //   if (_inventoryTypeList != null) {
-  //     for (var inventoryTypeList in _inventoryTypeList) {
-  //       InventoryTypeList.add(inventoryTypeList);
-  //     }
-  //     // selectedTypePermit.value = typePermitList[0]?.name ?? '';
-  //   }
-  // }
 
   Future<void> getBlocksList(int _facilityId) async {
     blocksList.value = <BlockModel>[];
@@ -324,27 +357,6 @@ class AddInventoryController extends GetxController {
       update(["blockList"]);
     }
   }
-  //   Future<void> getInventoryList() async {
-  //   // selectedInventoryColumnVisibility.clear();
-  //   inventoryList.clear();
-  //   // parentEquipmentList.clear();
-  //   final list = await addInventoryPresenter.getInventoryList(
-  //     isLoading: false,
-  //     categoryId: categoryId,
-  //     facilityId: facilityId,
-  //   );
-  //   inventoryList = list;
-
-  //   var someTempList = <DropdownModel>[];
-  //   for (var i in inventoryList) {
-  //     someTempList.add(DropdownModel(id: i.id, name: i.parentName ?? ''));
-  //   }
-
-  //   parentEquipmentList = someTempList.toSet().toList();
-
-  //   // onInitializeData();
-  //   update(['inventory_list', 'add_inventory']);
-  // }
 
   Future<void> getFacilityList() async {
     final _facilityList = await addInventoryPresenter.getFacilityList();
@@ -370,24 +382,6 @@ class AddInventoryController extends GetxController {
     }
   }
 
-  // void getBlockList(String facilityId) async {
-  //   final list = await homePresenter.getBlockList(
-  //       isLoading: false, facilityId: facilityId);
-  //   blockList = list;
-  //   update(['block_list']);
-  // }
-
-  // void getEquipmentList({
-  // //   required String facilityId,
-  // // }) async {
-  // //   final list = await homePresenter.getEquipmentList(
-  // //     isLoading: false,
-  // //     facilityId: facilityId,
-  // //   );
-  // //   equipmentList = list;
-  // //   update(['equipment_list']);
-  // // }
-
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
@@ -402,6 +396,14 @@ class AddInventoryController extends GetxController {
           int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<ManufacturerModel>:
+        {
+          int manufacturerIndex =
+              manufacturerModelNameList.indexWhere((x) => x?.name == value);
+          selectedmanufacturerNameId =
+              manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
         }
         break;
       case RxList<WarrantyTypeModel>:

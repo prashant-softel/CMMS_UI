@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -563,6 +564,32 @@ class Repository {
 //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ManufacturerModel>> getmanufacturerList({
+    required int? BusinessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getmanufacturerList(
+        BusinessType: BusinessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = manufacturerListModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
         return [];
       }
     } catch (error) {
@@ -2714,7 +2741,6 @@ class Repository {
       print(error.toString());
     }
   }
-
 
   Future<void> deleteModulelist(Object module_id, bool isLoading) async {
     try {

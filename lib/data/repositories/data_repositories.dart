@@ -140,6 +140,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getmanufacturerList({
+    int? BusinessType,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getmanufacturerList(
+      isLoading: isLoading,
+      auth: auth,
+      BusinessType: BusinessType,
+    );
+  }
+
   @override
   Future<ResponseModel> getUnitCurrencyList({
     int? facilityId,
@@ -1124,9 +1136,7 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
-  Future<ResponseModel> deleteModulelist
-  ({
+  Future<ResponseModel> deleteModulelist({
     auth,
     bool? isLoading,
     module_id,
