@@ -1942,5 +1942,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getWarrantyTypeList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetWarrantyTypeList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
   ///
+
+  Future<ResponseModel> getWarrantyUsageTermList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetWarrantyUsageTermList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
 }

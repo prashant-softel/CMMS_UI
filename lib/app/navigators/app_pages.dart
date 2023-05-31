@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
+import 'package:cmms/app/add_inventory/add_inventory_ui.dart';
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
@@ -228,10 +230,9 @@ class AppPages {
         page: BreakdownMaintenanceScreen.new,
         binding: BreakdownMaintenanceBinding()),
     GetPage<dynamic>(
-      name: _Paths.viewWarrantyClaim,
-      page: ViewWarrantyClaimWeb.new,
-      binding: ViewWarrantyClaimBinding()
-    ),
+        name: _Paths.viewWarrantyClaim,
+        page: ViewWarrantyClaimWeb.new,
+        binding: ViewWarrantyClaimBinding()),
     GetPage<dynamic>(
       name: _Paths.calibrationDetail,
       page: CalibrationDetailScreen.new,
@@ -265,7 +266,6 @@ class AppPages {
         name: _Paths.warrantyClaimListWeb,
         page: WarrantyClaimListWeb.new,
         binding: WarrantyClaimBinding()),
-   
 
     GetPage<dynamic>(
         name: _Paths.viewPermitWebScreen,
@@ -288,11 +288,18 @@ class AppPages {
     //   page: EditPermitWebScreen.new,
     //   binding: EditPermitBinding()
     // ),
+
     GetPage<dynamic>(
       name: _Paths.pmTaskView,
       page: PreventiveMaintenanceTaskViewScreen.new,
       binding: PreventiveMaintenanceTaskViewBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.addInventoryScreen,
+      page: AddInventoryScreen.new,
+      binding: AddInventoryBinding(),
+    ),
+
     GetPage<dynamic>(
       name: _Paths.inventory,
       page: InventoryScreen.new,

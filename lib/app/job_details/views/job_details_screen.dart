@@ -2,6 +2,7 @@ import 'package:cmms/app/job_details/job_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/job_model.dart';
+import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
@@ -20,6 +21,22 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
   Widget build(BuildContext context) {
     ///
     return Scaffold(
+      appBar: Responsive.isDesktop(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 90,
+              automaticallyImplyLeading: false,
+            )
+          : AppBar(
+              title: Text('Job Details'),
+              centerTitle: true,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => Get.back(),
+              ),
+            ),
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
