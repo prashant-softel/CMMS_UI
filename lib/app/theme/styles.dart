@@ -761,6 +761,7 @@ abstract class Styles {
     fontWeight: FontWeight.w700,
     fontSize: Dimens.fifteen,
   );
+
   static ButtonStyle greenElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),
     backgroundColor: Color.fromARGB(255, 96, 205, 76),
@@ -798,6 +799,17 @@ abstract class Styles {
     color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.w700,
     fontSize: Dimens.seventeen,
+  );
+  static BoxDecoration cardLikeDecoration = BoxDecoration(
+    boxShadow: [
+      BoxShadow(
+          color: ColorValues.primaryColor.withOpacity(0.15),
+          offset: const Offset(1, 1),
+          blurRadius: 16.0)
+    ],
+    border: Border.all(width: Dimens.one, color: Colors.transparent),
+    color: ColorValues.whiteColor,
+    borderRadius: BorderRadius.circular(10),
   );
 
   ///

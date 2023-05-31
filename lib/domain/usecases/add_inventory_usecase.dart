@@ -2,18 +2,22 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_status_list_model.dart';
+import 'package:cmms/domain/models/inventory_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
-import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
+import 'package:cmms/domain/models/warranty_type_model.dart';
+import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 
 import '../models/facility_model.dart';
 
-class HomeUsecase {
+class AddInventoryUsecase {
   final Repository _repository;
 
-  HomeUsecase(this._repository);
+  AddInventoryUsecase(this._repository);
 
   Future<void> generateToken() async {
     return await _repository.generateToken();
@@ -43,6 +47,25 @@ class HomeUsecase {
         facilityId,
         isLoading,
       );
+  Future<List<InventoryStatusListModel?>?> getInventoryStatusList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return _repository.getInventoryStatusList(facilityId, isLoading);
+  }
+
+  Future<List<FrequencyModel?>?> getFrequencyList({
+    bool? isLoading,
+  }) async =>
+      await _repository.getFrequencyList(
+        isLoading,
+      );
+  Future<List<InventoryTypeListModel?>?> getInventoryTypeList({
+    required bool isLoading,
+    required int facilityId,
+  }) async {
+    return _repository.getInventoryTypeList(facilityId, isLoading);
+  }
 
   Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
       await _repository.getTypePermitList(isLoading);
@@ -92,6 +115,20 @@ class HomeUsecase {
         isLoading,
       );
 
+  Future<List<WarrantyTypeModel?>?> getWarrantyTypeList({
+    bool? isLoading,
+  }) async =>
+      await _repository.getWarrantyTypeList(
+        isLoading,
+      );
+
+  //
+  Future<List<WarrantyUsageTermListModel?>?> getWarrantyUsageTermList({
+    bool? isLoading,
+  }) async =>
+      await _repository.getWarrantyUsageTermList(
+        isLoading,
+      );
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,
     required int? facilityId,

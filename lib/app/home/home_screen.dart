@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -280,6 +281,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.decoration,
     this.alignment,
+    this.numberTextField = false,
   }) : super(key: key);
 
   final String? label;
@@ -291,7 +293,7 @@ class CustomTextField extends StatelessWidget {
   final Function()? onTap;
   final InputDecoration? decoration;
   final Alignment? alignment;
-
+  final bool numberTextField;
   final TextEditingController? textController;
 
   @override
@@ -335,6 +337,12 @@ class CustomTextField extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
+                inputFormatters: numberTextField
+                    ? [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'))
+                      ]
+                    : null,
               ),
             ),
           ),
@@ -361,7 +369,7 @@ class AddPhoto extends StatelessWidget {
         children: [
           Container(
             height: 90,
-            width: 130,
+            width: 90,
             child: Icon(
               Icons.photo,
               size: 30,

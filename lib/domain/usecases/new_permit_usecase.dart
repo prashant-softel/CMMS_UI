@@ -174,7 +174,7 @@ class NewPermitUsecase {
         isLoading,
       );
 
-   Future<Map<String, dynamic>> updateNewPermit({
+  Future<Map<String, dynamic>> updateNewPermit({
     newPermit,
     bool? isLoading,
   }) async =>
