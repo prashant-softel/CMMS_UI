@@ -34,6 +34,7 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
@@ -585,6 +586,32 @@ class Repository {
       );
       if (!res.hasError) {
         var businessList = manufacturerListModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SupplierNameModel>> getSupplierList({
+    required int? BusinessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getSupplierList(
+        BusinessType: BusinessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = supplierNameListModelFromJson(res.data);
         return businessList;
       }
 //

@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:cmms/domain/models/inventory_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
@@ -44,6 +45,17 @@ class AddInventoryUsecase {
     required int? BusinessType,
   }) async {
     return _repository.getmanufacturerList(
+      isLoading: isLoading,
+      BusinessType: BusinessType,
+    );
+  }
+
+  //getSupplierNameModelList
+  Future<List<SupplierNameModel>> getSupplierList({
+    required bool isLoading,
+    required int? BusinessType,
+  }) async {
+    return _repository.getSupplierList(
       isLoading: isLoading,
       BusinessType: BusinessType,
     );

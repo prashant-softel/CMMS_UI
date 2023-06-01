@@ -152,6 +152,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getSupplierList({
+    int? BusinessType,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getSupplierList(
+      isLoading: isLoading,
+      auth: auth,
+      BusinessType: BusinessType,
+    );
+  }
+
   @override
   Future<ResponseModel> getUnitCurrencyList({
     int? facilityId,
