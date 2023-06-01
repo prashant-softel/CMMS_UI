@@ -21,7 +21,7 @@ class BreakdownMaintenanceBinding extends Bindings {
         ),
       ),
     );
-    Get.create<HomeController>(
+    Get.lazyPut<HomeController>(
       () => HomeController(
         Get.put(
           HomePresenter(
