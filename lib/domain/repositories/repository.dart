@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
@@ -18,7 +19,9 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -31,11 +34,14 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
+import 'package:cmms/domain/models/warranty_type_model.dart';
+import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -401,6 +407,8 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
+        }else{
+          Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createWarrantyClaim');
@@ -500,6 +508,38 @@ class Repository {
     }
   }
 
+  Future<List<InventoryModel2>> getAffectedPartList({
+    required int? facilityId,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAffectedPartList(
+        facilityId: facilityId,
+        blockId: blockId,
+        categoryIds: categoryIds,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var affectedPartList = inventoryModel2FromJson(res.data);
+        return affectedPartList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getAffectedPartList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<BusinessListModel>> getBusinessList({
     required int? businessType,
     // int? blockId,
@@ -525,6 +565,58 @@ class Repository {
 //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ManufacturerModel>> getmanufacturerList({
+    required int? BusinessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getmanufacturerList(
+        BusinessType: BusinessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = manufacturerListModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SupplierNameModel>> getSupplierList({
+    required int? BusinessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getSupplierList(
+        BusinessType: BusinessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = supplierNameListModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
         return [];
       }
     } catch (error) {
@@ -600,6 +692,8 @@ class Repository {
       return null;
     }
   }
+
+  
 
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
@@ -1943,7 +2037,7 @@ class Repository {
   }
 
   Future<List<InventoryTypeListModel?>?> getInventoryTypeList(
-    int? type,
+    // int? type,
     int? facilityId,
     bool? isLoading,
   ) async {
@@ -1952,7 +2046,7 @@ class Repository {
       final res = await _dataRepository.getInventoryTypeList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        type: type,
+        // type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -1978,7 +2072,6 @@ class Repository {
   }
 
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList(
-    int? type,
     int? facilityId,
     bool? isLoading,
   ) async {
@@ -1987,7 +2080,6 @@ class Repository {
       final res = await _dataRepository.getInventoryStatusList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -2677,7 +2769,6 @@ class Repository {
     }
   }
 
-
   Future<void> deleteModulelist(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3070,6 +3161,40 @@ class Repository {
     }
   }
 
+  Future<List<WarrantyTypeModel?>?> getWarrantyTypeList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyTypeList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsongetWarrantyTypeList = jsonDecode(res.data);
+        final List<WarrantyTypeModel> _warrantyTypeListModelList =
+            jsongetWarrantyTypeList
+                .map<WarrantyTypeModel>(
+                  (m) => WarrantyTypeModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _warrantyTypeListModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getWarrantyTypeList');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
   Future<List<dynamic>> updatePmExecution(
     pmExecutionJsonString,
     bool? isLoading,
@@ -3098,4 +3223,37 @@ class Repository {
   }
 
   ///
+  Future<List<WarrantyUsageTermListModel?>?> getWarrantyUsageTermList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyUsageTermList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsongetWarrantyUsageTermList = jsonDecode(res.data);
+        final List<WarrantyUsageTermListModel> _warrantyUsageTermListModelList =
+            jsongetWarrantyUsageTermList
+                .map<WarrantyUsageTermListModel>(
+                  (m) => WarrantyUsageTermListModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _warrantyUsageTermListModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getWarrantyTypeList');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
 }

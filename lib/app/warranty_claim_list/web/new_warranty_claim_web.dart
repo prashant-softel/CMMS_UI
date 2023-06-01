@@ -106,7 +106,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                           CustomTextField(
                                             label: 'Warranty Claim Title: *',
                                             textController: controller
-                                                .assetNameTextController,
+                                                .warrantyClaimTitleTextController,
                                           ),
                                         ],
                                       ),
@@ -116,9 +116,8 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             child: CustomTextField(
                                               label:
                                                   'Warranty Brief Description: *',
-                                              maxLine: 6,
                                               textController: controller
-                                                  .assetDescpTextController,
+                                                  .warrantyClaimBriefDescTextController,
                                             ),
                                           ),
                                         ],
@@ -145,38 +144,52 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                         .width /
                                                     3.8,
                                                 child:
-                                                    CustomMultiSelectDialogField(
-                                                  buttonText:
-                                                      'Select Equipment Categories',
-                                                  title: 'Equipment Categories',
-                                                  // initialValue: [],
-                                                  initialValue: (controller
-                                                          .selectedEquipmentCategoryIdList
-                                                          .isNotEmpty)
-                                                      ? controller
-                                                          .selectedEquipmentCategoryIdList
-                                                      : [],
-                                                  items: controller
-                                                      .equipmentCategoryList
-                                                      .map(
-                                                        (equipmentCategory) =>
-                                                            MultiSelectItem(
-                                                          equipmentCategory?.id,
-                                                          equipmentCategory
-                                                                  ?.name ??
-                                                              '',
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                  onConfirm:
-                                                      (selectedOptionsList) => {
-                                                    controller
-                                                        .equipmentCategoriesSelected(
-                                                            selectedOptionsList),
-                                                    print(
-                                                        'Equipment category list ${controller.equipmentCategoryList}')
-                                                  },
-                                                  // items: [],
+                                                    //     CustomMultiSelectDialogField(
+                                                    //   buttonText:
+                                                    //       'Select Equipment Categories',
+                                                    //   title: 'Equipment Categories',
+                                                    //   // initialValue: [],
+                                                    //   initialValue: (controller
+                                                    //           .selectedEquipmentCategoryIdList
+                                                    //           .isNotEmpty)
+                                                    //       ? controller
+                                                    //           .selectedEquipmentCategoryIdList
+                                                    //       : [],
+                                                    //   items: controller
+                                                    //       .equipmentCategoryList
+                                                    //       .map(
+                                                    //         (equipmentCategory) =>
+                                                    //             MultiSelectItem(
+                                                    //           equipmentCategory?.id,
+                                                    //           equipmentCategory
+                                                    //                   ?.name ??
+                                                    //               '',
+                                                    //         ),
+                                                    //       )
+                                                    //       .toList(),
+                                                    //   onConfirm:
+                                                    //       (selectedOptionsList) => {
+                                                    //     controller
+                                                    //         .equipmentCategoriesSelected(
+                                                    //             selectedOptionsList),
+                                                    //     print(
+                                                    //         'Equipment category list ${controller.selectedEquipmentCategoryIdList}')
+                                                    //   },
+                                                    //   // items: [],
+                                                    // ),
+                                                    Obx(
+                                                  () => DropdownWidget(
+                                                    dropdownList: controller
+                                                        .equipmentCategoryList,
+                                                    isValueSelected: controller
+                                                        .isEquipmentCategorySelected
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedEquipmentCategory
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
                                                 ),
                                               ),
                                               SizedBox(
@@ -198,10 +211,10 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                     dropdownList: controller
                                                         .eqipmentNameList,
                                                     isValueSelected: controller
-                                                        .isInventorySelected
+                                                        .isEquipmentNameSelected
                                                         .value,
                                                     selectedValue: controller
-                                                        .selectedInventory
+                                                        .selectedEquipmentName
                                                         .value,
                                                     onValueChanged: controller
                                                         .onValueChanged,
@@ -343,46 +356,70 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                                 left: 150),
                                                         child: Row(
                                                           children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Select Affected Part: '),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
                                                             SizedBox(
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
                                                                       .width /
                                                                   3.8,
-                                                              child:
-                                                                  CustomMultiSelectDialogField(
-                                                                buttonText:
-                                                                    'Affected parts',
-                                                                title:
-                                                                    'Select Affected Part',
-                                                                initialValue: (controller
-                                                                        .selectedWorkAreaIdList
-                                                                        .isNotEmpty)
-                                                                    ? controller
-                                                                        .selectedWorkAreaIdList
-                                                                    : [],
-                                                                items: controller
-                                                                    .eqipmentNameList
-                                                                    .map(
-                                                                      (equipmentList) =>
-                                                                          MultiSelectItem(
-                                                                        equipmentList
-                                                                            ?.id,
-                                                                        equipmentList?.name ??
-                                                                            '',
-                                                                      ),
-                                                                    )
-                                                                    .toList(),
-                                                                onConfirm:
-                                                                    (selectedOptionsList) =>
-                                                                        {
-                                                                  controller
-                                                                      .equipmentSelected(
-                                                                          selectedOptionsList),
-                                                                  print(
-                                                                      'Equipment Name list ${controller.eqipmentNameList}')
-                                                                },
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .affectedPartEqipmentNameList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isAffectedPartSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedAffectedPart
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
                                                               ),
+                                                              //     CustomMultiSelectDialogField(
+                                                              //   buttonText:
+                                                              //       'Affected parts',
+                                                              //   title:
+                                                              //       'Select Affected Part',
+                                                              //   initialValue: (controller
+                                                              //           .selectedAffectedPartEquipmentIdList
+                                                              //           .isNotEmpty)
+                                                              //       ? controller
+                                                              //           .selectedAffectedPartEquipmentIdList
+                                                              //       : [],
+                                                              //   items: controller
+                                                              //       .affectedPartEqipmentNameList
+                                                              //       .map(
+                                                              //         (equipmentList) =>
+                                                              //             MultiSelectItem(
+                                                              //           equipmentList
+                                                              //               ?.id,
+                                                              //           equipmentList?.name ??
+                                                              //               '',
+                                                              //         ),
+                                                              //       )
+                                                              //       .toList(),
+                                                              //   onConfirm:
+                                                              //       (selectedOptionsList) =>
+                                                              //           {
+                                                              //     controller
+                                                              //         .affectedPartSelected(
+                                                              //             selectedOptionsList),
+                                                              //     print(
+                                                              //         'Affected part Equipment Name list ${controller.selectedAffectedPartEquipmentIdList}')
+                                                              //   },
+                                                              // ),
                                                             ),
                                                             SizedBox(
                                                               width: 100,
@@ -469,9 +506,10 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             // textController:
                                             //     controller.categoryTextController,
                                             textController: controller
-                                                .startDateTimeCtrlrWeb,
+                                                .failureDateTimeCtrlrWeb,
+
                                             onTap: () {
-                                              pickDateTime_web(context);
+                                              pickFailureDateTime_web(context);
                                             },
                                           ),
                                         ],
@@ -564,72 +602,48 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                         children: [
                                           Column(
                                             children: [
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                child: CustomTextField(
-                                                  readOnly: true,
-                                                  hintText: '24356',
-                                                  label: 'Equipment Sr.No.:',
-                                                ),
+                                              CustomTextField(
+                                                textController: controller
+                                                    .affectedSerialNoTextController,
+                                                label: 'Affected Sr.No.:',
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                child: CustomTextField(
-                                                  readOnly: true,
-                                                  hintText: 'Justin Fernandez',
-                                                  label: 'Manufacturer Name:',
-                                                ),
+                                              CustomTextField(
+                                                readOnly: true,
+                                                hintText: 'Justin Fernandez',
+                                                label: 'Manufacturer Name:',
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                child: CustomTextField(
-                                                  readOnly: true,
-                                                  hintText: 'ORD1678',
-                                                  label:
-                                                      'Order/Contract Reference No.:',
-                                                ),
+                                              CustomTextField(
+                                                textController: controller
+                                                    .orderReferenceNoTextController,
+                                                label:
+                                                    'Order/Contract Reference No.:',
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                child: CustomTextField(
-                                                  readOnly: true,
-                                                  hintText: '10/01/2023',
-                                                  label: 'Warranty Start Date:',
-                                                ),
+                                              CustomTextField(
+                                                textController: controller
+                                                    .warrantyStartDateTimeCtrlrWeb,
+                                                label: 'Warranty Start Date:',
+                                                suffixIcon:
+                                                    Icon(Icons.calendar_month),
+                                                onTap: () {
+                                                  pickWarrantyStartDateTime_web(
+                                                      context);
+                                                },
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                child: CustomTextField(
-                                                  readOnly: true,
-                                                  hintText: '12/06/2023',
-                                                  label: 'Warranty End Date:',
-                                                ),
+                                              CustomTextField(
+                                                textController: controller
+                                                    .warrantyEndDateTimeCtrlrWeb,
+                                                label: 'Warranty End Date:',
+                                                suffixIcon:
+                                                    Icon(Icons.calendar_month),
+                                                onTap: () {
+                                                  pickWarrantyEndDateTime_web(
+                                                      context);
+                                                },
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                child: CustomTextField(
-                                                  readOnly: true,
-                                                  hintText: '25000 INR',
-                                                  label: 'Cost of Replacement:',
-                                                ),
+                                              CustomTextField(
+                                                textController: controller
+                                                    .costOfReplacementTextController,
+                                                label: 'Cost of Replacement:',
                                               ),
                                             ],
                                           ),
@@ -643,7 +657,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                2,
+                                                2.5,
                                             child: Center(
                                               child: Container(
                                                 margin: Dimens.edgeInsets16,
@@ -959,9 +973,10 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               CustomTextField(
+                                                textController: controller
+                                                    .immediateCorrectiveActionTextController,
                                                 label:
                                                     'Immediate Corrective Action by Buyer: *',
-                                                maxLine: 5,
                                               ),
                                             ],
                                           ),
@@ -969,8 +984,45 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             width: 210,
                                           ),
                                           CustomTextField(
+                                            textController: controller
+                                                .requestManufactureTextController,
                                             label: 'Request to Manufacturee: *',
-                                            maxLine: 5,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          CustomRichText(
+                                              title: 'Select Currency Unit: '),
+                                          SizedBox(
+                                            width: 35,
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                6,
+                                            child: Obx(
+                                              () => DropdownWidget(
+                                                dropdownList:
+                                                    controller.unitCurrencyList,
+                                                isValueSelected: controller
+                                                    .isUnitCurrencySelected
+                                                    .value,
+                                                selectedValue: controller
+                                                    .selectedUnitCurrency.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1165,21 +1217,6 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                             //           // textController:
                             //           //     controller.categoryTextController,
                             //         ),
-                            //         SizedBox(
-                            //           width:
-                            //               MediaQuery.of(context).size.width / 7,
-                            //           child: Obx(
-                            //             () => DropdownWidget(
-                            //               dropdownList:
-                            //                   controller.unitCurrencyList,
-                            //               isValueSelected: controller
-                            //                   .isUnitCurrencySelected.value,
-                            //               selectedValue: controller
-                            //                   .selectedUnitCurrency.value,
-                            //               onValueChanged:
-                            //                   controller.onValueChanged,
-                            //             ),
-                            //           ),
 
                             //           // CustomMultiSelectDialogField(
                             //           //   buttonText: 'Select Unit Currency',
@@ -1645,8 +1682,8 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   // }
 
   /// For Failure Date Time
-  Future pickDateTime_web(BuildContext context) async {
-    var dateTime = controller.selectedDateTimeWeb.value;
+  Future pickFailureDateTime_web(BuildContext context) async {
+    var dateTime = controller.selectedFailureDateTimeWeb.value;
     final date = await pickDate_web(context);
     if (date == null) {
       return;
@@ -1664,19 +1701,22 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
       time.hour,
       time.minute,
     );
-    controller.selectedDateTimeWeb.value = dateTime;
-    controller.startDateTimeCtrlrWeb
-      ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
+    controller.selectedFailureDateTimeWeb.value = dateTime;
+    controller.failureDateTimeCtrlrWeb
+      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: controller.startDateTimeCtrlrWeb.text.length,
+          offset: controller.failureDateTimeCtrlrWeb.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
+    print('FailureDateTime:${controller.failureDateTimeCtrlrWeb.text}');
+    controller.failureDateTimeCtrlrWebBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
   }
 
   Future<DateTime?> pickDate_web(BuildContext context) async {
-    DateTime? dateTime = controller.selectedDateTimeWeb.value;
+    DateTime? dateTime = controller.selectedFailureDateTimeWeb.value;
     //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -1691,7 +1731,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   }
 
   Future<TimeOfDay?> pickTime_web(BuildContext context) async {
-    DateTime dateTime = controller.selectedDateTimeWeb.value;
+    DateTime dateTime = controller.selectedFailureDateTimeWeb.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
@@ -1711,14 +1751,14 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   }
 
 ////Warranty Start Date
-  Future pickDateTime2_web(BuildContext context) async {
-    var dateTime = controller.selectedBreakdownTime2.value;
-    final date = await pickDate_web(context);
+  Future pickWarrantyStartDateTime_web(BuildContext context) async {
+    var dateTime = controller.selectedWarrantyStartDateTime.value;
+    final date = await pickDate2_web(context);
     if (date == null) {
       return;
     }
 
-    final time = await pickTime_web(context);
+    final time = await pickTime2_web(context);
     if (time == null) {
       return;
     }
@@ -1730,19 +1770,25 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
       time.hour,
       time.minute,
     );
-    controller.selectedBreakdownTime2.value = dateTime;
-    controller.startDateTimeCtrlr2Web
-      ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
+    controller.selectedWarrantyStartDateTime.value = dateTime;
+    controller.warrantyStartDateTimeCtrlrWeb
+      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: controller.startDateTimeCtrlr2Web.text.length,
+          offset: controller.warrantyStartDateTimeCtrlrWeb.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
+    print(
+        'Warranty Start Date Time: ${controller.warrantyStartDateTimeCtrlrWeb.text}');
+    controller.warrantyStartDateTimeCtrlrWebBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+    print(
+        'Warranty Start Date sending Time: ${controller.warrantyStartDateTimeCtrlrWebBuffer}');
   }
 
   Future<DateTime?> pickDate2_web(BuildContext context) async {
-    DateTime? dateTime = controller.selectedBreakdownTime2.value;
+    DateTime? dateTime = controller.selectedWarrantyStartDateTime.value;
     //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -1757,7 +1803,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   }
 
   Future<TimeOfDay?> pickTime2_web(BuildContext context) async {
-    DateTime dateTime = controller.selectedBreakdownTime2.value;
+    DateTime dateTime = controller.selectedWarrantyStartDateTime.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
@@ -1777,14 +1823,14 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   }
 
 ////Warranty End Date
-  Future pickDateTime3_web(BuildContext context) async {
-    var dateTime = controller.selectedBreakdownTime3.value;
-    final date = await pickDate_web(context);
+  Future pickWarrantyEndDateTime_web(BuildContext context) async {
+    var dateTime = controller.selectedWarrantyEndDateTime.value;
+    final date = await pickDate3_web(context);
     if (date == null) {
       return;
     }
 
-    final time = await pickTime_web(context);
+    final time = await pickTime3_web(context);
     if (time == null) {
       return;
     }
@@ -1796,19 +1842,23 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
       time.hour,
       time.minute,
     );
-    controller.selectedBreakdownTime3.value = dateTime;
-    controller.startDateTimeCtrlr3
-      ..text = DateFormat('dd-MMM-yyyy HH:mm').format(dateTime)
+    controller.selectedWarrantyEndDateTime.value = dateTime;
+    controller.warrantyEndDateTimeCtrlrWeb
+      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: controller.startDateTimeCtrlr3.text.length,
+          offset: controller.warrantyEndDateTimeCtrlrWeb.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
+    print(
+        'Warranty End Date Time: ${controller.warrantyEndDateTimeCtrlrWeb.text}');
+    controller.warrantyEndDateTimeCtrlrWebBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
   }
 
   Future<DateTime?> pickDate3_web(BuildContext context) async {
-    DateTime? dateTime = controller.selectedBreakdownTime3.value;
+    DateTime? dateTime = controller.selectedWarrantyEndDateTime.value;
     //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -1823,7 +1873,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   }
 
   Future<TimeOfDay?> pickTime3_web(BuildContext context) async {
-    DateTime dateTime = controller.selectedBreakdownTime3.value;
+    DateTime dateTime = controller.selectedWarrantyEndDateTime.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
