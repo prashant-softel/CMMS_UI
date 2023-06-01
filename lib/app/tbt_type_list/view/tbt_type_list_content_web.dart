@@ -71,7 +71,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.0,
+                          height: Get.height / 1.6,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -94,63 +94,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 70,
+                                          height: 20,
                                         ),
-                                        CustomRichText(
-                                            title: 'Job Type Title '),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            // Text(
-                                            //   "Title",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
-                                            ),
-                                          ],
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Facility: '),
                                         ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomRichText(title: 'Facility: '),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -170,66 +119,100 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                 controller.onValueChanged,
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 10,
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                              title: 'Job Type Title '),
                                         ),
-                                        CustomRichText(title: 'Description '),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            // Text(
-                                            //   "Description ",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15,right: 15),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
-                                            ),
-                                          ],
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: LoginCustomTextfield(
+                                                  // textController: controller
+                                                  //     .durationCtrlr,
+                                                  )),
+                                        ),
+                                        
+                                        
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Description '),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: LoginCustomTextfield(
+                                                  // textController: controller
+                                                  //     .durationCtrlr,
+                                                  )),
                                         ),
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           children: [
-                                            CustomRichText(
-                                                title: 'Require SOP/JSA: '),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15),
+                                              child: CustomRichText(
+                                                  title: 'Require SOP/JSA: '),
+                                            ),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -252,7 +235,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width: (Get.width * .1),
+                                        width: (Get.width * .07),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -262,7 +245,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .2) - 50,
+                                        width: (Get.width * .15) - 50,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
@@ -359,52 +342,49 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  // controller.preventiveCheckList!.isEmpty
-                                  //     ? Expanded(
-                                  //         child: ScrollableTableView(
-                                  //           columns: [
-                                  //             "Checklist Number ",
-                                  //             "Active Status ",
-                                  //             "Category ",
-                                  //             "Frequency ",
-                                  //             "PM Manpower",
-                                  //             "PM Duration(in Min.)",
-                                  //             "Action",
-                                  //           ].map((column) {
-                                  //             return TableViewColumn(
-                                  //               label: column,
-                                  //               minWidth: Get.width * 0.16,
-                                  //             );
-                                  //           }).toList(),
-                                  //           rows: [
-                                  //             ...List.generate(
-                                  //               controller.preventiveCheckList
-                                  //                       ?.length ??
-                                  //                   0,
-                                  //               (index) {
-                                  //                 return [
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                 ];
-                                  //               },
-                                  //             ),
-                                  //           ].map((record) {
-                                  //             return TableViewRow(
-                                  //               height: 60,
-                                  //               cells: record.map((value) {
-                                  //                 return TableViewCell(
-                                  //                   child: Text(value),
-                                  //                 );
-                                  //               }).toList(),
-                                  //             );
-                                  //           }).toList(),
-                                  //         ),
-                                  //       )
-                                  //     :
+                                  controller.jobTypeList.isEmpty
+                                      ? Expanded(
+                                          child: ScrollableTableView(
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "Description",
+                                              "Facility",
+                                              "Require\nSOP/JSA",
+                                              "Action"
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                label: column,
+                                                minWidth: Get.width * 0.16,
+                                              );
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller.jobTypeList.length,
+                                                (index) {
+                                                  return [
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((record) {
+                                              return TableViewRow(
+                                                height: 60,
+                                                cells: record.map((value) {
+                                                  return TableViewCell(
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      :
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
