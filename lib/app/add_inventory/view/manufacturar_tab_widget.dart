@@ -86,11 +86,12 @@ class ManufacturarTabWidget extends StatelessWidget {
                           CustomRichText(title: "  Supplier\n      Name"),
                           SizedBox(
                             child: DropdownWidget(
-                              dropdownList: controller.eqipmentNameList,
+                              dropdownList:
+                                  controller.supplierNameModelNameList,
                               isValueSelected:
-                                  controller.isEquipmentNameSelected.value,
+                                  controller.isStatusNameSelected.value,
                               selectedValue:
-                                  controller.selectedEquipmentName.value,
+                                  controller.selectedsupplierrName.value,
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),

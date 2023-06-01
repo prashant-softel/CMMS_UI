@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
+import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
@@ -117,6 +118,14 @@ class AddInventoryPresenter {
     required int? BusinessType,
   }) async {
     return addInventoryUsecase.getmanufacturerList(
+        isLoading: isLoading, BusinessType: BusinessType);
+  }
+
+  Future<List<SupplierNameModel>> getSupplierList({
+    required bool isLoading,
+    required int? BusinessType,
+  }) async {
+    return addInventoryUsecase.getSupplierList(
         isLoading: isLoading, BusinessType: BusinessType);
   }
 }

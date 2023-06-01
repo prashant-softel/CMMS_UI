@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:cmms/domain/models/inventory_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
+import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
@@ -112,6 +113,13 @@ class AddInventoryController extends GetxController {
   Rx<bool> iswarrantymanufacturerSelected = true.obs;
   int selectedmanufacturerNameId = 0;
 
+  ///
+  RxList<SupplierNameModel?> supplierNameModelNameList =
+      <SupplierNameModel>[].obs;
+  Rx<String> selectedsupplierrName = ''.obs;
+  Rx<bool> iswarrantysupplierSelected = true.obs;
+  int selectedsupplierrNameId = 0;
+
   ///Parent Equipment
   var parentEquipmentList = <DropdownModel>[];
   DropdownModel? parentEquipmentDropdownValue;
@@ -188,6 +196,9 @@ class AddInventoryController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getmanufacturerList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getSupplierList();
     });
 
     await getTypePermitList();
@@ -294,6 +305,17 @@ class AddInventoryController extends GetxController {
     }
   }
 
+  Future<void> getSupplierList() async {
+    supplierNameModelNameList.value = <SupplierNameModel>[];
+    final _supplierList = await addInventoryPresenter.getSupplierList(
+      isLoading: true,
+      BusinessType: 5,
+    );
+    for (var manuSupplierName in _supplierList) {
+      supplierNameModelNameList.add(manuSupplierName);
+    }
+  }
+
   Future<void> getInventoryStatusList({
     required bool isLoading,
     required int facilityId,
@@ -391,6 +413,7 @@ class AddInventoryController extends GetxController {
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
+
       case RxList<FrequencyModel>:
         {
           int frequencyIndex =
@@ -411,6 +434,14 @@ class AddInventoryController extends GetxController {
           int warrantyIndex =
               warrantyNameList.indexWhere((x) => x?.name == value);
           selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<SupplierNameModel>:
+        {
+          int supplierIndex =
+              supplierNameModelNameList.indexWhere((x) => x?.name == value);
+          selectedsupplierrNameId =
+              supplierNameModelNameList[supplierIndex]?.id ?? 0;
         }
         break;
       case RxList<WarrantyUsageTermListModel>:

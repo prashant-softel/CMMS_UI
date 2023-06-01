@@ -80,11 +80,12 @@ class WarrantyTabWidget extends StatelessWidget {
                           CustomRichText(title: "Warranty Provider"),
                           SizedBox(
                             child: DropdownWidget(
-                              dropdownList: controller.eqipmentNameList,
-                              isValueSelected:
-                                  controller.isEquipmentNameSelected.value,
+                              dropdownList:
+                                  controller.manufacturerModelNameList,
+                              isValueSelected: controller
+                                  .iswarrantymanufacturerSelected.value,
                               selectedValue:
-                                  controller.selectedEquipmentName.value,
+                                  controller.selectedmanufacturerName.value,
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
