@@ -358,6 +358,20 @@ class MastersDashboard extends GetView<MastersController> {
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Roles",
+                                    onTap: () {
+                                      controller.goToRoleTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Designation",
+                                    onTap: () {
+                                      controller.goToBlockTypeList();
+                                    });
+                              }))),
                               OnHover(
                                 builder: ((isHovered) {
                                   return createContentTile(
@@ -369,11 +383,19 @@ class MastersDashboard extends GetView<MastersController> {
                               ),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
-                                    title: "Block List",
+                                    title: "Feature List",
                                     onTap: () {
                                       controller.goToBlockTypeList();
                                     });
-                              })))
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Business List",
+                                    onTap: () {
+                                      controller.goToBusinessTypeList();
+                                    });
+                              }))),
+
                             ],
                           ),
                           Container(
@@ -426,6 +448,21 @@ class MastersDashboard extends GetView<MastersController> {
                                     title: "Country List",
                                     onTap: () {
                                       controller.goToCountryTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "State List",
+                                    onTap: () {
+                                      controller.goToStateTypeList();
+                                    });
+                              }))),
+
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Frequency List",
+                                    onTap: () {
+                                      controller.goToFrequencyList();
                                     });
                               }))),
                             ],

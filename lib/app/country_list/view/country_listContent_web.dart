@@ -807,7 +807,7 @@
 //   }
 // }
 
-
+import 'package:cmms/app/navigators/navigators.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -1542,7 +1542,7 @@ class CountryListContentWeb
                                                     icon: Icons.navigation_sharp,
                                                     label: 'Go To States',
                                                     onPress: () {
-                                                      
+                                                      controller.goToStatesScreen();
                                                       // print(_moduleList[0]);
                                                       // controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
                                                     },

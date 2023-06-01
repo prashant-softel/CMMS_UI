@@ -273,5 +273,12 @@ class CountryListController extends GetxController {
     );
     return true;
   }
+
+
+  Future<void>goToStatesScreen() async {
+    Get.toNamed(
+      Routes.stateTypeListScreen,
+    );
+  }
 }
 

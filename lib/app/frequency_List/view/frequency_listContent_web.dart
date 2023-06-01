@@ -10,12 +10,12 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
-import '../preventive_list_controller.dart';
+import '../frequency_list_controller.dart';
 
-class PreventiveChecklistListContentWeb
-    extends GetView<PreventiveListController> {
-  PreventiveChecklistListContentWeb({Key? key}) : super(key: key);
-  final PreventiveListController controller = Get.find();
+class FrequencyListContentWeb
+    extends GetView<FrequencyListController> {
+  FrequencyListContentWeb({Key? key}) : super(key: key);
+  final FrequencyListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +56,10 @@ class PreventiveChecklistListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / PREVENTIVE MAINTENANCE",
+                    child: Text(" / MASTERS",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE CHECKLIST NUMBER",
+                  Text(" / CREATE FREQUENCY NUMBER",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -94,7 +94,7 @@ class PreventiveChecklistListContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Checklist",
+                                          "Create FrequencyList",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -123,13 +123,13 @@ class PreventiveChecklistListContentWeb
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'CheckList:'),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
+                                            Expanded(child: CustomRichText(title: 'ID:')),
+                                            // SizedBox(
+                                            //   width: 70,
+                                            // ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
@@ -174,84 +174,71 @@ class PreventiveChecklistListContentWeb
                                           height: 10,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                          // MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Equipment Category: '),
+                                            Expanded(child: CustomRichText(title: 'Name:')),
+                                            // SizedBox(
+                                            //   width: 70,
+                                            // ),
                                             Expanded(
                                               child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    35,
-                                                child: DropdownWidget(
-                                                  controller: controller,
-                                                  dropdownList: controller
-                                                      .equipmentCategoryList,
-                                                  isValueSelected: controller
-                                                      .isSelectedequipment
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedequipment.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      30,
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                    ColorValues.whiteColor,
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                                  ),
+                                                  child: LoginCustomTextfield(
+                                                    textController: controller
+                                                        .checklistNumberCtrlr,
+                                                  )),
                                             ),
                                           ],
                                         ),
+
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                              // MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Frequency: '),
-                                            SizedBox(
-                                              width: 64,
-                                            ),
                                             Expanded(
-                                              child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                child: DropdownWidget(
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.frequencyList,
-                                                  isValueSelected: controller
-                                                      .isSelectedfrequency
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedfrequency.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                              child: Text(
+                                                "Days"
+                                                    ": ",
+                                                style: Styles.black16,
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Man"
-                                                  "power: ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 60,
-                                            ),
+                                            // SizedBox(
+                                            //   width: 60,
+                                            // ),
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -296,16 +283,18 @@ class PreventiveChecklistListContentWeb
                                           height: 10,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "Duration(in Min.): ",
-                                              style: Styles.blackBold16,
+                                            Expanded(
+                                              child: Text(
+                                                "Status: ",
+                                                style: Styles.black16,
+                                              ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            // SizedBox(
+                                            //   width: 15,
+                                            // ),
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -368,37 +357,38 @@ class PreventiveChecklistListContentWeb
                                     Container(
                                         height: 40,
                                         width: (Get.width * .2) - 70,
-                                        child: controller.selectedItem == null
-                                            ? CustomElevatedButton(
-                                                backgroundColor: ColorValues
-                                                    .appDarkBlueColor,
-                                                onPressed: () {
-                                                  controller
-                                                      .createChecklistNumber()
-                                                      .then((value) {
-                                                    print("value,$value");
-                                                    if (value == true)
-                                                      controller
-                                                          .issuccessCreatechecklist();
-                                                  });
-                                                },
-                                                text: 'Create CheckList')
-                                            : CustomElevatedButton(
-                                                backgroundColor: ColorValues
-                                                    .appDarkBlueColor,
-                                                onPressed: () {
-                                                  controller
-                                                      .updateChecklistNumber(
-                                                          controller
-                                                              .selectedItem?.id)
-                                                      .then((value) {
-                                                    print("value,$value");
-                                                    if (value == true)
-                                                      controller
-                                                          .issuccessCreatechecklist();
-                                                  });
-                                                },
-                                                text: 'Update')),
+                                        // child: controller.selectedItem == null
+                                            // ? CustomElevatedButton(
+                                            //     backgroundColor: ColorValues
+                                            //         .appDarkBlueColor,
+                                            //     onPressed: () {
+                                            //       controller
+                                            //           .createChecklistNumber()
+                                            //           .then((value) {
+                                            //         print("value,$value");
+                                            //         if (value == true)
+                                            //           controller
+                                            //               .issuccessCreatechecklist();
+                                            //       });
+                                            //     },
+                                            //     text: 'Create CheckList')
+                                            // : CustomElevatedButton(
+                                            //     backgroundColor: ColorValues
+                                            //         .appDarkBlueColor,
+                                            //     onPressed: () {
+                                            //       controller
+                                            //           .updateChecklistNumber(
+                                            //               controller
+                                            //                   .selectedItem?.id)
+                                            //           .then((value) {
+                                            //         print("value,$value");
+                                            //         if (value == true)
+                                            //           controller
+                                            //               .issuccessCreatechecklist();
+                                            //       });
+                                            //     },
+                                            //     text: 'Update')
+                                    ),
                                   ],
                                 ),
                               ],
@@ -427,7 +417,7 @@ class PreventiveChecklistListContentWeb
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Check List",
+                                      "Frequency List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -444,7 +434,7 @@ class PreventiveChecklistListContentWeb
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
-                                                      .preventiveCheckList![0]
+                                                      .frequencyList![0]
                                                       .toString())
                                                   .then((value) {
                                                 print("copy data");
@@ -485,18 +475,14 @@ class PreventiveChecklistListContentWeb
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.preventiveCheckList!.isEmpty
+                                  controller.frequencyList!.isEmpty
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Checklist Id",
-                                              "Checklist ",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
-                                              "Action",
+                                              "Id",
+                                              "Name ",
+                                              "Days",
+                                              "Status ",
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
@@ -505,14 +491,11 @@ class PreventiveChecklistListContentWeb
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.preventiveCheckList
+                                                controller.frequencyList
                                                         ?.length ??
                                                     0,
                                                 (index) {
                                                   return [
-                                                    '',
-                                                    '',
-                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -537,14 +520,10 @@ class PreventiveChecklistListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Checklist Id",
-                                              "Checklist",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
-                                              "Action"
+                                              "Id",
+                                              "Name",
+                                              "Days",
+                                              "Status"
                                             ].map((column) {
                                               return TableViewColumn(
                                                 minWidth: Get.width * 0.12,
@@ -554,24 +533,19 @@ class PreventiveChecklistListContentWeb
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller.preventiveCheckList
+                                                controller.frequencyList
                                                         ?.length ??
                                                     0,
                                                 (index) {
-                                                  var preventiveCheckListModelListDetails =
+                                                  var frequencyListModelListDetails =
                                                       controller
-                                                              .preventiveCheckList?[
+                                                              .frequencyList?[
                                                           index];
                                                   return [
-                                                    '${preventiveCheckListModelListDetails?.id}',
-
-                                                    '${preventiveCheckListModelListDetails?.checklist_number}',
-                                                    "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                                    '${preventiveCheckListModelListDetails?.category_name}',
-                                                    '${preventiveCheckListModelListDetails?.frequency_name}',
-                                                    '${preventiveCheckListModelListDetails?.manPower}',
-                                                    '${preventiveCheckListModelListDetails?.duration}',
-                                                    "Action"
+                                                    '${frequencyListModelListDetails?.id}',
+                                                    '${frequencyListModelListDetails?.name}',
+                                                    '${frequencyListModelListDetails?.days}',
+                                                    '${frequencyListModelListDetails?.status}',
                                                   ];
                                                 },
                                               ),
@@ -601,15 +575,15 @@ class PreventiveChecklistListContentWeb
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
-                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
+                                                                                  controller.selectedItem = controller.frequencyList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
 
-                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
-                                                                                  controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
-                                                                                  controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                  controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                                  controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                  controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                  controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                                  // controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
+                                                                                  // controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
+                                                                                  // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                  // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
+                                                                                  // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                                  // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                                  // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
                                                                                 },
                                                                               )
                                                                             : Container(),
@@ -621,7 +595,7 @@ class PreventiveChecklistListContentWeb
                                                                                 label: 'Delete',
                                                                                 onPress: () {
                                                                                   print(_preventiveCheckList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
+                                                                                  // controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
                                                                                 },
                                                                               )
                                                                             : Container()

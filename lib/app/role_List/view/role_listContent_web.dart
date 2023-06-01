@@ -12,13 +12,13 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
-import '../module_list_controller.dart';
+import '../role_list_controller.dart';
 // import '../preventive_list_controller.dart';
 
-class ModuleListContentWeb
-    extends GetView<ModuleListController> {
-  ModuleListContentWeb({Key? key}) : super(key: key);
-  final ModuleListController controller = Get.find();
+class RoleListContentWeb
+    extends GetView<RoleListController> {
+  RoleListContentWeb({Key? key}) : super(key: key);
+  final RoleListController controller = Get.find();
 
 
   @override
@@ -62,7 +62,7 @@ class ModuleListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / MODULE LIST",
+                    child: Text(" / ROLE LIST",
                         style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
@@ -75,7 +75,7 @@ class ModuleListContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                      .where((e) => e.feature_id == 5 && e.add == 0)
+                      .where((e) => e.feature_id == 5 && e.add == 1)
                       .length >
                       0
                       ? Container(
@@ -100,39 +100,39 @@ class ModuleListContentWeb
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Create Modulelist",
+                                    "Create Rolelist",
                                     style: Styles.blackBold16,
                                   ),
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  Visibility(
-                                    visible: controller.isSuccess.value,
-                                    child: Center(
-                                      child: Wrap(
-                                        children: [
-                                          Text(
-                                            controller.selectedItem ==
-                                                null
-                                                ? "ModuleList added Successfully in the List."
-                                                : "ModuleList updated Successfully in the List.",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Color.fromARGB(
-                                                    255, 24, 243, 123)),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  // Visibility(
+                                  //   visible: controller.isSuccess.value,
+                                  //   child: Center(
+                                  //     child: Wrap(
+                                  //       children: [
+                                  //         Text(
+                                  //           controller.selectedItem ==
+                                  //               null
+                                  //               ? "ModuleList added Successfully in the List."
+                                  //               : "ModuleList updated Successfully in the List.",
+                                  //           style: TextStyle(
+                                  //               fontSize: 16,
+                                  //               color: Color.fromARGB(
+                                  //                   255, 24, 243, 123)),
+                                  //         ),
+                                  //         SizedBox(
+                                  //           height: 5,
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                     children: [
-                                      CustomRichText(title: 'Module Name: '),
+                                      CustomRichText(title: 'Role Name: '),
                                       SizedBox(
                                         width: 70,
                                       ),
@@ -171,7 +171,7 @@ class ModuleListContentWeb
                                             ),
                                             child: LoginCustomTextfield(
                                               textController: controller
-                                                  .modulelistNumberCtrlr,
+                                                  .rolelistNumberCtrlr,
                                             )),
                                       ),
                                     ],
@@ -227,198 +227,7 @@ class ModuleListContentWeb
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(title:"Add"),
-                                          // SizedBox(width:12),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              // Text("No"),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggleOn.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle();
-                                                  }),
 
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CustomRichText(title:"Edit"),
-                                          SizedBox(width:12),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              // Text("No"),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggle1On.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle1();
-                                                  }),
-
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CustomRichText(title:"Delete"),
-                                          SizedBox(width:12),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                                            children: [
-                                              // Text("No"),
-                                              // SizedBox(width:2),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggle2On.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle2();
-                                                  }),
-                                              // SizedBox(width:2),
-
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(title:"View"),
-                                          // SizedBox(width:12),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              // Text("No"),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggle3On.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle3();
-                                                  }),
-
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CustomRichText(title:"Approve"),
-                                          SizedBox(width:12),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              // Text("No"),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggle4On.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle4();
-                                                  }),
-
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CustomRichText(title:"Issue"),
-                                          SizedBox(width:12),
-                                          Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                                            children: [
-                                              // Text("No"),
-                                              // SizedBox(width:2),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggle5On.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle5();
-                                                  }),
-                                              // SizedBox(width:2),
-
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CustomRichText(title:"SelfView"),
-                                          SizedBox(width:12),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                                            children: [
-                                              // Text("No"),
-                                              // SizedBox(width:2),
-                                              CustomSwitchTroggle(
-                                                  value:
-                                                  controller.isToggle6On.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle6();
-                                                  }),
-                                              // SizedBox(width:2),
-
-                                              // Text("Yes"),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
                                 ]),
                           ),
                           Row(
@@ -435,40 +244,40 @@ class ModuleListContentWeb
                               SizedBox(
                                 width: 10,
                               ),
-                              Container(
-                                  height: 40,
-                                  width: (Get.width * .2) - 70,
-                                  child: controller.selectedItem == null
-                                      ? CustomElevatedButton(
-                                      backgroundColor: ColorValues
-                                          .appDarkBlueColor,
-                                      onPressed: () {
-                                        controller
-                                            .createModuleListNumber()
-                                            .then((value) {
-                                          print("value,$value");
-                                          if (value == true)
-                                            controller
-                                                .issuccessCreatemodulelist();
-                                        });
-                                      },
-                                      text: 'Create Module List')
-                                      : CustomElevatedButton(
-                                      backgroundColor: ColorValues
-                                          .appDarkBlueColor,
-                                      onPressed: () {
-                                        controller
-                                            .updateModulelistNumber(
-                                            controller
-                                                .selectedItem?.id)
-                                            .then((value) {
-                                          print("value,$value");
-                                          if (value == true)
-                                            controller
-                                                .issuccessCreatemodulelist();
-                                        });
-                                      },
-                                      text: 'Update')),
+                              // Container(
+                              //     height: 40,
+                              //     width: (Get.width * .2) - 70,
+                              //     child: controller.selectedItem == null
+                              //         ? CustomElevatedButton(
+                              //         backgroundColor: ColorValues
+                              //             .appDarkBlueColor,
+                              //         onPressed: () {
+                              //           controller
+                              //               .createModuleListNumber()
+                              //               .then((value) {
+                              //             print("value,$value");
+                              //             if (value == true)
+                              //               controller
+                              //                   .issuccessCreatemodulelist();
+                              //           });
+                              //         },
+                              //         text: 'Create Module List')
+                              //         : CustomElevatedButton(
+                              //         backgroundColor: ColorValues
+                              //             .appDarkBlueColor,
+                              //         onPressed: () {
+                              //           controller
+                              //               .updateModulelistNumber(
+                              //               controller
+                              //                   .selectedItem?.id)
+                              //               .then((value) {
+                              //             print("value,$value");
+                              //             if (value == true)
+                              //               controller
+                              //                   .issuccessCreatemodulelist();
+                              //           });
+                              //         },
+                              //         text: 'Update')),
                             ],
                           ),
                         ],
@@ -514,7 +323,7 @@ class ModuleListContentWeb
                                       ColorValues.appLightBlueColor,
                                       onPressed: () {
                                         FlutterClipboard.copy(controller
-                                            .moduleList![0]
+                                            .roleList![0]
                                             .toString())
                                             .then((value) {
                                           print("copy data");
@@ -555,22 +364,13 @@ class ModuleListContentWeb
                             SizedBox(
                               height: 20,
                             ),
-                            controller.moduleList!.isEmpty
+                            controller.roleList!.isEmpty
                                 ? Expanded(
                               child: ScrollableTableView(
                                 columns: [
                                   "Id",
-                                  "Module Name ",
-                                  "Feature Name ",
-                                  // "Menu Image ",
-                                  "Add ",
-                                  "Edit",
-                                  "Delete",
-                                  "View",
-                                  "Approve",
-                                  "Issue",
-                                  "Self View",
-                                  "Action"
+                                  "Name ",
+
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
@@ -579,7 +379,7 @@ class ModuleListContentWeb
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
-                                    controller.moduleList
+                                    controller.roleList
                                         ?.length ??
                                         0,
                                         (index) {
@@ -587,14 +387,7 @@ class ModuleListContentWeb
                                         '',
                                         '',
                                         // '',
-                                        '',
-                                        '',
-                                        '',
-                                        '',
-                                        '',
-                                        '',
-                                        '',
-                                        '',
+
                                       ];
                                     },
                                   ),
@@ -616,17 +409,7 @@ class ModuleListContentWeb
                                 controller.paginationController,
                                 columns: [
                                   "Id",
-                                  "Module Name ",
-                                  "Feature Name ",
-                                  // "Menu Image ",
-                                  "Add ",
-                                  "Edit",
-                                  "Delete",
-                                  "View",
-                                  "Approve",
-                                  "Issue",
-                                  "Self View",
-                                  "Action"
+                                  " Name ",
                                 ].map((column) {
                                   return TableViewColumn(
                                     minWidth: Get.width * 0.12,
@@ -636,28 +419,18 @@ class ModuleListContentWeb
                                 rows: //
                                 [
                                   ...List.generate(
-                                    controller.moduleList
+                                    controller.roleList
                                         ?.length ??
                                         0,
                                         (index) {
-                                      var moduleListDetails =
+                                      var roleListDetails =
                                       controller
-                                          .moduleList?[
+                                          .roleList?[
                                       index];
                                       return [
-                                        '${moduleListDetails?.id}',
-                                        '${moduleListDetails?.moduleName}',
-                                        // "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                        '${moduleListDetails?.featureName}',
-                                        // '${moduleListDetails?.menuImage}',
-                                        '${moduleListDetails?.add}',
-                                        '${moduleListDetails?.edit}',
-                                        '${moduleListDetails?.delete}',
-                                        '${moduleListDetails?.view}',
-                                        '${moduleListDetails?.approve}',
-                                        '${moduleListDetails?.issue}',
-                                        '${moduleListDetails?.selfView}',
-                                        "Action"
+                                        '${roleListDetails?.id}',
+                                        '${roleListDetails?.name}',
+
                                       ];
                                     },
                                   ),
@@ -688,28 +461,8 @@ class ModuleListContentWeb
                                                     icon: Icons.edit,
                                                     label: 'Edit',
                                                     onPress: () {
-                                                      controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
-                                                      controller.modulelistNumberCtrlr.text = controller.selectedItem?.moduleName ?? '';
-                                                      controller.featureCtrlr.text = controller.selectedItem?.featureName ?? '';
-                                                      controller.isToggleOn.value = controller.selectedItem?.add == 1 ? true : false;
-                                                      controller.isToggle1On.value = controller.selectedItem?.edit == 1 ? true : false;
-                                                      controller.isToggle2On.value = controller.selectedItem?.delete == 1 ? true : false;
-                                                      controller.isToggle3On.value = controller.selectedItem?.view == 1 ? true : false;
-                                                      controller.isToggle4On.value = controller.selectedItem?.approve == 1 ? true : false;
-                                                      controller.isToggle5On.value = controller.selectedItem?.issue == 1 ? true : false;
-                                                      controller.isToggle6On.value = controller.selectedItem?.selfView == 1 ? true : false;
-
-                                                      // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
-                                                      // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";
-                                                      // // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                      // // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                      // controller.selectedEquipmentId = controller.selectedItem?.add ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.edit ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.delete ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.view ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.approve ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.issue ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.selfView ?? 0;
+                                                      controller.selectedItem = controller.roleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
+                                                      controller.rolelistNumberCtrlr.text = controller.selectedItem?.name ?? '';
 
                                                     },
                                                   ),
@@ -717,15 +470,15 @@ class ModuleListContentWeb
                                                   // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                   //     0
                                                   //     ?
-                                                  TableActionButton(
-                                                    color: ColorValues.appRedColor,
-                                                    icon: Icons.delete,
-                                                    label: 'Delete',
-                                                    onPress: () {
-                                                      print(_moduleList[0]);
-                                                      controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
-                                                    },
-                                                  )
+                                                  // TableActionButton(
+                                                  //   color: ColorValues.appRedColor,
+                                                  //   icon: Icons.delete,
+                                                  //   label: 'Delete',
+                                                  //   onPress: () {
+                                                  //     print(_moduleList[0]);
+                                                  //     controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
+                                                  //   },
+                                                  // )
                                                   // : Container()
                                                 ])
                                                 : Text(
