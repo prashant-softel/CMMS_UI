@@ -29,6 +29,10 @@ class JobListScreen extends StatelessWidget {
               title: Text('Jobs'),
               centerTitle: true,
               elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => Get.back(),
+              ),
             ),
       body: Container(
         width: Get.width,

@@ -38,7 +38,7 @@ class JobCardDetailsController extends GetxController {
 
   RxList<DataRow2> employeeTableRows = <DataRow2>[].obs;
   final responsibilityCtrlr = TextEditingController();
-  List<TextEditingController> responsibilityCtrlrs = [];
+  // List<TextEditingController> responsibilityCtrlrs = [];
   RxList<EmployeeModel?> employeeList = <EmployeeModel>[].obs;
   RxList<EmployeeModel>? selectedEmployeeList = <EmployeeModel>[].obs;
   Rx<EmployeeModel> selectedEmployee = EmployeeModel().obs;
@@ -110,7 +110,7 @@ class JobCardDetailsController extends GetxController {
       createPermitDetailsTableData();
       getEmployeeList();
       getPermitDetails();
-      responsibilityCtrlrs.add(TextEditingController());
+      // responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
       super.onInit();
     } catch (e) {
@@ -138,9 +138,9 @@ class JobCardDetailsController extends GetxController {
 
   @override
   void onClose() {
-    for (var i = 0; i < responsibilityCtrlrs.length; i++) {
-      responsibilityCtrlrs[i].dispose();
-    }
+    // for (var i = 0; i < responsibilityCtrlrs.length; i++) {
+    //   responsibilityCtrlrs[i].dispose();
+    // }
     super.onClose();
   }
 
@@ -459,67 +459,10 @@ class JobCardDetailsController extends GetxController {
     // return responsibitlity;
   }
 
-  // void onEmployeeSelected(selectedValueText, rowIndex) {
-  //   currentIndex.value = rowIndex;
-  //   // Update the selected employee value for the corresponding row
-  //   final rowToUpdate = employeeTableRows[rowIndex];
-  //   rowToUpdate.cells[0] = DataCell(
-  //     Container(
-  //       padding: Dimens.edgeInsets5,
-  //       child: DropdownWidget(
-  //         controller: this,
-  //         dropdownList: employeeList,
-  //         isValueSelected: true,
-  //         selectedValue: selectedValueText,
-  //         onValueChanged: (list, selectedValueText) {
-  //           onEmployeeSelected(selectedValueText, rowIndex);
-  //         },
-  //       ),
-  //     ),
-  //   );
-  //   // Update the observable variables for the selected employee
-  //   isEmployeeSelected.value = true;
-  //   final _selectedEmployee = employeeList.firstWhere(
-  //       (employee) => employee?.name == selectedValueText,
-  //       orElse: () => null);
-  //   if (_selectedEmployee != null) {
-  //     final exists = selectedEmployeeList
-  //             ?.any((employee) => employee.id == _selectedEmployee.id) ??
-  //         false;
-  //     if (!exists) {
-  //       selectedEmployeeList?.add(_selectedEmployee);
-  //     }
-  //   }
-  // }
-
   goToJobCardListScreen() {
     Get.back();
     Get.toNamed(Routes.jobCardList);
   }
-
-  // void addEmployeeDialog(Widget Function(BuildContext) dialogBuilder) {
-  //   Get.dialog(
-  //     AlertDialog(
-  //       title: Text('Add Employee'),
-  //       content: dialogBuilder(Get.context!),
-  //       actions: [
-  //         CustomElevatedButton(
-  //           text: 'Add',
-  //           onPressed: () {
-  //             addNewEmployee();
-  //             Get.back();
-  //           },
-  //         ),
-  //         CustomElevatedButton(
-  //           text: 'Cancel',
-  //           onPressed: () {
-  //             Get.back();
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {
     ///

@@ -172,9 +172,10 @@ class JobDetailsController extends GetxController {
   }
 
   void goToJobDetailsScreen() {
+    // close pop-up
     Get.back();
+    // reload screen
     getJobDetails(jobId.value);
-    // Get.offNamed(Routes.jobDetails, arguments: {'jobId': jobId.value});
   }
 
   onPermitSelected(NewPermitModel? newPermitModel) {
