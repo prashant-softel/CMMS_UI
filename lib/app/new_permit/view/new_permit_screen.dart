@@ -1565,7 +1565,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             3.75,
-                                                    height: 35,
+                                                    
                                                     child: Obx(
                                                       () => DropdownWidget(
                                                         dropdownList: controller
@@ -1718,7 +1718,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .size
                                                                   .width /
                                                               3.75,
-                                                      height: 35,
+                                                      
                                                       child: Obx(
                                                         () => DropdownWidget(
                                                           dropdownList: controller
@@ -3074,8 +3074,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       SizedBox(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             4.5,
-                                                                        height:
-                                                                            35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3103,8 +3101,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       SizedBox(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             4.5,
-                                                                        height:
-                                                                            35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3180,8 +3176,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       SizedBox(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             4.5,
-                                                                        height:
-                                                                            35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3224,8 +3218,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       SizedBox(
                                                                         width: MediaQuery.of(context).size.width /
                                                                             4.5,
-                                                                        height:
-                                                                            35,
                                                                         child:
                                                                             Obx(
                                                                           () =>
