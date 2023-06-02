@@ -384,13 +384,6 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                     255, 245, 248, 250),
                                               ),
                                               child: TabBarView(children: [
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                        color: ColorValues
-                                                            .whiteColor),
-                                                    child: Column(
-                                                      children: [Text('1 Tab')],
-                                                    )),
                                                 Column(
                                                   children: [
                                                     Container(
@@ -423,7 +416,73 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                               ],
                                                             ),
                                                             child: controller
-                                                                        .accesslevel
+                                                                        .plantListModel
+                                                                        .length >
+                                                                    0
+                                                                ? Center(
+                                                                    child:
+                                                                        ScrollableTableView(
+                                                                      columns: [
+                                                                        "Plant Name",
+                                                                        "SPV",
+                                                                        "Location",
+                                                                      ].map(
+                                                                          (column) {
+                                                                        return TableViewColumn(
+                                                                          label:
+                                                                              column,
+                                                                          minWidth:
+                                                                              Get.width * 0.20,
+                                                                        );
+                                                                      }).toList(),
+                                                                      rows: true
+                                                                          ? controller
+                                                                              .plantListModel
+                                                                              .map((plants) => TableViewRow(height: 90, cells: [
+                                                                                    TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
+                                                                                    TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
+                                                                                    TableViewCell(child: Text("----")),
+                                                                                  ]))
+                                                                              .toList()
+                                                                          : [],
+                                                                    ),
+                                                                  )
+                                                                : Container())),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Container(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        child: Container(
+                                                            height:
+                                                                Get.height - 30,
+                                                            margin: Dimens
+                                                                .edgeInsets15,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                color: ColorValues
+                                                                    .lightGreyColorWithOpacity35,
+                                                                width: 1,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: ColorValues
+                                                                      .appBlueBackgroundColor,
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            child: controller
+                                                                        .accessList
                                                                         .length >
                                                                     0
                                                                 ? ScrollableTableView(
@@ -451,7 +510,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                     }).toList(),
                                                                     rows: true
                                                                         ? controller
-                                                                            .accesslevel
+                                                                            .accessList
                                                                             .map((getAccesslevelDetails) =>
                                                                                 TableViewRow(height: 90, cells: [
                                                                                   TableViewCell(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
@@ -490,13 +549,85 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                 : Container())),
                                                   ],
                                                 ),
-                                                Container(
-                                                    decoration: BoxDecoration(
+                                                Column(
+                                                  children: [
+                                                    Container(
                                                         color: ColorValues
-                                                            .whiteColor),
-                                                    child: Column(
-                                                      children: [Text('3 Tab')],
-                                                    )),
+                                                            .whiteColor,
+                                                        child: Container(
+                                                            height:
+                                                                Get.height - 30,
+                                                            margin: Dimens
+                                                                .edgeInsets15,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                color: ColorValues
+                                                                    .lightGreyColorWithOpacity35,
+                                                                width: 1,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: ColorValues
+                                                                      .appBlueBackgroundColor,
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            child: controller
+                                                                        .notificationListByUserId
+                                                                        .length >
+                                                                    0
+                                                                ? ScrollableTableView(
+                                                                    columns: [
+                                                                      "Notifications",
+                                                                      "Default Value",
+                                                                      "Can Override",
+                                                                      "User Preference",
+                                                                    ].map(
+                                                                        (column) {
+                                                                      return TableViewColumn(
+                                                                        label:
+                                                                            column,
+                                                                        minWidth:
+                                                                            Get.width *
+                                                                                0.17,
+                                                                      );
+                                                                    }).toList(),
+                                                                    rows: true
+                                                                        ? controller
+                                                                            .notificationListByUserId
+                                                                            .map((getNotificationDetails) =>
+                                                                                TableViewRow(height: 70, cells: [
+                                                                                  TableViewCell(child: Text("${getNotificationDetails?.feature_name}" " " "${getNotificationDetails?.notification_name.value}")),
+                                                                                  TableViewCell(
+                                                                                    child: Obx(() {
+                                                                                      return _rowItem(
+                                                                                        getNotificationDetails?.default_flag.value,
+                                                                                      );
+                                                                                    }),
+                                                                                  ),
+                                                                                  TableViewCell(
+                                                                                    child: Obx(() {
+                                                                                      return _rowItem(getNotificationDetails?.can_change.value);
+                                                                                    }),
+                                                                                  ),
+                                                                                  TableViewCell(child: Obx(() {
+                                                                                    return _rowItem(getNotificationDetails?.default_flag.value);
+                                                                                  })),
+                                                                                ]))
+                                                                            .toList()
+                                                                        : [],
+                                                                  )
+                                                                : Container())),
+                                                  ],
+                                                ),
                                               ]),
                                             )
                                           ],

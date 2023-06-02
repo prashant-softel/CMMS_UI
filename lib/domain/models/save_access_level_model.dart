@@ -6,13 +6,13 @@ class SaveAccessLevelModel {
 
   int user_id;
 
-  List<AccessList> access_list;
+  List<SaveAccessList> access_list;
 
   factory SaveAccessLevelModel.fromJson(Map<String, dynamic> json) =>
       SaveAccessLevelModel(
         user_id: json["user_id"],
-        access_list: List<AccessList>.from(
-            json["access_list"].map((x) => AccessList.fromJson(x))),
+        access_list: List<SaveAccessList>.from(
+            json["access_list"].map((x) => SaveAccessList.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -21,8 +21,8 @@ class SaveAccessLevelModel {
       };
 }
 
-class AccessList {
-  AccessList(
+class SaveAccessList {
+  SaveAccessList(
       {required this.feature_id,
       required this.add,
       required this.approve,
@@ -40,7 +40,7 @@ class AccessList {
   int approve;
   int selfView;
 
-  factory AccessList.fromJson(Map<String, dynamic> json) => AccessList(
+  factory SaveAccessList.fromJson(Map<String, dynamic> json) => SaveAccessList(
         feature_id: json["feature_id"],
         add: json["add"],
         edit: json["edit"],

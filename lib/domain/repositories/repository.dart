@@ -6,6 +6,7 @@ import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
@@ -15,6 +16,9 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
@@ -2677,7 +2681,6 @@ class Repository {
     }
   }
 
-
   Future<void> deleteModulelist(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -2913,6 +2916,89 @@ class Repository {
     }
   }
 
+  Future<GetNotificationModel?> getRoleNotificationList(
+    int? roleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoleNotificationList(
+        auth: auth,
+        roleId: roleId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final GetNotificationModel _getNotificationModel =
+            getNotificationModelFromJson(res.data);
+        return _getNotificationModel;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getRoleNotificationList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetAccessLevelByIdModel?> getUserAccessListById(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserAccessListById(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final GetAccessLevelByIdModel _accessLevelModel =
+            getaccessLevelModelFromJson(res.data);
+        return _accessLevelModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getUserAccessListById');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetNotificationByUserIdModel?> getUserNotificationListById(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserNotificationListById(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final GetNotificationByUserIdModel _getNotificationByUserIdModel =
+            getNotificationByUserIdModelFromJson(res.data);
+        return _getNotificationByUserIdModel;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getUserNotificationListById');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   Future<List<RoleModel?>?> getRoleList(
     bool? isLoading,
   ) async {
@@ -3037,6 +3123,9 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
+        Get.offNamed(Routes.userList);
+
+        //   print("hellooooo");
         return true;
       } //
       else {
@@ -3094,6 +3183,31 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<AddUserModel?> uploadImge(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.uploadImge(
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        isLoading: isLoading,
+      );
+      if (res != null) {
+        print("file upload");
+        return res;
+      } //
+      else {
+        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 

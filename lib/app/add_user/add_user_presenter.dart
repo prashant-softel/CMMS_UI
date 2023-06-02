@@ -1,10 +1,17 @@
+import 'dart:typed_data';
+
 import 'package:cmms/domain/models/access_level_model.dart';
+import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/role_model.dart';
 import '../../domain/models/state_model.dart';
+import '../../domain/models/user_access_model.dart';
 import '../../domain/models/user_detail_model.dart';
 import '../../domain/usecases/add_user_usecase.dart';
 
@@ -43,6 +50,30 @@ class AddUserPresenter {
   }) async =>
       await addUserUsecase.getRoleAccessList(
         roleId: roleId,
+        isLoading: isLoading,
+      );
+  Future<GetNotificationModel?> getRoleNotificationList({
+    int? roleId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getRoleNotificationList(
+        roleId: roleId,
+        isLoading: isLoading,
+      );
+  Future<GetAccessLevelByIdModel?> getUserAccessListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getUserAccessListById(
+        userId: userId,
+        isLoading: isLoading,
+      );
+  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getUserNotificationListById(
+        userId: userId,
         isLoading: isLoading,
       );
   Future<Map<String, dynamic>> saveAccessLevel({
@@ -85,5 +116,11 @@ class AddUserPresenter {
       isLoading: isLoading,
     );
     return true;
+  }
+
+  Future<AddUserModel?> uploadImge(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await addUserUsecase.uploadImge(fileBytes, fileName, isLoading);
+    // return true;
   }
 }

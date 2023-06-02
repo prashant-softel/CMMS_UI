@@ -3,6 +3,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../../domain/models/update_pm_task_execution_model.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -117,7 +118,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                     style: Styles.black17,
                                   ),
                                   Text(
-                                      "${controller.pmtaskViewModel.value?.checklists![0].name ?? ""}",
+                                      "${controller.pmtaskViewModel.value?.checklist_name ?? ""}",
                                       style: Styles.blue700),
                                   Spacer(),
                                   Text(
@@ -167,17 +168,19 @@ class PreventiveMaintenanceExecutionContentWeb
                                   }).toList(),
                                   rows: [
                                     ...List.generate(
-                                      controller.scheduleCheckList?.length ?? 0,
+                                      controller.scheduleCheckPoints?.length ??
+                                          0,
                                       (index) {
-                                        var scheduleCheckListDetails =
+                                        var scheduleCheckPointsDetails =
                                             controller
-                                                .scheduleCheckList?[index];
+                                                .scheduleCheckPoints?[index];
                                         return [
-                                          '${scheduleCheckListDetails?.check_point_name}',
-                                          '${scheduleCheckListDetails?.requirement}',
+                                          '${scheduleCheckPointsDetails?.check_point_name}',
+                                          '${scheduleCheckPointsDetails?.requirement}',
                                           "Upload_image",
-                                          "Observation",
-                                          '${scheduleCheckListDetails?.is_job_created}',
+                                          scheduleCheckPointsDetails
+                                              ?.observation_value_controller,
+                                          '${scheduleCheckPointsDetails?.is_job_created}',
                                           // "Create_job"
                                         ];
                                       },
@@ -203,7 +206,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                         controller.toggle();
                                                       }),
                                                 )
-                                              : (value == "Observation")
+                                              : (value == record[3])
                                                   ? IgnorePointer(
                                                       ignoring: !controller
                                                           .isTouchable.value,
@@ -241,6 +244,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             ),
                                                             child:
                                                                 LoginCustomTextfield(
+                                                              textController: value
+                                                                  as TextEditingController,
                                                               maxLine: 5,
                                                             )),
                                                       ),
@@ -316,7 +321,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                           ),
                                                         )
                                                       : Center(
-                                                          child: Text(value)),
+                                                          child:
+                                                              Text("${value}")),
                                         );
                                       }).toList(),
                                     );
@@ -536,7 +542,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                 ColorValues.appDarkBlueColor,
                                             text: "Update",
                                             onPressed: () {
-                                              _updatedailog();
+                                              controller.updatePmExecution();
                                             },
                                           ),
                                         ),
@@ -558,70 +564,5 @@ class PreventiveMaintenanceExecutionContentWeb
         ],
       ),
     );
-  }
-
-  void _updatedailog() {
-    Get.dialog(AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-      ),
-      insetPadding: Dimens.edgeInsets10_0_10_0,
-      contentPadding: EdgeInsets.zero,
-      title: Column(
-        children: [
-          Text(
-            'PM Execution Submitted',
-            textAlign: TextAlign.center,
-            style: Styles.green700,
-          ),
-          Divider(
-            color: ColorValues.greyColor,
-          )
-        ],
-      ),
-      content: Builder(builder: (context) {
-        var height = Get.height;
-
-        return Container(
-          // margin: Dimens.edgeInsets15,
-          // padding: Dimens.edgeInsets25,
-          height: height / 7,
-          width: double.infinity,
-
-          child: Column(
-            children: [
-              RichText(
-                text: TextSpan(
-                    text: 'PM Execution Submitted with',
-                    style: Styles.blue700,
-                    children: <TextSpan>[
-                      TextSpan(text: ' \n     Code', style: Styles.blue700),
-                      TextSpan(
-                        text: '  PMSC87456',
-                        style: Styles.redBold15,
-                      ),
-                    ]),
-              ),
-              Dimens.boxHeight12,
-              //  Text("PM Execution Submitted with code PMSC87456"),
-              Container(
-                height: 40,
-                child: CustomElevatedButton(
-                  text: "PM Execution View",
-                  onPressed: () {
-                    Get.toNamed(
-                      Routes.pmExecutionView,
-                    );
-                  },
-                  backgroundColor: ColorValues.appDarkBlueColor,
-                  textColor: ColorValues.whiteColor,
-                ),
-              ),
-            ],
-          ),
-        );
-      }),
-      actions: [],
-    ));
   }
 }
