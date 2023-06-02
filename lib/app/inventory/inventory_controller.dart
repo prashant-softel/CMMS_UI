@@ -53,13 +53,6 @@ class InventoryController extends GetxController {
     );
   }
 
-
-  Future<void> warrantyType() async {
-    Get.toNamed(
-      Routes.warrantyType,
-    );
-  }
-
   Future<void> breakdownMaintenance() async {
     Get.toNamed(
       Routes.warrantyClaimListWeb,

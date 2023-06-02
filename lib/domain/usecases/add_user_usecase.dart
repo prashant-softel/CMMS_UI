@@ -17,7 +17,7 @@ class AddUserUsecase {
       await repository.getCountryList(
         isLoading,
       );
-  Future<List<BloodListModel?>?> getBloodList({
+  Future<List<BloodModel?>?> getBloodList({
     bool? isLoading,
   }) async =>
       await repository.getBloodList(

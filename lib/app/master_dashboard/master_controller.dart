@@ -117,46 +117,9 @@ class MastersController extends GetxController {
       Routes.blockTypeListScreen,
     );
   }
-
-  Future<void> goToBusinessTypeList() async {
-    Get.toNamed(
-      Routes.businessTypeListScreen,
-    );
-  }
   Future<void> goToModuleTypeList() async {
     Get.toNamed(
       Routes.moduleTypeListScreen,
-    );
-  }
-
-  Future<void> goToBloodTypeList() async {
-    Get.toNamed(
-      Routes.bloodTypeListScreen,
-    );
-  }
-
-  Future<void> goToRoleTypeList() async {
-    Get.toNamed(
-      Routes.roleListScreen,
-    );
-  }
-
-  Future<void> goToCountryTypeList() async {
-    Get.toNamed(
-      Routes.countryTypeListScreen,
-    );
-  }
-
-  Future<void> goToStateTypeList() async {
-    Get.toNamed(
-      Routes.stateTypeListScreen,
-    );
-  }
-
-
-  Future<void> goToFrequencyList() async {
-    Get.toNamed(
-      Routes.frequencyListScreen,
     );
   }
 }
