@@ -64,6 +64,8 @@ abstract class Routes {
   static const frequencyListScreen = _Paths.frequencyListScreen;
   static const roleListScreen = _Paths.roleListScreen;
   static const warrantyType = _Paths.warrantyType;
+  static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
+  static const addInventoryScreen = _Paths.addInventoryScreen;
 }
 
 abstract class _Paths {
@@ -127,7 +129,9 @@ abstract class _Paths {
   static const frequencyListScreen = '/frequency-Type-List-Screen';
   static const roleListScreen = '/role-Type-List-Screen';
   static const warrantyType = '/warranty-Type-List-Screen';
+  static const editWarrantyClaimContentWeb = '/edit-warranty-claim-content-web';
 
+  static const addInventoryScreen = '/add-inventory-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

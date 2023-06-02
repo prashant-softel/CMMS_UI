@@ -157,7 +157,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 6,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
@@ -231,7 +231,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 6,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
@@ -292,7 +292,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 6,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
@@ -353,7 +353,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 6,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
@@ -431,7 +431,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 6,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 6,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),

@@ -1,5 +1,5 @@
 import 'dart:async';
-// import 'dart:ui' as kIsWeb;
+
 import 'dart:io';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -136,7 +136,7 @@ class JobListController extends GetxController {
   }
 
   void goToJobDetailsScreen(int? _jobId) {
-    Get.offAndToNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
+    Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 
   String formatDate(String? inputDateTime) {

@@ -68,13 +68,12 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 13 && e.add == 1)
+                              .where((e) => e.feature_id == 13 && e.add == 0)
                               .length >
                           0
-                      ? 
-                      Container(
+                      ? Container(
                           width: (Get.width * .303),
-                          margin: EdgeInsets.only(left: 30, top: 30),
+                          margin: EdgeInsets.only(left: 30, top: 10),
                           height: Get.height / 1.2,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
@@ -98,83 +97,77 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 30,
+                                          height: 10,
                                         ),
-                                          CustomRichText(
-                                                                          title:
-                                                                              'TBT Type: '),
-                                                                               SizedBox(height: 5,),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
-                                                                                3.5,
-                                                                        height: 45,
-                                                                        child:
-                                                                            Obx(
-                                                                          () =>
-                                                                              DropdownWidget(
-                                                                            dropdownList:
-                                                                                controller.jobTypeList,
-                                                                            isValueSelected:
-                                                                                controller.isJobTypeListSelected.value,
-                                                                            selectedValue:
-                                                                                controller.selectedJobType.value,
-                                                                            onValueChanged:
-                                                                                controller.onValueChanged,
-                                                                          ),
-                                                                        ),
-
-                                                                        // LoginCustomTextfield(),
-                                                                      ),
-                                                                      SizedBox(height: 5,),
-                                        CustomRichText(title: 'Title '),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            // Text(
-                                            //   "Title",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                      textController: controller.titleTextFieldCtrlr,
-                                                      )),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'TBT Type: '),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.5,
+                                          
+                                          child: Obx(
+                                            () => DropdownWidget(
+                                              dropdownList:
+                                                  controller.jobTypeList,
+                                              isValueSelected: controller
+                                                  .isJobTypeListSelected.value,
+                                              selectedValue: controller
+                                                  .selectedJobType.value,
+                                              onValueChanged:
+                                                  controller.onValueChanged,
                                             ),
-                                          ],
+                                          ),
+
+                                          // LoginCustomTextfield(),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Title '),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: LoginCustomTextfield(
+                                                textController: controller
+                                                    .titleTextFieldCtrlr,
+                                              )),
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -202,234 +195,284 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         // SizedBox(
                                         //   height: 10,
                                         // ),
-                                        CustomRichText(title: 'Description '),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            // Text(
-                                            //   "Description ",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Description '),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                      textController: controller.descriptionTextFieldCtrlr,
-                                                      )),
-                                            ),
-                                          ],
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: LoginCustomTextfield(
+                                                textController: controller
+                                                    .descriptionTextFieldCtrlr,
+                                              )),
                                         ),
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        CustomRichText(title: 'View JSA File ',),
-                                        SizedBox(height: 5,),
-                                        Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 45,
-                          width: MediaQuery.of(context).size.width / 7.5,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                controller.fileName.value == ""
-                                    ? 'File Name'
-                                    : controller.fileName.value,
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                          height: 35,
-                          width: (Get.width * .2) - 170,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appDarkBlueColor,
-                            text: "Browse",
-                            onPressed: () async {
-                              final result =
-                                  await FilePicker.platform.pickFiles();
-                              if (result != null) {
-                                // for (var file in result.files) {
-                                controller.fileName.value =
-                                    result.files.single.name;
-                                controller.fileBytes =
-                                    result.files.single.bytes;
-                                //controller.filePath.value = file.;
-                                  print({"filepathes", controller.fileName.value});
-                                // }
-                              }
-                            },
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Upload',
-                              onPressed: () {
-                                controller
-                                    .browseFiles(
-                                  fileBytes: controller.fileBytes,
-                                  position: 0
-                                )
-                                    .then((value) {
-                                  controller.isSuccessDialog();
-
-                                //   // Fluttertoast.showToast(
-                                //   //     msg: "file upload  Successfully",
-                                //   //     fontSize: 16.0);
-                                });
-                                //  controller.savePmMapping();
-                              },
-                            ),
-                          ),
-                      ],
-                    ),
-                     SizedBox(
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                            title: 'View JSA File ',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15,right: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 45,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                  7.1,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromARGB(
+                                                              255, 236, 234, 234)
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Align(
+                                                    alignment: Alignment.topLeft,
+                                                    child: Text(
+                                                      controller.fileName.value ==
+                                                              ""
+                                                          ? 'File Name'
+                                                          : controller
+                                                              .fileName.value,
+                                                      maxLines: 3,
+                                                      textAlign: TextAlign.center,
+                                                      style: Styles.greyLight14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                height: 35,
+                                                width: 77,
+                                                child: CustomElevatedButton(  
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  text: "Browse",
+                                                  // style: TextStyle(fontSize: 8),
+                                                  size: 12,
+                                                  onPressed: () async {
+                                                    final result =
+                                                        await FilePicker.platform
+                                                            .pickFiles();
+                                                    if (result != null) {
+                                                      // for (var file in result.files) {
+                                                      controller.fileName.value =
+                                                          result
+                                                              .files.single.name;
+                                                      controller.fileBytes =
+                                                          result
+                                                              .files.single.bytes;
+                                                      //controller.filePath.value = file.;
+                                                      print({
+                                                        "filepathes",
+                                                        controller.fileName.value
+                                                      });
+                                                      // }
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                height: 35,
+                                                width: 77,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.greenColor,
+                                                  text: 'Upload',
+                                                  size: 12,
+                                                  onPressed: () {
+                                                    controller
+                                                        .browseFiles(
+                                                            fileBytes: controller
+                                                                .fileBytes,
+                                                            position: 0)
+                                                        .then((value) {
+                                                      controller
+                                                          .isSuccessDialog();
+                                        
+                                                      //   // Fluttertoast.showToast(
+                                                      //   //     msg: "file upload  Successfully",
+                                                      //   //     fontSize: 16.0);
+                                                    });
+                                                    //  controller.savePmMapping();
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
                                           height: 10,
                                         ),
-                                        CustomRichText(title: 'View SOP File ',),
-                                        SizedBox(height: 5,),
-                                        Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 45,
-                          width: MediaQuery.of(context).size.width / 7.5,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                controller.fileName2.value == ""
-                                    ? 'File Name'
-                                    : controller.fileName2.value,
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                          height: 35,
-                          width: (Get.width * .2) - 170,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appDarkBlueColor,
-                            text: "Browse",
-                            onPressed: () async {
-                              final result =
-                                  await FilePicker.platform.pickFiles();
-                              if (result != null) {
-                                // for (var file in result.files) {
-                                controller.fileName2.value =
-                                    result.files.single.name;
-                                controller.fileBytes2 =
-                                    result.files.single.bytes;
-                                //controller.filePath.value = file.;
-                                //  print({"filepathes", fileBytes});
-                                // }
-                              }
-                            },
-                          ),
-                        ),
-                         Dimens.boxWidth5,
-                        Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Upload',
-                              onPressed: () {
-                                controller
-                                    .browseFiles(
-                                  fileBytes: controller.fileBytes2,
-                                  position: 1
-                                  
-                                )
-                                    .then((value) {
-                                  controller.isSuccessDialog2();
-
-                                //   // Fluttertoast.showToast(
-                                //   //     msg: "file upload  Successfully",
-                                //   //     fontSize: 16.0);
-                                });
-                                //  controller.savePmMapping();
-                              },
-                            ),
-                          ),
-                      ],
-                    ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                            title: 'View SOP File ',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 45,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    7.1,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromARGB(
+                                                              255, 236, 234, 234)
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Align(
+                                                    alignment: Alignment.topLeft,
+                                                    child: Text(
+                                                      controller.fileName2
+                                                                  .value ==
+                                                              ""
+                                                          ? 'File Name'
+                                                          : controller
+                                                              .fileName2.value,
+                                                      maxLines: 3,
+                                                      textAlign: TextAlign.center,
+                                                      style: Styles.greyLight14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                height: 35,
+                                                width: 77,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  text: "Browse",
+                                                  size: 12,
+                                                  onPressed: () async {
+                                                    final result =
+                                                        await FilePicker.platform
+                                                            .pickFiles();
+                                                    if (result != null) {
+                                                      // for (var file in result.files) {
+                                                      controller.fileName2.value =
+                                                          result
+                                                              .files.single.name;
+                                                      controller.fileBytes2 =
+                                                          result
+                                                              .files.single.bytes;
+                                                      //controller.filePath.value = file.;
+                                                      //  print({"filepathes", fileBytes});
+                                                      // }
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                height: 35,
+                                                width: 77,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.greenColor,
+                                                  text: 'Upload',
+                                                  size: 12,
+                                                  onPressed: () {
+                                                    controller
+                                                        .browseFiles(
+                                                            fileBytes: controller
+                                                                .fileBytes2,
+                                                            position: 1)
+                                                        .then((value) {
+                                                      controller
+                                                          .isSuccessDialog2();
+                                        
+                                                      //   // Fluttertoast.showToast(
+                                                      //   //     msg: "file upload  Successfully",
+                                                      //   //     fontSize: 16.0);
+                                                    });
+                                                    //  controller.savePmMapping();
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         // Row(
                                         //   children: [
                                         //     CustomRichText(
@@ -455,7 +498,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width: (Get.width * .1),
+                                        width: (Get.width * .07),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -465,7 +508,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .2) - 50,
+                                        width: (Get.width * .15) - 50,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
@@ -481,14 +524,13 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 13 && e.view == 1)
+                              .where((e) => e.feature_id == 13 && e.view == 0)
                               .length >
                           0
-                      ? 
-                      Expanded(
+                      ? Expanded(
                           child: Container(
                             width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 30),
+                            margin: EdgeInsets.only(left: 10, top: 10),
                             height: Get.height,
                             child: Card(
                               color: Color.fromARGB(255, 251, 252, 253),
@@ -572,8 +614,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.sopPermitList
-                                                        .length ,
+                                                controller.sopPermitList.length,
                                                 (index) {
                                                   return [
                                                     '',
@@ -597,82 +638,92 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             }).toList(),
                                           ),
                                         )
-                                      :
-                                  Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .jobSOPListPaginationController,
-                                      columns: [
-                                        "Sr.No.",
-                                        "Title",
-                                        "Job Type Name",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.sopPermitList.length,
-                                          (index) {
-                                            var jobSOPListDetails =
-                                                controller.sopPermitList[index];
-                                            return [
-                                              '${jobSOPListDetails.id}',
-                                              '${jobSOPListDetails.name}',
-                                              '${jobSOPListDetails.jobTypeName}',
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .jobSOPListPaginationController,
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "Job Type Name",
                                               "Action"
-                                            ];
-                                          },
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.12,
+                                                label: column,
+                                              );
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller.sopPermitList.length,
+                                                (index) {
+                                                  var jobSOPListDetails =
+                                                      controller
+                                                          .sopPermitList[index];
+                                                  return [
+                                                    '${jobSOPListDetails.id}',
+                                                    '${jobSOPListDetails.name}',
+                                                    '${jobSOPListDetails.jobTypeName}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_permitTypeList) {
+                                              return TableViewRow(
+                                                  height: 60,
+                                                  cells: _permitTypeList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value ==
+                                                                'Checkbox')
+                                                            ? Checkbox(
+                                                                value: controller
+                                                                    .isChecked
+                                                                    .value,
+                                                                onChanged:
+                                                                    (val) {})
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appLightBlueColor,
+                                                                          icon:
+                                                                              Icons.edit,
+                                                                          label:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {},
+                                                                        ),
+                                                                        // : Container(),
+                                                                        // :Container(),
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          label:
+                                                                              'Delete',
+                                                                          onPress:
+                                                                              () {},
+                                                                        )
+                                                                        // : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
                                         ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 60,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'Checkbox')
-                                                      ? Checkbox(
-                                                          value: controller
-                                                              .isChecked.value,
-                                                          onChanged: (val) {})
-                                                      : (value == "Action")
-                                                          ? Wrap(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                label: 'Edit',
-                                                                onPress: () {},
-                                                              ),
-                                                              // : Container(),
-                                                              // :Container(),
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appRedColor,
-                                                                icon: Icons
-                                                                    .delete,
-                                                                label: 'Delete',
-                                                                onPress: () {},
-                                                              )
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

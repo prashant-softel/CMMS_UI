@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:cmms/app/preventive_maintenance_task/preventive_maintenance_task_presenter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/pm_task_model.dart';
+import '../../domain/models/update_pm_task_execution_model.dart';
 import '../home/home_controller.dart';
 import '../navigators/app_pages.dart';
 
@@ -31,7 +33,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
-
+  PmTaskListModel? selectedItem;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -40,16 +42,10 @@ class PreventiveMaintenanceTaskController extends GetxController {
       // });
     });
     await Future.delayed(Duration(seconds: 2), () async {
-      getPmTaskList(facilityId, true);
+      getPmTaskList(facilityId, false);
     });
 
     super.onInit();
-  }
-
-  Future<void> pmTaskView() async {
-    Get.toNamed(
-      Routes.pmTaskView,
-    );
   }
 
   Future<void> getPmTaskList(int facilityId, bool isLoading) async {

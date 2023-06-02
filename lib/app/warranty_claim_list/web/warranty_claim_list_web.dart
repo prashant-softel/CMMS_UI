@@ -422,7 +422,10 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                                                 .edit,
                                                                             label: 'Edit',
                                                                             onPress:
-                                                                                () {},
+                                                                                () {
+                                                                                   controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                  print('edit record:${int.tryParse('${record[0]}')}');
+                                                                                },
                                                                           ),
                                                                           //),
                 

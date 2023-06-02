@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
+import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
@@ -144,6 +145,24 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetBusinessTypeList',
+
+   Future<ResponseModel> getAffectedPartList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+    int? blockId,
+    String? categoryIds,
+  }) async {
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+
+    var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?' +
+          blockIdParam +
+          categoryIdsParam +
+          statusParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -160,6 +179,40 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetBusinessList?businessType=$businessType',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getmanufacturerList({
+    required bool isLoading,
+    required String auth,
+    int? BusinessType,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessList?BusinessType=$BusinessType',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getSupplierList({
+    required bool isLoading,
+    required String auth,
+    int? BusinessType,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessList?BusinessType=$BusinessType',
       Request.getMultiparts,
       null,
       isLoading,
@@ -610,9 +663,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel>
-  getPreventiveCheckList({
-
+  Future<ResponseModel> getPreventiveCheckList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -630,7 +681,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
   Future<ResponseModel> getWarrantyList({
     required String auth,
     bool? isLoading,
@@ -651,6 +701,7 @@ class ConnectHelper {
 
   Future<ResponseModel>
   getModuleList({
+  Future<ResponseModel> getModuleList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -667,7 +718,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
@@ -1150,7 +1200,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Create Warranty Claim
+  //Create Warranty Claim
   Future<ResponseModel> createWarrantyClaim({
     required String auth,
     createWarrantyClaim,
@@ -1170,15 +1220,18 @@ class ConnectHelper {
     print('Create Warranty Claim Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
     Get.dialog<void>(NewWarrantyClaimDialog(
       data: parsedJson['message'],
-      // warrantyId: parsedJson['id'],
+      warrantyClaimId: parsedJson['id'],
     ));
+    // }
 
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1251,7 +1304,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -1269,7 +1321,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
   Future<ResponseModel> createBusinessList({
     required String auth,
     bool? isLoading,
@@ -1296,19 +1347,18 @@ class ConnectHelper {
     bool? isLoading,
     required modulelistJsonString,
   }) async {
-
     var responseModel =
-      // responseModel =
-      await apiWrapper.makeRequest(
-        'CMMS/AddModule',
-        Request.post,
-        modulelistJsonString,
-        isLoading ?? false,
-        {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $auth',
-        },
-      );
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/AddModule',
+      Request.post,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
     return responseModel;
   }
@@ -1369,7 +1419,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> deleteModulelist({
     required String auth,
@@ -1634,7 +1683,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      'PMScheduleView/GetPMTaskDetail?schedule_id=2444',
       Request.get,
       null,
       isLoading ?? false,
@@ -1754,6 +1803,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> updateCheckPoint({
     required String auth,
     bool? isLoading,
@@ -1950,5 +2000,51 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updatePmExecution({
+    required String auth,
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/UpdatePMTaskExecution',
+      Request.post,
+      pmExecutionJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getWarrantyTypeList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetWarrantyTypeList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
   ///
+
+  Future<ResponseModel> getWarrantyUsageTermList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'Inventory/GetWarrantyUsageTermList',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
 }

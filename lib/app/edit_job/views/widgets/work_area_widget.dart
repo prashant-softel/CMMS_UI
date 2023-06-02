@@ -62,6 +62,7 @@ class WorkAreaWidget extends StatelessWidget {
           ),
           child: //
               MultiSelectDialogField(
+            searchable: true,
             initialValue: //
                 controller.selectedWorkAreaIdList
                     .map((equipmentId) =>

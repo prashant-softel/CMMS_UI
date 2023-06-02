@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_inventory/add_inventory_ui.dart';
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,9 +83,9 @@ class InventoryScreen extends GetView<InventoryController> {
                         _inventoryList(
                             tittle: "Add Inventory",
                             ontap: () {
-                              Get.to(() => AddInventory());
-
-                              //  controller.checkPoint();
+                              Get.toNamed(
+                                Routes.addInventoryScreen,
+                              );
                             }),
                         _inventoryList(
                             tittle: "Import Inventory",

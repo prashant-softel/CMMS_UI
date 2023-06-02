@@ -130,7 +130,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                               width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                2.72,
+                                                2.70,
                                                child: CustomTextField(
                                                   textController: controller.equipmentNameTextController,
                                                   readOnly: true,
@@ -225,7 +225,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                1.34,
+                                                1.33,
                                             child: CustomTextField(
                                               readOnly: true,
                                               hintText: 'Tashan Industry Zone',

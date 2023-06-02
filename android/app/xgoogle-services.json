@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "3950124460",
+    "project_id": "cmms-dev",
+    "storage_bucket": "cmms-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3950124460:android:4a28378ee18eaabdd7ae09",
+        "android_client_info": {
+          "package_name": "com.softel.cmms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3950124460-euhl594vbbtggn12tsikc4d5d5pr22v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq_fnVgwBYfAHgX0k_UkD0PYZZaTnwiOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3950124460-euhl594vbbtggn12tsikc4d5d5pr22v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

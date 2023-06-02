@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
@@ -33,6 +34,20 @@ class WarrantyClaimUsecase {
     required String categoryIds,
   }) async {
     return _repository.getInventoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: categoryIds,
+    );
+  }
+
+  Future<List<InventoryModel2>> getAffectedPartList({
+    required bool isLoading,
+    required int? facilityId,
+    int? blockId,
+    required String categoryIds,
+  }) async {
+    return _repository.getAffectedPartList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
