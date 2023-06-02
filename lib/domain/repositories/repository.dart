@@ -51,6 +51,7 @@ import '../../app/navigators/app_pages.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
 import '../models/blood_model.dart';
+import '../models/business_type_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
@@ -65,6 +66,7 @@ import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/user_list_model.dart';
+import '../models/warranty_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -432,7 +434,7 @@ class Repository {
 
   // Mixpanel? mixPanel;
 
-  Future<List<CountryState?>?> getStateList(int countryCode) async {
+  Future<List<StateModel?>?> getStateList(int countryCode) async {
     try {
       final res = await _dataRepository.getStateList(countryCode);
 
@@ -3256,4 +3258,107 @@ class Repository {
       return [];
     }
   }
+
+
+
+
+
+
+
+
+
+
+  Future<List<WarrantyModel?>?> getWarrantyList(
+      int? type,
+      int? facilityId,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonModuleListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<WarrantyModel> _ModuleListModelList =
+        jsonModuleListModelModels
+            .map<WarrantyModel>((m) =>
+            WarrantyModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _ModuleListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
+  Future<List<BusinessTypeModel>> getBusinessTypeList({
+    required int? businessType,
+    // int? blockId,
+    // required String categoryIds,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBusinessTypeList(
+        businessType: businessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = BusinessTypeModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
+
+
+
+
+  Future<bool> createBusinessListNumber(
+      {bool? isLoading, businesslistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createBusinessList(
+          auth: auth,
+          isLoading: isLoading,
+          businesslistJsonString: businesslistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
 }

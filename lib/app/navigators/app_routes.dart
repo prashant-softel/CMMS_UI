@@ -59,6 +59,14 @@ abstract class Routes {
   static const moduleTypeListScreen = _Paths.moduleTypeListScreen;
   static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
   static const addInventoryScreen = _Paths.addInventoryScreen;
+  static const bloodTypeListScreen = _Paths.bloodTypeListScreen;
+  static const countryTypeListScreen = _Paths.countryTypeListScreen;
+  static const stateTypeListScreen = _Paths.stateTypeListScreen;
+  static const businessListScreen = _Paths.businessListScreen;
+  static const businessTypeListScreen = _Paths.businessTypeListScreen;
+  static const frequencyListScreen = _Paths.frequencyListScreen;
+  static const roleListScreen = _Paths.roleListScreen;
+  static const warrantyType = _Paths.warrantyType;
 }
 
 abstract class _Paths {
@@ -116,7 +124,14 @@ abstract class _Paths {
   static const viewUserDetail = '/view-user-detail';
   static const moduleTypeListScreen = '/module-Type-List-Screen';
   static const editWarrantyClaimContentWeb = '/edit-warranty-claim-content-web';
-
+  static const bloodTypeListScreen = '/blood-Type-List-Screen';
+  static const countryTypeListScreen = '/country-Type-List-Screen';
+  static const stateTypeListScreen = '/state-Type-List-Screen';
+  static const businessListScreen = '/business-List-Screen';
+  static const businessTypeListScreen = '/business-Type-List-Screen';
+  static const frequencyListScreen = '/frequency-Type-List-Screen';
+  static const roleListScreen = '/role-Type-List-Screen';
+  static const warrantyType = '/warranty-Type-List-Screen';
   static const addInventoryScreen = '/add-inventory-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';

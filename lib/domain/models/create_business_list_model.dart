@@ -4,16 +4,16 @@
 
 import 'dart:convert';
 
-List<BusinessListModel> businessListModelFromJson(String str) =>
-    List<BusinessListModel>.from(
-        json.decode(str).map((x) => BusinessListModel.fromJson(x)));
+List<CreateBusinessListModel> businessListModelFromJson(String str) =>
+    List<CreateBusinessListModel>.from(
+        json.decode(str).map((x) => CreateBusinessListModel.fromJson(x)));
 
-String businessListModelToJson(List<BusinessListModel> data) =>
+String businessListModelToJson(List<CreateBusinessListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class BusinessListModel {
-  BusinessListModel({
-    this.id,
+class CreateBusinessListModel {
+  CreateBusinessListModel({
+    // this.id,
     this.name,
     this.email,
     this.contactPerson,
@@ -27,12 +27,12 @@ class BusinessListModel {
     this.zip,
     this.type,
     this.status,
-    this.addedAt,
+    this.addAt,
 
 
   });
 
-  int? id;
+  // int? id;
   String? name;
   String? email;
   String? contactPerson;
@@ -46,11 +46,11 @@ class BusinessListModel {
   String? zip;
   int? type;
   int? status;
-  String? addedAt;
+  String? addAt;
 
 
-  factory BusinessListModel.fromJson(Map<String, dynamic> json) => BusinessListModel(
-      id: json["id"],
+  factory CreateBusinessListModel.fromJson(Map<String, dynamic> json) => CreateBusinessListModel(
+      // id: json["id"],
       name: json["name"],
       email: json["email"],
       contactPerson: json["contactPerson"],
@@ -64,11 +64,11 @@ class BusinessListModel {
       zip: json["zip"],
       type: json["type"],
       status: json["status"],
-      addedAt: json["addedAt"]
+      addAt: json["addAt"]
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    // "id": id,
     "name": name,
     "email": email,
     "contactPerson": contactPerson,
@@ -82,6 +82,6 @@ class BusinessListModel {
     "zip": zip,
     "type": type,
     "status": status,
-    "addedAt": addedAt
+    "addAt": addAt
   };
 }
