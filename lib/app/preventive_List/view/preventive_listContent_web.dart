@@ -245,8 +245,7 @@ class PreventiveChecklistListContentWeb
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Man"
-                                                  "power: ",
+                                              "Manpower: ",
                                               style: Styles.blackBold16,
                                             ),
                                             SizedBox(

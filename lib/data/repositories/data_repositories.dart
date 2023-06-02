@@ -110,19 +110,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  @override
-  Future<ResponseModel> getBusinessTypeList({
-    int? businessType,
-    required bool isLoading,
-    required String auth,
-  }) async {
-    return await connectHelper.getBusinessTypeList(
-      isLoading: isLoading,
-      auth: auth,
-      businessType: businessType,
-    );
-  }
-  
    @override
   Future<ResponseModel> getAffectedPartList({
     int? facilityId,
@@ -546,33 +533,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getWarrantyList({
-    required String auth,
-    int? facilityId,
-    int? type,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.getWarrantyList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-
-  // Future<ResponseModel> getWarrantyList({
-  //   required String auth,
-  //   int? facilityId,
-  //   int? type,
-  //   bool? isLoading,
-  // }) async =>
-  //     await connectHelper.getWarrantyList(
-  //       auth: auth,
-  //       facilityId: facilityId ?? 0,
-  //       type: type,
-  //       isLoading: isLoading ?? false,
-  //     );
-
   Future<ResponseModel> getModuleList({
     required String auth,
     int? facilityId,
@@ -807,18 +767,6 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString);
-    return response;
-  }
-
-  Future<ResponseModel> createBusinessList({
-    auth,
-    bool? isLoading,
-    businesslistJsonString,
-  }) async {
-    var response = await connectHelper.createBusinessList(
-        auth: auth,
-        isLoading: isLoading,
-        businesslistJsonString: businesslistJsonString);
     return response;
   }
 

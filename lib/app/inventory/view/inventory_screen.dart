@@ -111,12 +111,6 @@ class InventoryScreen extends GetView<InventoryController> {
                             ontap: () {
                               controller.newWarrantyClaimList();
                             }),
-                        _inventoryList(
-                            tittle: "Warranty Type",
-                            ontap: () {
-                              controller.warrantyType();
-                            }),
-
                       ],
                     )
                   ]),
