@@ -28,6 +28,13 @@ class SafetyQuestionsListController extends GetxController {
   Rx<String> selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
 
+
+  ////
+  RxBool isCheckedRequire = false.obs;
+  void requiretoggleCheckbox() {
+    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+  }
+
   
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
