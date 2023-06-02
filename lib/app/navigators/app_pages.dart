@@ -34,7 +34,7 @@ import 'package:cmms/app/master_dashboard/master_dashboard_screen.dart';
 import 'package:cmms/app/permit_type/permit_type_binding.dart';
 import 'package:cmms/app/permit_type/view/permit_type_screen.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_binding.dart';
-import 'package:cmms/app/safety_questions_list/view/safety_question_list_screen.dart';
+import 'package:cmms/app/safety_questions_list/safety_question_list_screen.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';

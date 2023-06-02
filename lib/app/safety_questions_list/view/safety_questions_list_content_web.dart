@@ -70,7 +70,7 @@ class SafetyQuestionsListContentWeb
                           0
                       ? Container(
                           width: (Get.width * .3),
-                          margin: EdgeInsets.only(left: 30, top: 10),
+                          margin: EdgeInsets.only(left: 30, top: 25),
                           height: Get.height / 1.0,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
@@ -94,7 +94,7 @@ class SafetyQuestionsListContentWeb
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 15,
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 15, right: 15),
@@ -226,27 +226,40 @@ class SafetyQuestionsListContentWeb
                                           ),
                                         ),
                                         
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(title: 'Required: '),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15),
+                                              child: CustomRichText(title: 'Required: '),
+                                            ),
+                                            Checkbox(
+                                              value: controller
+                                                  .isCheckedRequire.value,
+                                              onChanged: (bool? value) {
+                                                controller
+                                                    .requiretoggleCheckbox();
+                                              },
+                                            ),
+                                          ],
                                         ),
+                                        SizedBox(height: 20,)
                                         
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.82,
-                                          child: DropdownWidget(
-                                            dropdownList: 
-                                                controller.typePermitList,
-                                            isValueSelected: controller
-                                                .isTypePermitSelected.value,
-                                            selectedValue: controller
-                                                .selectedTypePermit.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
-                                          ),
-                                        ),
+                                        // SizedBox(
+                                        //   width: MediaQuery.of(context)
+                                        //           .size
+                                        //           .width /
+                                        //       1.82,
+                                        //   child: DropdownWidget(
+                                        //     dropdownList: 
+                                        //         controller.typePermitList,
+                                        //     isValueSelected: controller
+                                        //         .isTypePermitSelected.value,
+                                        //     selectedValue: controller
+                                        //         .selectedTypePermit.value,
+                                        //     onValueChanged:
+                                        //         controller.onValueChanged,
+                                        //   ),
+                                        // ),
                                        
                                       ]),
                                 ),
@@ -293,7 +306,7 @@ class SafetyQuestionsListContentWeb
                       ? Expanded(
                           child: Container(
                             width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 10),
+                            margin: EdgeInsets.only(left: 10, top: 25),
                             height: Get.height,
                             child: Card(
                               color: Color.fromARGB(255, 251, 252, 253),
