@@ -15,6 +15,7 @@ import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -1851,6 +1852,60 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getRoleNotificationList({
+    required String? auth,
+    int? roleId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/GetRoleNotifications?role_id=$roleId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getUserAccessListById({
+    required String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetUserAccess?user_id=$userId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getUserNotificationListById({
+    required String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetUserNotifications?user_id=$userId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getRoleList({
     String? auth,
     bool? isLoading,
@@ -1965,7 +2020,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'PMScheduleView/UpdatePMTaskExecution',
-      Request.post,
+      Request.patch,
       pmExecutionJsonString,
       isLoading ?? false,
       {
@@ -1989,6 +2044,32 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<AddUserModel> uploadImge({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    bool? isLoading,
+  }) async {
+    final request = http.MultipartRequest('POST',
+        Uri.parse('http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile'));
+    request.files.add(
+        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+    request.headers.addAll({'Authorization': 'Bearer $auth'});
+
+    // Send the request and wait for the response
+    final response = await request.send();
+    var respStr = await response.stream.bytesToString();
+    var jsonResponse = json.decode(respStr);
+
+    // Check if the upload was successful
+    // if (response.statusCode == 200) {
+    AddUserModel addUserModel = AddUserModel(
+      photo_id: int.parse(jsonResponse["id"][0].toString()),
+    );
+    print('photo_id${addUserModel.photo_id}');
+
+    return addUserModel;
+  }
 
   ///
 
