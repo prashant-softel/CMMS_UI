@@ -31,6 +31,7 @@ class CountryListController extends GetxController {
   countryList =
       <CountryModel?>[].obs;
   int facilityId = 0;
+  int selectedCountryId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,

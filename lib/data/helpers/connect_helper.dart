@@ -144,25 +144,7 @@ class ConnectHelper {
     int? businessType,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetBusinessTypeList',
-
-   Future<ResponseModel> getAffectedPartList({
-    required bool isLoading,
-    required String auth,
-    int? facilityId,
-    int? blockId,
-    String? categoryIds,
-  }) async {
-    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
-    var categoryIdsParam =
-        (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
-
-    var statusParam = 'status=1';
-    ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?' +
-          blockIdParam +
-          categoryIdsParam +
-          statusParam,
+      'CMMS/GetBusinessList?businessType=$businessType',
       Request.getMultiparts,
       null,
       isLoading,
@@ -701,7 +683,6 @@ class ConnectHelper {
 
   Future<ResponseModel>
   getModuleList({
-  Future<ResponseModel> getModuleList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -2047,4 +2028,33 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
+
+  Future<ResponseModel> getAffectedPartList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+    int? blockId,
+    String? categoryIds,
+  }) async {
+    var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
+    var categoryIdsParam =
+    (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+
+    var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?' +
+          blockIdParam +
+          categoryIdsParam +
+          statusParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
 }

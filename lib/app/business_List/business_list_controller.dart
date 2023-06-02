@@ -30,7 +30,7 @@ class BusinessListController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<BusinessTypeModel?> countryList =
       <BusinessTypeModel>[].obs;
-  RxList<BusinessTypeModel?> businessCategoryList =
+  RxList<BusinessTypeModel?>  businessCategoryList =
       <BusinessTypeModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   Rx<bool> isSelectedBusinessType = true.obs;
@@ -192,7 +192,7 @@ class BusinessListController extends GetxController {
           contactnumber: _contactNumber,
           location: _location,
           address: _address,
-          addAt: formattedDateTime,
+          // addAt: formattedDateTime,
           state: _state,
           country: _country,
           city: _city,
