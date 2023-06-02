@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
@@ -94,6 +93,8 @@ class AddJobController extends GetxController {
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<int> jobID = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  // Create a FocusNode instance in your controller
+  FocusNode focusNode = FocusNode();
 
   ///
   @override
@@ -111,6 +112,16 @@ class AddJobController extends GetxController {
     });
 
     super.onInit();
+    // Request focus on the FocusNode after the widget is built
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => focusNode.requestFocus());
+  }
+
+  @override
+  void onClose() {
+    // Dispose of the FocusNode when the controller is getting deleted
+    focusNode.dispose();
+    super.onClose();
   }
 
   Future<void> getFacilityList() async {

@@ -24,7 +24,6 @@ class InventoryStatusListUsecase {
     bool? isLoading,
   }) async =>
       await repository.getInventoryStatusList(
-        type,
         facilityId,
         isLoading,
       );

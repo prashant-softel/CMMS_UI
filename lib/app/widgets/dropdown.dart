@@ -13,6 +13,7 @@ class DropdownWidget extends StatelessWidget {
     this.isEditable,
     required this.onValueChanged,
     this.controller,
+    this.focusNode,
   });
 
   String? selectedValue;
@@ -21,7 +22,9 @@ class DropdownWidget extends StatelessWidget {
   final bool? isEditable;
   Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
+  final FocusNode? focusNode;
 
+  ///
   @override
   Widget build(BuildContext context) {
     ///
@@ -29,24 +32,15 @@ class DropdownWidget extends StatelessWidget {
         Obx(
       () => //
           Container(
+        margin: Dimens.edgeInsets16,
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width / 4,
+          minWidth: 100,
+        ),
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
+          border: Border.all(
+            color: Colors.grey,
+          ),
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
@@ -62,28 +56,29 @@ class DropdownWidget extends StatelessWidget {
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
+            focusNode: focusNode,
             icon: Icon(
               Icons.arrow_drop_down,
               color: ColorValues.blackColor,
             ),
           ),
-          popupProps: PopupProps.dialog(
-            //
-            searchFieldProps: TextFieldProps(
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorValues.blueColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorValues.blueColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-            ),
-            showSearchBox: true,
-            showSelectedItems: true,
-          ),
+          // popupProps: PopupProps.dialog(
+          //   //
+          //   searchFieldProps: TextFieldProps(
+          //     decoration: InputDecoration(
+          //       enabledBorder: OutlineInputBorder(
+          //         borderSide: BorderSide(color: ColorValues.blueColor),
+          //         borderRadius: BorderRadius.circular(5),
+          //       ),
+          //       focusedBorder: OutlineInputBorder(
+          //         borderSide: BorderSide(color: ColorValues.blueColor),
+          //         borderRadius: BorderRadius.circular(5),
+          //       ),
+          //     ),
+          //   ),
+          //   showSearchBox: true,
+          //   showSelectedItems: true,
+          // ),
           items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration: InputDecoration(

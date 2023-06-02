@@ -1,13 +1,13 @@
 
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
 import 'package:cmms/app/safety_questions_list/view/safety_questions_list_content_web.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
-import '../../utils/responsive.dart';
 
 
 class SafetyQestionsListScreen extends GetView<SafetyQuestionsListController> {

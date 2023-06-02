@@ -2,8 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
-// import 'package:cmms/app/preventive_maintanance/preventive.dart';
-// import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
+
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +11,7 @@ class BreakdownMaintenanceController extends GetxController {
     this.breakdownMaintenancePresenter,
   );
 
-  final HomeController controller = Get.find();
+  // final HomeController controller = Get.find();
 
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
   late JobListController jobListController;
@@ -24,10 +23,7 @@ class BreakdownMaintenanceController extends GetxController {
 
   @override
   void onInit() async {
-    //homePresenter.generateToken();
-    // Future.delayed(Duration(seconds: 1), () {
     getFacilityList();
-    // });
 
     super.onInit();
   }
@@ -52,16 +48,12 @@ class BreakdownMaintenanceController extends GetxController {
     }
   }
 
-  Future<void> goToJobListScreen() async {
-    Get.offAndToNamed(
-      Routes.jobList,
-    );
+  void goToJobListScreen() {
+    Get.toNamed(Routes.jobList);
   }
 
   void addNewJob() {
-    Get.toNamed(
-      Routes.addJob,
-    );
+    Get.toNamed(Routes.addJob);
   }
 
   Future<void> newPermitList() async {
