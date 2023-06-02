@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class UpdatePmExecutionMdel {
   UpdatePmExecutionMdel({
     required this.schedule_id,
@@ -8,13 +10,14 @@ class UpdatePmExecutionMdel {
 
   List<AddObservations> add_observations;
 
-  factory UpdatePmExecutionMdel.fromJson(Map<String, dynamic> json) =>
-      UpdatePmExecutionMdel(
-        schedule_id: json["schedule_id"],
-        add_observations: List<AddObservations>.from(
-            json["add_observations"].map((x) => AddObservations.fromJson(x))),
-      );
-
+  factory UpdatePmExecutionMdel.fromJson(Map<String, dynamic> json) {
+    AddObservations(observation_value_controller: TextEditingController());
+    return UpdatePmExecutionMdel(
+      schedule_id: json["schedule_id"],
+      add_observations: List<AddObservations>.from(
+          json["add_observations"].map((x) => AddObservations.fromJson(x))),
+    );
+  }
   Map<String, dynamic> toJson() => {
         "schedule_id": schedule_id,
         "add_observations":
@@ -23,23 +26,26 @@ class UpdatePmExecutionMdel {
 }
 
 class AddObservations {
-  AddObservations({
-    required this.execution_id,
-    required this.observation,
-    required this.job_create,
-    required this.pm_files,
-  });
+  AddObservations(
+      {this.execution_id,
+      this.observation,
+      this.job_create,
+      this.pm_files,
+      this.observation_value_controller});
 
-  int execution_id;
-  String observation;
-  int job_create;
-  List<PmFiles> pm_files;
+  int? execution_id;
+  String? observation;
+  int? job_create;
+  List<PmFiles>? pm_files;
+  TextEditingController? observation_value_controller;
 
   factory AddObservations.fromJson(Map<String, dynamic> json) =>
       AddObservations(
         execution_id: json["execution_id"],
         observation: json["observation"],
         job_create: json["job_create"],
+        observation_value_controller:
+            TextEditingController(text: json["observation"]),
         pm_files: List<PmFiles>.from(
             json["pm_files"].map((x) => PmFiles.fromJson(x))),
       );
@@ -48,7 +54,7 @@ class AddObservations {
         "execution_id": execution_id,
         "observation": observation,
         "job_create": job_create,
-        "pm_files": List<dynamic>.from(pm_files.map((x) => x.toJson())),
+        "pm_files": List<dynamic>.from(pm_files!.map((x) => x.toJson())),
       };
 }
 

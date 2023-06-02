@@ -11,13 +11,13 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   PreventiveMaintenanceTaskViewPresenter preventiveMaintenanceTaskViewPresenter;
   int? scheduleId = 0;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
-  RxList<ScheduleCheckList?>? scheduleCheckList = <ScheduleCheckList?>[].obs;
-  ScheduleCheckList? scheduleCheckListModel;
+  RxList<ScheduleCheckPoint?>? scheduleCheckPoint = <ScheduleCheckPoint?>[].obs;
+  ScheduleCheckPoint? scheduleCheckPointModel;
   PaginationController schedulePaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  RxList<String> scheduleCheckListTableColumns = <String>[].obs;
+  RxList<String> scheduleCheckPointTableColumns = <String>[].obs;
   RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
   HistoryLog? historyLogModel;
   @override
@@ -37,19 +37,19 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
-      scheduleCheckList!.value = _permitDetails.schedule_check_list ?? [];
+      scheduleCheckPoint!.value = _permitDetails.schedule_check_points ?? [];
       historyLog!.value = _permitDetails.history_log ?? [];
 
       schedulePaginationController = PaginationController(
-        rowCount: scheduleCheckList?.length ?? 0,
+        rowCount: scheduleCheckPoint?.length ?? 0,
         rowsPerPage: 10,
       );
-      if (scheduleCheckList != null && scheduleCheckList!.isNotEmpty) {
-        scheduleCheckListModel = scheduleCheckList![0];
-        var scheduleCheckListJson = scheduleCheckListModel?.toJson();
-        scheduleCheckListTableColumns.value = <String>[];
-        for (var key in scheduleCheckListJson?.keys.toList() ?? []) {
-          scheduleCheckListTableColumns.add(key);
+      if (scheduleCheckPoint != null && scheduleCheckPoint!.isNotEmpty) {
+        scheduleCheckPointModel = scheduleCheckPoint![0];
+        var scheduleCheckPointJson = scheduleCheckPointModel?.toJson();
+        scheduleCheckPointTableColumns.value = <String>[];
+        for (var key in scheduleCheckPointJson?.keys.toList() ?? []) {
+          scheduleCheckPointTableColumns.add(key);
         }
       }
     }

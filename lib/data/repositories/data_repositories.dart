@@ -4,6 +4,8 @@ import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 
+import '../../domain/models/add_user_model.dart';
+
 /// Repositories (retrieve data, heavy processing etc..)
 class DataRepository extends DomainRepository {
   /// [connectHelper] : A connection helper which will connect to the
@@ -89,7 +91,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     var response =
-        await connectHelper.generateToken(auth: auth, isLoading: isLoading);
+    await connectHelper.generateToken(auth: auth, isLoading: isLoading);
     return response;
   }
 
@@ -1246,6 +1248,42 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getRoleNotificationList({
+    String? auth,
+    int? roleId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoleNotificationList(
+      auth: auth,
+      roleId: roleId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getUserAccessListById({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserAccessListById(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getUserNotificationListById({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserNotificationListById(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> getRoleList({
     required String auth,
     bool? isLoading,
@@ -1328,6 +1366,19 @@ class DataRepository extends DomainRepository {
         pmExecutionJsonString: pmExecutionJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<AddUserModel> uploadImge(
+      {required String auth,
+      Uint8List? fileBytes,
+      required String fileName,
+      required bool isLoading}) async {
+    return await connectHelper.uploadImge(
+      auth: auth,
+      fileBytes: fileBytes,
+      fileName: fileName,
+      isLoading: true,
+    );
+    // return true;
+  }
 
   ///
   Future<ResponseModel> getWarrantyUsageTermList({
@@ -1339,4 +1390,51 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+
+
+
+
+
+
+  Future<ResponseModel> createBusinessList({
+    auth,
+    bool? isLoading,
+    businesslistJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessList(
+        auth: auth,
+        isLoading: isLoading,
+        businesslistJsonString: businesslistJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> getBusinessTypeList({
+    int? businessType,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBusinessTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      businessType: businessType,
+    );
+  }
+
+
+
+  Future<ResponseModel> getWarrantyList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWarrantyList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
 }

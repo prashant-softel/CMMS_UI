@@ -145,7 +145,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             "${controller.pmtaskViewModel.value?.schedule_date ?? ""}",
                                             style: Styles.blue17),
                                         Text(
-                                            "${controller.pmtaskViewModel.value?.checklists![0].name ?? ""}",
+                                            "${controller.pmtaskViewModel.value?.checklist_name ?? ""}",
                                             style: Styles.blue17),
                                       ],
                                     ),
@@ -194,8 +194,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   ],
                                 ),
                               ),
-                              (controller.scheduleCheckList != null &&
-                                      controller.scheduleCheckList!.isNotEmpty)
+                              (controller.scheduleCheckPoint != null &&
+                                      controller.scheduleCheckPoint!.isNotEmpty)
                                   ? Container(
                                       margin: Dimens.edgeInsets20,
                                       height: 400,
@@ -222,7 +222,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "${controller.pmtaskViewModel.value?.checklists![0].name ?? ""}",
+                                                  "${controller.pmtaskViewModel.value?.checklist_name ?? ""}",
                                                   style: Styles.blue700,
                                                 ),
                                               ],
@@ -251,20 +251,20 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               rows: //
                                                   [
                                                 ...List.generate(
-                                                  controller.scheduleCheckList
+                                                  controller.scheduleCheckPoint
                                                           ?.length ??
                                                       0,
                                                   (index) {
-                                                    var scheduleCheckListDetails =
+                                                    var scheduleCheckPointDetails =
                                                         controller
-                                                                .scheduleCheckList?[
+                                                                .scheduleCheckPoint?[
                                                             index];
                                                     return [
-                                                      '${scheduleCheckListDetails?.check_point_id}',
-                                                      '${scheduleCheckListDetails?.check_point_name}',
-                                                      '${scheduleCheckListDetails?.requirement}',
+                                                      '${scheduleCheckPointDetails?.check_point_id}',
+                                                      '${scheduleCheckPointDetails?.check_point_name}',
+                                                      '${scheduleCheckPointDetails?.requirement}',
                                                       "IMG2234",
-                                                      '${scheduleCheckListDetails?.observation}',
+                                                      '${scheduleCheckPointDetails?.observation}',
                                                       "JOB2344"
                                                     ];
                                                   },

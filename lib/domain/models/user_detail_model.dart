@@ -102,18 +102,18 @@ class UserDetailsModel {
 }
 
 class PlantList {
-  int? id;
-  String? name;
-
-  PlantList({
-    this.id,
-    this.name,
-  });
+  int? plant_id;
+  String? plant_name;
+  int? spv_id;
+  String? spv_name;
+  PlantList({this.plant_id, this.plant_name, this.spv_id, this.spv_name});
 
   factory PlantList.fromJson(Map<String, dynamic> parsedJson) {
     return PlantList(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
+      plant_id: parsedJson['plant_id'],
+      plant_name: parsedJson['plant_name'],
+      spv_id: parsedJson['spv_id'],
+      spv_name: parsedJson['spv_name'],
     );
   }
 }

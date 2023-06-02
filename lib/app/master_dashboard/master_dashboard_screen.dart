@@ -27,19 +27,19 @@ class MastersDashboard extends GetView<MastersController> {
     return Scaffold(
       appBar: Responsive.isDesktop(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 100,
-              automaticallyImplyLeading: false,
-            )
+        title: HeaderWidget(),
+        elevation: 0,
+        toolbarHeight: 100,
+        automaticallyImplyLeading: false,
+      )
           : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+        title: HeaderWidget(),
+        elevation: 0,
+      ),
       drawer: //
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
-              : null,
+      (Responsive.isMobile(context) || Responsive.isTablet(context))
+          ? HomeDrawer() //ResponsiveSideMenu()
+          : null,
       body: Container(
         width: Get.width,
         height: Get.height,
@@ -48,15 +48,15 @@ class MastersDashboard extends GetView<MastersController> {
             (Responsive.isMobile(context) || Responsive.isTablet(context))
                 ? Dimens.box0
                 :
-                //
-                HomeDrawer(),
+            //
+            HomeDrawer(),
             Expanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (Responsive.isMobile(context))
                       Obx(
-                        () => Container(
+                            () => Container(
                           width: MediaQuery.of(context).size.width,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -75,18 +75,18 @@ class MastersDashboard extends GetView<MastersController> {
                                     style: const TextStyle(color: Colors.black),
                                     onChanged: (String? selectedValue) {
                                       controller.isFacilitySelected.value =
-                                          true;
+                                      true;
                                       controller.selectedFacility.value =
                                           selectedValue ?? '';
                                     },
                                     items: controller.facilityList
                                         .map<DropdownMenuItem<String>>(
                                             (facility) {
-                                      return DropdownMenuItem<String>(
-                                        value: facility?.name ?? '',
-                                        child: Text(facility?.name ?? ''),
-                                      );
-                                    }).toList(),
+                                          return DropdownMenuItem<String>(
+                                            value: facility?.name ?? '',
+                                            child: Text(facility?.name ?? ''),
+                                          );
+                                        }).toList(),
                                   ),
                                 ),
                               ),
@@ -113,325 +113,370 @@ class MastersDashboard extends GetView<MastersController> {
                       // margin: EdgeInsets.only(left: 20),
                       child: SingleChildScrollView(
                           child: Column(
-                        children: [
-                          // Container(
-                          //   margin: EdgeInsets.only(left: 20),
-                          //   child: Text(
-                          //     "Permit To Work",
-                          //     style: TextStyle(
-                          //         color: Color.fromARGB(255, 159, 156, 156),
-                          //         fontSize: 20,
-                          //         fontWeight: FontWeight.w400),
-                          //   ),
-                          // ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Permit To Work",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
+                            children: [
+                              // Container(
+                              //   margin: EdgeInsets.only(left: 20),
+                              //   child: Text(
+                              //     "Permit To Work",
+                              //     style: TextStyle(
+                              //         color: Color.fromARGB(255, 159, 156, 156),
+                              //         fontSize: 20,
+                              //         fontWeight: FontWeight.w400),
+                              //   ),
+                              // ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Permit To Work",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
                                         10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
                                         1, // Adjust the height of the line if needed
-                                  ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Permit Type",
-                                    onTap: () {
-                                      controller.goToPermitTypeScreen();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: 'Safety Questions',
-                                    onTap: () {
-                                      controller.gotToSafetyQuestionsList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "TBT Type",
-                                    onTap: () {
-                                      controller.goToJobTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "TBT SOP List",
-                                    onTap: () {
-                                      controller.goToJobSOPList();
-                                    });
-                              }))),
-
-                              // createContentTile(title: "Job Card List"),
-                              // _priventiveList(tittle: "PM Schedule View"),
-                              // _priventiveList(tittle: "PM Report"),
-                              // _priventiveList(tittle: "PM Report"),
-                              // _priventiveList(tittle: "PM "),
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Assets",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Category List",
-                                    onTap: () {
-                                      controller.goToAssetTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Type List",
-                                    onTap: () {
-                                      controller.goToInventoryTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Status List",
-                                    onTap: () {
-                                      controller.goToInventoryStatusList();
-                                    });
-                              }))),
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Facility",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "SPV List",
-                                    onTap: () {
-                                      controller.goToSPVList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Facility List",
-                                    onTap: () {
-                                      controller.goToFacilityTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Block List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
-                              }))),
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Module List",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(
-                                builder: ((isHovered) {
-                                  return createContentTile(
-                                      title: "Module List",
-                                      onTap: () {
-                                        controller.goToModuleTypeList();
-                                      });
-                                }),
                               ),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Block List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
-                              })))
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Six",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Facility List",
-                                    onTap: () {
-                                      controller.goToFacilityTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Block List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
-                              }))),
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : (itemWidth / itemHeightWeb),
+                                children: <Widget>[
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Permit Type",
+                                        onTap: () {
+                                          controller.goToPermitTypeScreen();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: 'Safety Questions',
+                                        onTap: () {
+                                          controller.gotToSafetyQuestionsList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "TBT Type",
+                                        onTap: () {
+                                          controller.goToJobTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "TBT SOP List",
+                                        onTap: () {
+                                          controller.goToJobSOPList();
+                                        });
+                                  }))),
+
+                                  // createContentTile(title: "Job Card List"),
+                                  // _priventiveList(tittle: "PM Schedule View"),
+                                  // _priventiveList(tittle: "PM Report"),
+                                  // _priventiveList(tittle: "PM Report"),
+                                  // _priventiveList(tittle: "PM "),
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Assets",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                        10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                        1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : (itemWidth / itemHeightWeb),
+                                children: <Widget>[
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Asset Category List",
+                                        onTap: () {
+                                          controller.goToAssetTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Asset Type List",
+                                        onTap: () {
+                                          controller.goToInventoryTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Asset Status List",
+                                        onTap: () {
+                                          controller.goToInventoryStatusList();
+                                        });
+                                  }))),
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Facility",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                        10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                        1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : (itemWidth / itemHeightWeb),
+                                children: <Widget>[
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "SPV List",
+                                        onTap: () {
+                                          controller.goToSPVList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Facility List",
+                                        onTap: () {
+                                          controller.goToFacilityTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Block List",
+                                        onTap: () {
+                                          controller.goToBlockTypeList();
+                                        });
+                                  }))),
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Module List",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                        10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                        1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : (itemWidth / itemHeightWeb),
+                                children: <Widget>[
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Roles",
+                                        onTap: () {
+                                          controller.goToRoleTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Designation",
+                                        onTap: () {
+                                          controller.goToBlockTypeList();
+                                        });
+                                  }))),
+                                  OnHover(
+                                    builder: ((isHovered) {
+                                      return createContentTile(
+                                          title: "Module List",
+                                          onTap: () {
+                                            controller.goToModuleTypeList();
+                                          });
+                                    }),
+                                  ),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Feature List",
+                                        onTap: () {
+                                          controller.goToBlockTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Business List",
+                                        onTap: () {
+                                          controller.goToBusinessList();
+                                        });
+                                  }))),
+
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Business Type List",
+                                        onTap: () {
+                                          controller.goToBusinessTypeList();
+                                        });
+                                  }))),
+
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Users",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                        10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                        1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : (itemWidth / itemHeightWeb),
+                                children: <Widget>[
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Blood List",
+                                        onTap: () {
+                                          controller.goToBloodTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Country List",
+                                        onTap: () {
+                                          controller.goToCountryTypeList();
+                                        });
+                                  }))),
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "State List",
+                                        onTap: () {
+                                          controller.goToStateTypeList();
+                                        });
+                                  }))),
+
+                                  OnHover(builder: (((isHovered) {
+                                    return createContentTile(
+                                        title: "Frequency List",
+                                        onTap: () {
+                                          controller.goToFrequencyList();
+                                        });
+                                  }))),
+                                ],
+                              ),
                             ],
-                          ),
-                        ],
-                      )),
+                          )),
                     ),
                   ]),
             ),

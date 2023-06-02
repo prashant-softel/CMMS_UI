@@ -284,7 +284,7 @@ class ApiWrapper {
               .clearData(LocalKeys.isAppExists);
           Repository(DeviceRepository(), DataRepository(ConnectHelper()))
               .deleteAllSecuredValues();
-          // RouteManagement.goOffAllLogin();
+          RouteManagement.goOffAllLogin();
         }
         return ResponseModel(
           data: response.body,

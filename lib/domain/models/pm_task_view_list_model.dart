@@ -30,9 +30,10 @@ class PmtaskViewModel {
   String? schedule_link_job;
   int? is_custom_check_point;
   int? is_file_required;
-  List<ScheduleCheckList>? schedule_check_list;
+  int? checklist_id;
+  String? checklist_name;
+  List<ScheduleCheckPoint>? schedule_check_points;
   List<HistoryLog>? history_log;
-  List<CheckLists>? checklists;
   List<Files>? files;
 
   PmtaskViewModel(
@@ -50,12 +51,13 @@ class PmtaskViewModel {
       this.maintenance_order_number,
       this.permit_code,
       this.permit_id,
-      this.schedule_check_list,
+      this.schedule_check_points,
       this.schedule_date,
       this.schedule_link_job,
       this.status,
       this.status_name,
-      this.checklists,
+      this.checklist_id,
+      this.checklist_name,
       // this.files,
       this.is_custom_check_point,
       this.is_file_required});
@@ -83,13 +85,14 @@ class PmtaskViewModel {
         status_name: json["status_name"] ?? "",
         is_custom_check_point: json["is_custom_check_point"],
         is_file_required: json["is_file_required"],
-        schedule_check_list: List<ScheduleCheckList>.from(
-            json["schedule_check_list"]
-                .map((x) => ScheduleCheckList.fromJson(x))),
+        checklist_id: json["checklist_id"],
+        checklist_name: json["checklist_name"],
+
+        schedule_check_points: List<ScheduleCheckPoint>.from(
+            json["schedule_check_points"]
+                .map((x) => ScheduleCheckPoint.fromJson(x))),
         history_log: List<HistoryLog>.from(
             json["history_log"].map((x) => HistoryLog.fromJson(x))),
-        checklists: List<CheckLists>.from(
-            json["checklists"].map((x) => CheckLists.fromJson(x))),
         //  files: List<Files>.from(json["files"].map((x) => Files.fromJson(x)))
       );
 
@@ -113,16 +116,16 @@ class PmtaskViewModel {
         "status_name": status_name,
         "is_custom_check_point": is_custom_check_point,
         "is_file_required": is_file_required,
+        "checklist_id": checklist_id,
+        "checklist_name": checklist_name,
         "history_log":
             List<dynamic>.from(history_log?.map((x) => x.toJson()) ?? []),
-        "schedule_check_list":
-            List<dynamic>.from(schedule_check_list?.map((x) => x) ?? []),
-        "checklists": List<dynamic>.from(checklists?.map((x) => x) ?? []),
-        "files": List<dynamic>.from(files?.map((x) => x) ?? []),
+        "schedule_check_points":
+            List<dynamic>.from(schedule_check_points?.map((x) => x) ?? []),
       };
 }
 
-class ScheduleCheckList {
+class ScheduleCheckPoint {
   int? execution_id;
   int? check_point_id;
   String? check_point_name;
@@ -133,7 +136,7 @@ class ScheduleCheckList {
   int? is_file_required;
   TextEditingController? observation_value_controller;
 
-  ScheduleCheckList(
+  ScheduleCheckPoint(
       {this.check_point_id,
       this.execution_id,
       this.check_point_name,
@@ -144,8 +147,8 @@ class ScheduleCheckList {
       this.observation_value_controller,
       this.requirement});
 
-  factory ScheduleCheckList.fromJson(Map<String, dynamic> json) =>
-      ScheduleCheckList(
+  factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
+      ScheduleCheckPoint(
           check_point_id: json["check_point_id"] ?? 0,
           check_point_name: json["check_point_name"] ?? '',
           is_file_required: json["is_file_required"] ?? 0,
@@ -222,24 +225,6 @@ class HistoryLog {
         "created_by_id": created_by_id,
         "created_at": created_at,
         "comment": comment,
-      };
-}
-
-class CheckLists {
-  int? id;
-
-  String? name;
-
-  CheckLists({this.id, this.name});
-
-  factory CheckLists.fromJson(Map<String, dynamic> json) => CheckLists(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
       };
 }
 

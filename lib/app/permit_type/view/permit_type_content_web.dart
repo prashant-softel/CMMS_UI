@@ -70,9 +70,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .3),
-                          margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.5,
+                          width: (Get.width * .25),
+                          margin: EdgeInsets.only(left: 10, top: 30),
+                          height: Get.height / 1.8,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -85,7 +85,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                 //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 10.0, right: 10, top: 10),
+                                      left: 5.0, right: 10, top: 10),
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -95,264 +95,19 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 30,
+                                          height: 15,
                                         ),
 
-                                        // Visibility(
-                                        //   visible: controller.isSuccess.value,
-                                        //   child: Center(
-                                        //     child: Wrap(
-                                        //       children: [
-                                        //         Text(
-                                        //           "CheckList added Successfully in the List.",
-                                        //           style: TextStyle(
-                                        //               fontSize: 16,
-                                        //               color: Color.fromARGB(
-                                        //                   255, 24, 243, 123)),
-                                        //         ),
-                                        //         SizedBox(
-                                        //           height: 5,
-                                        //         ),
-                                        //       ],
-                                        //     ),
-                                        //   ),
-                                        // ),
-                                        // // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'CheckList Number: '),
-                                        //     SizedBox(
-                                        //       width: 10,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //           width: (MediaQuery.of(context)
-                                        //                       .size
-                                        //                       .width *
-                                        //                   .2) -
-                                        //               30,
-                                        //           decoration: BoxDecoration(
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Colors.black26,
-                                        //                 offset: const Offset(
-                                        //                   5.0,
-                                        //                   5.0,
-                                        //                 ),
-                                        //                 blurRadius: 5.0,
-                                        //                 spreadRadius: 1.0,
-                                        //               ),
-                                        //               BoxShadow(
-                                        //                 color: ColorValues
-                                        //                     .whiteColor,
-                                        //                 offset: const Offset(
-                                        //                     0.0, 0.0),
-                                        //                 blurRadius: 0.0,
-                                        //                 spreadRadius: 0.0,
-                                        //               ),
-                                        //             ],
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     5),
-                                        //           ),
-                                        //           child: LoginCustomTextfield(
-                                        //             textController: controller
-                                        //                 .checklistNumberCtrlr,
-                                        //           )),
-                                        //     ),
-                                        //   ],
-                                        // ),
-
-                                        SizedBox(
-                                          height: 10,
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Facility: '),
                                         ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Equipment Category: '),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //         width: (MediaQuery.of(context)
-                                        //                     .size
-                                        //                     .width *
-                                        //                 .2) -
-                                        //             35,
-                                        //         child: DropdownWidget(
-                                        //           controller: controller,
-                                        //           dropdownList: controller
-                                        //               .equipmentCategoryList,
-                                        //           isValueSelected: controller
-                                        //               .isSelectedequipment
-                                        //               .value,
-                                        //           selectedValue: controller
-                                        //               .selectedequipment.value,
-                                        //           onValueChanged:
-                                        //               controller.onValueChanged,
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
-
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Frequency: '),
-                                        //     SizedBox(
-                                        //       width: 64,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //         width: (MediaQuery.of(context)
-                                        //                     .size
-                                        //                     .width *
-                                        //                 .2) -
-                                        //             30,
-                                        //         child: DropdownWidget(
-                                        //           controller: controller,
-                                        //           dropdownList:
-                                        //               controller.frequencyList,
-                                        //           isValueSelected: controller
-                                        //               .isSelectedfrequency
-                                        //               .value,
-                                        //           selectedValue: controller
-                                        //               .selectedfrequency.value,
-                                        //           onValueChanged:
-                                        //               controller.onValueChanged,
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
-
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Text(
-                                        //       "Manpower: ",
-                                        //       style: Styles.blackBold16,
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 60,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //           decoration: BoxDecoration(
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Colors.black26,
-                                        //                 offset: const Offset(
-                                        //                   5.0,
-                                        //                   5.0,
-                                        //                 ),
-                                        //                 blurRadius: 5.0,
-                                        //                 spreadRadius: 1.0,
-                                        //               ),
-                                        //               BoxShadow(
-                                        //                 color: ColorValues
-                                        //                     .whiteColor,
-                                        //                 offset: const Offset(
-                                        //                     0.0, 0.0),
-                                        //                 blurRadius: 0.0,
-                                        //                 spreadRadius: 0.0,
-                                        //               ),
-                                        //             ],
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     5),
-                                        //           ),
-                                        //           width: (MediaQuery.of(context)
-                                        //                       .size
-                                        //                       .width *
-                                        //                   .2) -
-                                        //               30,
-                                        //           child: LoginCustomTextfield(
-                                        //             textController: controller
-                                        //                 .manpowerCtrlr,
-                                        //           )),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                        CustomRichText(
-                                            title: 'Permit Type Title '),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            // Text(
-                                            //   "Title",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomRichText(title: 'Facility: '),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
+                                        
                                         SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              1.82,
+                                              0.5,
                                           child: DropdownWidget(
                                             dropdownList:
                                                 controller.facilityList,
@@ -365,58 +120,90 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           ),
                                         ),
 
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                              title: 'Permit Type Title '),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15,right: 15),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: MediaQuery.of(context).size.width / 2 ,
+                                              child: LoginCustomTextfield(
+                                                textController: controller
+                                                    .durationCtrlr,
+                                              )),
+                                        ),
+                                        
+                                        
+
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        CustomRichText(title: 'Description '),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            // Text(
-                                            //   "Description ",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Description '),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
-                                                  )),
-                                            ),
-                                          ],
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: LoginCustomTextfield(
+                                                textController: controller
+                                                    .durationCtrlr,
+                                              )),
                                         ),
 
                                         SizedBox(
@@ -428,7 +215,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width: (Get.width * .1),
+                                        width: (Get.width * .07),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -438,7 +225,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .2) - 70,
+                                        width: (Get.width * .15) - 70,
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
