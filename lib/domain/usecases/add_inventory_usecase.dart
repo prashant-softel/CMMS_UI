@@ -128,6 +128,13 @@ class AddInventoryUsecase {
     );
   }
 
+  Future<bool> AddInventory({
+    addInventoryJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.AddInventory(
+          isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
+
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,

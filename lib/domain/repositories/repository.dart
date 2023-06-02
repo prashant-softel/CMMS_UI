@@ -407,7 +407,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-        }else{
+        } else {
           Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
@@ -692,8 +692,6 @@ class Repository {
       return null;
     }
   }
-
-  
 
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
@@ -3254,6 +3252,31 @@ class Repository {
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<bool> AddInventory({bool? isLoading, addInventoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.AddInventory(
+          auth: auth,
+          isLoading: isLoading,
+          addInventoryJsonString: addInventoryJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+
+        Get.offAndToNamed(Routes.inventoryList);
+
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 }

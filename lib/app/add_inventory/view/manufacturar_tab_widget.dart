@@ -53,7 +53,9 @@ class ManufacturarTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "             Model"),
-                          CustomTextFieldForInventory(),
+                          CustomTextFieldForInventory(
+                            textController: controller.modelNoCtrlr,
+                          ),
                         ],
                       ),
                       // Row(
@@ -101,7 +103,9 @@ class ManufacturarTabWidget extends StatelessWidget {
                         children: [
                           CustomRichText(
                               title: "      Parent\nEquipment\n        S No."),
-                          CustomTextFieldForInventory(),
+                          CustomTextFieldForInventory(
+                            textController: controller.parentEquipmentNoCtrlr,
+                          ),
                         ],
                       ),
                       Row(

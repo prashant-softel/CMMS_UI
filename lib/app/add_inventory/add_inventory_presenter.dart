@@ -112,6 +112,18 @@ class AddInventoryPresenter {
     );
   }
 
+  Future<bool> AddInventory({
+    addInventoryJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    addInventoryUsecase.AddInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
   ///
   Future<List<ManufacturerModel>> getmanufacturerList({
     required bool isLoading,

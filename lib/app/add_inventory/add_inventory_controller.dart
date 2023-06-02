@@ -5,6 +5,7 @@ import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -63,6 +64,19 @@ class AddInventoryController extends GetxController {
   Rx<String> selectedInventoryType = ''.obs;
   Rx<String> selectedInventoryOfType = ''.obs;
   Rx<bool> isInventoryType = true.obs;
+  //add invntory
+  var serialNoCtrlr = TextEditingController();
+  var assetsNameCtrlr = TextEditingController();
+  var assesDiscriptionCtrlr = TextEditingController();
+  var certificateNoCtrlr = TextEditingController();
+  var discriptionCtrlr = TextEditingController();
+  var calibrationRemaingCtrlr = TextEditingController();
+  var modelNoCtrlr = TextEditingController();
+  var parentEquipmentNoCtrlr = TextEditingController();
+  var costCtrlr = TextEditingController();
+  var warrentyDescriptionCtrlr = TextEditingController();
+
+  int selectedEquipmentId = 0;
 
 //CategoryModel
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -72,6 +86,7 @@ class AddInventoryController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedEquipmentCategoryName = ''.obs;
   Rx<bool> isEquipmentCategoryNameSelected = true.obs;
+  int selectedEquipmentCategoryNameId = 0;
 
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
@@ -131,6 +146,7 @@ class AddInventoryController extends GetxController {
   Rx<bool> isBlocksSelected = true.obs;
   Rx<String> selectedBlocks = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
+  int selectedBlockListId = 0;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -242,7 +258,130 @@ class AddInventoryController extends GetxController {
     update(['inventory_list']);
   }
 
-  //
+//add inventory
+  Future<bool> AddInventory() async {
+    // if (addInventoryCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    String _serialNoCtrlr = serialNoCtrlr.text.trim();
+    String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+    String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
+    String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
+    String _discriptionCtrlr = discriptionCtrlr.text.trim();
+    String _modelNoCtrlr = modelNoCtrlr.text.trim();
+    String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
+    String _costCtrlr = costCtrlr.text.trim();
+    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+    String _expireDateTc = expireDateTc.text.trim();
+    String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
+
+    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+        warrantyDescription: _warrentyDescriptionCtrlr,
+        warrantyProviderId: selectedmanufacturerNameId,
+        warrantyStatus: 1,
+        warrantyType: selectedWarrentyNameId,
+        warrrantyTermType: selectedwarrantyUsageTermNameId,
+        // meterLimit: 1,
+        // meterUnit: 1,
+        certificateNumber: int.tryParse(_certificateNoCtrlr),
+        expiryDate: _expireDateTc,
+        // startDate///  is missing
+        warrantyDiscription: _warrentyDescriptionCtrlr);
+
+    AddInventoryRequestModel addInventoryRequestModel =
+        AddInventoryRequestModel(
+            name: _assetsNameCtrlr,
+            description: "need description", //_discriptionCtrlr,
+            typeId: selectedTypeNameId,
+            statusId: selectedStatusNameId,
+            facilityId: facilityId,
+            supplierId: selectedsupplierrNameId,
+            manufacturerId: selectedmanufacturerNameId,
+            blockId: selectedBlockListId,
+            categoryId: selectedEquipmentCategoryNameId,
+            currency: selectedUnitCurrency.value,
+            cost: 30, //int.tryParse(_costCtrlr),
+            model: _modelNoCtrlr,
+            serialNumber: _serialNoCtrlr,
+            parentId: selectedEquipmentnameId,
+            calibrationFrequency: selectedfrequencyId,
+            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
+            calibrationLastDate: _lastCalibrationDateTc,
+            calibrationFirstDueDate: "2023-03-10",
+            calibrationFrequencyType: 2,
+            acCapacity: 2000,
+            dcCapacity: 3000,
+            multiplier: 3,
+            customerId: 1,
+            operatorId: 3,
+            ownerId: 2,
+            stockCount: 50,
+            moduleQuantity: 15,
+            attachments: null
+
+            ///please check
+            // lstWarrantyDetail: [] //[lstWarrantyDetail],
+            );
+    var addInventoryJsonString = [
+      {
+        "name": _assetsNameCtrlr, //"NOOR_TOOLS_SMB_1new12",
+        "description": _assesDiscriptionCtrlr, // "NOOR_TOOLS SMB 1",
+        "typeId": 1,
+        "statusId": 1,
+        "facilityId": 46,
+        "blockId": 76,
+        "parentId": 122918,
+        "categoryId": 5,
+        "acCapacity": 2000,
+        "dcCapacity": 5000,
+        "serialNumber": "A123456",
+        "multiplier": 3,
+        "calibrationFrequency": 2,
+        "calibrationReminderDays": 10,
+        "calibrationFirstDueDate": "2023-03-10",
+        "calibrationLastDate": "2023-01-10",
+        "customerId": 1,
+        "ownerId": 2,
+        "operatorId": 3,
+        "manufacturerId": 8,
+        "supplierId": 5,
+        "model": "ModelString",
+        "stockCount": 50,
+        "moduleQuantity": 15,
+        "cost": 123456,
+        "currency": "USD",
+        "attachments": null,
+        "lstWarrantyDetail": [
+          {
+            "warranty_type": 0,
+            "warranty_description": null,
+            "warrranty_term_type": 0,
+            "expiry_date": "2030-12-31",
+            "warranty_provider_Id": 0,
+            "certificate_number": null,
+            "warranty_status": 1
+          }
+        ]
+      }
+    ];
+    // [
+    //   addInventoryRequestModel.toJson()
+    // ]; //createCheckListToJson([createChecklist]);
+
+    print({"checklistJsonString", addInventoryJsonString});
+    await addInventoryPresenter.AddInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: true,
+    );
+    return true;
+    // }
+    // return true;
+  }
+
   Future<void> getFrequencyList() async {
     final list = await addInventoryPresenter.getFrequencyList();
 
@@ -411,6 +550,22 @@ class AddInventoryController extends GetxController {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+        }
+        break;
+      case RxList<WarrantyUsageTermListModel>:
+        {
+          int warrantyUsageIndex =
+              warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
+
+          selectedwarrantyUsageTermNameId =
+              warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<BlockModel>:
+        {
+          int blockIndex = blocksList.indexWhere((x) => x?.name == value);
+
+          selectedBlockListId = frequencyList[blockIndex]?.id ?? 0;
         }
         break;
 

@@ -125,10 +125,10 @@ class ConnectHelper {
 
     var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?' +
-          blockIdParam +
-          categoryIdsParam +
-          statusParam,
+      'Inventory/GetInventoryList?facility_id=46',
+      // blockIdParam +
+      // categoryIdsParam +
+      // statusParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -139,8 +139,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> getAffectedPartList({
+  Future<ResponseModel> getAffectedPartList({
     required bool isLoading,
     required String auth,
     int? facilityId,
@@ -166,7 +165,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBusinessList({
     required bool isLoading,
@@ -2005,4 +2003,22 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<ResponseModel> AddInventory({
+    required String auth,
+    bool? isLoading,
+    required addInventoryJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/AddInventory',
+      Request.post,
+      addInventoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

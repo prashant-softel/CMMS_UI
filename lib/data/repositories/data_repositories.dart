@@ -110,7 +110,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getAffectedPartList({
     int? facilityId,
     int? blockId,
@@ -858,8 +858,6 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
-  
-  
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -1338,5 +1336,17 @@ class DataRepository extends DomainRepository {
       auth: auth,
       isLoading: isLoading,
     );
+  }
+
+  Future<ResponseModel> AddInventory({
+    auth,
+    bool? isLoading,
+    addInventoryJsonString,
+  }) async {
+    var response = await connectHelper.AddInventory(
+        auth: auth,
+        isLoading: isLoading,
+        addInventoryJsonString: addInventoryJsonString);
+    return response;
   }
 }

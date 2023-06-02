@@ -60,7 +60,7 @@ class HomeController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   String username = '';
 
-    RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
+  RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
   RxList<int> selectedEquipmentList = <int>[].obs;
   Rx<bool> isInventorySelected = true.obs;
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
@@ -70,7 +70,6 @@ class HomeController extends GetxController {
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
-
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -100,17 +99,17 @@ class HomeController extends GetxController {
     Future.delayed(Duration(seconds: 1), () async {
       await getuserAccessData();
     });
-     Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-     Future.delayed(Duration(seconds: 1), () {
-      getInventoryCategoryList();
-    });
-    await getTypePermitList();
+    //  Future.delayed(Duration(seconds: 1), () {
+    //   getInventoryCategoryList();
+    // });
+    // await getTypePermitList();
 
     super.onInit();
   }
@@ -141,7 +140,7 @@ class HomeController extends GetxController {
     }
   }
 
-   Future<void> getInventoryCategoryList({String? facilityId}) async {
+  Future<void> getInventoryCategoryList({String? facilityId}) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList = await homePresenter.getInventoryCategoryList(
       isLoading: true,
@@ -153,7 +152,6 @@ class HomeController extends GetxController {
       }
     }
   }
-
 
   void getInventoryList() async {
     eqipmentNameList.value = <InventoryModel>[];
