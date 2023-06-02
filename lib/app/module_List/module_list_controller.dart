@@ -191,6 +191,7 @@ class ModuleListController extends GetxController {
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+
           SizedBox(
             height: 10,
           ),

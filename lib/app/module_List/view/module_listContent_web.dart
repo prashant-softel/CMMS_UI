@@ -689,7 +689,6 @@ class ModuleListContentWeb
                                                     label: 'Edit',
                                                     onPress: () {
                                                       controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
-
                                                       controller.modulelistNumberCtrlr.text = controller.selectedItem?.moduleName ?? '';
                                                       controller.featureCtrlr.text = controller.selectedItem?.featureName ?? '';
                                                       controller.isToggleOn.value = controller.selectedItem?.add == 1 ? true : false;

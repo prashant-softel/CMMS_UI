@@ -6,6 +6,7 @@ import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
+import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
@@ -57,14 +58,21 @@ import '../SPV_list/SPV_list_binding.dart';
 import '../SPV_list/view/SPV_list_screen.dart';
 import '../add_job/add_job_binding.dart';
 import '../add_job/views/add_job_screen.dart';
+import '../blood_list/blood_list_binding.dart';
+import '../blood_list/view/blood_list_screen.dart';
 import '../breakdown_maintenance/breakdown_maintenance_binding.dart';
+import '../business_List/business_list_binding.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
+import '../country_list/country_list_binding.dart';
+import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
+import '../frequency_List/frequency_list_binding.dart';
+import '../frequency_List/view/frequency_list_screen.dart';
 import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
 import '../inventory/inventory_binding.dart';
@@ -96,10 +104,16 @@ import '../preventive_maintenance_execution_view/preventive_maintenance_executio
 import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
+import '../role_List/role_list_binding.dart';
+import '../state_list_screen/state_list_binding.dart';
+import '../state_list_screen/view/state_list_content_screen.dart';
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
+import '../role_List/view/role_list_screen.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
+import '../warrantyType/view/warranty_list_screen.dart';
+import '../warrantyType/warranty_list_binding.dart';
 
 // coverage:ignore-file
 
@@ -211,10 +225,47 @@ class AppPages {
       binding: ModuleListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.bloodTypeListScreen,
+      page: BloodListScreen.new,
+      binding: BloodListBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.countryTypeListScreen,
+      page: CountryListScreen.new,
+      binding: CountryListBinding(),
+    ),
+    //
+    GetPage<dynamic>(
+      name: _Paths.stateTypeListScreen,
+      page: StateListScreen.new,
+      binding: StateListBinding(),
+    ),
+
+
+    GetPage<dynamic>(
+      name: _Paths.roleListScreen,
+      page: RoleListScreen.new,
+      binding: RoleListBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.frequencyListScreen,
+      page: FrequencyListScreen.new,
+      binding: FrequencyListBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.warrantyClaimList,
       page: WarrantyClaimListScreen.new,
       binding: HomeBinding(),
     ),
+
+    GetPage<dynamic>(
+      name: _Paths.warrantyType,
+      page: WarrantyListScreen.new,
+      binding: WarrantyListBinding(),
+    ),
+
     GetPage<dynamic>(
       name: _Paths.calibrationList,
       page: CalibrationListScreen.new,
@@ -375,6 +426,11 @@ class AppPages {
       page: ViewUserDetailScreen.new,
       binding: ViewUserDetailBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.businessTypeListScreen,
+      page: BusinessListScreen.new,
+      binding: BusinessListBinding(),
+      ),
      GetPage<dynamic>(
       name: _Paths.editWarrantyClaimContentWeb,
       page: EditWarrantyClaimWeb.new,
