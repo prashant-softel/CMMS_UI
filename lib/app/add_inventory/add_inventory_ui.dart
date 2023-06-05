@@ -78,6 +78,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(title: 'Block'),
                                       SizedBox(
                                         child: DropdownWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList: controller.blocksList,
                                           isValueSelected:
                                               controller.isBlocksSelected.value,
@@ -94,6 +99,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(title: "Type"),
                                       SizedBox(
                                         child: DropdownWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList: controller.typeNameList,
                                           isValueSelected: controller
                                               .isTypeNameSelected.value,
@@ -110,6 +120,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(title: "Status"),
                                       SizedBox(
                                         child: DropdownWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList:
                                               controller.statusNameList,
                                           isValueSelected: controller
@@ -153,6 +168,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           title: 'Parent\nEquipment'),
                                       SizedBox(
                                         child: DropdownWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList:
                                               controller.eqipmentNameList,
                                           isValueSelected: controller
@@ -170,6 +190,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(title: "Category"),
                                       SizedBox(
                                         child: DropdownWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList:
                                               controller.equipmentCategoryList,
                                           isValueSelected: controller

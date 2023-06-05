@@ -36,6 +36,8 @@ class CalibrationTabWidget extends StatelessWidget {
                                   "          Calibration\n          Frequency"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               controller: controller,
                               dropdownList: controller.frequencyList,
                               isValueSelected:
@@ -78,7 +80,7 @@ class CalibrationTabWidget extends StatelessWidget {
                                       "        Calibration\n        remainder In"),
                               SizedBox(width: 10),
                               Container(
-                                width: 360,
+                                width: 150,
                                 child: TextField(
                                   controller:
                                       controller.calibrationRemaingCtrlr,
@@ -95,6 +97,10 @@ class CalibrationTabWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              CustomRichText(title: "Day"),
                             ],
                           ),
                         ],

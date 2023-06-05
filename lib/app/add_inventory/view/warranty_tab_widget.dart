@@ -37,6 +37,8 @@ class WarrantyTabWidget extends StatelessWidget {
                           CustomRichText(title: "Warranty Type"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList: controller.warrantyNameList,
                               isValueSelected:
                                   controller.isWarrentyNameSelected.value,
@@ -54,6 +56,8 @@ class WarrantyTabWidget extends StatelessWidget {
                                   "          Warranty\n           Usages  \n     Term Type"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
                                   controller.warrantyUsageTermNameList,
                               isValueSelected: controller
@@ -82,6 +86,8 @@ class WarrantyTabWidget extends StatelessWidget {
                           CustomRichText(title: "Warranty Provider"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
                                   controller.manufacturerModelNameList,
                               isValueSelected: controller

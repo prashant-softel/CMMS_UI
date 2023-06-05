@@ -15,6 +15,8 @@ class DropdownWidget extends StatelessWidget {
     required this.onValueChanged,
     this.controller,
     this.focusNode,
+    this.width,
+    this.margin,
   });
 
   String? selectedValue;
@@ -24,6 +26,8 @@ class DropdownWidget extends StatelessWidget {
   Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
   final FocusNode? focusNode;
+  double? width;
+  EdgeInsetsGeometry? margin;
 
   ///
   @override
@@ -33,11 +37,8 @@ class DropdownWidget extends StatelessWidget {
         Obx(
       () => //
           Container(
-        margin: Dimens.edgeInsets16,
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width / 4,
-          minWidth: 100,
-        ),
+        width: width,
+        margin: margin,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
