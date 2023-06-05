@@ -2123,6 +2123,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> saveNotification({
+    required String auth,
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/SetUserNotifications',
+      Request.post,
+      saveNotificationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWarrantyList({
     required String auth,
     bool? isLoading,

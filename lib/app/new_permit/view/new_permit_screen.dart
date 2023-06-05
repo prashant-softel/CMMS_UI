@@ -1565,7 +1565,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             3.75,
-                                                    
+
                                                     child: Obx(
                                                       () => DropdownWidget(
                                                         dropdownList: controller
@@ -1718,7 +1718,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .size
                                                                   .width /
                                                               3.75,
-                                                      
                                                       child: Obx(
                                                         () => DropdownWidget(
                                                           dropdownList: controller
