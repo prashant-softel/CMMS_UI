@@ -33,6 +33,11 @@ class DropdownWidget extends StatelessWidget {
         Obx(
       () => //
           Container(
+        margin: Dimens.edgeInsets16,
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width / 4,
+          minWidth: 100,
+        ),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
