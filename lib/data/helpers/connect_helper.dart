@@ -2085,11 +2085,6 @@ class ConnectHelper {
         },
       );
 
-
-
-
-
-
   Future<ResponseModel> getBusinessTypeList({
     required bool isLoading,
     required String auth,
@@ -2107,21 +2102,27 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
-
   Future<ResponseModel> createBusinessList({
     required String auth,
     bool? isLoading,
     required businesslistJsonString,
   }) async {
-
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
-      'CMMS/AddBusiness',//AddBusiness
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/AddBusiness', //AddBusiness
       Request.post,
       businesslistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> saveNotification({
     required String auth,
     saveNotificationJsonString,
@@ -2141,8 +2142,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
   Future<ResponseModel> getWarrantyList({
     required String auth,
     bool? isLoading,
@@ -2158,10 +2157,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    return responseModel;
-  }
-
-
     return responseModel;
   }
 }

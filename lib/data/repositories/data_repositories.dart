@@ -91,7 +91,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     var response =
-    await connectHelper.generateToken(auth: auth, isLoading: isLoading);
+        await connectHelper.generateToken(auth: auth, isLoading: isLoading);
     return response;
   }
 
@@ -1389,12 +1389,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-
-
-
-
-
-
   Future<ResponseModel> createBusinessList({
     auth,
     bool? isLoading,
@@ -1419,8 +1413,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-
-
   Future<ResponseModel> getWarrantyList({
     required String auth,
     int? facilityId,
@@ -1430,7 +1422,6 @@ class DataRepository extends DomainRepository {
       await connectHelper.getWarrantyList(
         auth: auth,
         facilityId: facilityId ?? 0,
-
         type: type,
         isLoading: isLoading ?? false,
       );
