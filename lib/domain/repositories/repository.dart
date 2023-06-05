@@ -413,7 +413,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-        }else{
+        } else {
           Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
@@ -698,8 +698,6 @@ class Repository {
       return null;
     }
   }
-
-  
 
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
@@ -3374,20 +3372,11 @@ class Repository {
     }
   }
 
-
-
-
-
-
-
-
-
-
   Future<List<WarrantyModel?>?> getWarrantyList(
-      int? type,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getWarrantyList(
@@ -3401,10 +3390,10 @@ class Repository {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<WarrantyModel> _ModuleListModelList =
-        jsonModuleListModelModels
-            .map<WarrantyModel>((m) =>
-            WarrantyModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+            jsonModuleListModelModels
+                .map<WarrantyModel>(
+                    (m) => WarrantyModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _ModuleListModelList;
       } else {
@@ -3417,7 +3406,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<BusinessTypeModel>> getBusinessTypeList({
     required int? businessType,
@@ -3449,11 +3437,6 @@ class Repository {
     }
   }
 
-
-
-
-
-
   Future<bool> createBusinessListNumber(
       {bool? isLoading, businesslistJsonString}) async {
     try {
@@ -3476,4 +3459,28 @@ class Repository {
     }
   }
 
+  Future<bool> AddInventory({bool? isLoading, addInventoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.AddInventory(
+          auth: auth,
+          isLoading: isLoading,
+          addInventoryJsonString: addInventoryJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+
+        Get.offAndToNamed(Routes.inventoryList);
+
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
 }

@@ -140,8 +140,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> getAffectedPartList({
+  Future<ResponseModel> getAffectedPartList({
     required bool isLoading,
     required String auth,
     int? facilityId,
@@ -167,7 +166,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBusinessList({
     required bool isLoading,
@@ -2087,11 +2085,6 @@ class ConnectHelper {
         },
       );
 
-
-
-
-
-
   Future<ResponseModel> getBusinessTypeList({
     required bool isLoading,
     required String auth,
@@ -2109,19 +2102,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
-
   Future<ResponseModel> createBusinessList({
     required String auth,
     bool? isLoading,
     required businesslistJsonString,
   }) async {
-
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
-      'CMMS/AddBusiness',//AddBusiness
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/AddBusiness', //AddBusiness
       Request.post,
       businesslistJsonString,
       isLoading ?? false,
@@ -2133,8 +2122,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getWarrantyList({
     required String auth,
@@ -2154,5 +2141,22 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> AddInventory({
+    required String auth,
+    bool? isLoading,
+    required addInventoryJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/AddInventory',
+      Request.post,
+      addInventoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    return responseModel;
+  }
 }

@@ -125,7 +125,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: "Asset\nName"),
-                                      CustomTextFieldForInventory(),
+                                      CustomTextFieldForInventory(
+                                        textController:
+                                            controller.assetsNameCtrlr,
+                                      ),
                                     ],
                                   ),
                                   Row(
@@ -133,7 +136,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(
                                         title: "      Asset\nDescription",
                                       ),
-                                      CustomTextFieldForInventory(),
+                                      CustomTextFieldForInventory(
+                                        textController:
+                                            controller.assesDiscriptionCtrlr,
+                                      ),
                                     ],
                                   )
                                 ],
@@ -181,7 +187,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: "Serial No"),
-                                      CustomTextFieldForInventory(),
+                                      CustomTextFieldForInventory(
+                                        textController:
+                                            controller.serialNoCtrlr,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -248,7 +257,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                           ),
                           Dimens.boxHeight15,
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.AddInventory();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

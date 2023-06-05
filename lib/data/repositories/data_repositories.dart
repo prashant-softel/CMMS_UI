@@ -91,7 +91,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     var response =
-    await connectHelper.generateToken(auth: auth, isLoading: isLoading);
+        await connectHelper.generateToken(auth: auth, isLoading: isLoading);
     return response;
   }
 
@@ -112,7 +112,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getAffectedPartList({
     int? facilityId,
     int? blockId,
@@ -860,8 +860,6 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
-  
-  
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -1391,12 +1389,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-
-
-
-
-
-
   Future<ResponseModel> createBusinessList({
     auth,
     bool? isLoading,
@@ -1421,8 +1413,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-
-
   Future<ResponseModel> getWarrantyList({
     required String auth,
     int? facilityId,
@@ -1432,9 +1422,18 @@ class DataRepository extends DomainRepository {
       await connectHelper.getWarrantyList(
         auth: auth,
         facilityId: facilityId ?? 0,
-
         type: type,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> AddInventory({
+    auth,
+    bool? isLoading,
+    addInventoryJsonString,
+  }) async {
+    var response = await connectHelper.AddInventory(
+        auth: auth,
+        isLoading: isLoading,
+        addInventoryJsonString: addInventoryJsonString);
+    return response;
+  }
 }
