@@ -2084,6 +2084,44 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+
+
+
+
+
+
+  Future<ResponseModel> getBusinessTypeList({
+    required bool isLoading,
+    required String auth,
+    int? businessType,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBusinessTypeList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
+
+
+  Future<ResponseModel> createBusinessList({
+    required String auth,
+    bool? isLoading,
+    required businesslistJsonString,
+  }) async {
+
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'CMMS/AddBusiness',//AddBusiness
+      Request.post,
+      businesslistJsonString,
   Future<ResponseModel> saveNotification({
     required String auth,
     saveNotificationJsonString,
@@ -2099,6 +2137,31 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+
+    return responseModel;
+  }
+
+
+
+  Future<ResponseModel> getWarrantyList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetWarrantyTypeList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
     return responseModel;
   }
 }

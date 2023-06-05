@@ -91,7 +91,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     var response =
-        await connectHelper.generateToken(auth: auth, isLoading: isLoading);
+    await connectHelper.generateToken(auth: auth, isLoading: isLoading);
     return response;
   }
 
@@ -1388,6 +1388,52 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+
+
+
+
+
+
+  Future<ResponseModel> createBusinessList({
+    auth,
+    bool? isLoading,
+    businesslistJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessList(
+        auth: auth,
+        isLoading: isLoading,
+        businesslistJsonString: businesslistJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> getBusinessTypeList({
+    int? businessType,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBusinessTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      businessType: businessType,
+    );
+  }
+
+
+
+  Future<ResponseModel> getWarrantyList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWarrantyList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+
+        type: type,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> saveNotification({
     required String auth,
