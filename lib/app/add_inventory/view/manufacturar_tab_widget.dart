@@ -39,6 +39,8 @@ class ManufacturarTabWidget extends StatelessWidget {
                               title: "   Manufacturer\n               Name"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
                                   controller.manufacturerModelNameList,
                               isValueSelected: controller
@@ -90,6 +92,8 @@ class ManufacturarTabWidget extends StatelessWidget {
                           CustomRichText(title: "  Supplier\n      Name"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
                                   controller.supplierNameModelNameList,
                               isValueSelected:
@@ -115,6 +119,8 @@ class ManufacturarTabWidget extends StatelessWidget {
                           CustomRichText(title: "Currency"),
                           SizedBox(
                             child: DropdownWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList: controller.unitCurrencyList,
                               isValueSelected:
                                   controller.isUnitCurrencySelected.value,
