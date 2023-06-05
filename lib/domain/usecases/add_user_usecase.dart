@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
@@ -111,5 +112,19 @@ class AddUserUsecase {
       isLoading,
     );
     //  return true;
+  }
+
+  Future<Map<String, dynamic>> saveNotification({
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.saveNotification(
+        saveNotificationJsonString,
+        isLoading,
+      );
+  Future<List<FacilityModel?>?> getFacilityList({
+    required bool isLoading,
+  }) async {
+    return repository.getFacilityList(isLoading);
   }
 }

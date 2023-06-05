@@ -3,10 +3,12 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../navigators/app_pages.dart';
 import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_multiselect_dialog_field.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 import '../../widgets/dropdown.dart';
@@ -1023,7 +1025,90 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                                           : [],
                                                                     ),
                                                                   )
-                                                                : Container())),
+                                                                : Container(
+                                                                    width: Get
+                                                                        .width,
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 9,
+                                                                          child:
+                                                                              ActionButton(
+                                                                            label:
+                                                                                'Add Facility',
+                                                                            icon:
+                                                                                Icons.add,
+                                                                            onPressed:
+                                                                                () {
+                                                                              Get.dialog<void>(AddfacilityListAlertBox());
+
+                                                                              //     void>(
+                                                                              // AddfacilityListAlertBox());
+                                                                            },
+                                                                            color:
+                                                                                Colors.green,
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.height * 1.5,
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                Get.height,
+                                                                            child: Column(
+                                                                                //
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    child: //
+                                                                                        ScrollableTableView(
+                                                                                      columns: [
+                                                                                        "Facility Id",
+                                                                                        'Facility name',
+                                                                                        'Location',
+                                                                                      ].map((column) {
+                                                                                        return TableViewColumn(minWidth: Get.width * 0.20, label: column);
+                                                                                      }).toList(),
+                                                                                      rows: //
+                                                                                          [
+                                                                                        ...List.generate(
+                                                                                          controller.filteredfacilityNameList.length,
+                                                                                          (index) {
+                                                                                            var facilityNameDetails = controller.filteredfacilityNameList[index];
+
+                                                                                            return [
+                                                                                              '${facilityNameDetails?.id ?? ''}',
+                                                                                              '${facilityNameDetails?.name ?? ''}',
+                                                                                              '${facilityNameDetails?.address ?? ''}',
+                                                                                            ];
+                                                                                          },
+                                                                                        ),
+                                                                                      ].map((_inventoryDetailList) {
+                                                                                        return TableViewRow(
+                                                                                            onTap: () => {
+                                                                                                  //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                },
+                                                                                            height: 60,
+                                                                                            cells: _inventoryDetailList.map((value) {
+                                                                                              return TableViewCell(
+                                                                                                //key: ,
+                                                                                                child: Text(value.toString()),
+                                                                                              );
+                                                                                            }).toList());
+                                                                                      }).toList(),
+                                                                                    ),
+                                                                                  ),
+                                                                                ]),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ))),
                                                   ],
                                                 ),
                                                 Column(
@@ -1503,6 +1588,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                           if (value == true) {
                                             // controller.userId = 0;
                                             controller.saveAccessLevel();
+                                            //   controller.saveNotification();
                                           }
                                         });
                                         //  controller.saveAccessLevel();
@@ -1547,5 +1633,80 @@ class AddUserContentWeb extends GetView<AddUserController> {
     } else {
       controller.joingdateCtrlr.text = date.toString().substring(0, 10);
     }
+  }
+
+  AddfacilityListAlertBox() {
+    return StatefulBuilder(builder: ((context, setState) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        ),
+        insetPadding: Dimens.edgeInsets10_0_10_0,
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          'Select facility Name',
+          textAlign: TextAlign.center,
+          // style: TextStyle(color: Colors.green),
+        ),
+        content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+
+          return Obx(
+            () => Container(
+              padding: Dimens.edgeInsets05_0_5_0,
+              height: 300, // double.infinity,
+              width: 300,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Divider(
+                      color: ColorValues.greyLightColour,
+                      thickness: 1,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.5,
+                      child: CustomMultiSelectDialogField(
+                        buttonText: 'Add Facility',
+                        title: 'Select Facility',
+                        initialValue:
+                            (controller.selectedFacilityNameList.isNotEmpty)
+                                ? controller.selectedfacilityNameIdList
+                                : [],
+                        items: controller.facilityNameList
+                            .map(
+                              (facilityName) => MultiSelectItem(
+                                facilityName?.id,
+                                facilityName?.name ?? '',
+                              ),
+                            )
+                            .toList(),
+                        onConfirm: (selectedOptionsList) => {
+                          controller.facilityNameSelected(selectedOptionsList),
+                        },
+                      ),
+                    )
+                  ]),
+            ),
+          );
+        }),
+        actions: [
+          Center(
+            child: Container(
+                height: 45,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.navyBlueColor,
+                  text: "Ok",
+                  onPressed: () {
+                    Get.back();
+                  },
+                )),
+          ),
+        ],
+      );
+    }));
   }
 }
