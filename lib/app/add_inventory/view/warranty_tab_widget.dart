@@ -68,9 +68,7 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "    Description"),
-                          CustomTextFieldForInventory(
-                              textController:
-                                  controller.warrentyDescriptionCtrlr),
+                          CustomTextFieldForInventory(),
                         ],
                       ),
                     ],
@@ -96,9 +94,7 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "Certificate Number"),
-                          CustomTextFieldForInventory(
-                            textController: controller.certificateNoCtrlr,
-                          ),
+                          CustomTextFieldForInventory(),
                         ],
                       ),
                     ],

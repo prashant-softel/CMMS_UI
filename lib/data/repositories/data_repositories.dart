@@ -1436,15 +1436,4 @@ class DataRepository extends DomainRepository {
         saveNotificationJsonString: saveNotificationJsonString,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> AddInventory({
-    auth,
-    bool? isLoading,
-    addInventoryJsonString,
-  }) async {
-    var response = await connectHelper.AddInventory(
-        auth: auth,
-        isLoading: isLoading,
-        addInventoryJsonString: addInventoryJsonString);
-    return response;
-  }
 }

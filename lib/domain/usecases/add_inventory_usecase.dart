@@ -191,10 +191,4 @@ class AddInventoryUsecase {
       await _repository.getFacilityList(true);
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
-  Future<bool> AddInventory({
-    addInventoryJsonString,
-    bool? isLoading,
-  }) async =>
-      await _repository.AddInventory(
-          isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
 }

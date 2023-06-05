@@ -56,7 +56,7 @@ class CalibrationTabWidget extends StatelessWidget {
                           !controller.openLastCalibrationDatePicker;
                       controller.update(['calibration_tab']);
                     },
-                    textController: controller.calibrationRemainderInTc,
+                    textController: controller.lastCalibrationDateTc,
                     label: 'Last calibration date: *',
                   ),
                 ],
@@ -80,8 +80,6 @@ class CalibrationTabWidget extends StatelessWidget {
                               Container(
                                 width: 360,
                                 child: TextField(
-                                  controller:
-                                      controller.calibrationRemaingCtrlr,
                                   decoration: InputDecoration(
                                     contentPadding: Dimens.edgeInsets16_0_16_0,
                                     focusedBorder: OutlineInputBorder(
