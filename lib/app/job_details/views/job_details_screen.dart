@@ -176,11 +176,18 @@ Widget _content(context, controller) {
                                               : [],
                                         ),
                                         JobDetailField(
-                                          title: 'Breakdown Type',
+                                          title: 'Breakdown Time',
                                           value: controller.jobDetailsModel
-                                                  .value?.breakdownType ??
+                                                  .value?.breakdownTime
+                                                  .toString() ??
                                               '',
                                         ),
+                                        // JobDetailField(
+                                        //   title: 'Breakdown Type',
+                                        //   value: controller.jobDetailsModel
+                                        //           .value?.breakdownType ??
+                                        //       '',
+                                        // ),
                                         JobDetailField(
                                           title: 'Permit ID',
                                           value: (controller.jobDetailsModel
@@ -251,18 +258,18 @@ Widget _content(context, controller) {
                                                   .toList()
                                               : [],
                                         ),
-                                        JobDetailMultiValueField(
-                                          title: 'Work Type',
-                                          values: (controller.jobDetailsModel
-                                                      .value?.workType !=
-                                                  null)
-                                              ? controller.jobDetailsModel.value
-                                                  ?.workType
-                                                  ?.map<String>(
-                                                      (item) => item.toString())
-                                                  .toList()
-                                              : [],
-                                        ),
+                                        // JobDetailMultiValueField(
+                                        //   title: 'Work Type',
+                                        //   values: (controller.jobDetailsModel
+                                        //               .value?.workType !=
+                                        //           null)
+                                        //       ? controller.jobDetailsModel.value
+                                        //           ?.workType
+                                        //           ?.map<String>(
+                                        //               (item) => item.toString())
+                                        //           .toList()
+                                        //       : [],
+                                        // ),
                                         if (controller
                                                 .jobDetailsModel
                                                 .value

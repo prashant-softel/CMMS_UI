@@ -1425,6 +1425,17 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> saveNotification({
+    required String auth,
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveNotification(
+        auth: auth,
+        saveNotificationJsonString: saveNotificationJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> AddInventory({
     auth,
     bool? isLoading,
