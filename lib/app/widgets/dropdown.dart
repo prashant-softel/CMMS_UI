@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
+/// DO NOT CHANGE THI FILE FOR THE TOP DROPDOWN. CREATE A NEW WIDGET.
 class DropdownWidget extends StatelessWidget {
   DropdownWidget({
     super.key,
@@ -32,15 +33,24 @@ class DropdownWidget extends StatelessWidget {
         Obx(
       () => //
           Container(
-        margin: Dimens.edgeInsets16,
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width / 4,
-          minWidth: 100,
-        ),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
@@ -62,23 +72,23 @@ class DropdownWidget extends StatelessWidget {
               color: ColorValues.blackColor,
             ),
           ),
-          // popupProps: PopupProps.dialog(
-          //   //
-          //   searchFieldProps: TextFieldProps(
-          //     decoration: InputDecoration(
-          //       enabledBorder: OutlineInputBorder(
-          //         borderSide: BorderSide(color: ColorValues.blueColor),
-          //         borderRadius: BorderRadius.circular(5),
-          //       ),
-          //       focusedBorder: OutlineInputBorder(
-          //         borderSide: BorderSide(color: ColorValues.blueColor),
-          //         borderRadius: BorderRadius.circular(5),
-          //       ),
-          //     ),
-          //   ),
-          //   showSearchBox: true,
-          //   showSelectedItems: true,
-          // ),
+          popupProps: PopupProps.dialog(
+            //
+            searchFieldProps: TextFieldProps(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: ColorValues.blueColor),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: ColorValues.blueColor),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            showSearchBox: true,
+            showSelectedItems: true,
+          ),
           items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration: InputDecoration(
