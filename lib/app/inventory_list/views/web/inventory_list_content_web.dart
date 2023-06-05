@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -51,7 +52,10 @@ class InventoryListContentWeb extends GetView<HomeController> {
                   icon: Icons.add,
                   label: 'addAsset'.tr,
                   onPressed: () {
-                    Get.to(() => AddInventory());
+                    Get.toNamed(
+                      Routes.addInventoryScreen,
+                    );
+                    // Get.to(() => AddInventory());
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => AddInventory()));
                   },
                   // lable: 'addAsset'.tr,
@@ -160,6 +164,7 @@ class InventoryListContentWeb extends GetView<HomeController> {
                   builder: (_controller) {
                     return //
                         Column(
+
                             //
                             children: [
                           ///
@@ -225,40 +230,40 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                           ),
                                                         ),
                                                         Spacer(),
-                                                        Align(
-                                                          alignment: Alignment
-                                                              .centerRight,
-                                                          child: Container(
-                                                            padding: Dimens
-                                                                .edgeInsets8_2_8_2,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: val.requirementStatus ==
-                                                                      1
-                                                                  ? ColorValues
-                                                                      .appRedColor
-                                                                  : ColorValues
-                                                                      .appGreenColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                            ),
-                                                            child: Text(
-                                                              val.name == 1
-                                                                  ? 'requirementRejected'
-                                                                      .tr
-                                                                  : 'requirementAccepted'
-                                                                      .tr,
-                                                              style: Styles
-                                                                  .white10
-                                                                  .copyWith(
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
+                                                        // Align(
+                                                        //   alignment: Alignment
+                                                        //       .centerRight,
+                                                        //   child: Container(
+                                                        //     padding: Dimens
+                                                        //         .edgeInsets8_2_8_2,
+                                                        //     decoration:
+                                                        //         BoxDecoration(
+                                                        //       color: val.requirementStatus ==
+                                                        //               1
+                                                        //           ? ColorValues
+                                                        //               .appRedColor
+                                                        //           : ColorValues
+                                                        //               .appGreenColor,
+                                                        //       borderRadius:
+                                                        //           BorderRadius
+                                                        //               .circular(
+                                                        //                   4),
+                                                        //     ),
+                                                        //     child: Text(
+                                                        //       val.name == 1
+                                                        //           ? 'requirementRejected'
+                                                        //               .tr
+                                                        //           : 'requirementAccepted'
+                                                        //               .tr,
+                                                        //       style: Styles
+                                                        //           .white10
+                                                        //           .copyWith(
+                                                        //         color: Colors
+                                                        //             .white,
+                                                        //       ),
+                                                        //     ),
+                                                        //   ),
+                                                        // ),
                                                         Dimens.boxHeight10,
                                                       ],
                                                     );
@@ -296,24 +301,24 @@ class InventoryListContentWeb extends GetView<HomeController> {
                                                             ),
                                                             //),
                                                           ]),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appGreenColor,
-                                                            icon: Icons
-                                                                .visibility,
-                                                            label:
-                                                                'Approve Request',
-                                                            onPress: () {},
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appRedColor,
-                                                            icon: Icons
-                                                                .visibility,
-                                                            label:
-                                                                'Reject Request',
-                                                            onPress: () {},
-                                                          ),
+                                                          // TableActionButton(
+                                                          //   color: ColorValues
+                                                          //       .appGreenColor,
+                                                          //   icon: Icons
+                                                          //       .visibility,
+                                                          //   label:
+                                                          //       'Approve Request',
+                                                          //   onPress: () {},
+                                                          // ),
+                                                          // TableActionButton(
+                                                          //   color: ColorValues
+                                                          //       .appRedColor,
+                                                          //   icon: Icons
+                                                          //       .visibility,
+                                                          //   label:
+                                                          //       'Reject Request',
+                                                          //   onPress: () {},
+                                                          // ),
                                                         ],
                                                       )
                                                     : Text(value.toString()),
