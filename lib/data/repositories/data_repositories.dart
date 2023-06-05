@@ -112,7 +112,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getAffectedPartList({
     int? facilityId,
     int? blockId,
@@ -860,8 +860,6 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
-  
-  
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -1437,4 +1435,14 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> saveNotification({
+    required String auth,
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveNotification(
+        auth: auth,
+        saveNotificationJsonString: saveNotificationJsonString,
+        isLoading: isLoading ?? false,
+      );
 }

@@ -1,5 +1,7 @@
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
+import 'package:cmms/domain/models/save_user_notification_model.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,6 +12,7 @@ import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
@@ -79,6 +82,17 @@ class AddUserController extends GetxController {
   var joingdateCtrlr = TextEditingController();
   int userId = 0;
   double thumbnailSize = Get.height * 0.25;
+  RxList<String?> selectedfacilityDataList = <String>[].obs;
+  RxList<int?> selectedfacilityIdList = <int>[].obs;
+  RxList<FacilityModel?> selectedFacilityNameList = <FacilityModel>[].obs;
+  RxList<int> selectedfacilityNameIdList = <int>[].obs;
+  RxList<FacilityModel?> facilityNameList = <FacilityModel>[].obs;
+  RxList<FacilityModel?> filteredfacilityNameList = <FacilityModel>[].obs;
+  Map<dynamic, dynamic> facility_map = {};
+  PaginationController facilityNamepaginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
 
   ///
   void onInit() async {
@@ -86,6 +100,7 @@ class AddUserController extends GetxController {
     await getBloodList();
     await getCountryList();
     await getRoleList();
+    await getFacilityList();
     if (userId != null) {
       await getUserDetails(userId: userId, isloading: true);
     }
@@ -96,6 +111,36 @@ class AddUserController extends GetxController {
   var selectedImageSize = ''.obs;
   RxString imageName = "".obs;
   var photoId;
+  Future<void> getFacilityList() async {
+    facilityNameList.value = <FacilityModel>[];
+    final _facilityNameList = await addUserPresenter.getFacilityList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+    );
+    for (var facility_list in _facilityNameList!) {
+      facilityNameList.add(facility_list);
+    }
+    facilityNamepaginationController = PaginationController(
+      rowCount: facilityNameList.length,
+      rowsPerPage: 10,
+    );
+    update(['permit_facility_list']);
+  }
+
+  void facilityNameSelected(_selectedfacilityNameIds) {
+    selectedfacilityNameIdList.value = <int>[];
+    filteredfacilityNameList.value = <FacilityModel>[];
+    late int emp_id = 0;
+    for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
+      selectedfacilityNameIdList.add(_selectedfacilityNameId);
+      FacilityModel? e = facilityNameList.firstWhere((element) {
+        return element?.id == _selectedfacilityNameId;
+      });
+      filteredfacilityNameList.add(e);
+    }
+
+    facility_map[emp_id] = selectedfacilityNameIdList;
+  }
 
   getImage(ImageSource imageSource) async {
     final pickedFile = await ImagePicker().pickImage(source: imageSource);
@@ -353,10 +398,11 @@ class AddUserController extends GetxController {
         isLoading: true,
       );
       if (responsePmMapCreated != null) {
-        userId = 0;
-        Get.offNamed(
-          Routes.userList,
-        );
+        saveNotification();
+        // userId = 0;
+        // Get.offNamed(
+        //   Routes.userList,
+        // );
       }
     } else {
       Fluttertoast.showToast(
@@ -364,13 +410,44 @@ class AddUserController extends GetxController {
     }
   }
 
+  void saveNotification() async {
+    List<SaveNotificationList> notificationlist = <SaveNotificationList>[];
+    userId == null
+        ? notificationList.forEach((e) {
+            notificationlist.add(SaveNotificationList(
+                notification_id: e?.notification_id.value ?? 0,
+                user_flag: e?.user_flag.value ?? 0));
+          })
+        : notificationListByUserId.forEach((e) {
+            notificationlist.add(SaveNotificationList(
+                notification_id: e?.notification_id.value ?? 0,
+                user_flag: e?.user_flag.value ?? 0));
+          });
+    SaveUserNotificationModel saveUserNotificationModel =
+        SaveUserNotificationModel(
+            user_id: userId, // varUserAccessModel.value.user_id ?? 0,
+            notification_list: notificationlist);
+    var saveNotificationJsonString = saveUserNotificationModel.toJson();
+    print({"saveNotificationJsonString", saveNotificationJsonString});
+    if (notificationlist.isNotEmpty) {
+      Map<String, dynamic>? responseSaveNotification =
+          await addUserPresenter.saveNotification(
+        saveNotificationJsonString: saveNotificationJsonString,
+        isLoading: true,
+      );
+      if (responseSaveNotification != null) {
+        userId = 0;
+        Get.offNamed(
+          Routes.userList,
+        );
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: "Unable to update the  notification", fontSize: 16.0);
+    }
+  }
+
   Future<bool> addUser() async {
-    // if (checklistNumberCtrlr.text.trim() == '' ||
-    //     selectedEquipmentId == 0 ||
-    //     selectedfrequencyId == 0) {
-    //   Fluttertoast.showToast(
-    //       msg: "Please enter required field", fontSize: 16.0);
-    // } else {
     List<AddAccessList> add_accessList = <AddAccessList>[];
     accesslevel.forEach((e) {
       add_accessList.add(AddAccessList(
@@ -419,8 +496,9 @@ class AddUserController extends GetxController {
         role_id: selectedRoleId,
         zipcode: int.parse(_zipcode),
         isEmployee: 1,
+        facilities: selectedfacilityNameIdList,
         credentials: credentials);
-    var adduserJsonString = adduser.toJson();
+    var adduserJsonString = [adduser.toJson()];
 
     print({"adduserJsonString", adduserJsonString});
     await addUserPresenter.addUser(
@@ -430,27 +508,7 @@ class AddUserController extends GetxController {
     return true;
   }
 
-  //return true;
-  // }
   Future<bool> updateUser() async {
-    // if (checklistNumberCtrlr.text.trim() == '' ||
-    //     selectedEquipmentId == 0 ||
-    //     selectedfrequencyId == 0) {
-    //   Fluttertoast.showToast(
-    //       msg: "Please enter required field", fontSize: 16.0);
-    // } else {
-    // List<AddAccessList> add_accessList = <AddAccessList>[];
-    // accesslevel.forEach((e) {
-    //   add_accessList.add(AddAccessList(
-    //       feature_id: e?.feature_id.value ?? 0,
-    //       add: e?.add.value ?? 0,
-    //       delete: e?.delete.value ?? 0,
-    //       edit: e?.edit.value ?? 0,
-    //       selfView: e?.selfView.value ?? 0,
-    //       approve: e?.approve.value ?? 0,
-    //       issue: e?.issue.value ?? 0,
-    //       view: e?.view.value ?? 0));
-    // });
     String _loginId = loginIdCtrlr.text.trim();
     String _firstname = firstNameCtrlr.text.trim();
     String _mobileno = mobileNoCtrlr.text.trim();
@@ -487,6 +545,7 @@ class AddUserController extends GetxController {
         photo_id: photoId,
         role_id: selectedRoleId,
         zipcode: int.parse(_zipcode),
+        facilities: selectedfacilityNameIdList,
         isEmployee: 1,
         credentials: credentials);
     var adduserJsonString = adduser.toJson();

@@ -140,8 +140,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> getAffectedPartList({
+  Future<ResponseModel> getAffectedPartList({
     required bool isLoading,
     required String auth,
     int? facilityId,
@@ -167,7 +166,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBusinessList({
     required bool isLoading,
@@ -2124,6 +2122,15 @@ class ConnectHelper {
       'CMMS/AddBusiness',//AddBusiness
       Request.post,
       businesslistJsonString,
+  Future<ResponseModel> saveNotification({
+    required String auth,
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/SetUserNotifications',
+      Request.post,
+      saveNotificationJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -2155,4 +2162,6 @@ class ConnectHelper {
   }
 
 
+    return responseModel;
+  }
 }
