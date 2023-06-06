@@ -1028,6 +1028,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                                 : Container(
                                                                     width: Get
                                                                         .width,
+                                                                    height:
+                                                                        Get.height -
+                                                                            30,
                                                                     child:
                                                                         Column(
                                                                       crossAxisAlignment:
@@ -1054,57 +1057,54 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                                                 Colors.green,
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
+                                                                        Container(
                                                                           width:
                                                                               MediaQuery.of(context).size.height * 1.5,
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                Get.height,
-                                                                            child: Column(
-                                                                                //
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    child: //
-                                                                                        ScrollableTableView(
-                                                                                      columns: [
-                                                                                        "Facility Id",
-                                                                                        'Facility name',
-                                                                                        'Location',
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(minWidth: Get.width * 0.20, label: column);
-                                                                                      }).toList(),
-                                                                                      rows: //
-                                                                                          [
-                                                                                        ...List.generate(
-                                                                                          controller.filteredfacilityNameList.length,
-                                                                                          (index) {
-                                                                                            var facilityNameDetails = controller.filteredfacilityNameList[index];
+                                                                          height:
+                                                                              Get.height - 70,
+                                                                          child: Column(
+                                                                              //
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: //
+                                                                                      ScrollableTableView(
+                                                                                    columns: [
+                                                                                      "Facility Id",
+                                                                                      'Facility name',
+                                                                                      'Location',
+                                                                                    ].map((column) {
+                                                                                      return TableViewColumn(minWidth: Get.width * 0.20, label: column);
+                                                                                    }).toList(),
+                                                                                    rows: //
+                                                                                        [
+                                                                                      ...List.generate(
+                                                                                        controller.filteredfacilityNameList.length,
+                                                                                        (index) {
+                                                                                          var facilityNameDetails = controller.filteredfacilityNameList[index];
 
-                                                                                            return [
-                                                                                              '${facilityNameDetails?.id ?? ''}',
-                                                                                              '${facilityNameDetails?.name ?? ''}',
-                                                                                              '${facilityNameDetails?.address ?? ''}',
-                                                                                            ];
-                                                                                          },
-                                                                                        ),
-                                                                                      ].map((_inventoryDetailList) {
-                                                                                        return TableViewRow(
-                                                                                            onTap: () => {
-                                                                                                  //  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                },
-                                                                                            height: 60,
-                                                                                            cells: _inventoryDetailList.map((value) {
-                                                                                              return TableViewCell(
-                                                                                                //key: ,
-                                                                                                child: Text(value.toString()),
-                                                                                              );
-                                                                                            }).toList());
-                                                                                      }).toList(),
-                                                                                    ),
+                                                                                          return [
+                                                                                            '${facilityNameDetails?.id ?? ''}',
+                                                                                            '${facilityNameDetails?.name ?? ''}',
+                                                                                            '${facilityNameDetails?.address ?? ''}',
+                                                                                          ];
+                                                                                        },
+                                                                                      ),
+                                                                                    ].map((_inventoryDetailList) {
+                                                                                      return TableViewRow(
+                                                                                          onTap: () => {
+                                                                                                //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                              },
+                                                                                          height: 60,
+                                                                                          cells: _inventoryDetailList.map((value) {
+                                                                                            return TableViewCell(
+                                                                                              //key: ,
+                                                                                              child: Text(value.toString()),
+                                                                                            );
+                                                                                          }).toList());
+                                                                                    }).toList(),
                                                                                   ),
-                                                                                ]),
-                                                                          ),
+                                                                                ),
+                                                                              ]),
                                                                         ),
                                                                       ],
                                                                     ),

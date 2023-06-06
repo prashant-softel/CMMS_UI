@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../app/utils/utility.dart';
 
@@ -130,7 +131,7 @@ class ScheduleCheckPoint {
   int? check_point_id;
   String? check_point_name;
   String? requirement;
-  int? is_job_created;
+  RxInt linked_job_id = RxInt(0);
   String? observation;
   int? is_custom_check_point;
   int? is_file_required;
@@ -142,10 +143,12 @@ class ScheduleCheckPoint {
       this.check_point_name,
       this.is_custom_check_point,
       this.is_file_required,
-      this.is_job_created,
+      required int linked_job_id,
       this.observation,
       this.observation_value_controller,
-      this.requirement});
+      this.requirement}) {
+    this.linked_job_id.value = linked_job_id;
+  }
 
   factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
       ScheduleCheckPoint(
@@ -153,7 +156,7 @@ class ScheduleCheckPoint {
           check_point_name: json["check_point_name"] ?? '',
           is_file_required: json["is_file_required"] ?? 0,
           is_custom_check_point: json["is_custom_check_point"] ?? 0,
-          is_job_created: json["is_job_created"] ?? 0,
+          linked_job_id: json["linked_job_id"] ?? 0,
           observation: json["observation"] ?? "",
           requirement: json["requirement"] ?? "",
           execution_id: json["execution_id"] ?? "",
@@ -166,7 +169,7 @@ class ScheduleCheckPoint {
         "check_point_name": check_point_name,
         "is_file_required": is_file_required,
         "is_custom_check_point": is_custom_check_point,
-        "is_job_created": is_job_created,
+        "linked_job_id": linked_job_id,
         "observation": observation,
         "requirement": requirement,
         "execution_id": execution_id
