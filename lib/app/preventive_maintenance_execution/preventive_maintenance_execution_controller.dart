@@ -20,11 +20,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   PreventiveMaintenanceExecutionPresenter
       preventiveMaintenanceExecutionPresenter;
   int scheduleId = 0;
-  RxBool isTouchable = false.obs;
+  RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
-  void toggle() {
-    isToggleOn.value = !isToggleOn.value;
-  }
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
@@ -48,6 +45,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
   void toggleTouch() {
     isTouchable.value = !isTouchable.value;
+    print(isTouchable.value);
   }
 
   Future<void> getPmtaskViewList({int? scheduleId, bool? isloading}) async {
@@ -82,7 +80,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       addObservations.add(AddObservations(
           execution_id: e!.execution_id ?? 0,
           observation: e.observation_value_controller?.text ?? "",
-          job_create: e.is_job_created ?? 0,
+          job_create: e.linked_job_id.value,
           pm_files: []));
     });
     UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(

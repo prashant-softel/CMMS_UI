@@ -20,6 +20,20 @@ class PreventiveMaintenanceExecutionContentWeb
   var controller = Get.find<PreventiveMaintenanceExecutionController>();
   @override
   Widget build(BuildContext context) {
+    Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
+      return IgnorePointer(
+          ignoring: !controller.isTouchable.value,
+          child: CustomSwitchTroggle(
+              value: defaultValue == 1 ? true : false,
+              onChanged: (value) {
+                print("object");
+                controller.isToggleOn.value = value!;
+                onCheck(value);
+
+                //  controller.toggle();
+              }));
+    }
+
     return Obx(
       () => Column(
         children: [
@@ -166,167 +180,144 @@ class PreventiveMaintenanceExecutionContentWeb
                                       minWidth: Get.width * 0.18,
                                     );
                                   }).toList(),
-                                  rows: [
-                                    ...List.generate(
-                                      controller.scheduleCheckPoints?.length ??
-                                          0,
-                                      (index) {
-                                        var scheduleCheckPointsDetails =
-                                            controller
-                                                .scheduleCheckPoints?[index];
-                                        return [
-                                          '${scheduleCheckPointsDetails?.check_point_name}',
-                                          '${scheduleCheckPointsDetails?.requirement}',
-                                          "Upload_image",
-                                          scheduleCheckPointsDetails
-                                              ?.observation_value_controller,
-                                          '${scheduleCheckPointsDetails?.is_job_created}',
-                                          // "Create_job"
-                                        ];
-                                      },
-                                    ),
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 90,
-                                      cells: record.map((value) {
-                                        return TableViewCell(
-                                          child: (value == "0" || value == "1")
-                                              ? IgnorePointer(
-                                                  ignoring: !controller
-                                                      .isTouchable.value,
-                                                  child: CustomSwitchTroggle(
-                                                      value: value == "1"
-                                                          ? controller
-                                                              .isToggleOn
-                                                              .value = true
-                                                          : controller
-                                                              .isToggleOn
-                                                              .value = false,
-                                                      onChanged: (value) {
-                                                        controller.toggle();
-                                                      }),
-                                                )
-                                              : (value == record[3])
-                                                  ? IgnorePointer(
-                                                      ignoring: !controller
-                                                          .isTouchable.value,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Container(
-                                                            width: (Get.width *
-                                                                .4),
-                                                            // padding: EdgeInsets.all(value),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                  spreadRadius:
-                                                                      1.0,
-                                                                ),
-                                                              ],
+                                  rows: true
+                                      ? controller.scheduleCheckPoints!
+                                          .map((scheduleCheckPointsDetails) =>
+                                              TableViewRow(height: 100, cells: [
+                                                TableViewCell(
+                                                    child: Text(
+                                                        "${scheduleCheckPointsDetails?.check_point_name ?? ""}")),
+                                                TableViewCell(
+                                                    child: Text(
+                                                        "${scheduleCheckPointsDetails?.requirement ?? ""}")),
+                                                TableViewCell(
+                                                  child: IgnorePointer(
+                                                    ignoring: !controller
+                                                        .isTouchable.value,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            border: Border.all(
                                                               color: ColorValues
-                                                                  .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
+                                                                  .appDarkBlueColor,
+                                                              width: 1,
                                                             ),
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              textController: value
-                                                                  as TextEditingController,
-                                                              maxLine: 5,
-                                                            )),
-                                                      ),
-                                                    )
-                                                  : (value == "Upload_image")
-                                                      ? IgnorePointer(
-                                                          ignoring: !controller
-                                                              .isTouchable
-                                                              .value,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: ColorValues
-                                                                        .appDarkBlueColor,
-                                                                    width: 1,
-                                                                  ),
+                                                          ),
+                                                          child: Icon(
+                                                              Icons.upload,
+                                                              size: 30,
+                                                              color: ColorValues
+                                                                  .whiteColor),
+                                                        ),
+                                                        Dimens.boxWidth15,
+                                                        Container(
+                                                          width: 60,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            border: Border.all(
+                                                              color: ColorValues
+                                                                  .appDarkBlueColor,
+                                                              width: 1,
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            "0 Files",
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: Styles
+                                                                .white12
+                                                                .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .displaySmall!
+                                                                  .color,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                TableViewCell(
+                                                  child: IgnorePointer(
+                                                    ignoring: !controller
+                                                        .isTouchable.value,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Container(
+                                                          width:
+                                                              (Get.width * .4),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                offset:
+                                                                    const Offset(
+                                                                  5.0,
+                                                                  5.0,
                                                                 ),
-                                                                child: Icon(
-                                                                    Icons
-                                                                        .upload,
-                                                                    size: 30,
-                                                                    color: ColorValues
-                                                                        .whiteColor),
-                                                              ),
-                                                              Dimens.boxWidth15,
-                                                              Container(
-                                                                width: 60,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              2),
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: ColorValues
-                                                                        .appDarkBlueColor,
-                                                                    width: 1,
-                                                                  ),
-                                                                ),
-                                                                child: Text(
-                                                                  "0 Files",
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: Styles
-                                                                      .white12
-                                                                      .copyWith(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .displaySmall!
-                                                                        .color,
-                                                                  ),
-                                                                ),
+                                                                blurRadius: 5.0,
+                                                                spreadRadius:
+                                                                    1.0,
                                                               ),
                                                             ],
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
                                                           ),
-                                                        )
-                                                      : Center(
                                                           child:
-                                                              Text("${value}")),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
+                                                              LoginCustomTextfield(
+                                                            textController:
+                                                                scheduleCheckPointsDetails
+                                                                        ?.observation_value_controller
+                                                                    as TextEditingController,
+                                                            maxLine: 5,
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ),
+                                                TableViewCell(
+                                                  child: Obx(() {
+                                                    return _rowItem(
+                                                        scheduleCheckPointsDetails
+                                                            ?.linked_job_id
+                                                            .value,
+                                                        onCheck: (val) {
+                                                      scheduleCheckPointsDetails
+                                                              ?.linked_job_id
+                                                              .value =
+                                                          val == true ? 1 : 0;
+                                                    });
+                                                  }),
+                                                )
+                                              ]))
+                                          .toList()
+                                      : [],
                                 ),
                               ),
                               Column(
