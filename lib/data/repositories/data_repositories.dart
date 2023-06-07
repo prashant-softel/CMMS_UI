@@ -861,6 +861,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> getAddInventoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getAddInventoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -1447,5 +1458,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
         addInventoryJsonString: addInventoryJsonString);
     return response;
+  }
+
+  Future<ResponseModel> inventoryList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.inventoryList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
   }
 }

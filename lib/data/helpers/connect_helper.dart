@@ -1281,6 +1281,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAddInventoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryDetails?id=$id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AddInventoryResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -2176,6 +2194,23 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> inventoryList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }

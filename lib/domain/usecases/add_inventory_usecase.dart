@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -24,6 +25,15 @@ class AddInventoryUsecase {
   Future<void> generateToken() async {
     return await _repository.generateToken();
   }
+
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail({
+    bool? isLoading,
+    required int id,
+  }) async =>
+      await _repository.getAddInventoryDetail(
+        id: id,
+        isLoading: isLoading ?? false,
+      );
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
