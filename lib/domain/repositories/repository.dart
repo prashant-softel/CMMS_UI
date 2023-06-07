@@ -7,6 +7,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
@@ -690,6 +691,42 @@ class Repository {
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  ///Add Inventory Details
+
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAddInventoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"AddInventorydetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final AddInventoryDetailsModel _addInventoryDetailModel =
+              addInventoryDetailModelFromJson(res.data[0]);
+
+          var responseMap = _addInventoryDetailModel;
+          print({"ViewWarrantyResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'AddInventoryDetail');
         //return '';
       }
       return null;
@@ -3508,6 +3545,34 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<List<InventoryModel>> inventoryList({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.inventoryList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var inventoryList = inventoryModelFromJson(res.data);
+        return inventoryList.reversed.toList();
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'inventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 }

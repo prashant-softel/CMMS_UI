@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -171,10 +172,19 @@ class AddInventoryController extends GetxController {
 
   Rx<int> selectedIndex = 0.obs;
 
-  ///
+  ///Add inventory Details
+  Rx<AddInventoryDetailsModel?> editAddInventoryDetailsModel =
+      AddInventoryDetailsModel().obs;
+  RxList<AddInventoryDetailsModel?>? editAddInventoryDetailsList =
+      <AddInventoryDetailsModel?>[].obs;
 
+  ///
+  int? id = 0;
   @override
   void onInit() async {
+    id = Get.arguments;
+    print('Inventory Id:$id');
+
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
 
@@ -185,6 +195,11 @@ class AddInventoryController extends GetxController {
         getInventoryStatusList(isLoading: true, facilityId: facilityId);
       });
     });
+    if (id != null) {
+      Future.delayed(Duration(seconds: 1), () {
+        getAddInventoryDetail(id: id!);
+      });
+    }
 
     Future.delayed(Duration(seconds: 1), () async {
       await getuserAccessData();
@@ -234,6 +249,56 @@ class AddInventoryController extends GetxController {
     }
 
     update(['unit_currency_list']);
+  }
+
+  Future<void> getAddInventoryDetail({required int id}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    editAddInventoryDetailsList?.value = <AddInventoryDetailsModel>[];
+
+    final _addInventoryDetails =
+        await addInventoryPresenter.getAddInventoryDetail(id: id);
+    print('Add Inventory Detail:$_addInventoryDetails');
+
+    if (_addInventoryDetails != null) {
+      editAddInventoryDetailsModel.value = _addInventoryDetails;
+      selectedBlocks.value =
+
+          ///please emplimemnt
+          // editAddInventoryDetailsModel.value?.blockName ?? '';
+          selectedTypeName.value =
+              editAddInventoryDetailsModel.value?.type ?? '';
+
+      // warrantyClaimTitleTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';
+      // warrantyClaimBriefDescTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.warranty_description ?? '';
+      // selectedEquipmentName.value =
+      //     editWarrantyClaimDetailsModel.value?.equipment_name ?? '';
+      // selectedEquipmentCategory.value =
+      //     editWarrantyClaimDetailsModel.value?.equipment_category ?? '';
+      // selectedAffectedPart.value =
+      //     editWarrantyClaimDetailsModel.value?.affected_part ?? '';
+      // failureDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
+      // affectedSerialNoTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.affected_sr_no ?? '';
+      // orderReferenceNoTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
+      // warrantyStartDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
+      // warrantyEndDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
+      // costOfReplacementTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
+      // immediateCorrectiveActionTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
+      // requestManufactureTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
+      // selectedUnitCurrency.value =
+      //     editWarrantyClaimDetailsModel.value?.currency ?? '';
+      // selectedEmployeeList.value =
+      //     editWarrantyClaimDetailsModel.value?.approver_name ?? '';
+    }
   }
 
   void getInventoryList() async {

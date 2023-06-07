@@ -14,6 +14,7 @@ import 'package:cmms/app/calibration_history/view/calibration_history_screen.dar
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
+import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
@@ -116,7 +117,6 @@ import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
 import '../warrantyType/warranty_list_binding.dart';
-
 
 // coverage:ignore-file
 
@@ -325,7 +325,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.inventoryList,
       page: InventoryListScreen.new,
-      binding: HomeBinding(),
+      binding: InventoryListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.safetyQuestionsList,
@@ -392,7 +392,7 @@ class AppPages {
       page: ViewUserDetailScreen.new,
       binding: ViewUserDetailBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.editWarrantyClaimContentWeb,
       page: EditWarrantyClaimWeb.new,
       binding: EditWarrantyClaimBinding(),
@@ -414,7 +414,6 @@ class AppPages {
       binding: BusinessTypeListBinding(),
     ),
 
-
     GetPage<dynamic>(
       name: _Paths.bloodTypeListScreen,
       page: BloodListScreen.new,
@@ -433,13 +432,11 @@ class AppPages {
       binding: StateListBinding(),
     ),
 
-
     GetPage<dynamic>(
       name: _Paths.roleListScreen,
       page: RoleListScreen.new,
       binding: RoleListBinding(),
     ),
-
 
     GetPage<dynamic>(
       name: _Paths.warrantyType,
