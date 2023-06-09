@@ -15,6 +15,8 @@ import 'package:cmms/app/create_preventive_checklist/view/create_preventive_scre
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
+import 'package:cmms/app/stock_management/stock_management_binding.dart';
+import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
@@ -191,6 +193,11 @@ class AppPages {
       name: _Paths.preventive,
       page: PreventiveScreen.new,
       binding: PreventiveBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.stockManagementDashboardScreen,
+      page: StockManagementDashboardScreen.new,
+      binding: StockManagementDashboardBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.createCheckList,

@@ -4,6 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class ManufacturarTabWidget extends StatelessWidget {
                           CustomRichText(
                               title: "   Manufacturer\n               Name"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
                               width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
@@ -91,7 +92,7 @@ class ManufacturarTabWidget extends StatelessWidget {
                         children: [
                           CustomRichText(title: "  Supplier\n      Name"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
                               width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
@@ -118,7 +119,7 @@ class ManufacturarTabWidget extends StatelessWidget {
                         children: [
                           CustomRichText(title: "Currency"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
                               width: MediaQuery.of(context).size.width / 4,
                               dropdownList: controller.unitCurrencyList,

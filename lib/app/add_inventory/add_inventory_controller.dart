@@ -260,16 +260,34 @@ class AddInventoryController extends GetxController {
     print('Add Inventory Detail:$_addInventoryDetails');
 
     if (_addInventoryDetails != null) {
-      editAddInventoryDetailsModel.value = _addInventoryDetails;
+      editAddInventoryDetailsModel.value = _addInventoryDetails[0];
       selectedBlocks.value =
 
           ///please emplimemnt
           // editAddInventoryDetailsModel.value?.blockName ?? '';
           selectedTypeName.value =
               editAddInventoryDetailsModel.value?.type ?? '';
+      assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
+      assesDiscriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.description ?? ""; //otherdata
+      warrentyDescriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.description ?? "";
+      certificateNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.description ?? ""; //otherdata
+      serialNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.serialNumber ?? "";
+      // modelNoCtrlr.text =
+      //     editAddInventoryDetailsModel.value?.model ?? ""; //otherdata
+      parentEquipmentNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.parentName ?? "";
+      costCtrlr.text =
+          editAddInventoryDetailsModel.value?.cost.toString() ?? "";
+      calibrationRemainderInTc.text = editAddInventoryDetailsModel
+              .value?.calibrationReminderDays
+              .toString() ??
+          "";
+      // modelNoCtrlr.text = editAddInventoryDetailsModel.value?.description ?? "";
 
-      // warrantyClaimTitleTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';
       // warrantyClaimBriefDescTextController.text =
       //     editWarrantyClaimDetailsModel.value?.warranty_description ?? '';
       // selectedEquipmentName.value =

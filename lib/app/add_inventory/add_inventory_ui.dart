@@ -7,6 +7,7 @@ import 'package:cmms/app/add_inventory/view/calibartion_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,7 +78,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: 'Block'),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
                                           margin: Dimens.edgeInsets16,
                                           width: MediaQuery.of(context)
                                                   .size
@@ -98,7 +99,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: "Type"),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
                                           margin: Dimens.edgeInsets16,
                                           width: MediaQuery.of(context)
                                                   .size
@@ -119,7 +120,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: "Status"),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
                                           margin: Dimens.edgeInsets16,
                                           width: MediaQuery.of(context)
                                                   .size
@@ -167,7 +168,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(
                                           title: 'Parent\nEquipment'),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
                                           margin: Dimens.edgeInsets16,
                                           width: MediaQuery.of(context)
                                                   .size
@@ -189,7 +190,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: "Category"),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
                                           margin: Dimens.edgeInsets16,
                                           width: MediaQuery.of(context)
                                                   .size
