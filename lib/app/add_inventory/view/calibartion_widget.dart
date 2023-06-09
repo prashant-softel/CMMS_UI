@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +36,7 @@ class CalibrationTabWidget extends StatelessWidget {
                               title:
                                   "          Calibration\n          Frequency"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
                               width: MediaQuery.of(context).size.width / 4,
                               controller: controller,
