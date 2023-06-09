@@ -1,16 +1,16 @@
-class StartCalibrationModel {
+class RequestCalibrationModel {
   int assetId;
   int vendorId;
   String nextCalibrationDate;
 
-  StartCalibrationModel({
+  RequestCalibrationModel({
     required this.assetId,
     required this.vendorId,
     required this.nextCalibrationDate,
   });
 
-  factory StartCalibrationModel.fromJson(Map<String, dynamic> json) =>
-      StartCalibrationModel(
+  factory RequestCalibrationModel.fromJson(Map<String, dynamic> json) =>
+      RequestCalibrationModel(
         assetId: json["asset_id"],
         vendorId: json["vendor_id"],
         nextCalibrationDate: json["next_calibration_date"],

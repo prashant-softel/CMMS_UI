@@ -2,6 +2,7 @@ import 'package:cmms/app/calibration_detail/calibration_detail_controller.dart';
 import 'package:cmms/app/home/home.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -116,16 +117,16 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width / 3.8,
-                                  child:
-                                      // DropdownWidget(
-                                      //   dropdownList: controller.inventoryNameList,
-                                      //   isValueSelected:
-                                      //       controller.isInventorySelected.value,
-                                      //   selectedValue: controller.selectedInventory.value,
-                                      //   onValueChanged: controller.onValueChanged,
-                                      // ),
+                                  child: DropdownWidget(
+                                    dropdownList: controller.inventoryNameList,
+                                    isValueSelected:
+                                        controller.isInventorySelected.value,
+                                    selectedValue:
+                                        controller.selectedInventory.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
 
-                                      LoginCustomTextfield(),
+                                  // LoginCustomTextfield(),
                                 ),
                               ],
                             ),

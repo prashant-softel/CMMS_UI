@@ -1081,13 +1081,15 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> StartCalibration({
+  Future<ResponseModel> requestCalibration({
     auth,
     bool? isLoading,
-    startcalibration,
+    requestCalibration,
   }) async {
-    var response = await connectHelper.StartCalibration(
-        auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+    var response = await connectHelper.requestCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        requestCalibration: requestCalibration);
     return response;
   }
 

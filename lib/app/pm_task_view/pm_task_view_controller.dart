@@ -1,7 +1,17 @@
 import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+
+import 'dart:ui';
+
+import 'package:flutter/rendering.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+
+import 'package:flutter/services.dart';
+import 'package:printing/printing.dart';
 
 class PreventiveMaintenanceTaskViewController extends GetxController {
   ///
@@ -20,6 +30,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   RxList<String> scheduleCheckPointTableColumns = <String>[].obs;
   RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
   HistoryLog? historyLogModel;
+  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
+
   @override
   void onInit() async {
     scheduleId = Get.arguments;
@@ -52,6 +64,33 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
           scheduleCheckPointTableColumns.add(key);
         }
       }
+    }
+  }
+
+  Future<void> printScreen() async {
+    try {
+      final RenderRepaintBoundary boundary =
+          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final imageBytes = await boundary
+          .toImage(pixelRatio: 3.0)
+          .then((image) => image.toByteData(format: ImageByteFormat.png));
+
+      if (imageBytes != null) {
+        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
+          final doc = pw.Document();
+          doc.addPage(
+            pw.Page(
+              build: (pw.Context context) {
+                return pw.Image(
+                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
+              },
+            ),
+          );
+          return doc.save();
+        });
+      }
+    } catch (e) {
+      print('Error printing: $e');
     }
   }
 }

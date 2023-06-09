@@ -25,10 +25,10 @@ class CalibrationListUsecase {
         facilityId,
         isLoading,
       );
-  Future<void> StartCalibration({
-    startcalibration,
+  Future<void> requestCalibration({
+    requestCalibration,
     bool? isLoading,
   }) async =>
-      await _repository.StartCalibration(
-          startcalibration: startcalibration, isLoading: isLoading);
+      await _repository.requestCalibration(
+          requestCalibration: requestCalibration, isLoading: isLoading);
 }

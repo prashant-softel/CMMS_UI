@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cmms/domain/models/start_calibration.dart';
+import 'package:cmms/domain/models/request_calibration_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -42,7 +42,9 @@ class CalibrationListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      getCalibrationList(facilityId, true);
+      Future.delayed(Duration(seconds: 2), () {
+        getCalibrationList(facilityId, false);
+      });
     });
     Future.delayed(Duration(seconds: 1), () {
       getVenderNameList();
@@ -109,16 +111,16 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void StartCalibration() async {
+  void requestCalibration() async {
     String _nextDueDate = nextDueDateController.text.trim();
     String _previousDate = previousDateController.text.trim();
-    StartCalibrationModel startCalibrationModel = StartCalibrationModel(
+    RequestCalibrationModel requestCalibrationModel = RequestCalibrationModel(
         vendorId: selectedvenderId,
         nextCalibrationDate: _nextDueDate,
         assetId: 27);
-    var startcalibrationJsonString = startCalibrationModel.toJson();
-    await calibrationListPresenter.StartCalibration(
-      startcalibration: startcalibrationJsonString,
+    var requestCalibrationJsonString = requestCalibrationModel.toJson();
+    await calibrationListPresenter.requestCalibration(
+      requestCalibration: requestCalibrationJsonString,
       isLoading: true,
     );
     // }

@@ -2599,20 +2599,26 @@ class Repository {
     }
   }
 
-  Future<bool> StartCalibration({bool? isLoading, startcalibration}) async {
+  Future<void> requestCalibration({bool? isLoading, requestCalibration}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.StartCalibration(
-          auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+      final res = await _dataRepository.requestCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          requestCalibration: requestCalibration);
       print({"res.data", res.data});
       if (!res.hasError) {
-        return true;
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        // return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
       }
-      return true;
+      // return true;
     } catch (error) {
       log(error.toString());
-      return false;
+      // return false;
     }
   }
 

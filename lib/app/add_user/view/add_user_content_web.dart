@@ -85,7 +85,11 @@ class AddUserContentWeb extends GetView<AddUserController> {
                       },
                       child: Text(" / USER LIST",
                           style: Styles.greyMediumLight12)),
-                  Text(" / ADD USER", style: Styles.greyMediumLight12)
+                  Text(
+                      controller.userId == null
+                          ? " / ADD USER"
+                          : " / EDIT USER",
+                      style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -101,7 +105,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           children: [
                             Text(
-                              "Add User ",
+                              controller.userId == null
+                                  ? "Add User "
+                                  : "Edit User",
                               style: Styles.blackBold16,
                             ),
                             Spacer(),

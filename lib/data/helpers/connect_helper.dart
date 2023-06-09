@@ -1578,15 +1578,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> StartCalibration({
+  Future<ResponseModel> requestCalibration({
     required String auth,
     bool? isLoading,
-    required startcalibration,
+    required requestCalibration,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Calibration/RequestCalibration',
       Request.post,
-      startcalibration,
+      requestCalibration,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
