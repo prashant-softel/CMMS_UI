@@ -182,8 +182,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                   "Equipment Category",
                                   "Equipment Name",
                                   "Serial No.",
-                                  "Calibration Certificates",
-                                  "Installation date",
                                   "Last Calibration date",
                                   "Next Due Date",
                                   "Calibration Frequency",
@@ -200,8 +198,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     controller.calibrationList?.length ?? 0,
                                     (index) {
                                       return [
-                                        '',
-                                        '',
                                         '',
                                         '',
                                         '',
@@ -231,8 +227,8 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                   "Equipment Category",
                                   "Equipment Name",
                                   "Serial No.",
-                                  "Calibration Certificates",
-                                  "Installation date",
+                                  // "Calibration Certificates",
+                                  // "Installation date",
                                   "Last Calibration date",
                                   "Next Due Date",
                                   "Calibration Frequency",
@@ -253,12 +249,12 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                       return [
                                         '${calibrationListListDetails?.category_name}',
                                         '${calibrationListListDetails?.asset_name}',
-                                        '123566',
-                                        "calibration_certificate",
-                                        'Installation Date',
+                                        '${calibrationListListDetails?.asset_serial}',
+                                        // "calibration_certificate",
+                                        // 'Installation Date',
                                         '${calibrationListListDetails?.last_calibration_date}',
-                                        "Next deu date",
-                                        'Day',
+                                        '${calibrationListListDetails?.next_calibration_due_date}',
+                                        '${calibrationListListDetails?.frequency_name}',
                                         '${calibrationListListDetails?.calibration_status}',
                                         "Action"
                                       ];
@@ -274,13 +270,25 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 TableActionButton(
                                                   color: ColorValues
                                                       .lightGreenColor,
-                                                  label: 'Start Calibration',
+                                                  label: 'Request Calibration',
                                                   onPress: () {
-                                                    startCalibration(
+                                                    requestCalibration(
                                                         equipmentName:
                                                             record[1],
-                                                        previousDate: record[5],
-                                                        nextDate: "04-04-2023");
+                                                        previousDate: record[3],
+                                                        nextDate: record[4]);
+                                                  },
+                                                ),
+                                                TableActionButton(
+                                                  color: ColorValues
+                                                      .lightGreenColor,
+                                                  label: 'Start Calibration',
+                                                  onPress: () {
+                                                    // requestCalibration(
+                                                    //     equipmentName:
+                                                    //         record[1],
+                                                    //     previousDate: record[3],
+                                                    //     nextDate: record[4]);
                                                   },
                                                 ),
                                                 TableActionButton(
@@ -434,7 +442,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
     );
   }
 
-  void startCalibration(
+  void requestCalibration(
       {required String equipmentName,
       required String previousDate,
       required String nextDate}) {
@@ -465,8 +473,10 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       content: Builder(builder: (context) {
         var height = Get.height;
         String preDate = Utility.getFormatedDate(previousDate);
+        String nextDueDate = Utility.getFormatedDate(nextDate);
+
         controller.previousDateController.text = preDate;
-        controller.nextDueDateController.text = nextDate;
+        controller.nextDueDateController.text = nextDueDate;
 
         return Obx(
           () => Container(
@@ -621,7 +631,10 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                         Dimens.boxWidth10,
                         CustomElevatedButton(
                           text: "Start",
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.requestCalibration();
+                            Get.back();
+                          },
                           backgroundColor: ColorValues.appGreenColor,
                           textColor: ColorValues.whiteColor,
                         ),
@@ -641,9 +654,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       context: context,
       cancelText: "Clear",
       confirmText: "Ok",
-      initialDate: DateTime(today.year - 18, today.month, today.day),
+      initialDate: DateTime(today.year, today.month, today.day),
       firstDate: DateTime(1900),
-      lastDate: DateTime(today.year - 18, today.month, today.day),
+      lastDate: DateTime(today.year + 18, today.month, today.day),
     );
     if (type == 1) {
       controller.previousDateController.text = date.toString().substring(0, 10);
