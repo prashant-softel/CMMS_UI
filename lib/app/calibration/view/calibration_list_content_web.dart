@@ -281,14 +281,13 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 ),
                                                 TableActionButton(
                                                   color: ColorValues
-                                                      .lightGreenColor,
-                                                  label: 'Start Calibration',
+                                                      .appDarkBlueColor,
+                                                  icon: Icons.add,
+                                                  label:
+                                                      'Add Calibration Detail',
                                                   onPress: () {
-                                                    // requestCalibration(
-                                                    //     equipmentName:
-                                                    //         record[1],
-                                                    //     previousDate: record[3],
-                                                    //     nextDate: record[4]);
+                                                    Get.toNamed(Routes
+                                                        .calibrationDetail);
                                                   },
                                                 ),
                                                 TableActionButton(
@@ -303,23 +302,36 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                   },
                                                 ),
                                                 TableActionButton(
+                                                  color: ColorValues
+                                                      .appYellowColor,
+                                                  label: 'Start Calibration',
+                                                  onPress: () {
+                                                    // requestCalibration(
+                                                    //     equipmentName:
+                                                    //         record[1],
+                                                    //     previousDate: record[3],
+                                                    //     nextDate: record[4]);
+                                                  },
+                                                ),
+
+                                                TableActionButton(
                                                   color:
                                                       ColorValues.appRedColor,
                                                   icon: Icons.delete,
                                                   label: 'Delete',
                                                   onPress: () {},
                                                 ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appLightBlueColor,
-                                                  icon: Icons
-                                                      .access_time_filled_outlined,
-                                                  label: 'History',
-                                                  onPress: () {
-                                                    controller
-                                                        .calibrationHistory();
-                                                  },
-                                                ),
+                                                // TableActionButton(
+                                                //   color: ColorValues
+                                                //       .appLightBlueColor,
+                                                //   icon: Icons
+                                                //       .access_time_filled_outlined,
+                                                //   label: 'History',
+                                                //   onPress: () {
+                                                //     controller
+                                                //         .calibrationHistory();
+                                                //   },
+                                                // ),
                                                 TableActionButton(
                                                   color:
                                                       ColorValues.appRedColor,
