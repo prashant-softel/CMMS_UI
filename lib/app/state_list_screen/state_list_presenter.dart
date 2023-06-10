@@ -18,7 +18,7 @@ class StateListPresenter {
       await statelistUsecase.getInventoryCategoryList(
         isLoading: isLoading ?? false,
       );
-  Future<List<StateModel?>?> getStateList({
+  Future<List<CountryState?>?> getStateList({
     // int? facilityId,
     int? selectedCountryId,
     // bool? isLoading,

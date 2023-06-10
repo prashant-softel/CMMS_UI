@@ -2213,4 +2213,25 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> createFacilityType({
+    required String auth,
+    bool? isLoading,
+    required facilitylistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/CreateNewFacility',
+      Request.post,
+      facilitylistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //end
 }

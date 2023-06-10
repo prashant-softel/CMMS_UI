@@ -439,12 +439,12 @@ class Repository {
 
   // Mixpanel? mixPanel;
 
-  Future<List<StateModel?>?> getStateList(int countryCode) async {
+  Future<List<CountryState?>?> getStateList(int countryCode) async {
     try {
       final res = await _dataRepository.getStateList(countryCode);
 
       if (!res.hasError) {
-        return stateFromJson(res.data);
+        return countrystateFromJson(res.data);
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getStateList');
@@ -1023,7 +1023,7 @@ class Repository {
   }
 
   Future<List<SPVListModel>> getSPVList({
-    required int? job_type_id,
+    int? job_type_id,
     required bool isLoading,
   }) async {
     try {
@@ -3590,4 +3590,28 @@ class Repository {
       return [];
     }
   }
+
+  Future<bool> createFacilityType(
+      {bool? isLoading, facilitylistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createFacilityType(
+          auth: auth,
+          isLoading: isLoading,
+          facilitylistJsonString: facilitylistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //end
 }

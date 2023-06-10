@@ -47,7 +47,7 @@ class StatelistUsecase {
         pmScheduleJsonString,
         isLoading,
       );
-  Future<List<StateModel?>?> getStateList({
+  Future<List<CountryState?>?> getStateList({
     // int? type,
     // bool? isLoading,
     int? selectedCountryId
