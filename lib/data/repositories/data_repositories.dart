@@ -1473,4 +1473,18 @@ class DataRepository extends DomainRepository {
       facilityId: facilityId,
     );
   }
+
+  Future<ResponseModel> createFacilityType({
+    auth,
+    bool? isLoading,
+    facilitylistJsonString,
+  }) async {
+    var response = await connectHelper.createFacilityType(
+        auth: auth,
+        isLoading: isLoading,
+        facilitylistJsonString: facilitylistJsonString);
+    return response;
+  }
+
+  //end
 }
