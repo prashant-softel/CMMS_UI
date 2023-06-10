@@ -370,7 +370,7 @@ class PreventiveCheckPointContentWeb
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 6 && e.view == 1)
+                              .where((e) => e.feature_id == 6 && e.view == 0)
                               .length >
                           0
                       ? Expanded(
@@ -553,7 +553,7 @@ class PreventiveCheckPointContentWeb
                                                                           e.feature_id ==
                                                                               6 &&
                                                                           e.edit ==
-                                                                              1)
+                                                                              0)
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
@@ -579,12 +579,7 @@ class PreventiveCheckPointContentWeb
                                                                             .selectedItem
                                                                             ?.requirement ??
                                                                         "";
-                                                                    controller
-                                                                        .isToggleOn
-                                                                        .value = controller.selectedItem?.is_document_required ==
-                                                                            1
-                                                                        ? true
-                                                                        : false;
+                                                                    controller.isToggleOn.value = controller.selectedItem?.is_document_required == 1 ? true : false;
                                                                   },
                                                                 )
                                                               : Container(),
@@ -595,7 +590,7 @@ class PreventiveCheckPointContentWeb
                                                                           e.feature_id ==
                                                                               6 &&
                                                                           e.delete ==
-                                                                              1)
+                                                                              0)
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
+/// DO NOT CHANGE THI FILE FOR THE TOP DROPDOWN. CREATE A NEW WIDGET.
 class DropdownWidget extends StatelessWidget {
   DropdownWidget({
     super.key,
@@ -13,6 +14,9 @@ class DropdownWidget extends StatelessWidget {
     this.isEditable,
     required this.onValueChanged,
     this.controller,
+    this.focusNode,
+    this.width,
+    this.margin,
   });
 
   String? selectedValue;
@@ -21,7 +25,11 @@ class DropdownWidget extends StatelessWidget {
   final bool? isEditable;
   Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
+  final FocusNode? focusNode;
+  double? width;
+  EdgeInsetsGeometry? margin;
 
+  ///
   @override
   Widget build(BuildContext context) {
     ///
@@ -29,6 +37,8 @@ class DropdownWidget extends StatelessWidget {
         Obx(
       () => //
           Container(
+        width: width,
+        margin: margin,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -62,6 +72,7 @@ class DropdownWidget extends StatelessWidget {
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
+            focusNode: focusNode,
             icon: Icon(
               Icons.arrow_drop_down,
               color: ColorValues.blackColor,

@@ -3,6 +3,8 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
@@ -31,43 +33,55 @@ class HomeUsecase {
     );
   }
 
+  Future<List<BlockModel?>?> getBlocksList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getBlocksList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+
+  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
+      await _repository.getTypePermitList(isLoading);
+
+  Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
+      {required bool isLoading, required int? permit_type_id}) async {
+    return _repository.getSafetyMeasureList(
+      isLoading: isLoading,
+      permit_type_id: permit_type_id,
+    );
+  }
+
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
     required int? businessType,
-   
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
       businessType: businessType,
-  
     );
   }
 
-  Future<List<CurrencyListModel>> getUnitCurrencyList({
-    required bool isLoading,
-    required int? facilityId
-   
-  }) async {
+  Future<List<CurrencyListModel>> getUnitCurrencyList(
+      {required bool isLoading, required int? facilityId}) async {
     return _repository.getUnitCurrencyList(
       isLoading: isLoading,
       facilityId: facilityId,
-  
     );
   }
 
-   Future<List<EmployeeListModel>> getEmployeeList({
-    required bool isLoading,
-    required int? facility_id
-   
-  }) async {
+  Future<List<EmployeeListModel>> getEmployeeList(
+      {required bool isLoading, required int? facility_id}) async {
     return _repository.getEmployeeList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
     );
   }
 
-   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,

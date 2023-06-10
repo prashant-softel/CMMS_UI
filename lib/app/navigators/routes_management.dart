@@ -11,4 +11,8 @@ abstract class RouteManagement {
   static void goOffAllHomScreen() {
     Get.offAllNamed<void>(Routes.home);
   }
+
+  static void goOffAllLogin() {
+    Get.offAllNamed<void>(Routes.login);
+  }
 }

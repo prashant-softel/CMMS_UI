@@ -61,6 +61,7 @@ class EquipmentCategoriesWidget extends StatelessWidget {
         child: //
             Obx(
           () => MultiSelectDialogField(
+            searchable: true,
             initialValue: //
                 controller.selectedEquipmentCategoryList
                     .map((equipmentCategory) => equipmentCategory

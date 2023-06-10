@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../domain/models/history_model.dart';
 import '../../domain/repositories/local_storage_keys.dart';
@@ -8,6 +9,7 @@ class HistoryController extends GetxController {
   ///
   var repository = Get.find<Repository>();
   var token = '';
+  Rx<double> tileHeight = 0.0.obs;
 
   ///
   @override
@@ -23,6 +25,13 @@ class HistoryController extends GetxController {
     var jobCardHistoryList =
         await repository.getJobCardHistory(moduleType, jobCardId, true);
     return jobCardHistoryList;
+  }
+
+  String formatDate(DateTime? dateTime) {
+    if (dateTime != null) {
+      return DateFormat("dd-MM-yyyy HH:mm").format(dateTime);
+    }
+    return '';
   }
 
   ///

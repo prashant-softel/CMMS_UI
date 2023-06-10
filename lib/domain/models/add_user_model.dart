@@ -18,6 +18,7 @@ class AddUserModel {
       this.role_id,
       this.zipcode,
       this.isEmployee,
+      this.facilities,
       this.credentials});
   int? id;
   String? secondaryEmail;
@@ -38,6 +39,7 @@ class AddUserModel {
   int? isEmployee;
   Credentials? credentials;
   List<AddAccessList>? add_access_list;
+  List<int>? facilities;
 
   factory AddUserModel.fromJson(Map<String, dynamic> json) => AddUserModel(
         id: json["id"],
@@ -57,6 +59,7 @@ class AddUserModel {
         zipcode: json["zipcode"],
         role_id: json["role_id"],
         isEmployee: json["isEmployee"],
+        facilities: List<int>.from(json["facilities"].map((x) => x)),
         credentials: Credentials.fromJson(json['credentials']),
         add_access_list: List<AddAccessList>.from(
             json["access_list"].map((x) => AddAccessList.fromJson(x))),
@@ -81,6 +84,7 @@ class AddUserModel {
         "role_id": role_id,
         "isEmployee": isEmployee,
         "credentials": credentials!.toJson(),
+        "facilities": List<dynamic>.from(facilities!.map((x) => x)),
         "access_list":
             List<dynamic>.from(add_access_list!.map((x) => x.toJson())),
       };

@@ -24,7 +24,7 @@ class AddUserScreen extends GetView<AddUserController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive Check Point'),
+              title: Text('Add user'),
               centerTitle: true,
               elevation: 0,
             ),

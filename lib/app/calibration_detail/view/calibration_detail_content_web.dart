@@ -2,6 +2,7 @@ import 'package:cmms/app/calibration_detail/calibration_detail_controller.dart';
 import 'package:cmms/app/home/home.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -53,7 +54,7 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                     style: Styles.greyMediumLight12),
               ),
               Text(
-                " / CALIBRATION VIEW",
+                " / CALIBRATION DETAILS",
                 style: Styles.greyMediumLight12,
               ),
             ],
@@ -73,12 +74,28 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "Calibration Details",
-                          style: Styles.blackBold16,
-                        ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Add Calibration Details",
+                              style: TextStyle(
+                                  color: ColorValues.appDarkBlueColor),
+                              // style: Styles.blackBold16,
+                            ),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: CustomElevatedButton(
+                              text: "Dispatched For Calibration",
+                              onPressed: () {},
+                              backgroundColor: ColorValues.appDarkBlueColor,
+                              textColor: ColorValues.whiteColor,
+                            ),
+                          ),
+                        ],
                       ),
                       Divider(
                         color: ColorValues.greyLightColour,
@@ -89,136 +106,551 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Equipment Name:",
-                                  style: Styles.blackBold15,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child: LoginCustomTextfield(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomRichText(
+                                            title: 'Equipment Name: '),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            child: LoginCustomTextfield(
+                                                // ishint: 'Enter Email ID',
+                                                // textController:
+                                                //     controller.loginIdCtrlr,
+                                                )),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight8,
+                                    Row(
+                                      children: [
+                                        CustomRichText(title: 'Serial No.:'),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            child: LoginCustomTextfield(
+                                                // ishint: 'Enter Email ID',
+                                                // textController:
+                                                //     controller.loginIdCtrlr,
+                                                )),
+                                      ],
+                                    ),
 
-                                  // DropdownWidget(
-                                  //   dropdownList: controller.inventoryNameList,
-                                  //   isValueSelected:
-                                  //       controller.isInventorySelected.value,
-                                  //   selectedValue: controller.selectedInventory.value,
-                                  //   onValueChanged: controller.onValueChanged,
-                                  // ),
+                                    Dimens.boxHeight8,
+                                    Row(
+                                      children: [
+                                        CustomRichText(title: 'Vender Name:'),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            child: LoginCustomTextfield(
+                                                //  ishint: 'Enter Email ID',
+                                                // textController:
+                                                //     controller.loginIdCtrlr,
+                                                )),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight8,
+                                    Row(
+                                      children: [
+                                        CustomRichText(
+                                            title: "Calibration Done Date"),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 227, 224, 224),
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                          ),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
+                                          child: LoginCustomTextfield(
+                                            textController: controller
+                                                .calibrationDaneDateController,
+                                            ontap: () {
+                                              _selectDate(context, 2);
+                                            },
+                                            widget: Icon(
+                                              Icons.calendar_month,
+                                              color: ColorValues.greyLightColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    // Dimens.boxHeight8,
+                                    // Row(
+                                    //   children: [
+                                    //     CustomRichText(title: 'Vender Name:'),
+                                    //     Dimens.boxWidth10,
+                                    //     Container(
+                                    //         decoration: BoxDecoration(
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(10),
+                                    //           border: Border.all(
+                                    //             color: Color.fromARGB(
+                                    //                 255, 227, 224, 224),
+                                    //             width: 1,
+                                    //           ),
+                                    //           boxShadow: [
+                                    //             BoxShadow(
+                                    //               color: Colors.black26,
+                                    //               offset: const Offset(
+                                    //                 5.0,
+                                    //                 5.0,
+                                    //               ),
+                                    //               blurRadius: 5.0,
+                                    //               spreadRadius: 1.0,
+                                    //             ),
+                                    //             BoxShadow(
+                                    //               color: ColorValues.whiteColor,
+                                    //               offset:
+                                    //                   const Offset(0.0, 0.0),
+                                    //               blurRadius: 0.0,
+                                    //               spreadRadius: 0.0,
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //         width: (MediaQuery.of(context)
+                                    //                 .size
+                                    //                 .width *
+                                    //             .2),
+                                    //         child: LoginCustomTextfield(
+                                    //             //  ishint: 'Enter Email ID',
+                                    //             // textController:
+                                    //             //     controller.loginIdCtrlr,
+                                    //             )),
+                                    //   ],
+                                    // ),
+                                    // Dimens.boxHeight8,
+                                  ],
                                 ),
-                                Dimens.boxWidth10,
-                                Text(
-                                  "Equipment Category:",
-                                  style: Styles.blackBold15,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child:
-                                      // DropdownWidget(
-                                      //   dropdownList: controller.inventoryNameList,
-                                      //   isValueSelected:
-                                      //       controller.isInventorySelected.value,
-                                      //   selectedValue: controller.selectedInventory.value,
-                                      //   onValueChanged: controller.onValueChanged,
-                                      // ),
+                                Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomRichText(
+                                            title: 'Equipment Category:'),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            child: Expanded(
+                                              child: LoginCustomTextfield(
+                                                  //  ishint: 'Enter Email ID',
+                                                  // textController:
+                                                  //     controller.secandoryIdCtrlr,
+                                                  ),
+                                            )),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight8,
+                                    Row(
+                                      children: [
+                                        CustomRichText(
+                                            title: 'Last Calibration Date:'),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            child: LoginCustomTextfield(
+                                                //  ishint: 'Enter First Name',
+                                                // textController:
+                                                //     controller.firstNameCtrlr,
+                                                )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 70,
+                                    ),
+                                    Row(
+                                      children: [
+                                        CustomRichText(title: "Recieved date:"),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 227, 224, 224),
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                          ),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
+                                          child: LoginCustomTextfield(
+                                            textController: controller
+                                                .recievedDateController,
+                                            ontap: () {
+                                              _selectDate(context, 3);
+                                            },
+                                            widget: Icon(
+                                              Icons.calendar_month,
+                                              color: ColorValues.greyLightColor,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            Dimens.boxHeight8,
 
-                                      LoginCustomTextfield(),
-                                ),
-                              ],
-                            ),
-                            Dimens.boxHeight10,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  "Serial No.:",
-                                  style: Styles.blackBold15,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child: LoginCustomTextfield(),
-                                ),
-                                Dimens.boxWidth10,
-                                Text(
-                                  "Last Calibration Date:",
-                                  style: Styles.blackBold15,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child: LoginCustomTextfield(
-                                    textController: controller
-                                        .lastCalibrationDateController,
-                                    ontap: () {
-                                      _selectDate(context, 1);
-                                    },
-                                    widget: Icon(
-                                      Icons.calendar_month,
-                                      color: ColorValues.greyLightColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Dimens.boxHeight10,
-                            Row(
-                              children: [
-                                Text(
-                                  "Vender Name:",
-                                  style: Styles.blackBold15,
-                                ),
-                                Dimens.boxWidth10,
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child: LoginCustomTextfield(),
-                                ),
-                              ],
-                            ),
-                            Dimens.boxHeight10,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CustomRichText(title: "Calibration Done Date"),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child: LoginCustomTextfield(
-                                    textController: controller
-                                        .calibrationDaneDateController,
-                                    ontap: () {
-                                      _selectDate(context, 2);
-                                    },
-                                    widget: Icon(
-                                      Icons.calendar_month,
-                                      color: ColorValues.greyLightColor,
-                                    ),
-                                  ),
-                                ),
-                                Dimens.boxWidth10,
-                                CustomRichText(title: "Recieved date:"),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.8,
-                                  child: LoginCustomTextfield(
-                                    textController:
-                                        controller.recievedDateController,
-                                    ontap: () {
-                                      _selectDate(context, 3);
-                                    },
-                                    widget: Icon(
-                                      Icons.calendar_month,
-                                      color: ColorValues.greyLightColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Dimens.boxHeight10,
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //   children: [
+                            //     Text(
+                            //       "Equipment Name:",
+                            //       style: Styles.blackBold15,
+                            //     ),
+                            //     SizedBox(
+                            //       width:
+                            //           MediaQuery.of(context).size.width / 3.8,
+                            //       child: LoginCustomTextfield(),
+
+                            //       // DropdownWidget(
+                            //       //   dropdownList: controller.inventoryNameList,
+                            //       //   isValueSelected:
+                            //       //       controller.isInventorySelected.value,
+                            //       //   selectedValue: controller.selectedInventory.value,
+                            //       //   onValueChanged: controller.onValueChanged,
+                            //       // ),
+                            //     ),
+                            //     Dimens.boxWidth10,
+                            //     Text(
+                            //       "Equipment Category:",
+                            //       style: Styles.blackBold15,
+                            //     ),
+                            //     Container(
+                            //       decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(10),
+                            //         border: Border.all(
+                            //           color: Color.fromARGB(255, 227, 224, 224),
+                            //           width: 1,
+                            //         ),
+                            //         boxShadow: [
+                            //           BoxShadow(
+                            //             color: Colors.black26,
+                            //             offset: const Offset(
+                            //               5.0,
+                            //               5.0,
+                            //             ),
+                            //             blurRadius: 5.0,
+                            //             spreadRadius: 1.0,
+                            //           ),
+                            //           BoxShadow(
+                            //             color: ColorValues.whiteColor,
+                            //             offset: const Offset(0.0, 0.0),
+                            //             blurRadius: 0.0,
+                            //             spreadRadius: 0.0,
+                            //           ),
+                            //         ],
+                            //       ),
+                            //       width:
+                            //           (MediaQuery.of(context).size.width * .2),
+                            //       child:
+                            //           //DropdownWidget(
+                            //           //     dropdownList: controller.inventoryNameList,
+                            //           //     isValueSelected:
+                            //           //         controller.isInventorySelected.value,
+                            //           //     selectedValue:
+                            //           //         controller.selectedInventory.value,
+                            //           //     onValueChanged: controller.onValueChanged,
+                            //           //   ),
+
+                            //           LoginCustomTextfield(),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Dimens.boxHeight10,
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //   children: [
+                            //     Text(
+                            //       "Serial No.:",
+                            //       style: Styles.blackBold15,
+                            //     ),
+                            //     SizedBox(
+                            //       width:
+                            //           MediaQuery.of(context).size.width / 3.8,
+                            //       child: LoginCustomTextfield(),
+                            //     ),
+                            //     Dimens.boxWidth10,
+                            //     Text(
+                            //       "Last Calibration Date:",
+                            //       style: Styles.blackBold15,
+                            //     ),
+                            //     SizedBox(
+                            //       width:
+                            //           MediaQuery.of(context).size.width / 3.8,
+                            //       child: LoginCustomTextfield(
+                            //         textController: controller
+                            //             .lastCalibrationDateController,
+                            //         ontap: () {
+                            //           _selectDate(context, 1);
+                            //         },
+                            //         widget: Icon(
+                            //           Icons.calendar_month,
+                            //           color: ColorValues.greyLightColor,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Dimens.boxHeight10,
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       "Vender Name:",
+                            //       style: Styles.blackBold15,
+                            //     ),
+                            //     Dimens.boxWidth10,
+                            //     SizedBox(
+                            //       width:
+                            //           MediaQuery.of(context).size.width / 3.8,
+                            //       child: LoginCustomTextfield(),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Dimens.boxHeight10,
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //   children: [
+                            //     CustomRichText(title: "Calibration Done Date"),
+                            //     SizedBox(
+                            //       width:
+                            //           MediaQuery.of(context).size.width / 3.8,
+                            //       child: LoginCustomTextfield(
+                            //         textController: controller
+                            //             .calibrationDaneDateController,
+                            //         ontap: () {
+                            //           _selectDate(context, 2);
+                            //         },
+                            //         widget: Icon(
+                            //           Icons.calendar_month,
+                            //           color: ColorValues.greyLightColor,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     Dimens.boxWidth10,
+                            //     CustomRichText(title: "Recieved date:"),
+                            //     SizedBox(
+                            //       width:
+                            //           MediaQuery.of(context).size.width / 3.8,
+                            //       child: LoginCustomTextfield(
+                            //         textController:
+                            //             controller.recievedDateController,
+                            //         ontap: () {
+                            //           _selectDate(context, 3);
+                            //         },
+                            //         widget: Icon(
+                            //           Icons.calendar_month,
+                            //           color: ColorValues.greyLightColor,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Dimens.boxHeight10,
                             Row(
                               children: [
                                 Text(
@@ -242,6 +674,7 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                 ),
                               ],
                             ),
+
                             _tabledata(),
                             Dimens.boxHeight10,
                             Row(

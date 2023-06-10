@@ -4,8 +4,11 @@ import 'dart:typed_data';
 
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
@@ -15,10 +18,15 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -31,10 +39,14 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
+import 'package:cmms/domain/models/warranty_type_model.dart';
+import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -44,6 +56,7 @@ import '../../app/navigators/app_pages.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
 import '../models/blood_model.dart';
+import '../models/business_type_model.dart';
 import '../models/city_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
@@ -58,6 +71,7 @@ import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/user_list_model.dart';
+import '../models/warranty_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -370,6 +384,50 @@ class Repository {
     }
   }
 
+  //Create Warranty claim
+  Future<Map<String, dynamic>> createWarrantyClaim(
+    createWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWarrantyClaim(
+        auth: auth,
+        createWarrantyClaim: createWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Warranty Claim: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -386,7 +444,7 @@ class Repository {
       final res = await _dataRepository.getStateList(countryCode);
 
       if (!res.hasError) {
-        return stateFromJson(res.data);
+        return countrystateFromJson(res.data);
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getStateList');
@@ -457,6 +515,38 @@ class Repository {
     }
   }
 
+  Future<List<InventoryModel2>> getAffectedPartList({
+    required int? facilityId,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAffectedPartList(
+        facilityId: facilityId,
+        blockId: blockId,
+        categoryIds: categoryIds,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var affectedPartList = inventoryModel2FromJson(res.data);
+        return affectedPartList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getAffectedPartList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<BusinessListModel>> getBusinessList({
     required int? businessType,
     // int? blockId,
@@ -482,6 +572,58 @@ class Repository {
 //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ManufacturerModel>> getmanufacturerList({
+    required int? BusinessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getmanufacturerList(
+        BusinessType: BusinessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = manufacturerListModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SupplierNameModel>> getSupplierList({
+    required int? BusinessType,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getSupplierList(
+        BusinessType: BusinessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = supplierNameListModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
         return [];
       }
     } catch (error) {
@@ -521,6 +663,85 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
+    int? wc_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getViewWarrantyClaimDetail(
+        auth: auth,
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"ViewWarrantyClaimdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final ViewWarrantyClaimModel _viewWarrantyClaimDetailModel =
+              viewWarrantyClaimDetailModelFromJson(res.data);
+
+          var responseMap = _viewWarrantyClaimDetailModel;
+          print({"ViewWarrantyResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  ///Add Inventory Details
+
+  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAddInventoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"AddInventorydetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final jsonPreventiveCheckPointModels = jsonDecode(res.data);
+
+          final List<AddInventoryDetailsModel> _addInventoryDetailModel =
+              jsonPreventiveCheckPointModels
+                  .map<AddInventoryDetailsModel>((m) =>
+                      AddInventoryDetailsModel.fromJson(
+                          Map<String, dynamic>.from(m)))
+                  .toList();
+
+          return _addInventoryDetailModel;
+          // final AddInventoryDetailsModel _addInventoryDetailModel =
+          //     addInventoryDetailModelFromJson(res.data[0]);
+
+          // var responseMap = _addInventoryDetailModel;
+          // print({"ViewWarrantyResponseData", responseMap});
+          // return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'AddInventoryDetail');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+      return [];
     }
   }
 
@@ -800,8 +1021,9 @@ class Repository {
       return [];
     }
   }
+
   Future<List<SPVListModel>> getSPVList({
-    required int? job_type_id,
+    int? job_type_id,
     required bool isLoading,
   }) async {
     try {
@@ -1771,6 +1993,28 @@ class Repository {
     }
   }
 
+  Future<bool> createModuleListNumber(
+      {bool? isLoading, modulelistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createModuleList(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList(
     int? type,
     int? facilityId,
@@ -1807,12 +2051,11 @@ class Repository {
     }
   }
 
-
   Future<List<ModuleListModel?>?> getModuleList(
-      int? type,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getModuleList(
@@ -1826,11 +2069,10 @@ class Repository {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<ModuleListModel> _ModuleListModelList =
-        jsonModuleListModelModels
-            .map<ModuleListModel>((m) =>
-            ModuleListModel.fromJson(
-                Map<String, dynamic>.from(m)))
-            .toList();
+            jsonModuleListModelModels
+                .map<ModuleListModel>((m) =>
+                    ModuleListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _ModuleListModelList;
       } else {
@@ -1845,7 +2087,7 @@ class Repository {
   }
 
   Future<List<InventoryTypeListModel?>?> getInventoryTypeList(
-    int? type,
+    // int? type,
     int? facilityId,
     bool? isLoading,
   ) async {
@@ -1854,7 +2096,7 @@ class Repository {
       final res = await _dataRepository.getInventoryTypeList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        type: type,
+        // type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -1880,7 +2122,6 @@ class Repository {
   }
 
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList(
-    int? type,
     int? facilityId,
     bool? isLoading,
   ) async {
@@ -1889,7 +2130,6 @@ class Repository {
       final res = await _dataRepository.getInventoryStatusList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -2359,20 +2599,26 @@ class Repository {
     }
   }
 
-  Future<bool> StartCalibration({bool? isLoading, startcalibration}) async {
+  Future<void> requestCalibration({bool? isLoading, requestCalibration}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.StartCalibration(
-          auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+      final res = await _dataRepository.requestCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          requestCalibration: requestCalibration);
       print({"res.data", res.data});
       if (!res.hasError) {
-        return true;
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        // return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
       }
-      return true;
+      // return true;
     } catch (error) {
       log(error.toString());
-      return false;
+      // return false;
     }
   }
 
@@ -2462,7 +2708,7 @@ class Repository {
         print({"object", _PmTaskListModelList});
         return _PmTaskListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
+        Utility.showDialog(res.errorCode.toString() + 'getPmTaskList');
         return [];
       }
     } catch (error) {
@@ -2520,6 +2766,8 @@ class Repository {
       if (!res.hasError) {
         final PmtaskViewModel _permitDetailsModel =
             pmtaskViewModelFromJson(res.data);
+        print({"respqwe", _permitDetailsModel});
+
         return _permitDetailsModel;
       } //
       else {
@@ -2577,6 +2825,25 @@ class Repository {
     }
   }
 
+  Future<void> deleteModulelist(Object module_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteModulelist(
+        auth: auth,
+        module_id: module_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<bool> updateChecklistNumber({
     bool? isLoading,
     checklistJsonString,
@@ -2587,6 +2854,31 @@ class Repository {
         auth: auth,
         isLoading: isLoading,
         checklistJsonString: checklistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateModulelistNumber({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateModulelistNumber(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
       );
       print(res.data);
       if (!res.hasError) {
@@ -2768,6 +3060,89 @@ class Repository {
     }
   }
 
+  Future<GetNotificationModel?> getRoleNotificationList(
+    int? roleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoleNotificationList(
+        auth: auth,
+        roleId: roleId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final GetNotificationModel _getNotificationModel =
+            getNotificationModelFromJson(res.data);
+        return _getNotificationModel;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getRoleNotificationList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetAccessLevelByIdModel?> getUserAccessListById(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserAccessListById(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final GetAccessLevelByIdModel _accessLevelModel =
+            getaccessLevelModelFromJson(res.data);
+        return _accessLevelModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getUserAccessListById');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetNotificationByUserIdModel?> getUserNotificationListById(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserNotificationListById(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final GetNotificationByUserIdModel _getNotificationByUserIdModel =
+            getNotificationByUserIdModelFromJson(res.data);
+        return _getNotificationByUserIdModel;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getUserNotificationListById');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   Future<List<RoleModel?>?> getRoleList(
     bool? isLoading,
   ) async {
@@ -2892,6 +3267,9 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
+        Get.offNamed(Routes.userList);
+
+        //   print("hellooooo");
         return true;
       } //
       else {
@@ -2925,5 +3303,315 @@ class Repository {
     }
   }
 
+  Future<List<WarrantyTypeModel?>?> getWarrantyTypeList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyTypeList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsongetWarrantyTypeList = jsonDecode(res.data);
+        final List<WarrantyTypeModel> _warrantyTypeListModelList =
+            jsongetWarrantyTypeList
+                .map<WarrantyTypeModel>(
+                  (m) => WarrantyTypeModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _warrantyTypeListModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getWarrantyTypeList');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<dynamic>> updatePmExecution(
+    pmExecutionJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePmExecution(
+        auth: auth,
+        pmExecutionJsonString: pmExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updatePmExecution');
+      }
+      return [];
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<AddUserModel?> uploadImge(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.uploadImge(
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        isLoading: isLoading,
+      );
+      if (res != null) {
+        print("file upload");
+        return res;
+      } //
+      else {
+        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   ///
+  Future<List<WarrantyUsageTermListModel?>?> getWarrantyUsageTermList(
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyUsageTermList(
+        auth: auth,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsongetWarrantyUsageTermList = jsonDecode(res.data);
+        final List<WarrantyUsageTermListModel> _warrantyUsageTermListModelList =
+            jsongetWarrantyUsageTermList
+                .map<WarrantyUsageTermListModel>(
+                  (m) => WarrantyUsageTermListModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _warrantyUsageTermListModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getWarrantyTypeList');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<WarrantyModel?>?> getWarrantyList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonModuleListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<WarrantyModel> _ModuleListModelList =
+            jsonModuleListModelModels
+                .map<WarrantyModel>(
+                    (m) => WarrantyModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _ModuleListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<BusinessTypeModel>> getBusinessTypeList({
+    required int? businessType,
+    // int? blockId,
+    // required String categoryIds,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBusinessTypeList(
+        businessType: businessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = BusinessTypeModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<bool> createBusinessListNumber(
+      {bool? isLoading, businesslistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createBusinessList(
+          auth: auth,
+          isLoading: isLoading,
+          businesslistJsonString: businesslistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<Map<String, dynamic>> saveNotification(
+    saveNotificationJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.saveNotification(
+        auth: auth,
+        saveNotificationJsonString: saveNotificationJsonString,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'saveNotification');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<bool> AddInventory({bool? isLoading, addInventoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.AddInventory(
+          auth: auth,
+          isLoading: isLoading,
+          addInventoryJsonString: addInventoryJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+
+        Get.offAndToNamed(Routes.inventoryList);
+
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<List<InventoryModel>> inventoryList({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.inventoryList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var inventoryList = inventoryModelFromJson(res.data);
+        return inventoryList.reversed.toList();
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'inventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<bool> createFacilityType(
+      {bool? isLoading, facilitylistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createFacilityType(
+          auth: auth,
+          isLoading: isLoading,
+          facilitylistJsonString: facilitylistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //end
 }

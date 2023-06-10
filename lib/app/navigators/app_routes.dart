@@ -15,6 +15,8 @@ abstract class Routes {
   static const facility = _Paths.facility;
   static const login = _Paths.login;
   static const preventive = _Paths.preventive;
+  static const stockManagementDashboardScreen =
+      _Paths.stockManagementDashboardScreen;
   static const createCheckList = _Paths.createCheckList;
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
@@ -57,6 +59,16 @@ abstract class Routes {
   static const addUser = _Paths.addUser;
   static const viewUserDetail = _Paths.viewUserDetail;
   static const moduleTypeListScreen = _Paths.moduleTypeListScreen;
+  static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
+  static const addInventoryScreen = _Paths.addInventoryScreen;
+  static const bloodTypeListScreen = _Paths.bloodTypeListScreen;
+  static const countryTypeListScreen = _Paths.countryTypeListScreen;
+  static const stateTypeListScreen = _Paths.stateTypeListScreen;
+  static const businessListScreen = _Paths.businessListScreen;
+  static const businessTypeListScreen = _Paths.businessTypeListScreen;
+  static const frequencyListScreen = _Paths.frequencyListScreen;
+  static const roleListScreen = _Paths.roleListScreen;
+  static const warrantyType = _Paths.warrantyType;
 }
 
 abstract class _Paths {
@@ -71,6 +83,7 @@ abstract class _Paths {
   static const jobCardList = '/job-card-list-screen';
   static const login = '/login-screen';
   static const preventive = '/preventive-maintenance';
+  static const stockManagementDashboardScreen = '/stock-management-dashboard';
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
@@ -113,7 +126,16 @@ abstract class _Paths {
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
   static const moduleTypeListScreen = '/module-Type-List-Screen';
-
+  static const editWarrantyClaimContentWeb = '/edit-warranty-claim-content-web';
+  static const bloodTypeListScreen = '/blood-Type-List-Screen';
+  static const countryTypeListScreen = '/country-Type-List-Screen';
+  static const stateTypeListScreen = '/state-Type-List-Screen';
+  static const businessListScreen = '/business-List-Screen';
+  static const businessTypeListScreen = '/business-Type-List-Screen';
+  static const frequencyListScreen = '/frequency-Type-List-Screen';
+  static const roleListScreen = '/role-Type-List-Screen';
+  static const warrantyType = '/warranty-Type-List-Screen';
+  static const addInventoryScreen = '/add-inventory-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

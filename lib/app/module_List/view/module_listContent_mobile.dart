@@ -294,7 +294,7 @@ class ModuleListContentMobile
       ),
       //
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.createChecklist(),
+        onPressed: () => controller.createModulelist(),
         backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,

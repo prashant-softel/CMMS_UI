@@ -1,7 +1,15 @@
+import 'dart:typed_data';
+
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
+import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/access_level_model.dart';
+import '../models/add_user_model.dart';
 import '../models/blood_model.dart';
 import '../models/city_model.dart';
 import '../models/role_model.dart';
@@ -43,6 +51,30 @@ class AddUserUsecase {
         roleId,
         isLoading,
       );
+  Future<GetNotificationModel?> getRoleNotificationList({
+    int? roleId,
+    bool? isLoading,
+  }) async =>
+      await repository.getRoleNotificationList(
+        roleId,
+        isLoading,
+      );
+  Future<GetAccessLevelByIdModel?> getUserAccessListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getUserAccessListById(
+        userId,
+        isLoading,
+      );
+  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getUserNotificationListById(
+        userId,
+        isLoading,
+      );
   Future<Map<String, dynamic>> saveAccessLevel({
     accessLevelJsonString,
     bool? isLoading,
@@ -71,4 +103,28 @@ class AddUserUsecase {
   }) async =>
       await repository.updateUser(
           isLoading: isLoading, adduserJsonString: adduserJsonString);
+
+  Future<AddUserModel?> uploadImge(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await repository.uploadImge(
+      fileBytes,
+      fileName,
+      isLoading,
+    );
+    //  return true;
+  }
+
+  Future<Map<String, dynamic>> saveNotification({
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.saveNotification(
+        saveNotificationJsonString,
+        isLoading,
+      );
+  Future<List<FacilityModel?>?> getFacilityList({
+    required bool isLoading,
+  }) async {
+    return repository.getFacilityList(isLoading);
+  }
 }

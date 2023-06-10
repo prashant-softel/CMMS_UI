@@ -351,6 +351,12 @@ abstract class Dimens {
     sixteen,
     zero,
   );
+  static EdgeInsets edgeInsets16_4_16_4 = EdgeInsets.fromLTRB(
+    sixteen,
+    zero,
+    sixteen,
+    zero,
+  );
 
   static EdgeInsets edgeInsets16_10_16_0 = EdgeInsets.fromLTRB(
     sixteen,
@@ -1336,6 +1342,7 @@ abstract class Dimens {
   static SizedBox boxHeight3 = SizedBox(height: three);
   static SizedBox boxHeight4 = SizedBox(height: four);
   static SizedBox boxHeight5 = SizedBox(height: five);
+  static SizedBox boxHeight75 = SizedBox(height: fiftyFive);
   static SizedBox boxHeight8 = SizedBox(height: eight);
   static SizedBox boxHeight9 = SizedBox(height: nine);
   static SizedBox boxHeight10 = SizedBox(height: ten);

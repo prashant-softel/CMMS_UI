@@ -364,6 +364,21 @@ class AddInventory extends StatelessWidget {
                             ),
                           ],
                         ),
+                        Dimens.boxHeight15,
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Dimens.boxHeight30,
                       ],
                     ),
                   ),

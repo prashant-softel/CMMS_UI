@@ -3,6 +3,8 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
 import '../../domain/models/facility_model.dart';
@@ -30,7 +32,21 @@ class HomePresenter {
     );
   }
 
-   Future<List<BusinessListModel>> getBusinessList({
+  Future<List<BlockModel?>?> getBlocksList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await homeUsecase.getBlocksList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<List<TypePermitModel?>?> getTypePermitList() async =>
+      await homeUsecase.getTypePermitList(true);
+
+  Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
     required int? businessType,
   }) async {
@@ -50,7 +66,7 @@ class HomePresenter {
     );
   }
 
-   Future<List<EmployeeListModel>> getEmployeeList({
+  Future<List<EmployeeListModel>> getEmployeeList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -60,15 +76,14 @@ class HomePresenter {
     );
   }
 
-   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await homeUsecase.getInventoryCategoryList(
-      );
+      await homeUsecase.getInventoryCategoryList();
 
-  Future<List<WarrantyClaimModel>>getWarrantyClaimList({
+  Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,
     required int? facilityId,
     int? blockId,
