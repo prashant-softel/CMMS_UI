@@ -17,6 +17,9 @@ import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_we
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
+import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
+import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_screen.dart';
+import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_web.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
@@ -198,6 +201,11 @@ class AppPages {
       name: _Paths.stockManagementDashboardScreen,
       page: StockManagementDashboardScreen.new,
       binding: StockManagementDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.stockManagementGoodsOrdersScreen,
+      page: StockManagementGoodsOrdersScreen.new,
+      binding: StockManagementGoodsOrdersBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.createCheckList,

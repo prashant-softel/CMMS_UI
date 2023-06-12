@@ -17,6 +17,8 @@ abstract class Routes {
   static const preventive = _Paths.preventive;
   static const stockManagementDashboardScreen =
       _Paths.stockManagementDashboardScreen;
+  static const stockManagementGoodsOrdersScreen =
+      _Paths.stockManagementGoodsOrdersScreen;
   static const createCheckList = _Paths.createCheckList;
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
@@ -84,6 +86,9 @@ abstract class _Paths {
   static const login = '/login-screen';
   static const preventive = '/preventive-maintenance';
   static const stockManagementDashboardScreen = '/stock-management-dashboard';
+  static const stockManagementGoodsOrdersScreen =
+      '/stock-management-goods-orders-dashboard';
+
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
