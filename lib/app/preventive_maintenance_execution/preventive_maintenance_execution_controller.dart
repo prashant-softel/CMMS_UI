@@ -1,3 +1,9 @@
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -14,20 +20,18 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   PreventiveMaintenanceExecutionPresenter
       preventiveMaintenanceExecutionPresenter;
   int scheduleId = 0;
-  RxBool isTouchable = false.obs;
+  RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
-  void toggle() {
-    isToggleOn.value = !isToggleOn.value;
-  }
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
-  RxList<ScheduleCheckList?>? scheduleCheckList = <ScheduleCheckList?>[].obs;
-  ScheduleCheckList? scheduleCheckListModel;
+  RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
+      <ScheduleCheckPoint?>[].obs;
+  ScheduleCheckPoint? scheduleCheckPointsModel;
   PaginationController schedulePaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  RxList<String> scheduleCheckListTableColumns = <String>[].obs;
+  RxList<String> scheduleCheckPointsTableColumns = <String>[].obs;
   RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
   HistoryLog? historyLogModel;
   @override
@@ -41,6 +45,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
   void toggleTouch() {
     isTouchable.value = !isTouchable.value;
+    print(isTouchable.value);
   }
 
   Future<void> getPmtaskViewList({int? scheduleId, bool? isloading}) async {
@@ -51,19 +56,19 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       pmtaskViewModel.value = _permitDetails;
 
       // print({"werr", pmtaskViewModel.value?.category_name});
-      scheduleCheckList!.value = _permitDetails.schedule_check_list ?? [];
+      scheduleCheckPoints!.value = _permitDetails.schedule_check_points ?? [];
       historyLog!.value = _permitDetails.history_log ?? [];
 
       schedulePaginationController = PaginationController(
-        rowCount: scheduleCheckList?.length ?? 0,
+        rowCount: scheduleCheckPoints?.length ?? 0,
         rowsPerPage: 10,
       );
-      if (scheduleCheckList != null && scheduleCheckList!.isNotEmpty) {
-        scheduleCheckListModel = scheduleCheckList![0];
-        var scheduleCheckListJson = scheduleCheckListModel?.toJson();
-        scheduleCheckListTableColumns.value = <String>[];
-        for (var key in scheduleCheckListJson?.keys.toList() ?? []) {
-          scheduleCheckListTableColumns.add(key);
+      if (scheduleCheckPoints != null && scheduleCheckPoints!.isNotEmpty) {
+        scheduleCheckPointsModel = scheduleCheckPoints![0];
+        var scheduleCheckPointsJson = scheduleCheckPointsModel?.toJson();
+        scheduleCheckPointsTableColumns.value = <String>[];
+        for (var key in scheduleCheckPointsJson?.keys.toList() ?? []) {
+          scheduleCheckPointsTableColumns.add(key);
         }
       }
     }
@@ -71,15 +76,15 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
   void updatePmExecution() async {
     List<AddObservations> addObservations = <AddObservations>[];
-    scheduleCheckList?.forEach((e) {
+    scheduleCheckPoints?.forEach((e) {
       addObservations.add(AddObservations(
           execution_id: e!.execution_id ?? 0,
-          observation: e.observation ?? "",
-          job_create: e.is_job_created ?? 0,
+          observation: e.observation_value_controller?.text ?? "",
+          job_create: e.linked_job_id.value,
           pm_files: []));
     });
     UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(
-        schedule_id: scheduleId, add_observations: addObservations);
+        schedule_id: 2444, add_observations: addObservations);
     var pmExecutionJsonString = updatePmExecutionMdel.toJson();
     print({"pmExecutionJsonString", pmExecutionJsonString});
     List<dynamic>? responsePmScheduleCreated =
@@ -87,9 +92,75 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       pmExecutionJsonString: pmExecutionJsonString,
       isLoading: true,
     );
-    if (responsePmScheduleCreated == []) {
-      Fluttertoast.showToast(
-          msg: "PM Schedule Successfully...", fontSize: 16.0);
+    if (responsePmScheduleCreated != null) {
+      _updatedailog();
+      // Fluttertoast.showToast(
+      //     msg: "PM Schedule Successfully...", fontSize: 16.0);
     }
+  }
+
+  void _updatedailog() {
+    Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      insetPadding: Dimens.edgeInsets10_0_10_0,
+      contentPadding: EdgeInsets.zero,
+      title: Column(
+        children: [
+          Text(
+            'PM Execution Submitted',
+            textAlign: TextAlign.center,
+            style: Styles.green700,
+          ),
+          Divider(
+            color: ColorValues.greyColor,
+          )
+        ],
+      ),
+      content: Builder(builder: (context) {
+        var height = Get.height;
+
+        return Container(
+          // margin: Dimens.edgeInsets15,
+          // padding: Dimens.edgeInsets25,
+          height: height / 7,
+          width: double.infinity,
+
+          child: Column(
+            children: [
+              RichText(
+                text: TextSpan(
+                    text: 'PM Execution Submitted with',
+                    style: Styles.blue700,
+                    children: <TextSpan>[
+                      TextSpan(text: ' \n     Code', style: Styles.blue700),
+                      TextSpan(
+                        text: '  2444',
+                        style: Styles.redBold15,
+                      ),
+                    ]),
+              ),
+              Dimens.boxHeight12,
+              //  Text("PM Execution Submitted with code PMSC87456"),
+              Container(
+                height: 40,
+                child: CustomElevatedButton(
+                  text: "PM Execution View",
+                  onPressed: () {
+                    Get.toNamed(
+                      Routes.pmExecutionView,
+                    );
+                  },
+                  backgroundColor: ColorValues.appDarkBlueColor,
+                  textColor: ColorValues.whiteColor,
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+      actions: [],
+    ));
   }
 }

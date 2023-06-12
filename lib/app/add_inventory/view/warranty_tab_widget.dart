@@ -4,6 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,9 @@ class WarrantyTabWidget extends StatelessWidget {
                         children: [
                           CustomRichText(title: "Warranty Type"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList: controller.warrantyNameList,
                               isValueSelected:
                                   controller.isWarrentyNameSelected.value,
@@ -53,7 +56,9 @@ class WarrantyTabWidget extends StatelessWidget {
                               title:
                                   "          Warranty\n           Usages  \n     Term Type"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
                                   controller.warrantyUsageTermNameList,
                               isValueSelected: controller
@@ -68,7 +73,9 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "    Description"),
-                          CustomTextFieldForInventory(),
+                          CustomTextFieldForInventory(
+                              textController:
+                                  controller.warrentyDescriptionCtrlr),
                         ],
                       ),
                     ],
@@ -79,7 +86,9 @@ class WarrantyTabWidget extends StatelessWidget {
                         children: [
                           CustomRichText(title: "Warranty Provider"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               dropdownList:
                                   controller.manufacturerModelNameList,
                               isValueSelected: controller
@@ -94,7 +103,9 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "Certificate Number"),
-                          CustomTextFieldForInventory(),
+                          CustomTextFieldForInventory(
+                            textController: controller.certificateNoCtrlr,
+                          ),
                         ],
                       ),
                     ],

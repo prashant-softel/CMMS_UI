@@ -31,7 +31,8 @@ class CustomTextFieldForInventory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      decoration: BoxDecoration(),
+      height: 45,
       margin: Dimens.edgeInsets16,
       constraints: BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width / 4,

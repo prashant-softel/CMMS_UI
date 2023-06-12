@@ -4,6 +4,8 @@ import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 
+import '../../domain/models/add_user_model.dart';
+
 /// Repositories (retrieve data, heavy processing etc..)
 class DataRepository extends DomainRepository {
   /// [connectHelper] : A connection helper which will connect to the
@@ -110,7 +112,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   @override
+  @override
   Future<ResponseModel> getAffectedPartList({
     int? facilityId,
     int? blockId,
@@ -850,7 +852,7 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
-  
+
 
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -906,8 +908,19 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
+
   
-  
+
+  Future<ResponseModel> getAddInventoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getAddInventoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getHistory({
     String? auth,
@@ -1118,13 +1131,15 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> StartCalibration({
+  Future<ResponseModel> requestCalibration({
     auth,
     bool? isLoading,
-    startcalibration,
+    requestCalibration,
   }) async {
-    var response = await connectHelper.StartCalibration(
-        auth: auth, isLoading: isLoading, startcalibration: startcalibration);
+    var response = await connectHelper.requestCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        requestCalibration: requestCalibration);
     return response;
   }
 
@@ -1294,6 +1309,42 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getRoleNotificationList({
+    String? auth,
+    int? roleId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoleNotificationList(
+      auth: auth,
+      roleId: roleId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getUserAccessListById({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserAccessListById(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getUserNotificationListById({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserNotificationListById(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> getRoleList({
     required String auth,
     bool? isLoading,
@@ -1376,6 +1427,19 @@ class DataRepository extends DomainRepository {
         pmExecutionJsonString: pmExecutionJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<AddUserModel> uploadImge(
+      {required String auth,
+      Uint8List? fileBytes,
+      required String fileName,
+      required bool isLoading}) async {
+    return await connectHelper.uploadImge(
+      auth: auth,
+      fileBytes: fileBytes,
+      fileName: fileName,
+      isLoading: true,
+    );
+    // return true;
+  }
 
   ///
   Future<ResponseModel> getWarrantyUsageTermList({
@@ -1387,4 +1451,90 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  Future<ResponseModel> createBusinessList({
+    auth,
+    bool? isLoading,
+    businesslistJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessList(
+        auth: auth,
+        isLoading: isLoading,
+        businesslistJsonString: businesslistJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> getBusinessTypeList({
+    int? businessType,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBusinessTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      businessType: businessType,
+    );
+  }
+
+  Future<ResponseModel> getWarrantyList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWarrantyList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> saveNotification({
+    required String auth,
+    saveNotificationJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveNotification(
+        auth: auth,
+        saveNotificationJsonString: saveNotificationJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> AddInventory({
+    auth,
+    bool? isLoading,
+    addInventoryJsonString,
+  }) async {
+    var response = await connectHelper.AddInventory(
+        auth: auth,
+        isLoading: isLoading,
+        addInventoryJsonString: addInventoryJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> inventoryList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.inventoryList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> createFacilityType({
+    auth,
+    bool? isLoading,
+    facilitylistJsonString,
+  }) async {
+    var response = await connectHelper.createFacilityType(
+        auth: auth,
+        isLoading: isLoading,
+        facilitylistJsonString: facilitylistJsonString);
+    return response;
+  }
+
+  //end
 }

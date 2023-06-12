@@ -7,6 +7,7 @@ import 'package:cmms/app/add_inventory/view/calibartion_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,7 +78,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: 'Block'),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList: controller.blocksList,
                                           isValueSelected:
                                               controller.isBlocksSelected.value,
@@ -93,7 +99,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: "Type"),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList: controller.typeNameList,
                                           isValueSelected: controller
                                               .isTypeNameSelected.value,
@@ -109,7 +120,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: "Status"),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList:
                                               controller.statusNameList,
                                           isValueSelected: controller
@@ -125,7 +141,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: "Asset\nName"),
-                                      CustomTextFieldForInventory(),
+                                      CustomTextFieldForInventory(
+                                        textController:
+                                            controller.assetsNameCtrlr,
+                                      ),
                                     ],
                                   ),
                                   Row(
@@ -133,7 +152,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(
                                         title: "      Asset\nDescription",
                                       ),
-                                      CustomTextFieldForInventory(),
+                                      CustomTextFieldForInventory(
+                                        textController:
+                                            controller.assesDiscriptionCtrlr,
+                                      ),
                                     ],
                                   )
                                 ],
@@ -146,7 +168,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       CustomRichText(
                                           title: 'Parent\nEquipment'),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList:
                                               controller.eqipmentNameList,
                                           isValueSelected: controller
@@ -163,7 +190,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     children: [
                                       CustomRichText(title: "Category"),
                                       SizedBox(
-                                        child: DropdownWidget(
+                                        child: DropdownWebWidget(
+                                          margin: Dimens.edgeInsets16,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           dropdownList:
                                               controller.equipmentCategoryList,
                                           isValueSelected: controller
@@ -181,7 +213,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: "Serial No"),
-                                      CustomTextFieldForInventory(),
+                                      CustomTextFieldForInventory(
+                                        textController:
+                                            controller.serialNoCtrlr,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -248,7 +283,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                           ),
                           Dimens.boxHeight15,
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.AddInventory();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

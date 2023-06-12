@@ -1,5 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:cmms/domain/models/access_level_model.dart';
+import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
@@ -45,6 +52,30 @@ class AddUserPresenter {
         roleId: roleId,
         isLoading: isLoading,
       );
+  Future<GetNotificationModel?> getRoleNotificationList({
+    int? roleId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getRoleNotificationList(
+        roleId: roleId,
+        isLoading: isLoading,
+      );
+  Future<GetAccessLevelByIdModel?> getUserAccessListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getUserAccessListById(
+        userId: userId,
+        isLoading: isLoading,
+      );
+  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getUserNotificationListById(
+        userId: userId,
+        isLoading: isLoading,
+      );
   Future<Map<String, dynamic>> saveAccessLevel({
     accessLevelJsonString,
     required bool isLoading,
@@ -85,5 +116,29 @@ class AddUserPresenter {
       isLoading: isLoading,
     );
     return true;
+  }
+
+  Future<AddUserModel?> uploadImge(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await addUserUsecase.uploadImge(fileBytes, fileName, isLoading);
+    // return true;
+  }
+
+  Future<Map<String, dynamic>> saveNotification({
+    saveNotificationJsonString,
+    required bool isLoading,
+  }) async {
+    return addUserUsecase.saveNotification(
+      saveNotificationJsonString: saveNotificationJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<FacilityModel?>?> getFacilityList({
+    required bool isLoading,
+  }) async {
+    return addUserUsecase.getFacilityList(
+      isLoading: isLoading,
+    );
   }
 }

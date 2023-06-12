@@ -3,10 +3,12 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../navigators/app_pages.dart';
 import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_multiselect_dialog_field.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 import '../../widgets/dropdown.dart';
@@ -83,7 +85,11 @@ class AddUserContentWeb extends GetView<AddUserController> {
                       },
                       child: Text(" / USER LIST",
                           style: Styles.greyMediumLight12)),
-                  Text(" / ADD USER", style: Styles.greyMediumLight12)
+                  Text(
+                      controller.userId == null
+                          ? " / ADD USER"
+                          : " / EDIT USER",
+                      style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -99,7 +105,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           children: [
                             Text(
-                              "Add User ",
+                              controller.userId == null
+                                  ? "Add User "
+                                  : "Edit User",
                               style: Styles.blackBold16,
                             ),
                             Spacer(),
@@ -185,7 +193,6 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                         onTap: () {
                                           controller
                                               .getImage(ImageSource.gallery);
-                                          // controller.pickFiles();
                                         },
                                         child: Container(
                                           height: 45,
@@ -961,13 +968,6 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                     255, 245, 248, 250),
                                               ),
                                               child: TabBarView(children: [
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                        color: ColorValues
-                                                            .whiteColor),
-                                                    child: Column(
-                                                      children: [Text('1 Tab')],
-                                                    )),
                                                 Column(
                                                   children: [
                                                     Container(
@@ -1000,119 +1000,559 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                               ],
                                                             ),
                                                             child: controller
-                                                                        .accesslevel
+                                                                        .plantListModel
                                                                         .length >
                                                                     0
-                                                                ? ScrollableTableView(
-                                                                    columns: [
-                                                                      "Module Name",
-                                                                      "Add",
-                                                                      "Edit",
-                                                                      "Delete",
-                                                                      "View",
-                                                                      "Issue",
-                                                                      "Approve",
-                                                                      "Self View"
-                                                                    ].map(
-                                                                        (column) {
-                                                                      return TableViewColumn(
-                                                                        label:
-                                                                            column,
-                                                                        // width:
-                                                                        //     115, // Set the width of the column to 100
-
-                                                                        minWidth:
-                                                                            Get.width *
-                                                                                0.085,
-                                                                      );
-                                                                    }).toList(),
-                                                                    rows: true
-                                                                        ? controller
-                                                                            .accesslevel
-                                                                            .map((getAccesslevelDetails) =>
-                                                                                TableViewRow(height: 90, cells: [
-                                                                                  TableViewCell(
-                                                                                    child: Obx(() {
-                                                                                      return Row(
-                                                                                        children: [
-                                                                                          Checkbox(
-                                                                                              value: controller.isCheckedmodule.value,
-                                                                                              checkColor: Colors.white,
-                                                                                              activeColor: ColorValues.blackColor,
-                                                                                              shape: RoundedRectangleBorder(
-                                                                                                borderRadius: BorderRadius.circular(2.0),
-                                                                                              ),
-                                                                                              side: MaterialStateBorderSide.resolveWith(
-                                                                                                (states) => BorderSide(
-                                                                                                  width: 1.0,
-                                                                                                  color: ColorValues.blackColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                              onChanged: (val) {
-                                                                                                controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
-                                                                                                controller.isCheckedmodule.value = val!;
-
-                                                                                                controller.update();
-                                                                                              }),
-                                                                                          Dimens.boxWidth5,
-                                                                                          Expanded(child: Text("${getAccesslevelDetails?.feature_name}"))
-                                                                                        ],
-                                                                                      );
-                                                                                    }),
-                                                                                  ),
-                                                                                  TableViewCell(
-                                                                                    child: Obx(() {
-                                                                                      return _rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
-                                                                                        getAccesslevelDetails?.add.value = val == true ? 1 : 0;
-                                                                                      });
-                                                                                    }),
-                                                                                  ),
-                                                                                  TableViewCell(
-                                                                                    child: Obx(() {
-                                                                                      return _rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
-                                                                                        getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
-                                                                                      });
-                                                                                    }),
-                                                                                  ),
-                                                                                  TableViewCell(child: Obx(() {
-                                                                                    return _rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
-                                                                                      getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
-                                                                                    });
-                                                                                  })),
-                                                                                  TableViewCell(child: Obx(() {
-                                                                                    return _rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
-                                                                                      getAccesslevelDetails?.view.value = val == true ? 1 : 0;
-                                                                                    });
-                                                                                  })),
-                                                                                  TableViewCell(child: Obx(() {
-                                                                                    return _rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
-                                                                                      getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
-                                                                                    });
-                                                                                  })),
-                                                                                  TableViewCell(child: Obx(() {
-                                                                                    return _rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
-                                                                                      getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                    });
-                                                                                  })),
-                                                                                  TableViewCell(child: Obx(() {
-                                                                                    return _rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                      getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                    });
-                                                                                  })),
-                                                                                ]))
-                                                                            .toList()
-                                                                        : [],
+                                                                ? Center(
+                                                                    child:
+                                                                        ScrollableTableView(
+                                                                      columns: [
+                                                                        "Plant Name",
+                                                                        "SPV",
+                                                                        "Location",
+                                                                      ].map(
+                                                                          (column) {
+                                                                        return TableViewColumn(
+                                                                          label:
+                                                                              column,
+                                                                          minWidth:
+                                                                              Get.width * 0.20,
+                                                                        );
+                                                                      }).toList(),
+                                                                      rows: true
+                                                                          ? controller
+                                                                              .plantListModel
+                                                                              .map((plants) => TableViewRow(height: 90, cells: [
+                                                                                    TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
+                                                                                    TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
+                                                                                    TableViewCell(child: Text("----")),
+                                                                                  ]))
+                                                                              .toList()
+                                                                          : [],
+                                                                    ),
                                                                   )
-                                                                : Container())),
+                                                                : Container(
+                                                                    width: Get
+                                                                        .width,
+                                                                    height:
+                                                                        Get.height -
+                                                                            30,
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 9,
+                                                                          child:
+                                                                              ActionButton(
+                                                                            label:
+                                                                                'Add Facility',
+                                                                            icon:
+                                                                                Icons.add,
+                                                                            onPressed:
+                                                                                () {
+                                                                              Get.dialog<void>(AddfacilityListAlertBox());
+
+                                                                              //     void>(
+                                                                              // AddfacilityListAlertBox());
+                                                                            },
+                                                                            color:
+                                                                                Colors.green,
+                                                                          ),
+                                                                        ),
+                                                                        Container(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.height * 1.5,
+                                                                          height:
+                                                                              Get.height - 70,
+                                                                          child: Column(
+                                                                              //
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: //
+                                                                                      ScrollableTableView(
+                                                                                    columns: [
+                                                                                      "Facility Id",
+                                                                                      'Facility name',
+                                                                                      'Location',
+                                                                                    ].map((column) {
+                                                                                      return TableViewColumn(minWidth: Get.width * 0.20, label: column);
+                                                                                    }).toList(),
+                                                                                    rows: //
+                                                                                        [
+                                                                                      ...List.generate(
+                                                                                        controller.filteredfacilityNameList.length,
+                                                                                        (index) {
+                                                                                          var facilityNameDetails = controller.filteredfacilityNameList[index];
+
+                                                                                          return [
+                                                                                            '${facilityNameDetails?.id ?? ''}',
+                                                                                            '${facilityNameDetails?.name ?? ''}',
+                                                                                            '${facilityNameDetails?.address ?? ''}',
+                                                                                          ];
+                                                                                        },
+                                                                                      ),
+                                                                                    ].map((_inventoryDetailList) {
+                                                                                      return TableViewRow(
+                                                                                          onTap: () => {
+                                                                                                //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                              },
+                                                                                          height: 60,
+                                                                                          cells: _inventoryDetailList.map((value) {
+                                                                                            return TableViewCell(
+                                                                                              //key: ,
+                                                                                              child: Text(value.toString()),
+                                                                                            );
+                                                                                          }).toList());
+                                                                                    }).toList(),
+                                                                                  ),
+                                                                                ),
+                                                                              ]),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ))),
                                                   ],
                                                 ),
-                                                Container(
-                                                    decoration: BoxDecoration(
+                                                Column(
+                                                  children: [
+                                                    Container(
                                                         color: ColorValues
-                                                            .whiteColor),
-                                                    child: Column(
-                                                      children: [Text('3 Tab')],
-                                                    )),
+                                                            .whiteColor,
+                                                        child: controller
+                                                                    .accesslevel
+                                                                    .length >
+                                                                0
+                                                            ? Container(
+                                                                height:
+                                                                    Get.height -
+                                                                        30,
+                                                                margin: Dimens
+                                                                    .edgeInsets15,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: ColorValues
+                                                                        .lightGreyColorWithOpacity35,
+                                                                    width: 1,
+                                                                  ),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: ColorValues
+                                                                          .appBlueBackgroundColor,
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: controller
+                                                                            .accesslevel
+                                                                            .length >
+                                                                        0
+                                                                    ? ScrollableTableView(
+                                                                        columns:
+                                                                            [
+                                                                          "Module Name",
+                                                                          "Add",
+                                                                          "Edit",
+                                                                          "Delete",
+                                                                          "View",
+                                                                          "Issue",
+                                                                          "Approve",
+                                                                          "Self View"
+                                                                        ].map((column) {
+                                                                          return TableViewColumn(
+                                                                            label:
+                                                                                column,
+                                                                            // width:
+                                                                            //     115, // Set the width of the column to 100
+
+                                                                            minWidth:
+                                                                                Get.width * 0.085,
+                                                                          );
+                                                                        }).toList(),
+                                                                        rows: true
+                                                                            ? controller.accesslevel
+                                                                                .map((getAccesslevelDetails) => TableViewRow(height: 90, cells: [
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return Row(
+                                                                                            children: [
+                                                                                              Checkbox(
+                                                                                                  value: controller.isCheckedmodule.value,
+                                                                                                  checkColor: Colors.white,
+                                                                                                  activeColor: ColorValues.blackColor,
+                                                                                                  shape: RoundedRectangleBorder(
+                                                                                                    borderRadius: BorderRadius.circular(2.0),
+                                                                                                  ),
+                                                                                                  side: MaterialStateBorderSide.resolveWith(
+                                                                                                    (states) => BorderSide(
+                                                                                                      width: 1.0,
+                                                                                                      color: ColorValues.blackColor,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                  onChanged: (val) {
+                                                                                                    controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
+                                                                                                    controller.isCheckedmodule.value = val!;
+
+                                                                                                    controller.update();
+                                                                                                  }),
+                                                                                              Dimens.boxWidth5,
+                                                                                              Expanded(child: Text("${getAccesslevelDetails?.feature_name}"))
+                                                                                            ],
+                                                                                          );
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
+                                                                                            getAccesslevelDetails?.add.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
+                                                                                            getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                          getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                          getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                          getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                          getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                          getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                    ]))
+                                                                                .toList()
+                                                                            : [],
+                                                                      )
+                                                                    : Container())
+                                                            : Container(
+                                                                height:
+                                                                    Get.height -
+                                                                        30,
+                                                                margin: Dimens
+                                                                    .edgeInsets15,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: ColorValues
+                                                                        .lightGreyColorWithOpacity35,
+                                                                    width: 1,
+                                                                  ),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: ColorValues
+                                                                          .appBlueBackgroundColor,
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: controller
+                                                                            .accessList
+                                                                            .length >
+                                                                        0
+                                                                    ? ScrollableTableView(
+                                                                        columns:
+                                                                            [
+                                                                          "Module Name",
+                                                                          "Add",
+                                                                          "Edit",
+                                                                          "Delete",
+                                                                          "View",
+                                                                          "Issue",
+                                                                          "Approve",
+                                                                          "Self View"
+                                                                        ].map((column) {
+                                                                          return TableViewColumn(
+                                                                            label:
+                                                                                column,
+                                                                            // width:
+                                                                            //     115, // Set the width of the column to 100
+
+                                                                            minWidth:
+                                                                                Get.width * 0.085,
+                                                                          );
+                                                                        }).toList(),
+                                                                        rows: true
+                                                                            ? controller.accessList
+                                                                                .map((getAccesslistDetails) => TableViewRow(height: 90, cells: [
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return Row(
+                                                                                            children: [
+                                                                                              Checkbox(
+                                                                                                  value: controller.isCheckedmodule.value,
+                                                                                                  checkColor: Colors.white,
+                                                                                                  activeColor: ColorValues.blackColor,
+                                                                                                  shape: RoundedRectangleBorder(
+                                                                                                    borderRadius: BorderRadius.circular(2.0),
+                                                                                                  ),
+                                                                                                  side: MaterialStateBorderSide.resolveWith(
+                                                                                                    (states) => BorderSide(
+                                                                                                      width: 1.0,
+                                                                                                      color: ColorValues.blackColor,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                  onChanged: (val) {
+                                                                                                    controller.accessList.firstWhere((e) => e?.feature_name == getAccesslistDetails?.feature_name);
+                                                                                                    controller.isCheckedmodule.value = val!;
+
+                                                                                                    controller.update();
+                                                                                                  }),
+                                                                                              Dimens.boxWidth5,
+                                                                                              Expanded(child: Text("${getAccesslistDetails?.feature_name}"))
+                                                                                            ],
+                                                                                          );
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getAccesslistDetails?.add.value, onCheck: (val) {
+                                                                                            getAccesslistDetails?.add.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getAccesslistDetails?.edit.value, onCheck: (val) {
+                                                                                            getAccesslistDetails?.edit.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslistDetails?.delete.value, onCheck: (val) {
+                                                                                          getAccesslistDetails?.delete.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslistDetails?.view.value, onCheck: (val) {
+                                                                                          getAccesslistDetails?.view.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslistDetails?.issue.value, onCheck: (val) {
+                                                                                          getAccesslistDetails?.issue.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslistDetails?.approve.value, onCheck: (val) {
+                                                                                          getAccesslistDetails?.approve.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getAccesslistDetails?.selfView.value, onCheck: (val) {
+                                                                                          getAccesslistDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                    ]))
+                                                                                .toList()
+                                                                            : [],
+                                                                      )
+                                                                    : Container()))
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Container(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        child: controller
+                                                                    .notificationList
+                                                                    .length >
+                                                                0
+                                                            ? Container(
+                                                                height:
+                                                                    Get.height -
+                                                                        30,
+                                                                margin: Dimens
+                                                                    .edgeInsets15,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: ColorValues
+                                                                        .lightGreyColorWithOpacity35,
+                                                                    width: 1,
+                                                                  ),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: ColorValues
+                                                                          .appBlueBackgroundColor,
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: controller
+                                                                            .notificationList
+                                                                            .length >
+                                                                        0
+                                                                    ? ScrollableTableView(
+                                                                        columns:
+                                                                            [
+                                                                          "Notifications",
+                                                                          "Default Value",
+                                                                          "Can Override",
+                                                                          "User Preference",
+                                                                        ].map((column) {
+                                                                          return TableViewColumn(
+                                                                            label:
+                                                                                column,
+                                                                            minWidth:
+                                                                                Get.width * 0.17,
+                                                                          );
+                                                                        }).toList(),
+                                                                        rows: true
+                                                                            ? controller.notificationList
+                                                                                .map((getnotificationListDetails) => TableViewRow(height: 70, cells: [
+                                                                                      TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                          getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                    ]))
+                                                                                .toList()
+                                                                            : [],
+                                                                      )
+                                                                    : Container())
+                                                            : Container(
+                                                                height:
+                                                                    Get.height -
+                                                                        30,
+                                                                margin: Dimens
+                                                                    .edgeInsets15,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: ColorValues
+                                                                        .lightGreyColorWithOpacity35,
+                                                                    width: 1,
+                                                                  ),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: ColorValues
+                                                                          .appBlueBackgroundColor,
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: controller
+                                                                            .notificationListByUserId
+                                                                            .length >
+                                                                        0
+                                                                    ? ScrollableTableView(
+                                                                        columns:
+                                                                            [
+                                                                          "Notifications",
+                                                                          "Default Value",
+                                                                          "Can Override",
+                                                                          "User Preference",
+                                                                        ].map((column) {
+                                                                          return TableViewColumn(
+                                                                            label:
+                                                                                column,
+                                                                            minWidth:
+                                                                                Get.width * 0.17,
+                                                                          );
+                                                                        }).toList(),
+                                                                        rows: true
+                                                                            ? controller.notificationListByUserId
+                                                                                .map((getnotificationListDetails) => TableViewRow(height: 70, cells: [
+                                                                                      TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(
+                                                                                        child: Obx(() {
+                                                                                          return _rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                          });
+                                                                                        }),
+                                                                                      ),
+                                                                                      TableViewCell(child: Obx(() {
+                                                                                        return _rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                          getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                        });
+                                                                                      })),
+                                                                                    ]))
+                                                                                .toList()
+                                                                            : [],
+                                                                      )
+                                                                    : Container()))
+                                                  ],
+                                                ),
                                               ]),
                                             )
                                           ],
@@ -1152,8 +1592,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                       onPressed: () {
                                         controller.updateUser().then((value) {
                                           if (value == true) {
-                                            controller.userId = 0;
+                                            // controller.userId = 0;
                                             controller.saveAccessLevel();
+                                            //   controller.saveNotification();
                                           }
                                         });
                                         //  controller.saveAccessLevel();
@@ -1189,14 +1630,89 @@ class AddUserContentWeb extends GetView<AddUserController> {
       context: context,
       cancelText: "Clear",
       confirmText: "Ok",
-      initialDate: DateTime(today.year - 18, today.month, today.day),
+      initialDate: DateTime(today.year, today.month, today.day),
       firstDate: DateTime(1900),
-      lastDate: DateTime(today.year - 18, today.month, today.day),
+      lastDate: DateTime(today.year + 18, today.month, today.day),
     );
     if (type == 1) {
       controller.dobCtrlr.text = date.toString().substring(0, 10);
     } else {
       controller.joingdateCtrlr.text = date.toString().substring(0, 10);
     }
+  }
+
+  AddfacilityListAlertBox() {
+    return StatefulBuilder(builder: ((context, setState) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        ),
+        insetPadding: Dimens.edgeInsets10_0_10_0,
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          'Select facility Name',
+          textAlign: TextAlign.center,
+          // style: TextStyle(color: Colors.green),
+        ),
+        content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+
+          return Obx(
+            () => Container(
+              padding: Dimens.edgeInsets05_0_5_0,
+              height: 300, // double.infinity,
+              width: 300,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Divider(
+                      color: ColorValues.greyLightColour,
+                      thickness: 1,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.5,
+                      child: CustomMultiSelectDialogField(
+                        buttonText: 'Add Facility',
+                        title: 'Select Facility',
+                        initialValue:
+                            (controller.selectedFacilityNameList.isNotEmpty)
+                                ? controller.selectedfacilityNameIdList
+                                : [],
+                        items: controller.facilityNameList
+                            .map(
+                              (facilityName) => MultiSelectItem(
+                                facilityName?.id,
+                                facilityName?.name ?? '',
+                              ),
+                            )
+                            .toList(),
+                        onConfirm: (selectedOptionsList) => {
+                          controller.facilityNameSelected(selectedOptionsList),
+                        },
+                      ),
+                    )
+                  ]),
+            ),
+          );
+        }),
+        actions: [
+          Center(
+            child: Container(
+                height: 45,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.navyBlueColor,
+                  text: "Ok",
+                  onPressed: () {
+                    Get.back();
+                  },
+                )),
+          ),
+        ],
+      );
+    }));
   }
 }

@@ -1,6 +1,6 @@
+import 'package:cmms/app/inventory_list/inventory_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/home_controller.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
@@ -8,7 +8,7 @@ import '../../utils/responsive.dart';
 import 'mobile/inventory_list_content_mobile.dart';
 import 'web/inventory_list_content_web.dart';
 
-class InventoryListScreen extends GetView<HomeController> {
+class InventoryListScreen extends GetView<InventoryListController> {
   InventoryListScreen({Key? key});
 
   ///

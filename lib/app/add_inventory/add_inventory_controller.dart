@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
@@ -63,7 +64,19 @@ class AddInventoryController extends GetxController {
   Rx<String> selectedInventoryType = ''.obs;
   Rx<String> selectedInventoryOfType = ''.obs;
   Rx<bool> isInventoryType = true.obs;
+  //add invntory
+  var serialNoCtrlr = TextEditingController();
+  var assetsNameCtrlr = TextEditingController();
+  var assesDiscriptionCtrlr = TextEditingController();
+  var certificateNoCtrlr = TextEditingController();
+  var discriptionCtrlr = TextEditingController();
+  var calibrationRemaingCtrlr = TextEditingController();
+  var modelNoCtrlr = TextEditingController();
+  var parentEquipmentNoCtrlr = TextEditingController();
+  var costCtrlr = TextEditingController();
+  var warrentyDescriptionCtrlr = TextEditingController();
 
+  int selectedEquipmentId = 0;
 //CategoryModel
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -72,6 +85,7 @@ class AddInventoryController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedEquipmentCategoryName = ''.obs;
   Rx<bool> isEquipmentCategoryNameSelected = true.obs;
+  int selectedEquipmentCategoryNameId = 0;
 
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
@@ -131,7 +145,7 @@ class AddInventoryController extends GetxController {
   Rx<bool> isBlocksSelected = true.obs;
   Rx<String> selectedBlocks = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
-
+  int selectedBlockListId = 0;
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
 
@@ -158,10 +172,19 @@ class AddInventoryController extends GetxController {
 
   Rx<int> selectedIndex = 0.obs;
 
-  ///
+  ///Add inventory Details
+  Rx<AddInventoryDetailsModel?> editAddInventoryDetailsModel =
+      AddInventoryDetailsModel().obs;
+  RxList<AddInventoryDetailsModel?>? editAddInventoryDetailsList =
+      <AddInventoryDetailsModel?>[].obs;
 
+  ///
+  int? id = 0;
   @override
   void onInit() async {
+    id = Get.arguments;
+    print('Inventory Id:$id');
+
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
 
@@ -172,6 +195,11 @@ class AddInventoryController extends GetxController {
         getInventoryStatusList(isLoading: true, facilityId: facilityId);
       });
     });
+    if (id != null) {
+      Future.delayed(Duration(seconds: 1), () {
+        getAddInventoryDetail(id: id!);
+      });
+    }
 
     Future.delayed(Duration(seconds: 1), () async {
       await getuserAccessData();
@@ -221,6 +249,74 @@ class AddInventoryController extends GetxController {
     }
 
     update(['unit_currency_list']);
+  }
+
+  Future<void> getAddInventoryDetail({required int id}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    editAddInventoryDetailsList?.value = <AddInventoryDetailsModel>[];
+
+    final _addInventoryDetails =
+        await addInventoryPresenter.getAddInventoryDetail(id: id);
+    print('Add Inventory Detail:$_addInventoryDetails');
+
+    if (_addInventoryDetails != null) {
+      editAddInventoryDetailsModel.value = _addInventoryDetails[0];
+      selectedBlocks.value =
+
+          ///please emplimemnt
+          // editAddInventoryDetailsModel.value?.blockName ?? '';
+          selectedTypeName.value =
+              editAddInventoryDetailsModel.value?.type ?? '';
+      assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
+      assesDiscriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.description ?? ""; //otherdata
+      warrentyDescriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.description ?? "";
+      certificateNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.description ?? ""; //otherdata
+      serialNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.serialNumber ?? "";
+      // modelNoCtrlr.text =
+      //     editAddInventoryDetailsModel.value?.model ?? ""; //otherdata
+      parentEquipmentNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.parentName ?? "";
+      costCtrlr.text =
+          editAddInventoryDetailsModel.value?.cost.toString() ?? "";
+      calibrationRemainderInTc.text = editAddInventoryDetailsModel
+              .value?.calibrationReminderDays
+              .toString() ??
+          "";
+      // modelNoCtrlr.text = editAddInventoryDetailsModel.value?.description ?? "";
+
+      // warrantyClaimBriefDescTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.warranty_description ?? '';
+      // selectedEquipmentName.value =
+      //     editWarrantyClaimDetailsModel.value?.equipment_name ?? '';
+      // selectedEquipmentCategory.value =
+      //     editWarrantyClaimDetailsModel.value?.equipment_category ?? '';
+      // selectedAffectedPart.value =
+      //     editWarrantyClaimDetailsModel.value?.affected_part ?? '';
+      // failureDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
+      // affectedSerialNoTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.affected_sr_no ?? '';
+      // orderReferenceNoTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
+      // warrantyStartDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
+      // warrantyEndDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
+      // costOfReplacementTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
+      // immediateCorrectiveActionTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
+      // requestManufactureTextController.text =
+      //     editWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
+      // selectedUnitCurrency.value =
+      //     editWarrantyClaimDetailsModel.value?.currency ?? '';
+      // selectedEmployeeList.value =
+      //     editWarrantyClaimDetailsModel.value?.approver_name ?? '';
+    }
   }
 
   void getInventoryList() async {
@@ -281,6 +377,86 @@ class AddInventoryController extends GetxController {
   }
 
   ///
+
+// /add inventory
+  Future<bool> AddInventory() async {
+    // if (addInventoryCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    String _serialNoCtrlr = serialNoCtrlr.text.trim();
+    String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+    String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
+    String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
+    String _discriptionCtrlr = discriptionCtrlr.text.trim();
+    String _modelNoCtrlr = modelNoCtrlr.text.trim();
+    String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
+    String _costCtrlr = costCtrlr.text.trim();
+    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+    String _expireDateTc = expireDateTc.text.trim();
+    String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
+
+    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+        warrantyDescription: _warrentyDescriptionCtrlr,
+        warrantyProviderId: selectedmanufacturerNameId,
+        warrantyStatus: 1,
+        warrantyType: selectedWarrentyNameId,
+        warrrantyTermType: selectedwarrantyUsageTermNameId,
+        // meterLimit: 1,
+        // meterUnit: 1,
+        certificateNumber: int.tryParse(_certificateNoCtrlr),
+        expiryDate: "2030-12-31",
+        // startDate///  is missing
+        warrantyDiscription: _warrentyDescriptionCtrlr);
+
+    AddInventoryRequestModel addInventoryRequestModel =
+        AddInventoryRequestModel(
+            name: _assetsNameCtrlr,
+            description: _discriptionCtrlr,
+            assetdescription: _assesDiscriptionCtrlr,
+            typeId: selectedTypeNameId,
+            statusId: selectedStatusNameId,
+            facilityId: facilityId,
+            supplierId: selectedsupplierrNameId,
+            manufacturerId: selectedmanufacturerNameId,
+            blockId: selectedBlockListId,
+            categoryId: selectedEquipmentCategoryNameId,
+            currency: selectedUnitCurrency.value,
+            cost: int.tryParse(_costCtrlr),
+            model: _modelNoCtrlr,
+            serialNumber: _serialNoCtrlr,
+            parentId: selectedEquipmentnameId,
+            calibrationFrequency: selectedfrequencyId,
+            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
+            calibrationLastDate: "2023-01-10",
+            calibrationFirstDueDate: "2023-01-10",
+            calibrationFrequencyType: 2,
+            acCapacity: 2000,
+            dcCapacity: 5000,
+            multiplier: 3,
+            customerId: 1,
+            operatorId: 3,
+            ownerId: 2,
+            stockCount: 50,
+            moduleQuantity: 15,
+            attachments: null);
+    var addInventoryJsonString = [
+      addInventoryRequestModel.toJson()
+    ]; //createCheckListToJson([createChecklist]);
+
+    print({"checklistJsonString", addInventoryJsonString});
+    await addInventoryPresenter.AddInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: true,
+    );
+    return true;
+    // }
+    // return true;
+  }
+
   Future<void> getWarrantyUsageTermList() async {
     warrantyUsageTermNameList.value = <WarrantyUsageTermListModel>[];
     final _warrantyUsageTermNameList =
@@ -448,46 +624,77 @@ class AddInventoryController extends GetxController {
         {
           int warrantyUsageTermIndex =
               warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
-          selectedWarrentyNameId =
+          selectedwarrantyUsageTermNameId =
               warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<WarrantyUsageTermListModel>:
+        {
+          int warrantyUsageIndex =
+              warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
+
+          selectedwarrantyUsageTermNameId =
+              warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<BlockModel>:
+        {
+          int blockIndex = blocksList.indexWhere((x) => x?.name == value);
+
+          selectedBlockListId = blocksList[blockIndex]?.id ?? 0;
         }
         break;
       case RxList<InventoryModel>:
         {
-          for (var workAreaName in selectedWorkAreaNameList) {
-            int workAreaIndex =
-                workAreaList.indexWhere((x) => x?.name == workAreaName);
-            selectedWorkAreaIdList.add(workAreaIndex);
-          }
+          // for (var workAreaName in selectedWorkAreaNameList) {
+          //   int workAreaIndex =
+          //       workAreaList.indexWhere((x) => x?.name == workAreaName);
+          //   selectedWorkAreaIdList.add(workAreaIndex);
+          // }
+          // int workAreaIndex = workAreaList.indexWhere((x) => x?.name == value);
+          // selectedWarrentyNameId = frequencyList[workAreaIndex]?.id ?? 0;
+          int eqipmentNameListIndex =
+              eqipmentNameList.indexWhere((x) => x?.name == value);
+          selectedEquipmentnameId =
+              eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
+          print({"selectedEquipmentnameId", selectedEquipmentnameId});
         }
         break;
       case RxList<InventoryCategoryModel>:
         {
-          for (var equipCat in selectedEquipmentCategoryList) {
-            int equipCatIndex =
-                equipmentCategoryList.indexWhere((x) => x?.name == value);
-            selectedEquipmentCategoryIdList.add(equipCatIndex);
-            // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
-            print('First Category Id:$selectedEquipmentCategoryList');
-          }
+          // for (var equipCat in selectedEquipmentCategoryList) {
+          //   int equipCatIndex =
+          //       equipmentCategoryList.indexWhere((x) => x?.name == value);
+          //   selectedEquipmentCategoryIdList.add(equipCatIndex);
+          //   // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
+          //   print('First Category Id:$selectedEquipmentCategoryList');
+          // }
+          int equipCatIndex =
+              equipmentCategoryList.indexWhere((x) => x?.name == value);
+          selectedEquipmentCategoryNameId =
+              equipmentCategoryList[equipCatIndex]?.id ?? 0;
         }
         break;
       case RxList<InventoryStatusListModel>:
         {
-          for (var statusName in statusNameList) {
-            int statusIndex =
-                statusNameList.indexWhere((x) => x?.name == statusName);
-            selectedWorkAreaIdList.add(statusIndex);
-          }
+          // for (var statusName in statusNameList) {
+          //   int statusIndex =
+          //       statusNameList.indexWhere((x) => x?.name == statusName);
+          //   selectedWorkAreaIdList.add(statusIndex);
+          // }
+          int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
+          selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
         }
         break;
       case RxList<InventoryTypeListModel>:
         {
-          for (var typeName in typeNameList) {
-            int typeNameIndex =
-                typeNameList.indexWhere((x) => x?.name == typeName);
-            selectedWorkAreaIdList.add(typeNameIndex);
-          }
+          // for (var typeName in typeNameList) {
+          //   int typeNameIndex =
+          //       typeNameList.indexWhere((x) => x?.name == typeName);
+          //   selectedWorkAreaIdList.add(typeNameIndex);
+          // }
+          int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
+          selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
         }
         break;
 

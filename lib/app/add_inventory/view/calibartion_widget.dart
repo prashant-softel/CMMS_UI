@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +36,9 @@ class CalibrationTabWidget extends StatelessWidget {
                               title:
                                   "          Calibration\n          Frequency"),
                           SizedBox(
-                            child: DropdownWidget(
+                            child: DropdownWebWidget(
+                              margin: Dimens.edgeInsets16,
+                              width: MediaQuery.of(context).size.width / 4,
                               controller: controller,
                               dropdownList: controller.frequencyList,
                               isValueSelected:
@@ -56,7 +59,7 @@ class CalibrationTabWidget extends StatelessWidget {
                           !controller.openLastCalibrationDatePicker;
                       controller.update(['calibration_tab']);
                     },
-                    textController: controller.lastCalibrationDateTc,
+                    textController: controller.calibrationRemainderInTc,
                     label: 'Last calibration date: *',
                   ),
                 ],
@@ -78,8 +81,10 @@ class CalibrationTabWidget extends StatelessWidget {
                                       "        Calibration\n        remainder In"),
                               SizedBox(width: 10),
                               Container(
-                                width: 360,
+                                width: 150,
                                 child: TextField(
+                                  controller:
+                                      controller.calibrationRemaingCtrlr,
                                   decoration: InputDecoration(
                                     contentPadding: Dimens.edgeInsets16_0_16_0,
                                     focusedBorder: OutlineInputBorder(
@@ -93,6 +98,10 @@ class CalibrationTabWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              CustomRichText(title: "Day"),
                             ],
                           ),
                         ],

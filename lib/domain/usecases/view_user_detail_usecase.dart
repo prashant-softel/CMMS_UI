@@ -1,3 +1,5 @@
+import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -20,6 +22,22 @@ class ViewUserDetailUsecase {
   }) async =>
       await repository.getRoleAccessList(
         roleId,
+        isLoading,
+      );
+  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getUserNotificationListById(
+        userId,
+        isLoading,
+      );
+  Future<GetAccessLevelByIdModel?> getUserAccessListById({
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getUserAccessListById(
+        userId,
         isLoading,
       );
 }
