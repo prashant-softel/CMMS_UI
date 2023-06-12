@@ -1143,6 +1143,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> rejectCalibration({
+    auth,
+    bool? isLoading,
+    rejectCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.rejectCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> getPMScheduleData({
     required String auth,
     int? facilityId,
@@ -1524,6 +1536,15 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> startCalibration({
+    auth,
+    bool? isLoading,
+    calibrationId,
+  }) async {
+    var response = await connectHelper.startCalibration(
+        auth: auth, isLoading: isLoading, calibrationId: calibrationId);
+    return response;
+  }
   Future<ResponseModel> createFacilityType({
     auth,
     bool? isLoading,

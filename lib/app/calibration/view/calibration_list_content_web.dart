@@ -185,7 +185,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                   "Last Calibration date",
                                   "Next Due Date",
                                   "Calibration Frequency",
-                                  "Status",
                                   "Action",
                                 ].map((column) {
                                   return TableViewColumn(
@@ -198,7 +197,6 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     controller.calibrationList?.length ?? 0,
                                     (index) {
                                       return [
-                                        '',
                                         '',
                                         '',
                                         '',
@@ -232,7 +230,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                   "Last Calibration date",
                                   "Next Due Date",
                                   "Calibration Frequency",
-                                  "Status",
+                                  // "Status",
                                   "Action",
                                 ].map((column) {
                                   return TableViewColumn(
@@ -240,43 +238,104 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     minWidth: Get.width * 0.15,
                                   );
                                 }).toList(),
-                                rows: [
-                                  ...List.generate(
-                                    controller.calibrationList?.length ?? 0,
-                                    (index) {
-                                      var calibrationListListDetails =
-                                          controller.calibrationList?[index];
-                                      return [
-                                        '${calibrationListListDetails?.category_name}',
-                                        '${calibrationListListDetails?.asset_name}',
-                                        '${calibrationListListDetails?.asset_serial}',
-                                        // "calibration_certificate",
-                                        // 'Installation Date',
-                                        '${calibrationListListDetails?.last_calibration_date}',
-                                        '${calibrationListListDetails?.next_calibration_due_date}',
-                                        '${calibrationListListDetails?.frequency_name}',
-                                        '${calibrationListListDetails?.calibration_status}',
-                                        "Action"
-                                      ];
-                                    },
-                                  ),
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 100,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: (value == "Action")
-                                            ? Wrap(children: [
+                                rows: true
+                                    ? controller.calibrationList!
+                                        .map((calibrationListListDetails) =>
+                                            TableViewRow(height: 150, cells: [
+                                              TableViewCell(
+                                                  child: Text(
+                                                '${calibrationListListDetails?.category_name}',
+                                              )),
+                                              TableViewCell(
+                                                  child: Column(
+                                                children: [
+                                                  Text(
+                                                    '${calibrationListListDetails?.asset_name}',
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    child: Container(
+                                                      padding: Dimens
+                                                          .edgeInsets8_2_8_2,
+                                                      decoration: BoxDecoration(
+                                                        color: calibrationListListDetails
+                                                                    ?.statusID ==
+                                                                218
+                                                            ? ColorValues
+                                                                .appRedColor
+                                                            : calibrationListListDetails
+                                                                        ?.statusID ==
+                                                                    211
+                                                                ? ColorValues
+                                                                    .appYellowColor
+                                                                : calibrationListListDetails
+                                                                            ?.statusID ==
+                                                                        214
+                                                                    ? ColorValues
+                                                                        .appGreenColor
+                                                                    : calibrationListListDetails?.statusID ==
+                                                                            213
+                                                                        ? ColorValues
+                                                                            .appYellowColor
+                                                                        : calibrationListListDetails?.statusID ==
+                                                                                217
+                                                                            ? ColorValues.appGreenColor
+                                                                            : ColorValues.appDarkBlueColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                      ),
+                                                      child: Text(
+                                                        '${calibrationListListDetails?.calibration_status}',
+                                                        style: Styles.white10
+                                                            .copyWith(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+                                              TableViewCell(
+                                                  child: Text(
+                                                      '${calibrationListListDetails?.asset_serial}')),
+                                              TableViewCell(
+                                                  child: Text(
+                                                      '${calibrationListListDetails?.last_calibration_date}')),
+                                              TableViewCell(
+                                                  child: Text(
+                                                      '${calibrationListListDetails?.next_calibration_due_date}')),
+                                              TableViewCell(
+                                                  child: Text(
+                                                      '${calibrationListListDetails?.frequency_name}')),
+                                              TableViewCell(
+                                                  child: Wrap(children: [
                                                 TableActionButton(
                                                   color: ColorValues
                                                       .lightGreenColor,
                                                   label: 'Request Calibration',
                                                   onPress: () {
                                                     requestCalibration(
-                                                        equipmentName:
-                                                            record[1],
-                                                        previousDate: record[3],
-                                                        nextDate: record[4]);
+                                                      equipmentName:
+                                                          '${calibrationListListDetails?.asset_name}',
+                                                      previousDate:
+                                                          '${calibrationListListDetails?.last_calibration_date}',
+                                                      nextDate:
+                                                          '${calibrationListListDetails?.next_calibration_due_date}',
+                                                    );
+                                                  },
+                                                ),
+                                                TableActionButton(
+                                                  color: ColorValues
+                                                      .appDarkBlueColor,
+                                                  icon: Icons
+                                                      .remove_red_eye_outlined,
+                                                  label: 'View',
+                                                  onPress: () {
+                                                    Get.toNamed(Routes
+                                                        .calibrationViewScreen);
                                                   },
                                                 ),
                                                 TableActionButton(
@@ -290,15 +349,25 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         .calibrationDetail);
                                                   },
                                                 ),
+                                                // TableActionButton(
+                                                //   color: ColorValues
+                                                //       .appDarkBlueColor,
+                                                //   icon: Icons.check,
+                                                //   label: 'Approve',
+                                                //   onPress: () {},
+                                                // ),
                                                 TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  label: 'View',
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.close,
+                                                  label: 'Reject',
                                                   onPress: () {
-                                                    Get.toNamed(Routes
-                                                        .calibrationDetail);
+                                                    controller.isCommentCalibrationDialog(
+                                                        calibrationName:
+                                                            '${calibrationListListDetails?.asset_name}',
+                                                        calibrationId:
+                                                            '${calibrationListListDetails?.asset_id}',
+                                                        type: 1);
                                                   },
                                                 ),
                                                 TableActionButton(
@@ -306,11 +375,13 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                       .appYellowColor,
                                                   label: 'Start Calibration',
                                                   onPress: () {
-                                                    // requestCalibration(
-                                                    //     equipmentName:
-                                                    //         record[1],
-                                                    //     previousDate: record[3],
-                                                    //     nextDate: record[4]);
+                                                    controller
+                                                        .isStartCalibrationDialog(
+                                                      calibrationName:
+                                                          '${calibrationListListDetails?.asset_name}',
+                                                      calibrationId:
+                                                          '${calibrationListListDetails?.asset_id}',
+                                                    );
                                                   },
                                                 ),
 
@@ -332,60 +403,32 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 //         .calibrationHistory();
                                                 //   },
                                                 // ),
+
                                                 TableActionButton(
                                                   color:
                                                       ColorValues.appRedColor,
-                                                  icon: Icons.close,
-                                                  label: 'Reject',
+                                                  icon: Icons.done,
+                                                  label: 'Completed',
                                                   onPress: () {},
                                                 ),
-                                                // TableActionButton(
-                                                //   color: ColorValues.appRedColor,
-                                                //   icon: Icons.close,
-                                                //   label: 'Completed',
-                                                //   onPress: () {},
-                                                // ),
                                                 TableActionButton(
                                                   color: ColorValues
                                                       .lightGreenColor,
                                                   icon: Icons.check,
                                                   label: 'Approve',
-                                                  onPress: () {},
+                                                  onPress: () {
+                                                    controller.isCommentCalibrationDialog(
+                                                        calibrationName:
+                                                            '${calibrationListListDetails?.asset_name}',
+                                                        calibrationId:
+                                                            '${calibrationListListDetails?.asset_id}',
+                                                        type: 2);
+                                                  },
                                                 ),
-                                              ])
-                                            : (value == "Status")
-                                                ? Container(
-                                                    padding: Dimens
-                                                        .edgeInsets8_2_8_2,
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromARGB(
-                                                          255, 213, 46, 40),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4),
-                                                    ),
-                                                    child: Text(
-                                                      "Overdue",
-                                                      style: Styles.white13
-                                                          .copyWith(
-                                                        color: Colors.white,
-                                                      ),
-                                                    ))
-                                                : (value ==
-                                                        "calibration_certificate")
-                                                    ? TableActionButton(
-                                                        color: ColorValues
-                                                            .appDarkBlueColor,
-                                                        icon: Icons
-                                                            .remove_red_eye_outlined,
-                                                        label: 'View',
-                                                        onPress: () {},
-                                                      )
-                                                    : Text(value),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
+                                              ])),
+                                            ]))
+                                        .toList()
+                                    : [],
                               ),
                       ),
                     ),
@@ -484,11 +527,8 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       ),
       content: Builder(builder: (context) {
         var height = Get.height;
-        String preDate = Utility.getFormatedDate(previousDate);
-        String nextDueDate = Utility.getFormatedDate(nextDate);
-
-        controller.previousDateController.text = preDate;
-        controller.nextDueDateController.text = nextDueDate;
+        controller.previousDateController.text = previousDate;
+        controller.nextDueDateController.text = nextDate;
 
         return Obx(
           () => Container(
