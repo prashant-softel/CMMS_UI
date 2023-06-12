@@ -122,8 +122,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: categoryIds,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
     );
   }
 
@@ -184,6 +184,19 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getEmployeeList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getEmployeesList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEmployeesList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
@@ -613,6 +626,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  //  Future<ResponseModel> getAffectedPartList({
+  //   String? auth,
+  //   bool? isLoading,
+  //   int? facilityId,
+  // }) async {
+  //   return await connectHelper.getAffectedPartList(
+  //     auth: auth,
+  //     isLoading: isLoading,
+  //     facilityId: facilityId,
+  //   );
+  // }
+
   Future<ResponseModel> getInventoryIsolationList({
     String? auth,
     bool? isLoading,
@@ -825,6 +850,18 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
+  
+
+  Future<ResponseModel> updateWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
@@ -856,6 +893,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.getViewWarrantyClaimDetail(
         auth: auth,
         wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getInventoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getInventoryDetail(
+        auth: auth,
+        id: id,
         isLoading: isLoading ?? false,
       );
   

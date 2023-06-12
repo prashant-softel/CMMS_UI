@@ -7,8 +7,8 @@ import 'dart:convert';
 ViewWarrantyClaimModel viewWarrantyClaimDetailModelFromJson(String str) =>
     ViewWarrantyClaimModel.fromJson(json.decode(str));
 
-String viewWarrantyClaimDetailModelToJson(ViewWarrantyClaimModel data) => json.encode(data.toJson());
-
+String viewWarrantyClaimDetailModelToJson(ViewWarrantyClaimModel data) =>
+    json.encode(data.toJson());
 
 class ViewWarrantyClaimModel {
   ViewWarrantyClaimModel({
@@ -41,7 +41,6 @@ class ViewWarrantyClaimModel {
     this.closed_at,
     this.status,
     this.log,
-
   });
 
   int? wc_id;
@@ -71,10 +70,11 @@ class ViewWarrantyClaimModel {
   String? approver_name;
   String? last_updated_at;
   String? closed_at;
-  String? status;
+  int? status;
   String? log;
 
-  factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) => ViewWarrantyClaimModel(
+  factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
+      ViewWarrantyClaimModel(
         wc_id: json["wc_id"],
         facility_id: json["facility_id"],
         facility_name: json["facility_name"],
@@ -108,7 +108,6 @@ class ViewWarrantyClaimModel {
         closed_at: json['closed_at'] ?? '',
         status: json["status"],
         log: json['log'] ?? '',
-        
       );
 
   Map<String, dynamic> toJson() => {
@@ -141,6 +140,5 @@ class ViewWarrantyClaimModel {
         "closed_at": closed_at,
         "status": status,
         "log": log,
-
       };
 }

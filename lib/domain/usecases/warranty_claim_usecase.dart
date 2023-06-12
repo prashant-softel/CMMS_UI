@@ -2,7 +2,11 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_category_model2.dart';
+import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -27,6 +31,24 @@ class WarrantyClaimUsecase {
         isLoading,
       );
 
+   Future<InventoryDetailsModel?> getInventoryDetail({
+    bool? isLoading,  
+    required int id,
+  }) async =>
+      await _repository.getInventoryDetail(
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<Map<String, dynamic>> saveAsDraft({
+    createWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.createWarrantyClaim(
+        createWarrantyClaim,
+        isLoading,
+      );
+
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,
@@ -41,17 +63,19 @@ class WarrantyClaimUsecase {
     );
   }
 
-  Future<List<InventoryModel2>> getAffectedPartList({
-    required bool isLoading,
-    required int? facilityId,
-    int? blockId,
-    required String categoryIds,
+  Future<List<InventoryCategoryModel2?>?> getAffectedPartList({
+     bool? isLoading,
+     int? facilityId,
+    String? auth,
+    // int? blockId,
+    // required String categoryIds,
   }) async {
     return _repository.getAffectedPartList(
-      isLoading: isLoading,
-      facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: categoryIds,
+       auth,
+        facilityId,
+        isLoading,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
     );
   }
 
@@ -76,6 +100,14 @@ class WarrantyClaimUsecase {
   Future<List<EmployeeListModel>> getEmployeeList(
       {required bool isLoading, required int? facility_id}) async {
     return _repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+   Future<List<EmployeeListModel2>> getEmployeesList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getEmployeesList(
       isLoading: isLoading,
       facility_id: facility_id,
     );
