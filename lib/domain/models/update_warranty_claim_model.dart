@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-CreateWarrantyClaimModel createWarrantyClaimModelFromJson(String str) =>
-    CreateWarrantyClaimModel.fromJson(json.decode(str));
+UpdateWarrantyClaimModel updateWarrantyClaimModelFromJson(String str) =>
+    UpdateWarrantyClaimModel.fromJson(json.decode(str));
 
-String createWarrantyClaimModelToJson(CreateWarrantyClaimModel data) =>
+String updateWarrantyClaimModelToJson(UpdateWarrantyClaimModel data) =>
     json.encode(data.toJson());
 
-class CreateWarrantyClaimModel {
+class UpdateWarrantyClaimModel {
   int? id;
   int? facilityId;
   int? equipmentId;
@@ -27,13 +27,11 @@ class CreateWarrantyClaimModel {
   int? approverId;
   String? failureTime;
   List<int?>? additionalEmailEmployees;
-  List<ExternalEmails?>? externalEmails;
-  List<SupplierActions?>? supplierActions;
-  int? status;
+  List<ExternalsEmails?>? externalEmails;
+  List<SuppliersActions?>? supplierActions;
 
-
-  CreateWarrantyClaimModel({
-    
+  UpdateWarrantyClaimModel({
+    this.id,
     this.facilityId,
     this.equipmentId,
     this.goodsOrderId,
@@ -53,12 +51,11 @@ class CreateWarrantyClaimModel {
     this.additionalEmailEmployees,
     this.externalEmails,
     this.supplierActions,
-    this.status,
   });
 
-  factory CreateWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
-      CreateWarrantyClaimModel(
-        
+  factory UpdateWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
+      UpdateWarrantyClaimModel(
+        id: json['id'],
         facilityId: json["facilityId"],
         equipmentId: json["equipmentId"],
         goodsOrderId: json["goodsOrderId"],
@@ -75,22 +72,20 @@ class CreateWarrantyClaimModel {
         correctiveActionByBuyer: json['correctiveActionByBuyer'],
         approverId: json['approverId'],
         failureTime: json['failureTime'],
-
         additionalEmailEmployees:json["additionalEmailEmployees"]!=null?
             List<int>.from(json["additionalEmailEmployees"].map((x) => x)):[],
 
-        externalEmails: json["externalEmails"]!=null? List<ExternalEmails>.from(
-            json["externalEmails"]?.map((x) => ExternalEmails.fromJson(x))):[],
+        externalEmails: json["externalEmails"]!=null? List<ExternalsEmails>.from(
+            json["externalEmails"]?.map((x) => ExternalsEmails.fromJson(x))):[],
 
-        supplierActions: json["supplierActions"]!=null? List<SupplierActions>.from(
-            json["supplierActions"]?.map((x) => SupplierActions.fromJson(x))):[],
+        supplierActions: json["supplierActions"]!=null? List<SuppliersActions>.from(
+            json["supplierActions"]?.map((x) => SuppliersActions.fromJson(x))):[],
+
         
-        status: json['status'],
-
       );
 
   Map<String, dynamic> toJson() => {
-        
+        "id": id,
         "facilityId": facilityId,
         "equipmentId": equipmentId,
         "goodsOrderId": goodsOrderId,
@@ -110,12 +105,13 @@ class CreateWarrantyClaimModel {
         "additionalEmailEmployees": List<dynamic>.from(additionalEmailEmployees!.map((x) => x)),
         "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
         "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
-        "status": status,
+
+
       };
 }
 
-class ExternalEmails {
-  ExternalEmails( {
+class ExternalsEmails {
+  ExternalsEmails({
     this.name,
     this.email,
   });
@@ -123,7 +119,7 @@ class ExternalEmails {
   String? name;
   String? email;
 
-  factory ExternalEmails.fromJson(Map<String, dynamic> json) => ExternalEmails(
+  factory ExternalsEmails.fromJson(Map<String, dynamic> json) => ExternalsEmails(
         name: json["name"],
         email: json["email"],
       );
@@ -134,36 +130,33 @@ class ExternalEmails {
       };
 }
 
-class SupplierActions {
-  SupplierActions({
+class SuppliersActions {
+  SuppliersActions({
     this.name,
-    // this.is_required,
+    this.is_required,
     this.required_by_date,
-    this.srNumber,
   });
 
   String? name;
-  // bool? is_required;
+  bool? is_required;
   String? required_by_date;
-  String? srNumber;
 
-  factory SupplierActions.fromJson(Map<String, dynamic> json) => SupplierActions(
+  factory SuppliersActions.fromJson(Map<String, dynamic> json) => SuppliersActions(
         name: json["name"],
-        // is_required: json["is_required"],
+        is_required: json["is_required"],
         required_by_date: json["required_by_date"],
-        srNumber: json['srNumber'],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        // "is_required": is_required,
+        "is_required": is_required,
         "required_by_date": required_by_date,
-        "srNumber": srNumber
       };
 }
 
 
-String addExternalEmailsToJson(ExternalEmails data) => json.encode(data.toJson());
-String addSupplierActionsToJson(SupplierActions data) => json.encode(data.toJson());
+String addExternalsEmailsToJson(ExternalsEmails data) => json.encode(data.toJson());
+String addSuppliersActionsToJson(SuppliersActions data) => json.encode(data.toJson());
+
 
 

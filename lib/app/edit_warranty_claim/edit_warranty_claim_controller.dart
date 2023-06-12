@@ -10,8 +10,10 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_warranty_claim_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
+import 'package:cmms/domain/models/update_warranty_claim_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +31,63 @@ class EditWarrantyClaimController extends GetxController {
 
   final HomeController homeController = Get.find();
 
+  ///Supplier Action Part
+  var supplierActions = <SupplierActions>[].obs;
+  void updateSupplierActionText(
+      String name, String required_by_data,) {
+    supplierActions.add(SupplierActions(
+        name: name,
+        required_by_date: required_by_data,
+        // is_required: is_required
+        ));
+  }
+
+  final TextEditingController supplierActionTextFieldController =
+      TextEditingController();
+
+  ///External Emails Part
+  var externalEmails = <ExternalEmails>[].obs;
+  void updateText(String name, String email) {
+    externalEmails.add(ExternalEmails(email: email, name: name));
+  }
+
+  final TextEditingController serialNoTextFieldController =
+      TextEditingController();
+  final TextEditingController nameTextFieldController = TextEditingController();
+  final TextEditingController emailTextFieldController =
+      TextEditingController();
+
+  ///Supplier Action Date Time For Web
+  var supplierActionDateTimeCtrlrWeb = TextEditingController();
+  var supplierActionDateTimeCtrlrWebBuffer;
+  Rx<DateTime> selectedSupplierActionDateTimeWeb = DateTime.now().obs;
+
+  ///Checkbox
+  RxBool isCheckedRequire = false.obs;
+  RxBool isCheckedDataRequire = false.obs;
+
+  void requireToggleCheckbox() {
+    isCheckedRequire.value = !isCheckedRequire.value;
+    isCheckedDataRequire.value = isCheckedRequire.value;
+    print('Checkbox value ${isCheckedRequire.value}');
+    print(
+        'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
+    // Toggle the checkbox state
+  }
+
   ///Failure Date Time For Web
   var failureDateTimeCtrlrWeb = TextEditingController();
   var failureDateTimeCtrlrWebBuffer;
   Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
+
+  /// Employees List / Additional Email
+  RxList<EmployeeListModel2> employeesList = <EmployeeListModel2>[].obs;
+  Rx<bool> isemployeesListSelected = true.obs;
+  Rx<String> selectedEmployeesList = ''.obs;
+  RxList<int> selectedEmployeeNameIdList = <int>[].obs;
+  RxList<String?> selectedEmployeesDataList = <String>[].obs;
+  RxList<int?> selectedEmployeesIdList = <int>[].obs;
+  int selectedEmployeesId = 0;
 
   ///Warranty Start date Time for web
   var warrantyStartDateTimeCtrlrWeb = TextEditingController();
@@ -53,6 +108,7 @@ class EditWarrantyClaimController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<bool> isEquipmentCategorySelected = true.obs;
   Rx<String> selectedEquipmentCategory = ''.obs;
+  int selectedEquipmentCategoryId = 0;
 
   RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
   RxList<int> selectedEquipmentList = <int>[].obs;
@@ -65,11 +121,13 @@ class EditWarrantyClaimController extends GetxController {
   Rx<String> selectedEquipmentName = ''.obs;
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
+  RxList<int?> selectedEquipmentNameId = <int?>[].obs;
+
   // String? selectedEquipmentName = '';
 
   //Affected Part Equipemnt Name lIst
-  RxList<InventoryModel2?> affectedPartEqipmentNameList =
-      <InventoryModel2>[].obs;
+  RxList<InventoryCategoryModel?> affectedPartEqipmentNameList =
+      <InventoryCategoryModel>[].obs;
   RxList<String?> selectedAffectedpartEquipmentNameList = <String>[].obs;
   RxList<int?> selectedAffectedPartEquipmentIdList = <int>[].obs;
   Rx<String> selectedAffectedPart = ''.obs;
@@ -233,9 +291,9 @@ class EditWarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getAffectedPartList();
     });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getWarrantyClaimList();
-    // });
+    Future.delayed(Duration(seconds: 1), () {
+      getEmployeesList();
+    });
     Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
     });
@@ -335,6 +393,25 @@ class EditWarrantyClaimController extends GetxController {
     }
   }
 
+  void getEmployeesList() async {
+    employeesList.value = <EmployeeListModel2>[];
+    final _employeesList = await editWarrantyClaimPresenter.getEmployeesList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: 45,
+    );
+    print('Employees List:$_employeesList');
+    for (var employees_list in _employeesList) {
+      employeesList.add(employees_list);
+    }
+    // supplierNameList = _supplierNameList;
+    // paginationBusinessListController = PaginationController(
+    //   rowCount: supplierNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['employee_list']);
+  }
+
   Future<void> getuserAccessData() async {
     final _userAccessList =
         await editWarrantyClaimPresenter.getUserAccessList();
@@ -351,6 +428,13 @@ class EditWarrantyClaimController extends GetxController {
     selectedEquipmentCategoryIdList.value = <int>[];
     for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
       selectedEquipmentCategoryIdList.add(_selectedCategoryId);
+    }
+  }
+
+  void employeesNameSelected(_selectedEmployeesNameIds) {
+    selectedEmployeeNameIdList.value = <int>[];
+    for (var _selectedEmployeesId in _selectedEmployeesNameIds) {
+      selectedEmployeeNameIdList.add(_selectedEmployeesId);
     }
   }
 
@@ -383,6 +467,20 @@ class EditWarrantyClaimController extends GetxController {
     }
   }
 
+  Future<void> getAffectedPartList({String? facilityId}) async {
+    affectedPartEqipmentNameList.value = <InventoryCategoryModel>[];
+    final _affectedPartList =
+        await editWarrantyClaimPresenter.getAffectedPartList(
+      isLoading: true,
+    );
+
+    if (_affectedPartList != null) {
+      for (var affectedPart in _affectedPartList) {
+        affectedPartEqipmentNameList.add(affectedPart);
+      }
+    }
+  }
+
   void getInventoryList() async {
     eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await editWarrantyClaimPresenter.getInventoryList(
@@ -402,25 +500,36 @@ class EditWarrantyClaimController extends GetxController {
     update(['inventory_list']);
   }
 
-  void getAffectedPartList() async {
-    affectedPartEqipmentNameList.value = <InventoryModel2>[];
-    final _affectedPartList =
-        await editWarrantyClaimPresenter.getAffectedPartList(
-      isLoading: true,
-      categoryIds: categoryIds,
-      facilityId: facilityId,
-    );
-    //  print('equipment Name List:$inventoryNameList');
-    for (var affected_part_list in _affectedPartList) {
-      affectedPartEqipmentNameList.add(affected_part_list);
-    }
-    // inventoryList = _affectedPartList;
-    // paginationController = PaginationController(
-    //   rowCount: eqipmentNameList.length,
-    //   rowsPerPage: 10,
-    // );
-    update(['inventory_list']);
-  }
+  // void getAffectedPartList() async {
+  //   // affectedPartEqipmentNameList.value = <InventoryModel2>[];
+  //   // final _affectedPartList =
+  //   //     await editWarrantyClaimPresenter.getAffectedPartList(
+  //   //   isLoading: true,
+  //   //   categoryIds: categoryIds,
+  //   //   facilityId: facilityId,
+  //   // );
+  //   equipmentCategoryList.value = <InventoryCategoryModel>[];
+  //   final _equipmentCategoryList =
+  //       await editWarrantyClaimPresenter.getAffectedPartList(
+  //     isLoading: true,
+  //   );
+
+  //   if (_equipmentCategoryList != null) {
+  //     for (var equimentCategory in _equipmentCategoryList) {
+  //       equipmentCategoryList.add(equimentCategory);
+  //     }
+  //   }
+  //   //  print('equipment Name List:$inventoryNameList');
+  //   // for (var affected_part_list in _affectedPartList) {
+  //   //   affectedPartEqipmentNameList.add(affected_part_list);
+  //   // }
+  //   // inventoryList = _affectedPartList;
+  //   // paginationController = PaginationController(
+  //   //   rowCount: eqipmentNameList.length,
+  //   //   rowsPerPage: 10,
+  //   // );
+  //   update(['inventory_list']);
+  // }
 
   // void getBusinessList() async {
   //   supplierNameList.value = <BusinessListModel>[];
@@ -598,7 +707,7 @@ class EditWarrantyClaimController extends GetxController {
           // }
         }
         break;
-      case RxList<InventoryModel2>:
+      case RxList<InventoryCategoryModel>:
         {
           // for (var workAreaName in selectedWorkAreaNameList) {
           int affectedPartIndex =
@@ -655,6 +764,35 @@ class EditWarrantyClaimController extends GetxController {
           }
           selectedEmployeeList.value = value;
           print('Approver Id: $selectedApproverId');
+
+          // }
+        }
+        break;
+      case RxList<InventoryCategoryModel>:
+        {
+          // for (var employeeDataList in selectedEmployeeDataList) {
+          int equipmentListIndex =
+              equipmentCategoryList.indexWhere((x) => x!.name == value);
+          selectedEquipmentCategoryId =
+              equipmentCategoryList[equipmentListIndex]?.id ?? 0;
+
+          print('Equipment Category Id: $equipmentListIndex');
+
+          // }
+        }
+        break;
+      case RxList<EmployeeListModel2>:
+        {
+          // for (var employeeDataList in selectedEmployeeDataList) {
+          int employeesListIndex =
+              employeesList.indexWhere((x) => x.name == value);
+          selectedEmployeesId = employeesList[employeesListIndex].id ?? 0;
+
+          // if (selectedApproverId > 0) {
+          //   isemployeeListSelected.value = true;
+          // }
+          // selectedEmployeeList.value = value;
+          print('Additional Email Employees Id: $selectedEmployeesId');
 
           // }
         }
@@ -739,68 +877,130 @@ class EditWarrantyClaimController extends GetxController {
   //   }
   // }
 
-  // ///Create Warranty Claim
-  // void createWarrantyClaim() async {
-  //   {
-  //     checkForm();
-  //     if (isFormInvalid.value) {
-  //       return;
-  //     }
+  ///Update Warranty Claim
+  void updateWarrantyClaim() async {
+    {
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
 
-  //     String _warrantyClaimTitle =
-  //         htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
-  //     String _description =
-  //         htmlEscape.convert(warrantyClaimBriefDescTextController.text.trim());
-  //     String _immediateCorrectiveByBuyer = htmlEscape
-  //         .convert(immediateCorrectiveActionTextController.text.trim());
-  //     String _requestToBuyer =
-  //         htmlEscape.convert(requestManufactureTextController.text.trim());
-  //     // String _costOfReplacement =
-  //     //     htmlEscape.convert(costOfReplacementTextController.text.trim());
-  //     String _orderReferenceNo =
-  //         htmlEscape.convert(orderReferenceNoTextController.text.trim());
-  //     String _affectedSerialNo =
-  //         htmlEscape.convert(affectedSerialNoTextController.text.trim());
+      String _warrantyClaimTitle =
+          htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
+      String _description =
+          htmlEscape.convert(warrantyClaimBriefDescTextController.text.trim());
+      String _immediateCorrectiveByBuyer = htmlEscape
+          .convert(immediateCorrectiveActionTextController.text.trim());
+      String _requestToBuyer =
+          htmlEscape.convert(requestManufactureTextController.text.trim());
+      // String _costOfReplacement =
+      //     htmlEscape.convert(costOfReplacementTextController.text.trim());
+      String _orderReferenceNo =
+          htmlEscape.convert(orderReferenceNoTextController.text.trim());
+      String _affectedSerialNo =
+          htmlEscape.convert(affectedSerialNoTextController.text.trim());
 
-  //     int costOfReplacement =
-  //         int.parse(costOfReplacementTextController.text.trim());
+      int costOfReplacement =
+          int.parse(costOfReplacementTextController.text.trim());
 
-  //     // int? sopFileId = createSOPModel2.sop_fileId;
-  //     // // int? jsaFileId = data.jsa_fileId;
-  //     // print('SOPFileId:$sopFileId');
+      // int? sopFileId = createSOPModel2.sop_fileId;
+      // // int? jsaFileId = data.jsa_fileId;
+      // print('SOPFileId:$sopFileId');
+      List<int?> idList = eqipmentNameList.map((obj) => obj!.id).toList();
+      // int? id = selectedEquipmentName.value
+      print('EquipmentCategoryId:$idList');
 
-  //     CreateWarrantyClaimModel createwarrantyClaimModel =
-  //         CreateWarrantyClaimModel(
-  //       facilityId: facilityId,
-  //       equipmentId: selectedEquipmentnameId,
-  //       goodsOrderId: 14205,
-  //       affectedPart: selectedAffectedPartName,
-  //       orderReference: _orderReferenceNo,
-  //       affectedSrNo: _affectedSerialNo,
-  //       costOfReplacement: costOfReplacement,
-  //       currencyId: selectedCurrencyId,
-  //       warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
-  //       warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
-  //       warrantyClaimTitle: _warrantyClaimTitle,
-  //       warrantyDescription: _description,
-  //       correctiveActionByBuyer: _immediateCorrectiveByBuyer,
-  //       requestToSupplier: _requestToBuyer,
-  //       approverId: selectedApproverId,
-  //       failureTime: failureDateTimeCtrlrWebBuffer,
-  //     );
+      UpdateWarrantyClaimModel updatewarrantyClaimModel = UpdateWarrantyClaimModel(
+          id: wc_id,
+          facilityId: facilityId,
+          equipmentId: selectedEquipmentnameId, // need id from backend
+          // equipmentId: selectedEquipmentNameId.value,
+          goodsOrderId: 14205,
+          affectedPart: selectedAffectedPart.value,
+          // affectedPart: "SWITCH",
+          orderReference: _orderReferenceNo,
+          affectedSrNo: _affectedSerialNo,
+          costOfReplacement: costOfReplacement,
+          currencyId: selectedCurrencyId, // need id from backend
+          warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
+          warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
+          warrantyClaimTitle: _warrantyClaimTitle,
+          warrantyDescription: _description,
+          correctiveActionByBuyer: _immediateCorrectiveByBuyer,
+          requestToSupplier: _requestToBuyer,
+          approverId: selectedApproverId, // need id from backend
+          failureTime: failureDateTimeCtrlrWebBuffer,
+          additionalEmailEmployees: [
+            5
+          ],
+          externalEmails: [
+            ExternalsEmails(name: "Himanshu Seth", email: "himanshu@gmail.com")
+          ],
+          supplierActions: [
+            SuppliersActions(
+                name: "Root Cause Analysis Report",
+                is_required: true,
+                required_by_date: "2023-06-02")
+            // {
+            //     name: "Root Cause Analysis Report",
+            //     is_required: true,
+            //     required_by_date: "2023-06-02"
+            // }
+          ]
 
-  //     var warrantyClaimJsonString = [createwarrantyClaimModel.toJson()];
-  //     Map<String, dynamic>? responseCreateWarrantyClaim =
-  //         await warrantyClaimPresenter.createWarrantyClaim(
-  //       createWarrantyClaim: warrantyClaimJsonString,
-  //       isLoading: true,
-  //     );
+          //        id: 107,
+          //   facilityId: 45,
+          //   equipmentId: 13221,
+          //   goodsOrderId: 14205,
+          //   affectedPart: "Switch",
+          //   orderReference: "ORDER14205",
+          //   affectedSrNo: "25518/09/SWITCH",
+          //   costOfReplacement: 5000,
+          //   currencyId: 69,
+          //   warrantyStartAt: "2018-04-01",
+          //   warrantyEndAt: "2023-04-01",
+          //   warrantyClaimTitle: "Burnt Switch Replacement",
+          //  warrantyDescription: "A switch in the ACDB is burnt. Please replace it.",
+          //   correctiveActionByBuyer: "Buyer will have to replace the switch.",
+          //   requestToSupplier: "Please give another switch at a discount.",
+          //   approverId: 1,
+          //   failureTime: "2023-05-29",
+          //   additionalEmailEmployees: [5],
+          //   externalEmails: [
+          //     ExternalsEmails(
+          //       name: "Himanshu Seth",
+          //       email: "himanshu@gmail.com"
+          //     )
 
-  //     if (responseCreateWarrantyClaim == null) {
-  //       //  CreateNewPermitDialog();
-  //       // showAlertDialog();
-  //     }
-  //     print('Create Warranty Claim data: $warrantyClaimJsonString');
-  //   }
-  // }
+          //   ],
+          //   supplierActions: [
+          //     SuppliersActions(
+          //        name: "Root Cause Analysis Report",
+          //        is_required: true,
+          //        required_by_date: "2023-06-02"
+
+          //     )
+          //       // {
+          //       //     name: "Root Cause Analysis Report",
+          //       //     is_required: true,
+          //       //     required_by_date: "2023-06-02"
+          //       // }
+          //   ]
+
+          );
+
+      var warrantyClaimJsonString = updatewarrantyClaimModel.toJson();
+      Map<String, dynamic>? responseUpdateWarrantyClaim =
+          await editWarrantyClaimPresenter.updateWarrantyClaim(
+        updateWarrantyClaim: warrantyClaimJsonString,
+        isLoading: true,
+      );
+
+      if (responseUpdateWarrantyClaim == null) {
+        //  CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print('Update Warranty Claim data: $warrantyClaimJsonString');
+    }
+  }
 }

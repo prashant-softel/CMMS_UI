@@ -23,7 +23,9 @@ import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
@@ -428,6 +430,50 @@ class Repository {
     }
   }
 
+   //Update Warranty claim
+  Future<Map<String, dynamic>> updateWarrantyClaim(
+    updateWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Warranty Claim: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }else{
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
     try {
@@ -439,12 +485,12 @@ class Repository {
 
   // Mixpanel? mixPanel;
 
-  Future<List<StateModel?>?> getStateList(int countryCode) async {
+  Future<List<CountryState?>?> getStateList(int countryCode) async {
     try {
       final res = await _dataRepository.getStateList(countryCode);
 
       if (!res.hasError) {
-        return stateFromJson(res.data);
+        return countrystateFromJson(res.data);
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getStateList');
@@ -515,37 +561,37 @@ class Repository {
     }
   }
 
-  Future<List<InventoryModel2>> getAffectedPartList({
-    required int? facilityId,
-    int? blockId,
-    String? categoryIds,
-    required bool isLoading,
-  }) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAffectedPartList(
-        facilityId: facilityId,
-        blockId: blockId,
-        categoryIds: categoryIds,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      // print('Inventory List Data: ${res.data}');
+//   Future<List<InventoryModel2>> getAffectedPartList({
+//     required int? facilityId,
+//     int? blockId,
+//     String? categoryIds,
+//     required bool isLoading,
+//   }) async {
+//     try {
+//       final auth = await getSecuredValue(LocalKeys.authToken);
+//       final res = await _dataRepository.getAffectedPartList(
+//         facilityId: facilityId,
+//         // blockId: blockId,
+//         // categoryIds: categoryIds,
+//         isLoading: isLoading,
+//         auth: auth,
+//       );
+//       // print('Inventory List Data: ${res.data}');
 
-      if (!res.hasError) {
-        var affectedPartList = inventoryModel2FromJson(res.data);
-        return affectedPartList;
-      }
-//
-      else {
-        Utility.showDialog(res.errorCode.toString() + 'getAffectedPartList');
-        return [];
-      }
-    } catch (error) {
-      print(error.toString());
-      return [];
-    }
-  }
+//       if (!res.hasError) {
+//         var affectedPartList = inventoryModel2FromJson(res.data);
+//         return affectedPartList;
+//       }
+// //
+//       else {
+//         Utility.showDialog(res.errorCode.toString() + 'getAffectedPartList');
+//         return [];
+//       }
+//     } catch (error) {
+//       print(error.toString());
+//       return [];
+//     }
+//   }
 
   Future<List<BusinessListModel>> getBusinessList({
     required int? businessType,
@@ -700,9 +746,46 @@ class Repository {
     }
   }
 
+  /// Inventory Details
+  Future<InventoryDetailsModel?> getInventoryDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"inventorydetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final InventoryDetailsModel _inventoryDetailModel =
+              inventoryDetailsModelFromJson(res.data);
+
+          var responseMap = _inventoryDetailModel;
+          print({"InventoryDetailsResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'InventoryDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+
+
   ///Add Inventory Details
 
-  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail({
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail({
     bool? isLoading,
     int? id,
   }) async {
@@ -717,31 +800,20 @@ class Repository {
       print({"AddInventorydetail", res.data});
 
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          final jsonPreventiveCheckPointModels = jsonDecode(res.data);
+        final AddInventoryDetailsModel _addInventoryDetailModel =
+            addInventoryDetailModelFromJson(res.data);
 
-          final List<AddInventoryDetailsModel> _addInventoryDetailModel =
-              jsonPreventiveCheckPointModels
-                  .map<AddInventoryDetailsModel>((m) =>
-                      AddInventoryDetailsModel.fromJson(
-                          Map<String, dynamic>.from(m)))
-                  .toList();
-
-          return _addInventoryDetailModel;
-          // final AddInventoryDetailsModel _addInventoryDetailModel =
-          //     addInventoryDetailModelFromJson(res.data[0]);
-
-          // var responseMap = _addInventoryDetailModel;
-          // print({"ViewWarrantyResponseData", responseMap});
-          // return responseMap;
-        }
+        // var responseMap = _addInventoryDetailModel;
+        print({"ViewWarrantyResponseData", _addInventoryDetailModel});
+        return _addInventoryDetailModel;
       } else {
         Utility.showDialog(res.errorCode.toString() + 'AddInventoryDetail');
-        return [];
+        //return '';
       }
+      return null;
     } catch (error) {
-      log(error.toString());
-      return [];
+      print(error.toString());
+      return null;
     }
   }
 
@@ -831,6 +903,36 @@ class Repository {
       return [];
     }
   }
+
+  ///Employees List
+  Future<List<EmployeeListModel2>> getEmployeesList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getEmployeesList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Employee List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var employeeList = employeeListModel2FromJson(res.data);
+        return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
 
   Future<List<EmployeeListModel>> getEmployeePermitList({
     required int? facility_id,
@@ -1023,7 +1125,7 @@ class Repository {
   }
 
   Future<List<SPVListModel>> getSPVList({
-    required int? job_type_id,
+    int? job_type_id,
     required bool isLoading,
   }) async {
     try {
@@ -1562,6 +1664,44 @@ class Repository {
             jsonInventoryCategoryModels
                 .map<InventoryCategoryModel>(
                   (m) => InventoryCategoryModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+
+        return _inventoryCategoryModelList;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getInventoryCategoryList');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+   Future<List<InventoryCategoryModel2?>?> getAffectedPartList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryCategoryList(
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryCategoryModels = jsonDecode(res.data);
+        final List<InventoryCategoryModel2> _inventoryCategoryModelList =
+            jsonInventoryCategoryModels
+                .map<InventoryCategoryModel2>(
+                  (m) => InventoryCategoryModel2.fromJson(
                     Map<String, dynamic>.from(m),
                   ),
                 )
@@ -3633,4 +3773,27 @@ class Repository {
       print(error.toString());
     }
   }
+  Future<bool> createFacilityType(
+      {bool? isLoading, facilitylistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createFacilityType(
+          auth: auth,
+          isLoading: isLoading,
+          facilitylistJsonString: facilitylistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //end
 }

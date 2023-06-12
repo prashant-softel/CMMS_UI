@@ -6,7 +6,7 @@ class SplashPresenter {
   SplashPresenter(this.splashUsecase);
   SplashUsecase splashUsecase;
 
-  Future<List<StateModel?>?> getStateList(int countryCode) async {
+  Future<List<CountryState?>?> getStateList(int countryCode) async {
     return await splashUsecase.getStateList(countryCode);
   }
 }
