@@ -2,6 +2,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
@@ -30,6 +31,27 @@ class EditWarrantyClaimPresenter {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
+  }
+
+  Future<List<EmployeeListModel2>> getEmployeesList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return editWarrantyClaimUsecase.getEmployeesList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+
+  Future<Map<String, dynamic>?> updateWarrantyClaim({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return editWarrantyClaimUsecase.updateWarrantyClaim(
+      updateWarrantyClaim: updateWarrantyClaim,
+      isLoading: isLoading,
+    );
   }
 
   Future<List<InventoryModel>> getInventoryList({
@@ -84,6 +106,14 @@ class EditWarrantyClaimPresenter {
       await editWarrantyClaimUsecase.getInventoryCategoryList(
       );
 
+   Future<List<InventoryCategoryModel?>?> getAffectedPartList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await editWarrantyClaimUsecase.getInventoryCategoryList(
+      );
+
   // Future<List<WarrantyClaimModel>>getWarrantyClaimList({
   //   required bool isLoading,
   //   required int? facilityId,
@@ -118,19 +148,19 @@ class EditWarrantyClaimPresenter {
   //   );
   // }
 
-   Future<List<InventoryModel2>> getAffectedPartList({
-    required bool isLoading,
-    required int? facilityId,
-    int? blockId,
-    required String categoryIds,
-  }) async {
-    return editWarrantyClaimUsecase.getAffectedPartList(
-      isLoading: isLoading,
-      facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: categoryIds,
-    );
-  }
+  //  Future<List<InventoryModel2>> getAffectedPartList({
+  //   required bool isLoading,
+  //   required int? facilityId,
+  //   int? blockId,
+  //   required String categoryIds,
+  // }) async {
+  //   return editWarrantyClaimUsecase.getAffectedPartList(
+  //     isLoading: isLoading,
+  //     facilityId: facilityId,
+  //     blockId: blockId,
+  //     categoryIds: categoryIds,
+  //   );
+  // }
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await editWarrantyClaimUsecase.getFacilityList();

@@ -944,6 +944,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                 ),
                               ),
                             ),
+                              
                                SizedBox(
                                         height: 200,
                                         width:
