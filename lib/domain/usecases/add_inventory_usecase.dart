@@ -26,7 +26,7 @@ class AddInventoryUsecase {
     return await _repository.generateToken();
   }
 
-  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail({
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail({
     bool? isLoading,
     required int id,
   }) async =>

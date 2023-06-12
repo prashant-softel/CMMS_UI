@@ -1,9 +1,9 @@
 import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
-import 'package:cmms/app/add_inventory/view/custom_text_field.dart';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
@@ -73,9 +73,22 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "    Description"),
-                          CustomTextFieldForInventory(
-                              textController:
-                                  controller.warrentyDescriptionCtrlr),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Color(0xFE50000),
+                              width: 0.5,
+                            )),
+                            height: 45,
+                            margin: Dimens.edgeInsets16,
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width / 4,
+                              minWidth: 100,
+                            ),
+                            child: LoginCustomTextfield(
+                                textController:
+                                    controller.warrentyDescriptionCtrlr),
+                          ),
                         ],
                       ),
                     ],
@@ -103,8 +116,20 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(title: "Certificate Number"),
-                          CustomTextFieldForInventory(
-                            textController: controller.certificateNoCtrlr,
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Color(0xFE50000),
+                              width: 0.5,
+                            )),
+                            height: 45,
+                            margin: Dimens.edgeInsets16,
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width / 4,
+                              minWidth: 100,
+                            ),
+                            child: LoginCustomTextfield(
+                                textController: controller.certificateNoCtrlr),
                           ),
                         ],
                       ),

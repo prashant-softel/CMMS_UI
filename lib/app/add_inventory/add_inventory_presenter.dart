@@ -27,7 +27,7 @@ class AddInventoryPresenter {
   Future<List<TypePermitModel?>?> getTypePermitList() async =>
       await addInventoryUsecase.getTypePermitList(true);
 
-  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail(
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail(
       {bool? isLoading, required int id}) async {
     return addInventoryUsecase.getAddInventoryDetail(
       id: id,

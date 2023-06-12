@@ -785,7 +785,7 @@ class Repository {
 
   ///Add Inventory Details
 
-  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail({
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail({
     bool? isLoading,
     int? id,
   }) async {
@@ -800,31 +800,20 @@ class Repository {
       print({"AddInventorydetail", res.data});
 
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          final jsonPreventiveCheckPointModels = jsonDecode(res.data);
+        final AddInventoryDetailsModel _addInventoryDetailModel =
+            addInventoryDetailModelFromJson(res.data);
 
-          final List<AddInventoryDetailsModel> _addInventoryDetailModel =
-              jsonPreventiveCheckPointModels
-                  .map<AddInventoryDetailsModel>((m) =>
-                      AddInventoryDetailsModel.fromJson(
-                          Map<String, dynamic>.from(m)))
-                  .toList();
-
-          return _addInventoryDetailModel;
-          // final AddInventoryDetailsModel _addInventoryDetailModel =
-          //     addInventoryDetailModelFromJson(res.data[0]);
-
-          // var responseMap = _addInventoryDetailModel;
-          // print({"ViewWarrantyResponseData", responseMap});
-          // return responseMap;
-        }
+        // var responseMap = _addInventoryDetailModel;
+        print({"ViewWarrantyResponseData", _addInventoryDetailModel});
+        return _addInventoryDetailModel;
       } else {
         Utility.showDialog(res.errorCode.toString() + 'AddInventoryDetail');
-        return [];
+        //return '';
       }
+      return null;
     } catch (error) {
-      log(error.toString());
-      return [];
+      print(error.toString());
+      return null;
     }
   }
 
