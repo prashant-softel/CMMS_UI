@@ -1,15 +1,14 @@
-import 'package:cmms/app/calibration_detail/calibration_detail_controller.dart';
-import 'package:cmms/app/home/home.dart';
+import 'package:cmms/app/mrs/view/mrs_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
+import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import 'calibration_detail_content_web.dart';
+import '../Mrs_list_controller.dart';
 
-class CalibrationDetailScreen extends GetView<CalibrationDetailController> {
-  CalibrationDetailScreen({super.key});
-  var homeController = Get.find<HomeController>();
+class MrsListScreen extends GetView<MrsListController> {
+  MrsListScreen({super.key});
 
   ///
   @override
@@ -23,10 +22,14 @@ class CalibrationDetailScreen extends GetView<CalibrationDetailController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Calibration Detail'),
+              title: Text('Mrs'),
               centerTitle: true,
               elevation: 0,
             ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -38,9 +41,14 @@ class CalibrationDetailScreen extends GetView<CalibrationDetailController> {
               Expanded(
                 child: Column(
                   children: [
+                    // if (Responsive.isMobile(context) ||
+                    //     Responsive.isTablet(context))
+                    //   Expanded(
+                    //     child: PreventiveChecklistListContentMobile(),
+                    //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: CalibrationDetailContentWeb(),
+                        child: MrsListContentWeb(),
                       )
                   ],
                 ),

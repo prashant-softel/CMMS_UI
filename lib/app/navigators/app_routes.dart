@@ -69,6 +69,8 @@ abstract class Routes {
   static const frequencyListScreen = _Paths.frequencyListScreen;
   static const roleListScreen = _Paths.roleListScreen;
   static const warrantyType = _Paths.warrantyType;
+  static const calibrationViewScreen = _Paths.calibrationViewScreen;
+  static const mrsListScreen = _Paths.mrsListScreen;
 }
 
 abstract class _Paths {
@@ -136,6 +138,8 @@ abstract class _Paths {
   static const roleListScreen = '/role-Type-List-Screen';
   static const warrantyType = '/warranty-Type-List-Screen';
   static const addInventoryScreen = '/add-inventory-screen';
+  static const calibrationViewScreen = '/calibration-view-screen';
+  static const mrsListScreen = '/mrs-list-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

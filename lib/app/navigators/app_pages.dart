@@ -11,10 +11,13 @@ import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
+import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
+import 'package:cmms/app/mrs/mrs_list_binding.dart';
+import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
@@ -69,6 +72,7 @@ import '../business_type_List/business_type_list_binding.dart';
 import '../business_type_List/view/business_type_list_screen.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
+import '../calibration_view/view/calibration_view_screen.dart';
 import '../country_list/country_list_binding.dart';
 import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
@@ -449,6 +453,16 @@ class AppPages {
       name: _Paths.warrantyType,
       page: WarrantyListScreen.new,
       binding: WarrantyListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.calibrationViewScreen,
+      page: CalibrationViewScreen.new,
+      binding: CalibrationViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsListScreen,
+      page: MrsListScreen.new,
+      binding: MrsListBinding(),
     ),
   ];
 }

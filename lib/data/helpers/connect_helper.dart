@@ -1597,6 +1597,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> rejectCalibration({
+    required String auth,
+    bool? isLoading,
+    required rejectCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RejectCalibration',
+      Request.put,
+      rejectCalibrationtoJsonString,
+      isLoading ?? true,
+      {
+        // 'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getPMScheduleData({
     required String auth,
     bool? isLoading,
@@ -2211,6 +2230,25 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> startCalibration({
+    required String auth,
+    bool? isLoading,
+    required calibrationId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/StartCalibration?calibration_id=$calibrationId',
+      Request.put,
+      calibrationId,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 }

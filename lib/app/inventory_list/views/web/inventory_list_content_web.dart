@@ -223,43 +223,42 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                     return Column(
                                                       children: [
                                                         Text('${val.name}'),
-                                                        // Spacer(),
-                                                        // Align(
-                                                        //   alignment: Alignment
-                                                        //       .centerRight,
-                                                        //   child: Container(
-                                                        //     padding: Dimens
-                                                        //         .edgeInsets8_2_8_2,
-                                                        //     decoration:
-                                                        //         BoxDecoration(
-                                                        //       color: val.requirementStatus ==
-                                                        //               1
-                                                        //           ? ColorValues
-                                                        //               .appRedColor
-                                                        //           : ColorValues
-                                                        //               .appGreenColor,
-                                                        //       borderRadius:
-                                                        //           BorderRadius
-                                                        //               .circular(
-                                                        //                   4),
-                                                        //     ),
-                                                        //     child: Text(
-                                                        //       val.name == 1
-                                                        //           ? 'requirementRejected'
-                                                        //               .tr
-                                                        //           : 'requirementAccepted'
-                                                        //               .tr,
-                                                        //       style: Styles
-                                                        //           .white10
-                                                        //           .copyWith(
-                                                        //         color: Colors
-                                                        //             .white,
-                                                        //       ),
-                                                        //     ),
-                                                        //   ),
-                                                        // ),
-
-                                                        // Dimens.boxHeight10,
+                                                        Spacer(),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .centerRight,
+                                                          child: Container(
+                                                            padding: Dimens
+                                                                .edgeInsets8_2_8_2,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: val.requirementStatus ==
+                                                                      1
+                                                                  ? ColorValues
+                                                                      .appRedColor
+                                                                  : ColorValues
+                                                                      .appGreenColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4),
+                                                            ),
+                                                            child: Text(
+                                                              val.name == 1
+                                                                  ? 'requirementRejected'
+                                                                      .tr
+                                                                  : 'requirementAccepted'
+                                                                      .tr,
+                                                              style: Styles
+                                                                  .white10
+                                                                  .copyWith(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Dimens.boxHeight10,
                                                       ],
                                                     );
                                                   })

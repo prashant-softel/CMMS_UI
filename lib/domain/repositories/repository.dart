@@ -2607,6 +2607,30 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           requestCalibration: requestCalibration);
+      //  print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        // return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+      }
+      // return true;
+    } catch (error) {
+      log(error.toString());
+      // return false;
+    }
+  }
+
+  Future<void> rejectCalibration(
+      {bool? isLoading, rejectCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -3588,6 +3612,25 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<void> startCalibration(Object calibrationId, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.startCalibration(
+        auth: auth,
+        calibrationId: calibrationId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
 }
