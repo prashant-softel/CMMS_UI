@@ -325,6 +325,76 @@ class AddInventoryController extends GetxController {
     }
   }
 
+  Future<bool> updateInventory() async {
+    String _serialNoCtrlr = serialNoCtrlr.text.trim();
+    String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+    String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
+    String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
+    String _discriptionCtrlr = discriptionCtrlr.text.trim();
+    String _modelNoCtrlr = modelNoCtrlr.text.trim();
+    String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
+    String _costCtrlr = costCtrlr.text.trim();
+    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+    String _expireDateTc = expireDateTc.text.trim();
+    String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
+
+    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+        warrantyDescription: _warrentyDescriptionCtrlr,
+        warrantyProviderId: selectedmanufacturerNameId,
+        warrantyStatus: 1,
+        warrantyType: selectedWarrentyNameId,
+        warrrantyTermType: selectedwarrantyUsageTermNameId,
+        // meterLimit: 1,
+        // meterUnit: 1,
+        certificateNumber: int.tryParse(_certificateNoCtrlr),
+        expiryDate: "2030-12-31",
+        // startDate///  is missing
+        warrantyDiscription: _warrentyDescriptionCtrlr);
+
+    AddInventoryRequestModel addInventoryRequestModel =
+        AddInventoryRequestModel(
+            id: id,
+            name: _assetsNameCtrlr,
+            description: _discriptionCtrlr,
+            assetdescription: _assesDiscriptionCtrlr,
+            typeId: selectedTypeNameId,
+            statusId: selectedStatusNameId,
+            facilityId: facilityId,
+            supplierId: selectedsupplierrNameId,
+            manufacturerId: selectedmanufacturerNameId,
+            blockId: selectedBlockListId,
+            categoryId: selectedEquipmentCategoryNameId,
+            currency: selectedUnitCurrency.value,
+            cost: int.tryParse(_costCtrlr),
+            model: _modelNoCtrlr,
+            serialNumber: _serialNoCtrlr,
+            parentId: selectedEquipmentnameId,
+            calibrationFrequency: selectedfrequencyId,
+            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
+            calibrationLastDate: "2023-01-10",
+            calibrationFirstDueDate: "2023-01-10",
+            calibrationFrequencyType: 2,
+            acCapacity: 2000,
+            dcCapacity: 5000,
+            multiplier: 3,
+            customerId: 1,
+            operatorId: 3,
+            ownerId: 2,
+            stockCount: 50,
+            moduleQuantity: 15,
+            attachments: null);
+    var addInventoryJsonString = addInventoryRequestModel
+        .toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"updateJsonString", addInventoryJsonString});
+    await addInventoryPresenter.updateInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
+
   void getInventoryList() async {
     eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await addInventoryPresenter.getInventoryList(
@@ -420,6 +490,7 @@ class AddInventoryController extends GetxController {
 
     AddInventoryRequestModel addInventoryRequestModel =
         AddInventoryRequestModel(
+            id: 0,
             name: _assetsNameCtrlr,
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,

@@ -1,4 +1,5 @@
 class AddInventoryRequestModel {
+  int? id;
   String? name;
   String? description;
   int? typeId;
@@ -32,6 +33,7 @@ class AddInventoryRequestModel {
 
   AddInventoryRequestModel(
       {this.name,
+      this.id,
       this.description,
       this.typeId,
       this.statusId,
@@ -63,6 +65,8 @@ class AddInventoryRequestModel {
       this.lstWarrantyDetail});
 
   AddInventoryRequestModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+
     name = json['name'];
     description = json['description'];
     assetdescription = json['assetdescription'];
@@ -103,6 +107,7 @@ class AddInventoryRequestModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data["id"] = this.id;
     data['name'] = this.name;
     data['description'] = this.description;
     data['assetdescription'] = this.assetdescription;

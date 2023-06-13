@@ -853,7 +853,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
     updateWarrantyClaim,
@@ -908,8 +907,6 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
-
-  
 
   Future<ResponseModel> getAddInventoryDetail({
     required String auth,
@@ -1518,6 +1515,18 @@ class DataRepository extends DomainRepository {
     addInventoryJsonString,
   }) async {
     var response = await connectHelper.AddInventory(
+        auth: auth,
+        isLoading: isLoading,
+        addInventoryJsonString: addInventoryJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateInventory({
+    auth,
+    bool? isLoading,
+    addInventoryJsonString,
+  }) async {
+    var response = await connectHelper.updateInventory(
         auth: auth,
         isLoading: isLoading,
         addInventoryJsonString: addInventoryJsonString);

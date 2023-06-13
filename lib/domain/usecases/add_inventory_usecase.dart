@@ -207,4 +207,10 @@ class AddInventoryUsecase {
   }) async =>
       await _repository.AddInventory(
           isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
+  Future<bool> updateInventory({
+    addInventoryJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateInventory(
+          isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
 }

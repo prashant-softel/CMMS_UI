@@ -430,7 +430,7 @@ class Repository {
     }
   }
 
-   //Update Warranty claim
+  //Update Warranty claim
   Future<Map<String, dynamic>> updateWarrantyClaim(
     updateWarrantyClaim,
     bool? isLoading,
@@ -460,7 +460,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-        }else{
+        } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
@@ -781,8 +781,6 @@ class Repository {
     }
   }
 
-
-
   ///Add Inventory Details
 
   Future<AddInventoryDetailsModel?> getAddInventoryDetail({
@@ -932,7 +930,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<EmployeeListModel>> getEmployeePermitList({
     required int? facility_id,
@@ -1683,7 +1680,7 @@ class Repository {
     }
   }
 
-   Future<List<InventoryCategoryModel2?>?> getAffectedPartList(
+  Future<List<InventoryCategoryModel2?>?> getAffectedPartList(
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -3715,6 +3712,34 @@ class Repository {
 
         Get.offAndToNamed(Routes.inventoryList);
 
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateInventory(
+      {bool? isLoading, addInventoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateInventory(
+          auth: auth,
+          isLoading: isLoading,
+          addInventoryJsonString: addInventoryJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Data update successfully...", fontSize: 16.0);
+
+        Get.offNamed(
+          Routes.inventoryList,
+        );
         return true;
       } //
       else {
