@@ -616,6 +616,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel>
+  getUnitMeasurementList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetUnitMeasurementList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 
   Future<ResponseModel>
   getModuleList({

@@ -2,15 +2,13 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
+
 import 'package:cmms/app/master_dashboard/master_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 // import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/usecases/job_list_usecase.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../../domain/models/inventory_category_model.dart';
 
 class MastersController extends GetxController {
   MastersController(
@@ -63,6 +61,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goTounitMeasurementScreen() async {
+    Get.toNamed(
+      Routes.unitMeasurementScreen,
+    );
+  }
+
   Future<void> gotToSafetyQuestionsList() async {
     Get.toNamed(
       Routes.safetyQuestionsList,
@@ -94,6 +98,7 @@ class MastersController extends GetxController {
       Routes.inventoryTypeListScreen,
     );
   }
+
   Future<void> goToInventoryStatusList() async {
     Get.toNamed(
       Routes.inventoryStatusListScreen,
@@ -106,17 +111,20 @@ class MastersController extends GetxController {
       Routes.facilityTypeListScreen,
     );
   }
+
   Future<void> goToSPVList() async {
     Get.toNamed(
       Routes.SPVListScreen,
     );
   }
+
   //goToBlockTypeList
   Future<void> goToBlockTypeList() async {
     Get.toNamed(
       Routes.blockTypeListScreen,
     );
   }
+
   Future<void> goToModuleTypeList() async {
     Get.toNamed(
       Routes.moduleTypeListScreen,

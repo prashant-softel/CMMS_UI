@@ -55,6 +55,7 @@ import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
 import '../models/role_model.dart';
 import '../models/state.dart';
+import '../models/unit_of_measurement_model.dart';
 import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -1906,6 +1907,43 @@ class Repository {
       return [];
     }
   }
+
+  Future<List<UnitOfMeasurementModel?>?> getUnitMeasurementList(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUnitMeasurementList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<UnitOfMeasurementModel> _PreventiveCheckListModelList =
+            jsonPreventiveCheckListModelModels
+                .map<UnitOfMeasurementModel>((m) =>
+                    UnitOfMeasurementModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+  
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
 
   Future<List<ModuleListModel?>?> getModuleList(
     int? type,

@@ -492,6 +492,20 @@ class DataRepository extends DomainRepository {
       );
 
 
+       Future<ResponseModel> getUnitMeasurementList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getUnitMeasurementList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+
   Future<ResponseModel> getModuleList({
     required String auth,
     int? facilityId,

@@ -1,11 +1,11 @@
 import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
-import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/master_dashboard/master_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../navigators/app_pages.dart';
 import '../onHover.dart';
 
 // import '../../navigators/app_pages.dart';
@@ -203,7 +203,7 @@ class MastersDashboard extends GetView<MastersController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Assets",
+                                  "Inventory",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
                                     fontSize: 16,
@@ -367,6 +367,15 @@ class MastersDashboard extends GetView<MastersController> {
                                       });
                                 }),
                               ),
+                               OnHover(
+                                builder: ((isHovered) {
+                                  return createContentTile(
+                                      title: "Unit Of Measurement",
+                                      onTap: () {
+                                        controller.goTounitMeasurementScreen();
+                                      });
+                                }),
+                              ),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Block List",
@@ -425,9 +434,65 @@ class MastersDashboard extends GetView<MastersController> {
                                 return createContentTile(
                                     title: "Block List",
                                     onTap: () {
-                                      controller.goToBlockTypeList();
+                                     // controller.goToBlockTypeList();
+                                     Get.toNamed(
+                                        Routes.unitMeasurementScreen,
+                                  );
                                     });
                               }))),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Stock",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 6,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 6,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Measurement",
+                                    onTap: () {
+                                      controller.goTounitMeasurementScreen();
+                                    });
+                              }))),
+
+                              // createContentTile(title: "Job Card List"),
+                              // _priventiveList(tittle: "PM Schedule View"),
+                              // _priventiveList(tittle: "PM Report"),
+                              // _priventiveList(tittle: "PM Report"),
+                              // _priventiveList(tittle: "PM "),
                             ],
                           ),
                         ],

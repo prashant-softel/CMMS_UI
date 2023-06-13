@@ -92,6 +92,8 @@ import '../preventive_maintenance_execution_view/preventive_maintenance_executio
 import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
+import '../unit_Of_measurement/unit_of_measurement_binding.dart';
+import '../unit_Of_measurement/view/unit_of_measurement_screen.dart';
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
@@ -226,10 +228,9 @@ class AppPages {
         page: BreakdownMaintenanceScreen.new,
         binding: BreakdownMaintenanceBinding()),
     GetPage<dynamic>(
-      name: _Paths.viewWarrantyClaim,
-      page: ViewWarrantyClaimWeb.new,
-      binding: ViewWarrantyClaimBinding()
-    ),
+        name: _Paths.viewWarrantyClaim,
+        page: ViewWarrantyClaimWeb.new,
+        binding: ViewWarrantyClaimBinding()),
     GetPage<dynamic>(
       name: _Paths.calibrationDetail,
       page: CalibrationDetailScreen.new,
@@ -263,7 +264,6 @@ class AppPages {
         name: _Paths.warrantyClaimListWeb,
         page: WarrantyClaimListWeb.new,
         binding: WarrantyClaimBinding()),
-   
 
     GetPage<dynamic>(
         name: _Paths.viewPermitWebScreen,
@@ -365,6 +365,11 @@ class AppPages {
       name: _Paths.viewUserDetail,
       page: ViewUserDetailScreen.new,
       binding: ViewUserDetailBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.unitMeasurementScreen,
+      page: UnitOfMeasurementScreen.new,
+      binding: UnitOfMeasurementBinding(),
     ),
   ];
 }

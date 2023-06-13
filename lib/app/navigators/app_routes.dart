@@ -37,6 +37,7 @@ abstract class Routes {
   static const pmExecutionView = _Paths.pmExecutionView;
   static const viewPermitWebScreen = _Paths.viewPermitWebScreen;
   static const permitTypeScreen = _Paths.permitTypeScreen;
+  static const unitMeasurementScreen = _Paths.unitMeasurementScreen;
   static const masterDashboard = _Paths.masterDashboard;
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
@@ -95,6 +96,7 @@ abstract class _Paths {
   static const pmExecutionView = '/pm-execution-view-screen';
   static const viewPermitWebScreen = '/view-permit-web-screen';
   static const permitTypeScreen = '/permit-type-screen';
+  static const unitMeasurementScreen = '/unit-Measurement-screen';
   static const masterDashboard = '/master-dashboard';
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
@@ -113,7 +115,6 @@ abstract class _Paths {
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
   static const moduleTypeListScreen = '/module-Type-List-Screen';
-
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }
