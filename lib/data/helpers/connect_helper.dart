@@ -2342,6 +2342,16 @@ class ConnectHelper {
       'Calibration/StartCalibration?calibration_id=$calibrationId',
       Request.put,
       calibrationId,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createFacilityType({
     required String auth,
     bool? isLoading,
