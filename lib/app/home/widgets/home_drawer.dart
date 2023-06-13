@@ -106,9 +106,7 @@ class HomeDrawer extends GetView {
                       MenuItem(
                         title: "Incident Report",
                         icon: "assets/files/reportins.png",
-                        press: () {
-                          Get.offNamed(Routes.mrsListScreen);
-                        },
+                        press: () {},
                       ),
                       MenuItem(
                         title: "Calibration",

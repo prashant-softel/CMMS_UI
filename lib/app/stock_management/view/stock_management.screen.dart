@@ -123,6 +123,8 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "MRS List",
                             ontap: () {
+                              Get.offNamed(Routes.mrsListScreen);
+
                               // Get.toNamed(
                               //     Routes.preventiveMaintenanceMapping,
                               //     );
