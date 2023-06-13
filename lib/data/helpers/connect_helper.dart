@@ -141,7 +141,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //  Future<ResponseModel> getAffectedPartList({
   //   required bool isLoading,
   //   required String auth,
@@ -248,7 +247,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> getEmployeesList(
+  Future<ResponseModel> getEmployeesList(
       {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
@@ -882,7 +881,7 @@ class ConnectHelper {
         },
       );
 
-   Future<ResponseModel> getAffectedPartList({
+  Future<ResponseModel> getAffectedPartList({
     String? auth,
     bool? isLoading,
     int? facilityId,
@@ -1241,7 +1240,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Update Warranty Claim
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -1345,7 +1343,6 @@ class ConnectHelper {
     print('ViewWarrantyClaimResponseModel${responseModel.data}');
     return responseModel;
   }
-
 
   Future<ResponseModel> getInventoryDetail({
     required String auth,
@@ -2270,6 +2267,25 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Inventory/AddInventory',
       Request.post,
+      addInventoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateInventory({
+    required String auth,
+    bool? isLoading,
+    required addInventoryJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventory',
+      Request.put,
       addInventoryJsonString,
       isLoading ?? false,
       {
