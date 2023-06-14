@@ -124,8 +124,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: categoryIds,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
     );
   }
 
@@ -186,6 +186,19 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getEmployeeList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
+  Future<ResponseModel> getEmployeesList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEmployeesList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
@@ -615,6 +628,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  //  Future<ResponseModel> getAffectedPartList({
+  //   String? auth,
+  //   bool? isLoading,
+  //   int? facilityId,
+  // }) async {
+  //   return await connectHelper.getAffectedPartList(
+  //     auth: auth,
+  //     isLoading: isLoading,
+  //     facilityId: facilityId,
+  //   );
+  // }
+
   Future<ResponseModel> getInventoryIsolationList({
     String? auth,
     bool? isLoading,
@@ -828,6 +853,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> updateWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
     bool? isLoading,
@@ -858,6 +894,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.getViewWarrantyClaimDetail(
         auth: auth,
         wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getInventoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getInventoryDetail(
+        auth: auth,
+        id: id,
         isLoading: isLoading ?? false,
       );
 
@@ -1090,6 +1137,18 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
         requestCalibration: requestCalibration);
+    return response;
+  }
+
+  Future<ResponseModel> rejectCalibration({
+    auth,
+    bool? isLoading,
+    rejectCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.rejectCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
     return response;
   }
 
@@ -1462,6 +1521,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateInventory({
+    auth,
+    bool? isLoading,
+    addInventoryJsonString,
+  }) async {
+    var response = await connectHelper.updateInventory(
+        auth: auth,
+        isLoading: isLoading,
+        addInventoryJsonString: addInventoryJsonString);
+    return response;
+  }
+
   Future<ResponseModel> inventoryList({
     int? facilityId,
     required bool isLoading,
@@ -1474,6 +1545,15 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> startCalibration({
+    auth,
+    bool? isLoading,
+    calibrationId,
+  }) async {
+    var response = await connectHelper.startCalibration(
+        auth: auth, isLoading: isLoading, calibrationId: calibrationId);
+    return response;
+  }
   Future<ResponseModel> createFacilityType({
     auth,
     bool? isLoading,
@@ -1485,7 +1565,7 @@ class DataRepository extends DomainRepository {
         facilitylistJsonString: facilitylistJsonString);
     return response;
   }
-
+  
   Future<ResponseModel> createBlockType({
     auth,
     bool? isLoading,
@@ -1498,5 +1578,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  //end
+  Future<ResponseModel> getAssetMasterList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAssetMasterList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+//end
 }

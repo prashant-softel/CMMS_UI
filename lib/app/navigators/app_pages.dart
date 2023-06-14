@@ -11,12 +11,18 @@ import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
+import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
+import 'package:cmms/app/mrs/mrs_list_binding.dart';
+import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
+import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
+import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_screen.dart';
+import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_web.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
@@ -69,6 +75,7 @@ import '../business_type_List/business_type_list_binding.dart';
 import '../business_type_List/view/business_type_list_screen.dart';
 import '../calibration/calibration_list_binding.dart';
 import '../calibration_detail/view/calibration_detail_screen.dart';
+import '../calibration_view/view/calibration_view_screen.dart';
 import '../country_list/country_list_binding.dart';
 import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
@@ -119,6 +126,10 @@ import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
 import '../warrantyType/warranty_list_binding.dart';
+import '../Asset_Master/asset_master_Binding.dart';
+import '../Asset_Master/view/asset_master_screen.dart';
+import '../add_asset_master/view/add_asset_master_screen.dart';
+import '../add_asset_master/add_asset_master_binding.dart';
 
 // coverage:ignore-file
 
@@ -198,6 +209,11 @@ class AppPages {
       name: _Paths.stockManagementDashboardScreen,
       page: StockManagementDashboardScreen.new,
       binding: StockManagementDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.stockManagementGoodsOrdersScreen,
+      page: StockManagementGoodsOrdersScreen.new,
+      binding: StockManagementGoodsOrdersBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.createCheckList,
@@ -449,6 +465,29 @@ class AppPages {
       name: _Paths.warrantyType,
       page: WarrantyListScreen.new,
       binding: WarrantyListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.calibrationViewScreen,
+      page: CalibrationViewScreen.new,
+      binding: CalibrationViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsListScreen,
+      page: MrsListScreen.new,
+      binding: MrsListBinding(),
+    ),
+
+
+    GetPage<dynamic>(
+      name: _Paths.assetMasterList,
+      page: AssetMasterScreen.new,
+      binding: AssetMasterBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.addassetMaster,
+      page: AddAssetMasterScreen.new,
+      binding: AddAssetMasterBinding(),
     ),
   ];
 }
