@@ -77,10 +77,8 @@ abstract class Routes {
   static const updateGoodsOrdersDetailsScreen =
       _Paths.updateGoodsOrdersDetailsScreen;
 
-
   static const assetMasterList = _Paths.assetMasterList;
   static const addassetMaster = _Paths.addassetMaster;
-
 }
 
 abstract class _Paths {
@@ -153,10 +151,8 @@ abstract class _Paths {
   static const addInventoryScreen = '/add-inventory-screen';
   static const calibrationViewScreen = '/calibration-view-screen';
   static const mrsListScreen = '/mrs-list-screen';
-
   static const updateGoodsOrdersDetailsScreen =
       '/update-goods-orders-details-screen';
-
   static const assetMasterList = '/asset-Master-List';
   static const addassetMaster = '/add-asset-Master';
 

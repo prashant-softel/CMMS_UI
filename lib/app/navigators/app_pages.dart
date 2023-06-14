@@ -482,9 +482,7 @@ class AppPages {
       name: _Paths.updateGoodsOrdersDetailsScreen,
       page: StockManagementUpdateGoodsOrdersDetailsScreen.new,
       binding: StockManagementGoodsOrdersBinding(),
-
-
-
+    ),
     GetPage<dynamic>(
       name: _Paths.assetMasterList,
       page: AssetMasterScreen.new,
@@ -495,7 +493,6 @@ class AppPages {
       name: _Paths.addassetMaster,
       page: AddAssetMasterScreen.new,
       binding: AddAssetMasterBinding(),
-
     ),
   ];
 }
