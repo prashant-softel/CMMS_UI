@@ -34,15 +34,21 @@ class EditWarrantyClaimController extends GetxController {
   ///Supplier Action Part
   var supplierActions = <SupplierActions>[].obs;
   void updateSupplierActionText(
-      String name, String required_by_data,) {
+    String name,
+    String required_by_data,
+    String srNumber,
+  ) {
     supplierActions.add(SupplierActions(
-        name: name,
-        required_by_date: required_by_data,
-        // is_required: is_required
-        ));
+      name: name,
+      required_by_date: required_by_data,
+      // is_required: is_required
+      srNumber: srNumber,
+    ));
   }
 
   final TextEditingController supplierActionTextFieldController =
+      TextEditingController();
+  final TextEditingController supplierActionSrNumberTextFieldController =
       TextEditingController();
 
   ///External Emails Part
@@ -64,7 +70,7 @@ class EditWarrantyClaimController extends GetxController {
 
   ///Checkbox
   RxBool isCheckedRequire = false.obs;
-  RxBool isCheckedDataRequire = false.obs;
+  RxBool isCheckedDataRequire = true.obs;
 
   void requireToggleCheckbox() {
     isCheckedRequire.value = !isCheckedRequire.value;
@@ -84,7 +90,7 @@ class EditWarrantyClaimController extends GetxController {
   RxList<EmployeeListModel2> employeesList = <EmployeeListModel2>[].obs;
   Rx<bool> isemployeesListSelected = true.obs;
   Rx<String> selectedEmployeesList = ''.obs;
-  RxList<int> selectedEmployeeNameIdList = <int>[].obs;
+  RxList<int?> selectedEmployeeNameIdList = <int?>[].obs;
   RxList<String?> selectedEmployeesDataList = <String>[].obs;
   RxList<int?> selectedEmployeesIdList = <int>[].obs;
   int selectedEmployeesId = 0;
@@ -189,6 +195,18 @@ class EditWarrantyClaimController extends GetxController {
       ViewWarrantyClaimModel().obs;
   RxList<ViewWarrantyClaimModel?>? editWarrantyClaimDetailsList =
       <ViewWarrantyClaimModel?>[].obs;
+
+  ///External Emails list from api
+  RxList<ExternalsEmailsList?>? externalEmailsList = <ExternalsEmailsList?>[].obs;
+
+  ///Supplier ACtion
+  RxList<SuppliersActionsList?>? supplierActionsList = <SuppliersActionsList?>[].obs;
+
+  ///AdditioanlEmailEmployees
+  RxList<AdditionalEmailsEmployeesList?>? additionalEmailEmployeesList = <AdditionalEmailsEmployeesList?>[].obs;
+  
+  
+
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -343,15 +361,15 @@ class EditWarrantyClaimController extends GetxController {
       selectedAffectedPart.value =
           editWarrantyClaimDetailsModel.value?.affected_part ?? '';
       failureDateTimeCtrlrWeb.text =
-          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
+          '${DateFormat('yyyy-MM-dd').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
       affectedSerialNoTextController.text =
           editWarrantyClaimDetailsModel.value?.affected_sr_no ?? '';
       orderReferenceNoTextController.text =
           editWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
       warrantyStartDateTimeCtrlrWeb.text =
-          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
+          '${DateFormat('yyyy-MM-dd').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
       warrantyEndDateTimeCtrlrWeb.text =
-          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
+          '${DateFormat('yyyy-MM-dd').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
       costOfReplacementTextController.text =
           editWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
       immediateCorrectiveActionTextController.text =
@@ -362,6 +380,20 @@ class EditWarrantyClaimController extends GetxController {
           editWarrantyClaimDetailsModel.value?.currency ?? '';
       selectedEmployeeList.value =
           editWarrantyClaimDetailsModel.value?.approver_name ?? '';
+      selectedEquipmentnameId =
+          editWarrantyClaimDetailsModel.value?.equipment_id ?? 0;
+      selectedCurrencyId = editWarrantyClaimDetailsModel.value?.currencyId ?? 0;
+      // selectedApproverId = editWarrantyClaimDetailsModel.value?.approverId ?? 0;
+
+      externalEmailsList?.value = editWarrantyClaimDetailsModel.value?.externalEmails ?? [];
+      supplierActionsList?.value = editWarrantyClaimDetailsModel.value?.supplierActions ?? [];
+      additionalEmailEmployeesList?.value = editWarrantyClaimDetailsModel.value?.additionalEmailEmployees ?? [];
+       List<int?> idList = additionalEmailEmployeesList!
+          .map((obj) => obj!.user_id)
+          .toList();
+      selectedEmployeeNameIdList.value = idList;
+      print('Additioanl Email Employees${selectedEmployeeNameIdList}');
+      
 
       // listEmployee?.value = viewPermitDetailsModel.value?.employee_list ?? [];
       // safetyList?.value = viewPermitDetailsModel.value?.safety_question_list ?? [];
@@ -910,10 +942,26 @@ class EditWarrantyClaimController extends GetxController {
       // int? id = selectedEquipmentName.value
       print('EquipmentCategoryId:$idList');
 
+     late List<ExternalsEmails> external_emails_list = [];
+
+      externalEmails.forEach((e) {
+        external_emails_list.add(ExternalsEmails(name: e.name, email: e.email));
+      });
+
+       late List<SuppliersActions> supplier_action_list = [];
+
+      supplierActions.forEach((e) {
+        supplier_action_list.add(SuppliersActions(
+          name: e.name,
+          required_by_date: e.required_by_date,
+          // is_required: e.is_required
+        ));
+      });
+
       UpdateWarrantyClaimModel updatewarrantyClaimModel = UpdateWarrantyClaimModel(
           id: wc_id,
           facilityId: facilityId,
-          equipmentId: selectedEquipmentnameId, // need id from backend
+          equipmentId: selectedEquipmentnameId,
           // equipmentId: selectedEquipmentNameId.value,
           goodsOrderId: 14205,
           affectedPart: selectedAffectedPart.value,
@@ -921,32 +969,35 @@ class EditWarrantyClaimController extends GetxController {
           orderReference: _orderReferenceNo,
           affectedSrNo: _affectedSerialNo,
           costOfReplacement: costOfReplacement,
-          currencyId: selectedCurrencyId, // need id from backend
-          warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
-          warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
+          currencyId: selectedCurrencyId,
+          warrantyStartAt: warrantyStartDateTimeCtrlrWeb.text,
+          warrantyEndAt: warrantyEndDateTimeCtrlrWeb.text,
           warrantyClaimTitle: _warrantyClaimTitle,
           warrantyDescription: _description,
           correctiveActionByBuyer: _immediateCorrectiveByBuyer,
           requestToSupplier: _requestToBuyer,
           approverId: selectedApproverId, // need id from backend
-          failureTime: failureDateTimeCtrlrWebBuffer,
-          additionalEmailEmployees: [
-            5
-          ],
-          externalEmails: [
-            ExternalsEmails(name: "Himanshu Seth", email: "himanshu@gmail.com")
-          ],
-          supplierActions: [
-            SuppliersActions(
-                name: "Root Cause Analysis Report",
-                is_required: true,
-                required_by_date: "2023-06-02")
-            // {
-            //     name: "Root Cause Analysis Report",
-            //     is_required: true,
-            //     required_by_date: "2023-06-02"
-            // }
-          ]
+          failureTime: failureDateTimeCtrlrWeb.text,
+          additionalEmailEmployees: selectedEmployeeNameIdList,
+          // [
+          //   5
+          // ],
+          externalEmails: external_emails_list,
+          // [
+          //   ExternalsEmails(name: "Himanshu Seth", email: "himanshu@gmail.com")
+          // ],
+          supplierActions: supplier_action_list,
+          // [
+          //   SuppliersActions(
+          //       name: "Root Cause Analysis Report",
+          //       // is_required: 1,
+          //       required_by_date: "2023-06-02")
+          //   // {
+          //   //     name: "Root Cause Analysis Report",
+          //   //     is_required: true,
+          //   //     required_by_date: "2023-06-02"
+          //   // }
+          // ]
 
           //        id: 107,
           //   facilityId: 45,
