@@ -1565,7 +1565,18 @@ class DataRepository extends DomainRepository {
         facilitylistJsonString: facilitylistJsonString);
     return response;
   }
-
+  
+  Future<ResponseModel> createBlockType({
+    auth,
+    bool? isLoading,
+    facilitylistJsonString,
+  }) async {
+    var response = await connectHelper.createBlockType(
+        auth: auth,
+        isLoading: isLoading,
+        blockTypeJsonString: facilitylistJsonString);
+    return response;
+  }
 
   Future<ResponseModel> getAssetMasterList({
     required String auth,
@@ -1579,7 +1590,6 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
-
 
 //end
 }

@@ -3822,6 +3822,28 @@ class Repository {
   }
 
 
+  Future<bool> createBlockType(
+      {bool? isLoading, blockTypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createFacilityType(
+          auth: auth,
+          isLoading: isLoading,
+          facilitylistJsonString: blockTypeJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<List<AssetMasterModel?>?> getAssetMasterList(
       int? type,
       int? facilityId,
@@ -3856,7 +3878,5 @@ class Repository {
       return [];
     }
   }
-
-
 //end
 }
