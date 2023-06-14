@@ -36,6 +36,7 @@ class BlockTypeListUsecase {
       job_type_id: job_type_id,
     );
   }
+
   Future<List<FacilityTypeListModel>> getFacilityList(
       {required bool isLoading, required int? job_type_id}) async {
     return repository.getFacilityTypeList(
@@ -43,6 +44,13 @@ class BlockTypeListUsecase {
       job_type_id: job_type_id,
     );
   }
+
+  Future<bool> createBlockType({
+    blockTypeJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createBlockType(
+          isLoading: isLoading, blockTypeJsonString: blockTypeJsonString);
 
   // Future<List<FacilityModel?>?> getFacilityList() async =>
   //     await repository.getFacilityList(true);

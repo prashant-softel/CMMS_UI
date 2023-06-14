@@ -2370,6 +2370,43 @@ class ConnectHelper {
 
     return responseModel;
   }
+  Future<ResponseModel> createBlockType({
+    required String auth,
+    bool? isLoading,
+    required blockTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/CreateNewBlock',
+      Request.post,
+      blockTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    return responseModel;
+  }
+  
+  Future<ResponseModel> getAssetMasterList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetAssetMasterList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+  
   //end
 }
