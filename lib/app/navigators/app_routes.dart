@@ -73,6 +73,8 @@ abstract class Routes {
   static const warrantyType = _Paths.warrantyType;
   static const calibrationViewScreen = _Paths.calibrationViewScreen;
   static const mrsListScreen = _Paths.mrsListScreen;
+  static const updateGoodsOrdersDetailsScreen =
+      _Paths.updateGoodsOrdersDetailsScreen;
 }
 
 abstract class _Paths {
@@ -145,6 +147,8 @@ abstract class _Paths {
   static const addInventoryScreen = '/add-inventory-screen';
   static const calibrationViewScreen = '/calibration-view-screen';
   static const mrsListScreen = '/mrs-list-screen';
+  static const updateGoodsOrdersDetailsScreen =
+      '/update-goods-orders-details-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

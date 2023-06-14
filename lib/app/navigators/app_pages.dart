@@ -23,6 +23,7 @@ import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_screen.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_web.dart';
+import 'package:cmms/app/stock_managment_update_goods_orders_details.dart/view/stock_management_update_goods_orders_details_screen.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_binding.dart';
@@ -471,6 +472,11 @@ class AppPages {
       name: _Paths.mrsListScreen,
       page: MrsListScreen.new,
       binding: MrsListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.updateGoodsOrdersDetailsScreen,
+      page: StockManagementUpdateGoodsOrdersDetailsScreen.new,
+      binding: StockManagementGoodsOrdersBinding(),
     ),
   ];
 }
