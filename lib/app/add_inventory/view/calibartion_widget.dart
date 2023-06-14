@@ -16,146 +16,161 @@ class CalibrationTabWidget extends StatelessWidget {
   Widget build(BuildContext context) => GetBuilder<AddInventoryController>(
       id: 'calibration_tab',
       builder: (controller) {
-        return Column(
-          children: [
-            Dimens.boxHeight10,
-            Text(
-              'Calibration',
-              style: Styles.blackBold18,
-            ),
+        return SingleChildScrollView(
+          child: Stack(children: [
             Container(
-              width: double.infinity,
-              child: Wrap(
+              height: 400,
+              child: Column(
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          CustomRichText(
-                              title:
-                                  "          Calibration\n          Frequency"),
-                          SizedBox(
-                            child: DropdownWebWidget(
-                              margin: Dimens.edgeInsets16,
-                              width: MediaQuery.of(context).size.width / 4,
-                              controller: controller,
-                              dropdownList: controller.frequencyList,
-                              isValueSelected:
-                                  controller.isSelectedfrequency.value,
-                              selectedValue: controller.selectedfrequency.value,
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  Dimens.boxHeight10,
+                  Text(
+                    'Calibration',
+                    style: Styles.blackBold18,
                   ),
-                  CustomTextField(
-                    numberTextField: true,
-                    // readOnly: true,
-                    onTap: () {
-                      controller.openLastCalibrationDatePicker =
-                          !controller.openLastCalibrationDatePicker;
-                      controller.update(['calibration_tab']);
-                    },
-                    textController: controller.calibrationRemainderInTc,
-                    label: 'Last calibration date: *',
+                  Container(
+                    width: double.infinity,
+                    child: Wrap(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomRichText(
+                                            title: "  Calibration Frequency"),
+                                        Dimens.boxWidth5,
+                                        SizedBox(
+                                          child: DropdownWebWidget(
+                                            margin: Dimens.edgeInsets16,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            controller: controller,
+                                            dropdownList:
+                                                controller.frequencyList,
+                                            isValueSelected: controller
+                                                .isSelectedfrequency.value,
+                                            selectedValue: controller
+                                                .selectedfrequency.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Row(
+                                        children: [
+                                          CustomRichText(
+                                              title:
+                                                  "Calibration remainder In"),
+                                          SizedBox(width: 10),
+                                          Container(
+                                            width: 150,
+                                            child: TextField(
+                                              controller: controller
+                                                  .calibrationRemaingCtrlr,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    Dimens.edgeInsets16_0_16_0,
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide:
+                                                      BorderSide(width: .2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(2),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide:
+                                                      BorderSide(width: .2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(2),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text("Day"),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    CustomTextField(
+                                      numberTextField: true,
+                                      // readOnly: true,
+                                      onTap: () {
+                                        controller
+                                                .openLastCalibrationDatePicker =
+                                            !controller
+                                                .openLastCalibrationDatePicker;
+                                        controller.update(['calibration_tab']);
+                                      },
+                                      textController:
+                                          controller.calibrationRemainderInTc,
+                                      label: 'Last calibration date: *',
+                                    ),
+                                    Container(
+                                      margin: Dimens.edgeInsets16,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text('Calibration certificate'),
+                                          Dimens.boxWidth10,
+                                          ActionButton(
+                                            label: 'Upload certification file',
+                                            onPressed: () {},
+                                            icon: Icons.file_upload_outlined,
+                                            color: Colors.blue,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: Wrap(
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              CustomRichText(
-                                  title:
-                                      "        Calibration\n        remainder In"),
-                              SizedBox(width: 10),
-                              Container(
-                                width: 150,
-                                child: TextField(
-                                  controller:
-                                      controller.calibrationRemaingCtrlr,
-                                  decoration: InputDecoration(
-                                    contentPadding: Dimens.edgeInsets16_0_16_0,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: .2),
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: .2),
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 50,
-                              ),
-                              CustomRichText(title: "Day"),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 35,
-                      ),
-                      Container(
-                        margin: Dimens.edgeInsets16,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('Calibration certificate'),
-                            Dimens.boxWidth10,
-                            ActionButton(
-                              label: 'Upload certification file',
-                              onPressed: () {},
-                              icon: Icons.file_upload_outlined,
-                              color: Colors.blue,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+            if (controller.openLastCalibrationDatePicker)
+              Positioned(
+                right: 70,
+                top: 60,
+                child: DatePickerWidget(
+                  minDate: DateTime(DateTime.now().year),
+                  maxDate: DateTime(
+                      DateTime.now().year, 13, 0), // last date of this year
+                  controller: DateRangePickerController(),
+                  selectionChanges: (p0) {
+                    print('po valu ${p0.value.toString()}');
+                    controller.lastCalibrationDateTc.text =
+                        DateFormat('yyyy-MM-dd').format(p0.value);
+                    controller.openLastCalibrationDatePicker =
+                        !controller.openLastCalibrationDatePicker;
+                    controller.update(['calibration_tab']);
+                  },
                 ),
-                if (controller.openLastCalibrationDatePicker)
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 570,
-                      ),
-                      Padding(
-                        padding: Dimens.edgeInsets0,
-                        child: DatePickerWidget(
-                          minDate: DateTime(DateTime.now().year),
-                          maxDate: DateTime(DateTime.now().year, 13,
-                              0), // last date of this year
-                          controller: DateRangePickerController(),
-                          selectionChanges: (p0) {
-                            print('po valu ${p0.value.toString()}');
-                            controller.lastCalibrationDateTc.text =
-                                DateFormat('yyyy-MM-dd').format(p0.value);
-                            controller.openLastCalibrationDatePicker =
-                                !controller.openLastCalibrationDatePicker;
-                            controller.update(['calibration_tab']);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ],
+              ),
+          ]),
         );
       });
 }

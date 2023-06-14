@@ -32,6 +32,7 @@ class WarrantyTabWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Row(
                         children: [
@@ -53,8 +54,7 @@ class WarrantyTabWidget extends StatelessWidget {
                       Row(
                         children: [
                           CustomRichText(
-                              title:
-                                  "          Warranty\n           Usages  \n     Term Type"),
+                              title: "Warranty Usages\n         Term Type"),
                           SizedBox(
                             child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
@@ -72,7 +72,7 @@ class WarrantyTabWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomRichText(title: "    Description"),
+                          CustomRichText(title: "Description"),
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(

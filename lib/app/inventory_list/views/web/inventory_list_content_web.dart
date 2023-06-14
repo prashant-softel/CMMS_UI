@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/add_asset.dart';
 import 'package:cmms/app/inventory_list/inventory_list_controller.dart';
 import 'package:cmms/app/inventory_list/views/inventory_list_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -272,7 +273,13 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                               icon: Icons
                                                                   .visibility,
                                                               label: 'View',
-                                                              onPress: () {},
+                                                              onPress: () {
+                                                                controller.addInventoryDetails(
+                                                                    id: int.tryParse(
+                                                                        '${record[2]}'));
+                                                                print(
+                                                                    'AddInV:${record[2]}');
+                                                              },
                                                             ),
                                                             //),
 

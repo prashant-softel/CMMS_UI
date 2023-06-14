@@ -172,7 +172,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(
-                                          title: "      Asset\nDescription",
+                                          title: "Asset\nDescription",
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -321,7 +321,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       ),
                                     ),
                                     Container(
-                                      height: 420,
+                                      height: 400,
                                       child: TabBarView(
                                         children: [
                                           CalibrationTabWidget(),
