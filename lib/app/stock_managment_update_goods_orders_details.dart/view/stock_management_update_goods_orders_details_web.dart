@@ -601,6 +601,160 @@ class UpdateGoodsOrdersDetailsWeb
                     SizedBox(
                       height: 20,
                     ),
+                    Container(
+                      height: 300,
+                      margin: Dimens.edgeInsets20,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: ColorValues.lightGreyColorWithOpacity35,
+                          width: 1,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorValues.appBlueBackgroundColor,
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ScrollableTableView(
+                        columns: [
+                          "Check Point",
+                          "Requirement",
+                          "Upload Image",
+                          "Observation",
+                          "Create Job",
+                        ].map((column) {
+                          return TableViewColumn(
+                            label: column,
+                            minWidth: Get.width * 0.18,
+                          );
+                        }).toList(),
+                        rows: [
+                          [
+                            "Check each string connect",
+                            "Should be clean",
+                            "Upload_image",
+                            "Observation",
+                            "Create_job"
+                          ],
+                          [
+                            "Check each string connect",
+                            "Should be clean",
+                            "Upload_image",
+                            "Observation",
+                            "Create_job"
+                          ],
+                          [
+                            "Check each string connect",
+                            "Should be clean",
+                            "Upload_image",
+                            "Observation",
+                            "Create_job"
+                          ],
+                          [
+                            "Check each string connect",
+                            "Should be clean",
+                            "Upload_image",
+                            "Observation",
+                            "Create_job"
+                          ]
+                        ].map((record) {
+                          return TableViewRow(
+                            height: 90,
+                            cells: record.map((value) {
+                              return TableViewCell(
+                                child: (value == "Create_job")
+                                    ? CustomSwitchTroggle(
+                                        onChanged: (value) {},
+                                      )
+                                    : (value == "Observation")
+                                        ? Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                                width: (Get.width * .4),
+                                                // padding: EdgeInsets.all(value),
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: LoginCustomTextfield(
+                                                  maxLine: 5,
+                                                )),
+                                          )
+                                        : (value == "Upload_image")
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        width: 1,
+                                                      ),
+                                                    ),
+                                                    child: Icon(Icons.upload,
+                                                        size: 30,
+                                                        color: ColorValues
+                                                            .whiteColor),
+                                                  ),
+                                                  Dimens.boxWidth15,
+                                                  Container(
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2),
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        width: 1,
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      "0 Files",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: Styles.white12
+                                                          .copyWith(
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .displaySmall!
+                                                            .color,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : Text(value),
+                              );
+                            }).toList(),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ],
                 ),
               ),

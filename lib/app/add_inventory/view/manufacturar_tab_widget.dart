@@ -3,14 +3,10 @@ import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ManufacturarTabWidget extends StatelessWidget {
   const ManufacturarTabWidget({
@@ -34,11 +30,12 @@ class ManufacturarTabWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Row(
                         children: [
                           CustomRichText(
-                              title: "   Manufacturer\n               Name"),
+                              title: "Manufacturer\n           Name"),
                           SizedBox(
                             child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
@@ -56,7 +53,7 @@ class ManufacturarTabWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomRichText(title: "             Model"),
+                          CustomRichText(title: "Model"),
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
@@ -92,7 +89,7 @@ class ManufacturarTabWidget extends StatelessWidget {
                       // ),
                       Row(
                         children: [
-                          CustomRichText(title: "                 Cost"),
+                          CustomRichText(title: "Cost"),
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
@@ -114,10 +111,11 @@ class ManufacturarTabWidget extends StatelessWidget {
                     ],
                   ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          CustomRichText(title: "  Supplier\n      Name"),
+                          CustomRichText(title: "      Supplier\n       Name"),
                           SizedBox(
                             child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
@@ -157,7 +155,7 @@ class ManufacturarTabWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomRichText(title: "Currency"),
+                          CustomRichText(title: "   Currency"),
                           SizedBox(
                             child: DropdownWebWidget(
                               margin: Dimens.edgeInsets16,
