@@ -1486,5 +1486,17 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createBlockType({
+    auth,
+    bool? isLoading,
+    facilitylistJsonString,
+  }) async {
+    var response = await connectHelper.createBlockType(
+        auth: auth,
+        isLoading: isLoading,
+        blockTypeJsonString: facilitylistJsonString);
+    return response;
+  }
+
   //end
 }
