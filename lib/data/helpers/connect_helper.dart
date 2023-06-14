@@ -2371,5 +2371,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+
+  Future<ResponseModel> getAssetMasterList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetAssetMasterList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   //end
 }

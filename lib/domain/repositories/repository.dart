@@ -57,6 +57,7 @@ import 'package:get/get.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
+import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
@@ -3820,5 +3821,42 @@ class Repository {
     }
   }
 
-  //end
+
+  Future<List<AssetMasterModel?>?> getAssetMasterList(
+      int? type,
+      int? facilityId,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAssetMasterList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonModuleListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<AssetMasterModel> _ModuleListModelList =
+        jsonModuleListModelModels
+            .map<AssetMasterModel>((m) =>
+            AssetMasterModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _ModuleListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
+//end
 }
