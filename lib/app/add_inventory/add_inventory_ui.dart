@@ -341,7 +341,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     backgroundColor: ColorValues.appGreenColor,
                                     text: 'Submit',
                                     onPressed: () {
-                                      controller.updateInventory();
+                                      controller.AddInventory();
                                     },
                                   )
                                 : CustomElevatedButton(
