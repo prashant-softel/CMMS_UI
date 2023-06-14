@@ -126,6 +126,10 @@ import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
 import '../warrantyType/warranty_list_binding.dart';
+import '../Asset_Master/asset_master_Binding.dart';
+import '../Asset_Master/view/asset_master_screen.dart';
+import '../add_asset_master/view/add_asset_master_screen.dart';
+import '../add_asset_master/add_asset_master_binding.dart';
 
 // coverage:ignore-file
 
@@ -471,6 +475,19 @@ class AppPages {
       name: _Paths.mrsListScreen,
       page: MrsListScreen.new,
       binding: MrsListBinding(),
+    ),
+
+
+    GetPage<dynamic>(
+      name: _Paths.assetMasterList,
+      page: AssetMasterScreen.new,
+      binding: AssetMasterBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.addassetMaster,
+      page: AddAssetMasterScreen.new,
+      binding: AddAssetMasterBinding(),
     ),
   ];
 }
