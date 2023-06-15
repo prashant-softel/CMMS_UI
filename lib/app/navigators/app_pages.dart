@@ -15,6 +15,8 @@ import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
+import 'package:cmms/app/incident_report_list.dart/incident_report_list_binding.dart';
+import 'package:cmms/app/incident_report_list.dart/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
@@ -301,11 +303,11 @@ class AppPages {
     ),
     GetPage<dynamic>(
         name: _Paths.newWarrantyClaimList,
-        page: NewWarrantyClaimListWeb.new,
+        page: NewWarrantyClaimWeb.new,
         binding: WarrantyClaimBinding()),
     GetPage<dynamic>(
         name: _Paths.warrantyClaimListWeb,
-        page: WarrantyClaimListWeb.new,
+        page: WarrantyClaimListScreen.new,
         binding: WarrantyClaimBinding()),
 
     GetPage<dynamic>(
@@ -493,6 +495,11 @@ class AppPages {
       name: _Paths.addassetMaster,
       page: AddAssetMasterScreen.new,
       binding: AddAssetMasterBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.incidentReportListWeb,
+      page: IncidentReportListScreen.new,
+      binding: IncidentReportListBinding(),
     ),
   ];
 }
