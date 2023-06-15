@@ -244,15 +244,32 @@ class MrsListContentWeb extends GetView<MrsListController> {
                             cells: record.map((value) {
                               return TableViewCell(
                                 child: value == "Action"
-                                    ? TableActionButton(
-                                        color: ColorValues.appDarkBlueColor,
-                                        icon: Icons.remove_red_eye_outlined,
-                                        label: 'View/Edit',
-                                        onPress: () {
-                                          //   Get.toNamed(Routes
-                                          // .calibrationViewScreen);
-                                        },
-                                      )
+                                    ? Wrap(children: [
+                                        TableActionButton(
+                                          color: ColorValues.appDarkBlueColor,
+                                          icon: Icons.remove_red_eye_outlined,
+                                          label: "View",
+                                          onPress: () {},
+                                        ),
+                                        TableActionButton(
+                                          color: ColorValues.appYellowColor,
+                                          icon: Icons.edit,
+                                          label: 'edit',
+                                          onPress: () {},
+                                        ),
+                                        TableActionButton(
+                                          color: ColorValues.appGreenColor,
+                                          icon: Icons.check,
+                                          label: 'Approve',
+                                          onPress: () {},
+                                        ),
+                                        TableActionButton(
+                                          color: ColorValues.appRedColor,
+                                          icon: Icons.report_problem,
+                                          label: 'Issue',
+                                          onPress: () {},
+                                        ),
+                                      ])
                                     : Text(value),
                               );
                             }).toList(),

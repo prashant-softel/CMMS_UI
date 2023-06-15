@@ -10,6 +10,7 @@ String calibrationListModelToJson(List<CalibrationListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CalibrationListModel {
+  int? calibration_id;
   int? asset_id;
   String? asset_name;
   String? asset_serial;
@@ -27,6 +28,7 @@ class CalibrationListModel {
 
   CalibrationListModel(
       {this.asset_health_status,
+      this.calibration_id,
       this.asset_id,
       this.asset_name,
       this.calibration_status,
@@ -45,6 +47,7 @@ class CalibrationListModel {
       CalibrationListModel(
           asset_health_status: json['asset_health_status'] ?? '',
           asset_id: json['asset_id'] ?? 0,
+          calibration_id: json['calibration_id'] ?? 0,
           statusID: json['statusID'] ?? 0,
           asset_name: json['asset_name'] ?? '',
           frequency_id: json['frequency_id'] ?? 0,
@@ -63,6 +66,7 @@ class CalibrationListModel {
   Map<String, dynamic> toJson() => {
         "asset_health_status": asset_health_status,
         "asset_id": asset_id,
+        "calibration_id": calibration_id,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
         "next_calibration_due_date": next_calibration_due_date,

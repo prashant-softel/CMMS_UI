@@ -853,7 +853,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
     updateWarrantyClaim,
@@ -908,8 +907,6 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
-
-  
 
   Future<ResponseModel> getAddInventoryDetail({
     required String auth,
@@ -1545,6 +1542,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, calibrationId: calibrationId);
     return response;
   }
+
   Future<ResponseModel> createFacilityType({
     auth,
     bool? isLoading,
@@ -1557,5 +1555,17 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  ///
+  Future<ResponseModel> getCalibrationView({
+    String? auth,
+    int? calibrationId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getCalibrationView(
+      auth: auth,
+      calibrationId: calibrationId,
+      isLoading: isLoading,
+    );
+  }
   //end
 }

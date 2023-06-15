@@ -355,7 +355,6 @@ class PreventiveChecklistListContentWeb
                                   children: [
                                     Container(
                                         height: 40,
-                                        width: (Get.width * .1),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
@@ -366,7 +365,6 @@ class PreventiveChecklistListContentWeb
                                     ),
                                     Container(
                                         height: 40,
-                                        width: (Get.width * .2) - 70,
                                         child: controller.selectedItem == null
                                             ? CustomElevatedButton(
                                                 backgroundColor: ColorValues

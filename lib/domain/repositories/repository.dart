@@ -10,6 +10,7 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/calibration_detail_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
@@ -430,7 +431,7 @@ class Repository {
     }
   }
 
-   //Update Warranty claim
+  //Update Warranty claim
   Future<Map<String, dynamic>> updateWarrantyClaim(
     updateWarrantyClaim,
     bool? isLoading,
@@ -460,7 +461,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-        }else{
+        } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
@@ -781,8 +782,6 @@ class Repository {
     }
   }
 
-
-
   ///Add Inventory Details
 
   Future<AddInventoryDetailsModel?> getAddInventoryDetail({
@@ -932,7 +931,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<EmployeeListModel>> getEmployeePermitList({
     required int? facility_id,
@@ -1683,7 +1681,7 @@ class Repository {
     }
   }
 
-   Future<List<InventoryCategoryModel2?>?> getAffectedPartList(
+  Future<List<InventoryCategoryModel2?>?> getAffectedPartList(
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -2773,6 +2771,10 @@ class Repository {
           rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
         // return true;
@@ -3773,6 +3775,7 @@ class Repository {
       print(error.toString());
     }
   }
+
   Future<bool> createFacilityType(
       {bool? isLoading, facilitylistJsonString}) async {
     try {
@@ -3792,6 +3795,36 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+/////
+  Future<CalibrationDetailModel?> getCalibrationView(
+    int? calibrationId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCalibrationView(
+        auth: auth,
+        calibrationId: calibrationId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final CalibrationDetailModel _calibrationDetailsModel =
+            calibrationDetailModelFromJson(res.data);
+        print({"calibrationDetailsModel", _calibrationDetailsModel});
+
+        return _calibrationDetailsModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'calibrationDetail');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 
