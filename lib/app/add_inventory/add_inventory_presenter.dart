@@ -61,6 +61,18 @@ class AddInventoryPresenter {
     return true;
   }
 
+  Future<bool> updateInventory({
+    addInventoryJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    addInventoryUsecase.updateInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
   Future<List<WarrantyUsageTermListModel?>?> getWarrantyUsageTermList({
     bool? isLoading,
   }) async =>
@@ -102,6 +114,7 @@ class AddInventoryPresenter {
       await addInventoryUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await addInventoryUsecase.getFacilityList();
   Future<String?> getUserAccessList() async =>

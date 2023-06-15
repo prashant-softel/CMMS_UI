@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:cmms/app/add_job/add_job_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -22,6 +23,7 @@ import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -31,7 +33,10 @@ import 'package:cmms/app/new_permit/new_permit_presenter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 
@@ -46,6 +51,10 @@ class ViewPermitController extends GetxController {
   //   RxBool on = false.obs; // our observable
   // // swap true/false & save it to observable
   // void toggle() => on.value = on.value ? false : true;
+
+  
+  ///Print Global key
+  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
   var isToggleOn = false.obs;
   var isToggleOn1 = false.obs;
@@ -789,6 +798,35 @@ class ViewPermitController extends GetxController {
       }
     }
   }
+
+  Future<void> printScreen() async {
+    try {
+      final RenderRepaintBoundary boundary =
+          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final imageBytes = await boundary
+          .toImage(pixelRatio: 3.0)
+          .then((image) => image.toByteData(format: ImageByteFormat.png));
+
+      if (imageBytes != null) {
+        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
+          final doc = pw.Document();
+          doc.addPage(
+            pw.Page(
+              build: (pw.Context context) {
+                return pw.Image(
+                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
+              },
+            ),
+          );
+          return doc.save();
+        });
+      }
+    } catch (e) {
+      print('Error printing: ${e}');
+    }
+  }
+
+
 
   //  Future<void> getInventoryIsolationList({String? facilityId}) async {
   //   equipmentIsolationList.value = <InventoryCategoryModel>[];

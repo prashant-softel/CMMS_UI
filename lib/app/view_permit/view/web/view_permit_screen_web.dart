@@ -1463,8 +1463,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   'Requested By: '),
                                                           SizedBox(
                                                             height: 1,
-
-                                                          ),CustomRichText(
+                                                          ),
+                                                          CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
@@ -1493,14 +1493,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   'Signature: '),
                                                           SizedBox(
                                                             height: 1,
-
-                                                          ),CustomRichText(
+                                                          ),
+                                                          CustomRichText(
                                                               title:
                                                                   'Approved By: '),
                                                           SizedBox(
                                                             height: 1,
-
-                                                          ),CustomRichText(
+                                                          ),
+                                                          CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
@@ -1818,9 +1818,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   ElevatedButton
                                                                       .styleFrom(
                                                                 foregroundColor:
-                                                              Colors.white,
-                                                          backgroundColor: Color
-                                                                    .fromARGB(
+                                                                    Colors
+                                                                        .white,
+                                                                backgroundColor:
+                                                                    Color.fromARGB(
                                                                         255,
                                                                         5,
                                                                         92,
@@ -2059,7 +2060,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             92,
                                                                             163)),
                                                               ),
-                                                             
+
                                                               controller.permitId !=
                                                                       null
                                                                   ? SizedBox(
@@ -2087,7 +2088,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       ),
                                                                     )
                                                                   : Container(),
-                                                             
+
                                                               //  SizedBox(
                                                               //     width: 150,
                                                               //     child: Text(
@@ -3542,9 +3543,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
 
-                    foregroundColor:
-                                                              Colors.white,
-                                                          backgroundColor: Color.fromARGB(255, 5, 92, 163), //  foreground
+                    foregroundColor: Colors.white,
+                    backgroundColor:
+                        Color.fromARGB(255, 5, 92, 163), //  foreground
                   ),
                   onPressed: () {},
                   icon: Icon(Icons.print), //icon data for elevated button
@@ -3552,6 +3553,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   // style: ButtonStyle( backgroundColor:Color(value)),
                 ),
               ),
+
+              ///Printing functionality
+              // Container(
+              //   height: 35,
+              //   child: CustomElevatedButton(
+              //     icon: Icons.print_outlined,
+              //     backgroundColor: ColorValues.appDarkBlueColor,
+              //     text: "Print",
+              //     onPressed: () {
+              //       controller.printScreen();
+              //     },
+              //   ),
+              // ),
               SizedBox(
                 width: 10,
               ),

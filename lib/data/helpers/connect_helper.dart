@@ -2297,6 +2297,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateInventory({
+    required String auth,
+    bool? isLoading,
+    required addInventoryJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventory',
+      Request.put,
+      addInventoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> inventoryList({
     required bool isLoading,
     required String auth,
@@ -2352,6 +2371,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createBlockType({
+    required String auth,
+    bool? isLoading,
+    required blockTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/CreateNewBlock',
+      Request.post,
+      blockTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   ///
   Future<ResponseModel> getCalibrationView({
     required String? auth,
@@ -2370,5 +2407,23 @@ class ConnectHelper {
     );
     return responseModel;
   }
-  //end
+
+  Future<ResponseModel> getAssetMasterList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? type,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetAssetMasterList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

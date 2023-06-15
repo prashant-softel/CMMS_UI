@@ -131,11 +131,11 @@ class StockManagementDashboardScreen
                               //    controller.pmMapping();
                             }),
                         _stockManagementList(
-                          tittle: "MRS Return",
-                          // ontap: () {
-                          //   controller.pmSchedule();
-                          // }
-                        ),
+                            tittle: "MRS Return",
+                            ontap: () {
+                              Get.offNamed(
+                                  Routes.updateGoodsOrdersDetailsScreen);
+                            }),
                         _stockManagementList(
                           tittle: "S2S Material Taransfer",
                           // ontap: () {

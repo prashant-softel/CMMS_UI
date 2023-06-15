@@ -5,6 +5,7 @@ import 'package:cmms/app/add_inventory/view/warranty_tab_widget.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/add_inventory/view/calibartion_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
@@ -171,7 +172,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(
-                                          title: "      Asset\nDescription",
+                                          title: "Asset\nDescription",
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -320,7 +321,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       ),
                                     ),
                                     Container(
-                                      height: 420,
+                                      height: 400,
                                       child: TabBarView(
                                         children: [
                                           CalibrationTabWidget(),
@@ -335,21 +336,22 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               ),
                             ),
                             Dimens.boxHeight15,
-                            ElevatedButton(
-                              onPressed: () {
-                                controller.AddInventory();
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Submit',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                            controller.id == null
+                                ? CustomElevatedButton(
+                                    backgroundColor: ColorValues.appGreenColor,
+                                    text: 'Submit',
+                                    onPressed: () {
+                                      controller.AddInventory();
+                                    },
+                                  )
+                                : CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appDarkBlueColor,
+                                    text: 'Update',
+                                    onPressed: () {
+                                      controller.updateInventory();
+                                    },
                                   ),
-                                ),
-                              ),
-                            ),
                             Dimens.boxHeight30,
                           ],
                         ),

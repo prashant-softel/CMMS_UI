@@ -1521,6 +1521,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateInventory({
+    auth,
+    bool? isLoading,
+    addInventoryJsonString,
+  }) async {
+    var response = await connectHelper.updateInventory(
+        auth: auth,
+        isLoading: isLoading,
+        addInventoryJsonString: addInventoryJsonString);
+    return response;
+  }
+
   Future<ResponseModel> inventoryList({
     int? facilityId,
     required bool isLoading,
@@ -1555,6 +1567,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createBlockType({
+    auth,
+    bool? isLoading,
+    facilitylistJsonString,
+  }) async {
+    var response = await connectHelper.createBlockType(
+        auth: auth,
+        isLoading: isLoading,
+        blockTypeJsonString: facilitylistJsonString);
+    return response;
+  }
+
   ///
   Future<ResponseModel> getCalibrationView({
     String? auth,
@@ -1567,5 +1591,20 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   //end
+  Future<ResponseModel> getAssetMasterList({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAssetMasterList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+//end
 }

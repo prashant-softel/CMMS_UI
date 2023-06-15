@@ -149,13 +149,13 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                     title:
                                                         'Equipment Categories: '),
                                                 SizedBox(
-                                                  width: 15,
+                                                  width: 27,
                                                 ),
                                                 SizedBox(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      3.8,
+                                                      4.2,
                                                   child:
                                                       //     CustomMultiSelectDialogField(
                                                       //   buttonText:
@@ -206,19 +206,19 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 50,
+                                                  width: 55,
                                                 ),
                                                 CustomRichText(
                                                     title: 'Equipment Name: '),
                                                 SizedBox(
-                                                  width: 5,
+                                                  width: 15,
                                                 ),
                                                 // Text("${controller.inventoryNameList.length}"),
                                                 SizedBox(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      4,
+                                                      4.2,
                                                   child: Obx(
                                                     () => DropdownWidget(
                                                       dropdownList: controller
@@ -374,14 +374,14 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                                   title:
                                                                       'Select Affected Part: '),
                                                               SizedBox(
-                                                                width: 5,
+                                                                width: 15,
                                                               ),
                                                               SizedBox(
                                                                 width: MediaQuery.of(
                                                                             context)
                                                                         .size
                                                                         .width /
-                                                                    3.8,
+                                                                    4.2,
                                                                 child:
                                                                     //               Obx(
                                                                     //   () => DropdownWidget(
@@ -925,6 +925,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                 ),
                                               ),
                                             )
+                                         
                                           ],
                                         ),
                                         SizedBox(
@@ -1153,13 +1154,13 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                 title:
                                                     'Select Currency Unit: '),
                                             SizedBox(
-                                              width: 25,
+                                              width: 30,
                                             ),
                                             SizedBox(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  5.5,
+                                                  6.3,
                                               child: Obx(
                                                 () => DropdownWidget(
                                                   dropdownList: controller
@@ -1615,11 +1616,11 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                     ),
                                     CustomRichText(title: 'Select Approver: '),
                                     SizedBox(
-                                      width: 5,
+                                      width: 15,
                                     ),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width /
-                                          3.8,
+                                          4.2,
                                       child: Obx(
                                         () => DropdownWidget(
                                           dropdownList: controller.employeeList,
@@ -2125,7 +2126,7 @@ class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width / 3.8,
+          width: MediaQuery.of(context).size.width / 4.2,
           child: CustomMultiSelectDialogField(
             buttonText: '$title',
             title: 'Employees',

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -9,16 +10,23 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
+
 
 class ViewWarrantyClaimController extends GetxController {
   ViewWarrantyClaimController(this.viewWarrantyClaimPresenter);
@@ -27,7 +35,14 @@ class ViewWarrantyClaimController extends GetxController {
   final HomeController homeController = Get.find();
 
 
-  ///
+  ///Print Global key
+  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
+
+//History Widget
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
+  
+
 
 
   ///
@@ -108,6 +123,12 @@ class ViewWarrantyClaimController extends GetxController {
 
   Rx<String> selectedFacility = ''.obs;
   String username = '';
+
+   ///External Emails list from api
+  RxList<ExternalsEmailsList?>? externalEmailsList = <ExternalsEmailsList?>[].obs;
+
+   ///Supplier ACtion
+  RxList<SuppliersActionsList?>? supplierActionsList = <SuppliersActionsList?>[].obs;
 
 
   ///View Warranty Claim Details
@@ -279,6 +300,8 @@ int? wc_id = 0;
       correctiveActionByBuyerTextController.text = viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
       requestToSupplierTextController.text = viewWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
       approverNametextController.text = viewWarrantyClaimDetailsModel.value?.approver_name ?? '';
+      externalEmailsList?.value = viewWarrantyClaimDetailsModel.value?.externalEmails ?? [];
+      supplierActionsList?.value = viewWarrantyClaimDetailsModel.value?.supplierActions ?? [];
       // // permitDescriptionCtrlr.text = newPermitDetailsModel.value?.description ?? '';
       // startDateTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';
       // validTillTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';;
@@ -299,6 +322,35 @@ int? wc_id = 0;
         
     
   }
+
+   Future<void> printScreen() async {
+    try {
+      final RenderRepaintBoundary boundary =
+          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final imageBytes = await boundary
+          .toImage(pixelRatio: 3.0)
+          .then((image) => image.toByteData(format: ImageByteFormat.png));
+
+      if (imageBytes != null) {
+        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
+          final doc = pw.Document();
+          doc.addPage(
+            pw.Page(
+              build: (pw.Context context) {
+                return pw.Image(
+                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
+              },
+            ),
+          );
+          return doc.save();
+        });
+      }
+    } catch (e) {
+      print('Error printing: $e');
+    }
+  }
+
+ 
 
   // void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
   //   selectedEquipmentCategoryIdList.value = <int>[];
@@ -326,6 +378,8 @@ int? wc_id = 0;
   //     }
   //   }
   // }
+
+  
 
   // void getInventoryList() async {
   //   eqipmentNameList.value = <InventoryModel>[];

@@ -91,7 +91,8 @@ class ApiWrapper {
               final response = await http
                   .put(
                     Uri.parse(uri),
-                    body: json.encode(data),
+                    body: // data,
+                        json.encode(data),
                     headers: headers,
                   )
                   .timeout(const Duration(seconds: 120));

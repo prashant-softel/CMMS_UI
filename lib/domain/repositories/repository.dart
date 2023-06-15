@@ -58,6 +58,7 @@ import 'package:get/get.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
+import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
@@ -3729,6 +3730,34 @@ class Repository {
     }
   }
 
+  Future<bool> updateInventory(
+      {bool? isLoading, addInventoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateInventory(
+          auth: auth,
+          isLoading: isLoading,
+          addInventoryJsonString: addInventoryJsonString);
+      print({"resp", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Data update successfully...", fontSize: 16.0);
+
+        Get.offNamed(
+          Routes.inventoryList,
+        );
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<List<InventoryModel>> inventoryList({
     required int? facilityId,
     required bool isLoading,
@@ -3829,4 +3858,62 @@ class Repository {
   }
 
   //end
+
+  Future<bool> createBlockType(
+      {bool? isLoading, blockTypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createFacilityType(
+          auth: auth,
+          isLoading: isLoading,
+          facilitylistJsonString: blockTypeJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<List<AssetMasterModel?>?> getAssetMasterList(
+      int? type,
+      int? facilityId,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAssetMasterList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonModuleListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<AssetMasterModel> _ModuleListModelList =
+        jsonModuleListModelModels
+            .map<AssetMasterModel>((m) =>
+            AssetMasterModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _ModuleListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+//end
 }
