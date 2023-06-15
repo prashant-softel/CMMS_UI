@@ -1,8 +1,6 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/incident_report_list.dart/view/web/incident_report_list_content_web.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/app/warranty_claim_list/mobile/warranty_claim_content_mobile.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
-import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import '../../home/home_controller.dart';
@@ -10,8 +8,8 @@ import 'package:get/get.dart';
 // import 'mobile/inventory_list_content_mobile.dart';
 // import 'web/inventory_list_content_web.dart';
 
-class WarrantyClaimListScreen extends GetView<WarrantyClaimController> {
-  WarrantyClaimListScreen({Key? key});
+class IncidentReportListScreen extends GetView<HomeController> {
+  IncidentReportListScreen({Key? key});
   // final HomeController controller = Get.find();
   
 
@@ -27,13 +25,13 @@ class WarrantyClaimListScreen extends GetView<WarrantyClaimController> {
         child: Column(
             //
             children: [
-              if (Responsive.isMobile(context))
-                Expanded(
-                  child: WarrantyClaimMobile(),
-                ),
+              // if (Responsive.isMobile(context))
+              //   Expanded(
+              //     child: IncidentReportMobile(),
+              //   ),
               if (Responsive.isDesktop(context))
                 Expanded(
-                  child: WarrantyClaimListWeb(),
+                  child: IncidentReportListWeb(),
                 ),
             ]),
       ),

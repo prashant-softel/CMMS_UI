@@ -12,8 +12,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class NewWarrantyClaimListWeb extends GetView<WarrantyClaimController> {
-  NewWarrantyClaimListWeb({super.key});
+class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
+  NewWarrantyClaimWeb({super.key});
 
   bool valuefirst = false;
 
