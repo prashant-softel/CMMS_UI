@@ -241,7 +241,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 rows: true
                                     ? controller.calibrationList!
                                         .map((calibrationListListDetails) =>
-                                            TableViewRow(height: 150, cells: [
+                                            TableViewRow(height: 120, cells: [
                                               TableViewCell(
                                                   child: Text(
                                                 '${calibrationListListDetails?.category_name}',
@@ -334,21 +334,30 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                       .remove_red_eye_outlined,
                                                   label: 'View',
                                                   onPress: () {
-                                                    Get.toNamed(Routes
-                                                        .calibrationViewScreen);
+                                                    int calibrationId =
+                                                        calibrationListListDetails
+                                                                ?.calibration_id ??
+                                                            0;
+                                                    if (calibrationId != null) {
+                                                      Get.toNamed(
+                                                          Routes
+                                                              .calibrationViewScreen,
+                                                          arguments:
+                                                              calibrationId);
+                                                    }
                                                   },
                                                 ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
-                                                  icon: Icons.add,
-                                                  label:
-                                                      'Add Calibration Detail',
-                                                  onPress: () {
-                                                    Get.toNamed(Routes
-                                                        .calibrationDetail);
-                                                  },
-                                                ),
+                                                // TableActionButton(
+                                                //   color: ColorValues
+                                                //       .appDarkBlueColor,
+                                                //   icon: Icons.add,
+                                                //   label:
+                                                //       'Add Calibration Detail',
+                                                //   onPress: () {
+                                                //     Get.toNamed(Routes
+                                                //         .calibrationDetail);
+                                                //   },
+                                                // ),
                                                 // TableActionButton(
                                                 //   color: ColorValues
                                                 //       .appDarkBlueColor,
@@ -366,7 +375,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         calibrationName:
                                                             '${calibrationListListDetails?.asset_name}',
                                                         calibrationId:
-                                                            '${calibrationListListDetails?.asset_id}',
+                                                            '${calibrationListListDetails?.calibration_id}',
                                                         type: 1);
                                                   },
                                                 ),
@@ -380,7 +389,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                       calibrationName:
                                                           '${calibrationListListDetails?.asset_name}',
                                                       calibrationId:
-                                                          '${calibrationListListDetails?.asset_id}',
+                                                          '${calibrationListListDetails?.calibration_id}',
                                                     );
                                                   },
                                                 ),
@@ -421,7 +430,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         calibrationName:
                                                             '${calibrationListListDetails?.asset_name}',
                                                         calibrationId:
-                                                            '${calibrationListListDetails?.asset_id}',
+                                                            '${calibrationListListDetails?.calibration_id}',
                                                         type: 2);
                                                   },
                                                 ),

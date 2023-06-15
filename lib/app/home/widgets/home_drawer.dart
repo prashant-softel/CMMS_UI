@@ -83,7 +83,7 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Corrective Maintenance",
+                        title: "Stock Management",
                         icon: "assets/files/maint.png",
                         press: () {
                           Get.offNamed(Routes.stockManagementDashboardScreen);

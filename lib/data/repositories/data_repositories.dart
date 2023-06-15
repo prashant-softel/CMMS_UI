@@ -1554,6 +1554,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, calibrationId: calibrationId);
     return response;
   }
+
   Future<ResponseModel> createFacilityType({
     auth,
     bool? isLoading,
@@ -1565,7 +1566,7 @@ class DataRepository extends DomainRepository {
         facilitylistJsonString: facilitylistJsonString);
     return response;
   }
-  
+
   Future<ResponseModel> createBlockType({
     auth,
     bool? isLoading,
@@ -1578,6 +1579,20 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  ///
+  Future<ResponseModel> getCalibrationView({
+    String? auth,
+    int? calibrationId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getCalibrationView(
+      auth: auth,
+      calibrationId: calibrationId,
+      isLoading: isLoading,
+    );
+  }
+
+  //end
   Future<ResponseModel> getAssetMasterList({
     required String auth,
     int? facilityId,

@@ -1687,9 +1687,9 @@ class ConnectHelper {
       'Calibration/RejectCalibration',
       Request.put,
       rejectCalibrationtoJsonString,
-      isLoading ?? true,
+      isLoading ?? false,
       {
-        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
@@ -1758,7 +1758,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?schedule_id=2444',
+      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
       Request.get,
       null,
       isLoading ?? false,
@@ -2370,6 +2370,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> createBlockType({
     required String auth,
     bool? isLoading,
@@ -2385,10 +2386,28 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
-  
+
+  ///
+  Future<ResponseModel> getCalibrationView({
+    required String? auth,
+    int? calibrationId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/GetCalibrationDetails?id=$calibrationId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getAssetMasterList({
     required String auth,
     bool? isLoading,
@@ -2401,12 +2420,10 @@ class ConnectHelper {
       null,
       isLoading ?? false,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
-  
-  //end
 }

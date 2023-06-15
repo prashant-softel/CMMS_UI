@@ -154,7 +154,7 @@ class CalibrationListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to start the Calibration ',
+                text: 'Are you sure you want to start the Calibration for',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
@@ -203,7 +203,7 @@ class CalibrationListController extends GetxController {
 
       var rejectCalibrationtoJsonString = commentCalibrationModel.toJson();
       print({"rejectCalibrationJsonString", rejectCalibrationtoJsonString});
-      await calibrationListPresenter.rejectCalibration(
+      final response = await calibrationListPresenter.rejectCalibration(
         rejectCalibrationtoJsonString: rejectCalibrationtoJsonString,
         isLoading: true,
       );
@@ -218,6 +218,16 @@ class CalibrationListController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                type == 1 ? "Reject" : "Approve",
+                style: TextStyle(
+                  color: ColorValues.blackColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Divider(
+                color: ColorValues.appDarkGreyColor,
+              ),
               Text(
                 "${calibrationName}",
                 style: TextStyle(

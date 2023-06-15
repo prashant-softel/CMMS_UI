@@ -232,37 +232,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           minWidth: Get.width * 0.15,
                                         );
                                       }).toList(),
-                                      rows: [
-                                        // [
-                                        //   "PR1000",
-                                        //   "Milk",
-                                        //   "20.00",
-                                        //   "---",
-                                        //   "status"
-                                        // ],
-                                        // [
-                                        //   "PR1001",
-                                        //   "Soap",
-                                        //   "10.00",
-                                        //   "---",
-                                        //   "status"
-                                        // ],
-                                        // ...List.generate(
-                                        //   controller.historyLog?.length ?? 0,
-                                        //   (index) {
-                                        //     var getHistoryListDetails =
-                                        //         controller.historyLog?[index];
-                                        //     return [
-                                        //       '${getHistoryListDetails?.created_at}',
-                                        //       '${getHistoryListDetails?.created_by_name ?? ''}',
-                                        //       '${getHistoryListDetails?.comment ?? ''}',
-                                        //       '--',
-                                        //       '${getHistoryListDetails?.status ?? ''}',
-                                        //     ];
-                                        //   },
-                                        // ),
-                                        // // [
-                                      ].map((record) {
+                                      rows: [].map((record) {
                                         return TableViewRow(
                                           height: 90,
                                           cells: record.map((value) {
@@ -449,7 +419,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                     child: CustomElevatedButton(
                                       backgroundColor:
                                           ColorValues.appDarkBlueColor,
-                                      text: "History",
+                                      text: "Print",
                                       onPressed: () {},
                                     ),
                                   ),
