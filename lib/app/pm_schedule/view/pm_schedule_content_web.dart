@@ -233,209 +233,226 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                             ),
                           ],
                         ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                child: ScrollableTableView(
-                                  paginationController:
-                                      controller.paginationController,
-                                  columns: [
-                                    "Asset Id",
-                                    "Equipment List",
-                                    ...controller.frequencyListName,
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.15,
-                                    );
-                                  }).toList(),
-                                  rows: [
-                                    ...List.generate(
-                                      controller.getPmScheduleList?.length ?? 0,
-                                      (index) {
-                                        var getPmScheduleListListDetails =
-                                            controller
-                                                .getPmScheduleList?[index];
-                                        return [
-                                          '${getPmScheduleListListDetails?.asset_id}',
-                                          '${getPmScheduleListListDetails?.asset_name ?? ''}',
-                                          ...(getPmScheduleListListDetails
-                                                  ?.frequency_dates ??
-                                              []),
-                                        ];
-                                      },
-                                    ),
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 80,
-                                      cells: record.map((value) {
-                                        if (value == record[0] ||
-                                            value == record[1])
-                                          return TableViewCell(
-                                            child: Text(value.toString()),
-                                          );
-                                        return TableViewCell(
-                                          child: Container(
-                                              width: Get.width / 7,
-                                              child: LoginCustomTextfield(
-                                                ontap: () {
-                                                  _selectDate(context, value);
-                                                },
-                                                textController: (value
-                                                        as FrequencyDates)
-                                                    .schedule_date_value_controller,
-                                                enabled:
-                                                    (value as FrequencyDates)
-                                                                .schedule_date !=
-                                                            null
-                                                        ? true
-                                                        : false,
-                                              )),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: ValueListenableBuilder(
-                                    valueListenable:
-                                        controller.paginationController,
-                                    builder: (context, value, child) {
-                                      return Row(children: [
-                                        Text(
-                                            "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                        Row(children: [
-                                          IconButton(
-                                            onPressed: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? null
-                                                : () {
-                                                    controller
-                                                        .paginationController
-                                                        .previous();
-                                                  },
-                                            iconSize: 20,
-                                            splashRadius: 20,
-                                            icon: Icon(
-                                              Icons.arrow_back_ios_new_rounded,
-                                              color: controller
-                                                          .paginationController
-                                                          .currentPage <=
-                                                      1
-                                                  ? Colors.black26
-                                                  : Theme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? null
-                                                : () {
-                                                    controller
-                                                        .paginationController
-                                                        .next();
-                                                  },
-                                            iconSize: 20,
-                                            splashRadius: 20,
-                                            icon: Icon(
-                                              Icons.arrow_forward_ios_rounded,
-                                              color: controller
-                                                          .paginationController
-                                                          .currentPage >=
-                                                      controller
-                                                          .paginationController
-                                                          .pageCount
-                                                  ? Colors.black26
-                                                  : Theme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                        ]),
-                                      ]);
-                                    }),
-                              ),
-                              Container(
-                                margin: Dimens.edgeInsets15,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomRichText(title: "Comment:"),
-                                    Dimens.boxWidth10,
-                                    Container(
-                                        width: (Get.width * .6),
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
-                                            ),
-                                            BoxShadow(
-                                              color: ColorValues.whiteColor,
-                                              offset: const Offset(0.0, 0.0),
-                                              blurRadius: 0.0,
-                                              spreadRadius: 0.0,
-                                            ),
-                                          ],
-                                          color: ColorValues.whiteColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: LoginCustomTextfield(
-                                          maxLine: 5,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 35,
-                                      child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.greenColor,
-                                        text: 'Submit',
-                                        onPressed: () {
-                                          controller.savePmSchedule();
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appDarkBlueColor,
-                                        text: "View History",
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ],
+                        child: controller.getPmScheduleList!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  "No data Found.....",
+                                  style: Styles.black15W600,
                                 ),
                               )
-                            ],
-                          ),
-                        ),
+                            : SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 500,
+                                      child: ScrollableTableView(
+                                        paginationController:
+                                            controller.paginationController,
+                                        columns: [
+                                          "Asset Id",
+                                          "Equipment List",
+                                          ...controller.frequencyListName,
+                                        ].map((column) {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width * 0.15,
+                                          );
+                                        }).toList(),
+                                        rows: [
+                                          ...List.generate(
+                                            controller.getPmScheduleList
+                                                    ?.length ??
+                                                0,
+                                            (index) {
+                                              var getPmScheduleListListDetails =
+                                                  controller.getPmScheduleList?[
+                                                      index];
+                                              return [
+                                                '${getPmScheduleListListDetails?.asset_id}',
+                                                '${getPmScheduleListListDetails?.asset_name ?? ''}',
+                                                ...(getPmScheduleListListDetails
+                                                        ?.frequency_dates ??
+                                                    []),
+                                              ];
+                                            },
+                                          ),
+                                        ].map((record) {
+                                          return TableViewRow(
+                                            height: 80,
+                                            cells: record.map((value) {
+                                              if (value == record[0] ||
+                                                  value == record[1])
+                                                return TableViewCell(
+                                                  child: Text(value.toString()),
+                                                );
+                                              return TableViewCell(
+                                                child: Container(
+                                                    width: Get.width / 7,
+                                                    child: LoginCustomTextfield(
+                                                      ontap: () {
+                                                        _selectDate(
+                                                            context, value);
+                                                      },
+                                                      textController: (value
+                                                              as FrequencyDates)
+                                                          .schedule_date_value_controller,
+                                                      enabled:
+                                                          (value as FrequencyDates)
+                                                                      .schedule_date !=
+                                                                  null
+                                                              ? true
+                                                              : false,
+                                                    )),
+                                              );
+                                            }).toList(),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 25),
+                                      child: ValueListenableBuilder(
+                                          valueListenable:
+                                              controller.paginationController,
+                                          builder: (context, value, child) {
+                                            return Row(children: [
+                                              Text(
+                                                  "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                              Row(children: [
+                                                IconButton(
+                                                  onPressed: controller
+                                                              .paginationController
+                                                              .currentPage <=
+                                                          1
+                                                      ? null
+                                                      : () {
+                                                          controller
+                                                              .paginationController
+                                                              .previous();
+                                                        },
+                                                  iconSize: 20,
+                                                  splashRadius: 20,
+                                                  icon: Icon(
+                                                    Icons
+                                                        .arrow_back_ios_new_rounded,
+                                                    color: controller
+                                                                .paginationController
+                                                                .currentPage <=
+                                                            1
+                                                        ? Colors.black26
+                                                        : Theme.of(context)
+                                                            .primaryColor,
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  onPressed: controller
+                                                              .paginationController
+                                                              .currentPage >=
+                                                          controller
+                                                              .paginationController
+                                                              .pageCount
+                                                      ? null
+                                                      : () {
+                                                          controller
+                                                              .paginationController
+                                                              .next();
+                                                        },
+                                                  iconSize: 20,
+                                                  splashRadius: 20,
+                                                  icon: Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_rounded,
+                                                    color: controller
+                                                                .paginationController
+                                                                .currentPage >=
+                                                            controller
+                                                                .paginationController
+                                                                .pageCount
+                                                        ? Colors.black26
+                                                        : Theme.of(context)
+                                                            .primaryColor,
+                                                  ),
+                                                ),
+                                              ]),
+                                            ]);
+                                          }),
+                                    ),
+                                    Container(
+                                      margin: Dimens.edgeInsets15,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomRichText(title: "Comment:"),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                              width: (Get.width * .6),
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: LoginCustomTextfield(
+                                                maxLine: 5,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 30),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: 35,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.greenColor,
+                                              text: 'Submit',
+                                              onPressed: () {
+                                                controller.savePmSchedule();
+                                              },
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            height: 35,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              text: "View History",
+                                              onPressed: () {},
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                       ),
                     ),
                   ],

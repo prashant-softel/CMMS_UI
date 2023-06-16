@@ -1734,13 +1734,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPmTaskList({
-    required String auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
+  Future<ResponseModel> getPmTaskList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=$facilityId',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${startDate}&end_date=${endDate}',
       Request.get,
       null,
       isLoading ?? true,

@@ -2618,7 +2618,7 @@ class Repository {
               (m) => HistoryModel.fromJson(Map<String, dynamic>.from(m)),
             )
             .toList();
-
+        print({"_historyModelList", _historyModelList});
         return _historyModelList;
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getHistory');
@@ -2852,17 +2852,16 @@ class Repository {
     }
   }
 
-  Future<List<PmTaskListModel?>?> getPmTaskList(
-    int? facilityId,
-    bool? isLoading,
-  ) async {
+  Future<List<PmTaskListModel?>?> getPmTaskList(int? facilityId,
+      bool? isLoading, dynamic startDate, dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPmTaskList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
       // print(res.data);
       if (!res.hasError) {
         final jsonPmTaskListModelModels = jsonDecode(res.data);
@@ -2872,7 +2871,7 @@ class Repository {
                 .map<PmTaskListModel>((m) =>
                     PmTaskListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
-        print({"object", _PmTaskListModelList});
+        // print({"object", _PmTaskListModelList});
         return _PmTaskListModelList;
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getPmTaskList');
@@ -3842,7 +3841,7 @@ class Repository {
       if (!res.hasError) {
         final CalibrationDetailModel _calibrationDetailsModel =
             calibrationDetailModelFromJson(res.data);
-        print({"calibrationDetailsModel", _calibrationDetailsModel});
+        // print({"calibrationDetailsModel", _calibrationDetailsModel});
 
         return _calibrationDetailsModel;
       } //
@@ -3859,8 +3858,7 @@ class Repository {
 
   //end
 
-  Future<bool> createBlockType(
-      {bool? isLoading, blockTypeJsonString}) async {
+  Future<bool> createBlockType({bool? isLoading, blockTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createFacilityType(
@@ -3882,10 +3880,10 @@ class Repository {
   }
 
   Future<List<AssetMasterModel?>?> getAssetMasterList(
-      int? type,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAssetMasterList(
@@ -3899,10 +3897,10 @@ class Repository {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<AssetMasterModel> _ModuleListModelList =
-        jsonModuleListModelModels
-            .map<AssetMasterModel>((m) =>
-            AssetMasterModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+            jsonModuleListModelModels
+                .map<AssetMasterModel>((m) =>
+                    AssetMasterModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _ModuleListModelList;
       } else {

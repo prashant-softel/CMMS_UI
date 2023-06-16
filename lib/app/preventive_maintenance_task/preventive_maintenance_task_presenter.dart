@@ -5,12 +5,14 @@ import '../../domain/usecases/pm_task_usecase.dart';
 class PreventiveMaintenanceTaskPresenter {
   PreventiveMaintenanceTaskPresenter(this.preventiveMaintenanceTaskUsecase);
   PreventiveMaintenanceTaskUsecase preventiveMaintenanceTaskUsecase;
-  Future<List<PmTaskListModel?>?> getPmTaskList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<List<PmTaskListModel?>?> getPmTaskList(
+          {int? facilityId,
+          bool? isLoading,
+          dynamic endDate,
+          dynamic startDate}) async =>
       await preventiveMaintenanceTaskUsecase.getPmTaskList(
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          endDate: endDate,
+          startDate: startDate);
 }

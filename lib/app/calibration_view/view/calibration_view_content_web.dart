@@ -1,6 +1,7 @@
 import 'package:cmms/app/calibration_View/calibration_View_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -86,7 +87,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: CustomElevatedButton(
-                              text: "Waiting for Approval",
+                              text:
+                                  "${controller.calibrationDetailModel.value?.statusShort ?? ""}",
                               onPressed: () {},
                               backgroundColor: ColorValues.appYellowColor,
                               textColor: ColorValues.whiteColor,
@@ -134,13 +136,21 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Demo_001_VMS", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.assetName ?? ""}",
+                                        style: Styles.blue17),
                                     Dimens.boxHeight10,
-                                    Text("2023-06-09", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.lastCalibrationDate ?? ""}",
+                                        style: Styles.blue17),
                                     Dimens.boxHeight10,
-                                    Text("Sujit Kumar", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.vendorName ?? ""}",
+                                        style: Styles.blue17),
                                     Dimens.boxHeight10,
-                                    Text("2023-7-09", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.completedAt ?? ""}",
+                                        style: Styles.blue17),
                                   ],
                                 ),
                                 Spacer(),
@@ -172,13 +182,21 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("VMS", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.categoryName ?? ""}",
+                                        style: Styles.blue17),
                                     Dimens.boxHeight10,
-                                    Text("2023-06-09", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.nextCalibrationDueDate ?? ""}",
+                                        style: Styles.blue17),
                                     Dimens.boxHeight10,
-                                    Text("Prashant", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.responsiblePerson ?? ""}",
+                                        style: Styles.blue17),
                                     Dimens.boxHeight10,
-                                    Text("2023--8-09", style: Styles.blue17),
+                                    Text(
+                                        "${controller.calibrationDetailModel.value?.receivedDate ?? ""}",
+                                        style: Styles.blue17),
                                   ],
                                 )
                               ],
@@ -237,7 +255,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           height: 90,
                                           cells: record.map((value) {
                                             return TableViewCell(
-                                              child: Text(value),
+                                              child: Text("no data found"),
                                             );
                                           }).toList(),
                                         );
@@ -341,6 +359,23 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                 ],
                               ),
                             ),
+                            controller.historyList != null &&
+                                    controller.historyList!.isNotEmpty
+                                ? //
+                                Container(
+                                    margin: Dimens.edgeInsets20,
+                                    constraints: BoxConstraints(
+                                      maxHeight: 500,
+                                      minHeight: 100,
+                                    ),
+                                    child: //
+                                        HistoryTableWidgetWeb(
+                                      historyList: controller.historyList,
+                                    ),
+                                  )
+                                //)
+                                : //
+                                Dimens.box0,
                             Row(
                               children: [
                                 Text(

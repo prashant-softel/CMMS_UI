@@ -4,12 +4,10 @@ import 'package:cmms/domain/repositories/repository.dart';
 class PreventiveMaintenanceTaskUsecase {
   PreventiveMaintenanceTaskUsecase(this.repository);
   Repository repository;
-  Future<List<PmTaskListModel?>?> getPmTaskList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getPmTaskList(
-        facilityId,
-        isLoading,
-      );
+  Future<List<PmTaskListModel?>?> getPmTaskList(
+          {int? facilityId,
+          bool? isLoading,
+          dynamic endDate,
+          dynamic startDate}) async =>
+      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate);
 }

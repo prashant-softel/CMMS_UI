@@ -38,21 +38,25 @@ class PreventiveMaintenanceTaskController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
+      Future.delayed(Duration(seconds: 2), () async {
+        getPmTaskList(facilityId, formattedTodate, formattedFromdate, false);
+      });
       // Future.delayed(Duration(seconds: 2), () async {
       // });
-    });
-    await Future.delayed(Duration(seconds: 2), () async {
-      getPmTaskList(facilityId, false);
     });
 
     super.onInit();
   }
 
-  Future<void> getPmTaskList(int facilityId, bool isLoading) async {
+  Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
+      bool isLoading) async {
     pmTaskList?.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await preventiveMaintenanceTaskPresenter.getPmTaskList(
-        facilityId: facilityId, isLoading: isLoading);
+        facilityId: facilityId,
+        isLoading: isLoading,
+        startDate: startDate,
+        endDate: endDate);
     if (_pmTaskList != null) {
       pmTaskList!.value = _pmTaskList;
       paginationController = PaginationController(
@@ -69,5 +73,9 @@ class PreventiveMaintenanceTaskController extends GetxController {
         }
       }
     }
+  }
+
+  void getPmTaskListByDate() {
+    getPmTaskList(facilityId, formattedFromdate, formattedTodate, false);
   }
 }
