@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/stock_managment_update_goods_orders_details.dart/stock_management_update_goods_orders_details_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -13,7 +14,9 @@ import '../../widgets/custom_textField.dart';
 class UpdateGoodsOrdersDetailsWeb
     extends GetView<StockManagementUpdateGoodsOrdersDetailsController> {
   UpdateGoodsOrdersDetailsWeb({Key? key}) : super(key: key);
-  // final StockManagementUpdateGoodsOrdersDetailsController controller = Get.find();
+
+  final StockManagementUpdateGoodsOrdersDetailsController controller =
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -109,31 +112,21 @@ class UpdateGoodsOrdersDetailsWeb
                             children: [
                               Row(
                                 children: [
+                                  Dimens.boxWidth10,
                                   CustomRichText(title: 'Vendor: '),
                                   Dimens.boxWidth10,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
+                                  SizedBox(
+                                    child: DropdownWebWidget(
                                       width:
-                                          (MediaQuery.of(context).size.width *
-                                              .2),
-                                      child: LoginCustomTextfield()),
+                                          MediaQuery.of(context).size.width / 5,
+                                      dropdownList: controller.unitCurrencyList,
+                                      isValueSelected: controller
+                                          .isUnitCurrencySelected.value,
+                                      selectedValue:
+                                          controller.selectedUnitCurrency.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Dimens.boxHeight5,
@@ -565,31 +558,21 @@ class UpdateGoodsOrdersDetailsWeb
                               Dimens.boxHeight5,
                               Row(
                                 children: [
-                                  CustomRichText(title: 'Currency : '),
                                   Dimens.boxWidth10,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
+                                  CustomRichText(title: 'Currency: '),
+                                  Dimens.boxWidth10,
+                                  SizedBox(
+                                    child: DropdownWebWidget(
                                       width:
-                                          (MediaQuery.of(context).size.width *
-                                              .2),
-                                      child: LoginCustomTextfield()),
+                                          MediaQuery.of(context).size.width / 5,
+                                      dropdownList: controller.unitCurrencyList,
+                                      isValueSelected: controller
+                                          .isUnitCurrencySelected.value,
+                                      selectedValue:
+                                          controller.selectedUnitCurrency.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
