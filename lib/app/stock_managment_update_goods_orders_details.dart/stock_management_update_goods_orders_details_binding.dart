@@ -7,7 +7,7 @@ import '../home/home_presenter.dart';
 import 'stock_management_update_goods_orders_details_controller.dart';
 import 'stock_management_update_goods_orders_details_presenter.dart';
 
-class StockManagementGoodsOrdersBinding extends Bindings {
+class StockManagementGoodsOrdersDetailsBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<StockManagementUpdateGoodsOrdersDetailsController>(

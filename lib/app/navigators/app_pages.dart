@@ -46,6 +46,8 @@ import 'package:cmms/app/permit_type/permit_type_binding.dart';
 import 'package:cmms/app/permit_type/view/permit_type_screen.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_binding.dart';
 import 'package:cmms/app/safety_questions_list/safety_question_list_screen.dart';
+import 'package:cmms/app/view_add_inventory/view_add_inventory_binding.dart';
+import 'package:cmms/app/view_add_inventory/view_add_inventory_ui.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
@@ -120,6 +122,7 @@ import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.d
 import '../role_List/role_list_binding.dart';
 import '../state_list_screen/state_list_binding.dart';
 import '../state_list_screen/view/state_list_content_screen.dart';
+import '../stock_managment_update_goods_orders_details.dart/stock_management_update_goods_orders_details_binding.dart';
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
@@ -340,6 +343,11 @@ class AppPages {
       page: AddInventoryScreen.new,
       binding: AddInventoryBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.viewAddInventoryScreen,
+      page: ViewAddInventoryScreen.new,
+      binding: ViewAddInventoryBinding(),
+    ),
 
     GetPage<dynamic>(
       name: _Paths.inventory,
@@ -481,7 +489,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.updateGoodsOrdersDetailsScreen,
       page: StockManagementUpdateGoodsOrdersDetailsScreen.new,
-      binding: StockManagementGoodsOrdersBinding(),
+      binding: StockManagementGoodsOrdersDetailsBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.assetMasterList,

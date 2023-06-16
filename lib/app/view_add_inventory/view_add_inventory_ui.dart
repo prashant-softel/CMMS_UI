@@ -5,6 +5,10 @@ import 'package:cmms/app/add_inventory/view/warranty_tab_widget.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/add_inventory/view/calibartion_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/view_add_inventory/view/view_calibartion_widget.dart';
+import 'package:cmms/app/view_add_inventory/view/view_manufacturar_tab_widget.dart';
+import 'package:cmms/app/view_add_inventory/view_add_inventory_controller.dart';
+
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -13,10 +17,12 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddInventoryScreen extends GetView<AddInventoryController> {
-  AddInventoryScreen({super.key});
+import 'view/view_warranty_tab_widget.dart';
 
-  final AddInventoryController controller = Get.find();
+class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
+  ViewAddInventoryScreen({super.key});
+
+  final ViewAddInventoryController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -115,8 +121,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(title: 'Block'),
-                                        SizedBox(
+                                        IgnorePointer(
+                                          ignoring: true,
                                           child: DropdownWebWidget(
+                                            isEditable: true,
                                             margin: Dimens.edgeInsets16,
                                             width: MediaQuery.of(context)
                                                     .size
@@ -136,7 +144,8 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(title: "Type"),
-                                        SizedBox(
+                                        IgnorePointer(
+                                          ignoring: true,
                                           child: DropdownWebWidget(
                                             margin: Dimens.edgeInsets16,
                                             width: MediaQuery.of(context)
@@ -158,7 +167,8 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(title: "Status"),
-                                        SizedBox(
+                                        IgnorePointer(
+                                          ignoring: true,
                                           child: DropdownWebWidget(
                                             margin: Dimens.edgeInsets16,
                                             width: MediaQuery.of(context)
@@ -180,24 +190,27 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(title: "Asset\nName"),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                            color: Color(0xFE50000),
-                                            width: 0.5,
-                                          )),
-                                          height: 45,
-                                          margin: Dimens.edgeInsets16,
-                                          constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
-                                            minWidth: 100,
-                                          ),
-                                          child: LoginCustomTextfield(
-                                            textController:
-                                                controller.assetsNameCtrlr,
+                                        IgnorePointer(
+                                          ignoring: true,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                              color: Color(0xFE50000),
+                                              width: 0.5,
+                                            )),
+                                            height: 45,
+                                            margin: Dimens.edgeInsets16,
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              minWidth: 100,
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              textController:
+                                                  controller.assetsNameCtrlr,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -207,24 +220,28 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(
                                           title: "Asset\nDescription",
                                         ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                            color: Color(0xFE50000),
-                                            width: 0.5,
-                                          )),
-                                          height: 45,
-                                          margin: Dimens.edgeInsets16,
-                                          constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
-                                            minWidth: 100,
-                                          ),
-                                          child: LoginCustomTextfield(
-                                            textController: controller
-                                                .assesDiscriptionCtrlr,
+                                        IgnorePointer(
+                                          ignoring: true,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                              color: Color(0xFE50000),
+                                              width: 0.5,
+                                            )),
+                                            height: 45,
+                                            margin: Dimens.edgeInsets16,
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              minWidth: 100,
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              enabled: false,
+                                              textController: controller
+                                                  .assesDiscriptionCtrlr,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -238,7 +255,8 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       children: [
                                         CustomRichText(
                                             title: 'Parent\nEquipment'),
-                                        SizedBox(
+                                        IgnorePointer(
+                                          ignoring: true,
                                           child: DropdownWebWidget(
                                             margin: Dimens.edgeInsets16,
                                             width: MediaQuery.of(context)
@@ -260,7 +278,8 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(title: "Category"),
-                                        SizedBox(
+                                        IgnorePointer(
+                                          ignoring: true,
                                           child: DropdownWebWidget(
                                             margin: Dimens.edgeInsets16,
                                             width: MediaQuery.of(context)
@@ -284,24 +303,28 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(title: "Serial No"),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                            color: Color(0xFE50000),
-                                            width: 0.5,
-                                          )),
-                                          height: 45,
-                                          margin: Dimens.edgeInsets16,
-                                          constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
-                                            minWidth: 100,
-                                          ),
-                                          child: LoginCustomTextfield(
-                                            textController:
-                                                controller.serialNoCtrlr,
+                                        IgnorePointer(
+                                          ignoring: true,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                              color: Color(0xFE50000),
+                                              width: 0.5,
+                                            )),
+                                            height: 45,
+                                            margin: Dimens.edgeInsets16,
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              minWidth: 100,
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              enabled: false,
+                                              textController:
+                                                  controller.serialNoCtrlr,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -357,9 +380,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       height: 400,
                                       child: TabBarView(
                                         children: [
-                                          CalibrationTabWidget(),
-                                          WarrantyTabWidget(),
-                                          ManufacturarTabWidget(),
+                                          ViewCalibrationTabWidget(),
+                                          ViewWarrantyTabWidget(),
+                                          ViewManufacturarTabWidget(),
                                           Files(),
                                         ],
                                       ),
@@ -368,23 +391,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                 ),
                               ),
                             ),
-                            Dimens.boxHeight15,
-                            controller.id == null
-                                ? CustomElevatedButton(
-                                    backgroundColor: ColorValues.appGreenColor,
-                                    text: 'Submit',
-                                    onPressed: () {
-                                      controller.AddInventory();
-                                    },
-                                  )
-                                : CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appDarkBlueColor,
-                                    text: 'Update',
-                                    onPressed: () {
-                                      controller.updateInventory();
-                                    },
-                                  ),
+                            // Dimens.boxHeight15,
+                            // controller.id == null
+                            //     ? CustomElevatedButton(
+                            //         backgroundColor: ColorValues.appGreenColor,
+                            //         text: 'Submit',
+                            //         onPressed: () {
+                            //           controller.AddInventory();
+                            //         },
+                            //       )
+                            //     : CustomElevatedButton(
+                            //         backgroundColor:
+                            //             ColorValues.appDarkBlueColor,
+                            //         text: 'Update',
+                            //         onPressed: () {
+                            //           controller.updateInventory();
+                            //         },
+                            //       ),
                             Dimens.boxHeight30,
                           ],
                         ),
