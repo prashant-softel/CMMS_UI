@@ -1,8 +1,7 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/calibration_list_model.dart';
-import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 
-import '../models/business_list_model.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 
 class StockManagementUpdateGoodsOrdersDetailsUsecase {
   final Repository _repository;
@@ -15,4 +14,19 @@ class StockManagementUpdateGoodsOrdersDetailsUsecase {
       facilityId: facilityId,
     );
   }
+
+  Future<List<BusinessTypeModel>> getBusinessTypeList({
+    required int? businessType,
+    // int? blockId,
+    // required String categoryIds,
+    // int? blockId,
+    // String? categoryIds,
+    required bool isLoading,
+  }) async =>
+      await _repository.getBusinessTypeList(
+        // blockId : blockId,
+        // categoryIds,
+        businessType: businessType,
+        isLoading: isLoading,
+      );
 }

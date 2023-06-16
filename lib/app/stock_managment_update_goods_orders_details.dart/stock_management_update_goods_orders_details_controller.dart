@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -20,6 +21,10 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId => _facilityId.value;
+  RxList<BusinessTypeModel?> businessCategoryList = <BusinessTypeModel>[].obs;
+  Rx<String> selectedBusinessType = ''.obs;
+  Rx<bool> isSelectedBusinessType = true.obs;
+  int selectedBusinessTypeId = 1;
 
   ///
   @override
@@ -27,7 +32,20 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });
+    Future.delayed(Duration(seconds: 1), () {
+      getBusinessTypeList();
+    });
     super.onInit();
+  }
+
+  Future<void> getBusinessTypeList() async {
+    businessCategoryList.value = <BusinessTypeModel>[];
+    final list = await stockManagementUpdateGoodsOrdersDetailsPresenter
+        .getBusinessTypeList();
+
+    for (var _equipmentCategoryList in list) {
+      businessCategoryList.add(_equipmentCategoryList);
+    }
   }
 
   void getUnitCurrencyList() async {
@@ -49,12 +67,20 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       //  case RxList<>:
-      //   {
-      //     int manufacturerIndex =
-      //         manufacturerModelNameList.indexWhere((x) => x?.name == value);
-      //     selectedmanufacturerNameId =
-      //         manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
-      //   }
+      // {
+      //   int manufacturerIndex =
+      //       manufacturerModelNameList.indexWhere((x) => x?.name == value);
+      //   selectedmanufacturerNameId =
+      //       manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
+      // }
+      case RxList<BusinessTypeModel>:
+        {
+          int equipmentIndex =
+              businessCategoryList.indexWhere((x) => x?.name == value);
+          selectedBusinessTypeId =
+              businessCategoryList[equipmentIndex]?.id ?? 0;
+        }
+        break;
     }
   }
 }
