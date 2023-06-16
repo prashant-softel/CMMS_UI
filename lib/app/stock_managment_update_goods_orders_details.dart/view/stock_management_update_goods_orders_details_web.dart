@@ -119,11 +119,12 @@ class UpdateGoodsOrdersDetailsWeb
                                     child: DropdownWebWidget(
                                       width:
                                           MediaQuery.of(context).size.width / 5,
-                                      dropdownList: controller.unitCurrencyList,
+                                      dropdownList:
+                                          controller.businessCategoryList,
                                       isValueSelected: controller
-                                          .isUnitCurrencySelected.value,
+                                          .isSelectedBusinessType.value,
                                       selectedValue:
-                                          controller.selectedUnitCurrency.value,
+                                          controller.selectedBusinessType.value,
                                       onValueChanged: controller.onValueChanged,
                                     ),
                                   ),
