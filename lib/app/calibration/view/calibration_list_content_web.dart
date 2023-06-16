@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -309,7 +310,10 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                       '${calibrationListListDetails?.next_calibration_due_date}')),
                                               TableViewCell(
                                                   child: Text(
-                                                      '${calibrationListListDetails?.frequency_name}')),
+                                                '${calibrationListListDetails?.calibration_status}${calibrationListListDetails?.statusID}',
+
+                                                // '${calibrationListListDetails?.frequency_name}'
+                                              )),
                                               TableViewCell(
                                                   child: Wrap(children: [
                                                 TableActionButton(
@@ -365,6 +369,20 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 //   label: 'Approve',
                                                 //   onPress: () {},
                                                 // ),
+                                                // controller.calibrationList!
+                                                //             .firstWhere(
+                                                //               (e) =>
+                                                //                   "${e?.calibration_id}" ==
+                                                //                   calibrationListListDetails!
+                                                //                       .calibration_id,
+                                                //               orElse: () =>
+                                                //                   CalibrationListModel(
+                                                //                       calibration_id:
+                                                //                           000),
+                                                //             )
+                                                //             ?.statusID ==
+                                                //         123
+                                                //     ?
                                                 TableActionButton(
                                                   color:
                                                       ColorValues.appRedColor,
@@ -379,6 +397,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         type: 1);
                                                   },
                                                 ),
+                                                // : Container(),
                                                 TableActionButton(
                                                   color: ColorValues
                                                       .appYellowColor,
