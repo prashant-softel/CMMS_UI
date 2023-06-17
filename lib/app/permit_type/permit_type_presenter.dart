@@ -17,7 +17,12 @@ class PermitTypePresenter {
       await permitTypeUsecase.getUserAccessList();
 
  
-  Future<List<TypePermitModel?>?> getTypePermitList() async =>
-      await permitTypeUsecase.getTypePermitList(true);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    {required int facility_id}
+  ) async =>
+      await permitTypeUsecase.getTypePermitList(
+        true,
+        facility_id
+        );
 
 }

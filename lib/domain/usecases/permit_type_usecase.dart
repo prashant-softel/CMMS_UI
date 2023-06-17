@@ -16,8 +16,14 @@ class PermitTypeUsecase {
   Future<String?> getUserAccessList() async =>
       await repository.getUserAccessData(LocalKeys.userAccess);
 
-  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
-      await repository.getTypePermitList(isLoading);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    bool? isLoading,
+    int? facility_id
+    ) async =>
+      await repository.getTypePermitList(
+        isLoading,
+        facility_id
+        );
 
        
 }

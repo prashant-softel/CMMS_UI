@@ -293,7 +293,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                       Expanded(
                         child: Container(
                           child: GetBuilder<IncidentReportListController>(
-                              id: 'warranty_claim_list',
+                              id: 'incident_report_list',
                               builder: (controller) {
                                 return //
                                     Column(
@@ -303,17 +303,15 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                       Expanded(
                                         child: ScrollableTableView(
                                           paginationController: controller
-                                              .paginationWarrantyController,
+                                              .paginationIncidentReportController,
                                           columns: [
-                                            'WC Id',
-                                            'Date of Claim',
-                                            'Warranty Claim Title',
-                                            'Equipment Serial No.',
-                                            'Equipment Category',
+                                            'Id',
+                                            'Description',
                                             'Equipment Name',
-                                            // 'Warranty Description',
-                                            'Estimated Cost',
-                                            // 'Quantity',
+                                            'Approved By',
+                                            'Approved At',
+                                            'Block Name',
+                                            'Created At',
                                             'Status',
                                             'action'.tr,
                                           ].map((column) {
@@ -325,7 +323,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                           rows: [
                                             ...List.generate(
                                               controller
-                                                  .warrantyClaimList.length,
+                                                  .incidentReportList.length,
+                                              
                                               (index) => [
                                                 // AssetName(
 
@@ -334,16 +333,14 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                 //   1,
                                                 // ),
                                                 // index + 1,
-                                                '${controller.warrantyClaimList[index].wc_id}',
-                                                '${controller.warrantyClaimList[index].date_of_claim}',
-                                                '${controller.warrantyClaimList[index].warranty_claim_title}',
-                                                '${controller.warrantyClaimList[index].equipment_sr_no}',
-                                                '${controller.warrantyClaimList[index].equipment_category}',
-                                                '${controller.warrantyClaimList[index].equipment_name}',
-                                                // '${controller.warrantyClaimList[index].warranty_description}',
-                                                '${controller.warrantyClaimList[index].estimated_cost}',
-                                                // '${controller.warrantyClaimList[index].quantity}',
-                                                '${controller.warrantyClaimList[index].status}',
+                                                '${controller.incidentReportList[index].id}',
+                                                '${controller.incidentReportList[index].description}',
+                                                '${controller.incidentReportList[index].equipment_name}',
+                                                '${controller.incidentReportList[index].approved_by}',
+                                                '${controller.incidentReportList[index].approved_at}',
+                                                '${controller.incidentReportList[index].block_name}',
+                                                '${controller.incidentReportList[index].created_at}',
+                                                '${controller.incidentReportList[index].status}',
                                                 'Actions'
                                               ],
                                             ),
@@ -430,8 +427,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                               color: ColorValues.appDarkBlueColor,
                                                                               icon: Icons.visibility,
                                                                               onPress: () {
-                                                                                controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                print('record:${int.tryParse('${record[0]}')}');
+                                                                                // controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                // print('record:${int.tryParse('${record[0]}')}');
                                                                               },
                                                                             ),
                                                                             //),
@@ -440,8 +437,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                               color: ColorValues.appYellowColor,
                                                                               icon: Icons.edit,
                                                                               onPress: () {
-                                                                                controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                print('edit record:${int.tryParse('${record[0]}')}');
+                                                                                // controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                // print('edit record:${int.tryParse('${record[0]}')}');
                                                                               },
                                                                             ),
                                                                             //),
@@ -491,23 +488,23 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                               horizontal: 25),
                                           child: ValueListenableBuilder(
                                               valueListenable: controller
-                                                  .paginationWarrantyController,
+                                                  .paginationIncidentReportController,
                                               builder: (context, value, child) {
                                                 return Row(
                                                   children: [
                                                     Text(
-                                                        "${controller.paginationWarrantyController.currentPage}  of ${controller.paginationWarrantyController.pageCount}"),
+                                                        "${controller.paginationIncidentReportController.currentPage}  of ${controller.paginationIncidentReportController.pageCount}"),
                                                     Row(
                                                       children: [
                                                         IconButton(
                                                           onPressed: controller
-                                                                      .paginationWarrantyController
+                                                                      .paginationIncidentReportController
                                                                       .currentPage <=
                                                                   1
                                                               ? null
                                                               : () {
                                                                   controller
-                                                                      .paginationWarrantyController
+                                                                      .paginationIncidentReportController
                                                                       .previous();
                                                                 },
                                                           iconSize: 20,
@@ -516,7 +513,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                             Icons
                                                                 .arrow_back_ios_new_rounded,
                                                             color: controller
-                                                                        .paginationWarrantyController
+                                                                        .paginationIncidentReportController
                                                                         .currentPage <=
                                                                     1
                                                                 ? Colors.black26
@@ -527,15 +524,15 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                         ),
                                                         IconButton(
                                                           onPressed: controller
-                                                                      .paginationWarrantyController
+                                                                      .paginationIncidentReportController
                                                                       .currentPage >=
                                                                   controller
-                                                                      .paginationWarrantyController
+                                                                      .paginationIncidentReportController
                                                                       .pageCount
                                                               ? null
                                                               : () {
                                                                   controller
-                                                                      .paginationWarrantyController
+                                                                      .paginationIncidentReportController
                                                                       .next();
                                                                 },
                                                           iconSize: 20,
@@ -544,10 +541,10 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                             Icons
                                                                 .arrow_forward_ios_rounded,
                                                             color: controller
-                                                                        .paginationWarrantyController
+                                                                        .paginationIncidentReportController
                                                                         .currentPage >=
                                                                     controller
-                                                                        .paginationWarrantyController
+                                                                        .paginationIncidentReportController
                                                                         .pageCount
                                                                 ? Colors.black26
                                                                 : Theme.of(

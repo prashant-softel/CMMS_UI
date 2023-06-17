@@ -81,13 +81,15 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                               onTap: () {
                                 Get.back();
                               },
-                              child: Text(" / Warranty Claim List",
+                              child: Text(" / Inventory",
                                   style: Styles.greyMediumLight12),
                             ),
+                            Text(" / Warranty Claim List",
+                                  style: Styles.greyMediumLight12),
                             // Text(" / Create Checklist Number",
                             //     style: Styles.greyMediumLight12)
                             SizedBox(
-                              width: 400,
+                              width: 350,
                             ),
                             // ActionButton(
                             //   icon: Icons.calendar_month,

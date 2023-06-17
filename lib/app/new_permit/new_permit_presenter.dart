@@ -139,8 +139,14 @@ class NewPermitPresenter {
    Future<List<FacilityModel?>?> getFacilityLists() async =>
       await newPermitUsecase.getFacilityLists(true);
 
-   Future<List<TypePermitModel?>?> getTypePermitList() async =>
-      await newPermitUsecase.getTypePermitList(true);
+   Future<List<TypePermitModel?>?> getTypePermitList(
+    {required int facility_id}
+   ) async =>
+      await newPermitUsecase.getTypePermitList(
+        true,
+        facility_id
+        );
+
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,

@@ -535,7 +535,7 @@ class ViewPermitController extends GetxController {
     final _employeeNameList = await viewPermitPresenter.getEmployeePermitList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     print('Employee List:$employeeNameList');
     if (_employeeNameList != null) {
@@ -556,7 +556,7 @@ class ViewPermitController extends GetxController {
     final _permitIssuerList = await viewPermitPresenter.getPermitIssuerList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     print('Permit Issuer List:$permitIssuerList');
     if (_permitIssuerList != null) {
@@ -577,7 +577,7 @@ class ViewPermitController extends GetxController {
     final _permitApproverList = await viewPermitPresenter.getPermitApproverList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     print('Permit Approver List:$permitApproverList');
     if (_permitApproverList != null) {
@@ -598,7 +598,7 @@ class ViewPermitController extends GetxController {
     final _jobTypeList = await viewPermitPresenter.getJobTypePermitList(
       isLoading: true,
       // categoryIds: cPategoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     print('Job Type List:${jobTypeList}');
     if (_jobTypeList != null) {
@@ -880,7 +880,9 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await viewPermitPresenter.getTypePermitList();
+    final _permitTypeList = await viewPermitPresenter.getTypePermitList(
+      facility_id: facilityId
+    );
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {

@@ -23,6 +23,7 @@ import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
@@ -1234,6 +1235,41 @@ class Repository {
     }
   }
 
+  ///Incident Report List
+   Future<List<IncidentReportListModel>> getIncidentReportList({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getIncidentReportList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('IncidentReportList: ${res.data}');
+
+      if (!res.hasError) {
+        var incidentReportList = incidentReportListModelFromJson(res.data);
+        return incidentReportList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
     String? categoryIds,
@@ -1585,12 +1621,16 @@ class Repository {
     }
   }
 
-  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    bool? isLoading,
+    int? facility_id
+    ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getTypePermitList(
         auth: auth,
         isLoading: isLoading,
+        facility_id: facility_id
       );
 
       if (!res.hasError) {

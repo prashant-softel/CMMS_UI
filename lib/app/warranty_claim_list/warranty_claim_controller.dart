@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
@@ -178,6 +179,8 @@ class WarrantyClaimController extends GetxController {
   RxList<String?> selectedEmployeesDataList = <String>[].obs;
   RxList<int?> selectedEmployeesIdList = <int>[].obs;
   int selectedEmployeesId = 0;
+  int facilityId = 0;
+
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -227,64 +230,10 @@ class WarrantyClaimController extends GetxController {
   );
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
+  int get facilityId1 => _facilityId.value;
 
-  /// SIDE MENU WEB
-  Rx<int> selectedIndex = 0.obs;
-  // RxList<MenuItem> menuItems = [
-  //   MenuItem(
-  //     title: "DashBoard",
-  //     icon: "assets/files/home.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Inventory",
-  //     icon: "assets/files/warranty.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Breakdown Maintenance",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Warranty claim",
-  //     icon: "assets/files/warranty.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Preventive Maintenance",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Corrective Maintenance",
-  //     icon: "assets/files/maint.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Module Cleaning",
-  //     icon: "assets/files/maintenance.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Vegetation Control",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Incident Report",
-  //     icon: "assets/files/reportins.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Calibration",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Misc",
-  //     icon: "assets/files/misc.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Settings",
-  //     icon: "assets/files/setting.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Log Out",
-  //     icon: "assets/files/dashboard.png",
-  //   ),
-  // ].obs;
+ 
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
 // int? wc_id = 0;
@@ -292,6 +241,12 @@ class WarrantyClaimController extends GetxController {
   void onInit() async {
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
+     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+      getWarrantyClaimList();
+    });
+    });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
@@ -305,9 +260,7 @@ class WarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getAffectedPartList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getWarrantyClaimList();
-    });
+    
     Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
     });

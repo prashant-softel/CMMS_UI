@@ -186,8 +186,14 @@ class ViewPermitUsecase {
   Future<List<FacilityModel?>?> getFacilityLists(bool? isLoading) async =>
       await repository.getFacilityList(isLoading);
 
-  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
-      await repository.getTypePermitList(isLoading);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    bool? isLoading,
+    int? facility_id
+    ) async =>
+      await repository.getTypePermitList(
+        isLoading,
+        facility_id
+        );
 
   Future<Map<String, dynamic>> createNewPermit({
     newPermit,

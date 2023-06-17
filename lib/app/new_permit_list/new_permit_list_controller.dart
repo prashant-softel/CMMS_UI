@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/block_model.dart';
@@ -36,7 +37,7 @@ class NewPermitListController extends GetxController {
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = false.obs;
-  int facilityId = 45;
+  int facilityId = 0;
   // int userId = 33;
   Rx<int> permitId = 0.obs;
   var breakdownTime;
@@ -62,6 +63,9 @@ class NewPermitListController extends GetxController {
   
 
   StreamSubscription<int>? facilityIdStreamSubscription;
+  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  Stream<int> get facilityId$ => _facilityId.stream;
+  int get facilityId1 => _facilityId.value;
 
   ///
   @override
@@ -129,7 +133,7 @@ class NewPermitListController extends GetxController {
       rowsPerPage: 10,
     );
 
-    update(['new_permit_list']);
+    update(['permit_list']);
   }
 
   Future<void> permitIssueButton({String? permitId}) async {

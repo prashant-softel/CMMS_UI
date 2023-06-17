@@ -108,7 +108,7 @@ abstract class _Paths {
   static const preventiveList =
       '/preventive-maintenance/preventive-list-screen';
   static const preventiveCheckPoint = '/preventive-check-point';
-  static const newPermitList = '/new-permit-list';
+  static const newPermitList = '/permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
   static const warrantyClaimListWeb = '/warranty-claim-list-web';
 
