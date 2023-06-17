@@ -105,7 +105,9 @@ class PermitTypeController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await permitTypePresenter.getTypePermitList();
+    final _permitTypeList = await permitTypePresenter.getTypePermitList(
+      facility_id: facilityId
+    );
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {

@@ -367,6 +367,24 @@ class DataRepository extends DomainRepository {
     );
   }
 
+///Incident Report List
+   @override
+  Future<ResponseModel> getIncidentReportList({
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getIncidentReportList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
+
   @override
   Future<ResponseModel> getWorkTypeList({
     String? categoryIds,
@@ -1034,10 +1052,12 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getTypePermitList({
     String? auth,
     bool? isLoading,
+    int? facility_id,
   }) async =>
       await connectHelper.getTypePermitList(
         auth: auth,
         isLoading: isLoading,
+        facility_id: facility_id
       );
 
   Future<ResponseModel> getUserAccessList({

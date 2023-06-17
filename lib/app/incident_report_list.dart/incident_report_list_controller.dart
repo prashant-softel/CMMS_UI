@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
@@ -11,6 +12,7 @@ import 'package:cmms/domain/models/create_warranty_claim_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
@@ -117,7 +119,8 @@ class IncidentReportListController extends GetxController {
   Set<String> supplierNameSet = {};
 
 //Warranty Claim
-  var warrantyClaimList = <WarrantyClaimModel>[];
+  var incidentReportList = <IncidentReportListModel>[];
+  
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -197,11 +200,9 @@ class IncidentReportListController extends GetxController {
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
 
-  /// Inventory Details Model
-  Rx<InventoryDetailsModel?> inventoryDetailsModel =
-      InventoryDetailsModel().obs;
-  RxList<InventoryDetailsModel?>? inventoryDetailsList =
-      <InventoryDetailsModel?>[].obs;
+///Incident Report List
+  RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel>[].obs;
+
 
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
@@ -218,74 +219,23 @@ class IncidentReportListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationWarrantyController = PaginationController(
+  PaginationController paginationIncidentReportController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationBusinessListController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
+  // PaginationController paginationBusinessListController = PaginationController(
+  //   rowCount: 0,
+  //   rowsPerPage: 10,
+  // );
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
+  int get facilityId1 => _facilityId.value;
+ 
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
 
-  /// SIDE MENU WEB
-  Rx<int> selectedIndex = 0.obs;
-  // RxList<MenuItem> menuItems = [
-  //   MenuItem(
-  //     title: "DashBoard",
-  //     icon: "assets/files/home.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Inventory",
-  //     icon: "assets/files/warranty.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Breakdown Maintenance",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Warranty claim",
-  //     icon: "assets/files/warranty.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Preventive Maintenance",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Corrective Maintenance",
-  //     icon: "assets/files/maint.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Module Cleaning",
-  //     icon: "assets/files/maintenance.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Vegetation Control",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Incident Report",
-  //     icon: "assets/files/reportins.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Calibration",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Misc",
-  //     icon: "assets/files/misc.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Settings",
-  //     icon: "assets/files/setting.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Log Out",
-  //     icon: "assets/files/dashboard.png",
-  //   ),
-  // ].obs;
+
+  
 
   ///
 // int? wc_id = 0;
@@ -293,6 +243,12 @@ class IncidentReportListController extends GetxController {
   void onInit() async {
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
+     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+      getIncidentReportList();
+    });
+    });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
@@ -300,15 +256,7 @@ class IncidentReportListController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getuserAccessData();
     });
-   
-    Future.delayed(Duration(seconds: 1), () {
-      getWarrantyClaimList();
-    });
     
-    
-   
-   
-
     super.onInit();
   }
 
@@ -588,24 +536,26 @@ class IncidentReportListController extends GetxController {
   //   update(['employee_list']);
   // }
 
-  void getWarrantyClaimList() async {
-    // supplierNameList.value = <WarrantyClaimModel>[];
+  void getIncidentReportList() async {
+    incidentReportModelList.value = <IncidentReportListModel>[];
 
-    final list = await incidentReportPresenter.getWarrantyClaimList(
-        isLoading: true, categoryIds: categoryIds, facilityId: facilityId);
-    print('Supplier Name List:$supplierNameList');
-    Set<String> supplierNameSet = {};
-    for (var _supplierNameList in list) {
-      if (_supplierNameList.supplier_name != null) {
-        supplierNameSet.add(_supplierNameList.supplier_name ?? "");
-      }
+    final list = await incidentReportPresenter.getIncidentReportList(
+        isLoading: true, 
+        start_date: '2020-01-01',
+        end_date: '2023-12-31',
+        facility_id: facilityId
+        );
+        print('incidentReportFacilityId$facilityId');
+    print('Incident Report List:$list');
+    for (var incident_list in list) {
+      incidentReportModelList.add(incident_list);
     }
-    warrantyClaimList = list;
-    paginationWarrantyController = PaginationController(
-      rowCount: warrantyClaimList.length,
+    incidentReportList = list;
+    paginationIncidentReportController = PaginationController(
+      rowCount: incidentReportList.length,
       rowsPerPage: 10,
     );
-    update(['warranty_claim_list']);
+    update(['incident_report_list']);
   }
 
   // void getBlockList(String facilityId) async {

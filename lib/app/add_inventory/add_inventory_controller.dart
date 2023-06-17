@@ -611,7 +611,9 @@ class AddInventoryController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await addInventoryPresenter.getTypePermitList();
+    final _permitTypeList = await addInventoryPresenter.getTypePermitList(
+      facility_id: facilityId
+    );
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {

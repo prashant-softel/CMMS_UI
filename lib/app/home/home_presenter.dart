@@ -43,8 +43,13 @@ class HomePresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<List<TypePermitModel?>?> getTypePermitList() async =>
-      await homeUsecase.getTypePermitList(true);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    {required int facility_id}
+  ) async =>
+      await homeUsecase.getTypePermitList(
+        true,
+        facility_id
+        );
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
