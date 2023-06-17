@@ -214,6 +214,7 @@ class ViewPermitController extends GetxController {
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
 
+
   /// Job Type Permit List
   RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
   Rx<bool> isJobTypeListSelected = true.obs;
