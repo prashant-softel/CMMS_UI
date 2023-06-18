@@ -63,6 +63,7 @@ import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
+import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
@@ -3397,6 +3398,37 @@ class Repository {
         final List<UserListModel> _UserListModelList = jsonUserListModelModels
             .map<UserListModel>(
                 (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _UserListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+  
+  Future<List<DocumentManagerModel?>?> getDocumentManager(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonUserListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<DocumentManagerModel> _UserListModelList = jsonUserListModelModels
+            .map<DocumentManagerModel>(
+                (m) => DocumentManagerModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
         return _UserListModelList;

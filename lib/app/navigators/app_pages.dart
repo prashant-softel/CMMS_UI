@@ -84,6 +84,8 @@ import '../calibration_view/view/calibration_view_screen.dart';
 import '../country_list/country_list_binding.dart';
 import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
+import '../document_manager/document_manager_binding.dart';
+import '../document_manager/view/document_manager_screen.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
@@ -508,6 +510,11 @@ class AppPages {
       name: _Paths.incidentReportListWeb,
       page: IncidentReportListScreen.new,
       binding: IncidentReportListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.documentManager,
+      page: DocumentManagerScreen.new,
+      binding: DocumentManagerBinding(),
     ),
   ];
 }
