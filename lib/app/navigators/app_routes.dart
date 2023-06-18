@@ -82,6 +82,8 @@ abstract class Routes {
   static const assetMasterList = _Paths.assetMasterList;
   static const addassetMaster = _Paths.addassetMaster;
   static const incidentReportListWeb = _Paths.incidentReportListWeb;
+  
+  static const documentManager = _Paths.documentManager;
 }
 
 abstract class _Paths {
@@ -160,6 +162,8 @@ abstract class _Paths {
   static const assetMasterList = '/asset-Master-List';
   static const addassetMaster = '/add-asset-Master';
   static const incidentReportListWeb = '/incident-report-list';
+  
+  static const documentManager = '/document-manager';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }
