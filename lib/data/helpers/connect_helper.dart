@@ -528,6 +528,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getGoodsOrdersList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'GO/GetGOList?plantID=$facility_id&fromDate=2001-01-01&toDate=2023-05-14',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,

@@ -43,6 +43,7 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -530,6 +531,46 @@ class Repository {
     } catch (error) {
       await _deviceRepository.generateToken();
       print(error.toString());
+    }
+  }
+
+  Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getGoodsOrdersList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('getGoodsOrdersList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonGoodsOrdersListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GoodsOrdersListModel> _goodOrderModelList =
+            jsonGoodsOrdersListModels
+                .map<GoodsOrdersListModel>((m) =>
+                    GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _goodOrderModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 
