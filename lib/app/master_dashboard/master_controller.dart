@@ -183,5 +183,12 @@ class MastersController extends GetxController {
       Routes.addassetMaster,
     );
   }
+  
+  
+  Future<void> goToDocumentManager() async {
+    Get.toNamed(
+      Routes.documentManager,
+    );
+  }
 
 }

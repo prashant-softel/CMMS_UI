@@ -25,8 +25,13 @@ class ViewAddInventoryPresenter {
     return await viewaddInventoryUsecase.generateToken();
   }
 
-  Future<List<TypePermitModel?>?> getTypePermitList() async =>
-      await viewaddInventoryUsecase.getTypePermitList(true);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    {required int facility_id}
+  ) async =>
+      await viewaddInventoryUsecase.getTypePermitList(
+         true,
+        facility_id
+        );
 
   Future<AddInventoryDetailsModel?> getAddInventoryDetail(
       {bool? isLoading, required int id}) async {

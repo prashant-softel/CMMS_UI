@@ -102,22 +102,26 @@ class SafetyQuestionsListContentWeb
                                               title: 'Select permit type: '),
                                         ),
                                         
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.82,
-                                          child: DropdownWidget(
-                                            dropdownList:
-                                                controller.typePermitList,
-                                            isValueSelected: controller
-                                                .isTypePermitSelected.value,
-                                            selectedValue: controller
-                                                .selectedTypePermit.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3.9,
+                                            child: DropdownWidget(
+                                              dropdownList:
+                                                  controller.typePermitList,
+                                              isValueSelected: controller
+                                                  .isTypePermitSelected.value,
+                                              selectedValue: controller
+                                                  .selectedTypePermit.value,
+                                              onValueChanged:
+                                                  controller.onValueChanged,
+                                            ),
                                           ),
                                         ),
+                                        SizedBox(height: 10,),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 15),
                                           child: CustomRichText(
@@ -209,20 +213,23 @@ class SafetyQuestionsListContentWeb
                                                   'Select confirmation type: '),
                                         ),
                                        
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.82,
-                                          child: DropdownWidget(
-                                            dropdownList: 
-                                                controller.typePermitList,
-                                            isValueSelected: controller
-                                                .isTypePermitSelected.value,
-                                            selectedValue: controller
-                                                .selectedTypePermit.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3.9,
+                                            child: DropdownWidget(
+                                              dropdownList: 
+                                                  controller.typePermitList,
+                                              isValueSelected: controller
+                                                  .isTypePermitSelected.value,
+                                              selectedValue: controller
+                                                  .selectedTypePermit.value,
+                                              onValueChanged:
+                                                  controller.onValueChanged,
+                                            ),
                                           ),
                                         ),
                                         

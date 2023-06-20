@@ -420,7 +420,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'WC/GetWCList?facilityId=45' + blockIdParam + categoryIdsParam,
+      'WC/GetWCList?facilityId=$facilityId' + blockIdParam + categoryIdsParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -430,6 +430,32 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+
+   Future<ResponseModel> getIncidentReportList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam =
+        (end_date != '') ? 'end_date=$end_date' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/GetIncidentList?facility_id=$facility_id&' + startDateParam + endDateParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getBlockList({
     required bool isLoading,
@@ -498,6 +524,29 @@ class ConnectHelper {
       },
     );
     print('NewPermitResponse: ${responseModel.data}');
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getGoodsOrdersList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'GO/GetGOList?plantID=$facility_id&fromDate=2001-01-01&toDate=2023-05-14',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
     return responseModel;
   }
@@ -831,12 +880,13 @@ class ConnectHelper {
   Future<ResponseModel> getTypePermitList({
     String? auth,
     bool? isLoading,
+    int? facility_id
   }) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
     print('PermitTypeResponse: $response');
     try {
       response = await apiWrapper.makeRequest(
-        'Permit/GetPermitTypeList?facility_id=50',
+        'Permit/GetPermitTypeList?facility_id=$facility_id',
         Request.get,
         null,
         true,

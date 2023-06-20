@@ -86,6 +86,8 @@ abstract class Routes {
   static const mrsApprovalScreen = _Paths.mrsApprovalScreen;
   static const mrsIssueScreen = _Paths.mrsIssueScreen;
   static const mrsReturnScreen = _Paths.mrsReturnScreen;
+  
+  static const documentManager = _Paths.documentManager;
 }
 
 abstract class _Paths {
@@ -112,7 +114,7 @@ abstract class _Paths {
   static const preventiveList =
       '/preventive-maintenance/preventive-list-screen';
   static const preventiveCheckPoint = '/preventive-check-point';
-  static const newPermitList = '/new-permit-list';
+  static const newPermitList = '/permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
   static const warrantyClaimListWeb = '/warranty-claim-list-web';
 
@@ -168,6 +170,8 @@ abstract class _Paths {
   static const mrsApprovalScreen = '/mrs-approval';
   static const mrsIssueScreen = '/mrs-issue';
   static const mrsReturnScreen = '/mrs-return';
+  
+  static const documentManager = '/document-manager';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

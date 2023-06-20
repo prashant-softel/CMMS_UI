@@ -10,8 +10,14 @@ class SafetyQuestionsListUsecase {
   SafetyQuestionsListUsecase(this.repository);
   Repository repository;
 
- Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
-      await repository.getTypePermitList(isLoading);
+ Future<List<TypePermitModel?>?> getTypePermitList(
+   bool? isLoading,
+  int? facility_id
+  ) async =>
+      await repository.getTypePermitList(
+        isLoading,
+        facility_id
+        );
       
    Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required bool isLoading,

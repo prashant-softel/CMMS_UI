@@ -23,6 +23,7 @@ import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
@@ -42,6 +43,7 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -62,6 +64,7 @@ import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
+import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
@@ -528,6 +531,46 @@ class Repository {
     } catch (error) {
       await _deviceRepository.generateToken();
       print(error.toString());
+    }
+  }
+
+  Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getGoodsOrdersList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('getGoodsOrdersList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonGoodsOrdersListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GoodsOrdersListModel> _goodOrderModelList =
+            jsonGoodsOrdersListModels
+                .map<GoodsOrdersListModel>((m) =>
+                    GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _goodOrderModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 
@@ -1234,6 +1277,41 @@ class Repository {
     }
   }
 
+  ///Incident Report List
+   Future<List<IncidentReportListModel>> getIncidentReportList({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getIncidentReportList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('IncidentReportList: ${res.data}');
+
+      if (!res.hasError) {
+        var incidentReportList = incidentReportListModelFromJson(res.data);
+        return incidentReportList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
     String? categoryIds,
@@ -1585,12 +1663,16 @@ class Repository {
     }
   }
 
-  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async {
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    bool? isLoading,
+    int? facility_id
+    ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getTypePermitList(
         auth: auth,
         isLoading: isLoading,
+        facility_id: facility_id
       );
 
       if (!res.hasError) {
@@ -3357,6 +3439,37 @@ class Repository {
         final List<UserListModel> _UserListModelList = jsonUserListModelModels
             .map<UserListModel>(
                 (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _UserListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+  
+  Future<List<DocumentManagerModel?>?> getDocumentManager(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonUserListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<DocumentManagerModel> _UserListModelList = jsonUserListModelModels
+            .map<DocumentManagerModel>(
+                (m) => DocumentManagerModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
         return _UserListModelList;

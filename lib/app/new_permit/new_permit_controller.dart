@@ -552,7 +552,7 @@ if(arguments != null){
     final _employeeNameList = await permitPresenter.getEmployeePermitList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     for (var employee_list in _employeeNameList) {
       employeeNameList.add(employee_list);
@@ -881,7 +881,9 @@ if(arguments != null){
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await permitPresenter.getTypePermitList();
+    final _permitTypeList = await permitPresenter.getTypePermitList(
+      facility_id: facilityId
+    );
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
