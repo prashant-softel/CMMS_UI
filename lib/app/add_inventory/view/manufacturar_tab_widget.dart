@@ -2,10 +2,12 @@ import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
+
 import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ManufacturarTabWidget extends StatelessWidget {
@@ -103,6 +105,10 @@ class ManufacturarTabWidget extends StatelessWidget {
                               minWidth: 100,
                             ),
                             child: LoginCustomTextfield(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               textController: controller.costCtrlr,
                             ),
                           ),
@@ -148,6 +154,10 @@ class ManufacturarTabWidget extends StatelessWidget {
                               minWidth: 100,
                             ),
                             child: LoginCustomTextfield(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               textController: controller.parentEquipmentNoCtrlr,
                             ),
                           ),
