@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddInventoryScreen extends GetView<AddInventoryController> {
@@ -300,6 +301,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             minWidth: 100,
                                           ),
                                           child: LoginCustomTextfield(
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: <
+                                                TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
                                             textController:
                                                 controller.serialNoCtrlr,
                                           ),
