@@ -17,8 +17,8 @@ class UserListController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<UserListModel?>? userList = <UserListModel?>[].obs;
-
+  RxList<UserListModel?> userList = <UserListModel?>[].obs;
+  RxList<UserListModel?> filteredData = <UserListModel>[].obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -26,6 +26,17 @@ class UserListController extends GetxController {
   UserListModel? userListModel;
   RxList<String> userListTableColumns = <String>[].obs;
   UserListModel? selectedItem;
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      userList.value = filteredData;
+      return;
+    }
+
+    userList.value = filteredData
+        .where((item) =>
+            item!.user_name!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   @override
   void onInit() async {
@@ -40,19 +51,20 @@ class UserListController extends GetxController {
   }
 
   Future<void> getUserList(int facilityId, bool isLoading) async {
-    userList?.value = <UserListModel>[];
+    userList.value = <UserListModel>[];
     final _userList = await userListPresenter.getUserList(
         facilityId: facilityId, isLoading: isLoading);
 
     if (_userList != null) {
-      userList!.value = _userList;
+      userList.value = _userList;
+      filteredData.value = userList.value;
       paginationController = PaginationController(
-        rowCount: userList?.length ?? 0,
+        rowCount: userList.length,
         rowsPerPage: 10,
       );
 
-      if (userList != null && userList!.isNotEmpty) {
-        userListModel = userList![0];
+      if (filteredData != null && filteredData.isNotEmpty) {
+        userListModel = filteredData[0];
         var userListJson = userListModel?.toJson();
         userListTableColumns.value = <String>[];
         for (var key in userListJson?.keys.toList() ?? []) {

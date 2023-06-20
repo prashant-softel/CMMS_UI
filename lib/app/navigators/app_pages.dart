@@ -20,6 +20,14 @@ import 'package:cmms/app/incident_report_list.dart/incident_report_list_screen.d
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
+import 'package:cmms/app/mrs_approve/mrs_approve_binding.dart';
+import 'package:cmms/app/mrs_approve/view/mrs_approve_screen.dart';
+import 'package:cmms/app/mrs_issue/mrs_issue_binding.dart';
+import 'package:cmms/app/mrs_issue/view/mrs_issue_screen.dart';
+import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
+import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
+import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
+import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
@@ -510,6 +518,26 @@ class AppPages {
       name: _Paths.incidentReportListWeb,
       page: IncidentReportListScreen.new,
       binding: IncidentReportListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsViewScreen,
+      page: MrsViewScreen.new,
+      binding: MrsViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsApprovalScreen,
+      page: MrsApproveScreen.new,
+      binding: MrsApproveBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsIssueScreen,
+      page: MrsIssueScreen.new,
+      binding: MrsIssueBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsReturnScreen,
+      page: MrsReturnScreen.new,
+      binding: MrsReturnBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.documentManager,

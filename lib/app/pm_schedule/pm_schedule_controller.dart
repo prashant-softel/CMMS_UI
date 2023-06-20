@@ -26,8 +26,10 @@ class PmScheduleController extends GetxController {
   int selectedEquipmentId = 0;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<GetPmScheduleListModel?>? getPmScheduleList =
+  RxList<GetPmScheduleListModel?> getPmScheduleList =
       <GetPmScheduleListModel?>[].obs;
+  RxList<GetPmScheduleListModel?> filteredData = <GetPmScheduleListModel>[].obs;
+
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -50,6 +52,18 @@ class PmScheduleController extends GetxController {
       });
     });
     super.onInit();
+  }
+
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      filteredData.value = getPmScheduleList;
+      return;
+    }
+
+    filteredData.value = getPmScheduleList
+        .where((item) =>
+            item!.asset_name!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
   }
 
   Future<void> getFrequencyList() async {
@@ -100,23 +114,24 @@ class PmScheduleController extends GetxController {
 
   Future<void> getPMScheduleData(
       int facilityId, int selectedEquipmentId) async {
-    getPmScheduleList?.clear();
-    getPmScheduleList?.value = <GetPmScheduleListModel>[];
+    getPmScheduleList.clear();
+    getPmScheduleList.value = <GetPmScheduleListModel>[];
     final _getPmScheduleList = await pmSchedulePresenter.getPMScheduleData(
         facilityId: facilityId,
         selectedEquipmentId: selectedEquipmentId,
         isLoading: true);
 
     if (_getPmScheduleList != null) {
-      getPmScheduleList!.value = _getPmScheduleList;
+      getPmScheduleList.value = _getPmScheduleList;
+      filteredData.value = getPmScheduleList.value;
 
       paginationController = PaginationController(
-        rowCount: getPmScheduleList?.length ?? 0,
+        rowCount: filteredData.length,
         rowsPerPage: 10,
       );
 
-      if (getPmScheduleList != null && getPmScheduleList!.isNotEmpty) {
-        getPmScheduleListModel = getPmScheduleList![0];
+      if (getPmScheduleList != null && getPmScheduleList.isNotEmpty) {
+        getPmScheduleListModel = getPmScheduleList[0];
         var getPmScheduleListModelJson = getPmScheduleListModel!.toJson();
         preventiveCheckListTableColumns.value = <String>[];
         for (var key in getPmScheduleListModelJson.keys.toList()) {
@@ -129,7 +144,7 @@ class PmScheduleController extends GetxController {
   void savePmSchedule() async {
     List<AssetScheduleList> assetScheduleList = <AssetScheduleList>[];
 
-    getPmScheduleList?.forEach((element) {
+    getPmScheduleList.forEach((element) {
       List<FrequencyDatesList> frequencyDatesList = <FrequencyDatesList>[];
 
       element?.frequency_dates?.forEach((e) {

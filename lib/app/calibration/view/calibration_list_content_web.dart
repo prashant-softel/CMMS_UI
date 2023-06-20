@@ -3,6 +3,7 @@ import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -328,6 +329,8 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                           '${calibrationListListDetails?.last_calibration_date}',
                                                       nextDate:
                                                           '${calibrationListListDetails?.next_calibration_due_date}',
+                                                      calibrationId:
+                                                          '${calibrationListListDetails?.asset_id}',
                                                     );
                                                   },
                                                 ),
@@ -525,10 +528,12 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
     );
   }
 
-  void requestCalibration(
-      {required String equipmentName,
-      required String previousDate,
-      required String nextDate}) {
+  void requestCalibration({
+    required String equipmentName,
+    required String previousDate,
+    required String nextDate,
+    required String calibrationId,
+  }) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -712,7 +717,8 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                         CustomElevatedButton(
                           text: "Start",
                           onPressed: () {
-                            controller.requestCalibration();
+                            controller.requestCalibration(
+                                int.tryParse(calibrationId) ?? 0);
                             Get.back();
                           },
                           backgroundColor: ColorValues.appGreenColor,

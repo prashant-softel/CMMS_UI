@@ -1,4 +1,5 @@
 import 'package:cmms/app/mrs/Mrs_list_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
@@ -249,7 +250,11 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                           color: ColorValues.appDarkBlueColor,
                                           icon: Icons.remove_red_eye_outlined,
                                           label: "View",
-                                          onPress: () {},
+                                          onPress: () {
+                                            Get.toNamed(
+                                              Routes.mrsViewScreen,
+                                            );
+                                          },
                                         ),
                                         TableActionButton(
                                           color: ColorValues.appYellowColor,
@@ -261,13 +266,21 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                           color: ColorValues.appGreenColor,
                                           icon: Icons.check,
                                           label: 'Approve',
-                                          onPress: () {},
+                                          onPress: () {
+                                            Get.toNamed(
+                                              Routes.mrsApprovalScreen,
+                                            );
+                                          },
                                         ),
                                         TableActionButton(
                                           color: ColorValues.appRedColor,
                                           icon: Icons.report_problem,
                                           label: 'Issue',
-                                          onPress: () {},
+                                          onPress: () {
+                                            Get.toNamed(
+                                              Routes.mrsIssueScreen,
+                                            );
+                                          },
                                         ),
                                       ])
                                     : Text(value),

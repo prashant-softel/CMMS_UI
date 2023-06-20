@@ -84,7 +84,7 @@ class UserListContentWeb extends GetView<UserListController> {
                             icon: Icons.add,
                             label: "Add New",
                             onPressed: () {
-                              Get.offNamed(Routes.addUser);
+                              Get.toNamed(Routes.addUser);
                             },
                             color: ColorValues.greenlightColor,
                           ),
@@ -135,6 +135,7 @@ class UserListContentWeb extends GetView<UserListController> {
                           height: 40,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
+                            onChanged: (value) => controller.search(value),
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -181,8 +182,8 @@ class UserListContentWeb extends GetView<UserListController> {
                                   ),
                                 )
                               : ScrollableTableView(
-                                  paginationController:
-                                      controller.paginationController,
+                                  // paginationController:
+                                  //     controller.paginationController,
                                   columns: [
                                     "Profile",
                                     "User Login ID",
@@ -201,10 +202,10 @@ class UserListContentWeb extends GetView<UserListController> {
                                   rows: //
                                       [
                                     ...List.generate(
-                                      controller.userList?.length ?? 0,
+                                      controller.userList.length,
                                       (index) {
                                         var userListModelListDetails =
-                                            controller.userList?[index];
+                                            controller.userList[index];
                                         return [
                                           'Profile_Img', //  '${userListModelListDetails?.photoPath}',
                                           '${userListModelListDetails?.user_name}',
@@ -221,14 +222,14 @@ class UserListContentWeb extends GetView<UserListController> {
                                     return TableViewRow(
                                         onTap: () {
                                           controller.selectedItem = controller
-                                              .userList!
+                                              .userList
                                               .firstWhere((element) =>
                                                   "${element?.user_name}" ==
                                                   _userList[1]);
                                           int userId =
                                               controller.selectedItem?.id ?? 0;
                                           if (userId != 0) {
-                                            Get.offNamed(Routes.viewUserDetail,
+                                            Get.toNamed(Routes.viewUserDetail,
                                                 arguments: userId);
                                           }
                                         },
@@ -236,7 +237,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                         cells: _userList.map((value) {
                                           return TableViewCell(
                                               child: (value == "Profile_Img")
-                                                  ? controller.userList!
+                                                  ? controller.userList
                                                               .firstWhere(
                                                                 (e) =>
                                                                     "${e?.photoPath}" ==
@@ -324,7 +325,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                             // label: 'view',
                                                             onPress: () {
                                                               controller.selectedItem = controller
-                                                                  .userList!
+                                                                  .filteredData
                                                                   .firstWhere((element) =>
                                                                       "${element?.user_name}" ==
                                                                       _userList[
@@ -334,7 +335,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                                       ?.id ??
                                                                   0;
                                                               if (userId != 0) {
-                                                                Get.offNamed(
+                                                                Get.toNamed(
                                                                     Routes
                                                                         .viewUserDetail,
                                                                     arguments:
@@ -349,7 +350,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                             //  label: 'Edit',
                                                             onPress: () {
                                                               controller.selectedItem = controller
-                                                                  .userList!
+                                                                  .filteredData
                                                                   .firstWhere((element) =>
                                                                       "${element?.user_name}" ==
                                                                       _userList[
@@ -359,7 +360,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                                       ?.id ??
                                                                   0;
                                                               if (userId != 0) {
-                                                                Get.offNamed(
+                                                                Get.toNamed(
                                                                     Routes
                                                                         .addUser,
                                                                     arguments:

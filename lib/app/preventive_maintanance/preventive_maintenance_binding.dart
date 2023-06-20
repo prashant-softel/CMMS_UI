@@ -21,16 +21,16 @@ class PreventiveBinding extends Bindings {
         ),
       ),
     );
-    // Get.lazyPut(
-    //   () => HomeController(
-    //     Get.put(
-    //       HomePresenter(
-    //         HomeUsecase(
-    //           Get.find(),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
+    Get.lazyPut(
+      () => HomeController(
+        Get.put(
+          HomePresenter(
+            HomeUsecase(
+              Get.find(),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

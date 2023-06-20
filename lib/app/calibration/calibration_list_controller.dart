@@ -117,13 +117,13 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void requestCalibration() async {
+  void requestCalibration(int calibrationId) async {
     String _nextDueDate = nextDueDateController.text.trim();
     // String _previousDate = previousDateController.text.trim();
     RequestCalibrationModel requestCalibrationModel = RequestCalibrationModel(
         vendorId: selectedvenderId,
         nextCalibrationDate: _nextDueDate,
-        assetId: 27);
+        assetId: calibrationId);
 
     var requestCalibrationJsonString = requestCalibrationModel.toJson();
 
