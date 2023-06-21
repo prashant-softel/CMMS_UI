@@ -3,7 +3,6 @@ import 'package:cmms/app/inventory_list/inventory_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 

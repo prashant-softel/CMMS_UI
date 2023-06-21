@@ -32,6 +32,7 @@ class AddInventoryController extends GetxController {
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   final HomeController homeController = Get.find();
   bool openLastCalibrationDatePicker = false;
+
   var lastCalibrationDateTc = TextEditingController();
   var calibrationRemainderInTc = TextEditingController();
   bool openExpiryDatePicker = false;
@@ -611,9 +612,8 @@ class AddInventoryController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await addInventoryPresenter.getTypePermitList(
-      facility_id: facilityId
-    );
+    final _permitTypeList =
+        await addInventoryPresenter.getTypePermitList(facility_id: facilityId);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
