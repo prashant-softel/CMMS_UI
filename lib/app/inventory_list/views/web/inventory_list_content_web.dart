@@ -159,176 +159,349 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                         Column(
                             //
                             children: [
-                          ///
-                          Expanded(
-                            child: ScrollableTableView(
-                              paginationController:
-                                  controller.paginationController,
-                              columns: [
-                                'assetName'.tr,
-                                'serialNo'.tr,
-                                'Id'.tr,
-                                'parrentAsset'.tr,
-                                'catergory'.tr,
-                                'assetFacilityName'.tr,
-                                'action'.tr,
-                              ].map((column) {
-                                return TableViewColumn(
-                                  minWidth: Get.width * 0.17,
-                                  label: column,
-                                );
-                              }).toList(),
-                              rows: [
-                                ...List.generate(
-                                  _controller.inventoryList.length,
-                                  (index) => [
-                                    AssetName(
-                                      '${_controller.inventoryList[index].name}',
-                                      1,
-                                    ),
-                                    index + 1,
-                                    '${controller.inventoryList[index].id}',
-                                    '${_controller.inventoryList[index].parentName}',
-                                    '${_controller.inventoryList[index].categoryName}',
-                                    '${_controller.inventoryList[index].operatorName}',
-                                    'Actions'
-                                  ],
-                                ),
-                              ].map(
-                                (record) {
-                                  return TableViewRow(
-                                    height: Get.height * 0.15,
-                                    cells: record.map(
-                                      (value) {
-                                        return TableViewCell(
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              print('${value} $record');
+                          controller.inventoryList.isEmpty
+                              ? Expanded(
+                                  child: ScrollableTableView(
+                                    paginationController:
+                                        controller.paginationController,
+                                    columns: [
+                                      'assetName'.tr,
+                                      'serialNo'.tr,
+                                      'Id'.tr,
+                                      'parrentAsset'.tr,
+                                      'catergory'.tr,
+                                      'assetFacilityName'.tr,
+                                      'action'.tr,
+                                    ].map((column) {
+                                      return TableViewColumn(
+                                        minWidth: Get.width * 0.17,
+                                        label: column,
+                                      );
+                                    }).toList(),
+                                    rows: [
+                                      ...List.generate(
+                                        _controller.inventoryList.length,
+                                        (index) => ['', '', '', '', '', '', ''],
+                                      ),
+                                    ].map(
+                                      (record) {
+                                        return TableViewRow(
+                                          height: Get.height * 0.15,
+                                          cells: record.map(
+                                            (value) {
+                                              return TableViewCell(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    print('${value} $record');
+                                                  },
+                                                  child:
+                                                      value.runtimeType
+                                                                  .toString() ==
+                                                              'AssetName'
+                                                          ? Builder(builder:
+                                                              (context) {
+                                                              final val = value
+                                                                  as AssetName;
+                                                              return Column(
+                                                                children: [
+                                                                  Text(
+                                                                      '${val.name}'),
+                                                                  Spacer(),
+                                                                  // Align(
+                                                                  //   alignment: Alignment
+                                                                  //       .centerRight,
+                                                                  //   child: Container(
+                                                                  //     padding: Dimens
+                                                                  //         .edgeInsets8_2_8_2,
+                                                                  //     decoration:
+                                                                  //         BoxDecoration(
+                                                                  //       color: val.requirementStatus ==
+                                                                  //               1
+                                                                  //           ? ColorValues
+                                                                  //               .appRedColor
+                                                                  //           : ColorValues
+                                                                  //               .appGreenColor,
+                                                                  //       borderRadius:
+                                                                  //           BorderRadius
+                                                                  //               .circular(
+                                                                  //                   4),
+                                                                  //     ),
+                                                                  //     // child: Text(
+                                                                  //     //   val.name == 1
+                                                                  //     //       ? 'requirementRejected'
+                                                                  //     //           .tr
+                                                                  //     //       : 'requirementAccepted'
+                                                                  //     //           .tr,
+                                                                  //     //   style: Styles
+                                                                  //     //       .white10
+                                                                  //     //       .copyWith(
+                                                                  //     //     color: Colors
+                                                                  //     //         .white,
+                                                                  //     //   ),
+                                                                  //     // ),
+                                                                  //   ),
+                                                                  // ),
+
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                ],
+                                                              );
+                                                            })
+                                                          : value == 'Actions'
+                                                              ? Wrap(
+                                                                  children: [
+                                                                    Row(
+                                                                        children: [
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appGreenColor,
+                                                                            icon:
+                                                                                Icons.visibility,
+                                                                            label:
+                                                                                'View',
+                                                                            onPress:
+                                                                                () {
+                                                                              controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                                                              Get.toNamed(Routes.viewAddInventoryScreen);
+                                                                            },
+                                                                          ),
+                                                                          //),p
+
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appLightBlueColor,
+                                                                            icon:
+                                                                                Icons.edit,
+                                                                            label:
+                                                                                'Edit',
+                                                                            onPress:
+                                                                                () {
+                                                                              controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                                                              print('AddInV:${record[2]}');
+                                                                            },
+                                                                          ),
+                                                                          //),
+
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appRedColor,
+                                                                            icon:
+                                                                                Icons.delete,
+                                                                            label:
+                                                                                'Delete',
+                                                                            onPress:
+                                                                                () {},
+                                                                          ),
+                                                                          //),
+                                                                        ]),
+                                                                    // TableActionButton(
+                                                                    //   color: ColorValues
+                                                                    //       .appGreenColor,
+                                                                    //   icon: Icons
+                                                                    //       .visibility,
+                                                                    //   label:
+                                                                    //       'Approve Request',
+                                                                    //   onPress: () {},
+                                                                    // ),
+                                                                    // TableActionButton(
+                                                                    //   color: ColorValues
+                                                                    //       .appRedColor,
+                                                                    //   icon: Icons
+                                                                    //       .visibility,
+                                                                    //   label:
+                                                                    //       'Reject Request',
+                                                                    //   onPress: () {},
+                                                                    // ),
+                                                                  ],
+                                                                )
+                                                              : Text(value
+                                                                  .toString()),
+                                                ),
+                                              );
                                             },
-                                            child: value.runtimeType
-                                                        .toString() ==
-                                                    'AssetName'
-                                                ? Builder(builder: (context) {
-                                                    final val =
-                                                        value as AssetName;
-                                                    return Column(
-                                                      children: [
-                                                        Text('${val.name}'),
-                                                        Spacer(),
-                                                        Align(
-                                                          alignment: Alignment
-                                                              .centerRight,
-                                                          child: Container(
-                                                            padding: Dimens
-                                                                .edgeInsets8_2_8_2,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: val.requirementStatus ==
-                                                                      1
-                                                                  ? ColorValues
-                                                                      .appRedColor
-                                                                  : ColorValues
-                                                                      .appGreenColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                            ),
-                                                            child: Text(
-                                                              val.name == 1
-                                                                  ? 'requirementRejected'
-                                                                      .tr
-                                                                  : 'requirementAccepted'
-                                                                      .tr,
-                                                              style: Styles
-                                                                  .white10
-                                                                  .copyWith(
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                      ],
-                                                    );
-                                                  })
-                                                : value == 'Actions'
-                                                    ? Wrap(
-                                                        children: [
-                                                          Row(children: [
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appGreenColor,
-                                                              icon: Icons
-                                                                  .visibility,
-                                                              label: 'View',
-                                                              onPress: () {
-                                                                controller.viewAddInventoryDetails(
-                                                                    id: int.tryParse(
-                                                                        '${record[2]}'));
-                                                                Get.toNamed(Routes
-                                                                    .viewAddInventoryScreen);
-                                                              },
-                                                            ),
-                                                            //),p
-
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appLightBlueColor,
-                                                              icon: Icons.edit,
-                                                              label: 'Edit',
-                                                              onPress: () {
-                                                                controller.showAddInventoryDetails(
-                                                                    id: int.tryParse(
-                                                                        '${record[2]}'));
-                                                                print(
-                                                                    'AddInV:${record[2]}');
-                                                              },
-                                                            ),
-                                                            //),
-
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appRedColor,
-                                                              icon:
-                                                                  Icons.delete,
-                                                              label: 'Delete',
-                                                              onPress: () {},
-                                                            ),
-                                                            //),
-                                                          ]),
-                                                          // TableActionButton(
-                                                          //   color: ColorValues
-                                                          //       .appGreenColor,
-                                                          //   icon: Icons
-                                                          //       .visibility,
-                                                          //   label:
-                                                          //       'Approve Request',
-                                                          //   onPress: () {},
-                                                          // ),
-                                                          // TableActionButton(
-                                                          //   color: ColorValues
-                                                          //       .appRedColor,
-                                                          //   icon: Icons
-                                                          //       .visibility,
-                                                          //   label:
-                                                          //       'Reject Request',
-                                                          //   onPress: () {},
-                                                          // ),
-                                                        ],
-                                                      )
-                                                    : Text(value.toString()),
-                                          ),
+                                          ).toList(),
                                         );
                                       },
                                     ).toList(),
-                                  );
-                                },
-                              ).toList(),
-                            ),
-                          ),
-                          // paginated
+                                  ),
+                                )
+                              : Expanded(
+                                  child: ScrollableTableView(
+                                    paginationController:
+                                        controller.paginationController,
+                                    columns: [
+                                      'assetName'.tr,
+                                      'serialNo'.tr,
+                                      'Id'.tr,
+                                      'parrentAsset'.tr,
+                                      'catergory'.tr,
+                                      'assetFacilityName'.tr,
+                                      'action'.tr,
+                                    ].map((column) {
+                                      return TableViewColumn(
+                                        minWidth: Get.width * 0.17,
+                                        label: column,
+                                      );
+                                    }).toList(),
+                                    rows: [
+                                      ...List.generate(
+                                        _controller.inventoryList.length,
+                                        (index) => [
+                                          AssetName(
+                                            '${_controller.inventoryList[index].name}',
+                                            1,
+                                          ),
+                                          index + 1,
+                                          '${controller.inventoryList[index].id}',
+                                          '${_controller.inventoryList[index].parentName}',
+                                          '${_controller.inventoryList[index].categoryName}',
+                                          '${_controller.inventoryList[index].operatorName}',
+                                          'Actions'
+                                        ],
+                                      ),
+                                    ].map(
+                                      (record) {
+                                        return TableViewRow(
+                                          height: Get.height * 0.15,
+                                          cells: record.map(
+                                            (value) {
+                                              return TableViewCell(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    print('${value} $record');
+                                                  },
+                                                  child:
+                                                      value.runtimeType
+                                                                  .toString() ==
+                                                              'AssetName'
+                                                          ? Builder(builder:
+                                                              (context) {
+                                                              final val = value
+                                                                  as AssetName;
+                                                              return Column(
+                                                                children: [
+                                                                  Text(
+                                                                      '${val.name}'),
+                                                                  Spacer(),
+                                                                  // Align(
+                                                                  //   alignment: Alignment
+                                                                  //       .centerRight,
+                                                                  //   child: Container(
+                                                                  //     padding: Dimens
+                                                                  //         .edgeInsets8_2_8_2,
+                                                                  //     decoration:
+                                                                  //         BoxDecoration(
+                                                                  //       color: val.requirementStatus ==
+                                                                  //               1
+                                                                  //           ? ColorValues
+                                                                  //               .appRedColor
+                                                                  //           : ColorValues
+                                                                  //               .appGreenColor,
+                                                                  //       borderRadius:
+                                                                  //           BorderRadius
+                                                                  //               .circular(
+                                                                  //                   4),
+                                                                  //     ),
+                                                                  //     // child: Text(
+                                                                  //     //   val.name == 1
+                                                                  //     //       ? 'requirementRejected'
+                                                                  //     //           .tr
+                                                                  //     //       : 'requirementAccepted'
+                                                                  //     //           .tr,
+                                                                  //     //   style: Styles
+                                                                  //     //       .white10
+                                                                  //     //       .copyWith(
+                                                                  //     //     color: Colors
+                                                                  //     //         .white,
+                                                                  //     //   ),
+                                                                  //     // ),
+                                                                  //   ),
+                                                                  // ),
+
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                ],
+                                                              );
+                                                            })
+                                                          : value == 'Actions'
+                                                              ? Wrap(
+                                                                  children: [
+                                                                    Row(
+                                                                        children: [
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appGreenColor,
+                                                                            icon:
+                                                                                Icons.visibility,
+                                                                            label:
+                                                                                'View',
+                                                                            onPress:
+                                                                                () {
+                                                                              controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                                                              Get.toNamed(Routes.viewAddInventoryScreen);
+                                                                            },
+                                                                          ),
+                                                                          //),p
+
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appLightBlueColor,
+                                                                            icon:
+                                                                                Icons.edit,
+                                                                            label:
+                                                                                'Edit',
+                                                                            onPress:
+                                                                                () {
+                                                                              controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                                                              print('AddInV:${record[2]}');
+                                                                            },
+                                                                          ),
+                                                                          //),
+
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appRedColor,
+                                                                            icon:
+                                                                                Icons.delete,
+                                                                            label:
+                                                                                'Delete',
+                                                                            onPress:
+                                                                                () {},
+                                                                          ),
+                                                                          //),
+                                                                        ]),
+                                                                    // TableActionButton(
+                                                                    //   color: ColorValues
+                                                                    //       .appGreenColor,
+                                                                    //   icon: Icons
+                                                                    //       .visibility,
+                                                                    //   label:
+                                                                    //       'Approve Request',
+                                                                    //   onPress: () {},
+                                                                    // ),
+                                                                    // TableActionButton(
+                                                                    //   color: ColorValues
+                                                                    //       .appRedColor,
+                                                                    //   icon: Icons
+                                                                    //       .visibility,
+                                                                    //   label:
+                                                                    //       'Reject Request',
+                                                                    //   onPress: () {},
+                                                                    // ),
+                                                                  ],
+                                                                )
+                                                              : Text(value
+                                                                  .toString()),
+                                                ),
+                                              );
+                                            },
+                                          ).toList(),
+                                        );
+                                      },
+                                    ).toList(),
+                                  ),
+                                ),
+
                           Center(
                             child: Padding(
                               padding:
