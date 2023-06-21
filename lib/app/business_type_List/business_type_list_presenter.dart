@@ -32,30 +32,30 @@ class BusinessTypeListPresenter {
       await businesstypeListScreen.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  // Future<bool> createBusinessListNumber({
-  //   businesslistJsonString,
-  //   required bool isLoading,
-  // }) async {
-  //   print("presenter");
-  //   businesstypeListScreen.createBusinessListNumber(
-  //     businesslistJsonString: businesslistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> createBusinessTypeNumber({
+    businesstypelistJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    businesstypeListScreen.createBusinessTypeNumber(
+      businesstypelistJsonString: businesstypelistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 
-  // deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
-  //     await businesstypeListScreen.deleteCkecklist(
-  //       checklist_id: checklist_id ?? 0,
-  //       isLoading: isLoading,
-  //     );
-  // Future<bool> updateChecklistNumber(
-  //     {checklistJsonString, required bool isLoading, checklistId}) async {
-  //   print("presenter");
-  //   businesstypeListScreen.updateChecklistNumber(
-  //     checklistJsonString: checklistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  deleteBusinessTypelist(String? checklist_id, {required bool isLoading}) async =>
+      await businesstypeListScreen.deleteBusinessTypelist(
+        checklist_id: checklist_id ?? 0,
+        isLoading: isLoading,
+      );
+  Future<bool> updateBusinessTypeNumber(
+      {businessTypeJsonString, required bool isLoading, checklistId}) async {
+    print("presenter");
+    businesstypeListScreen.updateBusinessTypeNumber(
+      businessTypeJsonString: businessTypeJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

@@ -11,6 +11,11 @@ class BlockTypeListPresenter {
   //     await jobTypeListUsecase.getFacilityList();
   // Future<String?> getUserAccessList() async =>
   //     await jobTypeListUsecase.getUserAccessList();
+  deleteBlocklist (String? module_id, {required bool isLoading}) async =>
+      await blockTypeListUsecase.deleteBlocklist(
+        module_id: module_id ?? 0,
+        isLoading: isLoading,
+      );
 
   Future<List<BlockTypeListModel>> getBlockTypeList({
     required bool isLoading,

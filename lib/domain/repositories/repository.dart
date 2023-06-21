@@ -178,7 +178,7 @@ class Repository {
       tokenFetchCount++;
     }
     try {
-      _value = await _deviceRepository.getSecuredValue(key);
+        _value = await _deviceRepository.getSecuredValue(key);
       print("Token fetched $tokenFetchCount times, value = $_value");
       return _value;
     } //
@@ -2987,7 +2987,7 @@ class Repository {
     }
   }
 
-  Future<void> deleteModulelist(Object module_id, bool isLoading) async {
+  Future<void>  deleteModulelist(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteModulelist(
@@ -3854,6 +3854,144 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+  Future<void> deleteBlocklist(Object module_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBlocklist(
+        auth: auth,
+        module_id: module_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+
+
+
+  Future<void> deleteBusinessTypelist(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessTypelist(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+
+  Future<void>  deleteBusinessList(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessList(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+
+  Future<bool> createBusinessTypeNumber(
+      {bool? isLoading, businesstypelistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createBusinessTypeNumber(
+          auth: auth,
+          isLoading: isLoading,
+          businesstypelistJsonString: businesstypelistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createBusinessTypeNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+
+  Future<bool> updateBusinessTypeNumber({
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinessTypeNumber(
+        auth: auth,
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateBusinesslist({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinesslist(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 

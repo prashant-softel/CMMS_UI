@@ -688,8 +688,9 @@ class ModuleListContentWeb
                                                     icon: Icons.edit,
                                                     label: 'Edit',
                                                     onPress: () {
+                                                      print(_moduleList[0]);
                                                       controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
-
+                                                      print(controller.selectedItem?.id);
                                                       controller.modulelistNumberCtrlr.text = controller.selectedItem?.moduleName ?? '';
                                                       controller.featureCtrlr.text = controller.selectedItem?.featureName ?? '';
                                                       controller.isToggleOn.value = controller.selectedItem?.add == 1 ? true : false;
@@ -699,20 +700,7 @@ class ModuleListContentWeb
                                                       controller.isToggle4On.value = controller.selectedItem?.approve == 1 ? true : false;
                                                       controller.isToggle5On.value = controller.selectedItem?.issue == 1 ? true : false;
                                                       controller.isToggle6On.value = controller.selectedItem?.selfView == 1 ? true : false;
-
-                                                      // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
-                                                      // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";
-                                                      // // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                      // // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                      // controller.selectedEquipmentId = controller.selectedItem?.add ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.edit ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.delete ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.view ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.approve ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.issue ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.selfView ?? 0;
-
-                                                    },
+                                                      },
                                                   ),
                                                   //     : Container(),
                                                   // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >

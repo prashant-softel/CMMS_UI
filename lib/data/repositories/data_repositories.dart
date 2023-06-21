@@ -1580,6 +1580,81 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> deleteBlocklist({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteBlocklist(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
 
+
+
+  Future<ResponseModel> updateBusinessTypeNumber({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinessTypeNumber(
+      auth: auth,
+      isLoading: isLoading,
+      businessTypeJsonString: businessTypeJsonString,
+    );
+    return response;
+  }
+
+
+  Future<ResponseModel> deleteBusinessTypelist({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessTypelist(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+
+
+
+
+  Future<ResponseModel> createBusinessTypeNumber({
+    auth,
+    bool? isLoading,
+    businesstypelistJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessTypeNumber(
+        auth: auth,
+        isLoading: isLoading,
+        businesstypelistJsonString: businesstypelistJsonString);
+    return response;
+  }
+
+
+
+  Future<ResponseModel> deleteBusinessList({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessList(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
+
+  Future<ResponseModel> updateBusinesslist({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinesslist(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
 //end
 }

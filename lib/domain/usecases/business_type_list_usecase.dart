@@ -57,25 +57,26 @@ class BusinessTypeListUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<bool> createBusinesslistNumber({
-    businesslistJsonString,
+  Future<bool> createBusinessTypeNumber({
+    businesstypelistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createBusinessListNumber(
-          isLoading: isLoading, businesslistJsonString: businesslistJsonString);
-  // deleteBusinesslist(
-  //         {required Object module_id, required bool isLoading}) async =>
-  //     await repository.deleteBusinesslist(
-  //       module_id,
-  //       isLoading,
-  //     );
-  // Future<bool> updateModulelistNumber({
-  //   modulelistJsonString,
-  //   bool? isLoading,
-  // }) async =>
-  //     await repository.updateModulelistNumber(
-  //       isLoading: isLoading,
-  //       modulelistJsonString: modulelistJsonString,
-  //     );
+      await repository.createBusinessTypeNumber(
+          isLoading: isLoading, businesstypelistJsonString: businesstypelistJsonString);
+
+  deleteBusinessTypelist(
+          {required Object checklist_id, required bool isLoading}) async =>
+      await repository.deleteBusinessTypelist(
+        checklist_id,
+        isLoading,
+      );
+  Future<bool> updateBusinessTypeNumber({
+    businessTypeJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateBusinessTypeNumber(
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString,
+      );
 
 }

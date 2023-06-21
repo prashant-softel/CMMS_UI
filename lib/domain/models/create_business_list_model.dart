@@ -14,20 +14,19 @@ String businessListModelToJson(List<CreateBusinessListModel> data) =>
 class CreateBusinessListModel {
   CreateBusinessListModel({
     // this.id,
-    this.name,
+      this.name,
     this.email,
     this.contactPerson,
     this.contactnumber,
     this.website,
     this.location,
     this.address,
-    this.country,
-    this.state,
-    this.city,
+    this.countryId,
+    this.stateId,
+    this.cityId,
     this.zip,
     this.type,
     this.status,
-    this.addAt,
 
 
   });
@@ -40,13 +39,13 @@ class CreateBusinessListModel {
   String? website;
   String? location;
   String? address;
-  String? country;
-  String? state;
-  String? city;
+  int? countryId;
+  int? stateId;
+  int? cityId;
   String? zip;
   int? type;
   int? status;
-  String? addAt;
+  // String? addAt;
 
 
   factory CreateBusinessListModel.fromJson(Map<String, dynamic> json) => CreateBusinessListModel(
@@ -58,13 +57,13 @@ class CreateBusinessListModel {
       website: json["website"],
       location: json["location"],
       address: json["address"],
-      country: json["country"],
-      state: json["state"],
-      city: json["city"],
+      countryId: json["countryId"],
+      stateId: json["stateId"],
+      cityId: json["cityId"],
       zip: json["zip"],
       type: json["type"],
       status: json["status"],
-      addAt: json["addAt"]
+      // addAt: json["addAt"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -76,12 +75,12 @@ class CreateBusinessListModel {
     "website": website,
     "location": location,
     "address": address,
-    "country": country,
-    "state": state,
-    "city": city,
+    "countryId": countryId,
+    "stateId": stateId,
+    "cityId": cityId,
     "zip": zip,
     "type": type,
     "status": status,
-    "addAt": addAt
+    // "addAt": addAt
   };
 }

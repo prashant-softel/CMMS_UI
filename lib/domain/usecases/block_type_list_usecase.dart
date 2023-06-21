@@ -29,7 +29,7 @@ class BlockTypeListUsecase {
   BlockTypeListUsecase(this.repository);
   Repository repository;
 
-  Future<List<BlockTypeListModel>> getBlockTypeList(
+  Future<List<BlockTypeListModel>>  getBlockTypeList(
       {required bool isLoading, required int? job_type_id}) async {
     return repository.getBlockTypeList(
       isLoading: isLoading,
@@ -43,7 +43,12 @@ class BlockTypeListUsecase {
       job_type_id: job_type_id,
     );
   }
-
+  deleteBlocklist(
+      {required Object module_id, required bool isLoading}) async =>
+      await repository.deleteBlocklist(
+        module_id,
+        isLoading,
+      );
   // Future<List<FacilityModel?>?> getFacilityList() async =>
   //     await repository.getFacilityList(true);
   // Future<String?> getUserAccessList() async =>

@@ -4,6 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/block_type_list/block_type_list_presenter.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -165,5 +166,63 @@ class BlockTypeListController extends GetxController {
     // Future.delayed(Duration(seconds: 5), () {
     //   isSuccess.value = false;
     // });
+  }
+
+  void isDeleteDialog({String? module_id, String? module}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the Module ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: module,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteBlocklist(module_id).then((value) {
+                    Get.back();
+                    getBlockTypeList();
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteBlocklist(String? module_id) async {
+    {
+      await blockTypeListPresenter.deleteBlocklist(
+        module_id,
+        isLoading: true,
+      );
+    }
   }
 }

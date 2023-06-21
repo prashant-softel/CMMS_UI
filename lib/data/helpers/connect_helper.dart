@@ -1777,7 +1777,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     final request = http.MultipartRequest('POST',
-        Uri.parse('http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile'));
+          Uri.parse('http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile'));
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});
@@ -2391,5 +2391,125 @@ class ConnectHelper {
 
     return responseModel;
   }
-  //end
+
+  Future<ResponseModel> deleteBlocklist({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBlock?block_id=$module_id',
+      Request.delete,
+      module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+
+  Future<ResponseModel> createBusinessTypeNumber({
+    required String auth,
+    bool? isLoading,
+    required businesstypelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/AddBusinessType',
+      Request.post,
+      businesstypelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> deleteBusinessTypelist({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBusinessType?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> updateBusinessTypeNumber({
+    required String auth,
+    bool? isLoading,
+    required businessTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBusinessType',
+      Request.patch,
+      businessTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> deleteBusinessList({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBusiness?id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> updateBusinesslist({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBusiness',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+//end
 }
