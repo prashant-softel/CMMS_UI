@@ -2846,7 +2846,8 @@ class Repository {
       final res = await _dataRepository.rejectRequestCalibration(
           auth: auth,
           isLoading: isLoading,
-          rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+          rejectCalibrationtoJsonString:
+              json.encode(rejectCalibrationtoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
