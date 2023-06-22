@@ -2822,7 +2822,7 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           requestCalibration: requestCalibration);
-      //  print({"res.data", res.data});
+      print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -2870,7 +2870,8 @@ class Repository {
       final res = await _dataRepository.approveRequestCalibration(
           auth: auth,
           isLoading: isLoading,
-          approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+          approveCalibrationtoJsonString:
+              json.encode(approveCalibrationtoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
