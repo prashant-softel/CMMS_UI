@@ -23,6 +23,13 @@ abstract class ColorValues {
   static const Color lightGreyTextColor = Color(lightGreyTextColorHex);
   static const Color transparent = Colors.transparent;
   static const Color greenlightColor = Color.fromARGB(255, 86, 234, 72);
+  static const Color approveColor = greenColor;
+  static const Color rejectColor = appRedColor;
+  static const Color completeColor = appRedColor;
+  static const Color deleteColor = redColor;
+  static const Color startColor = appYellowColor;
+  static const Color viewColor = greenColor;
+  static const Color editColor = appYellowColor;
 
   // ============================================
 

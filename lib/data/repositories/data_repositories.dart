@@ -367,8 +367,8 @@ class DataRepository extends DomainRepository {
     );
   }
 
-///Incident Report List
-   @override
+  ///Incident Report List
+  @override
   Future<ResponseModel> getIncidentReportList({
     int? facility_id,
     String? start_date,
@@ -1070,10 +1070,7 @@ class DataRepository extends DomainRepository {
     int? facility_id,
   }) async =>
       await connectHelper.getTypePermitList(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id
-      );
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1175,15 +1172,27 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> rejectCalibration({
+  Future<ResponseModel> rejectRequestCalibration({
     auth,
     bool? isLoading,
     rejectCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.rejectCalibration(
+    var response = await connectHelper.rejectRequestCalibration(
         auth: auth,
         isLoading: isLoading,
         rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approveRequestCalibration({
+    auth,
+    bool? isLoading,
+    approveCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.approveRequestCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
     return response;
   }
 

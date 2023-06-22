@@ -431,8 +431,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> getIncidentReportList({
+  Future<ResponseModel> getIncidentReportList({
     required bool isLoading,
     required String auth,
     int? facility_id,
@@ -440,12 +439,13 @@ class ConnectHelper {
     required String end_date,
   }) async {
     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    var endDateParam =
-        (end_date != '') ? 'end_date=$end_date' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'IncidentReport/GetIncidentList?facility_id=$facility_id&' + startDateParam + endDateParam,
+      'IncidentReport/GetIncidentList?facility_id=$facility_id&' +
+          startDateParam +
+          endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -455,7 +455,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBlockList({
     required bool isLoading,
@@ -877,11 +876,8 @@ class ConnectHelper {
     return response;
   }
 
-  Future<ResponseModel> getTypePermitList({
-    String? auth,
-    bool? isLoading,
-    int? facility_id
-  }) async {
+  Future<ResponseModel> getTypePermitList(
+      {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
     print('PermitTypeResponse: $response');
     try {
@@ -1728,15 +1724,34 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> rejectCalibration({
+  Future<ResponseModel> rejectRequestCalibration({
     required String auth,
     bool? isLoading,
     required rejectCalibrationtoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/RejectCalibration',
+      'Calibration/RejectRequestCalibration',
       Request.put,
       rejectCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveRequestCalibration({
+    required String auth,
+    bool? isLoading,
+    required approveCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveRequestCalibration',
+      Request.put,
+      approveCalibrationtoJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
