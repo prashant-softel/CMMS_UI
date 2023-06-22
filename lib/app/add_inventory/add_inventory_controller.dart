@@ -230,7 +230,7 @@ class AddInventoryController extends GetxController {
       getSupplierList();
     });
 
-    await getTypePermitList();
+    // await getTypePermitList();
     await getInventoryCategoryList();
     await getInventoryTypeList(isLoading: true, facilityId: facilityId);
     await getInventoryCategoryList();

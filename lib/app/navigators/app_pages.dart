@@ -1,7 +1,8 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
-import 'package:cmms/app/add_inventory/add_inventory_ui.dart';
+import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
+
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
