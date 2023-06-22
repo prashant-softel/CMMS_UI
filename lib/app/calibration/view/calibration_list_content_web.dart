@@ -243,7 +243,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 rows: true
                                     ? controller.calibrationList!
                                         .map((calibrationListListDetails) =>
-                                            TableViewRow(height: 120, cells: [
+                                            TableViewRow(height: 70, cells: [
                                               TableViewCell(
                                                   child: Text(
                                                 '${calibrationListListDetails?.category_name}',
@@ -271,7 +271,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                                         ?.statusID ==
                                                                     211
                                                                 ? ColorValues
-                                                                    .appYellowColor
+                                                                    .blueColor
                                                                 : calibrationListListDetails
                                                                             ?.statusID ==
                                                                         214
@@ -317,43 +317,73 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                               )),
                                               TableViewCell(
                                                   child: Wrap(children: [
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .lightGreenColor,
-                                                  label: 'Request Calibration',
-                                                  onPress: () {
-                                                    requestCalibration(
-                                                      equipmentName:
-                                                          '${calibrationListListDetails?.asset_name}',
-                                                      previousDate:
-                                                          '${calibrationListListDetails?.last_calibration_date}',
-                                                      nextDate:
-                                                          '${calibrationListListDetails?.next_calibration_due_date}',
-                                                      calibrationId:
-                                                          '${calibrationListListDetails?.asset_id}',
-                                                    );
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  label: 'View',
-                                                  onPress: () {
-                                                    int calibrationId =
-                                                        calibrationListListDetails
-                                                                ?.calibration_id ??
-                                                            0;
-                                                    if (calibrationId != null) {
-                                                      Get.toNamed(
-                                                          Routes
-                                                              .calibrationViewScreen,
-                                                          arguments:
-                                                              calibrationId);
-                                                    }
-                                                  },
-                                                ),
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        0
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .lightGreenColor,
+                                                        label:
+                                                            'Request Calibration',
+                                                        onPress: () {
+                                                          requestCalibration(
+                                                            equipmentName:
+                                                                '${calibrationListListDetails?.asset_name}',
+                                                            previousDate:
+                                                                '${calibrationListListDetails?.last_calibration_date}',
+                                                            nextDate:
+                                                                '${calibrationListListDetails?.next_calibration_due_date}',
+                                                            calibrationId:
+                                                                '${calibrationListListDetails?.asset_id}',
+                                                          );
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        0
+                                                    ? Dimens.box0
+                                                    : TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        label: 'View',
+                                                        onPress: () {
+                                                          int calibrationId =
+                                                              calibrationListListDetails
+                                                                      ?.calibration_id ??
+                                                                  0;
+                                                          if (calibrationId !=
+                                                              null) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .calibrationViewScreen,
+                                                                arguments:
+                                                                    calibrationId);
+                                                          }
+                                                        },
+                                                      ),
                                                 // TableActionButton(
                                                 //   color: ColorValues
                                                 //       .appDarkBlueColor,
@@ -386,43 +416,85 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 //             ?.statusID ==
                                                 //         123
                                                 //     ?
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                  icon: Icons.close,
-                                                  label: 'Reject',
-                                                  onPress: () {
-                                                    controller.isCommentCalibrationDialog(
-                                                        calibrationName:
-                                                            '${calibrationListListDetails?.asset_name}',
-                                                        calibrationId:
-                                                            '${calibrationListListDetails?.calibration_id}',
-                                                        type: 1);
-                                                  },
-                                                ),
-                                                // : Container(),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appYellowColor,
-                                                  label: 'Start Calibration',
-                                                  onPress: () {
-                                                    controller
-                                                        .isStartCalibrationDialog(
-                                                      calibrationName:
-                                                          '${calibrationListListDetails?.asset_name}',
-                                                      calibrationId:
-                                                          '${calibrationListListDetails?.calibration_id}',
-                                                    );
-                                                  },
-                                                ),
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        211
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .rejectColor,
+                                                        icon: Icons.close,
+                                                        label: 'Reject',
+                                                        onPress: () {
+                                                          controller.isCommentCalibrationDialog(
+                                                              calibrationName:
+                                                                  '${calibrationListListDetails?.asset_name}',
+                                                              calibrationId:
+                                                                  '${calibrationListListDetails?.calibration_id}',
+                                                              type: 1);
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        213
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .startColor,
+                                                        label:
+                                                            'Start Calibration',
+                                                        onPress: () {
+                                                          controller
+                                                              .isStartCalibrationDialog(
+                                                            calibrationName:
+                                                                '${calibrationListListDetails?.asset_name}',
+                                                            calibrationId:
+                                                                '${calibrationListListDetails?.calibration_id}',
+                                                          );
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
 
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                  icon: Icons.delete,
-                                                  label: 'Delete',
-                                                  onPress: () {},
-                                                ),
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        0
+                                                    ? Dimens.box0
+                                                    : TableActionButton(
+                                                        color: ColorValues
+                                                            .deleteColor,
+                                                        icon: Icons.delete,
+                                                        label: 'Delete',
+                                                        onPress: () {},
+                                                      ),
                                                 // TableActionButton(
                                                 //   color: ColorValues
                                                 //       .appLightBlueColor,
@@ -435,27 +507,55 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 //   },
                                                 // ),
 
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                  icon: Icons.done,
-                                                  label: 'Completed',
-                                                  onPress: () {},
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .lightGreenColor,
-                                                  icon: Icons.check,
-                                                  label: 'Approve',
-                                                  onPress: () {
-                                                    controller.isCommentCalibrationDialog(
-                                                        calibrationName:
-                                                            '${calibrationListListDetails?.asset_name}',
-                                                        calibrationId:
-                                                            '${calibrationListListDetails?.calibration_id}',
-                                                        type: 2);
-                                                  },
-                                                ),
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        214
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .completeColor,
+                                                        icon: Icons.done,
+                                                        label: 'Complete',
+                                                        onPress: () {},
+                                                      )
+                                                    : Dimens.box0,
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.asset_id ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          00),
+                                                            )
+                                                            ?.statusID ==
+                                                        211
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .approveColor,
+                                                        icon: Icons.check,
+                                                        label: 'Approve',
+                                                        onPress: () {
+                                                          controller.isCommentCalibrationDialog(
+                                                              calibrationName:
+                                                                  '${calibrationListListDetails?.asset_name}',
+                                                              calibrationId:
+                                                                  '${calibrationListListDetails?.calibration_id}',
+                                                              type: 2);
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
                                               ])),
                                             ]))
                                         .toList()
@@ -567,7 +667,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
           () => Container(
             margin: Dimens.edgeInsets15,
             padding: Dimens.edgeInsets25,
-            height: height / 2.3,
+            height: height / 2.5,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(
@@ -702,30 +802,27 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                   SizedBox(
                     height: 30,
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CustomElevatedButton(
-                          text: "Cancel",
-                          onPressed: () {
-                            Get.back();
-                          },
-                          backgroundColor: ColorValues.appRedColor,
-                          textColor: ColorValues.whiteColor,
-                        ),
-                        Dimens.boxWidth10,
-                        CustomElevatedButton(
-                          text: "Start",
-                          onPressed: () {
-                            controller.requestCalibration(
-                                int.tryParse(calibrationId) ?? 0);
-                            Get.back();
-                          },
-                          backgroundColor: ColorValues.appGreenColor,
-                          textColor: ColorValues.whiteColor,
-                        ),
-                        Dimens.boxWidth10,
-                      ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    CustomElevatedButton(
+                      text: "Cancel",
+                      onPressed: () {
+                        Get.back();
+                      },
+                      backgroundColor: ColorValues.appRedColor,
+                      textColor: ColorValues.whiteColor,
+                    ),
+                    Dimens.boxWidth30,
+                    CustomElevatedButton(
+                      text: "Start",
+                      onPressed: () {
+                        controller.requestCalibration(
+                            int.tryParse(calibrationId) ?? 0);
+                        Get.back();
+                      },
+                      backgroundColor: ColorValues.appGreenColor,
+                      textColor: ColorValues.whiteColor,
+                    ),
+                  ]),
                 ]),
           ),
         );
