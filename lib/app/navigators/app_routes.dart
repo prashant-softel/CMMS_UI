@@ -88,6 +88,8 @@ abstract class Routes {
   static const mrsReturnScreen = _Paths.mrsReturnScreen;
   
   static const documentManager = _Paths.documentManager;
+  static const designationScreen = _Paths.designationScreen;
+
 }
 
 abstract class _Paths {
@@ -172,6 +174,7 @@ abstract class _Paths {
   static const mrsReturnScreen = '/mrs-return';
   
   static const documentManager = '/document-manager';
+  static const designationScreen = '/designation-Screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

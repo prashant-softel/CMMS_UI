@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../../domain/models/business_list_model.dart';
 import '../../../domain/models/modulelist_model.dart';
 import '../../preventive_List/preventive_list_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -16,6 +17,15 @@ import '../business_list_controller.dart';
 
 class BusinessListContentWeb
     extends GetView<BusinessListController> {
+  RxList<BusinessListModel?> businessList =
+      <BusinessListModel>[].obs;
+  Rx<String> selectedBusiness = ''.obs;
+
+  Rx<bool> isSelectedBusiness = true.obs;
+
+  int selectedBusinessId = 1;
+
+
   BusinessListContentWeb({Key? key}) : super(key: key);
   final BusinessListController controller = Get.find();
 
@@ -502,41 +512,24 @@ class BusinessListContentWeb
                                               Expanded(child: CustomRichText(title: 'Country: ')),
                                               Expanded(
                                                 child: Container(
-                                                    width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                        .2) -
-                                                        30,
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      color:
-                                                      ColorValues.whiteColor,
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          5),
-                                                    ),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .countryCtrlr,
-                                                    )),
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      35,
+                                                  child: DropdownWidget(
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .countryList,
+                                                    isValueSelected: controller
+                                                        .isSelectedCountryType
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedCountry.value,
+                                                    onValueChanged:
+                                                    controller.onValueChanged,
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),                                          //Coutry
@@ -549,41 +542,24 @@ class BusinessListContentWeb
                                               Expanded(child: CustomRichText(title: 'State: ')),
                                               Expanded(
                                                 child: Container(
-                                                    width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                        .2) -
-                                                        30,
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      color:
-                                                      ColorValues.whiteColor,
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          5),
-                                                    ),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .stateCtrlr,
-                                                    )),
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      35,
+                                                  child: DropdownWidget(
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .stateList,
+                                                    isValueSelected: controller
+                                                        .isSelectedStateType
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedState.value,
+                                                    onValueChanged:
+                                                    controller.onValueChanged,
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),                                          //State
@@ -595,41 +571,24 @@ class BusinessListContentWeb
                                               Expanded(child: CustomRichText(title: 'City: ')),
                                               Expanded(
                                                 child: Container(
-                                                    width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                        .2) -
-                                                        30,
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      color:
-                                                      ColorValues.whiteColor,
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          5),
-                                                    ),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .cityCtrlr,
-                                                    )),
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      35,
+                                                  child: DropdownWidget(
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .cityList,
+                                                    isValueSelected: controller
+                                                        .isSelectedCityType
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedCity.value,
+                                                    onValueChanged:
+                                                    controller.onValueChanged,
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),                                          //City
@@ -639,7 +598,7 @@ class BusinessListContentWeb
                                             MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(child: CustomRichText(title: 'Zip: ')),
-                                              Expanded(
+                                              Expanded (
                                                 child: Container(
                                                     width: (MediaQuery.of(context)
                                                         .size
@@ -680,54 +639,6 @@ class BusinessListContentWeb
                                             ],
                                           ),                                          //zip
                                           SizedBox(height: 10,),
-                                                                       //type
-                                          // SizedBox(height: 10,),
-                                          //type
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //   MainAxisAlignment.spaceBetween,
-                                          //   children: [
-                                          //     Expanded(child: CustomRichText(title: 'Added At: ')),
-                                          //     Expanded(
-                                          //       child: Container(
-                                          //           width: (MediaQuery.of(context)
-                                          //               .size
-                                          //               .width *
-                                          //               .2) -
-                                          //               30,
-                                          //           decoration: BoxDecoration(
-                                          //             boxShadow: [
-                                          //               BoxShadow(
-                                          //                 color: Colors.black26,
-                                          //                 offset: const Offset(
-                                          //                   5.0,
-                                          //                   5.0,
-                                          //                 ),
-                                          //                 blurRadius: 5.0,
-                                          //                 spreadRadius: 1.0,
-                                          //               ),
-                                          //               BoxShadow(
-                                          //                 color: ColorValues
-                                          //                     .whiteColor,
-                                          //                 offset: const Offset(
-                                          //                     0.0, 0.0),
-                                          //                 blurRadius: 0.0,
-                                          //                 spreadRadius: 0.0,
-                                          //               ),
-                                          //             ],
-                                          //             color:
-                                          //             ColorValues.whiteColor,
-                                          //             borderRadius:
-                                          //             BorderRadius.circular(
-                                          //                 5),
-                                          //           ),
-                                          //           child: LoginCustomTextfield(
-                                          //             textController: controller
-                                          //                 .addedAtCtrlr,
-                                          //           )),
-                                          //     ),
-                                          //   ],
-                                          // ),
                                           SizedBox(
                                             height: 30,
                                           ),
@@ -776,7 +687,8 @@ class BusinessListContentWeb
                                         controller
                                             .updateBusinesslistNumber(
                                             controller
-                                                .selectedItem?.id)
+                                                .selectedItem?.id , controller.selectedItem?.status , controller.selectedItem?.addedAt
+                                        )
                                             .then((value) {
                                           print("value,$value");
                                           if (value == true)
@@ -875,7 +787,7 @@ class BusinessListContentWeb
                                 ? Expanded(
                               child: ScrollableTableView(
                                 columns: [
-                                  // "Id",
+                                  "Id",
                                   " Name ",
                                   "Email ",
                                   "Contact Person",
@@ -889,8 +801,6 @@ class BusinessListContentWeb
                                   "Zip",
                                   "Type",
                                   "Status",
-                                  "Added At"
-                                  // "Self View",
                                   "Action"
                                 ].map((column) {
                                   return TableViewColumn(
@@ -905,7 +815,7 @@ class BusinessListContentWeb
                                         0,
                                         (index) {
                                       return [
-                                        // '',
+                                        '',
                                         '',
                                         '',
                                         '',
@@ -940,7 +850,7 @@ class BusinessListContentWeb
                                 paginationController:
                                 controller.paginationController,
                                 columns: [
-                                  // "Id",
+                                  "Id",
                                   "Name ",
                                   "Email ",
                                   "Contact Person",
@@ -954,8 +864,8 @@ class BusinessListContentWeb
                                   "Zip",
                                   "Type",
                                   "Status",
-                                  "Added At"
-                                  // "Action"
+                                  // "Added At"
+                                  "Action"
 
                                 ].map((column) {
                                   return TableViewColumn(
@@ -975,6 +885,7 @@ class BusinessListContentWeb
                                           .moduleList?[
                                       index];
                                       return [
+                                        '${moduleListDetails?.id}',
                                         '${moduleListDetails?.name}',
                                         '${moduleListDetails?.email}',
                                         '${moduleListDetails?.contactPerson}',
@@ -988,16 +899,15 @@ class BusinessListContentWeb
                                         '${moduleListDetails?.zip}',
                                         '${moduleListDetails?.type}',
                                         '${moduleListDetails?.status}',
-                                        '${moduleListDetails?.addedAt}',
 
-                                        // "Action"
+                                        "Action",
                                       ];
                                     },
                                   ),
-                                ].map((_moduleList) {
+                                ].map((_businessList) {
                                   return TableViewRow(
                                       height: 60,
-                                      cells: _moduleList
+                                      cells: _businessList
                                           .map((value) {
                                         return TableViewCell(
                                             child: (value == 'No')
@@ -1021,22 +931,22 @@ class BusinessListContentWeb
                                                     icon: Icons.edit,
                                                     label: 'Edit',
                                                     onPress: () {
-                                                      controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
+                                                      controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _businessList[0]);
+                                                      controller.selectedBusinessType.value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?.type)!;
+                                                      // print(controller.selectedBusinessType.value);
+                                                      // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);
                                                       controller.businesslistNumberCtrlr.text = controller.selectedItem?.name ?? '';
                                                       controller.emailCtrlr.text = controller.selectedItem?.email ?? '';
-                                                      controller.emailCtrlr.text = controller.selectedItem?.contactPerson ?? '';
+                                                      controller.contactpersonCtrlr.text = controller.selectedItem?.contactPerson ?? '';
+                                                      controller.contactnumberCtrlr.text = controller.selectedItem?.contactnumber ?? '';
+                                                      controller.websiteCtrlr.text = controller.selectedItem?.website ?? '';
+                                                      controller.locationCtrlr.text = controller.selectedItem?.location ?? '';
+                                                      controller.addressCtrlr.text = controller.selectedItem?.address ?? '';
+                                                      controller.zipCtrlr.text = controller.selectedItem?.zip ?? '';
 
-                                                      // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
-                                                      // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";
-                                                      // // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                      // // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                      // controller.selectedEquipmentId = controller.selectedItem?.add ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.edit ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.delete ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.view ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.approve ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.issue ?? 0;
-                                                      // controller.selectedfrequencyId = controller.selectedItem?.selfView ?? 0;
+                                                      controller.selectedCountry.value = controller.selectedItem?.country ?? '';
+                                                      controller.selectedState.value = controller.selectedItem?.state ?? '';
+                                                      controller.selectedCity.value = controller.selectedItem?.city ?? '';
 
                                                     },
                                                   ),
@@ -1049,8 +959,8 @@ class BusinessListContentWeb
                                                     icon: Icons.delete,
                                                     label: 'Delete',
                                                     onPress: () {
-                                                      print(_moduleList[0]);
-                                                      controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
+                                                      controller.isDeleteDialog(business_id: _businessList[0], business: _businessList[1]);
+
                                                     },
                                                   )
                                                   // : Container()

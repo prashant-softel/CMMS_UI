@@ -64,6 +64,7 @@ import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
+import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
@@ -4069,6 +4070,80 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<List<DesignationModel?>?> getDesignationList(
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getDesignationList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonRoleModels = jsonDecode(res.data);
+        final List<DesignationModel> _roleModelList = jsonRoleModels
+            .map<DesignationModel>(
+              (m) => DesignationModel.fromJson(Map<String, dynamic>.from(m)),
+        )
+            .toList();
+
+        return _roleModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getRoleList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<void>  deleteBusinessList(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessList(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateBusinesslist({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinesslist(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 //end

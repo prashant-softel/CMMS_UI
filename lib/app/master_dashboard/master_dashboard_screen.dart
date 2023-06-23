@@ -369,7 +369,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 return createContentTile(
                                     title: "Designation",
                                     onTap: () {
-                                      controller.goToBlockTypeList();
+                                      controller.goToDesignationScreen();
                                     });
                               }))),
                               OnHover(
