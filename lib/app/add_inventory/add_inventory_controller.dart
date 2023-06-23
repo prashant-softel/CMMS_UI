@@ -582,8 +582,8 @@ class AddInventoryController extends GetxController {
         statusNameList.add(status);
       }
 
-      selectedStatusName.value = statusNameList[0]?.name ?? '';
-      selectedStatusNameId = statusNameList[0]?.id ?? 0;
+      // selectedStatusName.value = statusNameList[0]?.name ?? '';
+      // selectedStatusNameId = statusNameList[0]?.id ?? 0;
     }
   }
 
