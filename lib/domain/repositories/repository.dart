@@ -1278,7 +1278,7 @@ class Repository {
   }
 
   ///Incident Report List
-   Future<List<IncidentReportListModel>> getIncidentReportList({
+  Future<List<IncidentReportListModel>> getIncidentReportList({
     required int? facility_id,
     String? start_date,
     required String end_date,
@@ -1310,7 +1310,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
@@ -1664,16 +1663,11 @@ class Repository {
   }
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async {
+      bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getTypePermitList(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id
-      );
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
 
       if (!res.hasError) {
         final jsonTypePermitModels = jsonDecode(res.data);
@@ -2808,7 +2802,7 @@ class Repository {
                     CalibrationListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _CalibrationListModelList;
+        return _CalibrationListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
         return [];
@@ -2820,7 +2814,7 @@ class Repository {
     }
   }
 
-  Future<void> requestCalibration({bool? isLoading, requestCalibration}) async {
+  Future<bool> requestCalibration({bool? isLoading, requestCalibration}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -2828,46 +2822,69 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           requestCalibration: requestCalibration);
-      //  print({"res.data", res.data});
+      print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
-        // return true;
+        return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
       }
       // return true;
     } catch (error) {
       log(error.toString());
-      // return false;
+      return false;
     }
   }
 
-  Future<void> rejectCalibration(
+  Future<bool> rejectRequestCalibration(
       {bool? isLoading, rejectCalibrationtoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectCalibration(
+      final res = await _dataRepository.rejectRequestCalibration(
           auth: auth,
           isLoading: isLoading,
-          rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+          rejectCalibrationtoJsonString:
+              json.encode(rejectCalibrationtoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
-        // return true;
+        return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
       }
-      // return true;
     } catch (error) {
       log(error.toString());
-      // return false;
+      return false;
+    }
+  }
+
+  Future<bool> approveRequestCalibration(
+      {bool? isLoading, approveCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveRequestCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          approveCalibrationtoJsonString:
+              json.encode(approveCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 
@@ -3451,7 +3468,7 @@ class Repository {
       return [];
     }
   }
-  
+
   Future<List<DocumentManagerModel?>?> getDocumentManager(
     int? facilityId,
     bool? isLoading,
@@ -3467,10 +3484,11 @@ class Repository {
       if (!res.hasError) {
         final jsonUserListModelModels = jsonDecode(res.data);
         // print(res.data);
-        final List<DocumentManagerModel> _UserListModelList = jsonUserListModelModels
-            .map<DocumentManagerModel>(
-                (m) => DocumentManagerModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+        final List<DocumentManagerModel> _UserListModelList =
+            jsonUserListModelModels
+                .map<DocumentManagerModel>((m) =>
+                    DocumentManagerModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _UserListModelList;
       } else {
@@ -3898,7 +3916,7 @@ class Repository {
     }
   }
 
-  Future<void> startCalibration(Object calibrationId, bool isLoading) async {
+  Future<bool> startCalibration(Object calibrationId, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.startCalibration(
@@ -3908,12 +3926,15 @@ class Repository {
       );
 
       if (!res.hasError) {
+        return true;
         //get delete response back from API
       } else {
         Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        return false;
       }
     } catch (error) {
       print(error.toString());
+      return false;
     }
   }
 
