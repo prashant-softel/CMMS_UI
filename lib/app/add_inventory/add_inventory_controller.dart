@@ -57,7 +57,7 @@ class AddInventoryController extends GetxController {
   Rx<bool> isUnitCurrencySelected = true.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
-  RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
+  int selectedUnitCurrencyId = 0;
 
   //Inventory Type list
   RxList<TypePermitModel?> InventoryTypeList = <TypePermitModel>[].obs;
@@ -582,8 +582,8 @@ class AddInventoryController extends GetxController {
         statusNameList.add(status);
       }
 
-      selectedStatusName.value = statusNameList[0]?.name ?? '';
-      selectedStatusNameId = statusNameList[0]?.id ?? 0;
+      // selectedStatusName.value = statusNameList[0]?.name ?? '';
+      // selectedStatusNameId = statusNameList[0]?.id ?? 0;
     }
   }
 
@@ -660,6 +660,7 @@ class AddInventoryController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -674,6 +675,7 @@ class AddInventoryController extends GetxController {
           int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+          selectedfrequency.value = value;
         }
         break;
       case RxList<ManufacturerModel>:
@@ -682,6 +684,7 @@ class AddInventoryController extends GetxController {
               manufacturerModelNameList.indexWhere((x) => x?.name == value);
           selectedmanufacturerNameId =
               manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
+          selectedmanufacturerName.value = value;
         }
         break;
       case RxList<WarrantyTypeModel>:
@@ -689,6 +692,7 @@ class AddInventoryController extends GetxController {
           int warrantyIndex =
               warrantyNameList.indexWhere((x) => x?.name == value);
           selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
+          selectedWarrantyName.value = value;
         }
         break;
       case RxList<SupplierNameModel>:
@@ -697,6 +701,17 @@ class AddInventoryController extends GetxController {
               supplierNameModelNameList.indexWhere((x) => x?.name == value);
           selectedsupplierrNameId =
               supplierNameModelNameList[supplierIndex]?.id ?? 0;
+          selectedsupplierrName.value = value;
+        }
+        break;
+      case RxList<CurrencyListModel>:
+        {
+          int unitCurrencyListIndex =
+              unitCurrencyList.indexWhere((x) => x?.name == value);
+          selectedUnitCurrencyId =
+              unitCurrencyList[unitCurrencyListIndex]?.id ?? 0;
+          print('CurrencyId${selectedUnitCurrencyId}');
+          selectedUnitCurrency.value = value;
         }
         break;
       case RxList<WarrantyUsageTermListModel>:
@@ -705,6 +720,7 @@ class AddInventoryController extends GetxController {
               warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
           selectedwarrantyUsageTermNameId =
               warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
+          selectedwarrantyUsageTermListName.value = value;
         }
         break;
       case RxList<WarrantyUsageTermListModel>:
@@ -781,6 +797,7 @@ class AddInventoryController extends GetxController {
         {}
         break;
     }
+    print({"selectedfrequency": selectedfrequency});
   }
 }
 
