@@ -2888,6 +2888,30 @@ class Repository {
     }
   }
 
+  Future<bool> completeCalibration(
+      {bool? isLoading, completeCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.completeCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          completeCalibrationtoJsonString: completeCalibrationtoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<List<GetPmScheduleListModel?>?> getPMScheduleData(
     int? selectedEquipmentId,
     int? facilityId,

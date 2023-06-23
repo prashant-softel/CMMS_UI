@@ -1196,6 +1196,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> completeCalibration({
+    auth,
+    bool? isLoading,
+    completeCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.completeCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        completeCalibrationtoJsonString: completeCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> getPMScheduleData({
     required String auth,
     int? facilityId,

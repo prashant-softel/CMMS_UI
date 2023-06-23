@@ -1762,6 +1762,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> completeCalibration({
+    required String auth,
+    bool? isLoading,
+    required completeCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveRequestCalibration',
+      Request.put,
+      completeCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getPMScheduleData({
     required String auth,
     bool? isLoading,
