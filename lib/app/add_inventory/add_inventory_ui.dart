@@ -10,15 +10,20 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../controllers/file_upload_controller.dart';
 
 class AddInventoryScreen extends GetView<AddInventoryController> {
   AddInventoryScreen({super.key});
 
   final AddInventoryController controller = Get.find();
-
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: Responsive.isDesktop(context)
@@ -367,7 +372,27 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           CalibrationTabWidget(),
                                           WarrantyTabWidget(),
                                           ManufacturarTabWidget(),
-                                          Files(),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Container(
+                                              height: Get.height * 0.2,
+                                              width: Get.width,
+                                              child: Row(//
+                                                  children: [
+                                                Expanded(
+                                                  flex: 2,
+                                                  child:
+                                                      FileUploadWidgetWithDropzone(),
+                                                ),
+                                                Dimens.boxWidth10,
+                                                Expanded(
+                                                    flex: 8,
+                                                    child:
+                                                        FileUploadDetailsWidgetWeb()),
+                                              ]),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),

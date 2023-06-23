@@ -13,11 +13,16 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../widgets/dropdown_web.dart';
 
-class WarrantyTabWidget extends StatelessWidget {
+class WarrantyTabWidget extends StatefulWidget {
   WarrantyTabWidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<WarrantyTabWidget> createState() => _WarrantyTabWidgetState();
+}
+
+class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AddInventoryController>(
