@@ -3,8 +3,12 @@ import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import '../models/business_list_model.dart';
+import '../models/city_model.dart';
+import '../models/country_model.dart';
 import '../models/frequency_model.dart';
 import '../models/modulelist_model.dart';
+import '../models/state.dart';
+import '../models/state_model.dart';
 
 class BusinessListUsecase {
   BusinessListUsecase(this.repository);
@@ -20,7 +24,33 @@ class BusinessListUsecase {
         facilityId,
         isLoading,
       );
+  Future<List<CountryModel?>?> getCountryList({
+    bool? isLoading,
+  }) async =>
+      await repository.getCountryList(
+        isLoading,
+      );
 
+  Future<List<CountryState?>?> getStateList({
+
+    int? selectedCountryId
+    // bool? isLoading,
+
+  }) async =>
+      await repository.getStateList(
+        // true,
+        selectedCountryId!,
+      );
+
+
+  Future<List<CityModel?>?> getCityList({
+    int? selectedStateId
+
+  }) async =>
+      await repository.getCityList(
+        true,
+        selectedStateId!,
+      );
 
   Future<List<BusinessTypeModel>> getBusinessTypeList({
     required int? businessType,
@@ -64,17 +94,17 @@ class BusinessListUsecase {
   }) async =>
       await repository.createBusinessListNumber(
           isLoading: isLoading, businesslistJsonString: businesslistJsonString);
-  deleteModulelist(
-          {required Object module_id, required bool isLoading}) async =>
-      await repository.deleteModulelist(
-        module_id,
+  deleteBusiness(
+      {required Object business_id, required bool isLoading}) async =>
+      await repository.deleteBusinessList(
+        business_id,
         isLoading,
       );
-  Future<bool> updateModulelistNumber({
+  Future<bool> updateBusinesslist({
     modulelistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updateModulelistNumber(
+      await repository.updateBusinesslist(
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
       );

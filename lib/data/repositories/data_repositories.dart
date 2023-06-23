@@ -1664,5 +1664,40 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> getDesignationList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getDesignationList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> deleteBusinessList({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessList(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
+
+  Future<ResponseModel> updateBusinesslist({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinesslist(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
+
 //end
 }

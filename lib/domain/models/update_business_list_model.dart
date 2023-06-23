@@ -4,17 +4,17 @@
 
 import 'dart:convert';
 
-List<CreateBusinessListModel> businessListModelFromJson(String str) =>
-    List<CreateBusinessListModel>.from(
-        json.decode(str).map((x) => CreateBusinessListModel.fromJson(x)));
+List<UpdateBusinessListModel> businessListModelFromJson(String str) =>
+    List<UpdateBusinessListModel>.from(
+        json.decode(str).map((x) => UpdateBusinessListModel.fromJson(x)));
 
-String businessListModelToJson(List<CreateBusinessListModel> data) =>
+String businessListModelToJson(List<UpdateBusinessListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CreateBusinessListModel {
-  CreateBusinessListModel({
-    // this.id,
-    this.name,
+class UpdateBusinessListModel {
+  UpdateBusinessListModel({
+    this.id,
+      this.name,
     this.email,
     this.contactPerson,
     this.contactnumber,
@@ -31,7 +31,7 @@ class CreateBusinessListModel {
 
   });
 
-  // int? id;
+  int? id;
   String? name;
   String? email;
   String? contactPerson;
@@ -48,26 +48,26 @@ class CreateBusinessListModel {
   // String? addAt;
 
 
-  factory CreateBusinessListModel.fromJson(Map<String, dynamic> json) => CreateBusinessListModel(
-    // id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    contactPerson: json["contactPerson"],
-    contactnumber: json["contactnumber"],
-    website: json["website"],
-    location: json["location"],
-    address: json["address"],
-    countryId: json["countryId"],
-    stateId: json["stateId"],
-    cityId: json["cityId"],
-    zip: json["zip"],
-    type: json["type"],
-    status: json["status"],
-    // addAt: json["addAt"]
+  factory UpdateBusinessListModel.fromJson(Map<String, dynamic> json) => UpdateBusinessListModel(
+      id: json["id"],
+      name: json["name"],
+      email: json["email"],
+      contactPerson: json["contactPerson"],
+      contactnumber: json["contactnumber"],
+      website: json["website"],
+      location: json["location"],
+      address: json["address"],
+      countryId: json["countryId"],
+      stateId: json["stateId"],
+      cityId: json["cityId"],
+      zip: json["zip"],
+      type: json["type"],
+      status: json["status"],
+      // addAt: json["addAt"]
   );
 
   Map<String, dynamic> toJson() => {
-    // "id": id,
+    "id": id,
     "name": name,
     "email": email,
     "contactPerson": contactPerson,

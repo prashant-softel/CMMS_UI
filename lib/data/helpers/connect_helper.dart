@@ -2511,4 +2511,59 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> getDesignationList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'RoleAccess/GetDesignationList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
+  Future<ResponseModel> deleteBusinessList({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBusiness?id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> updateBusinesslist({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBusiness',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 }

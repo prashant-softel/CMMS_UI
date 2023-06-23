@@ -191,4 +191,9 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToDesignationScreen() async {
+    Get.toNamed(
+      Routes.designationScreen,
+    );
+  }
 }
