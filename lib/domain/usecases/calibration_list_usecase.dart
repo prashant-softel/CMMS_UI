@@ -45,6 +45,13 @@ class CalibrationListUsecase {
       await _repository.approveRequestCalibration(
           approveCalibrationtoJsonString: approveCalibrationtoJsonString,
           isLoading: isLoading);
+  Future<bool> completeCalibration({
+    completeCalibrationtoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.completeCalibration(
+          completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+          isLoading: isLoading);
   Future<bool> startCalibration(
           {required Object calibrationId, required bool isLoading}) async =>
       await _repository.startCalibration(

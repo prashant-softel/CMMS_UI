@@ -55,6 +55,16 @@ class CalibrationListPresenter {
     );
   }
 
+  Future<bool> completeCalibration({
+    completeCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.completeCalibration(
+      completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<bool> startCalibration(String? calibrationId,
           {required bool isLoading}) async =>
       await calibrationListUsecase.startCalibration(

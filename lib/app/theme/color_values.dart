@@ -28,7 +28,7 @@ abstract class ColorValues {
   static const Color completeColor = appRedColor;
   static const Color deleteColor = redColor;
   static const Color startColor = appYellowColor;
-  static const Color viewColor = greenColor;
+  static const Color viewColor = appDarkBlueColor;
   static const Color editColor = appYellowColor;
 
   // ============================================
