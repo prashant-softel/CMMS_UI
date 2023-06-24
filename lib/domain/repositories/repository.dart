@@ -1850,6 +1850,35 @@ class Repository {
     }
   }
 
+  Future<bool> createUnitOfMeasurement(
+      {bool? isLoading, checklistJsonString}) async {
+        print("For API testing repo entry");
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createUnitOfMeasurement(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString);
+
+      if (!res.hasError) {
+         print("For API testing try if repo exit");
+        return true;
+      } //
+      else {
+         print("For API testing try else repo exit");
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+     
+    } catch (error) {
+      print(error.toString());
+      print("For API testing repo catch exit");
+      return false;
+    }
+        
+
+  }
+
   Future<bool> createModuleListNumber(
       {bool? isLoading, modulelistJsonString}) async {
     try {

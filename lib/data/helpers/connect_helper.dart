@@ -595,9 +595,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel>
-  getPreventiveCheckList({
-
+  Future<ResponseModel> getPreventiveCheckList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -616,8 +614,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel>
-  getUnitMeasurementList({
+  Future<ResponseModel> getUnitMeasurementList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -636,9 +633,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-  Future<ResponseModel>
-  getModuleList({
+  Future<ResponseModel> getModuleList({
     required String auth,
     bool? isLoading,
     int? facilityId,
@@ -656,7 +651,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
@@ -1139,7 +1133,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Create Warranty Claim
+  //Create Warranty Claim
   Future<ResponseModel> createWarrantyClaim({
     required String auth,
     createWarrantyClaim,
@@ -1166,8 +1160,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1240,7 +1232,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -1258,24 +1249,24 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> createModuleList({
     required String auth,
     bool? isLoading,
     required modulelistJsonString,
   }) async {
-
     var responseModel =
-      // responseModel =
-      await apiWrapper.makeRequest(
-        'CMMS/AddModule',
-        Request.post,
-        modulelistJsonString,
-        isLoading ?? false,
-        {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $auth',
-        },
-      );
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/AddModule',
+      Request.post,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
     return responseModel;
   }
@@ -1296,6 +1287,26 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> createUnitOfMeasurement({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    print("For API testing connect helper entry");
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/AddUnitMeasurement',
+      Request.post,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+     print("For API testing connect helper  exit");
     return responseModel;
   }
 
@@ -1336,7 +1347,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> deleteModulelist({
     required String auth,
@@ -1721,6 +1731,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> updateCheckPoint({
     required String auth,
     bool? isLoading,

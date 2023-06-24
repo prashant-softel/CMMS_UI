@@ -34,12 +34,12 @@ class UnitOfMeasurementUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  // Future<bool> createChecklistNumber({
-  //   checklistJsonString,
-  //   bool? isLoading, required modulelistJsonString,
-  // }) async =>
-  //     await repository.createCheckListNumber(
-  //         isLoading: isLoading, checklistJsonString: checklistJsonString);
+  Future<bool> createUnitOfMeasurement({
+    checklistJsonString,
+    bool? isLoading, required modulelistJsonString,
+  }) async =>
+      await repository.createUnitOfMeasurement(
+          isLoading: isLoading, checklistJsonString: checklistJsonString);
   // deleteChecklist(
   //         {required Object checklist_id, required bool isLoading}) async =>
   //     await repository.deleteCkecklist(

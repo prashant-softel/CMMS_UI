@@ -733,6 +733,20 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createUnitOfMeasurement({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    print("For API testing data repo entry");
+    var response = await connectHelper.createUnitOfMeasurement(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString);
+        print("For API testing data repo exit");
+    return response;
+  }
+
   Future<ResponseModel> createModuleList({
     auth,
     bool? isLoading,

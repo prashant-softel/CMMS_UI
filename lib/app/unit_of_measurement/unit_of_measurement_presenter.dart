@@ -30,15 +30,18 @@ class UnitOfMeasurementPresenter {
       await unitOfMeasurementUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<bool> createModulelistNumber({
+  Future<bool> createUnitOfMeasurement({
     modulelistJsonString,
     required bool isLoading,
   }) async {
-    print("presenter");
-    // unitOfMeasurementUsecase.createChecklistNumber(
-    //   modulelistJsonString: modulelistJsonString,
-    //   isLoading: isLoading,
-    // );
+     print("For API testing presenter entry");
+  
+    // print("presenter");
+    unitOfMeasurementUsecase.createUnitOfMeasurement(
+      modulelistJsonString: modulelistJsonString,
+      isLoading: isLoading,
+     );
+    print("For API testing presenter exit");
     return true;
   }
 
