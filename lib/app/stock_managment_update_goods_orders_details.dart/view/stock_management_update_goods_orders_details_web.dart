@@ -739,6 +739,7 @@ class UpdateGoodsOrdersDetailsWeb
                         }).toList(),
                       ),
                     ),
+                 
                   ],
                 ),
               ),
