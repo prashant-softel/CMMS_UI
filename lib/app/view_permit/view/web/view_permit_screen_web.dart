@@ -2140,7 +2140,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              width: 50,
+                                                              width: 40,
                                                             ),
                                                             Column(
                                                               crossAxisAlignment:
@@ -2168,7 +2168,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              width: 20,
+                                                              width: 15,
                                                             ),
                                                             Column(
                                                               crossAxisAlignment:
@@ -2208,7 +2208,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              width: 20,
+                                                              width: 10,
                                                             ),
                                                             Column(
                                                               crossAxisAlignment:
@@ -2227,7 +2227,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     height: 5),
                                                               ],
                                                             ),
-                                                            SizedBox(width: 10),
+                                                            SizedBox(width: 5),
                                                             Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment

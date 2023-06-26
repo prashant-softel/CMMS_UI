@@ -462,7 +462,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                                   )
                                                                 : Dimens.box0,
                                                 // '${calibrationListListDetails?.frequency_name}'
-                                              )),
+                                                              ]
+                                              )
+                                              ),
                                               TableViewCell(
                                                   child: Wrap(children: [
                                                 TableActionButton(
@@ -477,6 +479,8 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                           '${calibrationListListDetails?.last_calibration_date}',
                                                       nextDate:
                                                           '${calibrationListListDetails?.next_calibration_due_date}',
+                                                      calibrationId:
+                                                          '${calibrationListListDetails?.asset_id}',
                                                     );
                                                   },
                                                 ),
