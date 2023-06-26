@@ -373,22 +373,26 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           CalibrationTabWidget(),
                                           WarrantyTabWidget(),
                                           ManufacturarTabWidget(),
-                                          Container(
-                                            height: Get.height * 0.2,
-                                            width: Get.width,
-                                            child: Row(//
-                                                children: [
-                                              Expanded(
-                                                flex: 2,
-                                                child:
-                                                    FileUploadWidgetWithDropzone(),
-                                              ),
-                                              Dimens.boxWidth10,
-                                              Expanded(
-                                                  flex: 8,
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Container(
+                                              height: Get.height * 0.2,
+                                              width: Get.width,
+                                              child: Row(//
+                                                  children: [
+                                                Expanded(
+                                                  flex: 2,
                                                   child:
-                                                      FileUploadDetailsWidgetWeb()),
-                                            ]),
+                                                      FileUploadWidgetWithDropzone(),
+                                                ),
+                                                Dimens.boxWidth10,
+                                                Expanded(
+                                                    flex: 8,
+                                                    child:
+                                                        FileUploadDetailsWidgetWeb()),
+                                              ]),
+                                            ),
                                           ),
                                         ],
                                       ),
