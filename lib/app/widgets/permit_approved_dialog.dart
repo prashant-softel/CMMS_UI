@@ -15,8 +15,9 @@ import '../theme/styles.dart';
 class PermitApprovedDialog extends GetView {
  String? permitApprovedDialog;
  String? permitId;
+ String? ptwStatus;
  
-  PermitApprovedDialog({super.key, this.permitApprovedDialog, this. permitId});
+  PermitApprovedDialog({super.key, this.permitApprovedDialog, this.permitId, this.ptwStatus});
   final NewPermitListController _controller = Get.find();
 
 
@@ -30,7 +31,7 @@ class PermitApprovedDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Approve Permit',
+          ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -123,10 +124,11 @@ class PermitApprovedDialog extends GetView {
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
-                              _controller.permitApprovedButton(permitId:permitId);
+                              _controller.permitApprovedButton(permitId:permitId, ptwStatus: '$ptwStatus');
+                              print('PermitStatus:$ptwStatus');
                               Get.back();
                             },
-                            child: const Text('Approve Permit'),
+                            child:  Text('${ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit'}'),
                           ),
                         ]),
         ],

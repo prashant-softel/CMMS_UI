@@ -12,11 +12,11 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitExtendDialog extends GetView {
- String? permitExtendDialog;
+class PermitCancelReQuestDialog extends GetView {
+ String? permitCancelDialog;
  String? permitId;
  
-  PermitExtendDialog({super.key, this.permitExtendDialog, this. permitId});
+  PermitCancelReQuestDialog({super.key, this.permitCancelDialog, this. permitId});
   final NewPermitListController _controller = Get.find();
 
 
@@ -30,7 +30,7 @@ class PermitExtendDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Permit Extend Request',
+          'Cancel Permit Request',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -40,7 +40,7 @@ class PermitExtendDialog extends GetView {
           return 
              Container(
               padding: Dimens.edgeInsets05_0_5_0,
-              height: 185,
+              height: 200,
               width: double.infinity,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,33 +53,13 @@ class PermitExtendDialog extends GetView {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                        
-                       CustomRichText(title: 'Enter reason for extension '),
-                      
-                       TextField(
-                        // keyboardType: TextInputType.number,
-                        controller: _controller.extendReasonCommentTextFieldCtrlr,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          hintText: 'Enter Reason....',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black,),
-                          
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide( color: Colors.black),
-                           ),
-                          
-                        ),
-                       ),
+                       CustomRichText(title: 'Comment '),
                        SizedBox(height: 20,),
-                        CustomRichText(title: 'Enter Time for extension '),
-                       
                        TextField(
-                        // keyboardType: TextInputType.number,
-                        controller: _controller.timeTextFieldCtrlr,
-                        maxLines: 1,
+                        controller: _controller.cancelCommentRequestTextFieldCtrlr,
+                        maxLines: 4,
                         decoration: InputDecoration(
-                          hintText: 'in minutes ....',
+                          hintText: 'Comment here....',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black,),
                           
@@ -143,10 +123,10 @@ class PermitExtendDialog extends GetView {
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
-                              _controller.permitExtendButton(permitId:permitId);
+                              _controller.permitCancelRequestButton(permitId:permitId);
                               Get.back();
                             },
-                            child: const Text('Extend Permit'),
+                            child: const Text('Cancel Permit'),
                           ),
                         ]),
         ],

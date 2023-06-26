@@ -52,12 +52,20 @@ class NewPermitListController extends GetxController {
   );
   TextEditingController commentTextFieldCtrlr = TextEditingController();
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController extendReasonCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController timeTextFieldCtrlr = TextEditingController();
+
   int userId = varUserAccessModel.value.user_id ?? 0;
 
   ///Buttons Cancel, Close Reject
   TextEditingController cancelCommentTextFieldCtrlr = TextEditingController();
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+
+  TextEditingController cancelCommentByApproverTextFieldCtrlr = TextEditingController();
+  TextEditingController cancelCommentRequestTextFieldCtrlr = TextEditingController();
+
+
 
 
   
@@ -142,41 +150,88 @@ class NewPermitListController extends GetxController {
     final _permitIssueBtn = await newPermitListPresenter.permitIssueButton(
       comment: _comment,
       id: permitId,
-      employee_id: "136",
     );
     // showAlertPermitIssueDialog();
     print('Issue Data1:${_comment}');
     print('Issue Data:${permitId}');
-    print('Issue Data:${136}');
+    
   }
 
-  Future<void> permitApprovedButton({String? permitId}) async {
+  Future<void> permitApprovedButton({String? permitId, String? ptwStatus}) async {
     String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
     final _permitApprovedBtn =
         await newPermitListPresenter.permitApprovedButton(
       comment: _approveComment,
       id: permitId,
-      employee_id: "136",
+      ptwStatus: ptwStatus
     );
     // showAlertPermitApproveDialog();
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');
-    print('Approved Data:${136}');
+    
   }
 
 
-  Future<void> permitCancelButton({String? permitId}) async {
+  Future<void> permitCancelByIssuerButton({String? permitId}) async {
     String _cancelComment = cancelCommentTextFieldCtrlr.text.trim();
 
-    final _permitCancelBtn =
-        await newPermitListPresenter.permitCancelButton(
+    final _permitCancelByIssuerBtn =
+        await newPermitListPresenter.permitCancelByIssuerButton(
       comment: _cancelComment,
       id: permitId,
     );
     // showAlertPermitApproveDialog();
     print('Cancel Button Data:${_cancelComment}');
     print('Cancel Button Data:${permitId}');
+    
+  }
+
+  Future<void> permitCancelRequestButton({String? permitId}) async {
+    String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
+
+    final _permitCancelRequestBtn =
+        await newPermitListPresenter.permitCancelRequestButton(
+      comment: _cancelComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Cancel Request Button Data:${_cancelComment}');
+    print('Cancel Request Button Data:${permitId}');
+    
+  }
+
+  Future<void> permitCancelByApproverButton({String? permitId, String? ptwStatus}) async {
+    String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
+
+    final _permitCancelByApproverBtn =
+        await newPermitListPresenter.permitCancelByApproverButton(
+      comment: _cancelComment,
+      id: permitId,
+      ptwStatus: ptwStatus
+    );
+    // showAlertPermitApproveDialog();
+    print('Cancel Button By Approver Data:${_cancelComment}');
+    print('Cancel Button By Approver Data:${permitId}');
+    
+  }
+
+  Future<void> permitExtendButton({String? permitId}) async {
+    String _reasonForExtensionComment = extendReasonCommentTextFieldCtrlr.text.trim();
+    String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
+
+
+    final _permitextendBtn =
+        await newPermitListPresenter.permitExtendButton(
+      comment: _reasonForExtensionComment,
+      Time: _timeForExtensionComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    
+    print('Extend Button Data:${_reasonForExtensionComment}');
+    print('Extend Button Data:${_timeForExtensionComment}');
+    print('Extend Button Data:${permitId}');
     
   }
 

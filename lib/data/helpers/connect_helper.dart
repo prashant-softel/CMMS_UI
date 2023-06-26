@@ -7,8 +7,11 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_request_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
@@ -554,14 +557,13 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     String? comment,
-    String? employee_id,
     String? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
       Request.put,
-      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
+      {'comment': "$comment", 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -579,14 +581,17 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     String? comment,
-    String? employee_id,
     String? id,
+    String? employee_id,
+    String? ptwStatus,
+    
   }) async {
     // facilityId = 45;
+    // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/PermitApprove',
+      ptwStatus == '123' ? 'Permit/PermitApprove': 'Permit/PermitExtendApprove',
       Request.put,
-      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
+      {'comment': "$comment", 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -600,7 +605,32 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelByIssuerButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitCancelByIssuer',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitCancelByIssuerResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageCancelByIssuerDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
+   Future<ResponseModel> permitCancelRequestButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -616,10 +646,63 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitCancelResponse: ${responseModel.data}');
+    print('PermitCancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageCancelRequestDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
+
+   Future<ResponseModel> permitCancelByApproverButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+    String? ptwStatus,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      ptwStatus == '123' ? 'Permit/PermitCancelByApprover' : 'Permit/PermitCancelRequest',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageCancelByApproverDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> permitExtendButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? Time,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitExtend',
+      Request.put,
+      {'comment': "$comment", 'Time': '$Time', 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitExtendResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageExtendDialog(data: parsedJson['message']));
 
     return responseModel;
   }
@@ -1557,6 +1640,27 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  ///Permit History
+  Future<ResponseModel> getPermitHistory({
+    required String? auth,
+    int? moduleType,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitHistory Response:${responseModel}');
     return responseModel;
   }
 

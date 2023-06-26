@@ -12,11 +12,11 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitCancelDialog extends GetView {
+class PermitCancelByIssuerDialog extends GetView {
  String? permitCancelDialog;
  String? permitId;
  
-  PermitCancelDialog({super.key, this.permitCancelDialog, this. permitId});
+  PermitCancelByIssuerDialog({super.key, this.permitCancelDialog, this. permitId});
   final NewPermitListController _controller = Get.find();
 
 
@@ -30,7 +30,7 @@ class PermitCancelDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Cancel Permit',
+          'Cancel Permit By Issuer',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -123,7 +123,7 @@ class PermitCancelDialog extends GetView {
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
-                              _controller.permitCancelButton(permitId:permitId);
+                              _controller.permitCancelByIssuerButton(permitId:permitId);
                               Get.back();
                             },
                             child: const Text('Cancel Permit'),

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 CreateWarrantyClaimModel createWarrantyClaimModelFromJson(String str) =>
     CreateWarrantyClaimModel.fromJson(json.decode(str));

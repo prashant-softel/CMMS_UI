@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 
 CreateSOPModel addCreateSOPModelFromJson(String str) =>
     CreateSOPModel.fromJson(json.decode(str));
