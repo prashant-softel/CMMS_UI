@@ -149,6 +149,8 @@ import '../add_asset_master/view/add_asset_master_screen.dart';
 import '../add_asset_master/add_asset_master_binding.dart';
 import '../designation_List/view/designation_list_screen.dart';
 import '../designation_List/designation_list_binding.dart';
+import '../competency_list/view/competency_list_screen.dart';
+import '../competency_list/competency_list_binding.dart';
 
 // coverage:ignore-file
 
@@ -552,6 +554,12 @@ class AppPages {
       name: _Paths.designationScreen,
       page: DesignationListScreen.new,
       binding: DesignationListBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.competencyScreen,
+      page: CompetencyListScreen.new,
+      binding: CompetencyListBinding(),
     ),
   ];
 }

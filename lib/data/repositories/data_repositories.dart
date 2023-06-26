@@ -1698,6 +1698,13 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
+  Future<ResponseModel> getCompetencyList({
+    required String auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCompetencyList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

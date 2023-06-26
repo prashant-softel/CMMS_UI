@@ -64,6 +64,7 @@ import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
+import '../models/competency_model.dart';
 import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
@@ -4146,5 +4147,38 @@ class Repository {
       return false;
     }
   }
+
+  Future<List<CompetencyModel?>?> getCompetencyList(
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCompetencyList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<CompetencyModel> _PreventiveCheckListModelList =
+        jsonPreventiveCheckListModelModels
+            .map<CompetencyModel>((m) =>
+            CompetencyModel.fromJson(
+                Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
 //end
 }

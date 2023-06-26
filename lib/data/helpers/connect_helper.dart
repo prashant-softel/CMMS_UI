@@ -2566,4 +2566,21 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel> getCompetencyList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetCompetencyList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

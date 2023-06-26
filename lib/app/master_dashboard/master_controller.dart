@@ -196,4 +196,11 @@ class MastersController extends GetxController {
       Routes.designationScreen,
     );
   }
+
+  Future<void> goToCompetencyScreen() async {
+    Get.toNamed(
+      Routes.competencyScreen,
+    );
+  }
+
 }
