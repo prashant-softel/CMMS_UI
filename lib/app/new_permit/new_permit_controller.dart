@@ -134,6 +134,8 @@ class NewPermitController extends GetxController {
   Rx<bool> isFacilitySelected = true.obs;
   Rx<bool> isJobDescriptionInvalid = false.obs;
   Rx<bool> isTitleTextInvalid = false.obs;
+  Rx<bool> isWorPermitNumberTextInvalid = false.obs;
+
 
 
 ///Permit Type
@@ -153,6 +155,8 @@ class NewPermitController extends GetxController {
 
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
+  var workPermitNumberTextCtrlr = TextEditingController();
+
 
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
@@ -380,7 +384,6 @@ if(arguments != null){
       await getJobTypePermitList();
       await getPermitIssuerList();
       await getPermitApproverList();
-      await getSafetyMeasureList();
       
 
      
@@ -656,7 +659,7 @@ if(arguments != null){
     final _safetyMeasureList = await permitPresenter.getSafetyMeasureList(
       isLoading: true,
       // categoryIds: categoryIds,
-      permit_type_id: 7,
+      permit_type_id: selectedPermitTypeId,
       // job_type_id: 36,
     );
     for (var safetyMeasure_list in _safetyMeasureList) {
@@ -752,6 +755,8 @@ if(arguments != null){
               typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = facilityList[permitTypeIndex]?.id ?? 0;
           selectedPermitTypeId = typePermitList[permitTypeIndex]?.id ?? 0;
+          getSafetyMeasureList();
+          print('PErmit Type Id: $selectedPermitTypeId');
           if (selectedTypePermitId != 0) {
             isTypePermitSelected.value = true;
           }

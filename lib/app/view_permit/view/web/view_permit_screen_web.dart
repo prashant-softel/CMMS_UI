@@ -12,6 +12,8 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
@@ -88,7 +90,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 children: [],
                               ),
                             ),
-                  
+
                             /// CARD
                             Expanded(
                               child: Container(
@@ -141,8 +143,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         ),
                                                         Text(
                                                           "DASHBOARD",
-                                                          style:
-                                                              Styles.greyLight14,
+                                                          style: Styles
+                                                              .greyLight14,
                                                         ),
                                                         GestureDetector(
                                                           onTap: () {
@@ -173,8 +175,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         child: Text(
                                                           '${controller.viewPermitDetailsModel.value?.title}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
+                                                              color: Color
+                                                                  .fromARGB(
                                                                       255,
                                                                       6,
                                                                       83,
@@ -190,7 +192,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       Container(
                                                         height: 30,
                                                         width: 170,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
@@ -200,8 +203,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                                color:
-                                                                    Colors.blue),
+                                                                color: Colors
+                                                                    .blue),
                                                           ],
                                                         ),
                                                         child: Center(
@@ -226,7 +229,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   ),
                                                   Row(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Column(
                                                         crossAxisAlignment:
@@ -370,7 +374,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     alignment:
                                                                         WrapAlignment
                                                                             .start,
-                                                                    spacing: 100,
+                                                                    spacing:
+                                                                        100,
                                                                     children: []
                                                                       ..addAll(controller
                                                                           .listCategory!
@@ -424,24 +429,26 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ],
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                  
+
                                                   ///Loto Applied List
                                                   SizedBox(
                                                     height: 230,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        0.1,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            0.1,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -467,7 +474,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         onChanged:
                                                                             (value) {},
                                                                       ),
-                  
+
                                                                       // CustomRichText(
                                                                       // title:
                                                                       //     'Loto Applied '),
@@ -478,7 +485,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //   onChanged:
                                                                       //   (value) {},
                                                                       // ),
-                  
+
                                                                       // CustomRichText(
                                                                       // title:
                                                                       //     'Isolated Equipments: '),
@@ -486,15 +493,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       // 'Inverter')
                                                                     ],
                                                                   )),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
                                                                     children: [
                                                                       Align(
-                                                                          alignment:
-                                                                              Alignment
-                                                                                  .centerLeft,
+                                                                          alignment: Alignment
+                                                                              .centerLeft,
                                                                           child:
                                                                               Text(
                                                                             'Isolated Category',
@@ -506,10 +513,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             2,
                                                                       ),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .height *
-                                                                            2,
+                                                                        width:
+                                                                            MediaQuery.of(context).size.height *
+                                                                                2,
                                                                         child:
                                                                             Container(
                                                                           height:
@@ -553,7 +559,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                                   //                     ? "Description"
                                                                                                   //                     : column == "permitTypeName"
                                                                                                   //                         ? "Work Type"
-                  
+
                                                                                                   // : "Action",
                                                                                                   : "");
                                                                                     }).toList(),
@@ -562,12 +568,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                       ...List.generate(
                                                                                         ///controller.selectedEquipmentNameIdList
                                                                                         controller.listLoto!.length,
-                  
+
                                                                                         (index) {
                                                                                           var viewLotoListName = controller.listLoto![index];
-                  
+
                                                                                           //_jobId = jobDetails?.id;
-                  
+
                                                                                           // controller.id.value = viewLotoListName?.id ?? 0;
                                                                                           print('Equipment Isss5:${controller.id.value}');
                                                                                           return [
@@ -644,7 +650,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                     }).toList(),
                                                                                   ),
                                                                                 ),
-                  
+
                                                                                 // / PAGINATION
                                                                                 Padding(
                                                                                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -688,9 +694,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         ),
                                                                       ),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
+                                                                        width: MediaQuery.of(context).size.width /
                                                                             1.2,
                                                                         child:
                                                                             Divider(
@@ -708,24 +712,26 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ),
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                  
+
                                                   ///Team Deployed
                                                   SizedBox(
                                                     height: 230,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        0.1,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            0.1,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -744,7 +750,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     'Team Deployed to carry out the job'
                                                                         .tr,
                                                               ),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
@@ -758,9 +765,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         ],
                                                                       ),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width *
+                                                                        width: MediaQuery.of(context).size.width *
                                                                             1.5,
                                                                         child:
                                                                             Container(
@@ -792,12 +797,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                       ...List.generate(
                                                                                         ///controller.selectedEquipmentNameIdList
                                                                                         controller.listEmployee?.length ?? 0,
-                  
+
                                                                                         (index) {
                                                                                           var employeeNameDetails = controller.listEmployee![index];
-                  
+
                                                                                           //_jobId = jobDetails?.id;
-                  
+
                                                                                           // controller.id.value = employeeNameDetails?.id ?? 0;
                                                                                           print('Employee Idss5:${controller.id.value}');
                                                                                           return [
@@ -864,7 +869,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                     }).toList(),
                                                                                   ),
                                                                                 ),
-                  
+
                                                                                 /// PAGINATION
                                                                                 Padding(
                                                                                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -907,7 +912,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               ]),
                                                                         ),
                                                                       ),
-                  
+
                                                                       // SizedBox(
                                                                       //   width: MediaQuery.of(context)
                                                                       //           .size
@@ -939,20 +944,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                  
+
                                                   ///Safety measures
                                                   SizedBox(
                                                     height: 240,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        0.1,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            0.1,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -971,7 +978,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     'Following safety Measures taken to\ncarry out the work'
                                                                         .tr,
                                                               ),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
@@ -1003,13 +1011,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //         3),
                                                                       //     Text(
                                                                       //         'Ladder'),
-                  
+
                                                                       //   ],
                                                                       // ),
                                                                       Wrap(
                                                                         alignment:
-                                                                            WrapAlignment
-                                                                                .start,
+                                                                            WrapAlignment.start,
                                                                         spacing:
                                                                             100,
                                                                         children: []
@@ -1029,7 +1036,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 ],
                                                                               ))),
                                                                       ),
-                  
+
                                                                       SizedBox(
                                                                         height:
                                                                             20,
@@ -1050,16 +1057,18 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   //Tool box talk
                                                   SizedBox(
                                                     height: 250,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        0.1,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            0.1,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -1078,7 +1087,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     'Tool Box Talk'
                                                                         .tr,
                                                               ),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
@@ -1090,8 +1100,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 15,
                                                                           ),
                                                                           CustomRichText(
-                                                                              title:
-                                                                                  'Job Type: '),
+                                                                              title: 'Job Type: '),
                                                                           SizedBox(
                                                                             width:
                                                                                 5,
@@ -1104,9 +1113,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         ],
                                                                       ),
                                                                       SizedBox(
-                                                                        height: 5,
+                                                                        height:
+                                                                            5,
                                                                       ),
-                  
+
                                                                       Row(
                                                                         children: [
                                                                           SizedBox(
@@ -1114,8 +1124,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 15,
                                                                           ),
                                                                           CustomRichText(
-                                                                              title:
-                                                                                  'SOP: '),
+                                                                              title: 'SOP: '),
                                                                           SizedBox(
                                                                             width:
                                                                                 5,
@@ -1126,16 +1135,16 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             child:
                                                                                 Text(
                                                                               '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
-                                                                              style:
-                                                                                  TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
-                                                                        height: 5,
+                                                                        height:
+                                                                            5,
                                                                       ),
-                  
+
                                                                       // Checkbox(
                                                                       //   value: controller
                                                                       //       .isCheckedLoto
@@ -1143,12 +1152,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //   onChanged:
                                                                       //       (value) {},
                                                                       // ),
-                  
+
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                                .only(
-                                                                            right:
-                                                                                250),
+                                                                        padding:
+                                                                            const EdgeInsets.only(right: 250),
                                                                         child: CustomRichText(
                                                                             title:
                                                                                 'JSA: '),
@@ -1159,18 +1166,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       ),
                                                                       Row(
                                                                         mainAxisAlignment:
-                                                                            MainAxisAlignment
-                                                                                .start,
+                                                                            MainAxisAlignment.start,
                                                                         children: [
                                                                           SizedBox(
                                                                             width:
                                                                                 15,
                                                                           ),
                                                                           Container(
-                                                                              height:
-                                                                                  30,
-                                                                              child:
-                                                                                  CustomElevatedButton(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
                                                                                 backgroundColor: ColorValues.navyBlueColor,
                                                                                 text: "View SOP",
                                                                                 onPressed: () {
@@ -1183,10 +1187,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 80,
                                                                           ),
                                                                           Container(
-                                                                              height:
-                                                                                  30,
-                                                                              child:
-                                                                                  CustomElevatedButton(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
                                                                                 backgroundColor: ColorValues.navyBlueColor,
                                                                                 text: "View JSA",
                                                                                 onPressed: () {
@@ -1196,7 +1198,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               )),
                                                                         ],
                                                                       ),
-                  
+
                                                                       ///Non Routine Tab Bar
                                                                       // SizedBox(
                                                                       //   height: 400,
@@ -1307,7 +1309,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //                                     Text('No Risk Assessment Link')
                                                                       //                                   ],
                                                                       //                                 )),
-                  
+
                                                                       //                                 ////Second TabBar View
                                                                       //                                 Center(child: Text('Second Tab'))
                                                                       //                               ]),
@@ -1318,7 +1320,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //                     ),
                                                                       //                   ],
                                                                       //                 ),
-                  
+
                                                                       //                 /// Employee
                                                                       //               ],
                                                                       //             ),
@@ -1340,10 +1342,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   ),
                                                   SizedBox(height: 10),
                                                   SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        0.03,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            0.03,
                                                     child: Container(
                                                       height: 180,
                                                       width:
@@ -1354,9 +1357,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey
-                                                                .withOpacity(.3)),
+                                                                .withOpacity(
+                                                                    .3)),
                                                       ),
-                                                      constraints: BoxConstraints(
+                                                      constraints:
+                                                          BoxConstraints(
                                                         maxWidth: 1100,
                                                       ),
                                                       child:
@@ -1385,7 +1390,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     SizedBox(
                                                                       width: 10,
                                                                     ),
-                                                                    Text('Name'),
+                                                                    Text(
+                                                                        'Name'),
                                                                     Dimens
                                                                         .boxWidth10,
                                                                     Text(
@@ -1421,20 +1427,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ),
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 25,
                                                   ),
-                  
+
                                                   ///Permit History
                                                   SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        0.03,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            0.03,
                                                     child: Container(
                                                       // margin: Dimens.edgeInsets20,
-                                                      constraints: BoxConstraints(
+                                                      constraints:
+                                                          BoxConstraints(
                                                         maxHeight: 100,
                                                         minHeight: 100,
                                                       ),
@@ -1445,7 +1453,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ),
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
@@ -1669,7 +1677,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           // ),
                                                         ],
                                                       ),
-                  
+
                                                       // Padding(
                                                       //   padding:
                                                       //       const EdgeInsets.only(
@@ -1798,7 +1806,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       // ),
                                                     ],
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 25,
                                                   ),
@@ -1816,9 +1824,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               child:
                                                                   ElevatedButton
                                                                       .icon(
-                                                                style:
-                                                                    ElevatedButton
-                                                                        .styleFrom(
+                                                                style: ElevatedButton
+                                                                    .styleFrom(
                                                                   foregroundColor:
                                                                       Colors
                                                                           .white,
@@ -1830,8 +1837,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                           163), //  foreground
                                                                 ),
                                                                 onPressed: () {
-                                                                  controller.printScreen();
-                                                                  print('HelloPrint');
+                                                                  controller
+                                                                      .printScreen();
+                                                                  print(
+                                                                      'HelloPrint');
                                                                 },
                                                                 icon: Icon(Icons
                                                                     .print), //icon data for elevated button
@@ -1848,9 +1857,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 child:
                                                                     CustomElevatedButton(
                                                                   backgroundColor:
-                                                                      Colors.red,
-                                                                  text: "Cancel",
-                                                                  onPressed: () {
+                                                                      Colors
+                                                                          .red,
+                                                                  text:
+                                                                      "Cancel",
+                                                                  onPressed:
+                                                                      () {
                                                                     // controller
                                                                     //     .createNewPermit();
                                                                   },
@@ -1860,7 +1872,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ],
                                                     ),
                                                   ),
-                                                 
+
                                                   SizedBox(
                                                     height: 90,
                                                   ),
@@ -1872,6 +1884,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                         } else if (Responsive.isDesktop(
                                           context,
                                         )) {
+                                          ///For Desktop
                                           return SingleChildScrollView(
                                             child: Column(
                                                 mainAxisAlignment:
@@ -1908,8 +1921,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         ),
                                                         Text(
                                                           "DASHBOARD",
-                                                          style:
-                                                              Styles.greyLight14,
+                                                          style: Styles
+                                                              .greyLight14,
                                                         ),
                                                         GestureDetector(
                                                           onTap: () {
@@ -1940,8 +1953,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         child: Text(
                                                           '${controller.viewPermitDetailsModel.value?.title}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
+                                                              color: Color
+                                                                  .fromARGB(
                                                                       255,
                                                                       6,
                                                                       83,
@@ -1952,12 +1965,17 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                        width: 650,
+                                                        width: 550,
                                                       ),
                                                       Container(
                                                         height: 30,
-                                                        width: 170,
-                                                        decoration: BoxDecoration(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
@@ -1967,13 +1985,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                                color:
-                                                                    Colors.blue),
+                                                                color: Colors
+                                                                    .blue),
                                                           ],
                                                         ),
                                                         child: Center(
                                                             child: Text(
-                                                          'Waiting to be Issued',
+                                                          '${controller.viewPermitDetailsModel.value?.current_status_short}',
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white),
@@ -1992,13 +2010,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     height: 20,
                                                   ),
                                                   SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
                                                     child: Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       children: [
                                                         SizedBox(
                                                           width: 35,
@@ -2048,25 +2068,23 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 Text(
                                                                   '${controller.startDateTimeCtrlr.text}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
-                  
+
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.permitNo}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
-                  
+
                                                                 //  SizedBox(
                                                                 //     width: 150,
                                                                 //     child: Text(
@@ -2083,12 +2101,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.description}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
                                                                 controller.permitId !=
                                                                         null
@@ -2101,23 +2118,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               WrapAlignment.start,
                                                                           spacing:
                                                                               100,
-                                                                          children: []
-                                                                            ..addAll(controller.listCategory!.map((element) =>
-                                                                                Row(
-                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    Text(
-                                                                                      "${element?.equipmentCat}",
-                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                    )
-                                                                                  ],
-                                                                                ))),
+                                                                          children: []..addAll(controller.listCategory!.map((element) =>
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "${element?.equipmentCat}",
+                                                                                    style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                  )
+                                                                                ],
+                                                                              ))),
                                                                         ),
                                                                       )
                                                                     : Container(),
-                  
+
                                                                 SizedBox(
                                                                   height: 5,
                                                                 ),
@@ -2162,22 +2178,20 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 Text(
                                                                   '${controller.validTillTimeCtrlr.text}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 150,
@@ -2194,7 +2208,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              width: 50,
+                                                              width: 20,
                                                             ),
                                                             Column(
                                                               crossAxisAlignment:
@@ -2213,56 +2227,56 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     height: 5),
                                                               ],
                                                             ),
-                                                            SizedBox(width: 20),
+                                                            SizedBox(width: 10),
                                                             Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                                  '${controller.viewPermitDetailsModel.value?.siteName}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.permitTypeName}',
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              5,
-                                                                              92,
-                                                                              163)),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
                                                                 ),
                                                               ],
                                                             ),
                                                           ],
                                                         ),
-                  
+
                                                         // _buildStartValidTillDateField_web(
                                                         //     context, 0,),
                                                       ],
                                                     ),
                                                   ),
-                  
+
                                                   ///Loto Applied List
                                                   SizedBox(
-                                                    height: 230,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
+                                                    height: 270,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -2278,7 +2292,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             children: [
                                                               CustomAppBar(
                                                                   title: '',
-                                                                  action: Padding(
+                                                                  action:
+                                                                      Padding(
                                                                     padding: const EdgeInsets
                                                                             .only(
                                                                         right:
@@ -2321,15 +2336,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       ],
                                                                     ),
                                                                   )),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
                                                                     children: [
                                                                       Align(
-                                                                          alignment:
-                                                                              Alignment
-                                                                                  .centerLeft,
+                                                                          alignment: Alignment
+                                                                              .centerLeft,
                                                                           child:
                                                                               Text(
                                                                             'Isolated Category',
@@ -2341,14 +2356,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             2,
                                                                       ),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .height *
-                                                                            2,
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width *
+                                                                                2,
                                                                         child:
                                                                             Container(
                                                                           height:
-                                                                              Get.height,
+                                                                              100,
                                                                           child: Column(
                                                                               //
                                                                               children: [
@@ -2359,50 +2373,40 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                     columns: [
                                                                                       'asset_name',
                                                                                       'locksrno',
-                                                                                      // 'approved_datetime',
-                                                                                      // 'equipment',
-                                                                                      // 'workingAreaId',
-                                                                                      // 'description',
-                                                                                      // 'permitTypeName',
-                                                                                      // 'raisedByName',
-                                                                                      // 'breakdownTime',
-                                                                                      // 'breakdownType',
-                                                                                      // 'permitId',
-                                                                                      // 'assignedToName',
-                                                                                      // 'status',
                                                                                       'action'.tr,
                                                                                     ].map((column) {
                                                                                       return TableViewColumn(
-                                                                                          minWidth: Get.width * 0.25,
-                                                                                          label: column == "asset_name"
-                                                                                              ? "Loto Applied On"
-                                                                                              : column == "locksrno"
-                                                                                                  ? "Serial Number"
-                                                                                                  //     : column == "approved_datetime"
-                                                                                                  //         ? "Approved Time"
-                                                                                                  //         : column == "equipment"
-                                                                                                  //             ? "Equipment" //
-                                                                                                  //             : column == "workingAreaId"
-                                                                                                  //                 ? "Working Area Id"
-                                                                                                  //                 : column == "description"
-                                                                                                  //                     ? "Description"
-                                                                                                  //                     : column == "permitTypeName"
-                                                                                                  //                         ? "Work Type"
-                  
-                                                                                                  // : "Action",
-                                                                                                  : "");
+                                                                                        minWidth: Get.width * 0.25,
+                                                                                        label: column == "asset_name"
+                                                                                            ? "Loto Applied On"
+                                                                                            : column == "locksrno"
+                                                                                                ? "Serial Number"
+                                                                                                //     : column == "approved_datetime"
+                                                                                                //         ? "Approved Time"
+                                                                                                //         : column == "equipment"
+                                                                                                //             ? "Equipment" //
+                                                                                                //             : column == "workingAreaId"
+                                                                                                //                 ? "Working Area Id"
+                                                                                                //                 : column == "description"
+                                                                                                //                     ? "Description"
+                                                                                                //                     : column == "permitTypeName"
+                                                                                                //                         ? "Work Type"
+
+                                                                                                : "Action",
+                                                                                        // : ""
+                                                                                      );
                                                                                     }).toList(),
                                                                                     rows: //
                                                                                         [
                                                                                       ...List.generate(
                                                                                         ///controller.selectedEquipmentNameIdList
                                                                                         controller.listLoto!.length,
-                  
+
                                                                                         (index) {
                                                                                           var viewLotoListName = controller.listLoto![index];
-                  
+
                                                                                           //_jobId = jobDetails?.id;
-                  
+
                                                                                           // controller.id.value = viewLotoListName?.id ?? 0;
                                                                                           print('Equipment Isss5:${controller.id.value}');
                                                                                           return [
@@ -2479,60 +2483,60 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                     }).toList(),
                                                                                   ),
                                                                                 ),
-                  
+
                                                                                 // / PAGINATION
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                  child: ValueListenableBuilder(
-                                                                                      valueListenable: controller.inventoryDetailPaginationController,
-                                                                                      builder: (context, value, child) {
-                                                                                        return Row(children: [
-                                                                                          Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                          Row(children: [
-                                                                                            IconButton(
-                                                                                              onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                                  ? null
-                                                                                                  : () {
-                                                                                                      controller.inventoryDetailPaginationController.previous();
-                                                                                                    },
-                                                                                              iconSize: 20,
-                                                                                              splashRadius: 20,
-                                                                                              icon: Icon(
-                                                                                                Icons.arrow_back_ios_new_rounded,
-                                                                                                color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                            IconButton(
-                                                                                              onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                                  ? null
-                                                                                                  : () {
-                                                                                                      controller.inventoryDetailPaginationController.next();
-                                                                                                    },
-                                                                                              iconSize: 20,
-                                                                                              splashRadius: 20,
-                                                                                              icon: Icon(
-                                                                                                Icons.arrow_forward_ios_rounded,
-                                                                                                color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ]),
-                                                                                        ]);
-                                                                                      }),
-                                                                                ),
+                                                                                // Padding(
+                                                                                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                //   child: ValueListenableBuilder(
+                                                                                //       valueListenable: controller.inventoryDetailPaginationController,
+                                                                                //       builder: (context, value, child) {
+                                                                                //         return Row(children: [
+                                                                                //           Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                //           Row(children: [
+                                                                                //             IconButton(
+                                                                                //               onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                //                   ? null
+                                                                                //                   : () {
+                                                                                //                       controller.inventoryDetailPaginationController.previous();
+                                                                                //                     },
+                                                                                //               iconSize: 20,
+                                                                                //               splashRadius: 20,
+                                                                                //               icon: Icon(
+                                                                                //                 Icons.arrow_back_ios_new_rounded,
+                                                                                //                 color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                //               ),
+                                                                                //             ),
+                                                                                //             IconButton(
+                                                                                //               onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                //                   ? null
+                                                                                //                   : () {
+                                                                                //                       controller.inventoryDetailPaginationController.next();
+                                                                                //                     },
+                                                                                //               iconSize: 20,
+                                                                                //               splashRadius: 20,
+                                                                                //               icon: Icon(
+                                                                                //                 Icons.arrow_forward_ios_rounded,
+                                                                                //                 color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                //               ),
+                                                                                //             ),
+                                                                                //           ]),
+                                                                                //         ]);
+                                                                                //       }),
+                                                                                // ),
                                                                               ]),
                                                                         ),
                                                                       ),
-                                                                      SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
-                                                                            1.2,
-                                                                        child:
-                                                                            Divider(
-                                                                          thickness:
-                                                                              2,
-                                                                        ),
-                                                                      ),
+                                                                      // SizedBox(
+                                                                      //   width: MediaQuery.of(context)
+                                                                      //           .size
+                                                                      //           .width /
+                                                                      //       1.2,
+                                                                      //   child:
+                                                                      //       Divider(
+                                                                      //     thickness:
+                                                                      //         2,
+                                                                      //   ),
+                                                                      // ),
                                                                     ],
                                                                   )
                                                                 ],
@@ -2543,24 +2547,26 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ),
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                  
+
                                                   ///Team Deployed
                                                   SizedBox(
-                                                    height: 230,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
+                                                    height: 270,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -2579,7 +2585,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     'Team Deployed to carry out the job'
                                                                         .tr,
                                                               ),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
@@ -2593,14 +2600,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         ],
                                                                       ),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .height *
+                                                                        width: MediaQuery.of(context).size.width *
                                                                             1.5,
                                                                         child:
                                                                             Container(
                                                                           height:
-                                                                              Get.height,
+                                                                              180,
                                                                           child: Column(
                                                                               //
                                                                               children: [
@@ -2614,7 +2619,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                       'Competeness'.tr,
                                                                                     ].map((column) {
                                                                                       return TableViewColumn(
-                                                                                        minWidth: Get.width * 0.19,
+                                                                                        minWidth: Get.width * 0.26,
                                                                                         label: column == "empName"
                                                                                             ? "Employee Name"
                                                                                             : column == "resp"
@@ -2627,12 +2632,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                       ...List.generate(
                                                                                         ///controller.selectedEquipmentNameIdList
                                                                                         controller.listEmployee?.length ?? 0,
-                  
+
                                                                                         (index) {
                                                                                           var employeeNameDetails = controller.listEmployee![index];
-                  
+
                                                                                           //_jobId = jobDetails?.id;
-                  
+
                                                                                           // controller.id.value = employeeNameDetails?.id ?? 0;
                                                                                           print('Employee Idss5:${controller.id.value}');
                                                                                           return [
@@ -2699,50 +2704,50 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                     }).toList(),
                                                                                   ),
                                                                                 ),
-                  
+
                                                                                 /// PAGINATION
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                  child: ValueListenableBuilder(
-                                                                                      valueListenable: controller.employeeNamepaginationController,
-                                                                                      builder: (context, value, child) {
-                                                                                        return Row(children: [
-                                                                                          Text("${controller.employeeNamepaginationController.currentPage}  of ${controller.employeeNamepaginationController.pageCount}"),
-                                                                                          Row(children: [
-                                                                                            IconButton(
-                                                                                              onPressed: controller.employeeNamepaginationController.currentPage <= 1
-                                                                                                  ? null
-                                                                                                  : () {
-                                                                                                      controller.employeeNamepaginationController.previous();
-                                                                                                    },
-                                                                                              iconSize: 20,
-                                                                                              splashRadius: 20,
-                                                                                              icon: Icon(
-                                                                                                Icons.arrow_back_ios_new_rounded,
-                                                                                                color: controller.employeeNamepaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                            IconButton(
-                                                                                              onPressed: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount
-                                                                                                  ? null
-                                                                                                  : () {
-                                                                                                      controller.employeeNamepaginationController.next();
-                                                                                                    },
-                                                                                              iconSize: 20,
-                                                                                              splashRadius: 20,
-                                                                                              icon: Icon(
-                                                                                                Icons.arrow_forward_ios_rounded,
-                                                                                                color: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ]),
-                                                                                        ]);
-                                                                                      }),
-                                                                                ),
+                                                                                // Padding(
+                                                                                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                //   child: ValueListenableBuilder(
+                                                                                //       valueListenable: controller.employeeNamepaginationController,
+                                                                                //       builder: (context, value, child) {
+                                                                                //         return Row(children: [
+                                                                                //           Text("${controller.employeeNamepaginationController.currentPage}  of ${controller.employeeNamepaginationController.pageCount}"),
+                                                                                //           Row(children: [
+                                                                                //             IconButton(
+                                                                                //               onPressed: controller.employeeNamepaginationController.currentPage <= 1
+                                                                                //                   ? null
+                                                                                //                   : () {
+                                                                                //                       controller.employeeNamepaginationController.previous();
+                                                                                //                     },
+                                                                                //               iconSize: 20,
+                                                                                //               splashRadius: 20,
+                                                                                //               icon: Icon(
+                                                                                //                 Icons.arrow_back_ios_new_rounded,
+                                                                                //                 color: controller.employeeNamepaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                //               ),
+                                                                                //             ),
+                                                                                //             IconButton(
+                                                                                //               onPressed: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount
+                                                                                //                   ? null
+                                                                                //                   : () {
+                                                                                //                       controller.employeeNamepaginationController.next();
+                                                                                //                     },
+                                                                                //               iconSize: 20,
+                                                                                //               splashRadius: 20,
+                                                                                //               icon: Icon(
+                                                                                //                 Icons.arrow_forward_ios_rounded,
+                                                                                //                 color: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                //               ),
+                                                                                //             ),
+                                                                                //           ]),
+                                                                                //         ]);
+                                                                                //       }),
+                                                                                // ),
                                                                               ]),
                                                                         ),
                                                                       ),
-                  
+
                                                                       // SizedBox(
                                                                       //   width: MediaQuery.of(context)
                                                                       //           .size
@@ -2774,20 +2779,23 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                  
+
                                                   ///Safety measures
+
                                                   SizedBox(
-                                                    height: 120,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
+                                                    height: 150,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -2806,7 +2814,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     'Following safety Measures taken to carry out the work'
                                                                         .tr,
                                                               ),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
@@ -2838,33 +2847,31 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //         3),
                                                                       //     Text(
                                                                       //         'Ladder'),
-                  
+
                                                                       //   ],
                                                                       // ),
-                                                                      Wrap(
-                                                                        alignment:
-                                                                            WrapAlignment
-                                                                                .start,
-                                                                        spacing:
-                                                                            100,
-                                                                        children: []
-                                                                          ..addAll(controller.safetyMeasureList.map((element) =>
-                                                                              Row(
-                                                                                mainAxisSize: MainAxisSize.min,
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                children: [
-                                                                                  Row(
+                                                                      controller.permitId !=
+                                                                              null
+                                                                          ? Wrap(
+                                                                              alignment: WrapAlignment.start,
+                                                                              spacing: 100,
+                                                                              children: []..addAll(controller.safetyMeasureList.map((element) => Row(
+                                                                                    mainAxisSize: MainAxisSize.min,
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      checkBoxMethod(1),
-                                                                                      // Text("${l = l! + 1}. "),
-                                                                                      Text("${element.name}")
+                                                                                      Row(
+                                                                                        children: [
+                                                                                          checkBoxMethod(1),
+                                                                                          // Text("${l = l! + 1}. "),
+                                                                                          Text("${element.name}")
+                                                                                        ],
+                                                                                      )
                                                                                     ],
-                                                                                  )
-                                                                                ],
-                                                                              ))),
-                                                                      ),
-                  
+                                                                                  ))),
+                                                                            )
+                                                                          : Container(),
+
                                                                       SizedBox(
                                                                         height:
                                                                             20,
@@ -2879,22 +2886,25 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ),
                                                   ),
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
                                                   //Tool box talk
                                                   SizedBox(
                                                     height: 250,
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.2,
                                                     child: Center(
                                                       child: Container(
                                                         margin:
                                                             Dimens.edgeInsets16,
                                                         height: Get.height,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors.grey
                                                                   .withOpacity(
@@ -2913,7 +2923,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     'Tool Box Talk'
                                                                         .tr,
                                                               ),
-                                                              Dimens.boxHeight10,
+                                                              Dimens
+                                                                  .boxHeight10,
                                                               Wrap(
                                                                 children: [
                                                                   Column(
@@ -2928,39 +2939,36 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 15,
                                                                           ),
                                                                           CustomRichText(
-                                                                              title:
-                                                                                  'Job Type: '),
+                                                                              title: 'Job Type: '),
                                                                           SizedBox(
                                                                             width:
                                                                                 5,
                                                                           ),
-                  
+
                                                                           Text(
                                                                             '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
                                                                             style:
                                                                                 TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                           ),
-                  
+
                                                                           SizedBox(
                                                                             width:
                                                                                 130,
                                                                           ),
                                                                           CustomRichText(
-                                                                              title:
-                                                                                  'SOP: '),
+                                                                              title: 'SOP: '),
                                                                           SizedBox(
                                                                             width:
                                                                                 5,
                                                                           ),
-                  
+
                                                                           SizedBox(
                                                                             width:
                                                                                 200,
                                                                             child:
                                                                                 Text(
                                                                               '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
-                                                                              style:
-                                                                                  TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                             ),
                                                                           ),
                                                                           // Checkbox(
@@ -2975,8 +2983,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 160,
                                                                           ),
                                                                           CustomRichText(
-                                                                              title:
-                                                                                  'JSA: '),
+                                                                              title: 'JSA: '),
                                                                           // Text(
                                                                           //   'Breakdown Maintenance - Demo Plant',
                                                                           //   style: TextStyle(
@@ -3001,14 +3008,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       ),
                                                                       Row(
                                                                         mainAxisAlignment:
-                                                                            MainAxisAlignment
-                                                                                .center,
+                                                                            MainAxisAlignment.center,
                                                                         children: [
                                                                           Container(
-                                                                              height:
-                                                                                  30,
-                                                                              child:
-                                                                                  CustomElevatedButton(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
                                                                                 backgroundColor: ColorValues.navyBlueColor,
                                                                                 text: "View SOP",
                                                                                 onPressed: () {
@@ -3021,10 +3025,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                 150,
                                                                           ),
                                                                           Container(
-                                                                              height:
-                                                                                  30,
-                                                                              child:
-                                                                                  CustomElevatedButton(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
                                                                                 backgroundColor: ColorValues.navyBlueColor,
                                                                                 text: "View JSA",
                                                                                 onPressed: () {
@@ -3034,7 +3036,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               )),
                                                                         ],
                                                                       ),
-                  
+
                                                                       ///Non Routine Tab Bar
                                                                       // SizedBox(
                                                                       //   height: 400,
@@ -3145,7 +3147,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //                                     Text('No Risk Assessment Link')
                                                                       //                                   ],
                                                                       //                                 )),
-                  
+
                                                                       //                                 ////Second TabBar View
                                                                       //                                 Center(child: Text('Second Tab'))
                                                                       //                               ]),
@@ -3156,7 +3158,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       //                     ),
                                                                       //                   ],
                                                                       //                 ),
-                  
+
                                                                       //                 /// Employee
                                                                       //               ],
                                                                       //             ),
@@ -3178,10 +3180,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   ),
                                                   SizedBox(height: 10),
                                                   SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.3,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.3,
                                                     child: Container(
                                                       height: 150,
                                                       width:
@@ -3192,9 +3195,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey
-                                                                .withOpacity(.3)),
+                                                                .withOpacity(
+                                                                    .3)),
                                                       ),
-                                                      constraints: BoxConstraints(
+                                                      constraints:
+                                                          BoxConstraints(
                                                         maxWidth: 1100,
                                                       ),
                                                       child:
@@ -3223,7 +3228,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     SizedBox(
                                                                       width: 10,
                                                                     ),
-                                                                    Text('Name'),
+                                                                    Text(
+                                                                        'Name'),
                                                                     Dimens
                                                                         .boxWidth20,
                                                                     Text(
@@ -3256,31 +3262,127 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                     ),
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
-                  
+
                                                   ///Permit History
                                                   Container(
                                                     margin: Dimens.edgeInsets20,
-                                                    constraints: BoxConstraints(
-                                                      maxHeight: 100,
-                                                      minHeight: 100,
+                                                    height: 300,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .lightGreyColorWithOpacity35,
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .appBlueBackgroundColor,
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    child: //
-                                                        HistoryTableWidgetWeb(
-                                                      historyList:
-                                                          controller.historyList,
+                                                    child: Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                "Permit History ",
+                                                                style: Styles
+                                                                    .blue700,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Divider(
+                                                          color: ColorValues
+                                                              .greyLightColour,
+                                                        ),
+                                                        Expanded(
+                                                          child:
+                                                              ScrollableTableView(
+                                                            columns: [
+                                                              "Time Stamp",
+                                                              "Posted By",
+                                                              "Comment",
+                                                              "Location",
+                                                              "Status",
+                                                            ].map((column) {
+                                                              return TableViewColumn(
+                                                                label: column,
+                                                                minWidth:
+                                                                    Get.width *
+                                                                        0.15,
+                                                              );
+                                                            }).toList(),
+                                                            rows: [
+                                                              ...List.generate(
+                                                                controller
+                                                                        .historyList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) {
+                                                                  var getHistoryListDetails =
+                                                                      controller
+                                                                              .historyList?[
+                                                                          index];
+                                                                  return [
+                                                                    '${getHistoryListDetails?.createdAt}',
+                                                                    '${getHistoryListDetails?.createdByName ?? ''}',
+                                                                    '${getHistoryListDetails?.comment ?? ''}',
+                                                                    '--',
+                                                                    '${getHistoryListDetails?.status_name ?? ''}',
+                                                                  ];
+                                                                },
+                                                              ),
+                                                              // [
+                                                            ].map((record) {
+                                                              return TableViewRow(
+                                                                height: 90,
+                                                                cells: record
+                                                                    .map(
+                                                                        (value) {
+                                                                  return TableViewCell(
+                                                                    child: Text(
+                                                                        value),
+                                                                  );
+                                                                }).toList(),
+                                                              );
+                                                            }).toList(),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                  
+                                                  // Container(
+                                                  //   margin: Dimens.edgeInsets20,
+                                                  //   constraints: BoxConstraints(
+                                                  //     maxHeight: 100,
+                                                  //     minHeight: 100,
+                                                  //   ),
+                                                  //   child: //
+                                                  //       HistoryTableWidgetWeb(
+                                                  //     historyList:
+                                                  //         controller.historyList,
+                                                  //   ),
+                                                  // ),
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),
                                                   Row(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         width: 100,
@@ -3294,31 +3396,31 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               title:
                                                                   'Requested By: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Issued By: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Approved By: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Closed By: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Cancelled By: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                         ],
                                                       ),
@@ -3364,10 +3466,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             ),
                                                           ),
                                                           SizedBox(
-                                                            height: 15,
-                                                          ),
-                                                          Text(
-                                                            '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
+                                                            width: 100,
+                                                            child: Text(
+                                                              '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
+                                                            ),
                                                           ),
                                                           SizedBox(
                                                             height: 5,
@@ -3386,31 +3488,31 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Date / Time: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                         ],
                                                       ),
@@ -3481,37 +3583,37 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               title:
                                                                   'Signature: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Signature: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Signature: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Signature: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                           CustomRichText(
                                                               title:
                                                                   'Signature: '),
                                                           SizedBox(
-                                                            height: 5,
+                                                            height: 6,
                                                           ),
                                                         ],
                                                       ),
                                                     ],
                                                   ),
-                  
+
                                                   SizedBox(
                                                     height: 90,
                                                   ),
@@ -3578,19 +3680,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               SizedBox(
                 width: 10,
               ),
-              Container(
-                  height: 45,
-                  child: CustomElevatedButton(
-                    backgroundColor: Colors.red,
-                    text: "Cancel",
-                    onPressed: () {
-                      // controller
-                      //     .createNewPermit();
-                    },
-                  )),
-              SizedBox(
-                width: 10,
-              ),
+              // Container(
+              //     height: 45,
+              //     child: CustomElevatedButton(
+              //       backgroundColor: Colors.red,
+              //       text: "Cancel",
+              //       onPressed: () {
+              //         // controller
+              //         //     .createNewPermit();
+              //       },
+              //     )),
+              // SizedBox(
+              //   width: 10,
+              // ),
 
               ////Issue Button
               varUserAccessModel.value.access_list!
@@ -3598,6 +3700,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               .length >
                           0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                      ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 122
+                      ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 124
+
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -3623,6 +3730,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               .length >
                           0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus == 123
+                      ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 133
+
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -3634,7 +3744,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           //     .createNewPermit();
                           Get.dialog(PermitApprovedDialog(
                               permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
+                              ptwStatus:
+                                  '${controller.viewPermitDetailsModel.value?.ptwStatus}'));
                         },
                       ))
                   : Container(),
@@ -3675,6 +3787,73 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               SizedBox(
                 width: 10,
               ),
+
+              ///Permit cancel by Issuer
+              varUserAccessModel.value.access_list!
+                              .where((e) => e.feature_id == 3 && e.issue == 1)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
+              ?Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appRedColor,
+                        text: "Cancel",
+                        icon: Icons.close,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitCancelByIssuerDialog(
+                              permitId:
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                        },
+                      ))
+                      :
+                      Container(),
+
+              /// Permit Cancel By approver & Permit Request
+              varUserAccessModel.value.access_list!
+                              .where((e) => e.feature_id == 3 && e.approve == 1)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 123
+                      ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 130
+
+              ?Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appRedColor,
+                        text: "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ? 'Cancel By Approver' : 'Cancel Request'}",
+                        icon: Icons.close,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitCancelByApproverDialog(
+                              permitId:
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
+                              ptwStatus: '${controller.viewPermitDetailsModel.value?.ptwStatus}',));
+                        },
+                      ))
+                      :
+                      Container(),
+              // varUserAccessModel.value.access_list!
+              //                 .where((e) => e.feature_id == 3 && e.approve == 1)
+              //                 .length >
+              //             0 &&
+              //         controller.viewPermitDetailsModel.value?.ptwStatus == 133
+              // ?TableActionButton(
+              //   color: ColorValues.appDarkBlueColor,
+              //   icon: Icons.expand_outlined,
+              //   label: 'Extend Approve',
+              //   onPress: () {
+                  
+              //     // Get.dialog(PermitExtendDialog(
+              //     //     permitId:
+              //     //         _newPermitList[0]));
+              //   },
+              // )
+              // : Container()
             ],
           ),
         ));

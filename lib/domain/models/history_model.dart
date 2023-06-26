@@ -22,6 +22,7 @@ class HistoryModel {
     this.createdByName,
     this.createdAt,
     this.status,
+    this.status_name,
     this.latitude,
     this.longitude,
   });
@@ -36,6 +37,7 @@ class HistoryModel {
   String? createdByName;
   DateTime? createdAt;
   int? status;
+  String? status_name;
   dynamic latitude;
   dynamic longitude;
 
@@ -57,6 +59,8 @@ class HistoryModel {
             ? DateTime.now()
             : DateTime.parse(json['created_at'] as String),
         status: json["status"] == null ? 0 : json["status"],
+        status_name: json["status_name"] == null ? 0 : json["status_name"],
+
         latitude: json["latitude"] == null ? '' : json["latitude"],
         longitude: json["longitude"] == null ? '' : json["longitude"],
       );
@@ -72,6 +76,7 @@ class HistoryModel {
         "created_by_name": createdByNameValues.reverse[createdByName],
         "created_at": createdAt?.toIso8601String(),
         "status": status,
+        "status_name": status_name,
         "latitude": latitude,
         "longitude": longitude,
       };

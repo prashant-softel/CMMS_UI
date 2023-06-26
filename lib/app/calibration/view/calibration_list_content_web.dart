@@ -331,26 +331,41 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     );
                                                   },
                                                 ),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  label: 'View',
-                                                  onPress: () {
-                                                    int calibrationId =
-                                                        calibrationListListDetails
-                                                                ?.calibration_id ??
-                                                            0;
-                                                    if (calibrationId != null) {
-                                                      Get.toNamed(
-                                                          Routes
-                                                              .calibrationViewScreen,
-                                                          arguments:
-                                                              calibrationId);
-                                                    }
-                                                  },
-                                                ),
+                                                controller.calibrationList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  "${e?.asset_id}" ==
+                                                                  calibrationListListDetails!
+                                                                      .asset_id,
+                                                              orElse: () =>
+                                                                  CalibrationListModel(
+                                                                      asset_id:
+                                                                          000),
+                                                            )
+                                                            ?.statusID ==
+                                                        0
+                                                    ? Container()
+                                                    : TableActionButton(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        label: 'View',
+                                                        onPress: () {
+                                                          int calibrationId =
+                                                              calibrationListListDetails
+                                                                      ?.calibration_id ??
+                                                                  0;
+                                                          if (calibrationId !=
+                                                              null) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .calibrationViewScreen,
+                                                                arguments:
+                                                                    calibrationId);
+                                                          }
+                                                        },
+                                                      ),
                                                 // TableActionButton(
                                                 //   color: ColorValues
                                                 //       .appDarkBlueColor,

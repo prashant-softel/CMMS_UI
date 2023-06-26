@@ -147,7 +147,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 // textController:
                                 //     controller.categoryTextController,
                                 textController: controller
-                                    .warrantyClaimListDateTimeCtrlrWeb,
+                                    .incidentReportListDateTimeCtrlrWeb,
                       
                                 onTap: () {
                                   pickDateTime_web(context);
@@ -575,7 +575,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
 
   /// For WC List Screen Date Time
   Future pickDateTime_web(BuildContext context) async {
-    var dateTime = controller.selectedwarrantyClaimListDateTimeWeb.value;
+    var dateTime = controller.selectedIncidentReportListDateTimeWeb.value;
     final date = await pickDate_web(context);
     if (date == null) {
       return;
@@ -593,23 +593,23 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
       time.hour,
       time.minute,
     );
-    controller.selectedwarrantyClaimListDateTimeWeb.value = dateTime;
-    controller.warrantyClaimListDateTimeCtrlrWeb
+    controller.selectedIncidentReportListDateTimeWeb.value = dateTime;
+    controller.incidentReportListDateTimeCtrlrWeb
       ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: controller.warrantyClaimListDateTimeCtrlrWeb.text.length,
+          offset: controller.incidentReportListDateTimeCtrlrWeb.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
     print(
-        'FailureDateTime:${controller.warrantyClaimListDateTimeCtrlrWeb.text}');
-    controller.warrantyClaimListDateTimeCtrlrWebBuffer =
+        'FailureDateTime:${controller.incidentReportListDateTimeCtrlrWeb.text}');
+    controller.incidentReportListDateTimeCtrlrWebBuffer =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
   }
 
   Future<DateTime?> pickDate_web(BuildContext context) async {
-    DateTime? dateTime = controller.selectedwarrantyClaimListDateTimeWeb.value;
+    DateTime? dateTime = controller.selectedIncidentReportListDateTimeWeb.value;
     //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -624,7 +624,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
   }
 
   Future<TimeOfDay?> pickTime_web(BuildContext context) async {
-    DateTime dateTime = controller.selectedwarrantyClaimListDateTimeWeb.value;
+    DateTime dateTime = controller.selectedIncidentReportListDateTimeWeb.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,

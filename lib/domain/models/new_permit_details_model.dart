@@ -36,6 +36,7 @@ class NewPermitDetailModel {
   String? closedByName;
   String? cancelRequestByName;
   String? cancel_at;
+  String? current_status_short;
   List<ListSafetyQuestion>? safety_question_list;
   List<ListEmployees?>? employee_list;
   List<ListIsolation?>? lstIsolation;
@@ -85,6 +86,7 @@ class NewPermitDetailModel {
       this.closedByName,
       this.cancelRequestByName,
       this.cancel_at,
+      this.current_status_short,
       this.safety_question_list,
       this.employee_list,
       this.lstIsolation,
@@ -132,6 +134,7 @@ class NewPermitDetailModel {
         closedByName: json['closedByName'],
         cancelRequestByName: json['cancelRequestByName'] ?? '',
         cancel_at: json['cancel_at'] ?? '',
+        current_status_short: json['current_status_short'],
         safety_question_list:json["safety_question_list"]!=null? List<ListSafetyQuestion>.from(
             json["safety_question_list"]
                 .map((x) => ListSafetyQuestion.fromJson(x))):[],
@@ -189,6 +192,7 @@ class NewPermitDetailModel {
         "closedByName": closedByName,
         "cancelRequestByName": cancelRequestByName,
         "cancel_at": cancel_at,
+        "current_status_short": current_status_short,
         "safety_question_list": List<dynamic>.from(safety_question_list!.map((x) => x)),
         "employee_list": List<dynamic>.from(employee_list!.map((x) => x)),
         "lstIsolation": List<dynamic>.from(lstIsolation!.map((x) => x)),
