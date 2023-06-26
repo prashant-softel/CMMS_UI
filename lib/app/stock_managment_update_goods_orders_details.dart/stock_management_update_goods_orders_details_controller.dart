@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import '../home/home_controller.dart';
@@ -25,6 +26,17 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   Rx<String> selectedBusinessType = ''.obs;
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
+  //
+  /// date picker
+  bool openPurchaseDatePicker = false;
+  bool openChallanDatePicker = false;
+  bool openPODatePicker = false;
+  bool openReceivedPicker = false;
+
+  var purchaseDateTc = TextEditingController();
+  var challanDateTc = TextEditingController();
+  var poDateDateTc = TextEditingController();
+  var receivedDateTc = TextEditingController();
 
   ///
   @override
