@@ -14,6 +14,7 @@ import '../../domain/models/calibration_list_model.dart';
 import '../home/home_controller.dart';
 import '../navigators/app_pages.dart';
 import 'calibration_list_presenter.dart';
+import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 
 class CalibrationListController extends GetxController {
   ///
@@ -42,6 +43,13 @@ class CalibrationListController extends GetxController {
     rowsPerPage: 10,
   );
   var commentCtrlr = TextEditingController();
+
+  var isToggleOn = false.obs;
+  final isSuccess = false.obs;
+
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
 
   ///
   @override
@@ -117,28 +125,34 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void requestCalibration() async {
+  void requestCalibration(int calibrationId) async {
     String _nextDueDate = nextDueDateController.text.trim();
     // String _previousDate = previousDateController.text.trim();
     RequestCalibrationModel requestCalibrationModel = RequestCalibrationModel(
         vendorId: selectedvenderId,
         nextCalibrationDate: _nextDueDate,
-        assetId: 27);
+        assetId: calibrationId);
 
     var requestCalibrationJsonString = requestCalibrationModel.toJson();
 
-    await calibrationListPresenter.requestCalibration(
+    final response = await calibrationListPresenter.requestCalibration(
       requestCalibration: requestCalibrationJsonString,
       isLoading: true,
     );
+    if (response == true) {
+      getCalibrationList(facilityId, true);
+    }
   }
 
   Future<void> startCalibration(String? calibrationId) async {
     {
-      await calibrationListPresenter.startCalibration(
+      final response = await calibrationListPresenter.startCalibration(
         calibrationId,
         isLoading: true,
       );
+      if (response == true) {
+        getCalibrationList(facilityId, true);
+      }
     }
   }
 
@@ -154,7 +168,7 @@ class CalibrationListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to start the Calibration for',
+                text: 'Are you sure you want to start the calibration for',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
@@ -194,7 +208,7 @@ class CalibrationListController extends GetxController {
     );
   }
 
-  rejectCalibration1(calibrationId) async {
+  rejectRequestCalibration(calibrationId) async {
     {
       String _comment = commentCtrlr.text.trim();
 
@@ -202,11 +216,57 @@ class CalibrationListController extends GetxController {
           CommentModel(id: int.tryParse(calibrationId), comment: _comment);
 
       var rejectCalibrationtoJsonString = commentCalibrationModel.toJson();
-      print({"rejectCalibrationJsonString", rejectCalibrationtoJsonString});
-      final response = await calibrationListPresenter.rejectCalibration(
+      // print({"rejectCalibrationJsonString", rejectCalibrationtoJsonString});
+      final response = await calibrationListPresenter.rejectRequestCalibration(
         rejectCalibrationtoJsonString: rejectCalibrationtoJsonString,
         isLoading: true,
       );
+      if (response == true) {
+        getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  approveRequestCalibration(calibrationId) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentCalibrationModel =
+          CommentModel(id: int.tryParse(calibrationId), comment: _comment);
+
+      var approveCalibrationtoJsonString = commentCalibrationModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      final response = await calibrationListPresenter.approveRequestCalibration(
+        approveCalibrationtoJsonString: approveCalibrationtoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  completeCalibration(calibrationId) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      // CommentModel commentCalibrationModel =
+      //     CommentModel(id: int.tryParse(calibrationId), comment: _comment);
+
+      var completeCalibrationtoJsonString = {
+        "calibration_id": calibrationId,
+        "comment": _comment,
+        "is_damaged": isToggleOn.value
+      };
+      // commentCalibrationModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      final response = await calibrationListPresenter.completeCalibration(
+        completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        getCalibrationList(facilityId, true);
+      }
     }
   }
 
@@ -214,76 +274,103 @@ class CalibrationListController extends GetxController {
       {String? calibrationId, String? calibrationName, int? type}) {
     Get.dialog(
       AlertDialog(
-        content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                type == 1 ? "Reject" : "Approve",
-                style: TextStyle(
-                  color: ColorValues.blackColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Divider(
-                color: ColorValues.appDarkGreyColor,
-              ),
-              Text(
-                "${calibrationName}",
-                style: TextStyle(
-                  color: ColorValues.appDarkBlueColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Dimens.boxHeight10,
-              Row(
-                children: [
-                  Text(
-                    "Remarks:",
-                    style: Styles.blackBold15,
-                  ),
-                  Dimens.boxWidth10,
-                  Container(
-                    width: (Get.width * .2),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: const Offset(
-                            5.0,
-                            5.0,
-                          ),
-                          blurRadius: 5.0,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: ColorValues.whiteColor,
-                          offset: const Offset(0.0, 0.0),
-                          blurRadius: 0.0,
-                          spreadRadius: 0.0,
-                        ),
-                      ],
-                      color: ColorValues.whiteColor,
-                      borderRadius: BorderRadius.circular(5),
+        content: Obx(
+          () => Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    type == 1
+                        ? "Reject Requested Calibration"
+                        : type == 2
+                            ? "Approve Requested Calibration"
+                            : "Complete Calibration",
+                    style: TextStyle(
+                      color: ColorValues.blackColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: TextField(
-                      controller: commentCtrlr,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 5,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                        fillColor: ColorValues.whiteColor,
-                        filled: true,
-                        contentPadding: Dimens.edgeInsets05_10,
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
+                  ),
+                ),
+                Divider(
+                  color: ColorValues.appDarkGreyColor,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Asset Name: ",
+                      style: Styles.black17,
+                    ),
+                    Text(
+                      "${calibrationName}",
+                      style: Styles.blue17,
+                    ),
+                  ],
+                ),
+                Dimens.boxHeight10,
+                Text(
+                  "Remarks:",
+                  style: Styles.blackBold15,
+                ),
+                Dimens.boxWidth10,
+                Container(
+                  width: (Get.width * .2),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: const Offset(
+                          5.0,
+                          5.0,
+                        ),
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
                       ),
+                      BoxShadow(
+                        color: ColorValues.whiteColor,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ),
+                    ],
+                    color: ColorValues.whiteColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: TextField(
+                    controller: commentCtrlr,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    autofocus: false,
+                    decoration: InputDecoration(
+                      fillColor: ColorValues.whiteColor,
+                      filled: true,
+                      contentPadding: Dimens.edgeInsets05_10,
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
                     ),
                   ),
-                ],
-              ),
-            ]),
+                ),
+                type == 3
+                    ? Row(
+                        children: [
+                          Text(
+                            "Any Damage: ",
+                            style: Styles.black17,
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: CustomSwitchTroggle(
+                                value: isToggleOn.value,
+                                onChanged: (value) {
+                                  toggle();
+                                }),
+                          ),
+                        ],
+                      )
+                    : Dimens.box0
+              ]),
+        ),
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -317,8 +404,10 @@ class CalibrationListController extends GetxController {
                     //   rejectCalibrationJsonString
                     // });
                     type == 1
-                        ? rejectCalibration1(calibrationId)
-                        : rejectCalibration1(calibrationId);
+                        ? rejectRequestCalibration(calibrationId)
+                        : type == 2
+                            ? approveRequestCalibration(calibrationId)
+                            : completeCalibration(calibrationId);
                   },
                 ),
               ),

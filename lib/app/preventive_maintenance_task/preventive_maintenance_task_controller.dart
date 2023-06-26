@@ -21,7 +21,9 @@ class PreventiveMaintenanceTaskController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<PmTaskListModel?>? pmTaskList = <PmTaskListModel?>[].obs;
+  RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
+  RxList<PmTaskListModel?> filteredData = <PmTaskListModel>[].obs;
+
   PmTaskListModel? pmTaskListModel;
   RxList<String> pmTaskListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
@@ -48,9 +50,22 @@ class PreventiveMaintenanceTaskController extends GetxController {
     super.onInit();
   }
 
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      pmTaskList.value = filteredData;
+      return;
+    }
+
+    pmTaskList.value = filteredData
+        .where((item) => item!.maintenance_order_number!
+            .toLowerCase()
+            .contains(keyword.toLowerCase()))
+        .toList();
+  }
+
   Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
-    pmTaskList?.value = <PmTaskListModel>[];
+    pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await preventiveMaintenanceTaskPresenter.getPmTaskList(
         facilityId: facilityId,
@@ -58,14 +73,16 @@ class PreventiveMaintenanceTaskController extends GetxController {
         startDate: startDate,
         endDate: endDate);
     if (_pmTaskList != null) {
-      pmTaskList!.value = _pmTaskList;
+      pmTaskList.value = _pmTaskList;
+      filteredData.value = pmTaskList.value;
+
       paginationController = PaginationController(
-        rowCount: pmTaskList?.length ?? 0,
+        rowCount: filteredData.length,
         rowsPerPage: 10,
       );
 
-      if (pmTaskList != null && pmTaskList!.isNotEmpty) {
-        pmTaskListModel = pmTaskList![0];
+      if (filteredData != null && filteredData.isNotEmpty) {
+        pmTaskListModel = filteredData[0];
         var calibrationListJson = pmTaskListModel?.toJson();
         pmTaskListTableColumns.value = <String>[];
         for (var key in calibrationListJson?.keys.toList() ?? []) {

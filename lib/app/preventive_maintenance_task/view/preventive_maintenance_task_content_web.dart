@@ -200,6 +200,7 @@ class PreventiveMaintenanceTaskContentWeb
                               hintText: 'search'.tr,
                               hintStyle: Styles.grey12,
                             ),
+                            onChanged: (value) => controller.search(value),
                           ),
                         ),
                       ],
@@ -224,7 +225,7 @@ class PreventiveMaintenanceTaskContentWeb
                             ),
                           ],
                         ),
-                        child: controller.pmTaskList!.isEmpty
+                        child: controller.pmTaskList.isEmpty
                             ? ScrollableTableView(
                                 columns: [
                                   "Order Number",
@@ -243,7 +244,7 @@ class PreventiveMaintenanceTaskContentWeb
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
-                                    controller.pmTaskList?.length ?? 0,
+                                    controller.pmTaskList.length,
                                     (index) {
                                       return [
                                         '',
@@ -269,8 +270,8 @@ class PreventiveMaintenanceTaskContentWeb
                                 }).toList(),
                               )
                             : ScrollableTableView(
-                                paginationController:
-                                    controller.paginationController,
+                                // paginationController:
+                                //     controller.paginationController,
                                 columns: [
                                   "Order Number",
                                   "Due Date",
@@ -289,10 +290,10 @@ class PreventiveMaintenanceTaskContentWeb
                                 rows: //
                                     [
                                   ...List.generate(
-                                    controller.pmTaskList?.length ?? 0,
+                                    controller.pmTaskList.length,
                                     (index) {
                                       var pmtaskListDetails =
-                                          controller.pmTaskList?[index];
+                                          controller.pmTaskList[index];
                                       return [
                                         '${pmtaskListDetails?.maintenance_order_number}',
                                         '${pmtaskListDetails?.schedule_date}',
@@ -320,7 +321,7 @@ class PreventiveMaintenanceTaskContentWeb
                                                   label: 'View',
                                                   onPress: () {
                                                     controller.selectedItem = controller
-                                                        .pmTaskList!
+                                                        .pmTaskList
                                                         .firstWhere((element) =>
                                                             "${element?.maintenance_order_number}" ==
                                                             record[0]);
@@ -359,7 +360,7 @@ class PreventiveMaintenanceTaskContentWeb
                                                   label: 'Execute',
                                                   onPress: () {
                                                     controller.selectedItem = controller
-                                                        .pmTaskList!
+                                                        .pmTaskList
                                                         .firstWhere((element) =>
                                                             "${element?.maintenance_order_number}" ==
                                                             record[0]);

@@ -367,8 +367,8 @@ class DataRepository extends DomainRepository {
     );
   }
 
-///Incident Report List
-   @override
+  ///Incident Report List
+  @override
   Future<ResponseModel> getIncidentReportList({
     int? facility_id,
     String? start_date,
@@ -434,6 +434,21 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getGoodsOrdersList({
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getGoodsOrdersList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
 
   Future<ResponseModel> getNewPermitList({
     required String auth,
@@ -1112,10 +1127,7 @@ class DataRepository extends DomainRepository {
     int? facility_id,
   }) async =>
       await connectHelper.getTypePermitList(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id
-      );
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1217,15 +1229,39 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> rejectCalibration({
+  Future<ResponseModel> rejectRequestCalibration({
     auth,
     bool? isLoading,
     rejectCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.rejectCalibration(
+    var response = await connectHelper.rejectRequestCalibration(
         auth: auth,
         isLoading: isLoading,
         rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approveRequestCalibration({
+    auth,
+    bool? isLoading,
+    approveCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.approveRequestCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> completeCalibration({
+    auth,
+    bool? isLoading,
+    completeCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.completeCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        completeCalibrationtoJsonString: completeCalibrationtoJsonString);
     return response;
   }
 
@@ -1684,6 +1720,41 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getDesignationList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getDesignationList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> deleteBusinessList({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessList(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
+
+  Future<ResponseModel> updateBusinesslist({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinesslist(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
 
 //end
 }

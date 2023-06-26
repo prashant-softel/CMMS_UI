@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../theme/color_values.dart';
@@ -15,6 +16,8 @@ class LoginCustomTextfield extends GetView {
   Function(dynamic value)? onfieldSubmitted;
   int? maxLine;
   bool enabled;
+  TextInputType? keyboardType;
+  List<TextInputFormatter>? inputFormatters;
 
   LoginCustomTextfield(
       {Key? key,
@@ -27,11 +30,14 @@ class LoginCustomTextfield extends GetView {
       this.onfieldSubmitted,
       this.maxLine = 1,
       this.enabled = true,
+      this.keyboardType,
+      this.inputFormatters,
       this.ontap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      // keyboardType:keyboardType,
       enabled: enabled,
       onFieldSubmitted: onfieldSubmitted,
       onTap: ontap,
@@ -39,7 +45,8 @@ class LoginCustomTextfield extends GetView {
       onChanged: onChanged,
       controller: textController,
       obscureText: obscureText,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         fillColor: ColorValues.whiteColor,
         floatingLabelBehavior: FloatingLabelBehavior.never,

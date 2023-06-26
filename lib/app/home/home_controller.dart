@@ -83,6 +83,11 @@ class HomeController extends GetxController {
   int get facilityId1 => _facilityId.value;
 
   Rx<int> selectedIndex = 0.obs;
+  var isExpanded = false.obs;
+
+  void toggleExpansion() {
+    isExpanded.toggle();
+  }
 
   ///
 

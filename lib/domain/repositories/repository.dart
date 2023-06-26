@@ -42,6 +42,7 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -62,6 +63,8 @@ import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
+import '../models/designation_model.dart';
+import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
@@ -528,6 +531,46 @@ class Repository {
     } catch (error) {
       await _deviceRepository.generateToken();
       print(error.toString());
+    }
+  }
+
+  Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getGoodsOrdersList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      // print('getGoodsOrdersList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonGoodsOrdersListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GoodsOrdersListModel> _goodOrderModelList =
+            jsonGoodsOrdersListModels
+                .map<GoodsOrdersListModel>((m) =>
+                    GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _goodOrderModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 
@@ -1235,7 +1278,7 @@ class Repository {
   }
 
   ///Incident Report List
-   Future<List<IncidentReportListModel>> getIncidentReportList({
+  Future<List<IncidentReportListModel>> getIncidentReportList({
     required int? facility_id,
     String? start_date,
     required String end_date,
@@ -1267,7 +1310,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
@@ -1704,16 +1746,11 @@ class Repository {
   }
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async {
+      bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getTypePermitList(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id
-      );
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
 
       if (!res.hasError) {
         final jsonTypePermitModels = jsonDecode(res.data);
@@ -2886,7 +2923,7 @@ class Repository {
                     CalibrationListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _CalibrationListModelList;
+        return _CalibrationListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
         return [];
@@ -2898,7 +2935,7 @@ class Repository {
     }
   }
 
-  Future<void> requestCalibration({bool? isLoading, requestCalibration}) async {
+  Future<bool> requestCalibration({bool? isLoading, requestCalibration}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -2906,46 +2943,93 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           requestCalibration: requestCalibration);
-      //  print({"res.data", res.data});
+      print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
-        // return true;
+        return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
       }
       // return true;
     } catch (error) {
       log(error.toString());
-      // return false;
+      return false;
     }
   }
 
-  Future<void> rejectCalibration(
+  Future<bool> rejectRequestCalibration(
       {bool? isLoading, rejectCalibrationtoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectCalibration(
+      final res = await _dataRepository.rejectRequestCalibration(
           auth: auth,
           isLoading: isLoading,
-          rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+          rejectCalibrationtoJsonString:
+              json.encode(rejectCalibrationtoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
-        // return true;
+        return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
       }
-      // return true;
     } catch (error) {
       log(error.toString());
-      // return false;
+      return false;
+    }
+  }
+
+  Future<bool> approveRequestCalibration(
+      {bool? isLoading, approveCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveRequestCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          approveCalibrationtoJsonString:
+              json.encode(approveCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> completeCalibration(
+      {bool? isLoading, completeCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.completeCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          completeCalibrationtoJsonString: completeCalibrationtoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 
@@ -3530,6 +3614,38 @@ class Repository {
     }
   }
 
+  Future<List<DocumentManagerModel?>?> getDocumentManager(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonUserListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<DocumentManagerModel> _UserListModelList =
+            jsonUserListModelModels
+                .map<DocumentManagerModel>((m) =>
+                    DocumentManagerModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _UserListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<UserDetailsModel?> getUserDetails(
     int? userId,
     bool? isLoading,
@@ -3945,7 +4061,7 @@ class Repository {
     }
   }
 
-  Future<void> startCalibration(Object calibrationId, bool isLoading) async {
+  Future<bool> startCalibration(Object calibrationId, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.startCalibration(
@@ -3955,12 +4071,15 @@ class Repository {
       );
 
       if (!res.hasError) {
+        return true;
         //get delete response back from API
       } else {
         Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        return false;
       }
     } catch (error) {
       print(error.toString());
+      return false;
     }
   }
 
@@ -4071,6 +4190,80 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<List<DesignationModel?>?> getDesignationList(
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getDesignationList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonRoleModels = jsonDecode(res.data);
+        final List<DesignationModel> _roleModelList = jsonRoleModels
+            .map<DesignationModel>(
+              (m) => DesignationModel.fromJson(Map<String, dynamic>.from(m)),
+        )
+            .toList();
+
+        return _roleModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getRoleList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<void>  deleteBusinessList(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessList(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateBusinesslist({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinesslist(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 //end

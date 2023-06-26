@@ -5,12 +5,20 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class CalibrationTabWidget extends StatelessWidget {
-  const CalibrationTabWidget({super.key});
+class CalibrationTabWidget extends StatefulWidget {
+  CalibrationTabWidget({super.key});
+
+  @override
+  State<CalibrationTabWidget> createState() => _CalibrationTabWidgetState();
+}
+
+class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
+  final AddInventoryController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => GetBuilder<AddInventoryController>(
@@ -76,6 +84,11 @@ class CalibrationTabWidget extends StatelessWidget {
                                           Container(
                                             width: 150,
                                             child: TextField(
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
                                               controller: controller
                                                   .calibrationRemaingCtrlr,
                                               decoration: InputDecoration(
@@ -111,7 +124,6 @@ class CalibrationTabWidget extends StatelessWidget {
                                   children: [
                                     CustomTextField(
                                       numberTextField: true,
-                                      // readOnly: true,
                                       onTap: () {
                                         controller
                                                 .openLastCalibrationDatePicker =
@@ -120,7 +132,7 @@ class CalibrationTabWidget extends StatelessWidget {
                                         controller.update(['calibration_tab']);
                                       },
                                       textController:
-                                          controller.calibrationRemainderInTc,
+                                          controller.lastCalibrationDateTc,
                                       label: 'Last calibration date: *',
                                     ),
                                     Container(

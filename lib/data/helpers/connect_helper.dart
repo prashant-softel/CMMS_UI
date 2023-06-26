@@ -530,6 +530,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getGoodsOrdersList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'GO/GetGOList?plantID=$facility_id&fromDate=2001-01-01&toDate=2023-05-14',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,
@@ -1805,15 +1828,53 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> rejectCalibration({
+  Future<ResponseModel> rejectRequestCalibration({
     required String auth,
     bool? isLoading,
     required rejectCalibrationtoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/RejectCalibration',
+      'Calibration/RejectRequestCalibration',
       Request.put,
       rejectCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveRequestCalibration({
+    required String auth,
+    bool? isLoading,
+    required approveCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveRequestCalibration',
+      Request.put,
+      approveCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> completeCalibration({
+    required String auth,
+    bool? isLoading,
+    required completeCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveRequestCalibration',
+      Request.put,
+      completeCalibrationtoJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -2554,4 +2615,59 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> getDesignationList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'RoleAccess/GetDesignationList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+
+  Future<ResponseModel> deleteBusinessList({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBusiness?id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> updateBusinesslist({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBusiness',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 }

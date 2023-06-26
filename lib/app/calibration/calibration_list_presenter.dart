@@ -25,7 +25,7 @@ class CalibrationListPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<void> requestCalibration({
+  Future<bool> requestCalibration({
     requestCalibration,
     required bool isLoading,
   }) async {
@@ -35,17 +35,38 @@ class CalibrationListPresenter {
     );
   }
 
-  Future<void> rejectCalibration({
+  Future<bool> rejectRequestCalibration({
     rejectCalibrationtoJsonString,
     required bool isLoading,
   }) async {
-    return calibrationListUsecase.rejectCalibration(
+    return calibrationListUsecase.rejectRequestCalibration(
       rejectCalibrationtoJsonString: rejectCalibrationtoJsonString,
       isLoading: isLoading,
     );
   }
 
-  startCalibration(String? calibrationId, {required bool isLoading}) async =>
+  Future<bool> approveRequestCalibration({
+    approveCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.approveRequestCalibration(
+      approveCalibrationtoJsonString: approveCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> completeCalibration({
+    completeCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.completeCalibration(
+      completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> startCalibration(String? calibrationId,
+          {required bool isLoading}) async =>
       await calibrationListUsecase.startCalibration(
         calibrationId: calibrationId ?? 0,
         isLoading: isLoading,

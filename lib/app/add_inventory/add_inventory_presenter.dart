@@ -1,4 +1,3 @@
-import 'package:cmms/app/add_inventory/view/warranty_tab_widget.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
@@ -25,13 +24,8 @@ class AddInventoryPresenter {
   }
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    {required int facility_id}
-  ) async =>
-      await addInventoryUsecase.getTypePermitList(
-        true,
-        facility_id
-
-        );
+          {required int facility_id}) async =>
+      await addInventoryUsecase.getTypePermitList(true, facility_id);
 
   Future<AddInventoryDetailsModel?> getAddInventoryDetail(
       {bool? isLoading, required int id}) async {

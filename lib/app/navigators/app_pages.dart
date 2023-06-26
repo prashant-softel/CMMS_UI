@@ -1,7 +1,8 @@
 // coverage:ignore-file
 
 import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
-import 'package:cmms/app/add_inventory/add_inventory_ui.dart';
+import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
+
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
@@ -20,6 +21,14 @@ import 'package:cmms/app/incident_report_list.dart/incident_report_list_screen.d
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
+import 'package:cmms/app/mrs_approve/mrs_approve_binding.dart';
+import 'package:cmms/app/mrs_approve/view/mrs_approve_screen.dart';
+import 'package:cmms/app/mrs_issue/mrs_issue_binding.dart';
+import 'package:cmms/app/mrs_issue/view/mrs_issue_screen.dart';
+import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
+import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
+import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
+import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
@@ -84,6 +93,8 @@ import '../calibration_view/view/calibration_view_screen.dart';
 import '../country_list/country_list_binding.dart';
 import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
+import '../document_manager/document_manager_binding.dart';
+import '../document_manager/view/document_manager_screen.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../facility/facility_binding.dart';
@@ -136,6 +147,8 @@ import '../Asset_Master/asset_master_Binding.dart';
 import '../Asset_Master/view/asset_master_screen.dart';
 import '../add_asset_master/view/add_asset_master_screen.dart';
 import '../add_asset_master/add_asset_master_binding.dart';
+import '../designation_List/view/designation_list_screen.dart';
+import '../designation_List/designation_list_binding.dart';
 
 // coverage:ignore-file
 
@@ -508,6 +521,37 @@ class AppPages {
       name: _Paths.incidentReportListWeb,
       page: IncidentReportListScreen.new,
       binding: IncidentReportListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsViewScreen,
+      page: MrsViewScreen.new,
+      binding: MrsViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsApprovalScreen,
+      page: MrsApproveScreen.new,
+      binding: MrsApproveBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsIssueScreen,
+      page: MrsIssueScreen.new,
+      binding: MrsIssueBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.mrsReturnScreen,
+      page: MrsReturnScreen.new,
+      binding: MrsReturnBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.documentManager,
+      page: DocumentManagerScreen.new,
+      binding: DocumentManagerBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.designationScreen,
+      page: DesignationListScreen.new,
+      binding: DesignationListBinding(),
     ),
   ];
 }

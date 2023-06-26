@@ -13,6 +13,6 @@ abstract class RouteManagement {
   }
 
   static void goOffAllLogin() {
-    Get.offAllNamed<void>(Routes.login);
+    Get.offAllNamed(Routes.login);
   }
 }

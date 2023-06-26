@@ -1,6 +1,7 @@
 import 'package:cmms/app/add_user/add_user_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
@@ -304,6 +305,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
+                                          obscureText: true,
                                           ishint: 'Enter Password',
                                           textController:
                                               controller.passwordCtrlr,
@@ -452,6 +454,11 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                                           ishint: 'Enter Mobile Number',
                                           textController:
                                               controller.mobileNoCtrlr,
@@ -749,6 +756,11 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                                           ishint: 'Enter Landline Number',
                                           textController:
                                               controller.landlineCtrlr,
@@ -811,6 +823,10 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                           (MediaQuery.of(context).size.width *
                                               .2),
                                       child: LoginCustomTextfield(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
                                         ishint: 'Enter Zip Code',
                                         textController: controller.zipcodeCtrlr,
                                       )),
@@ -1571,7 +1587,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            controller.userId == null
+                            controller.userId == 0
                                 ? Container(
                                     height: 35,
                                     child: CustomElevatedButton(
@@ -1632,7 +1648,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
       confirmText: "Ok",
       initialDate: DateTime(today.year, today.month, today.day),
       firstDate: DateTime(1900),
-      lastDate: DateTime(today.year + 18, today.month, today.day),
+      lastDate: DateTime(today.year, today.month, today.day),
     );
     if (type == 1) {
       controller.dobCtrlr.text = date.toString().substring(0, 10);

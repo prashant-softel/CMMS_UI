@@ -1,9 +1,7 @@
 import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 
-import 'package:cmms/app/add_inventory/view/manufacturar_tab_widget.dart';
-import 'package:cmms/app/add_inventory/view/warranty_tab_widget.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/add_inventory/view/calibartion_widget.dart';
+
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/view_add_inventory/view/view_calibartion_widget.dart';
 import 'package:cmms/app/view_add_inventory/view/view_manufacturar_tab_widget.dart';
