@@ -45,6 +45,17 @@ class EditWarrantyClaimBinding extends Bindings {
         ),
       ),
     );
+    //  Get.lazyPut(
+    //   () => EditWarrantyClaimController(
+    //     Get.put(
+    //       EditWarrantyClaimPresenter(
+    //         EditWarrantyClaimUsecase(
+    //           Get.find(),
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
     
   }
 }

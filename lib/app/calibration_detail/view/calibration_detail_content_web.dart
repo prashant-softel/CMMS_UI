@@ -149,10 +149,11 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                                     .width *
                                                 .2),
                                             child: LoginCustomTextfield(
-                                                // ishint: 'Enter Email ID',
-                                                // textController:
-                                                //     controller.loginIdCtrlr,
-                                                )),
+                                              enabled: false,
+                                              // ishint: 'Enter Email ID',
+                                              // textController:
+                                              //     controller.loginIdCtrlr,
+                                            )),
                                       ],
                                     ),
                                     Dimens.boxHeight8,
@@ -193,13 +194,14 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                                     .width *
                                                 .2),
                                             child: LoginCustomTextfield(
-                                                // ishint: 'Enter Email ID',
-                                                // textController:
-                                                //     controller.loginIdCtrlr,
-                                                )),
+                                              enabled: false,
+
+                                              // ishint: 'Enter Email ID',
+                                              // textController:
+                                              //     controller.loginIdCtrlr,
+                                            )),
                                       ],
                                     ),
-
                                     Dimens.boxHeight8,
                                     Row(
                                       children: [
@@ -295,51 +297,6 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                         ),
                                       ],
                                     ),
-                                    // Dimens.boxHeight8,
-                                    // Row(
-                                    //   children: [
-                                    //     CustomRichText(title: 'Vender Name:'),
-                                    //     Dimens.boxWidth10,
-                                    //     Container(
-                                    //         decoration: BoxDecoration(
-                                    //           borderRadius:
-                                    //               BorderRadius.circular(10),
-                                    //           border: Border.all(
-                                    //             color: Color.fromARGB(
-                                    //                 255, 227, 224, 224),
-                                    //             width: 1,
-                                    //           ),
-                                    //           boxShadow: [
-                                    //             BoxShadow(
-                                    //               color: Colors.black26,
-                                    //               offset: const Offset(
-                                    //                 5.0,
-                                    //                 5.0,
-                                    //               ),
-                                    //               blurRadius: 5.0,
-                                    //               spreadRadius: 1.0,
-                                    //             ),
-                                    //             BoxShadow(
-                                    //               color: ColorValues.whiteColor,
-                                    //               offset:
-                                    //                   const Offset(0.0, 0.0),
-                                    //               blurRadius: 0.0,
-                                    //               spreadRadius: 0.0,
-                                    //             ),
-                                    //           ],
-                                    //         ),
-                                    //         width: (MediaQuery.of(context)
-                                    //                 .size
-                                    //                 .width *
-                                    //             .2),
-                                    //         child: LoginCustomTextfield(
-                                    //             //  ishint: 'Enter Email ID',
-                                    //             // textController:
-                                    //             //     controller.loginIdCtrlr,
-                                    //             )),
-                                    //   ],
-                                    // ),
-                                    // Dimens.boxHeight8,
                                   ],
                                 ),
                                 Spacer(),
@@ -385,10 +342,12 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                                 .2),
                                             child: Expanded(
                                               child: LoginCustomTextfield(
-                                                  //  ishint: 'Enter Email ID',
-                                                  // textController:
-                                                  //     controller.secandoryIdCtrlr,
-                                                  ),
+                                                enabled: false,
+
+                                                //  ishint: 'Enter Email ID',
+                                                // textController:
+                                                //     controller.secandoryIdCtrlr,
+                                              ),
                                             )),
                                       ],
                                     ),
@@ -431,10 +390,12 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                                     .width *
                                                 .2),
                                             child: LoginCustomTextfield(
-                                                //  ishint: 'Enter First Name',
-                                                // textController:
-                                                //     controller.firstNameCtrlr,
-                                                )),
+                                              enabled: false,
+
+                                              //  ishint: 'Enter First Name',
+                                              // textController:
+                                              //     controller.firstNameCtrlr,
+                                            )),
                                       ],
                                     ),
                                     SizedBox(
@@ -476,11 +437,13 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                                   .width *
                                               .2),
                                           child: LoginCustomTextfield(
-                                            textController: controller
-                                                .recievedDateController,
-                                            ontap: () {
-                                              _selectDate(context, 3);
-                                            },
+                                            enabled: false,
+
+                                            // textController: controller
+                                            //     .recievedDateController,
+                                            // ontap: () {
+                                            //   _selectDate(context, 3);
+                                            //  },
                                             widget: Icon(
                                               Icons.calendar_month,
                                               color: ColorValues.greyLightColor,
@@ -494,163 +457,6 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                               ],
                             ),
                             Dimens.boxHeight8,
-
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //   children: [
-                            //     Text(
-                            //       "Equipment Name:",
-                            //       style: Styles.blackBold15,
-                            //     ),
-                            //     SizedBox(
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 3.8,
-                            //       child: LoginCustomTextfield(),
-
-                            //       // DropdownWidget(
-                            //       //   dropdownList: controller.inventoryNameList,
-                            //       //   isValueSelected:
-                            //       //       controller.isInventorySelected.value,
-                            //       //   selectedValue: controller.selectedInventory.value,
-                            //       //   onValueChanged: controller.onValueChanged,
-                            //       // ),
-                            //     ),
-                            //     Dimens.boxWidth10,
-                            //     Text(
-                            //       "Equipment Category:",
-                            //       style: Styles.blackBold15,
-                            //     ),
-                            //     Container(
-                            //       decoration: BoxDecoration(
-                            //         borderRadius: BorderRadius.circular(10),
-                            //         border: Border.all(
-                            //           color: Color.fromARGB(255, 227, 224, 224),
-                            //           width: 1,
-                            //         ),
-                            //         boxShadow: [
-                            //           BoxShadow(
-                            //             color: Colors.black26,
-                            //             offset: const Offset(
-                            //               5.0,
-                            //               5.0,
-                            //             ),
-                            //             blurRadius: 5.0,
-                            //             spreadRadius: 1.0,
-                            //           ),
-                            //           BoxShadow(
-                            //             color: ColorValues.whiteColor,
-                            //             offset: const Offset(0.0, 0.0),
-                            //             blurRadius: 0.0,
-                            //             spreadRadius: 0.0,
-                            //           ),
-                            //         ],
-                            //       ),
-                            //       width:
-                            //           (MediaQuery.of(context).size.width * .2),
-                            //       child:
-                            //           //DropdownWidget(
-                            //           //     dropdownList: controller.inventoryNameList,
-                            //           //     isValueSelected:
-                            //           //         controller.isInventorySelected.value,
-                            //           //     selectedValue:
-                            //           //         controller.selectedInventory.value,
-                            //           //     onValueChanged: controller.onValueChanged,
-                            //           //   ),
-
-                            //           LoginCustomTextfield(),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Dimens.boxHeight10,
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //   children: [
-                            //     Text(
-                            //       "Serial No.:",
-                            //       style: Styles.blackBold15,
-                            //     ),
-                            //     SizedBox(
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 3.8,
-                            //       child: LoginCustomTextfield(),
-                            //     ),
-                            //     Dimens.boxWidth10,
-                            //     Text(
-                            //       "Last Calibration Date:",
-                            //       style: Styles.blackBold15,
-                            //     ),
-                            //     SizedBox(
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 3.8,
-                            //       child: LoginCustomTextfield(
-                            //         textController: controller
-                            //             .lastCalibrationDateController,
-                            //         ontap: () {
-                            //           _selectDate(context, 1);
-                            //         },
-                            //         widget: Icon(
-                            //           Icons.calendar_month,
-                            //           color: ColorValues.greyLightColor,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Dimens.boxHeight10,
-                            // Row(
-                            //   children: [
-                            //     Text(
-                            //       "Vender Name:",
-                            //       style: Styles.blackBold15,
-                            //     ),
-                            //     Dimens.boxWidth10,
-                            //     SizedBox(
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 3.8,
-                            //       child: LoginCustomTextfield(),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Dimens.boxHeight10,
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //   children: [
-                            //     CustomRichText(title: "Calibration Done Date"),
-                            //     SizedBox(
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 3.8,
-                            //       child: LoginCustomTextfield(
-                            //         textController: controller
-                            //             .calibrationDaneDateController,
-                            //         ontap: () {
-                            //           _selectDate(context, 2);
-                            //         },
-                            //         widget: Icon(
-                            //           Icons.calendar_month,
-                            //           color: ColorValues.greyLightColor,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     Dimens.boxWidth10,
-                            //     CustomRichText(title: "Recieved date:"),
-                            //     SizedBox(
-                            //       width:
-                            //           MediaQuery.of(context).size.width / 3.8,
-                            //       child: LoginCustomTextfield(
-                            //         textController:
-                            //             controller.recievedDateController,
-                            //         ontap: () {
-                            //           _selectDate(context, 3);
-                            //         },
-                            //         widget: Icon(
-                            //           Icons.calendar_month,
-                            //           color: ColorValues.greyLightColor,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Dimens.boxHeight10,
                             Row(
                               children: [
                                 Text(
@@ -658,8 +464,16 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                   style: Styles.blackBold15,
                                 ),
                                 Dimens.boxWidth10,
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 6,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Color.fromARGB(255, 208, 206, 206),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
                                   child: LoginCustomTextfield(),
                                 ),
                                 SizedBox(
@@ -674,7 +488,6 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                 ),
                               ],
                             ),
-
                             _tabledata(),
                             Dimens.boxHeight10,
                             Row(
@@ -765,7 +578,7 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                 children: [
                                   Container(
                                     height: 35,
-                                    width: (Get.width * .2) - 90,
+                                    //  width: (Get.width * .2) - 90,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.redColor,
                                       text: "Cancel",
@@ -775,7 +588,7 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                   Dimens.boxWidth20,
                                   Container(
                                     height: 35,
-                                    width: (Get.width * .2) - 90,
+                                    //  width: (Get.width * .2) - 90,
                                     child: CustomElevatedButton(
                                       backgroundColor:
                                           ColorValues.appGreenColor,

@@ -169,4 +169,26 @@ class MastersController extends GetxController {
       Routes.frequencyListScreen,
     );
   }
+
+
+
+
+  Future<void> goToAssetMasterList() async {
+    Get.toNamed(
+      Routes.assetMasterList,
+    );
+  }
+  Future<void> goToAddAssetMaster() async {
+    Get.toNamed(
+      Routes.addassetMaster,
+    );
+  }
+  
+  
+  Future<void> goToDocumentManager() async {
+    Get.toNamed(
+      Routes.documentManager,
+    );
+  }
+
 }

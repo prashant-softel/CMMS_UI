@@ -40,9 +40,14 @@ class PmMappingController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        await getPmMappingList(facilityId);
+        // await getPmMappingList(facilityId);
 
         await getPreventiveCheckList(facilityId, type, false);
+      });
+      Future.delayed(Duration(seconds: 2), () async {
+        await getPmMappingList(facilityId);
+
+        //  await getPreventiveCheckList(facilityId, type, false);
       });
     });
     super.onInit();

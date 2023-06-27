@@ -7,8 +7,8 @@ import 'dart:convert';
 ViewWarrantyClaimModel viewWarrantyClaimDetailModelFromJson(String str) =>
     ViewWarrantyClaimModel.fromJson(json.decode(str));
 
-String viewWarrantyClaimDetailModelToJson(ViewWarrantyClaimModel data) => json.encode(data.toJson());
-
+String viewWarrantyClaimDetailModelToJson(ViewWarrantyClaimModel data) =>
+    json.encode(data.toJson());
 
 class ViewWarrantyClaimModel {
   ViewWarrantyClaimModel({
@@ -41,7 +41,12 @@ class ViewWarrantyClaimModel {
     this.closed_at,
     this.status,
     this.log,
-
+    this.equipment_id,
+    this.currencyId,
+    // this.approverId,
+    this.additionalEmailEmployees,
+    this.externalEmails,
+    this.supplierActions,
   });
 
   int? wc_id;
@@ -71,10 +76,17 @@ class ViewWarrantyClaimModel {
   String? approver_name;
   String? last_updated_at;
   String? closed_at;
-  String? status;
+  int? status;
   String? log;
+  int? equipment_id;
+  int? currencyId;
+  int? approverId;
+  List<AdditionalEmailsEmployeesList?>? additionalEmailEmployees;
+  List<ExternalsEmailsList?>? externalEmails;
+  List<SuppliersActionsList?>? supplierActions;
 
-  factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) => ViewWarrantyClaimModel(
+  factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
+      ViewWarrantyClaimModel(
         wc_id: json["wc_id"],
         facility_id: json["facility_id"],
         facility_name: json["facility_name"],
@@ -108,7 +120,22 @@ class ViewWarrantyClaimModel {
         closed_at: json['closed_at'] ?? '',
         status: json["status"],
         log: json['log'] ?? '',
-        
+        equipment_id: json['equipment_id'],
+        currencyId: json['currencyId'],
+        // approverId: json['approverId'],
+        additionalEmailEmployees: json["additionalEmailEmployees"] != null
+            ? List<AdditionalEmailsEmployeesList>.from(json["additionalEmailEmployees"].map((x) => AdditionalEmailsEmployeesList.fromJson(x)))
+            : [],
+
+        externalEmails: json["externalEmails"] != null
+            ? List<ExternalsEmailsList>.from(json["externalEmails"]
+                ?.map((x) => ExternalsEmailsList.fromJson(x)))
+            : [],
+
+        supplierActions: json["supplierActions"] != null
+            ? List<SuppliersActionsList>.from(json["supplierActions"]
+                ?.map((x) => SuppliersActionsList.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -141,6 +168,89 @@ class ViewWarrantyClaimModel {
         "closed_at": closed_at,
         "status": status,
         "log": log,
-
+        "equipment_id": equipment_id,
+        "currencyId": currencyId,
+        // "approverId": approverId,
+        "additionalEmailEmployees":
+            List<dynamic>.from(additionalEmailEmployees!.map((x) => x)),
+        "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
+        "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
       };
 }
+
+class ExternalsEmailsList {
+  ExternalsEmailsList({
+    this.name,
+    this.email,
+  });
+
+  String? name;
+  String? email;
+
+  factory ExternalsEmailsList.fromJson(Map<String, dynamic> json) =>
+      ExternalsEmailsList(
+        name: json["name"],
+        email: json["email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "email": email,
+      };
+}
+
+class AdditionalEmailsEmployeesList {
+  AdditionalEmailsEmployeesList({
+    this.name,
+    this.email,
+    this.user_id,
+  });
+  int? user_id;
+  String? name;
+  String? email;
+
+  factory AdditionalEmailsEmployeesList.fromJson(Map<String, dynamic> json) =>
+      AdditionalEmailsEmployeesList(
+        user_id: json['user_id'],
+        name: json["name"],
+        email: json["email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user_id": user_id,
+        "name": name,
+        "email": email,
+      };
+}
+
+class SuppliersActionsList {
+  SuppliersActionsList({
+    this.name,
+    this.is_required,
+    this.required_by_date,
+  });
+
+  String? name;
+  int? is_required;
+  String? required_by_date;
+
+  factory SuppliersActionsList.fromJson(Map<String, dynamic> json) =>
+      SuppliersActionsList(
+        name: json["name"],
+        is_required: json["is_required"],
+        required_by_date: json["required_by_date"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "is_required": is_required,
+        "required_by_date": required_by_date,
+      };
+}
+
+String addExternalsEmailsListToJson(ExternalsEmailsList data) =>
+    json.encode(data.toJson());
+String additionalEmailEmployeesListToJson(AdditionalEmailsEmployeesList data) =>
+    json.encode(data.toJson());
+String addSuppliersActionsListToJson(SuppliersActionsList data) =>
+    json.encode(data.toJson());

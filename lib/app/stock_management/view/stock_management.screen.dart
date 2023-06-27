@@ -59,34 +59,27 @@ class StockManagementDashboardScreen
                             child: Card(
                               shadowColor: ColorValues.greyColor,
                               elevation: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    onChanged: (value) {},
-                                    // isExpanded: true,
-                                    value: controller.selectedFacility.value,
-                                    icon: const Icon(
-                                        Icons.keyboard_arrow_down_outlined),
-                                    elevation: 9,
-                                    style: const TextStyle(color: Colors.black),
-                                    // onChanged: (String? selectedValue) {
-                                    //   controller.isFacilitySelected.value =
-                                    //       true;
-                                    //   controller.selectedFacility.value =
-                                    //       selectedValue ?? '';
-                                    // },
-                                    items: controller.facilityList
-                                        .map<DropdownMenuItem<String>>(
-                                            (facility) {
-                                      return DropdownMenuItem<String>(
-                                        value: facility?.name ?? '',
-                                        child: Text(facility?.name ?? ''),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                              ),
+                              // child: Padding(
+                              //   padding: const EdgeInsets.all(3.0),
+                              //   child: DropdownButtonHideUnderline(
+                              //     child: DropdownButton(
+                              //       onChanged: (value) {},
+
+                              //       icon: const Icon(
+                              //           Icons.keyboard_arrow_down_outlined),
+                              //       elevation: 9,
+                              //       style: const TextStyle(color: Colors.black),
+                              //       items: controller.facilityList
+                              //           .map<DropdownMenuItem<String>>(
+                              //               (facility) {
+                              //         return DropdownMenuItem<String>(
+                              //           value: facility?.name ?? '',
+                              //           child: Text(facility?.name ?? ''),
+                              //         );
+                              //       }).toList(),
+                              //     ),
+                              //   ),
+                              // ),
                             ),
                           ),
                         ),
@@ -120,31 +113,35 @@ class StockManagementDashboardScreen
                             }),
                         //  if (Responsive.isDesktop(context))
                         _stockManagementList(
-                            tittle: "Goods Order List",
+                            tittle: "Goods Order  List",
                             ontap: () {
-                              // Get.toNamed(
-                              //   Routes.preventive_checkPoint,
-                              // );
+                              Get.toNamed(
+                                Routes.preventiveCheckPoint,
+                              );
                               controller.checkPoint();
                             }),
                         _stockManagementList(
                             tittle: "MRS List",
                             ontap: () {
-                              Get.toNamed(
-                                Routes.preventiveMaintenanceMapping,
-                              );
+                              Get.offNamed(Routes.mrsListScreen);
+
+                              // Get.toNamed(
+                              //     Routes.preventiveMaintenanceMapping,
+                              //     );
                               //    controller.pmMapping();
                             }),
                         _stockManagementList(
                             tittle: "MRS Return",
                             ontap: () {
-                              controller.pmSchedule();
+                              Get.offNamed(
+                                  Routes.updateGoodsOrdersDetailsScreen);
                             }),
                         _stockManagementList(
-                            tittle: "S2S Material Taransfer",
-                            ontap: () {
-                              controller.pmTask();
-                            }),
+                          tittle: "S2S Material Taransfer",
+                          // ontap: () {
+                          //   controller.pmTask();
+                          // }
+                        ),
                         _stockManagementList(tittle: "Plant Stock"),
                       ],
                     )

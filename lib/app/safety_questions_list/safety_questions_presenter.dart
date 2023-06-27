@@ -8,8 +8,13 @@ class SafetyQuestionsListPresenter {
   SafetyQuestionsListUsecase safetyQuestionsListUsecase;
 
  
-     Future<List<TypePermitModel?>?> getTypePermitList() async =>
-      await safetyQuestionsListUsecase.getTypePermitList(true);
+     Future<List<TypePermitModel?>?> getTypePermitList(
+      {required int facility_id}
+     ) async =>
+      await safetyQuestionsListUsecase.getTypePermitList(
+        true,
+        facility_id
+        );
 
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required bool isLoading,

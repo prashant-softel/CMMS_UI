@@ -579,7 +579,12 @@ class PreventiveCheckPointContentWeb
                                                                             .selectedItem
                                                                             ?.requirement ??
                                                                         "";
-                                                                    controller.isToggleOn.value = controller.selectedItem?.is_document_required == 1 ? true : false;
+                                                                    controller
+                                                                        .isToggleOn
+                                                                        .value = controller.selectedItem?.is_document_required ==
+                                                                            1
+                                                                        ? true
+                                                                        : false;
                                                                   },
                                                                 )
                                                               : Container(),

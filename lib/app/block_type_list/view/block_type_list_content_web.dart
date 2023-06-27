@@ -102,11 +102,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            // Text(
-                                            //   "Title",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -141,38 +136,82 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
+                                                    textController:
+                                                        controller.titleCtrlr,
+                                                  )),
                                             ),
                                           ],
                                         ),
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        // CustomRichText(title: 'Facility: '),
-                                        // SizedBox(
-                                        //   width: 5,
-                                        // ),
-                                        // SizedBox(
-                                        //   width: MediaQuery.of(context)
-                                        //           .size
-                                        //           .width /
-                                        //       1.82,
-                                        //   child: DropdownWidget(
-                                        //     dropdownList:
-                                        //         controller.facilityList,
-                                        //     isValueSelected: controller
-                                        //         .isFacilitySelected.value,
-                                        //     selectedValue: controller
-                                        //         .selectedFacility.value,
-                                        //     onValueChanged:
-                                        //         controller.onValueChanged,
-                                        //   ),
-                                        // ),
-                                        // SizedBox(
-                                        //   height: 10,
-                                        // ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Facility Type '),
+                                            Expanded(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        .2) -
+                                                    45,
+                                                child: Container(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .3),
+                                                  child: DropdownWidget(
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .facilityTypeList,
+                                                    isValueSelected: controller
+                                                        .isSelectedfacility
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedfacility.value,
+                                                    onValueChanged:
+                                                        (selectedValue,
+                                                            isValueSelected) {
+                                                      controller.onValueChanged(
+                                                          selectedValue,
+                                                          isValueSelected);
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        ),
                                         CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
@@ -217,9 +256,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
+                                                    textController: controller
+                                                        .descriptionCtrlr,
+                                                  )),
                                             ),
                                           ],
                                         ),
@@ -266,14 +305,14 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .createChecklistNumber()
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   // if (value == true)
-                                              //   //   controller
-                                              //   //       .issuccessCreatechecklist();
-                                              // });
+                                              controller
+                                                  .createBlockList()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreateBlock();
+                                              });
                                             },
                                             text: 'Submit')),
                                   ],
@@ -284,7 +323,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 1)
+                              .where((e) => e.feature_id == 5 && e.view == 0)
                               .length >
                           0
                       ? Expanded(

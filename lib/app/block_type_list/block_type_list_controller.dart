@@ -4,10 +4,12 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/block_type_list/block_type_list_presenter.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/create_block_type_model copy.dart';
 import '../../domain/models/facility_type_list_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -71,6 +73,9 @@ class BlockTypeListController extends GetxController {
   BehaviorSubject<int> _blockId = BehaviorSubject.seeded(0);
   Stream<int> get blockId$ => _blockId.stream;
 
+  var titleCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
+
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -130,6 +135,38 @@ class BlockTypeListController extends GetxController {
     update(['block_type_list']);
   }
 
+  Future<bool> createBlockList() async {
+    print(
+        "title : ${titleCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()} ");
+    if (titleCtrlr.text.trim() == '' ||
+        descriptionCtrlr.text.trim() == '' ||
+        selectedFacilityId == 0) {
+      // Fluttertoast.showToast(
+      //     msg: "Please enter required field", fontSize: 16.0);
+      print("Fields are blank, please enter dat ato create");
+    } else {
+      String _title = titleCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
+      CreateBlockTypeModel createBlockList = CreateBlockTypeModel(
+        name: _title,
+        description: _description,
+        photoId: 0,
+        parentId: selectedFacilityId,
+      );
+      var blockTypeJsonString = createBlockList
+          .toJson(); //createCheckPointToJson([createCheckpoint]);
+      bool loading = true;
+      print({"checkpointJsonString", blockTypeJsonString});
+      final bool res = await blockTypeListPresenter.createBlockType(
+        blocktypelistJsonString: blockTypeJsonString,
+        isLoading: loading,
+      );
+      print(res);
+      return true;
+    }
+    return true;
+  }
+
   dynamic onValueChanged(RxList<FacilityTypeListModel> value, dynamic list) {
     print("onValueChange function. list : $list and value is : $value");
     String newValue = list.toString();
@@ -146,7 +183,7 @@ class BlockTypeListController extends GetxController {
     getBlockTypeList();
   }
 
-  Future<void> issuccessCreatechecklist() async {
+  Future<void> issuccessCreateBlock() async {
     isSuccess.toggle();
     await {_cleardata()};
   }

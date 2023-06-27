@@ -26,7 +26,7 @@ class AddInventoryUsecase {
     return await _repository.generateToken();
   }
 
-  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail({
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail({
     bool? isLoading,
     required int id,
   }) async =>
@@ -101,8 +101,14 @@ class AddInventoryUsecase {
     return _repository.getInventoryTypeList(facilityId, isLoading);
   }
 
-  Future<List<TypePermitModel?>?> getTypePermitList(bool? isLoading) async =>
-      await _repository.getTypePermitList(isLoading);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    bool? isLoading,
+    int? facility_id
+    ) async =>
+      await _repository.getTypePermitList(
+        isLoading,
+        facility_id
+        );
 
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
       {required bool isLoading, required int? permit_type_id}) async {
@@ -206,5 +212,11 @@ class AddInventoryUsecase {
     bool? isLoading,
   }) async =>
       await _repository.AddInventory(
+          isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
+  Future<bool> updateInventory({
+    addInventoryJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateInventory(
           isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
 }

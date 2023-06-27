@@ -1089,7 +1089,24 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                               color: ColorValues.appLightBlueColor,
                                                                               icon: Icons.edit,
                                                                               label: 'Edit',
-                                                                              onPress: () {},
+                                                                              onPress: () {
+                                                                                print(_permitTypeList[0]);
+                                                                                controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+
+                                                                                controller.titleCtrlr.text = controller.selectedFacilityId?.name ?? '';
+                                                                                controller.addressCtrlr.text = controller.selectedFacilityId?.address ?? '';
+                                                                                controller.zipcodeCtrlr.text = "${controller.selectedFacilityId?.pincode}";
+                                                                                // controller.descriptionCtrlr.text = "${controller.selectedFacilityId?.description}";
+
+                                                                                controller.selectedCountry.value = controller.selectedFacilityId?.country ?? "";
+                                                                                controller.selectedState.value = controller.selectedFacilityId?.state ?? "";
+                                                                                controller.selectedCity.value = controller.selectedFacilityId?.city ?? "";
+                                                                                // controller.selectedOwner.value = controller.selectedFacilityId?.owner ?? "";
+                                                                                // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                                // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                                // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                              },
                                                                             ),
                                                                             TableActionButton(
                                                                               color: ColorValues.appRedColor,

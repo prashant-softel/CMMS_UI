@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
@@ -55,37 +56,94 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                 child: Column(
                     //
                     children: [
+                       Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Text(" / Breakdown Maintenance",
+                                  style: Styles.greyLight14),
+                            ),
+                             Text(
+                              " / Permit List",
+                              style: Styles.greyLight14,
+                            ),
+                            // Text(" / Create Checklist Number",
+                            //     style: Styles.greyMediumLight12)
+                           
+                            // ActionButton(
+                            //   icon: Icons.calendar_month,
+                            //   label: 'December 3rd 2022',
+                            //   // onPress: () {
+                            //   //   // Get.to(() => AddInventory());
+                            //   //   // _buildStartDateField_mobile(context);
+                            //   // },
+                            //   color: Colors.green,
+                            //   onPressed: () {},
+                            // ),
+                            
+                          ],
+                        ),
+                      ),
+                      Dimens.boxHeight10,
                       ///
                       CustomAppBar(
                         title: 'Permit List',
                         action: Row(children: [
-                          ActionButton(
-                            icon: Icons.download,
-                            label: 'BM Report',
-                            onPressed: () {},
-                            color: Color.fromARGB(255, 220, 176, 45),
-                          ),
-                          Dimens.boxWidth10,
-                          ActionButton(
-                            icon: Icons.upload,
-                            label: 'Pending Permits',
-                            onPressed: () {},
-                            color: Color.fromARGB(255, 130, 183, 146),
-                          ),
-                          Dimens.boxWidth10,
-                          ActionButton(
-                            icon: Icons.add,
-                            label: 'Created By Me'.tr,
-                            onPressed: () {},
-                            color: Color.fromARGB(255, 73, 142, 143),
-                          ),
-                          Dimens.boxWidth10,
-                          ActionButton(
-                            icon: Icons.close,
-                            label: 'Assigned To Me'.tr,
-                            onPressed: () async {},
-                            color: Colors.green,
-                          ),
+                          // ActionButton(
+                          //   icon: Icons.download,
+                          //   label: 'BM Report',
+                          //   onPressed: () {},
+                          //   color: Color.fromARGB(255, 220, 176, 45),
+                          // ),
+                          // Dimens.boxWidth10,
+                          // ActionButton(
+                          //   icon: Icons.upload,
+                          //   label: 'Pending Permits',
+                          //   onPressed: () {},
+                          //   color: Color.fromARGB(255, 130, 183, 146),
+                          // ),
+                          // Dimens.boxWidth10,
+                          // ActionButton(
+                          //   icon: Icons.add,
+                          //   label: 'Created By Me'.tr,
+                          //   onPressed: () {},
+                          //   color: Color.fromARGB(255, 73, 142, 143),
+                          // ),
+                          // Dimens.boxWidth10,
+                          // ActionButton(
+                          //   icon: Icons.close,
+                          //   label: 'Assigned To Me'.tr,
+                          //   onPressed: () async {},
+                          //   color: Colors.green,
+                          // ),
                           Dimens.boxWidth10,
                           ActionButton(
                             icon: Icons.add,
@@ -94,6 +152,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                             color: Colors.blue,
                           ),
                           Dimens.boxWidth10,
+                          
                           varUserAccessModel.value.access_list!
                                       .where((e) =>
                                           e.feature_id == 3 && e.add == 1)
@@ -108,7 +167,31 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   color: Colors.blue,
                                 )
                               : Container(),
-                          Dimens.boxWidth10,
+
+                     ////Search field
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Container(
+                              width: 200,
+                              height: 40,
+                              margin: Dimens.edgeInsets0_0_16_0,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.grey, width: 0.0),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.grey, width: 0.0),
+                                  ),
+                                  contentPadding: Dimens.edgeInsets10_0_0_0,
+                                  hintText: 'search'.tr,
+                                  hintStyle: Styles.grey12,
+                                ),
+                              ),
+                            ),
+                          ),
                         ]),
                       ),
 
@@ -174,7 +257,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                       columns: [
                                         'permitId',
                                         'description',
-                                        'permitTypeName',
+                                        'permitType',
                                         'equipment_category',
                                         'workingAreaName',
                                         'request_by_name',
@@ -195,14 +278,14 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                 ? "Permit Id"
                                                 : column == "description"
                                                     ? "Title"
-                                                    : column == "permitTypeName"
-                                                        ? "Permit Type Name"
+                                                    : column == "permitType"
+                                                        ? "Permit Type"
                                                         : column ==
                                                                 "equipment_category"
                                                             ? "Equipment Category"
                                                             : column ==
                                                                     "workingAreaName"
-                                                                ? "Facility / Working Area"
+                                                                ? "Working Area"
                                                                 : column ==
                                                                         "request_by_name"
                                                                     ? "Permit Requested By"

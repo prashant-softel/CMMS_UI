@@ -253,31 +253,47 @@ class AddInventoryController extends GetxController {
 
   Future<void> getAddInventoryDetail({required int id}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
-    editAddInventoryDetailsList?.value = <AddInventoryDetailsModel>[];
+    //  editAddInventoryDetailsList?.value = <AddInventoryDetailsModel>[];
 
     final _addInventoryDetails =
         await addInventoryPresenter.getAddInventoryDetail(id: id);
     print('Add Inventory Detail:$_addInventoryDetails');
 
     if (_addInventoryDetails != null) {
-      editAddInventoryDetailsModel.value = _addInventoryDetails[0];
+      editAddInventoryDetailsModel.value = _addInventoryDetails;
       selectedBlocks.value =
-
-          ///please emplimemnt
-          // editAddInventoryDetailsModel.value?.blockName ?? '';
-          selectedTypeName.value =
-              editAddInventoryDetailsModel.value?.type ?? '';
+          editAddInventoryDetailsModel.value?.blockName ?? '';
+      selectedInventoryType.value =
+          editAddInventoryDetailsModel.value?.type ?? '';
+      selectedTypeName.value = editAddInventoryDetailsModel.value?.type ?? "";
       assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
       assesDiscriptionCtrlr.text =
-          editAddInventoryDetailsModel.value?.description ?? ""; //otherdata
-      warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.description ?? "";
+      warrentyDescriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
+      lastCalibrationDateTc.text =
+          editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
+              "";
+      calibrationRemainderInTc.text =
+          editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
+              "";
+      selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
+      selectedStatusName.value =
+          editAddInventoryDetailsModel.value?.status ?? '';
+      selectedEquipmentCategoryNameId =
+          editAddInventoryDetailsModel.value?.categoryId ?? 0;
+      selectedEquipmentCategoryName.value =
+          editAddInventoryDetailsModel.value?.categoryName ?? '';
+      selectedEquipmentnameId =
+          editAddInventoryDetailsModel.value?.parentId ?? 0;
+      selectedEquipmentName.value =
+          editAddInventoryDetailsModel.value?.parentName ?? '';
       certificateNoCtrlr.text =
-          editAddInventoryDetailsModel.value?.description ?? ""; //otherdata
+          editAddInventoryDetailsModel.value?.certificateNumber ?? "";
       serialNoCtrlr.text =
           editAddInventoryDetailsModel.value?.serialNumber ?? "";
-      // modelNoCtrlr.text =
-      //     editAddInventoryDetailsModel.value?.model ?? ""; //otherdata
+      selectedUnitCurrency.value =
+          editAddInventoryDetailsModel.value?.currency ?? "";
       parentEquipmentNoCtrlr.text =
           editAddInventoryDetailsModel.value?.parentName ?? "";
       costCtrlr.text =
@@ -286,37 +302,97 @@ class AddInventoryController extends GetxController {
               .value?.calibrationReminderDays
               .toString() ??
           "";
-      // modelNoCtrlr.text = editAddInventoryDetailsModel.value?.description ?? "";
-
-      // warrantyClaimBriefDescTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.warranty_description ?? '';
-      // selectedEquipmentName.value =
-      //     editWarrantyClaimDetailsModel.value?.equipment_name ?? '';
-      // selectedEquipmentCategory.value =
-      //     editWarrantyClaimDetailsModel.value?.equipment_category ?? '';
-      // selectedAffectedPart.value =
-      //     editWarrantyClaimDetailsModel.value?.affected_part ?? '';
-      // failureDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
-      // affectedSerialNoTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.affected_sr_no ?? '';
-      // orderReferenceNoTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
-      // warrantyStartDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
-      // warrantyEndDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
-      // costOfReplacementTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
-      // immediateCorrectiveActionTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
-      // requestManufactureTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
-      // selectedUnitCurrency.value =
-      //     editWarrantyClaimDetailsModel.value?.currency ?? '';
-      // selectedEmployeeList.value =
-      //     editWarrantyClaimDetailsModel.value?.approver_name ?? '';
+      selectedBlockListId = editAddInventoryDetailsModel.value?.blockId ?? 0;
+      selectedfrequency.value =
+          "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationFrequency ?? ""}")}";
+      calibrationRemaingCtrlr.text =
+          "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
+      selectedWarrantyName.value =
+          editAddInventoryDetailsModel.value?.warrantyTypeName ?? "";
+      selectedmanufacturerName.value =
+          editAddInventoryDetailsModel.value?.warrantyProviderName ?? "";
+      selectedwarrantyUsageTermListName.value =
+          editAddInventoryDetailsModel.value?.warrantyTermTypeName ?? "";
+      warrentyDescriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
+      selectedmanufacturerName.value =
+          editAddInventoryDetailsModel.value?.manufacturerName ?? "";
+      selectedsupplierrName.value =
+          editAddInventoryDetailsModel.value?.supplierName ?? "";
+      modelNoCtrlr.text = editAddInventoryDetailsModel.value?.model ?? "";
+      selectedUnitCurrency.value =
+          editAddInventoryDetailsModel.value?.currency ?? "";
     }
+  }
+
+  Future<bool> updateInventory() async {
+    String _serialNoCtrlr = serialNoCtrlr.text.trim();
+    String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+    String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
+    String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
+    String _discriptionCtrlr = discriptionCtrlr.text.trim();
+    String _modelNoCtrlr = modelNoCtrlr.text.trim();
+    String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
+    String _costCtrlr = costCtrlr.text.trim();
+    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+    String _expireDateTc = expireDateTc.text.trim();
+    String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
+
+    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+        warrantyDescription: _warrentyDescriptionCtrlr,
+        warrantyProviderId: selectedmanufacturerNameId,
+        warrantyStatus: 1,
+        warrantyType: selectedWarrentyNameId,
+        warrrantyTermType: selectedwarrantyUsageTermNameId,
+        // meterLimit: 1,
+        // meterUnit: 1,
+        certificateNumber: int.tryParse(_certificateNoCtrlr),
+        expiryDate: "2030-12-31",
+        // startDate///  is missing
+        warrantyDiscription: _warrentyDescriptionCtrlr);
+
+    AddInventoryRequestModel addInventoryRequestModel =
+        AddInventoryRequestModel(
+            id: id,
+            name: _assetsNameCtrlr,
+            description: _discriptionCtrlr,
+            assetdescription: _assesDiscriptionCtrlr,
+            typeId: selectedTypeNameId,
+            statusId: selectedStatusNameId,
+            facilityId: facilityId,
+            supplierId: selectedsupplierrNameId,
+            manufacturerId: selectedmanufacturerNameId,
+            blockId: selectedBlockListId,
+            categoryId: selectedEquipmentCategoryNameId,
+            currency: selectedUnitCurrency.value,
+            cost: int.tryParse(_costCtrlr),
+            model: _modelNoCtrlr,
+            serialNumber: _serialNoCtrlr,
+            parentId: selectedEquipmentnameId,
+            calibrationFrequency: selectedfrequencyId,
+            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
+            calibrationLastDate: "2023-01-10",
+            calibrationFirstDueDate: "2023-01-10",
+            calibrationFrequencyType: 2,
+            acCapacity: 2000,
+            dcCapacity: 5000,
+            multiplier: 3,
+            customerId: 1,
+            operatorId: 3,
+            ownerId: 2,
+            stockCount: 50,
+            moduleQuantity: 15,
+            attachments: null);
+    var addInventoryJsonString = addInventoryRequestModel
+        .toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"updateJsonString", addInventoryJsonString});
+    await addInventoryPresenter.updateInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 
   void getInventoryList() async {
@@ -414,6 +490,7 @@ class AddInventoryController extends GetxController {
 
     AddInventoryRequestModel addInventoryRequestModel =
         AddInventoryRequestModel(
+            id: 0,
             name: _assetsNameCtrlr,
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
@@ -534,7 +611,9 @@ class AddInventoryController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await addInventoryPresenter.getTypePermitList();
+    final _permitTypeList = await addInventoryPresenter.getTypePermitList(
+      facility_id: facilityId
+    );
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {

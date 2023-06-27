@@ -83,7 +83,7 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Corrective Maintenance",
+                        title: "Stock Management",
                         icon: "assets/files/maint.png",
                         press: () {
                           Get.offNamed(Routes.stockManagementDashboardScreen);
@@ -106,7 +106,10 @@ class HomeDrawer extends GetView {
                       MenuItem(
                         title: "Incident Report",
                         icon: "assets/files/reportins.png",
-                        press: () {},
+                        press: () {
+                          Get.offNamed(Routes.incidentReportListWeb);
+
+                        },
                       ),
                       MenuItem(
                         title: "Calibration",

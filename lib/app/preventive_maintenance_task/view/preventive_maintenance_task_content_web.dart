@@ -128,6 +128,7 @@ class PreventiveMaintenanceTaskContentWeb
                                               : controller.toDate.value =
                                                   pickUpDate;
                                           Get.back();
+                                          controller.getPmTaskListByDate();
                                         },
                                         onCancel: () => Get.back(),
                                       ),
@@ -136,7 +137,7 @@ class PreventiveMaintenanceTaskContentWeb
                                 );
                               },
                               text:
-                                  'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
+                                  'To Date: ${controller.formattedTodate.toString()}  From Date: ${controller.formattedFromdate.toString()}',
                             ),
                           ),
                         ],

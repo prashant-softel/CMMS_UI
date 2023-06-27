@@ -63,4 +63,14 @@ class InventoryListController extends GetxController {
     Get.toNamed(Routes.addInventoryScreen, arguments: id);
     print('Argument5:$id');
   }
+
+  void viewAddInventoryDetails({int? id}) {
+    Get.toNamed(Routes.viewAddInventoryScreen, arguments: id);
+    print('Argument5:$id');
+  }
+
+  void addInventoryDetails({int? id}) {
+    Get.toNamed(Routes.addInventoryScreen);
+    print('Argument5:$id');
+  }
 }

@@ -23,7 +23,7 @@ class CalibrationDetailScreen extends GetView<CalibrationDetailController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Calibration History'),
+              title: Text('Calibration Detail'),
               centerTitle: true,
               elevation: 0,
             ),

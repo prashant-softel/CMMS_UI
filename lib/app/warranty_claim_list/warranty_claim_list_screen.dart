@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 // import 'mobile/inventory_list_content_mobile.dart';
 // import 'web/inventory_list_content_web.dart';
 
-class WarrantyClaimListScreen extends GetView<HomeController> {
+class WarrantyClaimListScreen extends GetView<WarrantyClaimController> {
   WarrantyClaimListScreen({Key? key});
   // final HomeController controller = Get.find();
   

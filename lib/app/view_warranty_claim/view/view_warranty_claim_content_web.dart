@@ -5,6 +5,7 @@ import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,6 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
   final ViewWarrantyClaimController _controller = Get.find();
   // final HomeController _controller = Get.find();
 
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -29,81 +29,134 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
           toolbarHeight: 100,
           automaticallyImplyLeading: false,
         ),
-        body: Row(
-          children: [
-            Responsive.isMobile(context) || Responsive.isTablet(context)
-                ? Dimens.box0
-                : HomeDrawer(),
-            Expanded(
-              child: Center(
-                child: Container(
-                  margin: Dimens.edgeInsets16,
-                  height: Get.height,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.withOpacity(.3)),
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: 1100,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 55,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(0),
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.home,
-                                color: ColorValues.greyLightColor,
-                              ),
-                              Text(
-                                "Dashboard",
-                                style: Styles.greyLight14,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Text(" / Warranty Claim",
-                                    style: Styles.greyMediumLight12),
-                              ),
-                              Text(" / View Warranty Claim",
-                                  style: Styles.greyMediumLight12)
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        CustomAppBar(
-                          title: 'Warranty Claim: Details'.tr,
-                        ),
-                        Dimens.boxHeight10,
-                        Wrap(
+        body: Obx(
+          () => Row(
+            children: [
+              Responsive.isMobile(context) || Responsive.isTablet(context)
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: RepaintBoundary(
+                  key: controller.printKey,
+                  child: Center(
+                    child: Container(
+                      margin: Dimens.edgeInsets16,
+                      height: Get.height,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.withOpacity(.3)),
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: 1100,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
                           children: [
-                            GetBuilder<ViewWarrantyClaimController>(
-                                id: 'block_field',
-                                builder: (controller) {
-                                  return Column(
-                                    children: [
-                                      Row(
+                            Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0),
+                                border: Border.all(
+                                  color: Color.fromARGB(255, 227, 224, 224),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 236, 234, 234)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.home,
+                                    color: ColorValues.greyLightColor,
+                                  ),
+                                  Text(
+                                    "Dashboard",
+                                    style: Styles.greyLight14,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Text(" / Warranty Claim",
+                                        style: Styles.greyMediumLight12),
+                                  ),
+                                  Text(" / View Warranty Claim",
+                                      style: Styles.greyMediumLight12)
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            CustomAppBar(
+                              title: 'Warranty Claim: Details'.tr,
+                            ),
+                            Dimens.boxHeight10,
+                            Wrap(
+                              children: [
+                                GetBuilder<ViewWarrantyClaimController>(
+                                    id: 'block_field',
+                                    builder: (controller) {
+                                      return Column(
                                         children: [
+                                          Row(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            2.75,
+                                                    child: CustomTextField(
+                                                      textController: controller
+                                                          .categoryTextController,
+                                                      readOnly: true,
+                                                      hintText:
+                                                          '${controller.viewWarrantyClaimDetailsModel.value?.equipment_category}',
+                                                      label:
+                                                          'Equipment Category',
+                                                      suffixIcon: Icon(Icons
+                                                          .arrow_drop_down),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            2.70,
+                                                    child: CustomTextField(
+                                                      textController: controller
+                                                          .equipmentNameTextController,
+                                                      readOnly: true,
+                                                      hintText:
+                                                          '${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}',
+                                                      label: 'Equipment Name',
+                                                      suffixIcon: Icon(Icons
+                                                          .arrow_drop_down),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                           Row(
                                             children: [
                                               SizedBox(
@@ -111,1073 +164,1106 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                               ),
                                               SizedBox(
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.75,
+                                                        .size
+                                                        .width /
+                                                    2.75,
                                                 child: CustomTextField(
-                                                  textController: controller.categoryTextController,
+                                                  textController: controller
+                                                      .supplierNameTextController,
                                                   readOnly: true,
-                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.equipment_category}',
-                                                  label: 'Equipment Category',
-                                                  suffixIcon:
-                                                      Icon(Icons.arrow_drop_down),
+                                                  hintText:
+                                                      '${controller.viewWarrantyClaimDetailsModel.value?.supplier_name}',
+                                                  label: 'Supplier Name',
+                                                  suffixIcon: Icon(
+                                                      Icons.arrow_drop_down),
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 20,
+                                                width: 25,
                                               ),
-                                             SizedBox(
-                                              width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.70,
-                                               child: CustomTextField(
-                                                  textController: controller.equipmentNameTextController,
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.72,
+                                                child: CustomTextField(
+                                                  textController: controller
+                                                      .equipmentSerialNoTextController,
                                                   readOnly: true,
-                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}',
-                                                  label: 'Equipment Name',
-                                                  suffixIcon:
-                                                      Icon(Icons.arrow_drop_down),
+                                                  hintText:
+                                                      '${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}',
+                                                  label: 'Equipment Sr.No.',
                                                 ),
-                                             ),
+                                              )
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.75,
-                                            child: CustomTextField(
-                                                  textController: controller.supplierNameTextController,
+
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.75,
+                                                child: CustomTextField(
                                                   readOnly: true,
-                                                  hintText:'${controller.viewWarrantyClaimDetailsModel.value?.supplier_name}',
-                                                  label: 'Supplier Name',
-                                                  suffixIcon:
-                                                      Icon(Icons.arrow_drop_down),
+                                                  hintText: 'ponsekar',
+                                                  label: 'Contact Person Name',
                                                 ),
+                                              ),
+                                              SizedBox(
+                                                width: 25,
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.72,
+                                                child: CustomTextField(
+                                                  readOnly: true,
+                                                  hintText:
+                                                      'ponsekar@gmail.com',
+                                                  label: 'Contact Person Email',
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                          SizedBox(
-                                            width: 25,
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.33,
+                                                child: CustomTextField(
+                                                  readOnly: true,
+                                                  hintText:
+                                                      'Tashan Industry Zone',
+                                                  label: 'Supplier Address: *',
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.72,
-                                            child: CustomTextField(
-                                              textController: controller.equipmentSerialNoTextController,
-                                              readOnly: true,
-                                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}',
-                                              label: 'Equipment Sr.No.',
-                                            ),
-                                          )
-                                        ],
-                                      ),
 
-                                      Row(
-                                        children: [
+                                          ///Additional Email
                                           SizedBox(
-                                            width: 10,
-                                          ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.75,
-                                            child: CustomTextField(
-                                              readOnly: true,
-                                              hintText: 'ponsekar',
-                                              label: 'Contact Person Name',
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 25,
-                                          ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.72,
-                                            child: CustomTextField(
-                                              readOnly: true,
-                                              hintText: 'ponsekar@gmail.com',
-                                              label: 'Contact Person Email',
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          SizedBox(
+                                            height: 200,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
                                                 1.33,
-                                            child: CustomTextField(
-                                              readOnly: true,
-                                              hintText: 'Tashan Industry Zone',
-                                              label: 'Supplier Address: *',
-                                              
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                            child: Center(
+                                              child: Container(
+                                                margin: Dimens.edgeInsets16,
+                                                height: Get.height,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.grey
+                                                          .withOpacity(.3)),
+                                                ),
+                                                constraints: BoxConstraints(
+                                                  maxWidth: 1100,
+                                                ),
+                                                child: SingleChildScrollView(
+                                                  child: Obx(
+                                                    () => Column(
+                                                      children: [
+                                                        CustomAppBar(
+                                                          title:
+                                                              'Additional Emails'
+                                                                  .tr,
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Wrap(
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 30,
+                                                                ),
+                                                                Text('Name'),
+                                                                SizedBox(
+                                                                  width: 50,
+                                                                ),
+                                                                Text('Email'),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 30,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Container(
+                                                              height: 0.25,
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  1.2,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 30,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(left: 100),
+                                                              child: Row(
+                                                                  children: [
+                                                                // SizedBox(
+                                                                //   width: 150,
+                                                                // ),
+                                                                // Text('amit@test.com'),
+                                                                // SizedBox(
+                                                                //   width: 300,
+                                                                // ),
+                                                                // Text(
+                                                                //     'Amit Purchase Manager')
+                                                              ]..addAll(controller
+                                                                      .externalEmailsList!
+                                                                      .map(
+                                                                          (data) =>
+                                                                              Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                children: [
+                                                                                  SizedBox(
+                                                                                    width: 75,
+                                                                                  ),
+                                                                                  SizedBox(width: 200, child: Text('${data?.name}')),
+                                                                                  SizedBox(
+                                                                                    width: 200,
+                                                                                  ),
+                                                                                  SizedBox(width: 200, child: Text('${data?.email}')),
+                                                                                ],
+                                                                              )))),
+                                                            )
 
-                                      ///Additional Email
-                                      SizedBox(
-                                        height: 200,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.33,
-                                        child: Center(
-                                          child: Container(
-                                            margin: Dimens.edgeInsets16,
-                                            height: Get.height,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(.3)),
-                                            ),
-                                            constraints: BoxConstraints(
-                                              maxWidth: 1100,
-                                            ),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  CustomAppBar(
-                                                    title:
-                                                        'Additional Emails'.tr,
+                                                            /// Employee
+                                                            // SizedBox(
+                                                            //   height: 220,
+                                                            //   width: MediaQuery.of(
+                                                            //               context)
+                                                            //           .size
+                                                            //           .width /
+                                                            //       1.5,
+                                                            //   child: Center(
+                                                            //     child: Container(
+                                                            //       margin: Dimens
+                                                            //           .edgeInsets16,
+                                                            //       height: Get.height,
+                                                            //       decoration:
+                                                            //           BoxDecoration(
+                                                            //         border: Border.all(
+                                                            //             color: Colors
+                                                            //                 .grey
+                                                            //                 .withOpacity(
+                                                            //                     .3)),
+                                                            //       ),
+                                                            //       constraints:
+                                                            //           BoxConstraints(
+                                                            //         maxWidth: 1100,
+                                                            //       ),
+                                                            //       child:
+                                                            //           SingleChildScrollView(
+                                                            //         child: Column(
+                                                            //           children: [
+                                                            //             CustomAppBar(
+                                                            //               title:
+                                                            //                   'Employee'
+                                                            //                       .tr,
+                                                            //               action:
+                                                            //                   ActionButton(
+                                                            //                 icon: Icons
+                                                            //                     .add,
+                                                            //                 label:
+                                                            //                     'Add',
+                                                            //                 // onPress:
+                                                            //                 //     () async {},
+                                                            //                 color: Colors
+                                                            //                     .blue,
+                                                            //                 onPressed:
+                                                            //                     () {},
+                                                            //               ),
+                                                            //             ),
+                                                            //             Dimens
+                                                            //                 .boxHeight10,
+                                                            //             Wrap(
+                                                            //               children: [
+                                                            //                 Row(
+                                                            //                   mainAxisAlignment:
+                                                            //                       MainAxisAlignment.spaceBetween,
+                                                            //                   children: [
+                                                            //                     SizedBox(
+                                                            //                       width:
+                                                            //                           30,
+                                                            //                     ),
+                                                            //                     Text(
+                                                            //                         'Email'),
+                                                            //                     SizedBox(
+                                                            //                       width:
+                                                            //                           80,
+                                                            //                     ),
+                                                            //                     Text(
+                                                            //                         'Action'),
+                                                            //                     SizedBox(
+                                                            //                       height:
+                                                            //                           50,
+                                                            //                     ),
+                                                            //                   ],
+                                                            //                 ),
+                                                            //                 Row(
+                                                            //                   mainAxisAlignment:
+                                                            //                       MainAxisAlignment.spaceEvenly,
+                                                            //                   children: [
+                                                            //                     SizedBox(
+                                                            //                       width:
+                                                            //                           MediaQuery.of(context).size.width / 3.8,
+                                                            //                       child:
+                                                            //                           CustomMultiSelectDialogField(
+                                                            //                         initialValue: [],
+                                                            //                         // initialValue: (
+                                                            //                         //   controller
+                                                            //                         //         .selectedEquipmentCategoryIdList
+                                                            //                         //         .isNotEmpty)
+                                                            //                         //     ? controller
+                                                            //                         //         .selectedEquipmentCategoryIdList
+                                                            //                         //     : [],
+                                                            //                         // items: controller
+                                                            //                         //     .equipmentCategoryList
+                                                            //                         //     .map(
+                                                            //                         //       (equipmentCategory) =>
+                                                            //                         //           MultiSelectItem(
+                                                            //                         //         equipmentCategory?.id,
+                                                            //                         //         equipmentCategory?.name ??
+                                                            //                         //             '',
+                                                            //                         //       ),
+                                                            //                         //     )
+                                                            //                         //     .toList(),
+                                                            //                         onConfirm: (selectedOptionsList) => {
+                                                            //                           // controller
+                                                            //                           //     .equipmentCategoriesSelected(
+                                                            //                           //         selectedOptionsList),
+                                                            //                           // print(
+                                                            //                           //     'Equipment list ${controller.equipmentCategoryList}')
+                                                            //                         },
+                                                            //                         items: [],
+                                                            //                       ),
+                                                            //                     ),
+                                                            //                     ActionButton(
+                                                            //                       icon:
+                                                            //                           Icons.remove,
+                                                            //                       label:
+                                                            //                           'Delete',
+                                                            //                       // onPress:
+                                                            //                       //     () async {},
+                                                            //                       color:
+                                                            //                           Colors.red,
+                                                            //                       onPressed:
+                                                            //                           () {},
+                                                            //                     ),
+                                                            //                   ],
+                                                            //                 )
+                                                            //               ],
+                                                            //             ),
+                                                            //           ],
+                                                            //         ),
+                                                            //       ),
+                                                            //     ),
+                                                            //   ),
+                                                            // ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+
+                                          ///Affected Part
+                                          SizedBox(
+                                            height: 200,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.33,
+                                            child: Center(
+                                              child: Container(
+                                                margin: Dimens.edgeInsets16,
+                                                height: Get.height,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.grey
+                                                          .withOpacity(.3)),
+                                                ),
+                                                constraints: BoxConstraints(
+                                                  maxWidth: 1100,
+                                                ),
+                                                child: SingleChildScrollView(
+                                                  child: Column(
                                                     children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
+                                                      CustomAppBar(
+                                                        title:
+                                                            'Affected Part'.tr,
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Wrap(
                                                         children: [
-                                                          SizedBox(
-                                                            width: 30,
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 30,
+                                                              ),
+                                                              Text(
+                                                                  'Equipment Sr. no'),
+                                                              SizedBox(
+                                                                width: 50,
+                                                              ),
+                                                              Text(
+                                                                  'Equipment Name'),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Text(
+                                                                  'Rated Capacity'),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Text(
+                                                                  'Model Number'),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Text('Remarks'),
+                                                              SizedBox(
+                                                                height: 30,
+                                                              ),
+                                                            ],
                                                           ),
-                                                          Text('Email'),
-                                                          SizedBox(
-                                                            width: 50,
-                                                          ),
-                                                          Text('Name'),
-                                                          SizedBox(
-                                                            height: 10,
+                                                          Container(
+                                                            height: 0.25,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                1.2,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    color: Colors
+                                                                        .black),
                                                           ),
                                                           SizedBox(
                                                             height: 30,
                                                           ),
+                                                          Row(
+                                                            children: [
+                                                               SizedBox(width: 80,),
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child: Text('${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}')),
+                                                               SizedBox(width: 140,),
+                                                                SizedBox(
+                                                                  width: 200,
+                                                                  child: Text('${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}'))
+                                                            ],
+                                                          )
                                                         ],
                                                       ),
-                                                      Container(
-                                                        height: 0.25,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            1.2,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .black),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 150,
-                                                          ),
-                                                          Text('amit@test.com'),
-                                                          SizedBox(
-                                                            width: 300,
-                                                          ),
-                                                          Text(
-                                                              'Amit Purchase Manager')
-                                                        ],
-                                                      )
-
-                                                      /// Employee
-                                                      // SizedBox(
-                                                      //   height: 220,
-                                                      //   width: MediaQuery.of(
-                                                      //               context)
-                                                      //           .size
-                                                      //           .width /
-                                                      //       1.5,
-                                                      //   child: Center(
-                                                      //     child: Container(
-                                                      //       margin: Dimens
-                                                      //           .edgeInsets16,
-                                                      //       height: Get.height,
-                                                      //       decoration:
-                                                      //           BoxDecoration(
-                                                      //         border: Border.all(
-                                                      //             color: Colors
-                                                      //                 .grey
-                                                      //                 .withOpacity(
-                                                      //                     .3)),
-                                                      //       ),
-                                                      //       constraints:
-                                                      //           BoxConstraints(
-                                                      //         maxWidth: 1100,
-                                                      //       ),
-                                                      //       child:
-                                                      //           SingleChildScrollView(
-                                                      //         child: Column(
-                                                      //           children: [
-                                                      //             CustomAppBar(
-                                                      //               title:
-                                                      //                   'Employee'
-                                                      //                       .tr,
-                                                      //               action:
-                                                      //                   ActionButton(
-                                                      //                 icon: Icons
-                                                      //                     .add,
-                                                      //                 label:
-                                                      //                     'Add',
-                                                      //                 // onPress:
-                                                      //                 //     () async {},
-                                                      //                 color: Colors
-                                                      //                     .blue,
-                                                      //                 onPressed:
-                                                      //                     () {},
-                                                      //               ),
-                                                      //             ),
-                                                      //             Dimens
-                                                      //                 .boxHeight10,
-                                                      //             Wrap(
-                                                      //               children: [
-                                                      //                 Row(
-                                                      //                   mainAxisAlignment:
-                                                      //                       MainAxisAlignment.spaceBetween,
-                                                      //                   children: [
-                                                      //                     SizedBox(
-                                                      //                       width:
-                                                      //                           30,
-                                                      //                     ),
-                                                      //                     Text(
-                                                      //                         'Email'),
-                                                      //                     SizedBox(
-                                                      //                       width:
-                                                      //                           80,
-                                                      //                     ),
-                                                      //                     Text(
-                                                      //                         'Action'),
-                                                      //                     SizedBox(
-                                                      //                       height:
-                                                      //                           50,
-                                                      //                     ),
-                                                      //                   ],
-                                                      //                 ),
-                                                      //                 Row(
-                                                      //                   mainAxisAlignment:
-                                                      //                       MainAxisAlignment.spaceEvenly,
-                                                      //                   children: [
-                                                      //                     SizedBox(
-                                                      //                       width:
-                                                      //                           MediaQuery.of(context).size.width / 3.8,
-                                                      //                       child:
-                                                      //                           CustomMultiSelectDialogField(
-                                                      //                         initialValue: [],
-                                                      //                         // initialValue: (
-                                                      //                         //   controller
-                                                      //                         //         .selectedEquipmentCategoryIdList
-                                                      //                         //         .isNotEmpty)
-                                                      //                         //     ? controller
-                                                      //                         //         .selectedEquipmentCategoryIdList
-                                                      //                         //     : [],
-                                                      //                         // items: controller
-                                                      //                         //     .equipmentCategoryList
-                                                      //                         //     .map(
-                                                      //                         //       (equipmentCategory) =>
-                                                      //                         //           MultiSelectItem(
-                                                      //                         //         equipmentCategory?.id,
-                                                      //                         //         equipmentCategory?.name ??
-                                                      //                         //             '',
-                                                      //                         //       ),
-                                                      //                         //     )
-                                                      //                         //     .toList(),
-                                                      //                         onConfirm: (selectedOptionsList) => {
-                                                      //                           // controller
-                                                      //                           //     .equipmentCategoriesSelected(
-                                                      //                           //         selectedOptionsList),
-                                                      //                           // print(
-                                                      //                           //     'Equipment list ${controller.equipmentCategoryList}')
-                                                      //                         },
-                                                      //                         items: [],
-                                                      //                       ),
-                                                      //                     ),
-                                                      //                     ActionButton(
-                                                      //                       icon:
-                                                      //                           Icons.remove,
-                                                      //                       label:
-                                                      //                           'Delete',
-                                                      //                       // onPress:
-                                                      //                       //     () async {},
-                                                      //                       color:
-                                                      //                           Colors.red,
-                                                      //                       onPressed:
-                                                      //                           () {},
-                                                      //                     ),
-                                                      //                   ],
-                                                      //                 )
-                                                      //               ],
-                                                      //             ),
-                                                      //           ],
-                                                      //         ),
-                                                      //       ),
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
                                                     ],
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-
-                                      ///Affected Part
-                                      SizedBox(
-                                        height: 200,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.33,
-                                        child: Center(
-                                          child: Container(
-                                            margin: Dimens.edgeInsets16,
-                                            height: Get.height,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(.3)),
-                                            ),
-                                            constraints: BoxConstraints(
-                                              maxWidth: 1100,
-                                            ),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  CustomAppBar(
-                                                    title: 'Affected Part'.tr,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 30,
-                                                          ),
-                                                          Text(
-                                                              'Equipment Sr. no'),
-                                                          SizedBox(
-                                                            width: 50,
-                                                          ),
-                                                          Text(
-                                                              'Equipment Name'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text(
-                                                              'Rated Capacity'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('Model Number'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('Remarks'),
-                                                          SizedBox(
-                                                            height: 30,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Container(
-                                                        height: 0.25,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            1.2,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .black),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          //  SizedBox(width: 150,),
-                                                          //   Text('amit@test.com'),
-                                                          //  SizedBox(width: 300,),
-                                                          //   Text('Amit Purchase Manager')
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                   
-                                    ],
-                                  );
-                                 
-                                }),
-                            Row(
-                              children: [
-                                CustomTextField(
-                                  textController: controller.orderReferenceNoTextController,
-                                  readOnly: true,
-                                  hintText: '${controller.viewWarrantyClaimDetailsModel.value?.order_reference_number}',
-                                  label: 'Order/Contract Reference Number: *',
-                                  // readOnly: true,
-                                  onTap: () {
-                                    // controller.getEquipmentList(facilityId: '45');
-                                    // Get.defaultDialog(
-                                    //   title: 'Equipment List',
-                                    //   content: GetBuilder<HomeController>(
-                                    //     id: 'equipment_list',
-                                    //     builder: (_controller) {
-                                    //       if (controller.equipmentList.isEmpty) {
-                                    //         return CircularProgressIndicator
-                                    //             .adaptive();
-                                    //       }
-                                    //       return Container(
-                                    //         height: Get.height * .4,
-                                    //         decoration: BoxDecoration(
-                                    //           borderRadius:
-                                    //               BorderRadius.circular(8),
-                                    //         ),
-                                    //         child: SingleChildScrollView(
-                                    //           child: Column(
-                                    //             children: [
-                                    //               ...List.generate(
-                                    //                 controller.equipmentList.length,
-                                    //                 (index) => ListTile(
-                                    //                   onTap: () {
-                                    //                     _controller.onSelectEquipment(
-                                    //                         _controller
-                                    //                                 .equipmentList[
-                                    //                             index]);
-                                    //                     Get.back();
-                                    //                   },
-                                    //                   title: Text(
-                                    //                       '${_controller.equipmentList[index].name}'),
-                                    //                 ),
-                                    //               ).toList(),
-                                    //             ],
-                                    //           ),
-                                    //         ),
-                                    //       );
-                                    //     },
-                                    //   ),
-                                    // );
-                                  },
-                                ),
-                              ],
-                            ),
-                            Wrap(
-                              children: [
+                                        ],
+                                      );
+                                    }),
                                 Row(
                                   children: [
                                     CustomTextField(
-                                      textController: controller.failureDateTimeTextController,
+                                      textController: controller
+                                          .orderReferenceNoTextController,
                                       readOnly: true,
-                                      hintText: '${controller.viewWarrantyClaimDetailsModel.value?.failure_time}',
-                                      label: 'Failure Date & Time: *',
-                                      suffixIcon: Icon(
-                                        Icons.calendar_month,
-                                      ),
-                                      // textController:
-                                      //     controller.categoryTextController,
-                                      
-                                      // onTap: () {
-                                      //   pickDateTime_web(context);
-                                      // },
+                                      hintText:
+                                          '${controller.viewWarrantyClaimDetailsModel.value?.order_reference_number}',
+                                      label:
+                                          'Order/Contract Reference Number: *',
+                                      // readOnly: true,
+                                      onTap: () {
+                                        // controller.getEquipmentList(facilityId: '45');
+                                        // Get.defaultDialog(
+                                        //   title: 'Equipment List',
+                                        //   content: GetBuilder<HomeController>(
+                                        //     id: 'equipment_list',
+                                        //     builder: (_controller) {
+                                        //       if (controller.equipmentList.isEmpty) {
+                                        //         return CircularProgressIndicator
+                                        //             .adaptive();
+                                        //       }
+                                        //       return Container(
+                                        //         height: Get.height * .4,
+                                        //         decoration: BoxDecoration(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(8),
+                                        //         ),
+                                        //         child: SingleChildScrollView(
+                                        //           child: Column(
+                                        //             children: [
+                                        //               ...List.generate(
+                                        //                 controller.equipmentList.length,
+                                        //                 (index) => ListTile(
+                                        //                   onTap: () {
+                                        //                     _controller.onSelectEquipment(
+                                        //                         _controller
+                                        //                                 .equipmentList[
+                                        //                             index]);
+                                        //                     Get.back();
+                                        //                   },
+                                        //                   title: Text(
+                                        //                       '${_controller.equipmentList[index].name}'),
+                                        //                 ),
+                                        //               ).toList(),
+                                        //             ],
+                                        //           ),
+                                        //         ),
+                                        //       );
+                                        //     },
+                                        //   ),
+                                        // );
+                                      },
                                     ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.78,
-                                      child: CustomTextField(
-                                        textController: controller.costOfReplacementTextController,
-                                        readOnly: true,
-                                        hintText: '${controller.viewWarrantyClaimDetailsModel.value?.cost_of_replacement}',
-                                        label: 'Cost Of Replacement: *',
-                                        // textController:
-                                        //     controller.categoryTextController,
-                                      ),
+                                  ],
+                                ),
+                                Wrap(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomTextField(
+                                          textController: controller
+                                              .failureDateTimeTextController,
+                                          readOnly: true,
+                                          hintText:
+                                              '${controller.viewWarrantyClaimDetailsModel.value?.failure_time}',
+                                          label: 'Failure Date & Time: *',
+                                          suffixIcon: Icon(
+                                            Icons.calendar_month,
+                                          ),
+                                          // textController:
+                                          //     controller.categoryTextController,
+
+                                          // onTap: () {
+                                          //   pickDateTime_web(context);
+                                          // },
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2.78,
+                                          child: CustomTextField(
+                                            textController: controller
+                                                .costOfReplacementTextController,
+                                            readOnly: true,
+                                            hintText:
+                                                '${controller.viewWarrantyClaimDetailsModel.value?.cost_of_replacement}',
+                                            label: 'Cost Of Replacement: *',
+                                            // textController:
+                                            //     controller.categoryTextController,
+                                          ),
+                                        ),
+                                        // SizedBox(
+                                        //   width: 100,
+                                        //   child: CustomTextField(
+                                        //     readOnly: true,
+                                        //     hintText: 'INR-IN',
+                                        //     label: 'currency',
+                                        //     suffixIcon: Icon(Icons.arrow_drop_down),
+                                        //   ),
+                                        // ),
+                                      ],
                                     ),
-                                    // SizedBox(
+
+                                    // Container(
+                                    //   margin: Dimens.edgeInsets16,
                                     //   width: 100,
-                                    //   child: CustomTextField(
-                                    //     readOnly: true,
-                                    //     hintText: 'INR-IN',
-                                    //     label: 'currency',
-                                    //     suffixIcon: Icon(Icons.arrow_drop_down),
+                                    //   color: Colors.black,
+                                    //   child: ActionButton(
+                                    //     label: 'Add',
+                                    //     onPressed: () {},
+                                    //     icon: Icons.add,
+                                    //     color: Colors.blue,
                                     //   ),
-                                    // ),
+                                    // )
+                                  ],
+                                ),
+                                CustomTextField(
+                                  textController: controller
+                                      .warrantyStartDateTextController,
+                                  readOnly: true,
+                                  hintText:
+                                      '${controller.viewWarrantyClaimDetailsModel.value?.date_of_claim}',
+                                  label: 'Warranty Start Date: *',
+                                  suffixIcon: Icon(
+                                    Icons.calendar_month,
+                                  ),
+                                  // onTap: () {
+                                  //   pickDateTime2_web(context);
+                                  // },
+                                ),
+                                CustomTextField(
+                                  readOnly: true,
+                                  hintText: '11-Apr-2023 15:04',
+                                  label: 'Warranty End Date: *',
+                                  textController:
+                                      controller.startDateTimeCtrlr3,
+                                  suffixIcon: Icon(
+                                    Icons.calendar_month,
+                                  ),
+                                  // onTap: () {
+                                  //   pickDateTime3_web(context);
+                                  // },
+                                ),
+                                CustomTextField(
+                                  textController: controller
+                                      .warrantyClaimTitleTextController,
+                                  readOnly: true,
+                                  hintText:
+                                      '${controller.viewWarrantyClaimDetailsModel.value?.warranty_claim_title}',
+                                  label: 'Warranty Claim Title: *',
+                                  maxLine: 2,
+                                ),
+                                // CustomTextField(
+                                //   label: 'Enter Multiplier: ',
+                                //   textController:
+                                //       controller.enterMultiplierTextController,
+                                // ),
+                                // Row(
+                                //   children: [
+                                //     Expanded(
+                                //       child: CustomTextField(
+                                //         label: 'Warranty Brief Description: *',
+                                //         maxLine: 6,
+                                //         textController:
+                                //             controller.assetDescpTextController,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: CustomTextField(
+                                        alignment: Alignment.topCenter,
+                                        textController: controller
+                                            .warrantyBriefDescriptionTextController,
+                                        readOnly: true,
+                                        hintText:
+                                            '${controller.viewWarrantyClaimDetailsModel.value?.warranty_description}',
+                                        label: 'Warranty Brief Description: *',
+                                      ),
+                                    ),
                                   ],
                                 ),
 
-                                // Container(
-                                //   margin: Dimens.edgeInsets16,
-                                //   width: 100,
-                                //   color: Colors.black,
-                                //   child: ActionButton(
-                                //     label: 'Add',
-                                //     onPressed: () {},
-                                //     icon: Icons.add,
-                                //     color: Colors.blue,
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            CustomTextField(
-                              textController: controller.warrantyStartDateTextController,
-                              readOnly: true,
-                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.date_of_claim}',
-                              label: 'Warranty Start Date: *',
-                              suffixIcon: Icon(
-                                Icons.calendar_month,
-                              ),
-                              // onTap: () {
-                              //   pickDateTime2_web(context);
-                              // },
-                            ),
-                            CustomTextField(
-                              readOnly: true,
-                              hintText: '11-Apr-2023 15:04',
-                              label: 'Warranty End Date: *',
-                              textController: controller.startDateTimeCtrlr3,
-                              suffixIcon: Icon(
-                                Icons.calendar_month,
-                              ),
-                              // onTap: () {
-                              //   pickDateTime3_web(context);
-                              // },
-                            ),
-                            CustomTextField(
-                              textController: controller.warrantyClaimTitleTextController,
-                              readOnly: true,
-                              hintText: '${controller.viewWarrantyClaimDetailsModel.value?.warranty_claim_title}',
-                              label: 'Warranty Claim Title: *',
-                              maxLine: 2,
-                             
-                            ),
-                            // CustomTextField(
-                            //   label: 'Enter Multiplier: ',
-                            //   textController:
-                            //       controller.enterMultiplierTextController,
-                            // ),
-                            // Row(
-                            //   children: [
-                            //     Expanded(
-                            //       child: CustomTextField(
-                            //         label: 'Warranty Brief Description: *',
-                            //         maxLine: 6,
-                            //         textController:
-                            //             controller.assetDescpTextController,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            Row(
-                              
-                              children: [
-                                Expanded(
-                                  child: CustomTextField(
-                                    alignment: Alignment.topCenter,
-                                    textController: controller.warrantyBriefDescriptionTextController,
-                                    readOnly: true,
-                                    hintText: '${controller.viewWarrantyClaimDetailsModel.value?.warranty_description}',
-                                    label: 'Warranty Brief Description: *',
-                                    
-                                    
-                                  ),
-                                ),
-                              ],
-                            ),
-                           
-                            Wrap(
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                Wrap(
                                   children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        CustomTextField(
+                                          textController: controller
+                                              .correctiveActionByBuyerTextController,
+                                          readOnly: true,
+                                          hintText:
+                                              '${controller.viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer}',
+                                          label:
+                                              'Immediate Corrective Action by Buyer: *',
+                                          maxLine: 6,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 210,
+                                    ),
                                     CustomTextField(
-                                      textController: controller.correctiveActionByBuyerTextController,
+                                      textController: controller
+                                          .requestToSupplierTextController,
                                       readOnly: true,
-                                      hintText: '${controller.viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer}',
-                                      label: 'Immediate Corrective Action by Buyer: *',
-                                      maxLine: 6,
+                                      hintText:
+                                          '${controller.viewWarrantyClaimDetailsModel.value?.request_to_supplier}',
+                                      label: 'Request to Supplier: *',
+                                      maxLine: 5,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 30),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          // CustomRichText(
+                                          //   title: 'Select Approver: '
+                                          //   ),
+                                          CustomTextField(
+                                            textController: controller
+                                                .approverNametextController,
+                                            readOnly: true,
+                                            hintText:
+                                                '${controller.viewWarrantyClaimDetailsModel.value?.approver_name}',
+                                            label: 'Select Approver',
+                                            suffixIcon:
+                                                Icon(Icons.arrow_drop_down),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  width: 210,
-                                ),
-                                CustomTextField(
-                                  textController: controller.requestToSupplierTextController,
-                                  readOnly: true,
-                                  hintText: '${controller.viewWarrantyClaimDetailsModel.value?.request_to_supplier}',
-                                  label: 'Request to Supplier: *',
-                                  maxLine: 5,
-                                ),
-                                 Padding(
-                              padding: const EdgeInsets.only(top: 30),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  // CustomRichText(
-                                  //   title: 'Select Approver: '
-                                  //   ),
-                                  CustomTextField(
-                                    textController: controller.approverNametextController,
-                                    readOnly: true,
-                                    hintText: '${controller.viewWarrantyClaimDetailsModel.value?.approver_name}',
-                                    label: 'Select Approver',
-                                    suffixIcon: Icon(Icons.arrow_drop_down),
-                                  ),
-                                  
-                                ],
-                              ),
-                            ),
-                              ],
-                            ),
-                            SizedBox(
-                                        height: 170,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.33,
-                                        child: Center(
-                                          child: Container(
-                                            margin: Dimens.edgeInsets16,
-                                            height: Get.height,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(.3)),
-                                            ),
-                                            constraints: BoxConstraints(
-                                              maxWidth: 1100,
-                                            ),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  CustomAppBar(
-                                                    title: 'All Files Uploaded'.tr,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 30,
-                                                          ),
-                                                          Text(
-                                                              'Sr.No'),
-                                                          SizedBox(
-                                                            width: 50,
-                                                          ),
-                                                          Text(
-                                                              'View'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text(
-                                                              'File Name'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('File Size'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('Status'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('Description'),
-                                                          SizedBox(
-                                                            height: 30,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Container(
-                                                        height: 0.25,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            1.2,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .black),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                           SizedBox(width: 50,),
-                                                            Text('No Attachments'),
-                                                            // SizedBox(width: 50,),
-                                                            // Text('Warranty Claim has Been created'),
-                                                            // SizedBox(width: 50,),
-                                                            // Text('Amit Purchase Manager'),
-                                                            // SizedBox(width: 50,),
-                                                            // Text('2012-12-03 16:19'),
-                                                            // SizedBox(width: 100,),
-                                                            // Text('Created'),
-
-
-
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                  height: 170,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.33,
+                                  child: Center(
+                                    child: Container(
+                                      margin: Dimens.edgeInsets16,
+                                      height: Get.height,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
                                       ),
-                            SizedBox(
-                              height: 400,
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              child: Center(
-                                child: Container(
-                                  margin: Dimens.edgeInsets16,
-                                  height: Get.height,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1100,
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        CustomAppBar(
-                                          title:
-                                              'Schedule of Supplier Actions'.tr,
-                                          action: ActionButton(
-                                            icon: Icons.add,
-                                            label: 'Add',
-                                            // onPress:
-                                            //     () async {},
-                                            color: Colors.blue,
-                                            onPressed: () {},
-                                          ),
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Wrap(
+                                      constraints: BoxConstraints(
+                                        maxWidth: 1100,
+                                      ),
+                                      child: SingleChildScrollView(
+                                        child: Column(
                                           children: [
-                                            Row(
+                                            CustomAppBar(
+                                              title: 'All Files Uploaded'.tr,
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Wrap(
                                               children: [
-                                                SizedBox(
-                                                  width: 20,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 30,
+                                                    ),
+                                                    Text('Sr.No'),
+                                                    SizedBox(
+                                                      width: 50,
+                                                    ),
+                                                    Text('View'),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text('File Name'),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text('File Size'),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text('Status'),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text('Description'),
+                                                    SizedBox(
+                                                      height: 30,
+                                                    ),
+                                                  ],
                                                 ),
-                                                Text('#'),
-                                                SizedBox(
-                                                  width: 25,
+                                                Container(
+                                                  height: 0.25,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1.2,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.black),
                                                 ),
-                                                Text('Supplier Action'),
                                                 SizedBox(
-                                                  width: 475,
+                                                  height: 10,
                                                 ),
-                                                Text('Required by Date'),
-                                                
-                                                
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 50,
+                                                    ),
+                                                    Text('No Attachments'),
+                                                    // SizedBox(width: 50,),
+                                                    // Text('Warranty Claim has Been created'),
+                                                    // SizedBox(width: 50,),
+                                                    // Text('Amit Purchase Manager'),
+                                                    // SizedBox(width: 50,),
+                                                    // Text('2012-12-03 16:19'),
+                                                    // SizedBox(width: 100,),
+                                                    // Text('Created'),
+                                                  ],
+                                                )
                                               ],
                                             ),
-                                            supplierActionData('1','Root Cause Analysis Report', '2022-12-04', context, ),
-                                            supplierActionData('2', 'Material Replinishment', '2022-12-05', context, ),
-                                            supplierActionData('3', 'Preventive Action Plan', '2022-12-06', context, ),
-                                            supplierActionData('4', 'Claim Closure Date', '2022-12-07', context, )
                                           ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                               SizedBox(
-                                        height: 200,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.33,
-                                        child: Center(
-                                          child: Container(
-                                            margin: Dimens.edgeInsets16,
-                                            height: Get.height,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(.3)),
+
+                                ///Schedule of Supplier Action
+                                SizedBox(
+                                  height: 250,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  child: Center(
+                                    child: Container(
+                                      margin: Dimens.edgeInsets16,
+                                      height: Get.height,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+                                      constraints: BoxConstraints(
+                                        maxWidth: 1100,
+                                      ),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            CustomAppBar(
+                                              title:
+                                                  'Schedule of Supplier Actions'
+                                                      .tr,
+                                              // action: ActionButton(
+                                              //   icon: Icons.add,
+                                              //   label: 'Add',
+                                              //   // onPress:
+                                              //   //     () async {},
+                                              //   color: Colors.blue,
+                                              //   onPressed: () {},
+                                              // ),
                                             ),
-                                            constraints: BoxConstraints(
-                                              maxWidth: 1100,
-                                            ),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  CustomAppBar(
-                                                    title: 'Warranty Claim History'.tr,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
+                                            Dimens.boxHeight10,
+                                            Wrap(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 40,
+                                                    ),
+                                                    Text('#'),
+                                                    SizedBox(
+                                                      width: 25,
+                                                    ),
+                                                    Text('Supplier Action'),
+                                                    SizedBox(width: 205,),
+                                                    Text('Required'),
+                                                    SizedBox(
+                                                      width: 190,
+                                                    ),
+                                                    Text('Required by Date'),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: []..addAll(controller.supplierActionsList!.map((element) => Row(
                                                     children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 30,
-                                                          ),
-                                                          Text(
-                                                              'Sr.No'),
-                                                          SizedBox(
-                                                            width: 50,
-                                                          ),
-                                                          Text(
-                                                              'Comment'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text(
-                                                              'Posted By'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('Time Stamp'),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text('Status'),
-                                                          SizedBox(
-                                                            height: 30,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Container(
-                                                        height: 0.25,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            1.2,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .black),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                           SizedBox(width: 100,),
-                                                            Text('1'),
-                                                            SizedBox(width: 50,),
-                                                            Text('Warranty Claim has Been created'),
-                                                            SizedBox(width: 50,),
-                                                            Text('Amit Purchase Manager'),
-                                                            SizedBox(width: 50,),
-                                                            Text('2012-12-03 16:19'),
-                                                            SizedBox(width: 100,),
-                                                            Text('Created'),
-
-
-
-                                                        ],
-                                                      )
+                                                      supplierActionData(
+                                                  '#',
+                                                  '${element?.name}',
+                                                  '${element?.required_by_date}',
+                                                  context,
+                                                ),
                                                     ],
-                                                  ),
-                                                ],
-                                              ),
+                                                  )))
+                                                )
+                                               
+                                              ],
                                             ),
-                                          ),
+                                          ],
                                         ),
                                       ),
-                                   
-                       
-                           
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     SizedBox(
-                            //       height: 150,
-                            //     ),
-                            //     CustomElevatedButton(
-                            //       backgroundColor: Colors.green,
-                            //       onPressed: () {},
-                            //       text: 'Save As Draft',
-                            //     ),
-                            //     SizedBox(
-                            //       width: 20,
-                            //     ),
-                            //     CustomElevatedButton(
-                            //       backgroundColor: Colors.green,
-                            //       onPressed: () {
-                            //         showAlertDialog();
-                            //       },
-                            //       text: 'Submit For Release',
-                            //     ),
-                            //   ],
-                            // )
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 30,),
 
-                            // Wrap(
-                            //   children: [
-                            //     Row(
-                            //       mainAxisSize: MainAxisSize.min,
-                            //       children: [
-                            //         CustomTextField(
-                            //           label: 'Calibration remainder In: ',
-                            //           width: 300,
-                            //         ),
-                            //         Container(
-                            //           width: 100,
-                            //           child: TextField(
-                            //             decoration: InputDecoration(
-                            //               contentPadding:
-                            //                   Dimens.edgeInsets16_0_16_0,
-                            //               focusedBorder: OutlineInputBorder(
-                            //                 borderSide: BorderSide(width: .2),
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(2),
-                            //               ),
-                            //               enabledBorder: OutlineInputBorder(
-                            //                 borderSide: BorderSide(width: .2),
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(2),
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     Container(
-                            //       margin: Dimens.edgeInsets16,
-                            //       child: Row(
-                            //         mainAxisSize: MainAxisSize.min,
-                            //         children: [
-                            //           Text('Calibration cirtificate'),
-                            //           Dimens.boxWidth10,
-                            //           ActionButton(
-                            //             label: 'Upload cirtification file',
-                            //             onPressed: () {},
-                            //             icon: Icons.file_upload_outlined,
-                            //             color: Colors.blue,
-                            //           )
-                            //         ],
-                            //       ),
-                            //     )
-                            //   ],
-                            // ),
-                            // Container(
-                            //   margin: Dimens.edgeInsets16,
-                            //   decoration: BoxDecoration(
-                            //     border: Border.all(
-                            //       width: 1,
-                            //       color: Colors.grey.withOpacity(.3),
-                            //     ),
-                            //   ),
-                            //   child: DefaultTabController(
-                            //     length: 3,
-                            //     child: Column(
-                            //       children: [
-                            //         Container(
-                            //           color: Colors.grey.withOpacity(.2),
-                            //           child: TabBar(
-                            //             tabs: [
-                            //               Container(
-                            //                 height: 40,
-                            //                 child: Center(
-                            //                   child: Text('Warranties'),
-                            //                 ),
-                            //               ),
-                            //               Container(
-                            //                 height: 40,
-                            //                 child: Center(
-                            //                   child: Text('Purchasing'),
-                            //                 ),
-                            //               ),
-                            //               Container(
-                            //                 height: 40,
-                            //                 child: Center(
-                            //                   child: Text('Files'),
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //         Container(
-                            //           height: 400,
-                            //           child: TabBarView(
-                            //             children: [
-                            //               WarrantyTab(),
-                            //               ManufacturarTab(),
-                            //               Files(),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
+                                ///Warranty Claim History
+                                 Padding(
+                                   padding: const EdgeInsets.only(left: 15,top: 20, right: 15),
+                                   child: SizedBox(
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        1.2,
+                                                    child: Container(
+                                                      // margin: Dimens.edgeInsets20,
+                                                      constraints: BoxConstraints(
+                                                        maxHeight: 100,
+                                                        minHeight: 100,
+                                                      ),
+                                                      child: //
+                                                          HistoryTableWidgetWeb(
+                                                        historyList: controller
+                                                            .historyList,
+                                                      ),
+                                                    ),
+                                                  ),
+                                 ),
+                                // SizedBox(
+                                //   height: 200,
+                                //   width:
+                                //       MediaQuery.of(context).size.width / 1.33,
+                                //   child: Center(
+                                //     child: Container(
+                                //       margin: Dimens.edgeInsets16,
+                                //       height: Get.height,
+                                //       decoration: BoxDecoration(
+                                //         border: Border.all(
+                                //             color: Colors.grey.withOpacity(.3)),
+                                //       ),
+                                //       constraints: BoxConstraints(
+                                //         maxWidth: 1100,
+                                //       ),
+                                //       child: SingleChildScrollView(
+                                //         child: Column(
+                                //           children: [
+                                //             CustomAppBar(
+                                //               title:
+                                //                   'Warranty Claim History'.tr,
+                                //             ),
+                                //             Dimens.boxHeight10,
+                                //             Wrap(
+                                //               children: [
+                                //                 Row(
+                                //                   mainAxisAlignment:
+                                //                       MainAxisAlignment
+                                //                           .spaceBetween,
+                                //                   children: [
+                                //                     SizedBox(
+                                //                       width: 30,
+                                //                     ),
+                                //                     Text('Sr.No'),
+                                //                     SizedBox(
+                                //                       width: 50,
+                                //                     ),
+                                //                     Text('Comment'),
+                                //                     SizedBox(
+                                //                       height: 10,
+                                //                     ),
+                                //                     Text('Posted By'),
+                                //                     SizedBox(
+                                //                       height: 10,
+                                //                     ),
+                                //                     Text('Time Stamp'),
+                                //                     SizedBox(
+                                //                       height: 10,
+                                //                     ),
+                                //                     Text('Status'),
+                                //                     SizedBox(
+                                //                       height: 30,
+                                //                     ),
+                                //                   ],
+                                //                 ),
+                                //                 Container(
+                                //                   height: 0.25,
+                                //                   width: MediaQuery.of(context)
+                                //                           .size
+                                //                           .width /
+                                //                       1.2,
+                                //                   decoration: BoxDecoration(
+                                //                       color: Colors.black),
+                                //                 ),
+                                //                 SizedBox(
+                                //                   height: 30,
+                                //                 ),
+                                //                 Row(
+                                //                   children: [
+                                //                     SizedBox(
+                                //                       width: 100,
+                                //                     ),
+                                //                     Text('1'),
+                                //                     SizedBox(
+                                //                       width: 50,
+                                //                     ),
+                                //                     Text(
+                                //                         'Warranty Claim has Been created'),
+                                //                     SizedBox(
+                                //                       width: 50,
+                                //                     ),
+                                //                     Text(
+                                //                         'Amit Purchase Manager'),
+                                //                     SizedBox(
+                                //                       width: 50,
+                                //                     ),
+                                //                     Text('2012-12-03 16:19'),
+                                //                     SizedBox(
+                                //                       width: 100,
+                                //                     ),
+                                //                     Text('Created'),
+                                //                   ],
+                                //                 )
+                                //               ],
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 150,
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        icon: Icons.print_outlined,
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        text: "Print",
+                                        onPressed: () {
+                                          controller.printScreen();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                // Wrap(
+                                //   children: [
+                                //     Row(
+                                //       mainAxisSize: MainAxisSize.min,
+                                //       children: [
+                                //         CustomTextField(
+                                //           label: 'Calibration remainder In: ',
+                                //           width: 300,
+                                //         ),
+                                //         Container(
+                                //           width: 100,
+                                //           child: TextField(
+                                //             decoration: InputDecoration(
+                                //               contentPadding:
+                                //                   Dimens.edgeInsets16_0_16_0,
+                                //               focusedBorder: OutlineInputBorder(
+                                //                 borderSide: BorderSide(width: .2),
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(2),
+                                //               ),
+                                //               enabledBorder: OutlineInputBorder(
+                                //                 borderSide: BorderSide(width: .2),
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(2),
+                                //               ),
+                                //             ),
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     Container(
+                                //       margin: Dimens.edgeInsets16,
+                                //       child: Row(
+                                //         mainAxisSize: MainAxisSize.min,
+                                //         children: [
+                                //           Text('Calibration cirtificate'),
+                                //           Dimens.boxWidth10,
+                                //           ActionButton(
+                                //             label: 'Upload cirtification file',
+                                //             onPressed: () {},
+                                //             icon: Icons.file_upload_outlined,
+                                //             color: Colors.blue,
+                                //           )
+                                //         ],
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
+                                // Container(
+                                //   margin: Dimens.edgeInsets16,
+                                //   decoration: BoxDecoration(
+                                //     border: Border.all(
+                                //       width: 1,
+                                //       color: Colors.grey.withOpacity(.3),
+                                //     ),
+                                //   ),
+                                //   child: DefaultTabController(
+                                //     length: 3,
+                                //     child: Column(
+                                //       children: [
+                                //         Container(
+                                //           color: Colors.grey.withOpacity(.2),
+                                //           child: TabBar(
+                                //             tabs: [
+                                //               Container(
+                                //                 height: 40,
+                                //                 child: Center(
+                                //                   child: Text('Warranties'),
+                                //                 ),
+                                //               ),
+                                //               Container(
+                                //                 height: 40,
+                                //                 child: Center(
+                                //                   child: Text('Purchasing'),
+                                //                 ),
+                                //               ),
+                                //               Container(
+                                //                 height: 40,
+                                //                 child: Center(
+                                //                   child: Text('Files'),
+                                //                 ),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //         ),
+                                //         Container(
+                                //           height: 400,
+                                //           child: TabBarView(
+                                //             children: [
+                                //               WarrantyTab(),
+                                //               ManufacturarTab(),
+                                //               Files(),
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 

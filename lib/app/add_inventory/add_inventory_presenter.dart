@@ -24,10 +24,16 @@ class AddInventoryPresenter {
     return await addInventoryUsecase.generateToken();
   }
 
-  Future<List<TypePermitModel?>?> getTypePermitList() async =>
-      await addInventoryUsecase.getTypePermitList(true);
+  Future<List<TypePermitModel?>?> getTypePermitList(
+    {required int facility_id}
+  ) async =>
+      await addInventoryUsecase.getTypePermitList(
+        true,
+        facility_id
 
-  Future<List<AddInventoryDetailsModel?>?> getAddInventoryDetail(
+        );
+
+  Future<AddInventoryDetailsModel?> getAddInventoryDetail(
       {bool? isLoading, required int id}) async {
     return addInventoryUsecase.getAddInventoryDetail(
       id: id,
@@ -55,6 +61,18 @@ class AddInventoryPresenter {
   }) async {
     print("presenter");
     addInventoryUsecase.AddInventory(
+      addInventoryJsonString: addInventoryJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
+  Future<bool> updateInventory({
+    addInventoryJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    addInventoryUsecase.updateInventory(
       addInventoryJsonString: addInventoryJsonString,
       isLoading: isLoading,
     );
@@ -102,6 +120,7 @@ class AddInventoryPresenter {
       await addInventoryUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await addInventoryUsecase.getFacilityList();
   Future<String?> getUserAccessList() async =>
