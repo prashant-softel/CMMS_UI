@@ -91,7 +91,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Update Goods Order Details",
+                                      "Add  Goods Order Details",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
@@ -614,7 +614,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                 height: 20,
                               ),
                               Container(
-                                height: 300,
+                                height: 350,
                                 margin: Dimens.edgeInsets20,
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -631,158 +631,181 @@ class _UpdateGoodsOrdersDetailsWebState
                                     ),
                                   ],
                                 ),
-                                child: ScrollableTableView(
-                                  columns: [
-                                    "Material Code",
-                                    "Paid By",
-                                    "Cost",
-                                    "Ordered Qty",
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.18,
-                                    );
-                                  }).toList(),
-                                  rows: [
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ],
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ],
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ],
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ]
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 90,
-                                      cells: record.map((value) {
-                                        return TableViewCell(
-                                          child: (value == "Ordered")
-                                              ? CustomSwitchTroggle(
-                                                  onChanged: (value) {},
-                                                )
-                                              : (value == "Observation")
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                          width:
-                                                              (Get.width * .4),
-                                                          // padding: EdgeInsets.all(value),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
-                                                                ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
-                                                              ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                            maxLine: 5,
-                                                          )),
-                                                    )
-                                                  : (value == "Upload_image")
-                                                      ? Row(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 5),
+                                      child: Row(
+                                        children: [
+                                          Text("Assets"),
+                                          Spacer(),
+                                          Icon(Icons.exposure_plus_1),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 300,
+                                      child: ScrollableTableView(
+                                        columns: [
+                                          "Assets Code",
+                                          "Paid By",
+                                          "Cost",
+                                          "Ordered Qty",
+                                        ].map((column) {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width * 0.18,
+                                            height: Get.height / 2,
+                                          );
+                                        }).toList(),
+                                        rows: [
+                                          [
+                                            "Drop_down",
+                                            "Paid_By",
+                                            "Cost",
+                                            "Order",
+                                          ],
+                                        ].map((record) {
+                                          return TableViewRow(
+                                            height: 200,
+                                            cells: record.map((value) {
+                                              return TableViewCell(
+                                                child: (value == "Drop_down")
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 20,
+                                                                right: 20,
+                                                                top: 40),
+                                                        child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
                                                           children: [
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                color: ColorValues
-                                                                    .appDarkBlueColor,
-                                                                border:
-                                                                    Border.all(
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  width: 1,
-                                                                ),
-                                                              ),
-                                                              child: Icon(
-                                                                  Icons.upload,
-                                                                  size: 30,
-                                                                  color: ColorValues
-                                                                      .whiteColor),
-                                                            ),
-                                                            Dimens.boxWidth15,
-                                                            Container(
-                                                              width: 60,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            2),
-                                                                color: ColorValues
-                                                                    .appDarkBlueColor,
-                                                                border:
-                                                                    Border.all(
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  width: 1,
-                                                                ),
-                                                              ),
-                                                              child: Text(
-                                                                "0 Files",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: Styles
-                                                                    .white12
-                                                                    .copyWith(
-                                                                  color: Theme.of(
+                                                            DropdownWebWidget(
+                                                              width: MediaQuery.of(
                                                                           context)
-                                                                      .textTheme
-                                                                      .displaySmall!
-                                                                      .color,
-                                                                ),
-                                                              ),
+                                                                      .size
+                                                                      .width /
+                                                                  4,
+                                                              onValueChanged:
+                                                                  (p0, p1) {},
                                                             ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Assets Code :"),
+                                                                Text("12345")
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Material type :"),
+                                                                Text(
+                                                                    "Consumable")
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Material Category :"),
+                                                                Text(
+                                                                    "Connectors")
+                                                              ],
+                                                            )
                                                           ],
-                                                        )
-                                                      : Text(value),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
+                                                        ),
+                                                      )
+                                                    : (value == "Paid_By")
+                                                        ? DropdownWebWidget(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                4,
+                                                            onValueChanged:
+                                                                (p0, p1) {},
+                                                          )
+                                                        : (value == "Order")
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Container(
+                                                                    width: (Get.width * .4),
+                                                                    // padding: EdgeInsets.all(value),
+                                                                    decoration: BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: LoginCustomTextfield(
+                                                                      maxLine:
+                                                                          1,
+                                                                    )),
+                                                              )
+                                                            : (value == "Cost")
+                                                                ? Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            8.0),
+                                                                    child: Container(
+                                                                        width: (Get.width * .4),
+                                                                        // padding: EdgeInsets.all(value),
+                                                                        decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.black26,
+                                                                              offset: const Offset(
+                                                                                5.0,
+                                                                                5.0,
+                                                                              ),
+                                                                              blurRadius: 5.0,
+                                                                              spreadRadius: 1.0,
+                                                                            ),
+                                                                          ],
+                                                                          color:
+                                                                              ColorValues.whiteColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5),
+                                                                        ),
+                                                                        child: LoginCustomTextfield(
+                                                                          maxLine:
+                                                                              1,
+                                                                        )),
+                                                                  )
+                                                                : Text(value),
+                                              );
+                                            }).toList(),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

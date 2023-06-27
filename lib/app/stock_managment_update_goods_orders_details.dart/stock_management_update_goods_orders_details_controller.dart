@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -26,7 +27,12 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   Rx<String> selectedBusinessType = ''.obs;
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
-  //
+  RxBool showAdditionalColumn = false.obs;
+  //drop down list of assets
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  Rx<bool> isAssetSelected = true.obs;
+  Rx<String> selectedAsset = ''.obs;
+
   /// date picker
   bool openPurchaseDatePicker = false;
   bool openChallanDatePicker = false;
@@ -47,6 +53,10 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getBusinessTypeList();
     });
+    Future.delayed(Duration(seconds: 1), () {
+      getAssetList(facilityId);
+    });
+
     super.onInit();
   }
 
@@ -58,6 +68,23 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
     for (var _equipmentCategoryList in list) {
       businessCategoryList.add(_equipmentCategoryList);
     }
+  }
+
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList = await stockManagementUpdateGoodsOrdersDetailsPresenter
+        .getAssetList(facilityId: facilityId);
+    // print('jkncejknce:$facilityId');
+    if (_assetList != null) {
+      for (var asset in _assetList) {
+        assetList.add(asset);
+      }
+      update(["AssetList"]);
+    }
+  }
+
+  void toggleAdditionalColumn() {
+    showAdditionalColumn.toggle();
   }
 
   void getUnitCurrencyList() async {

@@ -19,6 +19,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
@@ -1541,13 +1542,13 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCancelByIssuerButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelByIssuerButton');
       }
     } catch (error) {
       log(error.toString());
     }
   }
-
 
   Future<void> permitCancelRequestButton(
     String? comment,
@@ -1568,15 +1569,15 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCancelRequestButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelRequestButton');
       }
     } catch (error) {
       log(error.toString());
     }
   }
 
-
-   Future<void> permitCancelByApproverButton(
+  Future<void> permitCancelByApproverButton(
     String? comment,
     String? id,
     String? ptwStatus,
@@ -1597,14 +1598,15 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCancelByApproverButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelByApproverButton');
       }
     } catch (error) {
       log(error.toString());
     }
   }
 
-   Future<void> permitExtendButton(
+  Future<void> permitExtendButton(
     String? comment,
     String? Time,
     String? id,
@@ -1631,7 +1633,6 @@ class Repository {
       log(error.toString());
     }
   }
-
 
   Future<void> permitCloseButton(
     String? comment,
@@ -2661,8 +2662,8 @@ class Repository {
     }
   }
 
-///Permit History
-   Future<List<HistoryModel>?> getPermitHistory(
+  ///Permit History
+  Future<List<HistoryModel>?> getPermitHistory(
     int? moduleType,
     int? permitId,
     bool? isLoading,
@@ -2697,7 +2698,6 @@ class Repository {
       return [];
     }
   }
-
 
   ///
   Future<Map<String, dynamic>> updateJobCard(
@@ -3931,6 +3931,38 @@ class Repository {
     }
   }
 
+  Future<List<GetAssetDataModel?>?> getAssetList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAssetList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+        facilityId: facilityId ?? 0,
+      );
+
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<GetAssetDataModel> _getAssetList = jsonFacilityModels
+            .map<GetAssetDataModel>(
+                (m) => GetAssetDataModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _getAssetList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getAssetList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<bool> createBusinessListNumber(
       {bool? isLoading, businesslistJsonString}) async {
     try {
@@ -4194,8 +4226,8 @@ class Repository {
   }
 
   Future<List<DesignationModel?>?> getDesignationList(
-      bool? isLoading,
-      ) async {
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getDesignationList(
@@ -4208,7 +4240,7 @@ class Repository {
         final List<DesignationModel> _roleModelList = jsonRoleModels
             .map<DesignationModel>(
               (m) => DesignationModel.fromJson(Map<String, dynamic>.from(m)),
-        )
+            )
             .toList();
 
         return _roleModelList;
@@ -4223,7 +4255,7 @@ class Repository {
     }
   }
 
-  Future<void>  deleteBusinessList(Object business_id, bool isLoading) async {
+  Future<void> deleteBusinessList(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteBusinessList(
