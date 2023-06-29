@@ -553,7 +553,7 @@ class AppPages {
       name: _Paths.roleAccess,
       page: RoleAccessScreen.new,
       binding: RoleAccessBinding(),
-
+    ),
     GetPage<dynamic>(
       name: _Paths.designationScreen,
       page: DesignationListScreen.new,
