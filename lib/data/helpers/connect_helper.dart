@@ -1762,13 +1762,70 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> rejectCloseCalibration({
+    required String auth,
+    bool? isLoading,
+    required rejectCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RejectCalibration',
+      Request.put,
+      rejectCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveCloseCalibration({
+    required String auth,
+    bool? isLoading,
+    required approveCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveCalibration',
+      Request.put,
+      approveCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeCalibration({
+    required String auth,
+    bool? isLoading,
+    required closeCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/CloseCalibration',
+      Request.put,
+      closeCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> completeCalibration({
     required String auth,
     bool? isLoading,
     required completeCalibrationtoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/ApproveRequestCalibration',
+      'Calibration/CompleteCalibration',
       Request.put,
       completeCalibrationtoJsonString,
       isLoading ?? false,

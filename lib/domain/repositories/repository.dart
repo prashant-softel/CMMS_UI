@@ -2888,6 +2888,81 @@ class Repository {
     }
   }
 
+  Future<bool> approveCloseCalibration(
+      {bool? isLoading, approveCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveCloseCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          approveCalibrationtoJsonString:
+              json.encode(approveCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectCloseCalibration(
+      {bool? isLoading, rejectCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectCloseCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          rejectCalibrationtoJsonString:
+              json.encode(rejectCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> closeCalibration(
+      {bool? isLoading, closeCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.closeCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          closeCalibrationtoJsonString:
+              json.encode(closeCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> completeCalibration(
       {bool? isLoading, completeCalibrationtoJsonString}) async {
     try {
@@ -2896,7 +2971,8 @@ class Repository {
       final res = await _dataRepository.completeCalibration(
           auth: auth,
           isLoading: isLoading,
-          completeCalibrationtoJsonString: completeCalibrationtoJsonString);
+          completeCalibrationtoJsonString:
+              json.encode(completeCalibrationtoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
