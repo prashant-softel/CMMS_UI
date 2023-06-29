@@ -1274,6 +1274,42 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> approveCloseCalibration({
+    auth,
+    bool? isLoading,
+    approveCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.approveCloseCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectCloseCalibration({
+    auth,
+    bool? isLoading,
+    rejectCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.rejectCloseCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> closeCalibration({
+    auth,
+    bool? isLoading,
+    closeCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.closeCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        closeCalibrationtoJsonString: closeCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> completeCalibration({
     auth,
     bool? isLoading,

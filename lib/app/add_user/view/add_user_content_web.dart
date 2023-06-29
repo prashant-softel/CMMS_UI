@@ -1632,7 +1632,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            controller.userId == 0
+                            controller.userId == null
                                 ? Container(
                                     height: 35,
                                     child: CustomElevatedButton(
@@ -1693,7 +1693,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
       confirmText: "Ok",
       initialDate: DateTime(today.year, today.month, today.day),
       firstDate: DateTime(1900),
-      lastDate: DateTime(today.year, today.month, today.day),
+      lastDate: DateTime(today.year + 2, today.month, today.day),
     );
     if (type == 1) {
       controller.dobCtrlr.text = date.toString().substring(0, 10);
