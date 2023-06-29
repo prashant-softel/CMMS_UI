@@ -46,6 +46,10 @@ class ViewPermitController extends GetxController {
   final HomeController homeController = Get.find();
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
+
+  ViewPermitPresenter viewPermitPresenter;
+  JobListPresenter jobListPresenter;
+
   // PreventivePresenter preventivePresenter;
 
   //   RxBool on = false.obs; // our observable
@@ -128,8 +132,7 @@ class ViewPermitController extends GetxController {
   int? selectedPermitTypeId = 0;
   int selectedJobTYpesId = 0;
 
-  ViewPermitPresenter viewPermitPresenter;
-  JobListPresenter jobListPresenter;
+ 
 
   // create permit
   Rx<bool> isFormInvalid = false.obs;
@@ -335,6 +338,7 @@ class ViewPermitController extends GetxController {
     await getPermitApproverList();
 
     await getSafetyMeasureList();
+    await getPermitHistory(permitId: permitId!);
 
     super.onInit();
   }
@@ -354,6 +358,23 @@ class ViewPermitController extends GetxController {
         getBlocksList(selectedFacilityId!);
       }
     }
+  }
+
+  Future<void> getPermitHistory({required int permitId}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 3;
+    // int tempModuleType = 21;
+    int permitId = Get.arguments;
+    //
+    historyList?.value = await viewPermitPresenter.getPermitHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          permitId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getViewPermitDetail({required int permitId}) async {
@@ -377,8 +398,8 @@ class ViewPermitController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';
       validTillTimeCtrlr.text =
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';
-      ;
-      // selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
+
+      selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.
       // selectedPermitIssuerLists.value = newPermitDetailsModel.value?.issuedByName ?? '';
@@ -394,9 +415,10 @@ class ViewPermitController extends GetxController {
     final _safetyMeasureList = await viewPermitPresenter.getSafetyMeasureList(
       isLoading: true,
       // categoryIds: categoryIds,
-      permit_type_id: 7,
+      permit_type_id: selectedSafetyMeasureId,
       // job_type_id: 36,
     );
+    print('View SafetyrMeasure${selectedSafetyMeasureId}');
     if (_safetyMeasureList != null) {
       for (var safetyMeasure_list in _safetyMeasureList) {
         safetyMeasureList.add(safetyMeasure_list);

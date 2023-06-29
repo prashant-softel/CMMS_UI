@@ -28,7 +28,6 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
@@ -64,6 +63,7 @@ import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/city_model.dart';
+import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/inventory_status_list_model.dart';
@@ -1470,7 +1470,6 @@ class Repository {
 
   Future<void> permitIssueButton(
     String? comment,
-    String? employee_id,
     String? id,
     bool? isLoading,
   ) async {
@@ -1481,7 +1480,6 @@ class Repository {
         auth: auth,
         comment: comment,
         id: id,
-        employee_id: employee_id,
         isLoading: isLoading ?? false,
       );
       print('PermitIssuerResponse5: ${res.data}');
@@ -1498,8 +1496,8 @@ class Repository {
 
   Future<void> permitApprovedButton(
     String? comment,
-    String? employee_id,
     String? id,
+    String? ptwStatus,
     bool? isLoading,
   ) async {
     try {
@@ -1509,10 +1507,10 @@ class Repository {
         auth: auth,
         comment: comment,
         id: id,
-        employee_id: employee_id,
+        ptwStatus: ptwStatus,
         isLoading: isLoading ?? false,
       );
-      print('PermitApprovedResponse5: ${res.data}');
+      print('PermitApproved&ExtendApproveResponse5: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -1524,7 +1522,7 @@ class Repository {
     }
   }
 
-  Future<void> permitCancelButton(
+  Future<void> permitCancelByIssuerButton(
     String? comment,
     String? id,
     bool? isLoading,
@@ -1532,23 +1530,108 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitCancelButton(
+      final res = await _dataRepository.permitCancelByIssuerButton(
         auth: auth,
         comment: comment,
         id: id,
         isLoading: isLoading ?? false,
       );
-      print('PermitCancelResponse: ${res.data}');
+      print('PermitCancelByIssuerResponse: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCancelButton');
+        Utility.showDialog(res.errorCode.toString() + 'permitCancelByIssuerButton');
       }
     } catch (error) {
       log(error.toString());
     }
   }
+
+
+  Future<void> permitCancelRequestButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCancelRequestButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCancelRequestResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitCancelRequestButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
+   Future<void> permitCancelByApproverButton(
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCancelByApproverButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        ptwStatus: ptwStatus,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCancelByApproverResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitCancelByApproverButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+   Future<void> permitExtendButton(
+    String? comment,
+    String? Time,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitExtendButton(
+        auth: auth,
+        comment: comment,
+        Time: Time,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitExtendResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitExtendButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
 
   Future<void> permitCloseButton(
     String? comment,
@@ -2577,6 +2660,44 @@ class Repository {
       return [];
     }
   }
+
+///Permit History
+   Future<List<HistoryModel>?> getPermitHistory(
+    int? moduleType,
+    int? permitId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPermitHistory(
+        auth: auth,
+        moduleType: moduleType,
+        permitId: permitId,
+        isLoading: isLoading,
+      );
+      print('Permit History: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonPermitDetailsModels = jsonDecode(res.data);
+        final List<HistoryModel> _permitDetailsList = jsonPermitDetailsModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(
+                Map<String, dynamic>.from(m),
+              ),
+            )
+            .toList();
+
+        return _permitDetailsList;
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
 
   ///
   Future<Map<String, dynamic>> updateJobCard(
@@ -4145,6 +4266,80 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<List<DesignationModel?>?> getDesignationList(
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getDesignationList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonRoleModels = jsonDecode(res.data);
+        final List<DesignationModel> _roleModelList = jsonRoleModels
+            .map<DesignationModel>(
+              (m) => DesignationModel.fromJson(Map<String, dynamic>.from(m)),
+        )
+            .toList();
+
+        return _roleModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getRoleList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<void>  deleteBusinessList(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessList(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateBusinesslist({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinesslist(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 //end

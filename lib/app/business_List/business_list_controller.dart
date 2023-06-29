@@ -10,15 +10,18 @@ import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/business_list_model.dart';
 import '../../domain/models/business_type_model.dart';
+import '../../domain/models/city_model.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/create_business_list_model.dart';
 import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/modulelist_model.dart';
+import '../../domain/models/state.dart';
+import '../../domain/models/state_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import '../../domain/models/update_business_list_model.dart';
 import 'business_list_presenter.dart';
 
 
@@ -28,13 +31,27 @@ class BusinessListController extends GetxController {
   );
   BusinessListPresenter businessListPresenter;
   final HomeController homecontroller = Get.find();
-  RxList<BusinessTypeModel?> countryList =
-      <BusinessTypeModel>[].obs;
+  RxList<CountryModel?> countryList =
+      <CountryModel>[].obs;
+  RxList<CountryState?> stateList =
+      <CountryState>[].obs;
+  RxList<CityModel?> cityList =
+      <CityModel>[].obs;
   RxList<BusinessTypeModel?>  businessCategoryList =
       <BusinessTypeModel>[].obs;
+
   Rx<String> selectedBusinessType = ''.obs;
+  Rx<String> selectedCountry = ''.obs;
+  Rx<String> selectedState = ''.obs;
+  Rx<String> selectedCity = ''.obs;
   Rx<bool> isSelectedBusinessType = true.obs;
+  Rx<bool> isSelectedCountryType = true.obs;
+  Rx<bool> isSelectedStateType = true.obs;
+  Rx<bool> isSelectedCityType = true.obs;
   int selectedBusinessTypeId = 1;
+  int selectedCountryId = 0;
+  int selectedStateId = 0;
+  int selectedCityId = 0;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<BusinessListModel?>?
   moduleList =
@@ -78,7 +95,11 @@ class BusinessListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
+
     getBusinessTypeList();
+    getCountryList();
+
+    // getCityList();
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
@@ -100,6 +121,61 @@ class BusinessListController extends GetxController {
   }
 
 
+  Future<void> getCountryList() async {
+    final list = await businessListPresenter.getCountryList();
+
+    if (list != null) {
+      for (var _equipmentCategoryList in list) {
+        countryList.add(_equipmentCategoryList);
+      }
+    }
+
+    // selectedCountryId = Get.arguments;
+    print(selectedCountryId);
+    if (selectedCountryId > 0) {
+      isSelectedCountryType.value = true;
+      // Future.delayed(Duration(seconds: 1), () async {
+      await getStateList(selectedCountryId);
+      // getAssignedToList(facilityId);
+      // });
+    }
+    // getStateList(selectedCountryId);
+  }
+
+  Future<void> getStateList(int selectedCountryId) async {
+    stateList.clear();
+    stateList.value = <CountryState>[];
+    final list = await businessListPresenter.getStateList(selectedCountryId : selectedCountryId);
+
+    if (list != null) {
+      for (var _equipmentCategoryList in list) {
+        stateList.add(_equipmentCategoryList);
+      }
+    }
+  }
+
+  Future<void> getCityList(int selectedStateId) async {
+    cityList.clear();
+    cityList.value = <CityModel>[];
+    final list = await businessListPresenter.getCityList(selectedStateId : selectedStateId);
+
+    if (list != null) {
+      for (var _equipmentCategoryList in list) {
+        cityList.add(_equipmentCategoryList);
+      }
+    }
+  }
+
+    // Future<void> getCityList() async {
+    //   final list = await businessListPresenter.getCityList();
+    //
+    //   if (list != null) {
+    //     for (var _equipmentCategoryList in list) {
+    //       cityList.add(_equipmentCategoryList);
+    //     }
+    //   }
+    // }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<BusinessTypeModel>:
@@ -107,15 +183,58 @@ class BusinessListController extends GetxController {
           int equipmentIndex =
           businessCategoryList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = businessCategoryList[equipmentIndex]?.id ?? 0;
+          selectedBusinessType.value = value;
         }
 
         break;
-      // case RxList<FrequencyModel>:
-      //   {
-      //     int frequencyIndex =
-      //     frequencyList.indexWhere((x) => x?.name == value);
-      //     selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-      //   }
+        case RxList<CountryModel>:
+          {
+            int frequencyIndex =
+            countryList.indexWhere((x) => x?.name == value);
+            selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
+            if (selectedCountryId > 0) {
+              isSelectedCountryType.value = true;
+            }
+            selectedCountry.value = value;
+            getStateList(selectedCountryId);
+            if(selectedStateId!=0 || selectedCityId!=0) {
+              selectedStateId=0;
+              selectedCityId=0;
+              selectedState = ''.obs;
+              selectedCity = ''.obs;
+              getStateList(selectedCountryId);
+              getCityList(selectedStateId);
+            }
+          }
+        break;
+      case RxList<CountryState>:
+        {
+          int frequencyIndex =
+          stateList.indexWhere((x) => x?.name == value);
+          selectedStateId = stateList[frequencyIndex]?.id ?? 0;
+          if (selectedStateId > 0) {
+            isSelectedStateType.value = true;
+          }
+          selectedState.value = value;
+          getCityList(selectedStateId);
+          if(selectedCityId!=0){
+            // selectedStateId=0;
+            selectedCityId=0;
+            // selectedState = ''.obs;
+            selectedCity = ''.obs;
+            // getStateList(selectedCountryId);
+            getCityList(selectedStateId);
+          }
+        }
+        break;
+      case RxList<CityModel>:
+        {
+          int frequencyIndex =
+          cityList.indexWhere((x) => x?.name == value);
+          selectedCityId = cityList[frequencyIndex]?.id ?? 0;
+          selectedCity.value = value;
+
+        }
         break;
       default:
         {
@@ -123,6 +242,16 @@ class BusinessListController extends GetxController {
         }
         break;
     }
+  }
+
+
+  dynamic onFetchNameBusinessTypeFromId(dynamic value) {
+          int equipmentIndex =
+          businessCategoryList.indexWhere((x) => x?.id == value);
+          selectedBusinessType.value =
+              businessCategoryList[equipmentIndex]?.name ?? '';
+          // selectedBusinessType.value = value;
+    return selectedBusinessType.value;
   }
 
   Future<void> getBusinessList(
@@ -159,43 +288,41 @@ class BusinessListController extends GetxController {
 
 
   Future<bool> createBusinessListNumber() async {
-    if (businesslistNumberCtrlr.text.trim() == '' ||
+    if (
+        websiteCtrlr.text.trim()== '' ||
         emailCtrlr.text.trim() == ''  ||
     contactpersonCtrlr.text.trim() == '' || contactnumberCtrlr.text.trim() == '' ||
     locationCtrlr.text.trim() == '' || addressCtrlr.text.trim() == '' ||
-    stateCtrlr.text.trim() == '' || countryCtrlr.text.trim() == '' ||
-    cityCtrlr.text.trim() == '' || zipCtrlr.text.trim() == '' ||
-    addressCtrlr.text.trim() == ''
+     zipCtrlr.text.trim() == '' ||
+    addressCtrlr.text.trim() == '' || selectedBusinessType == '' || selectedCity == '' ||
+        selectedCountry == '' || selectedState == ''
     ) {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
+
       String _businessListNumber = businesslistNumberCtrlr.text.trim();
+      String _website = websiteCtrlr.text.trim();
       String _emailListNumber = emailCtrlr.text.trim();
       String _contactperson = contactpersonCtrlr.text.trim();
       String _contactNumber = contactnumberCtrlr.text.trim();
       String _location = locationCtrlr.text.trim();
       String _address = addressCtrlr.text.trim();
-      String _state = stateCtrlr.text.trim();
-      String _country = countryCtrlr.text.trim();
-      String _city = cityCtrlr.text.trim();
       // String _status = statusCtrlr.text.trim();
       String _zip = zipCtrlr.text.trim();
-      // String _type = typeCtrlr.text.trim();
-      String _Addedat = addedAtCtrlr.text.trim();
-      DateTime dateTime = DateTime.parse(_Addedat);
-      String formattedDateTime = DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+      // String formattedDateTime = DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+
       CreateBusinessListModel createBusinessList = CreateBusinessListModel(
           name : _businessListNumber,
           email: _emailListNumber,
           contactPerson: _contactperson,
           contactnumber: _contactNumber,
+          website: _website,
           location: _location,
           address: _address,
-          // addAt: formattedDateTime,
-          state: _state,
-          country: _country,
-          city: _city,
+          stateId: selectedStateId,
+          countryId: selectedCountryId,
+          cityId: selectedCityId,
           zip: _zip,
           type: selectedBusinessTypeId,
           status : 1,
@@ -203,9 +330,9 @@ class BusinessListController extends GetxController {
 
       var businessListJsonString =
       [
-      createBusinessList.toJson() //createCheckListToJson([createChecklist]);
-
+        createBusinessList.toJson()//createCheckListToJson([createChecklist]);
       ];
+
 
       print({"checklistJsonString", businessListJsonString});
       await businessListPresenter.createBusinesslistNumber(
@@ -233,12 +360,11 @@ class BusinessListController extends GetxController {
     websiteCtrlr.text = '';
     locationCtrlr.text = '';
     addressCtrlr.text = '';
-    countryCtrlr.text = '';
-    stateCtrlr.text = '';
-    cityCtrlr.text = '';
     zipCtrlr.text = '';
     selectedBusinessType.value = '';
-    addedAtCtrlr.text = '';
+    selectedCountry.value = '';
+    selectedCity.value = '';
+    selectedState.value = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
       getBusinessList(type, true);
@@ -248,7 +374,10 @@ class BusinessListController extends GetxController {
     });
   }
 
-  void isDeleteDialog({String? module_id, String? module}) {
+  void isDeleteDialog({
+    String? business_id ,
+   String? business
+  }) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -259,11 +388,11 @@ class BusinessListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the Module ',
+                text: 'Are you sure you want to delete the Business ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: module,
+                    text: business,
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
@@ -284,7 +413,7 @@ class BusinessListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteModulelist(module_id).then((value) {
+                  deleteBusiness(business_id).then((value) {
                     Get.back();
                     getBusinessList(type, true);
                   });
@@ -298,30 +427,52 @@ class BusinessListController extends GetxController {
     );
   }
 
-  Future<void> deleteModulelist(String? module_id) async {
+
+  Future<void> deleteBusiness(String? business_id) async {
     {
-      await businessListPresenter.deleteModulelist(
-        module_id,
+      await businessListPresenter.deleteBusiness(
+        business_id,
         isLoading: true,
       );
     }
   }
 
-  Future<bool> updateBusinesslistNumber(moduleId) async {
-    String _modulelistNumber = businesslistNumberCtrlr.text.trim();
-    String _featurelistNumber = emailCtrlr.text.trim();
+  Future<bool> updateBusinesslistNumber(int? businessId ,int? status , String? addedAt) async {
+    print("BusinessId- ,$businessId");
+    print("Status - ,$status");
+    print("Addetd - ,$addedAt");
+    // String _businessType = selectedBusinessType.text.trim();
+    String _businessName = businesslistNumberCtrlr.text.trim();
+    String _email = emailCtrlr.text.trim();
+    String _contactPerson = contactpersonCtrlr.text.trim();
+    String _contactNumber = contactnumberCtrlr.text.trim();
+    String _website = websiteCtrlr.text.trim();
+    String _location = locationCtrlr.text.trim();
+    String _address = addressCtrlr.text.trim();
+    String _zip = zipCtrlr.text.trim();
 
-    BusinessListModel createModulelist = BusinessListModel(
-        id:moduleId,
-        name: _modulelistNumber,
-        email: _featurelistNumber,
-        contactPerson : null,
-    )  ;
+    UpdateBusinessListModel updateBusinessList = UpdateBusinessListModel(
+        id:businessId,
+        name: _businessName,
+        email: _email,
+        contactPerson : _contactPerson,
+        contactnumber: _contactNumber,
+        website: _website,
+        location: _location,
+        address: _address,
+        zip: _zip,
+        type: selectedBusinessTypeId,
+        countryId: selectedCountryId,
+        stateId : selectedStateId,
+        cityId : selectedCityId,
+        status : status,
+    );
     var modulelistJsonString =
-        createModulelist.toJson(); //createCheckListToJson([createChecklist]);
+      updateBusinessList.toJson();
+
 
     print({"modulelistJsonString", modulelistJsonString});
-    await businessListPresenter.updateModulelistNumber(
+    await businessListPresenter.updateBusinesslist(
       modulelistJsonString: modulelistJsonString,
       isLoading: true,
     );

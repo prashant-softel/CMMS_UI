@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 
 CreatePermitModel addCreatePermitModelFromJson(String str) =>
     CreatePermitModel.fromJson(json.decode(str));

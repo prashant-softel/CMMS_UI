@@ -149,6 +149,8 @@ import '../Asset_Master/asset_master_Binding.dart';
 import '../Asset_Master/view/asset_master_screen.dart';
 import '../add_asset_master/view/add_asset_master_screen.dart';
 import '../add_asset_master/add_asset_master_binding.dart';
+import '../designation_List/view/designation_list_screen.dart';
+import '../designation_List/designation_list_binding.dart';
 
 // coverage:ignore-file
 
@@ -551,6 +553,11 @@ class AppPages {
       name: _Paths.roleAccess,
       page: RoleAccessScreen.new,
       binding: RoleAccessBinding(),
+
+    GetPage<dynamic>(
+      name: _Paths.designationScreen,
+      page: DesignationListScreen.new,
+      binding: DesignationListBinding(),
     ),
   ];
 }

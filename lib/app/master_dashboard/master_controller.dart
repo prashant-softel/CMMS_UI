@@ -192,4 +192,10 @@ class MastersController extends GetxController {
       Routes.documentManager,
     );
   }
+
+  Future<void> goToDesignationScreen() async {
+    Get.toNamed(
+      Routes.designationScreen,
+    );
+  }
 }

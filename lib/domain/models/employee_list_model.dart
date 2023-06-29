@@ -16,7 +16,8 @@ class EmployeeListModel {
     this.id,
     this.login_id,
     this.name,
-    this.gender
+    this.gender,
+    this.mobileNumber
     
    
 
@@ -26,6 +27,7 @@ class EmployeeListModel {
   String? login_id;
   String? name;
   String? gender;
+  String? mobileNumber;
  
   
 
@@ -33,7 +35,8 @@ class EmployeeListModel {
         id: json["id"],
         login_id: json['login_id'],
         name: json["name"],
-        gender: json["gender"]
+        gender: json["gender"],
+        mobileNumber: json['mobileNumber'],
        
         
       );
@@ -43,6 +46,7 @@ class EmployeeListModel {
         "login_id": login_id,
         "name": name,
         "gender": gender,
+        "mobileNumber": mobileNumber
        
       };
 }
