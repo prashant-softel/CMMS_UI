@@ -51,6 +51,10 @@ class AddUserController extends GetxController {
   int selectedRoleId = 0;
   Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
   RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
+  RxBool isPasswordVisible = false.obs;
+  RxString password = ''.obs;
+  RxBool isPasswordValid = true.obs;
+  bool isToastVisible = false;
 
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
   RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
@@ -126,6 +130,38 @@ class AddUserController extends GetxController {
     );
     update(['permit_facility_list']);
   }
+
+  void togglePasswordVisibility() {
+    isPasswordVisible.toggle();
+  }
+
+  // void validatePassword(String value) {
+  //   password.value = value;
+  //   isPasswordValid.value = isPasswordValidated(password.value);
+
+  //   if (!isPasswordValid.value && !isToastVisible) {
+  //     Fluttertoast.showToast(
+  //       msg:
+  //           'Password must have at least one special character, one number, and a minimum length of 8 characters.',
+  //       toastLength: Toast.LENGTH_LONG,
+  //       gravity: ToastGravity.BOTTOM,
+  //       timeInSecForIosWeb: 86400, // 24 hours
+  //       backgroundColor: Colors.red,
+  //       textColor: Colors.white,
+  //     );
+
+  //     isToastVisible = true;
+  //   } else if (isPasswordValid.value && isToastVisible) {
+  //     Fluttertoast.cancel();
+  //     isToastVisible = false;
+  //   }
+  // }
+
+  // bool isPasswordValidated(String password) {
+  //   final RegExp passwordRegex = RegExp(
+  //       r'^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$');
+  //   return passwordRegex.hasMatch(password);
+  // }
 
   void facilityNameSelected(_selectedfacilityNameIds) {
     selectedfacilityNameIdList.value = <int>[];

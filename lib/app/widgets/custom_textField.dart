@@ -18,25 +18,28 @@ class LoginCustomTextfield extends GetView {
   bool enabled;
   TextInputType? keyboardType;
   List<TextInputFormatter>? inputFormatters;
+  final bool readOnly;
 
-  LoginCustomTextfield(
-      {Key? key,
-      this.ishint,
-      this.obscureText = false,
-      this.textController,
-      this.widget,
-      this.errorController,
-      this.onChanged,
-      this.onfieldSubmitted,
-      this.maxLine = 1,
-      this.enabled = true,
-      this.keyboardType,
-      this.inputFormatters,
-      this.ontap})
-      : super(key: key);
+  LoginCustomTextfield({
+    Key? key,
+    this.ishint,
+    this.obscureText = false,
+    this.textController,
+    this.widget,
+    this.errorController,
+    this.onChanged,
+    this.onfieldSubmitted,
+    this.maxLine = 1,
+    this.enabled = true,
+    this.keyboardType,
+    this.inputFormatters,
+    this.ontap,
+    this.readOnly = false,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
       // keyboardType:keyboardType,
       enabled: enabled,
       onFieldSubmitted: onfieldSubmitted,

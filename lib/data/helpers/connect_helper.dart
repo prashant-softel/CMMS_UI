@@ -584,12 +584,13 @@ class ConnectHelper {
     String? id,
     String? employee_id,
     String? ptwStatus,
-    
   }) async {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123' ? 'Permit/PermitApprove': 'Permit/PermitExtendApprove',
+      ptwStatus == '123'
+          ? 'Permit/PermitApprove'
+          : 'Permit/PermitExtendApprove',
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -624,13 +625,13 @@ class ConnectHelper {
     print('PermitCancelByIssuerResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelByIssuerDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelByIssuerDialog(data: parsedJson['message']));
 
     return responseModel;
   }
 
-
-   Future<ResponseModel> permitCancelRequestButton({
+  Future<ResponseModel> permitCancelRequestButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -649,14 +650,13 @@ class ConnectHelper {
     print('PermitCancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelRequestDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelRequestDialog(data: parsedJson['message']));
 
     return responseModel;
   }
 
-
-
-   Future<ResponseModel> permitCancelByApproverButton({
+  Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -665,7 +665,9 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123' ? 'Permit/PermitCancelByApprover' : 'Permit/PermitCancelRequest',
+      ptwStatus == '123'
+          ? 'Permit/PermitCancelByApprover'
+          : 'Permit/PermitCancelRequest',
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -673,14 +675,15 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
+    print(
+        'PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelByApproverDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelByApproverDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
   Future<ResponseModel> permitExtendButton({
     required String auth,
@@ -987,6 +990,20 @@ class ConnectHelper {
   }) async =>
       await apiWrapper.makeRequest(
         'CMMS/GetBlockList?facility_id=$facilityId',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getAssetList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'SMMaster/GetAssetMasterList',
         Request.getMultiparts,
         null,
         isLoading ?? false,
@@ -1365,6 +1382,34 @@ class ConnectHelper {
       warrantyClaimId: parsedJson['id'],
     ));
     // }
+
+    return responseModel;
+  }
+
+  //Create WarraGoods order
+
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/CreateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
 
     return responseModel;
   }
@@ -2650,7 +2695,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -2669,5 +2713,4 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 }

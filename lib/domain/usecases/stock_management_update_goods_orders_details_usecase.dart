@@ -2,6 +2,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 
 class StockManagementUpdateGoodsOrdersDetailsUsecase {
   final Repository _repository;
@@ -28,5 +29,23 @@ class StockManagementUpdateGoodsOrdersDetailsUsecase {
         // categoryIds,
         businessType: businessType,
         isLoading: isLoading,
+      );
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getAssetList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> createGoodsOrder({
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await _repository.createGoodsOrder(
+        createGo,
+        isLoading,
       );
 }

@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/stock_managment_update_goods_orders_details.dart/stock_management_update_goods_orders_details_controller.dart';
-import 'package:cmms/app/widgets/custom_swich_toggle.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +91,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Update Goods Order Details",
+                                      "Add  Goods Order Details",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
@@ -176,7 +176,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController:
+                                                      controller.challanNoCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -208,7 +211,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController:
+                                                      controller.pOCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -242,7 +248,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController: controller
+                                                      .frieghtToPayPaidCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -276,7 +285,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController: controller
+                                                      .noOfPackagesReceivedCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -310,7 +322,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController: controller
+                                                      .conditionOfPackagesReceivedCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -343,7 +358,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController:
+                                                      controller.girNoCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -374,7 +392,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                       .size
                                                       .width *
                                                   .2),
-                                              child: LoginCustomTextfield()),
+                                              child: LoginCustomTextfield(
+                                                textController:
+                                                    controller.amountCtrlr,
+                                              )),
                                         ]),
                                       ],
                                     ),
@@ -510,7 +531,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController:
+                                                      controller.lrNoCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -543,7 +567,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController:
+                                                      controller.vehicleNoCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -576,7 +603,10 @@ class _UpdateGoodsOrdersDetailsWebState
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: LoginCustomTextfield()),
+                                                child: LoginCustomTextfield(
+                                                  textController:
+                                                      controller.jobRefCtrlr,
+                                                )),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
@@ -614,7 +644,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                 height: 20,
                               ),
                               Container(
-                                height: 300,
+                                height: 350,
                                 margin: Dimens.edgeInsets20,
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -631,160 +661,231 @@ class _UpdateGoodsOrdersDetailsWebState
                                     ),
                                   ],
                                 ),
-                                child: ScrollableTableView(
-                                  columns: [
-                                    "Material Code",
-                                    "Paid By",
-                                    "Cost",
-                                    "Ordered Qty",
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.18,
-                                    );
-                                  }).toList(),
-                                  rows: [
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ],
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ],
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ],
-                                    [
-                                      "Check each string connect",
-                                      "Should be clean",
-                                      "Upload_image",
-                                      "Observation",
-                                    ]
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 90,
-                                      cells: record.map((value) {
-                                        return TableViewCell(
-                                          child: (value == "Ordered")
-                                              ? CustomSwitchTroggle(
-                                                  onChanged: (value) {},
-                                                )
-                                              : (value == "Observation")
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                          width:
-                                                              (Get.width * .4),
-                                                          // padding: EdgeInsets.all(value),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
-                                                                ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 5),
+                                      child: Row(
+                                        children: [
+                                          Text("Assets"),
+                                          Spacer(),
+                                          GestureDetector(
+                                              onTap: () {
+                                                controller.addRowItem();
+                                              },
+                                              child:
+                                                  Icon(Icons.exposure_plus_1)),
+                                        ],
+                                      ),
+                                    ),
+                                    Obx(
+                                      () => Container(
+                                        height: 300,
+                                        child: ScrollableTableView(
+                                          columns: [
+                                            "Assets Code",
+                                            "Paid By",
+                                            "Cost",
+                                            "Ordered Qty",
+                                          ].map((column) {
+                                            return TableViewColumn(
+                                              label: column,
+                                              minWidth: Get.width * 0.18,
+                                              height: Get.height / 2,
+                                            );
+                                          }).toList(),
+                                          rows: controller.rowItem.value
+                                              .map((record) {
+                                            return TableViewRow(
+                                              height: 200,
+                                              cells: record.map((mapData) {
+                                                return TableViewCell(
+                                                  child: (mapData['key'] ==
+                                                          "Drop_down")
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20,
+                                                                  right: 20,
+                                                                  top: 60),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              DropdownWebWidget(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .assetList
+                                                                        .value,
+                                                                selectedValue:
+                                                                    mapData[
+                                                                        "value"],
+                                                                onValueChanged:
+                                                                    (list,
+                                                                        selectedValue) {
+                                                                  print({
+                                                                    "selectedValue":
+                                                                        selectedValue
+                                                                  });
+                                                                  mapData["value"] =
+                                                                      selectedValue;
+                                                                  controller.dropdownMapperData["selectedValue"] = list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                                },
                                                               ),
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                      "Assets Code :"),
+                                                                  Text(
+                                                                      "${controller.dropdownMapperData["selectedValue"]?.asset_code ?? ''}")
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                      "Assets type :"),
+                                                                  Text(
+                                                                      "${controller.dropdownMapperData["selectedValue"]?.asset_type ?? ''}")
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                      "Assets Category :"),
+                                                                  Text(
+                                                                      "${controller.dropdownMapperData["selectedValue"]?.cat_name ?? ''}")
+                                                                ],
+                                                              )
                                                             ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
                                                           ),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                            maxLine: 5,
-                                                          )),
-                                                    )
-                                                  : (value == "Upload_image")
-                                                      ? Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                color: ColorValues
-                                                                    .appDarkBlueColor,
-                                                                border:
-                                                                    Border.all(
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  width: 1,
-                                                                ),
-                                                              ),
-                                                              child: Icon(
-                                                                  Icons.upload,
-                                                                  size: 30,
-                                                                  color: ColorValues
-                                                                      .whiteColor),
-                                                            ),
-                                                            Dimens.boxWidth15,
-                                                            Container(
-                                                              width: 60,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            2),
-                                                                color: ColorValues
-                                                                    .appDarkBlueColor,
-                                                                border:
-                                                                    Border.all(
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  width: 1,
-                                                                ),
-                                                              ),
-                                                              child: Text(
-                                                                "0 Files",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: Styles
-                                                                    .white12
-                                                                    .copyWith(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .displaySmall!
-                                                                      .color,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
                                                         )
-                                                      : Text(value),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
+                                                      : (mapData['key'] ==
+                                                              "Paid_By")
+                                                          ? DropdownWebWidget(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  4,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .assetList
+                                                                      .value,
+                                                              selectedValue:
+                                                                  mapData[
+                                                                      "value"],
+                                                              onValueChanged: (list,
+                                                                  selectedValue) {
+                                                                print({
+                                                                  "selectedValue":
+                                                                      selectedValue
+                                                                });
+                                                                mapData["value"] =
+                                                                    selectedValue;
+                                                              },
+                                                            )
+                                                          : (mapData['key'] ==
+                                                                      "Order") ||
+                                                                  (mapData[
+                                                                          'key'] ==
+                                                                      "Cost")
+                                                              ? Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Container(
+                                                                      width: (Get.width * .4),
+                                                                      // padding: EdgeInsets.all(value),
+                                                                      decoration: BoxDecoration(
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            offset:
+                                                                                const Offset(
+                                                                              5.0,
+                                                                              5.0,
+                                                                            ),
+                                                                            blurRadius:
+                                                                                5.0,
+                                                                            spreadRadius:
+                                                                                1.0,
+                                                                          ),
+                                                                        ],
+                                                                        color: ColorValues
+                                                                            .whiteColor,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                      ),
+                                                                      child: LoginCustomTextfield(
+                                                                        maxLine:
+                                                                            1,
+                                                                        textController:
+                                                                            new TextEditingController(text: mapData["value"] ?? ''),
+                                                                        onChanged:
+                                                                            (txt) {
+                                                                          mapData["value"] =
+                                                                              txt;
+                                                                        },
+                                                                      )),
+                                                                )
+                                                              : Text(mapData[
+                                                                      'key'] ??
+                                                                  ''),
+                                                );
+                                              }).toList(),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                              Dimens.boxHeight15,
+                              Center(
+                                child: Row(
+                                  children: [
+                                    Spacer(),
+                                    CustomElevatedButton(
+                                      backgroundColor: ColorValues.appRedColor,
+                                      text: 'Cancle',
+                                      onPressed: () {
+                                        // controller.AddInventory();
+                                      },
+                                    ),
+                                    Dimens.boxWidth15,
+                                    CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appGreenColor,
+                                      text: 'Submit',
+                                      onPressed: () {
+                                        controller.createGoodsOrder();
+                                      },
+                                    ),
+                                    Spacer()
+                                  ],
+                                ),
+                              ),
+                              Dimens.boxHeight15,
                             ],
                           ),
                         ),

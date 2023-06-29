@@ -534,7 +534,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
   Future<ResponseModel> permitExtendButton({
     required String auth,
     String? comment,
@@ -685,6 +684,18 @@ class DataRepository extends DomainRepository {
     int? facilityId,
   }) async {
     return await connectHelper.getBlocksList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getAssetList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getAssetList(
       auth: auth,
       isLoading: isLoading,
       facilityId: facilityId,
@@ -927,6 +938,16 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -1044,8 +1065,8 @@ class DataRepository extends DomainRepository {
     );
   }
 
-///Permit History
-   Future<ResponseModel> getPermitHistory({
+  ///Permit History
+  Future<ResponseModel> getPermitHistory({
     String? auth,
     int? permitId,
     int? moduleType,
@@ -1741,7 +1762,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> updateBusinesslist({
     auth,
     bool? isLoading,
@@ -1754,7 +1774,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
 //end
 }
