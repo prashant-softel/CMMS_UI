@@ -4,7 +4,7 @@ import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart
 import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'permit_type_mobile.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
@@ -41,11 +41,11 @@ class PermitTypeScreen extends GetView<PermitTypeController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
+                    if (Responsive.isMobile(context) ||
+                        Responsive.isTablet(context))
+                      Expanded(
+                        child: PermitTypeMobile(),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: PermitTypeContentWeb(),

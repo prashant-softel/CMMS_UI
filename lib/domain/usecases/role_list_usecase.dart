@@ -20,5 +20,27 @@ class RolelistUsecase {
         // facilityId,
         isLoading,
       );
+  
+  Future<bool> createRoleList({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createRoleList(
+          isLoading: isLoading, modulelistJsonString: modulelistJsonString);
+  deleteRoleList(
+      {required Object module_id, required bool isLoading}) async =>
+      await repository.deleteRole(
+        module_id,
+        isLoading,
+      );
+
+  Future<bool> updateRoleList({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateRoleList(
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
 
 }

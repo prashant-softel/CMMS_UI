@@ -31,24 +31,24 @@ class CompetencylistUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<bool> createChecklistNumber({
-    checklistJsonString,
+  Future<bool> createCompetency({
+    competencyJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckListNumber(
-          isLoading: isLoading, checklistJsonString: checklistJsonString);
-  deleteCkecklist(
+      await repository.createCompetency(
+          isLoading: isLoading, competencyJsonString: competencyJsonString);
+  deleteCompetencyList(
           {required Object checklist_id, required bool isLoading}) async =>
-      await repository.deleteCkecklist(
+      await repository.deleteCompetencyList(
         checklist_id,
         isLoading,
       );
-  Future<bool> updateChecklistNumber({
-    checklistJsonString,
+  Future<bool> updateCompetency({
+    competencyJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updateChecklistNumber(
+      await repository.updateCompetency(
         isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
+        competencyJsonString: competencyJsonString,
       );
 }

@@ -117,6 +117,8 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
+import '../permit_type/permit_type_binding.dart';
+import '../permit_type/view/permit_type_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';

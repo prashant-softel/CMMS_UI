@@ -62,6 +62,13 @@ class RoleListContentWeb
                     onTap: () {
                       Get.back();
                     },
+                    child: Text(" / MASTERS",
+                        style: Styles.greyMediumLight12),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
                     child: Text(" / ROLE LIST",
                         style: Styles.greyMediumLight12),
                   ),
@@ -75,13 +82,13 @@ class RoleListContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                      .where((e) => e.feature_id == 5 && e.add == 1)
+                      .where((e) => e.feature_id == 5 && e.add == 0)
                       .length >
                       0
                       ? Container(
                     width: (Get.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: Get.height/1.85,
+                    height: Get.height/2.4,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -106,28 +113,28 @@ class RoleListContentWeb
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  // Visibility(
-                                  //   visible: controller.isSuccess.value,
-                                  //   child: Center(
-                                  //     child: Wrap(
-                                  //       children: [
-                                  //         Text(
-                                  //           controller.selectedItem ==
-                                  //               null
-                                  //               ? "ModuleList added Successfully in the List."
-                                  //               : "ModuleList updated Successfully in the List.",
-                                  //           style: TextStyle(
-                                  //               fontSize: 16,
-                                  //               color: Color.fromARGB(
-                                  //                   255, 24, 243, 123)),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: 5,
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  Visibility(
+                                    visible: controller.isSuccess.value,
+                                    child: Center(
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            controller.selectedItem ==
+                                                null
+                                                ? "Role added Successfully in the List."
+                                                : "Role updated Successfully in the List.",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromARGB(
+                                                    255, 24, 243, 123)),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -179,54 +186,6 @@ class RoleListContentWeb
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomRichText(title: 'Feature Name: '),
-                                      SizedBox(
-                                        width: 70,
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                            width: (MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                                .2) -
-                                                30,
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues
-                                                      .whiteColor,
-                                                  offset: const Offset(
-                                                      0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              color:
-                                              ColorValues.whiteColor,
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  5),
-                                            ),
-                                            child: LoginCustomTextfield(
-                                              textController: controller
-                                                  .featureCtrlr,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
 
                                 ]),
                           ),
@@ -234,7 +193,9 @@ class RoleListContentWeb
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  height: 40,
+                                  height: 40
+
+                                  ,
                                   width: (Get.width * .1),
                                   child: CustomElevatedButton(
                                       backgroundColor:
@@ -244,40 +205,40 @@ class RoleListContentWeb
                               SizedBox(
                                 width: 10,
                               ),
-                              // Container(
-                              //     height: 40,
-                              //     width: (Get.width * .2) - 70,
-                              //     child: controller.selectedItem == null
-                              //         ? CustomElevatedButton(
-                              //         backgroundColor: ColorValues
-                              //             .appDarkBlueColor,
-                              //         onPressed: () {
-                              //           controller
-                              //               .createModuleListNumber()
-                              //               .then((value) {
-                              //             print("value,$value");
-                              //             if (value == true)
-                              //               controller
-                              //                   .issuccessCreatemodulelist();
-                              //           });
-                              //         },
-                              //         text: 'Create Module List')
-                              //         : CustomElevatedButton(
-                              //         backgroundColor: ColorValues
-                              //             .appDarkBlueColor,
-                              //         onPressed: () {
-                              //           controller
-                              //               .updateModulelistNumber(
-                              //               controller
-                              //                   .selectedItem?.id)
-                              //               .then((value) {
-                              //             print("value,$value");
-                              //             if (value == true)
-                              //               controller
-                              //                   .issuccessCreatemodulelist();
-                              //           });
-                              //         },
-                              //         text: 'Update')),
+                              Container(
+                                  height: 40,
+                                  width: (Get.width * .2) - 70,
+                                  child: controller.selectedItem == null
+                                      ? CustomElevatedButton(
+                                      backgroundColor: ColorValues
+                                          .appDarkBlueColor,
+                                      onPressed: () {
+                                        controller
+                                            .createRoleList()
+                                            .then((value) {
+                                          print("value,$value");
+                                          if (value == true)
+                                            controller
+                                                .issuccessCreatemodulelist();
+                                        });
+                                      },
+                                      text: 'Create Role')
+                                      : CustomElevatedButton(
+                                      backgroundColor: ColorValues
+                                          .appDarkBlueColor,
+                                      onPressed: () {
+                                        controller
+                                            .updateRoleList(
+                                            controller
+                                                .selectedItem?.id)
+                                            .then((value) {
+                                          print("value,$value");
+                                          if (value == true)
+                                            controller
+                                                .issuccessCreatemodulelist();
+                                        });
+                                      },
+                                      text: 'Update')),
                             ],
                           ),
                         ],
@@ -306,7 +267,7 @@ class RoleListContentWeb
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                "Check List",
+                                "Roles",
                                 style: Styles.blackBold16,
                               ),
                             ),
@@ -370,7 +331,7 @@ class RoleListContentWeb
                                 columns: [
                                   "Id",
                                   "Name ",
-
+                                  "Action"
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
@@ -386,7 +347,7 @@ class RoleListContentWeb
                                       return [
                                         '',
                                         '',
-                                        // '',
+                                        '',
 
                                       ];
                                     },
@@ -410,6 +371,7 @@ class RoleListContentWeb
                                 columns: [
                                   "Id",
                                   " Name ",
+                                  "Action"
                                 ].map((column) {
                                   return TableViewColumn(
                                     minWidth: Get.width * 0.12,
@@ -430,7 +392,7 @@ class RoleListContentWeb
                                       return [
                                         '${roleListDetails?.id}',
                                         '${roleListDetails?.name}',
-
+                                          'Action'
                                       ];
                                     },
                                   ),
@@ -470,15 +432,15 @@ class RoleListContentWeb
                                                   // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                   //     0
                                                   //     ?
-                                                  // TableActionButton(
-                                                  //   color: ColorValues.appRedColor,
-                                                  //   icon: Icons.delete,
-                                                  //   label: 'Delete',
-                                                  //   onPress: () {
-                                                  //     print(_moduleList[0]);
-                                                  //     controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
-                                                  //   },
-                                                  // )
+                                                  TableActionButton(
+                                                    color: ColorValues.appRedColor,
+                                                    icon: Icons.delete,
+                                                    label: 'Delete',
+                                                    onPress: () {
+                                                      print(_moduleList[0]);
+                                                      controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
+                                                    },
+                                                  )
                                                   // : Container()
                                                 ])
                                                 : Text(

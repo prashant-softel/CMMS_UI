@@ -143,6 +143,19 @@ class StockManagementDashboardScreen
                           // }
                         ),
                         _stockManagementList(tittle: "Plant Stock"),
+                        _stockManagementList(
+                            tittle: "Asset Master",
+                            ontap: () {
+                              Get.offNamed(
+                                  Routes.assetMasterList);
+                            }),
+                        _stockManagementList(
+                            tittle: "Add Asset Master",
+                            ontap: () {
+                              Get.offNamed(
+                                  Routes.addassetMaster
+                              );
+                            }),
                       ],
                     )
                   ]),

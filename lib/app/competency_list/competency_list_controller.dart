@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/competency_model.dart';
+import '../../domain/models/create_competency_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
@@ -39,9 +40,9 @@ class CompetencyListController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var checklistNumberCtrlr = TextEditingController();
+  var nameCtrlr = TextEditingController();
   CompetencyModel? selectedItem;
-  var manpowerCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
   var durationCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
@@ -50,12 +51,12 @@ class CompetencyListController extends GetxController {
   @override
   void onInit() async {
 
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
+    // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+    //   facilityId = event;
+    //   Future.delayed(Duration(seconds: 2), () {
         getCompetencyList( true);
-      });
-    });
+    //   });
+    // });
     super.onInit();
   }
 
@@ -68,7 +69,7 @@ class CompetencyListController extends GetxController {
          isLoading: isLoading);
 
     if (_competencyList != null) {
-      competencyList!.value = _competencyList;
+      competencyList!.value = _competencyList.cast<CompetencyModel?>();
       paginationController = PaginationController(
         rowCount: competencyList?.length ?? 0,
         rowsPerPage: 10,
@@ -85,69 +86,37 @@ class CompetencyListController extends GetxController {
     }
   }
 
-  Future<void> createChecklist() async {
+  Future<void> createCompetencyList() async {
     Get.toNamed(
       Routes.createCheckList,
     );
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          int equipmentIndex =
-          equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          int frequencyIndex =
-          frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
-  }
-
-  Future<bool> createChecklistNumber() async {
-    if (checklistNumberCtrlr.text.trim() == '' ||
-        selectedEquipmentId == 0 ||
-        selectedfrequencyId == 0) {
+  Future<bool> createCompetency() async {
+    if (nameCtrlr.text.trim() == '' ||
+        descriptionCtrlr.text.trim()=='') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-      String _checklistNumber = checklistNumberCtrlr.text.trim();
-      String _duration = durationCtrlr.text.trim();
-      String _manpower = manpowerCtrlr.text.trim();
+      String _name = nameCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
 
-      CreateChecklist createChecklist = CreateChecklist(
-          category_id: selectedEquipmentId,
-          duration: int.tryParse(_duration) ?? 0,
-          manPower: int.tryParse(_manpower) ?? 0,
-          facility_id: facilityId,
-          frequency_id: selectedfrequencyId,
-          status: 1,
-          type: 1,
-          id: 0,
-          checklist_number: _checklistNumber);
-      var checklistJsonString = [
-        createChecklist.toJson()
-      ]; //createCheckListToJson([createChecklist]);
+      CreateCompetency createCompetencyList = CreateCompetency(
+          name: _name,
+          description: _description
+      );
+      var competencyJsonString = 
+        createCompetencyList.toJson(); //createCheckListToJson([createCompetencyList]);
 
-      print({"checklistJsonString", checklistJsonString});
-      await competencyListPresenter.createChecklistNumber(
-        checklistJsonString: checklistJsonString,
+      print({"competencyJsonString", competencyJsonString});
+      await competencyListPresenter.createCompetency(
+        competencyJsonString: competencyJsonString,
         isLoading: true,
       );
       return true;
     }
+    getCompetencyList(true);
     return true;
   }
 
@@ -158,15 +127,9 @@ class CompetencyListController extends GetxController {
   }
 
   _cleardata() {
-    checklistNumberCtrlr.text = '';
-    durationCtrlr.text = '';
-    manpowerCtrlr.text = '';
-
-    selectedequipment.value = '';
-
-    selectedfrequency.value = '';
+    nameCtrlr.text = '';
+    descriptionCtrlr.text = '';
     selectedItem = null;
-
     Future.delayed(Duration(seconds: 1), () {
       getCompetencyList( true);
     });
@@ -185,7 +148,7 @@ class CompetencyListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the checkpoint ',
+                text: 'Are you sure you want to delete the competency ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
@@ -210,7 +173,7 @@ class CompetencyListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteCkecklist(checklist_id).then((value) {
+                  deleteCompetencyList(checklist_id).then((value) {
                     Get.back();
                     getCompetencyList( true);
                   });
@@ -224,36 +187,30 @@ class CompetencyListController extends GetxController {
     );
   }
 
-  Future<void> deleteCkecklist(String? checklist_id) async {
+  Future<void> deleteCompetencyList(String? checklist_id) async {
     {
-      await competencyListPresenter.deleteCkecklist(
+      await competencyListPresenter.deleteCompetencyList(
         checklist_id,
         isLoading: true,
       );
     }
   }
 
-  Future<bool> updateChecklistNumber(checklistId) async {
-    String _checklistNumber = checklistNumberCtrlr.text.trim();
-    String _duration = durationCtrlr.text.trim();
-    String _manpower = manpowerCtrlr.text.trim();
+  Future<bool> updateCompetency(checklistId) async {
+    String _name = nameCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
 
-    CreateChecklist createChecklist = CreateChecklist(
-        category_id: selectedEquipmentId,
-        duration: int.tryParse(_duration) ?? 0,
-        manPower: int.tryParse(_manpower) ?? 0,
-        facility_id: facilityId,
-        frequency_id: selectedfrequencyId,
-        status: 1,
-        type: 1,
-        id: checklistId,
-        checklist_number: _checklistNumber);
-    var checklistJsonString =
-    createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+    CompetencyModel createCompetencyList = CompetencyModel(
+        id:checklistId,
+        name: _name,
+        description: _description
+    );
+    var competencyJsonString =
+    createCompetencyList.toJson(); //createCheckListToJson([createCompetencyList]);
 
-    print({"checklistJsonString", checklistJsonString});
-    await competencyListPresenter.updateChecklistNumber(
-      checklistJsonString: checklistJsonString,
+    print({"competencyJsonString", competencyJsonString});
+    await competencyListPresenter.updateCompetency(
+      competencyJsonString: competencyJsonString,
       isLoading: true,
     );
     return true;

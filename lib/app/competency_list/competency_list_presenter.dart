@@ -28,28 +28,28 @@ class CompetencyListPresenter {
       await competencylistUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<bool> createChecklistNumber({
-    checklistJsonString,
+  Future<bool> createCompetency({
+    competencyJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    competencylistUsecase.createChecklistNumber(
-      checklistJsonString: checklistJsonString,
+    competencylistUsecase.createCompetency(
+      competencyJsonString: competencyJsonString,
       isLoading: isLoading,
     );
     return true;
   }
 
-  deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
-      await competencylistUsecase.deleteCkecklist(
+  deleteCompetencyList(String? checklist_id, {required bool isLoading}) async =>
+      await competencylistUsecase.deleteCompetencyList(
         checklist_id: checklist_id ?? 0,
         isLoading: isLoading,
       );
-  Future<bool> updateChecklistNumber(
-      {checklistJsonString, required bool isLoading, checklistId}) async {
+  Future<bool> updateCompetency(
+      {competencyJsonString, required bool isLoading, checklistId}) async {
     print("presenter");
-    competencylistUsecase.updateChecklistNumber(
-      checklistJsonString: checklistJsonString,
+    competencylistUsecase.updateCompetency(
+      competencyJsonString: competencyJsonString,
       isLoading: isLoading,
     );
     return true;

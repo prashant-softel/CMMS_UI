@@ -1,12 +1,13 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/models/competency_model.dart';
-import '../competency_list_controller.dart';
+import '../permit_type_controller.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 
-class CompetencyListContentMobile
-    extends GetView<CompetencyListController> {
-  CompetencyListContentMobile({Key? key}) : super(key: key);
+class PermitTypeMobile
+    extends GetView<PermitTypeController> {
+  PermitTypeMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +24,14 @@ class CompetencyListContentMobile
                 child: ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: controller.competencyList != null
-                        ? controller.competencyList?.length
+                    itemCount: controller.typePermitList != null
+                        ? controller.typePermitList?.length
                         : 0,
                     itemBuilder: (context, index) {
-                      final competencyModel =
-                          (controller.competencyList != null)
-                              ? controller.competencyList![index]
-                              : CompetencyModel();
+                      final preventiveCheckListModel =
+                          (controller.typePermitList != null)
+                              ? controller.typePermitList![index]
+                              : TypePermitModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
                         child: Card(
@@ -48,13 +49,13 @@ class CompetencyListContentMobile
                                   Row(
                                     children: [
                                       Text(
-                                        'CheckList Id: ',
+                                        'Sr no: ',
                                         style: const TextStyle(
                                             color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        '${competencyModel?.id ?? 0}',
+                                        '${preventiveCheckListModel?.id ?? 0}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: ColorValues.navyBlueColor,
@@ -64,7 +65,7 @@ class CompetencyListContentMobile
                                   ),
                                   Row(children: [
                                     Text(
-                                      'Name: ',
+                                      'Title: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -74,7 +75,7 @@ class CompetencyListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '${competencyModel?.name}'
+                                        '${preventiveCheckListModel?.name}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
@@ -83,8 +84,7 @@ class CompetencyListContentMobile
                                       ),
                                     ),
                                   ]),
-                                  Row(//
-                                      children: [
+                                  Row(children: [
                                     Text(
                                       'Description: ',
                                       style: const TextStyle(
@@ -96,16 +96,37 @@ class CompetencyListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        competencyModel
-                                                ?.description ??
+                                        'No Data!'
                                             '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ]),
+                                  Row(children: [
+                                    Text(
+                                      'Facility: ',
+                                      style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        'Hero Future Solar Plant 100MW'
+                                            '',
+                                        style: const TextStyle(
+                                          color: ColorValues.navyBlueColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+
                                 ]),
                           ),
                         ),
@@ -118,7 +139,7 @@ class CompetencyListContentMobile
       ),
       //
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.createCompetency(),
+        onPressed: () => controller.createPermitType(),
         backgroundColor: ColorValues.navyBlueColor,
         child: Icon(
           Icons.add,
