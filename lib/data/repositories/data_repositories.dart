@@ -938,6 +938,16 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,

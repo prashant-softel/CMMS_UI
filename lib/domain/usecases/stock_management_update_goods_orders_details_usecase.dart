@@ -40,4 +40,12 @@ class StockManagementUpdateGoodsOrdersDetailsUsecase {
         facilityId,
         isLoading,
       );
+  Future<Map<String, dynamic>> createGoodsOrder({
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await _repository.createGoodsOrder(
+        createGo,
+        isLoading,
+      );
 }

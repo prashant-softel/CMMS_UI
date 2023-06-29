@@ -436,6 +436,44 @@ class Repository {
     }
   }
 
+  //Create or  add Goods order
+  Future<Map<String, dynamic>> createGoodsOrder(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Goods Order Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Update Warranty claim
   Future<Map<String, dynamic>> updateWarrantyClaim(
     updateWarrantyClaim,

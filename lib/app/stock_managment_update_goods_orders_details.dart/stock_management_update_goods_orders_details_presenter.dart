@@ -37,4 +37,13 @@ class StockManagementUpdateGoodsOrdersDetailsPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  Future<Map<String, dynamic>?> createGoodsOrder({
+    createGo,
+    required bool isLoading,
+  }) async {
+    return stockManagementUpdateGoodsOrdersDetailsUsecase.createGoodsOrder(
+      createGo: createGo,
+      isLoading: isLoading,
+    );
+  }
 }

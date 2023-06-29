@@ -1003,7 +1003,7 @@ class ConnectHelper {
     int? facilityId,
   }) async =>
       await apiWrapper.makeRequest(
-        'SMMaster/GetAssetMasterList?ID=0',
+        'SMMaster/GetAssetMasterList',
         Request.getMultiparts,
         null,
         isLoading ?? false,
@@ -1382,6 +1382,34 @@ class ConnectHelper {
       warrantyClaimId: parsedJson['id'],
     ));
     // }
+
+    return responseModel;
+  }
+
+  //Create WarraGoods order
+
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/CreateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
 
     return responseModel;
   }

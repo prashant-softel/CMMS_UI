@@ -278,6 +278,7 @@ class CustomTextFieldForStock extends StatelessWidget {
                 controller: textController,
                 maxLines: maxLine,
                 decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.date_range),
                   contentPadding: Dimens.edgeInsets16_0_16_0,
                   filled: true,
                   fillColor: readOnly == true
@@ -289,7 +290,6 @@ class CustomTextFieldForStock extends StatelessWidget {
                   ),
                   hintText: hintText,
                   hintStyle: TextStyle(),
-                  suffixIcon: suffixIcon,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),
