@@ -263,6 +263,10 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.deny(
+                                                RegExp(r'\s')),
+                                          ],
                                           ishint: 'Enter Email ID',
                                           textController:
                                               controller.loginIdCtrlr,
@@ -305,10 +309,42 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
-                                          obscureText: true,
+                                          widget: MouseRegion(
+                                            onEnter: (_) {
+                                              if (!controller
+                                                  .isPasswordVisible.value) {
+                                                controller
+                                                    .togglePasswordVisibility();
+                                              }
+                                            },
+                                            onExit: (_) {
+                                              if (controller
+                                                  .isPasswordVisible.value) {
+                                                controller
+                                                    .togglePasswordVisibility();
+                                              }
+                                            },
+                                            child: IconButton(
+                                              icon: Icon(
+                                                  controller.isPasswordVisible
+                                                          .value
+                                                      ? Icons.visibility
+                                                      : Icons.visibility_off,
+                                                  color: Colors.grey),
+                                              onPressed: () {
+                                                controller
+                                                    .togglePasswordVisibility();
+                                              },
+                                            ),
+                                          ),
+                                          obscureText: !controller
+                                              .isPasswordVisible.value,
                                           ishint: 'Enter Password',
                                           textController:
                                               controller.passwordCtrlr,
+                                          onChanged: (value) {
+                                            // controller.validatePassword(value);
+                                          },
                                         )),
                                   ],
                                 ),
@@ -574,6 +610,10 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                                 .2),
                                         child: Expanded(
                                           child: LoginCustomTextfield(
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.deny(
+                                                  RegExp(r'\s')),
+                                            ],
                                             ishint: 'Enter Email ID',
                                             textController:
                                                 controller.secandoryIdCtrlr,
@@ -659,7 +699,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
-                                          ishint: 'Enter Birth Date',
+                                          readOnly: true,
+                                          // keyboardType: TextInputType.number,
+
                                           textController: controller.dobCtrlr,
                                           ontap: () {
                                             _selectDate(context, 1);
@@ -707,6 +749,9 @@ class AddUserContentWeb extends GetView<AddUserController> {
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         child: LoginCustomTextfield(
+                                          readOnly: true,
+                                          // keyboardType: TextInputType.number,
+
                                           ishint: 'Enter Date of Joining',
                                           textController:
                                               controller.joingdateCtrlr,
@@ -1587,7 +1632,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            controller.userId == 0
+                            controller.userId == null
                                 ? Container(
                                     height: 35,
                                     child: CustomElevatedButton(
@@ -1648,7 +1693,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
       confirmText: "Ok",
       initialDate: DateTime(today.year, today.month, today.day),
       firstDate: DateTime(1900),
-      lastDate: DateTime(today.year, today.month, today.day),
+      lastDate: DateTime(today.year + 2, today.month, today.day),
     );
     if (type == 1) {
       controller.dobCtrlr.text = date.toString().substring(0, 10);

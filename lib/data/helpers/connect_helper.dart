@@ -7,8 +7,11 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_request_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
+import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
@@ -554,14 +557,13 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     String? comment,
-    String? employee_id,
     String? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitIssue',
       Request.put,
-      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
+      {'comment': "$comment", 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -579,14 +581,18 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     String? comment,
-    String? employee_id,
     String? id,
+    String? employee_id,
+    String? ptwStatus,
   }) async {
     // facilityId = 45;
+    // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/PermitApprove',
+      ptwStatus == '123'
+          ? 'Permit/PermitApprove'
+          : 'Permit/PermitExtendApprove',
       Request.put,
-      {'comment': "$comment", 'employee_id': employee_id, 'id': id},
+      {'comment': "$comment", 'id': id},
       isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
@@ -600,7 +606,32 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelByIssuerButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitCancelByIssuer',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitCancelByIssuerResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        PermitMessageCancelByIssuerDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> permitCancelRequestButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -616,10 +647,65 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitCancelResponse: ${responseModel.data}');
+    print('PermitCancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelRequestDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> permitCancelByApproverButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+    String? ptwStatus,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      ptwStatus == '123'
+          ? 'Permit/PermitCancelByApprover'
+          : 'Permit/PermitCancelRequest',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print(
+        'PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        PermitMessageCancelByApproverDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> permitExtendButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? Time,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitExtend',
+      Request.put,
+      {'comment': "$comment", 'Time': '$Time', 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitExtendResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PermitMessageExtendDialog(data: parsedJson['message']));
 
     return responseModel;
   }
@@ -904,6 +990,20 @@ class ConnectHelper {
   }) async =>
       await apiWrapper.makeRequest(
         'CMMS/GetBlockList?facility_id=$facilityId',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getAssetList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'SMMaster/GetAssetMasterList',
         Request.getMultiparts,
         null,
         isLoading ?? false,
@@ -1286,6 +1386,34 @@ class ConnectHelper {
     return responseModel;
   }
 
+  //Create WarraGoods order
+
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/CreateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
   //Update Warranty Claim
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -1560,6 +1688,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  ///Permit History
+  Future<ResponseModel> getPermitHistory({
+    required String? auth,
+    int? moduleType,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitHistory Response:${responseModel}');
+    return responseModel;
+  }
+
   Future<ResponseModel> updateJobCard({
     String? auth,
     jobCard,
@@ -1762,13 +1911,70 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> rejectCloseCalibration({
+    required String auth,
+    bool? isLoading,
+    required rejectCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RejectCalibration',
+      Request.put,
+      rejectCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveCloseCalibration({
+    required String auth,
+    bool? isLoading,
+    required approveCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveCalibration',
+      Request.put,
+      approveCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeCalibration({
+    required String auth,
+    bool? isLoading,
+    required closeCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/CloseCalibration',
+      Request.put,
+      closeCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> completeCalibration({
     required String auth,
     bool? isLoading,
     required completeCalibrationtoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/ApproveRequestCalibration',
+      'Calibration/CompleteCalibration',
       Request.put,
       completeCalibrationtoJsonString,
       isLoading ?? false,
@@ -2546,7 +2752,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -2565,7 +2770,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getCompetencyList({
     required String auth,
@@ -2756,5 +2960,4 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 }

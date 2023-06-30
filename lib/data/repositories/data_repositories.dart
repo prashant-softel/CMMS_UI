@@ -468,14 +468,12 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> permitIssueButton({
     required String auth,
     String? comment,
-    String? employee_id,
     String? id,
     bool? isLoading,
   }) async =>
       await connectHelper.permitIssueButton(
         auth: auth,
         comment: comment,
-        employee_id: employee_id,
         id: id,
         isLoading: isLoading ?? false,
       );
@@ -483,27 +481,70 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> permitApprovedButton({
     required String auth,
     String? comment,
-    String? employee_id,
     String? id,
+    String? ptwStatus,
     bool? isLoading,
   }) async =>
       await connectHelper.permitApprovedButton(
         auth: auth,
         comment: comment,
-        employee_id: employee_id,
         id: id,
+        ptwStatus: ptwStatus,
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> permitCancelButton({
+  Future<ResponseModel> permitCancelByIssuerButton({
     required String auth,
     String? comment,
     String? id,
     bool? isLoading,
   }) async =>
-      await connectHelper.permitCancelButton(
+      await connectHelper.permitCancelByIssuerButton(
         auth: auth,
         comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> permitCancelRequestButton({
+    required String auth,
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitCancelRequestButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> permitCancelByApproverButton({
+    required String auth,
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitCancelByApproverButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        ptwStatus: ptwStatus,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> permitExtendButton({
+    required String auth,
+    String? comment,
+    String? Time,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.permitExtendButton(
+        auth: auth,
+        comment: comment,
+        Time: Time,
         id: id,
         isLoading: isLoading ?? false,
       );
@@ -643,6 +684,18 @@ class DataRepository extends DomainRepository {
     int? facilityId,
   }) async {
     return await connectHelper.getBlocksList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getAssetList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getAssetList(
       auth: auth,
       isLoading: isLoading,
       facilityId: facilityId,
@@ -885,6 +938,16 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -998,6 +1061,21 @@ class DataRepository extends DomainRepository {
       auth: auth,
       moduleType: moduleType,
       jobCardId: jobCardId,
+      isLoading: isLoading,
+    );
+  }
+
+  ///Permit History
+  Future<ResponseModel> getPermitHistory({
+    String? auth,
+    int? permitId,
+    int? moduleType,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getPermitHistory(
+      auth: auth,
+      moduleType: moduleType,
+      permitId: permitId,
       isLoading: isLoading,
     );
   }
@@ -1193,6 +1271,42 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
         approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approveCloseCalibration({
+    auth,
+    bool? isLoading,
+    approveCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.approveCloseCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectCloseCalibration({
+    auth,
+    bool? isLoading,
+    rejectCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.rejectCloseCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> closeCalibration({
+    auth,
+    bool? isLoading,
+    closeCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.closeCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        closeCalibrationtoJsonString: closeCalibrationtoJsonString);
     return response;
   }
 
@@ -1684,7 +1798,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> updateBusinesslist({
     auth,
     bool? isLoading,
@@ -1809,6 +1922,5 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
-
 //end
 }

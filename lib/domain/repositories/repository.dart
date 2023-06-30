@@ -19,6 +19,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
@@ -28,7 +29,6 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
@@ -428,6 +428,44 @@ class Repository {
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  //Create or  add Goods order
+  Future<Map<String, dynamic>> createGoodsOrder(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Goods Order Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
         //return '';
       }
       return Map();
@@ -1472,7 +1510,6 @@ class Repository {
 
   Future<void> permitIssueButton(
     String? comment,
-    String? employee_id,
     String? id,
     bool? isLoading,
   ) async {
@@ -1483,7 +1520,6 @@ class Repository {
         auth: auth,
         comment: comment,
         id: id,
-        employee_id: employee_id,
         isLoading: isLoading ?? false,
       );
       print('PermitIssuerResponse5: ${res.data}');
@@ -1500,8 +1536,8 @@ class Repository {
 
   Future<void> permitApprovedButton(
     String? comment,
-    String? employee_id,
     String? id,
+    String? ptwStatus,
     bool? isLoading,
   ) async {
     try {
@@ -1511,10 +1547,10 @@ class Repository {
         auth: auth,
         comment: comment,
         id: id,
-        employee_id: employee_id,
+        ptwStatus: ptwStatus,
         isLoading: isLoading ?? false,
       );
-      print('PermitApprovedResponse5: ${res.data}');
+      print('PermitApproved&ExtendApproveResponse5: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -1526,7 +1562,7 @@ class Repository {
     }
   }
 
-  Future<void> permitCancelButton(
+  Future<void> permitCancelByIssuerButton(
     String? comment,
     String? id,
     bool? isLoading,
@@ -1534,18 +1570,103 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitCancelButton(
+      final res = await _dataRepository.permitCancelByIssuerButton(
         auth: auth,
         comment: comment,
         id: id,
         isLoading: isLoading ?? false,
       );
-      print('PermitCancelResponse: ${res.data}');
+      print('PermitCancelByIssuerResponse: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCancelButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelByIssuerButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> permitCancelRequestButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCancelRequestButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCancelRequestResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelRequestButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> permitCancelByApproverButton(
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCancelByApproverButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        ptwStatus: ptwStatus,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCancelByApproverResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelByApproverButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> permitExtendButton(
+    String? comment,
+    String? Time,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitExtendButton(
+        auth: auth,
+        comment: comment,
+        Time: Time,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitExtendResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'permitExtendButton');
       }
     } catch (error) {
       log(error.toString());
@@ -2580,6 +2701,43 @@ class Repository {
     }
   }
 
+  ///Permit History
+  Future<List<HistoryModel>?> getPermitHistory(
+    int? moduleType,
+    int? permitId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPermitHistory(
+        auth: auth,
+        moduleType: moduleType,
+        permitId: permitId,
+        isLoading: isLoading,
+      );
+      print('Permit History: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonPermitDetailsModels = jsonDecode(res.data);
+        final List<HistoryModel> _permitDetailsList = jsonPermitDetailsModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(
+                Map<String, dynamic>.from(m),
+              ),
+            )
+            .toList();
+
+        return _permitDetailsList;
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   ///
   Future<Map<String, dynamic>> updateJobCard(
     jobCard,
@@ -2890,6 +3048,81 @@ class Repository {
     }
   }
 
+  Future<bool> approveCloseCalibration(
+      {bool? isLoading, approveCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveCloseCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          approveCalibrationtoJsonString:
+              json.encode(approveCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectCloseCalibration(
+      {bool? isLoading, rejectCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectCloseCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          rejectCalibrationtoJsonString:
+              json.encode(rejectCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> closeCalibration(
+      {bool? isLoading, closeCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.closeCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          closeCalibrationtoJsonString:
+              json.encode(closeCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> completeCalibration(
       {bool? isLoading, completeCalibrationtoJsonString}) async {
     try {
@@ -2898,7 +3131,8 @@ class Repository {
       final res = await _dataRepository.completeCalibration(
           auth: auth,
           isLoading: isLoading,
-          completeCalibrationtoJsonString: completeCalibrationtoJsonString);
+          completeCalibrationtoJsonString:
+              json.encode(completeCalibrationtoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -3812,6 +4046,38 @@ class Repository {
     }
   }
 
+  Future<List<GetAssetDataModel?>?> getAssetList(
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAssetList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+        facilityId: facilityId ?? 0,
+      );
+
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<GetAssetDataModel> _getAssetList = jsonFacilityModels
+            .map<GetAssetDataModel>(
+                (m) => GetAssetDataModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _getAssetList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getAssetList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<bool> createBusinessListNumber(
       {bool? isLoading, businesslistJsonString}) async {
     try {
@@ -4075,8 +4341,8 @@ class Repository {
   }
 
   Future<List<DesignationModel?>?> getDesignationList(
-      bool? isLoading,
-      ) async {
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getDesignationList(
@@ -4089,7 +4355,7 @@ class Repository {
         final List<DesignationModel> _roleModelList = jsonRoleModels
             .map<DesignationModel>(
               (m) => DesignationModel.fromJson(Map<String, dynamic>.from(m)),
-        )
+            )
             .toList();
 
         return _roleModelList;
@@ -4104,7 +4370,7 @@ class Repository {
     }
   }
 
-  Future<void>  deleteBusinessList(Object business_id, bool isLoading) async {
+  Future<void> deleteBusinessList(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteBusinessList(

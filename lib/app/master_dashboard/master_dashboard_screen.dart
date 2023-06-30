@@ -367,6 +367,13 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
+                                    title: "Role Access",
+                                    onTap: () {
+                                      controller.goToRoleAccess();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
                                     title: "Competencies",
                                     onTap: () {
                                       controller.goToCompetencyScreen();

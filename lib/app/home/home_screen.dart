@@ -231,6 +231,85 @@ class CustomTextField extends StatelessWidget {
   }
 }
 
+class CustomTextFieldForStock extends StatelessWidget {
+  const CustomTextFieldForStock({
+    Key? key,
+    this.label,
+    this.maxLine = 1,
+    this.width,
+    this.textController,
+    this.readOnly = false,
+    this.onTap,
+    this.suffixIcon,
+    this.hintText,
+    this.decoration,
+    this.alignment,
+    this.numberTextField = false,
+  }) : super(key: key);
+
+  final String? label;
+  final int? maxLine;
+  final double? width;
+  final bool readOnly;
+  final Icon? suffixIcon;
+  final String? hintText;
+  final Function()? onTap;
+  final InputDecoration? decoration;
+  final Alignment? alignment;
+  final bool numberTextField;
+  final TextEditingController? textController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      margin: Dimens.edgeInsets5,
+      constraints: BoxConstraints(
+        maxWidth: width ?? 400,
+        minWidth: 100,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              child: TextFormField(
+                onTap: onTap,
+                readOnly: readOnly,
+                controller: textController,
+                maxLines: maxLine,
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.date_range),
+                  contentPadding: Dimens.edgeInsets16_0_16_0,
+                  filled: true,
+                  fillColor: readOnly == true
+                      ? Color.fromARGB(255, 206, 205, 205)
+                      : Colors.white,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: .2),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  hintText: hintText,
+                  hintStyle: TextStyle(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: .2),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                inputFormatters: numberTextField
+                    ? [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'))
+                      ]
+                    : null,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class AddPhoto extends StatelessWidget {
   const AddPhoto({
     Key? key,

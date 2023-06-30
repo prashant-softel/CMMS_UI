@@ -5,20 +5,8 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/incident_report_list.dart/incident_report_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_presenter.dart';
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/create_warranty_claim_model.dart';
-import 'package:cmms/domain/models/currency_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/inventory_category_model2.dart';
-import 'package:cmms/domain/models/inventory_detail_model.dart';
-import 'package:cmms/domain/models/inventory_details_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -45,26 +33,26 @@ class IncidentReportListController extends GetxController {
 
   // }
 
-  ///External Emails Part
-  var externalEmails = <ExternalEmails>[].obs;
-  void updateText(String name, String email) {
-    externalEmails.add(ExternalEmails(email: email, name: name));
-  }
+  // ///External Emails Part
+  // var externalEmails = <ExternalEmails>[].obs;
+  // void updateText(String name, String email) {
+  //   externalEmails.add(ExternalEmails(email: email, name: name));
+  // }
 
-  ///Supplier Action Part
-  var supplierActions = <SupplierActions>[].obs;
-  void updateSupplierActionText(
-    String name,
-    String required_by_data,
-    String srNumber,
-  ) {
-    supplierActions.add(SupplierActions(
-      name: name,
-      required_by_date: required_by_data,
-      // is_required: is_required
-      srNumber: srNumber,
-    ));
-  }
+  // ///Supplier Action Part
+  // var supplierActions = <SupplierActions>[].obs;
+  // void updateSupplierActionText(
+  //   String name,
+  //   String required_by_data,
+  //   String srNumber,
+  // ) {
+  //   supplierActions.add(SupplierActions(
+  //     name: name,
+  //     required_by_date: required_by_data,
+  //     // is_required: is_required
+  //     srNumber: srNumber,
+  //   ));
+  // }
 
   final TextEditingController supplierActionTextFieldController =
       TextEditingController();
@@ -73,17 +61,17 @@ class IncidentReportListController extends GetxController {
 
   ///Checkbox
   ////
-  RxBool isCheckedRequire = false.obs;
-  RxBool isCheckedDataRequire = false.obs;
+  // RxBool isCheckedRequire = false.obs;
+  // RxBool isCheckedDataRequire = false.obs;
 
-  void requireToggleCheckbox() {
-    isCheckedRequire.value = !isCheckedRequire.value;
-    isCheckedDataRequire.value = isCheckedRequire.value;
-    print('Checkbox value ${isCheckedRequire.value}');
-    print(
-        'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
-    // Toggle the checkbox state
-  }
+  // void requireToggleCheckbox() {
+  //   isCheckedRequire.value = !isCheckedRequire.value;
+  //   isCheckedDataRequire.value = isCheckedRequire.value;
+  //   print('Checkbox value ${isCheckedRequire.value}');
+  //   print(
+  //       'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
+  //   // Toggle the checkbox state
+  // }
 
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
@@ -96,92 +84,92 @@ class IncidentReportListController extends GetxController {
   var failureDateTimeCtrlrWebBuffer;
   Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
 
-  ///WC List Date Time For Web
-  var warrantyClaimListDateTimeCtrlrWeb = TextEditingController();
-  var warrantyClaimListDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedwarrantyClaimListDateTimeWeb = DateTime.now().obs;
+  ///Incident Report List Date Time For Web
+  var incidentReportListDateTimeCtrlrWeb = TextEditingController();
+  var incidentReportListDateTimeCtrlrWebBuffer;
+  Rx<DateTime> selectedIncidentReportListDateTimeWeb = DateTime.now().obs;
 
-  ///Supplier Action Date Time For Web
-  var supplierActionDateTimeCtrlrWeb = TextEditingController();
-  var supplierActionDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedSupplierActionDateTimeWeb = DateTime.now().obs;
+  // ///Supplier Action Date Time For Web
+  // var supplierActionDateTimeCtrlrWeb = TextEditingController();
+  // var supplierActionDateTimeCtrlrWebBuffer;
+  // Rx<DateTime> selectedSupplierActionDateTimeWeb = DateTime.now().obs;
 
-  ///Warranty Start date Time for web
-  var warrantyStartDateTimeCtrlrWeb = TextEditingController();
-  var warrantyStartDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedWarrantyStartDateTime = DateTime.now().obs;
+  // ///Warranty Start date Time for web
+  // var warrantyStartDateTimeCtrlrWeb = TextEditingController();
+  // var warrantyStartDateTimeCtrlrWebBuffer;
+  // Rx<DateTime> selectedWarrantyStartDateTime = DateTime.now().obs;
 
-  ///Warranty End date time for web
-  var warrantyEndDateTimeCtrlrWeb = TextEditingController();
-  var warrantyEndDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedWarrantyEndDateTime = DateTime.now().obs;
+  // ///Warranty End date time for web
+  // var warrantyEndDateTimeCtrlrWeb = TextEditingController();
+  // var warrantyEndDateTimeCtrlrWebBuffer;
+  // Rx<DateTime> selectedWarrantyEndDateTime = DateTime.now().obs;
 
-  Set<String> supplierNameSet = {};
+  // Set<String> supplierNameSet = {};
 
-//Warranty Claim
+//Incident Report List
   var incidentReportList = <IncidentReportListModel>[];
   
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
-  Rx<bool> isEquipmentCategorySelected = true.obs;
-  Rx<String> selectedEquipmentCategory = ''.obs;
-  int selectedEquipmentCategoryIds = 0;
+  // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  // RxList<InventoryCategoryModel?> equipmentCategoryList =
+  //     <InventoryCategoryModel>[].obs;
+  // Rx<bool> isEquipmentCategorySelected = true.obs;
+  // Rx<String> selectedEquipmentCategory = ''.obs;
+  // int selectedEquipmentCategoryIds = 0;
 
-  RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
-  RxList<int> selectedEquipmentList = <int>[].obs;
-  Rx<bool> isInventorySelected = true.obs;
-  RxList<int> selectedEquipmentIdList = <int>[].obs;
-  Rx<String> selectedInventory = ''.obs;
+  // RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
+  // RxList<int> selectedEquipmentList = <int>[].obs;
+  // Rx<bool> isInventorySelected = true.obs;
+  // RxList<int> selectedEquipmentIdList = <int>[].obs;
+  // Rx<String> selectedInventory = ''.obs;
 
-  ///Equipment name List
-  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-  Rx<String> selectedEquipmentName = ''.obs;
-  Rx<bool> isEquipmentNameSelected = true.obs;
-  int selectedEquipmentnameId = 0;
-  // String? selectedEquipmentName = '';
+  // ///Equipment name List
+  // RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  // Rx<String> selectedEquipmentName = ''.obs;
+  // Rx<bool> isEquipmentNameSelected = true.obs;
+  // int selectedEquipmentnameId = 0;
+  // // String? selectedEquipmentName = '';
 
-  //Affected Part Equipemnt Name lIst
-  RxList<InventoryCategoryModel2?> affectedPartEqipmentNameList =
-      <InventoryCategoryModel2>[].obs;
-  RxList<String?> selectedAffectedpartEquipmentNameList = <String>[].obs;
-  RxList<int?> selectedAffectedPartEquipmentIdList = <int>[].obs;
-  Rx<String> selectedAffectedPart = ''.obs;
-  Rx<bool> isAffectedPartSelected = true.obs;
-  int selectedAffectedPartId = 0;
-  String? selectedAffectedPartName = '';
+  // //Affected Part Equipemnt Name lIst
+  // RxList<InventoryCategoryModel2?> affectedPartEqipmentNameList =
+  //     <InventoryCategoryModel2>[].obs;
+  // RxList<String?> selectedAffectedpartEquipmentNameList = <String>[].obs;
+  // RxList<int?> selectedAffectedPartEquipmentIdList = <int>[].obs;
+  // Rx<String> selectedAffectedPart = ''.obs;
+  // Rx<bool> isAffectedPartSelected = true.obs;
+  // int selectedAffectedPartId = 0;
+  // String? selectedAffectedPartName = '';
 
-  RxList<BusinessListModel?> supplierNameList = <BusinessListModel>[].obs;
-  Rx<bool> isSupplierNameSelected = true.obs;
-  Rx<String> selectedSupplier = ''.obs;
-  RxList<String?> selectedSupplierNameList = <String>[].obs;
-  RxList<int?> selectedSupplierNameIdList = <int>[].obs;
-  Rx<bool> isBlockSelected = true.obs;
+  // RxList<BusinessListModel?> supplierNameList = <BusinessListModel>[].obs;
+  // Rx<bool> isSupplierNameSelected = true.obs;
+  // Rx<String> selectedSupplier = ''.obs;
+  // RxList<String?> selectedSupplierNameList = <String>[].obs;
+  // RxList<int?> selectedSupplierNameIdList = <int>[].obs;
+  // Rx<bool> isBlockSelected = true.obs;
 
-  ///Currency List
-  RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
-  Rx<bool> isUnitCurrencySelected = true.obs;
-  Rx<String> selectedUnitCurrency = ''.obs;
-  RxList<String?> selectedUnitCurrencyList = <String>[].obs;
-  RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
-  int selectedCurrencyId = 0;
+  // ///Currency List
+  // RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
+  // Rx<bool> isUnitCurrencySelected = true.obs;
+  // Rx<String> selectedUnitCurrency = ''.obs;
+  // RxList<String?> selectedUnitCurrencyList = <String>[].obs;
+  // RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
+  // int selectedCurrencyId = 0;
 
-  /// Employee List / Approver
-  RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
-  Rx<bool> isemployeeListSelected = true.obs;
-  Rx<String> selectedEmployeeList = ''.obs;
-  RxList<String?> selectedEmployeeDataList = <String>[].obs;
-  RxList<int?> selectedEmployeeIdList = <int>[].obs;
-  int selectedApproverId = 0;
+  // /// Employee List / Approver
+  // RxList<EmployeeListModel> employeeList = <EmployeeListModel>[].obs;
+  // Rx<bool> isemployeeListSelected = true.obs;
+  // Rx<String> selectedEmployeeList = ''.obs;
+  // RxList<String?> selectedEmployeeDataList = <String>[].obs;
+  // RxList<int?> selectedEmployeeIdList = <int>[].obs;
+  // int selectedApproverId = 0;
 
-  /// Employees List / Additional Email
-  RxList<EmployeeListModel2> employeesList = <EmployeeListModel2>[].obs;
-  Rx<bool> isemployeesListSelected = true.obs;
-  Rx<String> selectedEmployeesList = ''.obs;
-  RxList<int> selectedEmployeeNameIdList = <int>[].obs;
-  RxList<String?> selectedEmployeesDataList = <String>[].obs;
-  RxList<int?> selectedEmployeesIdList = <int>[].obs;
-  int selectedEmployeesId = 0;
+  // /// Employees List / Additional Email
+  // RxList<EmployeeListModel2> employeesList = <EmployeeListModel2>[].obs;
+  // Rx<bool> isemployeesListSelected = true.obs;
+  // Rx<String> selectedEmployeesList = ''.obs;
+  // RxList<int> selectedEmployeeNameIdList = <int>[].obs;
+  // RxList<String?> selectedEmployeesDataList = <String>[].obs;
+  // RxList<int?> selectedEmployeesIdList = <int>[].obs;
+  // int selectedEmployeesId = 0;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -706,18 +694,18 @@ class IncidentReportListController extends GetxController {
   }
 
   void checkForm() {
-    if (selectedEquipmentName.value == '') {
-      isEquipmentNameSelected.value = false;
-    }
-    if (selectedAffectedPart.value == '') {
-      isAffectedPartSelected.value = false;
-    }
-    if (selectedUnitCurrency.value == '') {
-      isUnitCurrencySelected.value = false;
-    }
-    if (selectedEmployeeList.value == '') {
-      isemployeeListSelected.value = false;
-    }
+    // if (selectedEquipmentName.value == '') {
+    //   isEquipmentNameSelected.value = false;
+    // }
+    // if (selectedAffectedPart.value == '') {
+    //   isAffectedPartSelected.value = false;
+    // }
+    // if (selectedUnitCurrency.value == '') {
+    //   isUnitCurrencySelected.value = false;
+    // }
+    // if (selectedEmployeeList.value == '') {
+    //   isemployeeListSelected.value = false;
+    // }
 
     if (warrantyClaimTitleTextController.text == '') {
       Fluttertoast.showToast(
@@ -737,16 +725,16 @@ class IncidentReportListController extends GetxController {
           msg: 'Failure Date Time Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    if (warrantyStartDateTimeCtrlrWebBuffer == null) {
-      Fluttertoast.showToast(
-          msg: 'Warranty Start Date Time Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
-    if (warrantyEndDateTimeCtrlrWebBuffer == null) {
-      Fluttertoast.showToast(
-          msg: 'Warranty End Date Time Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
+    // if (warrantyStartDateTimeCtrlrWebBuffer == null) {
+    //   Fluttertoast.showToast(
+    //       msg: 'Warranty Start Date Time Field cannot be empty',
+    //       timeInSecForIosWeb: 5);
+    // }
+    // if (warrantyEndDateTimeCtrlrWebBuffer == null) {
+    //   Fluttertoast.showToast(
+    //       msg: 'Warranty End Date Time Field cannot be empty',
+    //       timeInSecForIosWeb: 5);
+    // }
     if (orderReferenceNoTextController.text == '') {
       Fluttertoast.showToast(
           msg: 'Order Reference No Field cannot be empty',
@@ -766,14 +754,15 @@ class IncidentReportListController extends GetxController {
       Fluttertoast.showToast(
           msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
     }
-    if (isEquipmentNameSelected.value == false ||
-        isAffectedPartSelected.value == false ||
-        isUnitCurrencySelected.value == false ||
-        isemployeeListSelected.value == false) {
-      isFormInvalid.value = true;
-    } else {
-      isFormInvalid.value = false;
-    }
+    // if (isEquipmentNameSelected.value == false ||
+    //     isAffectedPartSelected.value == false ||
+    //     isUnitCurrencySelected.value == false ||
+    //     isemployeeListSelected.value == false)
+    //      {
+    //   isFormInvalid.value = true;
+    // } else {
+    //   isFormInvalid.value = false;
+    // }
   }
 
   ///Create Warranty Claim

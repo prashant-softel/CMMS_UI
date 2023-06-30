@@ -29,6 +29,8 @@ import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
 import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
+import 'package:cmms/app/role_access/role_access_binding.dart';
+import 'package:cmms/app/role_access/view/role_access_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
@@ -551,7 +553,11 @@ class AppPages {
       page: DocumentManagerScreen.new,
       binding: DocumentManagerBinding(),
     ),
-
+    GetPage<dynamic>(
+      name: _Paths.roleAccess,
+      page: RoleAccessScreen.new,
+      binding: RoleAccessBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.designationScreen,
       page: DesignationListScreen.new,

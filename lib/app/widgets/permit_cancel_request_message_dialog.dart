@@ -9,11 +9,11 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitMessageCancelByIssuerDialog extends GetView {
+class PermitMessageCancelRequestDialog extends GetView {
   String? createPermitData;
   String? data;
 
-  PermitMessageCancelByIssuerDialog({super.key, this.createPermitData, this.data});
+  PermitMessageCancelRequestDialog({super.key, this.createPermitData, this.data});
   final NewPermitListController _controller = Get.find();
 
 

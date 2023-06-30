@@ -28,40 +28,76 @@ class NewPermitListPresenter {
 
   Future<void> permitIssueButton({
     String? comment,
-    String? employee_id,
     String? id,
     bool? isLoading,
   }) async =>
       await newPermitListUsecase.permitIssueButton(
         comment: comment,
-        employee_id: employee_id,
         id: id,
         isLoading: isLoading ?? false,
       );
 
   Future<void> permitApprovedButton({
     String? comment,
-    String? employee_id,
     String? id,
+    String? ptwStatus,
     bool? isLoading,
   }) async =>
       await newPermitListUsecase.permitApprovedButton(
         comment: comment,
-        employee_id: employee_id,
         id: id,
+        ptwStatus: ptwStatus,
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitCancelButton({
+  Future<void> permitCancelByIssuerButton({
     String? comment,
     String? id,
     bool? isLoading,
   }) async =>
-      await newPermitListUsecase.permitCancelButton(
+      await newPermitListUsecase.permitCancelByIssuerButton(
         comment: comment,
         id: id,
         isLoading: isLoading ?? false,
       );
+
+  Future<void> permitCancelRequestButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitCancelRequestButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<void> permitCancelByApproverButton({
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitCancelByApproverButton(
+        comment: comment,
+        id: id,
+        ptwStatus: ptwStatus,
+        isLoading: isLoading ?? false,
+      );
+
+Future<void> permitExtendButton({
+    String? comment,
+    String? Time,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await newPermitListUsecase.permitExtendButton(
+        comment: comment,
+        Time: Time,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
 
   Future<void> permitCloseButton({
     String? comment,

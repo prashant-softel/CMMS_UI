@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,7 +87,8 @@ class StockManagementGoodsOrdersWeb
                             icon: Icons.add,
                             label: "Add New",
                             onPressed: () {
-                              //  Get.offNamed(Routes.addUser);
+                              Get.offNamed(
+                                  Routes.updateGoodsOrdersDetailsScreen);
                             },
                             color: ColorValues.greenlightColor,
                           ),

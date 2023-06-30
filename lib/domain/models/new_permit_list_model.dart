@@ -20,6 +20,7 @@ class NewPermitModel {
   String? workingAreaName;
   String? description;
   String? requestByName;
+  int? requestById;
   DateTime? requestDatetime;
   String? approvedByName;
   DateTime? approvedDatetime;
@@ -37,6 +38,7 @@ class NewPermitModel {
       this.workingAreaName,
       this.description,
       this.requestByName,
+      this.requestById,
       this.requestDatetime,
       this.approvedByName,
       this.approvedDatetime,
@@ -54,6 +56,7 @@ class NewPermitModel {
     workingAreaName = json['workingAreaName'];
     description = json['description'];
     requestByName = json['request_by_name'];
+    requestById = json['request_by_id'];
     requestDatetime = json['request_datetime'] == null
         ? null
         : DateTime.parse(json['request_datetime'] as String);
@@ -77,6 +80,7 @@ class NewPermitModel {
     data['workingAreaName'] = this.workingAreaName;
     data['description'] = this.description;
     data['request_by_name'] = this.requestByName;
+    data['request_by_id'] = this.requestById;
     data['request_datetime'] = this.requestDatetime;
     data['approved_by_name'] = this.approvedByName;
     data['approved_datetime'] = this.approvedDatetime;
@@ -85,27 +89,29 @@ class NewPermitModel {
   }
 }
 
+const int permitStatusBase = 121;
 enum PermitStatus {
-  PTW_CREATED,
-  PTW_REJECTED_BY_ISSUER,
-  PTW_ISSUED,
-  PTW_REJECTED_BY_APPROVER,
-  PTW_APPROVE,
-  PTW_CLOSED,
-  PTW_CANCELLED_BY_ISSUER,
-  PTW_CANCELLED_BY_HSE,
-  PTW_CANCELLED_BY_APPROVER,
-  PTW_CANCEL_REQUESTED,
-  PTW_CANCEL_REQUEST_REJECTED,
-  PTW_EDIT,
-  PTW_EXTEND_REQUESTED,
-  PTW_EXTEND_REQUEST_APPROVE,
-  PTW_EXTEND_REQUEST_REJECTED,
-  PTW_LINKED_TO_JOB,
-  PTW_LINKED_TO_PM,
-  PTW_LINKED_TO_AUDIT,
-  PTW_LINKED_TO_HOTO,
-  PTW_EXPIRED,
+ PTW_CREATED,
+ PTW_REJECTED_BY_ISSUER,
+ PTW_ISSUED,
+ PTW_REJECTED_BY_APPROVER,
+ PTW_APPROVE,
+ PTW_CLOSED,
+ PTW_CANCELLED_BY_ISSUER,
+ PTW_CANCELLED_BY_HSE,
+ PTW_CANCELLED_BY_APPROVER,
+ PTW_CANCEL_REQUESTED,
+ PTW_CANCEL_REQUEST_REJECTED,
+ PTW_CANCEL_REQUEST_APPROVED,
+ PTW_EXTEND_REQUESTED,
+ PTW_EXTEND_REQUEST_REJECTED,
+ PTW_EXTEND_REQUEST_APPROVE,
+ PTW_LINKED_TO_JOB,
+ PTW_LINKED_TO_PM,
+ PTW_LINKED_TO_AUDIT,
+ PTW_LINKED_TO_HOTO,
+ PTW_EXPIRED,
+ PTW_UPDATED,
 }
 
 class PermitStatusData {
@@ -127,7 +133,7 @@ class PermitStatusData {
         PermitStatus.PTW_CANCEL_REQUESTED,
     AppConstants.kPermitStatusCancelRequestRejected:
         PermitStatus.PTW_CANCEL_REQUEST_REJECTED,
-    AppConstants.kPermitStatusEdit: PermitStatus.PTW_EDIT,
+    // AppConstants.kPermitStatusEdit: PermitStatus.PTW_EDIT,
     AppConstants.kPermitStatusExtendRequested:
         PermitStatus.PTW_EXTEND_REQUESTED,
     AppConstants.kPermitStatusExtendRequestApproved:
