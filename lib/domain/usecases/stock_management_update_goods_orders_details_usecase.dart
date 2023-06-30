@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
@@ -16,18 +17,12 @@ class StockManagementUpdateGoodsOrdersDetailsUsecase {
     );
   }
 
-  Future<List<BusinessTypeModel>> getBusinessTypeList({
-    required int? businessType,
-    // int? blockId,
-    // required String categoryIds,
-    // int? blockId,
-    // String? categoryIds,
-    required bool isLoading,
+  Future<List<BusinessListModel?>?> getBusinessList({
+    required int type,
+    bool isLoading = true,
   }) async =>
-      await _repository.getBusinessTypeList(
-        // blockId : blockId,
-        // categoryIds,
-        businessType: businessType,
+      await _repository.getBusinessList(
+        businessType: type,
         isLoading: isLoading,
       );
   Future<List<GetAssetDataModel?>?> getAssetList({

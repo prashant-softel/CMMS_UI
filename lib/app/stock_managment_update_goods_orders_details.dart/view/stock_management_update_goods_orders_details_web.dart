@@ -128,20 +128,23 @@ class _UpdateGoodsOrdersDetailsWebState
                                             CustomRichText(title: 'Vendor: '),
                                             Dimens.boxWidth10,
                                             SizedBox(
-                                              child: DropdownWebWidget(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                dropdownList: controller
-                                                    .businessCategoryList,
-                                                isValueSelected: controller
-                                                    .isSelectedBusinessType
-                                                    .value,
-                                                selectedValue: controller
-                                                    .selectedBusinessType.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
+                                              child: Obx(
+                                                () => DropdownWebWidget(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  dropdownList:
+                                                      controller.ownerList,
+                                                  isValueSelected: controller
+                                                      .isSelectedBusinessType
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedBusinessType
+                                                      .value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -709,7 +712,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                       .only(
                                                                   left: 20,
                                                                   right: 20,
-                                                                  top: 60),
+                                                                  top: 70),
                                                           child: Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -749,6 +752,9 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                           null);
                                                                 },
                                                               ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
                                                               Row(
                                                                 children: [
                                                                   Text(
@@ -786,8 +792,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                   4,
                                                               dropdownList:
                                                                   controller
-                                                                      .assetList
-                                                                      .value,
+                                                                      .paid,
                                                               selectedValue:
                                                                   mapData[
                                                                       "value"],
