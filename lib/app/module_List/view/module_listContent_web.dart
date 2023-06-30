@@ -62,6 +62,13 @@ class ModuleListContentWeb
                     onTap: () {
                       Get.back();
                     },
+                    child: Text(" / USERS",
+                        style: Styles.greyMediumLight12),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
                     child: Text(" / MODULE LIST",
                         style: Styles.greyMediumLight12),
                   ),
@@ -81,7 +88,7 @@ class ModuleListContentWeb
                       ? Container(
                     width: (Get.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: Get.height/1.85,
+                    height: Get.height/2.1,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -177,7 +184,7 @@ class ModuleListContentWeb
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 10,
+                                    height: 5,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -228,7 +235,7 @@ class ModuleListContentWeb
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 5,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -306,7 +313,7 @@ class ModuleListContentWeb
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 5,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -384,7 +391,7 @@ class ModuleListContentWeb
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 5,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -417,7 +424,7 @@ class ModuleListContentWeb
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 5,
                                   ),
                                 ]),
                           ),
@@ -684,6 +691,7 @@ class ModuleListContentWeb
                                                   //     0
                                                   //     ?
                                                   TableActionButton(
+
                                                     color: ColorValues.appLightBlueColor,
                                                     icon: Icons.edit,
                                                     label: 'Edit',

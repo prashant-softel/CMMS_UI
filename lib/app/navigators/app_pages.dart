@@ -119,6 +119,8 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
+import '../permit_type/permit_type_binding.dart';
+import '../permit_type/view/permit_type_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -151,6 +153,8 @@ import '../add_asset_master/view/add_asset_master_screen.dart';
 import '../add_asset_master/add_asset_master_binding.dart';
 import '../designation_List/view/designation_list_screen.dart';
 import '../designation_List/designation_list_binding.dart';
+import '../competency_list/view/competency_list_screen.dart';
+import '../competency_list/competency_list_binding.dart';
 
 // coverage:ignore-file
 
@@ -558,6 +562,12 @@ class AppPages {
       name: _Paths.designationScreen,
       page: DesignationListScreen.new,
       binding: DesignationListBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.competencyScreen,
+      page: CompetencyListScreen.new,
+      binding: CompetencyListBinding(),
     ),
   ];
 }

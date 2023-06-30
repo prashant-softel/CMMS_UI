@@ -2770,4 +2770,194 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getCompetencyList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetCompetencyList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createCompetency({
+    required String auth,
+    bool? isLoading,
+    required competencyJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/AddCompetency',
+      Request.post,
+      competencyJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateCompetency({
+    required String auth,
+    bool? isLoading,
+    required competencyJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/UpdateCompetency',
+      Request.patch,
+      competencyJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteCompetencyList({
+    required String auth,
+    bool? isLoading,
+    required checklist_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/DeleteCompetency?id=$checklist_id',
+      Request.delete,
+      checklist_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createPermitType({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermitType',
+      Request.post,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deletePermitType({
+    required String auth,
+    bool? isLoading,
+    required checklist_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/DeletePermitType?id=$checklist_id',
+      Request.delete,
+      checklist_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updatePermitType({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdatePermitType',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createRoleList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'RoleAccess/AddRole',
+      Request.post,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateRoleList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/UpdateRole',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteRole({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/DeleteRole?id=$module_id',
+      Request.delete,
+      module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

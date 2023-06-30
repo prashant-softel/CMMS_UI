@@ -25,5 +25,25 @@ class PermitTypeUsecase {
         facility_id
         );
 
-       
+  Future<bool> createPermitType({
+    checklistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createPermitType(
+          isLoading: isLoading, checklistJsonString: checklistJsonString);
+
+  deletePermitType(
+      {required Object checklist_id, required bool isLoading}) async =>
+      await repository.deletePermitType(
+        checklist_id,
+        isLoading,
+      );
+  Future<bool> updatePermitType({
+    checklistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updatePermitType(
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
 }
