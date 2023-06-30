@@ -2960,4 +2960,69 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+
+
+  Future<ResponseModel> createDesignation({
+    required String auth,
+    bool? isLoading,
+    required designationJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+
+    await apiWrapper.makeRequest(
+      'RoleAccess/AddDesignation',
+      Request.post,
+      designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateDesignation({
+    required String auth,
+    bool? isLoading,
+    required designationJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/UpdateDesignation',
+      Request.patch,
+      designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteDesignation({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/DeleteDesignation?id=$module_id',
+      Request.delete,
+      module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
 }

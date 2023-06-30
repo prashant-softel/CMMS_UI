@@ -1922,5 +1922,42 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
+
+
+  Future<ResponseModel> createDesignation({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.createDesignation(
+        auth: auth,
+        isLoading: isLoading,
+        designationJsonString: designationJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateDesignation({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.updateDesignation(
+      auth: auth,
+      isLoading: isLoading,
+      designationJsonString: designationJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteDesignation({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteDesignation(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
+
 //end
 }
