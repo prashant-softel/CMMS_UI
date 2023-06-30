@@ -2,10 +2,12 @@ import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 
+import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
 import 'stock_management_update_goods_orders_details_presenter.dart';
 
@@ -26,10 +28,12 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId => _facilityId.value;
-  RxList<BusinessTypeModel?> businessCategoryList = <BusinessTypeModel>[].obs;
+  RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
+  int paidId = 0;
+
   RxBool showAdditionalColumn = false.obs;
 
   //drop down list of assets
@@ -64,6 +68,12 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   bool openChallanDatePicker = false;
   bool openPODatePicker = false;
   bool openReceivedPicker = false;
+  var paid = <PaiedModel>[
+    PaiedModel(name: "Please Select", id: 0),
+    PaiedModel(name: 'Operator', id: 1),
+    PaiedModel(name: 'Owner', id: 2),
+  ];
+  var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
 
   ///
   @override
@@ -72,7 +82,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
       getUnitCurrencyList();
     });
     Future.delayed(Duration(seconds: 1), () {
-      getBusinessTypeList();
+      getBusinessList(4);
     });
     Future.delayed(Duration(seconds: 1), () {
       getAssetList(facilityId);
@@ -81,13 +91,16 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getBusinessTypeList() async {
-    businessCategoryList.value = <BusinessTypeModel>[];
-    final list = await stockManagementUpdateGoodsOrdersDetailsPresenter
-        .getBusinessTypeList();
-
-    for (var _equipmentCategoryList in list) {
-      businessCategoryList.add(_equipmentCategoryList);
+  Future<void> getBusinessList(ListType) async {
+    final list =
+        await stockManagementUpdateGoodsOrdersDetailsPresenter.getBusinessList(
+      ListType: ListType,
+      isLoading: true,
+    );
+    if (list!.length > 0) {
+      for (var _ownerList in list) {
+        ownerList.add(_ownerList);
+      }
     }
   }
 
@@ -139,10 +152,14 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
         break;
       case RxList<BusinessTypeModel>:
         {
-          int equipmentIndex =
-              businessCategoryList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId =
-              businessCategoryList[equipmentIndex]?.id ?? 0;
+          int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
+          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<BusinessTypeModel>:
+        {
+          int equipmentIndex = paid.indexWhere((x) => x.name == value);
+          paidId = paid[equipmentIndex].id;
         }
         break;
     }
@@ -150,10 +167,10 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'fsdf'},
-      {'key': "Paid_By", "value": 'sdfsd'},
-      {'key': "Cost", "value": 'sdf'},
-      {'key': "Order", "value": 'sd'},
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Paid_By", "value": 'Please Select'},
+      {'key': "Cost", "value": ''},
+      {'key': "Order", "value": ''},
     ]);
     print({"rowItem.value": rowItem.value.length});
     // [
