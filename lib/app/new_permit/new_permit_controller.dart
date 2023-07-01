@@ -31,7 +31,6 @@ import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/job_details_model.dart';
 
 class NewPermitController extends GetxController {
-
   NewPermitController(this.permitPresenter, this.jobListPresenter);
 
   final HomeController homeController = Get.find();
@@ -42,6 +41,7 @@ class NewPermitController extends GetxController {
   //   RxBool on = false.obs; // our observable
   // // swap true/false & save it to observable
   // void toggle() => on.value = on.value ? false : true;
+  var itemCount = 0.obs;
 
   var isToggleOn = false.obs;
   var isToggleOn1 = false.obs;
@@ -136,9 +136,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isTitleTextInvalid = false.obs;
   Rx<bool> isWorPermitNumberTextInvalid = false.obs;
 
-
-
-///Permit Type
+  ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;
   Rx<String> selectedTypePermit = ''.obs;
@@ -156,7 +154,6 @@ class NewPermitController extends GetxController {
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
   var workPermitNumberTextCtrlr = TextEditingController();
-
 
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
@@ -213,9 +210,7 @@ class NewPermitController extends GetxController {
 
   RxList<int?> selectedJobModelEquipemntIsolationIdList = <int?>[].obs;
 
-  RxList<EquipmentCatList?> listJobModelCategory =
-      <EquipmentCatList?>[].obs;
-
+  RxList<EquipmentCatList?> listJobModelCategory = <EquipmentCatList?>[].obs;
 
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
@@ -227,6 +222,8 @@ class NewPermitController extends GetxController {
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
+
+  RxList<int> selectedEmployeeNameIds = <int>[].obs;
 
   /// Job Type Permit List
   RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
@@ -315,12 +312,10 @@ class NewPermitController extends GetxController {
   Rx<NewPermitDetailModel?> newPermitDetailsModel = NewPermitDetailModel().obs;
   RxList<NewPermitDetailModel?>? newPermitDetailsList =
       <NewPermitDetailModel?>[].obs;
-  
+
   ///SOP File Path
   RxList<SOPListModel> sopListFilePathModel = <SOPListModel>[].obs;
   Rx<String> selectedSOPFilePath = ''.obs;
-
-
 
   var jobModel = JobDetailsModel();
 
@@ -337,29 +332,23 @@ class NewPermitController extends GetxController {
   ///
   @override
   void onInit() async {
-    
     try {
-    final arguments = Get.arguments;
-     JobDetailsModel? jobModel = JobDetailsModel();
-if(arguments != null){
-   if (arguments.containsKey('permitId')) {
- 
-      permitId.value = arguments['permitId'];
-     }
+      final arguments = Get.arguments;
+      JobDetailsModel? jobModel = JobDetailsModel();
+      if (arguments != null) {
+        if (arguments.containsKey('permitId')) {
+          permitId.value = arguments['permitId'];
+        }
 
-     if (arguments.containsKey('jobModel')) {
+        if (arguments.containsKey('jobModel')) {
+          jobModel = arguments['jobModel'];
+        }
 
-      jobModel = arguments['jobModel'];
-     }
-
-      if (jobModel != null) {
-        loadPermitDetails(jobModel);
+        if (jobModel != null) {
+          loadPermitDetails(jobModel);
+        }
       }
 
-}
-   
-      
-      
       //homePresenter.generateToken();
       //  Future.delayed(Duration(seconds: 1), () {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
@@ -373,7 +362,7 @@ if(arguments != null){
       if (permitId.value > 0) {
         await getNewPermitDetail(intPermitId: permitId.value);
       }
-      
+
       await getInventoryCategoryList();
       await getInventoryIsolationList();
       await getAssignedToList();
@@ -384,16 +373,11 @@ if(arguments != null){
       await getJobTypePermitList();
       await getPermitIssuerList();
       await getPermitApproverList();
-      
-
-     
     } catch (e) {
       print('jobModelError: $e');
     }
     super.onInit();
   }
-
- 
 
   Future<void> getNewPermitDetail({required int intPermitId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
@@ -409,18 +393,21 @@ if(arguments != null){
       permitDescriptionCtrlr.text =
           newPermitDetailsModel.value?.description ?? '';
 
-      ///// Start Date Time    
+      ///// Start Date Time
       startDateTimeCtrlr.text =
-          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}'; 
-          
-          startDateTimeCtrlrBuffer = '${newPermitDetailsModel.value?.start_datetime }';
-          
-      ///
-    
-      ///End date Time
-      validTillTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.end_datetime ?? ''}').add(Duration(hours: 8))).toString()}';
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}';
 
-      validTillTimeCtrlrBuffer = newPermitDetailsModel.value?.end_datetime ?? '';
+      startDateTimeCtrlrBuffer =
+          '${newPermitDetailsModel.value?.start_datetime}';
+
+      ///
+
+      ///End date Time
+      validTillTimeCtrlr.text =
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.end_datetime ?? ''}').add(Duration(hours: 8))).toString()}';
+
+      validTillTimeCtrlrBuffer =
+          newPermitDetailsModel.value?.end_datetime ?? '';
 
       ///
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
@@ -513,6 +500,25 @@ if(arguments != null){
     }
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
+  }
+
+  //  void removeRow(selectedEmployeeNameIds) {
+  //   selectedEmployeeNameIdList.value = <int>[];
+  //   filteredEmployeeNameList.value = <EmployeeListModel>[];
+  //   late int emp_id = 0;
+  //   for (var _selectedEmployeeNameId in selectedEmployeeNameIds) {
+  //     selectedEmployeeNameIdList.add(_selectedEmployeeNameId);
+  //     EmployeeListModel? e = employeeNameList.firstWhere((element) {
+  //       return element?.id == _selectedEmployeeNameId;
+  //     });
+  //     filteredEmployeeNameList.remove(e);
+  //   }
+
+  //   employee_map[emp_id] = selectedEmployeeNameIdList;
+  // }
+
+  void removeRow({required int id}) {
+    employeeNameList.removeWhere((element)  => element?.id == id);
   }
 
   void permitIssuerSelected(_selectedEmployeeNameIds) {
@@ -630,21 +636,13 @@ if(arguments != null){
       job_type_id: selectedJobTypesId,
       // job_type_id: 36,
     );
-    
 
     for (var sopPermit_list in _sopPermitList) {
       sopPermitList.add(sopPermit_list);
       String filePath;
-      
     }
 
-
-     
-
     print('SOP List 18:${filteredSOPPathList.value}');
-
-   
-    
 
     // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
@@ -674,7 +672,7 @@ if(arguments != null){
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    print({ list,  value});
+    print({list, value});
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
@@ -792,13 +790,11 @@ if(arguments != null){
         {
           int sopPermitListIndex =
               sopPermitList.indexWhere((x) => x.name == value);
-            jsaData = sopPermitList[sopPermitListIndex].jsa_file_path ?? '';
-            sopData = sopPermitList[sopPermitListIndex].sop_file_path ?? '';
+          jsaData = sopPermitList[sopPermitListIndex].jsa_file_path ?? '';
+          sopData = sopPermitList[sopPermitListIndex].sop_file_path ?? '';
           selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
           print('JsaPath:$jsaData');
           print('SopPath:$sopData');
-
-           
         }
         break;
 
@@ -815,7 +811,6 @@ if(arguments != null){
     final _blockList =
         await permitPresenter.getBlocksList(facilityId: _facilityId);
 
-    
     if (_blockList != null) {
       for (var block in _blockList) {
         blockList.add(block);
@@ -886,9 +881,8 @@ if(arguments != null){
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await permitPresenter.getTypePermitList(
-      facility_id: facilityId
-    );
+    final _permitTypeList =
+        await permitPresenter.getTypePermitList(facility_id: facilityId);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -946,10 +940,6 @@ if(arguments != null){
   //   return _selectedAssignBlockId;
   //   }
 
-
-
-
-
   void createNewPermit() async {
     {
       checkForm();
@@ -959,7 +949,6 @@ if(arguments != null){
       //   if(selectedBlockId <= 0){
       //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
       //   }
-
 
       // print('JobList BlockId:$selectedBlockId');
 
@@ -1012,7 +1001,9 @@ if(arguments != null){
         facility_id: facilityId,
         blockId: selectedBlockId,
         lotoId: selectedEquipmentCategoryIdList.first,
-        permitTypeId: selectedPermitTypeId, ///Permit Type Id
+        permitTypeId: selectedPermitTypeId,
+
+        ///Permit Type Id
         start_datetime: startDateTimeCtrlrBuffer,
         end_datetime: validTillTimeCtrlrBuffer,
         title: _title,
@@ -1078,9 +1069,8 @@ if(arguments != null){
   //         selectedFacility.value = value;
   //       }
 
-
-///Update New Permit
-   void updateNewPermit() async {
+  ///Update New Permit
+  void updateNewPermit() async {
     {
       // checkForm();
       // if (isFormInvalid.value) {
@@ -1113,8 +1103,6 @@ if(arguments != null){
             safetyMeasureId: e.id, safetyMeasureValue: e.name));
       });
 
-   
-
       //  List<Employeelist> employee_list= <Employeelist>[];
       // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
       // List<LotoList> loto_list = <LotoList>[];
@@ -1139,7 +1127,9 @@ if(arguments != null){
         blockId: selectedBlockId,
         lotoId: selectedEquipmentCategoryIdList.first,
         permit_id: permitId.value,
-        permitTypeId: selectedPermitTypeId, ///Permit Type Id
+        permitTypeId: selectedPermitTypeId,
+
+        ///Permit Type Id
         start_datetime: startDateTimeCtrlrBuffer,
         end_datetime: validTillTimeCtrlrBuffer,
         title: _title,
@@ -1173,11 +1163,6 @@ if(arguments != null){
     }
   }
 
-
-
-
-
-
   Future<void> createNewPermits() async {
     Get.toNamed(
       Routes.newPermit,
@@ -1189,20 +1174,15 @@ if(arguments != null){
     selectedBlock.value = jobModel.blockName ?? '';
     selectedBlockId = jobModel.blockId ?? 0;
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
-     List<int> idList = listJobModelCategory
-          .map((obj) => obj!.equipmentCatId)
-          .toList();
-          
-   
+    List<int> idList =
+        listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
+
     print("Selected Block Id:${selectedBlockId}");
 
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
     print("Selected Block Name:${selectedBlock}");
-    
-
-
   }
 
   /// class ends

@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/add_incident_report.dart/add_incident_report_binding.dart';
+import 'package:cmms/app/add_incident_report.dart/add_incident_report_screen.dart';
 import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
 import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
 
@@ -552,6 +554,12 @@ class AppPages {
       name: _Paths.designationScreen,
       page: DesignationListScreen.new,
       binding: DesignationListBinding(),
+    ),
+
+     GetPage<dynamic>(
+      name: _Paths.addIncidentReportContentWeb,
+      page: AddIncidentReportScreen.new,
+      binding: AddIncidentReportBinding(),
     ),
   ];
 }

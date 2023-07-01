@@ -160,15 +160,9 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                               icon: Icons.add,
                               label: 'Add Warranty Claim',
                               onPressed: () {
-                                // Get.to(() => AddInventory());
-                                //  Get.to(() => NewWarrantyClaimListWeb());
-                                //  Get.offAllNamed(Routes.newWarrantyClaimList);
+                               
                                 Get.toNamed(Routes.newWarrantyClaimList);
 
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => NewWarrantyClaimListWeb()));
                               },
                               color: Colors.blue,
                             ),

@@ -626,6 +626,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 ),
                                               ],
                                             ),
+                                        
                                           ],
                                         ),
                                         Row(
