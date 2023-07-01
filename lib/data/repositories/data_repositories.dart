@@ -1959,5 +1959,39 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createBusinessType({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessType(
+        auth: auth,
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString);
+    return response;
+  }
+  Future<ResponseModel> deleteBusinessType({
+    auth,
+    bool? isLoading,
+    businesstype_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessType(
+        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateBusinessType({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinessType(
+      auth: auth,
+      isLoading: isLoading,
+      businessTypeJsonString: businessTypeJsonString,
+    );
+    return response;
+  }
+
 //end
 }

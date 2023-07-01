@@ -16,26 +16,26 @@ class BusinessTypeModel {
     this.id,
     this.name,
     this.description,
-    this.status
+    // this.status
 
   });
 
   int? id;
   String? name;
   String? description;
-  int? status;
+  // int? status;
 
   factory BusinessTypeModel.fromJson(Map<String, dynamic> json) => BusinessTypeModel(
         id: json["id"],
         name: json["name"],
       description: json["description"],
-      status: json["status"]
+      // status: json["status"]
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
-        "status" : status
+        // "status" : status
   };
 }

@@ -3024,5 +3024,62 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createBusinessType({
+    required String auth,
+    bool? isLoading,
+    required businessTypeJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'CMMS/AddBusinessType', //AddBusiness
+      Request.post,
+      businessTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+  Future<ResponseModel> deleteBusinessType({
+    required String auth,
+    bool? isLoading,
+    required businesstype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBusinessType?id=$businesstype_id',
+      Request.delete,
+      businesstype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateBusinessType({
+    required String auth,
+    bool? isLoading,
+    required businessTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBusinessType',
+      Request.patch,
+      businessTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 
 }

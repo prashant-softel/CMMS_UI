@@ -10,12 +10,7 @@ class BusinessTypeListPresenter {
   BusinessTypeListPresenter(this.businesstypeListScreen);
   BusinessTypeListUsecase businesstypeListScreen;
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    bool? isLoading,
-  }) async =>
-      await businesstypeListScreen.getInventoryCategoryList(
-        isLoading: isLoading ?? false,
-      );
+
   Future<List<BusinessTypeModel?>?> getBusinessTypeList({
     int? businessType,
     // int? type,
@@ -26,36 +21,31 @@ class BusinessTypeListPresenter {
         // type: type,
         isLoading: isLoading ?? false,
       );
-  Future<List<FrequencyModel?>?> getFrequencyList({
-    bool? isLoading,
-  }) async =>
-      await businesstypeListScreen.getFrequencyList(
-        isLoading: isLoading ?? false,
-      );
-  // Future<bool> createBusinessListNumber({
-  //   businesslistJsonString,
-  //   required bool isLoading,
-  // }) async {
-  //   print("presenter");
-  //   businesstypeListScreen.createBusinessListNumber(
-  //     businesslistJsonString: businesslistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
 
-  // deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
-  //     await businesstypeListScreen.deleteCkecklist(
-  //       checklist_id: checklist_id ?? 0,
-  //       isLoading: isLoading,
-  //     );
-  // Future<bool> updateChecklistNumber(
-  //     {checklistJsonString, required bool isLoading, checklistId}) async {
-  //   print("presenter");
-  //   businesstypeListScreen.updateChecklistNumber(
-  //     checklistJsonString: checklistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> createBusinessType({
+    businessTypeJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    businesstypeListScreen.createBusinessType(
+      businessTypeJsonString: businessTypeJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
+  deleteBusinessType(String? businesstype_id, {required bool isLoading}) async =>
+      await businesstypeListScreen.deleteBusinessType(
+        businesstype_id: businesstype_id ?? 0,
+        isLoading: isLoading,
+      );
+  Future<bool> updateBusinessType(
+      {businessTypeJsonString, required bool isLoading, checklistId}) async {
+    print("presenter");
+    businesstypeListScreen.updateBusinessType(
+      businessTypeJsonString: businessTypeJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

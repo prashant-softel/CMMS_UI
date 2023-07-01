@@ -4712,6 +4712,75 @@ class Repository {
       print(error.toString());
     }
   }
+
+
+  Future<bool> createBusinessType(
+      {bool? isLoading, businessTypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createBusinessType(
+          auth: auth,
+          isLoading: isLoading,
+          businessTypeJsonString: businessTypeJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteBusinessType(Object businesstype_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessType(
+        auth: auth,
+        businesstype_id: businesstype_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateBusinessType({
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinessType(
+        auth: auth,
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
 //end
 //end
 }
