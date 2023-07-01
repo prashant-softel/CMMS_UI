@@ -33,7 +33,6 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
   int paidId = 0;
-
   RxBool showAdditionalColumn = false.obs;
 
   //drop down list of assets
@@ -46,6 +45,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
+  Map<String, PaiedModel> paiddropdownMapperData = {};
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -172,13 +172,6 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
     ]);
-    print({"rowItem.value": rowItem.value.length});
-    // [
-    //                                         "Drop_down",
-    //                                         "Paid_By",
-    //                                         "Cost",
-    //                                         "Order",
-    //                                       ],
   }
 
   void createGoodsOrder() async {
@@ -197,10 +190,17 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
     String _lrNoCtrlr = lrNoCtrlr.text.trim();
     String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
     String _jobRefCtrlr = jobRefCtrlr.text.trim();
-
-    Items items =
-        Items(assetItemID: 3, cost: 1, ordered_qty: 2, asset_type_ID: 1);
+    List<Items> items = [];
+    rowItem.value.forEach((element) {
+      Items item = Items(
+          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          cost: int.tryParse(element[2]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+      items.add(item);
+    });
     CreateGoModel createGoModel = CreateGoModel(
+        facility_id: 45,
         order_type: 1,
         location_ID: 1,
         vendorID: selectedBusinessTypeId,
@@ -219,7 +219,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
         job_ref: _jobRefCtrlr,
         amount: 0,
         currency: "",
-        items: [items]);
+        items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateWarrantyClaim =
