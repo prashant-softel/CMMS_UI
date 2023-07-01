@@ -41,6 +41,7 @@ abstract class AppConstants {
   static const String kPermitStatusCancelRequested = "CANCEL_REQUESTED";
   static const String kPermitStatusCancelRequestRejected =
       "CANCEL_REQUEST_REJECTED";
+  static const String kPermitStatusCancelRequestApproved = "PTW_CANCEL_REQUEST_APPROVED";
   static const String kPermitStatusEdit = "EDIT";
   static const String kPermitStatusExtendRequested = "EXTEND_REQUESTED";
   static const String kPermitStatusExtendRequestApproved =

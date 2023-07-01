@@ -789,7 +789,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               Row(
                                                                                 children: [
                                                                                   checkBoxMethod(1),
-
                                                                                   Text("${element.name}")
                                                                                 ],
                                                                               )
@@ -1799,7 +1798,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   SizedBox(
                                                     width: 90,
                                                     child: CustomRichText(
-                                                        title: 'Work Permit Reference Number: '),
+                                                        title:
+                                                            'Work Permit Reference Number: '),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -1993,7 +1993,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           constraints:
                                                               BoxConstraints(
                                                             maxWidth: 1100,
-                                                            
                                                           ),
                                                           child:
                                                               SingleChildScrollView(
@@ -2053,7 +2052,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                             columns: [
                                                                                               'name',
                                                                                               'serialNumber',
-                                                                                             
                                                                                               'action'.tr,
                                                                                             ].map((column) {
                                                                                               return TableViewColumn(
@@ -2062,8 +2060,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                     ? "Loto Applied On"
                                                                                                     : column == "serialNumber"
                                                                                                         ? "Serial Number"
-                                                                                                       
-
                                                                                                         : "Action",
                                                                                               );
                                                                                             }).toList(),
@@ -2083,7 +2079,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                   return [
                                                                                                     '${inventoryEquipmentName?.asset_name ?? ''}',
                                                                                                     '${inventoryEquipmentName?.locksrno ?? ''}',
-                                                                                                   
                                                                                                     'Actions'
                                                                                                   ];
                                                                                                 },
@@ -2109,7 +2104,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                     //     controller.permitId.value);
                                                                                                                   },
                                                                                                                 ),
-                                                                                                           
                                                                                                               ],
                                                                                                             )
                                                                                                           : Text(value.toString()),
@@ -2158,7 +2152,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                         //         ]);
                                                                                         //       }),
                                                                                         // ),
-                                                                                    
                                                                                       ]),
                                                                                 ),
                                                                               )
@@ -2176,7 +2169,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                             columns: [
                                                                                               'name',
                                                                                               'serialNumber',
-                                                                                            
                                                                                               'action'.tr,
                                                                                             ].map((column) {
                                                                                               return TableViewColumn(
@@ -2185,7 +2177,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                     ? "Loto Applied On"
                                                                                                     : column == "serialNumber"
                                                                                                         ? "Serial Number"
-                                                                                                       
                                                                                                         : "Action",
                                                                                               );
                                                                                             }).toList(),
@@ -2205,7 +2196,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                   return [
                                                                                                     '${inventoryEquipmentName?.name ?? ''}',
                                                                                                     '${inventoryEquipmentName?.serialNumber ?? ''}',
-                                                                                                   
                                                                                                     'Actions'
                                                                                                   ];
                                                                                                 },
@@ -2307,7 +2297,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                         //         ]);
                                                                                         //       }),
                                                                                         // ),
-                                                                                    
                                                                                       ]),
                                                                                 ),
                                                                               ),
@@ -2384,11 +2373,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                     // checkBoxMethod(1),
                                                                                     // Text("${i= i! + 1}. "),
                                                                                     Checkbox(
-                                                                                    value: controller.isChecked1.value,
-                                                                                    onChanged: (bool? value) {
-                                                                                      controller.toggleCheckbox1();
-                                                                                    },
-                                                                                  ),
+                                                                                      value: controller.isChecked1.value,
+                                                                                      onChanged: (bool? value) {
+                                                                                        controller.toggleCheckbox1();
+                                                                                      },
+                                                                                    ),
                                                                                     Text("${element.name}")
                                                                                   ],
                                                                                 )
@@ -2432,7 +2421,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ///Team Deploying
                                               controller.permitId.value <= 0
                                                   ? SizedBox(
-                                                      height:  MediaQuery.of(context)
+                                                      height:
+                                                          MediaQuery.of(context)
                                                                   .size
                                                                   .width /
                                                               5,
@@ -2517,21 +2507,23 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                               ScrollableTableView(
                                                                                             // paginationController: controller.equipmentNamepaginationController,
                                                                                             columns: [
+                                                                                              'id',
                                                                                               'name',
-                                                                                              'gender',
+                                                                                              // 'gender',
                                                                                               'Contact No.',
-                                                                                             
+
                                                                                               'action'.tr,
                                                                                             ].map((column) {
                                                                                               return TableViewColumn(
                                                                                                 minWidth: Get.width * 0.19,
-                                                                                                label: column == "name"
-                                                                                                    ? "Employee Name"
-                                                                                                    : column == "gender"
-                                                                                                        ? "Gender"
+                                                                                                label: column == "id"
+                                                                                                    ? "Employee Id"
+                                                                                                    : column == "name"
+                                                                                                        ? "Employee Name"
+                                                                                                        // : column == "gender"
+                                                                                                        //     ? "Gender"
                                                                                                         : column == "Contact No."
                                                                                                             ? "Contact No."
-                                                                                                          
                                                                                                             : "Action",
                                                                                               );
                                                                                             }).toList(),
@@ -2549,16 +2541,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                   controller.id.value = employeeNameDetails?.id ?? 0;
                                                                                                   print('Employee Idss5:${controller.id.value}');
                                                                                                   return [
+                                                                                                    '${employeeNameDetails?.id ?? ''}',
                                                                                                     '${employeeNameDetails?.name ?? ''}',
-                                                                                                    '${employeeNameDetails?.gender ?? ''}',
+                                                                                                    // '${employeeNameDetails?.gender ?? ''}',
                                                                                                     '${employeeNameDetails?.mobileNumber ?? ''}',
-                                                                                                   
 
                                                                                                     'Actions'
                                                                                                   ];
                                                                                                 },
                                                                                               ),
                                                                                             ].map((_inventoryDetailList) {
+                                                                                              print('ListData = ${_inventoryDetailList}');
+
                                                                                               return TableViewRow(
                                                                                                   onTap: () => {
                                                                                                         print('ZERO = ${_inventoryDetailList[0]}')
@@ -2576,6 +2570,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                 onPress: () {
                                                                                                                   // controller.showNewPermitListDetails(
                                                                                                                   //     controller.permitId.value);
+                                                                                                                  controller.removeRow(id: int.tryParse(_inventoryDetailList[0]) ?? 0);
+                                                                                                                  print('InventoryEmployeeList$_inventoryDetailList');
                                                                                                                 },
                                                                                                               ),
                                                                                                               // TableActionButton(
@@ -2653,7 +2649,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                         //         ]);
                                                                                         //       }),
                                                                                         // ),
-                                                                                   
                                                                                       ]),
                                                                                 ),
                                                                               ),
@@ -2684,7 +2679,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
                                                     )
                                                   : SizedBox(
-                                                      height: MediaQuery.of(context)
+                                                      height:
+                                                          MediaQuery.of(context)
                                                                   .size
                                                                   .width /
                                                               5,
@@ -2779,8 +2775,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                     ? "Employee Name"
                                                                                                     : column == "resp"
                                                                                                         ? "Responsibility"
-                                                                                                       
-
                                                                                                         : "Action",
                                                                                               );
                                                                                             }).toList(),
@@ -2800,7 +2794,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                   return [
                                                                                                     '${employeeNameDetails?.empName ?? ''}',
                                                                                                     '${employeeNameDetails?.resp ?? ''}',
-                                                                                                   
                                                                                                     'Actions'
                                                                                                   ];
                                                                                                 },
@@ -2900,7 +2893,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                         //         ]);
                                                                                         //       }),
                                                                                         // ),
-                                                                                   
                                                                                       ]),
                                                                                 ),
                                                                               ),
@@ -3903,8 +3895,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .format(dateTime.add(Duration(hours: 8)));
     controller.startDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .format(dateTime.add(Duration(hours: 8)));
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
   }
 
   Future<DateTime?> pickDate_web(BuildContext context, int position) async {
@@ -4141,7 +4132,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Dimens.boxHeight10,
     ]);
   }
- Widget _buildWorkPermitReferenceTextField_web(BuildContext context) {
+
+  Widget _buildWorkPermitReferenceTextField_web(BuildContext context) {
     return Column(//
         children: [
       // Align(
@@ -4204,14 +4196,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                focusedErrorBorder: controller.isWorPermitNumberTextInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : InputBorder.none,
+                focusedErrorBorder:
+                    controller.isWorPermitNumberTextInvalid.value
+                        ? OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide(
+                              color: ColorValues.redColorDark,
+                            ),
+                          )
+                        : InputBorder.none,
                 errorBorder: controller.isWorPermitNumberTextInvalid.value
                     ? OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),

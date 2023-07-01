@@ -3695,41 +3695,41 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               // ),
 
               ////Issue Button
-              varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 3 && e.issue == 1)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
-                      ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 122
-                      ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 124
+              // varUserAccessModel.value.access_list!
+              //                 .where((e) => e.feature_id == 3 && e.issue == 1)
+              //                 .length >
+              //             0 &&
+              //         controller.viewPermitDetailsModel.value?.ptwStatus == 121
+              //         ||
+              //         controller.viewPermitDetailsModel.value?.ptwStatus == 122
+              //         ||
+              //         controller.viewPermitDetailsModel.value?.ptwStatus == 124
 
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: Colors.green,
-                        text: "Issue",
-                        icon: Icons.check,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitIssueDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
-                        },
-                      ))
-                  : Container(),
+              //     ? Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: Colors.green,
+              //           text: "Issue",
+              //           icon: Icons.check,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitIssueDialog(
+              //                 permitId:
+              //                     '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              //           },
+              //         ))
+              //     : Container(),
               SizedBox(
                 width: 10,
               ),
 
               ///Approve Button
               varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 3 && e.approve == 1)
+                              .where((e) => e.feature_id == 3 && e.approve == 0)
                               .length >
                           0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 123
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
                       ||
                       controller.viewPermitDetailsModel.value?.ptwStatus == 133
 
