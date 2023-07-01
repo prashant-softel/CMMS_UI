@@ -584,12 +584,13 @@ class ConnectHelper {
     String? id,
     String? employee_id,
     String? ptwStatus,
-    
   }) async {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123' ? 'Permit/PermitApprove': 'Permit/PermitExtendApprove',
+      ptwStatus == '123'
+          ? 'Permit/PermitApprove'
+          : 'Permit/PermitExtendApprove',
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -624,13 +625,13 @@ class ConnectHelper {
     print('PermitCancelByIssuerResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelByIssuerDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelByIssuerDialog(data: parsedJson['message']));
 
     return responseModel;
   }
 
-
-   Future<ResponseModel> permitCancelRequestButton({
+  Future<ResponseModel> permitCancelRequestButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -649,14 +650,13 @@ class ConnectHelper {
     print('PermitCancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelRequestDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelRequestDialog(data: parsedJson['message']));
 
     return responseModel;
   }
 
-
-
-   Future<ResponseModel> permitCancelByApproverButton({
+  Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
     bool? isLoading,
     String? comment,
@@ -665,7 +665,9 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123' ? 'Permit/PermitCancelByApprover' : 'Permit/PermitCancelRequest',
+      ptwStatus == '123'
+          ? 'Permit/PermitCancelByApprover'
+          : 'Permit/PermitCancelRequest',
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -673,14 +675,15 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
+    print(
+        'PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCancelByApproverDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCancelByApproverDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
   Future<ResponseModel> permitExtendButton({
     required String auth,
@@ -987,6 +990,20 @@ class ConnectHelper {
   }) async =>
       await apiWrapper.makeRequest(
         'CMMS/GetBlockList?facility_id=$facilityId',
+        Request.getMultiparts,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getAssetList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'SMMaster/GetAssetMasterList',
         Request.getMultiparts,
         null,
         isLoading ?? false,
@@ -1365,6 +1382,34 @@ class ConnectHelper {
       warrantyClaimId: parsedJson['id'],
     ));
     // }
+
+    return responseModel;
+  }
+
+  //Create WarraGoods order
+
+  Future<ResponseModel> createGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/CreateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
 
     return responseModel;
   }
@@ -1866,13 +1911,70 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> rejectCloseCalibration({
+    required String auth,
+    bool? isLoading,
+    required rejectCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/RejectCalibration',
+      Request.put,
+      rejectCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveCloseCalibration({
+    required String auth,
+    bool? isLoading,
+    required approveCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/ApproveCalibration',
+      Request.put,
+      approveCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeCalibration({
+    required String auth,
+    bool? isLoading,
+    required closeCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/CloseCalibration',
+      Request.put,
+      closeCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> completeCalibration({
     required String auth,
     bool? isLoading,
     required completeCalibrationtoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/ApproveRequestCalibration',
+      'Calibration/CompleteCalibration',
       Request.put,
       completeCalibrationtoJsonString,
       isLoading ?? false,
@@ -2650,7 +2752,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -2670,4 +2771,193 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getCompetencyList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetCompetencyList',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createCompetency({
+    required String auth,
+    bool? isLoading,
+    required competencyJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/AddCompetency',
+      Request.post,
+      competencyJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateCompetency({
+    required String auth,
+    bool? isLoading,
+    required competencyJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/UpdateCompetency',
+      Request.patch,
+      competencyJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteCompetencyList({
+    required String auth,
+    bool? isLoading,
+    required checklist_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/DeleteCompetency?id=$checklist_id',
+      Request.delete,
+      checklist_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createPermitType({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermitType',
+      Request.post,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deletePermitType({
+    required String auth,
+    bool? isLoading,
+    required checklist_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/DeletePermitType?id=$checklist_id',
+      Request.delete,
+      checklist_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updatePermitType({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdatePermitType',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createRoleList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'RoleAccess/AddRole',
+      Request.post,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateRoleList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/UpdateRole',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteRole({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/DeleteRole?id=$module_id',
+      Request.delete,
+      module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

@@ -31,6 +31,8 @@ import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
 import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
+import 'package:cmms/app/role_access/role_access_binding.dart';
+import 'package:cmms/app/role_access/view/role_access_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
@@ -119,6 +121,8 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
+import '../permit_type/permit_type_binding.dart';
+import '../permit_type/view/permit_type_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -151,6 +155,8 @@ import '../add_asset_master/view/add_asset_master_screen.dart';
 import '../add_asset_master/add_asset_master_binding.dart';
 import '../designation_List/view/designation_list_screen.dart';
 import '../designation_List/designation_list_binding.dart';
+import '../competency_list/view/competency_list_screen.dart';
+import '../competency_list/competency_list_binding.dart';
 
 // coverage:ignore-file
 
@@ -549,7 +555,11 @@ class AppPages {
       page: DocumentManagerScreen.new,
       binding: DocumentManagerBinding(),
     ),
-
+    GetPage<dynamic>(
+      name: _Paths.roleAccess,
+      page: RoleAccessScreen.new,
+      binding: RoleAccessBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.designationScreen,
       page: DesignationListScreen.new,
@@ -560,6 +570,12 @@ class AppPages {
       name: _Paths.addIncidentReportContentWeb,
       page: AddIncidentReportScreen.new,
       binding: AddIncidentReportBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.competencyScreen,
+      page: CompetencyListScreen.new,
+      binding: CompetencyListBinding(),
     ),
   ];
 }

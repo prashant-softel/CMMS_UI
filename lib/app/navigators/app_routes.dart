@@ -87,10 +87,12 @@ abstract class Routes {
   static const mrsApprovalScreen = _Paths.mrsApprovalScreen;
   static const mrsIssueScreen = _Paths.mrsIssueScreen;
   static const mrsReturnScreen = _Paths.mrsReturnScreen;
-  
+
   static const documentManager = _Paths.documentManager;
   static const designationScreen = _Paths.designationScreen;
+  static const competencyScreen = _Paths.competencyScreen;
 
+  static const roleAccess = _Paths.roleAccess;
 }
 
 abstract class _Paths {
@@ -174,9 +176,11 @@ abstract class _Paths {
   static const mrsApprovalScreen = '/mrs-approval';
   static const mrsIssueScreen = '/mrs-issue';
   static const mrsReturnScreen = '/mrs-return';
-  
+
   static const documentManager = '/document-manager';
   static const designationScreen = '/designation-Screen';
+  static const competencyScreen = '/competency-Screen';
+  static const roleAccess = '/role-access';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

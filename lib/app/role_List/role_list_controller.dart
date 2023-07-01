@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_modulelist_model.dart';
+import '../../domain/models/create_role_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/modulelist_model.dart';
@@ -42,6 +43,7 @@ class RoleListController extends GetxController {
 
 
   RoleModel? roleModel;
+  final isSuccess = false.obs;
 
 
   RxList<String> moduleListTableColumns = <String>[].obs;
@@ -87,5 +89,133 @@ class RoleListController extends GetxController {
     }
   }
 
+
+
+  Future<void> createModulelist() async {
+    Get.toNamed(
+      Routes.createCheckList,
+    );
+  }
+
+
+  Future<bool> createRoleList() async {
+    if (rolelistNumberCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _role = rolelistNumberCtrlr.text.trim();
+
+      CreateRoleModel createModuleList = CreateRoleModel(
+        name : _role,
+      );
+
+      var moduleListJsonString =
+      createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+
+      print({"checklistJsonString", moduleListJsonString});
+      await roleListPresenter.createRoleList(
+        modulelistJsonString: moduleListJsonString,
+        isLoading: true,
+      );
+      return true;
+    }
+    getRoleList(true);
+    return true;
+  }
+
+  Future<void> issuccessCreatemodulelist() async {
+    isSuccess.toggle();
+
+    // isToggleOn.value = false;
+    await {_cleardata()};
+  }
+  _cleardata() {
+    rolelistNumberCtrlr.text = '';
+    selectedItem = null;
+    Future.delayed(Duration(seconds: 1), () {
+      getRoleList(true);
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
+  }
+
+  void isDeleteDialog({String? module_id, String? module}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the Module ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: module,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteRoleList(module_id).then((value) {
+                    Get.back();
+                    getRoleList(true);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteRoleList(String? module_id) async {
+    {
+      await roleListPresenter.deleteRoleList(
+        module_id,
+        isLoading: true,
+      );
+    }
+  }
+
+  Future<bool> updateRoleList(moduleId) async {
+    String _name = rolelistNumberCtrlr.text.trim();
+
+    RoleModel createModulelist = RoleModel(
+      id:moduleId,
+      name: _name
+    );
+    var modulelistJsonString =
+    createModulelist.toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"modulelistJsonString", modulelistJsonString});
+    await roleListPresenter.updateRoleList(
+      modulelistJsonString: modulelistJsonString,
+      isLoading: true,
+
+    );
+    return true;
+  }
+  
 }
 

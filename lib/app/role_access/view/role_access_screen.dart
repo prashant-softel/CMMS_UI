@@ -1,18 +1,15 @@
-import 'package:cmms/app/permit_type/permit_type_controller.dart';
-import 'package:cmms/app/permit_type/view/permit_type_content_web.dart';
-import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart';
-import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
+import 'package:cmms/app/role_access/rele_access_controller.dart';
+import 'package:cmms/app/role_access/view/role_access_content_mobile.dart';
+import 'package:cmms/app/role_access/view/role_access_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'permit_type_mobile.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-
-class PermitTypeScreen extends GetView<PermitTypeController> {
-  PermitTypeScreen({super.key});
+class RoleAccessScreen extends GetView<RoleAccessController> {
+  RoleAccessScreen({super.key});
 
   ///
   @override
@@ -26,7 +23,7 @@ class PermitTypeScreen extends GetView<PermitTypeController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive List'),
+              title: Text('Module List'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -44,11 +41,11 @@ class PermitTypeScreen extends GetView<PermitTypeController> {
                     if (Responsive.isMobile(context) ||
                         Responsive.isTablet(context))
                       Expanded(
-                        child: PermitTypeMobile(),
+                        child: RoleAccessContentMobile(),
                       ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PermitTypeContentWeb(),
+                        child: RoleAccessContentWeb(),
                       )
                   ],
                 ),

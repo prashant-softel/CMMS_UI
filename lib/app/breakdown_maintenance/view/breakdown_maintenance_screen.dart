@@ -21,7 +21,7 @@ class BreakdownMaintenanceScreen
     ///
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
-    final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
+    final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 6;
     final double itemWidth = size.width / 2;
 
     return //
@@ -145,6 +145,26 @@ class BreakdownMaintenanceScreen
                             title: "Add New Permit",
                             onTap: () {
                               controller.createNewPermit();
+                            }),
+                        createContentTile(
+                            title: "Permit Type",
+                            onTap: () {
+                              controller.goToPermitTypeScreen();
+                            }),
+                        createContentTile(
+                            title: "Safety Questions",
+                            onTap: () {
+                              controller.gotToSafetyQuestionsList();
+                            }),
+                        createContentTile(
+                            title: "TBT Type",
+                            onTap: () {
+                              controller.goToJobTypeList();
+                            }),
+                        createContentTile(
+                            title: "TBT SOP List",
+                            onTap: () {
+                              controller.goToJobSOPList();
                             }),
                         createContentTile(title: "Job Card List"),
                       ],

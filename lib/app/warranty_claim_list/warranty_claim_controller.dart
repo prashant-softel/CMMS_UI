@@ -181,7 +181,6 @@ class WarrantyClaimController extends GetxController {
   int selectedEmployeesId = 0;
   int facilityId = 0;
 
-
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
@@ -232,7 +231,6 @@ class WarrantyClaimController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
 
- 
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
@@ -241,11 +239,11 @@ class WarrantyClaimController extends GetxController {
   void onInit() async {
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
-     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-      getWarrantyClaimList();
-    });
+        getWarrantyClaimList();
+      });
     });
 
     Future.delayed(Duration(seconds: 1), () {
@@ -260,7 +258,7 @@ class WarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getAffectedPartList();
     });
-    
+
     Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
     });
