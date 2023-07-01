@@ -509,7 +509,7 @@ class BusinessTypeListContentWeb
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              // "Checklist Id",
+                                              "Id",
                                               "Name",
                                               "Description ",
                                               "Status ",
@@ -558,7 +558,7 @@ class BusinessTypeListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              // "Id",
+                                              "Id",
                                               "Name",
                                               "Description ",
                                               "Status",
@@ -580,8 +580,7 @@ class BusinessTypeListContentWeb
                                                               .preventiveCheckList?[
                                                           index];
                                                   return [
-                                                    // '${preventiveCheckListModelListDetails?.id}',
-
+                                                    '${preventiveCheckListModelListDetails?.id}',
                                                     '${preventiveCheckListModelListDetails?.name}',
                                                     '${preventiveCheckListModelListDetails?.description}',
                                                     '${preventiveCheckListModelListDetails?.status}',

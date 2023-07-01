@@ -111,6 +111,27 @@ class InventoryScreen extends GetView<InventoryController> {
                             ontap: () {
                               controller.newWarrantyClaimList();
                             }),
+                        _inventoryList(
+                            tittle: "Inventory Category",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.assetTypeListScreen,
+                              );
+                            }),
+                        _inventoryList(
+                            tittle: "Inventory Type",
+                            ontap: () {
+                              Get.toNamed(
+                              Routes.inventoryTypeListScreen,
+                            );
+                          }),
+                        _inventoryList(
+                            tittle: "Inventory Status",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.inventoryStatusListScreen,
+                              );
+                            }),
                       ],
                     )
                   ]),

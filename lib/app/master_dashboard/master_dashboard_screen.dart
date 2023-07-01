@@ -124,141 +124,141 @@ class MastersDashboard extends GetView<MastersController> {
                           //         fontWeight: FontWeight.w400),
                           //   ),
                           // ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Permit To Work",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Permit Type",
-                                    onTap: () {
-                                      controller.goToPermitTypeScreen();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: 'Safety Questions',
-                                    onTap: () {
-                                      controller.gotToSafetyQuestionsList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "TBT Type",
-                                    onTap: () {
-                                      controller.goToJobTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "TBT SOP List",
-                                    onTap: () {
-                                      controller.goToJobSOPList();
-                                    });
-                              }))),
-
-                              // createContentTile(title: "Job Card List"),
-                              // _priventiveList(tittle: "PM Schedule View"),
-                              // _priventiveList(tittle: "PM Report"),
-                              // _priventiveList(tittle: "PM Report"),
-                              // _priventiveList(tittle: "PM "),
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Assets",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Category List",
-                                    onTap: () {
-                                      controller.goToAssetTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Type List",
-                                    onTap: () {
-                                      controller.goToInventoryTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Status List",
-                                    onTap: () {
-                                      controller.goToInventoryStatusList();
-                                    });
-                              }))),
-                            ],
-                          ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 20),
+                          //   child: Row(
+                          //     children: [
+                          //       Text(
+                          //         "Permit To Work",
+                          //         style: TextStyle(
+                          //           color: Color.fromARGB(255, 159, 156, 156),
+                          //           fontSize: 16,
+                          //           fontWeight: FontWeight.w400,
+                          //         ),
+                          //       ),
+                          //       SizedBox(
+                          //           width:
+                          //               10), // Add some space between the text and the line
+                          //       Expanded(
+                          //         child: Divider(
+                          //           color: Colors
+                          //               .grey, // Customize the color of the line if needed
+                          //           height:
+                          //               1, // Adjust the height of the line if needed
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // GridView.count(
+                          //   shrinkWrap: true,
+                          //   primary: false,
+                          //   padding: Dimens.edgeInsets15,
+                          //   crossAxisSpacing: 6,
+                          //   mainAxisSpacing: 6,
+                          //   crossAxisCount:
+                          //       Responsive.isMobile(context) ? 2 : 5,
+                          //   childAspectRatio: Responsive.isMobile(context)
+                          //       ? (itemWidth / itemHeight)
+                          //       : (itemWidth / itemHeightWeb),
+                          //   children: <Widget>[
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Permit Type",
+                          //           onTap: () {
+                          //             controller.goToPermitTypeScreen();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: 'Safety Questions',
+                          //           onTap: () {
+                          //             controller.gotToSafetyQuestionsList();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "TBT Type",
+                          //           onTap: () {
+                          //             controller.goToJobTypeList();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "TBT SOP List",
+                          //           onTap: () {
+                          //             controller.goToJobSOPList();
+                          //           });
+                          //     }))),
+                          //
+                          //     // createContentTile(title: "Job Card List"),
+                          //     // _priventiveList(tittle: "PM Schedule View"),
+                          //     // _priventiveList(tittle: "PM Report"),
+                          //     // _priventiveList(tittle: "PM Report"),
+                          //     // _priventiveList(tittle: "PM "),
+                          //   ],
+                          // ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 20),
+                          //   child: Row(
+                          //     children: [
+                          //       Text(
+                          //         "Assets",
+                          //         style: TextStyle(
+                          //           color: Color.fromARGB(255, 159, 156, 156),
+                          //           fontSize: 16,
+                          //           fontWeight: FontWeight.w400,
+                          //         ),
+                          //       ),
+                          //       SizedBox(
+                          //           width:
+                          //               10), // Add some space between the text and the line
+                          //       Expanded(
+                          //         child: Divider(
+                          //           color: Colors
+                          //               .grey, // Customize the color of the line if needed
+                          //           height:
+                          //               1, // Adjust the height of the line if needed
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // GridView.count(
+                          //   shrinkWrap: true,
+                          //   primary: false,
+                          //   padding: Dimens.edgeInsets15,
+                          //   crossAxisSpacing: 6,
+                          //   mainAxisSpacing: 6,
+                          //   crossAxisCount:
+                          //       Responsive.isMobile(context) ? 2 : 5,
+                          //   childAspectRatio: Responsive.isMobile(context)
+                          //       ? (itemWidth / itemHeight)
+                          //       : (itemWidth / itemHeightWeb),
+                          //   children: <Widget>[
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Asset Category List",
+                          //           onTap: () {
+                          //             controller.goToAssetTypeList();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Asset Type List",
+                          //           onTap: () {
+                          //             controller.goToInventoryTypeList();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Asset Status List",
+                          //           onTap: () {
+                          //             controller.goToInventoryStatusList();
+                          //           });
+                          //     }))),
+                          //   ],
+                          // ),
                           Container(
                             margin: EdgeInsets.only(left: 20),
                             child: Row(
@@ -363,6 +363,20 @@ class MastersDashboard extends GetView<MastersController> {
                                     title: "Roles",
                                     onTap: () {
                                       controller.goToRoleTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Role Access",
+                                    onTap: () {
+                                      controller.goToRoleAccess();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Competencies",
+                                    onTap: () {
+                                      controller.goToCompetencyScreen();
                                     });
                               }))),
                               OnHover(builder: (((isHovered) {
@@ -472,82 +486,82 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                             ],
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Stock Management",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
-                            children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Asset Master",
-                                    onTap: () {
-                                      controller.goToAssetMasterList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Add Asset Master",
-                                    onTap: () {
-                                      controller.goToAddAssetMaster();
-                                    });
-                              }))),
-                              // OnHover(builder: (((isHovered) {
-                              //   return createContentTile(
-                              //       title: "Country List",
-                              //       onTap: () {
-                              //         controller.goToCountryTypeList();
-                              //       });
-                              // }))),
-                              // OnHover(builder: (((isHovered) {
-                              //   return createContentTile(
-                              //       title: "State List",
-                              //       onTap: () {
-                              //         controller.goToStateTypeList();
-                              //       });
-                              // }))),
-                              //
-                              // OnHover(builder: (((isHovered) {
-                              //   return createContentTile(
-                              //       title: "Frequency List",
-                              //       onTap: () {
-                              //         controller.goToFrequencyList();
-                              //       });
-                              // }))),
-                            ],
-                          ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 20),
+                          //   child: Row(
+                          //     children: [
+                          //       Text(
+                          //         "Stock Management",
+                          //         style: TextStyle(
+                          //           color: Color.fromARGB(255, 159, 156, 156),
+                          //           fontSize: 16,
+                          //           fontWeight: FontWeight.w400,
+                          //         ),
+                          //       ),
+                          //       SizedBox(
+                          //           width:
+                          //               10), // Add some space between the text and the line
+                          //       Expanded(
+                          //         child: Divider(
+                          //           color: Colors
+                          //               .grey, // Customize the color of the line if needed
+                          //           height:
+                          //               1, // Adjust the height of the line if needed
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // GridView.count(
+                          //   shrinkWrap: true,
+                          //   primary: false,
+                          //   padding: Dimens.edgeInsets15,
+                          //   crossAxisSpacing: 6,
+                          //   mainAxisSpacing: 6,
+                          //   crossAxisCount:
+                          //       Responsive.isMobile(context) ? 2 : 5,
+                          //   childAspectRatio: Responsive.isMobile(context)
+                          //       ? (itemWidth / itemHeight)
+                          //       : (itemWidth / itemHeightWeb),
+                          //   children: <Widget>[
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Asset Master",
+                          //           onTap: () {
+                          //             controller.goToAssetMasterList();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Add Asset Master",
+                          //           onTap: () {
+                          //             controller.goToAddAssetMaster();
+                          //           });
+                          //     }))),
+                          //     // OnHover(builder: (((isHovered) {
+                          //     //   return createContentTile(
+                          //     //       title: "Country List",
+                          //     //       onTap: () {
+                          //     //         controller.goToCountryTypeList();
+                          //     //       });
+                          //     // }))),
+                          //     // OnHover(builder: (((isHovered) {
+                          //     //   return createContentTile(
+                          //     //       title: "State List",
+                          //     //       onTap: () {
+                          //     //         controller.goToStateTypeList();
+                          //     //       });
+                          //     // }))),
+                          //     //
+                          //     // OnHover(builder: (((isHovered) {
+                          //     //   return createContentTile(
+                          //     //       title: "Frequency List",
+                          //     //       onTap: () {
+                          //     //         controller.goToFrequencyList();
+                          //     //       });
+                          //     // }))),
+                          //   ],
+                          // ),
                           Container(
                             margin: EdgeInsets.only(left: 20),
                             child: Row(

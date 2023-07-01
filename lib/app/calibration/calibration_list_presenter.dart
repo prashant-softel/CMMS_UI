@@ -55,6 +55,36 @@ class CalibrationListPresenter {
     );
   }
 
+  Future<bool> approveCloseCalibration({
+    approveCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.approveCloseCalibration(
+      approveCalibrationtoJsonString: approveCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> rejectCloseCalibration({
+    rejectCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.rejectCloseCalibration(
+      rejectCalibrationtoJsonString: rejectCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> closeCalibration({
+    closeCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.closeCalibration(
+      closeCalibrationtoJsonString: closeCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<bool> completeCalibration({
     completeCalibrationtoJsonString,
     required bool isLoading,

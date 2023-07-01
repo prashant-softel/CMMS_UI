@@ -94,6 +94,7 @@ class MastersController extends GetxController {
       Routes.inventoryTypeListScreen,
     );
   }
+
   Future<void> goToInventoryStatusList() async {
     Get.toNamed(
       Routes.inventoryStatusListScreen,
@@ -106,24 +107,25 @@ class MastersController extends GetxController {
       Routes.facilityTypeListScreen,
     );
   }
+
   Future<void> goToSPVList() async {
     Get.toNamed(
       Routes.SPVListScreen,
     );
   }
+
   //goToBlockTypeList
   Future<void> goToBlockTypeList() async {
     Get.toNamed(
       Routes.blockTypeListScreen,
     );
   }
+
   Future<void> goToModuleTypeList() async {
     Get.toNamed(
       Routes.moduleTypeListScreen,
     );
   }
-
-
 
   Future<void> goToBusinessList() async {
     Get.toNamed(
@@ -131,13 +133,11 @@ class MastersController extends GetxController {
     );
   }
 
-
   Future<void> goToBusinessTypeList() async {
     Get.toNamed(
       Routes.businessTypeListScreen,
     );
   }
-
 
   Future<void> goToBloodTypeList() async {
     Get.toNamed(
@@ -148,6 +148,12 @@ class MastersController extends GetxController {
   Future<void> goToRoleTypeList() async {
     Get.toNamed(
       Routes.roleListScreen,
+    );
+  }
+
+  Future<void> goToRoleAccess() async {
+    Get.toNamed(
+      Routes.roleAccess,
     );
   }
 
@@ -163,28 +169,24 @@ class MastersController extends GetxController {
     );
   }
 
-
   Future<void> goToFrequencyList() async {
     Get.toNamed(
       Routes.frequencyListScreen,
     );
   }
 
-
-
-
   Future<void> goToAssetMasterList() async {
     Get.toNamed(
       Routes.assetMasterList,
     );
   }
+
   Future<void> goToAddAssetMaster() async {
     Get.toNamed(
       Routes.addassetMaster,
     );
   }
-  
-  
+
   Future<void> goToDocumentManager() async {
     Get.toNamed(
       Routes.documentManager,
@@ -196,4 +198,11 @@ class MastersController extends GetxController {
       Routes.designationScreen,
     );
   }
+
+  Future<void> goToCompetencyScreen() async {
+    Get.toNamed(
+      Routes.competencyScreen,
+    );
+  }
+
 }

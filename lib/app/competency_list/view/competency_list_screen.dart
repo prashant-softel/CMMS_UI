@@ -1,18 +1,19 @@
-import 'package:cmms/app/permit_type/permit_type_controller.dart';
-import 'package:cmms/app/permit_type/view/permit_type_content_web.dart';
 import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart';
 import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'permit_type_mobile.dart';
+
+import '../../home/home_controller.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
+import '../competency_list_controller.dart';
+import 'competency_listContent_mobile.dart';
+import 'competency_listContent_web.dart';
 
-
-class PermitTypeScreen extends GetView<PermitTypeController> {
-  PermitTypeScreen({super.key});
+class CompetencyListScreen extends GetView<CompetencyListController> {
+  CompetencyListScreen({super.key});
 
   ///
   @override
@@ -26,7 +27,7 @@ class PermitTypeScreen extends GetView<PermitTypeController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive List'),
+              title: Text('Competency List'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -44,11 +45,11 @@ class PermitTypeScreen extends GetView<PermitTypeController> {
                     if (Responsive.isMobile(context) ||
                         Responsive.isTablet(context))
                       Expanded(
-                        child: PermitTypeMobile(),
+                        child: CompetencyListContentMobile(),
                       ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PermitTypeContentWeb(),
+                        child: CompetencyListContentWeb(),
                       )
                   ],
                 ),

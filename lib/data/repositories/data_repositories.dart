@@ -1274,6 +1274,42 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> approveCloseCalibration({
+    auth,
+    bool? isLoading,
+    approveCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.approveCloseCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectCloseCalibration({
+    auth,
+    bool? isLoading,
+    rejectCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.rejectCloseCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> closeCalibration({
+    auth,
+    bool? isLoading,
+    closeCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.closeCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        closeCalibrationtoJsonString: closeCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> completeCalibration({
     auth,
     bool? isLoading,
@@ -1775,5 +1811,116 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getCompetencyList({
+    required String auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCompetencyList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> createCompetency({
+    auth,
+    bool? isLoading,
+    competencyJsonString,
+  }) async {
+    var response = await connectHelper.createCompetency(
+        auth: auth,
+        isLoading: isLoading,
+        competencyJsonString: competencyJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateCompetency({
+    auth,
+    bool? isLoading,
+    competencyJsonString,
+  }) async {
+    var response = await connectHelper.updateCompetency(
+      auth: auth,
+      isLoading: isLoading,
+      competencyJsonString: competencyJsonString,
+    );
+    return response;
+  }
+  Future<ResponseModel> deleteCompetencyList({
+    auth,
+    bool? isLoading,
+    checklist_id,
+  }) async {
+    var response = await connectHelper.deleteCompetencyList(
+        auth: auth, isLoading: isLoading, checklist_id: checklist_id);
+    return response;
+  }
+
+  Future<ResponseModel> createPermitType({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.createPermitType(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deletePermitType({
+    auth,
+    bool? isLoading,
+    checklist_id,
+  }) async {
+    var response = await connectHelper.deletePermitType(
+        auth: auth, isLoading: isLoading, checklist_id: checklist_id);
+    return response;
+  }
+
+  Future<ResponseModel> updatePermitType({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updatePermitType(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+  Future<ResponseModel> createRoleList({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.createRoleList(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateRoleList({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateRoleList(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteRole({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteRole(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
 //end
 }
