@@ -4,6 +4,7 @@ CreateGoModel createGoModelFromJson(String str) =>
     CreateGoModel.fromJson(json.decode(str));
 
 class CreateGoModel {
+  int? facility_id;
   int? order_type;
   int? location_ID;
   int? vendorID;
@@ -25,7 +26,8 @@ class CreateGoModel {
   String? currency;
   List<Items?>? items;
   CreateGoModel(
-      {this.order_type,
+      {this.facility_id,
+      this.order_type,
       this.location_ID,
       this.vendorID,
       this.purchaseDate,
@@ -48,6 +50,7 @@ class CreateGoModel {
 
   factory CreateGoModel.fromJson(Map<String, dynamic> json) {
     return CreateGoModel(
+      facility_id: json['facility_id'],
       order_type: json['order_type'],
       location_ID: json['location_ID'],
       vendorID: json['vendorID'],
@@ -73,6 +76,7 @@ class CreateGoModel {
     );
   }
   Map<String, dynamic> toJson() => {
+        "facility_id": facility_id,
         "order_type": order_type,
         "location_ID": location_ID,
         "vendorID": vendorID,
