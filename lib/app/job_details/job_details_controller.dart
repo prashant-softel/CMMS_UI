@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/job_details_model.dart';
 import '../../domain/models/new_permit_list_model.dart';
@@ -28,7 +29,10 @@ class JobDetailsController extends GetxController {
   RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
-
+  PaginationController schedulePaginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
   /// Permit
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;

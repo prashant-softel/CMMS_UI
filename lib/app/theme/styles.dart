@@ -812,5 +812,10 @@ abstract class Styles {
     borderRadius: BorderRadius.circular(10),
   );
 
+  static TextStyle blue14 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.w400,
+    fontSize: Dimens.fourteen,
+  );
   ///
 }

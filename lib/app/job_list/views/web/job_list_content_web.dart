@@ -99,7 +99,7 @@ class JobListContentWeb extends StatelessWidget {
                       ),
                       buildDataColumn(
                         'breakdownTime',
-                        'Breakdown Time',
+                        'Breakdown\nTime',
                         ColumnSize.S,
                         controller.breakdownTimeFilterText,
                       ),
@@ -242,7 +242,9 @@ class JobDataSource extends DataTableSource {
           (job?.workingArea ?? '')
               .toLowerCase()
               .contains(controller.workAreaFilterText.value.toLowerCase()) &&
-          (job?.workType ?? '').contains(controller.workTypeFilterText.value) &&
+          (job?.workingArea ?? '')
+              .toLowerCase()
+              .contains(controller.workAreaFilterText.value.toLowerCase()) &&
           (job?.raisedByName ?? '').toLowerCase().contains(
               controller.raisedByNameFilterText.value.toLowerCase()) &&
           controller.formatDate(job?.breakdownTime.toString() ?? '').toLowerCase().contains(
