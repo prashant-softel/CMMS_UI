@@ -19,6 +19,7 @@ abstract class Routes {
       _Paths.stockManagementDashboardScreen;
   static const stockManagementGoodsOrdersScreen =
       _Paths.stockManagementGoodsOrdersScreen;
+
   static const createCheckList = _Paths.createCheckList;
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;

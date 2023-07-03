@@ -5,10 +5,10 @@ import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 
-class StockManagementUpdateGoodsOrdersDetailsUsecase {
+class StockManagementAddGoodsOrdersUsecase {
   final Repository _repository;
 
-  StockManagementUpdateGoodsOrdersDetailsUsecase(this._repository);
+  StockManagementAddGoodsOrdersUsecase(this._repository);
   Future<List<CurrencyListModel>> getUnitCurrencyList(
       {required bool isLoading, required int? facilityId}) async {
     return _repository.getUnitCurrencyList(
