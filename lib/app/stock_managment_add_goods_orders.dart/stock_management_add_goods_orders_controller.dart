@@ -9,15 +9,14 @@ import 'package:rxdart/subjects.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
-import 'stock_management_update_goods_orders_details_presenter.dart';
+import 'stock_management_add_goods_orders_presenter.dart';
 
-class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
+class StockManagementAddGoodsOrdersController extends GetxController {
   ///
-  StockManagementUpdateGoodsOrdersDetailsController(
-    this.stockManagementUpdateGoodsOrdersDetailsPresenter,
+  StockManagementAddGoodsOrdersController(
+    this.stockManagementAddGoodsOrdersPresenter,
   );
-  StockManagementUpdateGoodsOrdersDetailsPresenter
-      stockManagementUpdateGoodsOrdersDetailsPresenter;
+  StockManagementAddGoodsOrdersPresenter stockManagementAddGoodsOrdersPresenter;
   final HomeController homecontroller = Get.find();
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
@@ -92,8 +91,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   }
 
   Future<void> getBusinessList(ListType) async {
-    final list =
-        await stockManagementUpdateGoodsOrdersDetailsPresenter.getBusinessList(
+    final list = await stockManagementAddGoodsOrdersPresenter.getBusinessList(
       ListType: ListType,
       isLoading: true,
     );
@@ -106,7 +104,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
-    final _assetList = await stockManagementUpdateGoodsOrdersDetailsPresenter
+    final _assetList = await stockManagementAddGoodsOrdersPresenter
         .getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
@@ -128,8 +126,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   void getUnitCurrencyList() async {
     unitCurrencyList.value = <CurrencyListModel>[];
     final _unitCUrrencyList =
-        await stockManagementUpdateGoodsOrdersDetailsPresenter
-            .getUnitCurrencyList(
+        await stockManagementAddGoodsOrdersPresenter.getUnitCurrencyList(
       isLoading: true,
       facilityId: facilityId,
     );
@@ -223,7 +220,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
 
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateWarrantyClaim =
-        await stockManagementUpdateGoodsOrdersDetailsPresenter.createGoodsOrder(
+        await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
