@@ -2908,8 +2908,8 @@ class ConnectHelper {
     required modulelistJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'RoleAccess/AddRole',
       Request.post,
       modulelistJsonString,
@@ -2961,21 +2961,34 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
-
   Future<ResponseModel> createDesignation({
     required String auth,
     bool? isLoading,
     required designationJsonString,
   }) async {
-    var responseModel =
-    // responseModel =
-
-    await apiWrapper.makeRequest(
+    var responseModel = await apiWrapper.makeRequest(
       'RoleAccess/AddDesignation',
       Request.post,
       designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveRoleAccess({
+    required String auth,
+    bool? isLoading,
+    required saveRolelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/SetRoleAccess',
+      Request.post,
+      saveRolelistJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -3030,8 +3043,8 @@ class ConnectHelper {
     required businessTypeJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'CMMS/AddBusinessType', //AddBusiness
       Request.post,
       businessTypeJsonString,
@@ -3044,6 +3057,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> deleteBusinessType({
     required String auth,
     bool? isLoading,
@@ -3081,5 +3095,4 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 }

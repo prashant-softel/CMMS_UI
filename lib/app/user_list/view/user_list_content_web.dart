@@ -174,11 +174,50 @@ class UserListContentWeb extends GetView<UserListController> {
                               ),
                             ],
                           ),
-                          child: controller.userList!.isEmpty
-                              ? Center(
-                                  child: Text(
-                                    "No data Found.....",
-                                    style: Styles.black15W600,
+                          child: controller.userList.isEmpty
+                              ? Expanded(
+                                  child: ScrollableTableView(
+                                    columns: [
+                                      "Profile",
+                                      "User Login ID",
+                                      "User Role",
+                                      "Contact Number",
+                                      "Created On",
+                                      "Updated On",
+                                      "Status",
+                                      "Action"
+                                    ].map((column) {
+                                      return TableViewColumn(
+                                        label: column,
+                                        minWidth: Get.width * 0.16,
+                                      );
+                                    }).toList(),
+                                    rows: [
+                                      ...List.generate(
+                                        controller.userList.length,
+                                        (index) {
+                                          return [
+                                            "",
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            ''
+                                          ];
+                                        },
+                                      ),
+                                    ].map((record) {
+                                      return TableViewRow(
+                                        height: 60,
+                                        cells: record.map((value) {
+                                          return TableViewCell(
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
                                   ),
                                 )
                               : ScrollableTableView(

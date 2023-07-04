@@ -566,7 +566,8 @@ class Repository {
             userId: userId, auth: token, isLoading: isLoading ?? false);
       } else {
         Fluttertoast.showToast(
-            msg: "Invalid Email Id and Password", fontSize: 16.0);
+            msg: res.data, // "Invalid Email Id and Password",
+            fontSize: 16.0);
       }
     } catch (error) {
       await _deviceRepository.generateToken();
@@ -2546,6 +2547,27 @@ class Repository {
     }
   }
 
+  Future<bool> saveRoleAccess({bool? isLoading, saveRolelistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.saveRoleAccess(
+          auth: auth,
+          isLoading: isLoading,
+          saveRolelistJsonString: saveRolelistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<Map<String, dynamic>?> uploadFiles(
     fileUploadModel,
     bool? isLoading,
@@ -4415,8 +4437,8 @@ class Repository {
   }
 
   Future<List<CompetencyModel?>?> getCompetencyList(
-      bool? isLoading,
-      ) async {
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getCompetencyList(
@@ -4428,11 +4450,10 @@ class Repository {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<CompetencyModel> _PreventiveCheckListModelList =
-        jsonPreventiveCheckListModelModels
-            .map<CompetencyModel>((m) =>
-            CompetencyModel.fromJson(
-                Map<String, dynamic>.from(m)))
-            .toList();
+            jsonPreventiveCheckListModelModels
+                .map<CompetencyModel>((m) =>
+                    CompetencyModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _PreventiveCheckListModelList;
       } else {
@@ -4446,8 +4467,7 @@ class Repository {
     }
   }
 
-  Future<bool> createCompetency(
-      {bool? isLoading, competencyJsonString}) async {
+  Future<bool> createCompetency({bool? isLoading, competencyJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createCompetency(
@@ -4512,8 +4532,7 @@ class Repository {
     }
   }
 
-  Future<bool> createPermitType(
-      {bool? isLoading, checklistJsonString}) async {
+  Future<bool> createPermitType({bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createPermitType(
@@ -4553,7 +4572,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updatePermitType({
     bool? isLoading,
     checklistJsonString,
@@ -4579,8 +4597,7 @@ class Repository {
     }
   }
 
-  Future<bool> createRoleList(
-      {bool? isLoading, modulelistJsonString}) async {
+  Future<bool> createRoleList({bool? isLoading, modulelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRoleList(
@@ -4600,7 +4617,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateRoleList({
     bool? isLoading,

@@ -20,4 +20,10 @@ class RoleAccessUsecase {
       await repository.getRoleList(
         isLoading,
       );
+  Future<bool> saveRoleAccess({
+    saveRolelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.saveRoleAccess(
+          isLoading: isLoading, saveRolelistJsonString: saveRolelistJsonString);
 }
