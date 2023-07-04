@@ -858,9 +858,7 @@ class WarrantyClaimController extends GetxController {
               additionalEmailEmployees: selectedEmployeeNameIdList,
               externalEmails: external_emails_list,
               supplierActions: supplier_action_list,
-              status: 1
-
-              ///additional data to create WC as 'Submit for Release'
+              status: 1 ///additional data to create WC as 'Submit for Release'
 
               );
 

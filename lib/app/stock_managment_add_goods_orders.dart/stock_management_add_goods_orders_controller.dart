@@ -9,15 +9,14 @@ import 'package:rxdart/subjects.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
-import 'stock_management_update_goods_orders_details_presenter.dart';
+import 'stock_management_add_goods_orders_presenter.dart';
 
-class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
+class StockManagementAddGoodsOrdersController extends GetxController {
   ///
-  StockManagementUpdateGoodsOrdersDetailsController(
-    this.stockManagementUpdateGoodsOrdersDetailsPresenter,
+  StockManagementAddGoodsOrdersController(
+    this.stockManagementAddGoodsOrdersPresenter,
   );
-  StockManagementUpdateGoodsOrdersDetailsPresenter
-      stockManagementUpdateGoodsOrdersDetailsPresenter;
+  StockManagementAddGoodsOrdersPresenter stockManagementAddGoodsOrdersPresenter;
   final HomeController homecontroller = Get.find();
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
@@ -33,7 +32,6 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
   int paidId = 0;
-
   RxBool showAdditionalColumn = false.obs;
 
   //drop down list of assets
@@ -46,6 +44,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
+  Map<String, PaiedModel> paiddropdownMapperData = {};
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -92,8 +91,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   }
 
   Future<void> getBusinessList(ListType) async {
-    final list =
-        await stockManagementUpdateGoodsOrdersDetailsPresenter.getBusinessList(
+    final list = await stockManagementAddGoodsOrdersPresenter.getBusinessList(
       ListType: ListType,
       isLoading: true,
     );
@@ -106,7 +104,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
-    final _assetList = await stockManagementUpdateGoodsOrdersDetailsPresenter
+    final _assetList = await stockManagementAddGoodsOrdersPresenter
         .getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
@@ -128,8 +126,7 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
   void getUnitCurrencyList() async {
     unitCurrencyList.value = <CurrencyListModel>[];
     final _unitCUrrencyList =
-        await stockManagementUpdateGoodsOrdersDetailsPresenter
-            .getUnitCurrencyList(
+        await stockManagementAddGoodsOrdersPresenter.getUnitCurrencyList(
       isLoading: true,
       facilityId: facilityId,
     );
@@ -172,13 +169,6 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
     ]);
-    print({"rowItem.value": rowItem.value.length});
-    // [
-    //                                         "Drop_down",
-    //                                         "Paid_By",
-    //                                         "Cost",
-    //                                         "Order",
-    //                                       ],
   }
 
   void createGoodsOrder() async {
@@ -197,10 +187,17 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
     String _lrNoCtrlr = lrNoCtrlr.text.trim();
     String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
     String _jobRefCtrlr = jobRefCtrlr.text.trim();
-
-    Items items =
-        Items(assetItemID: 3, cost: 1, ordered_qty: 2, asset_type_ID: 1);
+    List<Items> items = [];
+    rowItem.value.forEach((element) {
+      Items item = Items(
+          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          cost: int.tryParse(element[2]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+      items.add(item);
+    });
     CreateGoModel createGoModel = CreateGoModel(
+        facility_id: 45,
         order_type: 1,
         location_ID: 1,
         vendorID: selectedBusinessTypeId,
@@ -219,11 +216,11 @@ class StockManagementUpdateGoodsOrdersDetailsController extends GetxController {
         job_ref: _jobRefCtrlr,
         amount: 0,
         currency: "",
-        items: [items]);
+        items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateWarrantyClaim =
-        await stockManagementUpdateGoodsOrdersDetailsPresenter.createGoodsOrder(
+        await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );

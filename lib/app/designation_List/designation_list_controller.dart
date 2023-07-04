@@ -8,7 +8,7 @@ import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/create_modulelist_model.dart';
+import '../../domain/models/CreateDesignationModel.dart';
 import '../../domain/models/designation_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -22,9 +22,9 @@ import 'designation_list_presenter.dart';
 // import 'module_list_presenter.dart';
 
 class DesignationListController extends GetxController {
-  DesignationListController(this.roleListPresenter,);
+  DesignationListController(this.designationPresenter,);
 
-  DesignationListPresenter roleListPresenter;
+  DesignationListPresenter designationPresenter;
   final HomeController homecontroller = Get.find();
 
   // final HomeController homecontroller = Get.put( HomeController.new);
@@ -34,7 +34,7 @@ class DesignationListController extends GetxController {
   // Rx<bool> isSelectedequipment = true.obs;
   // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<DesignationModel?>?
-  roleList =
+  designationList =
       <DesignationModel?>[].obs;
   int facilityId = 0;
   int type = 1;
@@ -44,18 +44,19 @@ class DesignationListController extends GetxController {
   );
 
 
-  DesignationModel? roleModel;
+  DesignationModel? designationModel;
+  final isSuccess = false.obs;
 
 
   RxList<String> moduleListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var rolelistNumberCtrlr = TextEditingController();
-  var featureCtrlr = TextEditingController();
-  DesignationModel? selectedItem;
+  var nameCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
+  DesignationModel? selectedItem = null;
   StreamSubscription<int>? facilityIdStreamSubscription;
-
+  bool isEditMode = false;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -68,20 +69,20 @@ class DesignationListController extends GetxController {
   }
 
   Future<void> getDesignationList(bool isLoading) async {
-    roleList?.value = <DesignationModel>[];
+    designationList?.value = <DesignationModel>[];
     final _moduleList =
-    await roleListPresenter.getDesignationList(isLoading: isLoading);
+    await designationPresenter.getDesignationList(isLoading: isLoading);
 
     if (_moduleList != null) {
-      roleList!.value = _moduleList.cast<DesignationModel?>();
+      designationList!.value = _moduleList.cast<DesignationModel?>();
       paginationController = PaginationController(
-        rowCount: roleList?.length ?? 0,
+        rowCount: designationList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (roleList != null && roleList!.isNotEmpty) {
-        roleModel = roleList![0];
-        var preventiveCheckListJson = roleModel?.toJson();
+      if (designationList != null && designationList!.isNotEmpty) {
+        designationModel = designationList![0];
+        var preventiveCheckListJson = designationModel?.toJson();
         moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
           moduleListTableColumns.add(key);
@@ -90,5 +91,129 @@ class DesignationListController extends GetxController {
     }
   }
 
+
+  Future<bool> createDesignation() async {
+    if (nameCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _name = nameCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
+
+      CreateDesignationModel createModuleList = CreateDesignationModel(
+          name : _name,
+          description: _description
+      );
+
+      var moduleListJsonString =
+      createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+
+      print({"checklistJsonString", moduleListJsonString});
+      await designationPresenter.createDesignation(
+        designationJsonString: moduleListJsonString,
+        isLoading: true,
+      );
+      return true;
+    }
+    getDesignationList(true);
+    return true;
+  }
+
+  Future<void> issuccessCreatemodulelist() async {
+    isSuccess.toggle();
+
+    // isToggleOn.value = false;
+    await {_cleardata()};
+  }
+  _cleardata() {
+    nameCtrlr.text = '';
+    descriptionCtrlr.text = '';
+    selectedItem = null;
+    Future.delayed(Duration(seconds: 1), () {
+      getDesignationList(true);
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
+  }
+
+  void isDeleteDialog({String? module_id, String? module}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the Designation ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: module,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteDesignation(module_id).then((value) {
+                    Get.back();
+                    getDesignationList(true);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteDesignation(String? module_id) async {
+    {
+      await designationPresenter.deleteDesignation(
+        module_id,
+        isLoading: true,
+      );
+    }
+  }
+
+  Future<bool> updateDesignation(moduleId) async {
+    String _name = nameCtrlr.text.trim();
+    String _Description = descriptionCtrlr.text.trim();
+
+    DesignationModel createModulelist = DesignationModel(
+        id:moduleId,
+        name: _name,
+        description: _Description
+    );
+    var designationJsonString =
+    createModulelist.toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"designationJsonString", designationJsonString});
+    await designationPresenter.updateDesignation(
+      designationJsonString: designationJsonString,
+      isLoading: true,
+
+    );
+    return true;
+  }
 }
 

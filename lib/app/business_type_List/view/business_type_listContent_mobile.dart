@@ -24,13 +24,13 @@ class BusinessTypeListContentMobile
                 child: ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: controller.preventiveCheckList != null
-                        ? controller.preventiveCheckList?.length
+                    itemCount: controller.businessTypeList != null
+                        ? controller.businessTypeList?.length
                         : 0,
                     itemBuilder: (context, index) {
                       final preventiveCheckListModel =
-                          (controller.preventiveCheckList != null)
-                              ? controller.preventiveCheckList![index]
+                          (controller.businessTypeList != null)
+                              ? controller.businessTypeList![index]
                               : BusinessTypeModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
@@ -117,15 +117,15 @@ class BusinessTypeListContentMobile
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Expanded(
-                                      child: Text(
-                                        "${preventiveCheckListModel?.status ?? ''}",
-                                        style: const TextStyle(
-                                          color: ColorValues.navyBlueColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    )
+                                    // Expanded(
+                                    //   child: Text(
+                                    //     "${preventiveCheckListModel?.status ?? ''}",
+                                    //     style: const TextStyle(
+                                    //       color: ColorValues.navyBlueColor,
+                                    //       fontWeight: FontWeight.bold,
+                                    //     ),
+                                    //   ),
+                                    // )
                                   ]),
                                   // Row(children: [
                                   //   Column(
@@ -165,21 +165,21 @@ class BusinessTypeListContentMobile
                                   //     ),
                                   //   )
                                   // ]),
-                                  SwitchListTile(
-                                    visualDensity: VisualDensity.comfortable,
-                                    title: Text(
-                                      'Active Status: ',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    value: preventiveCheckListModel?.status == 1
-                                        ? true
-                                        : false,
-                                    onChanged: (value) {},
-                                    activeColor: ColorValues.greenColor,
-                                  ),
+                                  // SwitchListTile(
+                                  //   visualDensity: VisualDensity.comfortable,
+                                  //   title: Text(
+                                  //     'Active Status: ',
+                                  //     style: TextStyle(
+                                  //       color: Colors.black,
+                                  //       fontWeight: FontWeight.w600,
+                                  //     ),
+                                  //   ),
+                                  //   value: preventiveCheckListModel?.status == 1
+                                  //       ? true
+                                  //       : false,
+                                  //   onChanged: (value) {},
+                                  //   activeColor: ColorValues.greenColor,
+                                  // ),
                                 ]),
                           ),
                         ),

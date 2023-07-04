@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/stock_managment_update_goods_orders_details.dart/stock_management_update_goods_orders_details_controller.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -12,21 +15,19 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 
-class UpdateGoodsOrdersDetailsWeb extends StatefulWidget {
-  UpdateGoodsOrdersDetailsWeb({
+class AddGoodsOrdersWeb extends StatefulWidget {
+  AddGoodsOrdersWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<UpdateGoodsOrdersDetailsWeb> createState() =>
-      _UpdateGoodsOrdersDetailsWebState();
+  State<AddGoodsOrdersWeb> createState() => _AddGoodsOrdersWebState();
 }
 
-class _UpdateGoodsOrdersDetailsWebState
-    extends State<UpdateGoodsOrdersDetailsWeb> {
+class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StockManagementUpdateGoodsOrdersDetailsController>(
+    return GetBuilder<StockManagementAddGoodsOrdersController>(
         id: 'stock_Mangement',
         builder: (controller) {
           return Obx(
@@ -128,23 +129,20 @@ class _UpdateGoodsOrdersDetailsWebState
                                             CustomRichText(title: 'Vendor: '),
                                             Dimens.boxWidth10,
                                             SizedBox(
-                                              child: Obx(
-                                                () => DropdownWebWidget(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  dropdownList:
-                                                      controller.ownerList,
-                                                  isValueSelected: controller
-                                                      .isSelectedBusinessType
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedBusinessType
-                                                      .value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                              child: DropdownWebWidget(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                dropdownList:
+                                                    controller.ownerList,
+                                                isValueSelected: controller
+                                                    .isSelectedBusinessType
+                                                    .value,
+                                                selectedValue: controller
+                                                    .selectedBusinessType.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
                                             ),
                                           ],
@@ -682,6 +680,13 @@ class _UpdateGoodsOrdersDetailsWebState
                                         ],
                                       ),
                                     ),
+                                    // Column(
+                                    //     children: []..addAll(
+                                    //           controller.rowItem.value.map((e) {
+                                    //         return Text(jsonEncode(e));
+                                    //       }))),
+                                    // Text(jsonEncode(
+                                    //     controller.dropdownMapperData)),
                                     Obx(
                                       () => Container(
                                         height: 300,
@@ -738,12 +743,12 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                     (list,
                                                                         selectedValue) {
                                                                   print({
-                                                                    "selectedValue":
+                                                                    selectedValue:
                                                                         selectedValue
                                                                   });
                                                                   mapData["value"] =
                                                                       selectedValue;
-                                                                  controller.dropdownMapperData["selectedValue"] = list.firstWhere(
+                                                                  controller.dropdownMapperData[selectedValue] = list.firstWhere(
                                                                       (element) =>
                                                                           element
                                                                               .name ==
@@ -760,7 +765,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                   Text(
                                                                       "Assets Code :"),
                                                                   Text(
-                                                                      "${controller.dropdownMapperData["selectedValue"]?.asset_code ?? ''}")
+                                                                      "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
                                                                 ],
                                                               ),
                                                               Row(
@@ -768,7 +773,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                   Text(
                                                                       "Assets type :"),
                                                                   Text(
-                                                                      "${controller.dropdownMapperData["selectedValue"]?.asset_type ?? ''}")
+                                                                      "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
                                                                 ],
                                                               ),
                                                               Row(
@@ -776,7 +781,7 @@ class _UpdateGoodsOrdersDetailsWebState
                                                                   Text(
                                                                       "Assets Category :"),
                                                                   Text(
-                                                                      "${controller.dropdownMapperData["selectedValue"]?.cat_name ?? ''}")
+                                                                      "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
                                                                 ],
                                                               )
                                                             ],
@@ -799,11 +804,21 @@ class _UpdateGoodsOrdersDetailsWebState
                                                               onValueChanged: (list,
                                                                   selectedValue) {
                                                                 print({
-                                                                  "selectedValue":
+                                                                  selectedValue:
                                                                       selectedValue
                                                                 });
                                                                 mapData["value"] =
                                                                     selectedValue;
+                                                                controller.paiddropdownMapperData[
+                                                                        selectedValue] =
+                                                                    list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                                // mapData["value"] =
+                                                                //     selectedValue;
                                                               },
                                                             )
                                                           : (mapData['key'] ==

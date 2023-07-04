@@ -22,4 +22,26 @@ class DesignationlistUsecase {
         isLoading,
       );
 
+  Future<bool> createDesignation({
+    designationJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createDesignation(
+          isLoading: isLoading, designationJsonString: designationJsonString);
+  deleteDesignation(
+      {required Object module_id, required bool isLoading}) async =>
+      await repository.deleteDesignation(
+        module_id,
+        isLoading,
+      );
+
+  Future<bool> updateDesignation({
+    designationJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateDesignation(
+        isLoading: isLoading,
+        designationJsonString: designationJsonString,
+      );
+
 }

@@ -56,6 +56,7 @@ class BreakdownTimeWidget extends StatelessWidget {
           },
           controller: controller.breakdownTimeCtrlr,
           autofocus: false,
+          readOnly: true,
           decoration: InputDecoration(
             fillColor: ColorValues.whiteColor,
             filled: true,

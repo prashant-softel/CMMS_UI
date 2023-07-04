@@ -1936,5 +1936,76 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
+
+
+  Future<ResponseModel> createDesignation({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.createDesignation(
+        auth: auth,
+        isLoading: isLoading,
+        designationJsonString: designationJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateDesignation({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.updateDesignation(
+      auth: auth,
+      isLoading: isLoading,
+      designationJsonString: designationJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteDesignation({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteDesignation(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
+
+  Future<ResponseModel> createBusinessType({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessType(
+        auth: auth,
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString);
+    return response;
+  }
+  Future<ResponseModel> deleteBusinessType({
+    auth,
+    bool? isLoading,
+    businesstype_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessType(
+        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateBusinessType({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinessType(
+      auth: auth,
+      isLoading: isLoading,
+      businessTypeJsonString: businessTypeJsonString,
+    );
+    return response;
+  }
+
 //end
 }

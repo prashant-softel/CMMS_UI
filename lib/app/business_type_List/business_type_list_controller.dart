@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/business_type_model.dart';
+import '../../domain/models/create_business_type_list_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
@@ -17,17 +18,12 @@ import 'business_type_list_presenter.dart';
 
 class BusinessTypeListController extends GetxController {
   BusinessTypeListController(
-      this.preventiveListPresenter,
+      this.businessTypepresenter,
       );
-  BusinessTypeListPresenter preventiveListPresenter;
+  BusinessTypeListPresenter businessTypepresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
-  Rx<String> selectedequipment = ''.obs;
-  Rx<bool> isSelectedequipment = true.obs;
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<BusinessTypeModel?>? preventiveCheckList =
+  RxList<BusinessTypeModel?>? businessTypeList =
       <BusinessTypeModel?>[].obs;
   int facilityId = 0;
   int type = 1;
@@ -35,24 +31,18 @@ class BusinessTypeListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  BusinessTypeModel? preventiveCheckListModel;
+  BusinessTypeModel? businessTypeListModel;
 
-  RxList<String> preventiveCheckListTableColumns = <String>[].obs;
-  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
+  RxList<String> businessTypeListTableColumns = <String>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var checklistNumberCtrlr = TextEditingController();
+  var nameCtrlr = TextEditingController();
   BusinessTypeModel? selectedItem;
-  var manpowerCtrlr = TextEditingController();
-  var durationCtrlr = TextEditingController();
-  int selectedEquipmentId = 0;
-  int selectedfrequencyId = 0;
+  var descriptionCtrlr = TextEditingController();
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-    getInventoryCategoryList();
-    getFrequencyList();
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -63,46 +53,26 @@ class BusinessTypeListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getFrequencyList() async {
-    final list = await preventiveListPresenter.getFrequencyList();
-
-    if (list != null) {
-      for (var _frequencyList in list) {
-        frequencyList.add(_frequencyList);
-      }
-    }
-  }
-
-  Future<void> getInventoryCategoryList() async {
-    final list = await preventiveListPresenter.getInventoryCategoryList();
-
-    if (list != null) {
-      for (var _equipmentCategoryList in list) {
-        equipmentCategoryList.add(_equipmentCategoryList);
-      }
-    }
-  }
-
   Future<void> getBusinessTypeList(
       int facilityId, int type, bool isLoading) async {
-    preventiveCheckList?.value = <BusinessTypeModel>[];
+    businessTypeList?.value = <BusinessTypeModel>[];
     final _businessTypeList =
-    await preventiveListPresenter.getBusinessTypeList(
+    await businessTypepresenter.getBusinessTypeList(
         businessType: facilityId,  isLoading: isLoading);
 
     if (_businessTypeList != null) {
-        preventiveCheckList!.value = _businessTypeList;
+        businessTypeList!.value = _businessTypeList;
       paginationController = PaginationController(
-        rowCount: preventiveCheckList?.length ?? 0,
+        rowCount: businessTypeList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (preventiveCheckList != null && preventiveCheckList!.isNotEmpty) {
-        preventiveCheckListModel = preventiveCheckList![0];
-        var preventiveCheckListJson = preventiveCheckListModel?.toJson();
-        preventiveCheckListTableColumns.value = <String>[];
+      if (businessTypeList != null && businessTypeList!.isNotEmpty) {
+        businessTypeListModel = businessTypeList![0];
+        var preventiveCheckListJson = businessTypeListModel?.toJson();
+        businessTypeListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          preventiveCheckListTableColumns.add(key);
+          businessTypeListTableColumns.add(key);
         }
       }
     }
@@ -114,65 +84,34 @@ class BusinessTypeListController extends GetxController {
     );
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          int equipmentIndex =
-          equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          int frequencyIndex =
-          frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
+
+  Future<bool> createBusinessType() async {
+    if (nameCtrlr.text.trim() == '' ||
+        descriptionCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _name = nameCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
+
+      CreateBusinessTypeListModel createBusinessType = CreateBusinessTypeListModel(
+          name: _name,
+          description : _description
+      );
+      var businessTypeJsonString =
+        createBusinessType.toJson(); //createCheckListToJson([createChecklist]);
+
+      print({"businessTypeJsonString", businessTypeJsonString});
+      await businessTypepresenter.createBusinessType(
+        businessTypeJsonString: businessTypeJsonString,
+        isLoading: true,
+      );
+      return true;
     }
+    getBusinessTypeList(facilityId, type, true);
+    return true;
   }
-
-  // Future<bool> createChecklistNumber() async {
-  //   if (checklistNumberCtrlr.text.trim() == '' ||
-  //       selectedEquipmentId == 0 ||
-  //       selectedfrequencyId == 0) {
-  //     Fluttertoast.showToast(
-  //         msg: "Please enter required field", fontSize: 16.0);
-  //   } else {
-  //     String _checklistNumber = checklistNumberCtrlr.text.trim();
-  //     String _duration = durationCtrlr.text.trim();
-  //     String _manpower = manpowerCtrlr.text.trim();
-  //
-  //     CreateChecklist createChecklist = CreateChecklist(
-  //         category_id: selectedEquipmentId,
-  //         duration: int.tryParse(_duration) ?? 0,
-  //         manPower: int.tryParse(_manpower) ?? 0,
-  //         facility_id: facilityId,
-  //         frequency_id: selectedfrequencyId,
-  //         status: 1,
-  //         type: 1,
-  //         id: 0,
-  //         checklist_number: _checklistNumber);
-  //     var checklistJsonString = [
-  //       createChecklist.toJson()
-  //     ]; //createCheckListToJson([createChecklist]);
-  //
-  //     print({"checklistJsonString", checklistJsonString});
-  //     await preventiveListPresenter.createChecklistNumber(
-  //       checklistJsonString: checklistJsonString,
-  //       isLoading: true,
-  //     );
-  //     return true;
-  //   }
-  //   return true;
-  // }
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
@@ -181,13 +120,8 @@ class BusinessTypeListController extends GetxController {
   }
 
   _cleardata() {
-    checklistNumberCtrlr.text = '';
-    durationCtrlr.text = '';
-    manpowerCtrlr.text = '';
-
-    selectedequipment.value = '';
-
-    selectedfrequency.value = '';
+    nameCtrlr.text = '';
+    descriptionCtrlr.text = '';
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
@@ -198,7 +132,7 @@ class BusinessTypeListController extends GetxController {
     });
   }
 
-  void isDeleteDialog({String? checklist_id, String? checklist}) {
+  void isDeleteDialog({String? businesstype_id, String? businesstype}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -208,11 +142,11 @@ class BusinessTypeListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the checkpoint ',
+                text: 'Are you sure you want to delete the Business Type ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: checklist,
+                    text: businesstype,
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
@@ -233,10 +167,10 @@ class BusinessTypeListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  // deleteCkecklist(checklist_id).then((value) {
-                  //   Get.back();
-                  //   getBusinessTypeList(facilityId, type, true);
-                  // });
+                  deleteBusinessType(businesstype_id).then((value) {
+                    Get.back();
+                    getBusinessTypeList(facilityId, type, true);
+                  });
                 },
                 child: Text('YES'),
               ),
@@ -247,38 +181,32 @@ class BusinessTypeListController extends GetxController {
     );
   }
 
-  // Future<void> deleteCkecklist(String? checklist_id) async {
-  //   {
-  //     await preventiveListPresenter.deleteCkecklist(
-  //       checklist_id,
-  //       isLoading: true,
-  //     );
-  //   }
-  // }
-  //
-  // Future<bool> updateChecklistNumber(checklistId) async {
-  //   String _checklistNumber = checklistNumberCtrlr.text.trim();
-  //   String _duration = durationCtrlr.text.trim();
-  //   String _manpower = manpowerCtrlr.text.trim();
-  //
-  //   CreateChecklist createChecklist = CreateChecklist(
-  //       category_id: selectedEquipmentId,
-  //       duration: int.tryParse(_duration) ?? 0,
-  //       manPower: int.tryParse(_manpower) ?? 0,
-  //       facility_id: facilityId,
-  //       frequency_id: selectedfrequencyId,
-  //       status: 1,
-  //       type: 1,
-  //       id: checklistId,
-  //       checklist_number: _checklistNumber);
-  //   var checklistJsonString =
-  //   createChecklist.toJson(); //createCheckListToJson([createChecklist]);
-  //
-  //   print({"checklistJsonString", checklistJsonString});
-  //   await preventiveListPresenter.updateChecklistNumber(
-  //     checklistJsonString: checklistJsonString,
-  //     isLoading: true,
-  //   );
-  //   return true;
-  // }
+  Future<void> deleteBusinessType(String? businesstype_id) async {
+    {
+      await businessTypepresenter.deleteBusinessType(
+        businesstype_id,
+        isLoading: true,
+      );
+    }
+  }
+
+  Future<bool> updateBusinessType(checklistId) async {
+    String _name = nameCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+
+    BusinessTypeModel createChecklist = BusinessTypeModel(
+        id: checklistId,
+        name : _name,
+        description: _description
+    );
+    var businessTypeJsonString =
+      createChecklist.toJson();
+
+    print({"businessTypeJsonString", businessTypeJsonString});
+    await businessTypepresenter.updateBusinessType(
+      businessTypeJsonString: businessTypeJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
 }

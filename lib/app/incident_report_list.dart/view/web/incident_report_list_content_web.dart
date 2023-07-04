@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_incident_report.dart/view/web/add_incident_report_content_web.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/incident_report_list.dart/incident_report_list_controller.dart';
@@ -158,15 +159,9 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 icon: Icons.add,
                                 label: 'Add Incident Report',
                                 onPressed: () {
-                                  // Get.to(() => AddInventory());
-                                  //  Get.to(() => NewWarrantyClaimListWeb());
-                                  //  Get.offAllNamed(Routes.newWarrantyClaimList);
-                                  // Get.toNamed(Routes.newWarrantyClaimList);
-                      
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => NewWarrantyClaimListWeb()));
+                                  
+                                   Get.toNamed(Routes.addIncidentReportContentWeb);
+                                 
                                 },
                                 color: Colors.green,
                               ),

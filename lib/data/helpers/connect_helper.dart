@@ -2961,6 +2961,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createDesignation({
+    required String auth,
+    bool? isLoading,
+    required designationJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/AddDesignation',
+      Request.post,
+      designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> saveRoleAccess({
     required String auth,
     bool? isLoading,
@@ -2970,6 +2989,103 @@ class ConnectHelper {
       'RoleAccess/SetRoleAccess',
       Request.post,
       saveRolelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateDesignation({
+    required String auth,
+    bool? isLoading,
+    required designationJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/UpdateDesignation',
+      Request.patch,
+      designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteDesignation({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/DeleteDesignation?id=$module_id',
+      Request.delete,
+      module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createBusinessType({
+    required String auth,
+    bool? isLoading,
+    required businessTypeJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/AddBusinessType', //AddBusiness
+      Request.post,
+      businessTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteBusinessType({
+    required String auth,
+    bool? isLoading,
+    required businesstype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBusinessType?id=$businesstype_id',
+      Request.delete,
+      businesstype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateBusinessType({
+    required String auth,
+    bool? isLoading,
+    required businessTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBusinessType',
+      Request.patch,
+      businessTypeJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

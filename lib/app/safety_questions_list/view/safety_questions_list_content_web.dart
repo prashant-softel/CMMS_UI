@@ -385,11 +385,10 @@ class SafetyQuestionsListContentWeb
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Sr.No.",
                                               "Title",
                                               "Type",
                                               "Confirmation",
-                                              "Required",
+                                              // "Required",
                                               "Action"
                                             ].map((column) {
                                               return TableViewColumn(
@@ -430,11 +429,10 @@ class SafetyQuestionsListContentWeb
                                       paginationController: controller
                                           .safetyQuestionListPaginationController,
                                       columns: [
-                                        "Sr.No.",
                                         "Title",
                                         "Type",
                                         "Confirmation",
-                                        "Required",
+                                        // "Required",
                                         "Action"
                                       ].map((column) {
                                         return TableViewColumn(
@@ -451,11 +449,12 @@ class SafetyQuestionsListContentWeb
                                                 controller
                                                     .safetyMeasureList[index];
                                             return [
-                                              '${safetyQuestionsListDetails.id}',
+                                              // '${safetyQuestionsListDetails.id}',
                                               '${safetyQuestionsListDetails.name}',
                                               '${safetyQuestionsListDetails.permitType}',
-                                              'yes/no',
-                                              'yes',
+                                              '${safetyQuestionsListDetails.inputName}',
+                                              // 'yes/no',
+                                              // 'yes',
                                               "Action"
                                             ];
                                           },

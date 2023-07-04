@@ -91,55 +91,57 @@ class NewPermitModel {
 
 const int permitStatusBase = 121;
 enum PermitStatus {
- PTW_CREATED,
- PTW_REJECTED_BY_ISSUER,
- PTW_ISSUED,
- PTW_REJECTED_BY_APPROVER,
- PTW_APPROVE,
- PTW_CLOSED,
- PTW_CANCELLED_BY_ISSUER,
- PTW_CANCELLED_BY_HSE,
- PTW_CANCELLED_BY_APPROVER,
- PTW_CANCEL_REQUESTED,
- PTW_CANCEL_REQUEST_REJECTED,
- PTW_CANCEL_REQUEST_APPROVED,
- PTW_EXTEND_REQUESTED,
- PTW_EXTEND_REQUEST_REJECTED,
- PTW_EXTEND_REQUEST_APPROVE,
- PTW_LINKED_TO_JOB,
- PTW_LINKED_TO_PM,
- PTW_LINKED_TO_AUDIT,
- PTW_LINKED_TO_HOTO,
- PTW_EXPIRED,
- PTW_UPDATED,
+ PTW_CREATED,///121
+ PTW_REJECTED_BY_ISSUER,///122
+ PTW_ISSUED,//123
+ PTW_REJECTED_BY_APPROVER,//124
+ PTW_APPROVE,//125
+ PTW_CLOSED,///126
+ PTW_CANCELLED_BY_ISSUER,///127
+ PTW_CANCELLED_BY_HSE,///128
+ PTW_CANCELLED_BY_APPROVER,///129
+ PTW_CANCEL_REQUESTED,///130
+ PTW_CANCEL_REQUEST_REJECTED,///131
+ PTW_CANCEL_REQUEST_APPROVED,///132
+ PTW_EXTEND_REQUESTED,////133
+ PTW_EXTEND_REQUEST_REJECTED,///134
+ PTW_EXTEND_REQUEST_APPROVE,///135
+ PTW_LINKED_TO_JOB,///136
+ PTW_LINKED_TO_PM,////137
+ PTW_LINKED_TO_AUDIT,///138
+ PTW_LINKED_TO_HOTO,///139
+ PTW_EXPIRED,///140
+ PTW_UPDATED,///141
 }
 
 class PermitStatusData {
   static Map<String, PermitStatus> permitStatusValues = {
-    AppConstants.kPermitStatusCreated: PermitStatus.PTW_CREATED,
+    AppConstants.kPermitStatusCreated: PermitStatus.PTW_CREATED,///121
     AppConstants.kPermitStatusRejectedByIssuer:
-        PermitStatus.PTW_REJECTED_BY_ISSUER,
-    AppConstants.kPermitStatusIssued: PermitStatus.PTW_ISSUED,
+        PermitStatus.PTW_REJECTED_BY_ISSUER,///122
+    AppConstants.kPermitStatusIssued: PermitStatus.PTW_ISSUED,///123
     AppConstants.kPermitStatusRejectedByApprover:
-        PermitStatus.PTW_REJECTED_BY_APPROVER,
-    AppConstants.kPermitStatusApproved: PermitStatus.PTW_APPROVE,
-    AppConstants.kPermitStatusClosed: PermitStatus.PTW_CLOSED,
+        PermitStatus.PTW_REJECTED_BY_APPROVER,///124
+    AppConstants.kPermitStatusApproved: PermitStatus.PTW_APPROVE,///125
+    AppConstants.kPermitStatusClosed: PermitStatus.PTW_CLOSED,///126
     AppConstants.kPermitStatusCancelledByIssuer:
-        PermitStatus.PTW_CANCELLED_BY_ISSUER,
-    AppConstants.kPermitStatusCancelledByHSE: PermitStatus.PTW_CANCELLED_BY_HSE,
+        PermitStatus.PTW_CANCELLED_BY_ISSUER,///127
+    AppConstants.kPermitStatusCancelledByHSE: PermitStatus.PTW_CANCELLED_BY_HSE,///128
     AppConstants.kPermitStatusCancelledByApprover:
-        PermitStatus.PTW_CANCELLED_BY_APPROVER,
+        PermitStatus.PTW_CANCELLED_BY_APPROVER,///129
     AppConstants.kPermitStatusCancelRequested:
-        PermitStatus.PTW_CANCEL_REQUESTED,
+        PermitStatus.PTW_CANCEL_REQUESTED,///130
     AppConstants.kPermitStatusCancelRequestRejected:
-        PermitStatus.PTW_CANCEL_REQUEST_REJECTED,
+        PermitStatus.PTW_CANCEL_REQUEST_REJECTED,///131
+    AppConstants.kPermitStatusCancelRequestApproved:
+        PermitStatus.PTW_CANCEL_REQUEST_APPROVED,///132
     // AppConstants.kPermitStatusEdit: PermitStatus.PTW_EDIT,
     AppConstants.kPermitStatusExtendRequested:
-        PermitStatus.PTW_EXTEND_REQUESTED,
-    AppConstants.kPermitStatusExtendRequestApproved:
-        PermitStatus.PTW_EXTEND_REQUEST_APPROVE,
+        PermitStatus.PTW_EXTEND_REQUESTED,///133
     AppConstants.kPermitStatusExtendRequestRejected:
-        PermitStatus.PTW_EXTEND_REQUEST_REJECTED,
+        PermitStatus.PTW_EXTEND_REQUEST_REJECTED,///134
+    AppConstants.kPermitStatusExtendRequestApproved:
+        PermitStatus.PTW_EXTEND_REQUEST_APPROVE,///135
     AppConstants.kPermitStatusLinkedToJob: PermitStatus.PTW_LINKED_TO_JOB,
     AppConstants.kPermitStatusLinkedToPM: PermitStatus.PTW_LINKED_TO_PM,
     AppConstants.kPermitStatusLinkedToAudit: PermitStatus.PTW_LINKED_TO_AUDIT,
