@@ -895,6 +895,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> saveRoleAccess({
+    auth,
+    bool? isLoading,
+    saveRolelistJsonString,
+  }) async {
+    var response = await connectHelper.saveRoleAccess(
+        auth: auth,
+        isLoading: isLoading,
+        saveRolelistJsonString: saveRolelistJsonString);
+    return response;
+  }
+
   Future<ResponseModel> createNewPermit({
     required String auth,
     newPermit,
@@ -1844,6 +1856,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> deleteCompetencyList({
     auth,
     bool? isLoading,
@@ -1888,6 +1901,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> createRoleList({
     auth,
     bool? isLoading,

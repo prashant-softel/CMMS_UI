@@ -2908,8 +2908,8 @@ class ConnectHelper {
     required modulelistJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'RoleAccess/AddRole',
       Request.post,
       modulelistJsonString,
@@ -2951,6 +2951,25 @@ class ConnectHelper {
       'RoleAccess/DeleteRole?id=$module_id',
       Request.delete,
       module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveRoleAccess({
+    required String auth,
+    bool? isLoading,
+    required saveRolelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/SetRoleAccess',
+      Request.post,
+      saveRolelistJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
