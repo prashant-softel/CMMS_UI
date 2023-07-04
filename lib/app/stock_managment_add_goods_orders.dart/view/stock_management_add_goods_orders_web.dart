@@ -893,14 +893,23 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       },
                                     ),
                                     Dimens.boxWidth15,
-                                    CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appGreenColor,
-                                      text: 'Submit',
-                                      onPressed: () {
-                                        controller.createGoodsOrder();
-                                      },
-                                    ),
+                                    controller.id == null
+                                        ? CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Submit',
+                                            onPressed: () {
+                                              controller.createGoodsOrder();
+                                            },
+                                          )
+                                        : CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Update',
+                                            onPressed: () {
+                                              // controller.createGoodsOrder();
+                                            },
+                                          ),
                                     Spacer()
                                   ],
                                 ),

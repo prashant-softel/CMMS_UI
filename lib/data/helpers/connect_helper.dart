@@ -541,7 +541,7 @@ class ConnectHelper {
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'GO/GetGOList?plantID=$facility_id&fromDate=2001-01-01&toDate=2023-05-14',
+      'GO/GetGOList?facility_id=$facility_id&fromDate=2001-01-01&toDate=2023-07-30',
       Request.getMultiparts,
       null,
       isLoading,
@@ -2908,8 +2908,8 @@ class ConnectHelper {
     required modulelistJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'RoleAccess/AddRole',
       Request.post,
       modulelistJsonString,
@@ -2961,18 +2961,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-
-
   Future<ResponseModel> createDesignation({
     required String auth,
     bool? isLoading,
     required designationJsonString,
   }) async {
     var responseModel =
-    // responseModel =
+        // responseModel =
 
-    await apiWrapper.makeRequest(
+        await apiWrapper.makeRequest(
       'RoleAccess/AddDesignation',
       Request.post,
       designationJsonString,
@@ -3030,8 +3027,8 @@ class ConnectHelper {
     required businessTypeJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'CMMS/AddBusinessType', //AddBusiness
       Request.post,
       businessTypeJsonString,
@@ -3044,6 +3041,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> deleteBusinessType({
     required String auth,
     bool? isLoading,
@@ -3081,5 +3079,4 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 }

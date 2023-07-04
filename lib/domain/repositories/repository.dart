@@ -591,7 +591,7 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      // print('getGoodsOrdersList: ${res.data}');
+      print('getGoodsOrdersList: ${res.data}');
 
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
@@ -4415,8 +4415,8 @@ class Repository {
   }
 
   Future<List<CompetencyModel?>?> getCompetencyList(
-      bool? isLoading,
-      ) async {
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getCompetencyList(
@@ -4428,11 +4428,10 @@ class Repository {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<CompetencyModel> _PreventiveCheckListModelList =
-        jsonPreventiveCheckListModelModels
-            .map<CompetencyModel>((m) =>
-            CompetencyModel.fromJson(
-                Map<String, dynamic>.from(m)))
-            .toList();
+            jsonPreventiveCheckListModelModels
+                .map<CompetencyModel>((m) =>
+                    CompetencyModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _PreventiveCheckListModelList;
       } else {
@@ -4446,8 +4445,7 @@ class Repository {
     }
   }
 
-  Future<bool> createCompetency(
-      {bool? isLoading, competencyJsonString}) async {
+  Future<bool> createCompetency({bool? isLoading, competencyJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createCompetency(
@@ -4512,8 +4510,7 @@ class Repository {
     }
   }
 
-  Future<bool> createPermitType(
-      {bool? isLoading, checklistJsonString}) async {
+  Future<bool> createPermitType({bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createPermitType(
@@ -4553,7 +4550,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updatePermitType({
     bool? isLoading,
     checklistJsonString,
@@ -4579,8 +4575,7 @@ class Repository {
     }
   }
 
-  Future<bool> createRoleList(
-      {bool? isLoading, modulelistJsonString}) async {
+  Future<bool> createRoleList({bool? isLoading, modulelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRoleList(
@@ -4600,7 +4595,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateRoleList({
     bool? isLoading,
@@ -4668,7 +4662,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updateDesignation({
     bool? isLoading,
     designationJsonString,
@@ -4713,7 +4706,6 @@ class Repository {
     }
   }
 
-
   Future<bool> createBusinessType(
       {bool? isLoading, businessTypeJsonString}) async {
     try {
@@ -4736,7 +4728,8 @@ class Repository {
     }
   }
 
-  Future<void> deleteBusinessType(Object businesstype_id, bool isLoading) async {
+  Future<void> deleteBusinessType(
+      Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteBusinessType(
@@ -4779,7 +4772,6 @@ class Repository {
       return false;
     }
   }
-
 
 //end
 //end
