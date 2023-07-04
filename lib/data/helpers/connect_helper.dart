@@ -2967,12 +2967,31 @@ class ConnectHelper {
     required designationJsonString,
   }) async {
     var responseModel =
-        // responseModel =
+
 
         await apiWrapper.makeRequest(
       'RoleAccess/AddDesignation',
       Request.post,
       designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveRoleAccess({
+    required String auth,
+    bool? isLoading,
+    required saveRolelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/SetRoleAccess',
+      Request.post,
+      saveRolelistJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

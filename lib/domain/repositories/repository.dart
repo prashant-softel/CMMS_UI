@@ -566,7 +566,8 @@ class Repository {
             userId: userId, auth: token, isLoading: isLoading ?? false);
       } else {
         Fluttertoast.showToast(
-            msg: "Invalid Email Id and Password", fontSize: 16.0);
+            msg: res.data, // "Invalid Email Id and Password",
+            fontSize: 16.0);
       }
     } catch (error) {
       await _deviceRepository.generateToken();
@@ -2533,6 +2534,27 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           checkpointJsonString: checkpointJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> saveRoleAccess({bool? isLoading, saveRolelistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.saveRoleAccess(
+          auth: auth,
+          isLoading: isLoading,
+          saveRolelistJsonString: saveRolelistJsonString);
 
       if (!res.hasError) {
         return true;

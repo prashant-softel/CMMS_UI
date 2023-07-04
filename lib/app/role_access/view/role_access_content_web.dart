@@ -128,7 +128,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                               Spacer(),
                               // Dimens.boxWidth15,
                               Text(
-                                'Existing User: ',
+                                'Apply to Existing User: ',
                                 style: Styles.blackBold14,
                               ),
                               Dimens.boxWidth10,
@@ -143,7 +143,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                               Spacer(),
                               // Dimens.boxWidth15,
                               Text(
-                                'Set Role: ',
+                                'Apply to Role: ',
                                 style: Styles.blackBold14,
                               ),
                               Dimens.boxWidth10,
@@ -195,7 +195,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                             label: column,
                                             // Set the width of the column to 100
 
-                                            minWidth: Get.width * 0.95,
+                                            minWidth: Get.width * 0.10,
                                           );
                                         }).toList(),
                                         rows: controller.accesslevel
@@ -371,7 +371,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                       text: 'Submit',
                                       onPressed: () {
                                         //controller.addUser();
-                                        //  controller.saveAccessLevel();
+                                        controller.saveRoleAccess();
                                       },
                                     ),
                                   ),
