@@ -341,7 +341,15 @@ class AddJobController extends GetxController {
             isBlockSelected.value = true;
           }
           selectedBlock.value = value;
+          // selectedEquipmentCategory.value ='';
+          // selectedToolRequiredToWorkType.value ='';
+          // selectedWorkAreaList.value = [];
+          // selectedAssignedTo.value ='';
+          // selectedWorkTypeList.value = [];
           getInventoryCategoryList(selectedBlockId.toString());
+          getWorkTypeList();
+          getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
+          // getToolsRequiredToWorkTypeList();
         }
         break;
       case RxList<EquipmentModel>:

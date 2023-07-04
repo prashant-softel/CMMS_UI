@@ -84,7 +84,9 @@ class WorkAreaWidget extends StatelessWidget {
                 .map((e) => MultiSelectItem(e, e?.name ?? ''))
                 .toList(),
             onConfirm: (selectedOptionsList) =>
-                {controller.workAreasSelected(selectedOptionsList)},
+                {controller.workAreasSelected(selectedOptionsList),
+                  controller.isWorkAreaSelected.value = selectedOptionsList.isNotEmpty,
+                  },
             chipDisplay: MultiSelectChipDisplay(),
           ),
         ),
