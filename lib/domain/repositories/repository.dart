@@ -592,7 +592,7 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      // print('getGoodsOrdersList: ${res.data}');
+      print('getGoodsOrdersList: ${res.data}');
 
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
@@ -4684,7 +4684,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updateDesignation({
     bool? isLoading,
     designationJsonString,
@@ -4729,7 +4728,6 @@ class Repository {
     }
   }
 
-
   Future<bool> createBusinessType(
       {bool? isLoading, businessTypeJsonString}) async {
     try {
@@ -4752,7 +4750,8 @@ class Repository {
     }
   }
 
-  Future<void> deleteBusinessType(Object businesstype_id, bool isLoading) async {
+  Future<void> deleteBusinessType(
+      Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteBusinessType(
@@ -4795,7 +4794,6 @@ class Repository {
       return false;
     }
   }
-
 
 //end
 //end
