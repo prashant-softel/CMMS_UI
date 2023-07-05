@@ -68,6 +68,7 @@ import '../models/competency_model.dart';
 import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
+import '../models/get_mrs_list_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
@@ -4792,6 +4793,37 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<List<MrsListModel?>?> getMrsList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMrsList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonMrsListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<MrsListModel> _MrsListModelList = jsonMrsListModelModels
+            .map<MrsListModel>(
+                (m) => MrsListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _MrsListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getMrsList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 

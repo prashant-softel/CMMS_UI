@@ -3098,4 +3098,23 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getMrsList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getMRSList?plant_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
 }

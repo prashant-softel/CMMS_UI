@@ -1937,7 +1937,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> createDesignation({
     auth,
     bool? isLoading,
@@ -1984,6 +1983,7 @@ class DataRepository extends DomainRepository {
         businessTypeJsonString: businessTypeJsonString);
     return response;
   }
+
   Future<ResponseModel> deleteBusinessType({
     auth,
     bool? isLoading,
@@ -2007,5 +2007,15 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getMrsList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getMrsList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
 //end
 }
