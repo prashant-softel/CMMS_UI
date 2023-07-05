@@ -33,6 +33,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
+  int? id = 0;
 
   //drop down list of assets
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -77,6 +78,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   ///
   @override
   void onInit() async {
+    id = Get.arguments;
+    print('AddStock:$id');
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });

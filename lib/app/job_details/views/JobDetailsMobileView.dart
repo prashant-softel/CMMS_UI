@@ -185,7 +185,7 @@ Widget _content(context, controller) {
                                       JobDetailField(
                                         title: 'Job Description',
                                         value: controller.jobDetailsModel
-                                            .value?.jobTitle ??
+                                            .value?.jobDescription ??
                                             '',
                                       ),
                                       JobDetailField(

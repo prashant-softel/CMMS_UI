@@ -6,102 +6,138 @@ List<GoodsOrdersListModel> goodOrderListModelFromJson(String str) =>
 
 class GoodsOrdersListModel {
   int? id;
-  int? facility_id;
-
-  dynamic? title;
-  int? order_by_type;
-  dynamic? remarks;
+  int? spare_status;
+  dynamic remarks;
+  int? orderflag;
+  String? asset_name;
+  int? asset_type_ID;
+  int? purchaseID;
+  int? assetItemID;
+  dynamic serial_number;
+  int? location_ID;
+  dynamic cost;
+  dynamic ordered_qty;
   String? rejectedRemark;
-  int? plantID;
+  int? facility_id;
   String? purchaseDate;
   int? vendorID;
   int? status;
-  dynamic? status_short;
-  String? generatedBy;
-  int? receiverID;
-  dynamic? vendor_name;
-  int? generate_flag;
-  int? location_ID;
+  String? asset_code;
+  String? asset_type;
+  String? cat_name;
+  dynamic received_qty;
+  dynamic damaged_qty;
+  dynamic accepted_qty;
   String? received_on;
+  String? approvedOn;
+  String? generatedBy;
   String? receivedBy;
   String? approvedBy;
-  String? approvedOn;
-  dynamic? go_items;
+  dynamic vendor_name;
+  String? status_short;
 
   GoodsOrdersListModel({
     this.id,
-    this.facility_id,
-    this.title,
-    this.order_by_type,
+    this.spare_status,
     this.remarks,
+    this.orderflag,
+    this.asset_name,
+    this.asset_type_ID,
+    this.purchaseID,
+    this.assetItemID,
+    this.serial_number,
+    this.location_ID,
+    this.cost,
+    this.ordered_qty,
     this.rejectedRemark,
-    this.plantID,
+    this.facility_id,
     this.purchaseDate,
     this.vendorID,
     this.status,
-    this.status_short,
-    this.generatedBy,
-    this.receiverID,
-    this.vendor_name,
-    this.generate_flag,
-    this.location_ID,
+    this.asset_code,
+    this.asset_type,
+    this.cat_name,
+    this.received_qty,
+    this.damaged_qty,
+    this.accepted_qty,
     this.received_on,
+    this.approvedOn,
+    this.generatedBy,
     this.receivedBy,
     this.approvedBy,
-    this.approvedOn,
-    this.go_items,
+    this.vendor_name,
+    this.status_short,
   });
 
   // Factory method to create a GoodsOrdersListModel instance from JSON
   factory GoodsOrdersListModel.fromJson(Map<String, dynamic> json) {
     return GoodsOrdersListModel(
       id: json['id'],
-      facility_id: json['facility_id'],
-      title: json['title'],
-      order_by_type: json["order_by_type"],
+      spare_status: json['spare_status'],
       remarks: json['remarks'],
+      orderflag: json['orderflag'],
+      asset_name: json['asset_name'],
+      asset_type_ID: json['asset_type_ID'],
+      purchaseID: json['purchaseID'],
+      assetItemID: json['assetItemID'],
+      serial_number: json['serial_number'],
+      location_ID: json['location_ID'],
+      cost: json['cost'],
+      ordered_qty: json['ordered_qty'],
       rejectedRemark: json['rejectedRemark'],
-      plantID: json['plantID'],
+      facility_id: json['facility_id'],
       purchaseDate: json['purchaseDate'],
       vendorID: json['vendorID'],
       status: json['status'],
-      status_short: json['status_short'],
-      generatedBy: json['generatedBy'],
-      receiverID: json['receiverID'],
-      vendor_name: json['vendor_name'],
-      generate_flag: json['generate_flag'],
-      location_ID: json['location_ID'],
+      asset_code: json['asset_code'],
+      asset_type: json['asset_type'],
+      cat_name: json['cat_name'],
+      received_qty: json['received_qty'],
+      damaged_qty: json['damaged_qty'],
+      accepted_qty: json['accepted_qty'],
       received_on: json['received_on'],
+      approvedOn: json['approvedOn'],
+      generatedBy: json['generatedBy'],
       receivedBy: json['receivedBy'],
       approvedBy: json['approvedBy'],
-      approvedOn: json['approvedOn'],
-      go_items: json['go_items'],
+      vendor_name: json['vendor_name'],
+      status_short: json['status_short'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['facility_id'] = this.facility_id;
-    data['title'] = this.title;
-    data['order_by_type'] = this.order_by_type;
+    data['spare_status'] = this.spare_status;
     data['remarks'] = this.remarks;
+    data['orderflag'] = this.orderflag;
+    data['asset_name'] = this.asset_name;
+    data['asset_type_ID'] = this.asset_type_ID;
+    data['purchaseID'] = this.purchaseID;
+    data['assetItemID'] = this.assetItemID;
+    data['serial_number'] = this.serial_number;
+    data['location_ID'] = this.location_ID;
+    data['cost'] = this.cost;
+    data['ordered_qty'] = this.ordered_qty;
     data['rejectedRemark'] = this.rejectedRemark;
-    data['plantID'] = this.plantID;
+    data['facility_id'] = this.facility_id;
     data['purchaseDate'] = this.purchaseDate;
     data['vendorID'] = this.vendorID;
     data['status'] = this.status;
-    data['status_short'] = this.status_short;
-    data['generatedBy'] = this.generatedBy;
-    data['receiverID'] = this.receiverID;
-    data['vendor_name'] = this.vendor_name;
-    data['generate_flag'] = this.generate_flag;
-    data['location_ID'] = this.location_ID;
+    data['asset_code'] = this.asset_code;
+    data['asset_type'] = this.asset_type;
+    data['cat_name'] = this.cat_name;
+    data['received_qty'] = this.received_qty;
+    data['damaged_qty'] = this.damaged_qty;
+    data['accepted_qty'] = this.accepted_qty;
     data['received_on'] = this.received_on;
+    data['approvedOn'] = this.approvedOn;
+    data['generatedBy'] = this.generatedBy;
     data['receivedBy'] = this.receivedBy;
     data['approvedBy'] = this.approvedBy;
-    data['approvedOn'] = this.approvedOn;
-    data['go_items'] = this.go_items;
+    data['vendor_name'] = this.vendor_name;
+    data['status_short'] = this.status_short;
+
     return data;
   }
 }

@@ -50,13 +50,12 @@ class AddJobScreen extends GetView<AddJobController> {
               child: Padding(
                   padding: Dimens.edgeInsets10,
                   child: (() {
-                    if (Responsive.isMobile(context)) {
-                      return //
-                          AddJobContentMobile();
+                    if (Responsive.isMobile(context)||
+                        Responsive.isTablet(context)) {
+                      return AddJobContentMobile();
                     } //
                     else if (Responsive.isDesktop(context)) {
-                      return //
-                          AddJobContentWeb();
+                      return AddJobContentWeb();
                     }
                   }())
                   //

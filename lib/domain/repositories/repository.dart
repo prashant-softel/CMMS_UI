@@ -593,7 +593,7 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      // print('getGoodsOrdersList: ${res.data}');
+      print('getGoodsOrdersList: ${res.data}');
 
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);

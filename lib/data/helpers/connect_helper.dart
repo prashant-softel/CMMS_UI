@@ -541,7 +541,7 @@ class ConnectHelper {
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'GO/GetGOList?plantID=$facility_id&fromDate=2001-01-01&toDate=2023-05-14',
+      'GO/GetGOList?facility_id=$facility_id&fromDate=2001-01-01&toDate=2023-07-30',
       Request.getMultiparts,
       null,
       isLoading,
@@ -2966,7 +2966,10 @@ class ConnectHelper {
     bool? isLoading,
     required designationJsonString,
   }) async {
-    var responseModel = await apiWrapper.makeRequest(
+    var responseModel =
+
+
+        await apiWrapper.makeRequest(
       'RoleAccess/AddDesignation',
       Request.post,
       designationJsonString,
