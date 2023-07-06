@@ -2966,10 +2966,7 @@ class ConnectHelper {
     bool? isLoading,
     required designationJsonString,
   }) async {
-    var responseModel =
-
-
-        await apiWrapper.makeRequest(
+    var responseModel = await apiWrapper.makeRequest(
       'RoleAccess/AddDesignation',
       Request.post,
       designationJsonString,
@@ -3099,12 +3096,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getMrsList({
-    required String auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
+  Future<ResponseModel> getMrsList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
+      // 'MRS/getMRSList?plant_ID=$facilityId&emp_id=$userId&fromDate=$startDate&toDate=$endDate',
       'MRS/getMRSList?plant_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
       Request.get,
       null,

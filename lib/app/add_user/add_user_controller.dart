@@ -473,7 +473,7 @@ class AddUserController extends GetxController {
       );
       if (responseSaveNotification != null) {
         userId = 0;
-        Get.toNamed(
+        Get.offAllNamed(
           Routes.userList,
         );
       }

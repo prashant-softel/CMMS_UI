@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
@@ -4796,17 +4797,18 @@ class Repository {
     }
   }
 
-  Future<List<MrsListModel?>?> getMrsList(
-    int? facilityId,
-    bool? isLoading,
-  ) async {
+  Future<List<MrsListModel?>?> getMrsList(int? facilityId, bool? isLoading,
+      dynamic startDate, dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
       final res = await _dataRepository.getMrsList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId);
 
       if (!res.hasError) {
         final jsonMrsListModelModels = jsonDecode(res.data);
