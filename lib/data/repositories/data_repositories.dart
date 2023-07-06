@@ -2017,15 +2017,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> getMrsList({
-    required String auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> getMrsList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate,
+          int? userId}) async =>
       await connectHelper.getMrsList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId);
 //end
 }

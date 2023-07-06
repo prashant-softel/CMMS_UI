@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/mrs/mrs_list_presenter.dart';
 import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../home/home_controller.dart';
 
@@ -24,6 +25,11 @@ class MrsListController extends GetxController {
   MrsListModel? mrsListModel;
 
   RxList<String> mrsTableColumns = <String>[].obs;
+  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
 
   ///
   @override
@@ -31,16 +37,20 @@ class MrsListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getMrsList(facilityId, true);
+        getMrsList(facilityId, formattedTodate, formattedFromdate, true);
       });
     });
     super.onInit();
   }
 
-  Future<void> getMrsList(int facilityId, bool isLoading) async {
+  Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
+      bool isLoading) async {
     mrsList?.value = <MrsListModel>[];
     final _mrsList = await mrsListPresenter.getMrsList(
-        facilityId: facilityId, isLoading: isLoading);
+        facilityId: facilityId,
+        isLoading: isLoading,
+        startDate: startDate,
+        endDate: endDate);
 
     if (_mrsList != null) {
       mrsList!.value = _mrsList;
@@ -58,5 +68,9 @@ class MrsListController extends GetxController {
         }
       }
     }
+  }
+
+  void getMrsListByDate() {
+    getMrsList(facilityId, formattedFromdate, formattedTodate, false);
   }
 }

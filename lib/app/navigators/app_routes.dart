@@ -94,6 +94,7 @@ abstract class Routes {
   static const competencyScreen = _Paths.competencyScreen;
 
   static const roleAccess = _Paths.roleAccess;
+  static const createMrs = _Paths.createMrs;
 }
 
 abstract class _Paths {
@@ -182,6 +183,7 @@ abstract class _Paths {
   static const designationScreen = '/designation-Screen';
   static const competencyScreen = '/competency-Screen';
   static const roleAccess = '/role-access';
+  static const createMrs = '/Create-mrs';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

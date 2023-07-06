@@ -5,12 +5,10 @@ class MrsListUsecase {
   final Repository _repository;
 
   MrsListUsecase(this._repository);
-  Future<List<MrsListModel?>?> getMrsList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await _repository.getMrsList(
-        facilityId,
-        isLoading,
-      );
+  Future<List<MrsListModel?>?> getMrsList(
+          {int? facilityId,
+          bool? isLoading,
+          dynamic endDate,
+          dynamic startDate}) async =>
+      await _repository.getMrsList(facilityId, isLoading, startDate, endDate);
 }

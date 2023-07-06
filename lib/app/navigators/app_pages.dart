@@ -15,6 +15,8 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
+import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
+import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
@@ -121,8 +123,6 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
-import '../permit_type/permit_type_binding.dart';
-import '../permit_type/view/permit_type_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -577,6 +577,11 @@ class AppPages {
       name: _Paths.competencyScreen,
       page: CompetencyListScreen.new,
       binding: CompetencyListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createMrs,
+      page: CreateMrsScreen.new,
+      binding: CreateMrsBinding(),
     ),
   ];
 }
