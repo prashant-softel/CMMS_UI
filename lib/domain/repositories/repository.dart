@@ -1326,6 +1326,8 @@ class Repository {
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
     int? blockId,
+    String? start_date,
+    required String end_date,
     required String categoryIds,
     required bool isLoading,
   }) async {
@@ -1337,6 +1339,8 @@ class Repository {
         facilityId: facilityId,
         blockId: blockId,
         categoryIds: categoryIds,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading,
         auth: auth,
       );

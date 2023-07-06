@@ -19,6 +19,7 @@ import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -30,6 +31,8 @@ class WarrantyClaimController extends GetxController {
   WarrantyClaimPresenter warrantyClaimPresenter;
 
   final HomeController homeController = Get.find();
+   var itemCount = 0.obs;
+
 
   //Additional Email work
   var rowList = <String>[].obs;
@@ -42,6 +45,11 @@ class WarrantyClaimController extends GetxController {
   //   // rowList3.add(rowData);
 
   // }
+
+  void removeRow({required int index}) {
+    supplierActions.removeAt(index);
+    
+  }
 
   ///External Emails Part
   var externalEmails = <ExternalEmails>[].obs;
@@ -155,6 +163,13 @@ class WarrantyClaimController extends GetxController {
   RxList<int?> selectedSupplierNameIdList = <int>[].obs;
   Rx<bool> isBlockSelected = true.obs;
 
+   //From and To date format
+   Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+
   ///Currency List
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
@@ -242,7 +257,7 @@ class WarrantyClaimController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getWarrantyClaimList();
+        getWarrantyClaimList(facilityId, formattedTodate, formattedFromdate, false);
       });
     });
 
@@ -554,11 +569,18 @@ class WarrantyClaimController extends GetxController {
   //   update(['employee_list']);
   // }
 
-  void getWarrantyClaimList() async {
+  void getWarrantyClaimList(int facilityId, dynamic startDate, dynamic endDate,
+      bool isLoading) async {
     // supplierNameList.value = <WarrantyClaimModel>[];
 
     final list = await warrantyClaimPresenter.getWarrantyClaimList(
-        isLoading: true, categoryIds: categoryIds, facilityId: facilityId);
+        isLoading: isLoading, 
+        categoryIds: categoryIds, 
+        facilityId: facilityId,
+        start_date: startDate,
+        end_date: endDate,
+
+        );
     print('Supplier Name List:$supplierNameList');
     Set<String> supplierNameSet = {};
     for (var _supplierNameList in list) {
@@ -1042,5 +1064,9 @@ class WarrantyClaimController extends GetxController {
   Future<void> editWarrantyClaim({int? wc_id}) async {
     Get.toNamed(Routes.editWarrantyClaimContentWeb, arguments: wc_id);
     print('EditArgument$wc_id');
+  }
+
+   void getWarrantyClaimtListByDate() {
+    getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate, false);
   }
 }

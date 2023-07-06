@@ -174,12 +174,16 @@ class ViewAddInventoryUsecase {
     required int? facilityId,
     int? blockId,
     required String categoryIds,
+    String? start_date,
+    required String end_date,
   }) async {
     return _repository.getWarrantyClaimList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
       categoryIds: categoryIds,
+      start_date: start_date,
+      end_date: end_date,
     );
   }
 

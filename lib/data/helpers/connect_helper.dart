@@ -413,6 +413,8 @@ class ConnectHelper {
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
     required String auth,
+    String? start_date,
+    required String end_date,
     int? facilityId,
     int? blockId,
     required String categoryIds,
@@ -420,10 +422,12 @@ class ConnectHelper {
     var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
     var categoryIdsParam =
         (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
+     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'WC/GetWCList?facilityId=$facilityId' + blockIdParam + categoryIdsParam,
+      'WC/GetWCList?facilityId=$facilityId&' + startDateParam + endDateParam,
       Request.getMultiparts,
       null,
       isLoading,

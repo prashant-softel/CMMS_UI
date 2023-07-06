@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class IncidentReportListWeb extends GetView<IncidentReportListController> {
   IncidentReportListWeb({super.key});
@@ -44,524 +45,586 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
               ? Dimens.box0
               : HomeDrawer(),
           Expanded(
-            child: Container(
-                color: ColorValues.lightBlueishColor,
-                child: DefaultTabController(
-                    length: 3,
-                    child: Column(children: [
-                      ///
-
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 227, 224, 224),
-                            width: 1,
+            child: Obx(
+              ()=> Container(
+                  color: ColorValues.lightBlueishColor,
+                  child: DefaultTabController(
+                      length: 3,
+                      child: Column(children: [
+                        ///
+            
+                        Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: Color.fromARGB(255, 227, 224, 224),
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 236, 234, 234)
+                                    .withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 236, 234, 234)
-                                  .withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.home,
-                              color: ColorValues.greyLightColor,
-                            ),
-                            Text(
-                              "DASHBOARD",
-                              style: Styles.greyLight14,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: Text(" / Incident Report List",
-                                  style: Styles.greyMediumLight12),
-                            ),
-                            // Text(" / Create Checklist Number",
-                            //     style: Styles.greyMediumLight12)
-                            SizedBox(
-                              width: 400,
-                            ),
-                            // ActionButton(
-                            //   icon: Icons.calendar_month,
-                            //   label: 'December 3rd 2022',
-                            //   // onPress: () {
-                            //   //   // Get.to(() => AddInventory());
-                            //   //   // _buildStartDateField_mobile(context);
-                            //   // },
-                            //   color: Colors.green,
-                            //   onPressed: () {},
-                            // ),
-                          ],
-                        ),
-                      ),
-                      Dimens.boxHeight20,
-
-                      ///
-                      SizedBox(
-                        height: 60,
-                        child: CustomAppBar(
-                          title: 'Incident Report List'.tr,
-                          
-                          action: Row(
+                          child: Row(
                             children: [
-                              // ActionButton(
-                              //   icon: Icons.all_inbox,
-                              //   label: 'All',
-                              //   onPressed: () {},
-                              //   color: Colors.blue,
-                              // ),
-                              // Dimens.boxWidth10,
-                              // ActionButton(
-                              //   icon: Icons.close,
-                              //   label: 'Closed',
-                              //   onPressed: () {
-                              //     // var file = "assets/files/Fixed Asset Imports.xlsx";
-                              //     // var bytes = File(file).readAsBytesSync();
-                              //     // var excel = Excel.decodeBytes(bytes);
-                      
-                              //     // for (var table in excel.tables.keys) {
-                              //     //   print(table); //sheet Name
-                              //     //   print(excel.tables[table]?.maxCols);
-                              //     //   print(excel.tables[table]?.maxRows);
-                              //     //   for (var row in excel.tables[table]!.rows) {
-                              //     //     print("QWERTY $row");
-                              //     //   }
-                              //     // }
-                              //   },
-                              //   color: Colors.green,
-                              // ),
-                              CustomTextField(
-                                label: 'Select Date & Time:',
-                                suffixIcon: Icon(
-                                  Icons.calendar_month,
-                                ),
-                                // textController:
-                                //     controller.categoryTextController,
-                                textController: controller
-                                    .incidentReportListDateTimeCtrlrWeb,
-                      
+                              Icon(
+                                Icons.home,
+                                color: ColorValues.greyLightColor,
+                              ),
+                              Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                              GestureDetector(
                                 onTap: () {
-                                  pickDateTime_web(context);
+                                  Get.back();
                                 },
+                                child: Text(" / Incident Report List",
+                                    style: Styles.greyMediumLight12),
                               ),
-                              Dimens.boxWidth10,
-                              ActionButton(
-                                icon: Icons.add,
-                                label: 'Add Incident Report',
-                                onPressed: () {
-                                  
-                                   Get.toNamed(Routes.addIncidentReportContentWeb);
-                                 
-                                },
-                                color: Colors.green,
+                              // Text(" / Create Checklist Number",
+                              //     style: Styles.greyMediumLight12)
+                              SizedBox(
+                                width: 400,
                               ),
-                              Dimens.boxWidth10,
                               // ActionButton(
-                              //   icon: Icons.close,
-                              //   lable: 'retireAsset'.tr,
-                              //   onPress: () async {
-                              //     // ByteData data = await rootBundle
-                              //     //     .load("assets/files/Fixed Asset Imports.xlsx");
-                              //     // var bytes = data.buffer
-                              //     //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
-                              //     // var excel = Excel.decodeBytes(bytes);
-                      
-                              //     // for (var table in excel.tables.keys) {
-                              //     //   print(table); //sheet Name
-                              //     //   print(excel.tables[table]?.maxCols);
-                              //     //   print(excel.tables[table]?.maxRows);
-                              //     //   for (var row in excel.tables[table]!.rows) {
-                              //     //     print("QWERTY $row");
-                              //     //   }
-                              //     // }
-                              //   },
-                              //   color: Colors.red,
+                              //   icon: Icons.calendar_month,
+                              //   label: 'December 3rd 2022',
+                              //   // onPress: () {
+                              //   //   // Get.to(() => AddInventory());
+                              //   //   // _buildStartDateField_mobile(context);
+                              //   // },
+                              //   color: Colors.green,
+                              //   onPressed: () {},
                               // ),
                             ],
                           ),
                         ),
-                      ),
-
-                      ///
-                      // Align(
-                      //   alignment: Alignment.centerLeft,
-                      //   child: Container(
-                      //     width: 400,
-                      //     child: TabBar(
-                      //       tabs: [
-                      //         CustomTabBar(
-                      //           label: 'listView'.tr,
-                      //           icon: Icons.menu,
-                      //         ),
-                      //         CustomTabBar(
-                      //           label: 'treeView'.tr,
-                      //           icon: Icons.account_tree_sharp,
-                      //         ),
-                      //         CustomTabBar(
-                      //           label: 'mapView'.tr,
-                      //           icon: Icons.location_on,
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-
-                      ///
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'columnVisibility'.tr,
+                        Dimens.boxHeight20,
+            
+                        ///
+                        SizedBox(
+                          height: 60,
+                          child: CustomAppBar(
+                            title: 'Incident Report List'.tr,
+                            
+                            action: Row(
+                              children: [
+                                // ActionButton(
+                                //   icon: Icons.all_inbox,
+                                //   label: 'All',
+                                //   onPressed: () {},
+                                //   color: Colors.blue,
+                                // ),
+                                // Dimens.boxWidth10,
+                                // ActionButton(
+                                //   icon: Icons.close,
+                                //   label: 'Closed',
+                                //   onPressed: () {
+                                //     // var file = "assets/files/Fixed Asset Imports.xlsx";
+                                //     // var bytes = File(file).readAsBytesSync();
+                                //     // var excel = Excel.decodeBytes(bytes);
+                        
+                                //     // for (var table in excel.tables.keys) {
+                                //     //   print(table); //sheet Name
+                                //     //   print(excel.tables[table]?.maxCols);
+                                //     //   print(excel.tables[table]?.maxRows);
+                                //     //   for (var row in excel.tables[table]!.rows) {
+                                //     //     print("QWERTY $row");
+                                //     //   }
+                                //     // }
+                                //   },
+                                //   color: Colors.green,
+                                // ),
+                                // CustomTextField(
+                                //   label: 'Select Date & Time:',
+                                //   suffixIcon: Icon(
+                                //     Icons.calendar_month,
+                                //   ),
+                                //   // textController:
+                                //   //     controller.categoryTextController,
+                                //   textController: controller
+                                //       .incidentReportListDateTimeCtrlrWeb,
+                        
+                                //   onTap: () {
+                                //     pickDateTime_web(context);
+                                //   },
+                                // ),
+                                Container(
+                              height: 30,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () async {
+                                  await Get.dialog(
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 350,
+                                          right: 350,
+                                          top: 200,
+                                          bottom: 200),
+                                      child: Container(
+                                        color: ColorValues.whiteColor,
+                                        child: SfDateRangePicker(
+                                          cancelText: "CANCEL",
+                                          confirmText: "Ok",
+                                          showActionButtons: true,
+                                          initialSelectedRange: PickerDateRange(
+                                            controller.fromDate.value,
+                                            controller.toDate.value,
+                                          ),
+                                          selectionMode:
+                                              DateRangePickerSelectionMode.range,
+                                          monthCellStyle:
+                                              DateRangePickerMonthCellStyle(
+                                            todayCellDecoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color:
+                                                    ColorValues.appDarkBlueColor),
+                                          ),
+                                          onSubmit: (value) {
+                                            PickerDateRange? data =
+                                                value as PickerDateRange;
+            
+                                            var pickUpDate = DateTime.parse(
+                                                data.startDate.toString());
+                                            controller.fromDate.value =
+                                                pickUpDate;
+                                            var dropDate = DateTime.parse(
+                                                data.endDate.toString());
+                                            dropDate != null
+                                                ? controller.toDate.value =
+                                                    dropDate
+                                                : controller.toDate.value =
+                                                    pickUpDate;
+                                            Get.back();
+                                            controller.getIncidentReportListByDate();
+                                          },
+                                          onCancel: () => Get.back(),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                text:
+                                    'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
+                              ),
+                            ),
+            
+                                Dimens.boxWidth10,
+                                ActionButton(
+                                  icon: Icons.add,
+                                  label: 'Add Incident Report',
+                                  onPressed: () {
+                                    
+                                     Get.toNamed(Routes.addIncidentReportContentWeb);
+                                   
+                                  },
+                                  color: Colors.green,
+                                ),
+                                Dimens.boxWidth10,
+                                // ActionButton(
+                                //   icon: Icons.close,
+                                //   lable: 'retireAsset'.tr,
+                                //   onPress: () async {
+                                //     // ByteData data = await rootBundle
+                                //     //     .load("assets/files/Fixed Asset Imports.xlsx");
+                                //     // var bytes = data.buffer
+                                //     //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
+                                //     // var excel = Excel.decodeBytes(bytes);
+                        
+                                //     // for (var table in excel.tables.keys) {
+                                //     //   print(table); //sheet Name
+                                //     //   print(excel.tables[table]?.maxCols);
+                                //     //   print(excel.tables[table]?.maxRows);
+                                //     //   for (var row in excel.tables[table]!.rows) {
+                                //     //     print("QWERTY $row");
+                                //     //   }
+                                //     // }
+                                //   },
+                                //   color: Colors.red,
+                                // ),
+                              ],
                             ),
                           ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'Copy'.tr,
+                        ),
+            
+                        ///
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: Container(
+                        //     width: 400,
+                        //     child: TabBar(
+                        //       tabs: [
+                        //         CustomTabBar(
+                        //           label: 'listView'.tr,
+                        //           icon: Icons.menu,
+                        //         ),
+                        //         CustomTabBar(
+                        //           label: 'treeView'.tr,
+                        //           icon: Icons.account_tree_sharp,
+                        //         ),
+                        //         CustomTabBar(
+                        //           label: 'mapView'.tr,
+                        //           icon: Icons.location_on,
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+            
+                        ///
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'columnVisibility'.tr,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'Excel'.tr,
+                            Container(
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'Copy'.tr,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'PDF'.tr,
+                            Container(
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'Excel'.tr,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 450),
-                            child: Container(
-                              width: 200,
-                              height: 40,
-                              margin: Dimens.edgeInsets0_0_16_0,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.grey, width: 0.0),
+                            Container(
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'PDF'.tr,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 450),
+                              child: Container(
+                                width: 200,
+                                height: 40,
+                                margin: Dimens.edgeInsets0_0_16_0,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    contentPadding: Dimens.edgeInsets10_0_0_0,
+                                    hintText: 'search'.tr,
+                                    hintStyle: Styles.grey12,
                                   ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.grey, width: 0.0),
-                                  ),
-                                  contentPadding: Dimens.edgeInsets10_0_0_0,
-                                  hintText: 'search'.tr,
-                                  hintStyle: Styles.grey12,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-
-                      ///
-                      Expanded(
-                        child: Container(
-                          child: GetBuilder<IncidentReportListController>(
-                              id: 'incident_report_list',
-                              builder: (controller) {
-                                return //
-                                    Column(
-                                        //
-                                        children: [
-                                      ///
-                                      Expanded(
-                                        child: ScrollableTableView(
-                                          paginationController: controller
-                                              .paginationIncidentReportController,
-                                          columns: [
-                                            'Id',
-                                            'Description',
-                                            'Equipment Name',
-                                            'Approved By',
-                                            'Approved At',
-                                            'Block Name',
-                                            'Created At',
-                                            'Status',
-                                            'action'.tr,
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              minWidth: Get.width * 0.1,
-                                              label: column,
-                                            );
-                                          }).toList(),
-                                          rows: [
-                                            ...List.generate(
-                                              controller
-                                                  .incidentReportList.length,
-                                              
-                                              (index) => [
-                                                // AssetName(
-
-                                                //    '${controller.warrantyClaimList[index].wc_id}',
-                                                //   // 'dummy data',
-                                                //   1,
-                                                // ),
-                                                // index + 1,
-                                                '${controller.incidentReportList[index].id}',
-                                                '${controller.incidentReportList[index].description}',
-                                                '${controller.incidentReportList[index].equipment_name}',
-                                                '${controller.incidentReportList[index].approved_by}',
-                                                '${controller.incidentReportList[index].approved_at}',
-                                                '${controller.incidentReportList[index].block_name}',
-                                                '${controller.incidentReportList[index].created_at}',
-                                                '${controller.incidentReportList[index].status}',
-                                                'Actions'
-                                              ],
-                                            ),
-                                          ].map(
-                                            (record) {
-                                              return TableViewRow(
-                                                height: Get.height * 0.13,
-                                                cells: record.map(
-                                                  (value) {
-                                                    return TableViewCell(
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          print(
-                                                              'warrantyiddata:$value');
-                                                        },
-                                                        child:
-                                                            // value.runtimeType
-                                                            //             .toString() ==
-                                                            //         'AssetName'
-                                                            //     ? Builder(builder: (context) {
-                                                            //         final val =
-                                                            //             value as AssetName;
-                                                            //         return Column(
-                                                            //           children: [
-                                                            //             Align(
-                                                            //               alignment: Alignment
-                                                            //                   .centerLeft,
-                                                            //               child: Padding(
-                                                            //                 padding: Dimens
-                                                            //                     .edgeInsets8,
-                                                            //                 child: Text(
-                                                            //                     '${val.name}'),
-                                                            //               ),
-                                                            //             ),
-                                                            //             Spacer(),
-                                                            //             Align(
-                                                            //               alignment: Alignment
-                                                            //                   .centerRight,
-                                                            //               child: Container(
-                                                            //                 padding: Dimens
-                                                            //                     .edgeInsets8_2_8_2,
-                                                            //                 decoration:
-                                                            //                     BoxDecoration(
-                                                            //                   // color: val.requirementStatus ==
-                                                            //                   //         1
-                                                            //                   //     ? Colors.red
-                                                            //                   //     : Colors
-                                                            //                   //         .green,
-                                                            //                   borderRadius:
-                                                            //                       BorderRadius
-                                                            //                           .circular(
-                                                            //                               4),
-                                                            //                 ),
-                                                            //                 child: Text(
-                                                            //                   // val.name == 1
-                                                            //                   //     ? 'requirementRejected'
-                                                            //                   //         .tr
-                                                            //                   //     : 'requirementAccepted'
-                                                            //                   //         .tr,
-                                                            //                   // style: Styles
-                                                            //                   //     .white10
-                                                            //                   //     .copyWith(
-                                                            //                   //   color: Colors
-                                                            //                   //       .white,
-                                                            //                   // ),
-                                                            //                   '',
-
-                                                            //                 ),
-                                                            //               ),
-                                                            //             ),
-                                                            //             Dimens.boxHeight10,
-                                                            //           ],
-                                                            //         );
-                                                            //       })
-                                                            //     :
-                                                            value == 'Actions'
-                                                                ? Wrap(
-                                                                    children: [
-                                                                      Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            TableActionButton(
-                                                                              color: ColorValues.appDarkBlueColor,
-                                                                              icon: Icons.visibility,
-                                                                              onPress: () {
-                                                                                // controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                // print('record:${int.tryParse('${record[0]}')}');
-                                                                              },
-                                                                            ),
-                                                                            //),
-
-                                                                            TableActionButton(
-                                                                              color: ColorValues.appYellowColor,
-                                                                              icon: Icons.edit,
-                                                                              onPress: () {
-                                                                                // controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                // print('edit record:${int.tryParse('${record[0]}')}');
-                                                                              },
-                                                                            ),
-                                                                            //),
-
-                                                                            // TableActionButton(
-                                                                            //   color: Colors.red,
-                                                                            //   icon:
-                                                                            //       Icons.delete,
-                                                                            //   label: 'Delete',
-                                                                            //   onPress: () {},
-                                                                            // ),
-                                                                            //),
-                                                                          ]),
-                                                                      // TableActionButton(
-                                                                      //   color: Colors.green,
-                                                                      //   icon: Icons
-                                                                      //       .visibility,
-                                                                      //   label:
-                                                                      //       'Approve Request',
-                                                                      //   onPress: () {},
-                                                                      // ),
-                                                                      // TableActionButton(
-                                                                      //   color: Colors.red,
-                                                                      //   icon: Icons
-                                                                      //       .visibility,
-                                                                      //   label:
-                                                                      //       'Reject Request',
-                                                                      //   onPress: () {},
-                                                                      // ),
-                                                                    ],
-                                                                  )
-                                                                : Text(value
-                                                                    .toString()),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).toList(),
+                          ],
+                        ),
+            
+                        ///
+                        Expanded(
+                          child: Container(
+                            child: GetBuilder<IncidentReportListController>(
+                                id: 'incident_report_list',
+                                builder: (controller) {
+                                  return //
+                                      Column(
+                                          //
+                                          children: [
+                                        ///
+                                        Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .paginationIncidentReportController,
+                                            columns: [
+                                              'Id',
+                                              'Description',
+                                              'Equipment Name',
+                                              'Approved By',
+                                              'Approved At',
+                                              'Block Name',
+                                              'Created At',
+                                              'Status',
+                                              'action'.tr,
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.1,
+                                                label: column,
                                               );
-                                            },
-                                          ).toList(),
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller
+                                                    .incidentReportList.length,
+                                                
+                                                (index) => [
+                                                  // AssetName(
+            
+                                                  //    '${controller.warrantyClaimList[index].wc_id}',
+                                                  //   // 'dummy data',
+                                                  //   1,
+                                                  // ),
+                                                  // index + 1,
+                                                  '${controller.incidentReportList[index].id}',
+                                                  '${controller.incidentReportList[index].description}',
+                                                  '${controller.incidentReportList[index].equipment_name}',
+                                                  '${controller.incidentReportList[index].approved_by}',
+                                                  '${controller.incidentReportList[index].approved_at}',
+                                                  '${controller.incidentReportList[index].block_name}',
+                                                  '${controller.incidentReportList[index].created_at}',
+                                                  '${controller.incidentReportList[index].status}',
+                                                  'Actions'
+                                                ],
+                                              ),
+                                            ].map(
+                                              (record) {
+                                                return TableViewRow(
+                                                  height: Get.height * 0.13,
+                                                  cells: record.map(
+                                                    (value) {
+                                                      return TableViewCell(
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            print(
+                                                                'warrantyiddata:$value');
+                                                          },
+                                                          child:
+                                                              // value.runtimeType
+                                                              //             .toString() ==
+                                                              //         'AssetName'
+                                                              //     ? Builder(builder: (context) {
+                                                              //         final val =
+                                                              //             value as AssetName;
+                                                              //         return Column(
+                                                              //           children: [
+                                                              //             Align(
+                                                              //               alignment: Alignment
+                                                              //                   .centerLeft,
+                                                              //               child: Padding(
+                                                              //                 padding: Dimens
+                                                              //                     .edgeInsets8,
+                                                              //                 child: Text(
+                                                              //                     '${val.name}'),
+                                                              //               ),
+                                                              //             ),
+                                                              //             Spacer(),
+                                                              //             Align(
+                                                              //               alignment: Alignment
+                                                              //                   .centerRight,
+                                                              //               child: Container(
+                                                              //                 padding: Dimens
+                                                              //                     .edgeInsets8_2_8_2,
+                                                              //                 decoration:
+                                                              //                     BoxDecoration(
+                                                              //                   // color: val.requirementStatus ==
+                                                              //                   //         1
+                                                              //                   //     ? Colors.red
+                                                              //                   //     : Colors
+                                                              //                   //         .green,
+                                                              //                   borderRadius:
+                                                              //                       BorderRadius
+                                                              //                           .circular(
+                                                              //                               4),
+                                                              //                 ),
+                                                              //                 child: Text(
+                                                              //                   // val.name == 1
+                                                              //                   //     ? 'requirementRejected'
+                                                              //                   //         .tr
+                                                              //                   //     : 'requirementAccepted'
+                                                              //                   //         .tr,
+                                                              //                   // style: Styles
+                                                              //                   //     .white10
+                                                              //                   //     .copyWith(
+                                                              //                   //   color: Colors
+                                                              //                   //       .white,
+                                                              //                   // ),
+                                                              //                   '',
+            
+                                                              //                 ),
+                                                              //               ),
+                                                              //             ),
+                                                              //             Dimens.boxHeight10,
+                                                              //           ],
+                                                              //         );
+                                                              //       })
+                                                              //     :
+                                                              value == 'Actions'
+                                                                  ? Wrap(
+                                                                      children: [
+                                                                        Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              TableActionButton(
+                                                                                color: ColorValues.appDarkBlueColor,
+                                                                                icon: Icons.visibility,
+                                                                                onPress: () {
+                                                                                  controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                  // print('record:${int.tryParse('${record[0]}')}');
+                                                                                },
+                                                                              ),
+                                                                              //),
+            
+                                                                              TableActionButton(
+                                                                                color: ColorValues.appYellowColor,
+                                                                                icon: Icons.edit,
+                                                                                onPress: () {
+                                                                                  // controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                  // print('edit record:${int.tryParse('${record[0]}')}');
+                                                                                },
+                                                                              ),
+                                                                              //),
+            
+                                                                              // TableActionButton(
+                                                                              //   color: Colors.red,
+                                                                              //   icon:
+                                                                              //       Icons.delete,
+                                                                              //   label: 'Delete',
+                                                                              //   onPress: () {},
+                                                                              // ),
+                                                                              //),
+                                                                            ]),
+                                                                        // TableActionButton(
+                                                                        //   color: Colors.green,
+                                                                        //   icon: Icons
+                                                                        //       .visibility,
+                                                                        //   label:
+                                                                        //       'Approve Request',
+                                                                        //   onPress: () {},
+                                                                        // ),
+                                                                        // TableActionButton(
+                                                                        //   color: Colors.red,
+                                                                        //   icon: Icons
+                                                                        //       .visibility,
+                                                                        //   label:
+                                                                        //       'Reject Request',
+                                                                        //   onPress: () {},
+                                                                        // ),
+                                                                      ],
+                                                                    )
+                                                                  : Text(value
+                                                                      .toString()),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).toList(),
+                                                );
+                                              },
+                                            ).toList(),
+                                          ),
                                         ),
-                                      ),
-                                      // paginated
-                                      Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 25),
-                                          child: ValueListenableBuilder(
-                                              valueListenable: controller
-                                                  .paginationIncidentReportController,
-                                              builder: (context, value, child) {
-                                                return Row(
-                                                  children: [
-                                                    Text(
-                                                        "${controller.paginationIncidentReportController.currentPage}  of ${controller.paginationIncidentReportController.pageCount}"),
-                                                    Row(
-                                                      children: [
-                                                        IconButton(
-                                                          onPressed: controller
-                                                                      .paginationIncidentReportController
-                                                                      .currentPage <=
-                                                                  1
-                                                              ? null
-                                                              : () {
-                                                                  controller
-                                                                      .paginationIncidentReportController
-                                                                      .previous();
-                                                                },
-                                                          iconSize: 20,
-                                                          splashRadius: 20,
-                                                          icon: Icon(
-                                                            Icons
-                                                                .arrow_back_ios_new_rounded,
-                                                            color: controller
+                                        // paginated
+                                        Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 25),
+                                            child: ValueListenableBuilder(
+                                                valueListenable: controller
+                                                    .paginationIncidentReportController,
+                                                builder: (context, value, child) {
+                                                  return Row(
+                                                    children: [
+                                                      Text(
+                                                          "${controller.paginationIncidentReportController.currentPage}  of ${controller.paginationIncidentReportController.pageCount}"),
+                                                      Row(
+                                                        children: [
+                                                          IconButton(
+                                                            onPressed: controller
                                                                         .paginationIncidentReportController
                                                                         .currentPage <=
                                                                     1
-                                                                ? Colors.black26
-                                                                : Theme.of(
-                                                                        context)
-                                                                    .primaryColor,
+                                                                ? null
+                                                                : () {
+                                                                    controller
+                                                                        .paginationIncidentReportController
+                                                                        .previous();
+                                                                  },
+                                                            iconSize: 20,
+                                                            splashRadius: 20,
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .arrow_back_ios_new_rounded,
+                                                              color: controller
+                                                                          .paginationIncidentReportController
+                                                                          .currentPage <=
+                                                                      1
+                                                                  ? Colors.black26
+                                                                  : Theme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        IconButton(
-                                                          onPressed: controller
-                                                                      .paginationIncidentReportController
-                                                                      .currentPage >=
-                                                                  controller
-                                                                      .paginationIncidentReportController
-                                                                      .pageCount
-                                                              ? null
-                                                              : () {
-                                                                  controller
-                                                                      .paginationIncidentReportController
-                                                                      .next();
-                                                                },
-                                                          iconSize: 20,
-                                                          splashRadius: 20,
-                                                          icon: Icon(
-                                                            Icons
-                                                                .arrow_forward_ios_rounded,
-                                                            color: controller
+                                                          IconButton(
+                                                            onPressed: controller
                                                                         .paginationIncidentReportController
                                                                         .currentPage >=
                                                                     controller
                                                                         .paginationIncidentReportController
                                                                         .pageCount
-                                                                ? Colors.black26
-                                                                : Theme.of(
-                                                                        context)
-                                                                    .primaryColor,
+                                                                ? null
+                                                                : () {
+                                                                    controller
+                                                                        .paginationIncidentReportController
+                                                                        .next();
+                                                                  },
+                                                            iconSize: 20,
+                                                            splashRadius: 20,
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .arrow_forward_ios_rounded,
+                                                              color: controller
+                                                                          .paginationIncidentReportController
+                                                                          .currentPage >=
+                                                                      controller
+                                                                          .paginationIncidentReportController
+                                                                          .pageCount
+                                                                  ? Colors.black26
+                                                                  : Theme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  );
+                                                }),
+                                          ),
                                         ),
-                                      ),
-
-                                      ///
-                                    ]);
-                                //);
-                              }),
-                        ),
-                      )
-                    ]))),
+            
+                                        ///
+                                      ]);
+                                  //);
+                                }),
+                          ),
+                        )
+                      ]))),
+            ),
           ),
         ],
       ),

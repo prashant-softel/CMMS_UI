@@ -1,24 +1,29 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
 
+import 'package:cmms/app/add_incident_report.dart/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_presenter.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/view_incident_report.dart/view_incident_report_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class IncidentReportListController extends GetxController {
-  IncidentReportListController(this.incidentReportPresenter);
-  IncidentReportListPresenter incidentReportPresenter;
+class ViewIncidentReportController extends GetxController {
+  ViewIncidentReportController(this.viewIncidentReportPresenter);
+  ViewIncidentReportPresenter viewIncidentReportPresenter;
 
   final HomeController homeController = Get.find();
 
@@ -26,6 +31,9 @@ class IncidentReportListController extends GetxController {
   var rowList = <String>[].obs;
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
+
+    ///Print Global key
+  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
   // void addRow(String rowData) {
   //   rowList.add(rowData);
@@ -73,6 +81,17 @@ class IncidentReportListController extends GetxController {
   //       'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
   //   // Toggle the checkbox state
   // }
+
+  
+///Permit Type
+  RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
+  Rx<bool> isTypePermitSelected = true.obs;
+  Rx<String> selectedTypePermit = ''.obs;
+  Rx<String> selectedTypeOfPermit = ''.obs;
+  Rx<bool> isTypePermit = true.obs;
+  Rx<String> selectedStartDate = ''.obs;
+  Rx<bool> isStartdate = true.obs;
+  Rx<bool> isEnddate = true.obs;
 
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
@@ -212,18 +231,74 @@ class IncidentReportListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
+  ///Plant Name
+  RxList<FacilityModel?> facilityPlantList = <FacilityModel>[].obs;
+  Rx<bool> isFacilityPlantSelected = true.obs;
+  Rx<String> selectedPlantFacility = ''.obs;
+
+
+  ///Equipment name List
+  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  Rx<String> selectedEquipmentName = ''.obs;
+  Rx<bool> isEquipmentNameSelected = true.obs;
+  int selectedEquipmentnameId = 0;
+
+
+
+   var startDateTimeCtrlr = TextEditingController();
+  var validTillTimeCtrlr = TextEditingController();
+  var validTillTimeCtrlrBuffer;
+  var startDateTimeCtrlrBuffer;
+
+  var incidentreportDescriptionCtrlr = TextEditingController();
+  var titleTextCtrlr = TextEditingController();
+  
+  Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
+  Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
+  Rx<bool> isJobDescriptionInvalid = false.obs;
+  Rx<bool> isTitleTextInvalid = false.obs;
+
+  Rx<bool> isVictimNameTextInvalid = false.obs;
+  var victimNameTextCtrlr = TextEditingController();
+
+  ///damaged Asset Cost
+  Rx<bool> isDamagedAssetCostTextInvalid = false.obs;
+  var damagedAssetCostTextCtrlr = TextEditingController();
+
+   ///Gen Loss Due To Asset Loss
+  Rx<bool> isGenLossAssetDamageTextInvalid = false.obs;
+  var genLossAssetDamageTextCtrlr = TextEditingController();
+
+     ///Gen Loss Due To Asset Loss
+  Rx<bool> isInsuranceRemarkTextInvalid = false.obs;
+  var insuranceRemarkTextCtrlr = TextEditingController();
+
+
+
+
+  ///Incident Reporting date Time
+  var actionTakenDateTimeCtrlr = TextEditingController();
+  Rx<DateTime> selectedActionTakenTime = DateTime.now().obs;
+
+
+  ///For Switch case
+  RxBool switchValue = false.obs;
+  RxBool switchValue2 = false.obs;
+  RxBool switchValue3 = false.obs;
+  RxBool switchValue4 = false.obs;
+
+
+
+
+  
+
+
+
   // PaginationController paginationBusinessListController = PaginationController(
   //   rowCount: 0,
   //   rowsPerPage: 10,
   // );
-
-  //From and To date format
-   Rx<DateTime> fromDate = DateTime.now().obs;
-  Rx<DateTime> toDate = DateTime.now().obs;
-  String get formattedFromdate =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
-
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -235,30 +310,38 @@ class IncidentReportListController extends GetxController {
   
 
   ///
-// int? wc_id = 0;
+int? id = 0;
   @override
   void onInit() async {
-    // wc_id = Get.arguments;
-    // print('WC_Id:$wc_id');
+    id = Get.arguments;
+    print('IncidentReport_Id:$id');
      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-      getIncidentReportList(facilityId, formattedTodate, formattedFromdate, false);
+      Future.delayed(Duration(seconds: 1), () {
+      getFacilityList();
     });
     });
 
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getFacilityList();
+    // });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getFacilityPlantList();
+    // });
     Future.delayed(Duration(seconds: 1), () {
       getuserAccessData();
     });
-    
+    //  Future.delayed(Duration(seconds: 1), () {
+    //   getTypePermitList();
+    // });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getInventoryList();
+    // });
     super.onInit();
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await incidentReportPresenter.getFacilityList();
+    final _facilityList = await viewIncidentReportPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -269,6 +352,52 @@ class IncidentReportListController extends GetxController {
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
   }
+
+  //  Future<void> getFacilityPlantList() async {
+  //   final _facilityPlantList = await incidentReportPresenter.getFacilityPlantList();
+  //   //print('Facility25:$_facilityList');
+  //   if (_facilityPlantList != null) {
+  //     for (var facility in _facilityPlantList) {
+  //       facilityPlantList.add(facility);
+  //     }
+
+  //     // selectedPlantFacility.value = facilityPlantList[0]?.name ?? '';
+  //     _facilityId.sink.add(facilityPlantList[0]?.id ?? 0);
+  //   }
+  // }
+
+
+  //  Future<void> getTypePermitList() async {
+  //   final _permitTypeList = await incidentReportPresenter.getTypePermitList(
+  //     facility_id: 45
+  //   );
+
+  //   if (_permitTypeList != null) {
+  //     for (var permitType in _permitTypeList) {
+  //       typePermitList.add(permitType);
+  //     }
+  //     // selectedTypePermit.value = typePermitList[0]?.name ?? '';
+  //   }
+  // }
+
+  // void getInventoryList() async {
+  //   eqipmentNameList.value = <InventoryModel>[];
+  //   final _inventoryList = await incidentReportPresenter.getInventoryList(
+  //     isLoading: true,
+  //     categoryIds: categoryIds,
+  //     facilityId: facilityId,
+  //   );
+  //   //  print('equipment Name List:$inventoryNameList');
+  //   for (var inventory_list in _inventoryList) {
+  //     eqipmentNameList.add(inventory_list);
+  //   }
+  //   inventoryList = _inventoryList;
+  //   paginationController = PaginationController(
+  //     rowCount: eqipmentNameList.length,
+  //     rowsPerPage: 10,
+  //   );
+  //   update(['inventory_list']);
+  // }
 
   // Future<void> getInventoryDetail() async {
   //   // newPermitDetails!.value = <NewPermitListModel>[];
@@ -322,7 +451,7 @@ class IncidentReportListController extends GetxController {
   // }
 
   Future<void> getuserAccessData() async {
-    final _userAccessList = await incidentReportPresenter.getUserAccessList();
+    final _userAccessList = await viewIncidentReportPresenter.getUserAccessList();
 
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);
@@ -533,28 +662,27 @@ class IncidentReportListController extends GetxController {
   //   update(['employee_list']);
   // }
 
-  void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
-    incidentReportModelList.value = <IncidentReportListModel>[];
+  // void getIncidentReportList() async {
+  //   incidentReportModelList.value = <IncidentReportListModel>[];
 
-    final list = await incidentReportPresenter.getIncidentReportList(
-        isLoading: isLoading, 
-        start_date: startDate,
-        end_date: endDate,
-        facility_id: facilityId
-        );
-        print('incidentReportFacilityId$facilityId');
-    print('Incident Report List:$list');
-    for (var incident_list in list) {
-      incidentReportModelList.add(incident_list);
-    }
-    incidentReportList = list;
-    paginationIncidentReportController = PaginationController(
-      rowCount: incidentReportList.length,
-      rowsPerPage: 10,
-    );
-    update(['incident_report_list']);
-  }
+  //   final list = await incidentReportPresenter.getIncidentReportList(
+  //       isLoading: true, 
+  //       start_date: '2020-01-01',
+  //       end_date: '2023-12-31',
+  //       facility_id: facilityId
+  //       );
+  //       print('incidentReportFacilityId$facilityId');
+  //   print('Incident Report List:$list');
+  //   for (var incident_list in list) {
+  //     incidentReportModelList.add(incident_list);
+  //   }
+  //   incidentReportList = list;
+  //   paginationIncidentReportController = PaginationController(
+  //     rowCount: incidentReportList.length,
+  //     rowsPerPage: 10,
+  //   );
+  //   update(['incident_report_list']);
+  // }
 
   // void getBlockList(String facilityId) async {
   //   final list = await warrantyClaimPresenter.getBlockList(
@@ -1019,17 +1147,41 @@ class IncidentReportListController extends GetxController {
   //   }
   // }
 
-  void getIncidentReportListByDate() {
-    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
-  }
-
-  Future<void> viewIncidentReport({int? id}) async {
-    Get.toNamed(Routes.viewIncidentReportScreen, arguments: id);
-    print('Argument$id');
-  }
+  // Future<void> viewWarrantyClaim({int? wc_id}) async {
+  //   Get.toNamed(Routes.viewWarrantyClaim, arguments: wc_id);
+  //   print('Argument$wc_id');
+  // }
 
   // Future<void> editWarrantyClaim({int? wc_id}) async {
   //   Get.toNamed(Routes.editWarrantyClaimContentWeb, arguments: wc_id);
   //   print('EditArgument$wc_id');
   // }
+
+  Future<void> printScreen() async {
+    try {
+      final RenderRepaintBoundary boundary =
+          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final imageBytes = await boundary
+          .toImage(pixelRatio: 3.0)
+          .then((image) => image.toByteData(format: ImageByteFormat.png));
+
+      if (imageBytes != null) {
+        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
+          final doc = pw.Document();
+          doc.addPage(
+            pw.Page(
+              build: (pw.Context context) {
+                return pw.Image(
+                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
+              },
+            ),
+          );
+          return doc.save();
+        });
+      }
+    } catch (e) {
+      print('Error printing: $e');
+    }
+  }
+
 }

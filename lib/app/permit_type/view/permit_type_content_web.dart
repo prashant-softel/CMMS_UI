@@ -363,7 +363,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
                                                       .typePermitList
-                                              ![0]
+                                              [0]
                                                       .toString())
                                                   .then((value) {
                                                 print("copy data");
@@ -401,7 +401,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.typePermitList!.isEmpty
+                                  controller.typePermitList.isEmpty
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
@@ -421,8 +421,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             rows: [
                                               ...List.generate(
                                                 controller.typePermitList
-                                                        ?.length ??
-                                                    0,
+                                                        .length ,
                                                 (index) {
                                                   return [
                                                     '',
@@ -466,11 +465,11 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                       rows: //
                                           [
                                         ...List.generate(
-                                          controller.typePermitList?.length??0,
+                                          controller.typePermitList.length,
                                           (index) {
                                             var typePermitListDetails =
                                                 controller
-                                                    .typePermitList?[index];
+                                                    .typePermitList[index];
                                             return [
                                               '${typePermitListDetails?.id}',
                                               //'${typePermitListDetails?.status ?? ''}',
@@ -506,7 +505,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                                     Icons.edit,
                                                                 label: 'Edit',
                                                                 onPress: () {
-                                                                  controller.selectedItem = controller.typePermitList!.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                  controller.selectedItem = controller.typePermitList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
 
                                                                   controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
                                                                   controller.selectedFacility.value = controller.onFetchNameFromId(controller.selectedItem?.id)!;

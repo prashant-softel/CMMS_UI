@@ -356,6 +356,8 @@ class DataRepository extends DomainRepository {
     int? blockId,
     required String categoryIds,
     required bool isLoading,
+    String? start_date,
+    required String end_date,
     required String auth,
   }) async {
     return await connectHelper.getWarrantyClaimList(
@@ -364,6 +366,8 @@ class DataRepository extends DomainRepository {
       facilityId: facilityId,
       blockId: blockId,
       categoryIds: categoryIds,
+      start_date: start_date,
+      end_date: end_date,
     );
   }
 

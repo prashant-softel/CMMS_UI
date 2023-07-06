@@ -146,6 +146,8 @@ import '../stock_managment_add_goods_orders.dart/view/stock_management_add_goods
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
+import '../view_incident_report.dart/view_incident_report_binding.dart';
+import '../view_incident_report.dart/view_incident_report_screen.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
@@ -577,6 +579,11 @@ class AppPages {
       name: _Paths.competencyScreen,
       page: CompetencyListScreen.new,
       binding: CompetencyListBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.viewIncidentReportScreen,
+      page: ViewIncidentReportScreen.new,
+      binding: ViewIncidentReportBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.createMrs,
