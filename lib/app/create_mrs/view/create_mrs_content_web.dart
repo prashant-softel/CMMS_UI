@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_mrs/create_mrs_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -191,6 +192,34 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                       ),
                     ),
                     Dimens.boxHeight15,
+                    Container(
+                      margin: EdgeInsets.only(bottom: 40, top: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.greenColor,
+                              text: 'Submit',
+                              onPressed: () {
+                                // controller.addUser();
+                                //  controller.saveAccessLevel();
+                              },
+                            ),
+                          ),
+                          Dimens.boxWidth20,
+                          Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.redColor,
+                              text: "Cancel",
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
