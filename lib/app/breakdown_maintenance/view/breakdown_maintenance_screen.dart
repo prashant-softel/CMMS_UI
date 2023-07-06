@@ -166,7 +166,11 @@ class BreakdownMaintenanceScreen
                             onTap: () {
                               controller.goToJobSOPList();
                             }),
-                        createContentTile(title: "Job Card List"),
+                        createContentTile(
+                            title: "JobCard List",
+                            onTap: () {
+                              controller.goToJobTypeList();
+                            }),
                       ],
                     )
                   ]),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
@@ -22,6 +23,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -68,6 +70,7 @@ import '../models/competency_model.dart';
 import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
+import '../models/get_mrs_list_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
@@ -566,7 +569,8 @@ class Repository {
             userId: userId, auth: token, isLoading: isLoading ?? false);
       } else {
         Fluttertoast.showToast(
-            msg: "Invalid Email Id and Password", fontSize: 16.0);
+            msg: res.data, // "Invalid Email Id and Password",
+            fontSize: 16.0);
       }
     } catch (error) {
       await _deviceRepository.generateToken();
@@ -591,7 +595,7 @@ class Repository {
         isLoading: isLoading,
         auth: auth,
       );
-      // print('getGoodsOrdersList: ${res.data}');
+      print('getGoodsOrdersList: ${res.data}');
 
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
@@ -822,6 +826,41 @@ class Repository {
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPurchaseDetailsById(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"getPurchaseDetailsByID", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final GetPurchaseDetailsByIDModel
+              _getPurchaseDetailsByIDModelFromJson =
+              getPurchaseDetailsByIDModelFromJson(res.data);
+
+          var responseMap = _getPurchaseDetailsByIDModelFromJson;
+          print({"ViewgetPurchaseDetailsByID", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'GetPurchaseDetailsByID');
         //return '';
       }
       return null;
@@ -2537,6 +2576,27 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           checkpointJsonString: checkpointJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> saveRoleAccess({bool? isLoading, saveRolelistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.saveRoleAccess(
+          auth: auth,
+          isLoading: isLoading,
+          saveRolelistJsonString: saveRolelistJsonString);
 
       if (!res.hasError) {
         return true;
@@ -4419,8 +4479,8 @@ class Repository {
   }
 
   Future<List<CompetencyModel?>?> getCompetencyList(
-      bool? isLoading,
-      ) async {
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getCompetencyList(
@@ -4432,11 +4492,10 @@ class Repository {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
         final List<CompetencyModel> _PreventiveCheckListModelList =
-        jsonPreventiveCheckListModelModels
-            .map<CompetencyModel>((m) =>
-            CompetencyModel.fromJson(
-                Map<String, dynamic>.from(m)))
-            .toList();
+            jsonPreventiveCheckListModelModels
+                .map<CompetencyModel>((m) =>
+                    CompetencyModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
 
         return _PreventiveCheckListModelList;
       } else {
@@ -4450,8 +4509,7 @@ class Repository {
     }
   }
 
-  Future<bool> createCompetency(
-      {bool? isLoading, competencyJsonString}) async {
+  Future<bool> createCompetency({bool? isLoading, competencyJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createCompetency(
@@ -4516,8 +4574,7 @@ class Repository {
     }
   }
 
-  Future<bool> createPermitType(
-      {bool? isLoading, checklistJsonString}) async {
+  Future<bool> createPermitType({bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createPermitType(
@@ -4557,7 +4614,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updatePermitType({
     bool? isLoading,
     checklistJsonString,
@@ -4583,8 +4639,7 @@ class Repository {
     }
   }
 
-  Future<bool> createRoleList(
-      {bool? isLoading, modulelistJsonString}) async {
+  Future<bool> createRoleList({bool? isLoading, modulelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRoleList(
@@ -4604,7 +4659,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateRoleList({
     bool? isLoading,
@@ -4649,5 +4703,172 @@ class Repository {
       print(error.toString());
     }
   }
+
+  Future<bool> createDesignation(
+      {bool? isLoading, designationJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createDesignation(
+          auth: auth,
+          isLoading: isLoading,
+          designationJsonString: designationJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateDesignation({
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateDesignation(
+        auth: auth,
+        isLoading: isLoading,
+        designationJsonString: designationJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteDesignation(Object module_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteDesignation(
+        auth: auth,
+        module_id: module_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> createBusinessType(
+      {bool? isLoading, businessTypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createBusinessType(
+          auth: auth,
+          isLoading: isLoading,
+          businessTypeJsonString: businessTypeJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteBusinessType(
+      Object businesstype_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBusinessType(
+        auth: auth,
+        businesstype_id: businesstype_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateBusinessType({
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBusinessType(
+        auth: auth,
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<List<MrsListModel?>?> getMrsList(int? facilityId, bool? isLoading,
+      dynamic startDate, dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+      final res = await _dataRepository.getMrsList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId);
+
+      if (!res.hasError) {
+        final jsonMrsListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<MrsListModel> _MrsListModelList = jsonMrsListModelModels
+            .map<MrsListModel>(
+                (m) => MrsListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _MrsListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getMrsList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+//end
 //end
 }

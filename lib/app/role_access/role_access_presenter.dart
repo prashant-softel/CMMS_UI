@@ -20,4 +20,15 @@ class RoleAccessPresenter {
         roleId: roleId,
         isLoading: isLoading,
       );
+  Future<bool> saveRoleAccess({
+    saveRolelistJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    roleAccessUsecase.saveRoleAccess(
+      saveRolelistJsonString: saveRolelistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

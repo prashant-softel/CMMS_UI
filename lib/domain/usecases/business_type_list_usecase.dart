@@ -9,16 +9,6 @@ class BusinessTypeListUsecase {
   BusinessTypeListUsecase(this.repository);
   Repository repository;
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
 
 
   Future<List<BusinessTypeModel>> getBusinessTypeList({
@@ -39,10 +29,6 @@ class BusinessTypeListUsecase {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int? businessType,
-    // int? blockId,
-    // required String categoryIds,
-    // int? blockId,
-    // String? categoryIds,
     required bool isLoading,
   }) async =>
       await repository.getBusinessList(
@@ -51,31 +37,26 @@ class BusinessTypeListUsecase {
         businessType: businessType,
         isLoading : isLoading,
       );
-  Future<List<FrequencyModel?>?> getFrequencyList({
+ 
+  Future<bool> createBusinessType({
+    businessTypeJsonString,
     bool? isLoading,
   }) async =>
-      await repository.getFrequencyList(
+      await repository.createBusinessType(
+          isLoading: isLoading, businessTypeJsonString: businessTypeJsonString);
+  deleteBusinessType(
+          {required Object businesstype_id, required bool isLoading}) async =>
+      await repository.deleteBusinessType(
+        businesstype_id,
         isLoading,
       );
-  Future<bool> createBusinesslistNumber({
-    businesslistJsonString,
+  Future<bool> updateBusinessType({
+    businessTypeJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createBusinessListNumber(
-          isLoading: isLoading, businesslistJsonString: businesslistJsonString);
-  // deleteBusinesslist(
-  //         {required Object module_id, required bool isLoading}) async =>
-  //     await repository.deleteBusinesslist(
-  //       module_id,
-  //       isLoading,
-  //     );
-  // Future<bool> updateModulelistNumber({
-  //   modulelistJsonString,
-  //   bool? isLoading,
-  // }) async =>
-  //     await repository.updateModulelistNumber(
-  //       isLoading: isLoading,
-  //       modulelistJsonString: modulelistJsonString,
-  //     );
+      await repository.updateBusinessType(
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString,
+      );
 
 }

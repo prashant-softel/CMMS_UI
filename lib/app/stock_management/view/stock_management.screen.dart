@@ -116,7 +116,7 @@ class StockManagementDashboardScreen
                             tittle: "Goods Order  List",
                             ontap: () {
                               Get.toNamed(
-                                Routes.preventiveCheckPoint,
+                                Routes.stockManagementGoodsOrdersScreen,
                               );
                               controller.checkPoint();
                             }),
@@ -146,15 +146,12 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "Asset Master",
                             ontap: () {
-                              Get.offNamed(
-                                  Routes.assetMasterList);
+                              Get.offNamed(Routes.assetMasterList);
                             }),
                         _stockManagementList(
                             tittle: "Add Asset Master",
                             ontap: () {
-                              Get.offNamed(
-                                  Routes.addassetMaster
-                              );
+                              Get.offNamed(Routes.addassetMaster);
                             }),
                       ],
                     )

@@ -899,6 +899,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> saveRoleAccess({
+    auth,
+    bool? isLoading,
+    saveRolelistJsonString,
+  }) async {
+    var response = await connectHelper.saveRoleAccess(
+        auth: auth,
+        isLoading: isLoading,
+        saveRolelistJsonString: saveRolelistJsonString);
+    return response;
+  }
+
   Future<ResponseModel> createNewPermit({
     required String auth,
     newPermit,
@@ -994,6 +1006,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.getViewWarrantyClaimDetail(
         auth: auth,
         wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getPurchaseDetailsById({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getPurchaseDetailsById(
+        auth: auth,
+        id: id,
         isLoading: isLoading ?? false,
       );
 
@@ -1848,6 +1870,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> deleteCompetencyList({
     auth,
     bool? isLoading,
@@ -1892,6 +1915,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> createRoleList({
     auth,
     bool? isLoading,
@@ -1926,5 +1950,90 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
+
+  Future<ResponseModel> createDesignation({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.createDesignation(
+        auth: auth,
+        isLoading: isLoading,
+        designationJsonString: designationJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateDesignation({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.updateDesignation(
+      auth: auth,
+      isLoading: isLoading,
+      designationJsonString: designationJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteDesignation({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteDesignation(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
+
+  Future<ResponseModel> createBusinessType({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.createBusinessType(
+        auth: auth,
+        isLoading: isLoading,
+        businessTypeJsonString: businessTypeJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteBusinessType({
+    auth,
+    bool? isLoading,
+    businesstype_id,
+  }) async {
+    var response = await connectHelper.deleteBusinessType(
+        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateBusinessType({
+    auth,
+    bool? isLoading,
+    businessTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateBusinessType(
+      auth: auth,
+      isLoading: isLoading,
+      businessTypeJsonString: businessTypeJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> getMrsList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate,
+          int? userId}) async =>
+      await connectHelper.getMrsList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId);
 //end
 }

@@ -19,6 +19,7 @@ abstract class Routes {
       _Paths.stockManagementDashboardScreen;
   static const stockManagementGoodsOrdersScreen =
       _Paths.stockManagementGoodsOrdersScreen;
+
   static const createCheckList = _Paths.createCheckList;
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
@@ -94,6 +95,7 @@ abstract class Routes {
   static const competencyScreen = _Paths.competencyScreen;
 
   static const roleAccess = _Paths.roleAccess;
+  static const createMrs = _Paths.createMrs;
 }
 
 abstract class _Paths {
@@ -183,6 +185,7 @@ abstract class _Paths {
   static const competencyScreen = '/competency-Screen';
   static const roleAccess = '/role-access';
   static const viewIncidentReportScreen = '/view-incident-report-screen';
+  static const createMrs = '/Create-mrs';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

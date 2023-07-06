@@ -29,10 +29,13 @@ class ToolsRequiredWidget extends StatelessWidget {
       Dimens.boxHeight5,
       DropdownWidget(
         dropdownList: controller.toolsRequiredToWorkTypeList,
+        // isValueSelected: controller.isToolRequiredToWorkTypeSelected.value,
         onValueChanged: controller.onDropdownValueChanged,
         selectedValue: controller.selectedToolRequiredToWorkType.value,
       ),
       Dimens.boxHeight20,
+
+
     ]);
   }
 }

@@ -166,7 +166,7 @@ class BusinessTypeListContentWeb
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .checklistNumberCtrlr,
+                                                        .nameCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -217,7 +217,7 @@ class BusinessTypeListContentWeb
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .checklistNumberCtrlr,
+                                                        .descriptionCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -225,150 +225,7 @@ class BusinessTypeListContentWeb
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Frequency: '),
-                                        //     SizedBox(
-                                        //       width: 64,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //         width: (MediaQuery.of(context)
-                                        //                     .size
-                                        //                     .width *
-                                        //                 .2) -
-                                        //             30,
-                                        //         child: DropdownWidget(
-                                        //           controller: controller,
-                                        //           dropdownList:
-                                        //               controller.frequencyList,
-                                        //           isValueSelected: controller
-                                        //               .isSelectedfrequency
-                                        //               .value,
-                                        //           selectedValue: controller
-                                        //               .selectedfrequency.value,
-                                        //           onValueChanged:
-                                        //               controller.onValueChanged,
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                        // SizedBox(
-                                        //   height: 10,
-                                        // ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Text(
-                                        //       "Man"
-                                        //           "power: ",
-                                        //       style: Styles.blackBold16,
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 60,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //           decoration: BoxDecoration(
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Colors.black26,
-                                        //                 offset: const Offset(
-                                        //                   5.0,
-                                        //                   5.0,
-                                        //                 ),
-                                        //                 blurRadius: 5.0,
-                                        //                 spreadRadius: 1.0,
-                                        //               ),
-                                        //               BoxShadow(
-                                        //                 color: ColorValues
-                                        //                     .whiteColor,
-                                        //                 offset: const Offset(
-                                        //                     0.0, 0.0),
-                                        //                 blurRadius: 0.0,
-                                        //                 spreadRadius: 0.0,
-                                        //               ),
-                                        //             ],
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     5),
-                                        //           ),
-                                        //           width: (MediaQuery.of(context)
-                                        //                       .size
-                                        //                       .width *
-                                        //                   .2) -
-                                        //               30,
-                                        //           child: LoginCustomTextfield(
-                                        //             textController: controller
-                                        //                 .manpowerCtrlr,
-                                        //           )),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                        // SizedBox(
-                                        //   height: 10,
-                                        // ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Text(
-                                        //       "Duration(in Min.): ",
-                                        //       style: Styles.blackBold16,
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 15,
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //           decoration: BoxDecoration(
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Colors.black26,
-                                        //                 offset: const Offset(
-                                        //                   5.0,
-                                        //                   5.0,
-                                        //                 ),
-                                        //                 blurRadius: 5.0,
-                                        //                 spreadRadius: 1.0,
-                                        //               ),
-                                        //               BoxShadow(
-                                        //                 color: ColorValues
-                                        //                     .whiteColor,
-                                        //                 offset: const Offset(
-                                        //                     0.0, 0.0),
-                                        //                 blurRadius: 0.0,
-                                        //                 spreadRadius: 0.0,
-                                        //               ),
-                                        //             ],
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     5),
-                                        //           ),
-                                        //           width: (MediaQuery.of(context)
-                                        //                       .size
-                                        //                       .width *
-                                        //                   .2) -
-                                        //               45,
-                                        //           child: LoginCustomTextfield(
-                                        //             textController: controller
-                                        //                 .durationCtrlr,
-                                        //           )),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                        // SizedBox(
-                                        //   height: 20,
-                                        // ),
+                                        
                                       ]),
                                 ),
                                 Row(
@@ -393,30 +250,30 @@ class BusinessTypeListContentWeb
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
                                                 onPressed: () {
-                                                  // controller
-                                                  //     .createChecklistNumber()
-                                                  //     .then((value) {
-                                                  //   print("value,$value");
-                                                  //   if (value == true)
-                                                  //     controller
-                                                  //         .issuccessCreatechecklist();
-                                                  // });
+                                                  controller
+                                                      .createBusinessType()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
                                                 },
                                                 text: 'Create BusinessType ')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
                                                 onPressed: () {
-                                                  // controller
-                                                  //     .updateChecklistNumber(
-                                                  //         controller
-                                                  //             .selectedItem?.id)
-                                                  //     .then((value) {
-                                                  //   print("value,$value");
-                                                  //   if (value == true)
-                                                  //     controller
-                                                  //         .issuccessCreatechecklist();
-                                                  // });
+                                                  controller
+                                                      .updateBusinessType(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
                                                 },
                                                 text: 'Update')),
                                   ],
@@ -464,7 +321,7 @@ class BusinessTypeListContentWeb
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
-                                                      .preventiveCheckList![0]
+                                                      .businessTypeList![0]
                                                       .toString())
                                                   .then((value) {
                                                 print("copy data");
@@ -505,19 +362,15 @@ class BusinessTypeListContentWeb
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.preventiveCheckList!.isEmpty
+                                  controller.businessTypeList!.isEmpty
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
                                               "Id",
                                               "Name",
                                               "Description ",
-                                              "Status ",
-                                              // "Category ",
-                                              // "Frequency ",
-                                              // "PM Manpower",
-                                              // "PM Duration(in Min.)",
-                                              // "Action",
+                                              // "Status ",
+                                              "Action",
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
@@ -526,7 +379,7 @@ class BusinessTypeListContentWeb
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.preventiveCheckList
+                                                controller.businessTypeList
                                                         ?.length ??
                                                     0,
                                                 (index) {
@@ -561,7 +414,8 @@ class BusinessTypeListContentWeb
                                               "Id",
                                               "Name",
                                               "Description ",
-                                              "Status",
+                                              // "Status",
+                                              "Action"
                                             ].map((column) {
                                               return TableViewColumn(
                                                 minWidth: Get.width * 0.12,
@@ -571,32 +425,27 @@ class BusinessTypeListContentWeb
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller.preventiveCheckList
+                                                controller.businessTypeList
                                                         ?.length ??
                                                     0,
                                                 (index) {
                                                   var preventiveCheckListModelListDetails =
                                                       controller
-                                                              .preventiveCheckList?[
+                                                              .businessTypeList?[
                                                           index];
                                                   return [
                                                     '${preventiveCheckListModelListDetails?.id}',
                                                     '${preventiveCheckListModelListDetails?.name}',
                                                     '${preventiveCheckListModelListDetails?.description}',
-                                                    '${preventiveCheckListModelListDetails?.status}',
-                                                    // "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                                    // '${preventiveCheckListModelListDetails?.category_name}',
-                                                    // '${preventiveCheckListModelListDetails?.frequency_name}',
-                                                    // '${preventiveCheckListModelListDetails?.manPower}',
-                                                    // '${preventiveCheckListModelListDetails?.duration}',
-                                                    // "Action"
+                                                    // '${preventiveCheckListModelListDetails?.status}',
+                                                    "Action"
                                                   ];
                                                 },
                                               ),
-                                            ].map((_preventiveCheckList) {
+                                            ].map((_businessTypeList) {
                                               return TableViewRow(
                                                   height: 60,
-                                                  cells: _preventiveCheckList
+                                                  cells: _businessTypeList
                                                       .map((value) {
                                                     return TableViewCell(
                                                         child: (value == 'No')
@@ -619,15 +468,11 @@ class BusinessTypeListContentWeb
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
-                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
+                                                                                  controller.selectedItem = controller.businessTypeList!.firstWhere((element) => "${element?.id}" == _businessTypeList[0]);
 
-                                                                                  // controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
-                                                                                  // controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
-                                                                                  // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                  // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                                  // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                  // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                  // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                                  controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                  controller.descriptionCtrlr.text = "${controller.selectedItem?.description}";
+                                                                                 
                                                                                 },
                                                                               )
                                                                             : Container(),
@@ -638,8 +483,8 @@ class BusinessTypeListContentWeb
                                                                                 icon: Icons.delete,
                                                                                 label: 'Delete',
                                                                                 onPress: () {
-                                                                                  print(_preventiveCheckList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
+                                                                                  print(_businessTypeList[0]);
+                                                                                  controller.isDeleteDialog(businesstype_id: _businessTypeList[0], businesstype: _businessTypeList[1]);
                                                                                 },
                                                                               )
                                                                             : Container()

@@ -1,15 +1,15 @@
-import 'package:cmms/app/stock_managment_update_goods_orders_details.dart/stock_management_update_goods_orders_details_controller.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import 'stock_management_update_goods_orders_details_web.dart';
+import 'stock_management_add_goods_orders_web.dart';
 
-class StockManagementUpdateGoodsOrdersDetailsScreen
-    extends GetView<StockManagementUpdateGoodsOrdersDetailsController> {
-  StockManagementUpdateGoodsOrdersDetailsScreen({super.key});
+class StockManagementAddGoodsOrdersScreen
+    extends GetView<StockManagementAddGoodsOrdersController> {
+  StockManagementAddGoodsOrdersScreen({super.key});
 
   ///
   @override
@@ -49,7 +49,7 @@ class StockManagementUpdateGoodsOrdersDetailsScreen
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: UpdateGoodsOrdersDetailsWeb(),
+                        child: AddGoodsOrdersWeb(),
                       )
                   ],
                 ),

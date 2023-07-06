@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/role_access/role_access_presenter.dart';
 import 'package:cmms/domain/models/access_level_model.dart';
+import 'package:cmms/domain/models/save_role_access_model.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/role_model.dart';
@@ -28,7 +29,7 @@ class RoleAccessController extends GetxController {
   }
 
   var isExistingusers = false.obs;
-  var isSetRole = false.obs;
+  var isSetRole = true.obs;
 
   void existingusertoggle() {
     isExistingusers.value = !isExistingusers.value;
@@ -86,5 +87,35 @@ class RoleAccessController extends GetxController {
       // }
       // moduleNameList.addAll(moduleNameSet.toList());
     }
+  }
+
+  Future<bool> saveRoleAccess() async {
+    List<SaveRoleAccessList> accesslist = <SaveRoleAccessList>[];
+    accesslevel.forEach((e) {
+      accesslist.add(SaveRoleAccessList(
+          feature_id: e?.feature_id.value ?? 0,
+          feature_name: e?.feature_name.value ?? "",
+          add: e?.add.value ?? 0,
+          delete: e?.delete.value ?? 0,
+          edit: e?.edit.value ?? 0,
+          selfView: e?.selfView.value ?? 0,
+          approve: e?.approve.value ?? 0,
+          issue: e?.issue.value ?? 0,
+          view: e?.view.value ?? 0));
+    });
+    SaveRoleAccessLevelModel saveRoleAccessLevelModel =
+        SaveRoleAccessLevelModel(
+            role_id: selectedRoleId,
+            set_existing_users: isExistingusers.value,
+            set_role: isSetRole.value,
+            access_list: accesslist);
+    var saveRolelistJsonString = saveRoleAccessLevelModel.toJson();
+
+    print({"saveRolelistJsonString", saveRolelistJsonString});
+    await roleAccessPresenter.saveRoleAccess(
+      saveRolelistJsonString: saveRolelistJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 }

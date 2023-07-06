@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/stock_managment_update_goods_orders_details.dart/stock_management_update_goods_orders_details_controller.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -15,21 +15,19 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 
-class UpdateGoodsOrdersDetailsWeb extends StatefulWidget {
-  UpdateGoodsOrdersDetailsWeb({
+class AddGoodsOrdersWeb extends StatefulWidget {
+  AddGoodsOrdersWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<UpdateGoodsOrdersDetailsWeb> createState() =>
-      _UpdateGoodsOrdersDetailsWebState();
+  State<AddGoodsOrdersWeb> createState() => _AddGoodsOrdersWebState();
 }
 
-class _UpdateGoodsOrdersDetailsWebState
-    extends State<UpdateGoodsOrdersDetailsWeb> {
+class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StockManagementUpdateGoodsOrdersDetailsController>(
+    return GetBuilder<StockManagementAddGoodsOrdersController>(
         id: 'stock_Mangement',
         builder: (controller) {
           return Obx(
@@ -682,13 +680,13 @@ class _UpdateGoodsOrdersDetailsWebState
                                         ],
                                       ),
                                     ),
-                                    Column(
-                                        children: []..addAll(
-                                              controller.rowItem.value.map((e) {
-                                            return Text(jsonEncode(e));
-                                          }))),
-                                    Text(jsonEncode(
-                                        controller.dropdownMapperData)),
+                                    // Column(
+                                    //     children: []..addAll(
+                                    //           controller.rowItem.value.map((e) {
+                                    //         return Text(jsonEncode(e));
+                                    //       }))),
+                                    // Text(jsonEncode(
+                                    //     controller.dropdownMapperData)),
                                     Obx(
                                       () => Container(
                                         height: 300,
@@ -895,14 +893,23 @@ class _UpdateGoodsOrdersDetailsWebState
                                       },
                                     ),
                                     Dimens.boxWidth15,
-                                    CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appGreenColor,
-                                      text: 'Submit',
-                                      onPressed: () {
-                                        controller.createGoodsOrder();
-                                      },
-                                    ),
+                                    controller.id == null
+                                        ? CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Submit',
+                                            onPressed: () {
+                                              controller.createGoodsOrder();
+                                            },
+                                          )
+                                        : CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Update',
+                                            onPressed: () {
+                                              // controller.createGoodsOrder();
+                                            },
+                                          ),
                                     Spacer()
                                   ],
                                 ),

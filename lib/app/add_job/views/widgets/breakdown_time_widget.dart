@@ -56,6 +56,7 @@ class BreakdownTimeWidget extends StatelessWidget {
           },
           controller: controller.breakdownTimeCtrlr,
           autofocus: false,
+          readOnly: true,
           decoration: InputDecoration(
             fillColor: ColorValues.whiteColor,
             filled: true,
@@ -115,7 +116,7 @@ class BreakdownTimeWidget extends StatelessWidget {
       context: context,
       initialDate: dateTime,
       firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
+      lastDate: DateTime.now(),
     );
 
     if (newDate == null) return null;

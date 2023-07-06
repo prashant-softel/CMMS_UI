@@ -106,28 +106,27 @@ class DesignationListContentWeb
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  // Visibility(
-                                  //   visible: controller.isSuccess.value,
-                                  //   child: Center(
-                                  //     child: Wrap(
-                                  //       children: [
-                                  //         Text(
-                                  //           controller.selectedItem ==
-                                  //               null
-                                  //               ? "ModuleList added Successfully in the List."
-                                  //               : "ModuleList updated Successfully in the List.",
-                                  //           style: TextStyle(
-                                  //               fontSize: 16,
-                                  //               color: Color.fromARGB(
-                                  //                   255, 24, 243, 123)),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: 5,
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  Visibility(
+                                    visible: controller.isSuccess.value,
+                                    child: Center(
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            controller.selectedItem == null
+                                                ? "DesignationList added Successfully in the List."
+                                                : "DesignationList updated Successfully in the List.",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromARGB(
+                                                    255, 24, 243, 123)),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -171,7 +170,7 @@ class DesignationListContentWeb
                                             ),
                                             child: LoginCustomTextfield(
                                               textController: controller
-                                                  .rolelistNumberCtrlr,
+                                                  .nameCtrlr,
                                             )),
                                       ),
                                     ],
@@ -222,7 +221,7 @@ class DesignationListContentWeb
                                             ),
                                             child: LoginCustomTextfield(
                                               textController: controller
-                                                  .featureCtrlr,
+                                                  .descriptionCtrlr,
                                             )),
                                       ),
                                     ],
@@ -244,40 +243,40 @@ class DesignationListContentWeb
                               SizedBox(
                                 width: 10,
                               ),
-                              // Container(
-                              //     height: 40,
-                              //     width: (Get.width * .2) - 70,
-                              //     child: controller.selectedItem == null
-                              //         ? CustomElevatedButton(
-                              //         backgroundColor: ColorValues
-                              //             .appDarkBlueColor,
-                              //         onPressed: () {
-                              //           controller
-                              //               .createModuleListNumber()
-                              //               .then((value) {
-                              //             print("value,$value");
-                              //             if (value == true)
-                              //               controller
-                              //                   .issuccessCreatemodulelist();
-                              //           });
-                              //         },
-                              //         text: 'Create Module List')
-                              //         : CustomElevatedButton(
-                              //         backgroundColor: ColorValues
-                              //             .appDarkBlueColor,
-                              //         onPressed: () {
-                              //           controller
-                              //               .updateModulelistNumber(
-                              //               controller
-                              //                   .selectedItem?.id)
-                              //               .then((value) {
-                              //             print("value,$value");
-                              //             if (value == true)
-                              //               controller
-                              //                   .issuccessCreatemodulelist();
-                              //           });
-                              //         },
-                              //         text: 'Update')),
+                              Container(
+                                  height: 40,
+                                  width: (Get.width * .2) - 70,
+                                  child: controller.selectedItem == null
+                                      ? CustomElevatedButton(
+                                      backgroundColor: ColorValues
+                                          .appDarkBlueColor,
+                                      onPressed: () {
+                                        controller
+                                            .createDesignation()
+                                            .then((value) {
+                                          print("value,$value");
+                                          if (value == true)
+                                            controller
+                                                .issuccessCreatemodulelist();
+                                        });
+                                      },
+                                      text: 'Create Designations')
+                                      : CustomElevatedButton(
+                                      backgroundColor: ColorValues
+                                          .appDarkBlueColor,
+                                      onPressed: () {
+                                        controller
+                                            .updateDesignation(
+                                            controller
+                                                .selectedItem?.id)
+                                            .then((value) {
+                                          print("value,$value");
+                                          if (value == true)
+                                            controller
+                                                .issuccessCreatemodulelist();
+                                        });
+                                      },
+                                      text: 'Update')),
                             ],
                           ),
                         ],
@@ -323,7 +322,7 @@ class DesignationListContentWeb
                                       ColorValues.appLightBlueColor,
                                       onPressed: () {
                                         FlutterClipboard.copy(controller
-                                            .roleList![0]
+                                            .designationList![0]
                                             .toString())
                                             .then((value) {
                                           print("copy data");
@@ -364,23 +363,23 @@ class DesignationListContentWeb
                             SizedBox(
                               height: 20,
                             ),
-                            controller.roleList!.isEmpty
+                            controller.designationList!.isEmpty
                                 ? Expanded(
                               child: ScrollableTableView(
                                 columns: [
                                   "Id",
                                   "Designation Name",
                                   "Designation Description",
-
+                                  "Action"
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.16,
+                                    minWidth: Get.width * 0.12,
                                   );
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
-                                    controller.roleList
+                                    controller.designationList
                                         ?.length ??
                                         0,
                                         (index) {
@@ -388,7 +387,7 @@ class DesignationListContentWeb
                                         '',
                                         '',
                                         '',
-
+                                        ''
                                       ];
                                     },
                                   ),
@@ -412,35 +411,36 @@ class DesignationListContentWeb
                                   "Id",
                                   "Designation Name",
                                   "Designation Description",
+                                  "Action"
                                 ].map((column) {
                                   return TableViewColumn(
-                                    minWidth: Get.width * 0.12,
+                                    minWidth: Get.width * 0.10,
                                     label: column,
                                   );
                                 }).toList(),
                                 rows: //
                                 [
                                   ...List.generate(
-                                    controller.roleList
+                                    controller.designationList
                                         ?.length ??
                                         0,
                                         (index) {
                                       var roleListDetails =
                                       controller
-                                          .roleList?[
+                                          .designationList?[
                                       index];
                                       return [
                                         '${roleListDetails?.id}',
                                         '${roleListDetails?.name}',
                                         '${roleListDetails?.description}',
-
+                                        'Action'
                                       ];
                                     },
                                   ),
-                                ].map((_moduleList) {
+                                ].map((_designationList) {
                                   return TableViewRow(
                                       height: 60,
-                                      cells: _moduleList
+                                      cells: _designationList
                                           .map((value) {
                                         return TableViewCell(
                                             child: (value == 'No')
@@ -464,8 +464,9 @@ class DesignationListContentWeb
                                                     icon: Icons.edit,
                                                     label: 'Edit',
                                                     onPress: () {
-                                                      controller.selectedItem = controller.roleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
-                                                      controller.rolelistNumberCtrlr.text = controller.selectedItem?.name ?? '';
+                                                      controller.selectedItem = controller.designationList!.firstWhere((element) => "${element?.id}" == _designationList[0]);
+                                                      controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
+                                                      controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
 
                                                     },
                                                   ),
@@ -473,15 +474,15 @@ class DesignationListContentWeb
                                                   // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                   //     0
                                                   //     ?
-                                                  // TableActionButton(
-                                                  //   color: ColorValues.appRedColor,
-                                                  //   icon: Icons.delete,
-                                                  //   label: 'Delete',
-                                                  //   onPress: () {
-                                                  //     print(_moduleList[0]);
-                                                  //     controller.isDeleteDialog(module_id: _moduleList[0], module: _moduleList[1]);
-                                                  //   },
-                                                  // )
+                                                  TableActionButton(
+                                                    color: ColorValues.appRedColor,
+                                                    icon: Icons.delete,
+                                                    label: 'Delete',
+                                                    onPress: () {
+                                                      print(_designationList[0]);
+                                                      controller.isDeleteDialog(module_id: _designationList[0], module: _designationList[1]);
+                                                    },
+                                                  )
                                                   // : Container()
                                                 ])
                                                 : Text(

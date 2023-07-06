@@ -242,14 +242,15 @@ class StockManagementGoodsOrdersWeb
                                       return [
                                         '${controller.goodsOrdersList![index]?.id}',
                                         '${controller.goodsOrdersList![index]?.generatedBy}',
-                                        'Order Date',
-                                        'Order Cost',
+                                        '${controller.goodsOrdersList![index]?.purchaseDate}',
+                                        '${controller.goodsOrdersList![index]?.cost}',
                                         '${controller.goodsOrdersList![index]?.status}',
                                         'Action',
                                       ];
                                     },
                                   ),
                                 ].map((record) {
+                                  // print('recoerdfjb:$record');
                                   return TableViewRow(
                                     height: 60,
                                     cells: record.map((value) {
@@ -265,6 +266,12 @@ class StockManagementGoodsOrdersWeb
                                                   onPress: () {},
                                                 ),
                                                 TableActionButton(
+                                                  onPress: () {
+                                                    controller
+                                                        .showAddGoodsOrdersDetails(
+                                                            id: int.tryParse(
+                                                                '${record[0]}'));
+                                                  },
                                                   color: ColorValues
                                                       .appYellowColor,
                                                   icon: Icons.edit,
