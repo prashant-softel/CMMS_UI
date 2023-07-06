@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/business_type_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 class StockManagementAddGoodsOrdersUsecase {
   final Repository _repository;
@@ -42,5 +43,13 @@ class StockManagementAddGoodsOrdersUsecase {
       await _repository.createGoodsOrder(
         createGo,
         isLoading,
+      );
+  Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
+    bool? isLoading,
+    required int id,
+  }) async =>
+      await _repository.getPurchaseDetailsById(
+        id: id,
+        isLoading: isLoading ?? false,
       );
 }

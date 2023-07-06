@@ -1004,6 +1004,16 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getPurchaseDetailsById({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getPurchaseDetailsById(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getInventoryDetail({
     required String auth,
@@ -1937,7 +1947,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> createDesignation({
     auth,
     bool? isLoading,
@@ -1984,6 +1993,7 @@ class DataRepository extends DomainRepository {
         businessTypeJsonString: businessTypeJsonString);
     return response;
   }
+
   Future<ResponseModel> deleteBusinessType({
     auth,
     bool? isLoading,

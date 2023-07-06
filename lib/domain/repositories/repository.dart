@@ -22,6 +22,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -823,6 +824,41 @@ class Repository {
         }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPurchaseDetailsById(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"getPurchaseDetailsByID", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final GetPurchaseDetailsByIDModel
+              _getPurchaseDetailsByIDModelFromJson =
+              getPurchaseDetailsByIDModelFromJson(res.data);
+
+          var responseMap = _getPurchaseDetailsByIDModelFromJson;
+          print({"ViewgetPurchaseDetailsByID", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'GetPurchaseDetailsByID');
         //return '';
       }
       return null;

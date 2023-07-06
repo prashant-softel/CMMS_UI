@@ -65,7 +65,7 @@ class LoginScreen extends GetView<LoginController> {
                           ),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start, //
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(top: 20, bottom: 20),
@@ -100,7 +100,7 @@ class LoginScreen extends GetView<LoginController> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                          Container(
+                                Container(
                                   width: (Get.width * .3) - 50,
                                   child: LoginCustomTextfield(
                                     onfieldSubmitted: (Value) {
@@ -126,7 +126,7 @@ class LoginScreen extends GetView<LoginController> {
                                     ),
                                   ),
                                 ),
-        SizedBox(
+                                SizedBox(
                                   height: 5,
                                 ),
                                 Container(
