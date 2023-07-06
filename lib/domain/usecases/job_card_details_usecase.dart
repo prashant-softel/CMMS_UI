@@ -5,8 +5,8 @@ import 'package:cmms/domain/repositories/repository.dart';
 import '../models/job_card_details_model.dart';
 import '../models/permit_details_model.dart';
 
-class JobCardUsecase {
-  JobCardUsecase(this.repository);
+class JobCardDetailsUsecase {
+  JobCardDetailsUsecase(this.repository);
   Repository repository;
 
   ///

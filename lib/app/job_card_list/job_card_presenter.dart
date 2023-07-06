@@ -3,11 +3,11 @@ import 'package:cmms/domain/models/history_model.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/job_card_details_model.dart';
 import '../../domain/models/permit_details_model.dart';
-import '../../domain/usecases/job_card_details_usecase.dart';
+import '../../domain/usecases/job_card_usecase.dart';
 
-class JobCardDetailsPresenter {
-  JobCardDetailsPresenter(this.jobCardDetailsUsecase);
-  JobCardDetailsUsecase jobCardDetailsUsecase;
+class JobCardPresenter {
+  JobCardPresenter(this.jobCardDetailsUsecase);
+  JobCardUsecase jobCardDetailsUsecase;
 
   ///
   Future<List<EmployeeModel?>?> getAssignedToList({

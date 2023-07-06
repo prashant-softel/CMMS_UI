@@ -111,6 +111,8 @@ import '../inventory_status_list/inventory_status_list_binding.dart';
 import '../inventory_status_list/view/inventory_status_list.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
+import '../job_card_list/views/job_card_list_screen.dart';
+import '../job_card_list/job_card_binding.dart';
 import '../job_details/job_details_binding.dart';
 import '../job_details/views/job_details_screen.dart';
 import '../job_list/job_list_binding.dart';
@@ -517,7 +519,11 @@ class AppPages {
       page: AssetMasterScreen.new,
       binding: AssetMasterBinding(),
     ),
-
+    GetPage<dynamic>(
+      name: _Paths.goToJobCardList,
+      page: JobCardScreen.new,
+      binding: JobCardBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.addassetMaster,
       page: AddAssetMasterScreen.new,

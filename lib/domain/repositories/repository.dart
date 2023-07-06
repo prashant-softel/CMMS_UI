@@ -2125,12 +2125,14 @@ class Repository {
   }
 
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList(
+      String? workTypeIds,
     String? auth,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getToolsRequiredToWorkTypeList(
+        workTypeIds:workTypeIds,
         auth: auth,
         isLoading: isLoading ?? false,
       );
