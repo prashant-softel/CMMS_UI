@@ -64,6 +64,7 @@ abstract class Routes {
   static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
   static const addInventoryScreen = _Paths.addInventoryScreen;
   static const viewAddInventoryScreen = _Paths.viewAddInventoryScreen;
+  static const viewIncidentReportScreen = _Paths.viewIncidentReportScreen;
 
   static const bloodTypeListScreen = _Paths.bloodTypeListScreen;
   static const countryTypeListScreen = _Paths.countryTypeListScreen;
@@ -181,6 +182,7 @@ abstract class _Paths {
   static const designationScreen = '/designation-Screen';
   static const competencyScreen = '/competency-Screen';
   static const roleAccess = '/role-access';
+  static const viewIncidentReportScreen = '/view-incident-report-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

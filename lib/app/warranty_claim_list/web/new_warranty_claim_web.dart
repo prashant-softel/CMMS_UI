@@ -2105,18 +2105,24 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
           ),
           // position == 1 || position == 2 || position == 3
           // ?
-          ActionButton(
-            icon: Icons.remove,
-            label: 'Delete',
-            // onPress:
-            //     () async {},
-            color: Colors.red,
-            onPressed: () {},
-          )
+          // ActionButton(
+          //   icon: Icons.remove,
+          //   label: 'Delete',
+          //   // onPress:
+          //   //     () async {},
+          //   color: Colors.red,
+          //   onPressed: () {
+          //     controller.removeRow(index: 0);
+          //   },
+          // )
+
           // : Text('data')
+          
         ],
       ),
     );
+    
+  
   }
 
   emailDropdown(
