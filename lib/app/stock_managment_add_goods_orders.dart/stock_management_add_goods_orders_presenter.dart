@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 
@@ -44,6 +45,16 @@ class StockManagementAddGoodsOrdersPresenter {
     return stockManagementAddGoodsOrdersUsecase.createGoodsOrder(
       createGo: createGo,
       isLoading: isLoading,
+    );
+  }
+
+  Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
+    bool? isLoading,
+    required int id,
+  }) async {
+    return stockManagementAddGoodsOrdersUsecase.getPurchaseDetailsById(
+      id: id,
+      isLoading: isLoading ?? false,
     );
   }
 }

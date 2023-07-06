@@ -5,10 +5,6 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_presenter.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class StockManagementGoodsOrdersController extends GetxController {

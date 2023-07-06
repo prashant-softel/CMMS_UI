@@ -250,7 +250,7 @@ class StockManagementGoodsOrdersWeb
                                     },
                                   ),
                                 ].map((record) {
-                                  print('recoerdfjb:$record');
+                                  // print('recoerdfjb:$record');
                                   return TableViewRow(
                                     height: 60,
                                     cells: record.map((value) {

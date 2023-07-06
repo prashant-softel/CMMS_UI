@@ -1004,6 +1004,16 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getPurchaseDetailsById({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getPurchaseDetailsById(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getInventoryDetail({
     required String auth,

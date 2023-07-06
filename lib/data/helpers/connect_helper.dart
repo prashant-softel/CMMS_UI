@@ -1518,6 +1518,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPurchaseDetailsById({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/getPurchaseDetailsByID?id=$id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewgetPurchaseDetailsById${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getInventoryDetail({
     required String auth,
     bool? isLoading,
@@ -2966,10 +2984,7 @@ class ConnectHelper {
     bool? isLoading,
     required designationJsonString,
   }) async {
-    var responseModel =
-
-
-        await apiWrapper.makeRequest(
+    var responseModel = await apiWrapper.makeRequest(
       'RoleAccess/AddDesignation',
       Request.post,
       designationJsonString,

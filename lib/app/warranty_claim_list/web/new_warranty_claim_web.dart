@@ -213,7 +213,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 SizedBox(
                                                   width: 15,
                                                 ),
-                                                // Text("${controller.inventoryNameList.length}"),
+
                                                 SizedBox(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -626,7 +626,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 ),
                                               ],
                                             ),
-                                        
                                           ],
                                         ),
                                         Row(
@@ -926,7 +925,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 ),
                                               ),
                                             )
-                                         
                                           ],
                                         ),
                                         SizedBox(
@@ -1309,7 +1307,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       child: CustomTextField(
                                                         textController: controller
                                                             .supplierActionSrNumberTextFieldController,
-                                                        label: '  Serial Number',
+                                                        label:
+                                                            '  Serial Number',
                                                       )),
                                                   SizedBox(
                                                       width:
