@@ -5,6 +5,7 @@ import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,7 +130,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             CustomRichText(title: 'Vendor: '),
                                             Dimens.boxWidth10,
                                             SizedBox(
-                                              child: DropdownWebWidget(
+                                              child: DropdownWebStock(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -617,7 +618,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             CustomRichText(title: 'Currency: '),
                                             Dimens.boxWidth10,
                                             SizedBox(
-                                              child: DropdownWebWidget(
+                                              child: DropdownWebStock(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -726,7 +727,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              DropdownWebWidget(
+                                                              DropdownWebStock(
                                                                 width: MediaQuery.of(
                                                                             context)
                                                                         .size
@@ -789,7 +790,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         )
                                                       : (mapData['key'] ==
                                                               "Paid_By")
-                                                          ? DropdownWebWidget(
+                                                          ? DropdownWebStock(
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
