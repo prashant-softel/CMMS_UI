@@ -48,10 +48,11 @@ class EditJobUsecase {
   ///
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
     String? workTypeIds,
-    bool? isLoading,
+    bool? isLoading,String? auth,
   }) async =>
       await repository.getToolsRequiredToWorkTypeList(
         workTypeIds,
+        auth,
         isLoading,
       );
 

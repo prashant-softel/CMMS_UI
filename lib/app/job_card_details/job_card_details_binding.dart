@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../domain/usecases/job_card_usecase.dart';
+import '../../domain/usecases/job_card_details_usecase.dart';
 
 import 'job_card_details_controller.dart';
 import 'job_card_details_presenter.dart';

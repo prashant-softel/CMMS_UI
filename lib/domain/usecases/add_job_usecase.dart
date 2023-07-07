@@ -47,11 +47,15 @@ class AddJobUsecase {
 
   ///
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
+    String? auth,
     String? workTypeIds,
     bool? isLoading,
+
   }) async =>
+
       await repository.getToolsRequiredToWorkTypeList(
         workTypeIds,
+        auth,
         isLoading,
       );
 

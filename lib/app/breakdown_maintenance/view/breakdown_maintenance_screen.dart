@@ -169,7 +169,7 @@ class BreakdownMaintenanceScreen
                         createContentTile(
                             title: "JobCard List",
                             onTap: () {
-                              controller.goToJobTypeList();
+                              controller.goToJobCardList();
                             }),
                       ],
                     )

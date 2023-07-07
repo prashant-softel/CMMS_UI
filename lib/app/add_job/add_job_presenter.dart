@@ -60,10 +60,14 @@ class AddJobPresenter {
 
   ///
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
+    String? auth,
     String? workTypeIds,
+
     bool? isLoading,
   }) async {
+    print("Work type id in presenter: $workTypeIds");
     return addJobUsecase.getToolsRequiredToWorkTypeList(
+      auth:auth ?? "",
       workTypeIds: workTypeIds,
       isLoading: isLoading,
     );

@@ -74,7 +74,7 @@ class AddJobController extends GetxController {
   //
   Rx<String> selectedToolRequiredToWorkType = ''.obs;
   Rx<bool> isToolRequiredToWorkTypeSelected = false.obs;
-  RxList<ToolsModel?>? toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
+  RxList<ToolsModel?> toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
   RxList<String?> selectedtoolsRequiredToWorkTypeList = <String>[].obs;
   RxList<int?> selectedtoolsRequiredToWorkTypeIdList = <int>[].obs;
 
@@ -168,14 +168,15 @@ class AddJobController extends GetxController {
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
+    print("Work type in controller, $workTypeIds");
     final list = await addJobPresenter.getToolsRequiredToWorkTypeList(
       isLoading: false,
       workTypeIds: workTypeIds,
     );
-    toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
+    toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
     update(['toolsRequiredToWorkTypeList']);
   }
-
+ 
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList =
@@ -412,6 +413,18 @@ class AddJobController extends GetxController {
     );
     getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);
   }
+  void toolsRequiredSelected(_selectedToolsRequired) {
+    selectedtoolsRequiredToWorkTypeIdList.value = <int>[];
+    for (var _selectedCategory in _selectedToolsRequired) {
+      selectedtoolsRequiredToWorkTypeList.add(_selectedCategory.name);
+    }
+
+    // getToolsRequiredToWorkTypeList(
+    //   facilityId: facilityId,
+    //   blockId: selectedBlockId,
+    //   receivedCategoryIds: selectedEquipmentCategoryIdList,
+    // );
+  }
 
   /// Work-areas / Equipments selected - multi select
   void workAreasSelected(_selectedWorkAreaList) {
@@ -425,9 +438,10 @@ class AddJobController extends GetxController {
     for (var _selectedWorkType in _selectedWorkTypesList) {
       selectedWorkTypeIdList.add(_selectedWorkType.id);
     }
-
-    String lststrWorkTypeIds = selectedWorkTypeIdList.join(', ').toString();
-    getToolsRequiredToWorkTypeList(lststrWorkTypeIds);
+    print(selectedWorkTypeIdList);
+    // var worktypeid = selectedWorkTypeIdList.join(', ').toString();
+    var worktypeid = selectedWorkTypeIdList.map((id)=>id.toString()).join(',');
+    getToolsRequiredToWorkTypeList(worktypeid);
   }
 
   /// Show alert dialog

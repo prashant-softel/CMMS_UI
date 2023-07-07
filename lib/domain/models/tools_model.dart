@@ -9,22 +9,22 @@ String facilityListToJson(List<ToolsModel> data) =>
 class ToolsModel {
   factory ToolsModel.fromJson(Map<String, dynamic> json) => ToolsModel(
         id: json['id'],
-        name: json['name'],
+        linkedToolName: json['linkedToolName'],
         input: json['input'],
       );
   ToolsModel({
     this.id,
-    this.name,
+    this.linkedToolName,
     this.input,
   });
 
   int? id;
-  String? name;
+  String? linkedToolName;
   int? input;
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'name': name,
+        'linkedToolName': linkedToolName,
         'input': input,
       };
 }
