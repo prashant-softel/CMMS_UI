@@ -1,4 +1,4 @@
-import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_controller.dart';
+import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +6,7 @@ import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import 'stock_management_goods_orders_web.dart';
+import 'stock_management_goods_list_orders_web.dart';
 
 class StockManagementGoodsOrdersScreen
     extends GetView<StockManagementGoodsOrdersController> {
