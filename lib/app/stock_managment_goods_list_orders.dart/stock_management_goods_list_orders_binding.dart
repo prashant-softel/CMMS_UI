@@ -4,8 +4,8 @@ import 'package:cmms/domain/usecases/stock_management_goods_orders_usecase.dart'
 
 import 'package:get/get.dart';
 
-import 'stock_management_goods_orders_controller.dart';
-import 'stock_management_goods_orders_presenter.dart';
+import 'stock_management_goods_list_orders_controller.dart';
+import 'stock_management_goods_list_orders_presenter.dart';
 
 class StockManagementGoodsOrdersBinding extends Bindings {
   @override

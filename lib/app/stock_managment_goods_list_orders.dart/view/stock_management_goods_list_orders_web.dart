@@ -9,7 +9,7 @@ import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/table_action_button.dart';
-import '../stock_management_goods_orders_controller.dart';
+import '../stock_management_goods_list_orders_controller.dart';
 
 class StockManagementGoodsOrdersWeb
     extends GetView<StockManagementGoodsOrdersController> {
