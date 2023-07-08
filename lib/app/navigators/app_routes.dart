@@ -80,7 +80,7 @@ abstract class Routes {
 
   static const updateGoodsOrdersDetailsScreen =
       _Paths.updateGoodsOrdersDetailsScreen;
-
+  static const GoodsOrdersReqDetailsScreen = _Paths.GoodsOrdersReqDetailsScreen;
   static const assetMasterList = _Paths.assetMasterList;
   static const addassetMaster = _Paths.addassetMaster;
   static const incidentReportListWeb = _Paths.incidentReportListWeb;
@@ -171,6 +171,8 @@ abstract class _Paths {
   static const mrsListScreen = '/mrs-list-screen';
   static const updateGoodsOrdersDetailsScreen =
       '/update-goods-orders-details-screen';
+  static const GoodsOrdersReqDetailsScreen = '/goods-orders-req-details-screen';
+
   static const assetMasterList = '/asset-Master-List';
   static const addassetMaster = '/add-asset-Master';
   static const incidentReportListWeb = '/incident-report-list';

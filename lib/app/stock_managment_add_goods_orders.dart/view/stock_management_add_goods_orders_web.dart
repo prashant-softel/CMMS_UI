@@ -69,14 +69,14 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / STOCK MANAGEMENT ",
+                          child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),
                         ),
                         GestureDetector(
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" /  UPDATE GOODS ORDER DETAILS",
+                            child: Text(" /  ADD GOODS ORDER DETAILS",
                                 style: Styles.greyMediumLight12)),
                       ],
                     ),
