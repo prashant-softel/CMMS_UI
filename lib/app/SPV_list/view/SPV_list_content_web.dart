@@ -56,7 +56,12 @@ class SPVListContentWeb extends GetView<SPVListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / FACILITY LIST", style: Styles.greyMediumLight12)
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Text(" / SPV LIST ", style: Styles.greyMediumLight12),
+              ),
                 ],
               ),
             ),
@@ -65,7 +70,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 1)
+                              .where((e) => e.feature_id == 5 && e.add == 0)
                               .length >
                           0
                       ? Container(
@@ -90,7 +95,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add Facility",
+                                          "SPV LIST",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -211,7 +216,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of Facilities",
+                                      "List of SPV",
                                       style: Styles.blackBold16,
                                     ),
                                   ),

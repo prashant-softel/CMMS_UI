@@ -111,6 +111,50 @@ class InventoryScreen extends GetView<InventoryController> {
                             ontap: () {
                               controller.newWarrantyClaimList();
                             }),
+                        // _inventoryList(
+                        //     tittle: "Inventory Category",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.assetTypeListScreen,
+                        //       );
+                        //     }),
+                        // _inventoryList(
+                        //     tittle: "Inventory Type",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //       Routes.inventoryTypeListScreen,
+                        //     );
+                        //   }),
+                        // _inventoryList(
+                        //     tittle: "Inventory Status",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.inventoryStatusListScreen,
+                        //       );
+                        //     }),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "Masters",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 159, 156, 156),
+                            fontSize: 24,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
                         _inventoryList(
                             tittle: "Inventory Category",
                             ontap: () {
@@ -122,9 +166,9 @@ class InventoryScreen extends GetView<InventoryController> {
                             tittle: "Inventory Type",
                             ontap: () {
                               Get.toNamed(
-                              Routes.inventoryTypeListScreen,
-                            );
-                          }),
+                                Routes.inventoryTypeListScreen,
+                              );
+                            }),
                         _inventoryList(
                             tittle: "Inventory Status",
                             ontap: () {
@@ -133,7 +177,7 @@ class InventoryScreen extends GetView<InventoryController> {
                               );
                             }),
                       ],
-                    )
+                    ),
                   ]),
             ),
           ],

@@ -7,6 +7,7 @@ import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
+import 'facility_listContent_mobile.dart';
 
 class FacilityTypeListScreen extends GetView<FacilityTypeListController> {
   FacilityTypeListScreen({super.key});
@@ -38,11 +39,11 @@ class FacilityTypeListScreen extends GetView<FacilityTypeListController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
+                    if (Responsive.isMobile(context) ||
+                        Responsive.isTablet(context))
+                      Expanded(
+                        child: FacilityTypeListContentMobile(),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: FacilityTypeListContentWeb(),

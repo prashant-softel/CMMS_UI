@@ -34,22 +34,38 @@ class FacilityTypeListController extends GetxController {
 
   //checkbox
   RxBool isChecked = true.obs;
+  // Rx<String> selectedCountry = ''.obs;
+  // Rx<bool> isSelectedCountry = true.obs;
+  // int countryId = -1;
+  // RxList<CountryModel?> countryList = <CountryModel>[].obs;
+  // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  //
+  // Rx<String> selectedState = ''.obs;
+  // Rx<bool> isSelectedState = true.obs;
+  // int stateId = -1;
+  // RxList<CountryState?> stateList = <CountryState>[].obs;
+  //
+  // Rx<String> selectedCity = ''.obs;
+  // Rx<bool> isSelectedCity = true.obs;
+  // int cityId = -1;
+  // RxList<CityModel?> cityList = <CityModel>[].obs;
+  RxList<CountryModel?> countryList =
+      <CountryModel>[].obs;
+  RxList<CountryState?> stateList =
+      <CountryState>[].obs;
+  RxList<CityModel?> cityList =
+      <CityModel>[].obs;
+
+  // Rx<String> selectedBusinessType = ''.obs;
   Rx<String> selectedCountry = ''.obs;
-  Rx<bool> isSelectedCountry = true.obs;
-  int countryId = 0;
-  RxList<CountryModel?> countryList = <CountryModel>[].obs;
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-
   Rx<String> selectedState = ''.obs;
-  Rx<bool> isSelectedState = true.obs;
-  int stateId = 0;
-  RxList<CountryState?> stateList = <CountryState>[].obs;
-
   Rx<String> selectedCity = ''.obs;
-  Rx<bool> isSelectedCity = true.obs;
-  int cityId = 0;
-  RxList<CityModel?> cityList = <CityModel>[].obs;
-
+  Rx<bool> isSelectedCountryType = true.obs;
+  Rx<bool> isSelectedStateType = true.obs;
+  Rx<bool> isSelectedCityType = true.obs;
+  int selectedCountryId = 0;
+  int selectedStateId = 0;
+  int selectedCityId = 0;
   Rx<String> selectedOwner = ''.obs;
   Rx<bool> isSelectedOwner = true.obs;
   int ownerId = 0;
@@ -121,38 +137,55 @@ class FacilityTypeListController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getCountryList();
+      Future.delayed(Duration(seconds: 1), () async {
+        if (countryList.isEmpty) {
+          await getCountryList();
+        }
+
+        // Check if the business lists are already fetched
+        if (ownerList.isEmpty) {
+          await getBusinessList(1);
+        }
+        if (customerList.isEmpty) {
+          await getBusinessList(2);
+        }
+        if (operatorList.isEmpty) {
+          await getBusinessList(3);
+        }
+        if (SpvList.isEmpty) {
+          await getSpvList();
+        }
+        // getCountryList();
         getFacilityTypeList();
-        getBusinessList(1);
-        getBusinessList(2);
-        getBusinessList(3);
-        getSpvList();
+        // getBusinessList(1);
+        // getBusinessList(2);
+        // getBusinessList(3);\
       });
     });
 
     super.onInit();
   }
 
-  Future<void> getCountryList() async {
-    final list = await facilityTypeListPresenter.getCountryList(
-      isLoading: true,
-    );
-
-    if (list != null) {
-      for (var _countryList in list) {
-        countryList.add(_countryList);
-      }
-    }
-  }
+  // Future<void> getCountryList() async {
+  //   final list = await facilityTypeListPresenter.getCountryList(
+  //     isLoading: true,
+  //   );
+  //
+  //   if (list != null) {
+  //     for (var _countryList in list) {
+  //       countryList.add(_countryList);
+  //     }
+  //   }
+  // }
 
   Future<void> getFacilityTypeList() async {
+    facilityTypeList.clear();
     facilityTypeList.value = <FacilityTypeListModel>[];
     final _facilityTypePermitList =
         await facilityTypeListPresenter.getFacilityTypeList(
       isLoading: true,
       // categoryIds: categoryIds,
-      job_type_id: selectedJobSOPId,
+      // job_type_id: selectedJobSOPId,
       // job_type_id: 36,
     );
     if (_facilityTypePermitList != null) {
@@ -170,32 +203,146 @@ class FacilityTypeListController extends GetxController {
     update(['facility_type_list']);
   }
 
-  dynamic onValueChangedCountry(RxList<CountryModel?> value, dynamic list) {
-    print("onValueChange function. list : $list and value is :");
-    String newValue = list.toString();
-    print(" Selected Facility : ");
+  // dynamic onValueChangedCountry(RxList<CountryModel?> value, dynamic list) {
+  //   if(countryId>=0 && stateId>=0 && cityId>=0){
+  //     stateId =-1;
+  //     countryId = -1;
+  //     selectedState.value = '';
+  //     selectedCity.value = '';
+  //   }
+  //   print("onValueChange function. list : $list and value is :");
+  //   String newValue = list.toString();
+  //   print(" Selected Facility : ");
+  //
+  //   int indexId = countryList.indexWhere((x) => x?.name == newValue);
+  //   if (indexId > 0) {
+  //     countryId = countryList[indexId]?.id ?? -1;
+  //   }
+  //   print("index received is : $indexId & country id  : $countryId");
+  //   // print(selectedfacility);
+  //   // selectedFacilityId = facilityIds;
+  //   getStateList();
+  // }
 
-    int indexId = countryList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      countryId = countryList[indexId]?.id ?? 0;
-    }
-    print("index received is : $indexId & country id  : $countryId");
-    // print(selectedfacility);
-    // selectedFacilityId = facilityIds;
-    getStateList();
-  }
+  // Future<void> getStateList() async {
+  //   final list = await facilityTypeListPresenter.getStateList(
+  //     country_code: countryId,
+  //   );
+  //
+  //   if (list != null) {
+  //     for (var _stateList in list) {
+  //       stateList.add(_stateList);
+  //     }
+  //   }
+  // }
 
-  Future<void> getStateList() async {
-    final list = await facilityTypeListPresenter.getStateList(
-      country_code: countryId,
-    );
+
+  Future<void> getCountryList() async {
+    countryList.clear();
+    final list = await facilityTypeListPresenter.getCountryList();
 
     if (list != null) {
-      for (var _stateList in list) {
-        stateList.add(_stateList);
+      for (var _equipmentCategoryList in list) {
+        countryList.add(_equipmentCategoryList);
+      }
+    }
+
+    // selectedCountryId = Get.arguments;
+    print(selectedCountryId);
+    if (selectedCountryId > 0) {
+      isSelectedCountryType.value = true;
+      // Future.delayed(Duration(seconds: 1), () async {
+      await getStateList(selectedCountryId);
+      // getAssignedToList(facilityId);
+      // });
+    }
+    // getStateList(selectedCountryId);
+  }
+
+  Future<void> getStateList(int selectedCountryId) async {
+    stateList.clear();
+    stateList.value = <CountryState>[];
+    final list = await facilityTypeListPresenter.getStateList(selectedCountryId : selectedCountryId);
+
+    if (list != null) {
+      for (var _equipmentCategoryList in list) {
+        stateList.add(_equipmentCategoryList);
       }
     }
   }
+
+  Future<void> getCityList(int selectedStateId) async {
+    cityList.clear();
+    cityList.value = <CityModel>[];
+    final list = await facilityTypeListPresenter.getCityList(selectedStateId : selectedStateId);
+
+    if (list != null) {
+      for (var _equipmentCategoryList in list) {
+        cityList.add(_equipmentCategoryList);
+      }
+    }
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<CountryModel>:
+        {
+          int frequencyIndex =
+          countryList.indexWhere((x) => x?.name == value);
+          selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
+          if (selectedCountryId > 0) {
+            isSelectedCountryType.value = true;
+          }
+          selectedCountry.value = value;
+          getStateList(selectedCountryId);
+          if(selectedStateId!=0 || selectedCityId!=0) {
+            selectedStateId=0;
+            selectedCityId=0;
+            selectedState = ''.obs;
+            selectedCity = ''.obs;
+            getStateList(selectedCountryId);
+            getCityList(selectedStateId);
+          }
+        }
+        break;
+      case RxList<CountryState>:
+        {
+          int frequencyIndex =
+          stateList.indexWhere((x) => x?.name == value);
+          selectedStateId = stateList[frequencyIndex]?.id ?? 0;
+          if (selectedStateId > 0) {
+            isSelectedStateType.value = true;
+          }
+          selectedState.value = value;
+          getCityList(selectedStateId);
+          if(selectedCityId!=0){
+            // selectedStateId=0;
+            selectedCityId=0;
+            // selectedState = ''.obs;
+            selectedCity = ''.obs;
+            // getStateList(selectedCountryId);
+            getCityList(selectedStateId);
+          }
+        }
+        break;
+      case RxList<CityModel>:
+        {
+          int frequencyIndex =
+          cityList.indexWhere((x) => x?.name == value);
+          selectedCityId = cityList[frequencyIndex]?.id ?? 0;
+          selectedCity.value = value;
+
+        }
+        break;
+
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+  }
+
 
   Future<void> getBusinessList(ListType) async {
     final list = await facilityTypeListPresenter.getBusinessList(
@@ -203,18 +350,21 @@ class FacilityTypeListController extends GetxController {
       isLoading: true,
     );
     if (ListType == 1) {
+      ownerList.clear();
       if (list != null) {
         for (var _ownerList in list) {
           ownerList.add(_ownerList);
         }
       }
     } else if (ListType == 2) {
+      customerList.clear();
       if (list != null) {
         for (var _customerList in list) {
           customerList.add(_customerList);
         }
       }
     } else if (ListType == 3) {
+      operatorList.clear();
       if (list != null) {
         for (var _operatorList in list) {
           operatorList.add(_operatorList);
@@ -224,6 +374,7 @@ class FacilityTypeListController extends GetxController {
   }
 
   Future<void> getSpvList() async {
+    SpvList.clear();
     final list = await facilityTypeListPresenter.getSpvList(
       isLoading: true,
     );
@@ -233,49 +384,49 @@ class FacilityTypeListController extends GetxController {
       }
     }
   }
+  //
+  // dynamic onValueChangedState(RxList<CountryState?> value, dynamic list) {
+  //   print("onValueChange function. list : $list and value is :");
+  //   String newValue = list.toString();
+  //   print(" Selected Facility : ");
+  //
+  //   int indexId = stateList.indexWhere((x) => x?.name == newValue);
+  //   if (indexId > 0) {
+  //     stateId = stateList[indexId]?.id ?? 0;
+  //   }
+  //   print("index received is : $indexId & country id  : $stateId");
+  //   // print(selectedfacility);
+  //   // selectedFacilityId = facilityIds;
+  //   getCityList();
+  // }
 
-  dynamic onValueChangedState(RxList<CountryState?> value, dynamic list) {
-    print("onValueChange function. list : $list and value is :");
-    String newValue = list.toString();
-    print(" Selected Facility : ");
+  // Future<void> getCityList() async {
+  //   final list = await facilityTypeListPresenter.getCityList(
+  //     isLoading: true,
+  //     country_code: stateId,
+  //   );
+  //
+  //   if (list != null) {
+  //     for (var _stateList in list) {
+  //       cityList.add(_stateList);
+  //     }
+  //   }
+  // }
 
-    int indexId = stateList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      stateId = stateList[indexId]?.id ?? 0;
-    }
-    print("index received is : $indexId & country id  : $stateId");
-    // print(selectedfacility);
-    // selectedFacilityId = facilityIds;
-    getCityList();
-  }
-
-  Future<void> getCityList() async {
-    final list = await facilityTypeListPresenter.getCityList(
-      isLoading: true,
-      country_code: stateId,
-    );
-
-    if (list != null) {
-      for (var _stateList in list) {
-        cityList.add(_stateList);
-      }
-    }
-  }
-
-  dynamic onValueChangedCity(RxList<CityModel?> value, dynamic list) {
-    print("onValueChange function. list : $list and value is :");
-    String newValue = list.toString();
-    print(" Selected Facility : ");
-
-    int indexId = cityList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      cityId = cityList[indexId]?.id ?? 0;
-    }
-    print("index received is : $indexId & city id  : $cityId");
-    // print(selectedfacility);
-    // selectedFacilityId = facilityIds;
-    // getBlockTypeList();
-  }
+  // dynamic onValueChangedCity(RxList<CityModel?> value, dynamic list) {
+  //   print("onValueChange function. list : $list and value is :");
+  //   String newValue = list.toString();
+  //   print(" Selected Facility : ");
+  //
+  //   int indexId = cityList.indexWhere((x) => x?.name == newValue);
+  //   if (indexId > 0) {
+  //     cityId = cityList[indexId]?.id ?? 0;
+  //   }
+  //   print("index received is : $indexId & city id  : $cityId");
+  //   // print(selectedfacility);
+  //   // selectedFacilityId = facilityIds;
+  //   // getBlockTypeList();
+  // }
 
   dynamic onValueChangedOwner(RxList<BusinessListModel?> value, dynamic list) {
     print("onValueChangeOwner function. list : $list and value is :");
@@ -286,6 +437,7 @@ class FacilityTypeListController extends GetxController {
     if (indexId > 0) {
       ownerId = ownerList[indexId]?.id ?? 0;
     }
+    selectedOwner.value = list;
     print("index received is : $indexId & owner id  : $ownerId");
   }
 
@@ -299,6 +451,7 @@ class FacilityTypeListController extends GetxController {
     if (indexId > 0) {
       customerId = customerList[indexId]?.id ?? 0;
     }
+    selectedCustomer.value = list;
     print("index received is : $indexId & customer id  : $customerId");
   }
 
@@ -312,6 +465,7 @@ class FacilityTypeListController extends GetxController {
     if (indexId > 0) {
       operatorId = operatorList[indexId]?.id ?? 0;
     }
+    selectedOperator.value = list;
     print("index received is : $indexId & operator id  : $operatorId");
   }
 
@@ -324,23 +478,22 @@ class FacilityTypeListController extends GetxController {
     if (indexId > 0) {
       SpvId = SpvList[indexId]?.id ?? 0;
     }
+    selectedSpv.value = list;
+
     print("index received is : $indexId & SPV id  : $SpvId");
   }
 
   Future<bool> createFacilityType() async {
-    print(
-        "title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $countryId , stateId: $stateId, cityId : $cityId, ownerId: $ownerId, customerId : $customerId, operatorId: $operatorId, spvId : $SpvId");
+    print("title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
     if (titleCtrlr.text.trim() == '' ||
         addressCtrlr.text.trim() == '' ||
         zipcodeCtrlr.text.trim() == '' ||
         descriptionCtrlr.text.trim() == '' ||
-        countryId == 0 ||
-        stateId == 0 ||
-        cityId == 0 ||
-        ownerId == 0 ||
-        customerId == 0 ||
-        operatorId == 0 ||
-        SpvId == 0) {
+        selectedOwner == '' ||
+        selectedCustomer == '' ||
+        selectedOperator == ''|| selectedCity == '' ||
+    selectedCountry == '' || selectedState == '' || selectedSpv==''
+    ) {
       // Fluttertoast.showToast(
       //     msg: "Please enter required field", fontSize: 16.0);
       print("Fields are blank, please enter dat ato create");
@@ -351,15 +504,15 @@ class FacilityTypeListController extends GetxController {
       int _zipcode = int.parse(pin);
       String _description = descriptionCtrlr.text.trim();
       CreateFacilityType createCheckpoint = CreateFacilityType(
-        title: _title,
+         name: _title,
         ownerId: ownerId,
         customerId: customerId,
         operatorId: operatorId,
         spvId: SpvId,
         address: _address,
-        city: cityId,
-        state: stateId,
-        country: countryId,
+        cityId: selectedCityId,
+        stateId: selectedStateId,
+        countryId: selectedCountryId,
         zipcode: _zipcode,
         description: _description,
         photoId: 0,
@@ -367,12 +520,12 @@ class FacilityTypeListController extends GetxController {
         longitude: 0.0,
         timezone: "default_hardcoded",
       );
-      var checkpointJsonString = createCheckpoint
-          .toJson(); //createCheckPointToJson([createCheckpoint]);
+      print("OUT ");
+      var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
 
-      print({"checkpointJsonString", checkpointJsonString});
+      print({"checkpointJsonString", facilitylistJsonString});
       await facilityTypeListPresenter.createFacilityType(
-        facilitylistJsonString: checkpointJsonString,
+        facilitylistJsonString: facilitylistJsonString,
         isLoading: true,
       );
       return true;
@@ -390,13 +543,15 @@ class FacilityTypeListController extends GetxController {
     addressCtrlr.text = '';
     zipcodeCtrlr.text = '';
     descriptionCtrlr.text = '';
-    countryId = 0;
-    stateId = 0;
-    cityId = 0;
-    ownerId = 0;
-    customerId = 0;
-    operatorId = 0;
-    SpvId = 0;
+    // selectedStateId = 0;
+    // selectedCountryId = 0;
+    // selectedCityId = 0;
+    // ownerId = 0;
+    //
+    // customerId = 0;
+    // operatorId = 0;
+    // SpvId = 0;
+    selectedState.value = '';
     selectedCity.value = '';
     selectedCountry.value = '';
     selectedCustomer.value = '';
@@ -410,5 +565,68 @@ class FacilityTypeListController extends GetxController {
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
+  }
+
+  void isDeleteDialog({
+    String? business_id ,
+    String? business
+  }) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the Business ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: business,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteFacility(business_id).then((value) {
+                    Get.back();
+                    getFacilityTypeList();
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+
+  Future<void> deleteFacility(String? business_id) async {
+    {
+      await facilityTypeListPresenter.deleteFacility(
+        business_id,
+        isLoading: true,
+      );
+    }
   }
 }

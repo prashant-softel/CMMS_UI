@@ -30,6 +30,8 @@ class BusinessListController extends GetxController {
     this.businessListPresenter,
   );
   BusinessListPresenter businessListPresenter;
+  RxList<BusinessListModel?> filteredData = <BusinessListModel>[].obs;
+
   final HomeController homecontroller = Get.find();
   RxList<CountryModel?> countryList =
       <CountryModel>[].obs;
@@ -109,6 +111,17 @@ class BusinessListController extends GetxController {
     super.onInit();
   }
 
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      moduleList?.value = filteredData;
+      return;
+    }
+
+    moduleList?.value = filteredData
+        .where((item) =>
+        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   Future<void> getBusinessTypeList() async {
     final list = await businessListPresenter.getBusinessTypeList();
@@ -263,14 +276,15 @@ class BusinessListController extends GetxController {
             businessType: type, isLoading: isLoading);
 
     if (_moduleList != null) {
-      moduleList!.value = _moduleList.cast<BusinessListModel?>();
+      moduleList!.value = _moduleList;
+      filteredData.value = moduleList!.value;
       paginationController = PaginationController(
         rowCount: moduleList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (moduleList != null && moduleList!.isNotEmpty) {
-        moduleListModel = moduleList![0];
+      if (filteredData != null && filteredData!.isNotEmpty) {
+        moduleListModel = filteredData![0];
         var preventiveCheckListJson = moduleListModel?.toJson();
         moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {

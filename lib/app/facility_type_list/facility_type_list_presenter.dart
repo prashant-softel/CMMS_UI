@@ -13,23 +13,50 @@ class FacilityTypeListPresenter {
 
   Future<List<FacilityTypeListModel>> getFacilityTypeList({
     required bool isLoading,
-    required int? job_type_id,
+    // required int? job_type_id,
   }) async {
     return facilityTypeListUsecase.getFacilityTypeList(
-        isLoading: isLoading, job_type_id: job_type_id);
+        isLoading: isLoading);
   }
 
   Future<List<CountryModel?>?> getCountryList({
-    required bool isLoading,
-  }) async {
-    return facilityTypeListUsecase.getCountryList(isLoading: isLoading);
-  }
+    bool? isLoading,
+  }) async =>
+      await facilityTypeListUsecase.getCountryList(
+        isLoading: isLoading ?? false,
+      );
+
 
   Future<List<CountryState?>?> getStateList({
-    required int country_code,
-  }) async {
-    return facilityTypeListUsecase.getStateList(countryCode: country_code);
-  }
+    // int? facilityId,
+    int? selectedCountryId,
+    // bool? isLoading,
+  }) async =>
+      await facilityTypeListUsecase.getStateList(
+        selectedCountryId: selectedCountryId,
+      );
+
+
+  Future<List<CityModel?>?> getCityList({
+    // int? facilityId,
+    int? selectedStateId,
+    // bool? isLoading,
+  }) async =>
+      await facilityTypeListUsecase.getCityList(
+        selectedStateId: selectedStateId,
+      );
+
+  // Future<List<CountryModel?>?> getCountryList({
+  //   required bool isLoading,
+  // }) async {
+  //   return facilityTypeListUsecase.getCountryList(isLoading: isLoading);
+  // }
+  //
+  // Future<List<CountryState?>?> getStateList({
+  //   required int country_code,
+  // }) async {
+  //   return facilityTypeListUsecase.getStateList(countryCode: country_code);
+  // }
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,
@@ -45,13 +72,13 @@ class FacilityTypeListPresenter {
     return facilityTypeListUsecase.getSpvList(isLoading: isLoading);
   }
 
-  Future<List<CityModel?>?> getCityList({
-    required bool isLoading,
-    required int country_code,
-  }) async {
-    return facilityTypeListUsecase.getCityList(
-        isLoading: isLoading, countryCode: country_code);
-  }
+  // Future<List<CityModel?>?> getCityList({
+  //   required bool isLoading,
+  //   required int country_code,
+  // }) async {
+  //   return facilityTypeListUsecase.getCityList(
+  //       isLoading: isLoading, countryCode: country_code);
+  // }
 
   Future<bool> createFacilityType({
     facilitylistJsonString,
@@ -64,4 +91,20 @@ class FacilityTypeListPresenter {
     );
     return true;
   }
+
+  deleteFacility(String? business_id, {required bool isLoading}) async =>
+      await facilityTypeListUsecase.deleteFacility(
+        business_id: business_id ?? 0,
+        isLoading: isLoading,
+      );
+  // Future<bool> updateBusinesslist(
+  //     {modulelistJsonString, required bool isLoading, moduleId}) async {
+  //   print("presenter");
+  //   businessUsecase.updateBusinesslist(
+  //     modulelistJsonString: modulelistJsonString,
+  //     isLoading: isLoading,
+  //   );
+  //   return true;
+  // }
+
 }

@@ -1220,7 +1220,7 @@ class Repository {
   }
 
   Future<List<FacilityTypeListModel>> getFacilityTypeList({
-    required int? job_type_id,
+    // required int? job_type_id,
     required bool isLoading,
   }) async {
     try {
@@ -1228,7 +1228,7 @@ class Repository {
 
       log(auth);
       final res = await _dataRepository.getFacilityTypeList(
-        job_type_id: job_type_id,
+        // job_type_id: job_type_id,
         isLoading: isLoading,
         auth: auth,
       );
@@ -4871,6 +4871,24 @@ class Repository {
     }
   }
 
+  Future<void> deleteFacility(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteFacility(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
 //end
 //end
 }
