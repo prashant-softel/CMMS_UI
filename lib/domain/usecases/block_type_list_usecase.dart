@@ -41,7 +41,7 @@ class BlockTypeListUsecase {
       {required bool isLoading, required int? job_type_id}) async {
     return repository.getFacilityTypeList(
       isLoading: isLoading,
-      job_type_id: job_type_id,
+      // job_type_id: job_type_id,
     );
   }
 

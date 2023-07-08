@@ -34,33 +34,58 @@ class FacilityTypeListUsecase {
   Repository repository;
 
   Future<List<FacilityTypeListModel>> getFacilityTypeList(
-      {required bool isLoading, required int? job_type_id}) async {
+      {required bool isLoading}) async {
     return repository.getFacilityTypeList(
       isLoading: isLoading,
-      job_type_id: job_type_id,
+      // job_type_id: job_type_id,
     );
   }
-
   Future<List<CountryModel?>?> getCountryList({
     bool? isLoading,
   }) async =>
       await repository.getCountryList(
         isLoading,
       );
+
   Future<List<CountryState?>?> getStateList({
-    int countryCode = 0,
+
+    int? selectedCountryId
+    // bool? isLoading,
+
   }) async =>
       await repository.getStateList(
-        countryCode,
+        // true,
+        selectedCountryId!,
       );
   Future<List<CityModel?>?> getCityList({
-    bool? isLoading,
-    int countryCode = 0,
+    int? selectedStateId
+
   }) async =>
       await repository.getCityList(
-        isLoading,
-        countryCode,
+        true,
+        selectedStateId!,
       );
+
+  // Future<List<CountryModel?>?> getCountryList({
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.getCountryList(
+  //       isLoading,
+  //     );
+  // Future<List<CountryState?>?> getStateList({
+  //   int countryCode = 0,
+  // }) async =>
+  //     await repository.getStateList(
+  //       countryCode,
+  //     );
+  // Future<List<CityModel?>?> getCityList({
+  //   bool? isLoading,
+  //   int countryCode = 0,
+  // }) async =>
+  //     await repository.getCityList(
+  //       isLoading,
+  //       countryCode,
+  //     );
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
     bool isLoading = true,
@@ -75,6 +100,20 @@ class FacilityTypeListUsecase {
   }) async =>
       await repository.getSPVList(
         isLoading: isLoading,
+      );
+  deleteFacility(
+      {required Object business_id, required bool isLoading}) async =>
+      await repository.deleteFacility(
+        business_id,
+        isLoading,
+      );
+  Future<bool> updateBusinesslist({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateBusinesslist(
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
       );
 
   Future<bool> createFacilityType({

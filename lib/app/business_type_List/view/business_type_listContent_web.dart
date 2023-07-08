@@ -356,7 +356,29 @@ class BusinessTypeListContentWeb
                                           onPressed: () {},
                                           text: 'columnVisibility'.tr,
                                         ),
-                                      )
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        width: 200,
+                                        height: 40,
+                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        child: TextField(
+                                          onChanged: (value) => controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            focusedBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey12,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -468,7 +490,7 @@ class BusinessTypeListContentWeb
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
-                                                                                  controller.selectedItem = controller.businessTypeList!.firstWhere((element) => "${element?.id}" == _businessTypeList[0]);
+                                                                                  controller.selectedItem = controller.filteredData!.firstWhere((element) => "${element?.id}" == _businessTypeList[0]);
 
                                                                                   controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
                                                                                   controller.descriptionCtrlr.text = "${controller.selectedItem?.description}";

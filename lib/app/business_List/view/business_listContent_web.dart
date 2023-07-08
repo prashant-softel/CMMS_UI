@@ -777,7 +777,29 @@ class BusinessListContentWeb
                                     onPressed: () {},
                                     text: 'columnVisibility'.tr,
                                   ),
-                                )
+                                ),
+                                Spacer(),
+                                Container(
+                                  width: 200,
+                                  height: 40,
+                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  child: TextField(
+                                    onChanged: (value) => controller.search(value),
+                                    decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.grey, width: 0.0),
+                                      ),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.grey, width: 0.0),
+                                      ),
+                                      contentPadding: Dimens.edgeInsets10_0_0_0,
+                                      hintText: 'search'.tr,
+                                      hintStyle: Styles.grey12,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             SizedBox(
@@ -931,7 +953,7 @@ class BusinessListContentWeb
                                                     icon: Icons.edit,
                                                     label: 'Edit',
                                                     onPress: () {
-                                                      controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _businessList[0]);
+                                                      controller.selectedItem = controller.filteredData!.firstWhere((element) => "${element?.id}" == _businessList[0]);
                                                       controller.selectedBusinessType.value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?.type)!;
                                                       // print(controller.selectedBusinessType.value);
                                                       // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);

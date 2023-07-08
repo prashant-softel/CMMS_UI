@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class CreateFacilityType {
-  String title;
+  String name;
   int ownerId;
   int customerId;
   int operatorId;
   int spvId;
   String address;
-  int city;
-  int state;
-  int country;
+  int cityId;
+  int stateId;
+  int countryId;
   int zipcode;
   String description;
   int photoId;
@@ -18,15 +18,15 @@ class CreateFacilityType {
   String timezone;
 
   CreateFacilityType({
-    required this.title,
+    required this.name,
     required this.ownerId,
     required this.customerId,
     required this.operatorId,
     required this.spvId,
     required this.address,
-    required this.city,
-    required this.state,
-    required this.country,
+    required this.cityId,
+    required this.stateId,
+    required this.countryId,
     required this.zipcode,
     required this.description,
     required this.photoId,
@@ -37,15 +37,15 @@ class CreateFacilityType {
 
   factory CreateFacilityType.fromJson(Map<String, dynamic> json) =>
       CreateFacilityType(
-        title: json['name'],
+        name: json['name'],
         ownerId: json['ownerId'],
         customerId: json['customerId'],
         operatorId: json['operatorId'],
         spvId: json['spvId'],
         address: json['address'],
-        city: json['cityId'],
-        state: json['stateId'],
-        country: json['countryId'],
+        cityId: json['cityId'],
+        stateId: json['stateId'],
+        countryId: json['countryId'],
         zipcode: json['zipcode'],
         description: json['description'],
         photoId: json['photoId'],
@@ -55,15 +55,15 @@ class CreateFacilityType {
       );
 
   Map<String, dynamic> toJson() => {
-        'name': title,
+        'name': name,
         'ownerId': ownerId,
         'customerId': customerId,
         'operatorId': operatorId,
         'spvId': spvId,
         'address': address,
-        'cityId': city,
-        'stateId': state,
-        'countryId': country,
+        'cityId': cityId,
+        'stateId': stateId,
+        'countryId': countryId,
         'zipcode': zipcode,
         'description': description,
         'photoId': photoId,

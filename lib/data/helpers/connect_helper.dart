@@ -353,9 +353,9 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getFacilityTypeList(
-      {required bool isLoading, required String auth, int? job_type_id}) async {
+      {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Facility/GetFacilityList',
+      'CMMS/GetFacilityList',
       Request.getMultiparts,
       null,
       isLoading,
@@ -3140,4 +3140,26 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+  Future<ResponseModel> deleteFacility({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/DeleteFacility?id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
 }
