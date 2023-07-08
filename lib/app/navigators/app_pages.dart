@@ -40,6 +40,7 @@ import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_binding.dart';
 import 'package:cmms/app/stock_managment_goods_list_orders.dart/view/stock_management_goods_list_orders_screen.dart';
+import 'package:cmms/app/stock_managment_goods_orders_req_details.dart/view/stock_management_goods_orders_req_details_screen.dart';
 
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
@@ -145,6 +146,7 @@ import '../state_list_screen/state_list_binding.dart';
 import '../state_list_screen/view/state_list_content_screen.dart';
 import '../stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_binding.dart';
 import '../stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_screen.dart';
+import '../stock_managment_goods_orders_req_details.dart/stock_management_goods_orders_req_details_binding.dart';
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
@@ -514,6 +516,11 @@ class AppPages {
       binding: MrsListBinding(),
     ),
 
+    GetPage<dynamic>(
+      name: _Paths.GoodsOrdersReqDetailsScreen,
+      page: StockManagementGoodsOrdersReqdetailsScreen.new,
+      binding: GoodsOrdersReqDetailBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.updateGoodsOrdersDetailsScreen,
       page: StockManagementAddGoodsOrdersScreen.new,
