@@ -3122,8 +3122,8 @@ class ConnectHelper {
       dynamic endDate,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      // 'MRS/getMRSList?plant_ID=$facilityId&emp_id=$userId&fromDate=$startDate&toDate=$endDate',
-      'MRS/getMRSList?plant_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
+      'MRS/getMRSList?facility_ID=$facilityId&emp_id=$userId&fromDate=$startDate&toDate=$endDate',
+      //  'MRS/getMRSList?facility_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
       Request.get,
       null,
       isLoading ?? false,
@@ -3135,4 +3135,19 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getEquipmentAssetsList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'MRS/GetAssetItems?facility_ID=$facilityId',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
 }

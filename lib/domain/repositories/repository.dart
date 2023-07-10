@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
@@ -4865,6 +4866,36 @@ class Repository {
     }
   }
 
+  Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getEquipmentAssetsList(
+        auth: auth,
+        isLoading: isLoading ?? false,
+        facilityId: facilityId ?? 0,
+      );
+
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<GetAssetItemsModel> _getAssetList = jsonFacilityModels
+            .map<GetAssetItemsModel>((m) =>
+                GetAssetItemsModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _getAssetList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getAssetList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
 //end
 //end
 }

@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_mrs/create_mrs_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/dropdown_web.dart';
 
 class CreateMrsContentWeb extends GetView<CreateMrsController> {
   CreateMrsContentWeb({Key? key}) : super(key: key);
@@ -182,10 +186,129 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                 Spacer(),
                                 GestureDetector(
                                     onTap: () {
-                                      //  controller.addRowItem();
+                                      controller.addRowItem();
                                     },
                                     child: Icon(Icons.exposure_plus_1)),
                               ],
+                            ),
+                          ),
+                          Column(
+                              children: []
+                                ..addAll(controller.rowItem.value.map((e) {
+                                  return Text(jsonEncode(e));
+                                }))),
+                          Text(jsonEncode(controller.dropdownMapperData)),
+                          Container(
+                            height: 300,
+                            child: ScrollableTableView(
+                              columns: [
+                                "Equipment Name",
+                                "Material Type",
+                                "Image",
+                                "Available Qty",
+                                "Requested Qty",
+                              ].map((column) {
+                                return TableViewColumn(
+                                  label: column,
+                                  minWidth: Get.width * 0.18,
+                                  //  height: Get.height / 2,
+                                );
+                              }).toList(),
+                              rows: controller.rowItem.value.map((record) {
+                                return TableViewRow(
+                                  height: 120,
+                                  cells: record.map((mapData) {
+                                    return TableViewCell(
+                                      child: (mapData['key'] == "Drop_down")
+                                          ? Column(
+                                              children: [
+                                                DropdownWebWidget(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4,
+                                                  dropdownList:
+                                                      controller.assetItemList,
+                                                  selectedValue:
+                                                      mapData["value"],
+                                                  onValueChanged:
+                                                      (list, selectedValue) {
+                                                    // print({
+                                                    //   selectedValue:
+                                                    //       selectedValue
+                                                    // });
+                                                    mapData["value"] =
+                                                        selectedValue;
+                                                    controller.dropdownMapperData[
+                                                            selectedValue] =
+                                                        list.firstWhere(
+                                                            (element) =>
+                                                                element.name ==
+                                                                selectedValue,
+                                                            orElse: null);
+                                                  },
+                                                ),
+                                                Text(
+                                                    "${controller.dropdownMapperData[mapData['value']]?.available_qty ?? ''}"),
+                                                Text(
+                                                    "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                              ],
+                                            )
+                                          : (mapData['key'] == "Requested_Qty")
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Container(
+                                                      width: (Get.width * .4),
+                                                      // padding: EdgeInsets.all(value),
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        maxLine: 1,
+                                                        textController:
+                                                            new TextEditingController(
+                                                                text: mapData[
+                                                                        "value"] ??
+                                                                    ''),
+                                                        onChanged: (txt) {
+                                                          mapData["value"] =
+                                                              txt;
+                                                        },
+                                                      )),
+                                                )
+                                              : (mapData['key'] ==
+                                                      "Available_Qty")
+                                                  ? Text(
+                                                      "${controller.dropdownMapperData[mapData['value']]?.available_qty ?? 'ffhhhjj'}")
+                                                  : (mapData['key'] ==
+                                                          "Material_Type")
+                                                      ? Text(
+                                                          "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? 'hh'}")
+                                                      : Text(
+                                                          mapData['key'] ?? ''),
+                                    );
+                                  }).toList(),
+                                );
+                              }).toList(),
                             ),
                           ),
                         ],
