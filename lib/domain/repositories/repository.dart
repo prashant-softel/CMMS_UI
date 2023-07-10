@@ -2169,14 +2169,14 @@ class Repository {
   }
 
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList(
-      String? workTypeIds,
+    String? workTypeIds,
     String? auth,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getToolsRequiredToWorkTypeList(
-        workTypeIds:workTypeIds,
+        workTypeIds: workTypeIds,
         auth: auth,
         isLoading: isLoading ?? false,
       );
@@ -4900,6 +4900,9 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
   Future<void> deleteFacility(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -4918,6 +4921,7 @@ class Repository {
       print(error.toString());
     }
   }
-//end
-//end
 }
+//end
+//end
+
