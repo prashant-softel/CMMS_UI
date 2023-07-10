@@ -2555,6 +2555,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel>
+  createSPV({
+    required String auth,
+    bool? isLoading,
+    required businesslistJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'CMMS/CreateSPV', //AddBusiness
+      Request.post,
+      businesslistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> saveNotification({
     required String auth,
     saveNotificationJsonString,
@@ -2775,6 +2798,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteSPV({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteSPV?id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -2782,6 +2825,45 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CMMS/UpdateBusiness',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateSPV({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateSPV',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> updateFacilityList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/UpdateFacility',
       Request.patch,
       modulelistJsonString,
       isLoading ?? false,

@@ -97,14 +97,14 @@ class FacilityTypeListPresenter {
         business_id: business_id ?? 0,
         isLoading: isLoading,
       );
-  // Future<bool> updateBusinesslist(
-  //     {modulelistJsonString, required bool isLoading, moduleId}) async {
-  //   print("presenter");
-  //   businessUsecase.updateBusinesslist(
-  //     modulelistJsonString: modulelistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> updateFacilityList(
+      {modulelistJsonString, required bool isLoading}) async {
+    print("presenter");
+    facilityTypeListUsecase.updateFacilityList(
+      modulelistJsonString: modulelistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 
 }

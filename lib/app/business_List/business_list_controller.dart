@@ -104,9 +104,8 @@ class BusinessListController extends GetxController {
     // getCityList();
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-        getBusinessList(type, true);
-      });
+      // Future.delayed(Duration(seconds: 2), () {
+      // });
     });
     super.onInit();
   }
@@ -124,13 +123,25 @@ class BusinessListController extends GetxController {
   }
 
   Future<void> getBusinessTypeList() async {
-    final list = await businessListPresenter.getBusinessTypeList();
+    // if(isSelectedBusinessType == true ){
+    //   businessCategoryList.value = <BusinessTypeModel>[];
+    // }else{
+    print("$selectedBusinessTypeId");
+      final list = await businessListPresenter.getBusinessTypeList();
 
-    if (list != null) {
-      for (var _equipmentCategoryList in list) {
-        businessCategoryList.add(_equipmentCategoryList);
+      if (list != null) {
+        for (var _equipmentCategoryList in list) {
+          businessCategoryList.add(_equipmentCategoryList);
+        }
       }
-    }
+      // if(selectedBusinessType.value != '') {
+      //   print("$selectedBusinessTypeId");
+      //
+      //   getBusinessList(selectedBusinessTypeId, true);
+      // }
+    print("$selectedBusinessTypeId");
+    // }
+
   }
 
 
@@ -197,6 +208,7 @@ class BusinessListController extends GetxController {
           businessCategoryList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = businessCategoryList[equipmentIndex]?.id ?? 0;
           selectedBusinessType.value = value;
+          getBusinessList(selectedBusinessTypeId, true);
         }
 
         break;
@@ -267,30 +279,31 @@ class BusinessListController extends GetxController {
     return selectedBusinessType.value;
   }
 
-  Future<void> getBusinessList(
-      int type , bool isLoading)
+  Future<void> getBusinessList(int type , bool isLoading)
   async {
-    moduleList?.value = <BusinessListModel>[];
-    final _moduleList =
-        await businessListPresenter.getBusinessList(
-            businessType: type, isLoading: isLoading);
+      moduleList?.value = <BusinessListModel>[];
+      final _moduleList =
+      await businessListPresenter.getBusinessList(
+          businessType: type, isLoading: isLoading);
 
-    if (_moduleList != null) {
-      moduleList!.value = _moduleList;
-      filteredData.value = moduleList!.value;
-      paginationController = PaginationController(
-        rowCount: moduleList?.length ?? 0,
-        rowsPerPage: 10,
-      );
+      if (_moduleList != null) {
+        moduleList!.value = _moduleList;
+        filteredData.value = moduleList!.value;
+        paginationController = PaginationController(
+          rowCount: moduleList?.length ?? 0,
+          rowsPerPage: 10,
+        );
 
-      if (filteredData != null && filteredData!.isNotEmpty) {
-        moduleListModel = filteredData![0];
-        var preventiveCheckListJson = moduleListModel?.toJson();
-        moduleListTableColumns.value = <String>[];
-        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          moduleListTableColumns.add(key);
-        }
-      }
+        if (filteredData != null && filteredData!.isNotEmpty) {
+          moduleListModel = filteredData![0];
+          var preventiveCheckListJson = moduleListModel?.toJson();
+          moduleListTableColumns.value = <String>[];
+          for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+            moduleListTableColumns.add(key);
+          }
+        // }
+    }
+
     }
   }
 
@@ -355,7 +368,7 @@ class BusinessListController extends GetxController {
       );
       return true;
     }
-    getBusinessList(type, true);
+    getBusinessList(selectedBusinessTypeId, true);
     return true;
   }
 
@@ -381,7 +394,7 @@ class BusinessListController extends GetxController {
     selectedState.value = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(type, true);
+      getBusinessList(selectedBusinessTypeId, true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -429,7 +442,7 @@ class BusinessListController extends GetxController {
                 onPressed: () {
                   deleteBusiness(business_id).then((value) {
                     Get.back();
-                    getBusinessList(type, true);
+                    getBusinessList(selectedBusinessTypeId, true);
                   });
                 },
                 child: Text('YES'),
