@@ -7,6 +7,7 @@ import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
+import 'SPV_list_content_mobile.dart';
 
 class SPVListScreen extends GetView<SPVListController> {
   SPVListScreen({super.key});
@@ -38,11 +39,11 @@ class SPVListScreen extends GetView<SPVListController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
+                    if (Responsive.isMobile(context) ||
+                        Responsive.isTablet(context))
+                      Expanded(
+                        child: SPVListContentMobile(),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: SPVListContentWeb(),

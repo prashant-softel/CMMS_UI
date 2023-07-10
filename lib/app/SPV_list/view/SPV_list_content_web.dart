@@ -56,7 +56,12 @@ class SPVListContentWeb extends GetView<SPVListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / FACILITY LIST", style: Styles.greyMediumLight12)
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Text(" / SPV LIST ", style: Styles.greyMediumLight12),
+              ),
                 ],
               ),
             ),
@@ -90,7 +95,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Add Facility",
+                                          "SPV LIST",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -191,7 +196,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 1)
+                              .where((e) => e.feature_id == 5 && e.view == 0)
                               .length >
                           0
                       ? Expanded(
@@ -211,7 +216,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "List of Facilities",
+                                      "List of SPV",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -269,57 +274,48 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  // controller.preventiveCheckList!.isEmpty
-                                  //     ? Expanded(
-                                  //         child: ScrollableTableView(
-                                  //           columns: [
-                                  //             "Checklist Number ",
-                                  //             "Active Status ",
-                                  //             "Category ",
-                                  //             "Frequency ",
-                                  //             "PM Manpower",
-                                  //             "PM Duration(in Min.)",
-                                  //             "Action",
-                                  //           ].map((column) {
-                                  //             return TableViewColumn(
-                                  //               label: column,
-                                  //               minWidth: Get.width * 0.16,
-                                  //             );
-                                  //           }).toList(),
-                                  //           rows: [
-                                  //             ...List.generate(
-                                  //               controller.preventiveCheckList
-                                  //                       ?.length ??
-                                  //                   0,
-                                  //               (index) {
-                                  //                 return [
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                 ];
-                                  //               },
-                                  //             ),
-                                  //           ].map((record) {
-                                  //             return TableViewRow(
-                                  //               height: 60,
-                                  //               cells: record.map((value) {
-                                  //                 return TableViewCell(
-                                  //                   child: Text(value),
-                                  //                 );
-                                  //               }).toList(),
-                                  //             );
-                                  //           }).toList(),
-                                  //         ),
-                                  //       )
-                                  //     :
+                                  controller.SPVList.isEmpty
+                                      ? Expanded(
+                                          child: ScrollableTableView(
+                                            columns: [
+                                              "Id ",
+                                              "Name",
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                label: column,
+                                                minWidth: Get.width * 0.16,
+                                              );
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller.SPVList.length ??
+                                                    0,
+                                                (index) {
+                                                  return [
+                                                    '',
+                                                    '',
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((record) {
+                                              return TableViewRow(
+                                                height: 60,
+                                                cells: record.map((value) {
+                                                  return TableViewCell(
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      :
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
                                           .SPVListPaginationController,
-                                      columns: ["Sr.No.", "Title", "Action"]
+                                      columns: [
+                                        "Id ", "Name"]
                                           .map((column) {
                                         return TableViewColumn(
                                           minWidth: Get.width * 0.12,
@@ -336,7 +332,6 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             return [
                                               '${SPVListDetails.id}',
                                               '${SPVListDetails.name}',
-                                              "Action"
                                             ];
                                           },
                                         ),

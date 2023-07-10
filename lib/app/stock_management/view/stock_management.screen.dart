@@ -143,6 +143,29 @@ class StockManagementDashboardScreen
                           // }
                         ),
                         _stockManagementList(tittle: "Plant Stock"),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "Masters",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 159, 156, 156),
+                            fontSize: 24,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
                         _stockManagementList(
                             tittle: "Asset Master",
                             ontap: () {

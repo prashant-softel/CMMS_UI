@@ -3,7 +3,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/job_card_details_model.dart';
 import '../../domain/models/permit_details_model.dart';
-import '../../domain/usecases/job_card_usecase.dart';
+import '../../domain/usecases/job_card_details_usecase.dart';
 
 class JobCardDetailsPresenter {
   JobCardDetailsPresenter(this.jobCardDetailsUsecase);

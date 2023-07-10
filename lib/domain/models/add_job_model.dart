@@ -9,7 +9,8 @@ AddJobModel addJobModelFromJson(String str) =>
 
 String addJobModelToJson(AddJobModel data) => json.encode(data.toJson());
 
-class AddJobModel {
+class
+AddJobModel {
   AddJobModel({
     this.id,
     required this.facilityId,

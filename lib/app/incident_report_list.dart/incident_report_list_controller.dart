@@ -9,6 +9,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -215,6 +216,14 @@ class IncidentReportListController extends GetxController {
   //   rowCount: 0,
   //   rowsPerPage: 10,
   // );
+
+  //From and To date format
+   Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -233,8 +242,8 @@ class IncidentReportListController extends GetxController {
     // print('WC_Id:$wc_id');
      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-      getIncidentReportList();
+      Future.delayed(Duration(seconds: 2), () {
+      getIncidentReportList(facilityId, formattedTodate, formattedFromdate, false);
     });
     });
 
@@ -524,13 +533,14 @@ class IncidentReportListController extends GetxController {
   //   update(['employee_list']);
   // }
 
-  void getIncidentReportList() async {
+  void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
+      bool isLoading) async {
     incidentReportModelList.value = <IncidentReportListModel>[];
 
     final list = await incidentReportPresenter.getIncidentReportList(
-        isLoading: true, 
-        start_date: '2020-01-01',
-        end_date: '2023-12-31',
+        isLoading: isLoading, 
+        start_date: startDate,
+        end_date: endDate,
         facility_id: facilityId
         );
         print('incidentReportFacilityId$facilityId');
@@ -1009,13 +1019,17 @@ class IncidentReportListController extends GetxController {
   //   }
   // }
 
-  Future<void> viewWarrantyClaim({int? wc_id}) async {
-    Get.toNamed(Routes.viewWarrantyClaim, arguments: wc_id);
-    print('Argument$wc_id');
+  void getIncidentReportListByDate() {
+    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
   }
 
-  Future<void> editWarrantyClaim({int? wc_id}) async {
-    Get.toNamed(Routes.editWarrantyClaimContentWeb, arguments: wc_id);
-    print('EditArgument$wc_id');
+  Future<void> viewIncidentReport({int? id}) async {
+    Get.toNamed(Routes.viewIncidentReportScreen, arguments: id);
+    print('Argument$id');
   }
+
+  // Future<void> editWarrantyClaim({int? wc_id}) async {
+  //   Get.toNamed(Routes.editWarrantyClaimContentWeb, arguments: wc_id);
+  //   print('EditArgument$wc_id');
+  // }
 }

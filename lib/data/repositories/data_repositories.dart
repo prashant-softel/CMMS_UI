@@ -297,7 +297,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getFacilityTypeList(
       isLoading: isLoading,
       auth: auth,
-      job_type_id: job_type_id,
+      // job_type_id: job_type_id,
       // businessType: businessType,
       // blockId: blockId,
       // categoryIds: categoryIds,
@@ -356,6 +356,8 @@ class DataRepository extends DomainRepository {
     int? blockId,
     required String categoryIds,
     required bool isLoading,
+    String? start_date,
+    required String end_date,
     required String auth,
   }) async {
     return await connectHelper.getWarrantyClaimList(
@@ -364,6 +366,8 @@ class DataRepository extends DomainRepository {
       facilityId: facilityId,
       blockId: blockId,
       categoryIds: categoryIds,
+      start_date: start_date,
+      end_date: end_date,
     );
   }
 
@@ -1819,6 +1823,17 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
+
+  Future<ResponseModel> deleteFacility({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteFacility(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
 
   Future<ResponseModel> updateBusinesslist({
     auth,

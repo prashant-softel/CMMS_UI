@@ -38,8 +38,9 @@ import 'package:cmms/app/role_access/view/role_access_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
-import 'package:cmms/app/stock_managment_goods_orders.dart/stock_management_goods_orders_binding.dart';
-import 'package:cmms/app/stock_managment_goods_orders.dart/view/stock_management_goods_orders_screen.dart';
+import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_binding.dart';
+import 'package:cmms/app/stock_managment_goods_list_orders.dart/view/stock_management_goods_list_orders_screen.dart';
+import 'package:cmms/app/stock_managment_goods_orders_req_details.dart/view/stock_management_goods_orders_req_details_screen.dart';
 
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_binding.dart';
 import 'package:cmms/app/tbt_list_sop/view/tbt_list_sop_screen.dart';
@@ -115,6 +116,8 @@ import '../inventory_status_list/inventory_status_list_binding.dart';
 import '../inventory_status_list/view/inventory_status_list.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
+import '../job_card_list/views/job_card_list_screen.dart';
+import '../job_card_list/job_card_binding.dart';
 import '../job_details/job_details_binding.dart';
 import '../job_details/views/job_details_screen.dart';
 import '../job_list/job_list_binding.dart';
@@ -143,9 +146,12 @@ import '../state_list_screen/state_list_binding.dart';
 import '../state_list_screen/view/state_list_content_screen.dart';
 import '../stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_binding.dart';
 import '../stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_screen.dart';
+import '../stock_managment_goods_orders_req_details.dart/stock_management_goods_orders_req_details_binding.dart';
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
+import '../view_incident_report.dart/view_incident_report_binding.dart';
+import '../view_incident_report.dart/view_incident_report_screen.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
@@ -511,6 +517,11 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
+      name: _Paths.GoodsOrdersReqDetailsScreen,
+      page: StockManagementGoodsOrdersReqdetailsScreen.new,
+      binding: GoodsOrdersReqDetailBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.updateGoodsOrdersDetailsScreen,
       page: StockManagementAddGoodsOrdersScreen.new,
       binding: StockManagementAddGoodsOrdersBinding(),
@@ -520,7 +531,11 @@ class AppPages {
       page: AssetMasterScreen.new,
       binding: AssetMasterBinding(),
     ),
-
+    GetPage<dynamic>(
+      name: _Paths.goToJobCardList,
+      page: JobCardScreen.new,
+      binding: JobCardBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.addassetMaster,
       page: AddAssetMasterScreen.new,
@@ -577,6 +592,11 @@ class AppPages {
       name: _Paths.competencyScreen,
       page: CompetencyListScreen.new,
       binding: CompetencyListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewIncidentReportScreen,
+      page: ViewIncidentReportScreen.new,
+      binding: ViewIncidentReportBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.createMrs,

@@ -502,7 +502,7 @@ class NewPermitController extends GetxController {
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
-  //  void removeRow(selectedEmployeeNameIds) {
+  //  void removeRow({selectedEmployeeNameIds}) {
   //   selectedEmployeeNameIdList.value = <int>[];
   //   filteredEmployeeNameList.value = <EmployeeListModel>[];
   //   late int emp_id = 0;
@@ -518,7 +518,7 @@ class NewPermitController extends GetxController {
   // }
 
   void removeRow({required int id}) {
-    employeeNameList.removeWhere((element)  => element?.id == id);
+    employeeNameList.removeWhere((element) => element?.id == id);
   }
 
   void permitIssuerSelected(_selectedEmployeeNameIds) {

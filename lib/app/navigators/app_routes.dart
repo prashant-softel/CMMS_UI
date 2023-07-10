@@ -34,6 +34,7 @@ abstract class Routes {
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
   static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
   static const warrantyClaimListWeb = _Paths.warrantyClaimListWeb;
+  static const goToJobCardList = _Paths.goToJobCardList;
 
   static const calibrationDetail = _Paths.calibrationDetail;
   static const pmSchedule = _Paths.pmSchedule;
@@ -65,6 +66,7 @@ abstract class Routes {
   static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
   static const addInventoryScreen = _Paths.addInventoryScreen;
   static const viewAddInventoryScreen = _Paths.viewAddInventoryScreen;
+  static const viewIncidentReportScreen = _Paths.viewIncidentReportScreen;
 
   static const bloodTypeListScreen = _Paths.bloodTypeListScreen;
   static const countryTypeListScreen = _Paths.countryTypeListScreen;
@@ -79,7 +81,7 @@ abstract class Routes {
 
   static const updateGoodsOrdersDetailsScreen =
       _Paths.updateGoodsOrdersDetailsScreen;
-
+  static const GoodsOrdersReqDetailsScreen = _Paths.GoodsOrdersReqDetailsScreen;
   static const assetMasterList = _Paths.assetMasterList;
   static const addassetMaster = _Paths.addassetMaster;
   static const incidentReportListWeb = _Paths.incidentReportListWeb;
@@ -124,6 +126,7 @@ abstract class _Paths {
   static const newPermitList = '/permit-list';
   static const warrantyClaimList = '/warranty-claim-list';
   static const warrantyClaimListWeb = '/warranty-claim-list-web';
+  static const goToJobCardList = '/job-card-list';
 
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
@@ -170,6 +173,8 @@ abstract class _Paths {
   static const mrsListScreen = '/mrs-list-screen';
   static const updateGoodsOrdersDetailsScreen =
       '/update-goods-orders-details-screen';
+  static const GoodsOrdersReqDetailsScreen = '/goods-orders-req-details-screen';
+
   static const assetMasterList = '/asset-Master-List';
   static const addassetMaster = '/add-asset-Master';
   static const incidentReportListWeb = '/incident-report-list';
@@ -183,6 +188,7 @@ abstract class _Paths {
   static const designationScreen = '/designation-Screen';
   static const competencyScreen = '/competency-Screen';
   static const roleAccess = '/role-access';
+  static const viewIncidentReportScreen = '/view-incident-report-screen';
   static const createMrs = '/Create-mrs';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';

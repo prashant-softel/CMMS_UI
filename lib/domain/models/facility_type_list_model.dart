@@ -19,7 +19,7 @@ class FacilityTypeListModel {
     this.city,
     this.state,
     this.country,
-    this.blocks,
+    // this.blocks,
     this.pin,
   });
 
@@ -29,7 +29,7 @@ class FacilityTypeListModel {
   String? city;
   String? state;
   String? country;
-  int? blocks;
+  // int? blocks;
   int? pin;
 
   factory FacilityTypeListModel.fromJson(Map<String, dynamic> json) =>
@@ -40,7 +40,7 @@ class FacilityTypeListModel {
         city: json['city'],
         state: json['state'],
         country: json['country'],
-        blocks: json['blocks'],
+        // blocks: json['blocks'],
         pin: json['pin'],
       );
 
@@ -51,7 +51,7 @@ class FacilityTypeListModel {
         "city": city,
         "state": state,
         "country": country,
-        "blocks": blocks,
+        // "blocks": blocks,
         "pin": pin,
       };
 }

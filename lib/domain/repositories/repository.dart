@@ -1221,7 +1221,7 @@ class Repository {
   }
 
   Future<List<FacilityTypeListModel>> getFacilityTypeList({
-    required int? job_type_id,
+    // required int? job_type_id,
     required bool isLoading,
   }) async {
     try {
@@ -1229,7 +1229,7 @@ class Repository {
 
       log(auth);
       final res = await _dataRepository.getFacilityTypeList(
-        job_type_id: job_type_id,
+        // job_type_id: job_type_id,
         isLoading: isLoading,
         auth: auth,
       );
@@ -1327,6 +1327,8 @@ class Repository {
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
     int? blockId,
+    String? start_date,
+    required String end_date,
     required String categoryIds,
     required bool isLoading,
   }) async {
@@ -1338,6 +1340,8 @@ class Repository {
         facilityId: facilityId,
         blockId: blockId,
         categoryIds: categoryIds,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading,
         auth: auth,
       );
@@ -2165,12 +2169,14 @@ class Repository {
   }
 
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList(
+      String? workTypeIds,
     String? auth,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getToolsRequiredToWorkTypeList(
+        workTypeIds:workTypeIds,
         auth: auth,
         isLoading: isLoading ?? false,
       );
@@ -4894,6 +4900,22 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+  Future<void> deleteFacility(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteFacility(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
 //end

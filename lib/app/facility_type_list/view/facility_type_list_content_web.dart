@@ -557,19 +557,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .countryList,
                                                       isValueSelected:
                                                           controller
-                                                              .isSelectedCountry
+                                                              .isSelectedCountryType
                                                               .value,
                                                       selectedValue: controller
                                                           .selectedCountry
                                                           .value,
                                                       onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
                                                         controller
-                                                            .onValueChangedCountry(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                      },
+                                                            .onValueChanged
                                                     ),
                                                   ),
                                                 ),
@@ -623,18 +618,13 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           controller.stateList,
                                                       isValueSelected:
                                                           controller
-                                                              .isSelectedState
+                                                              .isSelectedStateType
                                                               .value,
                                                       selectedValue: controller
                                                           .selectedState.value,
-                                                      onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
+                                                      onValueChanged :
                                                         controller
-                                                            .onValueChangedState(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                      },
+                                                            .onValueChanged
                                                     ),
                                                   ),
                                                 ),
@@ -693,21 +683,16 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       dropdownList:
                                                           controller.cityList,
                                                       isValueSelected:
-                                                          controller
-                                                              .isSelectedCity
+                                                          controller.isSelectedCityType
                                                               .value,
                                                       selectedValue: controller
                                                           .selectedCity.value,
                                                       // onValueChanged:
                                                       //     controller.onValueChanged(46, 46),
                                                       onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
                                                         controller
-                                                            .onValueChangedCity(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                      },
+                                                            .onValueChanged
+                                                      // },
                                                     ),
                                                   ),
                                                 ),
@@ -960,52 +945,58 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  // controller.preventiveCheckList!.isEmpty
-                                  //     ? Expanded(
-                                  //         child: ScrollableTableView(
-                                  //           columns: [
-                                  //             "Checklist Number ",
-                                  //             "Active Status ",
-                                  //             "Category ",
-                                  //             "Frequency ",
-                                  //             "PM Manpower",
-                                  //             "PM Duration(in Min.)",
-                                  //             "Action",
-                                  //           ].map((column) {
-                                  //             return TableViewColumn(
-                                  //               label: column,
-                                  //               minWidth: Get.width * 0.16,
-                                  //             );
-                                  //           }).toList(),
-                                  //           rows: [
-                                  //             ...List.generate(
-                                  //               controller.preventiveCheckList
-                                  //                       ?.length ??
-                                  //                   0,
-                                  //               (index) {
-                                  //                 return [
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                 ];
-                                  //               },
-                                  //             ),
-                                  //           ].map((record) {
-                                  //             return TableViewRow(
-                                  //               height: 60,
-                                  //               cells: record.map((value) {
-                                  //                 return TableViewCell(
-                                  //                   child: Text(value),
-                                  //                 );
-                                  //               }).toList(),
-                                  //             );
-                                  //           }).toList(),
-                                  //         ),
-                                  //       )
-                                  //     :
+                                  controller.facilityTypeList!.isEmpty
+                                      ? Expanded(
+                                          child: ScrollableTableView(
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "Address",
+                                              "City",
+                                              "State",
+                                              "Country",
+                                              "Pin",
+                                              "Blocks",
+                                              "Action"
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                label: column,
+                                                minWidth: Get.width * 0.16,
+                                              );
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller.facilityTypeList
+                                                        ?.length ??
+                                                    0,
+                                                (index) {
+                                                  return [
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    ''
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((record) {
+                                              return TableViewRow(
+                                                height: 60,
+                                                cells: record.map((value) {
+                                                  return TableViewCell(
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      :
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
@@ -1018,13 +1009,20 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         "State",
                                         "Country",
                                         "Pin",
-                                        "Blocks",
+                                        // "Blocks",
                                         "Action"
                                       ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
+                                        if (column == "Action") {
+                                          return TableViewColumn(
+                                            minWidth: Get.width * 0.20, // Adjust the width as needed
+                                            label: column,
+                                          );
+                                        } else {
+                                          return TableViewColumn(
+                                            minWidth: Get.width * 0.13,
+                                            label: column,
+                                          );
+                                        }
                                       }).toList(),
                                       rows: //
                                           [
@@ -1041,8 +1039,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               '${facilityTypeListDetails.city}',
                                               '${facilityTypeListDetails.state}',
                                               '${facilityTypeListDetails.country}',
-                                              '${facilityTypeListDetails.blocks}',
                                               '${facilityTypeListDetails.pin}',
+                                              // '${facilityTypeListDetails.blocks}',
                                               "Action"
                                             ];
                                           },
@@ -1069,22 +1067,22 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                             10),
                                                                 child: Column(
                                                                   children: [
-                                                                    TableActionButton(
-                                                                      color: ColorValues
-                                                                          .appLightBlueColor,
-                                                                      icon: Icons
-                                                                          .visibility,
-                                                                      label:
-                                                                          'View Blocks',
-                                                                      onPress:
-                                                                          () {},
-                                                                    ),
                                                                     Container(
                                                                       padding: EdgeInsets.only(
                                                                           bottom:
                                                                               10),
                                                                       child: Row(
                                                                           children: [
+                                                                            TableActionButton(
+                                                                              color: ColorValues
+                                                                                  .appLightBlueColor,
+                                                                              icon: Icons
+                                                                                  .visibility,
+                                                                              label:
+                                                                              'View Blocks',
+                                                                              onPress:
+                                                                                  () {},
+                                                                            ),
                                                                             TableActionButton(
                                                                               color: ColorValues.appLightBlueColor,
                                                                               icon: Icons.edit,
@@ -1113,8 +1111,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                               icon: Icons.delete,
                                                                               label: 'Delete',
                                                                               onPress: () {
-                                                                                controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                // controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
                                                                               },
+
                                                                             ),
                                                                           ]),
                                                                     ),

@@ -25,12 +25,12 @@ class PermitTypeMobile
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.typePermitList != null
-                        ? controller.typePermitList?.length
+                        ? controller.typePermitList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final preventiveCheckListModel =
                           (controller.typePermitList != null)
-                              ? controller.typePermitList![index]
+                              ? controller.typePermitList[index]
                               : TypePermitModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),

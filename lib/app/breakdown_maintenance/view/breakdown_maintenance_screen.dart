@@ -121,7 +121,7 @@ class BreakdownMaintenanceScreen
                       padding: Dimens.edgeInsets15,
                       crossAxisSpacing: 6,
                       mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 2,
+                      crossAxisCount: Responsive.isMobile(context) ? 3 : 3,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
@@ -147,6 +147,35 @@ class BreakdownMaintenanceScreen
                               controller.createNewPermit();
                             }),
                         createContentTile(
+                            title: "JobCard List",
+                            onTap: () {
+                              controller.goToJobCardList();
+                            }),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "MASTERS",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 159, 156, 156),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: Dimens.edgeInsets15,
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 3 : 3,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        createContentTile(
                             title: "Permit Type",
                             onTap: () {
                               controller.goToPermitTypeScreen();
@@ -166,13 +195,8 @@ class BreakdownMaintenanceScreen
                             onTap: () {
                               controller.goToJobSOPList();
                             }),
-                        createContentTile(
-                            title: "JobCard List",
-                            onTap: () {
-                              controller.goToJobTypeList();
-                            }),
                       ],
-                    )
+                    ),
                   ]),
             ),
           ],

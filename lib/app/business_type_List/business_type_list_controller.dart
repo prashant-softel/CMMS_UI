@@ -32,6 +32,7 @@ class BusinessTypeListController extends GetxController {
     rowsPerPage: 10,
   );
   BusinessTypeModel? businessTypeListModel;
+  RxList<BusinessTypeModel?> filteredData = <BusinessTypeModel?>[].obs;
 
   RxList<String> businessTypeListTableColumns = <String>[].obs;
   Rx<String> selectedfrequency = ''.obs;
@@ -53,6 +54,19 @@ class BusinessTypeListController extends GetxController {
     super.onInit();
   }
 
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      businessTypeList!.value = filteredData;
+      return;
+    }
+
+
+    businessTypeList!.value = filteredData
+        .where((item) =>
+        item!.name!.toString().contains(keyword))
+        .toList();
+  }
+
   Future<void> getBusinessTypeList(
       int facilityId, int type, bool isLoading) async {
     businessTypeList?.value = <BusinessTypeModel>[];
@@ -61,14 +75,15 @@ class BusinessTypeListController extends GetxController {
         businessType: facilityId,  isLoading: isLoading);
 
     if (_businessTypeList != null) {
-        businessTypeList!.value = _businessTypeList;
+      businessTypeList!.value = _businessTypeList;
+      filteredData!.value = _businessTypeList;
       paginationController = PaginationController(
         rowCount: businessTypeList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (businessTypeList != null && businessTypeList!.isNotEmpty) {
-        businessTypeListModel = businessTypeList![0];
+      if (filteredData != null && filteredData!.isNotEmpty) {
+        businessTypeListModel = filteredData![0];
         var preventiveCheckListJson = businessTypeListModel?.toJson();
         businessTypeListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
