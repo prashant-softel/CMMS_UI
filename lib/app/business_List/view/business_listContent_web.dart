@@ -71,6 +71,13 @@ class BusinessListContentWeb
                     onTap: () {
                       Get.back();
                     },
+                    child: Text(" /  MASTERS",
+                        style: Styles.greyMediumLight12),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
                     child: Text(" / BUSINESS LIST",
                         style: Styles.greyMediumLight12),
                   ),
@@ -822,7 +829,7 @@ class BusinessListContentWeb
                                   "Country",
                                   "Zip",
                                   "Type",
-                                  "Status",
+                                  // "Status",
                                   "Action"
                                 ].map((column) {
                                   return TableViewColumn(
@@ -885,7 +892,7 @@ class BusinessListContentWeb
                                   "Country",
                                   "Zip",
                                   "Type",
-                                  "Status",
+                                  // "Status",
                                   // "Added At"
                                   "Action"
 
@@ -920,7 +927,7 @@ class BusinessListContentWeb
                                         '${moduleListDetails?.country}',
                                         '${moduleListDetails?.zip}',
                                         '${moduleListDetails?.type}',
-                                        '${moduleListDetails?.status}',
+                                        // '${moduleListDetails?.status}',
 
                                         "Action",
                                       ];

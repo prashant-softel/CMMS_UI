@@ -4,12 +4,12 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/SPV_list/SPV_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/SPV_list_model.dart';
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
+import '../../domain/models/createSPVModel.dart';
 
 class SPVListController extends GetxController {
   SPVListController(
@@ -17,13 +17,14 @@ class SPVListController extends GetxController {
   );
   SPVListPresenter sPVListPresenter;
   final HomeController homecontroller = Get.find();
+  SPVListModel? selectedItem;
+  SPVListModel? selectedItemupdate;
 
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
-
   //checkbox
   RxBool isChecked = true.obs;
 
@@ -55,11 +56,22 @@ class SPVListController extends GetxController {
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
   int selectedSOPId = 0;
   int selectedJobSOPId = 0;
+  RxList<SPVListModel> filteredData = <SPVListModel>[].obs;
 
   PaginationController SPVListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      SPVList.value = filteredData;
+      return;
+    }
+
+    SPVList.value = filteredData.where((item) =>
+        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   //Facility list / demo plant
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -67,6 +79,8 @@ class SPVListController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
+  var titleCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
 
   @override
   void onInit() async {
@@ -106,36 +120,30 @@ class SPVListController extends GetxController {
     update(['SPV_list']);
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          // int equipmentIndex =
-          //     equipmentCategoryList.indexWhere((x) => x?.name == value);
-          // selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
+  Future<bool> createSPVlist() async {
+    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
+      // Fluttertoast.showToast(
+      //     msg: "Please enter required field", fontSize: 16.0);
+      print("Fields are blank, please enter dat ato create");
+    } else {
+      String _title = titleCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          // int frequencyIndex =
-          // frequencyList.indexWhere((x) => x?.name == value);
-          // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
-      case RxList<FacilityModel>:
-        {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+      CreateSPVModel createCheckpoint = CreateSPVModel(
+        name: _title,
+        description: _description
+      );
+      print("OUT ");
+      var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
+      print({"checkpointJsonString", facilitylistJsonString});
+      await sPVListPresenter.createSPVlist(
+        facilitylistJsonString: facilitylistJsonString,
+        isLoading: true,
+      );
+      return true;
     }
+    return true;
   }
 
   Future<void> issuccessCreatechecklist() async {
@@ -144,18 +152,105 @@ class SPVListController extends GetxController {
   }
 
   _cleardata() {
-    // checklistNumberCtrlr.text = '';
-    // durationCtrlr.text = '';
-    // manpowerCtrlr.text = '';
+    titleCtrlr.text = '';
+    descriptionCtrlr.text = '';
+    // selectedStateId = 0;
+    // selectedCountryId = 0;
+    // selectedCityId = 0;
+    // ownerId = 0;
+    selectedItem = null;
+    // customerId = 0;
+    // operatorId = 0;
+    // SpvId = 0;
 
-    // selectedequipment.value = '';
-
-    // selectedfrequency.value = '';
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getPreventiveCheckList(facilityId, type, true);
-    // });
-    // Future.delayed(Duration(seconds: 5), () {
-    //   isSuccess.value = false;
-    // });
+    Future.delayed(Duration(seconds: 1), () {
+      getSPVList();
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
   }
+
+
+  Future<bool> updateSPV(checklistId) async {
+    String _name = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+
+    SPVListModel createChecklist = SPVListModel(
+      id: checklistId,
+      name : _name,
+      description: _description,
+    );
+    var businessTypeJsonString =
+    createChecklist.toJson();
+
+    print({"businessTypeJsonString", businessTypeJsonString});
+    await sPVListPresenter.updateSPV(
+      modulelistJsonString: businessTypeJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
+
+  void isDeleteDialog({
+    String? business_id ,
+    String? business
+  }) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the SPV ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: business,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteSPV(business_id).then((value) {
+                    Get.back();
+                    getSPVList();
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+  Future<void> deleteSPV(String? business_id) async {
+    {
+      await sPVListPresenter.deleteFacility(
+        business_id,
+        isLoading: true,
+      );
+    }
+  }
+
 }

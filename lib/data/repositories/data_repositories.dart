@@ -1671,6 +1671,21 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+
+  Future<ResponseModel> createSPVlist({
+    auth,
+    bool? isLoading,
+    businesslistJsonString,
+  }) async {
+    var response = await connectHelper.createSPV(
+        auth: auth,
+        isLoading: isLoading,
+        businesslistJsonString: businesslistJsonString);
+    return response;
+  }
+
+
+
   Future<ResponseModel> getBusinessTypeList({
     int? businessType,
     required bool isLoading,
@@ -1824,6 +1839,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+
+  Future<ResponseModel> deleteSPV({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteSPV(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
+
+
   Future<ResponseModel> deleteFacility({
     auth,
     bool? isLoading,
@@ -1847,6 +1875,32 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+  Future<ResponseModel> updateSPV({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateSPV(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+  Future<ResponseModel> updateFacilityList({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateFacilityList(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
 
   Future<ResponseModel> getCompetencyList({
     required String auth,
