@@ -2046,5 +2046,17 @@ class DataRepository extends DomainRepository {
           startDate: startDate,
           endDate: endDate,
           userId: userId);
+  Future<ResponseModel> getEquipmentAssetsList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    return await connectHelper.getEquipmentAssetsList(
+      auth: auth,
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
 //end
 }
