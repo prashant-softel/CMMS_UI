@@ -3,9 +3,7 @@ import 'dart:ui';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_presenter.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
@@ -16,7 +14,6 @@ import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -155,60 +152,7 @@ class ViewWarrantyClaimController extends GetxController {
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
-  // RxList<MenuItem> menuItems = [
-  //   MenuItem(
-  //     title: "DashBoard",
-  //     icon: "assets/files/home.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Inventory",
-  //     icon: "assets/files/warranty.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Breakdown Maintenance",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Warranty claim",
-  //     icon: "assets/files/warranty.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Preventive Maintenance",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Corrective Maintenance",
-  //     icon: "assets/files/maint.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Module Cleaning",
-  //     icon: "assets/files/maintenance.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Vegetation Control",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Incident Report",
-  //     icon: "assets/files/reportins.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Calibration",
-  //     icon: "assets/files/preventive.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Misc",
-  //     icon: "assets/files/misc.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Settings",
-  //     icon: "assets/files/setting.png",
-  //   ),
-  //   MenuItem(
-  //     title: "Log Out",
-  //     icon: "assets/files/dashboard.png",
-  //   ),
-  // ].obs;
+ 
 
   ///
 int? wc_id = 0;
@@ -230,21 +174,7 @@ int? wc_id = 0;
     });
 
    }
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getWarrantyClaimList();
-    // });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getInventoryCategoryList();
-    // });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getBusinessList();
-    // });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getUnitCurrencyList();
-    // });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getEmployeeList();
-    // });
+   
     super.onInit();
   }
 
@@ -302,17 +232,7 @@ int? wc_id = 0;
       approverNametextController.text = viewWarrantyClaimDetailsModel.value?.approver_name ?? '';
       externalEmailsList?.value = viewWarrantyClaimDetailsModel.value?.externalEmails ?? [];
       supplierActionsList?.value = viewWarrantyClaimDetailsModel.value?.supplierActions ?? [];
-      // // permitDescriptionCtrlr.text = newPermitDetailsModel.value?.description ?? '';
-      // startDateTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';
-      // validTillTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';;
-      // // selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
-      // // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
-      // // // selectedJobTypeList.value = newPermitDetailsModel.value.
-      // // selectedPermitIssuerLists.value = newPermitDetailsModel.value?.issuedByName ?? '';
-      // // selectedPermitApproverLists.value = newPermitDetailsModel.value?.approvedByName ?? '';
-      // // listEmployee?.value = newPermitDetailsModel.value?.lstEmp ?? [];
-      // // safetyList?.value = newPermitDetailsModel.value?.safety_question_list ?? [];
-      // // // print('EmployeeList:${listEmployee}');
+     
       
       
       
@@ -352,194 +272,7 @@ int? wc_id = 0;
 
  
 
-  // void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
-  //   selectedEquipmentCategoryIdList.value = <int>[];
-  //   for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
-  //     selectedEquipmentCategoryIdList.add(_selectedCategoryId);
-  //   }
-  // }
-
-  // void equipmentSelected(_selectedEquipmentIds) {
-  //   // selectedEquipmentIdList.value = <int>[];
-  //   // for (var _selectedEquipmentNameId in _selectedEquipmentIds) {
-  //   //   selectedEquipmentIdList.add(_selectedEquipmentNameId);
-  //   // }
-  // }
-
-  // Future<void> getInventoryCategoryList({String? facilityId}) async {
-  //   equipmentCategoryList.value = <InventoryCategoryModel>[];
-  //   final _equipmentCategoryList = await warrantyClaimPresenter.getInventoryCategoryList(
-  //     isLoading: true,
-  //   );
-
-  //   if (_equipmentCategoryList != null) {
-  //     for (var equimentCategory in _equipmentCategoryList) {
-  //       equipmentCategoryList.add(equimentCategory);
-  //     }
-  //   }
-  // }
-
-  
-
-  // void getInventoryList() async {
-  //   eqipmentNameList.value = <InventoryModel>[];
-  //   final _inventoryList = await warrantyClaimPresenter.getInventoryList(
-  //     isLoading: true,
-  //     categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   //  print('equipment Name List:$inventoryNameList');
-  //   for (var inventory_list in _inventoryList) {
-  //     eqipmentNameList.add(inventory_list);
-  //   }
-  //   inventoryList = _inventoryList;
-  //   paginationController = PaginationController(
-  //     rowCount: eqipmentNameList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['inventory_list']);
-  // }
-
-  // void getBusinessList() async {
-  //   supplierNameList.value = <BusinessListModel>[];
-  //   final _supplierNameList = await warrantyClaimPresenter.getBusinessList(
-  //     isLoading: true,
-  //     //  categoryIds: categoryIds,
-  //     businessType: 5,
-  //   );
-  //   //  print('Supplier Name List:$supplierNameList');
-  //   for (var supplier_list in _supplierNameList) {
-  //     supplierNameList.add(supplier_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['business_list']);
-  // }
-
-  // void getUnitCurrencyList() async {
-  //   unitCurrencyList.value = <CurrencyListModel>[];
-  //   final _unitCUrrencyList = await warrantyClaimPresenter.getUnitCurrencyList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   print('Unit Currency List:$unitCurrencyList');
-  //   for (var unit_currency_list in _unitCUrrencyList) {
-  //     unitCurrencyList.add(unit_currency_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['unit_currency_list']);
-  // }
-
-  // void getEmployeeList() async {
-  //   employeeList.value = <EmployeeListModel>[];
-  //   final _employeeList = await warrantyClaimPresenter.getEmployeeList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     facility_id: 45,
-  //   );
-  //   print('Employee List:$employeeList');
-  //   for (var employee_list in _employeeList) {
-  //     employeeList.add(employee_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['employee_list']);
-  // }
-
-  // void getUnitCurrencyList() async {
-  //   unitCurrencyList.value = <CurrencyListModel>[];
-  //   final _unitCUrrencyList = await warrantyClaimPresenter.getUnitCurrencyList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   print('Unit Currency List:$unitCurrencyList');
-  //   for (var unit_currency_list in _unitCUrrencyList) {
-  //     unitCurrencyList.add(unit_currency_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['unit_currency_list']);
-  // }
-
-  // void getEmployeeList() async {
-  //   employeeList.value = <EmployeeListModel>[];
-  //   final _employeeList = await warrantyClaimPresenter.getEmployeeList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     facility_id: 45,
-  //   );
-  //   print('Employee List:$employeeList');
-  //   for (var employee_list in _employeeList) {
-  //     employeeList.add(employee_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['employee_list']);
-  // }
-
-  // void getWarrantyClaimList() async {
-  //   // supplierNameList.value = <WarrantyClaimModel>[];
-
-  //   final list = await warrantyClaimPresenter.getWarrantyClaimList(
-  //       isLoading: true, categoryIds: categoryIds, facilityId: facilityId);
-  //   print('Supplier Name List:$supplierNameList');
-  //   Set<String> supplierNameSet = {};
-  //   for (var _supplierNameList in list) {
-  //     if (_supplierNameList.supplier_name != null) {
-  //       supplierNameSet.add(_supplierNameList.supplier_name ?? "");
-  //     }
-  //   }
-  //   warrantyClaimList = list;
-  //   paginationWarrantyController = PaginationController(
-  //     rowCount: warrantyClaimList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['warranty_claim_list']);
-  // }
-
-  // void getBlockList(String facilityId) async {
-  //   final list = await warrantyClaimPresenter.getBlockList(
-  //       isLoading: false, facilityId: facilityId);
-  //   blockList = list;
-  //   update(['block_list']);
-  // }
-
-  // void getEquipmentList({
-  //   required String facilityId,
-  // }) async {
-  //   final list = await warrantyClaimPresenter.getEquipmentList(
-  //     isLoading: false,
-  //     facilityId: facilityId,
-  //   );
-  //   equipmentList = list;
-  //   update(['equipment_list']);
-  // }
-
-  // void onSelectEquipment(EquipmentModel equipment) {
-  //   selectedEquipment = equipment;
-  //   parentEquipmentTextController.text = selectedEquipment.name ?? '';
-
-  //   update(['equipment_list']);
-  // }
-
+ 
   void onSelectBlock(BlockModel block) {
     selectedBlock = block;
     blockTextController.text = selectedBlock.name ?? '';

@@ -3,6 +3,8 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
@@ -24,6 +26,17 @@ class ViewIncidentReportUsecase {
     return await _repository.generateToken();
   }
 
+   Future<List<HistoryModel>?> getIncidentReportHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await _repository.getHistory(
+        moduleType,
+        id,
+        isLoading,
+      );
+
    Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,
@@ -37,6 +50,15 @@ class ViewIncidentReportUsecase {
       categoryIds: categoryIds,
     );
   }
+
+  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+    bool? isLoading,  
+    required int id,
+  }) async =>
+      await _repository.getIncidentReportDetail(
+        id: id,
+        isLoading: isLoading ?? false,
+      );
 
 
    Future<List<TypePermitModel?>?> getTypePermitList(

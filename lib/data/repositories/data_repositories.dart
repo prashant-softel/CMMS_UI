@@ -1008,6 +1008,18 @@ class DataRepository extends DomainRepository {
         wc_id: wc_id,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getIncidentReportDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getIncidentReportDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getPurchaseDetailsById({
     required String auth,
     bool? isLoading,
@@ -1106,6 +1118,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  
   Future<ResponseModel> updateJobCard({
     String? auth,
     jobCard,

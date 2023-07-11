@@ -1,10 +1,7 @@
-import 'package:cmms/app/add_incident_report.dart/view/web/add_incident_report_content_web.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/incident_report_list.dart/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
-import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_web.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +13,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
   IncidentReportListWeb({super.key});
 
   final IncidentReportListController controller = Get.find();
-  //  final HomeController controller = Get.find();
-  // final HomeController controller = Get.find();
+
 
   ///
 

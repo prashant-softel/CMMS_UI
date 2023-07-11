@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
-import 'package:cmms/app/warranty_claim_list/web/new_warranty_claim_web.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +13,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
   WarrantyClaimListWeb({super.key});
 
   final WarrantyClaimController controller = Get.find();
-  //  final HomeController controller = Get.find();
-  // final HomeController controller = Get.find();
+
 
   ///
 
@@ -93,34 +91,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                               SizedBox(
                                 width: 350,
                               ),
-                              // ActionButton(
-                              //   icon: Icons.calendar_month,
-                              //   label: 'December 3rd 2022',
-                              //   // onPress: () {
-                              //   //   // Get.to(() => AddInventory());
-                              //   //   // _buildStartDateField_mobile(context);
-                              //   // },
-                              //   color: Colors.green,
-                              //   onPressed: () {},
-                              // ),
-                              // SizedBox(
-                              //   height: 150,
-                              //   child: CustomTextField(
-                                  
-                              //     label: 'Select Date & Time:',
-                              //     suffixIcon: Icon(
-                              //       Icons.calendar_month,
-                              //     ),
-                              //     // textController:
-                              //     //     controller.categoryTextController,
-                              //     textController:
-                              //         controller.warrantyClaimListDateTimeCtrlrWeb,
-                              
-                              //     onTap: () {
-                              //       pickDateTime_web(context);
-                              //     },
-                              //   ),
-                              // ),
+                             
                             ],
                           ),
                         ),
@@ -131,32 +102,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                           title: 'Warranty Claim List'.tr,
                           action: Row(
                             children: [
-                              // ActionButton(
-                              //   icon: Icons.all_inbox,
-                              //   label: 'All',
-                              //   onPressed: () {},
-                              //   color: Colors.blue,
-                              // ),
-                              // Dimens.boxWidth10,
-                              // ActionButton(
-                              //   icon: Icons.close,
-                              //   label: 'Closed',
-                              //   onPressed: () {
-                              //     // var file = "assets/files/Fixed Asset Imports.xlsx";
-                              //     // var bytes = File(file).readAsBytesSync();
-                              //     // var excel = Excel.decodeBytes(bytes);
-            
-                              //     // for (var table in excel.tables.keys) {
-                              //     //   print(table); //sheet Name
-                              //     //   print(excel.tables[table]?.maxCols);
-                              //     //   print(excel.tables[table]?.maxRows);
-                              //     //   for (var row in excel.tables[table]!.rows) {
-                              //     //     print("QWERTY $row");
-                              //     //   }
-                              //     // }
-                              //   },
-                              //   color: Colors.green,
-                              // ),
+                             
                                Container(
                               height: 30,
                               child: CustomElevatedButton(
@@ -229,55 +175,12 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                 color: Colors.blue,
                               ),
                               Dimens.boxWidth10,
-                              // ActionButton(
-                              //   icon: Icons.close,
-                              //   lable: 'retireAsset'.tr,
-                              //   onPress: () async {
-                              //     // ByteData data = await rootBundle
-                              //     //     .load("assets/files/Fixed Asset Imports.xlsx");
-                              //     // var bytes = data.buffer
-                              //     //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
-                              //     // var excel = Excel.decodeBytes(bytes);
-            
-                              //     // for (var table in excel.tables.keys) {
-                              //     //   print(table); //sheet Name
-                              //     //   print(excel.tables[table]?.maxCols);
-                              //     //   print(excel.tables[table]?.maxRows);
-                              //     //   for (var row in excel.tables[table]!.rows) {
-                              //     //     print("QWERTY $row");
-                              //     //   }
-                              //     // }
-                              //   },
-                              //   color: Colors.red,
-                              // ),
+                             
                             ],
                           ),
                         ),
             
-                        ///
-                        // Align(
-                        //   alignment: Alignment.centerLeft,
-                        //   child: Container(
-                        //     width: 400,
-                        //     child: TabBar(
-                        //       tabs: [
-                        //         CustomTabBar(
-                        //           label: 'listView'.tr,
-                        //           icon: Icons.menu,
-                        //         ),
-                        //         CustomTabBar(
-                        //           label: 'treeView'.tr,
-                        //           icon: Icons.account_tree_sharp,
-                        //         ),
-                        //         CustomTabBar(
-                        //           label: 'mapView'.tr,
-                        //           icon: Icons.location_on,
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-            
+                      
                         ///
                         SizedBox(
                           height: 20,

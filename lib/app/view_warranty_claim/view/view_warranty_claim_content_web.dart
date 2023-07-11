@@ -1,25 +1,19 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
   ViewWarrantyClaimWeb({super.key});
 
   bool valuefirst = true;
 
-  // final controller = Get.find<HomeController>();
   final ViewWarrantyClaimController _controller = Get.find();
-  // final HomeController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
