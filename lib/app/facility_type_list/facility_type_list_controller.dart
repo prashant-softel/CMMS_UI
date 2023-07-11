@@ -93,6 +93,9 @@ class FacilityTypeListController extends GetxController {
   ///SOP Permit List
   RxList<FacilityTypeListModel> facilityTypeList =
       <FacilityTypeListModel>[].obs;
+
+  RxList<FacilityTypeListModel> filteredData =
+      <FacilityTypeListModel>[].obs;
   Rx<bool> isfacilityTypeListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -222,7 +225,17 @@ class FacilityTypeListController extends GetxController {
   //     }
   //   }
   // }
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      facilityTypeList.value = filteredData;
+      return;
+    }
 
+    facilityTypeList.value = filteredData
+        .where((item) =>
+        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   Future<void> getCountryList() async {
     countryList.clear();

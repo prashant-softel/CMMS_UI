@@ -165,75 +165,8 @@ class InventoryStatusListContentWeb
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .checklistNumberCtrlr,
+                                                        .nameCtrlr,
                                                   )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Equipment Category: '),
-                                            Expanded(
-                                              child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    35,
-                                                child: DropdownWidget(
-                                                  controller: controller,
-                                                  dropdownList: controller
-                                                      .equipmentCategoryList,
-                                                  isValueSelected: controller
-                                                      .isSelectedequipment
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedequipment.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Frequency: '),
-                                            SizedBox(
-                                              width: 64,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                child: DropdownWidget(
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.frequencyList,
-                                                  isValueSelected: controller
-                                                      .isSelectedfrequency
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedfrequency.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
                                             ),
                                           ],
                                         ),
@@ -286,67 +219,13 @@ class InventoryStatusListContentWeb
                                                       30,
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .manpowerCtrlr,
+                                                        .descriptionCtrlr,
                                                   )),
                                             ),
                                           ],
                                         ),
                                         SizedBox(
                                           height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Status : ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
                                         ),
                                       ]),
                                 ),
@@ -492,7 +371,7 @@ class InventoryStatusListContentWeb
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Status List Id",
+                                              " Id",
                                               "Name ",
                                               "Description",
                                               "Action",
@@ -590,9 +469,9 @@ class InventoryStatusListContentWeb
                                                                                 onPress: () {
                                                                                   // controller.selectedItem = controller.inventoryStatusList!.firstWhere((element) => "${element?.id}" == _inventoryStatusList[0]);
 
-                                                                                  // controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
+                                                                                  // controller.nameCtrlr.text = controller.selectedItem?.checklist_number ?? '';
                                                                                   // controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
-                                                                                  // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                  // controller.descriptionCtrlr.text = "${controller.selectedItem?.manPower}";
                                                                                   // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
                                                                                   // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
                                                                                   // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
