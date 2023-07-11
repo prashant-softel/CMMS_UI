@@ -1,22 +1,15 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
-import 'package:cmms/app/add_incident_report.dart/add_incident_report_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/view_incident_report.dart/view_incident_report_controller.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
-import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
-import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ViewIncidentReportContentWeb
     extends GetView<ViewIncidentReportController> {
@@ -28,8 +21,8 @@ class ViewIncidentReportContentWeb
   bool valuefirst = false;
   bool _switchValue = false;
 
-  // final controller = Get.find<HomeController>();
-  // final AddIncidentReportController controller = Get.find();
+  // final homeController = Get.find<HomeController>();
+  final ViewIncidentReportController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -39,18 +32,19 @@ class ViewIncidentReportContentWeb
           toolbarHeight: 100,
           automaticallyImplyLeading: false,
         ),
-        body: RepaintBoundary(
-          key: controller.printKey,
-          child: Row(
-            children: [
-              Responsive.isMobile(context) || Responsive.isTablet(context)
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
+        body: Row(
+          children: [
+            Responsive.isMobile(context) || Responsive.isTablet(context)
+                ? Dimens.box0
+                : HomeDrawer(),
+            Expanded(
+              child: RepaintBoundary(
+                key: controller.printKey,
                 child: Center(
                   child: Container(
                     margin: Dimens.edgeInsets16,
-                    height: Get.height,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.withOpacity(.3)),
                     ),
@@ -103,29 +97,6 @@ class ViewIncidentReportContentWeb
                           SizedBox(
                             height: 10,
                           ),
-                          CustomAppBar(
-                            title: 'View Incident Report'.tr,
-                            action: Container(
-                              height: 30,
-                              width: 170,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: Colors.blue,
-                                  width: 1,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(color: Colors.green),
-                                ],
-                              ),
-                              child: Center(
-                                  child: Text(
-                                'Approved',
-                                style: TextStyle(color: Colors.white),
-                              )),
-                            ),
-                          ),
-                          Dimens.boxHeight10,
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 1,
                             // height: MediaQuery.of(context).size.height / 1,
@@ -136,16 +107,314 @@ class ViewIncidentReportContentWeb
                                   GetBuilder<ViewIncidentReportController>(
                                       id: 'incident-report',
                                       builder: (controller) {
-                                        return Column(
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10),
-                                                  child: Column(
+                                        return Obx(
+                                          () => Column(
+                                            children: [
+                                              CustomAppBar(
+                                                title:
+                                                    'View Incident Report'.tr,
+                                                action: Container(
+                                                  height: 30,
+                                                  width: 170,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Colors.blue,
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: Colors.green),
+                                                    ],
+                                                  ),
+                                                  child: Center(
+                                                      child: Text(
+                                                    '${controller.incidentReportDetailsModel.value?.status_short}',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )),
+                                                ),
+                                              ),
+                                              Dimens.boxHeight10,
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 15,
+                                                        ),
+                                                        CustomRichText(
+                                                            title: 'Id: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title: 'Plant: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Incident Date & Time: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Incident Description: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Victim Name: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Incident Investigation Done By: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Risk Type: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Legal Applicability: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Damaged Assets cost approx.: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Asset Restoration action taken by: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Insurance Available: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Insurance Status: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Insurance Remarks: '),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 12,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.id}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.facility_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentDateTimeCtrlrWeb.text}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.description}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.victim_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.risk_type_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.legal_applicability_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.insurance_remark}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                  /////
+                                                  SizedBox(
+                                                    width: 70,
+                                                  ),
+                                                  Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment.end,
                                                     children: [
@@ -153,383 +422,301 @@ class ViewIncidentReportContentWeb
                                                         height: 15,
                                                       ),
                                                       CustomRichText(
-                                                          title: 'Id: '),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      CustomRichText(
-                                                          title: 'Plant: '),
+                                                          title: 'Title: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Incident Date & Time: '),
+                                                              'Equipment Categories: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Incident Description: '),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      CustomRichText(
-                                                          title: 'Victim Name: '),
+                                                              'Reporting Date & Time: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Incident Investigation Done By: '),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      CustomRichText(
-                                                          title: 'Risk Type: '),
+                                                              'Incident Severity: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Legal Applicability: '),
+                                                              'Action Taken Date & Time: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Damaged Assets cost approx.: '),
+                                                              'Incident Investigation Verification done by: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Asset Restoration action taken by: '),
+                                                              'ESI Applicability: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Insurance Available: '),
+                                                              'RCA Upload Required: '),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Insurance Status: '),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Insurance Remarks: '),
+                                                              'Gen loss due to asset damage: '),
                                                     ],
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 12,
-                                                    ),
-                                                    Text(
-                                                      'INC2345',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      'Demo Plant',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      '2023-01-12 06:15:35',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      'Inverter Failure',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      '-',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      'Prashant Shethya',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Hospitalization',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'No',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      '50000 INR',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Sujit Kumar',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Insurance Example',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Insurance Status Example',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Insurance Remarks Example',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                  ],
-                                                ),
-                
-                                                /////
-                                                SizedBox(
-                                                  width: 70,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    CustomRichText(
-                                                        title: 'Title: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Equipment Categories: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Reporting Date & Time: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Incident Severity: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Action Taken Date & Time: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Incident Investigation Verification done by: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'ESI Applicability: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'RCA Upload Required: '),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Gen loss due to asset damage: '),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      'Demo_plant short circuit',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Demo_block_2',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      '2023-01-12 06:15:35',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      'High',
-                                                      style: TextStyle(
-                                                          color: Colors.red),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      '2023-01-12 06:15:35',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Text(
-                                                      'Sujit Kumar',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      'No',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          'Yes',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                        SizedBox(width: 10,),
-                                                        TableActionButton(
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        // '${controller.incidentReportDetailsModel.value?.title}',
+                                                        '',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.block_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '2023-01-12 06:15:35',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.risk_level_name}',
+                                                        style: TextStyle(
+                                                            color: Colors.red),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.actionTakenDateTimeCtrlrWeb.text}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.verified_by_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 3,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '${controller.incidentReportDetailsModel.value?.rca_required_name}',
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        5,
+                                                                        92,
+                                                                        163)),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            icon: Icons
+                                                                .visibility,
+                                                            label: 'RCA',
+                                                            onPress: () {
+                                                              // controller.viewIncidentReport(
+                                                              //     id: int.tryParse(
+                                                              //         '${record[0]}'));
+                                                              // print('record:${int.tryParse('${record[0]}')}');
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                               ///Incident Report History
+                                                     Container(
+                                                    margin: Dimens.edgeInsets20,
+                                                    height: 300,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .lightGreyColorWithOpacity35,
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
                                                           color: ColorValues
-                                                              .appDarkBlueColor,
-                                                          icon: Icons.visibility,
-                                                          label: 'RCA',
-                                                          onPress: () {
-                                                            // controller.viewIncidentReport(
-                                                            //     id: int.tryParse(
-                                                            //         '${record[0]}'));
-                                                            // print('record:${int.tryParse('${record[0]}')}');
-                                                          },
+                                                              .appBlueBackgroundColor,
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
                                                         ),
                                                       ],
                                                     ),
-                                                    SizedBox(
-                                                      height: 5,
+                                                    child: Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                "Incident Report History ",
+                                                                style: Styles
+                                                                    .blue700,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Divider(
+                                                          color: ColorValues
+                                                              .greyLightColour,
+                                                        ),
+                                                        Expanded(
+                                                          child:
+                                                              ScrollableTableView(
+                                                            columns: [
+                                                              "Time Stamp",
+                                                              "Module Ref ID",
+                                                              "Comment",
+                                                              "Module Type",
+                                                              "Status",
+                                                            ].map((column) {
+                                                              return TableViewColumn(
+                                                                label: column,
+                                                                minWidth:
+                                                                    Get.width *
+                                                                        0.15,
+                                                              );
+                                                            }).toList(),
+                                                            rows: [
+                                                              ...List.generate(
+                                                                controller
+                                                                        .historyList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) {
+                                                                  var getHistoryListDetails =
+                                                                      controller
+                                                                              .historyList?[
+                                                                          index];
+                                                                  return [
+                                                                    '${getHistoryListDetails?.createdAt}',
+                                                                    '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                                    '${getHistoryListDetails?.comment ?? ''}',
+                                                                    '${getHistoryListDetails?.moduleType ?? ''}',
+                                                                    '${getHistoryListDetails?.status_name ?? ''}',
+                                                                  ];
+                                                                },
+                                                              ),
+                                                              // [
+                                                            ].map((record) {
+                                                              return TableViewRow(
+                                                                height: 90,
+                                                                cells: record
+                                                                    .map(
+                                                                        (value) {
+                                                                  return TableViewCell(
+                                                                    child: Text(
+                                                                        value),
+                                                                  );
+                                                                }).toList(),
+                                                              );
+                                                            }).toList(),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      '50000 INR',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          
-                                          ],
+                                                  ),
+                                                
+                                            ],
+                                          ),
                                         );
                                       }),
                                   Row(
@@ -550,7 +737,9 @@ class ViewIncidentReportContentWeb
                                           },
                                         ),
                                       ),
-                                      SizedBox(width: 15,),
+                                      SizedBox(
+                                        width: 15,
+                                      ),
                                       CustomElevatedButton(
                                         backgroundColor: Colors.red,
                                         onPressed: () {
@@ -561,7 +750,6 @@ class ViewIncidentReportContentWeb
                                       SizedBox(
                                         width: 20,
                                       ),
-                                      
                                     ],
                                   )
                                 ],
@@ -574,9 +762,10 @@ class ViewIncidentReportContentWeb
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+
         // ),
       );
 
@@ -588,17 +777,7 @@ class ViewIncidentReportContentWeb
   ) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.topLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(right: 385),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
-      //           style: Styles.blackBold16, children: []),
-      //     ),
-      //   ),
-      // ),
+     
       // Align(
       //     alignment: Alignment.topLeft,
       //     child: Padding(
@@ -775,17 +954,7 @@ class ViewIncidentReportContentWeb
   ) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.topLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(right: 385),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
-      //           style: Styles.blackBold16, children: []),
-      //     ),
-      //   ),
-      // ),
+      
       // Align(
       //     alignment: Alignment.topLeft,
       //     child: Padding(
@@ -1554,53 +1723,5 @@ class ViewIncidentReportContentWeb
     ]);
   }
 
-  // emailDropdown(
-  //   BuildContext context,
-  //   String? title,
-  // ) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //     children: [
-  //       SizedBox(
-  //         width: MediaQuery.of(context).size.width / 4.2,
-  //         child: CustomMultiSelectDialogField(
-  //           buttonText: '$title',
-  //           title: 'Employees',
-  //           // initialValue: [],
-  //           initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty)
-  //               ? controller.selectedEmployeeNameIdList
-  //               : [],
-  //           items: controller.employeesList
-  //               .map(
-  //                 (equipmentCategory) => MultiSelectItem(
-  //                   equipmentCategory.id,
-  //                   equipmentCategory.name ?? '',
-  //                 ),
-  //               )
-  //               .toList(),
-  //           onConfirm: (selectedOptionsList) => {
-  //             controller.employeesNameSelected(selectedOptionsList),
-  //             print(
-  //                 'Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
-  //           },
-  //         ),
-  //       ),
-  //       GestureDetector(
-  //         onTap: () {},
-  //         child: Icon(
-  //           Icons.delete,
-  //           color: Colors.red,
-  //         ),
-  //       )
-  //       // ActionButton(
-  //       //   icon: Icons.delete_outline,
-  //       //   label: 'Delete',
-  //       //   // onPress:
-  //       //   //     () async {},
-  //       //   color: Colors.red,
-  //       //   onPressed: () {},
-  //       // ),
-  //     ],
-  //   );
-  // }
+ 
 }

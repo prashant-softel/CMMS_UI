@@ -27,6 +27,7 @@ import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
@@ -835,6 +836,42 @@ class Repository {
       return null;
     }
   }
+
+
+   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getIncidentReportDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"IncidentReportdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final IncidentReportDetailsModel _incidentReportDetailModel =
+              incidentReportDetailModelFromJson(res.data);
+
+          var responseMap = _incidentReportDetailModel;
+          print({"IncidentReportDetailResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'IncidentReportDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
 
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
@@ -2805,6 +2842,7 @@ class Repository {
     }
   }
 
+  
   ///
   Future<Map<String, dynamic>> updateJobCard(
     jobCard,

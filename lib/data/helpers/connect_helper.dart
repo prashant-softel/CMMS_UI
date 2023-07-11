@@ -1523,6 +1523,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getIncidentReportDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/GetIncidentDetailsReport?id=$id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('IncidentReportDetailResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getPurchaseDetailsById({
     required String auth,
     bool? isLoading,
