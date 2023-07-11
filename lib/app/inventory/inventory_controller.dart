@@ -58,4 +58,9 @@ class InventoryController extends GetxController {
       Routes.warrantyClaimListWeb,
     );
   }
+  Future<void> inventoryStatusScreen() async {
+    Get.toNamed(
+      Routes.inventoryStatusListScreen,
+    );
+  }
 }

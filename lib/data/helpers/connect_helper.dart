@@ -2091,7 +2091,9 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     final request = http.MultipartRequest('POST',
-        Uri.parse('http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://'
+            ''
+            '/CMMS_API/api/FileUpload/UploadFile'));
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});

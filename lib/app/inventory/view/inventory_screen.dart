@@ -172,9 +172,7 @@ class InventoryScreen extends GetView<InventoryController> {
                         _inventoryList(
                             tittle: "Inventory Status",
                             ontap: () {
-                              Get.toNamed(
-                                Routes.inventoryStatusListScreen,
-                              );
+                              controller.inventoryStatusScreen();
                             }),
                       ],
                     ),
