@@ -14,7 +14,23 @@ class GetPurchaseDetailsByIDModel {
   int? status;
   String? statusShort;
   double? acceptedQty;
-  List<GoDetails>? goDetail;
+  String? currency;
+  int? amount;
+  String? job_ref;
+  String? gir_no;
+  String? vehicle_no;
+  String? condition_pkg_received;
+  String? lr_no;
+  String? no_pkg_received;
+  dynamic? received_on;
+  String? freight;
+  dynamic? po_date;
+  String? po_no;
+  String? challan_date;
+  String? challan_no;
+  String? purchaseDate;
+  int? location_ID;
+  List<GoDetails>? goDetails;
 
   GetPurchaseDetailsByIDModel({
     this.id,
@@ -24,7 +40,23 @@ class GetPurchaseDetailsByIDModel {
     this.status,
     this.statusShort,
     this.acceptedQty,
-    this.goDetail,
+    this.currency,
+    this.amount,
+    this.job_ref,
+    this.gir_no,
+    this.vehicle_no,
+    this.condition_pkg_received,
+    this.lr_no,
+    this.no_pkg_received,
+    this.received_on,
+    this.freight,
+    this.po_date,
+    this.po_no,
+    this.challan_date,
+    this.challan_no,
+    this.purchaseDate,
+    this.location_ID,
+    this.goDetails,
   });
 
   factory GetPurchaseDetailsByIDModel.fromJson(Map<String, dynamic> json) =>
@@ -36,7 +68,23 @@ class GetPurchaseDetailsByIDModel {
         status: json["status"] ?? "",
         statusShort: json["status_short"] ?? "",
         acceptedQty: json["accepted_qty"] ?? "",
-        goDetail: List<GoDetails>.from(
+        currency: json["currency"] ?? "",
+        amount: json["amount"] ?? "",
+        job_ref: json["job_ref"] ?? "",
+        gir_no: json["gir_no"] ?? "",
+        vehicle_no: json["vehicle_no"] ?? "",
+        condition_pkg_received: json["condition_pkg_received"] ?? "",
+        lr_no: json["lr_no"] ?? "",
+        no_pkg_received: json["no_pkg_received"] ?? "",
+        received_on: json["received_on"] ?? "",
+        freight: json["freight"] ?? "",
+        po_date: json["po_date"] ?? "",
+        po_no: json["po_no"] ?? "",
+        challan_date: json["challan_date"] ?? "",
+        challan_no: json["challan_no"] ?? "",
+        purchaseDate: json["purchaseDate"] ?? "",
+        location_ID: json["location_ID"] ?? "",
+        goDetails: List<GoDetails>.from(
             json["goDetails"].map((x) => GoDetails.fromJson(x))),
       );
 
@@ -48,7 +96,23 @@ class GetPurchaseDetailsByIDModel {
         "status": status,
         "status_short": statusShort,
         "accepted_qty": acceptedQty,
-        "goDetail": List<dynamic>.from(goDetail?.map((x) => x) ?? []),
+        "currency": currency,
+        "amount": amount,
+        "job_ref": job_ref,
+        "gir_no": gir_no,
+        "vehicle_no": vehicle_no,
+        "condition_pkg_received": condition_pkg_received,
+        "lr_no": lr_no,
+        "no_pkg_received": no_pkg_received,
+        "received_on": received_on,
+        "freight": freight,
+        "po_date": po_date,
+        "po_no": po_no,
+        "challan_date": challan_date,
+        "challan_no": challan_no,
+        "purchaseDate": purchaseDate,
+        "location_ID": location_ID,
+        "goDetail": List<dynamic>.from(goDetails?.map((x) => x) ?? []),
       };
 }
 
@@ -61,6 +125,7 @@ class GoDetails {
   int? spareStatus;
   int? remarks;
   int? receiveLater;
+  int? asset_type_ID;
 
   GoDetails({
     this.id,
@@ -71,6 +136,7 @@ class GoDetails {
     this.spareStatus,
     this.remarks,
     this.receiveLater,
+    this.asset_type_ID,
   });
 
   GoDetails.fromJson(Map<String, dynamic> json) {
@@ -82,6 +148,7 @@ class GoDetails {
     spareStatus = json['spare_status'];
     remarks = json['remarks'];
     receiveLater = json['receive_later'];
+    asset_type_ID = json['asset_type_ID'];
   }
 
   Map<String, dynamic> toJson() {
@@ -94,6 +161,7 @@ class GoDetails {
     data['spare_status'] = this.spareStatus;
     data['remarks'] = this.remarks;
     data['receive_later'] = this.receiveLater;
+    data['asset_type_ID'] = this.asset_type_ID;
 
     return data;
   }
