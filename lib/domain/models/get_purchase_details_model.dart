@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 GetPurchaseDetailsByIDModel getPurchaseDetailsByIDModelFromJson(String str) =>
     GetPurchaseDetailsByIDModel.fromJson(json.decode(str));
 
@@ -24,6 +26,7 @@ class GetPurchaseDetailsByIDModel {
   String? no_pkg_received;
   dynamic? received_on;
   String? freight;
+
   dynamic? po_date;
   String? po_no;
   String? challan_date;
@@ -59,33 +62,36 @@ class GetPurchaseDetailsByIDModel {
     this.goDetails,
   });
 
-  factory GetPurchaseDetailsByIDModel.fromJson(Map<String, dynamic> json) =>
+  factory GetPurchaseDetailsByIDModel.fromJson(
+          Map<String, dynamic> parsedJson) =>
       GetPurchaseDetailsByIDModel(
-        id: json["id"] ?? "",
-        facilityId: json["facility_id"] ?? "",
-        assetTypeId: json["asset_type_ID"] ?? "",
-        vendorId: json["vendorID"] ?? "",
-        status: json["status"] ?? "",
-        statusShort: json["status_short"] ?? "",
-        acceptedQty: json["accepted_qty"] ?? "",
-        currency: json["currency"] ?? "",
-        amount: json["amount"] ?? "",
-        job_ref: json["job_ref"] ?? "",
-        gir_no: json["gir_no"] ?? "",
-        vehicle_no: json["vehicle_no"] ?? "",
-        condition_pkg_received: json["condition_pkg_received"] ?? "",
-        lr_no: json["lr_no"] ?? "",
-        no_pkg_received: json["no_pkg_received"] ?? "",
-        received_on: json["received_on"] ?? "",
-        freight: json["freight"] ?? "",
-        po_date: json["po_date"] ?? "",
-        po_no: json["po_no"] ?? "",
-        challan_date: json["challan_date"] ?? "",
-        challan_no: json["challan_no"] ?? "",
-        purchaseDate: json["purchaseDate"] ?? "",
-        location_ID: json["location_ID"] ?? "",
+        id: parsedJson["id"] ?? "",
+        facilityId: parsedJson["facility_id"] ?? "",
+        assetTypeId: parsedJson["asset_type_ID"] ?? "",
+        vendorId: parsedJson["vendorID"] ?? "",
+        status: parsedJson["status"] ?? "",
+        statusShort: parsedJson["status_short"] ?? "",
+        acceptedQty: parsedJson["accepted_qty"] ?? "",
+        currency: parsedJson["currency"] ?? "",
+        amount: parsedJson["amount"] ?? "",
+        job_ref: parsedJson["job_ref"] ?? "",
+        gir_no: parsedJson["gir_no"] ?? "",
+        vehicle_no: parsedJson["vehicle_no"] ?? "",
+        condition_pkg_received: parsedJson["condition_pkg_received"] ?? "",
+        lr_no: parsedJson["lr_no"] ?? "",
+        no_pkg_received: parsedJson["no_pkg_received"] ?? "",
+        received_on: Utility.getFormatedyearMonthDay(parsedJson['received_on']),
+        freight: parsedJson["freight"] ?? "",
+        po_date: Utility.getFormatedyearMonthDay(parsedJson['po_date']),
+        po_no: parsedJson["po_no"] ?? "",
+        challan_date:
+            Utility.getFormatedyearMonthDay(parsedJson['challan_date']),
+        challan_no: parsedJson["challan_no"] ?? "",
+        purchaseDate:
+            Utility.getFormatedyearMonthDay(parsedJson['purchaseDate']),
+        location_ID: parsedJson["location_ID"] ?? "",
         goDetails: List<GoDetails>.from(
-            json["goDetails"].map((x) => GoDetails.fromJson(x))),
+            parsedJson["goDetails"].map((x) => GoDetails.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

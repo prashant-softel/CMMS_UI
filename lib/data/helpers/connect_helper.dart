@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
@@ -541,11 +540,8 @@ class ConnectHelper {
     String? start_date,
     required String end_date,
   }) async {
-    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
-
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'GO/GetGOList?facility_id=$facility_id&fromDate=2001-01-01&toDate=2023-07-30',
+      'GO/GetGOList?facility_id=$facility_id&fromDate=$start_date&toDate=$end_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -1547,7 +1543,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/getPurchaseDetailsByID?id=$id',
+      'GO/GetGODetailsByID?id=201',
       Request.get,
       null,
       isLoading ?? false,
@@ -1555,7 +1551,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('ViewgetPurchaseDetailsById${responseModel.data}');
+    print('ViewgetPurchaseDetailsById1${responseModel.data}');
     return responseModel;
   }
 
