@@ -107,14 +107,34 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     getPurchaseDetailsByIDModelList?.value = <GetPurchaseDetailsByIDModel>[];
 
     final _getPurchaseDetailsById = await stockManagementAddGoodsOrdersPresenter
-        .getPurchaseDetailsById(id: 199);
+        .getPurchaseDetailsById(id: id);
     print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
       print('Additioanl Email Employees${_getPurchaseDetailsById}');
-      getPurchaseDetailsByIDModel.value?.vendorId ?? "";
+      challanDateTc.text =
+          getPurchaseDetailsByIDModel.value?.challan_date ?? "";
+      purchaseDateTc.text =
+          getPurchaseDetailsByIDModel.value?.purchaseDate ?? "";
+      poDateDateTc.text = getPurchaseDetailsByIDModel.value?.po_date ?? "";
+      receivedDateTc.text =
+          getPurchaseDetailsByIDModel.value?.received_on ?? "";
+      challanNoCtrlr.text = getPurchaseDetailsByIDModel.value?.challan_no ?? "";
+      pOCtrlr.text = getPurchaseDetailsByIDModel.value?.po_no ?? "";
+      frieghtToPayPaidCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.freight ?? "";
+      noOfPackagesReceivedCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.no_pkg_received ?? "";
+      conditionOfPackagesReceivedCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.condition_pkg_received ?? "";
+      girNoCtrlr.text = getPurchaseDetailsByIDModel.value?.gir_no ?? "";
+      amountCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.amount.toString() ?? "";
+      lrNoCtrlr.text = getPurchaseDetailsByIDModel.value?.lr_no ?? "";
+      vehicleNoCtrlr.text = getPurchaseDetailsByIDModel.value?.vehicle_no ?? "";
+      jobRefCtrlr.text = getPurchaseDetailsByIDModel.value?.job_ref ?? "";
     }
   }
 

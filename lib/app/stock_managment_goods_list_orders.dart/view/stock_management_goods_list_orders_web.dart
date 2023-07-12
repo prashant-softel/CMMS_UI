@@ -3,6 +3,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -83,6 +84,67 @@ class StockManagementGoodsOrdersWeb
                             "GOODS ORDER",
                             style: Styles.blackBold16,
                           ),
+                          Spacer(),
+                          Container(
+                            height: 30,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.appLightBlueColor,
+                              onPressed: () async {
+                                await Get.dialog(
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 350,
+                                        right: 350,
+                                        top: 200,
+                                        bottom: 200),
+                                    child: Container(
+                                      color: ColorValues.whiteColor,
+                                      child: SfDateRangePicker(
+                                        cancelText: "CANCEL",
+                                        confirmText: "Ok",
+                                        showActionButtons: true,
+                                        initialSelectedRange: PickerDateRange(
+                                          controller.fromDate.value,
+                                          controller.toDate.value,
+                                        ),
+                                        selectionMode:
+                                            DateRangePickerSelectionMode.range,
+                                        monthCellStyle:
+                                            DateRangePickerMonthCellStyle(
+                                          todayCellDecoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color:
+                                                  ColorValues.appDarkBlueColor),
+                                        ),
+                                        onSubmit: (value) {
+                                          PickerDateRange? data =
+                                              value as PickerDateRange;
+
+                                          var pickUpDate = DateTime.parse(
+                                              data.startDate.toString());
+                                          controller.fromDate.value =
+                                              pickUpDate;
+                                          var dropDate = DateTime.parse(
+                                              data.endDate.toString());
+                                          dropDate != null
+                                              ? controller.toDate.value =
+                                                  dropDate
+                                              : controller.toDate.value =
+                                                  pickUpDate;
+                                          Get.back();
+                                          controller.getPmTaskListByDate();
+                                        },
+                                        onCancel: () => Get.back(),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              text:
+                                  'To Date: ${controller.formattedTodate.toString()}  From Date: ${controller.formattedFromdate.toString()}',
+                            ),
+                          ),
+                          Dimens.boxWidth10,
                           ActionButton(
                             icon: Icons.add,
                             label: "Add New",

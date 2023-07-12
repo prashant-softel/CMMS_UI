@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_presenter.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class StockManagementGoodsOrdersController extends GetxController {
@@ -15,6 +16,11 @@ class StockManagementGoodsOrdersController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<GoodsOrdersListModel?>? goodsOrdersList =
       <GoodsOrdersListModel?>[].obs;
+  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
   GoodsOrdersListModel? goodsOrdersListModel;
   RxList<String> goodsOrdersListTableColumns = <String>[].obs;
 
@@ -29,19 +35,21 @@ class StockManagementGoodsOrdersController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getGoodsOrdersList(facilityId, true);
+        getGoodsOrdersList(
+            facilityId, formattedTodate, formattedFromdate, false);
       });
     });
     super.onInit();
   }
 
-  Future<void> getGoodsOrdersList(int facilityId, bool isLoading) async {
+  Future<void> getGoodsOrdersList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
     goodsOrdersList!.value = <GoodsOrdersListModel>[];
     final _goodsordersList =
         await stockManagementGoodsOrdersPresenter.getGoodsOrdersList(
             isLoading: true,
-            start_date: '2020-01-01',
-            end_date: '2023-07-30',
+            start_date: startDate,
+            end_date: endDate,
             facility_id: facilityId);
     if (_goodsordersList != null) {
       goodsOrdersList!.value = _goodsordersList;
@@ -70,5 +78,9 @@ class StockManagementGoodsOrdersController extends GetxController {
   void showAddGoodsOrdersDetails({int? id}) {
     Get.toNamed(Routes.updateGoodsOrdersDetailsScreen, arguments: id);
     print('Argument5:$id');
+  }
+
+  void getPmTaskListByDate() {
+    getGoodsOrdersList(facilityId, formattedFromdate, formattedTodate, false);
   }
 }
