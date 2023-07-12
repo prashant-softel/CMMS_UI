@@ -1523,6 +1523,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getIncidentReportDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/GetIncidentDetailsReport?id=$id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('IncidentReportDetailResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getPurchaseDetailsById({
     required String auth,
     bool? isLoading,
@@ -2092,6 +2110,7 @@ class ConnectHelper {
   }) async {
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});
@@ -2555,6 +2574,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createSPV({
+    required String auth,
+    bool? isLoading,
+    required businesslistJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/CreateSPV', //AddBusiness
+      Request.post,
+      businesslistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> saveNotification({
     required String auth,
     saveNotificationJsonString,
@@ -2775,6 +2815,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteSPV({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteSPV?id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -2782,6 +2841,44 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CMMS/UpdateBusiness',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateSPV({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateSPV',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateFacilityList({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/UpdateFacility',
       Request.patch,
       modulelistJsonString,
       isLoading ?? false,

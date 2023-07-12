@@ -116,6 +116,15 @@ class FacilityTypeListUsecase {
         modulelistJsonString: modulelistJsonString,
       );
 
+  Future<bool> updateFacilityList({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateFacilityList(
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+
   Future<bool> createFacilityType({
     facilitylistJsonString,
     bool? isLoading,

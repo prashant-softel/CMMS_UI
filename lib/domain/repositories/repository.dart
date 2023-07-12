@@ -27,6 +27,7 @@ import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
@@ -835,6 +836,42 @@ class Repository {
       return null;
     }
   }
+
+
+   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getIncidentReportDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"IncidentReportdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final IncidentReportDetailsModel _incidentReportDetailModel =
+              incidentReportDetailModelFromJson(res.data);
+
+          var responseMap = _incidentReportDetailModel;
+          print({"IncidentReportDetailResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'IncidentReportDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
 
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
@@ -2805,6 +2842,7 @@ class Repository {
     }
   }
 
+  
   ///
   Future<Map<String, dynamic>> updateJobCard(
     jobCard,
@@ -4167,6 +4205,28 @@ class Repository {
     }
   }
 
+  Future<bool> createSPVlist(
+      {bool? isLoading, businesslistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createSPVlist(
+          auth: auth,
+          isLoading: isLoading,
+          businesslistJsonString: businesslistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<Map<String, dynamic>> saveNotification(
     saveNotificationJsonString,
     bool? isLoading,
@@ -4456,6 +4516,26 @@ class Repository {
     }
   }
 
+
+  Future<void> deleteSPV(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteSPV(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<bool> updateBusinesslist({
     bool? isLoading,
     modulelistJsonString,
@@ -4463,6 +4543,57 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateBusinesslist(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateSPV({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateSPV(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+  Future<bool> updateFacilityList({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateFacilityList(
         auth: auth,
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
@@ -4814,6 +4945,8 @@ class Repository {
       print(error.toString());
     }
   }
+
+
 
   Future<bool> updateBusinessType({
     bool? isLoading,

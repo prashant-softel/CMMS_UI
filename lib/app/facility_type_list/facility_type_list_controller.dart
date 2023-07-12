@@ -18,6 +18,7 @@ import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/state.dart';
 import '../../domain/models/state_model.dart';
+import '../../domain/models/update_facility_type_model.dart';
 
 class FacilityTypeListController extends GetxController {
   FacilityTypeListController(
@@ -25,6 +26,7 @@ class FacilityTypeListController extends GetxController {
   );
   FacilityTypeListPresenter facilityTypeListPresenter;
   final HomeController homecontroller = Get.find();
+  FacilityTypeListModel? selectedItem;
 
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
@@ -34,21 +36,6 @@ class FacilityTypeListController extends GetxController {
 
   //checkbox
   RxBool isChecked = true.obs;
-  // Rx<String> selectedCountry = ''.obs;
-  // Rx<bool> isSelectedCountry = true.obs;
-  // int countryId = -1;
-  // RxList<CountryModel?> countryList = <CountryModel>[].obs;
-  // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  //
-  // Rx<String> selectedState = ''.obs;
-  // Rx<bool> isSelectedState = true.obs;
-  // int stateId = -1;
-  // RxList<CountryState?> stateList = <CountryState>[].obs;
-  //
-  // Rx<String> selectedCity = ''.obs;
-  // Rx<bool> isSelectedCity = true.obs;
-  // int cityId = -1;
-  // RxList<CityModel?> cityList = <CityModel>[].obs;
   RxList<CountryModel?> countryList =
       <CountryModel>[].obs;
   RxList<CountryState?> stateList =
@@ -105,6 +92,9 @@ class FacilityTypeListController extends GetxController {
 
   ///SOP Permit List
   RxList<FacilityTypeListModel> facilityTypeList =
+      <FacilityTypeListModel>[].obs;
+
+  RxList<FacilityTypeListModel> filteredData =
       <FacilityTypeListModel>[].obs;
   Rx<bool> isfacilityTypeListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
@@ -235,7 +225,17 @@ class FacilityTypeListController extends GetxController {
   //     }
   //   }
   // }
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      facilityTypeList.value = filteredData;
+      return;
+    }
 
+    facilityTypeList.value = filteredData
+        .where((item) =>
+        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   Future<void> getCountryList() async {
     countryList.clear();
@@ -547,7 +547,7 @@ class FacilityTypeListController extends GetxController {
     // selectedCountryId = 0;
     // selectedCityId = 0;
     // ownerId = 0;
-    //
+    selectedItem = null;
     // customerId = 0;
     // operatorId = 0;
     // SpvId = 0;
@@ -618,6 +618,41 @@ class FacilityTypeListController extends GetxController {
         ],
       ),
     );
+  }
+
+  Future<bool> updateFacilityList(checklistId) async {
+    String _name = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+    String _pin = zipcodeCtrlr.text.trim();
+    String _address = addressCtrlr.text.trim();
+
+    UpdateFacilityTypeModel createChecklist = UpdateFacilityTypeModel(
+        id: checklistId,
+        name : _name,
+        description: _description,
+        zipcode : int.parse(_pin),
+        address: _address,
+        countryId: selectedCountryId,
+        cityId: selectedCityId,
+        stateId: selectedStateId,
+        operatorId: operatorId,
+        spvId: SpvId,
+        ownerId: ownerId,
+        customerId: customerId,
+        photoId: 0,
+        latitude: 0.0,
+        longitude: 0.0,
+        timezone: "default",
+    );
+    var businessTypeJsonString =
+    createChecklist.toJson();
+
+    print({"businessTypeJsonString", businessTypeJsonString});
+    await facilityTypeListPresenter.updateFacilityList(
+      modulelistJsonString: businessTypeJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 
 

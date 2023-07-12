@@ -13,9 +13,7 @@ import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
-import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,12 +37,7 @@ class WarrantyClaimController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
-  // void addRow(String rowData) {
-  //   rowList.add(rowData);
-  //   // rowList2.add(rowData);
-  //   // rowList3.add(rowData);
-
-  // }
+ 
 
   void removeRow({required int index}) {
     supplierActions.removeAt(index);
@@ -324,36 +317,7 @@ class WarrantyClaimController extends GetxController {
           '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
       requestManufactureTextController.text =
           inventoryDetailsModel.value?.supplierName ?? '';
-      // warrantyClaimTitleTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';
-      // warrantyClaimBriefDescTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.warranty_description ?? '';
-      // selectedEquipmentName.value =
-      //     editWarrantyClaimDetailsModel.value?.equipment_name ?? '';
-      // selectedEquipmentCategory.value =
-      //     editWarrantyClaimDetailsModel.value?.equipment_category ?? '';
-      // selectedAffectedPart.value =
-      //     editWarrantyClaimDetailsModel.value?.affected_part ?? '';
-      // failureDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
-      // affectedSerialNoTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.affected_sr_no ?? '';
-      // orderReferenceNoTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
-      // warrantyStartDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
-      // warrantyEndDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
-      // costOfReplacementTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
-      // immediateCorrectiveActionTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
-      // requestManufactureTextController.text =
-      //     editWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
-      // selectedUnitCurrency.value =
-      //     editWarrantyClaimDetailsModel.value?.currency ?? '';
-      // selectedEmployeeList.value =
-      //     editWarrantyClaimDetailsModel.value?.approver_name ?? '';
+     
     }
   }
 
@@ -381,13 +345,7 @@ class WarrantyClaimController extends GetxController {
       selectedAffectedPartEquipmentIdList.add(_selectedCategoryId);
     }
 
-    // for (var _selectedEquipmentNameId in _selectedEquipmentIds) {
-    //   selectedEquipmentIdList.add(_selectedEquipmentNameId);
-    //   print('Affected part id:$selectedEquipmentIdList');
-    // }
-    // int affectedpartIndex = affectedPartEqipmentNameList.indexWhere((x) => x?.name == _selectedEquipmentName);
-    // selectedAffetctedpart = affectedPartEqipmentNameList[affectedpartIndex]?.name ?? '';
-    // print('Affected part :${selectedAffetctedpart}');
+  
   }
 
   Future<void> getInventoryCategoryList({String? facilityId}) async {
@@ -436,24 +394,7 @@ class WarrantyClaimController extends GetxController {
     update(['inventory_list']);
   }
 
-  // void getAffectedPartList() async {
-  //   affectedPartEqipmentNameList.value = <InventoryModel2>[];
-  //   final _affectedPartList = await warrantyClaimPresenter.getAffectedPartList(
-  //     isLoading: true,
-  //     categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   //  print('equipment Name List:$inventoryNameList');
-  //   for (var affected_part_list in _affectedPartList) {
-  //     affectedPartEqipmentNameList.add(affected_part_list);
-  //   }
-  //   // inventoryList = _affectedPartList;
-  //   // paginationController = PaginationController(
-  //   //   rowCount: eqipmentNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['inventory_list']);
-  // }
+ 
 
   void getBusinessList() async {
     supplierNameList.value = <BusinessListModel>[];
@@ -504,11 +445,7 @@ class WarrantyClaimController extends GetxController {
     for (var employee_list in _employeeList) {
       employeeList.add(employee_list);
     }
-    // supplierNameList = _supplierNameList;
-    // paginationBusinessListController = PaginationController(
-    //   rowCount: supplierNameList.length,
-    //   rowsPerPage: 10,
-    // );
+    
     update(['employee_list']);
   }
 
@@ -523,51 +460,13 @@ class WarrantyClaimController extends GetxController {
     for (var employees_list in _employeesList) {
       employeesList.add(employees_list);
     }
-    // supplierNameList = _supplierNameList;
-    // paginationBusinessListController = PaginationController(
-    //   rowCount: supplierNameList.length,
-    //   rowsPerPage: 10,
-    // );
+   
     update(['employee_list']);
   }
 
-  // void getUnitCurrencyList() async {
-  //   unitCurrencyList.value = <CurrencyListModel>[];
-  //   final _unitCUrrencyList = await warrantyClaimPresenter.getUnitCurrencyList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   print('Unit Currency List:$unitCurrencyList');
-  //   for (var unit_currency_list in _unitCUrrencyList) {
-  //     unitCurrencyList.add(unit_currency_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['unit_currency_list']);
-  // }
+ 
 
-  // void getEmployeeList() async {
-  //   employeeList.value = <EmployeeListModel>[];
-  //   final _employeeList = await warrantyClaimPresenter.getEmployeeList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     facility_id: 45,
-  //   );
-  //   print('Employee List:$employeeList');
-  //   for (var employee_list in _employeeList) {
-  //     employeeList.add(employee_list);
-  //   }
-  //   // supplierNameList = _supplierNameList;
-  //   // paginationBusinessListController = PaginationController(
-  //   //   rowCount: supplierNameList.length,
-  //   //   rowsPerPage: 10,
-  //   // );
-  //   update(['employee_list']);
-  // }
+ 
 
   void getWarrantyClaimList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {

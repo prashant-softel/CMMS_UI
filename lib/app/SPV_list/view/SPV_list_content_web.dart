@@ -76,7 +76,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.8,
+                          height: Get.height / 2.0,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -101,6 +101,29 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                         SizedBox(
                                           height: 40,
                                         ),
+                                        Visibility(
+                                          visible: controller.isSuccess.value,
+                                          child: Center(
+                                            child: Wrap(
+                                              children: [
+                                                Text(
+                                                  controller.selectedItem ==
+                                                      null
+                                                      ? "Facility added Successfully in the List."
+                                                      : "Facility updated Successfully in the List.",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Color.fromARGB(
+                                                          255, 24, 243, 123)),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -110,7 +133,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             //   style: Styles.blackBold16,
                                             // ),
 
-                                            CustomRichText(title: 'Title '),
+                                            Expanded(child: CustomRichText(title: 'Title ')),
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -146,8 +169,58 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                       45,
                                                   child: LoginCustomTextfield(
                                                     ishint: 'Enter Title',
-                                                    // textController: controller
-                                                    //     .durationCtrlr,
+                                                    textController: controller
+                                                        .titleCtrlr,
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+
+                                            Expanded(child: CustomRichText(title: 'Description ')),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                    ColorValues.whiteColor,
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      45,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Description',
+                                                    textController: controller
+                                                        .descriptionCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -174,20 +247,39 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                     Container(
                                         width: (Get.width * .2) - 50,
                                         height: 40,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
+                                        child:
+                                        controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .createChecklistNumber()
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   // if (value == true)
-                                              //   //   controller
-                                              //   //       .issuccessCreatechecklist();
-                                              // });
+                                              controller
+                                                  .createSPVlist()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
                                             },
-                                            text: 'Submit')),
+                                            text: 'Create SPV ')
+                                            : CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .updateSPV(
+                                                  controller
+                                                      .selectedItem?.id)
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Update')
+                                      ),
                                   ],
                                 ),
                               ],
@@ -260,7 +352,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
+                                        width: (Get.width * .2) - 150,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -268,7 +360,29 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                           onPressed: () {},
                                           text: 'columnVisibility'.tr,
                                         ),
-                                      )
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        width: 200,
+                                        height: 40,
+                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        child: TextField(
+                                          onChanged: (value) => controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            focusedBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey12,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -280,6 +394,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             columns: [
                                               "Id ",
                                               "Name",
+                                              "Description",
+                                              "Action"
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
@@ -294,6 +410,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                   return [
                                                     '',
                                                     '',
+                                                    '',
+                                                    ''
                                                   ];
                                                 },
                                               ),
@@ -315,7 +433,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                       paginationController: controller
                                           .SPVListPaginationController,
                                       columns: [
-                                        "Id ", "Name"]
+                                        "Id ", "Name","Description","Action"]
                                           .map((column) {
                                         return TableViewColumn(
                                           minWidth: Get.width * 0.12,
@@ -332,6 +450,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             return [
                                               '${SPVListDetails.id}',
                                               '${SPVListDetails.name}',
+                                              '${SPVListDetails.description}',
+                                              "Action"
                                             ];
                                           },
                                         ),
@@ -367,7 +487,12 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                                             label:
                                                                                 'Edit',
                                                                             onPress:
-                                                                                () {},
+                                                                                () {
+                                                                                  controller.selectedItem = controller.SPVList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                  controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                  controller.descriptionCtrlr.text = controller.selectedItem?.description  ?? '';
+                                                                                },
                                                                           ),
                                                                           TableActionButton(
                                                                             color:
@@ -377,7 +502,10 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                                             label:
                                                                                 'Delete',
                                                                             onPress:
-                                                                                () {},
+                                                                                () {
+                                                                                  controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+
+                                                                                },
                                                                           ),
                                                                         ]),
                                                                     // Container(

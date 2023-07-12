@@ -5,14 +5,10 @@ import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
-import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/usecases/warranty_claim_usecase.dart';
-
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 
 class WarrantyClaimPresenter {
   WarrantyClaimPresenter(this.warrantyClaimUsecase);
@@ -57,19 +53,7 @@ class WarrantyClaimPresenter {
     );
   }
 
-  // Future<List<InventoryModel2>> getAffectedPartList({
-  //   required bool isLoading,
-  //   required int? facilityId,
-  //   int? blockId,
-  //   required String categoryIds,
-  // }) async {
-  //   return warrantyClaimUsecase.getAffectedPartList(
-  //     isLoading: isLoading,
-  //     facilityId: facilityId,
-  //     blockId: blockId,
-  //     categoryIds: categoryIds,
-  //   );
-  // }
+ 
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,

@@ -38,9 +38,9 @@ class InventoryStatusListController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var checklistNumberCtrlr = TextEditingController();
+  var nameCtrlr = TextEditingController();
   InventoryStatusListModel? selectedItem;
-  var manpowerCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
   var durationCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
@@ -137,15 +137,15 @@ class InventoryStatusListController extends GetxController {
   }
 
   Future<bool> createChecklistNumber() async {
-    if (checklistNumberCtrlr.text.trim() == '' ||
+    if (nameCtrlr.text.trim() == '' ||
         selectedEquipmentId == 0 ||
         selectedfrequencyId == 0) {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-      String _checklistNumber = checklistNumberCtrlr.text.trim();
+      String _checklistNumber = nameCtrlr.text.trim();
       String _duration = durationCtrlr.text.trim();
-      String _manpower = manpowerCtrlr.text.trim();
+      String _manpower = descriptionCtrlr.text.trim();
 
       CreateChecklist createChecklist = CreateChecklist(
           category_id: selectedEquipmentId,
@@ -178,9 +178,9 @@ class InventoryStatusListController extends GetxController {
   }
 
   _cleardata() {
-    checklistNumberCtrlr.text = '';
+    nameCtrlr.text = '';
     durationCtrlr.text = '';
-    manpowerCtrlr.text = '';
+    descriptionCtrlr.text = '';
 
     selectedequipment.value = '';
 
@@ -252,9 +252,9 @@ class InventoryStatusListController extends GetxController {
   }
 
   Future<bool> updateChecklistNumber(checklistId) async {
-    String _checklistNumber = checklistNumberCtrlr.text.trim();
+    String _checklistNumber = nameCtrlr.text.trim();
     String _duration = durationCtrlr.text.trim();
-    String _manpower = manpowerCtrlr.text.trim();
+    String _manpower = descriptionCtrlr.text.trim();
 
     CreateChecklist createChecklist = CreateChecklist(
         category_id: selectedEquipmentId,

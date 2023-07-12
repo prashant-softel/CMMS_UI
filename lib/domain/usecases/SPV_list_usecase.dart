@@ -35,6 +35,28 @@ class SPVListUsecase {
     );
   }
 
+
+  deleteSPV(
+      {required Object business_id, required bool isLoading}) async =>
+      await repository.deleteSPV(
+        business_id,
+        isLoading,
+      );
+  Future<bool> updateSPV({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateSPV(
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+
+  Future<bool> createSPVlist({
+    facilitylistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createSPVlist(
+          isLoading: isLoading, businesslistJsonString: facilitylistJsonString);
   // Future<List<FacilityModel?>?> getFacilityList() async =>
   //     await repository.getFacilityList(true);
   // Future<String?> getUserAccessList() async =>

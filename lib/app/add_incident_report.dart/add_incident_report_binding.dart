@@ -1,10 +1,7 @@
 import 'package:cmms/app/add_incident_report.dart/add_incident_report_controller.dart';
 import 'package:cmms/app/add_incident_report.dart/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_controller.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_presenter.dart';
 import 'package:cmms/domain/usecases/add_incident_report_usecase.dart';
-import 'package:cmms/domain/usecases/incident_report_list_usecase.dart';
 import 'package:get/get.dart';
 
 import '../../domain/usecases/home_usecase.dart';

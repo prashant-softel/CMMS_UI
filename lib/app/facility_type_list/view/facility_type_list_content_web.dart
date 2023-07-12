@@ -247,7 +247,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 width: 10,
                                               ),
                                               CustomRichText(
-                                                  title: 'Customer '),
+                                                  title: 'Operator '),
                                               Expanded(
                                                 child: Container(
                                                   decoration: BoxDecoration(
@@ -319,7 +319,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               CustomRichText(
-                                                  title: 'Operator '),
+                                                  title: 'Customer '),
                                               Expanded(
                                                 child: Container(
                                                   decoration: BoxDecoration(
@@ -844,9 +844,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       Container(
                                           width: (Get.width * .2) - 50,
                                           height: 40,
-                                          child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
+                                          // print("$controller.selectedItem");
+                                          child: controller.selectedItem == null
+                                              ? CustomElevatedButton(
+                                              backgroundColor: ColorValues
+                                                  .appDarkBlueColor,
                                               onPressed: () {
                                                 controller
                                                     .createFacilityType()
@@ -857,7 +859,23 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                         .issuccessCreatechecklist();
                                                 });
                                               },
-                                              text: 'Submit')),
+                                              text: 'Create BusinessType ')
+                                              : CustomElevatedButton(
+                                              backgroundColor: ColorValues
+                                                  .appDarkBlueColor,
+                                              onPressed: () {
+                                                controller
+                                                    .updateFacilityList(
+                                                    controller
+                                                        .selectedFacilityId?.id)
+                                                    .then((value) {
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                });
+                                              },
+                                              text: 'Update')),
                                     ],
                                   ),
                                 ],
@@ -931,7 +949,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
+                                        width: (Get.width * .2) - 200,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -939,7 +957,29 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           onPressed: () {},
                                           text: 'columnVisibility'.tr,
                                         ),
-                                      )
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        width: 200,
+                                        height: 40,
+                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        child: TextField(
+                                          onChanged: (value) => controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            focusedBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey12,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -1089,16 +1129,17 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                               label: 'Edit',
                                                                               onPress: () {
                                                                                 print(_permitTypeList[0]);
-                                                                                controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                controller.selectedItem = controller.facilityTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
 
-                                                                                controller.titleCtrlr.text = controller.selectedFacilityId?.name ?? '';
-                                                                                controller.addressCtrlr.text = controller.selectedFacilityId?.address ?? '';
-                                                                                controller.zipcodeCtrlr.text = "${controller.selectedFacilityId?.pincode}";
+                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                controller.addressCtrlr.text = controller.selectedItem?.address ?? '';
+                                                                                controller.zipcodeCtrlr.text = "${controller.selectedItem?.pin}";
                                                                                 // controller.descriptionCtrlr.text = "${controller.selectedFacilityId?.description}";
 
-                                                                                controller.selectedCountry.value = controller.selectedFacilityId?.country ?? "";
-                                                                                controller.selectedState.value = controller.selectedFacilityId?.state ?? "";
-                                                                                controller.selectedCity.value = controller.selectedFacilityId?.city ?? "";
+                                                                                controller.selectedCountry.value = controller.selectedItem?.country ?? "";
+                                                                                controller.selectedState.value = controller.selectedItem?.state ?? "";
+                                                                                controller.selectedCity.value = controller.selectedItem?.city ?? "";
+
                                                                                 // controller.selectedOwner.value = controller.selectedFacilityId?.owner ?? "";
                                                                                 // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
                                                                                 // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
