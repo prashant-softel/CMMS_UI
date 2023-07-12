@@ -422,7 +422,7 @@ class ConnectHelper {
     var blockIdParam = (blockId != null) ? 'linkedToBlockId=$blockId&' : '';
     var categoryIdsParam =
         (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
-     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
@@ -1541,7 +1541,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getPurchaseDetailsById({
     required String auth,
     bool? isLoading,
@@ -2110,9 +2109,8 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     final request = http.MultipartRequest('POST',
-        Uri.parse('http://'
-            ''
-            '/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});
@@ -2502,7 +2500,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     final request = http.MultipartRequest('POST',
-        Uri.parse('http://3.111.196.218/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});
@@ -2576,16 +2574,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-  Future<ResponseModel>
-  createSPV({
+  Future<ResponseModel> createSPV({
     required String auth,
     bool? isLoading,
     required businesslistJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'CMMS/CreateSPV', //AddBusiness
       Request.post,
       businesslistJsonString,
@@ -2838,7 +2834,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -2876,7 +2871,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> updateFacilityList({
     required String auth,
@@ -3277,6 +3271,4 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
 }
