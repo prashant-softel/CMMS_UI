@@ -97,6 +97,7 @@ abstract class Routes {
 
   static const roleAccess = _Paths.roleAccess;
   static const createMrs = _Paths.createMrs;
+  static const incidentRiskType = _Paths.incidentRiskType;
 }
 
 abstract class _Paths {
@@ -190,6 +191,7 @@ abstract class _Paths {
   static const roleAccess = '/role-access';
   static const viewIncidentReportScreen = '/view-incident-report-screen';
   static const createMrs = '/Create-mrs';
+  static const incidentRiskType = '/Incident-Risk-Type';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

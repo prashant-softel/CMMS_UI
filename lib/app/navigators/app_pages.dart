@@ -110,6 +110,8 @@ import '../frequency_List/frequency_list_binding.dart';
 import '../frequency_List/view/frequency_list_screen.dart';
 import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
+import '../incident_risk_type/incident_listContent_binding.dart';
+import '../incident_risk_type/view/incident_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../inventory_status_list/inventory_status_list_binding.dart';
@@ -602,6 +604,11 @@ class AppPages {
       name: _Paths.createMrs,
       page: CreateMrsScreen.new,
       binding: CreateMrsBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.incidentRiskType,
+      page: IncidentRiskTypeScreen.new,
+      binding: IncidentRiskTypeBinding(),
     ),
   ];
 }

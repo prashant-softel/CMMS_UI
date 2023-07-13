@@ -113,7 +113,7 @@ class BusinessListController extends GetxController {
   void search(String keyword) {
     if (keyword.isEmpty) {
       moduleList?.value = filteredData;
-      return;
+      // return;
     }
 
     moduleList?.value = filteredData

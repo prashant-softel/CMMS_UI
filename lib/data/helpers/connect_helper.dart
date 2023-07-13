@@ -365,6 +365,22 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel> getIncidentRiskTypeList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetRiskTypeList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -3290,4 +3306,63 @@ class ConnectHelper {
 
     return responseModel;
   }
+  Future<ResponseModel> createRiskType({
+    required String auth,
+    bool? isLoading,
+    required riskTypeJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'CMMS/CreateRiskType', //AddBusiness
+      Request.post,
+      riskTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteRiskType({
+    required String auth,
+    bool? isLoading,
+    required businesstype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteRiskType?id=$businesstype_id',
+      Request.delete,
+      businesstype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateRiskType({
+    required String auth,
+    bool? isLoading,
+    required riskTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateRiskType',
+      Request.patch,
+      riskTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 }
