@@ -2125,5 +2125,57 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getIncidentRiskTypeList({
+    // int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getIncidentRiskTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      // job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  Future<ResponseModel> createRiskType({
+    auth,
+    bool? isLoading,
+    riskTypeJsonString,
+  }) async {
+    var response = await connectHelper.createRiskType(
+        auth: auth,
+        isLoading: isLoading,
+        riskTypeJsonString: riskTypeJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteRiskType({
+    auth,
+    bool? isLoading,
+    businesstype_id,
+  }) async {
+    var response = await connectHelper.deleteRiskType(
+        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateRiskType({
+    auth,
+    bool? isLoading,
+    riskTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateRiskType(
+      auth: auth,
+      isLoading: isLoading,
+      riskTypeJsonString: riskTypeJsonString,
+    );
+    return response;
+  }
+
+
+
 //end
 }

@@ -607,6 +607,14 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToDocumentManager();
                                     });
                               }))),
+
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Incident Risk Type",
+                                    onTap: () {
+                                      controller.goToIncidentRiskType();
+                                    });
+                              }))),
                             ],
                           ),
                         ],
