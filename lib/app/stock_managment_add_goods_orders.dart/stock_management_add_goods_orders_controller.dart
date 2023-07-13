@@ -30,6 +30,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int get facilityId => _facilityId.value;
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
+
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
   int paidId = 0;
@@ -67,6 +68,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   var lrNoCtrlr = TextEditingController();
   var vehicleNoCtrlr = TextEditingController();
   var jobRefCtrlr = TextEditingController();
+  var textController = TextEditingController();
 
   /// date picker
   bool openPurchaseDatePicker = false;
@@ -114,6 +116,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
       print('Additioanl Email Employees${_getPurchaseDetailsById}');
+
       challanDateTc.text =
           getPurchaseDetailsByIDModel.value?.challan_date ?? "";
       purchaseDateTc.text =
@@ -135,6 +138,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       lrNoCtrlr.text = getPurchaseDetailsByIDModel.value?.lr_no ?? "";
       vehicleNoCtrlr.text = getPurchaseDetailsByIDModel.value?.vehicle_no ?? "";
       jobRefCtrlr.text = getPurchaseDetailsByIDModel.value?.job_ref ?? "";
+      textController.text =
+          getPurchaseDetailsByIDModel.value?.goDetails.toString() ?? "";
+      selectedBusinessType.value =
+          getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
     }
   }
 
@@ -161,6 +168,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       }
       update(["AssetList"]);
     }
+    addRowItem();
   }
 
   void updatePaidBy(String value) {
@@ -245,6 +253,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
+        id: 0,
         facility_id: 45,
         order_type: 1,
         location_ID: 1,
@@ -262,21 +271,83 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         vehicle_no: _vehicleNoCtrlr,
         gir_no: _girNoCtrlr,
         job_ref: _jobRefCtrlr,
-        amount: 0,
+        amount: int.tryParse(_amountCtrlr) ?? 0,
         currency: "",
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
-    Map<String, dynamic>? responseCreateWarrantyClaim =
+    Map<String, dynamic>? responseCreateGoModel =
         await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
 
-    if (responseCreateWarrantyClaim == null) {
+    if (responseCreateGoModel == null) {
       //  CreateNewPermitDialog();
       // showAlertDialog();
     }
     print('Create  Create GO  data: $createGoModelJsonString');
+  }
+
+  void updateGoodsOrder() async {
+    String _challanNoCtrlr = challanNoCtrlr.text.trim();
+    String _pOCtrlr = pOCtrlr.text.trim();
+    String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
+    String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
+    String _conditionOfPackagesReceivedCtrlr =
+        conditionOfPackagesReceivedCtrlr.text.trim();
+    String _girNoCtrlr = girNoCtrlr.text.trim();
+    String _amountCtrlr = amountCtrlr.text.trim();
+    String _purchaseDateTc = purchaseDateTc.text.trim();
+    String _challanDateTc = challanDateTc.text.trim();
+    String _poDateDateTc = poDateDateTc.text.trim();
+    String _receivedDateTc = receivedDateTc.text.trim();
+    String _lrNoCtrlr = lrNoCtrlr.text.trim();
+    String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
+    String _jobRefCtrlr = jobRefCtrlr.text.trim();
+    List<Items> items = [];
+    rowItem.value.forEach((element) {
+      Items item = Items(
+          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          cost: int.tryParse(element[2]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+      items.add(item);
+    });
+    CreateGoModel createGoModel = CreateGoModel(
+        id: 214,
+        facility_id: 45,
+        order_type: 1,
+        location_ID: 1,
+        vendorID: selectedBusinessTypeId,
+        purchaseDate: _purchaseDateTc,
+        challan_no: _challanNoCtrlr,
+        challan_date: _challanDateTc,
+        po_no: _pOCtrlr,
+        po_date: _poDateDateTc,
+        freight: _frieghtToPayPaidCtrlr,
+        received_on: _receivedDateTc,
+        no_pkg_received: _noOfPackagesReceivedCtrlr,
+        lr_no: _lrNoCtrlr,
+        condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
+        vehicle_no: _vehicleNoCtrlr,
+        gir_no: _girNoCtrlr,
+        job_ref: _jobRefCtrlr,
+        amount: int.tryParse(_amountCtrlr) ?? 0,
+        currency: "",
+        items: items);
+
+    var createGoModelJsonString = createGoModel.toJson();
+    Map<String, dynamic>? responseCreateGoModel =
+        await stockManagementAddGoodsOrdersPresenter.updateGoodsOrder(
+      createGo: createGoModelJsonString,
+      isLoading: true,
+    );
+
+    if (responseCreateGoModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    print('update  Create GO  data: $createGoModelJsonString');
   }
 }
