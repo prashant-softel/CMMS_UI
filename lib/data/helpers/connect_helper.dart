@@ -1415,6 +1415,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/UpdateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('update Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   //Update Warranty Claim
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -1543,7 +1566,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=201',
+      'GO/GetGODetailsByID?id=214',
       Request.get,
       null,
       isLoading ?? false,

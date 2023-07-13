@@ -480,6 +480,41 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateGoodsOrder(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Goods Order update Successfully...", fontSize: 16.0);
+
+        Get.offNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Update Warranty claim
   Future<Map<String, dynamic>> updateWarrantyClaim(
     updateWarrantyClaim,
@@ -837,8 +872,7 @@ class Repository {
     }
   }
 
-
-   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
     int? id,
   }) async {
@@ -871,7 +905,6 @@ class Repository {
       return null;
     }
   }
-
 
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
@@ -2842,7 +2875,6 @@ class Repository {
     }
   }
 
-  
   ///
   Future<Map<String, dynamic>> updateJobCard(
     jobCard,
@@ -4205,8 +4237,7 @@ class Repository {
     }
   }
 
-  Future<bool> createSPVlist(
-      {bool? isLoading, businesslistJsonString}) async {
+  Future<bool> createSPVlist({bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSPVlist(
@@ -4516,7 +4547,6 @@ class Repository {
     }
   }
 
-
   Future<void> deleteSPV(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -4585,7 +4615,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateFacilityList({
     bool? isLoading,
@@ -4945,8 +4974,6 @@ class Repository {
       print(error.toString());
     }
   }
-
-
 
   Future<bool> updateBusinessType({
     bool? isLoading,

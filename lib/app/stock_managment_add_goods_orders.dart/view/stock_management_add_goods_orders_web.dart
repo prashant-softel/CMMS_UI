@@ -908,7 +908,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ColorValues.appGreenColor,
                                             text: 'Update',
                                             onPressed: () {
-                                              // controller.createGoodsOrder();
+                                              controller.updateGoodsOrder();
                                             },
                                           ),
                                     Spacer()

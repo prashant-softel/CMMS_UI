@@ -48,6 +48,16 @@ class StockManagementAddGoodsOrdersPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> updateGoodsOrder({
+    createGo,
+    required bool isLoading,
+  }) async {
+    return stockManagementAddGoodsOrdersUsecase.updateGoodsOrder(
+      createGo: createGo,
+      isLoading: isLoading,
+    );
+  }
+
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
     required int id,
