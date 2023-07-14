@@ -10,14 +10,14 @@ import 'package:rxdart/subjects.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
-import 'stock_management_add_goods_orders_presenter.dart';
+import 'stock_management_view_add_goods_orders_presenter.dart';
 
-class StockManagementAddGoodsOrdersController extends GetxController {
+class ViewAddGoodsOrdersController extends GetxController {
   ///
-  StockManagementAddGoodsOrdersController(
-    this.stockManagementAddGoodsOrdersPresenter,
+  ViewAddGoodsOrdersController(
+    this.viewAddGoodsOrdersPresenter,
   );
-  StockManagementAddGoodsOrdersPresenter stockManagementAddGoodsOrdersPresenter;
+  ViewAddGoodsOrdersPresenter viewAddGoodsOrdersPresenter;
   final HomeController homecontroller = Get.find();
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
@@ -108,8 +108,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Future<void> getPurchaseDetailsById({required int id}) async {
     getPurchaseDetailsByIDModelList?.value = <GetPurchaseDetailsByIDModel>[];
 
-    final _getPurchaseDetailsById = await stockManagementAddGoodsOrdersPresenter
-        .getPurchaseDetailsById(id: id);
+    final _getPurchaseDetailsById =
+        await viewAddGoodsOrdersPresenter.getPurchaseDetailsById(id: id);
     print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
@@ -146,7 +146,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   Future<void> getBusinessList(ListType) async {
-    final list = await stockManagementAddGoodsOrdersPresenter.getBusinessList(
+    final list = await viewAddGoodsOrdersPresenter.getBusinessList(
       ListType: ListType,
       isLoading: true,
     );
@@ -159,8 +159,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
-    final _assetList = await stockManagementAddGoodsOrdersPresenter
-        .getAssetList(facilityId: facilityId);
+    final _assetList =
+        await viewAddGoodsOrdersPresenter.getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
       for (var asset in _assetList) {
@@ -182,7 +182,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   void getUnitCurrencyList() async {
     unitCurrencyList.value = <CurrencyListModel>[];
     final _unitCUrrencyList =
-        await stockManagementAddGoodsOrdersPresenter.getUnitCurrencyList(
+        await viewAddGoodsOrdersPresenter.getUnitCurrencyList(
       isLoading: true,
       facilityId: facilityId,
     );
@@ -277,7 +277,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
-        await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
+        await viewAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
@@ -339,7 +339,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
-        await stockManagementAddGoodsOrdersPresenter.updateGoodsOrder(
+        await viewAddGoodsOrdersPresenter.updateGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );

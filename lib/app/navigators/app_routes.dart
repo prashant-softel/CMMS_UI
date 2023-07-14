@@ -82,6 +82,8 @@ abstract class Routes {
   static const updateGoodsOrdersDetailsScreen =
       _Paths.updateGoodsOrdersDetailsScreen;
   static const GoodsOrdersReqDetailsScreen = _Paths.GoodsOrdersReqDetailsScreen;
+  static const viewGoodsOrders = _Paths.viewGoodsOrders;
+
   static const assetMasterList = _Paths.assetMasterList;
   static const addassetMaster = _Paths.addassetMaster;
   static const incidentReportListWeb = _Paths.incidentReportListWeb;
@@ -97,6 +99,7 @@ abstract class Routes {
 
   static const roleAccess = _Paths.roleAccess;
   static const createMrs = _Paths.createMrs;
+  static const incidentRiskType = _Paths.incidentRiskType;
 }
 
 abstract class _Paths {
@@ -174,6 +177,7 @@ abstract class _Paths {
   static const updateGoodsOrdersDetailsScreen =
       '/update-goods-orders-details-screen';
   static const GoodsOrdersReqDetailsScreen = '/goods-orders-req-details-screen';
+  static const viewGoodsOrders = '/view-goods-orders';
 
   static const assetMasterList = '/asset-Master-List';
   static const addassetMaster = '/add-asset-Master';
@@ -190,6 +194,7 @@ abstract class _Paths {
   static const roleAccess = '/role-access';
   static const viewIncidentReportScreen = '/view-incident-report-screen';
   static const createMrs = '/Create-mrs';
+  static const incidentRiskType = '/Incident-Risk-Type';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }
