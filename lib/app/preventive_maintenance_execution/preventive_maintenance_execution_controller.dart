@@ -38,7 +38,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   void onInit() async {
     scheduleId = Get.arguments;
     if (scheduleId != 0) {
-      await getPmtaskViewList(scheduleId: scheduleId, isloading: false);
+      await getPmtaskViewList(scheduleId: scheduleId, isloading: true);
     }
     super.onInit();
   }

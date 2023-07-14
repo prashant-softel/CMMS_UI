@@ -365,7 +365,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getIncidentRiskTypeList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -379,7 +378,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
@@ -3306,14 +3304,33 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/CreateMRS',
+      Request.post,
+      createMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> createRiskType({
     required String auth,
     bool? isLoading,
     required riskTypeJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'CMMS/CreateRiskType', //AddBusiness
       Request.post,
       riskTypeJsonString,
@@ -3323,7 +3340,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
 
@@ -3364,5 +3380,4 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 }

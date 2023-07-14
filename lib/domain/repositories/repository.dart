@@ -5083,6 +5083,41 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createMrs(
+    createMrsJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " Mrs Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<List<IncidentRiskTypeModel>> getIncidentRiskTypeList({
     // required int? job_type_id,
@@ -5110,8 +5145,7 @@ class Repository {
     }
   }
 
-  Future<bool> createRiskType(
-      {bool? isLoading, riskTypeJsonString}) async {
+  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRiskType(
@@ -5132,8 +5166,7 @@ class Repository {
     }
   }
 
-  Future<void> deleteRiskType(
-      Object businesstype_id, bool isLoading) async {
+  Future<void> deleteRiskType(Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteRiskType(

@@ -1,38 +1,39 @@
 class CreateMrsModel {
   int? ID;
   int? isEditMode;
-  int? plant_ID;
-  int? requested_by_Id;
+  int? facility_ID;
+  // int? requested_by_Id;
   String? requestd_date;
   int? setAsTemplate;
   String? activity;
   int? whereUsedType;
   int? whereUsedTypeId;
   String? return_remarks;
-  String? approved_date;
+  // String? approved_date;
   List<Equipments>? equipments;
   CreateMrsModel(
-      {this.approved_date,
+      {
+      // this.approved_date,
       this.ID,
       this.activity,
       this.equipments,
       this.isEditMode,
-      this.plant_ID,
+      this.facility_ID,
       this.requestd_date,
-      this.requested_by_Id,
+      // this.requested_by_Id,
       this.return_remarks,
       this.setAsTemplate,
       this.whereUsedType,
       this.whereUsedTypeId});
 
   factory CreateMrsModel.fromJson(Map<String, dynamic> json) => CreateMrsModel(
-        approved_date: json["approved_date"],
+        // approved_date: json["approved_date"],
         ID: json["ID"],
         activity: json["activity"],
         isEditMode: json["isEditMode"],
-        plant_ID: json["plant_ID"],
+        facility_ID: json["facility_ID"],
         requestd_date: json["requestd_date"],
-        requested_by_Id: json["requested_by_Id"],
+        // requested_by_Id: json["requested_by_Id"],
         return_remarks: json["return_remarks"],
         setAsTemplate: json["setAsTemplate"],
         whereUsedType: json["whereUsedType"],
@@ -43,12 +44,12 @@ class CreateMrsModel {
 
   Map<String, dynamic> toJson() => {
         "ID": ID,
-        "approved_date": approved_date,
+        // "approved_date": approved_date,
         "activity": activity,
-        "plant_ID": plant_ID,
+        "facility_ID": facility_ID,
         "isEditMode": isEditMode,
         "requestd_date": requestd_date,
-        "requested_by_Id": requested_by_Id,
+        // "requested_by_Id": requested_by_Id,
         "return_remarks": return_remarks,
         "setAsTemplate": setAsTemplate,
         "whereUsedType": whereUsedType,

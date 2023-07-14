@@ -42,7 +42,7 @@ class UserListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         getUserList(facilityId, true);
       });
     });
