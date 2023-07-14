@@ -98,7 +98,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                     ),
                                     Spacer(),
                                     Text(
-                                      " Order ID : GOS001 ",
+                                      " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
                                       style: Styles.blackBold16,
                                     ),
                                     // ActionButton(

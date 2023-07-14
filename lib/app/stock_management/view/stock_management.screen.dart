@@ -133,8 +133,8 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "MRS Return",
                             ontap: () {
-                              Get.offNamed(
-                                  Routes.updateGoodsOrdersDetailsScreen);
+                              // Get.offNamed(
+                              //     Routes.updateGoodsOrdersDetailsScreen);
                             }),
                         _stockManagementList(
                           tittle: "S2S Material Taransfer",
