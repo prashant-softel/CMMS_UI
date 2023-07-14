@@ -1118,7 +1118,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  
   Future<ResponseModel> updateJobCard({
     String? auth,
     jobCard,
@@ -1684,7 +1683,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> createSPVlist({
     auth,
     bool? isLoading,
@@ -1696,8 +1694,6 @@ class DataRepository extends DomainRepository {
         businesslistJsonString: businesslistJsonString);
     return response;
   }
-
-
 
   Future<ResponseModel> getBusinessTypeList({
     int? businessType,
@@ -1852,7 +1848,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> deleteSPV({
     auth,
     bool? isLoading,
@@ -1863,8 +1858,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
-
   Future<ResponseModel> deleteFacility({
     auth,
     bool? isLoading,
@@ -1874,7 +1867,6 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
-
 
   Future<ResponseModel> updateBusinesslist({
     auth,
@@ -1901,6 +1893,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> updateFacilityList({
     auth,
     bool? isLoading,
@@ -1913,7 +1906,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
   Future<ResponseModel> getCompetencyList({
     required String auth,
@@ -2125,5 +2117,15 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

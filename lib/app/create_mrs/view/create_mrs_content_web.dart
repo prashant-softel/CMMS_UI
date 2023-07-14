@@ -5,6 +5,7 @@ import 'package:cmms/app/create_mrs/create_mrs_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -17,14 +18,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Obx(
-        // () =>
-        Container(
-      color: Color.fromARGB(255, 234, 236, 238),
-      width: Get.width,
-      height: Get.height,
-      child: Column(
+    return Obx(
+      () => Column(
         children: [
           Container(
             height: 45,
@@ -82,7 +77,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                       color: ColorValues.greyLightColour,
                     ),
                     Container(
-                      margin: Dimens.edgeInsets20,
+                      margin: Dimens.edgeInsets20_0_20_0,
                       child: Row(
                         children: [
                           CustomRichText(title: 'Activity: '),
@@ -114,12 +109,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               ),
                               width: (MediaQuery.of(context).size.width * .2),
                               child: LoginCustomTextfield(
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.deny(
-                                  //       RegExp(r'\s')),
-                                  // ],
-                                  // textController: controller.loginIdCtrlr,
-                                  )),
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.deny(
+                                //       RegExp(r'\s')),
+                                // ],
+                                textController: controller.activityCtrlr,
+                              )),
                           Spacer(),
                           Text('Where Used: '),
                           Dimens.boxWidth10,
@@ -151,13 +146,14 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               width: (MediaQuery.of(context).size.width * .2),
                               child: LoginCustomTextfield(
                                 enabled: false,
+                                textController: controller.whereUsedCtrlr,
                               )),
                         ],
                       ),
                     ),
                     Container(
-                      height: 350,
-                      margin: Dimens.edgeInsets20,
+                      //height: 400,
+                      margin: Dimens.edgeInsets20_20_20_0,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: ColorValues.lightGreyColorWithOpacity35,
@@ -192,12 +188,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               ],
                             ),
                           ),
-                          Column(
-                              children: []
-                                ..addAll(controller.rowItem.value.map((e) {
-                                  return Text(jsonEncode(e));
-                                }))),
-                          Text(jsonEncode(controller.dropdownMapperData)),
+                          // Column(
+                          //     children: []
+                          //       ..addAll(controller.rowItem.value.map((e) {
+                          //         return Text(jsonEncode(e));
+                          //       }))),
+                          // Text(jsonEncode(controller.dropdownMapperData)),
                           Container(
                             height: 300,
                             child: ScrollableTableView(
@@ -283,6 +279,11 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                       ),
                                                       child:
                                                           LoginCustomTextfield(
+                                                        inputFormatters: <
+                                                            TextInputFormatter>[
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
                                                         maxLine: 1,
                                                         textController:
                                                             new TextEditingController(
@@ -314,6 +315,43 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                         ],
                       ),
                     ),
+                    Container(
+                      margin: Dimens.edgeInsets15,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomRichText(title: "Comment:"),
+                          Dimens.boxWidth10,
+                          Container(
+                              width: (Get.width * .6),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      5.0,
+                                      5.0,
+                                    ),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: ColorValues.whiteColor,
+                                    offset: const Offset(0.0, 0.0),
+                                    blurRadius: 0.0,
+                                    spreadRadius: 0.0,
+                                  ),
+                                ],
+                                color: ColorValues.whiteColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: LoginCustomTextfield(
+                                maxLine: 5,
+                                textController: controller.remarkCtrlr,
+                              )),
+                        ],
+                      ),
+                    ),
                     Dimens.boxHeight15,
                     Container(
                       margin: EdgeInsets.only(bottom: 40, top: 30),
@@ -327,7 +365,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               text: 'Submit',
                               onPressed: () {
                                 // controller.addUser();
-                                //  controller.saveAccessLevel();
+                                controller.createMrs();
                               },
                             ),
                           ),
@@ -350,7 +388,6 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
           ),
         ],
       ),
-      //  ),
     );
   }
 }
