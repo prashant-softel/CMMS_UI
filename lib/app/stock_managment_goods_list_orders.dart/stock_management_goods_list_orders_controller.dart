@@ -80,6 +80,11 @@ class StockManagementGoodsOrdersController extends GetxController {
     print('Argument5:$id');
   }
 
+  void viewAddGoodsOrdersDetails({int? id}) {
+    Get.toNamed(Routes.viewGoodsOrders, arguments: id);
+    print('Argument5:$id');
+  }
+
   void getPmTaskListByDate() {
     getGoodsOrdersList(facilityId, formattedFromdate, formattedTodate, false);
   }

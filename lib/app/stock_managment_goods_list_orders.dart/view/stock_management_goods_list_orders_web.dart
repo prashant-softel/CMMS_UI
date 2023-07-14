@@ -325,7 +325,15 @@ class StockManagementGoodsOrdersWeb
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   // label: 'view',
-                                                  onPress: () {},
+
+                                                  onPress: () {
+                                                    controller
+                                                        .viewAddGoodsOrdersDetails(
+                                                            id: int.tryParse(
+                                                                '${record[0]}'));
+                                                    Get.toNamed(
+                                                        Routes.viewGoodsOrders);
+                                                  },
                                                 ),
                                                 TableActionButton(
                                                   onPress: () {
