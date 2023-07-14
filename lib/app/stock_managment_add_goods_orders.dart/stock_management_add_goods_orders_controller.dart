@@ -142,6 +142,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           getPurchaseDetailsByIDModel.value?.goDetails.toString() ?? "";
       selectedBusinessType.value =
           getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
+      selectedUnitCurrency.value =
+          getPurchaseDetailsByIDModel.value?.currency ?? "";
     }
   }
 
@@ -249,7 +251,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+          poID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
@@ -311,7 +313,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+          poID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(

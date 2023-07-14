@@ -249,7 +249,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+          poID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
@@ -311,7 +311,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+          poID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
