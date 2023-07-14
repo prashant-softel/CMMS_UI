@@ -33,23 +33,23 @@ class InventoryTypeListUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<bool> createChecklistNumber({
+  Future<bool> createInventoryType({
     checklistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckListNumber(
+      await repository.createInventoryType(
           isLoading: isLoading, checklistJsonString: checklistJsonString);
-  deleteCkecklist(
+  deleteInventoryType(
           {required Object checklist_id, required bool isLoading}) async =>
-      await repository.deleteCkecklist(
+      await repository.deleteInventoryType(
         checklist_id,
         isLoading,
       );
-  Future<bool> updateChecklistNumber({
+  Future<bool> updateInventoryType({
     checklistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updateChecklistNumber(
+      await repository.updateInventoryType(
         isLoading: isLoading,
         checklistJsonString: checklistJsonString,
       );

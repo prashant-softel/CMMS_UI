@@ -8,12 +8,12 @@ class InventoryStatusListPresenter {
   InventoryStatusListPresenter(this.inventoryStatusListUsecase);
   InventoryStatusListUsecase inventoryStatusListUsecase;
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    bool? isLoading,
-  }) async =>
-      await inventoryStatusListUsecase.getInventoryCategoryList(
-        isLoading: isLoading ?? false,
-      );
+  // Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+  //   bool? isLoading,
+  // }) async =>
+  //     await inventoryStatusListUsecase.getInventoryCategoryList(
+  //       isLoading: isLoading ?? false,
+  //     );
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList({
     int? facilityId,
     int? type,
@@ -30,27 +30,27 @@ class InventoryStatusListPresenter {
       await inventoryStatusListUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<bool> createChecklistNumber({
+  Future<bool> createInventoryStatus({
     checklistJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    inventoryStatusListUsecase.createChecklistNumber(
+    inventoryStatusListUsecase.createInventoryStatus(
       checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );
     return true;
   }
 
-  deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
-      await inventoryStatusListUsecase.deleteCkecklist(
+  deleteInventoryStatus(String? checklist_id, {required bool isLoading}) async =>
+      await inventoryStatusListUsecase.deleteInventoryStatus(
         checklist_id: checklist_id ?? 0,
         isLoading: isLoading,
       );
-  Future<bool> updateChecklistNumber(
+  Future<bool> updateInventoryStatus(
       {checklistJsonString, required bool isLoading, checklistId}) async {
     print("presenter");
-    inventoryStatusListUsecase.updateChecklistNumber(
+    inventoryStatusListUsecase.updateInventoryStatus(
       checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );

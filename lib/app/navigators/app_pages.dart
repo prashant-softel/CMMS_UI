@@ -110,6 +110,8 @@ import '../frequency_List/frequency_list_binding.dart';
 import '../frequency_List/view/frequency_list_screen.dart';
 import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
+import '../incident_dashboard/incident_report_binding.dart';
+import '../incident_dashboard/view/incident_screen.dart';
 import '../incident_risk_type/incident_listContent_binding.dart';
 import '../incident_risk_type/view/incident_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
@@ -610,5 +612,12 @@ class AppPages {
       page: IncidentRiskTypeScreen.new,
       binding: IncidentRiskTypeBinding(),
     ),
+
+    GetPage<dynamic>(
+      name: _Paths.incident_risk_dashboard,
+      page: IncidentScreen.new,
+      binding: IncidentReportBinding(),
+    ),
+
   ];
 }

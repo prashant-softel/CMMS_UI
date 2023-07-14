@@ -9,9 +9,11 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
+import '../../domain/models/create_inventory_status.dart';
+
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+// import ''
 class InventoryTypeListController extends GetxController {
   InventoryTypeListController(
     this.inventoryTypeListPresenter,
@@ -38,25 +40,25 @@ class InventoryTypeListController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var checklistNumberCtrlr = TextEditingController();
+  var nameCtrlr = TextEditingController();
   InventoryTypeListModel? selectedItem;
   var manpowerCtrlr = TextEditingController();
-  var durationCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-    getInventoryCategoryList();
-    getFrequencyList();
+    getInventoryTypeList(facilityId, type, true);
 
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-        getInventoryTypeList(facilityId, type, true);
-      });
-    });
+
+    // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+    //   facilityId = event;
+      // Future.delayed(Duration(seconds: 2), () {
+      //   // getInventoryTypeList(facilityId, type, true);
+      // });
+    // });
     super.onInit();
   }
 
@@ -137,37 +139,30 @@ class InventoryTypeListController extends GetxController {
   }
 
   Future<bool> createChecklistNumber() async {
-    if (checklistNumberCtrlr.text.trim() == '' ||
-        selectedEquipmentId == 0 ||
-        selectedfrequencyId == 0) {
+    if (nameCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-      String _checklistNumber = checklistNumberCtrlr.text.trim();
-      String _duration = durationCtrlr.text.trim();
-      String _manpower = manpowerCtrlr.text.trim();
+      String _checklistNumber = nameCtrlr.text.trim();
+      String _duration = descriptionCtrlr.text.trim();
 
-      CreateChecklist createChecklist = CreateChecklist(
-          category_id: selectedEquipmentId,
-          duration: int.tryParse(_duration) ?? 0,
-          manPower: int.tryParse(_manpower) ?? 0,
-          facility_id: facilityId,
-          frequency_id: selectedfrequencyId,
-          status: 1,
-          type: 1,
-          id: 0,
-          checklist_number: _checklistNumber);
-      var checklistJsonString = [
-        createChecklist.toJson()
-      ]; //createCheckListToJson([createChecklist]);
+      CreateInventoryStatusListModel createChecklist = CreateInventoryStatusListModel(
+          // id : checklistId,
+          name : _checklistNumber,
+          description : _duration
+      );
+      var checklistJsonString =
+        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", checklistJsonString});
-      await inventoryTypeListPresenter.createChecklistNumber(
+      await inventoryTypeListPresenter.createInventoryType(
         checklistJsonString: checklistJsonString,
         isLoading: true,
       );
       return true;
+
     }
+    getInventoryTypeList(facilityId, type, true);
     return true;
   }
 
@@ -178,13 +173,9 @@ class InventoryTypeListController extends GetxController {
   }
 
   _cleardata() {
-    checklistNumberCtrlr.text = '';
-    durationCtrlr.text = '';
-    manpowerCtrlr.text = '';
-
-    selectedequipment.value = '';
-
-    selectedfrequency.value = '';
+    nameCtrlr.text = '';
+    descriptionCtrlr.text = '';
+    selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
       getInventoryTypeList(facilityId, type, true);
     });
@@ -228,7 +219,7 @@ class InventoryTypeListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteCkecklist(checklist_id).then((value) {
+                  deleteInventoryType(checklist_id).then((value) {
                     Get.back();
                     getInventoryTypeList(facilityId, type, true);
                   });
@@ -242,35 +233,30 @@ class InventoryTypeListController extends GetxController {
     );
   }
 
-  Future<void> deleteCkecklist(String? checklist_id) async {
+  Future<void> deleteInventoryType(String? checklist_id) async {
     {
-      await inventoryTypeListPresenter.deleteCkecklist(
+      await inventoryTypeListPresenter.deleteInventoryType(
         checklist_id,
         isLoading: true,
       );
     }
   }
 
-  Future<bool> updateChecklistNumber(checklistId) async {
-    String _checklistNumber = checklistNumberCtrlr.text.trim();
-    String _duration = durationCtrlr.text.trim();
+  Future<bool> updateInventoryType(checklistId) async {
+    String _checklistNumber = nameCtrlr.text.trim();
+    String _duration = descriptionCtrlr.text.trim();
     String _manpower = manpowerCtrlr.text.trim();
 
-    CreateChecklist createChecklist = CreateChecklist(
-        category_id: selectedEquipmentId,
-        duration: int.tryParse(_duration) ?? 0,
-        manPower: int.tryParse(_manpower) ?? 0,
-        facility_id: facilityId,
-        frequency_id: selectedfrequencyId,
-        status: 1,
-        type: 1,
-        id: checklistId,
-        checklist_number: _checklistNumber);
+    InventoryTypeListModel createChecklist = InventoryTypeListModel(
+        id : checklistId,
+        name : _checklistNumber,
+      description : _duration
+    );
     var checklistJsonString =
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"checklistJsonString", checklistJsonString});
-    await inventoryTypeListPresenter.updateChecklistNumber(
+    await inventoryTypeListPresenter.updateInventoryType(
       checklistJsonString: checklistJsonString,
       isLoading: true,
     );

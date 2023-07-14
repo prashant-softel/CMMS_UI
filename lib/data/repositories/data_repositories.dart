@@ -2175,7 +2175,73 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createInventoryStatus({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createInventoryStatus(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteInventoryStatus({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteInventoryStatus(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+  Future<ResponseModel> updateInventoryStatus({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateInventoryStatus(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
 
 
+  Future<ResponseModel> createInventoryType({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createInventoryType(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteInventoryType({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteInventoryType(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+  Future<ResponseModel> updateInventoryType({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateInventoryType(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
 //end
 }

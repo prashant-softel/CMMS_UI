@@ -67,13 +67,13 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 1)
+                              .where((e) => e.feature_id == 5 && e.add == 0)
                               .length >
                           0
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.5,
+                          height: Get.height / 2.3,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -114,7 +114,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           255, 24, 243, 123)),
                                                 ),
                                                 SizedBox(
-                                                  height: 5,
+                                                  height: 20,
                                                 ),
                                               ],
                                             ),
@@ -122,19 +122,18 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Inventory Name:'),
+                                            CustomRichText(title: 'Name: '),
                                             SizedBox(
                                               width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
+                                                      .size
+                                                      .width *
+                                                      .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -157,155 +156,36 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                        ColorValues.whiteColor,
+                                                    ColorValues.whiteColor,
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                                    BorderRadius.circular(
+                                                        5),
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .checklistNumberCtrlr,
+                                                        .nameCtrlr,
                                                   )),
                                             ),
                                           ],
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 20,
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Equipment Category: '),
-                                            Expanded(
-                                              child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    35,
-                                                child: DropdownWidget(
-                                                  controller: controller,
-                                                  dropdownList: controller
-                                                      .equipmentCategoryList,
-                                                  isValueSelected: controller
-                                                      .isSelectedequipment
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedequipment.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Frequency: '),
+                                            CustomRichText(title: 'Description: '),
                                             SizedBox(
-                                              width: 64,
+                                              width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                child: DropdownWidget(
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.frequencyList,
-                                                  isValueSelected: controller
-                                                      .isSelectedfrequency
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedfrequency.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Description : ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 60,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
+                                                      .size
+                                                      .width *
+                                                      .2) -
                                                       30,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .manpowerCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Status : ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Expanded(
-                                              child: Container(
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -327,19 +207,15 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                        ColorValues.whiteColor,
+                                                    ColorValues.whiteColor,
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                                    BorderRadius.circular(
+                                                        5),
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .durationCtrlr,
+                                                        .descriptionCtrlr
+                                                    ,
                                                   )),
                                             ),
                                           ],
@@ -384,9 +260,10 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
+                                                text: 'Update',
                                                 onPressed: () {
                                                   controller
-                                                      .updateChecklistNumber(
+                                                      .updateInventoryType(
                                                           controller
                                                               .selectedItem?.id)
                                                       .then((value) {
@@ -396,7 +273,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                                text: 'Update')),
+                                        )
+                                    ),
                                   ],
                                 ),
                               ],
@@ -405,7 +283,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 1)
+                              .where((e) => e.feature_id == 5 && e.view == 0)
                               .length >
                           0
                       ? Expanded(
@@ -491,13 +369,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Checklist Id",
-                                              "Checklist ",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
+                                              "Name",
+                                              "Description ",
                                               "Action",
                                             ].map((column) {
                                               return TableViewColumn(
@@ -542,7 +415,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                               "Inventory Type Id",
                                               "Name",
                                               "Description",
-                                              "Status",
+                                              // "Status",
                                               "Action"
                                             ].map((column) {
                                               return TableViewColumn(
@@ -565,7 +438,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                     '${inventoryTypeListModelListDetails?.id}',
                                                     '${inventoryTypeListModelListDetails?.name}',
                                                     '${inventoryTypeListModelListDetails?.description}',
-                                                    '${inventoryTypeListModelListDetails?.status}',
+                                                    // '${inventoryTypeListModelListDetails?.status}',
                                                     "Action"
                                                   ];
                                                 },
@@ -589,17 +462,17 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                     "Action")
                                                                 ? Wrap(
                                                                     children: [
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
-                                                                                  // controller.selectedItem = controller.inventoryTypeList!.firstWhere((element) => "${element?.id}" == _inventoryTypeList[0]);
+                                                                                  controller.selectedItem = controller.inventoryTypeList!.firstWhere((element) => "${element?.id}" == _inventoryTypeList[0]);
 
-                                                                                  // controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
-                                                                                  // controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
+                                                                                  controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                  controller.descriptionCtrlr.text = "${controller.selectedItem?.description}";
                                                                                   // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
                                                                                   // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
                                                                                   // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
@@ -608,7 +481,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                                 },
                                                                               )
                                                                             : Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,
@@ -616,7 +489,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                                 label: 'Delete',
                                                                                 onPress: () {
                                                                                   // print(_inventoryTypeList[0]);
-                                                                                  // controller.isDeleteDialog(checklist_id: _inventoryTypeList[0], checklist: _inventoryTypeList[1]);
+                                                                                  controller.isDeleteDialog(checklist_id: _inventoryTypeList[0], checklist: _inventoryTypeList[1]);
                                                                                 },
                                                                               )
                                                                             : Container()
