@@ -4567,6 +4567,25 @@ class Repository {
     }
   }
 
+  Future<void> deleteGoodsOrders(Object id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGoodsOrders(
+        auth: auth,
+        id: id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<bool> updateBusinesslist({
     bool? isLoading,
     modulelistJsonString,
@@ -5083,7 +5102,6 @@ class Repository {
     }
   }
 
-
   Future<List<IncidentRiskTypeModel>> getIncidentRiskTypeList({
     // required int? job_type_id,
     required bool isLoading,
@@ -5110,8 +5128,7 @@ class Repository {
     }
   }
 
-  Future<bool> createRiskType(
-      {bool? isLoading, riskTypeJsonString}) async {
+  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRiskType(
@@ -5132,8 +5149,7 @@ class Repository {
     }
   }
 
-  Future<void> deleteRiskType(
-      Object businesstype_id, bool isLoading) async {
+  Future<void> deleteRiskType(Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteRiskType(
