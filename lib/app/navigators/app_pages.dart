@@ -115,6 +115,8 @@ import '../incident_dashboard/view/incident_screen.dart';
 import '../incident_risk_type/incident_listContent_binding.dart';
 import '../incident_risk_type/view/incident_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
+import '../inventory_category_list/inventory_category_list_binding.dart';
+import '../inventory_category_list/view/inventory_category_list.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../inventory_status_list/inventory_status_list_binding.dart';
 import '../inventory_status_list/view/inventory_status_list.dart';
@@ -619,5 +621,10 @@ class AppPages {
       binding: IncidentReportBinding(),
     ),
 
+    GetPage<dynamic>(
+      name: _Paths.inventoryCategory,
+      page: InventoryCategoryListScreen.new,
+      binding: InventoryCategoryListBinding(),
+    ),
   ];
 }

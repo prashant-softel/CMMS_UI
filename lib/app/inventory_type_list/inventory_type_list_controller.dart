@@ -28,6 +28,8 @@ class InventoryTypeListController extends GetxController {
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryTypeListModel?>? inventoryTypeList =
       <InventoryTypeListModel?>[].obs;
+  RxList<InventoryTypeListModel?> filteredData =
+      <InventoryTypeListModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -35,6 +37,16 @@ class InventoryTypeListController extends GetxController {
     rowsPerPage: 10,
   );
   InventoryTypeListModel? inventoryTypeListModel;
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      inventoryTypeList?.value = filteredData;
+      // return;
+    }
+
+    inventoryTypeList?.value = filteredData.where((item) =>
+        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   RxList<String> inventoryTypeListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;

@@ -349,7 +349,7 @@ class InventoryStatusListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
+                                        width: (Get.width * .2) - 200,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -358,7 +358,29 @@ class InventoryStatusListContentWeb
                                           onPressed: () {},
                                           text: 'columnVisibility'.tr,
                                         ),
-                                      )
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        width: 200,
+                                        height: 40,
+                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        child: TextField(
+                                          onChanged: (value) => controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            focusedBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey, width: 0.0),
+                                            ),
+                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey12,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(

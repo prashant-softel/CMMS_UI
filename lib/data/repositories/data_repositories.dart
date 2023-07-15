@@ -2243,5 +2243,39 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+  Future<ResponseModel> createInventoryCategory({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createInventoryCategory(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteInventoryCategory({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteInventoryCategory(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+  Future<ResponseModel> updateInventoryCategory({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateInventoryCategory(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
 //end
 }

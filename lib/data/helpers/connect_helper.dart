@@ -3450,4 +3450,62 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+  Future<ResponseModel> createInventoryCategory({
+    required String auth,
+    bool? isLoading,
+    required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/AddInventoryCategory',
+      Request.post,
+      checkpointJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> deleteInventoryCategory({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/DeleteInventoryCategory?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateInventoryCategory({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventoryCategory',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
 }

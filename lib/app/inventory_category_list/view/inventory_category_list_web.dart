@@ -1,7 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/domain/models/inventory_type_list_model.dart';
+import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -10,11 +10,12 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
-import '../inventory_type_list_controller.dart';
+import '../inventory_category_list_controller.dart';
 
-class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
-  InventoryTypeListContentWeb({Key? key}) : super(key: key);
-  final InventoryTypeListController controller = Get.find();
+class InventoryCategoryListContentWeb
+    extends GetView<InventoryCategoryListController> {
+  InventoryCategoryListContentWeb({Key? key}) : super(key: key);
+  final InventoryCategoryListController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / INVENTORY TYPE LIST",
+                  Text(" / INVENTORY CATEGORY LIST",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -73,7 +74,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 2.3,
+                          height: Get.height / 2.1,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -106,8 +107,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                 Text(
                                                   controller.selectedItem ==
                                                           null
-                                                      ? "Inventory Type added Successfully in the List."
-                                                      : "Inventory Type updated Successfully in the List.",
+                                                      ? "Inventory Category added Successfully in the List."
+                                                      : "Inventory Category updated Successfully in the List.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -124,7 +125,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                           mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'Name: '),
+                                            CustomRichText(title: 'RiskType: '),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -248,7 +249,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                     .appDarkBlueColor,
                                                 onPressed: () {
                                                   controller
-                                                      .createChecklistNumber()
+                                                      .createInventoryStatus()
                                                       .then((value) {
                                                     print("value,$value");
                                                     if (value == true)
@@ -260,10 +261,9 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
-                                                text: 'Update',
                                                 onPressed: () {
                                                   controller
-                                                      .updateInventoryType(
+                                                      .updateInventoryStatus(
                                                           controller
                                                               .selectedItem?.id)
                                                       .then((value) {
@@ -273,8 +273,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                        )
-                                    ),
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -303,7 +302,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Inventory Type List ",
+                                      "Inventory Category List ",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -321,7 +320,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
-                                                      .inventoryTypeList![0]
+                                                      .inventoryStatusList![0]
                                                       .toString())
                                                   .then((value) {
                                                 print("copy data");
@@ -387,12 +386,13 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.inventoryTypeList!.isEmpty
+                                  controller.inventoryStatusList!.isEmpty
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
-                                              "Name",
-                                              "Description ",
+                                              "Id",
+                                              "Name ",
+                                              "Description",
                                               "Action",
                                             ].map((column) {
                                               return TableViewColumn(
@@ -402,14 +402,11 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.inventoryTypeList
+                                                controller.inventoryStatusList
                                                         ?.length ??
                                                     0,
                                                 (index) {
                                                   return [
-                                                    '',
-                                                    '',
-                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -434,11 +431,10 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Inventory Type Id",
+                                              "Category Type Id",
                                               "Name",
                                               "Description",
-                                              // "Status",
-                                              "Action"
+                                              "Action",
                                             ].map((column) {
                                               return TableViewColumn(
                                                 minWidth: Get.width * 0.12,
@@ -448,27 +444,26 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller.inventoryTypeList
+                                                controller.inventoryStatusList
                                                         ?.length ??
                                                     0,
                                                 (index) {
-                                                  var inventoryTypeListModelListDetails =
+                                                  var inventoryStatusListModelListDetails =
                                                       controller
-                                                              .inventoryTypeList?[
+                                                              .inventoryStatusList?[
                                                           index];
                                                   return [
-                                                    '${inventoryTypeListModelListDetails?.id}',
-                                                    '${inventoryTypeListModelListDetails?.name}',
-                                                    '${inventoryTypeListModelListDetails?.description}',
-                                                    // '${inventoryTypeListModelListDetails?.status}',
+                                                    '${inventoryStatusListModelListDetails?.id}',
+                                                    '${inventoryStatusListModelListDetails?.name}',
+                                                    '${inventoryStatusListModelListDetails?.description}',
                                                     "Action"
                                                   ];
                                                 },
                                               ),
-                                            ].map((_inventoryTypeList) {
+                                            ].map((_inventoryStatusList) {
                                               return TableViewRow(
                                                   height: 60,
-                                                  cells: _inventoryTypeList
+                                                  cells: _inventoryStatusList
                                                       .map((value) {
                                                     return TableViewCell(
                                                         child: (value == 'No')
@@ -484,37 +479,38 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                     "Action")
                                                                 ? Wrap(
                                                                     children: [
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
-                                                                                0
-                                                                            ? TableActionButton(
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
-                                                                                  controller.selectedItem = controller.inventoryTypeList!.firstWhere((element) => "${element?.id}" == _inventoryTypeList[0]);
-
+                                                                                  controller.selectedItem = controller.inventoryStatusList!.firstWhere((element) => "${element?.id}" == _inventoryStatusList[0]);
                                                                                   controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
                                                                                   controller.descriptionCtrlr.text = "${controller.selectedItem?.description}";
-                                                                                  // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                  // controller.descriptionCtrlr.text = "${controller.selectedItem?.manPower}";
                                                                                   // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
                                                                                   // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
                                                                                   // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
                                                                                   // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
                                                                                 },
-                                                                              )
-                                                                            : Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
-                                                                                0
-                                                                            ? TableActionButton(
+                                                                              ),
+                                                                        //     : Container(),
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
                                                                                 color: ColorValues.appRedColor,
                                                                                 icon: Icons.delete,
                                                                                 label: 'Delete',
                                                                                 onPress: () {
-                                                                                  // print(_inventoryTypeList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _inventoryTypeList[0], checklist: _inventoryTypeList[1]);
+                                                                                  // print(_inventoryStatusList[0]);
+                                                                                  controller.isDeleteDialog(checklist_id: _inventoryStatusList[0], checklist: _inventoryStatusList[1]);
                                                                                 },
                                                                               )
-                                                                            : Container()
+                                                                            // : Container()
                                                                       ])
                                                                 : Text(
                                                                     value,

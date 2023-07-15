@@ -10,44 +10,35 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/create_inventory_status.dart';
+import '../../domain/models/inventory_category_model2.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class InventoryStatusListController extends GetxController {
-  InventoryStatusListController(
+import 'inventory_category_list_presenter.dart';
+
+class InventoryCategoryListController extends GetxController {
+  InventoryCategoryListController(
     this.inventoryStatusListPresenter,
   );
-  InventoryStatusListPresenter inventoryStatusListPresenter;
+  InventoryCategoryListPresenter inventoryStatusListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel2?> equipmentCategoryList =
+      <InventoryCategoryModel2>[].obs;
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<InventoryStatusListModel?>? inventoryStatusList =
-      <InventoryStatusListModel?>[].obs;
-  RxList<InventoryStatusListModel?> filteredData =
-      <InventoryStatusListModel?>[].obs;
+  RxList<InventoryCategoryModel2?>? inventoryStatusList =
+      <InventoryCategoryModel2?>[].obs;
+  RxList<InventoryCategoryModel2?> filteredData =
+      <InventoryCategoryModel2?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  InventoryStatusListModel? inventoryStatusListModel;
-
-  RxList<String> inventoryStatusListTableColumns = <String>[].obs;
-  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
-  Rx<String> selectedfrequency = ''.obs;
-  Rx<bool> isSelectedfrequency = true.obs;
-  var nameCtrlr = TextEditingController();
-  InventoryStatusListModel? selectedItem;
-  var descriptionCtrlr = TextEditingController();
-  var durationCtrlr = TextEditingController();
-  int selectedEquipmentId = 0;
-  int selectedfrequencyId = 0;
-  final isSuccess = false.obs;
+  InventoryCategoryModel2? inventoryStatusListModel;
   void search(String keyword) {
     if (keyword.isEmpty) {
       inventoryStatusList?.value = filteredData;
@@ -58,7 +49,17 @@ class InventoryStatusListController extends GetxController {
         item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
-
+  RxList<String> inventoryStatusListTableColumns = <String>[].obs;
+  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
+  Rx<String> selectedfrequency = ''.obs;
+  Rx<bool> isSelectedfrequency = true.obs;
+  var nameCtrlr = TextEditingController();
+  InventoryCategoryModel2? selectedItem;
+  var descriptionCtrlr = TextEditingController();
+  var durationCtrlr = TextEditingController();
+  int selectedEquipmentId = 0;
+  int selectedfrequencyId = 0;
+  final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
@@ -68,7 +69,7 @@ class InventoryStatusListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getInventoryStatusList(facilityId, type, true);
+        getInventoryCategoryList(facilityId, type, true);
       });
     });
     super.onInit();
@@ -94,12 +95,11 @@ class InventoryStatusListController extends GetxController {
   //   }
   // }
 
-  Future<void> getInventoryStatusList(
+  Future<void> getInventoryCategoryList(
       int facilityId, int type, bool isLoading) async {
-    inventoryStatusList?.value = <InventoryStatusListModel>[];
+    inventoryStatusList?.value = <InventoryCategoryModel2>[];
     final _inventoryStatusList =
-        await inventoryStatusListPresenter.getInventoryStatusList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+        await inventoryStatusListPresenter.getInventoryCategoryList(isLoading: isLoading);
 
     if (_inventoryStatusList != null) {
       inventoryStatusList!.value = _inventoryStatusList;
@@ -127,7 +127,7 @@ class InventoryStatusListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case RxList<InventoryCategoryModel2>:
         {
           int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
@@ -167,13 +167,13 @@ class InventoryStatusListController extends GetxController {
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", checklistJsonString});
-      await inventoryStatusListPresenter.createInventoryStatus(
+      await inventoryStatusListPresenter.createInventoryCategory(
         checklistJsonString: checklistJsonString,
         isLoading: true,
       );
       return true;
     }
-    getInventoryStatusList(facilityId, type, true);
+    getInventoryCategoryList(facilityId, type, true);
     return true;
   }
 
@@ -195,7 +195,7 @@ class InventoryStatusListController extends GetxController {
     //
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
-      getInventoryStatusList(facilityId, type, true);
+      getInventoryCategoryList(facilityId, type, true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -212,7 +212,7 @@ class InventoryStatusListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the InventoryStatus ',
+                text: 'Are you sure you want to delete the InventoryCategory ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
@@ -239,7 +239,7 @@ class InventoryStatusListController extends GetxController {
                 onPressed: () {
                   deleteCkecklist(checklist_id).then((value) {
                     Get.back();
-                    getInventoryStatusList(facilityId, type, true);
+                    getInventoryCategoryList(facilityId, type, true);
                   });
                 },
                 child: Text('YES'),
@@ -253,7 +253,7 @@ class InventoryStatusListController extends GetxController {
 
   Future<void> deleteCkecklist(String? checklist_id) async {
     {
-      await inventoryStatusListPresenter.deleteInventoryStatus(
+      await inventoryStatusListPresenter.deleteInventoryCategory(
         checklist_id,
         isLoading: true,
       );
@@ -274,7 +274,7 @@ class InventoryStatusListController extends GetxController {
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"checklistJsonString", checklistJsonString});
-    await inventoryStatusListPresenter.updateInventoryStatus(
+    await inventoryStatusListPresenter.updateInventoryCategory(
       checklistJsonString: checklistJsonString,
       isLoading: true,
     );
