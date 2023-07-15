@@ -2137,6 +2137,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getIncidentRiskTypeList({
     // int? job_type_id,
     required bool isLoading,
