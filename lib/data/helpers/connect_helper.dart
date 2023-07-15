@@ -2867,6 +2867,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteGoodsOrders({
+    required String auth,
+    bool? isLoading,
+    required id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/DeleteGO?id=$id',
+      Request.delete,
+      id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -3304,6 +3323,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
 
   Future<ResponseModel> createMrs({
     required String auth,

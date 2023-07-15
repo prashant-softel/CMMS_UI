@@ -1904,6 +1904,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> deleteGoodsOrders({
+    auth,
+    bool? isLoading,
+    id,
+  }) async {
+    var response = await connectHelper.deleteGoodsOrders(
+        auth: auth, isLoading: isLoading, id: id);
+    return response;
+  }
+
   Future<ResponseModel> updateFacilityList({
     auth,
     bool? isLoading,
@@ -2186,8 +2196,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
-
 
 //end
 }

@@ -4567,6 +4567,25 @@ class Repository {
     }
   }
 
+  Future<void> deleteGoodsOrders(Object id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGoodsOrders(
+        auth: auth,
+        id: id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<bool> updateBusinesslist({
     bool? isLoading,
     modulelistJsonString,
