@@ -110,9 +110,13 @@ import '../frequency_List/frequency_list_binding.dart';
 import '../frequency_List/view/frequency_list_screen.dart';
 import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
+import '../incident_dashboard/incident_report_binding.dart';
+import '../incident_dashboard/view/incident_screen.dart';
 import '../incident_risk_type/incident_listContent_binding.dart';
 import '../incident_risk_type/view/incident_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
+import '../inventory_category_list/inventory_category_list_binding.dart';
+import '../inventory_category_list/view/inventory_category_list.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../inventory_status_list/inventory_status_list_binding.dart';
 import '../inventory_status_list/view/inventory_status_list.dart';
@@ -614,6 +618,18 @@ class AppPages {
       name: _Paths.incidentRiskType,
       page: IncidentRiskTypeScreen.new,
       binding: IncidentRiskTypeBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.incident_risk_dashboard,
+      page: IncidentScreen.new,
+      binding: IncidentReportBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.inventoryCategory,
+      page: InventoryCategoryListScreen.new,
+      binding: InventoryCategoryListBinding(),
     ),
   ];
 }

@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
 import '../../navigators/app_pages.dart';
-import '../inventory_controller.dart';
+import '../incident_report_controller.dart';
 
-class InventoryScreen extends GetView<InventoryController> {
-  InventoryScreen({super.key});
-  final InventoryController controller = Get.find();
+class IncidentScreen extends GetView<IncidentReportController> {
+  IncidentScreen({super.key});
+  final IncidentReportController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Text(
-                          "Inventory",
+                          "Incident Report",
                           style: TextStyle(
                               color: Color.fromARGB(255, 159, 156, 156),
                               fontSize: 24,
@@ -73,43 +73,19 @@ class InventoryScreen extends GetView<InventoryController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _inventoryList(
-                            tittle: "Inventory List",
+                            tittle: "Incident Report List",
                             ontap: () {
                               Get.toNamed(
-                                Routes.inventoryList,
+                                Routes.incidentReportListWeb,
                               );
                               //  controller.createChecklist();
                             }),
                         _inventoryList(
-                            tittle: "Add Inventory",
+                            tittle: "Incident Risk Type",
                             ontap: () {
                               Get.toNamed(
-                                Routes.addInventoryScreen,
+                                Routes.incidentRiskType,
                               );
-                            }),
-                        _inventoryList(
-                            tittle: "Import Inventory",
-                            ontap: () {
-                              Get.toNamed(Routes.importInventory, arguments: 1);
-                            }),
-                        _inventoryList(
-                            tittle: "Warranty Certificates",
-                            ontap: () {
-                              // controller.pmSchedule();
-                            }),
-                        _inventoryList(
-                            tittle: "Calibration Certificates",
-                            ontap: () {
-                              // controller.pmTask();
-                            }),
-                        _inventoryList(
-                          tittle: "Warranty Claims",
-                          ontap: () => controller.breakdownMaintenance(),
-                        ),
-                        _inventoryList(
-                            tittle: "New Warranty Claim",
-                            ontap: () {
-                              controller.newWarrantyClaimList();
                             }),
                         // _inventoryList(
                         //     tittle: "Inventory Category",
@@ -132,48 +108,6 @@ class InventoryScreen extends GetView<InventoryController> {
                         //         Routes.inventoryStatusListScreen,
                         //       );
                         //     }),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Text(
-                        "Masters",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 159, 156, 156),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 6,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        _inventoryList(
-                            tittle: "Inventory Category",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.inventoryCategory,
-                              );
-                            }),
-                        _inventoryList(
-                            tittle: "Inventory Type",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.inventoryTypeListScreen,
-                              );
-                            }),
-                        _inventoryList(
-                            tittle: "Inventory Status",
-                            ontap: () {
-                              controller.inventoryStatusScreen();
-                            }),
                       ],
                     ),
                   ]),

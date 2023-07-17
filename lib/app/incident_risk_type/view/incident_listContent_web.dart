@@ -107,7 +107,7 @@ class IncidentRiskTypeWeb
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Create Modulelist",
+                                    "Create RiskType",
                                     style: Styles.blackBold16,
                                   ),
                                   SizedBox(

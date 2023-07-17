@@ -3,17 +3,18 @@ import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/frequency_model.dart';
+import '../models/inventory_category_model2.dart';
 
-class InventoryStatusListUsecase {
-  InventoryStatusListUsecase(this.repository);
+class InventoryCategoryListUsecase {
+  InventoryCategoryListUsecase(this.repository);
   Repository repository;
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+  Future<List<InventoryCategoryModel2?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
+      await repository.getInventoryCategory2List(
         auth,
         facilityId,
         isLoading,
@@ -33,23 +34,23 @@ class InventoryStatusListUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<bool> createInventoryStatus({
+  Future<bool> createInventoryCategory({
     checklistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createInventoryStatus(
+      await repository.createInventoryCategory(
           isLoading: isLoading, checklistJsonString: checklistJsonString);
-  deleteInventoryStatus(
+  deleteInventoryCategory(
           {required Object checklist_id, required bool isLoading}) async =>
-      await repository.deleteInventoryStatus(
+      await repository.deleteInventoryCategory(
         checklist_id,
         isLoading,
       );
-  Future<bool> updateInventoryStatus({
+  Future<bool> updateInventoryCategory({
     checklistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updateInventoryStatus(
+      await repository.updateInventoryCategory(
         isLoading: isLoading,
         checklistJsonString: checklistJsonString,
       );
