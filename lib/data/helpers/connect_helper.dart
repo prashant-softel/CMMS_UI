@@ -1520,6 +1520,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> submitPurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/SubmitPurchaseOrderData',
+      Request.post,
+      createGoReq,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateGoodsOrder({
     required String auth,
     createGo,
@@ -3447,7 +3473,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> createMrs({
     required String auth,

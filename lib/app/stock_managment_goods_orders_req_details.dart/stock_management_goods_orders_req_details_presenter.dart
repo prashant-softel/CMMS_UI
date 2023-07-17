@@ -1,7 +1,27 @@
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/usecases/create_mrs_usecase.dart';
 import 'package:cmms/domain/usecases/stock_managment_goods_order_req_details_usecase.dart';
 
 class GoodsOrdersReqDetailPresenter {
   GoodsOrdersReqDetailPresenter(this.goodsOrdersReqDetailUsecase);
   GoodsOrdersReqDetailUsecase goodsOrdersReqDetailUsecase;
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await goodsOrdersReqDetailUsecase.getAssetList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<Map<String, dynamic>?> submitPurchaseOrderData({
+    createGoReq,
+    required bool isLoading,
+  }) async {
+    return goodsOrdersReqDetailUsecase.submitPurchaseOrderData(
+      createGoReq: createGoReq,
+      isLoading: isLoading,
+    );
+  }
 }
