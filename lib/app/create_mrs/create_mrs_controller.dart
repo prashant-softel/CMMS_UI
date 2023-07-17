@@ -27,13 +27,18 @@ class CreateMrsController extends GetxController {
   var whereUsedCtrlr = TextEditingController();
 
   int whereUsedTypeId = 0;
+  var isSetTemplate = false.obs;
+
+  void setTemplatetoggle() {
+    isSetTemplate.value = !isSetTemplate.value;
+  }
 
   ///
   @override
   void onInit() async {
     whereUsedTypeId = Get.arguments;
     if (whereUsedTypeId != 0) {
-      whereUsedCtrlr.text = whereUsedTypeId.toString() ?? "";
+      whereUsedCtrlr.text = whereUsedTypeId.toString();
     }
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -58,6 +63,8 @@ class CreateMrsController extends GetxController {
 
       update(["AssetList"]);
     }
+    // assetItemList.value = [];
+
     addRowItem();
   }
 
@@ -97,7 +104,7 @@ class CreateMrsController extends GetxController {
         isEditMode: 0,
         facility_ID: facilityId,
         requestd_date: formattedFromdate,
-        setAsTemplate: 0,
+        setAsTemplate: isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,

@@ -340,13 +340,25 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                                 ),
                                                 TableActionButton(
                                                   color:
-                                                      ColorValues.appGreenColor,
+                                                      ColorValues.approveColor,
                                                   icon: Icons.check,
                                                   label: 'Approve',
                                                   onPress: () {
-                                                    Get.toNamed(
-                                                      Routes.mrsApprovalScreen,
-                                                    );
+                                                    controller.selectedItem =
+                                                        controller.mrsList!
+                                                            .firstWhere(
+                                                                (element) =>
+                                                                    "${element?.id}" ==
+                                                                    record[0]);
+                                                    int mrsId = controller
+                                                            .selectedItem?.id ??
+                                                        0;
+                                                    if (mrsId != 0) {
+                                                      Get.toNamed(
+                                                          Routes
+                                                              .mrsApprovalScreen,
+                                                          arguments: mrsId);
+                                                    }
                                                   },
                                                 ),
                                                 TableActionButton(

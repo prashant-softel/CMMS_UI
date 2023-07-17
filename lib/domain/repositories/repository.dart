@@ -78,6 +78,7 @@ import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/modulelist_model.dart';
+import '../models/mrs_detail_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
 import '../models/role_model.dart';
@@ -5452,6 +5453,32 @@ class Repository {
     }
   }
 
+  Future<MrsDetailsModel?> getMrsDetails(
+    int? mrsId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMrsDetails(
+        auth: auth,
+        mrsId: mrsId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final MrsDetailsModel _mrsDetailModel =
+            mrsDetailsModelFromJson(res.data);
+        return _mrsDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getMrsDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
 
   Future<bool> updateInventoryStatus({
     bool? isLoading,
