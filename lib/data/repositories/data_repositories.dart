@@ -1001,6 +1001,16 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updateGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -1942,6 +1952,17 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+
+  Future<ResponseModel> deleteGoodsOrders({
+    auth,
+    bool? isLoading,
+    id,
+  }) async {
+    var response = await connectHelper.deleteGoodsOrders(
+        auth: auth, isLoading: isLoading, id: id);
+    return response;
+  }
+
   Future<ResponseModel> updateFacilityList({
     auth,
     bool? isLoading,
@@ -2163,6 +2184,66 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       facilityId: facilityId,
     );
+  }
+
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getIncidentRiskTypeList({
+    // int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getIncidentRiskTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      // job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
+  Future<ResponseModel> createRiskType({
+    auth,
+    bool? isLoading,
+    riskTypeJsonString,
+  }) async {
+    var response = await connectHelper.createRiskType(
+        auth: auth,
+        isLoading: isLoading,
+        riskTypeJsonString: riskTypeJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteRiskType({
+    auth,
+    bool? isLoading,
+    businesstype_id,
+  }) async {
+    var response = await connectHelper.deleteRiskType(
+        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateRiskType({
+    auth,
+    bool? isLoading,
+    riskTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateRiskType(
+      auth: auth,
+      isLoading: isLoading,
+      riskTypeJsonString: riskTypeJsonString,
+    );
+    return response;
   }
 
 //end

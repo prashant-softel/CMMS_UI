@@ -13,4 +13,13 @@ class CreateMrsPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  Future<Map<String, dynamic>?> createMrs({
+    createMrsJsonString,
+    required bool isLoading,
+  }) async {
+    return createmrsUsecase.createMrs(
+      createMrsJsonString: createMrsJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

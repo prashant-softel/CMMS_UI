@@ -205,4 +205,10 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToIncidentRiskType() async {
+    Get.toNamed(
+      Routes.incidentRiskType,
+    );
+  }
+
 }

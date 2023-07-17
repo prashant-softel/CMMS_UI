@@ -72,7 +72,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.8,
+                          height: Get.height / 2,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -97,11 +97,11 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         SizedBox(
                                           height: 40,
                                         ),
-                                        CustomRichText(title: 'Title '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
+                                        CustomRichText(title: 'Title '),
                                             Expanded(
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -143,7 +143,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           ],
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 40,
                                         ),
                                         Row(
                                           mainAxisAlignment:
@@ -212,7 +212,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         SizedBox(
                                           height: 40,
                                         ),
-                                        CustomRichText(title: 'Description '),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -221,6 +220,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             //   "Description ",
                                             //   style: Styles.blackBold16,
                                             // ),
+                                        CustomRichText(title: 'Description '),
 
                                             Expanded(
                                               child: Container(
@@ -351,35 +351,35 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           style: Styles.blackBold16,
                                         ),
                                       ),
-                                      Spacer(),
-                                      Text(
-                                        "Facility Type:",
-                                        style: Styles.black16W500,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .3),
-                                        child: DropdownWidget(
-                                          controller: controller,
-                                          dropdownList:
-                                              controller.facilityTypeList,
-                                          isValueSelected: controller
-                                              .isSelectedfacility.value,
-                                          selectedValue:
-                                              controller.selectedfacility.value,
-                                          // onValueChanged:
-                                          //     controller.onValueChanged(46, 46),
-                                          onValueChanged:
-                                              (selectedValue, isValueSelected) {
-                                            controller.onValueChanged(
-                                                selectedValue, isValueSelected);
-                                          },
-                                        ),
-                                      ),
+                                      // Spacer(),
+                                      // Text(
+                                      //   "Facility Type:",
+                                      //   style: Styles.black16W500,
+                                      // ),
+                                      // SizedBox(
+                                      //   width: 5,
+                                      // ),
+                                      // Container(
+                                      //   width:
+                                      //       (MediaQuery.of(context).size.width *
+                                      //           .3),
+                                      //   child: DropdownWidget(
+                                      //     controller: controller,
+                                      //     dropdownList:
+                                      //         controller.facilityTypeList,
+                                      //     isValueSelected: controller
+                                      //         .isSelectedfacility.value,
+                                      //     selectedValue:
+                                      //         controller.selectedfacility.value,
+                                      //     // onValueChanged:
+                                      //     //     controller.onValueChanged(46, 46),
+                                      //     onValueChanged:
+                                      //         (selectedValue, isValueSelected) {
+                                      //       controller.onValueChanged(
+                                      //           selectedValue, isValueSelected);
+                                      //     },
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                   Divider(

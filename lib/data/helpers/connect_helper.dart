@@ -370,6 +370,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getIncidentRiskTypeList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetRiskTypeList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -545,11 +559,8 @@ class ConnectHelper {
     String? start_date,
     required String end_date,
   }) async {
-    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
-
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'GO/GetGOList?facility_id=$facility_id&fromDate=2001-01-01&toDate=2023-07-30',
+      'GO/GetGOList?facility_id=$facility_id&fromDate=$start_date&toDate=$end_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -1509,6 +1520,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/UpdateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('update Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   //Update Warranty Claim
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -1671,7 +1705,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/getPurchaseDetailsByID?id=$id',
+      'GO/GetGODetailsByID?id=214',
       Request.get,
       null,
       isLoading ?? false,
@@ -1679,7 +1713,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('ViewgetPurchaseDetailsById${responseModel.data}');
+    print('ViewgetPurchaseDetailsById1${responseModel.data}');
     return responseModel;
   }
 
@@ -2958,6 +2992,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteGoodsOrders({
+    required String auth,
+    bool? isLoading,
+    required id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/DeleteGO?id=$id',
+      Request.delete,
+      id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -3386,6 +3439,83 @@ class ConnectHelper {
       'Facility/DeleteFacility?id=$business_id',
       Request.delete,
       business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/CreateMRS',
+      Request.post,
+      createMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> createRiskType({
+    required String auth,
+    bool? isLoading,
+    required riskTypeJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/CreateRiskType', //AddBusiness
+      Request.post,
+      riskTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteRiskType({
+    required String auth,
+    bool? isLoading,
+    required businesstype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteRiskType?id=$businesstype_id',
+      Request.delete,
+      businesstype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateRiskType({
+    required String auth,
+    bool? isLoading,
+    required riskTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateRiskType',
+      Request.patch,
+      riskTypeJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

@@ -6,15 +6,16 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 
-class StockManagementAddGoodsOrdersPresenter {
-  StockManagementAddGoodsOrdersPresenter(
-      this.stockManagementAddGoodsOrdersUsecase);
-  StockManagementAddGoodsOrdersUsecase stockManagementAddGoodsOrdersUsecase;
+import '../../domain/usecases/stock_management_view_add_goods_orders_usecase.dart';
+
+class ViewAddGoodsOrdersPresenter {
+  ViewAddGoodsOrdersPresenter(this.viewAddGoodsOrdersUsecase);
+  ViewAddGoodsOrdersUsecase viewAddGoodsOrdersUsecase;
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required bool isLoading,
     required int? facilityId,
   }) async {
-    return stockManagementAddGoodsOrdersUsecase.getUnitCurrencyList(
+    return viewAddGoodsOrdersUsecase.getUnitCurrencyList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
@@ -24,7 +25,7 @@ class StockManagementAddGoodsOrdersPresenter {
     required int ListType,
     required bool isLoading,
   }) async {
-    return stockManagementAddGoodsOrdersUsecase.getBusinessList(
+    return viewAddGoodsOrdersUsecase.getBusinessList(
         type: ListType, isLoading: isLoading);
   }
 
@@ -33,7 +34,7 @@ class StockManagementAddGoodsOrdersPresenter {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await stockManagementAddGoodsOrdersUsecase.getAssetList(
+      await viewAddGoodsOrdersUsecase.getAssetList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
@@ -42,7 +43,7 @@ class StockManagementAddGoodsOrdersPresenter {
     createGo,
     required bool isLoading,
   }) async {
-    return stockManagementAddGoodsOrdersUsecase.createGoodsOrder(
+    return viewAddGoodsOrdersUsecase.createGoodsOrder(
       createGo: createGo,
       isLoading: isLoading,
     );
@@ -52,7 +53,7 @@ class StockManagementAddGoodsOrdersPresenter {
     createGo,
     required bool isLoading,
   }) async {
-    return stockManagementAddGoodsOrdersUsecase.updateGoodsOrder(
+    return viewAddGoodsOrdersUsecase.updateGoodsOrder(
       createGo: createGo,
       isLoading: isLoading,
     );
@@ -62,7 +63,7 @@ class StockManagementAddGoodsOrdersPresenter {
     bool? isLoading,
     required int id,
   }) async {
-    return stockManagementAddGoodsOrdersUsecase.getPurchaseDetailsById(
+    return viewAddGoodsOrdersUsecase.getPurchaseDetailsById(
       id: id,
       isLoading: isLoading ?? false,
     );

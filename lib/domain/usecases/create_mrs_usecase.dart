@@ -12,4 +12,12 @@ class CreateMrsUsecase {
         facilityId,
         isLoading,
       );
+  Future<Map<String, dynamic>> createMrs({
+    createMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createMrs(
+        createMrsJsonString,
+        isLoading,
+      );
 }

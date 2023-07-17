@@ -4,6 +4,7 @@ CreateGoModel createGoModelFromJson(String str) =>
     CreateGoModel.fromJson(json.decode(str));
 
 class CreateGoModel {
+  int? id;
   int? facility_id;
   int? order_type;
   int? location_ID;
@@ -46,7 +47,8 @@ class CreateGoModel {
       this.job_ref,
       this.amount,
       this.currency,
-      this.items});
+      this.items,
+      this.id});
 
   factory CreateGoModel.fromJson(Map<String, dynamic> json) {
     return CreateGoModel(
@@ -70,8 +72,9 @@ class CreateGoModel {
       job_ref: json['job_ref'],
       amount: json['amount'],
       currency: json['currency'],
-      items: json["items"] != null
-          ? List<Items>.from(json["items"]?.map((x) => Items.fromJson(x)))
+      id: json['id'],
+      items: json["go_items"] != null
+          ? List<Items>.from(json["go_items"]?.map((x) => Items.fromJson(x)))
           : [],
     );
   }
@@ -96,7 +99,8 @@ class CreateGoModel {
         "job_ref": job_ref,
         "amount": amount,
         "currency": currency,
-        "items": List<dynamic>.from(items!.map((x) => x)),
+        "id": id,
+        "go_items": List<dynamic>.from(items!.map((x) => x)),
       };
 }
 
@@ -105,25 +109,25 @@ class Items {
     this.assetItemID,
     this.cost,
     this.ordered_qty,
-    this.asset_type_ID,
+    this.poID,
   });
 
   int? assetItemID;
   int? cost;
   int? ordered_qty;
-  int? asset_type_ID;
+  int? poID;
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetItemID: json["assetItemID"],
         cost: json["cost"],
         ordered_qty: json["ordered_qty"],
-        asset_type_ID: json["asset_type_ID"],
+        poID: json["poID"],
       );
 
   Map<String, dynamic> toJson() => {
         "assetItemID": assetItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
-        "asset_type_ID": asset_type_ID
+        "poID": poID,
       };
 }

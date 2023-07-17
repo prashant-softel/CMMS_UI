@@ -17,6 +17,11 @@ class StockManagementGoodsOrdersUsecase {
         facilityId,
         isLoading,
       );
+  deleteGoodsOrders({required Object id, required bool isLoading}) async =>
+      await repository.deleteGoodsOrders(
+        id,
+        isLoading,
+      );
   Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
     required bool isLoading,
     required int? facility_id,

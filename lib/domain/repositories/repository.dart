@@ -62,6 +62,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
+import '../models/IncidentRiskTypeModel.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
 import '../models/asset_master_model.dart';
@@ -525,6 +526,41 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateGoodsOrder(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Goods Order update Successfully...", fontSize: 16.0);
+
+        Get.offNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Update Warranty claim
   Future<Map<String, dynamic>> updateWarrantyClaim(
     updateWarrantyClaim,
@@ -928,8 +964,7 @@ class Repository {
     }
   }
 
-
-   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
     int? id,
   }) async {
@@ -962,7 +997,6 @@ class Repository {
       return null;
     }
   }
-
 
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
@@ -2990,7 +3024,6 @@ class Repository {
     }
   }
 
-  
   ///
   Future<Map<String, dynamic>> updateJobCard(
     jobCard,
@@ -4353,8 +4386,7 @@ class Repository {
     }
   }
 
-  Future<bool> createSPVlist(
-      {bool? isLoading, businesslistJsonString}) async {
+  Future<bool> createSPVlist({bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSPVlist(
@@ -4664,13 +4696,31 @@ class Repository {
     }
   }
 
-
   Future<void> deleteSPV(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteSPV(
         auth: auth,
         business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<void> deleteGoodsOrders(Object id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGoodsOrders(
+        auth: auth,
+        id: id,
         isLoading: isLoading,
       );
 
@@ -4733,7 +4783,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateFacilityList({
     bool? isLoading,
@@ -5094,8 +5143,6 @@ class Repository {
     }
   }
 
-
-
   Future<bool> updateBusinessType({
     bool? isLoading,
     businessTypeJsonString,
@@ -5200,6 +5247,133 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> createMrs(
+    createMrsJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " Mrs Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<List<IncidentRiskTypeModel>> getIncidentRiskTypeList({
+    // required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getIncidentRiskTypeList(
+        // job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = IncidentRiskTypeListModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createRiskType(
+          auth: auth,
+          isLoading: isLoading,
+          riskTypeJsonString: riskTypeJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteRiskType(Object businesstype_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteRiskType(
+        auth: auth,
+        businesstype_id: businesstype_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateRiskType({
+    bool? isLoading,
+    riskTypeJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateRiskType(
+        auth: auth,
+        isLoading: isLoading,
+        riskTypeJsonString: riskTypeJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 }

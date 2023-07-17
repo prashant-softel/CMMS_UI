@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<GoodsOrdersListModel> goodOrderListModelFromJson(String str) =>
     List<GoodsOrdersListModel>.from(
         json.decode(str).map(GoodsOrdersListModel.fromJson));
@@ -86,7 +88,7 @@ class GoodsOrdersListModel {
       ordered_qty: json['ordered_qty'],
       rejectedRemark: json['rejectedRemark'],
       facility_id: json['facility_id'],
-      purchaseDate: json['purchaseDate'],
+      purchaseDate: Utility.getFormatedyearMonthDay(json['purchaseDate']),
       vendorID: json['vendorID'],
       status: json['status'],
       asset_code: json['asset_code'],

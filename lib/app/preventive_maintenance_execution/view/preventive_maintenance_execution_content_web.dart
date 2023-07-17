@@ -3,7 +3,6 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../../domain/models/update_pm_task_execution_model.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -322,40 +321,102 @@ class PreventiveMaintenanceExecutionContentWeb
                               ),
                               Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text("Material Used",
-                                          style: Styles.blue700),
-                                      Container(
-                                          width: Get.width / 4,
-                                          child: LoginCustomTextfield())
-                                    ],
+                                  Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: ColorValues.whiteColor,
+                                      border: Border.all(
+                                        color: ColorValues.whiteColor,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Material Used",
+                                              style: Styles.blue700),
+                                          InkWell(
+                                            child:
+                                                Icon(Icons.arrow_forward_ios),
+                                            onTap: () {
+                                              //action code when clicked
+                                              print("The icon is clicked");
+                                            },
+                                          )
+
+                                          //     child: LoginCustomTextfield())
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Dimens.boxHeight10,
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text("Return Items",
-                                          style: Styles.blue700),
-                                      Container(
-                                          width: Get.width / 4,
-                                          child: LoginCustomTextfield())
-                                    ],
+                                  Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: ColorValues.whiteColor,
+                                      border: Border.all(
+                                        color: ColorValues.whiteColor,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Return Items",
+                                              style: Styles.blue700),
+                                          InkWell(
+                                            child:
+                                                Icon(Icons.arrow_forward_ios),
+                                            onTap: () {
+                                              //action code when clicked
+                                              print("The icon is clicked");
+                                            },
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Dimens.boxHeight10,
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text("Request From Store",
-                                          style: Styles.blue700),
-                                      Container(
-                                          width: Get.width / 4,
-                                          child: LoginCustomTextfield())
-                                    ],
+                                  Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: ColorValues.whiteColor,
+                                      border: Border.all(
+                                        color: ColorValues.whiteColor,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.toNamed(Routes.createMrs,
+                                              arguments: controller
+                                                      .pmtaskViewModel
+                                                      .value
+                                                      ?.id ??
+                                                  0);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Request From Store",
+                                                style: Styles.blue700),
+                                            Icon(Icons.arrow_forward_ios),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   Dimens.boxHeight15,
                                   (controller.historyLog != null &&
@@ -445,7 +506,6 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   }).toList(),
                                                 ),
                                               ),
-                                           
                                             ],
                                           ),
                                         )
