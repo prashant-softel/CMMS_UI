@@ -289,7 +289,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
+                            crossAxisSpacing: 40,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -325,7 +325,7 @@ class MastersDashboard extends GetView<MastersController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Module List",
+                                  "Business ",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
                                     fontSize: 16,
@@ -334,13 +334,13 @@ class MastersDashboard extends GetView<MastersController> {
                                 ),
                                 SizedBox(
                                     width:
-                                        10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                                 Expanded(
                                   child: Divider(
                                     color: Colors
                                         .grey, // Customize the color of the line if needed
                                     height:
-                                        1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                                   ),
                                 ),
                               ],
@@ -350,58 +350,14 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
+                            crossAxisSpacing: 40,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
+                            Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Roles",
-                                    onTap: () {
-                                      controller.goToRoleTypeList();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Role Access",
-                                    onTap: () {
-                                      controller.goToRoleAccess();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Competencies",
-                                    onTap: () {
-                                      controller.goToCompetencyScreen();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Designation",
-                                    onTap: () {
-                                      controller.goToDesignationScreen();
-                                    });
-                              }))),
-                              OnHover(
-                                builder: ((isHovered) {
-                                  return createContentTile(
-                                      title: "Module List",
-                                      onTap: () {
-                                        controller.goToModuleTypeList();
-                                      });
-                                }),
-                              ),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Feature List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
-                              }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Business List",
@@ -423,7 +379,7 @@ class MastersDashboard extends GetView<MastersController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Users",
+                                  "Module and Users",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
                                     fontSize: 16,
@@ -448,7 +404,123 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
+                            crossAxisSpacing: 40,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              OnHover(
+                                builder: ((isHovered) {
+                                  return createContentTile(
+                                      title: "Module List",
+                                      onTap: () {
+                                        controller.goToModuleTypeList();
+                                      });
+                                }),
+                              ),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Feature List",
+                                    onTap: () {
+                                      controller.goToBlockTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Roles",
+                                    onTap: () {
+                                      controller.goToRoleTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Role Access",
+                                    onTap: () {
+                                      controller.goToRoleAccess();
+                                    });
+                              }))),
+
+                            ],
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 40,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                            Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "User List",
+                                    onTap: () {
+                                      controller.goToUserList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Add User",
+                                    onTap: () {
+                                      controller.goToAddUser();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Designation",
+                                    onTap: () {
+                                      controller.goToDesignationScreen();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Competencies",
+                                    onTap: () {
+                                      controller.goToCompetencyScreen();
+                                    });
+                              }))),
+
+                            ],
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "General ",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 40,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -473,6 +545,13 @@ class MastersDashboard extends GetView<MastersController> {
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "State List",
+                                    onTap: () {
+                                      controller.goToStateTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "City List",
                                     onTap: () {
                                       controller.goToStateTypeList();
                                     });
@@ -592,7 +671,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 6,
+                            crossAxisSpacing: 40,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -608,13 +687,7 @@ class MastersDashboard extends GetView<MastersController> {
                                     });
                               }))),
 
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Incident Risk Type",
-                                    onTap: () {
-                                      controller.goToIncidentRiskType();
-                                    });
-                              }))),
+
                             ],
                           ),
                         ],
@@ -629,44 +702,35 @@ class MastersDashboard extends GetView<MastersController> {
   }
 
   createContentTile({required String title, Function()? onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorValues.appLightBlueColor,
-          borderRadius: BorderRadius.circular(2),
-        ),
-        padding: EdgeInsets.all(9),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                    color: ColorValues.whiteColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 243, 245, 245),
-                border: Border.all(
-                  color: ColorValues.whiteColor,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorValues.skyBlueColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+          padding: EdgeInsets.all(9),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      color: ColorValues.whiteColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+
+
+                  textAlign: TextAlign.center, // Updated
                 ),
-                borderRadius: BorderRadius.circular(5),
+
               ),
-              child: Icon(
-                Icons.format_list_bulleted,
-                size: 20,
-                color: ColorValues.appLightBlueColor,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

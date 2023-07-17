@@ -44,7 +44,12 @@ class BlockTypeListUsecase {
       // job_type_id: job_type_id,
     );
   }
-
+  deleteBlock(
+      {required Object business_id, required bool isLoading}) async =>
+      await repository.deleteBlock(
+        business_id,
+        isLoading,
+      );
   Future<bool> createBlockType({
     blockTypeJsonString,
     bool? isLoading,

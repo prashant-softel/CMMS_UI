@@ -15,6 +15,7 @@ class BlockTypeListModel {
   BlockTypeListModel({
     this.id,
     this.name,
+    this.spv,
     this.address,
     this.city,
     this.state,
@@ -25,6 +26,7 @@ class BlockTypeListModel {
   int? id;
   String? name;
   String? address;
+  String? spv;
   String? city;
   String? state;
   String? country;
@@ -35,6 +37,7 @@ class BlockTypeListModel {
         id: json["id"],
         name: json["name"],
         address: json['address'],
+        spv: json['spv'],
         city: json['city'],
         state: json['state'],
         country: json['country'],
@@ -44,7 +47,8 @@ class BlockTypeListModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "address": address,
+    "address": address,
+    "spv": spv,
         "city": city,
         "state": state,
         "country": country,

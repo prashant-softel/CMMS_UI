@@ -211,4 +211,15 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToUserList() async {
+    Get.toNamed(
+      Routes.userList,
+    );
+  }
+  Future<void> goToAddUser() async {
+    Get.toNamed(
+      Routes.addUser,
+    );
+  }
+
 }
