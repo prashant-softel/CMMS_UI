@@ -4,7 +4,8 @@ import 'dart:ui';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/view_incident_report.dart/view_incident_report_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/view_incident_report/view_incident_report_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -86,6 +87,9 @@ class ViewIncidentReportController extends GetxController {
 
   ///Action Taken Date & Time
   var actionTakenDateTimeCtrlrWeb = TextEditingController();
+
+  ///Reporting Date & Time
+  var reportingDateTimeCtrlrWeb = TextEditingController();
   
 
  
@@ -273,6 +277,7 @@ int? id = 0;
 
       incidentDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.incident_datetime}'))}';
       actionTakenDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.action_taken_datetime}'))}';
+      reportingDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.reporting_datetime}'))}';
 
 
         }
@@ -371,6 +376,11 @@ int? id = 0;
     } catch (e) {
       print('Error printing: $e');
     }
+  }
+
+  Future<void> editIncidentReport({int? id}) async {
+    Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
+    print('Argument$id');
   }
 
 }

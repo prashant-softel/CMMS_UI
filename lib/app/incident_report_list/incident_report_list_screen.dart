@@ -1,7 +1,7 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
+import 'package:cmms/app/incident_report_list/view/web/incident_report_list_content_web.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/app/view_incident_report.dart/view/web/view_incident_report_content_web.dart';
-import 'package:cmms/app/view_incident_report.dart/view_incident_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import '../../home/home_controller.dart';
@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 // import 'mobile/inventory_list_content_mobile.dart';
 // import 'web/inventory_list_content_web.dart';
 
-class ViewIncidentReportScreen extends GetView<ViewIncidentReportController> {
-  ViewIncidentReportScreen({Key? key});
+class IncidentReportListScreen extends GetView<IncidentReportListController> {
+  IncidentReportListScreen({Key? key});
   // final HomeController controller = Get.find();
   
 
@@ -32,7 +32,7 @@ class ViewIncidentReportScreen extends GetView<ViewIncidentReportController> {
               //   ),
               if (Responsive.isDesktop(context))
                 Expanded(
-                  child: ViewIncidentReportContentWeb(),
+                  child: IncidentReportListWeb(),
                 ),
             ]),
       ),

@@ -59,6 +59,7 @@ class IncidentReportDetailsModel {
     this.status,
     this.historyId,
     this.status_name,
+    this.reporting_datetime,
     this.approved_at,
     this.status_short,
     this.status_long,
@@ -91,6 +92,7 @@ class IncidentReportDetailsModel {
   int? action_taken_by;
   String? action_taken_by_name;
   DateTime? action_taken_datetime;
+  DateTime? reporting_datetime;
   int? inverstigated_by;
   String? inverstigated_by_name;
   int? verified_by;
@@ -150,6 +152,9 @@ class IncidentReportDetailsModel {
         incident_datetime: json['incident_datetime'] == null
             ? null
             : DateTime.parse(json['incident_datetime'] as String),
+        reporting_datetime: json['reporting_datetime'] == null
+            ? null
+            : DateTime.parse(json['reporting_datetime'] as String),
         victim_id: json['victim_id'],
         victim_name: json['victim_name'],
         action_taken_by: json['action_taken_by'],
@@ -224,6 +229,7 @@ class IncidentReportDetailsModel {
         "created_by_name": created_by_name,
         "created_by_id": created_by_id,
         "incident_datetime": incident_datetime?.toIso8601String(),
+        "reporting_datetime": reporting_datetime?.toIso8601String(),
         "victim_id": victim_id,
         "victim_name": victim_name,
         "action_taken_by": action_taken_by,

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 
-import 'package:cmms/app/add_incident_report.dart/add_incident_report_binding.dart';
-import 'package:cmms/app/add_incident_report.dart/add_incident_report_screen.dart';
+import 'package:cmms/app/add_incident_report/add_incident_report_binding.dart';
+import 'package:cmms/app/add_incident_report/add_incident_report_screen.dart';
 import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
 import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
 
@@ -20,8 +20,8 @@ import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_binding.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_screen.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
@@ -152,8 +152,8 @@ import '../stock_managment_goods_orders_req_details.dart/stock_management_goods_
 import '../user_list/user_list_binding.dart';
 import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
-import '../view_incident_report.dart/view_incident_report_binding.dart';
-import '../view_incident_report.dart/view_incident_report_screen.dart';
+import '../view_incident_report/view_incident_report_binding.dart';
+import '../view_incident_report/view_incident_report_screen.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';

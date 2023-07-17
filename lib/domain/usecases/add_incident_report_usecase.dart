@@ -1,4 +1,7 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
@@ -13,6 +16,69 @@ class AddIncidentReportUsecase {
     return await _repository.generateToken();
   }
 
+   Future<Map<String, dynamic>> updateIncidentReport({
+    updateIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateIncidentReport(
+        updateIncidentReport,
+        isLoading,
+      );
+
+  Future<List<BlockModel?>?> getBlocksList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getBlocksList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+
+  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+    bool? isLoading,  
+    required int id,
+  }) async =>
+      await _repository.getIncidentReportDetail(
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<List<EmployeeListModel>> getIncidentInvestigationDoneByList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+   Future<List<EmployeeListModel>> getIncidentInvestigationVerificationDoneByList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+   Future<List<EmployeeListModel>> getVictimNameList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+  Future<List<EmployeeListModel>> getAssetRestorationActionTakenByList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+  
+
    Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,
@@ -26,6 +92,15 @@ class AddIncidentReportUsecase {
       categoryIds: categoryIds,
     );
   }
+
+   Future<Map<String, dynamic>> createIncidentReport({
+    createIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await _repository.createIncidentReport(
+        createIncidentReport,
+        isLoading,
+      );
 
 
    Future<List<TypePermitModel?>?> getTypePermitList(

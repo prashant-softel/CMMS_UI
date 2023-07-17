@@ -443,6 +443,51 @@ class Repository {
     }
   }
 
+   //Create Incident Report
+  Future<Map<String, dynamic>> createIncidentReport(
+    createIncidentReport,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createIncidentReport(
+        auth: auth,
+        createIncidentReport: createIncidentReport,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Incident Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createIncidentReport');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
     createGo,
@@ -559,6 +604,52 @@ class Repository {
       return Map();
     }
   }
+
+
+  //Update Incident Report
+  Future<Map<String, dynamic>> updateIncidentReport(
+    updateIncidentReport,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateIncidentReport(
+        auth: auth,
+        updateIncidentReport: json.encode(updateIncidentReport),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Incident Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateIncidentReport');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -1839,6 +1930,63 @@ class Repository {
       log(error.toString());
     }
   }
+
+
+///Incident Report Reject Button
+   Future<void> incidentReportRejectButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.incidentReportRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('IncidentReportRejectResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'incidentReportRejectButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
+  ///Incident Report Approve Button
+   Future<void> incidentReportApproveButton(
+    String? incidentId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.incidentReportApproveButton(
+        auth: auth,
+        incidentId: incidentId,
+        isLoading: isLoading ?? false,
+      );
+      print('IncidentReportApproveResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'incidentReportApproveButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
+
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,

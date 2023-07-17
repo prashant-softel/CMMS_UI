@@ -1,8 +1,9 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/view_incident_report.dart/view_incident_report_controller.dart';
+import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 
@@ -485,8 +486,7 @@ class ViewIncidentReportContentWeb
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        // '${controller.incidentReportDetailsModel.value?.title}',
-                                                        '',
+                                                        '${controller.incidentReportDetailsModel.value?.title}',
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -499,7 +499,7 @@ class ViewIncidentReportContentWeb
                                                         height: 7,
                                                       ),
                                                       Text(
-                                                        '${controller.incidentReportDetailsModel.value?.block_name}',
+                                                        '${controller.incidentReportDetailsModel.value?.equipment_name}',
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -512,7 +512,7 @@ class ViewIncidentReportContentWeb
                                                         height: 7,
                                                       ),
                                                       Text(
-                                                        '2023-01-12 06:15:35',
+                                                        '${controller.reportingDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -525,7 +525,7 @@ class ViewIncidentReportContentWeb
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        '${controller.incidentReportDetailsModel.value?.risk_level_name}',
+                                                        '${controller.incidentReportDetailsModel.value?.severity}',
                                                         style: TextStyle(
                                                             color: Colors.red),
                                                       ),
@@ -618,139 +618,162 @@ class ViewIncidentReportContentWeb
                                                   ),
                                                 ],
                                               ),
-                                               ///Incident Report History
-                                                     Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: 300,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Incident Report History ",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Divider(
-                                                          color: ColorValues
-                                                              .greyLightColour,
-                                                        ),
-                                                        Expanded(
-                                                          child:
-                                                              ScrollableTableView(
-                                                            columns: [
-                                                              "Time Stamp",
-                                                              "Module Ref ID",
-                                                              "Comment",
-                                                              "Module Type",
-                                                              "Status",
-                                                            ].map((column) {
-                                                              return TableViewColumn(
-                                                                label: column,
-                                                                minWidth:
-                                                                    Get.width *
-                                                                        0.15,
-                                                              );
-                                                            }).toList(),
-                                                            rows: [
-                                                              ...List.generate(
-                                                                controller
-                                                                        .historyList
-                                                                        ?.length ??
-                                                                    0,
-                                                                (index) {
-                                                                  var getHistoryListDetails =
-                                                                      controller
-                                                                              .historyList?[
-                                                                          index];
-                                                                  return [
-                                                                    '${getHistoryListDetails?.createdAt}',
-                                                                    '${getHistoryListDetails?.moduleRefId ?? ''}',
-                                                                    '${getHistoryListDetails?.comment ?? ''}',
-                                                                    '${getHistoryListDetails?.moduleType ?? ''}',
-                                                                    '${getHistoryListDetails?.status_name ?? ''}',
-                                                                  ];
-                                                                },
-                                                              ),
-                                                              // [
-                                                            ].map((record) {
-                                                              return TableViewRow(
-                                                                height: 90,
-                                                                cells: record
-                                                                    .map(
-                                                                        (value) {
-                                                                  return TableViewCell(
-                                                                    child: Text(
-                                                                        value),
-                                                                  );
-                                                                }).toList(),
-                                                              );
-                                                            }).toList(),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
+
+                                              ///Incident Report History
+                                              Container(
+                                                margin: Dimens.edgeInsets20,
+                                                height: 300,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .lightGreyColorWithOpacity35,
+                                                    width: 1,
                                                   ),
-                                                
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .appBlueBackgroundColor,
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Incident Report History ",
+                                                            style:
+                                                                Styles.blue700,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      color: ColorValues
+                                                          .greyLightColour,
+                                                    ),
+                                                    Expanded(
+                                                      child:
+                                                          ScrollableTableView(
+                                                        columns: [
+                                                          "Time Stamp",
+                                                          "Module Ref ID",
+                                                          "Comment",
+                                                          "Module Type",
+                                                          "Status",
+                                                        ].map((column) {
+                                                          return TableViewColumn(
+                                                            label: column,
+                                                            minWidth:
+                                                                Get.width *
+                                                                    0.15,
+                                                          );
+                                                        }).toList(),
+                                                        rows: [
+                                                          ...List.generate(
+                                                            controller
+                                                                    .historyList
+                                                                    ?.length ??
+                                                                0,
+                                                            (index) {
+                                                              var getHistoryListDetails =
+                                                                  controller
+                                                                          .historyList?[
+                                                                      index];
+                                                              return [
+                                                                '${getHistoryListDetails?.createdAt}',
+                                                                '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                                '${getHistoryListDetails?.comment ?? ''}',
+                                                                '${getHistoryListDetails?.moduleType ?? ''}',
+                                                                '${getHistoryListDetails?.status_name ?? ''}',
+                                                              ];
+                                                            },
+                                                          ),
+                                                          // [
+                                                        ].map((record) {
+                                                          return TableViewRow(
+                                                            height: 90,
+                                                            cells: record
+                                                                .map((value) {
+                                                              return TableViewCell(
+                                                                child:
+                                                                    Text(value),
+                                                              );
+                                                            }).toList(),
+                                                          );
+                                                        }).toList(),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         );
                                       }),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 150,
-                                      ),
-                                      Container(
-                                        height: 28,
-                                        child: CustomElevatedButton(
-                                          icon: Icons.print_outlined,
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          text: "Print",
-                                          onPressed: () {
-                                            controller.printScreen();
-                                          },
+                                  Obx(
+                                    () => Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: 150,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      CustomElevatedButton(
-                                        backgroundColor: Colors.red,
-                                        onPressed: () {
-                                          // controller.saveAsDraft();
-                                        },
-                                        text: 'Cancel',
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                    ],
+                                        Container(
+                                          height: 28,
+                                          child: CustomElevatedButton(
+                                            icon: Icons.print_outlined,
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            text: "Print",
+                                            onPressed: () {
+                                              controller.printScreen();
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        CustomElevatedButton(
+                                          backgroundColor: Colors.red,
+                                          onPressed: () {
+                                            // controller.saveAsDraft();
+                                          },
+                                          text: 'Cancel',
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        //           varUserAccessModel.value.access_list!
+                                        // .where((e) => e.feature_id == 3 && e.edit == 1)
+                                        // .length > 0
+                                        // &&
+                                        controller.incidentReportDetailsModel
+                                                    .value?.id !=
+                                                null
+                                            ? CustomElevatedButton(
+                                                icon: Icons.edit,
+                                                backgroundColor: Colors.green,
+                                                onPressed: () {
+                                                  // controller.saveAsDraft();
+                                                  controller.editIncidentReport(
+                                                      id: controller
+                                                          .incidentReportDetailsModel
+                                                          .value
+                                                          ?.id);
+                                                },
+                                                text: 'Edit',
+                                              )
+                                            : Container()
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
@@ -777,7 +800,6 @@ class ViewIncidentReportContentWeb
   ) {
     return Column(//
         children: [
-     
       // Align(
       //     alignment: Alignment.topLeft,
       //     child: Padding(
@@ -954,7 +976,6 @@ class ViewIncidentReportContentWeb
   ) {
     return Column(//
         children: [
-      
       // Align(
       //     alignment: Alignment.topLeft,
       //     child: Padding(
@@ -1722,6 +1743,4 @@ class ViewIncidentReportContentWeb
       Dimens.boxHeight10,
     ]);
   }
-
- 
 }

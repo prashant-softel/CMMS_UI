@@ -8,12 +8,15 @@ String createIncidentReportModelToJson(CreateIncidentReportModel data) =>
     json.encode(data.toJson());
 
 class CreateIncidentReportModel {
+  
   int? facility_id;
   int? block_id;
   int? equipment_id;
   int? risk_level;
   String? incident_datetime;
+  String? reporting_datetime;
   int? victim_id;
+  String? title;
   int? action_taken_by;
   String? action_taken_datetime;
   int? inverstigated_by;
@@ -30,6 +33,8 @@ class CreateIncidentReportModel {
   String? insurance;
   int? insurance_status;
   String? insurance_remark;
+  int? id;
+  String? severity;
 
 
  
@@ -43,7 +48,9 @@ class CreateIncidentReportModel {
     this.equipment_id,
     this.risk_level,
     this.incident_datetime,
+    this.reporting_datetime,
     this.victim_id,
+    this.title,
     this.action_taken_by,
     this.action_taken_datetime,
     this.inverstigated_by,
@@ -60,6 +67,8 @@ class CreateIncidentReportModel {
     this.insurance,
     this.insurance_status,
     this.insurance_remark,
+    this.id,
+    this.severity,
 
 
     
@@ -69,13 +78,14 @@ class CreateIncidentReportModel {
 
   factory CreateIncidentReportModel.fromJson(Map<String, dynamic> json) =>
       CreateIncidentReportModel(
-        
         facility_id: json["facility_id"],
         block_id: json["block_id"],
         equipment_id: json['equipment_id'],
         risk_level: json['risk_level'],
         incident_datetime: json['incident_datetime'],
+        reporting_datetime: json['reporting_datetime'],
         victim_id: json['victim_id'],
+        title: json['title'],
         action_taken_by: json['action_taken_by'],
         action_taken_datetime: json['action_taken_datetime'],
         inverstigated_by: json['inverstigated_by'],
@@ -92,6 +102,8 @@ class CreateIncidentReportModel {
         insurance: json['insurance'],
         insurance_status: json['insurance_status'],
         insurance_remark: json['insurance_remark'],
+        id: json['id'],
+        severity: json['severity'],
 
 
 
@@ -105,7 +117,9 @@ class CreateIncidentReportModel {
         "equipment_id": equipment_id,
         "risk_level": risk_level,
         "incident_datetime": incident_datetime,
+        "reporting_datetime": reporting_datetime,
         "victim_id": victim_id,
+        "title": title,
         "action_taken_by": action_taken_by,
         "action_taken_datetime": action_taken_datetime,
         "inverstigated_by": inverstigated_by,
@@ -121,6 +135,8 @@ class CreateIncidentReportModel {
         "insurance": insurance,
         "insurance_status": insurance_status,
         "insurance_remark": insurance_remark,
+        "id": id,
+        "severity": severity,
 
 
 

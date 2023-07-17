@@ -579,6 +579,30 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> incidentReportRejectButton({
+    required String auth,
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.incidentReportRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> incidentReportApproveButton({
+    required String auth,
+    String? incidentId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.incidentReportApproveButton(
+        auth: auth,
+        incidentId: incidentId,
+        isLoading: isLoading ?? false,
+      );
+
   //  @override
   // Future<ResponseModel> getNewPermitList({
   //   int? facilityId,
@@ -954,6 +978,19 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
+
+
+  Future<ResponseModel> createIncidentReport({
+    required String auth,
+    createIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createIncidentReport(
+        auth: auth,
+        createIncidentReport: createIncidentReport,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createGoodsOrder({
     required String auth,
     createGo,
@@ -983,6 +1020,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.updateWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<ResponseModel> updateIncidentReport({
+    required String auth,
+    updateIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateIncidentReport(
+        auth: auth,
+        updateIncidentReport: updateIncidentReport,
         isLoading: isLoading ?? false,
       );
 
@@ -1903,6 +1951,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
 
   Future<ResponseModel> deleteGoodsOrders({
     auth,
