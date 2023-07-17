@@ -2187,7 +2187,17 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
+  Future<ResponseModel> getMrsDetails({
+    String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getMrsDetails(
+      auth: auth,
+      mrsId: mrsId,
+      isLoading: isLoading,
+    );
+  }
 
 //end
 }

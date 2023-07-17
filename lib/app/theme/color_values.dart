@@ -26,10 +26,12 @@ abstract class ColorValues {
   static const Color approveColor = greenColor;
   static const Color rejectColor = appRedColor;
   static const Color completeColor = appRedColor;
-  static const Color deleteColor = redColor;
   static const Color startColor = appYellowColor;
   static const Color viewColor = appDarkBlueColor;
   static const Color editColor = appYellowColor;
+  static const Color deleteColor = redColor;
+
+//link,cancel,close,submit,add new,export,coloum visi,issue,update,print,in progress
 
   // ============================================
 

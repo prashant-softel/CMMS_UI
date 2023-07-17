@@ -129,15 +129,14 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  //  controller
-                                  // .userDetailModel.value?.user_name ??
-                                  "Sujit Kumar",
+                                  controller.mrsDetailsModel.value
+                                          ?.requested_by_name ??
+                                      "",
                                   style: Styles.blue17),
                               Dimens.boxHeight10,
                               Text(
-                                  // controller.userDetailModel.value
-                                  //        ?.first_name ??
-                                  "Repairing",
+                                  controller.mrsDetailsModel.value?.activity ??
+                                      "",
                                   style: Styles.blue17),
                             ],
                           ),
@@ -162,15 +161,13 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  // controller
-                                  // .userDetailModel.value?.user_name ??
-                                  "23-04-2023  12:30:30",
+                                  controller.mrsDetailsModel.value
+                                          ?.requestd_date ??
+                                      "",
                                   style: Styles.blue17),
                               Dimens.boxHeight10,
                               Text(
-                                  // controller
-                                  // .userDetailModel.value?.last_name ??
-                                  "JC3435",
+                                  "${controller.whereUsedType}${controller.mrsDetailsModel.value?.whereUsedTypeId}",
                                   style: Styles.blue17),
                             ],
                           )
