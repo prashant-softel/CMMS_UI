@@ -107,7 +107,7 @@ class HomeDrawer extends GetView {
                         title: "Incident Report",
                         icon: "assets/files/reportins.png",
                         press: () {
-                          Get.offNamed(Routes.incidentReportListWeb);
+                          Get.offNamed(Routes.incident_risk_dashboard);
                         },
                       ),
                       MenuItem(

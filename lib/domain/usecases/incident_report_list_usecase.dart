@@ -33,7 +33,7 @@ class IncidentReportListUsecase {
   //     );
 
   //  Future<InventoryDetailsModel?> getInventoryDetail({
-  //   bool? isLoading,  
+  //   bool? isLoading,
   //   required int id,
   // }) async =>
   //     await _repository.getInventoryDetail(
@@ -136,6 +136,28 @@ class IncidentReportListUsecase {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+    );
+  }
+
+  Future<void> incidentReportRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await _repository.incidentReportRejectButton(
+      comment,
+      id,
+      isLoading,
+    );
+  }
+
+  Future<void> incidentReportApproveButton({
+    String? incidentId,
+    bool? isLoading,
+  }) async {
+    await _repository.incidentReportApproveButton(
+      incidentId,
+      isLoading,
     );
   }
 

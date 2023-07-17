@@ -350,9 +350,13 @@ class StockManagementGoodsOrdersWeb
                                                   color:
                                                       ColorValues.appRedColor,
                                                   icon: Icons.delete,
-                                                  // label: 'Delete',
-                                                  onPress: () {},
-                                                )
+                                                  label: 'Delete',
+                                                  onPress: () {
+                                                    controller.isDeleteDialog(
+                                                        id: record[0],
+                                                        generatedBy: record[1]);
+                                                  },
+                                                ),
                                               ])
                                             : Text(value),
                                       );

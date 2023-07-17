@@ -109,25 +109,25 @@ class Items {
     this.assetItemID,
     this.cost,
     this.ordered_qty,
-    this.asset_type_ID,
+    this.poID,
   });
 
   int? assetItemID;
   int? cost;
   int? ordered_qty;
-  int? asset_type_ID;
+  int? poID;
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetItemID: json["assetItemID"],
         cost: json["cost"],
         ordered_qty: json["ordered_qty"],
-        asset_type_ID: json["asset_type_ID"],
+        poID: json["poID"],
       );
 
   Map<String, dynamic> toJson() => {
         "assetItemID": assetItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
-        "asset_type_ID": asset_type_ID
+        "poID": poID,
       };
 }

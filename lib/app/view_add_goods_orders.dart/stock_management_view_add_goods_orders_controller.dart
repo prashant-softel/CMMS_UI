@@ -115,7 +115,17 @@ class ViewAddGoodsOrdersController extends GetxController {
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
-      print('Additioanl Email Employees${_getPurchaseDetailsById}');
+      print(
+          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
+      rowItem.value = [];
+      _getPurchaseDetailsById.goDetails?.forEach((element) {
+        rowItem.value.add([
+          {"key": "Drop_down", "value": 'Please Select'},
+          {'key': "Paid_By", "value": 'Please Select'},
+          {'key': "Cost", "value": '${element.cost}'},
+          {'key': "Order", "value": ''},
+        ]);
+      });
 
       challanDateTc.text =
           getPurchaseDetailsByIDModel.value?.challan_date ?? "";
@@ -249,7 +259,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+          poID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
@@ -311,7 +321,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          asset_type_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+          poID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(

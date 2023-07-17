@@ -159,7 +159,7 @@ class InventoryScreen extends GetView<InventoryController> {
                             tittle: "Inventory Category",
                             ontap: () {
                               Get.toNamed(
-                                Routes.assetTypeListScreen,
+                                Routes.inventoryCategory,
                               );
                             }),
                         _inventoryList(

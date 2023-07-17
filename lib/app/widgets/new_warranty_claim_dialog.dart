@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,8 @@ class NewWarrantyClaimDialog extends GetView {
                   Center(
                     child: RichText(
                       text: TextSpan(
-                        text: 'Goods Oders Added Successfully',
+                        text:
+                            'Warranty Claim Added Successfully with Claim ID ',
                         style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
                           TextSpan(
@@ -88,22 +90,22 @@ class NewWarrantyClaimDialog extends GetView {
                         SizedBox(
                           width: 15,
                         ),
-                        // ElevatedButton(
-                        //   style: Styles.greenElevatedButtonStyle,
-                        //   onPressed: () {
-                        //     Get.offAllNamed(Routes.warrantyClaimList);
-                        //     controller.getWarrantyClaimList();
-                        //   },
-                        //   child: const Text('Warranty Claim List'),
-                        // ),
-                        // Dimens.boxWidth10,
-                        // ElevatedButton(
-                        //   style: Styles.yellowElevatedButtonStyle,
-                        //   onPressed: () =>
-                        //       Get.offAndToNamed(Routes.viewWarrantyClaim),
-                        //   child: const Text('View This Warranty Claim'),
-                        // ),
-                        // Dimens.boxWidth10,
+                        ElevatedButton(
+                          style: Styles.greenElevatedButtonStyle,
+                          onPressed: () {
+                            Get.offAllNamed(Routes.warrantyClaimList);
+                            controller.getWarrantyClaimList();
+                          },
+                          child: const Text('Warranty Claim List'),
+                        ),
+                        Dimens.boxWidth10,
+                        ElevatedButton(
+                          style: Styles.yellowElevatedButtonStyle,
+                          onPressed: () =>
+                              Get.offAndToNamed(Routes.viewWarrantyClaim),
+                          child: const Text('View This Warranty Claim'),
+                        ),
+                        Dimens.boxWidth10,
                         ElevatedButton(
                           style: Styles.darkBlueElevatedButtonStyle,
                           onPressed: () => Get.back(),

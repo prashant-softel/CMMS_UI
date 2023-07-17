@@ -30,27 +30,27 @@ class InventoryTypeListPresenter {
       await inventoryTypeListUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<bool> createChecklistNumber({
+  Future<bool> createInventoryType({
     checklistJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    inventoryTypeListUsecase.createChecklistNumber(
+    inventoryTypeListUsecase.createInventoryType(
       checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );
     return true;
   }
 
-  deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
-      await inventoryTypeListUsecase.deleteCkecklist(
+  deleteInventoryType(String? checklist_id, {required bool isLoading}) async =>
+      await inventoryTypeListUsecase.deleteInventoryType(
         checklist_id: checklist_id ?? 0,
         isLoading: isLoading,
       );
-  Future<bool> updateChecklistNumber(
+  Future<bool> updateInventoryType(
       {checklistJsonString, required bool isLoading, checklistId}) async {
     print("presenter");
-    inventoryTypeListUsecase.updateChecklistNumber(
+    inventoryTypeListUsecase.updateInventoryType(
       checklistJsonString: checklistJsonString,
       isLoading: isLoading,
     );

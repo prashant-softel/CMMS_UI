@@ -142,6 +142,11 @@ class StockManagementDashboardScreen
                           //   controller.pmTask();
                           // }
                         ),
+                        _stockManagementList(
+                            tittle: "Purchase Orders Request",
+                            ontap: () {
+                              Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                            }),
                         _stockManagementList(tittle: "Plant Stock"),
                       ],
                     ),
