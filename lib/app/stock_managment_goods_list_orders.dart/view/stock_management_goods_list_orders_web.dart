@@ -325,7 +325,15 @@ class StockManagementGoodsOrdersWeb
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   // label: 'view',
-                                                  onPress: () {},
+
+                                                  onPress: () {
+                                                    controller
+                                                        .viewAddGoodsOrdersDetails(
+                                                            id: int.tryParse(
+                                                                '${record[0]}'));
+                                                    Get.toNamed(
+                                                        Routes.viewGoodsOrders);
+                                                  },
                                                 ),
                                                 TableActionButton(
                                                   onPress: () {
@@ -342,9 +350,13 @@ class StockManagementGoodsOrdersWeb
                                                   color:
                                                       ColorValues.appRedColor,
                                                   icon: Icons.delete,
-                                                  // label: 'Delete',
-                                                  onPress: () {},
-                                                )
+                                                  label: 'Delete',
+                                                  onPress: () {
+                                                    controller.isDeleteDialog(
+                                                        id: record[0],
+                                                        generatedBy: record[1]);
+                                                  },
+                                                ),
                                               ])
                                             : Text(value),
                                       );

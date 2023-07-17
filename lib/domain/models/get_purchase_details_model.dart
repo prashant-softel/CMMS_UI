@@ -12,7 +12,7 @@ class GetPurchaseDetailsByIDModel {
   int? id;
   int? facilityId;
   int? assetTypeId;
-  int? vendorId;
+  // int? vendorId;
   int? status;
   String? statusShort;
   double? acceptedQty;
@@ -26,6 +26,7 @@ class GetPurchaseDetailsByIDModel {
   String? no_pkg_received;
   dynamic? received_on;
   String? freight;
+  String? vendor_name;
 
   dynamic? po_date;
   String? po_no;
@@ -39,7 +40,7 @@ class GetPurchaseDetailsByIDModel {
     this.id,
     this.facilityId,
     this.assetTypeId,
-    this.vendorId,
+    // this.vendorId,
     this.status,
     this.statusShort,
     this.acceptedQty,
@@ -60,6 +61,7 @@ class GetPurchaseDetailsByIDModel {
     this.purchaseDate,
     this.location_ID,
     this.goDetails,
+    this.vendor_name,
   });
 
   factory GetPurchaseDetailsByIDModel.fromJson(
@@ -68,7 +70,7 @@ class GetPurchaseDetailsByIDModel {
         id: parsedJson["id"] ?? "",
         facilityId: parsedJson["facility_id"] ?? "",
         assetTypeId: parsedJson["asset_type_ID"] ?? "",
-        vendorId: parsedJson["vendorID"] ?? "",
+        // vendorId: parsedJson["vendorID"] ?? "",
         status: parsedJson["status"] ?? "",
         statusShort: parsedJson["status_short"] ?? "",
         acceptedQty: parsedJson["accepted_qty"] ?? "",
@@ -90,6 +92,7 @@ class GetPurchaseDetailsByIDModel {
         purchaseDate:
             Utility.getFormatedyearMonthDay(parsedJson['purchaseDate']),
         location_ID: parsedJson["location_ID"] ?? "",
+        vendor_name: parsedJson["vendor_name"] ?? "",
         goDetails: List<GoDetails>.from(
             parsedJson["goDetails"].map((x) => GoDetails.fromJson(x))),
       );
@@ -98,7 +101,7 @@ class GetPurchaseDetailsByIDModel {
         "id": id,
         "facility_id": facilityId,
         "asset_type_ID": assetTypeId,
-        "vendorId": vendorId,
+        // "vendorId": vendorId,
         "status": status,
         "status_short": statusShort,
         "accepted_qty": acceptedQty,
@@ -118,6 +121,7 @@ class GetPurchaseDetailsByIDModel {
         "challan_no": challan_no,
         "purchaseDate": purchaseDate,
         "location_ID": location_ID,
+        "vendor_name": vendor_name,
         "goDetail": List<dynamic>.from(goDetails?.map((x) => x) ?? []),
       };
 }

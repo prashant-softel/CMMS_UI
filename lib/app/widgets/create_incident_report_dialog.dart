@@ -1,19 +1,24 @@
+import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
+// import '../view_incident_report/view_incident_report_controller.dart';
 
-class NewWarrantyClaimDialog extends GetView {
-  String? createPermitData;
+class CreateIncidentReportDialog extends GetView {
+  String? createIncidentReportData;
   String? data;
-  List<dynamic>? warrantyClaimId;
+  List<dynamic>? incidentReportId;
 
-  NewWarrantyClaimDialog(
-      {super.key, this.createPermitData, this.data, this.warrantyClaimId});
-  // final StockManagementAddGoodsOrdersController controller = Get.find();
+  CreateIncidentReportDialog(
+      {super.key,
+      this.createIncidentReportData,
+      this.data,
+      this.incidentReportId});
+
+  final IncidentReportListController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,7 @@ class NewWarrantyClaimDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: height / 5.5,
+            height: height / 7,
             width: double.infinity,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,12 +62,11 @@ class NewWarrantyClaimDialog extends GetView {
                   Center(
                     child: RichText(
                       text: TextSpan(
-                        text:
-                            'Warranty Claim Added Successfully with Claim ID ',
+                        text: 'Created Incident Report Successfully with ID ',
                         style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
                           TextSpan(
-                            text: '$warrantyClaimId',
+                            text: '$incidentReportId ',
                             style: TextStyle(
                               color: Colors.blue, // Set the desired text color
                               fontWeight: FontWeight
@@ -81,41 +85,42 @@ class NewWarrantyClaimDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 15,
-                        ),
-                        ElevatedButton(
-                          style: Styles.greenElevatedButtonStyle,
-                          onPressed: () {
-                            Get.offAllNamed(Routes.warrantyClaimList);
-                            controller.getWarrantyClaimList();
-                          },
-                          child: const Text('Warranty Claim List'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.yellowElevatedButtonStyle,
-                          onPressed: () =>
-                              Get.offAndToNamed(Routes.viewWarrantyClaim),
-                          child: const Text('View This Warranty Claim'),
-                        ),
-                        Dimens.boxWidth10,
-                        ElevatedButton(
-                          style: Styles.darkBlueElevatedButtonStyle,
-                          onPressed: () => Get.back(),
-                          child: const Text('Ok'),
-                        ),
-                      ]),
                 ]),
           );
         }),
-        actions: [],
+        actions: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SizedBox(
+              width: 15,
+            ),
+            ElevatedButton(
+              style: Styles.greenElevatedButtonStyle,
+              onPressed: () {
+                Get.offAllNamed(Routes.incidentReportListWeb);
+              },
+              child: const Text('Incident Report List'),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            // ElevatedButton(
+            //   style: Styles.darkBlueElevatedButtonStyle,
+            //   onPressed: () {
+            //     Get.offAllNamed(Routes.incidentReportListWeb);
+            //   },
+            //   child: const Text('Ok'),
+            // ),
+
+            ElevatedButton(
+              style: Styles.yellowElevatedButtonStyle,
+              onPressed: () {
+                _controller.viewIncidentReport(id: incidentReportId![0]);
+                print('Incident Report Id${incidentReportId![0]}');
+              },
+              child: const Text('View This Incident Report'),
+            ),
+          ]),
+        ],
       );
     }));
   }

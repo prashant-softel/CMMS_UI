@@ -443,6 +443,51 @@ class Repository {
     }
   }
 
+   //Create Incident Report
+  Future<Map<String, dynamic>> createIncidentReport(
+    createIncidentReport,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createIncidentReport(
+        auth: auth,
+        createIncidentReport: createIncidentReport,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Incident Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createIncidentReport');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
     createGo,
@@ -472,6 +517,41 @@ class Repository {
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> updateGoodsOrder(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Goods Order update Successfully...", fontSize: 16.0);
+
+        Get.offNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateGoodsOrder');
         //return '';
       }
       return Map();
@@ -524,6 +604,52 @@ class Repository {
       return Map();
     }
   }
+
+
+  //Update Incident Report
+  Future<Map<String, dynamic>> updateIncidentReport(
+    updateIncidentReport,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateIncidentReport(
+        auth: auth,
+        updateIncidentReport: json.encode(updateIncidentReport),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Incident Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateIncidentReport');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -838,8 +964,7 @@ class Repository {
     }
   }
 
-
-   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
     int? id,
   }) async {
@@ -872,7 +997,6 @@ class Repository {
       return null;
     }
   }
-
 
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
@@ -1806,6 +1930,63 @@ class Repository {
       log(error.toString());
     }
   }
+
+
+///Incident Report Reject Button
+   Future<void> incidentReportRejectButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.incidentReportRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('IncidentReportRejectResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'incidentReportRejectButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
+  ///Incident Report Approve Button
+   Future<void> incidentReportApproveButton(
+    String? incidentId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.incidentReportApproveButton(
+        auth: auth,
+        incidentId: incidentId,
+        isLoading: isLoading ?? false,
+      );
+      print('IncidentReportApproveResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'incidentReportApproveButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
+
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,
@@ -2881,7 +3062,6 @@ class Repository {
     }
   }
 
-  
   ///
   Future<Map<String, dynamic>> updateJobCard(
     jobCard,
@@ -4244,8 +4424,7 @@ class Repository {
     }
   }
 
-  Future<bool> createSPVlist(
-      {bool? isLoading, businesslistJsonString}) async {
+  Future<bool> createSPVlist({bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSPVlist(
@@ -4555,13 +4734,31 @@ class Repository {
     }
   }
 
-
   Future<void> deleteSPV(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteSPV(
         auth: auth,
         business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<void> deleteGoodsOrders(Object id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGoodsOrders(
+        auth: auth,
+        id: id,
         isLoading: isLoading,
       );
 
@@ -4624,7 +4821,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateFacilityList({
     bool? isLoading,
@@ -4985,8 +5181,6 @@ class Repository {
     }
   }
 
-
-
   Future<bool> updateBusinessType({
     bool? isLoading,
     businessTypeJsonString,
@@ -5094,6 +5288,41 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createMrs(
+    createMrsJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " Mrs Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<List<IncidentRiskTypeModel>> getIncidentRiskTypeList({
     // required int? job_type_id,
@@ -5121,8 +5350,7 @@ class Repository {
     }
   }
 
-  Future<bool> createRiskType(
-      {bool? isLoading, riskTypeJsonString}) async {
+  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRiskType(
@@ -5143,8 +5371,7 @@ class Repository {
     }
   }
 
-  Future<void> deleteRiskType(
-      Object businesstype_id, bool isLoading) async {
+  Future<void> deleteRiskType(Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteRiskType(

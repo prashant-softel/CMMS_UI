@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_presenter.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -53,6 +53,12 @@ class IncidentReportListController extends GetxController {
   var incidentReportListDateTimeCtrlrWeb = TextEditingController();
   var incidentReportListDateTimeCtrlrWebBuffer;
   Rx<DateTime> selectedIncidentReportListDateTimeWeb = DateTime.now().obs;
+
+
+  ///Reject Incident Report Controller
+  
+   final TextEditingController rejectCommentTextFieldCtrlr =
+      TextEditingController();
 
 
 
@@ -175,6 +181,33 @@ class IncidentReportListController extends GetxController {
     }
   }
 
+   Future<void> incidentReportRejectButton({String? id}) async {
+    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+    final _incidentReportRejectBtn =
+        await incidentReportPresenter.incidentReportRejectButton(
+      comment: _rejectComment,
+      id: id,
+    );
+    // showAlertPermitApproveDialog();
+    print('Incident Report Reject Button Data:${_rejectComment}');
+    print('Incident Report Reject Button Data:${id}');
+    
+  }
+
+  Future<void> incidentReportApproveButton({String? incidentId}) async {
+    // String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+    final _incidentReportApproveBtn =
+        await incidentReportPresenter.incidentReportApproveButton(
+      // comment: _rejectComment,
+      incidentId: incidentId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Incident Report Approve Button Data:${incidentId}');
+    
+  }
+
   
 
 
@@ -277,6 +310,12 @@ class IncidentReportListController extends GetxController {
     Get.toNamed(Routes.viewIncidentReportScreen, arguments: id);
     print('Argument$id');
   }
+
+   Future<void> editIncidentReport({int? id}) async {
+    Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
+    print('Argument$id');
+  }
+
 
 
 }

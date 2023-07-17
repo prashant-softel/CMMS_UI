@@ -1,4 +1,4 @@
-import 'package:cmms/app/add_incident_report.dart/add_incident_report_controller.dart';
+import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -90,7 +90,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                             ],
                           ),
                         ),
-                        
                         Dimens.boxHeight10,
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1,
@@ -99,12 +98,14 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                             color: Colors.lightBlue.shade50,
                             child: Wrap(
                               children: [
+                                 
                                 GetBuilder<AddIncidentReportController>(
                                     id: 'incident-report',
                                     builder: (controller) {
                                       return Obx(
                                         () => Column(
                                           children: [
+                                            
                                             CustomAppBar(
                                               title: 'Add Incident Report'.tr,
                                             ),
@@ -125,7 +126,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       ),
                                                       CustomRichText(
                                                           title:
-                                                              'Plant Name: '),
+                                                              'Block Name: '),
                                                       SizedBox(
                                                         height: 50,
                                                       ),
@@ -156,6 +157,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 SizedBox(
                                                   width: 20,
                                                 ),
+                                                
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -175,15 +177,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             5,
                                                         child: Obx(
                                                           () => DropdownWidget(
-                                                            dropdownList: controller
-                                                                .facilityPlantList,
+                                                            dropdownList:
+                                                                controller
+                                                                    .blockList,
                                                             isValueSelected:
                                                                 controller
-                                                                    .isFacilityPlantSelected
+                                                                    .isBlockSelected
                                                                     .value,
                                                             selectedValue:
                                                                 controller
-                                                                    .selectedPlantFacility
+                                                                    .selectedBlock
                                                                     .value,
                                                             onValueChanged:
                                                                 controller
@@ -202,9 +205,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .width /
                                                               4.8,
                                                       child:
-                                                          _buildStartValidTillDateField_web(
+                                                          _buildIncidentDateTimeField_web(
                                                         context,
-                                                        0,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -239,76 +241,136 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     SizedBox(
                                                       height: 10,
                                                     ),
+                                                   
+    
+                                  
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceAround,
                                                       children: [
                                                         Row(
+
                                                           children: [
+                                                            
+                                                            ///Start Here
+
+                                                            // RadioListTile(
+                                                            //   title: Text(
+                                                            //       'Option 1'),
+                                                            //   value: true,
+                                                            //   groupValue:
+                                                            //       controller
+                                                            //           .isSelected
+                                                            //           .value,
+                                                            //   onChanged: (value) =>
+                                                            //       controller
+                                                            //           .selectOption(value!),
+                                                            // ),
+
+                                                            // ListView.builder(
+                                                            //   itemCount: 10,
+                                                            //   itemBuilder:
+                                                            //       (BuildContext
+                                                            //               context,
+                                                            //           int index) {
+                                                            //     return
+                                                            //      SizedBox(
+                                                            //       height: 50,
+                                                            //        child: Expanded(
+                                                            //          child: RadioListTile(
+                                                            //             title: Text(
+                                                            //                 'Option 2'),
+                                                            //             value:
+                                                            //                 false,
+                                                            //             groupValue:
+                                                            //                 'null',
+                                                            //             onChanged:
+                                                            //                 (value) {}),
+                                                            //        ),
+                                                            //      ),
+                                                            //   },
+                                                            //   shrinkWrap:
+                                                            //       true, // Add this line to shrink-wrap the ListView
+                                                            //   physics:
+                                                            //       NeverScrollableScrollPhysics(),
+                                                            // ),
+
+                                                            ///End here
                                                             Radio(
-                                                                value: 1,
+                                                                value: false,
                                                                 groupValue:
-                                                                    'null',
+                                                                    controller
+                                                                        .isSelected
+                                                                        .value,
                                                                 onChanged:
-                                                                    (value) {}),
+                                                                    (value) {
+                                                                  controller
+                                                                      .selectOption(
+                                                                          'Critical');
+                                                                  print(
+                                                                      'Radio Critical ${controller.isSelected.value}');
+                                                                }),
                                                             Text(
                                                               'Critical',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .red),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        Row(
-                                                          children: [
+                                                            ),
                                                             Radio(
-                                                                value: 1,
+                                                                value: true,
                                                                 groupValue:
-                                                                    'null',
+                                                                    controller
+                                                                        .isSelected
+                                                                        .value,
                                                                 onChanged:
-                                                                    (value) {}),
+                                                                    (value) {
+                                                                  controller
+                                                                      .selectOption(
+                                                                          'High');
+                                                                  print(
+                                                                      'Radio High ${controller.isSelected.value}');
+                                                                }),
                                                             Text(
                                                               'High',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .orange),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        Row(
-                                                          children: [
+                                                            ),
                                                             Radio(
-                                                                value: 1,
+                                                                value: true,
                                                                 groupValue:
-                                                                    'null',
+                                                                    controller
+                                                                        .isSelected
+                                                                        .value,
                                                                 onChanged:
-                                                                    (index) {}),
+                                                                    (value) {
+                                                                  controller
+                                                                      .selectOption(
+                                                                          'Medium');
+                                                                  print(
+                                                                      'Radio Medium ${controller.isSelected.value}');
+                                                                }),
                                                             Text(
                                                               'Medium',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .yellow),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        Row(
-                                                          children: [
+                                                            ),
                                                             Radio(
-                                                                value: 1,
+                                                                value: true,
                                                                 groupValue:
-                                                                    'null',
+                                                                    controller
+                                                                        .isSelected
+                                                                        .value,
                                                                 onChanged:
-                                                                    (index) {}),
+                                                                    (value) {
+                                                                  controller
+                                                                      .selectOption(
+                                                                          'Low');
+                                                                  print(
+                                                                      'Radio Low ${controller.isSelected.value}');
+                                                                }),
                                                             Text(
                                                               'Low',
                                                               style: TextStyle(
@@ -317,11 +379,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             )
                                                           ],
                                                         ),
+                                                        SizedBox(
+                                                          width: 15,
+                                                        ),
                                                       ],
                                                     ),
+                                                    
                                                   ],
                                                 ),
-
+                                                
                                                 /////
                                                 SizedBox(
                                                   width: 70,
@@ -396,9 +462,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .width /
                                                               4.8,
                                                       child:
-                                                          _buildStartValidTillDateField_web(
+                                                          _buildReportingDateTimeField_web(
                                                         context,
-                                                        0,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -408,9 +473,85 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
+                                            //  Wrap(
+                                            //   alignment: WrapAlignment.start,
+                                            //    children: 
+                                            //                     [
+                                            //                       RadioListTile(
+                                            //                       title: Text(
+                                            //                           'Critical',style: TextStyle(color: Colors.red),),
+                                            //                       value: true,
+                                            //                       groupValue:
+                                            //                           controller
+                                            //                               .isSelected
+                                            //                               .value,
+                                            //                       onChanged: (value) {
+                                            //                         controller
+                                            //                               .selectOption('Critical');
+                                            //                         print('Critical Rdio: ${ controller
+                                            //                               .isSelected
+                                            //                               .value}');
+                                            //                       }
+                                                                      
+                                                                      
+                                            //                     ),
+                                            //                      RadioListTile(
+                                            //                   title: Text(
+                                            //                       'High',style: TextStyle(color: Colors.orange),),
+                                            //                   value: false,
+                                            //                   groupValue:
+                                            //                       controller
+                                            //                           .isSelected
+                                            //                           .value,
+                                            //                   onChanged: (value) {
+                                            //                     controller
+                                            //                           .selectOption('High');
+                                            //                      print('Critical Rdio: ${ controller
+                                            //                               .isSelected
+                                            //                               .value}');
+                                            //                   }
+                                                                  
+                                            //                 ),
+                                            //                 RadioListTile(
+                                            //                   title: Text(
+                                            //                       'Medium',style: TextStyle(color: Colors.yellow),),
+                                            //                   value: false,
+                                            //                   groupValue:
+                                            //                       controller
+                                            //                           .isSelected
+                                            //                           .value,
+                                            //                   onChanged: (value) {
+                                            //                      controller
+                                            //                           .selectOption('Medium');
+                                            //                      print('Critical Rdio: ${ controller
+                                            //                               .isSelected
+                                            //                               .value}');
+                                            //                   }
+                                                                 
+                                            //                 ),
+                                            //                 RadioListTile(
+                                            //                   title: Text(
+                                            //                       'Low',style: TextStyle(color: Colors.green),),
+                                            //                   value: false,
+                                            //                   groupValue:
+                                            //                       controller
+                                            //                           .isSelected
+                                            //                           .value,
+                                            //                   onChanged: (value) {
+                                            //                     controller
+                                            //                           .selectOption('Low');
+                                            //                      print('Critical Rdio: ${ controller
+                                            //                               .isSelected
+                                            //                               .value}');
+                                            //                   }
+                                                                  
+                                            //                 ),
+
+
+                                            //                   ],
+                                            //  ),
+                                                           
+                                           SizedBox(height: 20,),
                                             Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -444,7 +585,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       CustomRichText(
                                                           title: 'Risk Type: '),
                                                       SizedBox(
-                                                        height: 40,
+                                                        height: 50,
                                                       ),
                                                       CustomRichText(
                                                           title:
@@ -459,16 +600,31 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 20),
+                                                              left: 30),
                                                       child: SizedBox(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              4.8,
-                                                          child:
-                                                              _buildVictimNameTextField_web(
-                                                                  context)),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        child: Obx(
+                                                          () => DropdownWidget(
+                                                            dropdownList: controller
+                                                                .victimNameList,
+                                                            isValueSelected:
+                                                                controller
+                                                                    .isVictimNameListSelected
+                                                                    .value,
+                                                            selectedValue:
+                                                                controller
+                                                                    .selectedVictimNameList
+                                                                    .value,
+                                                            onValueChanged:
+                                                                controller
+                                                                    .onValueVictimNameChanged,
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
                                                     SizedBox(
                                                       height: 15,
@@ -486,14 +642,14 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         child: Obx(
                                                           () => DropdownWidget(
                                                             dropdownList: controller
-                                                                .typePermitList,
+                                                                .incidentInvestigationDoneByList,
                                                             isValueSelected:
                                                                 controller
-                                                                    .isTypePermitSelected
+                                                                    .isincidentInvestigationDoneByListSelected
                                                                     .value,
                                                             selectedValue:
                                                                 controller
-                                                                    .selectedTypePermit
+                                                                    .selectedIncidentInvestigationDoneByList
                                                                     .value,
                                                             onValueChanged:
                                                                 controller
@@ -534,26 +690,83 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Dimens.boxHeight10,
-                                                    Obx(
-                                                      () => Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 20),
-                                                        child: Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .switchValue3
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .switchValue3
-                                                                .value = value;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    Dimens.boxHeight35,
+                                                    controller.id != null
+                                                        ? controller
+                                                                    .incidentReportDetailsModel
+                                                                    .value
+                                                                    ?.legal_applicability_name ==
+                                                                "YES"
+                                                            ? Obx(
+                                                                () => Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 20),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .legalApplicabilityDetailValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .legalApplicabilityDetailValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Obx(
+                                                                () => Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 20),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .legalApplicabilityDetailFalseValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .legalApplicabilityDetailFalseValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              )
+                                                        : Obx(
+                                                            () => Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 20),
+                                                              child: Switch(
+                                                                activeColor:
+                                                                    Colors
+                                                                        .green,
+                                                                value: controller
+                                                                    .legalApplicabilityValue
+                                                                    .value,
+                                                                onChanged:
+                                                                    (value) {
+                                                                  controller
+                                                                      .legalApplicabilityValue
+                                                                      .value = value;
+                                                                  print(
+                                                                      'Legal applicability: ${controller.legalApplicabilityValue.value}');
+                                                                },
+                                                              ),
+                                                            ),
+                                                          )
                                                   ],
                                                 ),
                                                 SizedBox(
@@ -564,7 +777,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     SizedBox(
-                                                      height: 35,
+                                                      height: 15,
                                                     ),
                                                     CustomRichText(
                                                         title:
@@ -597,9 +810,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    SizedBox(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -609,7 +819,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             _buildActionTakenDateTimeField_web(
                                                                 context)),
                                                     SizedBox(
-                                                      height: 15,
+                                                      height: 5,
                                                     ),
                                                     SizedBox(
                                                       width:
@@ -620,66 +830,186 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       child: Obx(
                                                         () => DropdownWidget(
                                                           dropdownList: controller
-                                                              .typePermitList,
+                                                              .incidentInvestigationVerificationDoneByList,
                                                           isValueSelected:
                                                               controller
-                                                                  .isTypePermitSelected
+                                                                  .isincidentInvestigationVerificationDoneByListSelected
                                                                   .value,
                                                           selectedValue: controller
-                                                              .selectedTypePermit
+                                                              .selectedIncidentInvestigationVerificationDoneByList
                                                               .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
+                                                          onValueChanged: controller
+                                                              .onValueIncidentVerificationChanged,
                                                         ),
                                                       ),
                                                     ),
                                                     Dimens.boxHeight20,
-                                                    Obx(
-                                                      () => Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 170),
-                                                        child: Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .switchValue
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .switchValue
-                                                                .value = value;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    controller.id != null
+                                                        ? controller
+                                                                    .incidentReportDetailsModel
+                                                                    .value
+                                                                    ?.esi_applicability_name ==
+                                                                "YES"
+                                                            ? Obx(
+                                                                () => Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          170,
+                                                                      top: 5),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .esiApplicabilityDetailValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .esiApplicabilityDetailValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Obx(
+                                                                () => Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          170,
+                                                                      top: 5),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .esiApplicabilityDetailFalseValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .esiApplicabilityDetailFalseValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              )
+                                                        : Obx(
+                                                            () => Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          170,
+                                                                      top: 5),
+                                                              child: Switch(
+                                                                activeColor:
+                                                                    Colors
+                                                                        .green,
+                                                                value: controller
+                                                                    .esiApplicabilityValue
+                                                                    .value,
+                                                                onChanged:
+                                                                    (value) {
+                                                                  controller
+                                                                      .esiApplicabilityValue
+                                                                      .value = value;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
                                                     Dimens.boxHeight20,
-                                                    Obx(
-                                                      () => Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 170),
-                                                        child: Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .switchValue2
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .switchValue2
-                                                                .value = value;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    )
+                                                    controller.id != null
+                                                        ? controller
+                                                                    .incidentReportDetailsModel
+                                                                    .value
+                                                                    ?.rca_required_name ==
+                                                                "YES"
+                                                            ? Obx(
+                                                                () => Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          170,
+                                                                      top: 2),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .rCAUploadRequiredDetailValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .rCAUploadRequiredDetailValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Obx(
+                                                                () => Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          170,
+                                                                      top: 2),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .rCAUploadRequiredDetailFalseValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .rCAUploadRequiredDetailFalseValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              )
+                                                        : Obx(
+                                                            () => Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          170,
+                                                                      top: 2),
+                                                              child: Switch(
+                                                                activeColor:
+                                                                    Colors
+                                                                        .green,
+                                                                value: controller
+                                                                    .rCAUploadRequiredValue
+                                                                    .value,
+                                                                onChanged:
+                                                                    (value) {
+                                                                  controller
+                                                                      .rCAUploadRequiredValue
+                                                                      .value = value;
+                                                                },
+                                                              ),
+                                                            ),
+                                                          )
                                                   ],
                                                 )
                                               ],
                                             ),
+                                            Dimens.boxHeight10,
 
                                             /// FILE UPLOAD WIDGET
                                             Container(
@@ -733,9 +1063,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           title:
                                                               'Insurance Applicable: '),
                                                       Dimens.boxHeight50,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Insurance Available: '),
+                                                      controller.insuranceApplicableValue ==
+                                                              true
+                                                          ? CustomRichText(
+                                                              title:
+                                                                  'Insurance Available: ')
+                                                          : Container(),
                                                       Dimens.boxHeight30,
                                                       CustomRichText(
                                                           title:
@@ -776,18 +1109,18 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         child: Obx(
                                                           () => DropdownWidget(
                                                             dropdownList: controller
-                                                                .typePermitList,
+                                                                .assetRestorationActionTakenByList,
                                                             isValueSelected:
                                                                 controller
-                                                                    .isTypePermitSelected
+                                                                    .isAssetRestorationActionTakenByListSelected
                                                                     .value,
                                                             selectedValue:
                                                                 controller
-                                                                    .selectedTypePermit
+                                                                    .selectedAssetRestorationActionTakenByList
                                                                     .value,
                                                             onValueChanged:
                                                                 controller
-                                                                    .onValueChanged,
+                                                                    .onValueAssetRestorationActionTakenByChanged,
                                                           ),
                                                         ),
                                                       ),
@@ -802,46 +1135,35 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           activeColor:
                                                               Colors.green,
                                                           value: controller
-                                                              .switchValue4
+                                                              .insuranceApplicableValue
                                                               .value,
                                                           onChanged: (value) {
                                                             controller
-                                                                .switchValue4
+                                                                .insuranceApplicableValue
                                                                 .value = value;
                                                           },
                                                         ),
                                                       ),
                                                     ),
                                                     Dimens.boxHeight10,
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 30),
-                                                      child: SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        child: Obx(
-                                                          () => DropdownWidget(
-                                                            dropdownList: controller
-                                                                .typePermitList,
-                                                            isValueSelected:
-                                                                controller
-                                                                    .isTypePermitSelected
-                                                                    .value,
-                                                            selectedValue:
-                                                                controller
-                                                                    .selectedTypePermit
-                                                                    .value,
-                                                            onValueChanged:
-                                                                controller
-                                                                    .onValueChanged,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    controller.insuranceApplicableValue ==
+                                                            true
+                                                        ? Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 20),
+                                                            child: SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4.8,
+                                                                child:
+                                                                    _buildInsuranceAvailableTextField_web(
+                                                                        context)),
+                                                          )
+                                                        : Container(),
                                                     Dimens.boxHeight10,
                                                     Padding(
                                                       padding:
@@ -870,7 +1192,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         child: CustomRichText(
                                                             title:
                                                                 'Gen Loss Due To Asset Damage')),
-                                                    SizedBox(height: 200),
+                                                    SizedBox(height: 140),
                                                     CustomRichText(
                                                         title:
                                                             'Insurance Status')
@@ -895,7 +1217,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               _buildGenLossAssetDamageTextField_web(
                                                                   context),
                                                         )),
-                                                    Dimens.boxHeight200,
+                                                    Dimens.boxHeight125,
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -929,38 +1251,51 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 )
                                               ],
                                             ),
-                                             Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 150,
-                                    ),
-                                    CustomElevatedButton(
-                                      backgroundColor: Colors.red,
-                                      onPressed: () {
-                                        // controller.saveAsDraft();
-                                      },
-                                      text: 'Cancel',
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    CustomElevatedButton(
-                                      backgroundColor: Colors.green,
-                                      onPressed: () {
-                                        // showAlertDialog();
-                                        // controller.createWarrantyClaim();
-                                      },
-                                      text: 'Submit',
-                                    ),
-                                  ],
-                                )
-                              
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  height: 150,
+                                                ),
+                                                CustomElevatedButton(
+                                                  backgroundColor: Colors.red,
+                                                  onPressed: () {
+                                                    // controller.saveAsDraft();
+                                                  },
+                                                  text: 'Cancel',
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                controller.id == null
+                                                    ? CustomElevatedButton(
+                                                        backgroundColor:
+                                                            Colors.green,
+                                                        onPressed: () {
+                                                          // showAlertDialog();
+                                                          controller
+                                                              .createIncidentReport();
+                                                        },
+                                                        text: 'Submit',
+                                                      )
+                                                    : CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .navyBlueColor,
+                                                        onPressed: () {
+                                                          // showAlertDialog();
+                                                          controller
+                                                              .updateIncidentReport();
+                                                        },
+                                                        text: 'Update',
+                                                      ),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       );
                                     }),
-                               
                               ],
                             ),
                           ),
@@ -1045,38 +1380,38 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
               // :null,
               autofocus: false,
               decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                suffixIcon: Icon(Icons.calendar_month)
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-              ),
+                  fillColor: ColorValues.whiteColor,
+                  filled: true,
+                  contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  suffixIcon: Icon(Icons.calendar_month)
+                  // focusedErrorBorder:
+                  // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
+                  //     controller.isJobTitleInvalid.value
+                  //         ? OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.circular(5),
+                  //             borderSide: BorderSide(
+                  //               color: ColorsValue.redColorDark,
+                  //             ),
+                  //           )
+                  //         : InputBorder.none,
+                  // errorBorder:
+                  //     controller.isJobTitleInvalid.value
+                  //         ? OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.circular(5),
+                  //             borderSide: BorderSide(
+                  //               color: ColorsValue.redColorDark,
+                  //             ),
+                  //           )
+                  //         : null,
+                  // errorText: controller.isJobTitleInvalid.value
+                  //     ? "Required field"
+                  //     : null,
+                  ),
             ),
           ),
         ),
@@ -1085,7 +1420,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     ]);
   }
 
-//Start Date and valid Till
+//Action Taken Date and Time
   Future pickActionTakenDateTime_web(BuildContext context, int position) async {
     var dateTime = controller.selectedActionTakenTime.value;
 
@@ -1124,6 +1459,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     // controller.startDateTimeCtrlrBuffer =
     //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     //         .format(dateTime);
+    controller.actionTakenDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+    print(
+        'Action TakenDate & Time ${controller.actionTakenDateTimeCtrlrBuffer}');
   }
 
   Future<DateTime?> pickActionTakenDate_web(
@@ -1166,10 +1505,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   }
 
   ///
-  /// Incident and Reporting date Time
-  Widget _buildStartValidTillDateField_web(
+  /// Reporting date and Time
+  Widget _buildReportingDateTimeField_web(
     BuildContext context,
-    int position,
   ) {
     return Column(//
         children: [
@@ -1198,7 +1536,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         child: Container(
           height: 50,
           decoration: BoxDecoration(
-            
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
@@ -1214,9 +1551,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 offset: const Offset(0.0, 0.0),
                 blurRadius: 0.0,
                 spreadRadius: 0.0,
-                
               ), //BoxShadow
-              
             ],
             color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(5),
@@ -1226,52 +1561,48 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 ? MediaQuery.of(context).size.width / 3.7
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
-              
               onTap: () {
-                position == 0
-                    ? pickDateTime_web(context, 0)
-                    : pickDateTime_web(context, 1);
+                pickReportingDateTime_web(context, 0);
+
                 // : null;
               },
-              controller: position == 0
-                  ? controller.startDateTimeCtrlr
-                  : controller.validTillTimeCtrlr,
+              controller: controller.reportingDateTimeCtrlr,
 
               // :null,
               autofocus: false,
               decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                suffixIcon: Icon(Icons.calendar_month)
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-              ),
+                  fillColor: ColorValues.whiteColor,
+                  filled: true,
+                  contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  suffixIcon: Icon(Icons.calendar_month)
+                  // focusedErrorBorder:
+                  // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
+                  //     controller.isJobTitleInvalid.value
+                  //         ? OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.circular(5),
+                  //             borderSide: BorderSide(
+                  //               color: ColorsValue.redColorDark,
+                  //             ),
+                  //           )
+                  //         : InputBorder.none,
+                  // errorBorder:
+                  //     controller.isJobTitleInvalid.value
+                  //         ? OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.circular(5),
+                  //             borderSide: BorderSide(
+                  //               color: ColorsValue.redColorDark,
+                  //             ),
+                  //           )
+                  //         : null,
+                  // errorText: controller.isJobTitleInvalid.value
+                  //     ? "Required field"
+                  //     : null,
+                  ),
             ),
           ),
         ),
@@ -1280,17 +1611,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     ]);
   }
 
-//Start Date and valid Till
-  Future pickDateTime_web(BuildContext context, int position) async {
-    var dateTime = position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value;
-    final date = await pickDate_web(context, position);
+//Start Reporting Date and Time
+  Future pickReportingDateTime_web(BuildContext context, int position) async {
+    var dateTime = controller.selectedReportingDateTime.value;
+
+    final date = await pickReportingDate_web(context, position);
     if (date == null) {
       return;
     }
 
-    final time = await pickTime_web(context, position);
+    final time = await pickReportingTime_web(context, position);
     if (time == null) {
       return;
     }
@@ -1302,34 +1632,33 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
       time.hour,
       time.minute,
     );
-    position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value = dateTime;
-    position == 0
-        ? controller.startDateTimeCtrlr
-        : controller.validTillTimeCtrlr
+    controller.selectedReportingDateTime.value;
+
+    controller.reportingDateTimeCtrlr
       ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: position == 0
-              ? controller.startDateTimeCtrlr.text.length
-              : controller.validTillTimeCtrlr.text.length,
+          offset: controller.reportingDateTimeCtrlr.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
-    controller.validTillTimeCtrlr.text =
-        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
-    controller.validTillTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .format(dateTime.add(Duration(hours: 8)));
-    controller.startDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+    // controller.validTillTimeCtrlr.text =
+    //     DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+    // controller.validTillTimeCtrlrBuffer =
+    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    //         .format(dateTime.add(Duration(hours: 8)));
+    // controller.startDateTimeCtrlrBuffer =
+    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    //         .format(dateTime);
+    controller.reportingDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+    print('Reporting Date & Time ${controller.reportingDateTimeCtrlrBuffer}');
   }
 
-  Future<DateTime?> pickDate_web(BuildContext context, int position) async {
-    DateTime? dateTime = position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value;
+  Future<DateTime?> pickReportingDate_web(
+      BuildContext context, int position) async {
+    DateTime? dateTime = controller.selectedReportingDateTime.value;
+
     //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -1343,10 +1672,198 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     return newDate;
   }
 
-  Future<TimeOfDay?> pickTime_web(BuildContext context, int position) async {
-    DateTime dateTime = position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value;
+  Future<TimeOfDay?> pickReportingTime_web(
+      BuildContext context, int position) async {
+    DateTime dateTime = controller.selectedReportingDateTime.value;
+
+    //final initialTime = TimeOfDay(hour: 12, minute: 0);
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
+
+  /// Incident date and Time
+  Widget _buildIncidentDateTimeField_web(
+    BuildContext context,
+  ) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.topLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(right: 385),
+      //     child: RichText(
+      //       text: TextSpan(
+      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
+      //           style: Styles.blackBold16, children: []),
+      //     ),
+      //   ),
+      // ),
+      // Align(
+      //     alignment: Alignment.topLeft,
+      //     child: Padding(
+      //       padding: const EdgeInsets.only(right: 385),
+      //       child: CustomRichText(
+      //         title: position == 0 ? '$title1' : '$title2',
+      //       ),
+      //     )),
+      Dimens.boxHeight5,
+      Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ), //BoxShadow
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 3.7
+                : MediaQuery.of(context).size.width / 1.0,
+            child: TextField(
+              onTap: () {
+                pickDateTime_web(context);
+
+                // : null;
+              },
+              controller: controller.startDateTimeCtrlr,
+
+              // :null,
+              autofocus: false,
+              decoration: InputDecoration(
+                  fillColor: ColorValues.whiteColor,
+                  filled: true,
+                  contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  suffixIcon: Icon(Icons.calendar_month)
+                  // focusedErrorBorder:
+                  // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
+                  //     controller.isJobTitleInvalid.value
+                  //         ? OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.circular(5),
+                  //             borderSide: BorderSide(
+                  //               color: ColorsValue.redColorDark,
+                  //             ),
+                  //           )
+                  //         : InputBorder.none,
+                  // errorBorder:
+                  //     controller.isJobTitleInvalid.value
+                  //         ? OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.circular(5),
+                  //             borderSide: BorderSide(
+                  //               color: ColorsValue.redColorDark,
+                  //             ),
+                  //           )
+                  //         : null,
+                  // errorText: controller.isJobTitleInvalid.value
+                  //     ? "Required field"
+                  //     : null,
+                  ),
+            ),
+          ),
+        ),
+      ),
+      Dimens.boxHeight20,
+    ]);
+  }
+
+//Start Date and valid Till
+  Future pickDateTime_web(
+    BuildContext context,
+  ) async {
+    var dateTime = controller.selectedBreakdownTime.value;
+
+    final date = await pickDate_web(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime_web(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    controller.selectedBreakdownTime.value;
+
+    controller.startDateTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: controller.startDateTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+    controller.startDateTimeCtrlr.text =
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
+
+    controller.startDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+    print('Incident reportDate & Time ${controller.startDateTimeCtrlrBuffer}');
+  }
+
+  Future<DateTime?> pickDate_web(
+    BuildContext context,
+  ) async {
+    DateTime? dateTime = controller.selectedBreakdownTime.value;
+
+    //final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime_web(
+    BuildContext context,
+  ) async {
+    DateTime dateTime = controller.selectedBreakdownTime.value;
+
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
@@ -1427,15 +1944,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                focusedErrorBorder: controller.isJobDescriptionInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : InputBorder.none,
-                errorBorder: controller.isJobDescriptionInvalid.value
+                focusedErrorBorder:
+                    controller.isIncidentDescriptionInvalid.value
+                        ? OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide(
+                              color: ColorValues.redColorDark,
+                            ),
+                          )
+                        : InputBorder.none,
+                errorBorder: controller.isIncidentDescriptionInvalid.value
                     ? OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
@@ -1443,15 +1961,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                         ),
                       )
                     : null,
-                errorText: controller.isJobDescriptionInvalid.value
+                errorText: controller.isIncidentDescriptionInvalid.value
                     ? "Required field"
                     : null,
               ),
               onChanged: (value) {
                 if (value.trim().length > 3) {
-                  controller.isJobDescriptionInvalid.value = false;
+                  controller.isIncidentDescriptionInvalid.value = false;
                 } else {
-                  controller.isJobDescriptionInvalid.value = true;
+                  controller.isIncidentDescriptionInvalid.value = true;
                 }
               },
             ),
@@ -1659,7 +2177,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     ]);
   }
 
-  Widget _buildVictimNameTextField_web(BuildContext context) {
+  Widget _buildInsuranceAvailableTextField_web(BuildContext context) {
     return Column(//
         children: [
       // Align(
@@ -1712,7 +2230,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
-              controller: controller.victimNameTextCtrlr,
+              controller: controller.insuranceAvailableTextCtrlr,
               keyboardType: TextInputType.multiline,
               autofocus: false,
               decoration: InputDecoration(
@@ -1722,7 +2240,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                focusedErrorBorder: controller.isVictimNameTextInvalid.value
+                focusedErrorBorder: controller.isInsuranceAvailableInvalid.value
                     ? OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
@@ -1730,7 +2248,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                         ),
                       )
                     : InputBorder.none,
-                errorBorder: controller.isVictimNameTextInvalid.value
+                errorBorder: controller.isInsuranceAvailableInvalid.value
                     ? OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
@@ -1738,15 +2256,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                         ),
                       )
                     : null,
-                errorText: controller.isVictimNameTextInvalid.value
+                errorText: controller.isInsuranceAvailableInvalid.value
                     ? "Required field"
                     : null,
               ),
               onChanged: (value) {
                 if (value.trim().length > 3) {
-                  controller.isVictimNameTextInvalid.value = false;
+                  controller.isInsuranceAvailableInvalid.value = false;
                 } else {
-                  controller.isVictimNameTextInvalid.value = true;
+                  controller.isInsuranceAvailableInvalid.value = true;
                 }
               },
             ),
@@ -1845,7 +2363,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                     : null,
               ),
               onChanged: (value) {
-                if (value.trim().length > 3) {
+                print('value Damaged${value.length}');
+                if (value.trim().length > 2) {
                   controller.isDamagedAssetCostTextInvalid.value = false;
                 } else {
                   controller.isDamagedAssetCostTextInvalid.value = true;
@@ -1947,7 +2466,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                     : null,
               ),
               onChanged: (value) {
-                if (value.trim().length > 3) {
+                if (value.trim().length > 2) {
                   controller.isGenLossAssetDamageTextInvalid.value = false;
                 } else {
                   controller.isGenLossAssetDamageTextInvalid.value = true;
