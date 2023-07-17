@@ -11,8 +11,6 @@ class IncidentReportListPresenter {
     return await incidentReportListUsecase.generateToken();
   }
 
-
-
   Future<List<IncidentReportListModel>> getIncidentReportList({
     required bool isLoading,
     required int? facility_id,
@@ -27,7 +25,26 @@ class IncidentReportListPresenter {
     );
   }
 
- 
+  Future<void> incidentReportRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await incidentReportListUsecase.incidentReportRejectButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<void> incidentReportApproveButton({
+    String? incidentId,
+    bool? isLoading,
+  }) async =>
+      await incidentReportListUsecase.incidentReportApproveButton(
+        incidentId: incidentId,
+        isLoading: isLoading ?? false,
+      );
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await incidentReportListUsecase.getFacilityList();
   Future<String?> getUserAccessList() async =>

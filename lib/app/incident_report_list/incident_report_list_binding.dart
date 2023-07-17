@@ -1,21 +1,21 @@
-import 'package:cmms/app/add_incident_report.dart/add_incident_report_controller.dart';
-import 'package:cmms/app/add_incident_report.dart/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/usecases/add_incident_report_usecase.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_presenter.dart';
+import 'package:cmms/domain/usecases/incident_report_list_usecase.dart';
 import 'package:get/get.dart';
 
 import '../../domain/usecases/home_usecase.dart';
 
 /// A list of bindings which will be used in the route of [HomeScreen].
-class AddIncidentReportBinding extends Bindings {
+class IncidentReportListBinding extends Bindings {
   @override
   void dependencies() {
       // Get.find<IncidentReportListController>();
     Get.lazyPut(
-      () => AddIncidentReportController(
+      () => IncidentReportListController(
         Get.put(
-          AddIncidentReportPresenter(
-            AddIncidentReportUsecase(
+          IncidentReportListPresenter(
+            IncidentReportListUsecase(
               Get.find(),
             ),
           ),

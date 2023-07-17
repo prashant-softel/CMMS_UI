@@ -1,8 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/incident_report_list.dart/incident_report_list_controller.dart';
+import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
+import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +15,6 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
   IncidentReportListWeb({super.key});
 
   final IncidentReportListController controller = Get.find();
-
 
   ///
 
@@ -42,13 +43,13 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
               : HomeDrawer(),
           Expanded(
             child: Obx(
-              ()=> Container(
+              () => Container(
                   color: ColorValues.lightBlueishColor,
                   child: DefaultTabController(
                       length: 3,
                       child: Column(children: [
                         ///
-            
+
                         Container(
                           height: 45,
                           decoration: BoxDecoration(
@@ -103,13 +104,12 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                           ),
                         ),
                         Dimens.boxHeight20,
-            
+
                         ///
                         SizedBox(
                           height: 60,
                           child: CustomAppBar(
                             title: 'Incident Report List'.tr,
-                            
                             action: Row(
                               children: [
                                 // ActionButton(
@@ -126,7 +126,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 //     // var file = "assets/files/Fixed Asset Imports.xlsx";
                                 //     // var bytes = File(file).readAsBytesSync();
                                 //     // var excel = Excel.decodeBytes(bytes);
-                        
+
                                 //     // for (var table in excel.tables.keys) {
                                 //     //   print(table); //sheet Name
                                 //     //   print(excel.tables[table]?.maxCols);
@@ -147,79 +147,83 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 //   //     controller.categoryTextController,
                                 //   textController: controller
                                 //       .incidentReportListDateTimeCtrlrWeb,
-                        
+
                                 //   onTap: () {
                                 //     pickDateTime_web(context);
                                 //   },
                                 // ),
                                 Container(
-                              height: 30,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () async {
-                                  await Get.dialog(
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 350,
-                                          right: 350,
-                                          top: 200,
-                                          bottom: 200),
-                                      child: Container(
-                                        color: ColorValues.whiteColor,
-                                        child: SfDateRangePicker(
-                                          cancelText: "CANCEL",
-                                          confirmText: "Ok",
-                                          showActionButtons: true,
-                                          initialSelectedRange: PickerDateRange(
-                                            controller.fromDate.value,
-                                            controller.toDate.value,
-                                          ),
-                                          selectionMode:
-                                              DateRangePickerSelectionMode.range,
-                                          monthCellStyle:
-                                              DateRangePickerMonthCellStyle(
-                                            todayCellDecoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color:
-                                                    ColorValues.appDarkBlueColor),
-                                          ),
-                                          onSubmit: (value) {
-                                            PickerDateRange? data =
-                                                value as PickerDateRange;
-            
-                                            var pickUpDate = DateTime.parse(
-                                                data.startDate.toString());
-                                            controller.fromDate.value =
-                                                pickUpDate;
-                                            var dropDate = DateTime.parse(
-                                                data.endDate.toString());
-                                            dropDate != null
-                                                ? controller.toDate.value =
-                                                    dropDate
-                                                : controller.toDate.value =
+                                  height: 30,
+                                  child: CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () async {
+                                      await Get.dialog(
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 350,
+                                              right: 350,
+                                              top: 200,
+                                              bottom: 200),
+                                          child: Container(
+                                            color: ColorValues.whiteColor,
+                                            child: SfDateRangePicker(
+                                              cancelText: "CANCEL",
+                                              confirmText: "Ok",
+                                              showActionButtons: true,
+                                              initialSelectedRange:
+                                                  PickerDateRange(
+                                                controller.fromDate.value,
+                                                controller.toDate.value,
+                                              ),
+                                              selectionMode:
+                                                  DateRangePickerSelectionMode
+                                                      .range,
+                                              monthCellStyle:
+                                                  DateRangePickerMonthCellStyle(
+                                                todayCellDecoration:
+                                                    BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: ColorValues
+                                                            .appDarkBlueColor),
+                                              ),
+                                              onSubmit: (value) {
+                                                PickerDateRange? data =
+                                                    value as PickerDateRange;
+
+                                                var pickUpDate = DateTime.parse(
+                                                    data.startDate.toString());
+                                                controller.fromDate.value =
                                                     pickUpDate;
-                                            Get.back();
-                                            controller.getIncidentReportListByDate();
-                                          },
-                                          onCancel: () => Get.back(),
+                                                var dropDate = DateTime.parse(
+                                                    data.endDate.toString());
+                                                dropDate != null
+                                                    ? controller.toDate.value =
+                                                        dropDate
+                                                    : controller.toDate.value =
+                                                        pickUpDate;
+                                                Get.back();
+                                                controller
+                                                    .getIncidentReportListByDate();
+                                              },
+                                              onCancel: () => Get.back(),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                text:
-                                    'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
-                              ),
-                            ),
-            
+                                      );
+                                    },
+                                    text:
+                                        'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
+                                  ),
+                                ),
+
                                 Dimens.boxWidth10,
                                 ActionButton(
                                   icon: Icons.add,
                                   label: 'Add Incident Report',
                                   onPressed: () {
-                                    
-                                     Get.toNamed(Routes.addIncidentReportContentWeb);
-                                   
+                                    Get.toNamed(
+                                        Routes.addIncidentReportContentWeb);
                                   },
                                   color: Colors.green,
                                 ),
@@ -233,7 +237,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 //     // var bytes = data.buffer
                                 //     //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
                                 //     // var excel = Excel.decodeBytes(bytes);
-                        
+
                                 //     // for (var table in excel.tables.keys) {
                                 //     //   print(table); //sheet Name
                                 //     //   print(excel.tables[table]?.maxCols);
@@ -249,7 +253,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                             ),
                           ),
                         ),
-            
+
                         ///
                         // Align(
                         //   alignment: Alignment.centerLeft,
@@ -273,7 +277,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                         //     ),
                         //   ),
                         // ),
-            
+
                         ///
                         SizedBox(
                           height: 20,
@@ -341,7 +345,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                             ),
                           ],
                         ),
-            
+
                         ///
                         Expanded(
                           child: Container(
@@ -369,7 +373,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                               'action'.tr,
                                             ].map((column) {
                                               return TableViewColumn(
-                                                minWidth: Get.width * 0.1,
+                                                minWidth: Get.width * 0.15,
                                                 label: column,
                                               );
                                             }).toList(),
@@ -377,10 +381,9 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                               ...List.generate(
                                                 controller
                                                     .incidentReportList.length,
-                                                
                                                 (index) => [
                                                   // AssetName(
-            
+
                                                   //    '${controller.warrantyClaimList[index].wc_id}',
                                                   //   // 'dummy data',
                                                   //   1,
@@ -401,13 +404,17 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                               (record) {
                                                 return TableViewRow(
                                                   height: Get.height * 0.13,
+                                                  onTap: () {},
                                                   cells: record.map(
                                                     (value) {
                                                       return TableViewCell(
                                                         child: GestureDetector(
                                                           onTap: () {
                                                             print(
-                                                                'warrantyiddata:$value');
+                                                                'incidentreportiddata:$value');
+                                                            controller.viewIncidentReport(
+                                                                id: int.tryParse(
+                                                                    '${record[0]}'));
                                                           },
                                                           child:
                                                               // value.runtimeType
@@ -460,7 +467,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                               //                   //       .white,
                                                               //                   // ),
                                                               //                   '',
-            
+
                                                               //                 ),
                                                               //               ),
                                                               //             ),
@@ -485,17 +492,28 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                                 },
                                                                               ),
                                                                               //),
-            
+
                                                                               TableActionButton(
                                                                                 color: ColorValues.appYellowColor,
                                                                                 icon: Icons.edit,
                                                                                 onPress: () {
-                                                                                  // controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                  // print('edit record:${int.tryParse('${record[0]}')}');
+                                                                                  controller.editIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                  print('edit record:${int.tryParse('${record[0]}')}');
                                                                                 },
                                                                               ),
+
+                                                                              TableActionButton(
+                                                                                color: Colors.red,
+                                                                                icon: Icons.close,
+                                                                                label: 'Reject',
+                                                                                onPress: () {
+                                                                                  Get.dialog(IncidentReportRejectDialog(id: record[0]));
+                                                                                  // controller.viewNewPermitList(permitId: int.tryParse(_newPermitList[0]));
+                                                                                },
+                                                                              ),
+                                                                              
                                                                               //),
-            
+
                                                                               // TableActionButton(
                                                                               //   color: Colors.red,
                                                                               //   icon:
@@ -505,6 +523,20 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                               // ),
                                                                               //),
                                                                             ]),
+                                                                            Padding(
+                                                                              padding: const EdgeInsets.only(left: 25, top: 5),
+                                                                              child: TableActionButton(
+                                                                                  color: ColorValues.purpleColor,
+                                                                                  icon: Icons.add,
+                                                                                  label: 'Approve',
+                                                                                  onPress: () {
+                                                                                    // Get.dialog(PermitApprovedDialog(
+                                                                                    //     permitId:
+                                                                                    //         _newPermitList[0]));
+                                                                                    controller.incidentReportApproveButton(incidentId: record[0]);
+                                                                                  },
+                                                                                ),
+                                                                            )
                                                                         // TableActionButton(
                                                                         //   color: Colors.green,
                                                                         //   icon: Icons
@@ -542,7 +574,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                             child: ValueListenableBuilder(
                                                 valueListenable: controller
                                                     .paginationIncidentReportController,
-                                                builder: (context, value, child) {
+                                                builder:
+                                                    (context, value, child) {
                                                   return Row(
                                                     children: [
                                                       Text(
@@ -569,7 +602,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                           .paginationIncidentReportController
                                                                           .currentPage <=
                                                                       1
-                                                                  ? Colors.black26
+                                                                  ? Colors
+                                                                      .black26
                                                                   : Theme.of(
                                                                           context)
                                                                       .primaryColor,
@@ -599,7 +633,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                       controller
                                                                           .paginationIncidentReportController
                                                                           .pageCount
-                                                                  ? Colors.black26
+                                                                  ? Colors
+                                                                      .black26
                                                                   : Theme.of(
                                                                           context)
                                                                       .primaryColor,
@@ -612,7 +647,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                 }),
                                           ),
                                         ),
-            
+
                                         ///
                                       ]);
                                   //);
