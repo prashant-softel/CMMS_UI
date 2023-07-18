@@ -105,6 +105,8 @@ abstract class Routes {
   static const viewEscalatiomMatrixContentWeb = _Paths.viewEscalatiomMatrixContentWeb;
 
 
+  static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
+  static const inventoryCategory = _Paths.inventoryCategory;
 }
 
 abstract class _Paths {
@@ -206,6 +208,8 @@ abstract class _Paths {
 
 
 
+  static const incident_risk_dashboard = '/incident-risk-dashboard';
+  static const inventoryCategory = '/inventoryCategory';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

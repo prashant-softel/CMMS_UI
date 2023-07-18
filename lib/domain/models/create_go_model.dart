@@ -24,7 +24,7 @@ class CreateGoModel {
   String? closedBy;
   String? job_ref;
   int? amount;
-  String? currency;
+  int? currencyID;
   List<Items?>? items;
   CreateGoModel(
       {this.facility_id,
@@ -46,7 +46,7 @@ class CreateGoModel {
       this.closedBy,
       this.job_ref,
       this.amount,
-      this.currency,
+      this.currencyID,
       this.items,
       this.id});
 
@@ -71,7 +71,7 @@ class CreateGoModel {
       closedBy: json['closedBy'],
       job_ref: json['job_ref'],
       amount: json['amount'],
-      currency: json['currency'],
+      currencyID: json['currencyID'],
       id: json['id'],
       items: json["go_items"] != null
           ? List<Items>.from(json["go_items"]?.map((x) => Items.fromJson(x)))
@@ -98,7 +98,7 @@ class CreateGoModel {
         "closedBy": closedBy,
         "job_ref": job_ref,
         "amount": amount,
-        "currency": currency,
+        "currencyID": currencyID,
         "id": id,
         "go_items": List<dynamic>.from(items!.map((x) => x)),
       };

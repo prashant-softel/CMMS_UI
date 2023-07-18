@@ -78,6 +78,7 @@ import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
 import '../models/modulelist_model.dart';
+import '../models/mrs_detail_model.dart';
 import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
 import '../models/role_model.dart';
@@ -508,6 +509,43 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " Goods Order Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> submitPurchaseOrderData(
+    createGoReq,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.submitPurchaseOrderData(
+        auth: auth,
+        createGoReq: createGoReq,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order req  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Goods Order  req Add Successfully...", fontSize: 16.0);
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -2129,6 +2167,44 @@ class Repository {
                   ),
                 )
                 .toList();
+
+        return _inventoryCategoryModelList;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getInventoryCategoryList');
+        return null;
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<InventoryCategoryModel2?>?> getInventoryCategory2List(
+      String? auth,
+      int? facilityId,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getInventoryCategoryList(
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+      );
+
+      if (!res.hasError) {
+        final jsonInventoryCategoryModels = jsonDecode(res.data);
+        final List<InventoryCategoryModel2> _inventoryCategoryModelList =
+        jsonInventoryCategoryModels
+            .map<InventoryCategoryModel2>(
+              (m) => InventoryCategoryModel2.fromJson(
+            Map<String, dynamic>.from(m),
+          ),
+        )
+            .toList();
 
         return _inventoryCategoryModelList;
       } //
@@ -5376,6 +5452,239 @@ class Repository {
       return false;
     }
   }
+
+  Future<MrsDetailsModel?> getMrsDetails(
+    int? mrsId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMrsDetails(
+        auth: auth,
+        mrsId: mrsId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final MrsDetailsModel _mrsDetailModel =
+            mrsDetailsModelFromJson(res.data);
+        return _mrsDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getMrsDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<bool> updateInventoryStatus({
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateInventoryStatus(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+  Future<void> deleteInventoryStatus(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteInventoryStatus(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+  Future<bool> createInventoryStatus({bool? isLoading, required checklistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createInventoryStatus(
+          auth: auth,
+          isLoading: isLoading,
+          checkpointJsonString: checklistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+  Future<bool> updateInventoryType({
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateInventoryType(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+  Future<void> deleteInventoryType(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteInventoryType(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+  Future<bool> createInventoryType({bool? isLoading, required checklistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createInventoryType(
+          auth: auth,
+          isLoading: isLoading,
+          checkpointJsonString: checklistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+  Future<bool> updateInventoryCategory({
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateInventoryCategory(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: checklistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+  Future<void> deleteInventoryCategory(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteInventoryCategory(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+  Future<bool> createInventoryCategory({bool? isLoading, required checklistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.createInventoryCategory(
+          auth: auth,
+          isLoading: isLoading,
+          checkpointJsonString: checklistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
+
 }
 //end
 //end

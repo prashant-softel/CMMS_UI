@@ -27,7 +27,7 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(
@@ -46,31 +46,30 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
       body:
           //
           Container(
-        height: Get.height,
-        width: Get.width,
-        child: Row(
-          children: [
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? Dimens.box0
-                : HomeDrawer(),
-            Expanded(
-              child: Column(
+              height: Get.height,
+              width: Get.width,
+              child: Row(
                 children: [
-                  if (Responsive.isMobile(context) ||
-                      Responsive.isTablet(context))
-                    Expanded(
-                      child: JobDetailsMobileView(),
+                  (Responsive.isMobile(context) || Responsive.isTablet(context))
+                      ? Dimens.box0
+                      : HomeDrawer(),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        if (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                          Expanded(
+                            child: JobDetailsMobileView(),
+                          ),
+                        if (Responsive.isDesktop(context))
+                          Expanded(
+                            child: JobDetailsWebView(),
+                          )
+                      ],
                     ),
-                  if (Responsive.isDesktop(context))
-                    Expanded(
-                      child: JobDetailsWebView(),
-                    )
+                  ),
                 ],
-              ),
-            ),
-          ],
-        )
-      ),
+              )),
     );
 
     /// build ends
@@ -78,6 +77,3 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
 
   /// class ends
 }
-
-
-

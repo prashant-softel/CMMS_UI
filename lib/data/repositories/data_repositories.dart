@@ -1001,6 +1001,16 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> submitPurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.submitPurchaseOrderData(
+        auth: auth,
+        createGoReq: createGoReq,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> updateGoodsOrder({
     required String auth,
     createGo,
@@ -2246,5 +2256,118 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getMrsDetails({
+    String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getMrsDetails(
+      auth: auth,
+      mrsId: mrsId,
+      isLoading: isLoading,
+    );
+  }
+  Future<ResponseModel> createInventoryStatus({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createInventoryStatus(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteInventoryStatus({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteInventoryStatus(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+  Future<ResponseModel> updateInventoryStatus({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateInventoryStatus(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+
+
+  Future<ResponseModel> createInventoryType({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createInventoryType(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteInventoryType({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteInventoryType(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+  Future<ResponseModel> updateInventoryType({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateInventoryType(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> createInventoryCategory({
+    auth,
+    bool? isLoading,
+    checkpointJsonString,
+  }) async {
+    var response = await connectHelper.createInventoryCategory(
+        auth: auth,
+        isLoading: isLoading,
+        checkpointJsonString: checkpointJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteInventoryCategory({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteInventoryCategory(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+  Future<ResponseModel> updateInventoryCategory({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateInventoryCategory(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
 //end
 }

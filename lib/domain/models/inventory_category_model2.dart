@@ -13,14 +13,14 @@ String inventoryCategoryModel2ToJson(List<InventoryCategoryModel2> data) =>
 
 class InventoryCategoryModel2 {
   InventoryCategoryModel2({
-    required this.id,
-    required this.name,
+     this.id,
+     this.name,
     this.description,
   });
 
-  int id;
-  String name;
-  dynamic description;
+  int? id;
+  String? name;
+  String? description;
 
   factory InventoryCategoryModel2.fromJson(Map<String, dynamic> json) =>
       InventoryCategoryModel2(

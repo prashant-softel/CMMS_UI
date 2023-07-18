@@ -23,7 +23,7 @@ class MrsListController extends GetxController {
     rowsPerPage: 10,
   );
   MrsListModel? mrsListModel;
-
+  MrsListModel? selectedItem;
   RxList<String> mrsTableColumns = <String>[].obs;
   Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;

@@ -434,7 +434,7 @@ class PreventiveChecklistListContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -450,7 +450,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -459,7 +459,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -468,7 +468,7 @@ class PreventiveChecklistListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -594,7 +594,7 @@ class PreventiveChecklistListContentWeb
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
-                                                                                color: ColorValues.appLightBlueColor,
+                                                                                color: ColorValues.editColor,
                                                                                 icon: Icons.edit,
                                                                                 label: 'Edit',
                                                                                 onPress: () {
@@ -613,7 +613,7 @@ class PreventiveChecklistListContentWeb
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
-                                                                                color: ColorValues.appRedColor,
+                                                                                color: ColorValues.deleteColor,
                                                                                 icon: Icons.delete,
                                                                                 label: 'Delete',
                                                                                 onPress: () {

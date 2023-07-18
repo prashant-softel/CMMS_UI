@@ -14,7 +14,6 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
 
   final WarrantyClaimController controller = Get.find();
 
-
   ///
 
   @override
@@ -24,7 +23,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 100,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(
@@ -42,13 +41,13 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
               : HomeDrawer(),
           Expanded(
             child: Obx(
-              ()=> Container(
+              () => Container(
                   color: ColorValues.lightBlueishColor,
                   child: DefaultTabController(
                       length: 3,
                       child: Column(children: [
                         ///
-            
+
                         Container(
                           height: 65,
                           decoration: BoxDecoration(
@@ -85,132 +84,129 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                     style: Styles.greyMediumLight12),
                               ),
                               Text(" / Warranty Claim List",
-                                    style: Styles.greyMediumLight12),
+                                  style: Styles.greyMediumLight12),
                               // Text(" / Create Checklist Number",
                               //     style: Styles.greyMediumLight12)
                               SizedBox(
                                 width: 350,
                               ),
-                             
                             ],
                           ),
                         ),
                         Dimens.boxHeight30,
-            
+
                         ///
                         CustomAppBar(
                           title: 'Warranty Claim List'.tr,
                           action: Row(
                             children: [
-                             
-                               Container(
-                              height: 30,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () async {
-                                  await Get.dialog(
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 350,
-                                          right: 350,
-                                          top: 200,
-                                          bottom: 200),
-                                      child: Container(
-                                        color: ColorValues.whiteColor,
-                                        child: SfDateRangePicker(
-                                          cancelText: "CANCEL",
-                                          confirmText: "Ok",
-                                          showActionButtons: true,
-                                          initialSelectedRange: PickerDateRange(
-                                            controller.fromDate.value,
-                                            controller.toDate.value,
+                              Container(
+                                height: 30,
+                                child: CustomElevatedButton(
+                                  backgroundColor:
+                                      ColorValues.appLightBlueColor,
+                                  onPressed: () async {
+                                    await Get.dialog(
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 350,
+                                            right: 350,
+                                            top: 200,
+                                            bottom: 200),
+                                        child: Container(
+                                          color: ColorValues.whiteColor,
+                                          child: SfDateRangePicker(
+                                            cancelText: "CANCEL",
+                                            confirmText: "Ok",
+                                            showActionButtons: true,
+                                            initialSelectedRange:
+                                                PickerDateRange(
+                                              controller.fromDate.value,
+                                              controller.toDate.value,
+                                            ),
+                                            selectionMode:
+                                                DateRangePickerSelectionMode
+                                                    .range,
+                                            monthCellStyle:
+                                                DateRangePickerMonthCellStyle(
+                                              todayCellDecoration:
+                                                  BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: ColorValues
+                                                          .appDarkBlueColor),
+                                            ),
+                                            onSubmit: (value) {
+                                              PickerDateRange? data =
+                                                  value as PickerDateRange;
+
+                                              var pickUpDate = DateTime.parse(
+                                                  data.startDate.toString());
+                                              controller.fromDate.value =
+                                                  pickUpDate;
+                                              var dropDate = DateTime.parse(
+                                                  data.endDate.toString());
+                                              dropDate != null
+                                                  ? controller.toDate.value =
+                                                      dropDate
+                                                  : controller.toDate.value =
+                                                      pickUpDate;
+                                              Get.back();
+                                              controller
+                                                  .getWarrantyClaimtListByDate();
+                                            },
+                                            onCancel: () => Get.back(),
                                           ),
-                                          selectionMode:
-                                              DateRangePickerSelectionMode.range,
-                                          monthCellStyle:
-                                              DateRangePickerMonthCellStyle(
-                                            todayCellDecoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color:
-                                                    ColorValues.appDarkBlueColor),
-                                          ),
-                                          onSubmit: (value) {
-                                            PickerDateRange? data =
-                                                value as PickerDateRange;
-            
-                                            var pickUpDate = DateTime.parse(
-                                                data.startDate.toString());
-                                            controller.fromDate.value =
-                                                pickUpDate;
-                                            var dropDate = DateTime.parse(
-                                                data.endDate.toString());
-                                            dropDate != null
-                                                ? controller.toDate.value =
-                                                    dropDate
-                                                : controller.toDate.value =
-                                                    pickUpDate;
-                                            Get.back();
-                                            controller.getWarrantyClaimtListByDate();
-                                          },
-                                          onCancel: () => Get.back(),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                text:
-                                    'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
+                                    );
+                                  },
+                                  text:
+                                      'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
+                                ),
                               ),
-                            ),
-            
                               Dimens.boxWidth10,
                               ActionButton(
                                 icon: Icons.add,
                                 label: 'Add Warranty Claim',
                                 onPressed: () {
-                                 
                                   Get.toNamed(Routes.newWarrantyClaimList);
-            
                                 },
                                 color: Colors.blue,
                               ),
                               Dimens.boxWidth10,
-                             
                             ],
                           ),
                         ),
-            
-                      
+
                         ///
                         SizedBox(
                           height: 20,
                         ),
                         Row(
-                          
                           children: [
                             Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'columnVisibility'.tr,
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'columnVisibility'.tr,
+                              ),
                             ),
-                          ),
                             Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'PDF'.tr,
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'PDF'.tr,
+                              ),
                             ),
-                          ),
                             Padding(
                               padding: const EdgeInsets.only(left: 620),
                               child: Container(
                                 width: 200,
-                                height: 40,
+                                height: 35,
                                 margin: Dimens.edgeInsets0_0_16_0,
                                 child: TextField(
                                   decoration: InputDecoration(
@@ -231,7 +227,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                             ),
                           ],
                         ),
-            
+
                         ///
                         Expanded(
                           child: Container(
@@ -271,7 +267,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                     .warrantyClaimList.length,
                                                 (index) => [
                                                   // AssetName(
-            
+
                                                   //    '${controller.warrantyClaimList[index].wc_id}',
                                                   //   // 'dummy data',
                                                   //   1,
@@ -353,7 +349,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                               //                   //       .white,
                                                               //                   // ),
                                                               //                   '',
-            
+
                                                               //                 ),
                                                               //               ),
                                                               //             ),
@@ -372,25 +368,23 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                                               TableActionButton(
                                                                                 color: ColorValues.appDarkBlueColor,
                                                                                 icon: Icons.visibility,
-                                                                                
                                                                                 onPress: () {
                                                                                   controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
                                                                                   print('record:${int.tryParse('${record[0]}')}');
                                                                                 },
                                                                               ),
                                                                               //),
-            
+
                                                                               TableActionButton(
                                                                                 color: ColorValues.appYellowColor,
                                                                                 icon: Icons.edit,
-                                                                                
                                                                                 onPress: () {
                                                                                   controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
                                                                                   print('edit record:${int.tryParse('${record[0]}')}');
                                                                                 },
                                                                               ),
                                                                               //),
-            
+
                                                                               // TableActionButton(
                                                                               //   color: Colors.red,
                                                                               //   icon:
@@ -437,7 +431,8 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             child: ValueListenableBuilder(
                                                 valueListenable: controller
                                                     .paginationWarrantyController,
-                                                builder: (context, value, child) {
+                                                builder:
+                                                    (context, value, child) {
                                                   return Row(
                                                     children: [
                                                       Text(
@@ -464,7 +459,8 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                                           .paginationWarrantyController
                                                                           .currentPage <=
                                                                       1
-                                                                  ? Colors.black26
+                                                                  ? Colors
+                                                                      .black26
                                                                   : Theme.of(
                                                                           context)
                                                                       .primaryColor,
@@ -494,7 +490,8 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                                       controller
                                                                           .paginationWarrantyController
                                                                           .pageCount
-                                                                  ? Colors.black26
+                                                                  ? Colors
+                                                                      .black26
                                                                   : Theme.of(
                                                                           context)
                                                                       .primaryColor,
@@ -507,7 +504,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                 }),
                                           ),
                                         ),
-            
+
                                         ///
                                       ]);
                                   //);

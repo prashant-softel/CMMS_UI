@@ -777,7 +777,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-///Incident Report Reject Button
+  ///Incident Report Reject Button
   Future<ResponseModel> incidentReportRejectButton({
     required String auth,
     bool? isLoading,
@@ -797,11 +797,11 @@ class ConnectHelper {
     print('IncidentReportRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(IncidentReportMessageRejectDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        IncidentReportMessageRejectDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
   ///Incident Report Approve Button
   Future<ResponseModel> incidentReportApproveButton({
@@ -822,11 +822,11 @@ class ConnectHelper {
     print('IncidentReportApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(IncidentReportMessageApproveDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        IncidentReportMessageApproveDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -1457,8 +1457,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   //Create Incident Report
+  //Create Incident Report
   Future<ResponseModel> createIncidentReport({
     required String auth,
     createIncidentReport,
@@ -1491,7 +1490,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create WarraGoods order
 
   Future<ResponseModel> createGoodsOrder({
@@ -1503,6 +1501,32 @@ class ConnectHelper {
       'GO/CreateGO',
       Request.post,
       createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> submitPurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/SubmitPurchaseOrderData',
+      Request.post,
+      createGoReq,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -1575,7 +1599,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   //Update Incident Report
   Future<ResponseModel> updateIncidentReport({
@@ -1705,7 +1728,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=214',
+      'GO/GetGODetailsByID?id=252',
       Request.get,
       null,
       isLoading ?? false,
@@ -1826,7 +1849,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
 
@@ -3449,7 +3471,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> createMrs({
     required String auth,
     createMrsJsonString,
@@ -3516,6 +3537,193 @@ class ConnectHelper {
       'CMMS/UpdateRiskType',
       Request.patch,
       riskTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createInventoryStatus({
+    required String auth,
+    bool? isLoading,
+    required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/AddInventoryStatus',
+      Request.post,
+      checkpointJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> getMrsDetails({
+    required String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getMRSDetails?ID=$mrsId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteInventoryStatus({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/DeleteInventoryStatus?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateInventoryStatus({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventoryStatus',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createInventoryType({
+    required String auth,
+    bool? isLoading,
+    required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/AddInventoryType',
+      Request.post,
+      checkpointJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteInventoryType({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/DeleteInventoryType?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateInventoryType({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventoryType',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createInventoryCategory({
+    required String auth,
+    bool? isLoading,
+    required checkpointJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/AddInventoryCategory',
+      Request.post,
+      checkpointJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteInventoryCategory({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/DeleteInventoryCategory?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateInventoryCategory({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Inventory/UpdateInventoryCategory',
+      Request.patch,
+      checklistJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
