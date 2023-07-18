@@ -291,88 +291,114 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                     minWidth: Get.width * 0.13,
                                   );
                                 }).toList(),
-                                rows: [
-                                  ...List.generate(
-                                    controller.mrsList!.length,
-                                    (index) {
-                                      var mrsListModelListDetails =
-                                          controller.mrsList![index];
-                                      return [
-                                        '${mrsListModelListDetails?.id}',
-                                        "Requested by:${mrsListModelListDetails?.requested_by_name ?? ""}\nIssued by:${mrsListModelListDetails?.approver_name ?? ""}",
-
-                                        // '${mrsListModelListDetails?.approver_name}',
-                                        '${mrsListModelListDetails?.requestd_date}',
-                                        '${mrsListModelListDetails?.activity}',
-                                        '${mrsListModelListDetails?.whereUsedType}',
-                                        "Action"
-                                      ];
-                                    },
-                                  ),
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 60,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: value == "Action"
-                                            ? Wrap(children: [
-                                                TableActionButton(
-                                                  color: ColorValues.viewColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  label: "View",
-                                                  onPress: () {
-                                                    Get.toNamed(
+                                rows: controller.mrsList!
+                                    .map((mrsListDetails) =>
+                                        TableViewRow(height: 70, cells: [
+                                          TableViewCell(
+                                              child: Column(
+                                            children: [
+                                              Text(
+                                                '${mrsListDetails?.id}',
+                                              ),
+                                              Dimens.boxHeight10,
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Container(
+                                                  padding:
+                                                      Dimens.edgeInsets8_2_8_2,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.addNewColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                  ),
+                                                  child: Text(
+                                                    '${mrsListDetails?.status_short}',
+                                                    style:
+                                                        Styles.white10.copyWith(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                          TableViewCell(
+                                              child: Text(
+                                                  "Requested by:${mrsListDetails?.requested_by_name ?? ""}\nIssued by:${mrsListDetails?.approver_name ?? ""}")),
+                                          TableViewCell(
+                                              child: Text(
+                                                  '${mrsListDetails?.requestd_date}')),
+                                          TableViewCell(
+                                              child: Text(
+                                                  '${mrsListDetails?.activity}')),
+                                          TableViewCell(
+                                              child: Text(
+                                            '${mrsListDetails?.whereUsedType}',
+                                          )),
+                                          TableViewCell(
+                                              child: Wrap(children: [
+                                            TableActionButton(
+                                              color: ColorValues.viewColor,
+                                              icon:
+                                                  Icons.remove_red_eye_outlined,
+                                              label: "View",
+                                              onPress: () {
+                                                int mrsId =
+                                                    mrsListDetails?.id ?? 0;
+                                                if (mrsId != null) {
+                                                  Get.toNamed(
                                                       Routes.mrsViewScreen,
-                                                    );
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  label: 'edit',
-                                                  onPress: () {},
-                                                ),
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.approveColor,
-                                                  icon: Icons.check,
-                                                  label: 'Approve',
-                                                  onPress: () {
-                                                    controller.selectedItem =
-                                                        controller.mrsList!
-                                                            .firstWhere(
-                                                                (element) =>
-                                                                    "${element?.id}" ==
-                                                                    record[0]);
-                                                    int mrsId = controller
-                                                            .selectedItem?.id ??
-                                                        0;
-                                                    if (mrsId != 0) {
-                                                      Get.toNamed(
-                                                          Routes
-                                                              .mrsApprovalScreen,
-                                                          arguments: mrsId);
-                                                    }
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues.issueColor,
-                                                  icon: Icons.report_problem,
-                                                  label: 'Issue',
-                                                  onPress: () {
-                                                    Get.toNamed(
+                                                      arguments: mrsId);
+                                                }
+                                              },
+                                            ),
+                                            TableActionButton(
+                                              color: ColorValues.editColor,
+                                              icon: Icons.edit,
+                                              label: 'edit',
+                                              onPress: () {
+                                                int mrsId =
+                                                    mrsListDetails?.id ?? 0;
+                                                if (mrsId != null) {
+                                                  Get.toNamed(Routes.createMrs,
+                                                      arguments: mrsId);
+                                                }
+                                              },
+                                            ),
+                                            TableActionButton(
+                                              color: ColorValues.approveColor,
+                                              icon: Icons.check,
+                                              label: 'Approve',
+                                              onPress: () {
+                                                int mrsId =
+                                                    mrsListDetails?.id ?? 0;
+                                                if (mrsId != null) {
+                                                  Get.toNamed(
+                                                      Routes.mrsApprovalScreen,
+                                                      arguments: mrsId);
+                                                }
+                                              },
+                                            ),
+                                            TableActionButton(
+                                              color: ColorValues.rejectColor,
+                                              icon: Icons.close,
+                                              label: 'Reject',
+                                              onPress: () {
+                                                int mrsId =
+                                                    mrsListDetails?.id ?? 0;
+                                                if (mrsId != null) {
+                                                  Get.toNamed(
                                                       Routes.mrsIssueScreen,
-                                                    );
-                                                  },
-                                                ),
-                                              ])
-                                            : Text(value),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
-                              ),
+                                                      arguments: mrsId);
+                                                }
+                                              },
+                                            ),
+                                          ]))
+                                        ]))
+                                    .toList()),
                       ),
                     ),
                     Padding(

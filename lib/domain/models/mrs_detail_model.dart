@@ -41,7 +41,7 @@ class MrsDetailsModel {
   });
 
   factory MrsDetailsModel.fromJson(Map<String?, dynamic> parsedJson) {
-    var list = parsedJson['plant_list'] as List;
+    var list = parsedJson['cmmrsItems'] as List;
     List<CmmrsItems> cmmrsItems =
         list.map((i) => CmmrsItems.fromJson(i)).toList();
 
