@@ -59,7 +59,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             controller: controller,
                                             dropdownList:
                                                 controller.frequencyList,
@@ -82,7 +82,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                                   "Calibration remainder In"),
                                           SizedBox(width: 10),
                                           Container(
-                                            width: 150,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5.1,
                                             child: TextField(
                                               inputFormatters: <
                                                   TextInputFormatter>[
