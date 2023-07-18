@@ -96,10 +96,10 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                     label: 'listView'.tr,
                     icon: Icons.menu,
                   ),
-                  CustomTabBar(
-                    label: 'treeView'.tr,
-                    icon: Icons.account_tree_sharp,
-                  ),
+                  // CustomTabBar(
+                  //   label: 'treeView'.tr,
+                  //   icon: Icons.account_tree_sharp,
+                  // ),
                   // CustomTabBar(
                   //   label: 'mapView'.tr,
                   //   icon: Icons.location_on,
@@ -174,7 +174,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                       'action'.tr,
                                     ].map((column) {
                                       return TableViewColumn(
-                                        minWidth: Get.width * 0.17,
+                                        minWidth: Get.width * 0.12,
                                         label: column,
                                       );
                                     }).toList(),
@@ -186,7 +186,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                     ].map(
                                       (record) {
                                         return TableViewRow(
-                                          height: Get.height * 0.15,
+                                          height: Get.height * 0.08,
                                           cells: record.map(
                                             (value) {
                                               return TableViewCell(
@@ -339,7 +339,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                       'action'.tr,
                                     ].map((column) {
                                       return TableViewColumn(
-                                        minWidth: Get.width * 0.17,
+                                        minWidth: Get.width * 0.12,
                                         label: column,
                                       );
                                     }).toList(),
@@ -362,7 +362,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                     ].map(
                                       (record) {
                                         return TableViewRow(
-                                          height: Get.height * 0.15,
+                                          height: Get.height * 0.08,
                                           cells: record.map(
                                             (value) {
                                               return TableViewCell(
@@ -433,8 +433,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.appGreenColor,
                                                                             icon:
                                                                                 Icons.visibility,
-                                                                            label:
-                                                                                'View',
+                                                                            // label:
+                                                                            //     'View',
                                                                             onPress:
                                                                                 () {
                                                                               controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
@@ -448,8 +448,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.appLightBlueColor,
                                                                             icon:
                                                                                 Icons.edit,
-                                                                            label:
-                                                                                'Edit',
+                                                                            // label:
+                                                                            //     'Edit',
                                                                             onPress:
                                                                                 () {
                                                                               controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
@@ -463,8 +463,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.appRedColor,
                                                                             icon:
                                                                                 Icons.delete,
-                                                                            label:
-                                                                                'Delete',
+                                                                            // label:
+                                                                            //     'Delete',
                                                                             onPress:
                                                                                 () {},
                                                                           ),

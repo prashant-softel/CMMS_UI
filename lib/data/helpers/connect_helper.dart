@@ -777,7 +777,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-///Incident Report Reject Button
+  ///Incident Report Reject Button
   Future<ResponseModel> incidentReportRejectButton({
     required String auth,
     bool? isLoading,
@@ -797,11 +797,11 @@ class ConnectHelper {
     print('IncidentReportRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(IncidentReportMessageRejectDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        IncidentReportMessageRejectDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
   ///Incident Report Approve Button
   Future<ResponseModel> incidentReportApproveButton({
@@ -822,11 +822,11 @@ class ConnectHelper {
     print('IncidentReportApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(IncidentReportMessageApproveDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        IncidentReportMessageApproveDialog(data: parsedJson['message']));
 
     return responseModel;
   }
-
 
 //   Future<ResponseModel> getNewPermitList({
 //     required bool isLoading,
@@ -1457,8 +1457,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   //Create Incident Report
+  //Create Incident Report
   Future<ResponseModel> createIncidentReport({
     required String auth,
     createIncidentReport,
@@ -1490,7 +1489,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   //Create WarraGoods order
 
@@ -1601,7 +1599,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   //Update Incident Report
   Future<ResponseModel> updateIncidentReport({
@@ -1731,7 +1728,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=214',
+      'GO/GetGODetailsByID?id=252',
       Request.get,
       null,
       isLoading ?? false,
@@ -3549,7 +3546,7 @@ class ConnectHelper {
 
     return responseModel;
   }
-  
+
   Future<ResponseModel> createInventoryStatus({
     required String auth,
     bool? isLoading,
@@ -3567,6 +3564,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteInventoryStatus({
     required String auth,
     bool? isLoading,
@@ -3622,6 +3620,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteInventoryType({
     required String auth,
     bool? isLoading,
@@ -3660,7 +3659,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> createInventoryCategory({
     required String auth,
     bool? isLoading,
@@ -3678,6 +3676,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteInventoryCategory({
     required String auth,
     bool? isLoading,
