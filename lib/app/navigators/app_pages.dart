@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_binding.dart';
+import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_screen.dart';
 import 'package:cmms/app/add_incident_report/add_incident_report_binding.dart';
 import 'package:cmms/app/add_incident_report/add_incident_report_screen.dart';
 import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
@@ -20,6 +22,8 @@ import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
+import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.dart';
+import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
@@ -67,6 +71,8 @@ import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_go
 import 'package:cmms/app/view_add_goods_orders.dart/view/stock_management_view_add_goods_orders_screen.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_binding.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_ui.dart';
+import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_binding.dart';
+import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_screen.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
@@ -556,6 +562,21 @@ class AppPages {
       name: _Paths.incidentReportListWeb,
       page: IncidentReportListScreen.new,
       binding: IncidentReportListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.escalationMatrixListWeb,
+      page: EscalationMatrixListScreen.new,
+      binding: EscalationMatrixListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addEscalatiomMatrixContentWeb,
+      page: AddEscalationMatrixScreen.new,
+      binding: AddEscalationMatrixBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewEscalatiomMatrixContentWeb,
+      page: ViewEscalationMatrixScreen.new,
+      binding: ViewEscalationMatrixBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.mrsViewScreen,

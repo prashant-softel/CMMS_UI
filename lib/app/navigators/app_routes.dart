@@ -100,6 +100,11 @@ abstract class Routes {
   static const roleAccess = _Paths.roleAccess;
   static const createMrs = _Paths.createMrs;
   static const incidentRiskType = _Paths.incidentRiskType;
+  static const escalationMatrixListWeb = _Paths.escalationMatrixListWeb;
+  static const addEscalatiomMatrixContentWeb = _Paths.addEscalatiomMatrixContentWeb;
+  static const viewEscalatiomMatrixContentWeb = _Paths.viewEscalatiomMatrixContentWeb;
+
+
   static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
   static const inventoryCategory = _Paths.inventoryCategory;
 }
@@ -197,6 +202,12 @@ abstract class _Paths {
   static const viewIncidentReportScreen = '/view-incident-report-screen';
   static const createMrs = '/Create-mrs';
   static const incidentRiskType = '/Incident-Risk-Type';
+  static const escalationMatrixListWeb = '/escalation-matrix-list';
+  static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
+  static const viewEscalatiomMatrixContentWeb = '/view-escalation-matrix';
+
+
+
   static const incident_risk_dashboard = '/incident-risk-dashboard';
   static const inventoryCategory = '/inventoryCategory';
 

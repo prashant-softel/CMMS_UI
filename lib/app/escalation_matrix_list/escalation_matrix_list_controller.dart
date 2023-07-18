@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_presenter.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
@@ -16,9 +17,9 @@ import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class IncidentReportListController extends GetxController {
-  IncidentReportListController(this.incidentReportPresenter);
-  IncidentReportListPresenter incidentReportPresenter;
+class EscalationMatrixListController extends GetxController {
+  EscalationMatrixListController(this.escalationMatrixPresenter);
+  EscalationMatrixListPresenter escalationMatrixPresenter;
 
   final HomeController homeController = Get.find();
 
@@ -27,93 +28,84 @@ class IncidentReportListController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
+//   final TextEditingController supplierActionTextFieldController =
+//       TextEditingController();
+//   final TextEditingController supplierActionSrNumberTextFieldController =
+//       TextEditingController();
 
+//   final TextEditingController serialNoTextFieldController =
+//       TextEditingController();
+//   final TextEditingController nameTextFieldController = TextEditingController();
+//   final TextEditingController emailTextFieldController =
+//       TextEditingController();
 
- 
+//   ///Failure Date Time For Web
+//   var failureDateTimeCtrlrWeb = TextEditingController();
+//   var failureDateTimeCtrlrWebBuffer;
+//   Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
 
-  final TextEditingController supplierActionTextFieldController =
-      TextEditingController();
-  final TextEditingController supplierActionSrNumberTextFieldController =
-      TextEditingController();
+//   ///Escalation Matrix List Date Time For Web
+  var escalationMatrixListDateTimeCtrlrWeb = TextEditingController();
+  var escalationMatrixListDateTimeCtrlrWebBuffer;
+  Rx<DateTime> selectedEscalationMatrixListDateTimeWeb = DateTime.now().obs;
 
-  
+//   ///Reject Incident Report Controller
 
-  final TextEditingController serialNoTextFieldController =
-      TextEditingController();
-  final TextEditingController nameTextFieldController = TextEditingController();
-  final TextEditingController emailTextFieldController =
-      TextEditingController();
+//    final TextEditingController rejectCommentTextFieldCtrlr =
+//       TextEditingController();
 
-  ///Failure Date Time For Web
-  var failureDateTimeCtrlrWeb = TextEditingController();
-  var failureDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
-
-  ///Incident Report List Date Time For Web
-  var incidentReportListDateTimeCtrlrWeb = TextEditingController();
-  var incidentReportListDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedIncidentReportListDateTimeWeb = DateTime.now().obs;
-
-
-  ///Reject Incident Report Controller
-  
-   final TextEditingController rejectCommentTextFieldCtrlr =
-      TextEditingController();
-
-
-
-//Incident Report List
+// //Escalation Matrix List
   var incidentReportList = <IncidentReportListModel>[];
-  
-  
 
-  var inventoryList = <InventoryModel>[];
-  var blockList = <BlockModel>[];
-  var equipmentList = <EquipmentModel>[];
+//   var inventoryList = <InventoryModel>[];
+//   var blockList = <BlockModel>[];
+//   var equipmentList = <EquipmentModel>[];
 
-  ///Text Editing Controller
-  final warrantyClaimTitleTextController = TextEditingController();
-  final warrantyClaimBriefDescTextController = TextEditingController();
-  final immediateCorrectiveActionTextController = TextEditingController();
-  final requestManufactureTextController = TextEditingController();
-  final costOfReplacementTextController = TextEditingController();
-  final orderReferenceNoTextController = TextEditingController();
-  final affectedSerialNoTextController = TextEditingController();
-  final manufacturerNameTextController = TextEditingController();
+//   ///Text Editing Controller
+//   final warrantyClaimTitleTextController = TextEditingController();
+//   final warrantyClaimBriefDescTextController = TextEditingController();
+//   final immediateCorrectiveActionTextController = TextEditingController();
+//   final requestManufactureTextController = TextEditingController();
+//   final costOfReplacementTextController = TextEditingController();
+//   final orderReferenceNoTextController = TextEditingController();
+//   final affectedSerialNoTextController = TextEditingController();
+//   final manufacturerNameTextController = TextEditingController();
 
-  final blockTextController = TextEditingController();
-  final parentEquipmentTextController = TextEditingController();
+//   final blockTextController = TextEditingController();
+//   final parentEquipmentTextController = TextEditingController();
 
-///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel>[].obs;
+// ///Incident Report List
+  RxList<IncidentReportListModel?> incidentReportModelList =
+      <IncidentReportListModel>[].obs;
 
+//   var selectedBlock = BlockModel();
+//   var selectedEquipment = EquipmentModel();
+//   //int facilityId = 45;
+//   String categoryIds = '';
+//   Rx<bool> isFormInvalid = false.obs;
 
-  var selectedBlock = BlockModel();
-  var selectedEquipment = EquipmentModel();
-  //int facilityId = 45;
-  String categoryIds = '';
-  Rx<bool> isFormInvalid = false.obs;
-
-  Rx<String> selectedFacility = ''.obs;
-  String username = '';
+//   String username = '';
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
-  PaginationController paginationController = PaginationController(
+  Rx<String> selectedFacility = ''.obs;
+
+//   PaginationController paginationController = PaginationController(
+//     rowCount: 0,
+//     rowsPerPage: 10,
+//   );
+  PaginationController paginationEscalationMatrixController =
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationIncidentReportController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
-  // PaginationController paginationBusinessListController = PaginationController(
-  //   rowCount: 0,
-  //   rowsPerPage: 10,
-  // );
+//   // PaginationController paginationBusinessListController = PaginationController(
+//   //   rowCount: 0,
+//   //   rowsPerPage: 10,
+//   // );
 
   //From and To date format
-   Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
@@ -122,7 +114,7 @@ class IncidentReportListController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
- 
+
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
@@ -130,20 +122,17 @@ class IncidentReportListController extends GetxController {
   // Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel = ViewWarrantyClaimModel().obs;
   // RxList<ViewWarrantyClaimModel?>? viewWarrantyClaimDetailsList = <ViewWarrantyClaimModel?>[].obs;
 
-
-  
-
   ///
 // int? wc_id = 0;
   @override
   void onInit() async {
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
-     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-      getIncidentReportList(facilityId, formattedTodate, formattedFromdate, false);
-    });
+        getIncidentReportList(facilityId, "2020-01-01", "2023-12-31", false);
+      });
     });
 
     Future.delayed(Duration(seconds: 1), () {
@@ -152,12 +141,12 @@ class IncidentReportListController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getuserAccessData();
     });
-    
+
     super.onInit();
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await incidentReportPresenter.getFacilityList();
+    final _facilityList = await escalationMatrixPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -169,9 +158,8 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-  
   Future<void> getuserAccessData() async {
-    final _userAccessList = await incidentReportPresenter.getUserAccessList();
+    final _userAccessList = await escalationMatrixPresenter.getUserAccessList();
 
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);
@@ -181,60 +169,56 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-   Future<void> incidentReportRejectButton({String? id}) async {
-    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  //  Future<void> incidentReportRejectButton({String? id}) async {
+  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
-    final _incidentReportRejectBtn =
-        await incidentReportPresenter.incidentReportRejectButton(
-      comment: _rejectComment,
-      id: id,
-    );
-    // showAlertPermitApproveDialog();
-    print('Incident Report Reject Button Data:${_rejectComment}');
-    print('Incident Report Reject Button Data:${id}');
-    
-  }
+  //   final _incidentReportRejectBtn =
+  //       await incidentReportPresenter.incidentReportRejectButton(
+  //     comment: _rejectComment,
+  //     id: id,
+  //   );
+  //   // showAlertPermitApproveDialog();
+  //   print('Incident Report Reject Button Data:${_rejectComment}');
+  //   print('Incident Report Reject Button Data:${id}');
 
-  Future<void> incidentReportApproveButton({String? incidentId}) async {
-    // String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  // }
 
-    final _incidentReportApproveBtn =
-        await incidentReportPresenter.incidentReportApproveButton(
-      // comment: _rejectComment,
-      incidentId: incidentId,
-    );
-    // showAlertPermitApproveDialog();
-    print('Incident Report Approve Button Data:${incidentId}');
-    
-  }
+  // Future<void> incidentReportApproveButton({String? incidentId}) async {
+  //   // String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
-  
+  //   final _incidentReportApproveBtn =
+  //       await incidentReportPresenter.incidentReportApproveButton(
+  //     // comment: _rejectComment,
+  //     incidentId: incidentId,
+  //   );
+  //   // showAlertPermitApproveDialog();
+  //   print('Incident Report Approve Button Data:${incidentId}');
 
+  // }
 
   void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
     incidentReportModelList.value = <IncidentReportListModel>[];
 
-    final list = await incidentReportPresenter.getIncidentReportList(
-        isLoading: isLoading, 
-        start_date: "2020-01-01", ///startDate,
-        end_date: "2023-12-31",  ////endDate,
-        facility_id: facilityId
-        );
-        print('incidentReportFacilityId$facilityId');
+    final list = await escalationMatrixPresenter.getIncidentReportList(
+        isLoading: isLoading,
+        start_date: "2020-01-01",
+
+        ///startDate,
+        end_date: "2023-12-31", ////endDate,
+        facility_id: facilityId);
+    print('incidentReportFacilityId$facilityId');
     print('Incident Report List:$list');
     for (var incident_list in list) {
       incidentReportModelList.add(incident_list);
     }
     incidentReportList = list;
-    paginationIncidentReportController = PaginationController(
+    paginationEscalationMatrixController = PaginationController(
       rowCount: incidentReportList.length,
       rowsPerPage: 10,
     );
     update(['incident_report_list']);
   }
-
-
 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
@@ -246,7 +230,6 @@ class IncidentReportListController extends GetxController {
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
-     
 
       default:
         {
@@ -257,7 +240,6 @@ class IncidentReportListController extends GetxController {
   }
 
   // void checkForm() {
-  
 
   //   if (warrantyClaimTitleTextController.text == '') {
   //     Fluttertoast.showToast(
@@ -277,7 +259,7 @@ class IncidentReportListController extends GetxController {
   //         msg: 'Failure Date Time Field cannot be empty',
   //         timeInSecForIosWeb: 5);
   //   }
-   
+
   //   if (orderReferenceNoTextController.text == '') {
   //     Fluttertoast.showToast(
   //         msg: 'Order Reference No Field cannot be empty',
@@ -297,25 +279,20 @@ class IncidentReportListController extends GetxController {
   //     Fluttertoast.showToast(
   //         msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
   //   }
- 
+
   // }
 
-
-
-  void getIncidentReportListByDate() {
-    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
+  void getEscalationMatrixListByDate() {
+    // getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
   }
 
-  Future<void> viewIncidentReport({int? id}) async {
-    Get.toNamed(Routes.viewIncidentReportScreen, arguments: id);
+  Future<void> viewEscalationMatrix({int? id}) async {
+    Get.toNamed(Routes.viewEscalatiomMatrixContentWeb, arguments: id);
     print('Argument$id');
   }
 
-   Future<void> editIncidentReport({int? id}) async {
+  Future<void> editEscalationMatrix({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
   }
-
-
-
 }
