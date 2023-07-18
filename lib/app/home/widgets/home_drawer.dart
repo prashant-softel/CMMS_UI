@@ -111,6 +111,14 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
+                        title: "Escalation Matrix",
+                        icon: "assets/files/reportins.png",
+                        press: () {
+                          Get.offNamed(Routes.escalationMatrixListWeb);
+                        },
+                      ),
+                      
+                      MenuItem(
                         title: "Calibration",
                         icon: "assets/files/preventive.png",
                         press: () {
