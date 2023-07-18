@@ -148,7 +148,7 @@ class LoginScreen extends GetView<LoginController> {
                                     height: 45,
                                     child: CustomElevatedButton(
                                       backgroundColor:
-                                          ColorValues.navyBlueColor,
+                                          ColorValues.appDarkBlueColor,
                                       text: "Login",
                                       onPressed: () {
                                         controller.login();
@@ -236,7 +236,7 @@ class LoginScreen extends GetView<LoginController> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 textStyle: TextStyle(fontSize: Dimens.fourteen),
-                                backgroundColor: ColorValues.navyBlueColor,
+                                backgroundColor: ColorValues.appDarkBlueColor,
                               ),
                               onPressed: () {
                                 controller.login();

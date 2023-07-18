@@ -8,7 +8,6 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-
 class TBTSOPListScreen extends GetView<TBTSOPListController> {
   TBTSOPListScreen({super.key});
 
@@ -20,7 +19,7 @@ class TBTSOPListScreen extends GetView<TBTSOPListController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(

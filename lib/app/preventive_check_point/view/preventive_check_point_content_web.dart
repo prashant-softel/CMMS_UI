@@ -417,7 +417,7 @@ class PreventiveCheckPointContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -426,7 +426,7 @@ class PreventiveCheckPointContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -435,7 +435,7 @@ class PreventiveCheckPointContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -444,7 +444,7 @@ class PreventiveCheckPointContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -558,7 +558,7 @@ class PreventiveCheckPointContentWeb
                                                                   0
                                                               ? TableActionButton(
                                                                   color: ColorValues
-                                                                      .appLightBlueColor,
+                                                                      .editColor,
                                                                   icon: Icons
                                                                       .edit,
                                                                   label: 'Edit',
@@ -600,7 +600,7 @@ class PreventiveCheckPointContentWeb
                                                                   0
                                                               ? TableActionButton(
                                                                   color: ColorValues
-                                                                      .appRedColor,
+                                                                      .deleteColor,
                                                                   icon: Icons
                                                                       .delete,
                                                                   label:

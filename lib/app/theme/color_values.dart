@@ -23,15 +23,26 @@ abstract class ColorValues {
   static const Color lightGreyTextColor = Color(lightGreyTextColorHex);
   static const Color transparent = Colors.transparent;
   static const Color greenlightColor = Color.fromARGB(255, 86, 234, 72);
-  static const Color approveColor = greenColor;
+  static const Color approveColor = appGreenColor;
   static const Color rejectColor = appRedColor;
   static const Color completeColor = appRedColor;
   static const Color startColor = appYellowColor;
   static const Color viewColor = appDarkBlueColor;
   static const Color editColor = appYellowColor;
-  static const Color deleteColor = redColor;
+  static const Color deleteColor = appRedColor;
+  static const Color addNewColor = appGreenColor;
+  static const Color submitColor = appGreenColor;
+  static const Color closeColor = appRedColor;
+  static const Color cancelColor = appRedColor;
+  static const Color printColor = appDarkBlueColor;
+  static const Color updateColor = appDarkBlueColor;
+  static const Color tabActionColor = apptabColor;
+  static const Color linktopermitColor = appDarkBlueColor;
+  static const Color pendingColor = appYellowColor;
+  static const Color issueColor = appDarkBlueColor;
+  static const Color executeColor = appGreenColor;
 
-//link,cancel,close,submit,add new,export,coloum visi,issue,update,print,in progress
+//,export,in progress
 
   // ============================================
 
@@ -80,6 +91,8 @@ abstract class ColorValues {
   static const Color appGreenColor = Color(appGreenColorHex);
   static const Color appLightGreyColor = Color(appLightGreyColorHex);
   static const Color appPurpleColor = Color(appPurpleColorHex);
+  static const Color apptabColor = Color(appTabsColorHex);
+
   static Color appBackgroundColor = appLightBlueColor.withOpacity(0.1);
   static const Color appDarkGreyColor = Color(appDarkGreyColorHex);
   static Color appBlueBackgroundColor = Colors.blue.shade50;
@@ -139,12 +152,13 @@ abstract class ColorValues {
 
   ///
   // APP COLOR HEX============================================================================
-  static const int appDarkBlueColorHex = 0xff506677;
-  static const int appLightBlueColorHex = 0xff7CABB2;
-  static const int appRedColorHex = 0xffC45C59;
-  static const int appYellowColorHex = 0xffCCAD6B;
-  static const int appGreenColorHex = 0xff85A871;
+  static const int appDarkBlueColorHex = 0xff3B5670;
+  static const int appLightBlueColorHex = 0xff89C6D2;
+  static const int appRedColorHex = 0xffDC4F46;
+  static const int appYellowColorHex = 0xff93C171;
+  static const int appGreenColorHex = 0xff86C466;
   static const int appLightGreyColorHex = 0xffEEEEEE;
   static const int appPurpleColorHex = 0xffDA70D6;
   static const int appDarkGreyColorHex = 0xffAFAFAF;
+  static const int appTabsColorHex = 0xff89C6D2;
 }

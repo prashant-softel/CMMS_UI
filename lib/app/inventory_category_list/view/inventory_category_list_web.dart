@@ -123,7 +123,7 @@ class InventoryCategoryListContentWeb
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomRichText(title: 'RiskType: '),
                                             SizedBox(
@@ -132,9 +132,9 @@ class InventoryCategoryListContentWeb
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -157,14 +157,14 @@ class InventoryCategoryListContentWeb
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .nameCtrlr,
+                                                    textController:
+                                                        controller.nameCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -174,18 +174,19 @@ class InventoryCategoryListContentWeb
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'Description: '),
+                                            CustomRichText(
+                                                title: 'Description: '),
                                             SizedBox(
                                               width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -208,15 +209,14 @@ class InventoryCategoryListContentWeb
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .descriptionCtrlr
-                                                    ,
+                                                        .descriptionCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -365,17 +365,23 @@ class InventoryCategoryListContentWeb
                                         height: 40,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
-                                          onChanged: (value) => controller.search(value),
+                                          onChanged: (value) =>
+                                              controller.search(value),
                                           decoration: InputDecoration(
-                                            enabledBorder: const OutlineInputBorder(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            focusedBorder: const OutlineInputBorder(
+                                            focusedBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            contentPadding:
+                                                Dimens.edgeInsets10_0_0_0,
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
@@ -483,34 +489,48 @@ class InventoryCategoryListContentWeb
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
-                                                                                color: ColorValues.appLightBlueColor,
-                                                                                icon: Icons.edit,
-                                                                                label: 'Edit',
-                                                                                onPress: () {
-                                                                                  controller.selectedItem = controller.inventoryStatusList!.firstWhere((element) => "${element?.id}" == _inventoryStatusList[0]);
-                                                                                  controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                  controller.descriptionCtrlr.text = "${controller.selectedItem?.description}";
-                                                                                  // controller.descriptionCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                  // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                                  // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                  // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                  // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
-                                                                                },
-                                                                              ),
+                                                                          color:
+                                                                              ColorValues.appLightBlueColor,
+                                                                          icon:
+                                                                              Icons.edit,
+                                                                          label:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.inventoryStatusList!.firstWhere((element) =>
+                                                                                "${element?.id}" ==
+                                                                                _inventoryStatusList[0]);
+                                                                            controller.nameCtrlr.text =
+                                                                                controller.selectedItem?.name ?? '';
+                                                                            controller.descriptionCtrlr.text =
+                                                                                "${controller.selectedItem?.description}";
+                                                                            // controller.descriptionCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                            // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
+                                                                            // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                            // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                            // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                          },
+                                                                        ),
                                                                         //     : Container(),
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.delete,
-                                                                                label: 'Delete',
-                                                                                onPress: () {
-                                                                                  // print(_inventoryStatusList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _inventoryStatusList[0], checklist: _inventoryStatusList[1]);
-                                                                                },
-                                                                              )
-                                                                            // : Container()
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          label:
+                                                                              'Delete',
+                                                                          onPress:
+                                                                              () {
+                                                                            // print(_inventoryStatusList[0]);
+                                                                            controller.isDeleteDialog(
+                                                                                checklist_id: _inventoryStatusList[0],
+                                                                                checklist: _inventoryStatusList[1]);
+                                                                          },
+                                                                        )
+                                                                        // : Container()
                                                                       ])
                                                                 : Text(
                                                                     value,

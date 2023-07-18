@@ -25,7 +25,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 100,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(
@@ -324,7 +324,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                               padding: const EdgeInsets.only(left: 450),
                               child: Container(
                                 width: 200,
-                                height: 40,
+                                height: 35,
                                 margin: Dimens.edgeInsets0_0_16_0,
                                 child: TextField(
                                   decoration: InputDecoration(
@@ -511,7 +511,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                                   // controller.viewNewPermitList(permitId: int.tryParse(_newPermitList[0]));
                                                                                 },
                                                                               ),
-                                                                              
+
                                                                               //),
 
                                                                               // TableActionButton(
@@ -523,20 +523,27 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                               // ),
                                                                               //),
                                                                             ]),
-                                                                            Padding(
-                                                                              padding: const EdgeInsets.only(left: 25, top: 5),
-                                                                              child: TableActionButton(
-                                                                                  color: ColorValues.purpleColor,
-                                                                                  icon: Icons.add,
-                                                                                  label: 'Approve',
-                                                                                  onPress: () {
-                                                                                    // Get.dialog(PermitApprovedDialog(
-                                                                                    //     permitId:
-                                                                                    //         _newPermitList[0]));
-                                                                                    controller.incidentReportApproveButton(incidentId: record[0]);
-                                                                                  },
-                                                                                ),
-                                                                            )
+                                                                        Padding(
+                                                                          padding: const EdgeInsets.only(
+                                                                              left: 25,
+                                                                              top: 5),
+                                                                          child:
+                                                                              TableActionButton(
+                                                                            color:
+                                                                                ColorValues.purpleColor,
+                                                                            icon:
+                                                                                Icons.add,
+                                                                            label:
+                                                                                'Approve',
+                                                                            onPress:
+                                                                                () {
+                                                                              // Get.dialog(PermitApprovedDialog(
+                                                                              //     permitId:
+                                                                              //         _newPermitList[0]));
+                                                                              controller.incidentReportApproveButton(incidentId: record[0]);
+                                                                            },
+                                                                          ),
+                                                                        )
                                                                         // TableActionButton(
                                                                         //   color: Colors.green,
                                                                         //   icon: Icons

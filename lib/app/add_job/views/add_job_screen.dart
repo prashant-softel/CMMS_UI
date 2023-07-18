@@ -22,7 +22,7 @@ class AddJobScreen extends GetView<AddJobController> {
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
             )
           : AppBar(
               title: Text('Add Job'),
@@ -50,7 +50,7 @@ class AddJobScreen extends GetView<AddJobController> {
               child: Padding(
                   padding: Dimens.edgeInsets10,
                   child: (() {
-                    if (Responsive.isMobile(context)||
+                    if (Responsive.isMobile(context) ||
                         Responsive.isTablet(context)) {
                       return AddJobContentMobile();
                     } //

@@ -153,7 +153,7 @@ class HomeDrawer extends GetView {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.logout_outlined, size: 35, color: ColorValues.redColor),
+          Icon(Icons.logout_outlined, size: 35, color: ColorValues.deleteColor),
           SizedBox(
             height: 10,
           ),
