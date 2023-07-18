@@ -579,7 +579,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> incidentReportRejectButton({
+  Future<ResponseModel> incidentReportRejectButton({
     required String auth,
     String? comment,
     String? id,
@@ -979,7 +979,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
   Future<ResponseModel> createIncidentReport({
     required String auth,
     createIncidentReport,
@@ -1033,7 +1032,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> updateIncidentReport({
+  Future<ResponseModel> updateIncidentReport({
     required String auth,
     updateIncidentReport,
     bool? isLoading,
@@ -1962,7 +1961,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> deleteGoodsOrders({
     auth,
     bool? isLoading,
@@ -2267,6 +2265,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   Future<ResponseModel> createInventoryStatus({
     auth,
     bool? isLoading,
@@ -2288,6 +2287,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   Future<ResponseModel> updateInventoryStatus({
     auth,
     bool? isLoading,
@@ -2300,7 +2300,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
   Future<ResponseModel> createInventoryType({
     auth,
@@ -2323,6 +2322,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   Future<ResponseModel> updateInventoryType({
     auth,
     bool? isLoading,
@@ -2357,6 +2357,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   Future<ResponseModel> updateInventoryCategory({
     auth,
     bool? isLoading,
@@ -2367,6 +2368,30 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       checklistJsonString: checklistJsonString,
     );
+    return response;
+  }
+
+  Future<ResponseModel> approveMrs({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveMrs(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectMrs({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    var response = await connectHelper.rejectMrs(
+        auth: auth,
+        isLoading: isLoading,
+        rejecttoJsonString: rejecttoJsonString);
     return response;
   }
 //end

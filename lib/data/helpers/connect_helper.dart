@@ -3732,4 +3732,42 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> approveMrs({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/mrsApproval',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectMrs({
+    required String auth,
+    bool? isLoading,
+    required rejecttoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/mrsReject',
+      Request.post,
+      rejecttoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

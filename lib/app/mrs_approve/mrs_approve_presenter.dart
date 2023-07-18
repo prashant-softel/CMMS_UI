@@ -12,4 +12,13 @@ class MrsApprovePresenter {
         mrsId: mrsId,
         isLoading: isLoading,
       );
+  Future<bool> approveMrs({
+    approvetoJsonString,
+    required bool isLoading,
+  }) async {
+    return mrsApproveUsecase.approveMrs(
+      approvetoJsonString: approvetoJsonString,
+      isLoading: isLoading,
+    );
+  }
 }
