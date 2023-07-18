@@ -23,6 +23,7 @@ import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_we
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
+import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
 import 'package:cmms/app/mrs_approve/mrs_approve_binding.dart';
@@ -132,6 +133,7 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
+import '../module_cleaning_dashboard/view/module_dashboard_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -630,6 +632,11 @@ class AppPages {
       name: _Paths.inventoryCategory,
       page: InventoryCategoryListScreen.new,
       binding: InventoryCategoryListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningDashboard,
+      page: ModuleCleaningDashboardScreen.new,
+      binding: ModuleCleaningDashboardBinding(),
     ),
   ];
 }

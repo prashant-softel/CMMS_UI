@@ -66,7 +66,7 @@ class HomeDrawer extends GetView {
                         title: "Module Cleaning",
                         icon: "assets/files/maintenance.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.moduleCleaningDashboard);
                         },
                       ),
                       MenuItem(
