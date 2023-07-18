@@ -1728,7 +1728,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=214',
+      'GO/GetGODetailsByID?id=252',
       Request.get,
       null,
       isLoading ?? false,
@@ -3564,6 +3564,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
 
   Future<ResponseModel> getMrsDetails({
     required String? auth,
