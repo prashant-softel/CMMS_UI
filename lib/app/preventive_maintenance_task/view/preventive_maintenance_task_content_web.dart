@@ -149,7 +149,7 @@ class PreventiveMaintenanceTaskContentWeb
                     Row(
                       children: [
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -157,7 +157,7 @@ class PreventiveMaintenanceTaskContentWeb
                               text: 'Copy'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -165,7 +165,7 @@ class PreventiveMaintenanceTaskContentWeb
                               text: 'Excel'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -173,7 +173,7 @@ class PreventiveMaintenanceTaskContentWeb
                               text: 'PDF'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -184,7 +184,7 @@ class PreventiveMaintenanceTaskContentWeb
                         Spacer(),
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
                             decoration: InputDecoration(
@@ -314,8 +314,7 @@ class PreventiveMaintenanceTaskContentWeb
                                         child: (value == "Action")
                                             ? Wrap(children: [
                                                 TableActionButton(
-                                                  color:
-                                                      ColorValues.appGreenColor,
+                                                  color: ColorValues.viewColor,
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   label: 'View',
@@ -339,7 +338,7 @@ class PreventiveMaintenanceTaskContentWeb
                                                 ),
                                                 TableActionButton(
                                                   color:
-                                                      ColorValues.appRedColor,
+                                                      ColorValues.deleteColor,
                                                   icon: Icons.delete,
                                                   label: 'Delete',
                                                   onPress: () {},
@@ -354,7 +353,7 @@ class PreventiveMaintenanceTaskContentWeb
                                                 // ),
                                                 TableActionButton(
                                                   color:
-                                                      ColorValues.appGreenColor,
+                                                      ColorValues.executeColor,
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   label: 'Execute',
@@ -377,14 +376,14 @@ class PreventiveMaintenanceTaskContentWeb
                                                 ),
                                                 TableActionButton(
                                                   color: ColorValues
-                                                      .appDarkBlueColor,
+                                                      .linktopermitColor,
                                                   icon: Icons.link_sharp,
                                                   label: 'Link To Permit',
                                                   onPress: () {},
                                                 ),
                                                 TableActionButton(
-                                                  color: ColorValues
-                                                      .appYellowColor,
+                                                  color:
+                                                      ColorValues.pendingColor,
                                                   icon: Icons.numbers_outlined,
                                                   label: 'PM Pending Jobs',
                                                   onPress: () {},

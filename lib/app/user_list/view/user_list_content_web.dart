@@ -97,7 +97,7 @@ class UserListContentWeb extends GetView<UserListController> {
                     Row(
                       children: [
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -106,7 +106,7 @@ class UserListContentWeb extends GetView<UserListController> {
                           ),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -114,7 +114,7 @@ class UserListContentWeb extends GetView<UserListController> {
                               text: 'Copy'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -122,7 +122,7 @@ class UserListContentWeb extends GetView<UserListController> {
                               text: 'Excel'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -132,7 +132,7 @@ class UserListContentWeb extends GetView<UserListController> {
                         Spacer(),
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
                             onChanged: (value) => controller.search(value),
@@ -358,7 +358,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                       ? Wrap(children: [
                                                           TableActionButton(
                                                             color: ColorValues
-                                                                .appDarkBlueColor,
+                                                                .viewColor,
                                                             icon: Icons
                                                                 .remove_red_eye_outlined,
                                                             // label: 'view',
@@ -384,7 +384,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                           ),
                                                           TableActionButton(
                                                             color: ColorValues
-                                                                .appYellowColor,
+                                                                .editColor,
                                                             icon: Icons.edit,
                                                             //  label: 'Edit',
                                                             onPress: () {
@@ -409,7 +409,7 @@ class UserListContentWeb extends GetView<UserListController> {
                                                           ),
                                                           TableActionButton(
                                                             color: ColorValues
-                                                                .appRedColor,
+                                                                .deleteColor,
                                                             icon: Icons.delete,
                                                             // label: 'Delete',
                                                             onPress: () {},

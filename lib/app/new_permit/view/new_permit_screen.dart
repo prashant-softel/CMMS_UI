@@ -53,7 +53,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
             )
           : AppBar(
               title: HeaderWidget(),

@@ -28,7 +28,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         appBar: AppBar(
           title: HeaderWidget(),
           elevation: 0,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           automaticallyImplyLeading: false,
         ),
         body: Row(
@@ -98,14 +98,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                             color: Colors.lightBlue.shade50,
                             child: Wrap(
                               children: [
-                                 
                                 GetBuilder<AddIncidentReportController>(
                                     id: 'incident-report',
                                     builder: (controller) {
                                       return Obx(
                                         () => Column(
                                           children: [
-                                            
                                             CustomAppBar(
                                               title: 'Add Incident Report'.tr,
                                             ),
@@ -157,7 +155,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 SizedBox(
                                                   width: 20,
                                                 ),
-                                                
+
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -241,18 +239,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     SizedBox(
                                                       height: 10,
                                                     ),
-                                                   
-    
-                                  
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceAround,
                                                       children: [
                                                         Row(
-
                                                           children: [
-                                                            
                                                             ///Start Here
 
                                                             // RadioListTile(
@@ -384,10 +377,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ],
                                                     ),
-                                                    
                                                   ],
                                                 ),
-                                                
+
                                                 /////
                                                 SizedBox(
                                                   width: 70,
@@ -475,7 +467,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             ),
                                             //  Wrap(
                                             //   alignment: WrapAlignment.start,
-                                            //    children: 
+                                            //    children:
                                             //                     [
                                             //                       RadioListTile(
                                             //                       title: Text(
@@ -492,8 +484,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             //                               .isSelected
                                             //                               .value}');
                                             //                       }
-                                                                      
-                                                                      
+
                                             //                     ),
                                             //                      RadioListTile(
                                             //                   title: Text(
@@ -510,7 +501,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             //                               .isSelected
                                             //                               .value}');
                                             //                   }
-                                                                  
+
                                             //                 ),
                                             //                 RadioListTile(
                                             //                   title: Text(
@@ -527,7 +518,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             //                               .isSelected
                                             //                               .value}');
                                             //                   }
-                                                                 
+
                                             //                 ),
                                             //                 RadioListTile(
                                             //                   title: Text(
@@ -544,14 +535,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             //                               .isSelected
                                             //                               .value}');
                                             //                   }
-                                                                  
-                                            //                 ),
 
+                                            //                 ),
 
                                             //                   ],
                                             //  ),
-                                                           
-                                           SizedBox(height: 20,),
+
+                                            SizedBox(
+                                              height: 20,
+                                            ),
                                             Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,

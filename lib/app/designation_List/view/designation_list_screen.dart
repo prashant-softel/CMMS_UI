@@ -11,7 +11,7 @@ import '../designation_list_controller.dart';
 import 'designation_listContent_mobile.dart';
 import 'designation_listContent_web.dart';
 
-  class DesignationListScreen extends GetView<DesignationListController> {
+class DesignationListScreen extends GetView<DesignationListController> {
   DesignationListScreen({super.key});
 
   ///
@@ -22,7 +22,7 @@ import 'designation_listContent_web.dart';
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(

@@ -18,16 +18,16 @@ class JobCardScreen extends GetView<JobCardListController> {
     return Scaffold(
       appBar: Responsive.isDesktop(context)
           ? AppBar(
-        title: HeaderWidget(),
-        elevation: 0,
-        toolbarHeight: 90,
-        automaticallyImplyLeading: false,
-      )
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 60,
+              automaticallyImplyLeading: false,
+            )
           : AppBar(
-        title: Text('Job Card List'),
-        centerTitle: true,
-        elevation: 0,
-      ),
+              title: Text('Job Card List'),
+              centerTitle: true,
+              elevation: 0,
+            ),
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -45,9 +45,9 @@ class JobCardScreen extends GetView<JobCardListController> {
                     //     // child: ModuleListContentMobile(),
                     //   // ),
                     // if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: JobCardWeb(),
-                      )
+                    Expanded(
+                      child: JobCardWeb(),
+                    )
                   ],
                 ),
               ),

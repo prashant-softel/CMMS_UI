@@ -150,7 +150,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                             onPressed: () {
                               Get.toNamed(Routes.createMrs);
                             },
-                            color: ColorValues.greenlightColor,
+                            color: ColorValues.addNewColor,
                           ),
                         ],
                       ),
@@ -161,7 +161,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                     Row(
                       children: [
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -169,7 +169,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                               text: 'Copy'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -177,7 +177,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                               text: 'Excel'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -185,7 +185,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                               text: 'PDF'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -196,7 +196,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                         Spacer(),
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
                             decoration: InputDecoration(
@@ -215,9 +215,6 @@ class MrsListContentWeb extends GetView<MrsListController> {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 20,
                     ),
                     Expanded(
                       child: Container(
@@ -320,8 +317,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                         child: value == "Action"
                                             ? Wrap(children: [
                                                 TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
+                                                  color: ColorValues.viewColor,
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   label: "View",
@@ -332,8 +328,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                                   },
                                                 ),
                                                 TableActionButton(
-                                                  color: ColorValues
-                                                      .appYellowColor,
+                                                  color: ColorValues.editColor,
                                                   icon: Icons.edit,
                                                   label: 'edit',
                                                   onPress: () {},
@@ -362,8 +357,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                                   },
                                                 ),
                                                 TableActionButton(
-                                                  color:
-                                                      ColorValues.appRedColor,
+                                                  color: ColorValues.issueColor,
                                                   icon: Icons.report_problem,
                                                   label: 'Issue',
                                                   onPress: () {
