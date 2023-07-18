@@ -40,7 +40,8 @@ class HeaderWidget extends GetView<HomeController> {
               padding: const EdgeInsets.all(0.0),
               child: Image.asset(
                 'assets/files/logo.png',
-                // height: 120,
+                height: 150,
+                width: 150,
               ),
             ),
           Spacer(),
@@ -53,6 +54,7 @@ class HeaderWidget extends GetView<HomeController> {
             Obx(
               () => Container(
                 width: Get.width * .2,
+                height: 35,
                 child: DropdownWidget(
                   controller: controller,
                   dropdownList: controller.facilityList,

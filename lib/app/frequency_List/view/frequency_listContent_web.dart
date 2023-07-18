@@ -12,8 +12,7 @@ import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
 import '../frequency_list_controller.dart';
 
-class FrequencyListContentWeb
-    extends GetView<FrequencyListController> {
+class FrequencyListContentWeb extends GetView<FrequencyListController> {
   FrequencyListContentWeb({Key? key}) : super(key: key);
   final FrequencyListController controller = Get.find();
 
@@ -56,8 +55,7 @@ class FrequencyListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / MASTERS",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
                   Text(" / CREATE FREQUENCY NUMBER",
                       style: Styles.greyMediumLight12)
@@ -126,7 +124,9 @@ class FrequencyListContentWeb
                                           // mainAxisAlignment:
                                           //     MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Expanded(child: CustomRichText(title: 'ID:')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'ID:')),
                                             // SizedBox(
                                             //   width: 70,
                                             // ),
@@ -177,16 +177,18 @@ class FrequencyListContentWeb
                                           // mainAxisAlignment:
                                           // MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Expanded(child: CustomRichText(title: 'Name:')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Name:')),
                                             // SizedBox(
                                             //   width: 70,
                                             // ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -209,10 +211,10 @@ class FrequencyListContentWeb
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
@@ -221,18 +223,17 @@ class FrequencyListContentWeb
                                             ),
                                           ],
                                         ),
-
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           // mainAxisAlignment:
-                                              // MainAxisAlignment.spaceBetween,
+                                          // MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               child: Text(
                                                 "Days"
-                                                    ": ",
+                                                ": ",
                                                 style: Styles.black16,
                                               ),
                                             ),
@@ -355,39 +356,39 @@ class FrequencyListContentWeb
                                       width: 10,
                                     ),
                                     Container(
-                                        height: 40,
-                                        width: (Get.width * .2) - 70,
-                                        // child: controller.selectedItem == null
-                                            // ? CustomElevatedButton(
-                                            //     backgroundColor: ColorValues
-                                            //         .appDarkBlueColor,
-                                            //     onPressed: () {
-                                            //       controller
-                                            //           .createChecklistNumber()
-                                            //           .then((value) {
-                                            //         print("value,$value");
-                                            //         if (value == true)
-                                            //           controller
-                                            //               .issuccessCreatechecklist();
-                                            //       });
-                                            //     },
-                                            //     text: 'Create CheckList')
-                                            // : CustomElevatedButton(
-                                            //     backgroundColor: ColorValues
-                                            //         .appDarkBlueColor,
-                                            //     onPressed: () {
-                                            //       controller
-                                            //           .updateChecklistNumber(
-                                            //               controller
-                                            //                   .selectedItem?.id)
-                                            //           .then((value) {
-                                            //         print("value,$value");
-                                            //         if (value == true)
-                                            //           controller
-                                            //               .issuccessCreatechecklist();
-                                            //       });
-                                            //     },
-                                            //     text: 'Update')
+                                      height: 40,
+                                      width: (Get.width * .2) - 70,
+                                      // child: controller.selectedItem == null
+                                      // ? CustomElevatedButton(
+                                      //     backgroundColor: ColorValues
+                                      //         .appDarkBlueColor,
+                                      //     onPressed: () {
+                                      //       controller
+                                      //           .createChecklistNumber()
+                                      //           .then((value) {
+                                      //         print("value,$value");
+                                      //         if (value == true)
+                                      //           controller
+                                      //               .issuccessCreatechecklist();
+                                      //       });
+                                      //     },
+                                      //     text: 'Create CheckList')
+                                      // : CustomElevatedButton(
+                                      //     backgroundColor: ColorValues
+                                      //         .appDarkBlueColor,
+                                      //     onPressed: () {
+                                      //       controller
+                                      //           .updateChecklistNumber(
+                                      //               controller
+                                      //                   .selectedItem?.id)
+                                      //           .then((value) {
+                                      //         print("value,$value");
+                                      //         if (value == true)
+                                      //           controller
+                                      //               .issuccessCreatechecklist();
+                                      //       });
+                                      //     },
+                                      //     text: 'Update')
                                     ),
                                   ],
                                 ),
@@ -427,7 +428,7 @@ class FrequencyListContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -443,7 +444,7 @@ class FrequencyListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -452,7 +453,7 @@ class FrequencyListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -461,7 +462,7 @@ class FrequencyListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -538,8 +539,7 @@ class FrequencyListContentWeb
                                                     0,
                                                 (index) {
                                                   var frequencyListModelListDetails =
-                                                      controller
-                                                              .frequencyList?[
+                                                      controller.frequencyList?[
                                                           index];
                                                   return [
                                                     '${frequencyListModelListDetails?.id}',

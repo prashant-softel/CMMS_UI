@@ -25,7 +25,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
         appBar: AppBar(
           title: HeaderWidget(),
           elevation: 0,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           automaticallyImplyLeading: false,
         ),
         body: Row(
@@ -2116,12 +2116,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
           // )
 
           // : Text('data')
-          
         ],
       ),
     );
-    
-  
   }
 
   emailDropdown(

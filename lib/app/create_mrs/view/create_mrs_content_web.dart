@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown_web.dart';
 
 class CreateMrsContentWeb extends GetView<CreateMrsController> {
@@ -212,43 +213,54 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               }).toList(),
                               rows: controller.rowItem.value.map((record) {
                                 return TableViewRow(
-                                  height: 120,
+                                  height: 85,
                                   cells: record.map((mapData) {
                                     return TableViewCell(
                                       child: (mapData['key'] == "Drop_down")
-                                          ? Column(
-                                              children: [
-                                                DropdownWebWidget(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  dropdownList:
-                                                      controller.assetItemList,
-                                                  selectedValue:
-                                                      mapData["value"],
-                                                  onValueChanged:
-                                                      (list, selectedValue) {
-                                                    // print({
-                                                    //   selectedValue:
-                                                    //       selectedValue
-                                                    // });
-                                                    mapData["value"] =
-                                                        selectedValue;
-                                                    controller.dropdownMapperData[
-                                                            selectedValue] =
-                                                        list.firstWhere(
-                                                            (element) =>
-                                                                element.name ==
-                                                                selectedValue,
-                                                            orElse: null);
-                                                  },
-                                                ),
-                                                Text(
-                                                    "${controller.dropdownMapperData[mapData['value']]?.available_qty ?? ''}"),
-                                                Text(
-                                                    "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                              ],
+                                          ? Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: Column(
+                                                children: [
+                                                  DropdownWebWidget(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            4,
+                                                    dropdownList: controller
+                                                        .assetItemList,
+                                                    selectedValue:
+                                                        mapData["value"],
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
+                                                      // print({
+                                                      //   selectedValue:
+                                                      //       selectedValue
+                                                      // });
+                                                      mapData["value"] =
+                                                          selectedValue;
+                                                      controller.dropdownMapperData[
+                                                              selectedValue] =
+                                                          list.firstWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  selectedValue,
+                                                              orElse: null);
+                                                    },
+                                                  ),
+                                                  Dimens.boxHeight5,
+                                                  Row(
+                                                    children: [
+                                                      Text("Approval :"),
+                                                      Dimens.boxWidth10,
+                                                      Text(
+                                                          "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}")
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
                                             )
                                           : (mapData['key'] == "Requested_Qty")
                                               ? Padding(
@@ -299,11 +311,11 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                               : (mapData['key'] ==
                                                       "Available_Qty")
                                                   ? Text(
-                                                      "${controller.dropdownMapperData[mapData['value']]?.available_qty ?? 'ffhhhjj'}")
+                                                      "${controller.dropdownMapperData[record[0]['value']]?.available_qty ?? ""}")
                                                   : (mapData['key'] ==
                                                           "Material_Type")
                                                       ? Text(
-                                                          "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? 'hh'}")
+                                                          "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
                                                       : Text(
                                                           mapData['key'] ?? ''),
                                     );
@@ -352,34 +364,51 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                         ],
                       ),
                     ),
-                    Dimens.boxHeight15,
                     Container(
-                      margin: EdgeInsets.only(bottom: 40, top: 30),
+                      margin: Dimens.edgeInsets20_0_0_0,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Submit',
-                              onPressed: () {
-                                // controller.addUser();
-                                controller.createMrs();
-                              },
-                            ),
+                          Text(
+                            'Set As Template: ',
+                            style: Styles.blackBold14,
                           ),
-                          Dimens.boxWidth20,
-                          Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.redColor,
-                              text: "Cancel",
-                              onPressed: () {},
-                            ),
+                          Dimens.boxWidth10,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: CustomSwitchTroggle(
+                                value: controller.isSetTemplate.value,
+                                onChanged: (value) {
+                                  controller.setTemplatetoggle();
+                                }),
                           ),
                         ],
                       ),
+                    ),
+                    Dimens.boxHeight15,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.greenColor,
+                            text: 'Submit',
+                            onPressed: () {
+                              // controller.addUser();
+                              controller.createMrs();
+                            },
+                          ),
+                        ),
+                        Dimens.boxWidth20,
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.redColor,
+                            text: "Cancel",
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),

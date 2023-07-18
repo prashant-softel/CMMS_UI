@@ -3565,6 +3565,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel> getMrsDetails({
+    required String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getMRSDetails?ID=$mrsId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteInventoryStatus({
     required String auth,
     bool? isLoading,

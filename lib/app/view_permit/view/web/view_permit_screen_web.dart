@@ -47,7 +47,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                 title: HeaderWidget(),
                 automaticallyImplyLeading: false,
                 elevation: 0,
-                toolbarHeight: 90,
+                toolbarHeight: 60,
               )
             : AppBar(
                 title: Text('View Permit'),
@@ -3716,13 +3716,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
               ///Approve Button
               varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 3 && e.approve == 0)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
-                      ||
+                                  .where((e) =>
+                                      e.feature_id == 3 && e.approve == 0)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              121 ||
                       controller.viewPermitDetailsModel.value?.ptwStatus == 133
-
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -3784,7 +3784,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               .length >
                           0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus == 121
-              ?Container(
+                  ? Container(
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
@@ -3798,35 +3798,36 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                   '${controller.viewPermitDetailsModel.value?.permitNo}'));
                         },
                       ))
-                      :
-                      Container(),
+                  : Container(),
 
               /// Permit Cancel By approver & Permit Request
               varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 3 && e.approve == 1)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 123
-                      ||
+                                  .where((e) =>
+                                      e.feature_id == 3 && e.approve == 1)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              123 ||
                       controller.viewPermitDetailsModel.value?.ptwStatus == 130
-
-              ?Container(
+                  ? Container(
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
-                        text: "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ? 'Cancel By Approver' : 'Cancel Request'}",
+                        text:
+                            "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ? 'Cancel By Approver' : 'Cancel Request'}",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
                           //     .createNewPermit();
                           Get.dialog(PermitCancelByApproverDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
-                              ptwStatus: '${controller.viewPermitDetailsModel.value?.ptwStatus}',));
+                            permitId:
+                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            ptwStatus:
+                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                          ));
                         },
                       ))
-                      :
-                      Container(),
+                  : Container(),
               // varUserAccessModel.value.access_list!
               //                 .where((e) => e.feature_id == 3 && e.approve == 1)
               //                 .length >
@@ -3837,7 +3838,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               //   icon: Icons.expand_outlined,
               //   label: 'Extend Approve',
               //   onPress: () {
-                  
+
               //     // Get.dialog(PermitExtendDialog(
               //     //     permitId:
               //     //         _newPermitList[0]));

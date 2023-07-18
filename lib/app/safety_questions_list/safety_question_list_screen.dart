@@ -1,4 +1,3 @@
-
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
@@ -7,8 +6,6 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 
 class SafetyQestionsListScreen extends GetView<SafetyQuestionsListController> {
   SafetyQestionsListScreen({super.key});
@@ -21,7 +18,7 @@ class SafetyQestionsListScreen extends GetView<SafetyQuestionsListController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(

@@ -10,7 +10,8 @@ import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../inventory_category_list_controller.dart';
 
-class InventoryCategoryListScreen extends GetView<InventoryCategoryListController> {
+class InventoryCategoryListScreen
+    extends GetView<InventoryCategoryListController> {
   InventoryCategoryListScreen({super.key});
 
   ///
@@ -21,7 +22,7 @@ class InventoryCategoryListScreen extends GetView<InventoryCategoryListControlle
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(

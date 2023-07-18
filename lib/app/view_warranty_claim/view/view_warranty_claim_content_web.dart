@@ -20,7 +20,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
         appBar: AppBar(
           title: HeaderWidget(),
           elevation: 0,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           automaticallyImplyLeading: false,
         ),
         body: Obx(
@@ -313,7 +313,11 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                               height: 30,
                                                             ),
                                                             Padding(
-                                                              padding: const EdgeInsets.only(left: 100),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          100),
                                                               child: Row(
                                                                   children: [
                                                                 // SizedBox(
@@ -327,21 +331,21 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                                 //     'Amit Purchase Manager')
                                                               ]..addAll(controller
                                                                       .externalEmailsList!
-                                                                      .map(
-                                                                          (data) =>
-                                                                              Row(
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                children: [
-                                                                                  SizedBox(
-                                                                                    width: 75,
-                                                                                  ),
-                                                                                  SizedBox(width: 200, child: Text('${data?.name}')),
-                                                                                  SizedBox(
-                                                                                    width: 200,
-                                                                                  ),
-                                                                                  SizedBox(width: 200, child: Text('${data?.email}')),
-                                                                                ],
-                                                                              )))),
+                                                                      .map((data) =>
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            children: [
+                                                                              SizedBox(
+                                                                                width: 75,
+                                                                              ),
+                                                                              SizedBox(width: 200, child: Text('${data?.name}')),
+                                                                              SizedBox(
+                                                                                width: 200,
+                                                                              ),
+                                                                              SizedBox(width: 200, child: Text('${data?.email}')),
+                                                                            ],
+                                                                          )))),
                                                             )
 
                                                             /// Employee
@@ -570,14 +574,20 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                           ),
                                                           Row(
                                                             children: [
-                                                               SizedBox(width: 80,),
-                                                                SizedBox(
+                                                              SizedBox(
+                                                                width: 80,
+                                                              ),
+                                                              SizedBox(
                                                                   width: 100,
-                                                                  child: Text('${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}')),
-                                                               SizedBox(width: 140,),
-                                                                SizedBox(
+                                                                  child: Text(
+                                                                      '${controller.viewWarrantyClaimDetailsModel.value?.equipment_sr_no}')),
+                                                              SizedBox(
+                                                                width: 140,
+                                                              ),
+                                                              SizedBox(
                                                                   width: 200,
-                                                                  child: Text('${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}'))
+                                                                  child: Text(
+                                                                      '${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}'))
                                                             ],
                                                           )
                                                         ],
@@ -972,7 +982,9 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                       width: 25,
                                                     ),
                                                     Text('Supplier Action'),
-                                                    SizedBox(width: 205,),
+                                                    SizedBox(
+                                                      width: 205,
+                                                    ),
                                                     Text('Required'),
                                                     SizedBox(
                                                       width: 190,
@@ -981,18 +993,19 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                   ],
                                                 ),
                                                 Column(
-                                                  children: []..addAll(controller.supplierActionsList!.map((element) => Row(
-                                                    children: [
-                                                      supplierActionData(
-                                                  '#',
-                                                  '${element?.name}',
-                                                  '${element?.required_by_date}',
-                                                  context,
-                                                ),
-                                                    ],
-                                                  )))
-                                                )
-                                               
+                                                    children: []
+                                                      ..addAll(controller
+                                                          .supplierActionsList!
+                                                          .map((element) => Row(
+                                                                children: [
+                                                                  supplierActionData(
+                                                                    '#',
+                                                                    '${element?.name}',
+                                                                    '${element?.required_by_date}',
+                                                                    context,
+                                                                  ),
+                                                                ],
+                                                              ))))
                                               ],
                                             ),
                                           ],
@@ -1001,30 +1014,30 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 30,),
+                                SizedBox(
+                                  height: 30,
+                                ),
 
                                 ///Warranty Claim History
-                                 Padding(
-                                   padding: const EdgeInsets.only(left: 15,top: 20, right: 15),
-                                   child: SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
-                                                    child: Container(
-                                                      // margin: Dimens.edgeInsets20,
-                                                      constraints: BoxConstraints(
-                                                        maxHeight: 100,
-                                                        minHeight: 100,
-                                                      ),
-                                                      child: //
-                                                          HistoryTableWidgetWeb(
-                                                        historyList: controller
-                                                            .historyList,
-                                                      ),
-                                                    ),
-                                                  ),
-                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, top: 20, right: 15),
+                                  child: SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    child: Container(
+                                      // margin: Dimens.edgeInsets20,
+                                      constraints: BoxConstraints(
+                                        maxHeight: 100,
+                                        minHeight: 100,
+                                      ),
+                                      child: //
+                                          HistoryTableWidgetWeb(
+                                        historyList: controller.historyList,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 // SizedBox(
                                 //   height: 200,
                                 //   width:
