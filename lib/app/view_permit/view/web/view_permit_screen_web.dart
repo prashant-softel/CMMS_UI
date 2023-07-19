@@ -3644,7 +3644,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                     foregroundColor: Colors.white,
                     backgroundColor:
-                        Color.fromARGB(255, 5, 92, 163), //  foreground
+                        ColorValues.appDarkBlueColor, //  foreground
                   ),
                   onPressed: () {
                     controller.printScreen();
@@ -3698,7 +3698,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               //     ? Container(
               //         height: 45,
               //         child: CustomElevatedButton(
-              //           backgroundColor: Colors.green,
+              //           backgroundColor: ColorValues.appDarkBlueColor,
               //           text: "Issue",
               //           icon: Icons.check,
               //           onPressed: () {
@@ -3726,7 +3726,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
-                        backgroundColor: ColorValues.purpleColor,
+                        backgroundColor: ColorValues.appGreenColor,
                         text: "Approve",
                         icon: Icons.add,
                         onPressed: () {
@@ -3762,7 +3762,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
-                        backgroundColor: Colors.red,
+                        backgroundColor: ColorValues.appRedColor,
                         text: "Reject",
                         icon: Icons.close,
                         onPressed: () {

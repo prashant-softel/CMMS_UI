@@ -4,9 +4,7 @@ import 'dart:convert';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_presenter.dart';
-import 'package:cmms/app/incident_report_list/incident_report_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +13,6 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class EscalationMatrixListController extends GetxController {
   EscalationMatrixListController(this.escalationMatrixPresenter);
@@ -28,21 +25,7 @@ class EscalationMatrixListController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
-//   final TextEditingController supplierActionTextFieldController =
-//       TextEditingController();
-//   final TextEditingController supplierActionSrNumberTextFieldController =
-//       TextEditingController();
 
-//   final TextEditingController serialNoTextFieldController =
-//       TextEditingController();
-//   final TextEditingController nameTextFieldController = TextEditingController();
-//   final TextEditingController emailTextFieldController =
-//       TextEditingController();
-
-//   ///Failure Date Time For Web
-//   var failureDateTimeCtrlrWeb = TextEditingController();
-//   var failureDateTimeCtrlrWebBuffer;
-//   Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
 
 //   ///Escalation Matrix List Date Time For Web
   var escalationMatrixListDateTimeCtrlrWeb = TextEditingController();
@@ -57,34 +40,12 @@ class EscalationMatrixListController extends GetxController {
 // //Escalation Matrix List
   var incidentReportList = <IncidentReportListModel>[];
 
-//   var inventoryList = <InventoryModel>[];
-//   var blockList = <BlockModel>[];
-//   var equipmentList = <EquipmentModel>[];
-
-//   ///Text Editing Controller
-//   final warrantyClaimTitleTextController = TextEditingController();
-//   final warrantyClaimBriefDescTextController = TextEditingController();
-//   final immediateCorrectiveActionTextController = TextEditingController();
-//   final requestManufactureTextController = TextEditingController();
-//   final costOfReplacementTextController = TextEditingController();
-//   final orderReferenceNoTextController = TextEditingController();
-//   final affectedSerialNoTextController = TextEditingController();
-//   final manufacturerNameTextController = TextEditingController();
-
-//   final blockTextController = TextEditingController();
-//   final parentEquipmentTextController = TextEditingController();
 
 // ///Incident Report List
   RxList<IncidentReportListModel?> incidentReportModelList =
       <IncidentReportListModel>[].obs;
 
-//   var selectedBlock = BlockModel();
-//   var selectedEquipment = EquipmentModel();
-//   //int facilityId = 45;
-//   String categoryIds = '';
-//   Rx<bool> isFormInvalid = false.obs;
 
-//   String username = '';
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -169,33 +130,7 @@ class EscalationMatrixListController extends GetxController {
     }
   }
 
-  //  Future<void> incidentReportRejectButton({String? id}) async {
-  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
-
-  //   final _incidentReportRejectBtn =
-  //       await incidentReportPresenter.incidentReportRejectButton(
-  //     comment: _rejectComment,
-  //     id: id,
-  //   );
-  //   // showAlertPermitApproveDialog();
-  //   print('Incident Report Reject Button Data:${_rejectComment}');
-  //   print('Incident Report Reject Button Data:${id}');
-
-  // }
-
-  // Future<void> incidentReportApproveButton({String? incidentId}) async {
-  //   // String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
-
-  //   final _incidentReportApproveBtn =
-  //       await incidentReportPresenter.incidentReportApproveButton(
-  //     // comment: _rejectComment,
-  //     incidentId: incidentId,
-  //   );
-  //   // showAlertPermitApproveDialog();
-  //   print('Incident Report Approve Button Data:${incidentId}');
-
-  // }
-
+  
   void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
     incidentReportModelList.value = <IncidentReportListModel>[];
@@ -283,7 +218,7 @@ class EscalationMatrixListController extends GetxController {
   // }
 
   void getEscalationMatrixListByDate() {
-    // getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
+    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
   }
 
   Future<void> viewEscalationMatrix({int? id}) async {

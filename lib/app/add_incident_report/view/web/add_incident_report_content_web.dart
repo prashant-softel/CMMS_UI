@@ -126,7 +126,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           title:
                                                               'Block Name: '),
                                                       SizedBox(
-                                                        height: 50,
+                                                        height: 70,
                                                       ),
                                                       CustomRichText(
                                                           title:
@@ -138,13 +138,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           title:
                                                               'Incident Title: '),
                                                       SizedBox(
-                                                        height: 60,
+                                                        height: 80,
                                                       ),
                                                       CustomRichText(
                                                           title:
                                                               'Incident Description: '),
                                                       SizedBox(
-                                                        height: 110,
+                                                        height: 90,
                                                       ),
                                                       CustomRichText(
                                                           title:
@@ -231,19 +231,20 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       context)
                                                                   .size
                                                                   .width /
-                                                              4.9,
+                                                              2,
                                                           child:
                                                               _buildIncidentReportDescriptionField_web(
                                                                   context)),
                                                     ),
                                                     SizedBox(
-                                                      height: 10,
+                                                      height: 20,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceAround,
                                                       children: [
+                                                       
                                                         Row(
                                                           children: [
                                                             ///Start Here
@@ -381,9 +382,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 ),
 
                                                 /////
-                                                SizedBox(
-                                                  width: 70,
-                                                ),
+                                               SizedBox(width: 50,),
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
@@ -395,7 +394,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         title:
                                                             'Equipment Name: '),
                                                     SizedBox(
-                                                      height: 50,
+                                                      height: 80,
                                                     ),
                                                     CustomRichText(
                                                         title:
@@ -463,6 +462,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     ),
                                                   ],
                                                 ),
+                                             
                                               ],
                                             ),
                                             //  Wrap(
@@ -563,25 +563,25 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           title:
                                                               'Victim Name: '),
                                                       SizedBox(
-                                                        height: 50,
+                                                        height: 60,
                                                       ),
                                                       SizedBox(
-                                                        width: 140,
+                                                        width: 170,
                                                         child: CustomRichText(
                                                             title:
                                                                 'Incident Investigation Done By: '),
                                                       ),
                                                       SizedBox(
-                                                        height: 40,
-                                                      ),
-                                                      CustomRichText(
-                                                          title: 'Risk Type: '),
-                                                      SizedBox(
                                                         height: 50,
                                                       ),
                                                       CustomRichText(
-                                                          title:
-                                                              'Legal Applicability: '),
+                                                          title: 'Risk Type: '),
+                                                      //  SizedBox(
+                                                      //   height: 30,
+                                                      // ),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //          'Legal Applicability: '),
                                                     ],
                                                   ),
                                                 ),
@@ -682,83 +682,92 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Dimens.boxHeight35,
-                                                    controller.id != null
-                                                        ? controller
-                                                                    .incidentReportDetailsModel
-                                                                    .value
-                                                                    ?.legal_applicability_name ==
-                                                                "YES"
-                                                            ? Obx(
-                                                                () => Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 20),
-                                                                  child: Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .legalApplicabilityDetailValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .legalApplicabilityDetailValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            : Obx(
-                                                                () => Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 20),
-                                                                  child: Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .legalApplicabilityDetailFalseValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .legalApplicabilityDetailFalseValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              )
-                                                        : Obx(
-                                                            () => Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left: 20),
-                                                              child: Switch(
-                                                                activeColor:
-                                                                    Colors
-                                                                        .green,
-                                                                value: controller
-                                                                    .legalApplicabilityValue
-                                                                    .value,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  controller
-                                                                      .legalApplicabilityValue
-                                                                      .value = value;
-                                                                  print(
-                                                                      'Legal applicability: ${controller.legalApplicabilityValue.value}');
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
+                                                    
+                                                    SizedBox(height: 30,),
+                                                   
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                          title:
+                                                               'Legal Applicability: '),
+                                                            controller.id != null
+                                                       ? controller
+                                                                       .incidentReportDetailsModel
+                                                                       .value
+                                                                       ?.legal_applicability_name ==
+                                                                   "YES"
+                                                               ? Obx(
+                                                                   () => Padding(
+                                                                     padding: const EdgeInsets
+                                                                             .only(
+                                                                         left: 20),
+                                                                     child: Switch(
+                                                                       activeColor:
+                                                                           Colors
+                                                                               .green,
+                                                                       value: controller
+                                                                           .legalApplicabilityDetailValue
+                                                                           .value,
+                                                                       onChanged:
+                                                                           (value) {
+                                                                         controller
+                                                                             .legalApplicabilityDetailValue
+                                                                             .value = value;
+                                                                         print(
+                                                                             'Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
+                                                                       },
+                                                                     ),
+                                                                   ),
+                                                                 )
+                                                               : Obx(
+                                                                   () => Padding(
+                                                                     padding: const EdgeInsets
+                                                                             .only(
+                                                                         left: 20),
+                                                                     child: Switch(
+                                                                       activeColor:
+                                                                           Colors
+                                                                               .green,
+                                                                       value: controller
+                                                                           .legalApplicabilityDetailFalseValue
+                                                                           .value,
+                                                                       onChanged:
+                                                                           (value) {
+                                                                         controller
+                                                                             .legalApplicabilityDetailFalseValue
+                                                                             .value = value;
+                                                                         print(
+                                                                             'Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
+                                                                       },
+                                                                     ),
+                                                                   ),
+                                                                 )
+                                                       : Obx(
+                                                               () => Padding(
+                                                                 padding:
+                                                                     const EdgeInsets
+                                                                             .only(
+                                                                         left: 20),
+                                                                 child: Switch(
+                                                                   activeColor:
+                                                                       Colors
+                                                                           .green,
+                                                                   value: controller
+                                                                       .legalApplicabilityValue
+                                                                       .value,
+                                                                   onChanged:
+                                                                       (value) {
+                                                                     controller
+                                                                         .legalApplicabilityValue
+                                                                         .value = value;
+                                                                     print(
+                                                                         'Legal applicability: ${controller.legalApplicabilityValue.value}');
+                                                                   },
+                                                                 ),
+                                                               ),
+                                                             ),
+                                                          ],
+                                                        )
                                                   ],
                                                 ),
                                                 SizedBox(
@@ -769,7 +778,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     SizedBox(
-                                                      height: 15,
+                                                      height: 30,
                                                     ),
                                                     CustomRichText(
                                                         title:
@@ -778,13 +787,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       height: 50,
                                                     ),
                                                     SizedBox(
-                                                      width: 150,
+                                                      width: 170,
                                                       child: CustomRichText(
                                                           title:
                                                               'Incident Investigation Verification Done By: '),
                                                     ),
                                                     SizedBox(
-                                                      height: 45,
+                                                      height: 50,
                                                     ),
                                                     CustomRichText(
                                                         title:
@@ -836,87 +845,90 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       ),
                                                     ),
                                                     Dimens.boxHeight20,
-                                                    controller.id != null
-                                                        ? controller
-                                                                    .incidentReportDetailsModel
-                                                                    .value
-                                                                    ?.esi_applicability_name ==
-                                                                "YES"
-                                                            ? Obx(
-                                                                () => Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          170,
-                                                                      top: 5),
-                                                                  child: Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
+                                                    
+                                                        
+                                                            controller.id != null
+                                                       ? controller
+                                                                  .incidentReportDetailsModel
+                                                                  .value
+                                                                  ?.esi_applicability_name ==
+                                                              "YES"
+                                                          ? Obx(
+                                                              () => Padding(
+                                                                padding: const EdgeInsets
+                                                                        .only(
+                                                                    right:
+                                                                        170,
+                                                                    top: 5),
+                                                                child: Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .esiApplicabilityDetailValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
                                                                         .esiApplicabilityDetailValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .esiApplicabilityDetailValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
-                                                                    },
-                                                                  ),
+                                                                        .value = value;
+                                                                    print(
+                                                                        'ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                  },
                                                                 ),
-                                                              )
-                                                            : Obx(
-                                                                () => Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          170,
-                                                                      top: 5),
-                                                                  child: Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .esiApplicabilityDetailFalseValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .esiApplicabilityDetailFalseValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              )
-                                                        : Obx(
-                                                            () => Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          170,
-                                                                      top: 5),
-                                                              child: Switch(
-                                                                activeColor:
-                                                                    Colors
-                                                                        .green,
-                                                                value: controller
-                                                                    .esiApplicabilityValue
-                                                                    .value,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  controller
-                                                                      .esiApplicabilityValue
-                                                                      .value = value;
-                                                                },
                                                               ),
+                                                            )
+                                                          : Obx(
+                                                              () => Padding(
+                                                                padding: const EdgeInsets
+                                                                        .only(
+                                                                    right:
+                                                                        170,
+                                                                    top: 5),
+                                                                child: Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .esiApplicabilityDetailFalseValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .esiApplicabilityDetailFalseValue
+                                                                        .value = value;
+                                                                    print(
+                                                                        'ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            )
+                                                       : Obx(
+                                                          () => Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right:
+                                                                        170,
+                                                                    top: 5),
+                                                            child: Switch(
+                                                              activeColor:
+                                                                  Colors
+                                                                      .green,
+                                                              value: controller
+                                                                  .esiApplicabilityValue
+                                                                  .value,
+                                                              onChanged:
+                                                                  (value) {
+                                                                controller
+                                                                    .esiApplicabilityValue
+                                                                    .value = value;
+                                                              },
                                                             ),
                                                           ),
+                                                        ),
                                                     Dimens.boxHeight20,
+                                                   
                                                     controller.id != null
                                                         ? controller
                                                                     .incidentReportDetailsModel
@@ -1045,15 +1057,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       ),
                                                       Dimens.boxHeight20,
                                                       SizedBox(
-                                                        width: 150,
+                                                        width: 170,
                                                         child: CustomRichText(
                                                             title:
                                                                 'Asset Restoration Action Taken By: '),
                                                       ),
-                                                      Dimens.boxHeight40,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Insurance Applicable: '),
+                                                      SizedBox(height: 55,),
+                                                      // CustomRichText(
+                                                      //     title:
+                                                      //         'Insurance Applicable: '),
                                                       Dimens.boxHeight50,
                                                       controller.insuranceApplicableValue ==
                                                               true
@@ -1061,7 +1073,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               title:
                                                                   'Insurance Available: ')
                                                           : Container(),
-                                                      Dimens.boxHeight30,
+                                                      Dimens.boxHeight60,
                                                       CustomRichText(
                                                           title:
                                                               'Insurance Remark: '),
@@ -1118,24 +1130,31 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       ),
                                                     ),
                                                     Dimens.boxHeight10,
-                                                    Obx(
-                                                      () => Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 20),
-                                                        child: Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .insuranceApplicableValue
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .insuranceApplicableValue
-                                                                .value = value;
-                                                          },
+                                                    Row(
+                                                      children: [
+                                                         CustomRichText(
+                                                          title:
+                                                              'Insurance Applicable: '),
+                                                        Obx(
+                                                          () => Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(left: 20),
+                                                            child: Switch(
+                                                              activeColor:
+                                                                  Colors.green,
+                                                              value: controller
+                                                                  .insuranceApplicableValue
+                                                                  .value,
+                                                              onChanged: (value) {
+                                                                controller
+                                                                    .insuranceApplicableValue
+                                                                    .value = value;
+                                                              },
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
                                                     Dimens.boxHeight10,
                                                     controller.insuranceApplicableValue ==
@@ -1251,7 +1270,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                   height: 150,
                                                 ),
                                                 CustomElevatedButton(
-                                                  backgroundColor: Colors.red,
+                                                  backgroundColor: ColorValues.appRedColor,
                                                   onPressed: () {
                                                     // controller.saveAsDraft();
                                                   },
@@ -1263,7 +1282,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 controller.id == null
                                                     ? CustomElevatedButton(
                                                         backgroundColor:
-                                                            Colors.green,
+                                                            ColorValues.appGreenColor,
                                                         onPressed: () {
                                                           // showAlertDialog();
                                                           controller
@@ -1274,7 +1293,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     : CustomElevatedButton(
                                                         backgroundColor:
                                                             ColorValues
-                                                                .navyBlueColor,
+                                                                .appDarkBlueColor,
                                                         onPressed: () {
                                                           // showAlertDialog();
                                                           controller
@@ -1901,7 +1920,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
       Padding(
         padding: const EdgeInsets.only(left: 1),
         child: Container(
-          // width: 500,
+          
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

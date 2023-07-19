@@ -3,6 +3,7 @@ import 'package:cmms/app/incident_report_list/incident_report_list_controller.da
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
@@ -113,21 +114,23 @@ class IncidentReportRejectDialog extends GetView {
                         children: [
                           
                           Dimens.boxWidth10,
-                          ElevatedButton(
-                            style: Styles.darkRedElevatedButtonStyle,
+                          CustomElevatedButton(
+                            text: 'Cancel',
+                            backgroundColor: ColorValues.appRedColor,
                             onPressed: () {
                               Get.back();
                             },
-                            child: const Text('Cancel'),
+                        
+                            
                           ),
                            Dimens.boxWidth20,
-                          ElevatedButton(
-                            style: Styles.greenElevatedButtonStyle,
+                          CustomElevatedButton(
+                            text: 'Reject Incident Report',
+                            backgroundColor: ColorValues.appRedColor,
                             onPressed: () {
                               _controller.incidentReportRejectButton(id:id);
                               Get.back();
                             },
-                            child: const Text('Reject Incident Report'),
                           ),
                         ]),
         ],
