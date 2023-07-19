@@ -363,7 +363,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                                 int mrsId =
                                                     mrsListDetails?.id ?? 0;
                                                 if (mrsId != null) {
-                                                  Get.toNamed(Routes.createMrs,
+                                                  Get.toNamed(Routes.editMrs,
                                                       arguments: mrsId);
                                                 }
                                               },
