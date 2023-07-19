@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,7 +82,13 @@ class ModuleCleaningDashboardScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        _moduleCleaningList(tittle: "Planning", ontap: () {}),
+                        _moduleCleaningList(
+                            tittle: "Planning",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.moduleCleaningPlanning,
+                              );
+                            }),
                         //  if (Responsive.isDesktop(context))
                         _moduleCleaningList(
                             tittle: "Execution",

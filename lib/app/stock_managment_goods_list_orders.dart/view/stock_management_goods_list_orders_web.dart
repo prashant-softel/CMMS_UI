@@ -152,7 +152,7 @@ class StockManagementGoodsOrdersWeb
                               Get.offNamed(
                                   Routes.updateGoodsOrdersDetailsScreen);
                             },
-                            color: ColorValues.greenlightColor,
+                            color: ColorValues.editColor,
                           ),
                         ],
                       ),
@@ -320,8 +320,7 @@ class StockManagementGoodsOrdersWeb
                                         child: value == "Action"
                                             ? Wrap(children: [
                                                 TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
+                                                  color: ColorValues.viewColor,
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   // label: 'view',
@@ -342,15 +341,14 @@ class StockManagementGoodsOrdersWeb
                                                             id: int.tryParse(
                                                                 '${record[0]}'));
                                                   },
-                                                  color: ColorValues
-                                                      .appYellowColor,
+                                                  color: ColorValues.editColor,
                                                   icon: Icons.edit,
                                                 ),
                                                 TableActionButton(
                                                   color:
-                                                      ColorValues.appRedColor,
+                                                      ColorValues.deleteColor,
                                                   icon: Icons.delete,
-                                                  label: 'Delete',
+                                                  // label: 'Delete',
                                                   onPress: () {
                                                     controller.isDeleteDialog(
                                                         id: record[0],

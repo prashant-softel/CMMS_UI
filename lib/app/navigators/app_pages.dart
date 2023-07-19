@@ -24,6 +24,8 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
+import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_binding.dart';
+import 'package:cmms/app/module_cleaning_planning/view/module_cleaning_planning_screen.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
 import 'package:cmms/app/mrs_approve/mrs_approve_binding.dart';
@@ -637,6 +639,11 @@ class AppPages {
       name: _Paths.moduleCleaningDashboard,
       page: ModuleCleaningDashboardScreen.new,
       binding: ModuleCleaningDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningPlanning,
+      page: ModuleCleaningPlanningScreen.new,
+      binding: ModuleCleaningPlanningBinding(),
     ),
   ];
 }
