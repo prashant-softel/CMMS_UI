@@ -147,7 +147,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.start,
                                           children: [
                                             CustomRichText(
                                                 title: 'Facility Type '),
@@ -300,10 +300,14 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .2) - 50,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
+                                        height: 40,
+                                        width: (Get.width * .2) - 70,
+                                        child:
+                                      // controller.selectedItem == null
+                                        //     ?
+                                        CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
                                             onPressed: () {
                                               controller
                                                   .createBlockList()
@@ -314,7 +318,24 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                       .issuccessCreateBlock();
                                               });
                                             },
-                                            text: 'Submit')),
+                                            text: 'Create Block List'),
+                                            // : CustomElevatedButton(
+                                            // backgroundColor: ColorValues
+                                            //     .appDarkBlueColor,
+                                            // onPressed: () {
+                                            //   controller
+                                            //       .updateBusinessType(
+                                            //       controller
+                                            //           .selectedItem?.id)
+                                            //       .then((value) {
+                                            //     print("value,$value");
+                                            //     if (value == true)
+                                            //       controller
+                                            //           .issuccessCreatechecklist();
+                                            //   });
+                                            // },
+                                            // text: 'Update')
+                                      ),
                                   ],
                                 ),
                               ],
@@ -344,18 +365,12 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(0.0),
-                                        child: Text(
-                                          "List of Blocks",
-                                          style: Styles.blackBold16,
-                                        ),
-                                      ),
+
                                       // Spacer(),
-                                      // Text(
-                                      //   "Facility Type:",
-                                      //   style: Styles.black16W500,
-                                      // ),
+                                      Text(
+                                        "Facility Type:",
+                                        style: Styles.black16W500,
+                                      ),
                                       // SizedBox(
                                       //   width: 5,
                                       // ),
@@ -436,52 +451,61 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  // controller.preventiveCheckList!.isEmpty
-                                  //     ? Expanded(
-                                  //         child: ScrollableTableView(
-                                  //           columns: [
-                                  //             "Checklist Number ",
-                                  //             "Active Status ",
-                                  //             "Category ",
-                                  //             "Frequency ",
-                                  //             "PM Manpower",
-                                  //             "PM Duration(in Min.)",
-                                  //             "Action",
-                                  //           ].map((column) {
-                                  //             return TableViewColumn(
-                                  //               label: column,
-                                  //               minWidth: Get.width * 0.16,
-                                  //             );
-                                  //           }).toList(),
-                                  //           rows: [
-                                  //             ...List.generate(
-                                  //               controller.preventiveCheckList
-                                  //                       ?.length ??
-                                  //                   0,
-                                  //               (index) {
-                                  //                 return [
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                   '',
-                                  //                 ];
-                                  //               },
-                                  //             ),
-                                  //           ].map((record) {
-                                  //             return TableViewRow(
-                                  //               height: 60,
-                                  //               cells: record.map((value) {
-                                  //                 return TableViewCell(
-                                  //                   child: Text(value),
-                                  //                 );
-                                  //               }).toList(),
-                                  //             );
-                                  //           }).toList(),
-                                  //         ),
-                                  //       )
-                                  //     :
+                                  controller.blockTypeList!.isEmpty
+                                      ? Expanded(
+                                          child: ScrollableTableView(
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "SPV",
+                                                  "Address",
+                                              "City",
+                                              "State",
+                                              "Country",
+                                              "Pin",
+                                              "Action"
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                label: column,
+                                                minWidth: Get.width * 0.16,
+                                              );
+                                            }).toList(),
+                                            rows: [
+                                              ...List.generate(
+                                                controller.blockTypeList
+                                                        ?.length ??
+                                                    0,
+                                                (index) {
+                                                  return [
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                    '',
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((record) {
+                                              return TableViewRow(
+                                                height: 60,
+                                                cells: record.map((value) {
+                                                  return TableViewCell(
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        )
+                                      :
                                   Expanded(
                                     child: ScrollableTableView(
                                       paginationController: controller
@@ -489,7 +513,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                       columns: [
                                         "Sr.No.",
                                         "Title",
+                                        "SPV",
                                         "Address",
+
                                         "City",
                                         "State",
                                         "Country",
@@ -511,6 +537,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             return [
                                               '${facilityTypeListDetails.id}',
                                               '${facilityTypeListDetails.name}',
+                                              '${facilityTypeListDetails.spv}',
                                               '${facilityTypeListDetails.address}',
                                               '${facilityTypeListDetails.city}',
                                               '${facilityTypeListDetails.state}',
@@ -558,7 +585,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                                               color: ColorValues.appRedColor,
                                                                               icon: Icons.delete,
                                                                               label: 'Delete',
-                                                                              onPress: () {},
+                                                                              onPress: () {
+                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                              },
                                                                             ),
                                                                           ]),
                                                                     ),

@@ -4764,6 +4764,25 @@ class Repository {
     }
   }
 
+  Future<void> deleteBlock(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBlock(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<void> deleteSPV(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
