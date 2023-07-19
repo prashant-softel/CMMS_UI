@@ -25,7 +25,7 @@ class StockManagementDashboardScreen
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 100,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(
@@ -133,8 +133,8 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "MRS Return",
                             ontap: () {
-                              Get.offNamed(
-                                  Routes.updateGoodsOrdersDetailsScreen);
+                              // Get.offNamed(
+                              //     Routes.updateGoodsOrdersDetailsScreen);
                             }),
                         _stockManagementList(
                           tittle: "S2S Material Taransfer",
@@ -142,6 +142,11 @@ class StockManagementDashboardScreen
                           //   controller.pmTask();
                           // }
                         ),
+                        _stockManagementList(
+                            tittle: "Purchase Orders Request",
+                            ontap: () {
+                              Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                            }),
                         _stockManagementList(tittle: "Plant Stock"),
                       ],
                     ),

@@ -11,7 +11,7 @@ import '../role_list_controller.dart';
 import 'role_listContent_mobile.dart';
 import 'role_listContent_web.dart';
 
-  class RoleListScreen extends GetView<RoleListController> {
+class RoleListScreen extends GetView<RoleListController> {
   RoleListScreen({super.key});
 
   ///
@@ -22,7 +22,7 @@ import 'role_listContent_web.dart';
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(

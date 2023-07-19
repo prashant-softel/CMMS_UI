@@ -10,7 +10,6 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-
 class PermitTypeScreen extends GetView<PermitTypeController> {
   PermitTypeScreen({super.key});
 
@@ -22,7 +21,7 @@ class PermitTypeScreen extends GetView<PermitTypeController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(

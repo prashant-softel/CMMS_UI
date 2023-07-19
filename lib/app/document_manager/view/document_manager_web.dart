@@ -97,7 +97,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                     Row(
                       children: [
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -106,7 +106,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                           ),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -114,7 +114,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                               text: 'Copy'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -122,7 +122,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                               text: 'Excel'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -132,7 +132,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                         Spacer(),
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
                             decoration: InputDecoration(

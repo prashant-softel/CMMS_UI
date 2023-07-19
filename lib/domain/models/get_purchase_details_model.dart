@@ -10,12 +10,13 @@ String pmtaskViewModelToJson(GetPurchaseDetailsByIDModel data) =>
 
 class GetPurchaseDetailsByIDModel {
   int? id;
-  int? facilityId;
-  int? assetTypeId;
+  int? facility_id;
+  int? asset_type_ID;
   int? vendorId;
   int? status;
   String? statusShort;
   double? acceptedQty;
+  int? currencyID;
   String? currency;
   int? amount;
   String? job_ref;
@@ -26,6 +27,7 @@ class GetPurchaseDetailsByIDModel {
   String? no_pkg_received;
   dynamic? received_on;
   String? freight;
+  String? vendor_name;
 
   dynamic? po_date;
   String? po_no;
@@ -33,16 +35,18 @@ class GetPurchaseDetailsByIDModel {
   String? challan_no;
   String? purchaseDate;
   int? location_ID;
+  String? facilityName;
   List<GoDetails>? goDetails;
 
   GetPurchaseDetailsByIDModel({
     this.id,
-    this.facilityId,
-    this.assetTypeId,
+    this.facility_id,
+    this.asset_type_ID,
     this.vendorId,
     this.status,
     this.statusShort,
     this.acceptedQty,
+    this.currencyID,
     this.currency,
     this.amount,
     this.job_ref,
@@ -60,18 +64,22 @@ class GetPurchaseDetailsByIDModel {
     this.purchaseDate,
     this.location_ID,
     this.goDetails,
+    this.vendor_name,
+    this.facilityName,
   });
 
   factory GetPurchaseDetailsByIDModel.fromJson(
           Map<String, dynamic> parsedJson) =>
       GetPurchaseDetailsByIDModel(
+        facilityName: parsedJson["facilityName"] ?? "",
         id: parsedJson["id"] ?? "",
-        facilityId: parsedJson["facility_id"] ?? "",
-        assetTypeId: parsedJson["asset_type_ID"] ?? "",
+        facility_id: parsedJson["facility_id"] ?? "",
+        asset_type_ID: parsedJson["asset_type_ID"] ?? "",
         vendorId: parsedJson["vendorID"] ?? "",
         status: parsedJson["status"] ?? "",
         statusShort: parsedJson["status_short"] ?? "",
         acceptedQty: parsedJson["accepted_qty"] ?? "",
+        currencyID: parsedJson["currencyID"] ?? "",
         currency: parsedJson["currency"] ?? "",
         amount: parsedJson["amount"] ?? "",
         job_ref: parsedJson["job_ref"] ?? "",
@@ -90,18 +98,21 @@ class GetPurchaseDetailsByIDModel {
         purchaseDate:
             Utility.getFormatedyearMonthDay(parsedJson['purchaseDate']),
         location_ID: parsedJson["location_ID"] ?? "",
+        vendor_name: parsedJson["vendor_name"] ?? "",
         goDetails: List<GoDetails>.from(
             parsedJson["goDetails"].map((x) => GoDetails.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "facility_id": facilityId,
-        "asset_type_ID": assetTypeId,
+        "facilityName": facilityName,
+        "facility_id": facility_id,
+        "asset_type_ID": asset_type_ID,
         "vendorId": vendorId,
         "status": status,
         "status_short": statusShort,
         "accepted_qty": acceptedQty,
+        "currencyID": currencyID,
         "currency": currency,
         "amount": amount,
         "job_ref": job_ref,
@@ -118,6 +129,7 @@ class GetPurchaseDetailsByIDModel {
         "challan_no": challan_no,
         "purchaseDate": purchaseDate,
         "location_ID": location_ID,
+        "vendor_name": vendor_name,
         "goDetail": List<dynamic>.from(goDetails?.map((x) => x) ?? []),
       };
 }
@@ -125,35 +137,53 @@ class GetPurchaseDetailsByIDModel {
 class GoDetails {
   int? id;
   int? assetItemID;
+  String? assetItem_Name;
   int? locationID;
   double? cost;
-  double? acceptedQty;
-  int? spareStatus;
+  int? ordered_qty;
+  int? received_qty;
+  int? lost_qty;
+  int? requested_qty;
+  int? damaged_qty;
+  double? accepted_qty;
+  int? spare_status;
   int? remarks;
-  int? receiveLater;
+  int? receive_later;
   int? asset_type_ID;
 
   GoDetails({
     this.id,
     this.assetItemID,
+    this.assetItem_Name,
     this.locationID,
     this.cost,
-    this.acceptedQty,
-    this.spareStatus,
+    this.ordered_qty,
+    this.received_qty,
+    this.lost_qty,
+    this.requested_qty,
+    this.damaged_qty,
+    this.accepted_qty,
+    this.spare_status,
     this.remarks,
-    this.receiveLater,
+    this.receive_later,
     this.asset_type_ID,
   });
 
   GoDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     assetItemID = json['assetItemID'];
+    assetItem_Name = json['assetItem_Name'];
     locationID = json['location_ID'];
     cost = json['cost'];
-    acceptedQty = json['accepted_qty'];
-    spareStatus = json['spare_status'];
+    ordered_qty = json['ordered_qty'];
+    received_qty = json['received_qty'];
+    lost_qty = json['lost_qty'];
+    requested_qty = json['requested_qty'];
+    damaged_qty = json['damaged_qty'];
+    accepted_qty = json['accepted_qty'];
+    spare_status = json['spare_status'];
     remarks = json['remarks'];
-    receiveLater = json['receive_later'];
+    receive_later = json['receive_later'];
     asset_type_ID = json['asset_type_ID'];
   }
 
@@ -161,12 +191,18 @@ class GoDetails {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['assetItemID'] = this.assetItemID;
+    data['assetItem_Name'] = this.assetItem_Name;
+    data['ordered_qty'] = this.ordered_qty;
+    data['lost_qty'] = this.lost_qty;
+    data['received_qty'] = this.received_qty;
+    data['requested_qty'] = this.requested_qty;
+    data['damaged_qty'] = this.damaged_qty;
     data['location_ID'] = this.locationID;
     data['cost'] = this.cost;
-    data['accepted_qty'] = this.acceptedQty;
-    data['spare_status'] = this.spareStatus;
+    data['accepted_qty'] = this.accepted_qty;
+    data['spare_status'] = this.spare_status;
     data['remarks'] = this.remarks;
-    data['receive_later'] = this.receiveLater;
+    data['receive_later'] = this.receive_later;
     data['asset_type_ID'] = this.asset_type_ID;
 
     return data;

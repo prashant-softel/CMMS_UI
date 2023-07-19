@@ -163,7 +163,7 @@ class StockManagementGoodsOrdersWeb
                     Row(
                       children: [
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -171,7 +171,7 @@ class StockManagementGoodsOrdersWeb
                               text: 'Copy'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -179,7 +179,7 @@ class StockManagementGoodsOrdersWeb
                               text: 'Excel'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -187,7 +187,7 @@ class StockManagementGoodsOrdersWeb
                               text: 'PDF'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -198,7 +198,7 @@ class StockManagementGoodsOrdersWeb
                         Spacer(),
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
                             decoration: InputDecoration(
@@ -325,7 +325,15 @@ class StockManagementGoodsOrdersWeb
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   // label: 'view',
-                                                  onPress: () {},
+
+                                                  onPress: () {
+                                                    controller
+                                                        .viewAddGoodsOrdersDetails(
+                                                            id: int.tryParse(
+                                                                '${record[0]}'));
+                                                    Get.toNamed(
+                                                        Routes.viewGoodsOrders);
+                                                  },
                                                 ),
                                                 TableActionButton(
                                                   onPress: () {
@@ -342,9 +350,13 @@ class StockManagementGoodsOrdersWeb
                                                   color:
                                                       ColorValues.appRedColor,
                                                   icon: Icons.delete,
-                                                  // label: 'Delete',
-                                                  onPress: () {},
-                                                )
+                                                  label: 'Delete',
+                                                  onPress: () {
+                                                    controller.isDeleteDialog(
+                                                        id: record[0],
+                                                        generatedBy: record[1]);
+                                                  },
+                                                ),
                                               ])
                                             : Text(value),
                                       );

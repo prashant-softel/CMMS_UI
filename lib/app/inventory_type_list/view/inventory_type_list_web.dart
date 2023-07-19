@@ -122,7 +122,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomRichText(title: 'Name: '),
                                             SizedBox(
@@ -131,9 +131,9 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -156,14 +156,14 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .nameCtrlr,
+                                                    textController:
+                                                        controller.nameCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -173,18 +173,19 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'Description: '),
+                                            CustomRichText(
+                                                title: 'Description: '),
                                             SizedBox(
                                               width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -207,15 +208,14 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .descriptionCtrlr
-                                                    ,
+                                                        .descriptionCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -273,8 +273,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                        )
-                                    ),
+                                              )),
                                   ],
                                 ),
                               ],
@@ -313,7 +312,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                   Row(
                                     children: [
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -331,7 +330,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                       ),
                                       Container(
                                         width: (Get.width * .1) - 60,
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -341,7 +340,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                       ),
                                       Container(
                                         width: (Get.width * .1) - 70,
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -351,7 +350,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                       ),
                                       Container(
                                         width: (Get.width * .2) - 200,
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -363,20 +362,26 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                       Spacer(),
                                       Container(
                                         width: 200,
-                                        height: 40,
+                                        height: 35,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
-                                          onChanged: (value) => controller.search(value),
+                                          onChanged: (value) =>
+                                              controller.search(value),
                                           decoration: InputDecoration(
-                                            enabledBorder: const OutlineInputBorder(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            focusedBorder: const OutlineInputBorder(
+                                            focusedBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            contentPadding:
+                                                Dimens.edgeInsets10_0_0_0,
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
