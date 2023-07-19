@@ -27,6 +27,9 @@ import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.da
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
+import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
+import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_binding.dart';
+import 'package:cmms/app/module_cleaning_planning/view/module_cleaning_planning_screen.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
 import 'package:cmms/app/mrs/view/mrs_list_screen.dart';
 import 'package:cmms/app/mrs_approve/mrs_approve_binding.dart';
@@ -138,6 +141,7 @@ import '../login/login_binding.dart';
 import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
+import '../module_cleaning_dashboard/view/module_dashboard_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -651,6 +655,16 @@ class AppPages {
       name: _Paths.inventoryCategory,
       page: InventoryCategoryListScreen.new,
       binding: InventoryCategoryListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningDashboard,
+      page: ModuleCleaningDashboardScreen.new,
+      binding: ModuleCleaningDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningPlanning,
+      page: ModuleCleaningPlanningScreen.new,
+      binding: ModuleCleaningPlanningBinding(),
     ),
   ];
 }
