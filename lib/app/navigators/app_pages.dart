@@ -18,6 +18,7 @@ import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
@@ -104,6 +105,7 @@ import '../document_manager/document_manager_binding.dart';
 import '../document_manager/view/document_manager_screen.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
+import '../edit_mrs/edit_mrs_binding.dart';
 import '../facility/facility_binding.dart';
 import '../facility/facility_view.dart';
 import '../frequency_List/frequency_list_binding.dart';
@@ -630,6 +632,11 @@ class AppPages {
       name: _Paths.inventoryCategory,
       page: InventoryCategoryListScreen.new,
       binding: InventoryCategoryListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.editMrs,
+      page: EditMrsScreen.new,
+      binding: EditMrsBinding(),
     ),
   ];
 }
