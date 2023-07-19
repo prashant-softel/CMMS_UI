@@ -171,7 +171,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                 onPressed: () {
                                   Get.toNamed(Routes.newWarrantyClaimList);
                                 },
-                                color: Colors.blue,
+                                color: ColorValues.appGreenColor,
                               ),
                               Dimens.boxWidth10,
                             ],
@@ -289,7 +289,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                             ].map(
                                               (record) {
                                                 return TableViewRow(
-                                                  height: Get.height * 0.13,
+                                                  height: Get.height * 0.08,
                                                   cells: record.map(
                                                     (value) {
                                                       return TableViewCell(

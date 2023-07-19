@@ -357,6 +357,7 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                                     onPress: () {
                                                       //   Get.toNamed(Routes
                                                       // .calibrationViewScreen);
+                                                      Get.dialog(widget);
                                                     },
                                                   )
                                                 : Text(value),
