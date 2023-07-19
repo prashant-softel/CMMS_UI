@@ -39,4 +39,20 @@ class BlockTypeListPresenter {
     );
     return true;
   }
+
+  deleteBlock(String? business_id, {required bool isLoading}) async =>
+      await blockTypeListUsecase.deleteBlock(
+        business_id: business_id ?? 0,
+        isLoading: isLoading,
+      );
+  // Future<bool> updateBusinesslist(
+  //     {modulelistJsonString, required bool isLoading, moduleId}) async {
+  //   print("presenter");
+  //   businessUsecase.updateBusinesslist(
+  //     modulelistJsonString: modulelistJsonString,
+  //     isLoading: isLoading,
+  //   );
+  //   return true;
+  // }
+
 }

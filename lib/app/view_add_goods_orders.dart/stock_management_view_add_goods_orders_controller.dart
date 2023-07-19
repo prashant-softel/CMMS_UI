@@ -120,10 +120,10 @@ class ViewAddGoodsOrdersController extends GetxController {
       rowItem.value = [];
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
-          {"key": "Drop_down", "value": 'Please Select'},
-          {'key': "Paid_By", "value": 'Please Select'},
+          {"key": "Drop_down", "value": '${element.assetItem_Name}'},
+          {'key': "Paid_By", "value": '${element.assetItem_Name}'},
           {'key': "Cost", "value": '${element.cost}'},
-          {'key': "Order", "value": ''},
+          {'key': "Order", "value": '${element.ordered_qty}'},
         ]);
       });
 
@@ -152,6 +152,8 @@ class ViewAddGoodsOrdersController extends GetxController {
           getPurchaseDetailsByIDModel.value?.goDetails.toString() ?? "";
       selectedBusinessType.value =
           getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
+      selectedUnitCurrency.value =
+          getPurchaseDetailsByIDModel.value?.currency ?? "";
     }
   }
 
@@ -264,7 +266,7 @@ class ViewAddGoodsOrdersController extends GetxController {
     });
     CreateGoModel createGoModel = CreateGoModel(
         id: 0,
-        facility_id: 45,
+        facility_id: facilityId,
         order_type: 1,
         location_ID: 1,
         vendorID: selectedBusinessTypeId,
@@ -282,7 +284,7 @@ class ViewAddGoodsOrdersController extends GetxController {
         gir_no: _girNoCtrlr,
         job_ref: _jobRefCtrlr,
         amount: int.tryParse(_amountCtrlr) ?? 0,
-        currency: "",
+        currencyID: selectedUnitCurrencyId,
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
@@ -325,8 +327,8 @@ class ViewAddGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: 214,
-        facility_id: 45,
+        id: id,
+        facility_id: facilityId,
         order_type: 1,
         location_ID: 1,
         vendorID: selectedBusinessTypeId,
@@ -344,7 +346,7 @@ class ViewAddGoodsOrdersController extends GetxController {
         gir_no: _girNoCtrlr,
         job_ref: _jobRefCtrlr,
         amount: int.tryParse(_amountCtrlr) ?? 0,
-        currency: "",
+        currencyID: selectedUnitCurrencyId,
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();

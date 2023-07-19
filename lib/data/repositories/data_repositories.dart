@@ -1915,6 +1915,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> deleteBlock({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteBlock(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
   Future<ResponseModel> deleteSPV({
     auth,
     bool? isLoading,
