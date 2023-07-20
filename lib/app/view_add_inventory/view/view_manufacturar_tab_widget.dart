@@ -21,7 +21,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
           return Obx(
             () => SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: IgnorePointer(
                   ignoring: true,
                   child: Column(children: [
@@ -30,8 +30,8 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                       'Manufacturer',
                       style: Styles.blackBold18,
                     ),
+                    Dimens.boxHeight5,
                     Row(
-                      // crossAxisAlignment: CrossAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
@@ -42,7 +42,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                                 CustomRichText(title: "Manufacturer Name"),
                                 SizedBox(
                                   child: DropdownWebWidget(
-                                    margin: Dimens.edgeInsets16,
+                                    margin: Dimens.edgeInsets5,
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     dropdownList:
@@ -66,7 +66,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                                     width: 0.5,
                                   )),
                                   height: 45,
-                                  margin: Dimens.edgeInsets16,
+                                  margin: Dimens.edgeInsets5,
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width / 5,
@@ -103,7 +103,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                                     width: 0.5,
                                   )),
                                   height: 45,
-                                  margin: Dimens.edgeInsets16,
+                                  margin: Dimens.edgeInsets5,
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width / 5,
@@ -121,6 +121,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                             ),
                           ],
                         ),
+                        Spacer(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
@@ -129,7 +130,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                                 CustomRichText(title: "Supplier Name"),
                                 SizedBox(
                                   child: DropdownWebWidget(
-                                    margin: Dimens.edgeInsets16,
+                                    margin: Dimens.edgeInsets5,
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     dropdownList:
@@ -153,7 +154,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                                     width: 0.5,
                                   )),
                                   height: 45,
-                                  margin: Dimens.edgeInsets16,
+                                  margin: Dimens.edgeInsets5,
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width / 5,
@@ -175,7 +176,7 @@ class ViewManufacturarTabWidget extends StatelessWidget {
                                 CustomRichText(title: "Currency"),
                                 SizedBox(
                                   child: DropdownWebWidget(
-                                    margin: Dimens.edgeInsets16,
+                                    margin: Dimens.edgeInsets5,
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     dropdownList: controller.unitCurrencyList,

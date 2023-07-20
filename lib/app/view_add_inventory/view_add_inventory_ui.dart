@@ -49,7 +49,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
               child: Obx(
                 () => Center(
                   child: Container(
-                    margin: Dimens.edgeInsets16,
+                    margin: Dimens.edgeInsets5,
                     height: Get.height,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.withOpacity(.3)),
@@ -124,7 +124,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           ignoring: true,
                                           child: DropdownWebWidget(
                                             isEditable: true,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -146,7 +146,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -169,7 +169,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -198,7 +198,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               width: 0.5,
                                             )),
                                             height: 45,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
@@ -228,7 +228,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               width: 0.5,
                                             )),
                                             height: 45,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
@@ -247,6 +247,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     )
                                   ],
                                 ),
+                                Spacer(),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
@@ -257,7 +258,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -280,7 +281,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -311,7 +312,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               width: 0.5,
                                             )),
                                             height: 45,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
@@ -330,10 +331,13 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  width: 30,
+                                )
                               ],
                             ),
                             Container(
-                              margin: Dimens.edgeInsets16,
+                              margin: Dimens.edgeInsets5,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   width: 1,

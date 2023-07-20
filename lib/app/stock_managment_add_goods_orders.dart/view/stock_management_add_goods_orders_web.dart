@@ -709,9 +709,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
                               Container(
                                 height: 350,
                                 margin: Dimens.edgeInsets20,
@@ -774,7 +771,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           rows: controller.rowItem.value
                                               .map((record) {
                                             return TableViewRow(
-                                              height: 200,
+                                              height: 130,
                                               cells: record.map((mapData) {
                                                 return TableViewCell(
                                                   child: (mapData['key'] ==
@@ -785,7 +782,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                       .only(
                                                                   left: 20,
                                                                   right: 20,
-                                                                  top: 70),
+                                                                  top: 10),
                                                           child: Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -824,9 +821,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                       orElse:
                                                                           null);
                                                                 },
-                                                              ),
-                                                              SizedBox(
-                                                                height: 5,
                                                               ),
                                                               Row(
                                                                 children: [
@@ -897,8 +891,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                               ? Padding(
                                                                   padding:
                                                                       const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
+                                                                          .only(
+                                                                    left: 20,
+                                                                    right: 20,
+                                                                  ),
                                                                   child: Container(
                                                                       width: (Get.width * .4),
                                                                       // padding: EdgeInsets.all(value),
@@ -961,7 +957,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                   children: [
                                     Spacer(),
                                     CustomElevatedButton(
-                                      backgroundColor: ColorValues.appRedColor,
+                                      backgroundColor: ColorValues.cancelColor,
                                       text: 'Cancle',
                                       onPressed: () {
                                         // controller.AddInventory();
@@ -971,7 +967,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                     controller.id == null
                                         ? CustomElevatedButton(
                                             backgroundColor:
-                                                ColorValues.appGreenColor,
+                                                ColorValues.submitColor,
                                             text: 'Submit',
                                             onPressed: () {
                                               controller.createGoodsOrder();
@@ -979,7 +975,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           )
                                         : CustomElevatedButton(
                                             backgroundColor:
-                                                ColorValues.appGreenColor,
+                                                ColorValues.submitColor,
                                             text: 'Update',
                                             onPressed: () {
                                               controller.updateGoodsOrder();
