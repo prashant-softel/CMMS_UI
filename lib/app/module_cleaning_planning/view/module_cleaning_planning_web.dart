@@ -3,6 +3,7 @@ import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_contr
 
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/app/widgets/create%20_schedule_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -258,113 +259,135 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                 ),
                               ),
                               Expanded(
-                                child: Container(
-                                  margin: Dimens.edgeInsets15,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35,
-                                      width: 1,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 5),
+                                      child: Row(
+                                        children: [
+                                          Text("Assets"),
+                                          Spacer(),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Get.dialog(CreateSchedule());
+                                            },
+                                            child: Text("+ Add"),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  child: ScrollableTableView(
-                                    // paginationController:
-                                    //     controller.paginationController,
-                                    columns: [
-                                      "MRS ID",
-                                      "MRS Details",
-                                      "Order Date",
-                                      "Activity",
-                                      "Where Used",
-                                      "Action",
-                                    ].map((column) {
-                                      return TableViewColumn(
-                                        label: column,
-                                        minWidth: Get.width * 0.13,
-                                      );
-                                    }).toList(),
-                                    // rows: [],
-                                    rows: [
-                                      [
-                                        "PR1000",
-                                        "Requested by:Amit\nIssued by:Sujit kumar",
-                                        "2023-09-08",
-                                        "String faluire",
-                                        "Job11122",
-                                        "Action"
-                                      ],
-                                      [
-                                        "PR1000",
-                                        "Requested by:Amit\nIssued by:Sujit kumar",
-                                        "2023-09-08",
-                                        "String faluire",
-                                        "Job11122",
-                                        "Action"
-                                      ],
-                                      [
-                                        "PR1000",
-                                        "Requested by:Amit\nIssued by:Sujit kumar",
-                                        "2023-09-08",
-                                        "String faluire",
-                                        "Job11122",
-                                        "Action"
-                                      ],
-                                      [
-                                        "PR1000",
-                                        "Requested by:Amit\nIssued by:Sujit kumar",
-                                        "2023-09-08",
-                                        "String faluire",
-                                        "Job11122",
-                                        "Action"
-                                      ],
-                                      [
-                                        "PR1000",
-                                        "Requested by:Amit\nIssued by:Sujit kumar",
-                                        "2023-09-08",
-                                        "String faluire",
-                                        "Job11122",
-                                        "Action"
-                                      ],
-                                      [
-                                        "PR1000",
-                                        "Requested by:Amit\nIssued by:Sujit kumar",
-                                        "2023-09-08",
-                                        "String faluire",
-                                        "Job11122",
-                                        "Action"
-                                      ],
-                                    ].map((record) {
-                                      return TableViewRow(
-                                        height: 60,
-                                        cells: record.map((value) {
-                                          return TableViewCell(
-                                            child: value == "Action"
-                                                ? TableActionButton(
-                                                    color: ColorValues
-                                                        .appDarkBlueColor,
-                                                    icon: Icons
-                                                        .remove_red_eye_outlined,
-                                                    label: 'View/Edit',
-                                                    onPress: () {
-                                                      //   Get.toNamed(Routes
-                                                      // .calibrationViewScreen);
-                                                    },
-                                                  )
-                                                : Text(value),
-                                          );
-                                        }).toList(),
-                                      );
-                                    }).toList(),
-                                  ),
+                                    ),
+                                    // Obx(
+                                    //   () => Container(
+                                    //     margin: Dimens.edgeInsets15,
+                                    //     decoration: BoxDecoration(
+                                    //       border: Border.all(
+                                    //         color: ColorValues
+                                    //             .lightGreyColorWithOpacity35,
+                                    //         width: 1,
+                                    //       ),
+                                    //       boxShadow: [
+                                    //         BoxShadow(
+                                    //           color: ColorValues
+                                    //               .appBlueBackgroundColor,
+                                    //           spreadRadius: 2,
+                                    //           blurRadius: 5,
+                                    //           offset: Offset(0, 2),
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //     child: ScrollableTableView(
+                                    //       // paginationController:
+                                    //       //     controller.paginationController,
+                                    //       columns: [
+                                    //         "MRS ID",
+                                    //         "MRS Details",
+                                    //         "Order Date",
+                                    //         "Activity",
+                                    //         "Where Used",
+                                    //         "Action",
+                                    //       ].map((column) {
+                                    //         return TableViewColumn(
+                                    //           label: column,
+                                    //           minWidth: Get.width * 0.13,
+                                    //         );
+                                    //       }).toList(),
+                                    //       // rows: [],
+                                    //       rows: [
+                                    //         [
+                                    //           "PR1000",
+                                    //           "Requested by:Amit\nIssued by:Sujit kumar",
+                                    //           "2023-09-08",
+                                    //           "String faluire",
+                                    //           "Job11122",
+                                    //           "Action"
+                                    //         ],
+                                    //         [
+                                    //           "PR1000",
+                                    //           "Requested by:Amit\nIssued by:Sujit kumar",
+                                    //           "2023-09-08",
+                                    //           "String faluire",
+                                    //           "Job11122",
+                                    //           "Action"
+                                    //         ],
+                                    //         [
+                                    //           "PR1000",
+                                    //           "Requested by:Amit\nIssued by:Sujit kumar",
+                                    //           "2023-09-08",
+                                    //           "String faluire",
+                                    //           "Job11122",
+                                    //           "Action"
+                                    //         ],
+                                    //         [
+                                    //           "PR1000",
+                                    //           "Requested by:Amit\nIssued by:Sujit kumar",
+                                    //           "2023-09-08",
+                                    //           "String faluire",
+                                    //           "Job11122",
+                                    //           "Action"
+                                    //         ],
+                                    //         [
+                                    //           "PR1000",
+                                    //           "Requested by:Amit\nIssued by:Sujit kumar",
+                                    //           "2023-09-08",
+                                    //           "String faluire",
+                                    //           "Job11122",
+                                    //           "Action"
+                                    //         ],
+                                    //         [
+                                    //           "PR1000",
+                                    //           "Requested by:Amit\nIssued by:Sujit kumar",
+                                    //           "2023-09-08",
+                                    //           "String faluire",
+                                    //           "Job11122",
+                                    //           "Action"
+                                    //         ],
+                                    //       ].map((record) {
+                                    //         return TableViewRow(
+                                    //           height: 60,
+                                    //           cells: record.map((value) {
+                                    //             return TableViewCell(
+                                    //               child: value == "Action"
+                                    //                   ? TableActionButton(
+                                    //                       color: ColorValues
+                                    //                           .appDarkBlueColor,
+                                    //                       icon: Icons
+                                    //                           .remove_red_eye_outlined,
+                                    //                       label: 'View/Edit',
+                                    //                       onPress: () {
+                                    //                         //   Get.toNamed(Routes
+                                    //                         // .calibrationViewScreen);
+                                    //                       },
+                                    //                     )
+                                    //                   : Text(value),
+                                    //             );
+                                    //           }).toList(),
+                                    //         );
+                                    //       }).toList(),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
                                 ),
                               ),
                             ],
