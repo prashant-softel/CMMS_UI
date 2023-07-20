@@ -63,6 +63,13 @@ class AssetMasterWeb
                     onTap: () {
                       Get.back();
                     },
+                    child: Text(" / STOCK MANAGEMENT",
+                        style: Styles.greyMediumLight12),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
                     child: Text(" / ASSET MASTER LIST",
                         style: Styles.greyMediumLight12),
                   ),
@@ -595,10 +602,22 @@ class AssetMasterWeb
                                   "Approval Required"
                                   "Action"
                                 ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.16,
-                                  );
+                                  if (column == "Action") {
+                                    return TableViewColumn(
+                                      label: column,
+                                      minWidth: Get.width * 0.08,  // Set the desired width for the "Action" column
+                                    );
+                                  } else if (column == "Description" || column == "Material Name") {
+                                    return TableViewColumn(
+                                      label: column,
+                                      minWidth: Get.width * 0.25,  // Set the desired width for the "Description" column
+                                    );
+                                  } else {
+                                    return TableViewColumn(
+                                      label: column,
+                                      minWidth: Get.width * 0.16,
+                                    );
+                                  }
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
@@ -665,12 +684,24 @@ class AssetMasterWeb
                                   "Description",
                                   "Unit Of Measurement",
                                   "Approval Required",
-                                      "Action"
+                                  "Action"
                                 ].map((column) {
-                                  return TableViewColumn(
-                                    minWidth: Get.width * 0.19,
+                                    if (column == "Action") {
+                                      return TableViewColumn(
+                                      label: column,
+                                      minWidth: Get.width * 0.12,  // Set the desired width for the "Action" column
+                                    );
+                                    } else if (column == "Description" || column == "Material Name") {
+                                    return TableViewColumn(
                                     label: column,
-                                  );
+                                    minWidth: Get.width * 0.25,  // Set the desired width for the "Description" column
+                                    );
+                                    } else {
+                                      return TableViewColumn(
+                                        label: column,
+                                        minWidth: Get.width * 0.16,
+                                      );
+                                    }
                                 }).toList(),
                                 rows: //
                                 [

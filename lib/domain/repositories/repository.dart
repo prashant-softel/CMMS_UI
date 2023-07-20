@@ -63,6 +63,7 @@ import 'package:get/get.dart';
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
 import '../models/IncidentRiskTypeModel.dart';
+import '../models/InsuranceProviderModel.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
 import '../models/asset_master_model.dart';
@@ -4453,7 +4454,7 @@ class Repository {
   Future<bool> createBlockType({bool? isLoading, blockTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createFacilityType(
+      final res = await _dataRepository.createBlockType(
           auth: auth,
           isLoading: isLoading,
           facilitylistJsonString: blockTypeJsonString);
@@ -5143,6 +5144,34 @@ class Repository {
     }
   }
 
+  Future<List<InsuranceProviderModel>> getInsuranceProvider({
+    // required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInsuranceProvider(
+        // job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = InsuranceProviderModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+
   Future<bool> createRiskType(
       {bool? isLoading, riskTypeJsonString}) async {
     try {
@@ -5415,7 +5444,30 @@ class Repository {
   }
 
 
-
+  Future<bool> updateBlockType({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBlockType(
+        auth: auth,
+        isLoading: isLoading,
+        checklistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
 }
 //end
 //end

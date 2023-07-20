@@ -7,7 +7,9 @@ import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/modulelist_model.dart';
-import '../incident_listContent_controller.dart';
+// import '../incident_listContent_controller.dart';
+import '../insurance_provider_listContent_controller.dart';
+
 import '../../preventive_List/preventive_list_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -15,10 +17,10 @@ import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
 // import '../preventive_list_controller.dart';
 
-class IncidentRiskTypeWeb
-    extends GetView<IncidentRiskTypeController> {
-  IncidentRiskTypeWeb({Key? key}) : super(key: key);
-  final IncidentRiskTypeController controller = Get.find();
+class InsuranceProviderWeb
+    extends GetView<InsuranceProviderController> {
+  InsuranceProviderWeb({Key? key}) : super(key: key);
+  final InsuranceProviderController controller = Get.find();
 
 
   @override
@@ -69,7 +71,7 @@ class IncidentRiskTypeWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / RISKTYPE LIST",
+                    child: Text(" / INSURANCE PROVIDER LIST",
                         style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
@@ -88,7 +90,7 @@ class IncidentRiskTypeWeb
                       ? Container(
                     width: (Get.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: Get.height/2.15,
+                    height: Get.height/2.65,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -107,7 +109,7 @@ class IncidentRiskTypeWeb
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Create RiskType",
+                                    "Create InsuranceProvider",
                                     style: Styles.blackBold16,
                                   ),
                                   SizedBox(
@@ -121,8 +123,8 @@ class IncidentRiskTypeWeb
                                           Text(
                                             controller.selectedItem ==
                                                 null
-                                                ? "RiskType added Successfully in the List."
-                                                : "RiskType updated Successfully in the List.",
+                                                ? "InsuranceProvider added Successfully in the List."
+                                                : "InsuranceProvider updated Successfully in the List.",
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 color: Color.fromARGB(
@@ -139,7 +141,7 @@ class IncidentRiskTypeWeb
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                     children: [
-                                      CustomRichText(title: 'Risk Type: '),
+                                      CustomRichText(title: 'Insurance Provider : '),
                                       SizedBox(
                                         width: 70,
                                       ),
@@ -186,59 +188,6 @@ class IncidentRiskTypeWeb
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomRichText(title: 'Description: '),
-                                      SizedBox(
-                                        width: 70,
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                            width: (MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                                .2) -
-                                                30,
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues
-                                                      .whiteColor,
-                                                  offset: const Offset(
-                                                      0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              color:
-                                              ColorValues.whiteColor,
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  5),
-                                            ),
-                                            child: LoginCustomTextfield(
-                                              textController: controller
-                                                  .descriptionCtrlr
-                                              ,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-
-                                  SizedBox(
-                                    height: 20,
-                                  ),
                                 ]),
                           ),
                           Row(
@@ -272,7 +221,7 @@ class IncidentRiskTypeWeb
                                                 .issuccessCreatemodulelist();
                                         });
                                       },
-                                      text: 'Create RiskType List')
+                                      text: 'Create InsuranceProvider List')
                                       : CustomElevatedButton(
                                       backgroundColor: ColorValues
                                           .appDarkBlueColor,
@@ -317,7 +266,7 @@ class IncidentRiskTypeWeb
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                "RiskType List",
+                                "InsuranceProvider List",
                                 style: Styles.blackBold16,
                               ),
                             ),
@@ -380,8 +329,7 @@ class IncidentRiskTypeWeb
                               child: ScrollableTableView(
                                 columns: [
                                   "Id",
-                                  "Risk type ",
-                                  "Description ",
+                                  "InsuranceProvider ",
                                   "Action"
                                 ].map((column) {
                                   return TableViewColumn(
@@ -399,9 +347,6 @@ class IncidentRiskTypeWeb
                                         '',
                                         '',
                                         // '',
-                                        '',
-                                        '',
-                                        '',
                                         '',
                                         '',
                                         '',
@@ -428,8 +373,7 @@ class IncidentRiskTypeWeb
                                 controller.paginationController,
                                 columns: [
                                   "Id",
-                                  "Risk type ",
-                                  "Description ",
+                                  "InsuranceProvider",
                                   "Action"
                                 ].map((column) {
 
@@ -452,7 +396,7 @@ class IncidentRiskTypeWeb
                                       return [
                                         '${moduleListDetails?.id}',
                                         '${moduleListDetails?.name}',
-                                        '${moduleListDetails?.description}',
+                                        // '${moduleListDetails?.description}',
                                         "Action"
                                       ];
                                     },
@@ -488,7 +432,7 @@ class IncidentRiskTypeWeb
                                                       controller.selectedItem = controller.moduleList!.firstWhere((element) => "${element?.id}" == _moduleList[0]);
 
                                                       controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                      controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
+                                                      // controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
 
 
                                                     },

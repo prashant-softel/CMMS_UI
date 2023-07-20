@@ -4,24 +4,20 @@
 
 import 'dart:convert';
 
-List<CreateBlockTypeListModel> BlockTypeListModelFromJson(String str) =>
-    List<CreateBlockTypeListModel>.from(
-        json.decode(str).map((x) => CreateBlockTypeListModel.fromJson(x)));
+List<UpdateBlockTypeListModel> BlockTypeListModelFromJson(String str) =>
+    List<UpdateBlockTypeListModel>.from(
+        json.decode(str).map((x) => UpdateBlockTypeListModel.fromJson(x)));
 
-String BockTypeListModelToJson(List<CreateBlockTypeListModel> data) =>
+String BockTypeListModelToJson(List<UpdateBlockTypeListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CreateBlockTypeListModel {
-  CreateBlockTypeListModel({
+class UpdateBlockTypeListModel {
+  UpdateBlockTypeListModel({
     this.parentId,
     this.id,
     this.name,
     // this.spv,
     this.description,
-    // this.city,
-    // this.state,
-    // this.country,
-    // this.pin,
   });
 
   int? parentId;
@@ -34,8 +30,8 @@ class CreateBlockTypeListModel {
   // String? country;
   // int? pin;
 
-  factory CreateBlockTypeListModel.fromJson(Map<String, dynamic> json) =>
-      CreateBlockTypeListModel(
+  factory UpdateBlockTypeListModel.fromJson(Map<String, dynamic> json) =>
+      UpdateBlockTypeListModel(
         parentId: json["parentId"],
         id: json["id"],
         name: json["name"],

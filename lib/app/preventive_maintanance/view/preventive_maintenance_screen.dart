@@ -14,10 +14,10 @@ class PreventiveScreen extends GetView<PreventiveController> {
   Widget build(BuildContext context) {
     var size = Get;
 
-    final double itemHeight = (size.height - kToolbarHeight - 90) / 10;
+    final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
 
-    final double itemWidth = size.width / 3;
+    final double itemWidth = size.width / 2;
 
     return Scaffold(
       appBar: Responsive.isDesktop(context)
@@ -48,6 +48,8 @@ class PreventiveScreen extends GetView<PreventiveController> {
             Expanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+
                   children: [
                     if (Responsive.isMobile(context))
                       Obx(
@@ -60,6 +62,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               elevation: 1,
                               child: Padding(
                                 padding: const EdgeInsets.all(3.0),
+
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
                                     // isExpanded: true,
@@ -92,21 +95,37 @@ class PreventiveScreen extends GetView<PreventiveController> {
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Preventive Maintenance",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400),
+                        child: Row(
+                      children: [
+                      Text(
+                      "Masters",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 159, 156, 156),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
+                      ),
+                    SizedBox(
+                        width:
+                        10), // Add some space between the text and the line
+                    Expanded(
+                      child: Divider(
+                        color: Colors
+                            .grey, // Customize the color of the line if needed
+                        height:
+                        1, // Adjust the height of the line if needed
+                      ),
+                    ),
+                  ],
+              ),
                       ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 6,
+                      crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5 ,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
@@ -161,46 +180,37 @@ class PreventiveScreen extends GetView<PreventiveController> {
   }
 
   _priventiveList({required String tittle, Function()? ontap}) {
-    return GestureDetector(
-      onTap: ontap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorValues.appLightBlueColor,
-          borderRadius: BorderRadius.circular(2),
-        ),
-        padding: EdgeInsets.all(9),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                tittle,
-                style: TextStyle(
-                    color: ColorValues.whiteColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 243, 245, 245),
-                border: Border.all(
-                  color: ColorValues.whiteColor,
+    return  MouseRegion(
+      cursor: SystemMouseCursors.click,
+
+      child: GestureDetector(
+        onTap: ontap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorValues.skyBlueColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+          padding: EdgeInsets.all(9),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  tittle,
+                  style: TextStyle(
+                      color: ColorValues.whiteColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                  textAlign: TextAlign.center,
                 ),
-                borderRadius: BorderRadius.circular(5),
+
               ),
-              child: Icon(
-                Icons.format_list_bulleted,
-                size: 30,
-                color: ColorValues.appLightBlueColor,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

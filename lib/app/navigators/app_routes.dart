@@ -100,6 +100,7 @@ abstract class Routes {
   static const incidentRiskType = _Paths.incidentRiskType;
   static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
   static const inventoryCategory = _Paths.inventoryCategory;
+  static const insuranceProvider = _Paths.insuranceProvider;
 }
 
 abstract class _Paths {
@@ -196,6 +197,7 @@ abstract class _Paths {
   static const incidentRiskType = '/Incident-Risk-Type';
   static const incident_risk_dashboard = '/incident-risk-dashboard';
   static const inventoryCategory = '/inventoryCategory';
+  static const insuranceProvider = '/insuranceProvider';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }
