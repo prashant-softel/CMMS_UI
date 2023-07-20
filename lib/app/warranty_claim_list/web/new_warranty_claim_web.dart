@@ -25,7 +25,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
         appBar: AppBar(
           title: HeaderWidget(),
           elevation: 0,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           automaticallyImplyLeading: false,
         ),
         body: Row(
@@ -901,7 +901,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                         controller.nameTextFieldController.clear();
                                                                                         controller.emailTextFieldController.clear();
                                                                                       },
-                                                                                      child: Text('Add'),
+                                                                                      child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -1410,7 +1410,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   //   },
                                                   // ),
                                                   ElevatedButton(
-                                                    child: Text('Add'),
+                                                    child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
                                                     onPressed: () {
                                                       controller
                                                           .updateSupplierActionText(
@@ -1644,7 +1644,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                     height: 150,
                                   ),
                                   CustomElevatedButton(
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: ColorValues.appGreenColor,
                                     onPressed: () {
                                       controller.saveAsDraft();
                                     },
@@ -1654,7 +1654,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                     width: 20,
                                   ),
                                   CustomElevatedButton(
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: ColorValues.appGreenColor,
                                     onPressed: () {
                                       // showAlertDialog();
                                       controller.createWarrantyClaim();
@@ -2116,12 +2116,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
           // )
 
           // : Text('data')
-          
         ],
       ),
     );
-    
-  
   }
 
   emailDropdown(

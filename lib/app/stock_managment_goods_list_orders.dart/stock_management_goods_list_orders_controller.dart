@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -80,7 +83,71 @@ class StockManagementGoodsOrdersController extends GetxController {
     print('Argument5:$id');
   }
 
+  void viewAddGoodsOrdersDetails({int? id}) {
+    Get.toNamed(Routes.viewGoodsOrders, arguments: id);
+    print('Argument5:$id');
+  }
+
   void getPmTaskListByDate() {
     getGoodsOrdersList(facilityId, formattedFromdate, formattedTodate, false);
+  }
+
+  void isDeleteDialog({String? id, String? generatedBy}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the SPV ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: generatedBy,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteGoodsOrders(id).then((value) {
+                    Get.back();
+                    getGoodsOrdersList(
+                        facilityId, formattedTodate, formattedFromdate, false);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteGoodsOrders(String? id) async {
+    {
+      await stockManagementGoodsOrdersPresenter.deleteFacility(
+        id,
+        isLoading: true,
+      );
+    }
   }
 }

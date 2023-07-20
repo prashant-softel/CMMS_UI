@@ -52,7 +52,7 @@ class ViewCalibrationTabWidget extends StatelessWidget {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             controller: controller,
                                             dropdownList:
                                                 controller.frequencyList,
@@ -77,7 +77,10 @@ class ViewCalibrationTabWidget extends StatelessWidget {
                                           IgnorePointer(
                                             ignoring: true,
                                             child: Container(
-                                              width: 150,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5.1,
                                               child: TextField(
                                                 controller: controller
                                                     .calibrationRemaingCtrlr,
@@ -147,7 +150,8 @@ class ViewCalibrationTabWidget extends StatelessWidget {
                                                   'Upload certification file',
                                               onPressed: () {},
                                               icon: Icons.file_upload_outlined,
-                                              color: Colors.blue,
+                                              color:
+                                                  ColorValues.appLightBlueColor,
                                             )
                                           ],
                                         ),

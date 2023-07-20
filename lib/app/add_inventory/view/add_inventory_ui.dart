@@ -31,7 +31,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
             ? AppBar(
                 title: HeaderWidget(),
                 elevation: 0,
-                toolbarHeight: 90,
+                toolbarHeight: 60,
                 automaticallyImplyLeading: false,
               )
             : AppBar(
@@ -42,27 +42,26 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
         drawer: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? HomeDrawer()
             : null,
-        body: Row(
-          children: [
-            Responsive.isMobile(context) || Responsive.isTablet(context)
-                ? Dimens.box0
-                : HomeDrawer(),
-            Expanded(
-              child: Obx(
-                () => Center(
-                  child: Container(
-                    margin: Dimens.edgeInsets16,
-                    height: Get.height,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(.3)),
-                    ),
-                    constraints: BoxConstraints(
-                      maxWidth: Get.width,
-                    ),
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Column(
+        body: Row(children: [
+          Responsive.isMobile(context) || Responsive.isTablet(context)
+              ? Dimens.box0
+              : HomeDrawer(),
+          Expanded(
+            child: Obx(
+              () => Center(
+                child: Container(
+                  margin: Dimens.edgeInsets5,
+                  height: Get.height,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.withOpacity(.3)),
+                  ),
+                  constraints: BoxConstraints(
+                    maxWidth: Get.width,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -124,11 +123,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: 'Block'),
                                         SizedBox(
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList: controller.blocksList,
                                             isValueSelected: controller
                                                 .isBlocksSelected.value,
@@ -145,11 +144,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: "Type"),
                                         SizedBox(
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList:
                                                 controller.typeNameList,
                                             isValueSelected: controller
@@ -167,11 +166,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: "Status"),
                                         SizedBox(
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList:
                                                 controller.statusNameList,
                                             isValueSelected: controller
@@ -186,7 +185,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     ),
                                     Row(
                                       children: [
-                                        CustomRichText(title: "Asset\nName"),
+                                        CustomRichText(title: "Asset Name"),
                                         Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
@@ -194,12 +193,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             width: 0.5,
                                           )),
                                           height: 45,
-                                          margin: Dimens.edgeInsets16,
+                                          margin: Dimens.edgeInsets5,
                                           constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             minWidth: 100,
                                           ),
                                           child: LoginCustomTextfield(
@@ -212,7 +211,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(
-                                          title: "Asset\nDescription",
+                                          title: "Asset Description",
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -221,12 +220,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             width: 0.5,
                                           )),
                                           height: 45,
-                                          margin: Dimens.edgeInsets16,
+                                          margin: Dimens.edgeInsets5,
                                           constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             minWidth: 100,
                                           ),
                                           child: LoginCustomTextfield(
@@ -238,20 +237,21 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     )
                                   ],
                                 ),
+                                Spacer(),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Row(
                                       children: [
                                         CustomRichText(
-                                            title: 'Parent\nEquipment'),
+                                            title: 'Parent Equipment'),
                                         SizedBox(
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList:
                                                 controller.eqipmentNameList,
                                             isValueSelected: controller
@@ -269,11 +269,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: "Category"),
                                         SizedBox(
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList: controller
                                                 .equipmentCategoryList,
                                             isValueSelected: controller
@@ -298,12 +298,12 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             width: 0.5,
                                           )),
                                           height: 45,
-                                          margin: Dimens.edgeInsets16,
+                                          margin: Dimens.edgeInsets5,
                                           constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             minWidth: 100,
                                           ),
                                           child: LoginCustomTextfield(
@@ -321,10 +321,13 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  width: 30,
+                                )
                               ],
                             ),
                             Container(
-                              margin: Dimens.edgeInsets16,
+                              margin: Dimens.edgeInsets5,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   width: 1,
@@ -397,33 +400,44 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                 ),
                               ),
                             ),
-                            Dimens.boxHeight15,
-                            controller.id == null
-                                ? CustomElevatedButton(
-                                    backgroundColor: ColorValues.appGreenColor,
-                                    text: 'Submit',
-                                    onPressed: () {
-                                      controller.AddInventory();
-                                    },
-                                  )
-                                : CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appDarkBlueColor,
-                                    text: 'Update',
-                                    onPressed: () {
-                                      controller.updateInventory();
-                                    },
-                                  ),
-                            Dimens.boxHeight30,
-                          ],
-                        ),
-                      ),
+                          ]),
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          )
+        ]),
+        floatingActionButton: Row(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Spacer(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 5,
+              ),
+              controller.id == null
+                  ? Container(
+                      height: 40,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appGreenColor,
+                        text: 'Submit',
+                        onPressed: () {
+                          controller.AddInventory();
+                        },
+                      ),
+                    )
+                  : Container(
+                      height: 40,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        text: 'Update',
+                        onPressed: () {
+                          controller.updateInventory();
+                        },
+                      ),
+                    ),
+              Spacer()
+            ]),
       );
 }

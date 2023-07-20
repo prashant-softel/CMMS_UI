@@ -152,7 +152,7 @@ class StockManagementGoodsOrdersWeb
                               Get.offNamed(
                                   Routes.updateGoodsOrdersDetailsScreen);
                             },
-                            color: ColorValues.greenlightColor,
+                            color: ColorValues.editColor,
                           ),
                         ],
                       ),
@@ -163,7 +163,7 @@ class StockManagementGoodsOrdersWeb
                     Row(
                       children: [
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -171,7 +171,7 @@ class StockManagementGoodsOrdersWeb
                               text: 'Copy'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -179,7 +179,7 @@ class StockManagementGoodsOrdersWeb
                               text: 'Excel'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                               backgroundColor: ColorValues.appLightBlueColor,
@@ -187,7 +187,7 @@ class StockManagementGoodsOrdersWeb
                               text: 'PDF'),
                         ),
                         Container(
-                          height: 45,
+                          height: 35,
                           margin: EdgeInsets.only(left: 10),
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appLightBlueColor,
@@ -198,7 +198,7 @@ class StockManagementGoodsOrdersWeb
                         Spacer(),
                         Container(
                           width: 200,
-                          height: 40,
+                          height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
                             decoration: InputDecoration(
@@ -320,12 +320,19 @@ class StockManagementGoodsOrdersWeb
                                         child: value == "Action"
                                             ? Wrap(children: [
                                                 TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
+                                                  color: ColorValues.viewColor,
                                                   icon: Icons
                                                       .remove_red_eye_outlined,
                                                   // label: 'view',
-                                                  onPress: () {},
+
+                                                  onPress: () {
+                                                    controller
+                                                        .viewAddGoodsOrdersDetails(
+                                                            id: int.tryParse(
+                                                                '${record[0]}'));
+                                                    Get.toNamed(
+                                                        Routes.viewGoodsOrders);
+                                                  },
                                                 ),
                                                 TableActionButton(
                                                   onPress: () {
@@ -334,17 +341,20 @@ class StockManagementGoodsOrdersWeb
                                                             id: int.tryParse(
                                                                 '${record[0]}'));
                                                   },
-                                                  color: ColorValues
-                                                      .appYellowColor,
+                                                  color: ColorValues.editColor,
                                                   icon: Icons.edit,
                                                 ),
                                                 TableActionButton(
                                                   color:
-                                                      ColorValues.appRedColor,
+                                                      ColorValues.deleteColor,
                                                   icon: Icons.delete,
                                                   // label: 'Delete',
-                                                  onPress: () {},
-                                                )
+                                                  onPress: () {
+                                                    controller.isDeleteDialog(
+                                                        id: record[0],
+                                                        generatedBy: record[1]);
+                                                  },
+                                                ),
                                               ])
                                             : Text(value),
                                       );

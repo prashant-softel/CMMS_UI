@@ -579,6 +579,30 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> incidentReportRejectButton({
+    required String auth,
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.incidentReportRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> incidentReportApproveButton({
+    required String auth,
+    String? incidentId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.incidentReportApproveButton(
+        auth: auth,
+        incidentId: incidentId,
+        isLoading: isLoading ?? false,
+      );
+
   //  @override
   // Future<ResponseModel> getNewPermitList({
   //   int? facilityId,
@@ -954,12 +978,44 @@ class DataRepository extends DomainRepository {
         createWarrantyClaim: createWarrantyClaim,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> createIncidentReport({
+    required String auth,
+    createIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createIncidentReport(
+        auth: auth,
+        createIncidentReport: createIncidentReport,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createGoodsOrder({
     required String auth,
     createGo,
     bool? isLoading,
   }) async =>
       await connectHelper.createGoodsOrder(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> submitPurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.submitPurchaseOrderData(
+        auth: auth,
+        createGoReq: createGoReq,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> updateGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateGoodsOrder(
         auth: auth,
         createGo: createGo,
         isLoading: isLoading ?? false,
@@ -973,6 +1029,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.updateWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> updateIncidentReport({
+    required String auth,
+    updateIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateIncidentReport(
+        auth: auth,
+        updateIncidentReport: updateIncidentReport,
         isLoading: isLoading ?? false,
       );
 
@@ -1118,7 +1185,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  
   Future<ResponseModel> updateJobCard({
     String? auth,
     jobCard,
@@ -1684,7 +1750,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
   Future<ResponseModel> createSPVlist({
     auth,
     bool? isLoading,
@@ -1696,8 +1761,6 @@ class DataRepository extends DomainRepository {
         businesslistJsonString: businesslistJsonString);
     return response;
   }
-
-
 
   Future<ResponseModel> getBusinessTypeList({
     int? businessType,
@@ -1861,6 +1924,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
+
   Future<ResponseModel> deleteSPV({
     auth,
     bool? isLoading,
@@ -1871,8 +1935,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
-
   Future<ResponseModel> deleteFacility({
     auth,
     bool? isLoading,
@@ -1882,7 +1944,6 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
-
 
   Future<ResponseModel> updateBusinesslist({
     auth,
@@ -1909,6 +1970,17 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+  Future<ResponseModel> deleteGoodsOrders({
+    auth,
+    bool? isLoading,
+    id,
+  }) async {
+    var response = await connectHelper.deleteGoodsOrders(
+        auth: auth, isLoading: isLoading, id: id);
+    return response;
+  }
+
   Future<ResponseModel> updateFacilityList({
     auth,
     bool? isLoading,
@@ -1921,7 +1993,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
   Future<ResponseModel> getCompetencyList({
     required String auth,
@@ -2133,6 +2204,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createMrs(
+        auth: auth,
+        createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getIncidentRiskTypeList({
     // int? job_type_id,
     required bool isLoading,
@@ -2198,6 +2279,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getMrsDetails({
+    String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getMrsDetails(
+      auth: auth,
+      mrsId: mrsId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> createInventoryStatus({
     auth,
     bool? isLoading,
@@ -2219,6 +2312,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   Future<ResponseModel> updateInventoryStatus({
     auth,
     bool? isLoading,
@@ -2231,7 +2325,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
   Future<ResponseModel> createInventoryType({
     auth,
@@ -2254,6 +2347,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   Future<ResponseModel> updateInventoryType({
     auth,
     bool? isLoading,
@@ -2288,6 +2382,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
   Future<ResponseModel> updateInventoryCategory({
     auth,
     bool? isLoading,
@@ -2300,6 +2395,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> updateBlockType({
     auth,
     bool? isLoading,
@@ -2310,6 +2406,30 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       checklistJsonString: checklistJsonString,
     );
+    return response;
+  }
+
+  Future<ResponseModel> approveMrs({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveMrs(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectMrs({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    var response = await connectHelper.rejectMrs(
+        auth: auth,
+        isLoading: isLoading,
+        rejecttoJsonString: rejecttoJsonString);
     return response;
   }
 //end

@@ -5,10 +5,12 @@ import 'package:cmms/app/create_mrs/create_mrs_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown_web.dart';
 
 class CreateMrsContentWeb extends GetView<CreateMrsController> {
@@ -17,14 +19,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Obx(
-        // () =>
-        Container(
-      color: Color.fromARGB(255, 234, 236, 238),
-      width: Get.width,
-      height: Get.height,
-      child: Column(
+    return Obx(
+      () => Column(
         children: [
           Container(
             height: 45,
@@ -82,7 +78,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                       color: ColorValues.greyLightColour,
                     ),
                     Container(
-                      margin: Dimens.edgeInsets20,
+                      margin: Dimens.edgeInsets20_0_20_0,
                       child: Row(
                         children: [
                           CustomRichText(title: 'Activity: '),
@@ -114,12 +110,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               ),
                               width: (MediaQuery.of(context).size.width * .2),
                               child: LoginCustomTextfield(
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.deny(
-                                  //       RegExp(r'\s')),
-                                  // ],
-                                  // textController: controller.loginIdCtrlr,
-                                  )),
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.deny(
+                                //       RegExp(r'\s')),
+                                // ],
+                                textController: controller.activityCtrlr,
+                              )),
                           Spacer(),
                           Text('Where Used: '),
                           Dimens.boxWidth10,
@@ -151,13 +147,14 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               width: (MediaQuery.of(context).size.width * .2),
                               child: LoginCustomTextfield(
                                 enabled: false,
+                                textController: controller.whereUsedCtrlr,
                               )),
                         ],
                       ),
                     ),
                     Container(
-                      height: 350,
-                      margin: Dimens.edgeInsets20,
+                      //height: 400,
+                      margin: Dimens.edgeInsets20_20_20_0,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: ColorValues.lightGreyColorWithOpacity35,
@@ -192,12 +189,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               ],
                             ),
                           ),
-                          Column(
-                              children: []
-                                ..addAll(controller.rowItem.value.map((e) {
-                                  return Text(jsonEncode(e));
-                                }))),
-                          Text(jsonEncode(controller.dropdownMapperData)),
+                          // Column(
+                          //     children: []
+                          //       ..addAll(controller.rowItem.value.map((e) {
+                          //         return Text(jsonEncode(e));
+                          //       }))),
+                          // Text(jsonEncode(controller.dropdownMapperData)),
                           Container(
                             height: 300,
                             child: ScrollableTableView(
@@ -216,43 +213,54 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               }).toList(),
                               rows: controller.rowItem.value.map((record) {
                                 return TableViewRow(
-                                  height: 120,
+                                  height: 85,
                                   cells: record.map((mapData) {
                                     return TableViewCell(
                                       child: (mapData['key'] == "Drop_down")
-                                          ? Column(
-                                              children: [
-                                                DropdownWebWidget(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  dropdownList:
-                                                      controller.assetItemList,
-                                                  selectedValue:
-                                                      mapData["value"],
-                                                  onValueChanged:
-                                                      (list, selectedValue) {
-                                                    // print({
-                                                    //   selectedValue:
-                                                    //       selectedValue
-                                                    // });
-                                                    mapData["value"] =
-                                                        selectedValue;
-                                                    controller.dropdownMapperData[
-                                                            selectedValue] =
-                                                        list.firstWhere(
-                                                            (element) =>
-                                                                element.name ==
-                                                                selectedValue,
-                                                            orElse: null);
-                                                  },
-                                                ),
-                                                Text(
-                                                    "${controller.dropdownMapperData[mapData['value']]?.available_qty ?? ''}"),
-                                                Text(
-                                                    "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                              ],
+                                          ? Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: Column(
+                                                children: [
+                                                  DropdownWebWidget(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            4,
+                                                    dropdownList: controller
+                                                        .assetItemList,
+                                                    selectedValue:
+                                                        mapData["value"],
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
+                                                      // print({
+                                                      //   selectedValue:
+                                                      //       selectedValue
+                                                      // });
+                                                      mapData["value"] =
+                                                          selectedValue;
+                                                      controller.dropdownMapperData[
+                                                              selectedValue] =
+                                                          list.firstWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  selectedValue,
+                                                              orElse: null);
+                                                    },
+                                                  ),
+                                                  Dimens.boxHeight5,
+                                                  Row(
+                                                    children: [
+                                                      Text("Approval :"),
+                                                      Dimens.boxWidth10,
+                                                      Text(
+                                                          "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}")
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
                                             )
                                           : (mapData['key'] == "Requested_Qty")
                                               ? Padding(
@@ -283,6 +291,11 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                       ),
                                                       child:
                                                           LoginCustomTextfield(
+                                                        inputFormatters: <
+                                                            TextInputFormatter>[
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
                                                         maxLine: 1,
                                                         textController:
                                                             new TextEditingController(
@@ -298,11 +311,11 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                               : (mapData['key'] ==
                                                       "Available_Qty")
                                                   ? Text(
-                                                      "${controller.dropdownMapperData[mapData['value']]?.available_qty ?? 'ffhhhjj'}")
+                                                      "${controller.dropdownMapperData[record[0]['value']]?.available_qty ?? ""}")
                                                   : (mapData['key'] ==
                                                           "Material_Type")
                                                       ? Text(
-                                                          "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? 'hh'}")
+                                                          "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
                                                       : Text(
                                                           mapData['key'] ?? ''),
                                     );
@@ -314,34 +327,88 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                         ],
                       ),
                     ),
-                    Dimens.boxHeight15,
                     Container(
-                      margin: EdgeInsets.only(bottom: 40, top: 30),
+                      margin: Dimens.edgeInsets15,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          CustomRichText(title: "Comment:"),
+                          Dimens.boxWidth10,
                           Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Submit',
-                              onPressed: () {
-                                // controller.addUser();
-                                //  controller.saveAccessLevel();
-                              },
-                            ),
+                              width: (Get.width * .6),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      5.0,
+                                      5.0,
+                                    ),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: ColorValues.whiteColor,
+                                    offset: const Offset(0.0, 0.0),
+                                    blurRadius: 0.0,
+                                    spreadRadius: 0.0,
+                                  ),
+                                ],
+                                color: ColorValues.whiteColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: LoginCustomTextfield(
+                                maxLine: 5,
+                                textController: controller.remarkCtrlr,
+                              )),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: Dimens.edgeInsets20_0_0_0,
+                      child: Row(
+                        children: [
+                          Text(
+                            'Set As Template: ',
+                            style: Styles.blackBold14,
                           ),
-                          Dimens.boxWidth20,
-                          Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.redColor,
-                              text: "Cancel",
-                              onPressed: () {},
-                            ),
+                          Dimens.boxWidth10,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: CustomSwitchTroggle(
+                                value: controller.isSetTemplate.value,
+                                onChanged: (value) {
+                                  controller.setTemplatetoggle();
+                                }),
                           ),
                         ],
                       ),
+                    ),
+                    Dimens.boxHeight15,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.greenColor,
+                            text: 'Submit',
+                            onPressed: () {
+                              // controller.addUser();
+                              controller.createMrs();
+                            },
+                          ),
+                        ),
+                        Dimens.boxWidth20,
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.redColor,
+                            text: "Cancel",
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),
@@ -350,7 +417,6 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
           ),
         ],
       ),
-      //  ),
     );
   }
 }

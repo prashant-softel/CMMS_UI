@@ -23,11 +23,11 @@ class InventoryScreen extends GetView<InventoryController> {
     return Scaffold(
       appBar: Responsive.isDesktop(context)
           ? AppBar(
-        title: HeaderWidget(),
-        elevation: 0,
-        toolbarHeight: 100,
-        automaticallyImplyLeading: false,
-      )
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 60,
+              automaticallyImplyLeading: false,
+            )
           : AppBar(
         title: HeaderWidget(),
         elevation: 0,

@@ -22,7 +22,7 @@ class EditJobScreen extends GetView<EditJobController> {
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
               elevation: 0,
-              toolbarHeight: 90,
+              toolbarHeight: 60,
             )
           : AppBar(
               title: Text('Add Job'),

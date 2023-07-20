@@ -2,8 +2,12 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
+
+import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
+import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
@@ -13,6 +17,7 @@ import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
@@ -365,7 +370,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getIncidentRiskTypeList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -393,8 +397,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
-
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -784,6 +786,57 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  ///Incident Report Reject Button
+  Future<ResponseModel> incidentReportRejectButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/RejectIncidentReport',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('IncidentReportRejectResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        IncidentReportMessageRejectDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  ///Incident Report Approve Button
+  Future<ResponseModel> incidentReportApproveButton({
+    required String auth,
+    bool? isLoading,
+    String? incidentId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/ApproveIncidentReport?incidentId=$incidentId',
+      Request.put,
+      {'incidentId': incidentId},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('IncidentReportApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        IncidentReportMessageApproveDialog(data: parsedJson['message']));
 
     return responseModel;
   }
@@ -1417,6 +1470,39 @@ class ConnectHelper {
     return responseModel;
   }
 
+  //Create Incident Report
+  Future<ResponseModel> createIncidentReport({
+    required String auth,
+    createIncidentReport,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/CreateIncidentReport',
+      Request.post,
+      createIncidentReport,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Incident Report Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(CreateIncidentReportDialog(
+      data: parsedJson['message'],
+      incidentReportId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
   //Create WarraGoods order
 
   Future<ResponseModel> createGoodsOrder({
@@ -1441,6 +1527,55 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> submitPurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/SubmitPurchaseOrderData',
+      Request.post,
+      createGoReq,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateGoodsOrder({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/UpdateGO',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('update Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
 
     return responseModel;
   }
@@ -1472,6 +1607,39 @@ class ConnectHelper {
     Get.dialog<void>(WarrantyClaimUpdatedMessageDialog(
       data: parsedJson['message'],
       warrantyClaimId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
+  //Update Incident Report
+  Future<ResponseModel> updateIncidentReport({
+    required String auth,
+    updateIncidentReport,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/UpdateIncidentReport',
+      Request.put,
+      updateIncidentReport,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update Incident Report Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(UpdateIncidentReportDialog(
+      data: parsedJson['message'],
+      incidentReportId: parsedJson['id'],
     ));
     // }
 
@@ -1573,7 +1741,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=201',
+      'GO/GetGODetailsByID?id=252',
       Request.get,
       null,
       isLoading ?? false,
@@ -2879,6 +3047,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteGoodsOrders({
+    required String auth,
+    bool? isLoading,
+    required id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/DeleteGO?id=$id',
+      Request.delete,
+      id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateBusinesslist({
     required String auth,
     bool? isLoading,
@@ -3316,14 +3503,33 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> createMrs({
+    required String auth,
+    createMrsJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/CreateMRS',
+      Request.post,
+      createMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> createRiskType({
     required String auth,
     bool? isLoading,
     required riskTypeJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'CMMS/CreateRiskType', //AddBusiness
       Request.post,
       riskTypeJsonString,
@@ -3333,7 +3539,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
 
@@ -3392,6 +3597,26 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+
+  Future<ResponseModel> getMrsDetails({
+    required String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getMRSDetails?ID=$mrsId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteInventoryStatus({
     required String auth,
     bool? isLoading,
@@ -3447,6 +3672,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteInventoryType({
     required String auth,
     bool? isLoading,
@@ -3485,7 +3711,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> createInventoryCategory({
     required String auth,
     bool? isLoading,
@@ -3503,6 +3728,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteInventoryCategory({
     required String auth,
     bool? isLoading,
@@ -3559,7 +3785,42 @@ class ConnectHelper {
 
     return responseModel;
   }
+  
+   Future<ResponseModel> approveMrs({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/mrsApproval',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    return responseModel;
+  }
 
+  Future<ResponseModel> rejectMrs({
+    required String auth,
+    bool? isLoading,
+    required rejecttoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/mrsReject',
+      Request.post,
+      rejecttoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    return responseModel;
+  }
 }

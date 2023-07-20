@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -97,10 +98,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
-                                    Text(
-                                      " Order ID : GOS001 ",
-                                      style: Styles.blackBold16,
-                                    ),
+                                    controller.id == null
+                                        ? Container()
+                                        : Text(
+                                            " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
+                                            style: Styles.blackBold16,
+                                          )
+
                                     // ActionButton(
                                     //   icon: Icons.menu,
                                     //   label: "User List",
@@ -179,6 +183,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController:
                                                       controller.challanNoCtrlr,
                                                 )),
@@ -214,6 +225,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController:
                                                       controller.pOCtrlr,
                                                 )),
@@ -251,6 +269,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController: controller
                                                       .frieghtToPayPaidCtrlr,
                                                 )),
@@ -325,6 +350,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController: controller
                                                       .conditionOfPackagesReceivedCtrlr,
                                                 )),
@@ -361,6 +393,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController:
                                                       controller.girNoCtrlr,
                                                 )),
@@ -395,6 +434,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                       .width *
                                                   .2),
                                               child: LoginCustomTextfield(
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatters: <
+                                                    TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly
+                                                ],
                                                 textController:
                                                     controller.amountCtrlr,
                                               )),
@@ -534,6 +580,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController:
                                                       controller.lrNoCtrlr,
                                                 )),
@@ -570,6 +623,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController:
                                                       controller.vehicleNoCtrlr,
                                                 )),
@@ -606,6 +666,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                         .width *
                                                     .2),
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   textController:
                                                       controller.jobRefCtrlr,
                                                 )),
@@ -641,9 +708,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                     Dimens.boxWidth30,
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20,
                               ),
                               Container(
                                 height: 350,
@@ -707,7 +771,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           rows: controller.rowItem.value
                                               .map((record) {
                                             return TableViewRow(
-                                              height: 200,
+                                              height: 130,
                                               cells: record.map((mapData) {
                                                 return TableViewCell(
                                                   child: (mapData['key'] ==
@@ -718,7 +782,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                       .only(
                                                                   left: 20,
                                                                   right: 20,
-                                                                  top: 70),
+                                                                  top: 10),
                                                           child: Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -757,9 +821,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                       orElse:
                                                                           null);
                                                                 },
-                                                              ),
-                                                              SizedBox(
-                                                                height: 5,
                                                               ),
                                                               Row(
                                                                 children: [
@@ -830,8 +891,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                               ? Padding(
                                                                   padding:
                                                                       const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
+                                                                          .only(
+                                                                    left: 20,
+                                                                    right: 20,
+                                                                  ),
                                                                   child: Container(
                                                                       width: (Get.width * .4),
                                                                       // padding: EdgeInsets.all(value),
@@ -857,6 +920,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                             BorderRadius.circular(5),
                                                                       ),
                                                                       child: LoginCustomTextfield(
+                                                                        keyboardType:
+                                                                            TextInputType.number,
+                                                                        inputFormatters: <
+                                                                            TextInputFormatter>[
+                                                                          FilteringTextInputFormatter
+                                                                              .digitsOnly
+                                                                        ],
                                                                         maxLine:
                                                                             1,
                                                                         textController:
@@ -887,7 +957,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                   children: [
                                     Spacer(),
                                     CustomElevatedButton(
-                                      backgroundColor: ColorValues.appRedColor,
+                                      backgroundColor: ColorValues.cancelColor,
                                       text: 'Cancle',
                                       onPressed: () {
                                         // controller.AddInventory();
@@ -897,7 +967,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                     controller.id == null
                                         ? CustomElevatedButton(
                                             backgroundColor:
-                                                ColorValues.appGreenColor,
+                                                ColorValues.submitColor,
                                             text: 'Submit',
                                             onPressed: () {
                                               controller.createGoodsOrder();
@@ -905,10 +975,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           )
                                         : CustomElevatedButton(
                                             backgroundColor:
-                                                ColorValues.appGreenColor,
+                                                ColorValues.submitColor,
                                             text: 'Update',
                                             onPressed: () {
-                                              // controller.createGoodsOrder();
+                                              controller.updateGoodsOrder();
                                             },
                                           ),
                                     Spacer()

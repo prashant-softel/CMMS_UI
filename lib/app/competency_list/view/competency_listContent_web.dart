@@ -11,8 +11,7 @@ import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
 import '../competency_list_controller.dart';
 
-class CompetencyListContentWeb
-    extends GetView<CompetencyListController> {
+class CompetencyListContentWeb extends GetView<CompetencyListController> {
   CompetencyListContentWeb({Key? key}) : super(key: key);
   final CompetencyListController controller = Get.find();
 
@@ -55,11 +54,9 @@ class CompetencyListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / MASTER",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE COMPETENCY",
-                      style: Styles.greyMediumLight12)
+                  Text(" / CREATE COMPETENCY", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -163,8 +160,8 @@ class CompetencyListContentWeb
                                                             5),
                                                   ),
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .nameCtrlr,
+                                                    textController:
+                                                        controller.nameCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -174,18 +171,19 @@ class CompetencyListContentWeb
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'Description:'),
+                                            CustomRichText(
+                                                title: 'Description:'),
                                             SizedBox(
                                               width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -208,10 +206,10 @@ class CompetencyListContentWeb
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
@@ -240,24 +238,23 @@ class CompetencyListContentWeb
                                     ),
                                     Container(
                                         height: 40,
-                                        child:
-                                          controller.selectedItem == null
-                                              ? CustomElevatedButton(
-                                                  backgroundColor: ColorValues
-                                                      .appDarkBlueColor,
-                                                  onPressed: () {
-                                                    controller
-                                                        .createCompetency()
-                                                        .then((value) {
-                                                      print("value,$value");
-                                                      if (value == true){
-                                                        controller.issuccessCreatechecklist();
-                                                      }
-                                                    });
-                                                  },
-                                                  text: 'Create Competency')
-                                              :
-                                        CustomElevatedButton(
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .createCompetency()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true) {
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                    }
+                                                  });
+                                                },
+                                                text: 'Create Competency')
+                                            : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
                                                 onPressed: () {
@@ -267,7 +264,7 @@ class CompetencyListContentWeb
                                                               .selectedItem?.id)
                                                       .then((value) {
                                                     print("value,$value");
-                                                    if (value == true){
+                                                    if (value == true) {
                                                       controller
                                                           .issuccessCreatechecklist();
                                                     }
@@ -312,7 +309,7 @@ class CompetencyListContentWeb
                                   Row(
                                     children: [
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -328,7 +325,7 @@ class CompetencyListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -337,7 +334,7 @@ class CompetencyListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -346,7 +343,7 @@ class CompetencyListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        height: 45,
+                                        height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -384,7 +381,6 @@ class CompetencyListContentWeb
                                                     '',
                                                     '',
                                                     '',
-
                                                   ];
                                                 },
                                               ),
@@ -424,7 +420,8 @@ class CompetencyListContentWeb
                                                 (index) {
                                                   var competencyModelListDetails =
                                                       controller
-                                                              .competencyList?[index];
+                                                              .competencyList?[
+                                                          index];
                                                   return [
                                                     '${competencyModelListDetails?.id}',
                                                     '${competencyModelListDetails?.name}',
@@ -456,32 +453,44 @@ class CompetencyListContentWeb
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appLightBlueColor,
+                                                                          icon:
+                                                                              Icons.edit,
+                                                                          label:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.competencyList!.firstWhere((element) =>
+                                                                                "${element?.id}" ==
+                                                                                _competencyList[0]);
 
-                                                                                color: ColorValues.appLightBlueColor,
-                                                                                icon: Icons.edit,
-                                                                                label: 'Edit',
-                                                                                onPress: () {
-
-                                                                                  controller.selectedItem = controller.competencyList!.firstWhere((element) => "${element?.id}" == _competencyList[0]);
-
-                                                                                  controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                  controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
-                                                                                },
-                                                                              ),
+                                                                            controller.nameCtrlr.text =
+                                                                                controller.selectedItem?.name ?? '';
+                                                                            controller.descriptionCtrlr.text =
+                                                                                controller.selectedItem?.description ?? '';
+                                                                          },
+                                                                        ),
                                                                         //     : Container(),
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.delete,
-                                                                                label: 'Delete',
-                                                                                onPress: () {
-                                                                                  print(_competencyList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _competencyList[0], checklist: _competencyList[1]);
-                                                                                },
-                                                                              )
-                                                                            // : Container()
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          label:
+                                                                              'Delete',
+                                                                          onPress:
+                                                                              () {
+                                                                            print(_competencyList[0]);
+                                                                            controller.isDeleteDialog(
+                                                                                checklist_id: _competencyList[0],
+                                                                                checklist: _competencyList[1]);
+                                                                          },
+                                                                        )
+                                                                        // : Container()
                                                                       ])
                                                                 : Text(
                                                                     value,

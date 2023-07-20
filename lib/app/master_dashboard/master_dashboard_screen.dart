@@ -29,7 +29,7 @@ class MastersDashboard extends GetView<MastersController> {
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
-              toolbarHeight: 100,
+              toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
           : AppBar(
@@ -686,8 +686,6 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToDocumentManager();
                                     });
                               }))),
-
-
                             ],
                           ),
                         ],

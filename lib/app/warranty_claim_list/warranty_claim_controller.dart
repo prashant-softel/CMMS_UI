@@ -439,7 +439,7 @@ class WarrantyClaimController extends GetxController {
     final _employeeList = await warrantyClaimPresenter.getEmployeeList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     print('Employee List:$employeeList');
     for (var employee_list in _employeeList) {
@@ -454,7 +454,7 @@ class WarrantyClaimController extends GetxController {
     final _employeesList = await warrantyClaimPresenter.getEmployeesList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     print('Employees List:$employeesList');
     for (var employees_list in _employeesList) {

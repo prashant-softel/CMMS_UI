@@ -1,5 +1,3 @@
-import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
-import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
@@ -51,30 +49,12 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Inventory",
-                        icon: "assets/files/warranty.png",
-                        press: () {
-                          Get.offNamed(Routes.inventory);
-                        },
-                      ),
-                      MenuItem(
                         title: "Breakdown Maintenance",
                         icon: "assets/files/preventive.png",
                         press: () {
                           Get.offNamed(Routes.breakdown);
                         },
                       ),
-                      // MenuItem(
-                      //   title: "Warranty claim",
-                      //   icon: "assets/files/warranty.png",
-                      //   press: () {
-                      //     Get.offNamed(Routes.warrantyClaimList);
-                      //     //  Navigator.push(
-                      //     //         context,
-                      //     //         MaterialPageRoute(
-                      //     //             builder: (context) => WarrantyClaimListWeb()));
-                      //   },
-                      // ),
                       MenuItem(
                         title: "Preventive Maintenance",
                         icon: "assets/files/preventive.png",
@@ -83,17 +63,10 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Stock Management",
-                        icon: "assets/files/maint.png",
-                        press: () {
-                          Get.offNamed(Routes.stockManagementDashboardScreen);
-                        },
-                      ),
-                      MenuItem(
                         title: "Module Cleaning",
                         icon: "assets/files/maintenance.png",
                         press: () {
-                          Get.offNamed(Routes.home);
+                          Get.offNamed(Routes.moduleCleaningDashboard);
                         },
                       ),
                       MenuItem(
@@ -104,17 +77,39 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Incident Report",
-                        icon: "assets/files/reportins.png",
+                        title: "Inventory",
+                        icon: "assets/files/warranty.png",
                         press: () {
-                          Get.offNamed(Routes.incident_risk_dashboard);
+                          Get.offNamed(Routes.inventory);
                         },
                       ),
+                      MenuItem(
+                        title: "Stock Management",
+                        icon: "assets/files/maint.png",
+                        press: () {
+                          Get.offNamed(Routes.stockManagementDashboardScreen);
+                        },
+                      ),
+                      MenuItem(
+                        title: "Escalation Matrix",
+                        icon: "assets/files/reportins.png",
+                        press: () {
+                          Get.offNamed(Routes.escalationMatrixListWeb);
+                        },
+                      ),
+                      
                       MenuItem(
                         title: "Calibration",
                         icon: "assets/files/preventive.png",
                         press: () {
                           Get.offNamed(Routes.calibrationList);
+                        },
+                      ),
+                      MenuItem(
+                        title: "Incident Report",
+                        icon: "assets/files/reportins.png",
+                        press: () {
+                          Get.offNamed(Routes.incident_risk_dashboard);
                         },
                       ),
                       MenuItem(
@@ -153,7 +148,7 @@ class HomeDrawer extends GetView {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.logout_outlined, size: 35, color: ColorValues.redColor),
+          Icon(Icons.logout_outlined, size: 35, color: ColorValues.deleteColor),
           SizedBox(
             height: 10,
           ),

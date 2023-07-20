@@ -26,7 +26,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
         appBar: AppBar(
           title: HeaderWidget(),
           elevation: 0,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           automaticallyImplyLeading: false,
         ),
         body: Row(
@@ -880,8 +880,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                                 ),
                                                                                                 SizedBox(width: 200, child: Text('${data?.email}')),
                                                                                               ],
-                                                                                            )))
-                                                                                            ),
+                                                                                            )))),
 
                                                                                     // SizedBox(
                                                                                     //     width: MediaQuery.of(context).size.width / 3,
@@ -1675,7 +1674,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                     height: 150,
                                   ),
                                   CustomElevatedButton(
-                                    backgroundColor: ColorValues.navyBlueColor,
+                                    backgroundColor: ColorValues.appDarkBlueColor,
                                     onPressed: () {
                                       controller.updateWarrantyClaim();
                                     },
@@ -2158,7 +2157,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
           child: CustomMultiSelectDialogField(
             buttonText: '$title',
             title: 'Employees',
-            initialValue: [7,45],
+            initialValue: [7, 45],
             // initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty)
             //     ? controller.selectedEmployeeNameIdList
             //     : [],
@@ -2172,7 +2171,8 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                 .toList(),
             onConfirm: (selectedOptionsList) => {
               controller.employeesNameSelected(selectedOptionsList),
-              print('Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
+              print(
+                  'Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
             },
           ),
         ),

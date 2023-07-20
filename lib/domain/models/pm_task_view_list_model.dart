@@ -28,7 +28,7 @@ class PmtaskViewModel {
   String? permit_code;
   int? status;
   String? status_name;
-  String? schedule_link_job;
+  // String? schedule_link_job;
   int? is_custom_check_point;
   int? is_file_required;
   int? checklist_id;
@@ -54,7 +54,7 @@ class PmtaskViewModel {
       this.permit_id,
       this.schedule_check_points,
       this.schedule_date,
-      this.schedule_link_job,
+      // this.schedule_link_job,
       this.status,
       this.status_name,
       this.checklist_id,
@@ -81,7 +81,7 @@ class PmtaskViewModel {
         permit_code: json["permit_code"] ?? "",
         permit_id: json["permit_id"] ?? "",
         schedule_date: Utility.getFormatedyearMonthDay(json["schedule_date"]),
-        schedule_link_job: json["schedule_link_job"] ?? "",
+        // schedule_link_job: json["schedule_link_job"] ?? "",
         status: json["status"] ?? "",
         status_name: json["status_name"] ?? "",
         is_custom_check_point: json["is_custom_check_point"],
@@ -112,7 +112,7 @@ class PmtaskViewModel {
         "permit_code": permit_code,
         "permit_id": permit_id,
         "schedule_date": schedule_date,
-        "schedule_link_job": schedule_link_job,
+        // "schedule_link_job": schedule_link_job,
         "status": status,
         "status_name": status_name,
         "is_custom_check_point": is_custom_check_point,

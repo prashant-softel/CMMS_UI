@@ -45,7 +45,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                             Row(
                               children: [
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   // mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Row(
@@ -55,11 +55,11 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                         Dimens.boxWidth5,
                                         SizedBox(
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             controller: controller,
                                             dropdownList:
                                                 controller.frequencyList,
@@ -71,8 +71,11 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                                 controller.onValueChanged,
                                           ),
                                         ),
+                                        Dimens.boxWidth30,
+                                        Dimens.boxWidth5,
                                       ],
                                     ),
+                                    Dimens.boxHeight5,
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Row(
@@ -82,7 +85,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                                   "Calibration remainder In"),
                                           SizedBox(width: 10),
                                           Container(
-                                            width: 150,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5.1,
                                             child: TextField(
                                               inputFormatters: <
                                                   TextInputFormatter>[
@@ -93,7 +99,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                                   .calibrationRemaingCtrlr,
                                               decoration: InputDecoration(
                                                 contentPadding:
-                                                    Dimens.edgeInsets16_0_16_0,
+                                                    Dimens.edgeInsets5,
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                   borderSide:
@@ -136,7 +142,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                       label: 'Last calibration date: *',
                                     ),
                                     Container(
-                                      margin: Dimens.edgeInsets16,
+                                      margin: Dimens.edgeInsets5,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -146,7 +152,8 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                             label: 'Upload certification file',
                                             onPressed: () {},
                                             icon: Icons.file_upload_outlined,
-                                            color: Colors.blue,
+                                            color:
+                                                ColorValues.appLightBlueColor,
                                           )
                                         ],
                                       ),

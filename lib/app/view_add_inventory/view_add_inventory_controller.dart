@@ -232,7 +232,7 @@ class ViewAddInventoryController extends GetxController {
       getSupplierList();
     });
 
-    await getTypePermitList();
+    // await getTypePermitList();
     await getInventoryCategoryList();
     await getInventoryTypeList(isLoading: true, facilityId: facilityId);
     await getInventoryCategoryList();
@@ -618,8 +618,7 @@ class ViewAddInventoryController extends GetxController {
 
   Future<void> getTypePermitList() async {
     final _permitTypeList = await viewaddInventoryPresenter.getTypePermitList(
-      facility_id: facilityId
-    );
+        facility_id: facilityId);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {

@@ -1,17 +1,16 @@
-import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
-
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/view_add_inventory/view/view_calibartion_widget.dart';
 import 'package:cmms/app/view_add_inventory/view/view_manufacturar_tab_widget.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_controller.dart';
 
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +20,8 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
   ViewAddInventoryScreen({super.key});
 
   final ViewAddInventoryController controller = Get.find();
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -28,7 +29,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
             ? AppBar(
                 title: HeaderWidget(),
                 elevation: 0,
-                toolbarHeight: 90,
+                toolbarHeight: 60,
                 automaticallyImplyLeading: false,
               )
             : AppBar(
@@ -48,7 +49,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
               child: Obx(
                 () => Center(
                   child: Container(
-                    margin: Dimens.edgeInsets16,
+                    margin: Dimens.edgeInsets5,
                     height: Get.height,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.withOpacity(.3)),
@@ -123,11 +124,11 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           ignoring: true,
                                           child: DropdownWebWidget(
                                             isEditable: true,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList: controller.blocksList,
                                             isValueSelected: controller
                                                 .isBlocksSelected.value,
@@ -145,11 +146,11 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList:
                                                 controller.typeNameList,
                                             isValueSelected: controller
@@ -168,11 +169,11 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList:
                                                 controller.statusNameList,
                                             isValueSelected: controller
@@ -187,7 +188,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     ),
                                     Row(
                                       children: [
-                                        CustomRichText(title: "Asset\nName"),
+                                        CustomRichText(title: "Asset Name"),
                                         IgnorePointer(
                                           ignoring: true,
                                           child: Container(
@@ -197,12 +198,12 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               width: 0.5,
                                             )),
                                             height: 45,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  4,
+                                                  5,
                                               minWidth: 100,
                                             ),
                                             child: LoginCustomTextfield(
@@ -216,7 +217,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     Row(
                                       children: [
                                         CustomRichText(
-                                          title: "Asset\nDescription",
+                                          title: "Asset Description",
                                         ),
                                         IgnorePointer(
                                           ignoring: true,
@@ -227,12 +228,12 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               width: 0.5,
                                             )),
                                             height: 45,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  4,
+                                                  5,
                                               minWidth: 100,
                                             ),
                                             child: LoginCustomTextfield(
@@ -246,21 +247,22 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     )
                                   ],
                                 ),
+                                Spacer(),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Row(
                                       children: [
                                         CustomRichText(
-                                            title: 'Parent\nEquipment'),
+                                            title: 'Parent Equipment'),
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList:
                                                 controller.eqipmentNameList,
                                             isValueSelected: controller
@@ -279,11 +281,11 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         IgnorePointer(
                                           ignoring: true,
                                           child: DropdownWebWidget(
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                4,
+                                                5,
                                             dropdownList: controller
                                                 .equipmentCategoryList,
                                             isValueSelected: controller
@@ -310,12 +312,12 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               width: 0.5,
                                             )),
                                             height: 45,
-                                            margin: Dimens.edgeInsets16,
+                                            margin: Dimens.edgeInsets5,
                                             constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  4,
+                                                  5,
                                               minWidth: 100,
                                             ),
                                             child: LoginCustomTextfield(
@@ -329,10 +331,13 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  width: 30,
+                                )
                               ],
                             ),
                             Container(
-                              margin: Dimens.edgeInsets16,
+                              margin: Dimens.edgeInsets5,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   width: 1,
@@ -381,7 +386,29 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           ViewCalibrationTabWidget(),
                                           ViewWarrantyTabWidget(),
                                           ViewManufacturarTabWidget(),
-                                          Files(),
+                                          Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: IgnorePointer(
+                                              ignoring: true,
+                                              child: Container(
+                                                height: Get.height * 0.2,
+                                                width: Get.width,
+                                                child: Row(//
+                                                    children: [
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child:
+                                                        FileUploadWidgetWithDropzone(),
+                                                  ),
+                                                  Dimens.boxWidth10,
+                                                  Expanded(
+                                                      flex: 8,
+                                                      child:
+                                                          FileUploadDetailsWidgetWeb()),
+                                                ]),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
