@@ -2995,6 +2995,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteBlock({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/DeleteBlock?block_id=$business_id',
+      Request.delete,
+      business_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> deleteSPV({
     required String auth,
     bool? isLoading,
@@ -3724,6 +3744,44 @@ class ConnectHelper {
       'Inventory/UpdateInventoryCategory',
       Request.patch,
       checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveMrs({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/mrsApproval',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectMrs({
+    required String auth,
+    bool? isLoading,
+    required rejecttoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/mrsReject',
+      Request.post,
+      rejecttoJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

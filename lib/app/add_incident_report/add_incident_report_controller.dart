@@ -713,85 +713,94 @@ RxString isSelected = ''.obs;
     print(
         'Asset Restoration Action Taken By Id: $selectedAssetRestorationActionTakenById');
   }
-  // void checkForm() {
-  //   // if (selectedEquipmentName.value == '') {
-  //   //   isEquipmentNameSelected.value = false;
-  //   // }
-  //   // if (selectedAffectedPart.value == '') {
-  //   //   isAffectedPartSelected.value = false;
-  //   // }
-  //   // if (selectedUnitCurrency.value == '') {
-  //   //   isUnitCurrencySelected.value = false;
-  //   // }
-  //   // if (selectedEmployeeList.value == '') {
-  //   //   isemployeeListSelected.value = false;
-  //   // }
 
-  //   if (warrantyClaimTitleTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (warrantyClaimBriefDescTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Description Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (affectedSerialNoTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Affected Serial No Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (failureDateTimeCtrlrWebBuffer == null) {
-  //     Fluttertoast.showToast(
-  //         msg: 'Failure Date Time Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   // if (warrantyStartDateTimeCtrlrWebBuffer == null) {
-  //   //   Fluttertoast.showToast(
-  //   //       msg: 'Warranty Start Date Time Field cannot be empty',
-  //   //       timeInSecForIosWeb: 5);
-  //   // }
-  //   // if (warrantyEndDateTimeCtrlrWebBuffer == null) {
-  //   //   Fluttertoast.showToast(
-  //   //       msg: 'Warranty End Date Time Field cannot be empty',
-  //   //       timeInSecForIosWeb: 5);
-  //   // }
-  //   if (orderReferenceNoTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Order Reference No Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (costOfReplacementTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Cost of Replacement Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (immediateCorrectiveActionTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Corrective Action Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (requestManufactureTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   // if (isEquipmentNameSelected.value == false ||
-  //   //     isAffectedPartSelected.value == false ||
-  //   //     isUnitCurrencySelected.value == false ||
-  //   //     isemployeeListSelected.value == false)
-  //   //      {
-  //   //   isFormInvalid.value = true;
-  //   // } else {
-  //   //   isFormInvalid.value = false;
-  //   // }
-  // }
+  void checkForm() {
+    if (selectedBlock.value == '') {
+      isBlockSelected.value = false;
+    }
+    if (selectedEquipmentName.value == '') {
+      isEquipmentNameSelected.value = false;
+    }
+     if (startDateTimeCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Incident Date & Time Field cannot be empty', timeInSecForIosWeb: 5);
+    }
+     if (reportingDateTimeCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Reporting Date & Time Field cannot be empty', timeInSecForIosWeb: 5);
+    }
+    if (selectedVictimNameList.value == '') {
+      isVictimNameListSelected.value = false;
+    }
+     if (actionTakenDateTimeCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Action Taken By Date & Time Field cannot be empty', timeInSecForIosWeb: 5);
+    }
+    if (selectedAssetRestorationActionTakenByList.value == '') {
+      isAssetRestorationActionTakenByListSelected.value = false;
+    }
+     if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
+      isincidentInvestigationVerificationDoneByListSelected.value = false;
+    }
+    if (damagedAssetCostTextCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Damaged cost Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (genLossAssetDamageTextCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Generation Loss Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (titleTextCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Title Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (incidentreportDescriptionCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Incident Description Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (insuranceAvailableTextCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Insurance Available Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    if (insuranceRemarkTextCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Insurance Remark Field cannot be empty',
+          timeInSecForIosWeb: 5);
+    }
+    // if (immediateCorrectiveActionTextController.text == '') {
+    //   Fluttertoast.showToast(
+    //       msg: 'Corrective Action Field cannot be empty',
+    //       timeInSecForIosWeb: 5);
+    // }
+    // if (requestManufactureTextController.text == '') {
+    //   Fluttertoast.showToast(
+    //       msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
+    // }
+    if (isBlockSelected.value == false ||
+        isEquipmentNameSelected.value == false ||
+        isVictimNameListSelected.value == false ||
+        isAssetRestorationActionTakenByListSelected.value == false ||
+        isincidentInvestigationDoneByListSelected.value == false ||
+        isincidentInvestigationVerificationDoneByListSelected.value == false)
+         {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
 
   ///Create Incident Report
   void createIncidentReport() async {
     {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _incidentDescription =
           htmlEscape.convert(incidentreportDescriptionCtrlr.text.trim());
@@ -878,10 +887,10 @@ RxString isSelected = ''.obs;
   ///Update Incident Report
   void updateIncidentReport() async {
     {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _incidentDescription =
           htmlEscape.convert(incidentreportDescriptionCtrlr.text.trim());

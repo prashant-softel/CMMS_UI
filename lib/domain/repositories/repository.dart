@@ -444,7 +444,7 @@ class Repository {
     }
   }
 
-   //Create Incident Report
+  //Create Incident Report
   Future<Map<String, dynamic>> createIncidentReport(
     createIncidentReport,
     bool? isLoading,
@@ -474,9 +474,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           return responseMap;
-        } else {
-
-        }
+        } else {}
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createIncidentReport');
         //return '';
@@ -487,7 +485,6 @@ class Repository {
       return Map();
     }
   }
-
 
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
@@ -643,7 +640,6 @@ class Repository {
     }
   }
 
-
   //Update Incident Report
   Future<Map<String, dynamic>> updateIncidentReport(
     updateIncidentReport,
@@ -687,7 +683,6 @@ class Repository {
       return Map();
     }
   }
-
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -1969,9 +1964,8 @@ class Repository {
     }
   }
 
-
-///Incident Report Reject Button
-   Future<void> incidentReportRejectButton(
+  ///Incident Report Reject Button
+  Future<void> incidentReportRejectButton(
     String? comment,
     String? id,
     bool? isLoading,
@@ -1990,16 +1984,16 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'incidentReportRejectButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'incidentReportRejectButton');
       }
     } catch (error) {
       log(error.toString());
     }
   }
 
-
   ///Incident Report Approve Button
-   Future<void> incidentReportApproveButton(
+  Future<void> incidentReportApproveButton(
     String? incidentId,
     bool? isLoading,
   ) async {
@@ -2016,15 +2010,13 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'incidentReportApproveButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'incidentReportApproveButton');
       }
     } catch (error) {
       log(error.toString());
     }
   }
-
-
-
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required int? facilityId,
@@ -2183,10 +2175,10 @@ class Repository {
   }
 
   Future<List<InventoryCategoryModel2?>?> getInventoryCategory2List(
-      String? auth,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getInventoryCategoryList(
@@ -2198,13 +2190,13 @@ class Repository {
       if (!res.hasError) {
         final jsonInventoryCategoryModels = jsonDecode(res.data);
         final List<InventoryCategoryModel2> _inventoryCategoryModelList =
-        jsonInventoryCategoryModels
-            .map<InventoryCategoryModel2>(
-              (m) => InventoryCategoryModel2.fromJson(
-            Map<String, dynamic>.from(m),
-          ),
-        )
-            .toList();
+            jsonInventoryCategoryModels
+                .map<InventoryCategoryModel2>(
+                  (m) => InventoryCategoryModel2.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
 
         return _inventoryCategoryModelList;
       } //
@@ -4772,6 +4764,25 @@ class Repository {
     }
   }
 
+  Future<void> deleteBlock(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBlock(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<void> deleteSPV(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5505,8 +5516,8 @@ class Repository {
     }
   }
 
-
-  Future<void> deleteInventoryStatus(Object check_point_id, bool isLoading) async {
+  Future<void> deleteInventoryStatus(
+      Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteInventoryStatus(
@@ -5525,8 +5536,8 @@ class Repository {
     }
   }
 
-
-  Future<bool> createInventoryStatus({bool? isLoading, required checklistJsonString}) async {
+  Future<bool> createInventoryStatus(
+      {bool? isLoading, required checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -5546,7 +5557,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateInventoryType({
     bool? isLoading,
@@ -5573,8 +5583,8 @@ class Repository {
     }
   }
 
-
-  Future<void> deleteInventoryType(Object check_point_id, bool isLoading) async {
+  Future<void> deleteInventoryType(
+      Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteInventoryType(
@@ -5593,8 +5603,8 @@ class Repository {
     }
   }
 
-
-  Future<bool> createInventoryType({bool? isLoading, required checklistJsonString}) async {
+  Future<bool> createInventoryType(
+      {bool? isLoading, required checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -5614,7 +5624,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<bool> updateInventoryCategory({
     bool? isLoading,
@@ -5641,8 +5650,8 @@ class Repository {
     }
   }
 
-
-  Future<void> deleteInventoryCategory(Object check_point_id, bool isLoading) async {
+  Future<void> deleteInventoryCategory(
+      Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteInventoryCategory(
@@ -5661,8 +5670,8 @@ class Repository {
     }
   }
 
-
-  Future<bool> createInventoryCategory({bool? isLoading, required checklistJsonString}) async {
+  Future<bool> createInventoryCategory(
+      {bool? isLoading, required checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -5683,8 +5692,51 @@ class Repository {
     }
   }
 
+  Future<bool> approveMrs({bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveMrs(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: approvetoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
 
+  Future<bool> rejectMrs({bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectMrs(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: rejecttoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
 }
 //end
 //end

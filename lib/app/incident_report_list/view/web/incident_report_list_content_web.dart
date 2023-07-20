@@ -152,6 +152,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 //     pickDateTime_web(context);
                                 //   },
                                 // ),
+                                
+                                ///Date & Time Range functionality
                                 Container(
                                   height: 30,
                                   child: CustomElevatedButton(
@@ -225,7 +227,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                     Get.toNamed(
                                         Routes.addIncidentReportContentWeb);
                                   },
-                                  color: Colors.green,
+                                  color: ColorValues.appGreenColor,
                                 ),
                                 Dimens.boxWidth10,
                                 // ActionButton(
@@ -403,7 +405,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                             ].map(
                                               (record) {
                                                 return TableViewRow(
-                                                  height: Get.height * 0.13,
+                                                  height: Get.height * 0.1,
                                                   onTap: () {},
                                                   cells: record.map(
                                                     (value) {
@@ -503,7 +505,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                               ),
 
                                                                               TableActionButton(
-                                                                                color: Colors.red,
+                                                                                color: ColorValues.appRedColor,
                                                                                 icon: Icons.close,
                                                                                 label: 'Reject',
                                                                                 onPress: () {
@@ -530,7 +532,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                           child:
                                                                               TableActionButton(
                                                                             color:
-                                                                                ColorValues.purpleColor,
+                                                                                ColorValues.appGreenColor,
                                                                             icon:
                                                                                 Icons.add,
                                                                             label:
@@ -669,7 +671,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
     );
   }
 
-  /// For WC List Screen Date Time
+  /// For Incident Report List Screen Date Time
   Future pickDateTime_web(BuildContext context) async {
     var dateTime = controller.selectedIncidentReportListDateTimeWeb.value;
     final date = await pickDate_web(context);

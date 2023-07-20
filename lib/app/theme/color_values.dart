@@ -155,7 +155,7 @@ abstract class ColorValues {
   static const int appDarkBlueColorHex = 0xff3B5670;
   static const int appLightBlueColorHex = 0xff89C6D2;
   static const int appRedColorHex = 0xffDC4F46;
-  static const int appYellowColorHex = 0xff93C171;
+  static const int appYellowColorHex = 0xffF7CE6D;
   static const int appGreenColorHex = 0xff86C466;
   static const int appLightGreyColorHex = 0xffEEEEEE;
   static const int appPurpleColorHex = 0xffDA70D6;

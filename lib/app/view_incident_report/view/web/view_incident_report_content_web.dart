@@ -742,7 +742,7 @@ class ViewIncidentReportContentWeb
                                           width: 15,
                                         ),
                                         CustomElevatedButton(
-                                          backgroundColor: Colors.red,
+                                          backgroundColor: ColorValues.appRedColor,
                                           onPressed: () {
                                             // controller.saveAsDraft();
                                           },
@@ -760,7 +760,7 @@ class ViewIncidentReportContentWeb
                                                 null
                                             ? CustomElevatedButton(
                                                 icon: Icons.edit,
-                                                backgroundColor: Colors.green,
+                                                backgroundColor: ColorValues.appYellowColor,
                                                 onPressed: () {
                                                   // controller.saveAsDraft();
                                                   controller.editIncidentReport(

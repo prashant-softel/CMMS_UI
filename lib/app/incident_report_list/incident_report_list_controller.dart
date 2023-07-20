@@ -14,7 +14,6 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class IncidentReportListController extends GetxController {
   IncidentReportListController(this.incidentReportPresenter);
@@ -217,8 +216,8 @@ class IncidentReportListController extends GetxController {
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading, 
-        start_date: "2020-01-01", ///startDate,
-        end_date: "2023-12-31",  ////endDate,
+        start_date:  startDate, //// "2020-01-01",
+        end_date:    endDate,  ////  "2023-12-31",
         facility_id: facilityId
         );
         print('incidentReportFacilityId$facilityId');
@@ -256,49 +255,49 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-  void checkForm() {
+  // void checkForm() {
   
 
-    if (warrantyClaimTitleTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
-    }
-    if (warrantyClaimBriefDescTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Description Field cannot be empty', timeInSecForIosWeb: 5);
-    }
-    if (affectedSerialNoTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Affected Serial No Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
-    if (failureDateTimeCtrlrWebBuffer == null) {
-      Fluttertoast.showToast(
-          msg: 'Failure Date Time Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
+  //   if (warrantyClaimTitleTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
+  //   }
+  //   if (warrantyClaimBriefDescTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Description Field cannot be empty', timeInSecForIosWeb: 5);
+  //   }
+  //   if (affectedSerialNoTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Affected Serial No Field cannot be empty',
+  //         timeInSecForIosWeb: 5);
+  //   }
+  //   if (failureDateTimeCtrlrWebBuffer == null) {
+  //     Fluttertoast.showToast(
+  //         msg: 'Failure Date Time Field cannot be empty',
+  //         timeInSecForIosWeb: 5);
+  //   }
    
-    if (orderReferenceNoTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Order Reference No Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
-    if (costOfReplacementTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Cost of Replacement Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
-    if (immediateCorrectiveActionTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Corrective Action Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
-    if (requestManufactureTextController.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-    }
+  //   if (orderReferenceNoTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Order Reference No Field cannot be empty',
+  //         timeInSecForIosWeb: 5);
+  //   }
+  //   if (costOfReplacementTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Cost of Replacement Field cannot be empty',
+  //         timeInSecForIosWeb: 5);
+  //   }
+  //   if (immediateCorrectiveActionTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Corrective Action Field cannot be empty',
+  //         timeInSecForIosWeb: 5);
+  //   }
+  //   if (requestManufactureTextController.text == '') {
+  //     Fluttertoast.showToast(
+  //         msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
+  //   }
  
-  }
+  // }
 
 
 

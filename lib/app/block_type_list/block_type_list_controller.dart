@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/block_type_list/block_type_list_presenter.dart';
 import 'package:cmms/domain/models/block_model.dart';
@@ -29,6 +29,7 @@ class BlockTypeListController extends GetxController {
 
   //checkbox
   RxBool isChecked = true.obs;
+  BlockTypeListModel? selectedItem;
 
   Rx<String> selectedfacility = ''.obs;
   Rx<bool> isSelectedfacility = true.obs;
@@ -85,7 +86,7 @@ class BlockTypeListController extends GetxController {
       blockId = event;
       Future.delayed(Duration(seconds: 1), () {
         getFacilityList();
-        getBlockTypeList();
+        // getBlockTypeList();
       });
     });
 
@@ -169,12 +170,12 @@ class BlockTypeListController extends GetxController {
 
   dynamic onValueChanged(RxList<FacilityTypeListModel> value, dynamic list) {
     print("onValueChange function. list : $list and value is : $value");
-    String newValue = list.toString();
+    // String newValue = list.toString();
     print(" Selected Facility : ");
 
-    int indexId = facilityTypeList.indexWhere((x) => x.name == newValue);
+    int indexId = facilityTypeList.indexWhere((x) => x.name == list);
     int facilityIds = 0;
-    if (indexId > 0) {
+    if (indexId >= 0) {
       facilityIds = facilityTypeList[indexId].id ?? 0;
     }
     print("index received is : $indexId & facility id  : $facilityIds");
@@ -183,24 +184,133 @@ class BlockTypeListController extends GetxController {
     getBlockTypeList();
   }
 
+  // Future<bool> updateBusinesslistNumber(int? businessId ,int? status , String? addedAt) async {
+  //   // print("BusinessId- ,$businessId");
+  //   // print("Status - ,$status");
+  //   // print("Addetd - ,$addedAt");
+
+  //   // String _businessType = selectedBusinessType.text.trim();
+  //   String _businessName = titleCtrlr.text.trim();
+  //   String _description = descriptionCtrlr.text.trim();
+  //   // String _email = emailCtrlr.text.trim();
+  //   // String _contactPerson = contactpersonCtrlr.text.trim();
+  //   // String _contactNumber = contactnumberCtrlr.text.trim();
+  //   // String _website = websiteCtrlr.text.trim();
+  //   // String _location = locationCtrlr.text.trim();
+  //   // String _address = addressCtrlr.text.trim();
+  //   // String _zip = zipCtrlr.text.trim();
+  //   //
+  //   UpdateBusinessListModel updateBusinessList = UpdateBusinessListModel(
+  //     id:businessId,
+  //     name: _businessName,
+  //     email: _email,
+  //     contactPerson : _contactPerson,
+  //     contactnumber: _contactNumber,
+  //     website: _website,
+  //     location: _location,
+  //     address: _address,
+  //     zip: _zip,
+  //     type: selectedBusinessTypeId,
+  //     countryId: selectedCountryId,
+  //     stateId : selectedStateId,
+  //     cityId : selectedCityId,
+  //     status : status,
+  //   );
+  //   // var modulelistJsonString =
+  //   // updateBusinessList.toJson();
+  //   //
+  //   //
+  //   // print({"modulelistJsonString", modulelistJsonString});
+  //   // await businessListPresenter.updateBusinesslist(
+  //   //   modulelistJsonString: modulelistJsonString,
+  //   //   isLoading: true,
+  //   // );
+  //   // return true;
+  // }
+  void isDeleteDialog({
+    String? business_id ,
+    String? business
+  }) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the Block ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: business,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteBusiness(business_id).then((value) {
+                    Get.back();
+                    getBlockTypeList();
+                    // getBusinessList(selectedBusinessTypeId, true);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+
+  Future<void> deleteBusiness(String? business_id) async {
+    {
+      await blockTypeListPresenter.deleteBlock(
+        business_id,
+        isLoading: true,
+      );
+    }
+  }
+
   Future<void> issuccessCreateBlock() async {
     isSuccess.toggle();
     await {_cleardata()};
   }
 
   _cleardata() {
-    // checklistNumberCtrlr.text = '';
-    // durationCtrlr.text = '';
+    titleCtrlr.text = '';
+    descriptionCtrlr.text = '';
     // manpowerCtrlr.text = '';
+    selectedItem = null;
 
     // selectedequipment.value = '';
 
     // selectedfrequency.value = '';
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getPreventiveCheckList(facilityId, type, true);
-    // });
-    // Future.delayed(Duration(seconds: 5), () {
-    //   isSuccess.value = false;
-    // });
+    Future.delayed(Duration(seconds: 1), () {
+      // get(facilityId, type, true);
+      getBlockTypeList();
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
   }
 }
