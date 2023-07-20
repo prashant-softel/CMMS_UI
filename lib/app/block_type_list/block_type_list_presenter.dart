@@ -45,14 +45,14 @@ class BlockTypeListPresenter {
         business_id: business_id ?? 0,
         isLoading: isLoading,
       );
-  // Future<bool> updateBusinesslist(
-  //     {modulelistJsonString, required bool isLoading, moduleId}) async {
-  //   print("presenter");
-  //   businessUsecase.updateBusinesslist(
-  //     modulelistJsonString: modulelistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> updateBlock(
+      {modulelistJsonString, required bool isLoading, moduleId}) async {
+    print("presenter");
+    blockTypeListUsecase.updateBlock(
+      modulelistJsonString: modulelistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 
 }

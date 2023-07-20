@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/IncidentRiskTypeModel.dart';
+import '../../domain/models/InsuranceProviderModel.dart';
 import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/create_risk_type_model.dart';
 import '../../domain/models/frequency_model.dart';
@@ -16,13 +17,13 @@ import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'incident_listContent_presenter.dart';
+import 'insurance_provider_listContent_presenter.dart';
 
-class IncidentRiskTypeController extends GetxController {
-  IncidentRiskTypeController(
+class InsuranceProviderController extends GetxController {
+  InsuranceProviderController(
     this.moduleListPresenter,
   );
-  IncidentRiskTypePresenter moduleListPresenter;
+  InsuranceProviderPresenter moduleListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -30,9 +31,9 @@ class IncidentRiskTypeController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<IncidentRiskTypeModel?>?
+  RxList<InsuranceProviderModel?>?
   moduleList =
-      <IncidentRiskTypeModel?>[].obs;
+      <InsuranceProviderModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -41,7 +42,7 @@ class IncidentRiskTypeController extends GetxController {
   );
 
 
-  IncidentRiskTypeModel? moduleListModel;
+  InsuranceProviderModel? moduleListModel;
   var isToggleOn = false.obs;
   var isToggle1On = false.obs;
   var isToggle2On = false.obs;
@@ -79,7 +80,7 @@ class IncidentRiskTypeController extends GetxController {
   Rx<bool> isSelectedfrequency = true.obs;
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
-  IncidentRiskTypeModel? selectedItem;
+  InsuranceProviderModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
@@ -87,18 +88,18 @@ class IncidentRiskTypeController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getIncidentRiskTypeList(facilityId, type, true);
+        getInsuranceProvider(facilityId, type, true);
       });
     });
     super.onInit();
   }
 
-  Future<void> getIncidentRiskTypeList(
+  Future<void> getInsuranceProvider(
       int facilityId, int type, bool isLoading)
   async {
-    moduleList?.value = <IncidentRiskTypeModel>[];
+    moduleList?.value = <InsuranceProviderModel>[];
     final _moduleList =
-        await moduleListPresenter.getIncidentRiskTypeList( isLoading: isLoading);
+        await moduleListPresenter.getInsuranceProvider( isLoading: isLoading);
 
     if (_moduleList != null) {
       moduleList!.value = _moduleList;
@@ -149,7 +150,7 @@ class IncidentRiskTypeController extends GetxController {
       );
       return true;
     }
-    getIncidentRiskTypeList(facilityId, type, true);
+    getInsuranceProvider(facilityId, type, true);
     return true;
   }
 
@@ -172,7 +173,7 @@ class IncidentRiskTypeController extends GetxController {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getIncidentRiskTypeList(facilityId, type, true);
+      getInsuranceProvider(facilityId, type, true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -216,7 +217,7 @@ class IncidentRiskTypeController extends GetxController {
                 onPressed: () {
                   deleteRiskType(module_id).then((value) {
                     Get.back();
-                    getIncidentRiskTypeList(facilityId, type, true);
+                    getInsuranceProvider(facilityId, type, true);
                   });
                 },
                 child: Text('YES'),

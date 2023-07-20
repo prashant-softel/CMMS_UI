@@ -384,6 +384,19 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getInsuranceProvider(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetInsuranceProviderList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -3754,7 +3767,26 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> approveMrs({
+  Future<ResponseModel> updateBlockType({
+    required String auth,
+    bool? isLoading,
+    required checklistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/UpdateBlockType',
+      Request.patch,
+      checklistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+  
+   Future<ResponseModel> approveMrs({
     required String auth,
     bool? isLoading,
     required approvetoJsonString,

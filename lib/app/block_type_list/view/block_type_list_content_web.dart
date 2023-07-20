@@ -367,10 +367,10 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                     children: [
 
                                       // Spacer(),
-                                      Text(
-                                        "Facility Type:",
-                                        style: Styles.black16W500,
-                                      ),
+                                      // Text(
+                                      //   "Facility Type:",
+                                      //   style: Styles.black16W500,
+                                      // ),
                                       // SizedBox(
                                       //   width: 5,
                                       // ),
@@ -579,7 +579,18 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                                               color: ColorValues.appLightBlueColor,
                                                                               icon: Icons.edit,
                                                                               label: 'Edit',
-                                                                              onPress: () {},
+                                                                              onPress: () {
+                                                                                controller.selectedItem = controller.blockTypeList!.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                // controller.selectedfacility.value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?. )!;
+                                                                                // print(controller.selectedBusinessType.value);
+                                                                                // controller.
+                                                                                // selectedfacilityId :
+                                                                                // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);
+                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                // controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
+
+
+                                                                              },
                                                                             ),
                                                                             TableActionButton(
                                                                               color: ColorValues.appRedColor,

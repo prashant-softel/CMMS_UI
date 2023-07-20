@@ -58,7 +58,8 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / USERS", style: Styles.greyMediumLight12),
+                    child: Text(" / INCIDENT REPORT",
+                        style: Styles.greyMediumLight12),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -81,15 +82,15 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .3),
-                          margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.8,
-                          child: Card(
-                            color: Color.fromARGB(255, 251, 252, 253),
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
+                    width: (Get.width * .3),
+                    margin: EdgeInsets.only(left: 30, top: 30),
+                    height: Get.height/2.15,
+                    child: Card(
+                      color: Color.fromARGB(255, 251, 252, 253),
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                             child: Column(
                               children: [
                                 // Text(

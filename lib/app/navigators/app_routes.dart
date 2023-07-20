@@ -107,6 +107,8 @@ abstract class Routes {
 
   static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
   static const inventoryCategory = _Paths.inventoryCategory;
+
+  static const insuranceProvider = _Paths.insuranceProvider;
   static const editMrs = _Paths.editMrs;
   static const moduleCleaningDashboard = _Paths.moduleCleaningDashboard;
   static const moduleCleaningPlanning = _Paths.moduleCleaningPlanning;
@@ -213,6 +215,7 @@ abstract class _Paths {
 
   static const incident_risk_dashboard = '/incident-risk-dashboard';
   static const inventoryCategory = '/inventoryCategory';
+  static const insuranceProvider = '/insuranceProvider';
   static const editMrs = '/editMrs';
   static const moduleCleaningDashboard = '/module-cleaning-dashboard';
   static const moduleCleaningPlanning = '/module-cleaning-planning';
