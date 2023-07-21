@@ -1456,7 +1456,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               CustomElevatedButton(
                                                             backgroundColor:
                                                                 ColorValues
-                                                                    .navyBlueColor,
+                                                                    .appGreenColor,
                                                             text: "Submit",
                                                             onPressed: () {
                                                               controller.isCheckedJSA
@@ -1481,7 +1481,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               CustomElevatedButton(
                                                             backgroundColor:
                                                                 ColorValues
-                                                                    .navyBlueColor,
+                                                                    .appDarkBlueColor,
                                                             text: "Update",
                                                             onPressed: () {
                                                               controller
@@ -3269,7 +3269,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               CustomElevatedButton(
                                                             backgroundColor:
                                                                 ColorValues
-                                                                    .navyBlueColor,
+                                                                    .appGreenColor,
                                                             text: "Submit",
                                                             onPressed: () {
                                                               controller.isCheckedJSA
@@ -3294,7 +3294,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               CustomElevatedButton(
                                                             backgroundColor:
                                                                 ColorValues
-                                                                    .navyBlueColor,
+                                                                    .appDarkBlueColor,
                                                             text: "Update",
                                                             onPressed: () {
                                                               controller

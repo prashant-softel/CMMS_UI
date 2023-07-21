@@ -1674,7 +1674,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                     height: 150,
                                   ),
                                   CustomElevatedButton(
-                                    backgroundColor: ColorValues.navyBlueColor,
+                                    backgroundColor: ColorValues.appDarkBlueColor,
                                     onPressed: () {
                                       controller.updateWarrantyClaim();
                                     },

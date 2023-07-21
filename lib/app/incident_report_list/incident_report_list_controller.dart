@@ -14,7 +14,6 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class IncidentReportListController extends GetxController {
   IncidentReportListController(this.incidentReportPresenter);
@@ -217,8 +216,8 @@ class IncidentReportListController extends GetxController {
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading, 
-        start_date: "2020-01-01", ///startDate,
-        end_date: "2023-12-31",  ////endDate,
+        start_date:  startDate, //// "2020-01-01",
+        end_date:    endDate,  ////  "2023-12-31",
         facility_id: facilityId
         );
         print('incidentReportFacilityId$facilityId');

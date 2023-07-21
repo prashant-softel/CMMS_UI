@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
   EscalationMatrixListWeb({super.key});
@@ -148,72 +149,72 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                             //   },
                             // ),
 
-                            ///From and To Date Range
+                              ///Date & Time Range functionality
+                                Container(
+                                  height: 30,
+                                  child: CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () async {
+                                      await Get.dialog(
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 350,
+                                              right: 350,
+                                              top: 200,
+                                              bottom: 200),
+                                          child: Container(
+                                            color: ColorValues.whiteColor,
+                                            child: SfDateRangePicker(
+                                              cancelText: "CANCEL",
+                                              confirmText: "Ok",
+                                              showActionButtons: true,
+                                              initialSelectedRange:
+                                                  PickerDateRange(
+                                                controller.fromDate.value,
+                                                controller.toDate.value,
+                                              ),
+                                              selectionMode:
+                                                  DateRangePickerSelectionMode
+                                                      .range,
+                                              monthCellStyle:
+                                                  DateRangePickerMonthCellStyle(
+                                                todayCellDecoration:
+                                                    BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: ColorValues
+                                                            .appDarkBlueColor),
+                                              ),
+                                              onSubmit: (value) {
+                                                PickerDateRange? data =
+                                                    value as PickerDateRange;
 
-                            // Container(
-                            //   height: 30,
-                            //   child: CustomElevatedButton(
-                            //     backgroundColor:
-                            //         ColorValues.appLightBlueColor,
-                            //     onPressed: () async {
-                            //       await Get.dialog(
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               left: 350,
-                            //               right: 350,
-                            //               top: 200,
-                            //               bottom: 200),
-                            //           child: Container(
-                            //             color: ColorValues.whiteColor,
-                            //             child: SfDateRangePicker(
-                            //               cancelText: "CANCEL",
-                            //               confirmText: "Ok",
-                            //               showActionButtons: true,
-                            //               initialSelectedRange:
-                            //                   PickerDateRange(
-                            //                 controller.fromDate.value,
-                            //                 controller.toDate.value,
-                            //               ),
-                            //               selectionMode:
-                            //                   DateRangePickerSelectionMode
-                            //                       .range,
-                            //               monthCellStyle:
-                            //                   DateRangePickerMonthCellStyle(
-                            //                 todayCellDecoration:
-                            //                     BoxDecoration(
-                            //                         shape: BoxShape.circle,
-                            //                         color: ColorValues
-                            //                             .appDarkBlueColor),
-                            //               ),
-                            //               onSubmit: (value) {
-                            //                 PickerDateRange? data =
-                            //                     value as PickerDateRange;
+                                                var pickUpDate = DateTime.parse(
+                                                    data.startDate.toString());
+                                                controller.fromDate.value =
+                                                    pickUpDate;
+                                                var dropDate = DateTime.parse(
+                                                    data.endDate.toString());
+                                                dropDate != null
+                                                    ? controller.toDate.value =
+                                                        dropDate
+                                                    : controller.toDate.value =
+                                                        pickUpDate;
+                                                Get.back();
+                                                controller
+                                                    .getEscalationMatrixListByDate();
+                                              },
+                                              onCancel: () => Get.back(),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    text:
+                                        'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
+                                  ),
+                                ),
 
-                            //                 var pickUpDate = DateTime.parse(
-                            //                     data.startDate.toString());
-                            //                 controller.fromDate.value =
-                            //                     pickUpDate;
-                            //                 var dropDate = DateTime.parse(
-                            //                     data.endDate.toString());
-                            //                 dropDate != null
-                            //                     ? controller.toDate.value =
-                            //                         dropDate
-                            //                     : controller.toDate.value =
-                            //                         pickUpDate;
-                            //                 Get.back();
-                            //                 // controller
-                            //                 //     .getIncidentReportListByDate();
-                            //               },
-                            //               onCancel: () => Get.back(),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       );
-                            //     },
-                            //     text:
-                            //         'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
-                            //   ),
-                            // ),
 
                             Dimens.boxWidth10,
                             ActionButton(
@@ -226,6 +227,8 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                               color: ColorValues.appGreenColor,
                             ),
                             Dimens.boxWidth10,
+                            
+                           
                             // ActionButton(
                             //   icon: Icons.close,
                             //   lable: 'retireAsset'.tr,
@@ -401,7 +404,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                     ].map(
                                       (record) {
                                         return TableViewRow(
-                                          height: Get.height * 0.1,
+                                          height: Get.height * 0.08,
                                           onTap: () {},
                                           cells: record.map(
                                             (value) {

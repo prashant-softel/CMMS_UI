@@ -36,7 +36,14 @@ class BlockTypeListUsecase {
       job_type_id: job_type_id,
     );
   }
-
+  Future<bool> updateBlock({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateBlockType(
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
   Future<List<FacilityTypeListModel>> getFacilityList(
       {required bool isLoading, required int? job_type_id}) async {
     return repository.getFacilityTypeList(

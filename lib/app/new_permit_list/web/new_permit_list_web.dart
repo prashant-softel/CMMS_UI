@@ -166,7 +166,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   onPressed: () {
                                     controller.addNewPermitList();
                                   },
-                                  color: Colors.blue,
+                                  color: ColorValues.appGreenColor,
                                 )
                               : Container(),
 
@@ -363,7 +363,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                       permitId: int.tryParse(
                                                           _newPermitList[0]))
                                                 },
-                                            height: 135,
+                                            height: 70,
                                             cells: _newPermitList.map((value) {
                                               var index;
 
@@ -441,8 +441,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
-                                                                  color: Colors
-                                                                      .green,
+                                                                  color: ColorValues.appDarkBlueColor,
                                                                   icon: Icons
                                                                       .visibility,
                                                                   label: 'View',
@@ -538,7 +537,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       121
                                                               ? TableActionButton(
                                                                   color: ColorValues
-                                                                      .purpleColor,
+                                                                      .appGreenColor,
                                                                   icon:
                                                                       Icons.add,
                                                                   label:
@@ -589,7 +588,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                           /// Condition For delete ends here
 
                                                           TableActionButton(
-                                                            color: Colors.red,
+                                                            color: ColorValues.appRedColor,
                                                             icon: Icons.close,
                                                             label: 'Close',
                                                             onPress: () {
@@ -668,7 +667,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       133
                                                               ? TableActionButton(
                                                                   color: ColorValues
-                                                                      .appDarkBlueColor,
+                                                                      .appGreenColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
                                                                   label:
@@ -706,8 +705,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                           ?.ptwStatus ==
                                                                       133
                                                               ? TableActionButton(
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
+                                                                  color: ColorValues.appRedColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
                                                                   label:
@@ -843,8 +841,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                               ?.ptwStatus ==
                                                                           123
                                                               ? TableActionButton(
-                                                                  color: Colors
-                                                                      .red,
+                                                                  color: ColorValues
+                                                                      .appRedColor,
                                                                   icon: Icons
                                                                       .close,
                                                                   label:
@@ -867,7 +865,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                           .where((e) =>
                                                                               e.feature_id == 3 &&
                                                                               e.edit ==
-                                                                                  0)
+                                                                                  1)
                                                                           .length >
                                                                       0 &&
                                                                   controller
@@ -882,8 +880,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                           ?.ptwStatus ==
                                                                       124
                                                               ? TableActionButton(
-                                                                  color: Colors
-                                                                      .blue,
+                                                                  color: ColorValues.appYellowColor,
                                                                   icon: Icons
                                                                       .edit,
                                                                   label:

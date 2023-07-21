@@ -13,6 +13,7 @@ import '../../domain/models/create_block_type_model copy.dart';
 import '../../domain/models/facility_type_list_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
+import '../../domain/models/update_block_type_list_model.dart';
 
 class BlockTypeListController extends GetxController {
   BlockTypeListController(
@@ -184,49 +185,35 @@ class BlockTypeListController extends GetxController {
     getBlockTypeList();
   }
 
-  // Future<bool> updateBusinesslistNumber(int? businessId ,int? status , String? addedAt) async {
-  //   // print("BusinessId- ,$businessId");
-  //   // print("Status - ,$status");
-  //   // print("Addetd - ,$addedAt");
+  Future<bool> updateBlock(int? businessId) async {
+    // id = businessId;
+    String _businessName = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+    // String _email = emailCtrlr.text.trim();
+    // String _contactPerson = contactpersonCtrlr.text.trim();
+    // String _contactNumber = contactnumberCtrlr.text.trim();
+    // String _website = websiteCtrlr.text.trim();
+    // String _location = locationCtrlr.text.trim();
+    // String _address = addressCtrlr.text.trim();
+    // String _zip = zipCtrlr.text.trim();
+    //
+    UpdateBlockTypeListModel updateBusinessList = UpdateBlockTypeListModel(
+      id:businessId,
+      name: _businessName,
+      description: _description,
+      parentId: selectedFacilityId,
+    );
+    var modulelistJsonString =
+    updateBusinessList.toJson();
 
-  //   // String _businessType = selectedBusinessType.text.trim();
-  //   String _businessName = titleCtrlr.text.trim();
-  //   String _description = descriptionCtrlr.text.trim();
-  //   // String _email = emailCtrlr.text.trim();
-  //   // String _contactPerson = contactpersonCtrlr.text.trim();
-  //   // String _contactNumber = contactnumberCtrlr.text.trim();
-  //   // String _website = websiteCtrlr.text.trim();
-  //   // String _location = locationCtrlr.text.trim();
-  //   // String _address = addressCtrlr.text.trim();
-  //   // String _zip = zipCtrlr.text.trim();
-  //   //
-  //   UpdateBusinessListModel updateBusinessList = UpdateBusinessListModel(
-  //     id:businessId,
-  //     name: _businessName,
-  //     email: _email,
-  //     contactPerson : _contactPerson,
-  //     contactnumber: _contactNumber,
-  //     website: _website,
-  //     location: _location,
-  //     address: _address,
-  //     zip: _zip,
-  //     type: selectedBusinessTypeId,
-  //     countryId: selectedCountryId,
-  //     stateId : selectedStateId,
-  //     cityId : selectedCityId,
-  //     status : status,
-  //   );
-  //   // var modulelistJsonString =
-  //   // updateBusinessList.toJson();
-  //   //
-  //   //
-  //   // print({"modulelistJsonString", modulelistJsonString});
-  //   // await businessListPresenter.updateBusinesslist(
-  //   //   modulelistJsonString: modulelistJsonString,
-  //   //   isLoading: true,
-  //   // );
-  //   // return true;
-  // }
+
+    print({"modulelistJsonString", modulelistJsonString});
+    await blockTypeListPresenter.updateBlock(
+      modulelistJsonString: modulelistJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
   void isDeleteDialog({
     String? business_id ,
     String? business
@@ -286,6 +273,8 @@ class BlockTypeListController extends GetxController {
     {
       await blockTypeListPresenter.deleteBlock(
         business_id,
+
+
         isLoading: true,
       );
     }
@@ -300,6 +289,8 @@ class BlockTypeListController extends GetxController {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
     // manpowerCtrlr.text = '';
+    selectedfacility.value = '';
+    selectedFacilityId = 0;
     selectedItem = null;
 
     // selectedequipment.value = '';
