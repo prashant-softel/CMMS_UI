@@ -262,7 +262,7 @@ class CustomTextFieldForStock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.049,
+      height: MediaQuery.of(context).size.height * 0.043,
       // margin: Dimens.edgeInsets5,
       constraints: BoxConstraints(
         maxWidth: width ?? 400,

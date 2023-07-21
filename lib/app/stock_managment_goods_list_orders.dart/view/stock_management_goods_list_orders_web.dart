@@ -152,7 +152,7 @@ class StockManagementGoodsOrdersWeb
                               Get.offNamed(
                                   Routes.updateGoodsOrdersDetailsScreen);
                             },
-                            color: ColorValues.editColor,
+                            color: ColorValues.appGreenColor,
                           ),
                         ],
                       ),
