@@ -75,6 +75,7 @@ import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/get_mrs_list_model.dart';
+import '../models/insurance_status_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
@@ -5815,6 +5816,32 @@ class Repository {
       return Map();
     }
   }
+
+  Future<List<InsuranceStatusModel>> getInsuranceStatus({
+    // required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInsuranceStatus(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = InsuranceStatusModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
 }
 //end
 //end

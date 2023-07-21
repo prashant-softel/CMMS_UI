@@ -130,6 +130,8 @@ import '../incident_risk_type/incident_listContent_binding.dart';
 import '../incident_risk_type/view/incident_listContent_screen.dart';
 import '../insurance_provider/insurance_provider_listContent_binding.dart';
 import '../insurance_provider/view/insurance_provider_listContent_screen.dart';
+import '../insurance_status/insurance_status_listContent_binding.dart';
+import '../insurance_status/view/insurance_status_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_category_list/inventory_category_list_binding.dart';
 import '../inventory_category_list/view/inventory_category_list.dart';
@@ -687,6 +689,11 @@ class AppPages {
       name: _Paths.moduleCleaningListPlan,
       page: ModuleCleaningListPlanScreen.new,
       binding: ModuleCleaningListPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.insuranceStatus,
+      page: InsuranceStatusScreen.new,
+      binding: InsuranceStatusBinding(),
     ),
   ];
 }

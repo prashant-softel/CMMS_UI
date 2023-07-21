@@ -3839,4 +3839,18 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> getInsuranceStatus(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetInsuranceStatusList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

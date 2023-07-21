@@ -2443,5 +2443,20 @@ class DataRepository extends DomainRepository {
         editMrsJsonString: editMrsJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getInsuranceStatus({
+    // int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInsuranceStatus(
+      isLoading: isLoading,
+      auth: auth,
+      // job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
 //end
 }
