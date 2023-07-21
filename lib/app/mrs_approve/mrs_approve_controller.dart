@@ -56,4 +56,21 @@ class MrsApproveController extends GetxController {
       }
     }
   }
+
+  rejectMrs() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: mrsId, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response = await mrsApprovePresenter.rejectMrs(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.mrsListScreen);
+      }
+    }
+  }
 }

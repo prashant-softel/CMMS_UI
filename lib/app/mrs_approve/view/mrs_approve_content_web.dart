@@ -212,13 +212,12 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                   "Equipment Name",
                                   "Asset Type",
                                   "Image",
+                                  "Available Qyt.",
                                   "Requested Qty.",
-                                  "Approved Qty.",
-                                  "issued Qyt."
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.13,
+                                    minWidth: Get.width * 0.15,
                                   );
                                 }).toList(),
                                 rows: [
@@ -233,120 +232,103 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                       return [
                                         '${equipmentModelListDetails.asset_name}',
                                         '${equipmentModelListDetails.asset_type}',
-                                        '${equipmentModelListDetails.file_path}',
+                                        "", //'${equipmentModelListDetails.file_path}',
+                                        '${equipmentModelListDetails.available_qty}',
                                         '${equipmentModelListDetails.requested_qty}',
-                                        '${equipmentModelListDetails.approval_status}',
-                                        '${equipmentModelListDetails.issued_qty}',
                                       ];
                                     },
                                   ),
                                 ].map((record) {
                                   return TableViewRow(
-                                    height: 70,
+                                    height: 50,
                                     cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: value == record[1] ||
-                                                value == record[2]
-                                            ? Text(value)
-                                            : Container(
-                                                height: 45,
-                                                width: Get.width / 8,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                  ],
-                                                  color: ColorValues.whiteColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      15.0),
-                                                  child: Text(value),
-                                                ) // LoginCustomTextfield(t)
-                                                ),
-                                      );
+                                      return TableViewCell(child: Text(value));
                                     }).toList(),
                                   );
                                 }).toList(),
                               ),
                             ),
-                            Container(
-                              margin: Dimens.edgeInsets15,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomRichText(title: "Comment:"),
-                                  Dimens.boxWidth10,
-                                  Container(
-                                      width: (Get.width * .6),
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
-                                        color: ColorValues.whiteColor,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: LoginCustomTextfield(
-                                        maxLine: 5,
-                                      )),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 30),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 35,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.cancelColor,
-                                      text: "Concel",
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.submitColor,
-                                      text: 'Submit',
-                                      onPressed: () {
-                                        controller.approveMrs();
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),
+                      Container(
+                        margin: Dimens.edgeInsets15,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomRichText(title: "Comment:"),
+                            Dimens.boxWidth10,
+                            Container(
+                                width: (Get.width * .6),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
+                                  color: ColorValues.whiteColor,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: LoginCustomTextfield(
+                                  maxLine: 5,
+                                )),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.cancelColor,
+                                text: "Concel",
+                                onPressed: () {},
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.approveColor,
+                                text: 'Approve',
+                                onPressed: () {
+                                  controller.approveMrs();
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.rejectColor,
+                                text: 'Reject',
+                                onPressed: () {
+                                  controller.rejectMrs();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),

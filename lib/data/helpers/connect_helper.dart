@@ -3014,7 +3014,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> deleteSPV({
     required String auth,
     bool? isLoading,
@@ -3585,7 +3584,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getMrsDetails({
     required String? auth,
     int? mrsId,
@@ -3789,6 +3787,24 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> editMrs({
+    required String auth,
+    editMrsJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/updateMRS',
+      Request.post,
+      editMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }
