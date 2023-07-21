@@ -21,4 +21,14 @@ class MrsApprovePresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<bool> rejectMrs({
+    rejecttoJsonString,
+    required bool isLoading,
+  }) async {
+    return mrsApproveUsecase.rejectMrs(
+      rejecttoJsonString: rejecttoJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

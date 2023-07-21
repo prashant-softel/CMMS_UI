@@ -186,7 +186,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                     onTap: () {
                                       controller.addRowItem();
                                     },
-                                    child: Icon(Icons.exposure_plus_1)),
+                                    child: Icon(Icons.add)),
                               ],
                             ),
                           ),
@@ -396,7 +396,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                             text: 'Update',
                             onPressed: () {
                               // controller.addUser();
-                              controller.createMrs();
+                              controller.editMrs();
                             },
                           ),
                         ),

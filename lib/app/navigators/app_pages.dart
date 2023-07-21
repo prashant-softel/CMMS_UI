@@ -29,6 +29,9 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
+import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_binding.dart';
+import 'package:cmms/app/module_cleaning_list_plan/view/module_cleaning_list_planning_screen.dart.dart';
+
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_binding.dart';
 import 'package:cmms/app/module_cleaning_planning/view/module_cleaning_planning_screen.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
@@ -125,6 +128,8 @@ import '../incident_dashboard/incident_report_binding.dart';
 import '../incident_dashboard/view/incident_screen.dart';
 import '../incident_risk_type/incident_listContent_binding.dart';
 import '../incident_risk_type/view/incident_listContent_screen.dart';
+import '../insurance_provider/insurance_provider_listContent_binding.dart';
+import '../insurance_provider/view/insurance_provider_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
 import '../inventory_category_list/inventory_category_list_binding.dart';
 import '../inventory_category_list/view/inventory_category_list.dart';
@@ -659,6 +664,11 @@ class AppPages {
       binding: InventoryCategoryListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.insuranceProvider,
+      page: InsuranceProviderScreen.new,
+      binding: InsuranceProviderBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.editMrs,
       page: EditMrsScreen.new,
       binding: EditMrsBinding(),
@@ -672,6 +682,11 @@ class AppPages {
       name: _Paths.moduleCleaningPlanning,
       page: ModuleCleaningPlanningScreen.new,
       binding: ModuleCleaningPlanningBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningListPlan,
+      page: ModuleCleaningListPlanScreen.new,
+      binding: ModuleCleaningListPlanBinding(),
     ),
   ];
 }

@@ -150,7 +150,8 @@ class ViewCalibrationTabWidget extends StatelessWidget {
                                                   'Upload certification file',
                                               onPressed: () {},
                                               icon: Icons.file_upload_outlined,
-                                              color: Colors.blue,
+                                              color:
+                                                  ColorValues.appLightBlueColor,
                                             )
                                           ],
                                         ),

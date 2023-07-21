@@ -31,7 +31,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
         return Obx(
           () => SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
                   Dimens.boxHeight10,
@@ -39,6 +39,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                     'Warranty',
                     style: Styles.blackBold18,
                   ),
+                  Dimens.boxHeight10,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -50,7 +51,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Type"),
                               SizedBox(
                                 child: DropdownWebWidget(
-                                  margin: Dimens.edgeInsets16,
+                                  margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList: controller.warrantyNameList,
                                   isValueSelected:
@@ -68,7 +69,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   title: "Warranty Usages Term Type"),
                               SizedBox(
                                 child: DropdownWebWidget(
-                                  margin: Dimens.edgeInsets16,
+                                  margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.warrantyUsageTermNameList,
@@ -91,7 +92,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   width: 0.5,
                                 )),
                                 height: 45,
-                                margin: Dimens.edgeInsets16,
+                                margin: Dimens.edgeInsets5,
                                 constraints: BoxConstraints(
                                   maxWidth:
                                       MediaQuery.of(context).size.width / 5,
@@ -105,6 +106,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                           ),
                         ],
                       ),
+                      Spacer(),
                       Column(
                         children: [
                           Row(
@@ -112,7 +114,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Provider"),
                               SizedBox(
                                 child: DropdownWebWidget(
-                                  margin: Dimens.edgeInsets16,
+                                  margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.manufacturerModelNameList,
@@ -135,7 +137,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   width: 0.5,
                                 )),
                                 height: 45,
-                                margin: Dimens.edgeInsets16,
+                                margin: Dimens.edgeInsets5,
                                 constraints: BoxConstraints(
                                   maxWidth:
                                       MediaQuery.of(context).size.width / 5,
@@ -149,6 +151,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                     textController:
                                         controller.certificateNoCtrlr),
                               ),
+                              Dimens.boxHeight10,
                             ],
                           ),
                         ],

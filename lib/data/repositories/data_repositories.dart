@@ -2229,6 +2229,21 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getInsuranceProvider({
+    // int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInsuranceProvider(
+      isLoading: isLoading,
+      auth: auth,
+      // job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+
   Future<ResponseModel> createRiskType({
     auth,
     bool? isLoading,
@@ -2381,6 +2396,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateBlockType({
+    auth,
+    bool? isLoading,
+    checklistJsonString,
+  }) async {
+    var response = await connectHelper.updateBlockType(
+      auth: auth,
+      isLoading: isLoading,
+      checklistJsonString: checklistJsonString,
+    );
+    return response;
+  }
+
   Future<ResponseModel> approveMrs({
     auth,
     bool? isLoading,
@@ -2404,5 +2432,16 @@ class DataRepository extends DomainRepository {
         rejecttoJsonString: rejecttoJsonString);
     return response;
   }
+
+  Future<ResponseModel> editMrs({
+    required String auth,
+    editMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.editMrs(
+        auth: auth,
+        editMrsJsonString: editMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

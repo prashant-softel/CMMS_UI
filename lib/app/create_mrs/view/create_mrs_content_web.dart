@@ -185,7 +185,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                     onTap: () {
                                       controller.addRowItem();
                                     },
-                                    child: Icon(Icons.exposure_plus_1)),
+                                    child: Icon(Icons.add)),
                               ],
                             ),
                           ),

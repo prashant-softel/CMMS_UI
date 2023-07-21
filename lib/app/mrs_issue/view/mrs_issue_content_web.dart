@@ -53,7 +53,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / MATERIAL REQUISITION  REJECT",
+                  Text(" / MATERIAL REQUISITION  Issue",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -70,7 +70,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                         child: Row(
                           children: [
                             Text(
-                              "Material Requisition Reject ",
+                              "Material Requisition Issue ",
                               style: Styles.blackBold16,
                             ),
                             Spacer(),
@@ -208,76 +208,73 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                             ),
                             Expanded(
                               child: ScrollableTableView(
-                                columns: [
-                                  "Equipment Name",
-                                  "Asset Type",
-                                  "Image",
-                                  "Requested Qty.",
-                                  "Approved Qty.",
-                                  "issued Qyt."
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.13,
-                                  );
-                                }).toList(),
-                                rows: [
-                                  ...List.generate(
-                                    controller.mrsDetailsModel.value!
-                                        .cmmrsItems!.length,
-                                    (index) {
-                                      var equipmentModelListDetails = controller
-                                          .mrsDetailsModel
-                                          .value!
-                                          .cmmrsItems![index];
-                                      return [
-                                        '${equipmentModelListDetails.asset_name}',
-                                        '${equipmentModelListDetails.asset_type}',
-                                        '${equipmentModelListDetails.file_path}',
-                                        '${equipmentModelListDetails.requested_qty}',
-                                        '${equipmentModelListDetails.approval_status}',
-                                        '${equipmentModelListDetails.issued_qty}',
-                                      ];
-                                    },
-                                  ),
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 70,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: value == record[1] ||
-                                                value == record[2]
-                                            ? Text(value)
-                                            : Container(
-                                                height: 45,
-                                                width: Get.width / 8,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
+                                  columns: [
+                                    "Equipment Name",
+                                    "Asset Type",
+                                    "Image",
+                                    "Available Qty.",
+                                    "Requested Qty.",
+                                    "Approved Qty.",
+                                    "issued Qyt."
+                                  ].map((column) {
+                                    return TableViewColumn(
+                                      label: column,
+                                      minWidth: Get.width * 0.11,
+                                    );
+                                  }).toList(),
+                                  rows: controller
+                                      .mrsDetailsModel.value!.cmmrsItems!
+                                      .map((cmmsItemsDetails) =>
+                                          TableViewRow(height: 70, cells: [
+                                            TableViewCell(
+                                                child: Text(
+                                                    "${cmmsItemsDetails.asset_name ?? ""}")),
+                                            TableViewCell(
+                                                child: Text(
+                                                    "${cmmsItemsDetails.asset_type ?? ""}")),
+                                            TableViewCell(child: Text("${""}")),
+                                            TableViewCell(
+                                                child: Text(
+                                                    "${cmmsItemsDetails.available_qty ?? ""}")),
+                                            TableViewCell(
+                                                child: Text(
+                                                    "${cmmsItemsDetails.requested_qty ?? ""}")),
+                                            TableViewCell(
+                                                child: Text(
+                                                    "${cmmsItemsDetails.approved_date ?? ""}")),
+                                            TableViewCell(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                    width: (Get.width * .4),
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                      ],
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
                                                     ),
-                                                  ],
-                                                  color: ColorValues.whiteColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      15.0),
-                                                  child: Text(value),
-                                                ) // LoginCustomTextfield(t)
-                                                ),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
-                              ),
+                                                    child: LoginCustomTextfield(
+                                                      textController: cmmsItemsDetails
+                                                              .issued_qty_controller
+                                                          as TextEditingController,
+                                                    )),
+                                              ),
+                                            ),
+                                          ]))
+                                      .toList()),
                             ),
                             Container(
                               margin: Dimens.edgeInsets15,
@@ -334,10 +331,10 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                   Container(
                                     height: 35,
                                     child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.submitColor,
-                                      text: 'Submit',
+                                      backgroundColor: ColorValues.issueColor,
+                                      text: 'Issue',
                                       onPressed: () {
-                                        controller.rejectMrs();
+                                        // controller.rejectMrs();
                                       },
                                     ),
                                   ),

@@ -15,10 +15,10 @@ class IncidentScreen extends GetView<IncidentReportController> {
   Widget build(BuildContext context) {
     var size = Get;
 
-    final double itemHeight = (size.height - kToolbarHeight - 90) / 10;
+    final double itemHeight = (size.height - kToolbarHeight - 50) / 10;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
 
-    final double itemWidth = size.width / 3;
+    final double itemWidth = size.width / 2;
 
     return Scaffold(
       appBar: Responsive.isDesktop(context)
@@ -53,21 +53,37 @@ class IncidentScreen extends GetView<IncidentReportController> {
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Incident Report",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400),
+                        child:  Row(
+                          children: [
+                            Text(
+                              "Incident Report ",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 6,
+                      crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
@@ -132,7 +148,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                       
+
                         _incidentReportList(
                             tittle: "Incident Risk Type",
                             ontap: () {
@@ -140,6 +156,15 @@ class IncidentScreen extends GetView<IncidentReportController> {
                                 Routes.incidentRiskType,
                               );
                             }),
+
+                        _inventoryList(
+                            tittle: "Insurance Provider",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.insuranceProvider,
+                              );
+                            }),
+
                         // _incidentReportList(
                         //     tittle: "Inventory Category",
                         //     ontap: () {
@@ -178,12 +203,13 @@ class IncidentScreen extends GetView<IncidentReportController> {
         onTap: ontap,
         child: Container(
           decoration: BoxDecoration(
-            color: ColorValues.appLightBlueColor,
+            color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
           padding: EdgeInsets.all(9),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Text(
@@ -192,26 +218,12 @@ class IncidentScreen extends GetView<IncidentReportController> {
                       color: ColorValues.whiteColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w700),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 243, 245, 245),
-                  border: Border.all(
-                    color: ColorValues.whiteColor,
+                textAlign: TextAlign.center,
                   ),
-                  borderRadius: BorderRadius.circular(5),
+
                 ),
-                child: Icon(
-                  Icons.format_list_bulleted,
-                  size: 30,
-                  color: ColorValues.appLightBlueColor,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

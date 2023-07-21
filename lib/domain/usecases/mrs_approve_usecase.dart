@@ -18,4 +18,10 @@ class MrsApproveUsecase {
   }) async =>
       await repository.approveMrs(
           approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> rejectMrs({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.rejectMrs(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 }
