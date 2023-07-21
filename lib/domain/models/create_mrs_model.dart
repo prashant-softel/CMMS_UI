@@ -3,12 +3,12 @@ class CreateMrsModel {
   int? isEditMode;
   int? facility_ID;
   // int? requested_by_Id;
-  String? requestd_date;
-  int? setAsTemplate;
+  // String? requestd_date;
+  String? setAsTemplate;
   String? activity;
   int? whereUsedType;
   int? whereUsedTypeId;
-  String? return_remarks;
+  String? remarks;
   // String? approved_date;
   List<Equipments>? equipments;
   CreateMrsModel(
@@ -19,9 +19,9 @@ class CreateMrsModel {
       this.equipments,
       this.isEditMode,
       this.facility_ID,
-      this.requestd_date,
+      // this.requestd_date,
       // this.requested_by_Id,
-      this.return_remarks,
+      this.remarks,
       this.setAsTemplate,
       this.whereUsedType,
       this.whereUsedTypeId});
@@ -32,14 +32,14 @@ class CreateMrsModel {
         activity: json["activity"],
         isEditMode: json["isEditMode"],
         facility_ID: json["facility_ID"],
-        requestd_date: json["requestd_date"],
+        // requestd_date: json["requestd_date"],
         // requested_by_Id: json["requested_by_Id"],
-        return_remarks: json["return_remarks"],
+        remarks: json["remarks"],
         setAsTemplate: json["setAsTemplate"],
         whereUsedType: json["whereUsedType"],
         whereUsedTypeId: json["whereUsedTypeId"],
         equipments: List<Equipments>.from(
-            json["equipments"].map((x) => Equipments.fromJson(x))),
+            json["cmmrsItems"].map((x) => Equipments.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,13 +48,13 @@ class CreateMrsModel {
         "activity": activity,
         "facility_ID": facility_ID,
         "isEditMode": isEditMode,
-        "requestd_date": requestd_date,
+        // "requestd_date": requestd_date,
         // "requested_by_Id": requested_by_Id,
-        "return_remarks": return_remarks,
+        "remarks": remarks,
         "setAsTemplate": setAsTemplate,
         "whereUsedType": whereUsedType,
         "whereUsedTypeId": whereUsedTypeId,
-        "equipments": List<dynamic>.from(equipments!.map((x) => x.toJson())),
+        "cmmrsItems": List<dynamic>.from(equipments!.map((x) => x.toJson())),
       };
 }
 
@@ -76,6 +76,9 @@ class Equipments {
   int? requested_qty;
   int? issued_qty;
 
+  int? returned_qty;
+  int? used_qty;
+  int? available_qty;
   factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
         id: json["id"],
         equipmentID: json["equipmentID"],

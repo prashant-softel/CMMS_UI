@@ -17,7 +17,7 @@ class EditMrsUsecase {
     editMrsJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createMrs(
+      await repository.editMrs(
         editMrsJsonString,
         isLoading,
       );

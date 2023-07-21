@@ -23,14 +23,14 @@ class EditMrsController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetItemsModel> dropdownMapperData = {};
+
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
-  Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
 
   int mrsId = 0;
   var isSetTemplate = false.obs;
-
+  int whereUsedId = 0;
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
   }
@@ -62,20 +62,20 @@ class EditMrsController extends GetxController {
       rowItem.value = [];
       _mrsDetailsModel.cmmrsItems?.forEach((element) {
         rowItem.value.add([
-          {"key": "Drop_down", "value": 'Please Select'},
+          {"key": "Drop_down", "value": '${element.asset_name}'},
           {'key': "Material_Type", "value": '${element.asset_type}'},
-          {'key': "Image", "value": '${element.file_path}'},
+          {'key': "Image", "value": '${element.approved_date}'},
           {'key': "Available_Qty", "value": '${element.available_qty}'},
           {'key': "Requested_Qty", "value": '${element.requested_qty}'},
         ]);
+        //  dropdownMapperData = element.approval_required;
       });
-      mrsDetailsModel.value = _mrsDetailsModel;
-      activityCtrlr.text = mrsDetailsModel.value?.activity ?? "";
-      remarkCtrlr.text = "";
-      whereUsedCtrlr.text =
-          mrsDetailsModel.value?.whereUsedType.toString() ?? "";
+      whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
+      activityCtrlr.text = _mrsDetailsModel.activity ?? "";
+      remarkCtrlr.text = _mrsDetailsModel.remarks ?? "";
+      whereUsedCtrlr.text = _mrsDetailsModel.whereUsedType.toString();
     }
-    print({"mrsdetailss", mrsDetailsModel});
+    print({"mrsdetailss", _mrsDetailsModel});
   }
 
   Future<void> getEquipmentList(int _facilityId) async {
@@ -90,9 +90,6 @@ class EditMrsController extends GetxController {
 
       update(["AssetList"]);
     }
-    // assetItemList.value = [];
-
-    addRowItem();
   }
 
   void addRowItem() {
@@ -105,13 +102,13 @@ class EditMrsController extends GetxController {
     ]);
   }
 
-  Future<void> createMrs() async {
+  Future<void> editMrs() async {
     String _activity = activityCtrlr.text.trim();
     String _remark = remarkCtrlr.text.trim();
 
-    Rx<DateTime> requestd_date = DateTime.now().obs;
-    String formattedFromdate =
-        DateFormat('yyyy-MM-dd').format(requestd_date.value);
+    // Rx<DateTime> requestd_date = DateTime.now().obs;
+    // String formattedFromdate =
+    //     DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<Equipments> items = [];
     rowItem.value.forEach((element) {
@@ -126,26 +123,26 @@ class EditMrsController extends GetxController {
       );
       items.add(item);
     });
-    CreateMrsModel createMrs = CreateMrsModel(
-        ID: 0,
-        isEditMode: 0,
+    CreateMrsModel editMrs = CreateMrsModel(
+        ID: mrsId,
+        isEditMode: 1,
         facility_ID: facilityId,
-        requestd_date: formattedFromdate,
-        setAsTemplate: isSetTemplate == true ? 1 : 0,
+        //  requestd_date: formattedFromdate,
+        setAsTemplate: "",
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,
-        // whereUsedTypeId: whereUsedTypeId,
-        return_remarks: _remark,
+        whereUsedTypeId: whereUsedId,
+        remarks: _remark,
         equipments: items);
-    var createMrsJsonString = createMrs.toJson();
+    var editMrsJsonString = editMrs.toJson();
 
-    print({"createMrsJsonString", createMrsJsonString});
-    Map<String, dynamic>? responseCreateMrs = await editMrsPresenter.editMrs(
-      editMrsJsonString: createMrsJsonString,
+    print({"editMrsJsonString", editMrsJsonString});
+    Map<String, dynamic>? responseEditMrs = await editMrsPresenter.editMrs(
+      editMrsJsonString: editMrsJsonString,
       isLoading: true,
     );
-    if (responseCreateMrs == null) {
+    if (responseEditMrs == null) {
     } else {
       Get.offAllNamed(
         Routes.mrsListScreen,

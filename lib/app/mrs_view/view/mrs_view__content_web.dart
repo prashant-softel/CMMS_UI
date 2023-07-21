@@ -277,9 +277,9 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                       return [
                                         '${equipmentModelListDetails.asset_name}',
                                         '${equipmentModelListDetails.asset_type}',
-                                        '${equipmentModelListDetails.file_path}',
+                                        "", //'${equipmentModelListDetails.file_path}',
                                         '${equipmentModelListDetails.requested_qty}',
-                                        '${equipmentModelListDetails.approval_status}',
+                                        '${equipmentModelListDetails.available_qty}',
                                         '${equipmentModelListDetails.issued_qty}',
                                       ];
                                     },

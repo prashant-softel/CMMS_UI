@@ -103,13 +103,12 @@ class CreateMrsController extends GetxController {
         ID: 0,
         isEditMode: 0,
         facility_ID: facilityId,
-        requestd_date: formattedFromdate,
-        setAsTemplate: isSetTemplate == true ? 1 : 0,
+        setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,
         whereUsedTypeId: whereUsedTypeId,
-        return_remarks: _remark,
+        remarks: _remark,
         equipments: items);
     var createMrsJsonString = createMrs.toJson();
 

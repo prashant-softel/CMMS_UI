@@ -5364,7 +5364,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        Utility.showDialog(res.errorCode.toString() + 'createMrs');
         //return '';
       }
       return Map();
@@ -5787,6 +5787,32 @@ class Repository {
     } catch (error) {
       log(error.toString());
       return false;
+    }
+  }
+
+  Future<Map<String, dynamic>> editMrs(
+    editMrsJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.editMrs(
+        auth: auth,
+        editMrsJsonString: editMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Mrs edit Successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'editMrs');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 }

@@ -2432,5 +2432,16 @@ class DataRepository extends DomainRepository {
         rejecttoJsonString: rejecttoJsonString);
     return response;
   }
+
+  Future<ResponseModel> editMrs({
+    required String auth,
+    editMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.editMrs(
+        auth: auth,
+        editMrsJsonString: editMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

@@ -3,6 +3,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -265,7 +266,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                     ),
                                   ].map((record) {
                                     return TableViewRow(
-                                      height: 60,
+                                      height: 80,
                                       cells: record.map((value) {
                                         return TableViewCell(
                                           child: Text(value),
@@ -293,7 +294,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                 }).toList(),
                                 rows: controller.mrsList!
                                     .map((mrsListDetails) =>
-                                        TableViewRow(height: 70, cells: [
+                                        TableViewRow(height: 60, cells: [
                                           TableViewCell(
                                               child: Column(
                                             children: [
@@ -344,7 +345,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                               color: ColorValues.viewColor,
                                               icon:
                                                   Icons.remove_red_eye_outlined,
-                                              label: "View",
+                                              // label: "View",
                                               onPress: () {
                                                 int mrsId =
                                                     mrsListDetails?.id ?? 0;
@@ -358,7 +359,7 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                             TableActionButton(
                                               color: ColorValues.editColor,
                                               icon: Icons.edit,
-                                              label: 'edit',
+                                              //// label: 'edit',
                                               onPress: () {
                                                 int mrsId =
                                                     mrsListDetails?.id ?? 0;
@@ -368,34 +369,132 @@ class MrsListContentWeb extends GetView<MrsListController> {
                                                 }
                                               },
                                             ),
-                                            TableActionButton(
-                                              color: ColorValues.approveColor,
-                                              icon: Icons.check,
-                                              label: 'Approve',
-                                              onPress: () {
-                                                int mrsId =
-                                                    mrsListDetails?.id ?? 0;
-                                                if (mrsId != null) {
-                                                  Get.toNamed(
-                                                      Routes.mrsApprovalScreen,
-                                                      arguments: mrsId);
-                                                }
-                                              },
-                                            ),
-                                            TableActionButton(
-                                              color: ColorValues.rejectColor,
-                                              icon: Icons.close,
-                                              label: 'Reject',
-                                              onPress: () {
-                                                int mrsId =
-                                                    mrsListDetails?.id ?? 0;
-                                                if (mrsId != null) {
-                                                  Get.toNamed(
-                                                      Routes.mrsIssueScreen,
-                                                      arguments: mrsId);
-                                                }
-                                              },
-                                            ),
+                                            controller.mrsList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.status ==
+                                                        321 &&
+                                                    controller.mrsList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.approval_status ==
+                                                        0
+                                                ? TableActionButton(
+                                                    color: ColorValues
+                                                        .approveColor,
+                                                    icon: Icons.check,
+                                                    // label: 'Approve',
+                                                    onPress: () {
+                                                      int mrsId =
+                                                          mrsListDetails?.id ??
+                                                              0;
+                                                      if (mrsId != null) {
+                                                        Get.toNamed(
+                                                            Routes
+                                                                .mrsApprovalScreen,
+                                                            arguments: mrsId);
+                                                      }
+                                                    },
+                                                  )
+                                                : Dimens.box0,
+                                            controller.mrsList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.approval_status ==
+                                                        223 &&
+                                                    controller.mrsList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.approval_status ==
+                                                        223
+                                                ? TableActionButton(
+                                                    color:
+                                                        ColorValues.issueColor,
+                                                    icon: Icons.report,
+                                                    //label: 'issue',
+                                                    onPress: () {
+                                                      int mrsId =
+                                                          mrsListDetails?.id ??
+                                                              0;
+                                                      if (mrsId != null) {
+                                                        Get.toNamed(
+                                                            Routes
+                                                                .mrsIssueScreen,
+                                                            arguments: mrsId);
+                                                      }
+                                                    },
+                                                  )
+                                                : Dimens.box0,
+                                            controller.mrsList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.status ==
+                                                        321 &&
+                                                    controller.mrsList!
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.approval_status ==
+                                                        0
+                                                ? TableActionButton(
+                                                    color:
+                                                        ColorValues.rejectColor,
+                                                    icon: Icons.close,
+                                                    // label: 'Reject',
+                                                    onPress: () {
+                                                      int mrsId =
+                                                          mrsListDetails?.id ??
+                                                              0;
+                                                      if (mrsId != null) {
+                                                        Get.toNamed(
+                                                            Routes
+                                                                .mrsApprovalScreen,
+                                                            arguments: mrsId);
+                                                      }
+                                                    },
+                                                  )
+                                                : Dimens.box0
                                           ]))
                                         ]))
                                     .toList()),

@@ -334,13 +334,13 @@ class MastersDashboard extends GetView<MastersController> {
                                 ),
                                 SizedBox(
                                     width:
-                                    10), // Add some space between the text and the line
+                                        10), // Add some space between the text and the line
                                 Expanded(
                                   child: Divider(
                                     color: Colors
                                         .grey, // Customize the color of the line if needed
                                     height:
-                                    1, // Adjust the height of the line if needed
+                                        1, // Adjust the height of the line if needed
                                   ),
                                 ),
                               ],
@@ -353,7 +353,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 40,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                            Responsive.isMobile(context) ? 2 : 5,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
@@ -442,7 +442,13 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToRoleAccess();
                                     });
                               }))),
-
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Role Notifications",
+                                    onTap: () {
+                                      controller.goToRoleAccess();
+                                    });
+                              }))),
                             ],
                           ),
                           GridView.count(
@@ -452,12 +458,11 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 40,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                            Responsive.isMobile(context) ? 2 : 5,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "User List",
@@ -486,7 +491,6 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToCompetencyScreen();
                                     });
                               }))),
-
                             ],
                           ),
 
@@ -722,10 +726,8 @@ class MastersDashboard extends GetView<MastersController> {
                       fontSize: 16,
                       fontWeight: FontWeight.w700),
 
-
                   textAlign: TextAlign.center, // Updated
                 ),
-
               ),
             ],
           ),
