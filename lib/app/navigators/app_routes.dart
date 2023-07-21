@@ -101,9 +101,10 @@ abstract class Routes {
   static const createMrs = _Paths.createMrs;
   static const incidentRiskType = _Paths.incidentRiskType;
   static const escalationMatrixListWeb = _Paths.escalationMatrixListWeb;
-  static const addEscalatiomMatrixContentWeb = _Paths.addEscalatiomMatrixContentWeb;
-  static const viewEscalatiomMatrixContentWeb = _Paths.viewEscalatiomMatrixContentWeb;
-
+  static const addEscalatiomMatrixContentWeb =
+      _Paths.addEscalatiomMatrixContentWeb;
+  static const viewEscalatiomMatrixContentWeb =
+      _Paths.viewEscalatiomMatrixContentWeb;
 
   static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
   static const inventoryCategory = _Paths.inventoryCategory;
@@ -112,6 +113,7 @@ abstract class Routes {
   static const editMrs = _Paths.editMrs;
   static const moduleCleaningDashboard = _Paths.moduleCleaningDashboard;
   static const moduleCleaningPlanning = _Paths.moduleCleaningPlanning;
+  static const moduleCleaningListPlan = _Paths.moduleCleaningListPlan;
 }
 
 abstract class _Paths {
@@ -211,14 +213,13 @@ abstract class _Paths {
   static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
   static const viewEscalatiomMatrixContentWeb = '/view-escalation-matrix';
 
-
-
   static const incident_risk_dashboard = '/incident-risk-dashboard';
   static const inventoryCategory = '/inventoryCategory';
   static const insuranceProvider = '/insuranceProvider';
   static const editMrs = '/editMrs';
   static const moduleCleaningDashboard = '/module-cleaning-dashboard';
   static const moduleCleaningPlanning = '/module-cleaning-planning';
+  static const moduleCleaningListPlan = '/module-cleaning-list-plan';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

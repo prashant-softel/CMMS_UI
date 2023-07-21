@@ -20,6 +20,8 @@ class LoginCustomTextfield extends GetView {
   List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
 
+  double? width;
+
   LoginCustomTextfield({
     Key? key,
     this.ishint,
@@ -35,11 +37,13 @@ class LoginCustomTextfield extends GetView {
     this.inputFormatters,
     this.ontap,
     this.readOnly = false,
+    this.width,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.049,
+      height: 35,
+      width: width,
       child: TextFormField(
         readOnly: readOnly,
         // keyboardType:keyboardType,

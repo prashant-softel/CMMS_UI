@@ -86,7 +86,7 @@ class ModuleCleaningDashboardScreen
                             tittle: "Planning",
                             ontap: () {
                               Get.toNamed(
-                                Routes.moduleCleaningPlanning,
+                                Routes.moduleCleaningListPlan,
                               );
                             }),
                         //  if (Responsive.isDesktop(context))
