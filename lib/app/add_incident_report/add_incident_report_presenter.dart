@@ -2,6 +2,7 @@
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
@@ -126,6 +127,17 @@ class AddIncidentReportPresenter {
       categoryIds: categoryIds,
     );
   }
+
+  Future<List<HistoryModel>?> getIncidentReportHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await incidentReportUsecase.getIncidentReportHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
 
 
 

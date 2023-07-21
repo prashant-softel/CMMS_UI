@@ -149,73 +149,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                             //   },
                             // ),
 
-                              ///Date & Time Range functionality
-                                Container(
-                                  height: 30,
-                                  child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () async {
-                                      await Get.dialog(
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 350,
-                                              right: 350,
-                                              top: 200,
-                                              bottom: 200),
-                                          child: Container(
-                                            color: ColorValues.whiteColor,
-                                            child: SfDateRangePicker(
-                                              cancelText: "CANCEL",
-                                              confirmText: "Ok",
-                                              showActionButtons: true,
-                                              initialSelectedRange:
-                                                  PickerDateRange(
-                                                controller.fromDate.value,
-                                                controller.toDate.value,
-                                              ),
-                                              selectionMode:
-                                                  DateRangePickerSelectionMode
-                                                      .range,
-                                              monthCellStyle:
-                                                  DateRangePickerMonthCellStyle(
-                                                todayCellDecoration:
-                                                    BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: ColorValues
-                                                            .appDarkBlueColor),
-                                              ),
-                                              onSubmit: (value) {
-                                                PickerDateRange? data =
-                                                    value as PickerDateRange;
-
-                                                var pickUpDate = DateTime.parse(
-                                                    data.startDate.toString());
-                                                controller.fromDate.value =
-                                                    pickUpDate;
-                                                var dropDate = DateTime.parse(
-                                                    data.endDate.toString());
-                                                dropDate != null
-                                                    ? controller.toDate.value =
-                                                        dropDate
-                                                    : controller.toDate.value =
-                                                        pickUpDate;
-                                                Get.back();
-                                                controller
-                                                    .getEscalationMatrixListByDate();
-                                              },
-                                              onCancel: () => Get.back(),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    text:
-                                        'From Date: ${controller.formattedFromdate.toString()}  To Date: ${controller.formattedTodate.toString()}',
-                                  ),
-                                ),
-
-
+                             
                             Dimens.boxWidth10,
                             ActionButton(
                               icon: Icons.add,
