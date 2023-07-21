@@ -61,8 +61,6 @@ class IncidentReportListController extends GetxController {
 
 
 
-//Incident Report List
-  var incidentReportList = <IncidentReportListModel>[];
   
   
 
@@ -84,7 +82,16 @@ class IncidentReportListController extends GetxController {
   final parentEquipmentTextController = TextEditingController();
 
 ///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel>[].obs;
+  // RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel?>[].obs;
+  RxList<IncidentReportListModel?> incidentReportList = <IncidentReportListModel?>[].obs;
+  RxList<IncidentReportListModel?> filteredData = <IncidentReportListModel>[].obs;
+
+    IncidentReportListModel? incidentReportModelList;
+  RxList<String> incidentListTableColumns = <String>[].obs;
+  
+//Incident Report List
+  // var incidentReportList = <IncidentReportListModel>[];
+
 
 
   var selectedBlock = BlockModel();
@@ -168,6 +175,8 @@ class IncidentReportListController extends GetxController {
     }
   }
 
+ 
+
   
   Future<void> getuserAccessData() async {
     final _userAccessList = await incidentReportPresenter.getUserAccessList();
@@ -208,28 +217,52 @@ class IncidentReportListController extends GetxController {
   }
 
   
+ void search(String keyword) {
+    if (keyword.isEmpty) {
+      incidentReportList.value = filteredData;
+      return;
+    }
 
+    incidentReportList.value = filteredData
+        .where((item) =>
+            item!.description!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
-    incidentReportModelList.value = <IncidentReportListModel>[];
+    incidentReportList.value = <IncidentReportListModel>[];
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading, 
-        start_date:  startDate, //// "2020-01-01",
-        end_date:    endDate,  ////  "2023-12-31",
+        start_date:  "2020-01-01", //// startDate,
+        end_date:    "2023-12-31",  ////  endDate,
         facility_id: facilityId
         );
         print('incidentReportFacilityId$facilityId');
     print('Incident Report List:$list');
     for (var incident_list in list) {
-      incidentReportModelList.add(incident_list);
+      incidentReportList.add(incident_list);
     }
-    incidentReportList = list;
-    paginationIncidentReportController = PaginationController(
+
+    if(list != null){
+      incidentReportList.value = list;
+      filteredData.value = incidentReportList.value;
+      paginationIncidentReportController = PaginationController(
       rowCount: incidentReportList.length,
       rowsPerPage: 10,
     );
+     if (filteredData != null && filteredData.isNotEmpty) {
+        incidentReportModelList = filteredData[0];
+        var incidentListJson = incidentReportModelList?.toJson();
+        incidentListTableColumns.value = <String>[];
+        for (var key in incidentListJson?.keys.toList() ?? []) {
+          incidentListTableColumns.add(key);
+        }
+      }
+
+    }
+   
     update(['incident_report_list']);
   }
 

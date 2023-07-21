@@ -51,6 +51,29 @@ class ViewIncidentReportUsecase {
     );
   }
 
+   Future<void> incidentReportRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await _repository.incidentReportRejectButton(
+      comment,
+      id,
+      isLoading,
+    );
+  }
+
+  Future<void> incidentReportApproveButton({
+    String? incidentId,
+    bool? isLoading,
+  }) async {
+    await _repository.incidentReportApproveButton(
+      incidentId,
+      isLoading,
+    );
+  }
+
+
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,  
     required int id,

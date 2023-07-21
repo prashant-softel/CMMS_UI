@@ -38,6 +38,7 @@ class DropdownWidget extends StatelessWidget {
       () => //
           Container(
         width: width,
+        height: MediaQuery.of(context).size.height * 0.050,
         margin: margin,
         decoration: BoxDecoration(
           boxShadow: [

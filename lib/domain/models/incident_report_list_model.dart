@@ -20,6 +20,7 @@ class IncidentReportListModel {
     this.risk_level,
     this.approved_by,
     this.approved_at,
+    this.reported_at,
     this.reported_by_name,
     this.created_at,
     this.status,
@@ -33,6 +34,7 @@ class IncidentReportListModel {
   int? risk_level;
   String? approved_by;
   DateTime? approved_at;
+  DateTime? reported_at;
   String? reported_by_name;
   DateTime? created_at;
   String? status;
@@ -49,7 +51,10 @@ class IncidentReportListModel {
         approved_at: json['approved_at'] == null
           ? null
           : DateTime.parse(json['approved_at'] as String),
-        reported_by_name: json["reported_by_name"] ?? '',
+        reported_at: json['reported_at'] == null
+        ? null
+        : DateTime.parse(json['reported_at'] as String),
+        reported_by_name: json["reported_by_name"] ?? null,
         created_at: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

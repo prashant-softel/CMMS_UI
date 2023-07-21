@@ -173,169 +173,472 @@ class AddEscalationMatrixContentWeb
                                                 ],
                                               ),
                                               Dimens.boxHeight50,
+                                               ////Supplier Actions
+                              // SizedBox(
+                              //   height: 400,
+                              //   width: MediaQuery.of(context).size.width / 1.2,
+                              //   child: Center(
+                              //     child: Container(
+                              //       margin: Dimens.edgeInsets16,
+                              //       height: Get.height,
+                              //       decoration: BoxDecoration(
+                              //         border: Border.all(
+                              //             color: Colors.grey.withOpacity(.3)),
+                              //       ),
+                              //       constraints: BoxConstraints(
+                              //         maxWidth: 1100,
+                              //       ),
+                              //       child: SingleChildScrollView(
+                              //         child: Column(
+                              //           children: [
+                              //             CustomAppBar(
+                              //               title:
+                              //                   'Schedule of Supplier Actions'
+                              //                       .tr,
+                              //               // action: ActionButton(
+                              //               //   icon: Icons.add,
+                              //               //   label: 'Add',
+                              //               //   // onPress:
+                              //               //   //     () async {},
+                              //               //   color: Colors.blue,
+                              //               //   onPressed: () {
+                              //               //     controller
+                              //               //         .updateSupplierActionText(
+                              //               //       controller
+                              //               //           .supplierActionTextFieldController
+                              //               //           .text,
+                              //               //       controller
+                              //               //           .supplierActionDateTimeCtrlrWeb
+                              //               //           .text,
+                              //               //       // controller.isCheckedRequire
+                              //               //       //     .value
+                              //               //     );
+                              //               //     controller
+                              //               //         .supplierActionTextFieldController
+                              //               //         .clear();
+                              //               //     controller
+                              //               //         .supplierActionDateTimeCtrlrWeb
+                              //               //         .clear();
+                              //               //     // controller.isCheckedRequire
+                              //               //     //     .value = false;
+                              //               //   },
+                              //               // ),
+                              //             ),
+                              //             Dimens.boxHeight10,
+                              //             Obx(
+                              //               () => Wrap(children: [
+                              //                 Row(children: [
+                              //                   SizedBox(
+                              //                     width: 10,
+                              //                   ),
+                              //                   Text('#'),
+                              //                   SizedBox(
+                              //                     width: 25,
+                              //                   ),
+                              //                   Text('Supplier Action'),
+                              //                   SizedBox(
+                              //                     width: 160,
+                              //                   ),
+                              //                   Text('Required'),
+                              //                   SizedBox(
+                              //                     width: 170,
+                              //                   ),
+                              //                   Text('Required by Date'),
+                              //                   SizedBox(
+                              //                     width: 150,
+                              //                   ),
+                              //                   Text('Action'),
+                              //                 ]),
+                              //                 SizedBox(
+                              //                   height: 20,
+                              //                 ),
+                              //                 Column(
+                              //                   children: []..addAll(controller
+                              //                       .supplierActions
+                              //                       .map((element) => Row(
+                              //                             children: [
+                              //                               // Text('${element.name}'),
+                              //                               // Text('${element.required_by_date}')
+
+                              //                               supplierActionData(
+                              //                                   '${element.srNumber}',
+                              //                                   '${element.name}',
+                              //                                   context,
+                              //                                   0,
+                              //                                   '${element.required_by_date}'),
+                              //                             ],
+                              //                           ))),
+                              //                 ),
+
+                              //                 // supplierActionData(
+                              //                 //     '2',
+                              //                 //     'Material Replinishment',
+                              //                 //     context,
+                              //                 //     1),
+                              //                 // supplierActionData(
+                              //                 //     '3',
+                              //                 //     'Preventive Action Plan',
+                              //                 //     context,
+                              //                 //     2),
+                              //                 // supplierActionData(
+                              //                 //     '4',
+                              //                 //     'Claim Closure Date',
+                              //                 //     context,
+                              //                 //     3)
+                              //                 Column(
+                              //                   children: [
+                              //                     SizedBox(
+                              //                         width:
+                              //                             MediaQuery.of(context)
+                              //                                     .size
+                              //                                     .width /
+                              //                                 3,
+                              //                         child: CustomTextField(
+                              //                           textController: controller
+                              //                               .supplierActionSrNumberTextFieldController,
+                              //                           label:
+                              //                               '  Serial Number',
+                              //                         )),
+                              //                     SizedBox(
+                              //                         width:
+                              //                             MediaQuery.of(context)
+                              //                                     .size
+                              //                                     .width /
+                              //                                 3,
+                              //                         child: CustomTextField(
+                              //                           textController: controller
+                              //                               .supplierActionTextFieldController,
+                              //                           label:
+                              //                               'Supplier Action',
+                              //                         )),
+
+                              //                     ///Checkbox
+                              //                     Row(
+                              //                       children: [
+                              //                         Padding(
+                              //                           padding:
+                              //                               const EdgeInsets
+                              //                                       .only(
+                              //                                   left: 340),
+                              //                           child: Text(
+                              //                             'Required',
+                              //                             style: TextStyle(
+                              //                                 fontSize: 15),
+                              //                           ),
+                              //                         ),
+                              //                         SizedBox(
+                              //                           width: 70,
+                              //                         ),
+                              //                         Checkbox(
+                              //                             value: controller
+                              //                                 .isCheckedRequire
+                              //                                 .value,
+                              //                             onChanged:
+                              //                                 (bool? value) {
+                              //                               controller
+                              //                                   .requireToggleCheckbox();
+                              //                             }),
+                              //                       ],
+                              //                     ),
+
+                              //                     SizedBox(
+                              //                       width:
+                              //                           MediaQuery.of(context)
+                              //                                   .size
+                              //                                   .width /
+                              //                               3,
+                              //                       child: CustomTextField(
+                              //                         label: ' Required Date ',
+                              //                         suffixIcon: Icon(
+                              //                           Icons.calendar_month,
+                              //                         ),
+                              //                         // textController:
+                              //                         //     controller.categoryTextController,
+                              //                         // textController: controller
+                              //                         //     .supplierActionDateTimeCtrlrWeb,
+
+                              //                         // onTap: () {
+                              //                         //   pickRequiredSupplierDate_web(
+                              //                         //       context);
+                              //                         // },
+                              //                       ),
+                              //                     ),
+                              //                     // ActionButton(
+                              //                     //   icon: Icons.add,
+                              //                     //   label: 'Add',
+                              //                     //   // onPress:
+                              //                     //   //     () async {},
+                              //                     //   color: Colors.blue,
+                              //                     //   onPressed: () {
+                              //                     //     controller
+                              //                     //         .updateSupplierActionText(
+                              //                     //       controller
+                              //                     //           .supplierActionTextFieldController
+                              //                     //           .text,
+                              //                     //       controller
+                              //                     //           .supplierActionDateTimeCtrlrWeb
+                              //                     //           .text,
+                              //                     //       controller
+                              //                     //           .supplierActionSrNumberTextFieldController
+                              //                     //           .text,
+
+                              //                     //       // controller.isCheckedRequire
+                              //                     //       //     .value
+                              //                     //     );
+                              //                     //     controller
+                              //                     //         .supplierActionSrNumberTextFieldController
+                              //                     //         .clear();
+                              //                     //     controller
+                              //                     //         .supplierActionTextFieldController
+                              //                     //         .clear();
+                              //                     //     controller
+                              //                     //         .supplierActionDateTimeCtrlrWeb
+                              //                     //         .clear();
+                              //                     //     // controller.isCheckedRequire
+                              //                     //     //     .value = false;
+                              //                     //   },
+                              //                     // ),
+                              //                     ElevatedButton(
+                              //                       child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
+                              //                       onPressed: () {
+                              //                         controller
+                              //                             .updateSupplierActionText(
+                              //                           controller
+                              //                               .supplierActionTextFieldController
+                              //                               .text,
+                              //                           // controller
+                              //                           //     .supplierActionDateTimeCtrlrWeb
+                              //                           //     .text,
+                              //                           controller
+                              //                               .supplierActionSrNumberTextFieldController
+                              //                               .text,
+
+                              //                           // controller.isCheckedRequire
+                              //                           //     .value
+                              //                         );
+                              //                         controller
+                              //                             .supplierActionSrNumberTextFieldController
+                              //                             .clear();
+                              //                         controller
+                              //                             .supplierActionTextFieldController
+                              //                             .clear();
+                              //                         // controller
+                              //                         //     .supplierActionDateTimeCtrlrWeb
+                              //                         //     .clear();
+                              //                         // controller.isCheckedRequire
+                              //                         //     .value = false;
+                              //                       },
+                              //                     )
+                              //                   ],
+                              //                 ),
+                              //               ]),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+
 
                                               ///Escalation Matrix Roles
-                                              Container(
-                                                height: 350,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.5,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: ColorValues
-                                                        .lightGreyColorWithOpacity35,
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .appBlueBackgroundColor,
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 20,
-                                                          vertical: 5),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                              "Escalation Levels"),
-                                                          Spacer(),
-                                                          GestureDetector(
-                                                              onTap: () {
-                                                                controller
-                                                                    .addRowItem();
-                                                              },
-                                                              child: Icon(Icons
-                                                                  .exposure_plus_1)),
+                                              Obx(
+                                                ()=> Wrap(
+                                                  children: 
+                                                    [Container(
+                                                      height: 350,
+                                                      width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          1.5,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
                                                         ],
                                                       ),
-                                                    ),
-                                                    // Column(
-                                                    //     children: []..addAll(
-                                                    //           controller.rowItem.value.map((e) {
-                                                    //         return Text(jsonEncode(e));
-                                                    //       }))),
-                                                    // Text(jsonEncode(
-                                                    //     controller.dropdownMapperData)),
-                                                    Container(
-                                                      height: 300,
-                                                      child:
-                                                          ScrollableTableView(
-                                                        columns: [
-                                                          "Duration (Days)",
-                                                          "Escalation Roles and Levels",
-                                                        ].map((column) {
-                                                          return TableViewColumn(
-                                                            label: column,
-                                                            minWidth:
-                                                                Get.width *
-                                                                    0.35,
-                                                            height:
-                                                                Get.height / 2,
-                                                          );
-                                                        }).toList(),
-                                                        rows: controller
-                                                            .rowItem.value
-                                                            .map((record) {
-                                                          return TableViewRow(
-                                                            height: 200,
-                                                            cells: record
-                                                                .map((mapData) {
-                                                              return TableViewCell(
-                                                                child: (mapData[
-                                                                            'key'] ==
-                                                                        "Duration (Days)")
-                                                                    ? Padding(
-                                                                        padding: const EdgeInsets.only(
-                                                                            left:
-                                                                                20,
-                                                                            right:
-                                                                                20,
-                                                                            top:
-                                                                                10),
-                                                                        child:
-                                                                            Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.center,
-                                                                          children: [
-                                                                            SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: DropdownWidget(
-                                                                                dropdownList: controller.typePermitList,
-                                                                                isValueSelected: controller.isTypePermitSelected.value,
-                                                                                selectedValue: controller.selectedTypePermit.value,
-                                                                                onValueChanged: controller.onValueChanged,
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 20,
+                                                                vertical: 5),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Escalation Levels"),
+                                                                Spacer(),
+                                                                GestureDetector(
+                                                                    onTap: () {
+                                                                      controller
+                                                                         .addRowItem();
+                                                                    },
+                                                                    child: Icon(Icons
+                                                                        .exposure_plus_1)),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Column(
+                                                          //     children: []..addAll(
+                                                          //           controller.rowItem.value.map((e) {
+                                                          //         return Text(jsonEncode(e));
+                                                          //       }))),
+                                                          // Text(jsonEncode(
+                                                          //     controller.dropdownMapperData)),
+                                                          Container(
+                                                            height: 300,
+                                                            child:
+                                                                ScrollableTableView(
+                                                              columns: [
+                                                                "Duration (Days)",
+                                                                "Escalation Roles and Levels",
+                                                              ].map((column) {
+                                                                return TableViewColumn(
+                                                                  label: column,
+                                                                  minWidth:
+                                                                      Get.width *
+                                                                          0.35,
+                                                                  height:
+                                                                      Get.height / 2,
+                                                                );
+                                                              }).toList(),
+                                                              rows: controller
+                                                                  .rowItem.value
+                                                                  .map((record) {
+                                                                return TableViewRow(
+                                                                  height: 200,
+                                                                  cells: record
+                                                                      .map((mapData) {
+                                                                    return TableViewCell(
+                                                                      child:
+                                                  //                      Column(
+                                                  //                       children: [
+                                                  //                          SizedBox(
+                                                  //     width:
+                                                  //         MediaQuery.of(context)
+                                                  //                 .size
+                                                  //                 .width /
+                                                  //             3,
+                                                  //     child: CustomTextField(
+                                                  //       textController: controller
+                                                  //           .supplierActionSrNumberTextFieldController,
+                                                  //       label:
+                                                  //           '  Serial Number',
+                                                  //     )),
+                                                  // SizedBox(
+                                                  //     width:
+                                                  //         MediaQuery.of(context)
+                                                  //                 .size
+                                                  //                 .width /
+                                                  //             3,
+                                                  //     child: CustomTextField(
+                                                  //       textController: controller
+                                                  //           .supplierActionTextFieldController,
+                                                  //       label:
+                                                  //           'Supplier Action',
+                                                  //     )),
+
+                                                  //                       ],
+                                                  //                     )
+                                                                      (mapData[
+                                                                                  'key'] ==
+                                                                              "Duration (Days)")
+                                                                          ? Padding(
+                                                                              padding: const EdgeInsets.only(
+                                                                                  left:
+                                                                                      20,
+                                                                                  right:
+                                                                                      20,
+                                                                                  top:
+                                                                                      10),
+                                                                              child:
+                                                                                  Column(
+                                                                                mainAxisAlignment:
+                                                                                    MainAxisAlignment.center,
+                                                                                crossAxisAlignment:
+                                                                                    CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  SizedBox(
+                                                                                    width: MediaQuery.of(context).size.width / 5,
+                                                                                    child: DropdownWidget(
+                                                                                      dropdownList: controller.typePermitList,
+                                                                                      isValueSelected: controller.isTypePermitSelected.value,
+                                                                                      selectedValue: controller.selectedTypePermit.value,
+                                                                                      onValueChanged: controller.onValueChanged,
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height: 5,
+                                                                                  ),
+                                                                                ],
                                                                               ),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              height: 5,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      )
-                                                                    : (mapData['key'] ==
-                                                                            "Escalation Roles and Levels")
-                                                                        ? SizedBox(
-                                                                            width: MediaQuery.of(context).size.width / 5,
-                                                                            child:
-                                                                                DropdownWidget(
-                                                                              dropdownList: controller.typePermitList,
-                                                                              isValueSelected: controller.isTypePermitSelected.value,
-                                                                              selectedValue: controller.selectedTypePermit.value,
-                                                                              onValueChanged: controller.onValueChanged,
-                                                                            ),
-                                                                          )
-                                                                        : Text(mapData['key'] ??
-                                                                            ''),
-                                                                // (mapData['key'] == "Order") || (mapData['key'] == "Cost")
-                                                                //     ? Padding(
-                                                                //         padding: const EdgeInsets.all(8.0),
-                                                                //         child: Container(
-                                                                //             width: (Get.width * .4),
-                                                                //             // padding: EdgeInsets.all(value),
-                                                                //             decoration: BoxDecoration(
-                                                                //               boxShadow: [
-                                                                //                 BoxShadow(
-                                                                //                   color: Colors.black26,
-                                                                //                   offset: const Offset(
-                                                                //                     5.0,
-                                                                //                     5.0,
-                                                                //                   ),
-                                                                //                   blurRadius: 5.0,
-                                                                //                   spreadRadius: 1.0,
-                                                                //                 ),
-                                                                //               ],
-                                                                //               color: ColorValues.whiteColor,
-                                                                //               borderRadius: BorderRadius.circular(5),
-                                                                //             ),
-                                                                //             child: LoginCustomTextfield(
-                                                                //               keyboardType: TextInputType.number,
-                                                                //               inputFormatters: <TextInputFormatter>[
-                                                                //                 FilteringTextInputFormatter.digitsOnly
-                                                                //               ],
-                                                                //               maxLine: 1,
-                                                                //               textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                //               onChanged: (txt) {
-                                                                //                 mapData["value"] = txt;
-                                                                //               },
-                                                                //             )),
-                                                                //       )
-                                                                //     : Text(mapData['key'] ?? ''),
-                                                              );
-                                                            }).toList(),
-                                                          );
-                                                        }).toList(),
+                                                                            )
+                                                                          : (mapData['key'] ==
+                                                                                  "Escalation Roles and Levels")
+                                                                              ? SizedBox(
+                                                                                  width: MediaQuery.of(context).size.width / 5,
+                                                                                  child:
+                                                                                      DropdownWidget(
+                                                                                    dropdownList: controller.typePermitList,
+                                                                                    isValueSelected: controller.isTypePermitSelected.value,
+                                                                                    selectedValue: controller.selectedTypePermit.value,
+                                                                                    onValueChanged: controller.onValueChanged,
+                                                                                  ),
+                                                                                )
+                                                                              : Text(mapData['key'] ??
+                                                                                  ''),
+                                                                      // (mapData['key'] == "Order") || (mapData['key'] == "Cost")
+                                                                      //     ? Padding(
+                                                                      //         padding: const EdgeInsets.all(8.0),
+                                                                      //         child: Container(
+                                                                      //             width: (Get.width * .4),
+                                                                      //             // padding: EdgeInsets.all(value),
+                                                                      //             decoration: BoxDecoration(
+                                                                      //               boxShadow: [
+                                                                      //                 BoxShadow(
+                                                                      //                   color: Colors.black26,
+                                                                      //                   offset: const Offset(
+                                                                      //                     5.0,
+                                                                      //                     5.0,
+                                                                      //                   ),
+                                                                      //                   blurRadius: 5.0,
+                                                                      //                   spreadRadius: 1.0,
+                                                                      //                 ),
+                                                                      //               ],
+                                                                      //               color: ColorValues.whiteColor,
+                                                                      //               borderRadius: BorderRadius.circular(5),
+                                                                      //             ),
+                                                                      //             child: LoginCustomTextfield(
+                                                                      //               keyboardType: TextInputType.number,
+                                                                      //               inputFormatters: <TextInputFormatter>[
+                                                                      //                 FilteringTextInputFormatter.digitsOnly
+                                                                      //               ],
+                                                                      //               maxLine: 1,
+                                                                      //               textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                      //               onChanged: (txt) {
+                                                                      //                 mapData["value"] = txt;
+                                                                      //               },
+                                                                      //             )),
+                                                                      //       )
+                                                                      //     : Text(mapData['key'] ?? ''),
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              }).toList(),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                   ],
@@ -419,6 +722,61 @@ class AddEscalationMatrixContentWeb
 
         // ),
       );
+
+       supplierActionData(String? title, String? title2, BuildContext context,
+      int? position, String? date) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 1.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text('$title'),
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 5,
+            child: Container(
+                child: Container(
+              height: 30,
+              decoration:
+                  BoxDecoration(color: Color.fromARGB(255, 206, 204, 204)),
+              child: Center(child: Text('$title2')),
+            )),
+          ),
+          Checkbox(
+            // value: controller.isCheckedDataRequire.value,
+            value: true,
+            // onChanged: (bool? value) {
+            //   // this.valuefirst = value!;
+            //   // controller.isCheckedDataRequire.value = value!;
+            // }
+            onChanged: null,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 3,
+            child: CustomTextField(
+              label: '',
+              hintText: '$date',
+              readOnly: true,
+            ),
+          ),
+          // position == 1 || position == 2 || position == 3
+          // ?
+          // ActionButton(
+          //   icon: Icons.remove,
+          //   label: 'Delete',
+          //   // onPress:
+          //   //     () async {},
+          //   color: Colors.red,
+          //   onPressed: () {
+          //     controller.removeRow(index: 0);
+          //   },
+          // )
+
+          // : Text('data')
+        ],
+      ),
+    );
+  }
+
 
   ///Below All For WEB
   ///

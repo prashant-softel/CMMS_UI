@@ -72,7 +72,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        _inventoryList(
+                        _incidentReportList(
                             tittle: "Incident Report List",
                             ontap: () {
                               Get.toNamed(
@@ -80,28 +80,81 @@ class IncidentScreen extends GetView<IncidentReportController> {
                               );
                               //  controller.createChecklist();
                             }),
-                        _inventoryList(
-                            tittle: "Incident Risk Type",
+                        _incidentReportList(
+                            tittle: "Add Incident Report",
                             ontap: () {
                               Get.toNamed(
-                                Routes.incidentRiskType,
+                                Routes.addIncidentReportContentWeb,
                               );
                             }),
-                        // _inventoryList(
+                        // _incidentReportList(
                         //     tittle: "Inventory Category",
                         //     ontap: () {
                         //       Get.toNamed(
                         //         Routes.assetTypeListScreen,
                         //       );
                         //     }),
-                        // _inventoryList(
+                        // _incidentReportList(
                         //     tittle: "Inventory Type",
                         //     ontap: () {
                         //       Get.toNamed(
                         //       Routes.inventoryTypeListScreen,
                         //     );
                         //   }),
-                        // _inventoryList(
+                        // _incidentReportList(
+                        //     tittle: "Inventory Status",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.inventoryStatusListScreen,
+                        //       );
+                        //     }),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "MASTERS",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 159, 156, 156),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                     GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                       
+                        _incidentReportList(
+                            tittle: "Incident Risk Type",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.incidentRiskType,
+                              );
+                            }),
+                        // _incidentReportList(
+                        //     tittle: "Inventory Category",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.assetTypeListScreen,
+                        //       );
+                        //     }),
+                        // _incidentReportList(
+                        //     tittle: "Inventory Type",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //       Routes.inventoryTypeListScreen,
+                        //     );
+                        //   }),
+                        // _incidentReportList(
                         //     tittle: "Inventory Status",
                         //     ontap: () {
                         //       Get.toNamed(
@@ -118,45 +171,48 @@ class IncidentScreen extends GetView<IncidentReportController> {
     );
   }
 
-  _inventoryList({required String tittle, Function()? ontap}) {
-    return GestureDetector(
-      onTap: ontap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorValues.appLightBlueColor,
-          borderRadius: BorderRadius.circular(2),
-        ),
-        padding: EdgeInsets.all(9),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                tittle,
-                style: TextStyle(
-                    color: ColorValues.whiteColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 243, 245, 245),
-                border: Border.all(
-                  color: ColorValues.whiteColor,
+  _incidentReportList({required String tittle, Function()? ontap}) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: ontap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorValues.appLightBlueColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+          padding: EdgeInsets.all(9),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  tittle,
+                  style: TextStyle(
+                      color: ColorValues.whiteColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
                 ),
-                borderRadius: BorderRadius.circular(5),
               ),
-              child: Icon(
-                Icons.format_list_bulleted,
-                size: 30,
-                color: ColorValues.appLightBlueColor,
+              SizedBox(
+                height: 5,
               ),
-            ),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 243, 245, 245),
+                  border: Border.all(
+                    color: ColorValues.whiteColor,
+                  ),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Icon(
+                  Icons.format_list_bulleted,
+                  size: 30,
+                  color: ColorValues.appLightBlueColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
