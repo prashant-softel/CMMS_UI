@@ -132,8 +132,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       purchaseDateTc.text =
           getPurchaseDetailsByIDModel.value?.purchaseDate ?? "";
       poDateDateTc.text = getPurchaseDetailsByIDModel.value?.po_date ?? "";
-      receivedDateTc.text =
-          getPurchaseDetailsByIDModel.value?.received_on ?? "";
+      receivedDateTc.text = getPurchaseDetailsByIDModel.value?.receivedAt ?? "";
       challanNoCtrlr.text = getPurchaseDetailsByIDModel.value?.challan_no ?? "";
       pOCtrlr.text = getPurchaseDetailsByIDModel.value?.po_no ?? "";
       frieghtToPayPaidCtrlr.text =
