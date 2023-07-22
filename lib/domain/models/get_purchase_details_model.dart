@@ -14,8 +14,10 @@ class GetPurchaseDetailsByIDModel {
   int? asset_type_ID;
   int? vendorId;
   int? status;
-  String? statusShort;
-  double? acceptedQty;
+  String? status_short;
+  String? status_long;
+  String? receivedAt;
+  double? accepted_qty;
   int? currencyID;
   String? currency;
   int? amount;
@@ -25,11 +27,11 @@ class GetPurchaseDetailsByIDModel {
   String? condition_pkg_received;
   String? lr_no;
   String? no_pkg_received;
-  dynamic? received_on;
+
   String? freight;
   String? vendor_name;
 
-  dynamic? po_date;
+  String? po_date;
   String? po_no;
   String? challan_date;
   String? challan_no;
@@ -44,8 +46,10 @@ class GetPurchaseDetailsByIDModel {
     this.asset_type_ID,
     this.vendorId,
     this.status,
-    this.statusShort,
-    this.acceptedQty,
+    this.status_short,
+    this.status_long,
+    this.accepted_qty,
+    this.receivedAt,
     this.currencyID,
     this.currency,
     this.amount,
@@ -55,7 +59,6 @@ class GetPurchaseDetailsByIDModel {
     this.condition_pkg_received,
     this.lr_no,
     this.no_pkg_received,
-    this.received_on,
     this.freight,
     this.po_date,
     this.po_no,
@@ -77,8 +80,10 @@ class GetPurchaseDetailsByIDModel {
         asset_type_ID: parsedJson["asset_type_ID"] ?? "",
         vendorId: parsedJson["vendorID"] ?? "",
         status: parsedJson["status"] ?? "",
-        statusShort: parsedJson["status_short"] ?? "",
-        acceptedQty: parsedJson["accepted_qty"] ?? "",
+        status_short: parsedJson["status_short"] ?? "",
+        status_long: parsedJson["status_long"] ?? "",
+        accepted_qty: parsedJson["accepted_qty"] ?? "",
+        receivedAt: parsedJson["receivedAt"] ?? "",
         currencyID: parsedJson["currencyID"] ?? "",
         currency: parsedJson["currency"] ?? "",
         amount: parsedJson["amount"] ?? "",
@@ -88,7 +93,6 @@ class GetPurchaseDetailsByIDModel {
         condition_pkg_received: parsedJson["condition_pkg_received"] ?? "",
         lr_no: parsedJson["lr_no"] ?? "",
         no_pkg_received: parsedJson["no_pkg_received"] ?? "",
-        received_on: Utility.getFormatedyearMonthDay(parsedJson['received_on']),
         freight: parsedJson["freight"] ?? "",
         po_date: Utility.getFormatedyearMonthDay(parsedJson['po_date']),
         po_no: parsedJson["po_no"] ?? "",
@@ -110,8 +114,10 @@ class GetPurchaseDetailsByIDModel {
         "asset_type_ID": asset_type_ID,
         "vendorId": vendorId,
         "status": status,
-        "status_short": statusShort,
-        "accepted_qty": acceptedQty,
+        "status_short": status_short,
+        "status_long": status_long,
+        "accepted_qty": accepted_qty,
+        "receivedAt": receivedAt,
         "currencyID": currencyID,
         "currency": currency,
         "amount": amount,
@@ -121,7 +127,6 @@ class GetPurchaseDetailsByIDModel {
         "condition_pkg_received": condition_pkg_received,
         "lr_no": lr_no,
         "no_pkg_received": no_pkg_received,
-        "received_on": received_on,
         "freight": freight,
         "po_date": po_date,
         "po_no": po_no,

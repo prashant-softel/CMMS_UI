@@ -303,9 +303,9 @@ class StockManagementGoodsOrdersWeb
                                     (index) {
                                       return [
                                         '${controller.goodsOrdersList![index]?.id}',
-                                        '${controller.goodsOrdersList![index]?.generatedBy}',
+                                        '${controller.goodsOrdersList![index]?.approvedBy}',
                                         '${controller.goodsOrdersList![index]?.purchaseDate}',
-                                        '${controller.goodsOrdersList![index]?.cost}',
+                                        '${controller.goodsOrdersList![index]?.asset_code}',
                                         '${controller.goodsOrdersList![index]?.status}',
                                         'Action',
                                       ];

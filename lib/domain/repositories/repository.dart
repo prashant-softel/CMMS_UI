@@ -507,6 +507,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " Goods Order Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -5425,9 +5428,8 @@ class Repository {
       return [];
     }
   }
-  
-  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
 
+  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRiskType(
@@ -5767,6 +5769,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> rejectMrs({bool? isLoading, rejecttoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);

@@ -121,7 +121,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.assetItem_Name}'},
-          {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {'key': "Paid_By", "value": ''},
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
         ]);
@@ -132,8 +132,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       purchaseDateTc.text =
           getPurchaseDetailsByIDModel.value?.purchaseDate ?? "";
       poDateDateTc.text = getPurchaseDetailsByIDModel.value?.po_date ?? "";
-      receivedDateTc.text =
-          getPurchaseDetailsByIDModel.value?.received_on ?? "";
+      receivedDateTc.text = getPurchaseDetailsByIDModel.value?.receivedAt ?? "";
       challanNoCtrlr.text = getPurchaseDetailsByIDModel.value?.challan_no ?? "";
       pOCtrlr.text = getPurchaseDetailsByIDModel.value?.po_no ?? "";
       frieghtToPayPaidCtrlr.text =

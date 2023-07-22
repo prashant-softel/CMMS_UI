@@ -17,7 +17,7 @@ class GoodsOrdersListModel {
   int? assetItemID;
   dynamic serial_number;
   int? location_ID;
-  dynamic cost;
+  // dynamic cost;
   dynamic ordered_qty;
   String? rejectedRemark;
   int? facility_id;
@@ -32,7 +32,7 @@ class GoodsOrdersListModel {
   dynamic accepted_qty;
   String? received_on;
   String? approvedOn;
-  String? generatedBy;
+  // String? generatedBy;
   String? receivedBy;
   String? approvedBy;
   dynamic vendor_name;
@@ -49,7 +49,7 @@ class GoodsOrdersListModel {
     this.assetItemID,
     this.serial_number,
     this.location_ID,
-    this.cost,
+    // this.cost,
     this.ordered_qty,
     this.rejectedRemark,
     this.facility_id,
@@ -64,7 +64,7 @@ class GoodsOrdersListModel {
     this.accepted_qty,
     this.received_on,
     this.approvedOn,
-    this.generatedBy,
+    // this.generatedBy,
     this.receivedBy,
     this.approvedBy,
     this.vendor_name,
@@ -84,7 +84,7 @@ class GoodsOrdersListModel {
       assetItemID: json['assetItemID'],
       serial_number: json['serial_number'],
       location_ID: json['location_ID'],
-      cost: json['cost'],
+      // cost: json['cost'],
       ordered_qty: json['ordered_qty'],
       rejectedRemark: json['rejectedRemark'],
       facility_id: json['facility_id'],
@@ -99,7 +99,7 @@ class GoodsOrdersListModel {
       accepted_qty: json['accepted_qty'],
       received_on: json['received_on'],
       approvedOn: json['approvedOn'],
-      generatedBy: json['generatedBy'],
+      // generatedBy: json['generatedBy'],
       receivedBy: json['receivedBy'],
       approvedBy: json['approvedBy'],
       vendor_name: json['vendor_name'],
@@ -119,7 +119,7 @@ class GoodsOrdersListModel {
     data['assetItemID'] = this.assetItemID;
     data['serial_number'] = this.serial_number;
     data['location_ID'] = this.location_ID;
-    data['cost'] = this.cost;
+    // data['cost'] = this.cost;
     data['ordered_qty'] = this.ordered_qty;
     data['rejectedRemark'] = this.rejectedRemark;
     data['facility_id'] = this.facility_id;
@@ -134,7 +134,7 @@ class GoodsOrdersListModel {
     data['accepted_qty'] = this.accepted_qty;
     data['received_on'] = this.received_on;
     data['approvedOn'] = this.approvedOn;
-    data['generatedBy'] = this.generatedBy;
+    // data['generatedBy'] = this.generatedBy;
     data['receivedBy'] = this.receivedBy;
     data['approvedBy'] = this.approvedBy;
     data['vendor_name'] = this.vendor_name;

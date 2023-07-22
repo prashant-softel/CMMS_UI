@@ -397,6 +397,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -1741,7 +1742,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=252',
+      'GO/GetGODetailsByID?id=$id',
       Request.get,
       null,
       isLoading ?? false,
@@ -3783,8 +3784,8 @@ class ConnectHelper {
 
     return responseModel;
   }
-  
-   Future<ResponseModel> approveMrs({
+
+  Future<ResponseModel> approveMrs({
     required String auth,
     bool? isLoading,
     required approvetoJsonString,
