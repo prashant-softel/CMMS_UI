@@ -164,6 +164,13 @@ class IncidentScreen extends GetView<IncidentReportController> {
                                 Routes.insuranceProvider,
                               );
                             }),
+                        _incidentReportList(
+                            tittle: "Insurance Status",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.insuranceStatus,
+                              );
+                            }),
 
                         // _incidentReportList(
                         //     tittle: "Inventory Category",
