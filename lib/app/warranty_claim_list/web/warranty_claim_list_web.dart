@@ -204,26 +204,27 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 620),
-                              child: Container(
-                                width: 200,
-                                height: 35,
-                                margin: Dimens.edgeInsets0_0_16_0,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    contentPadding: Dimens.edgeInsets10_0_0_0,
-                                    hintText: 'search'.tr,
-                                    hintStyle: Styles.grey12,
-                                  ),
-                                ),
+                              child:  Container(
+                          width: 200,
+                          height: 35,
+                          margin: Dimens.edgeInsets0_0_16_0,
+                          child: TextField(
+                            onChanged: (value) => controller.search(value),
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.grey, width: 0.0),
                               ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.grey, width: 0.0),
+                              ),
+                              contentPadding: Dimens.edgeInsets10_0_0_0,
+                              hintText: 'search'.tr,
+                              hintStyle: Styles.grey12,
+                            ),
+                          ),
+                        ),
                             ),
                           ],
                         ),
@@ -257,7 +258,7 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                               'action'.tr,
                                             ].map((column) {
                                               return TableViewColumn(
-                                                minWidth: Get.width * 0.1,
+                                                minWidth: Get.width * 0.06,
                                                 label: column,
                                               );
                                             }).toList(),
@@ -273,16 +274,16 @@ class WarrantyClaimListWeb extends GetView<WarrantyClaimController> {
                                                   //   1,
                                                   // ),
                                                   // index + 1,
-                                                  '${controller.warrantyClaimList[index].wc_id}',
-                                                  '${controller.warrantyClaimList[index].date_of_claim}',
-                                                  '${controller.warrantyClaimList[index].warranty_claim_title}',
-                                                  '${controller.warrantyClaimList[index].equipment_sr_no}',
-                                                  '${controller.warrantyClaimList[index].equipment_category}',
-                                                  '${controller.warrantyClaimList[index].equipment_name}',
+                                                  '${controller.warrantyClaimList[index]!.wc_id}',
+                                                  '${controller.warrantyClaimList[index]!.date_of_claim}',
+                                                  '${controller.warrantyClaimList[index]!.warranty_claim_title}',
+                                                  '${controller.warrantyClaimList[index]!.equipment_sr_no}',
+                                                  '${controller.warrantyClaimList[index]!.equipment_category}',
+                                                  '${controller.warrantyClaimList[index]!.equipment_name}',
                                                   // '${controller.warrantyClaimList[index].warranty_description}',
-                                                  '${controller.warrantyClaimList[index].estimated_cost}',
+                                                  '${controller.warrantyClaimList[index]!.estimated_cost}',
                                                   // '${controller.warrantyClaimList[index].quantity}',
-                                                  '${controller.warrantyClaimList[index].status}',
+                                                  '${controller.warrantyClaimList[index]!.status}',
                                                   'Actions'
                                                 ],
                                               ),

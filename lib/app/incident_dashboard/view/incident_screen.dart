@@ -157,7 +157,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
                               );
                             }),
 
-                        _inventoryList(
+                        _incidentReportList(
                             tittle: "Insurance Provider",
                             ontap: () {
                               Get.toNamed(
@@ -226,7 +226,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }
