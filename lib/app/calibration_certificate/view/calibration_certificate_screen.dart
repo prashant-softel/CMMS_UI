@@ -26,7 +26,7 @@ class CalibrationCertificateScreen extends GetView<CalibrationCertificateControl
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Module List'),
+              title: Text('Calibration Certificate List'),
               centerTitle: true,
               elevation: 0,
             ),

@@ -25,7 +25,7 @@ class WarrantyCertificateScreen extends GetView<WarrantyCertificateController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Module List'),
+              title: Text('Warranty Certificate List'),
               centerTitle: true,
               elevation: 0,
             ),

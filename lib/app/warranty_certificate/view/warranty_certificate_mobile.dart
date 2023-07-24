@@ -33,7 +33,7 @@ class WarrantyCertificateMobile
                       final moduleModel =
                           (controller.warrantyList != null)
                               ? controller.warrantyList![index]
-                              : WarrantyCertificateModel;
+                              : WarrantyCertificateModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
                         child: Card(
@@ -45,244 +45,301 @@ class WarrantyCertificateMobile
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            // child: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.start,
-                            //     children: [
-                            //       Row(
-                            //         children: [
-                            //           Text(
-                            //             'CheckList Id: ',
-                            //             style: const TextStyle(
-                            //                 color: ColorValues.blackColor,
-                            //                 fontWeight: FontWeight.w400),
-                            //           ),
-                            //           Text(
-                            //             '${moduleModel?.id ?? 0}',
-                            //             style: const TextStyle(
-                            //               fontWeight: FontWeight.bold,
-                            //               color: ColorValues.navyBlueColor,
-                            //             ),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //       Row(children: [
-                            //         Text(
-                            //           'Module Name: ',
-                            //           style: const TextStyle(
-                            //               color: ColorValues.blackColor,
-                            //               fontWeight: FontWeight.w400),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 5,
-                            //         ),
-                            //         Expanded(
-                            //           child: Text(
-                            //               '${moduleModel?.moduleName}'
-                            //             '',
-                            //             style: const TextStyle(
-                            //               color: ColorValues.navyBlueColor,
-                            //               fontWeight: FontWeight.bold,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ]),
-                            //       Row(//
-                            //           children: [
-                            //         Text(
-                            //           'Module: ',
-                            //           style: const TextStyle(
-                            //               color: ColorValues.blackColor,
-                            //               fontWeight: FontWeight.w400),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 5,
-                            //         ),
-                            //         Expanded(
-                            //           child: Text(
-                            //             moduleModel
-                            //                     ?.moduleName ??
-                            //                 '',
-                            //             style: const TextStyle(
-                            //               color: ColorValues.navyBlueColor,
-                            //               fontWeight: FontWeight.bold,
-                            //             ),
-                            //           ),
-                            //         )
-                            //       ]),
-                            //       Row(children: [
-                            //         Text(
-                            //           'Feature: ',
-                            //           style: const TextStyle(
-                            //               color: ColorValues.blackColor,
-                            //               fontWeight: FontWeight.w400),
-                            //         ),
-                            //         SizedBox(
-                            //           width: 5,
-                            //         ),
-                            //         Expanded(
-                            //           child: Text(
-                            //             "${moduleModel?.featureName ?? ''}",
-                            //             style: const TextStyle(
-                            //               color: ColorValues.navyBlueColor,
-                            //               fontWeight: FontWeight.bold,
-                            //             ),
-                            //           ),
-                            //         )
-                            //       ]),
-                            //       Row(children: [
-                            //         Column(
-                            //           children: [
-                            //             Text(
-                            //               'Menu Image',
-                            //               style: const TextStyle(
-                            //                   color: ColorValues.blackColor,
-                            //                   fontWeight: FontWeight.w400),
-                            //             ),
-                            //             Text(
-                            //               "${moduleModel?.menuImage ?? ''} min.",
-                            //               style: const TextStyle(
-                            //                 color: ColorValues.navyBlueColor,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             )
-                            //           ],
-                            //         ),
-                            //         Expanded(
-                            //           child: Column(
-                            //             children: [
-                            //               Text(
-                            //                 'Add',
-                            //                 style: const TextStyle(
-                            //                     color: ColorValues.blackColor,
-                            //                     fontWeight: FontWeight.w500),
-                            //               ),
-                            //               Text(
-                            //                 "${moduleModel?.add ?? ''}",
-                            //                 style: const TextStyle(
-                            //                   color: ColorValues.navyBlueColor,
-                            //                   fontWeight: FontWeight.bold,
-                            //                 ),
-                            //               )
-                            //             ],
-                            //           ),
-                            //         )
-                            //       ]),
-                            //       Row(children: [
-                            //         Column(
-                            //           children: [
-                            //             Text(
-                            //               'Edit',
-                            //               style: const TextStyle(
-                            //                   color: ColorValues.blackColor,
-                            //                   fontWeight: FontWeight.w400),
-                            //             ),
-                            //             Text(
-                            //               "${moduleModel?.edit ?? ''} min.",
-                            //               style: const TextStyle(
-                            //                 color: ColorValues.navyBlueColor,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             )
-                            //           ],
-                            //         ),
-                            //         Expanded(
-                            //           child: Column(
-                            //             children: [
-                            //               Text(
-                            //                 'Delete',
-                            //                 style: const TextStyle(
-                            //                     color: ColorValues.blackColor,
-                            //                     fontWeight: FontWeight.w500),
-                            //               ),
-                            //               Text(
-                            //                 "${moduleModel?.delete ?? ''}",
-                            //                 style: const TextStyle(
-                            //                   color: ColorValues.navyBlueColor,
-                            //                   fontWeight: FontWeight.bold,
-                            //                 ),
-                            //               )
-                            //             ],
-                            //           ),
-                            //         )
-                            //       ]),
-                            //       Row(children: [
-                            //         Column(
-                            //           children: [
-                            //             Text(
-                            //               'View',
-                            //               style: const TextStyle(
-                            //                   color: ColorValues.blackColor,
-                            //                   fontWeight: FontWeight.w400),
-                            //             ),
-                            //             Text(
-                            //               "${moduleModel?.view ?? ''} min.",
-                            //               style: const TextStyle(
-                            //                 color: ColorValues.navyBlueColor,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             )
-                            //           ],
-                            //         ),
-                            //         Expanded(
-                            //           child: Column(
-                            //             children: [
-                            //               Text(
-                            //                 'Approve',
-                            //                 style: const TextStyle(
-                            //                     color: ColorValues.blackColor,
-                            //                     fontWeight: FontWeight.w500),
-                            //               ),
-                            //               Text(
-                            //                 "${moduleModel?.approve ?? ''}",
-                            //                 style: const TextStyle(
-                            //                   color: ColorValues.navyBlueColor,
-                            //                   fontWeight: FontWeight.bold,
-                            //                 ),
-                            //               )
-                            //             ],
-                            //           ),
-                            //         )
-                            //       ]),
-                            //
-                            //       Row(children: [
-                            //         Column(
-                            //           children: [
-                            //             Text(
-                            //               'Issue',
-                            //               style: const TextStyle(
-                            //                   color: ColorValues.blackColor,
-                            //                   fontWeight: FontWeight.w400),
-                            //             ),
-                            //             Text(
-                            //               "${moduleModel?.issue ?? ''} min.",
-                            //               style: const TextStyle(
-                            //                 color: ColorValues.navyBlueColor,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             )
-                            //           ],
-                            //         ),
-                            //         Expanded(
-                            //           child: Column(
-                            //             children: [
-                            //               Text(
-                            //                 'Self View',
-                            //                 style: const TextStyle(
-                            //                     color: ColorValues.blackColor,
-                            //                     fontWeight: FontWeight.w500),
-                            //               ),
-                            //               Text(
-                            //                 "${moduleModel?.selfView ?? ''}",
-                            //                 style: const TextStyle(
-                            //                   color: ColorValues.navyBlueColor,
-                            //                   fontWeight: FontWeight.bold,
-                            //                 ),
-                            //               )
-                            //             ],
-                            //           ),
-                            //         )
-                            //       ]),
-                            //     ]),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Asset Id: ',
+                                        style: const TextStyle(
+                                            color: ColorValues.blackColor,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        '${moduleModel?.asset_id ?? 0}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorValues.navyBlueColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(children: [
+                                    Text(
+                                      'CategoryId: ',
+                                      style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          '${moduleModel?.categoryId ?? 0}',
+                                        style: const TextStyle(
+                                          color: ColorValues.navyBlueColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                                  Row(//
+                                      children: [
+                                    Text(
+                                      'Asset name: ',
+                                      style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        moduleModel
+                                                ?.asset_name ??
+                                            '',
+                                        style: const TextStyle(
+                                          color: ColorValues.navyBlueColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  ]),
+                                  Row(children: [
+                                    Text(
+                                      'Warranty Type Id: ',
+                                      style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        "${moduleModel?.warrantyTypeId ?? ''}",
+                                        style: const TextStyle(
+                                          color: ColorValues.navyBlueColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  ]),
+                                  Row(children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Warranty Provoider',
+                                          style: const TextStyle(
+                                              color: ColorValues.blackColor,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text(
+                                          "${moduleModel?.warranty_provider ?? ''}",
+                                          style: const TextStyle(
+                                            color: ColorValues.navyBlueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Category Name',
+                                            style: const TextStyle(
+                                                color: ColorValues.blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(
+                                            "${moduleModel?.categoryName ?? ''}",
+                                            style: const TextStyle(
+                                              color: ColorValues.navyBlueColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ]),
+                                  Row(children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Warranty Description',
+                                          style: const TextStyle(
+                                              color: ColorValues.blackColor,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text(
+                                          "${moduleModel?.warranty_description ?? ''} min.",
+                                          style: const TextStyle(
+                                            color: ColorValues.navyBlueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Warranty Type Name',
+                                            style: const TextStyle(
+                                                color: ColorValues.blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(
+                                            "${moduleModel?.warrantyTypeName ?? ''}",
+                                            style: const TextStyle(
+                                              color: ColorValues.navyBlueColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ]),
+                                  Row(children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'WarrantyTermId',
+                                          style: const TextStyle(
+                                              color: ColorValues.blackColor,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text(
+                                          "${moduleModel?.warrantyTermId ?? ''}",
+                                          style: const TextStyle(
+                                            color: ColorValues.navyBlueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'WarrantyTermName',
+                                            style: const TextStyle(
+                                                color: ColorValues.blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(
+                                            "${moduleModel?.warrantyTermName ?? ''}",
+                                            style: const TextStyle(
+                                              color: ColorValues.navyBlueColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ]),
+
+                                  Row(children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Certificate_number',
+                                          style: const TextStyle(
+                                              color: ColorValues.blackColor,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text(
+                                          "${moduleModel?.certificate_number ?? ''}",
+                                          style: const TextStyle(
+                                            color: ColorValues.navyBlueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Warranty certificate file path',
+                                            style: const TextStyle(
+                                                color: ColorValues.blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(
+                                            "${moduleModel?.warranty_certificate_file_path ?? ''}",
+                                            style: const TextStyle(
+                                              color: ColorValues.navyBlueColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ]),
+                                  Row(children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Warranty Provider Id',
+                                          style: const TextStyle(
+                                              color: ColorValues.blackColor,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text(
+                                          "${moduleModel?.warrantyProviderId ?? 0}",
+                                          style: const TextStyle(
+                                            color: ColorValues.navyBlueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Warranty Provider Name',
+                                            style: const TextStyle(
+                                                color: ColorValues.blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(
+                                            "${moduleModel?.warrantyProviderName ?? ''}",
+                                            style: const TextStyle(
+                                              color: ColorValues.navyBlueColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ]),
+                                  Row(children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Warranty Term Type',
+                                          style: const TextStyle(
+                                              color: ColorValues.blackColor,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text(
+                                          "${moduleModel?.warranty_term_type ?? ''}",
+                                          style: const TextStyle(
+                                            color: ColorValues.navyBlueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ]),
+
+                                ]),
                           ),
                         ),
                       );
