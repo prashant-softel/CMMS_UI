@@ -3840,4 +3840,23 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> saveRoleNotification({
+    required String auth,
+    bool? isLoading,
+    required saveRoleNotificationJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/SetRoleNotifications',
+      Request.post,
+      saveRoleNotificationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

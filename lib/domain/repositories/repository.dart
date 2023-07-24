@@ -2895,7 +2895,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString() + 'saveRoleAccess');
         return true;
       }
     } catch (error) {
@@ -5816,6 +5816,28 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> saveRoleNotification(
+      {bool? isLoading, saveRoleNotificationJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.saveRoleNotification(
+          auth: auth,
+          isLoading: isLoading,
+          saveRoleNotificationJsonString: saveRoleNotificationJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'saveRoleNotification');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 }
