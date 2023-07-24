@@ -192,7 +192,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             color: Color(0xFE50000),
                                             width: 0.5,
                                           )),
-                                          height: 45,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.040,
                                           margin: Dimens.edgeInsets5,
                                           constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
@@ -219,7 +222,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             color: Color(0xFE50000),
                                             width: 0.5,
                                           )),
-                                          height: 45,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.040,
                                           margin: Dimens.edgeInsets5,
                                           constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
@@ -297,7 +303,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             color: Color(0xFE50000),
                                             width: 0.5,
                                           )),
-                                          height: 45,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.040,
                                           margin: Dimens.edgeInsets5,
                                           constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)

@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
@@ -18,6 +19,8 @@ class StockManagementAddGoodsOrdersUsecase {
     );
   }
 
+  Future<List<FacilityModel?>?> getFacilityList() async =>
+      await _repository.getFacilityList(true);
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
     bool isLoading = true,

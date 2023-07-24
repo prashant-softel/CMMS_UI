@@ -586,6 +586,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getModuleCleaningListPlan({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCPlanList?facilityId=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,
