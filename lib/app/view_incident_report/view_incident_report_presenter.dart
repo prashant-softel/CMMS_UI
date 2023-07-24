@@ -34,6 +34,28 @@ class ViewIncidentReportPresenter {
         isLoading: isLoading,
       );
 
+
+     Future<void> incidentReportRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await viewIncidentReportUsecase.incidentReportRejectButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<void> incidentReportApproveButton({
+    String? incidentId,
+    bool? isLoading,
+  }) async =>
+      await viewIncidentReportUsecase.incidentReportApproveButton(
+        incidentId: incidentId,
+        isLoading: isLoading ?? false,
+      );
+
+
  
 
 

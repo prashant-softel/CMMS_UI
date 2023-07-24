@@ -36,7 +36,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
             Expanded(
               child: Center(
                 child: Container(
-                  margin: Dimens.edgeInsets16,
+                  // margin: Dimens.edgeInsets16,
                   height: Get.height,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.withOpacity(.3)),

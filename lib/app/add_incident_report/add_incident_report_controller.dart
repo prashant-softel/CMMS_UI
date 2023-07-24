@@ -8,6 +8,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -32,7 +33,8 @@ class AddIncidentReportController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
-  
+  ///Incident Report History
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
 
 RxString isSelected = ''.obs;
@@ -279,6 +281,12 @@ RxString isSelected = ''.obs;
       });
     }
 
+     if (id != null){
+      Future.delayed(Duration(seconds: 1), () {
+      getIncidentReportHistory(id: id!);
+    });
+     }
+
     Future.delayed(Duration(seconds: 1), () {
       getFacilityPlantList();
     });
@@ -303,6 +311,9 @@ RxString isSelected = ''.obs;
     Future.delayed(Duration(seconds: 1), () {
       getAssetRestorationActionTakenByList();
     });
+   
+  
+
     super.onInit();
   }
 
@@ -442,6 +453,23 @@ RxString isSelected = ''.obs;
     }
 
     update(['incidentInvestigationVerificationDoneBy_list']);
+  }
+
+  Future<void> getIncidentReportHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 131;
+    // int tempModuleType = 21;
+    int id = Get.arguments;
+    //
+    historyList?.value = await incidentReportPresenter.getIncidentReportHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   void getVictimNameList() async {

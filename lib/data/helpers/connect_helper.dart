@@ -1742,7 +1742,7 @@ class ConnectHelper {
     int? id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/GetGODetailsByID?id=252',
+      'GO/GetGODetailsByID?id=$id',
       Request.get,
       null,
       isLoading ?? false,

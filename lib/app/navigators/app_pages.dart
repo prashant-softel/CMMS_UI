@@ -29,6 +29,11 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
+import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
+import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
+import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_binding.dart';
+import 'package:cmms/app/module_cleaning_list_plan/view/module_cleaning_list_planning_screen.dart.dart';
+
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_binding.dart';
 import 'package:cmms/app/module_cleaning_planning/view/module_cleaning_planning_screen.dart';
 import 'package:cmms/app/mrs/mrs_list_binding.dart';
@@ -693,6 +698,16 @@ class AppPages {
       name: _Paths.setting,
       page: SettingDashboardScreen.new,
       binding: SettingDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningListPlan,
+      page: ModuleCleaningListPlanScreen.new,
+      binding: ModuleCleaningListPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningListExecution,
+      page: ModuleCleaningListExecutionScreen.new,
+      binding: ModuleCleaningListExecutionBinding(),
     ),
   ];
 }

@@ -115,6 +115,8 @@ abstract class Routes {
   static const moduleCleaningPlanning = _Paths.moduleCleaningPlanning;
   static const roleNotification = _Paths.roleNotification;
   static const setting = _Paths.setting;
+  static const moduleCleaningListPlan = _Paths.moduleCleaningListPlan;
+  static const moduleCleaningListExecution = _Paths.moduleCleaningListExecution;
 }
 
 abstract class _Paths {
@@ -222,6 +224,8 @@ abstract class _Paths {
   static const moduleCleaningPlanning = '/module-cleaning-planning';
   static const roleNotification = '/role-notification';
   static const setting = '/setting';
+  static const moduleCleaningListPlan = '/module-cleaning-list-plan';
+  static const moduleCleaningListExecution = '/module-cleaning-list-execution';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

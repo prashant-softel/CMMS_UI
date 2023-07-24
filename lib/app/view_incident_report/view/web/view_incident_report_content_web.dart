@@ -6,6 +6,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -87,7 +88,7 @@ class ViewIncidentReportContentWeb
                                   onTap: () {
                                     Get.back();
                                   },
-                                  child: Text(" / Incident Report List",
+                                  child: Text(" / Incident Report",
                                       style: Styles.greyMediumLight12),
                                 ),
                                 Text(" / View Incident Report",
@@ -162,6 +163,11 @@ class ViewIncidentReportContentWeb
                                                         ),
                                                         CustomRichText(
                                                             title: 'Plant: '),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        CustomRichText(
+                                                            title: 'Block: '),
                                                         SizedBox(
                                                           height: 10,
                                                         ),
@@ -265,6 +271,19 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                       SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.block_name}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
+                                                      ),
                                                       SizedBox(
                                                         height: 7,
                                                       ),
@@ -281,15 +300,19 @@ class ViewIncidentReportContentWeb
                                                       SizedBox(
                                                         height: 5,
                                                       ),
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.description}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                                      SizedBox(
+                                                        width: 150,
+                                                        child: Text(
+                                                          '${controller.incidentReportDetailsModel.value?.description}',
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      5,
+                                                                      92,
+                                                                      163)),
+                                                        ),
                                                       ),
                                                       SizedBox(
                                                         height: 7,
@@ -398,22 +421,25 @@ class ViewIncidentReportContentWeb
                                                       SizedBox(
                                                         height: 5,
                                                       ),
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.insurance_remark}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                                      SizedBox(
+                                                        width: 300,
+                                                        child: Text(
+                                                          '${controller.incidentReportDetailsModel.value?.insurance_remark}',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      5,
+                                                                      92,
+                                                                      163)),
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
 
                                                   /////
                                                   SizedBox(
-                                                    width: 70,
+                                                    width: 10,
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
@@ -622,7 +648,7 @@ class ViewIncidentReportContentWeb
                                               ///Incident Report History
                                               Container(
                                                 margin: Dimens.edgeInsets20,
-                                                height: 300,
+                                                height: 200,
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: ColorValues
@@ -699,7 +725,7 @@ class ViewIncidentReportContentWeb
                                                           // [
                                                         ].map((record) {
                                                           return TableViewRow(
-                                                            height: 90,
+                                                            height: 30,
                                                             cells: record
                                                                 .map((value) {
                                                               return TableViewCell(
@@ -714,6 +740,7 @@ class ViewIncidentReportContentWeb
                                                   ],
                                                 ),
                                               ),
+                                            
                                             ],
                                           ),
                                         );
@@ -758,6 +785,9 @@ class ViewIncidentReportContentWeb
                                         controller.incidentReportDetailsModel
                                                     .value?.id !=
                                                 null
+                                          &&
+                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.edit == 1).length > 0
+
                                             ? CustomElevatedButton(
                                                 icon: Icons.edit,
                                                 backgroundColor: ColorValues.appYellowColor,
@@ -771,7 +801,47 @@ class ViewIncidentReportContentWeb
                                                 },
                                                 text: 'Edit',
                                               )
-                                            : Container()
+                                            : Container(),
+                                            SizedBox(
+                                          width: 20,
+                                        ),
+
+                                          ////Approve Button
+                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 0).length > 0
+                                          && controller.incidentReportDetailsModel.value?.status == 181
+                                          ?CustomElevatedButton(
+                                                icon: Icons.add,
+                                                backgroundColor: ColorValues.appGreenColor,
+                                                onPressed: () {
+                                                  // controller.saveAsDraft();
+                                                  controller.incidentReportApproveButton();
+                                                  
+                                                },
+                                                text: 'Approve',
+                                              )
+                                              : Container(),
+                                          SizedBox(
+                                          width: 20,
+                                        ),
+                                            
+                                          ////Reject Button
+                                           varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.delete == 1).length > 0
+                                          && controller.incidentReportDetailsModel.value?.status == 181
+                                          ?CustomElevatedButton(
+                                                icon: Icons.close,
+                                                backgroundColor: ColorValues.appRedColor,
+                                                onPressed: () {
+                                                  // controller.saveAsDraft();
+                                                  Get.dialog(IncidentReportRejectDialog(id: '${controller
+                                                          .incidentReportDetailsModel
+                                                          .value
+                                                          ?.id}'));
+                                                  
+                                                },
+                                                text: 'Reject',
+                                              )
+                                              : Container(),
+
                                       ],
                                     ),
                                   )

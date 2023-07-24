@@ -82,11 +82,12 @@ class IncidentReportMessageApproveDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                _controller.getIncidentReportList(
-                    _controller.facilityId,
-                    _controller.formattedTodate,
-                    _controller.formattedFromdate,
-                    false);
+                // _controller.getIncidentReportList(
+                //     _controller.facilityId,
+                //     _controller.formattedTodate,
+                //     _controller.formattedFromdate,
+                //     false);
+                    Get.offAndToNamed(Routes.incidentReportListWeb);
                 Get.back();
               },
               child: const Text('Ok'),

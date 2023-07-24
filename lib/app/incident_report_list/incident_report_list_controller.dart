@@ -26,16 +26,10 @@ class IncidentReportListController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
-
-
- 
-
   final TextEditingController supplierActionTextFieldController =
       TextEditingController();
   final TextEditingController supplierActionSrNumberTextFieldController =
       TextEditingController();
-
-  
 
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
@@ -53,18 +47,10 @@ class IncidentReportListController extends GetxController {
   var incidentReportListDateTimeCtrlrWebBuffer;
   Rx<DateTime> selectedIncidentReportListDateTimeWeb = DateTime.now().obs;
 
-
   ///Reject Incident Report Controller
-  
-   final TextEditingController rejectCommentTextFieldCtrlr =
+
+  final TextEditingController rejectCommentTextFieldCtrlr =
       TextEditingController();
-
-
-
-//Incident Report List
-  var incidentReportList = <IncidentReportListModel>[];
-  
-  
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -83,9 +69,18 @@ class IncidentReportListController extends GetxController {
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
 
-///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel>[].obs;
+  ///Incident Report List
+  // RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel?>[].obs;
+  RxList<IncidentReportListModel?> incidentReportList =
+      <IncidentReportListModel?>[].obs;
+  RxList<IncidentReportListModel?> filteredData =
+      <IncidentReportListModel>[].obs;
 
+  IncidentReportListModel? incidentReportModelList;
+  RxList<String> incidentListTableColumns = <String>[].obs;
+
+//Incident Report List
+  // var incidentReportList = <IncidentReportListModel>[];
 
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
@@ -102,7 +97,8 @@ class IncidentReportListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationIncidentReportController = PaginationController(
+  PaginationController paginationIncidentReportController =
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -112,7 +108,7 @@ class IncidentReportListController extends GetxController {
   // );
 
   //From and To date format
-   Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
@@ -121,7 +117,7 @@ class IncidentReportListController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
- 
+
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
@@ -129,20 +125,18 @@ class IncidentReportListController extends GetxController {
   // Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel = ViewWarrantyClaimModel().obs;
   // RxList<ViewWarrantyClaimModel?>? viewWarrantyClaimDetailsList = <ViewWarrantyClaimModel?>[].obs;
 
-
-  
-
   ///
 // int? wc_id = 0;
   @override
   void onInit() async {
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
-     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-      getIncidentReportList(facilityId, formattedTodate, formattedFromdate, false);
-    });
+        getIncidentReportList(
+            facilityId, formattedTodate, formattedFromdate, false);
+      });
     });
 
     Future.delayed(Duration(seconds: 1), () {
@@ -151,7 +145,7 @@ class IncidentReportListController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getuserAccessData();
     });
-    
+
     super.onInit();
   }
 
@@ -168,7 +162,6 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-  
   Future<void> getuserAccessData() async {
     final _userAccessList = await incidentReportPresenter.getUserAccessList();
 
@@ -180,7 +173,7 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-   Future<void> incidentReportRejectButton({String? id}) async {
+  Future<void> incidentReportRejectButton({String? id}) async {
     String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
     final _incidentReportRejectBtn =
@@ -191,7 +184,6 @@ class IncidentReportListController extends GetxController {
     // showAlertPermitApproveDialog();
     print('Incident Report Reject Button Data:${_rejectComment}');
     print('Incident Report Reject Button Data:${id}');
-    
   }
 
   Future<void> incidentReportApproveButton({String? incidentId}) async {
@@ -204,36 +196,55 @@ class IncidentReportListController extends GetxController {
     );
     // showAlertPermitApproveDialog();
     print('Incident Report Approve Button Data:${incidentId}');
-    
   }
 
-  
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      incidentReportList.value = filteredData;
+      return;
+    }
 
+    incidentReportList.value = filteredData
+        .where((item) =>
+            item!.status!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 
   void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
-    incidentReportModelList.value = <IncidentReportListModel>[];
+    incidentReportList.value = <IncidentReportListModel>[];
 
     final list = await incidentReportPresenter.getIncidentReportList(
-        isLoading: isLoading, 
-        start_date:  startDate, //// "2020-01-01",
-        end_date:    endDate,  ////  "2023-12-31",
-        facility_id: facilityId
-        );
-        print('incidentReportFacilityId$facilityId');
+        isLoading: isLoading,
+        start_date: "2020-01-01", //// startDate,
+        end_date: "2023-12-31", ////  endDate,
+        facility_id: facilityId);
+    print('incidentReportFacilityId$facilityId');
     print('Incident Report List:$list');
     for (var incident_list in list) {
-      incidentReportModelList.add(incident_list);
+      incidentReportList.add(incident_list);
     }
-    incidentReportList = list;
-    paginationIncidentReportController = PaginationController(
-      rowCount: incidentReportList.length,
-      rowsPerPage: 10,
-    );
+
+    if (list != null) {
+      incidentReportList.value = list;
+      filteredData.value = incidentReportList.value;
+      print('Filtered data:${filteredData.value}');
+      paginationIncidentReportController = PaginationController(
+        rowCount: incidentReportList.length,
+        rowsPerPage: 10,
+      );
+      if (filteredData != null && filteredData.isNotEmpty) {
+        incidentReportModelList = filteredData[0];
+        var incidentListJson = incidentReportModelList?.toJson();
+        incidentListTableColumns.value = <String>[];
+        for (var key in incidentListJson?.keys.toList() ?? []) {
+          incidentListTableColumns.add(key);
+        }
+      }
+    }
+
     update(['incident_report_list']);
   }
-
-
 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
@@ -245,7 +256,6 @@ class IncidentReportListController extends GetxController {
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
-     
 
       default:
         {
@@ -256,7 +266,6 @@ class IncidentReportListController extends GetxController {
   }
 
   // void checkForm() {
-  
 
   //   if (warrantyClaimTitleTextController.text == '') {
   //     Fluttertoast.showToast(
@@ -276,7 +285,7 @@ class IncidentReportListController extends GetxController {
   //         msg: 'Failure Date Time Field cannot be empty',
   //         timeInSecForIosWeb: 5);
   //   }
-   
+
   //   if (orderReferenceNoTextController.text == '') {
   //     Fluttertoast.showToast(
   //         msg: 'Order Reference No Field cannot be empty',
@@ -296,13 +305,12 @@ class IncidentReportListController extends GetxController {
   //     Fluttertoast.showToast(
   //         msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
   //   }
- 
+
   // }
 
-
-
   void getIncidentReportListByDate() {
-    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
+    getIncidentReportList(
+        facilityId, formattedFromdate, formattedTodate, false);
   }
 
   Future<void> viewIncidentReport({int? id}) async {
@@ -310,11 +318,8 @@ class IncidentReportListController extends GetxController {
     print('Argument$id');
   }
 
-   Future<void> editIncidentReport({int? id}) async {
+  Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
   }
-
-
-
 }

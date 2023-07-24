@@ -507,6 +507,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " Goods Order Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);

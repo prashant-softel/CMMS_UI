@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
@@ -82,7 +83,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 onTap: () {
                                   Get.back();
                                 },
-                                child: Text(" / Incident Report List",
+                                child: Text(" / Incident Report",
                                     style: Styles.greyMediumLight12),
                               ),
                               // Text(" / Create Checklist Number",
@@ -152,7 +153,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 //     pickDateTime_web(context);
                                 //   },
                                 // ),
-                                
+
                                 ///Date & Time Range functionality
                                 Container(
                                   height: 30,
@@ -220,6 +221,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 ),
 
                                 Dimens.boxWidth10,
+                              varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.add == 1).length > 0
+                                ?
                                 ActionButton(
                                   icon: Icons.add,
                                   label: 'Add Incident Report',
@@ -228,7 +231,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                         Routes.addIncidentReportContentWeb);
                                   },
                                   color: ColorValues.appGreenColor,
-                                ),
+                                )
+                                :Dimens.box0,
                                 Dimens.boxWidth10,
                                 // ActionButton(
                                 //   icon: Icons.close,
@@ -322,28 +326,31 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 text: 'PDF'.tr,
                               ),
                             ),
+
+                            //Search
                             Padding(
                               padding: const EdgeInsets.only(left: 450),
                               child: Container(
-                                width: 200,
-                                height: 35,
-                                margin: Dimens.edgeInsets0_0_16_0,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    contentPadding: Dimens.edgeInsets10_0_0_0,
-                                    hintText: 'search'.tr,
-                                    hintStyle: Styles.grey12,
-                                  ),
-                                ),
+                          width: 200,
+                          height: 35,
+                          margin: Dimens.edgeInsets0_0_16_0,
+                          child: TextField(
+                            onChanged: (value) => controller.search(value),
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.grey, width: 0.0),
                               ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.grey, width: 0.0),
+                              ),
+                              contentPadding: Dimens.edgeInsets10_0_0_0,
+                              hintText: 'search'.tr,
+                              hintStyle: Styles.grey12,
+                            ),
+                          ),
+                        ),
                             ),
                           ],
                         ),
@@ -366,16 +373,18 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                             columns: [
                                               'Id',
                                               'Description',
+                                              'Block Name',
                                               'Equipment Name',
                                               'Approved By',
                                               'Approved At',
-                                              'Block Name',
-                                              'Created At',
+                                              'Reported By',
+                                              'Reported At',
+                                              // 'Created At',
                                               'Status',
                                               'action'.tr,
                                             ].map((column) {
                                               return TableViewColumn(
-                                                minWidth: Get.width * 0.15,
+                                                minWidth: Get.width * 0.08,
                                                 label: column,
                                               );
                                             }).toList(),
@@ -384,21 +393,16 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                 controller
                                                     .incidentReportList.length,
                                                 (index) => [
-                                                  // AssetName(
-
-                                                  //    '${controller.warrantyClaimList[index].wc_id}',
-                                                  //   // 'dummy data',
-                                                  //   1,
-                                                  // ),
-                                                  // index + 1,
-                                                  '${controller.incidentReportList[index].id}',
-                                                  '${controller.incidentReportList[index].description}',
-                                                  '${controller.incidentReportList[index].equipment_name}',
-                                                  '${controller.incidentReportList[index].approved_by}',
-                                                  '${controller.incidentReportList[index].approved_at}',
-                                                  '${controller.incidentReportList[index].block_name}',
-                                                  '${controller.incidentReportList[index].created_at}',
-                                                  '${controller.incidentReportList[index].status}',
+                                                  '${controller.incidentReportList[index]!.id}',
+                                                  '${controller.incidentReportList[index]!.description}',
+                                                  '${controller.incidentReportList[index]!.block_name}',
+                                                  '${controller.incidentReportList[index]!.equipment_name}',
+                                                  '${controller.incidentReportList[index]!.approved_by}',
+                                                  '${controller.incidentReportList[index]!.approved_at}',
+                                                  '${controller.incidentReportList[index]!.reported_by_name}',
+                                                  '${controller.incidentReportList[index]!.reported_at}',
+                                                  // '${controller.incidentReportList[index].created_at}',
+                                                  '${controller.incidentReportList[index]!.status}',
                                                   'Actions'
                                                 ],
                                               ),
@@ -413,7 +417,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                         child: GestureDetector(
                                                           onTap: () {
                                                             print(
-                                                                'incidentreportiddata:$value');
+                                                                'incidentreportiddata:${record[8]}');
                                                             controller.viewIncidentReport(
                                                                 id: int.tryParse(
                                                                     '${record[0]}'));
@@ -485,16 +489,19 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.center,
                                                                             children: [
-                                                                              TableActionButton(
-                                                                                color: ColorValues.appDarkBlueColor,
-                                                                                icon: Icons.visibility,
-                                                                                onPress: () {
-                                                                                  controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
-                                                                                  // print('record:${int.tryParse('${record[0]}')}');
-                                                                                },
-                                                                              ),
+                                                                              varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.view == 1).length > 0
+                                                                                  ? TableActionButton(
+                                                                                      color: ColorValues.appDarkBlueColor,
+                                                                                      icon: Icons.visibility,
+                                                                                      onPress: () {
+                                                                                        controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                        // print('record:${int.tryParse('${record[0]}')}');
+                                                                                      },
+                                                                                    )
+                                                                                  : Container(),
                                                                               //),
-
+                                                                              varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.edit == 1).length > 0
+                                                                            ?
                                                                               TableActionButton(
                                                                                 color: ColorValues.appYellowColor,
                                                                                 icon: Icons.edit,
@@ -502,17 +509,8 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                                   controller.editIncidentReport(id: int.tryParse('${record[0]}'));
                                                                                   print('edit record:${int.tryParse('${record[0]}')}');
                                                                                 },
-                                                                              ),
-
-                                                                              TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.close,
-                                                                                label: 'Reject',
-                                                                                onPress: () {
-                                                                                  Get.dialog(IncidentReportRejectDialog(id: record[0]));
-                                                                                  // controller.viewNewPermitList(permitId: int.tryParse(_newPermitList[0]));
-                                                                                },
-                                                                              ),
+                                                                              )
+                                                                              : Container()
 
                                                                               //),
 
@@ -525,9 +523,12 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                               // ),
                                                                               //),
                                                                             ]),
-                                                                        Padding(
+                                                                              varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 0).length > 0
+                                                                          &&
+                                                                          record[8] == "Submitted"
+                                                                       ? Padding(
                                                                           padding: const EdgeInsets.only(
-                                                                              left: 25,
+                                                                              left: 15,
                                                                               top: 5),
                                                                           child:
                                                                               TableActionButton(
@@ -535,17 +536,43 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                                                                 ColorValues.appGreenColor,
                                                                             icon:
                                                                                 Icons.add,
-                                                                            label:
-                                                                                'Approve',
                                                                             onPress:
                                                                                 () {
                                                                               // Get.dialog(PermitApprovedDialog(
                                                                               //     permitId:
                                                                               //         _newPermitList[0]));
-                                                                              controller.incidentReportApproveButton(incidentId: record[0]);
+                                                                              // controller.incidentReportApproveButton(incidentId: record[0]);
+                                                                              controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
                                                                             },
                                                                           ),
                                                                         )
+                                                                        : Container(),
+
+                                                                         
+                                                                        ///Reject Button
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.delete == 1).length > 0
+                                                                          &&
+                                                                          record[8] == "Submitted"
+                                                                        ?
+                                                                        Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.only(top: 5),
+                                                                          child:
+                                                                              TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appRedColor,
+                                                                            icon:
+                                                                                Icons.close,
+                                                                            onPress:
+                                                                                () {
+                                                                              // Get.dialog(IncidentReportRejectDialog(id: record[0]));
+                                                                              controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                        : Container(),
+
+
                                                                         // TableActionButton(
                                                                         //   color: Colors.green,
                                                                         //   icon: Icons

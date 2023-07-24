@@ -37,7 +37,7 @@ class DropdownWebWidget extends StatelessWidget {
 
         Obx(
       () => Container(
-        height: MediaQuery.of(context).size.height * 0.049,
+        height: MediaQuery.of(context).size.height * 0.040,
         width: width,
         margin: margin,
         decoration: BoxDecoration(

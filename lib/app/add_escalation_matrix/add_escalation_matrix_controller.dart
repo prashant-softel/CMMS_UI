@@ -8,6 +8,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_presenter.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/create_warranty_claim_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -37,13 +38,43 @@ class AddEscalationMatrixController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
-  ///Print Global key
-  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
-
   final TextEditingController supplierActionTextFieldController =
       TextEditingController();
   final TextEditingController supplierActionSrNumberTextFieldController =
       TextEditingController();
+ ///Checkbox
+  ////
+  RxBool isCheckedRequire = false.obs;
+  RxBool isCheckedDataRequire = false.obs;
+
+  void requireToggleCheckbox() {
+    isCheckedRequire.value = !isCheckedRequire.value;
+    isCheckedDataRequire.value = isCheckedRequire.value;
+    print('Checkbox value ${isCheckedRequire.value}');
+    print(
+        'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
+    // Toggle the checkbox state
+  }
+  ///Supplier Action Part
+  var supplierActions = <SupplierActions>[].obs;
+  void updateSupplierActionText(
+    String name,
+    // String required_by_data,
+    String srNumber,
+  ) {
+    supplierActions.add(SupplierActions(
+      name: name,
+      // required_by_date: required_by_data,
+      // is_required: is_required
+      srNumber: srNumber,
+    ));
+  }
+
+
+  ///Print Global key
+  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
+
+
 
 Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);

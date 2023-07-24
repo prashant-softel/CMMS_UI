@@ -92,7 +92,10 @@ class ViewIncidentReportController extends GetxController {
   var reportingDateTimeCtrlrWeb = TextEditingController();
   
 
- 
+   ///Reject Incident Report Controller
+  
+   final TextEditingController rejectCommentTextFieldCtrlr =
+      TextEditingController();
 
 //Incident Report List
   var incidentReportList = <IncidentReportListModel>[];
@@ -283,6 +286,33 @@ int? id = 0;
         }
     
         
+    
+  }
+
+  Future<void> incidentReportApproveButton() async {
+    // String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+    final _incidentReportApproveBtn =
+        await viewIncidentReportPresenter.incidentReportApproveButton(
+      // comment: _rejectComment,
+      incidentId: '$id',
+    );
+    // showAlertPermitApproveDialog();
+    print('Incident Report Approve Button Data:${id}');
+    
+  }
+
+  Future<void> incidentReportRejectButton({String? id}) async {
+    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+    final _incidentReportRejectBtn =
+        await viewIncidentReportPresenter.incidentReportRejectButton(
+      comment: _rejectComment,
+      id: '$id',
+    );
+    // showAlertPermitApproveDialog();
+    print('Incident Report Reject Button Data:${_rejectComment}');
+    print('Incident Report Reject Button Data:${id}');
     
   }
 

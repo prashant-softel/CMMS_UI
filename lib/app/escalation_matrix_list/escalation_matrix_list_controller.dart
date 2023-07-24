@@ -32,10 +32,6 @@ class EscalationMatrixListController extends GetxController {
   var escalationMatrixListDateTimeCtrlrWebBuffer;
   Rx<DateTime> selectedEscalationMatrixListDateTimeWeb = DateTime.now().obs;
 
-//   ///Reject Incident Report Controller
-
-//    final TextEditingController rejectCommentTextFieldCtrlr =
-//       TextEditingController();
 
 // //Escalation Matrix List
   var incidentReportList = <IncidentReportListModel>[];
@@ -60,17 +56,8 @@ class EscalationMatrixListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-//   // PaginationController paginationBusinessListController = PaginationController(
-//   //   rowCount: 0,
-//   //   rowsPerPage: 10,
-//   // );
 
-  //From and To date format
-  Rx<DateTime> fromDate = DateTime.now().obs;
-  Rx<DateTime> toDate = DateTime.now().obs;
-  String get formattedFromdate =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -217,9 +204,7 @@ class EscalationMatrixListController extends GetxController {
 
   // }
 
-  void getEscalationMatrixListByDate() {
-    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, false);
-  }
+ 
 
   Future<void> viewEscalationMatrix({int? id}) async {
     Get.toNamed(Routes.viewEscalatiomMatrixContentWeb, arguments: id);

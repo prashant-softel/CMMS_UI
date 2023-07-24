@@ -3,6 +3,7 @@ import 'package:cmms/app/incident_report_list/incident_report_list_controller.da
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -19,7 +20,7 @@ class IncidentReportRejectDialog extends GetView {
  String? id;
  
   IncidentReportRejectDialog({super.key, this.incidentRejectDialog, this. id});
-  final IncidentReportListController _controller = Get.find();
+  final ViewIncidentReportController _controller = Get.find();
 
 
   @override

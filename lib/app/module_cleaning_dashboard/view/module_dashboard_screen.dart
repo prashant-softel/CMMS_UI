@@ -86,16 +86,16 @@ class ModuleCleaningDashboardScreen
                             tittle: "Planning",
                             ontap: () {
                               Get.toNamed(
-                                Routes.moduleCleaningPlanning,
+                                Routes.moduleCleaningListPlan,
                               );
                             }),
                         //  if (Responsive.isDesktop(context))
                         _moduleCleaningList(
                             tittle: "Execution",
                             ontap: () {
-                              // Get.toNamed(
-                              //   Routes.preventive_checkPoint,
-                              // );
+                              Get.toNamed(
+                                Routes.moduleCleaningListExecution,
+                              );
                             }),
                       ],
                     )

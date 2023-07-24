@@ -117,8 +117,16 @@ class WarrantyClaimController extends GetxController {
 
   Set<String> supplierNameSet = {};
 
+
+    WarrantyClaimModel? warrantyClaimListModel;
+  RxList<String> warrantyClaimListTableColumns = <String>[].obs;
+
 //Warranty Claim
-  var warrantyClaimList = <WarrantyClaimModel>[];
+  // var warrantyClaimList = <WarrantyClaimModel>[];
+  RxList<WarrantyClaimModel?> filteredData = <WarrantyClaimModel>[].obs;
+  RxList<WarrantyClaimModel?> warrantyClaimList = <WarrantyClaimModel>[].obs;
+
+
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -464,6 +472,18 @@ class WarrantyClaimController extends GetxController {
     update(['employee_list']);
   }
 
+
+void search(String keyword) {
+    if (keyword.isEmpty) {
+      warrantyClaimList.value = filteredData;
+      return;
+    }
+
+    warrantyClaimList.value = filteredData
+        .where((item) =>
+            item!.warranty_claim_title!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
  
 
  
@@ -487,11 +507,20 @@ class WarrantyClaimController extends GetxController {
         supplierNameSet.add(_supplierNameList.supplier_name ?? "");
       }
     }
-    warrantyClaimList = list;
+    warrantyClaimList.value = list;
+    filteredData.value = warrantyClaimList.value;
     paginationWarrantyController = PaginationController(
       rowCount: warrantyClaimList.length,
       rowsPerPage: 10,
     );
+     if (filteredData != null && filteredData.isNotEmpty) {
+        warrantyClaimListModel = filteredData[0];
+        var warrantyClaimListJson = warrantyClaimListModel?.toJson();
+        warrantyClaimListTableColumns.value = <String>[];
+        for (var key in warrantyClaimListJson?.keys.toList() ?? []) {
+          warrantyClaimListTableColumns.add(key);
+        }
+      }
     update(['warranty_claim_list']);
   }
 
