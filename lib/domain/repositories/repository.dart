@@ -70,12 +70,14 @@ import '../models/access_level_model.dart';
 import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
+import '../models/calibration_certificate_model.dart';
 import '../models/city_model.dart';
 import '../models/competency_model.dart';
 import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/get_mrs_list_model.dart';
+import '../models/insurance_status_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
@@ -89,6 +91,7 @@ import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/user_list_model.dart';
+import '../models/warranty_certificate_model.dart';
 import '../models/warranty_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -5858,6 +5861,97 @@ class Repository {
     }
   }
 
+  Future<List<InsuranceStatusModel>> getInsuranceStatus({
+    // required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInsuranceStatus(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = InsuranceStatusModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+  Future<List<CalibrationCertificateModel?>?> getCalibrationCertificate(
+      int? type,
+      int? facilityId,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCalibrationCertificate(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonCalibrationCertificate = jsonDecode(res.data);
+        // print(res.data);
+        final List<CalibrationCertificateModel> _CalibrationListModelList =
+        jsonCalibrationCertificate
+            .map<CalibrationCertificateModel>((m) =>
+            CalibrationCertificateModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _CalibrationListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getCalibrationCertificate');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+  Future<List<WarrantyCertificateModel?>?> getWarrantyCertificate(
+      int? type,
+      bool? isLoading,
+      ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyCertificate(
+        auth: auth,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonWarrantyCertificate = jsonDecode(res.data);
+        // print(res.data);
+        final List<WarrantyCertificateModel> _warrantyModel =
+        jsonWarrantyCertificate
+            .map<WarrantyCertificateModel>((m) =>
+            WarrantyCertificateModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _warrantyModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getWarrantyCertificate');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<bool> saveRoleNotification(
       {bool? isLoading, saveRoleNotificationJsonString}) async {
     try {
@@ -5879,7 +5973,8 @@ class Repository {
       return false;
     }
   }
+  //end
+  //end
 }
-//end
-//end
+
 

@@ -2455,6 +2455,42 @@ class DataRepository extends DomainRepository {
         editMrsJsonString: editMrsJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getInsuranceStatus({
+    // int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInsuranceStatus(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
+  Future<ResponseModel> getCalibrationCertificate({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCalibrationAssets(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getWarrantyCertificate({
+    required String auth,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWarrantyCertificate(
+        auth: auth,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> saveRoleNotification({
     auth,
     bool? isLoading,

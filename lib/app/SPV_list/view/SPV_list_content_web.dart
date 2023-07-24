@@ -136,6 +136,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             Expanded(child: CustomRichText(title: 'Title ')),
                                             Expanded(
                                               child: Container(
+                                                  margin: Dimens.edgeInsets5,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -175,9 +176,6 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 40,
-                                        ),
                                         Row(
                                           mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -186,6 +184,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             Expanded(child: CustomRichText(title: 'Description ')),
                                             Expanded(
                                               child: Container(
+                                                  margin:Dimens.edgeInsets5,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
