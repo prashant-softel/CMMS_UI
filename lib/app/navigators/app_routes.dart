@@ -113,10 +113,13 @@ abstract class Routes {
   static const editMrs = _Paths.editMrs;
   static const moduleCleaningDashboard = _Paths.moduleCleaningDashboard;
   static const moduleCleaningPlanning = _Paths.moduleCleaningPlanning;
+  static const roleNotification = _Paths.roleNotification;
+  static const setting = _Paths.setting;
   static const moduleCleaningListPlan = _Paths.moduleCleaningListPlan;
   static const insuranceStatus = _Paths.insuranceStatus;
   static const calibrationCertificate = _Paths.calibrationCertificate;
   static const warrantyCertificate = _Paths.warrantyCertificate;
+  static const moduleCleaningListExecution = _Paths.moduleCleaningListExecution;
 
 }
 
@@ -223,10 +226,15 @@ abstract class _Paths {
   static const editMrs = '/editMrs';
   static const moduleCleaningDashboard = '/module-cleaning-dashboard';
   static const moduleCleaningPlanning = '/module-cleaning-planning';
+  static const roleNotification = '/role-notification';
+  static const setting = '/setting';
   static const moduleCleaningListPlan = '/module-cleaning-list-plan';
+
   static const insuranceStatus = '/insuranceStatus';
   static const calibrationCertificate = '/calibrationCertificate';
   static const warrantyCertificate = '/warrantyCertificate';
+  static const moduleCleaningListExecution = '/module-cleaning-list-execution';
+
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

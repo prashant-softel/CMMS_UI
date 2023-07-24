@@ -586,6 +586,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getModuleCleaningListPlan({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCPlanList?facilityId=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,
@@ -3885,6 +3903,25 @@ class ConnectHelper {
       null,
       isLoading ?? false,
       {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveRoleNotification({
+    required String auth,
+    bool? isLoading,
+    required saveRoleNotificationJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/SetRoleNotifications',
+      Request.post,
+      saveRoleNotificationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

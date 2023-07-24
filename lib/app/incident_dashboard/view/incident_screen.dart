@@ -234,6 +234,5 @@ class IncidentScreen extends GetView<IncidentReportController> {
           ),
         ),
       );
-    // )
   }
 }

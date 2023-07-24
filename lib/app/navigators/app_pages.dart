@@ -29,6 +29,8 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
+import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
+import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_binding.dart';
 import 'package:cmms/app/module_cleaning_list_plan/view/module_cleaning_list_planning_screen.dart.dart';
 
@@ -46,6 +48,7 @@ import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
+import 'package:cmms/app/role_notification/view/role_notification_screen.dart';
 import 'package:cmms/app/stock_management/stock_management_binding.dart';
 import 'package:cmms/app/stock_management/view/stock_management.screen.dart';
 import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_binding.dart';
@@ -169,6 +172,9 @@ import '../preventive_maintenance_execution_view/view/preventive_maintenance_exe
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 import '../role_List/role_list_binding.dart';
+import '../role_notification/role_notification_binding.dart';
+import '../setting_dashboard/setting_dashboard_binding.dart';
+import '../setting_dashboard/view/setting_dashboard_screen.dart';
 import '../state_list_screen/state_list_binding.dart';
 import '../state_list_screen/view/state_list_content_screen.dart';
 import '../stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_binding.dart';
@@ -690,11 +696,22 @@ class AppPages {
       binding: ModuleCleaningPlanningBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.roleNotification,
+      page: RoleNotificationScreen.new,
+      binding: RoleNotificationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.setting,
+      page: SettingDashboardScreen.new,
+      binding: SettingDashboardBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.moduleCleaningListPlan,
       page: ModuleCleaningListPlanScreen.new,
       binding: ModuleCleaningListPlanBinding(),
     ),
     GetPage<dynamic>(
+
       name: _Paths.insuranceStatus,
       page: InsuranceStatusScreen.new,
       binding: InsuranceStatusBinding(),
@@ -709,6 +726,10 @@ class AppPages {
       page: WarrantyCertificateScreen.new,
       binding: WarrantyCertificateBinding(),
     ),
-
+    GetPage<dynamic>(
+      name: _Paths.moduleCleaningListExecution,
+      page: ModuleCleaningListExecutionScreen.new,
+      binding: ModuleCleaningListExecutionBinding(),
+    ),
   ];
 }

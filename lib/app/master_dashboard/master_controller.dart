@@ -157,6 +157,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToRoleNotification() async {
+    Get.toNamed(
+      Routes.roleNotification,
+    );
+  }
+
   Future<void> goToCountryTypeList() async {
     Get.toNamed(
       Routes.countryTypeListScreen,
@@ -216,10 +222,10 @@ class MastersController extends GetxController {
       Routes.userList,
     );
   }
+
   Future<void> goToAddUser() async {
     Get.toNamed(
       Routes.addUser,
     );
   }
-
 }

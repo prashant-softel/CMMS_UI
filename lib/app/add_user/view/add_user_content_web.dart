@@ -78,7 +78,7 @@ class AddUserContentWeb extends GetView<AddUserController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / SETTING", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
                   GestureDetector(
                       onTap: () {

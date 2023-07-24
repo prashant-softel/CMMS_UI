@@ -454,6 +454,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getModuleCleaningListPlan({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getModuleCleaningListPlan(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
   Future<ResponseModel> getNewPermitList({
     required String auth,
     int? facilityId,
@@ -2478,5 +2490,18 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> saveRoleNotification({
+    auth,
+    bool? isLoading,
+    saveRoleNotificationJsonString,
+  }) async {
+    var response = await connectHelper.saveRoleNotification(
+        auth: auth,
+        isLoading: isLoading,
+        saveRoleNotificationJsonString: saveRoleNotificationJsonString);
+    return response;
+  }
+
 //end
 }
