@@ -53,9 +53,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                 onTap: () {
                   Get.back();
                 },
-                child: Text(" / CALIBRATION LIST",
-                    style: Styles.greyMediumLight12),
+                child: Text(" / INVENTORY", style: Styles.greyMediumLight12),
               ),
+              Text(" / CALIBRATION LIST", style: Styles.greyMediumLight12),
             ],
           ),
         ),

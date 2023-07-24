@@ -2892,7 +2892,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString() + 'saveRoleAccess');
         return true;
       }
     } catch (error) {
@@ -5425,9 +5425,8 @@ class Repository {
       return [];
     }
   }
-  
-  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
 
+  Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createRiskType(
@@ -5767,6 +5766,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> rejectMrs({bool? isLoading, rejecttoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5813,6 +5813,28 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> saveRoleNotification(
+      {bool? isLoading, saveRoleNotificationJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.saveRoleNotification(
+          auth: auth,
+          isLoading: isLoading,
+          saveRoleNotificationJsonString: saveRoleNotificationJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'saveRoleNotification');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 }

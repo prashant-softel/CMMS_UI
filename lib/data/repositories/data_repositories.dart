@@ -2443,5 +2443,17 @@ class DataRepository extends DomainRepository {
         editMrsJsonString: editMrsJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> saveRoleNotification({
+    auth,
+    bool? isLoading,
+    saveRoleNotificationJsonString,
+  }) async {
+    var response = await connectHelper.saveRoleNotification(
+        auth: auth,
+        isLoading: isLoading,
+        saveRoleNotificationJsonString: saveRoleNotificationJsonString);
+    return response;
+  }
+
 //end
 }

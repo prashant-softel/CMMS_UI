@@ -446,7 +446,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 return createContentTile(
                                     title: "Role Notifications",
                                     onTap: () {
-                                      controller.goToRoleAccess();
+                                      controller.goToRoleNotification();
                                     });
                               }))),
                             ],

@@ -397,6 +397,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getSPVList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -3783,8 +3784,8 @@ class ConnectHelper {
 
     return responseModel;
   }
-  
-   Future<ResponseModel> approveMrs({
+
+  Future<ResponseModel> approveMrs({
     required String auth,
     bool? isLoading,
     required approvetoJsonString,
@@ -3837,6 +3838,25 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> saveRoleNotification({
+    required String auth,
+    bool? isLoading,
+    required saveRoleNotificationJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RoleAccess/SetRoleNotifications',
+      Request.post,
+      saveRoleNotificationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 }
