@@ -85,6 +85,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                                   "Calibration remainder In"),
                                           SizedBox(width: 10),
                                           Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.040,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /

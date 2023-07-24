@@ -55,7 +55,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                   icon: Icons.download,
                   label: 'exportAsset'.tr,
                   onPressed: () {},
-                  color: ColorValues.appDarkBlueColor,
+                  color: ColorValues.appLightBlueColor,
                 ),
                 Dimens.boxWidth10,
                 ActionButton(
@@ -73,7 +73,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                       Routes.addInventoryScreen,
                     );
                   },
-                  color: ColorValues.appDarkBlueColor,
+                  color: ColorValues.appGreenColor,
                 ),
                 Dimens.boxWidth10,
                 ActionButton(

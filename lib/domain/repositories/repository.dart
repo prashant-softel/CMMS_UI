@@ -36,6 +36,7 @@ import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
@@ -776,6 +777,44 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getModuleCleaningListPlan(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getModuleCleaningListPlan: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonModuleCleaningListPlan = jsonDecode(res.data);
+        // print(res.data);
+        final List<ModuleCleaningListPlanModel> _moduleCleaningListPlan =
+            jsonModuleCleaningListPlan
+                .map<ModuleCleaningListPlanModel>((m) =>
+                    ModuleCleaningListPlanModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _moduleCleaningListPlan;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getModuleCleaningListPlan');
         return [];
       }
     } catch (error) {

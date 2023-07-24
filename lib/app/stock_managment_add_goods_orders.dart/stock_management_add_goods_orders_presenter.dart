@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/business_list_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
@@ -67,4 +68,7 @@ class StockManagementAddGoodsOrdersPresenter {
       isLoading: isLoading ?? false,
     );
   }
+
+  Future<List<FacilityModel?>?> getFacilityList() async =>
+      await stockManagementAddGoodsOrdersUsecase.getFacilityList();
 }
