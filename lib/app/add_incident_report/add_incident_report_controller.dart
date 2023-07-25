@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,6 @@ import '../../domain/models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AddIncidentReportController extends GetxController {
- 
   AddIncidentReportController(this.incidentReportPresenter);
   AddIncidentReportPresenter incidentReportPresenter;
 
@@ -36,8 +36,7 @@ class AddIncidentReportController extends GetxController {
   ///Incident Report History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-
-RxString isSelected = ''.obs;
+  RxString isSelected = ''.obs;
 
   void selectOption(String value) {
     isSelected.value = value;
@@ -82,6 +81,12 @@ RxString isSelected = ''.obs;
   RxList<String?> selectedVictimNameDataList = <String>[].obs;
   RxList<int?> selectedVictimNameIdList = <int>[].obs;
   int selectedVictimNameId = 0;
+
+  ///Risk Type List
+  RxList<RiskTypeModel> riskTypeList = <RiskTypeModel>[].obs;
+  Rx<bool> isRiskTypeListSelected = true.obs;
+  Rx<String> selectedRiskTypeList = ''.obs;
+  int selectedRiskTypeId = 0;
 
   /// Asset Restoration Action taken By List
   RxList<EmployeeListModel> assetRestorationActionTakenByList =
@@ -270,9 +275,9 @@ RxString isSelected = ''.obs;
       Future.delayed(Duration(seconds: 1), () {
         getFacilityList();
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getBlocksList(facilityId);
-      });
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getBlocksList(facilityId);
     });
 
     if (id != null) {
@@ -281,18 +286,18 @@ RxString isSelected = ''.obs;
       });
     }
 
-     if (id != null){
+    if (id != null) {
       Future.delayed(Duration(seconds: 1), () {
-      getIncidentReportHistory(id: id!);
-    });
-     }
+        getIncidentReportHistory(id: id!);
+      });
+    }
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityPlantList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getuserAccessData();
+    // });
     Future.delayed(Duration(seconds: 1), () {
       getTypePermitList();
     });
@@ -311,8 +316,9 @@ RxString isSelected = ''.obs;
     Future.delayed(Duration(seconds: 1), () {
       getAssetRestorationActionTakenByList();
     });
-   
-  
+    Future.delayed(Duration(seconds: 1), () {
+      getRiskTypeList();
+    });
 
     super.onInit();
   }
@@ -414,6 +420,7 @@ RxString isSelected = ''.obs;
       genLossAssetDamageTextCtrlr.text =
           '${incidentReportDetailsModel.value?.generation_loss ?? 0}';
       isSelected.value = '${incidentReportDetailsModel.value?.severity ?? ''}';
+      selectedRiskTypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
     }
   }
 
@@ -487,6 +494,21 @@ RxString isSelected = ''.obs;
     update(['victim_name_list']);
   }
 
+  void getRiskTypeList() async {
+    riskTypeList.value = <RiskTypeModel>[];
+    final _riskTypeList = await incidentReportPresenter.getRiskTypeList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: facilityId,
+    );
+    print('Risk Type List:$_riskTypeList');
+    for (var riskType_list in _riskTypeList) {
+      riskTypeList.add(riskType_list);
+    }
+
+    update(['riskType_list']);
+  }
+
   void getAssetRestorationActionTakenByList() async {
     assetRestorationActionTakenByList.value = <EmployeeListModel>[];
     final _assetRestorationActionTakenByList =
@@ -549,16 +571,16 @@ RxString isSelected = ''.obs;
     update(['inventory_list']);
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await incidentReportPresenter.getUserAccessList();
+  // Future<void> getuserAccessData() async {
+  //   final _userAccessList = await incidentReportPresenter.getUserAccessList();
 
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+  //   if (_userAccessList != null) {
+  //     final userAccessModelList = jsonDecode(_userAccessList);
+  //     var userAccess = AccessListModel.fromJson(userAccessModelList);
+  //     varUserAccessModel.value = userAccess;
+  //     varUserAccessModel.value.access_list = userAccess.access_list;
+  //   }
+  // }
 
   // void getIncidentReportList() async {
   //   incidentReportModelList.value = <IncidentReportListModel>[];
@@ -647,16 +669,6 @@ RxString isSelected = ''.obs;
       //     // }
       //   }
       //   break;
-      // case RxList<BusinessListModel>:
-      //   {
-      //     for (var supplierName in selectedSupplierNameList) {
-      //       int supplierNameIndex =
-      //           supplierNameList.indexWhere((x) => x?.name == supplierName);
-      //       selectedSupplierNameIdList.add(supplierNameIndex);
-      //     }
-      //   }
-      //   break;
-
       case RxList<EmployeeListModel>:
         {
           int incidentInvestigationDoneByListIndex =
@@ -679,6 +691,14 @@ RxString isSelected = ''.obs;
           selectedIncidentInvestigationDoneByList.value = value;
           print(
               'Incident Investigation Done By Id: $selectedIncidentInvestigationDoneById');
+        }
+        break;
+        case RxList<RiskTypeModel>:
+        {
+          int riskTypeListIndex = riskTypeList.indexWhere((x) => x.name == value);
+          selectedRiskTypeId = riskTypeList[riskTypeListIndex].id ?? 0;
+          print('Risk Type id: $selectedRiskTypeId');
+         
         }
         break;
 
@@ -749,41 +769,41 @@ RxString isSelected = ''.obs;
     if (selectedEquipmentName.value == '') {
       isEquipmentNameSelected.value = false;
     }
-     if (startDateTimeCtrlr.text == '') {
+    if (startDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Incident Date & Time Field cannot be empty', timeInSecForIosWeb: 5);
+          msg: 'Incident Date & Time Field cannot be empty',
+          timeInSecForIosWeb: 5);
     }
-     if (reportingDateTimeCtrlr.text == '') {
+    if (reportingDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Reporting Date & Time Field cannot be empty', timeInSecForIosWeb: 5);
+          msg: 'Reporting Date & Time Field cannot be empty',
+          timeInSecForIosWeb: 5);
     }
     if (selectedVictimNameList.value == '') {
       isVictimNameListSelected.value = false;
     }
-     if (actionTakenDateTimeCtrlr.text == '') {
+    if (actionTakenDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Action Taken By Date & Time Field cannot be empty', timeInSecForIosWeb: 5);
+          msg: 'Action Taken By Date & Time Field cannot be empty',
+          timeInSecForIosWeb: 5);
     }
     if (selectedAssetRestorationActionTakenByList.value == '') {
       isAssetRestorationActionTakenByListSelected.value = false;
     }
-     if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
+    if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
       isincidentInvestigationVerificationDoneByListSelected.value = false;
     }
     if (damagedAssetCostTextCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Damaged cost Field cannot be empty',
-          timeInSecForIosWeb: 5);
+          msg: 'Damaged cost Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (genLossAssetDamageTextCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Generation Loss Field cannot be empty',
-          timeInSecForIosWeb: 5);
+          msg: 'Generation Loss Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (titleTextCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Title Field cannot be empty',
-          timeInSecForIosWeb: 5);
+          msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (incidentreportDescriptionCtrlr.text == '') {
       Fluttertoast.showToast(
@@ -797,8 +817,7 @@ RxString isSelected = ''.obs;
     }
     if (insuranceRemarkTextCtrlr.text == '') {
       Fluttertoast.showToast(
-          msg: 'Insurance Remark Field cannot be empty',
-          timeInSecForIosWeb: 5);
+          msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
     }
     // if (immediateCorrectiveActionTextController.text == '') {
     //   Fluttertoast.showToast(
@@ -814,8 +833,7 @@ RxString isSelected = ''.obs;
         isVictimNameListSelected.value == false ||
         isAssetRestorationActionTakenByListSelected.value == false ||
         isincidentInvestigationDoneByListSelected.value == false ||
-        isincidentInvestigationVerificationDoneByListSelected.value == false)
-         {
+        isincidentInvestigationVerificationDoneByListSelected.value == false) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -879,7 +897,7 @@ RxString isSelected = ''.obs;
               action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
               inverstigated_by: selectedIncidentInvestigationDoneById,
               verified_by: selectedIncidentInvestigationVerificationDoneById,
-              risk_type: 2,
+              risk_type: selectedRiskTypeId,
               esi_applicability: esiApplicabilityValue.value,
               legal_applicability: legalApplicabilityValue.value,
               rca_required: rCAUploadRequiredValue.value,
@@ -894,8 +912,7 @@ RxString isSelected = ''.obs;
               insurance: _insuranceAvailable,
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
-              severity: isSelected.value
-              );
+              severity: isSelected.value);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
       Map<String, dynamic>? responseCreateIncidentReport =
@@ -966,7 +983,7 @@ RxString isSelected = ''.obs;
               action_taken_by: selectedAssetRestorationActionTakenById,
               inverstigated_by: selectedIncidentInvestigationDoneById,
               verified_by: selectedIncidentInvestigationVerificationDoneById,
-              risk_type: 1,
+              risk_type: selectedRiskTypeId,
               legal_applicability: incidentReportDetailsModel
                           .value?.legal_applicability_name ==
                       "YES"
@@ -996,8 +1013,7 @@ RxString isSelected = ''.obs;
               is_insurance_applicable: true,
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
-              severity: isSelected.value
-              );
+              severity: isSelected.value);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
       Map<String, dynamic>? responseUpdateIncidentReport =

@@ -142,9 +142,9 @@ class IncidentReportListController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getuserAccessData();
+    // });
 
     super.onInit();
   }
@@ -162,16 +162,16 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await incidentReportPresenter.getUserAccessList();
+  // Future<void> getuserAccessData() async {
+  //   final _userAccessList = await incidentReportPresenter.getUserAccessList();
 
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+  //   if (_userAccessList != null) {
+  //     final userAccessModelList = jsonDecode(_userAccessList);
+  //     var userAccess = AccessListModel.fromJson(userAccessModelList);
+  //     varUserAccessModel.value = userAccess;
+  //     varUserAccessModel.value.access_list = userAccess.access_list;
+  //   }
+  // }
 
   Future<void> incidentReportRejectButton({String? id}) async {
     String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();

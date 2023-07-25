@@ -250,7 +250,7 @@ class ModuleListController extends GetxController {
 
     ModuleListModel createModulelist = ModuleListModel(
         id:moduleId,
-        moduleName: _modulelistNumber,
+        name: _modulelistNumber,
         featureName: _featurelistNumber,
         menuImage : null,
         add : isToggleOn.value?1:0,

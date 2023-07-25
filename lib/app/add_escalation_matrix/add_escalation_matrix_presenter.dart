@@ -1,6 +1,8 @@
 
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
+import 'package:cmms/domain/models/modulelist_model.dart';
+import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/usecases/add_escalation_matrix_usecase.dart';
 
@@ -14,15 +16,15 @@ class AddEscalationMatrixPresenter {
 
  
 
-  // Future<IncidentReportDetailsModel?> getIncidentReportDetail({
-  //   bool? isLoading,  
-  //   required int id,
-  // }) async {
-  //     return viewIncidentReportUsecase.getIncidentReportDetail(
-  //       id: id,
-  //       isLoading: isLoading ?? false,
-  //     );
-  // }
+   Future<Map<String, dynamic>?> createEscalationMatrix({
+    createEscalationMatrix,
+    required bool isLoading,
+  }) async {
+    return viewIncidentReportUsecase.createEscalationMatrix(
+      createEscalationMatrix: createEscalationMatrix,
+      isLoading: isLoading,
+    );
+  }
 
    Future<List<TypePermitModel?>?> getTypePermitList(
     {required int facility_id}
@@ -32,22 +34,25 @@ class AddEscalationMatrixPresenter {
         facility_id
         );
 
-  //  Future<List<HistoryModel>?> getIncidentReportHistory(
-  //   moduleType,
-  //   id,
-  //   isLoading,
-  // ) async =>
-  //     await viewIncidentReportUsecase.getIncidentReportHistory(
-  //       moduleType: moduleType,
-  //       id: id,
-  //       isLoading: isLoading,
-  //     );
+    Future<List<ModuleListModel?>?> getModuleList({
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await viewIncidentReportUsecase.getModuleList(
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<List<RoleModel?>?> getRoleList({
+    bool? isLoading,
+  }) async =>
+      await viewIncidentReportUsecase.getRoleList(
+        isLoading: isLoading ?? false,
+      );
 
  
-
-
-
-
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await viewIncidentReportUsecase.getFacilityList();
 

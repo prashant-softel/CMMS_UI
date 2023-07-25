@@ -160,8 +160,9 @@ class WarrantyClaimPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await warrantyClaimUsecase.getFacilityList();
-  Future<String?> getUserAccessList() async =>
-      await warrantyClaimUsecase.getUserAccessList();
+
+  // Future<String?> getUserAccessList() async =>
+  //     await warrantyClaimUsecase.getUserAccessList();
 
   ///
 }

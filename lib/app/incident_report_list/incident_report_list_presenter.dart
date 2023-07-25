@@ -47,8 +47,8 @@ class IncidentReportListPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await incidentReportListUsecase.getFacilityList();
-  Future<String?> getUserAccessList() async =>
-      await incidentReportListUsecase.getUserAccessList();
+  // Future<String?> getUserAccessList() async =>
+  //     await incidentReportListUsecase.getUserAccessList();
 
   ///
 }

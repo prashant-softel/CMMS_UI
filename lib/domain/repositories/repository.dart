@@ -41,6 +41,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
@@ -478,6 +479,49 @@ class Repository {
         } else {}
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createIncidentReport');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
+  //Create Escalation Matrix
+  Future<Map<String, dynamic>> createEscalationMatrix(
+    createEscalationMatrix,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createEscalationMatrix(
+        auth: auth,
+        createEscalationMatrix: createEscalationMatrix,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Escalation Matrix Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {}
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createEscalationMatrix');
         //return '';
       }
       return Map();
@@ -1225,6 +1269,37 @@ class Repository {
       return [];
     }
   }
+
+
+  ///Risk Type List
+   Future<List<RiskTypeModel>> getRiskTypeList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getRiskTypeList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Risk Type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var riskTypeList = riskTypeModelFromJson(res.data);
+        return riskTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
 
   ///Employees List
   Future<List<EmployeeListModel2>> getEmployeesList({
@@ -2099,6 +2174,32 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getTypePermitList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+
+      return [];
+    }
+  }
+
+   Future<List<ModuleListModel?>?> getModulesList(
+      bool? isLoading, int? facility_id) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getModulesList(
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
+
+      if (!res.hasError) {
+        final jsonModuleListModels = jsonDecode(res.data);
+        final List<ModuleListModel> _typePermitModelList = jsonModuleListModels
+            .map<ModuleListModel>(
+                (m) => ModuleListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _typePermitModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getModulesList');
         return null;
       }
     } catch (error) {

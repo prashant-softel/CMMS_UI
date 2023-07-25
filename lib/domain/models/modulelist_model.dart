@@ -9,7 +9,7 @@ String moduleListModelToJson(List<ModuleListModel> data) =>
 
 class ModuleListModel {
   int? id;
-  String? moduleName;
+  String? name;
   String? featureName;
   String? menuImage;
   int? add;
@@ -22,7 +22,7 @@ class ModuleListModel {
 
   ModuleListModel({
     this.id,
-    this.moduleName,
+    this.name,
     this.featureName,
     this.menuImage,
     this.add,
@@ -37,7 +37,7 @@ class ModuleListModel {
   factory ModuleListModel.fromJson(Map<String, dynamic> json) =>
       ModuleListModel(
         id: json['id'],
-        moduleName: json['moduleName'],
+        name: json['moduleName'],
         featureName: json['featureName'],
         menuImage: json['menuImage'],
         add: json['add'],
@@ -51,7 +51,7 @@ class ModuleListModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "moduleName": moduleName,
+        "moduleName": name,
         "featureName": featureName,
         "menuImage": menuImage,
         "add": add,
