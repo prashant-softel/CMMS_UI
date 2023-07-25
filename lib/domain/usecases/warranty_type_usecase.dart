@@ -127,6 +127,7 @@ class WarrantyTypeUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
+      
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
 }

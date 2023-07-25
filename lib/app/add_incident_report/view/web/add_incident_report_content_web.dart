@@ -5,6 +5,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +133,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   // margin: Dimens.edgeInsets5,
                                                                   dropdownList:
                                                                       controller
@@ -334,7 +335,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .victimNameList,
                                                                   isValueSelected:
@@ -371,7 +372,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .incidentInvestigationDoneByList,
                                                                   isValueSelected:
@@ -405,16 +406,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
-                                                                      .typePermitList,
+                                                                      .riskTypeList,
                                                                   isValueSelected:
                                                                       controller
-                                                                          .isTypePermitSelected
+                                                                          .isRiskTypeListSelected
                                                                           .value,
                                                                   selectedValue:
                                                                       controller
-                                                                          .selectedTypePermit
+                                                                          .selectedRiskTypeList
                                                                           .value,
                                                                   onValueChanged:
                                                                       controller
@@ -570,7 +571,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .assetRestorationActionTakenByList,
                                                                   isValueSelected:
@@ -690,7 +691,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .eqipmentNameList,
                                                                   isValueSelected:
@@ -764,7 +765,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .width /
                                                                     5,
                                                             child: Obx(
-                                                              () => DropdownWidget(
+                                                              () => DropdownWebWidget(
                                                                 dropdownList: controller
                                                                     .incidentInvestigationVerificationDoneByList,
                                                                 isValueSelected:
@@ -966,7 +967,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .width /
                                                               5,
                                                           child: Obx(
-                                                            () => DropdownWidget(
+                                                            () => DropdownWebWidget(
                                                               dropdownList: controller
                                                                   .typePermitList,
                                                               isValueSelected:

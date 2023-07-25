@@ -11,6 +11,8 @@ import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/inventory_model2.dart';
+import 'package:cmms/domain/models/modulelist_model.dart';
+import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -34,6 +36,15 @@ class AddEscalationMatrixUsecase {
       await _repository.getHistory(
         moduleType,
         id,
+        isLoading,
+      );
+
+    Future<Map<String, dynamic>> createEscalationMatrix({
+    createEscalationMatrix,
+    bool? isLoading,
+  }) async =>
+      await _repository.createEscalationMatrix(
+        createEscalationMatrix,
         isLoading,
       );
 
@@ -71,6 +82,24 @@ class AddEscalationMatrixUsecase {
         isLoading,
         facility_id
         );
+    
+   Future<List<ModuleListModel?>?> getModuleList({
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getModuleList(
+        type,
+        facilityId,
+        isLoading,
+      );
+
+   Future<List<RoleModel?>?> getRoleList({
+    bool? isLoading,
+  }) async =>
+      await _repository.getRoleList(
+        isLoading,
+      );
 
   // Future<Map<String, dynamic>> createWarrantyClaim({
   //   createWarrantyClaim,

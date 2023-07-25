@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
@@ -267,6 +268,26 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+
+  ///Risk Type List
+   Future<ResponseModel> getRiskTypeList(
+      {required bool isLoading, 
+      required String auth, 
+      int? facility_id
+      }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetRiskTypeList?facility_id=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
 
   Future<ResponseModel> getEmployeePermitList(
       {required bool isLoading, required String auth, int? facility_id}) async {
@@ -1085,6 +1106,29 @@ class ConnectHelper {
     return response;
   }
 
+
+  Future<ResponseModel> getModulesList(
+      {String? auth, bool? isLoading, int? facility_id}) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('PermitTypeResponse: $response');
+    try {
+      response = await apiWrapper.makeRequest(
+        'CMMS/GetModuleList?facility_id=$facility_id',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
+
   Future<ResponseModel> getBlocksList({
     String? auth,
     bool? isLoading,
@@ -1521,6 +1565,41 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+  //Create Escalation matrix
+  Future<ResponseModel> createEscalationMatrix({
+    required String auth,
+    createEscalationMatrix,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'EM/SetEscalationMatrix',
+      Request.post,
+      createEscalationMatrix,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Escalation Matrix Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(CreateEscalationMatrixDialog(
+      data: parsedJson['message'],
+      escalationMatrixId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
 
   //Create WarraGoods order
 

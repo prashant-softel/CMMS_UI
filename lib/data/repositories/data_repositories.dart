@@ -193,6 +193,19 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getRiskTypeList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getRiskTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
   Future<ResponseModel> getEmployeesList({
     int? facility_id,
     required bool isLoading,
@@ -1002,6 +1015,19 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+
+ Future<ResponseModel> createEscalationMatrix({
+    required String auth,
+    createEscalationMatrix,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createEscalationMatrix(
+        auth: auth,
+        createEscalationMatrix: createEscalationMatrix,
+        isLoading: isLoading ?? false,
+      );
+
+
   Future<ResponseModel> createGoodsOrder({
     required String auth,
     createGo,
@@ -1265,6 +1291,15 @@ class DataRepository extends DomainRepository {
     int? facility_id,
   }) async =>
       await connectHelper.getTypePermitList(
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
+  
+
+  Future<ResponseModel> getModulesList({
+    String? auth,
+    bool? isLoading,
+    int? facility_id,
+  }) async =>
+      await connectHelper.getModulesList(
           auth: auth, isLoading: isLoading, facility_id: facility_id);
 
   Future<ResponseModel> getUserAccessList({

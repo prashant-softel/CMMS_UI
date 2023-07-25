@@ -164,8 +164,9 @@ class EditWarrantyClaimPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await editWarrantyClaimUsecase.getFacilityList();
-  Future<String?> getUserAccessList() async =>
-      await editWarrantyClaimUsecase.getUserAccessList();
+      
+  // Future<String?> getUserAccessList() async =>
+  //     await editWarrantyClaimUsecase.getUserAccessList();
 
   ///
 }

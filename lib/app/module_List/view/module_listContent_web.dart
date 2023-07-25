@@ -661,7 +661,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                           .moduleList?[index];
                                                   return [
                                                     '${moduleListDetails?.id}',
-                                                    '${moduleListDetails?.moduleName}',
+                                                    '${moduleListDetails?.name}',
                                                     // "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
                                                     '${moduleListDetails?.featureName}',
                                                     // '${moduleListDetails?.menuImage}',
@@ -712,7 +712,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                                                 _moduleList[0]);
 
                                                                             controller.modulelistNumberCtrlr.text =
-                                                                                controller.selectedItem?.moduleName ?? '';
+                                                                                controller.selectedItem?.name ?? '';
                                                                             controller.featureCtrlr.text =
                                                                                 controller.selectedItem?.featureName ?? '';
                                                                             controller.isToggleOn.value = controller.selectedItem?.add == 1

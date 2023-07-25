@@ -265,9 +265,9 @@ class WarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getuserAccessData();
+    // });
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
@@ -329,16 +329,16 @@ class WarrantyClaimController extends GetxController {
     }
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await warrantyClaimPresenter.getUserAccessList();
+  // Future<void> getuserAccessData() async {
+  //   final _userAccessList = await warrantyClaimPresenter.getUserAccessList();
 
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+  //   if (_userAccessList != null) {
+  //     final userAccessModelList = jsonDecode(_userAccessList);
+  //     var userAccess = AccessListModel.fromJson(userAccessModelList);
+  //     varUserAccessModel.value = userAccess;
+  //     varUserAccessModel.value.access_list = userAccess.access_list;
+  //   }
+  // }
 
   void employeesNameSelected(_selectedEmployeesNameIds) {
     selectedEmployeeNameIdList.value = <int>[];

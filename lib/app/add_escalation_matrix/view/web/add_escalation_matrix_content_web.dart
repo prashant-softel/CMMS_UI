@@ -3,12 +3,10 @@ import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +45,7 @@ class AddEscalationMatrixContentWeb
                 key: controller.printKey,
                 child: Center(
                   child: Container(
-                    margin: Dimens.edgeInsets16,
+                    // margin: Dimens.edgeInsets16,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
@@ -134,14 +132,14 @@ class AddEscalationMatrixContentWeb
                                                                 .size
                                                                 .width /
                                                             5,
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
                                                       dropdownList: controller
-                                                          .typePermitList,
+                                                          .moduleList,
                                                       isValueSelected: controller
-                                                          .isTypePermitSelected
+                                                          .isModuleListSelected
                                                           .value,
                                                       selectedValue: controller
-                                                          .selectedTypePermit
+                                                          .selectedModuleList
                                                           .value,
                                                       onValueChanged: controller
                                                           .onValueChanged,
@@ -157,7 +155,7 @@ class AddEscalationMatrixContentWeb
                                                                 .size
                                                                 .width /
                                                             5,
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
                                                       dropdownList: controller
                                                           .typePermitList,
                                                       isValueSelected: controller
@@ -173,274 +171,7 @@ class AddEscalationMatrixContentWeb
                                                 ],
                                               ),
                                               Dimens.boxHeight50,
-                                               ////Supplier Actions
-                              // SizedBox(
-                              //   height: 400,
-                              //   width: MediaQuery.of(context).size.width / 1.2,
-                              //   child: Center(
-                              //     child: Container(
-                              //       margin: Dimens.edgeInsets16,
-                              //       height: Get.height,
-                              //       decoration: BoxDecoration(
-                              //         border: Border.all(
-                              //             color: Colors.grey.withOpacity(.3)),
-                              //       ),
-                              //       constraints: BoxConstraints(
-                              //         maxWidth: 1100,
-                              //       ),
-                              //       child: SingleChildScrollView(
-                              //         child: Column(
-                              //           children: [
-                              //             CustomAppBar(
-                              //               title:
-                              //                   'Schedule of Supplier Actions'
-                              //                       .tr,
-                              //               // action: ActionButton(
-                              //               //   icon: Icons.add,
-                              //               //   label: 'Add',
-                              //               //   // onPress:
-                              //               //   //     () async {},
-                              //               //   color: Colors.blue,
-                              //               //   onPressed: () {
-                              //               //     controller
-                              //               //         .updateSupplierActionText(
-                              //               //       controller
-                              //               //           .supplierActionTextFieldController
-                              //               //           .text,
-                              //               //       controller
-                              //               //           .supplierActionDateTimeCtrlrWeb
-                              //               //           .text,
-                              //               //       // controller.isCheckedRequire
-                              //               //       //     .value
-                              //               //     );
-                              //               //     controller
-                              //               //         .supplierActionTextFieldController
-                              //               //         .clear();
-                              //               //     controller
-                              //               //         .supplierActionDateTimeCtrlrWeb
-                              //               //         .clear();
-                              //               //     // controller.isCheckedRequire
-                              //               //     //     .value = false;
-                              //               //   },
-                              //               // ),
-                              //             ),
-                              //             Dimens.boxHeight10,
-                              //             Obx(
-                              //               () => Wrap(children: [
-                              //                 Row(children: [
-                              //                   SizedBox(
-                              //                     width: 10,
-                              //                   ),
-                              //                   Text('#'),
-                              //                   SizedBox(
-                              //                     width: 25,
-                              //                   ),
-                              //                   Text('Supplier Action'),
-                              //                   SizedBox(
-                              //                     width: 160,
-                              //                   ),
-                              //                   Text('Required'),
-                              //                   SizedBox(
-                              //                     width: 170,
-                              //                   ),
-                              //                   Text('Required by Date'),
-                              //                   SizedBox(
-                              //                     width: 150,
-                              //                   ),
-                              //                   Text('Action'),
-                              //                 ]),
-                              //                 SizedBox(
-                              //                   height: 20,
-                              //                 ),
-                              //                 Column(
-                              //                   children: []..addAll(controller
-                              //                       .supplierActions
-                              //                       .map((element) => Row(
-                              //                             children: [
-                              //                               // Text('${element.name}'),
-                              //                               // Text('${element.required_by_date}')
-
-                              //                               supplierActionData(
-                              //                                   '${element.srNumber}',
-                              //                                   '${element.name}',
-                              //                                   context,
-                              //                                   0,
-                              //                                   '${element.required_by_date}'),
-                              //                             ],
-                              //                           ))),
-                              //                 ),
-
-                              //                 // supplierActionData(
-                              //                 //     '2',
-                              //                 //     'Material Replinishment',
-                              //                 //     context,
-                              //                 //     1),
-                              //                 // supplierActionData(
-                              //                 //     '3',
-                              //                 //     'Preventive Action Plan',
-                              //                 //     context,
-                              //                 //     2),
-                              //                 // supplierActionData(
-                              //                 //     '4',
-                              //                 //     'Claim Closure Date',
-                              //                 //     context,
-                              //                 //     3)
-                              //                 Column(
-                              //                   children: [
-                              //                     SizedBox(
-                              //                         width:
-                              //                             MediaQuery.of(context)
-                              //                                     .size
-                              //                                     .width /
-                              //                                 3,
-                              //                         child: CustomTextField(
-                              //                           textController: controller
-                              //                               .supplierActionSrNumberTextFieldController,
-                              //                           label:
-                              //                               '  Serial Number',
-                              //                         )),
-                              //                     SizedBox(
-                              //                         width:
-                              //                             MediaQuery.of(context)
-                              //                                     .size
-                              //                                     .width /
-                              //                                 3,
-                              //                         child: CustomTextField(
-                              //                           textController: controller
-                              //                               .supplierActionTextFieldController,
-                              //                           label:
-                              //                               'Supplier Action',
-                              //                         )),
-
-                              //                     ///Checkbox
-                              //                     Row(
-                              //                       children: [
-                              //                         Padding(
-                              //                           padding:
-                              //                               const EdgeInsets
-                              //                                       .only(
-                              //                                   left: 340),
-                              //                           child: Text(
-                              //                             'Required',
-                              //                             style: TextStyle(
-                              //                                 fontSize: 15),
-                              //                           ),
-                              //                         ),
-                              //                         SizedBox(
-                              //                           width: 70,
-                              //                         ),
-                              //                         Checkbox(
-                              //                             value: controller
-                              //                                 .isCheckedRequire
-                              //                                 .value,
-                              //                             onChanged:
-                              //                                 (bool? value) {
-                              //                               controller
-                              //                                   .requireToggleCheckbox();
-                              //                             }),
-                              //                       ],
-                              //                     ),
-
-                              //                     SizedBox(
-                              //                       width:
-                              //                           MediaQuery.of(context)
-                              //                                   .size
-                              //                                   .width /
-                              //                               3,
-                              //                       child: CustomTextField(
-                              //                         label: ' Required Date ',
-                              //                         suffixIcon: Icon(
-                              //                           Icons.calendar_month,
-                              //                         ),
-                              //                         // textController:
-                              //                         //     controller.categoryTextController,
-                              //                         // textController: controller
-                              //                         //     .supplierActionDateTimeCtrlrWeb,
-
-                              //                         // onTap: () {
-                              //                         //   pickRequiredSupplierDate_web(
-                              //                         //       context);
-                              //                         // },
-                              //                       ),
-                              //                     ),
-                              //                     // ActionButton(
-                              //                     //   icon: Icons.add,
-                              //                     //   label: 'Add',
-                              //                     //   // onPress:
-                              //                     //   //     () async {},
-                              //                     //   color: Colors.blue,
-                              //                     //   onPressed: () {
-                              //                     //     controller
-                              //                     //         .updateSupplierActionText(
-                              //                     //       controller
-                              //                     //           .supplierActionTextFieldController
-                              //                     //           .text,
-                              //                     //       controller
-                              //                     //           .supplierActionDateTimeCtrlrWeb
-                              //                     //           .text,
-                              //                     //       controller
-                              //                     //           .supplierActionSrNumberTextFieldController
-                              //                     //           .text,
-
-                              //                     //       // controller.isCheckedRequire
-                              //                     //       //     .value
-                              //                     //     );
-                              //                     //     controller
-                              //                     //         .supplierActionSrNumberTextFieldController
-                              //                     //         .clear();
-                              //                     //     controller
-                              //                     //         .supplierActionTextFieldController
-                              //                     //         .clear();
-                              //                     //     controller
-                              //                     //         .supplierActionDateTimeCtrlrWeb
-                              //                     //         .clear();
-                              //                     //     // controller.isCheckedRequire
-                              //                     //     //     .value = false;
-                              //                     //   },
-                              //                     // ),
-                              //                     ElevatedButton(
-                              //                       child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
-                              //                       onPressed: () {
-                              //                         controller
-                              //                             .updateSupplierActionText(
-                              //                           controller
-                              //                               .supplierActionTextFieldController
-                              //                               .text,
-                              //                           // controller
-                              //                           //     .supplierActionDateTimeCtrlrWeb
-                              //                           //     .text,
-                              //                           controller
-                              //                               .supplierActionSrNumberTextFieldController
-                              //                               .text,
-
-                              //                           // controller.isCheckedRequire
-                              //                           //     .value
-                              //                         );
-                              //                         controller
-                              //                             .supplierActionSrNumberTextFieldController
-                              //                             .clear();
-                              //                         controller
-                              //                             .supplierActionTextFieldController
-                              //                             .clear();
-                              //                         // controller
-                              //                         //     .supplierActionDateTimeCtrlrWeb
-                              //                         //     .clear();
-                              //                         // controller.isCheckedRequire
-                              //                         //     .value = false;
-                              //                       },
-                              //                     )
-                              //                   ],
-                              //                 ),
-                              //               ]),
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
-
-
+                              
                                               ///Escalation Matrix Roles
                                               Obx(
                                                 ()=> Wrap(
@@ -483,6 +214,9 @@ class AddEscalationMatrixContentWeb
                                                                     onTap: () {
                                                                       controller
                                                                          .addRowItem();
+                                                                      
+                                                                      print('TypeId:${controller.durationDaysTextCtrlr}');
+                                                                     
                                                                     },
                                                                     child: Icon(Icons
                                                                         .exposure_plus_1)),
@@ -571,12 +305,7 @@ class AddEscalationMatrixContentWeb
                                                                                 children: [
                                                                                   SizedBox(
                                                                                     width: MediaQuery.of(context).size.width / 5,
-                                                                                    child: DropdownWidget(
-                                                                                      dropdownList: controller.typePermitList,
-                                                                                      isValueSelected: controller.isTypePermitSelected.value,
-                                                                                      selectedValue: controller.selectedTypePermit.value,
-                                                                                      onValueChanged: controller.onValueChanged,
-                                                                                    ),
+                                                                                    child: _buildDurationDaysTextField_web(context)
                                                                                   ),
                                                                                   SizedBox(
                                                                                     height: 5,
@@ -589,10 +318,10 @@ class AddEscalationMatrixContentWeb
                                                                               ? SizedBox(
                                                                                   width: MediaQuery.of(context).size.width / 5,
                                                                                   child:
-                                                                                      DropdownWidget(
-                                                                                    dropdownList: controller.typePermitList,
-                                                                                    isValueSelected: controller.isTypePermitSelected.value,
-                                                                                    selectedValue: controller.selectedTypePermit.value,
+                                                                                      DropdownWebWidget(
+                                                                                    dropdownList: controller.roleList,
+                                                                                    isValueSelected: controller.isSelectedRole.value,
+                                                                                    selectedValue: controller.selectedRole.value,
                                                                                     onValueChanged: controller.onValueChanged,
                                                                                   ),
                                                                                 )
@@ -644,6 +373,24 @@ class AddEscalationMatrixContentWeb
                                                   ],
                                                 ),
                                               ),
+                                              Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      text: "Add Data",
+                                                      onPressed: () {
+                                                        
+                                                        controller.addStatusEscalationData(controller.selectedTypePermitId);
+                                                        controller.addEscalationData(int.tryParse('${controller.durationDaysTextCtrlr.text}'), controller.selectedRoleListId);
+                                                        print('Controller:${controller.durationDaysTextCtrlr.text}');
+                                                        print('Controller:${controller.selectedTypePermitId}');
+                                                        controller.durationDaysTextCtrlr.clear();
+                                                        controller.selectedRole.value = "";
+                                                      },
+                                                    ),
+                                                  ),
 
                                               Row(
                                                 mainAxisAlignment:
@@ -674,10 +421,11 @@ class AddEscalationMatrixContentWeb
                                                               .appGreenColor,
                                                       text: "Submit",
                                                       onPressed: () {
-                                                        // controller.printScreen();
+                                                        controller.createEscalationMatrix();
                                                       },
                                                     ),
                                                   ),
+                                                  
 
                                                   //           varUserAccessModel.value.access_list!
                                                   // .where((e) => e.feature_id == 3 && e.edit == 1)
@@ -723,517 +471,89 @@ class AddEscalationMatrixContentWeb
         // ),
       );
 
-       supplierActionData(String? title, String? title2, BuildContext context,
-      int? position, String? date) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / 1.5,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('$title'),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 5,
-            child: Container(
-                child: Container(
-              height: 30,
-              decoration:
-                  BoxDecoration(color: Color.fromARGB(255, 206, 204, 204)),
-              child: Center(child: Text('$title2')),
-            )),
-          ),
-          Checkbox(
-            // value: controller.isCheckedDataRequire.value,
-            value: true,
-            // onChanged: (bool? value) {
-            //   // this.valuefirst = value!;
-            //   // controller.isCheckedDataRequire.value = value!;
-            // }
-            onChanged: null,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 3,
-            child: CustomTextField(
-              label: '',
-              hintText: '$date',
-              readOnly: true,
-            ),
-          ),
-          // position == 1 || position == 2 || position == 3
-          // ?
-          // ActionButton(
-          //   icon: Icons.remove,
-          //   label: 'Delete',
-          //   // onPress:
-          //   //     () async {},
-          //   color: Colors.red,
-          //   onPressed: () {
-          //     controller.removeRow(index: 0);
-          //   },
-          // )
-
-          // : Text('data')
-        ],
-      ),
-    );
-  }
-
-
-  ///Below All For WEB
-  ///
-  /// Action Taken date and Time
-  Widget _buildActionTakenDateTimeField_web(
-    BuildContext context,
-  ) {
+     
+ ///Duration in Days
+  Widget _buildDurationDaysTextField_web(BuildContext context) {
     return Column(//
         children: [
-      // Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(right: 385),
-      //       child: CustomRichText(
-      //         title: position == 0 ? '$title1' : '$title2',
-      //       ),
-      //     )),
-      Dimens.boxHeight5,
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ), //BoxShadow
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: Responsive.isDesktop(context)
-                ? MediaQuery.of(context).size.width / 3.7
-                : MediaQuery.of(context).size.width / 1.0,
-            child: TextField(
-              onTap: () {
-                pickActionTakenDateTime_web(context, 0);
-
-                // : null;
-              },
-              controller: controller.actionTakenDateTimeCtrlr,
-
-              // :null,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
+      
+      Container(
+      height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.44
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
               ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
             ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.durationDaysTextCtrlr,
+            keyboardType: TextInputType.number,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              suffixText: 'Days in Number',
+              // label: Text('INR'),
+              focusedErrorBorder:
+                  controller.isDurationDaysTextInvalid.value
+                      ? OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                            color: ColorValues.redColorDark,
+                          ),
+                        )
+                      : InputBorder.none,
+              errorBorder: controller.isDurationDaysTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                      
+                    )
+                  : null,
+              errorText: controller.isDurationDaysTextInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              print('value Days${value.length}');
+              if (value.trim().length > 0) {
+                controller.isDurationDaysTextInvalid.value = false;
+              } else {
+                controller.isDurationDaysTextInvalid.value = true;
+              }
+            },
           ),
         ),
       ),
-      Dimens.boxHeight20,
+      
     ]);
   }
-
-//Start Date and valid Till
-  Future pickActionTakenDateTime_web(BuildContext context, int position) async {
-    var dateTime = controller.selectedActionTakenTime.value;
-
-    final date = await pickActionTakenDate_web(context, position);
-    if (date == null) {
-      return;
-    }
-
-    final time = await pickActionTakenTime_web(context, position);
-    if (time == null) {
-      return;
-    }
-
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedActionTakenTime.value;
-
-    controller.actionTakenDateTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.actionTakenDateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-    // controller.validTillTimeCtrlr.text =
-    //     DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
-    // controller.validTillTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    //         .format(dateTime.add(Duration(hours: 8)));
-    // controller.startDateTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    //         .format(dateTime);
-  }
-
-  Future<DateTime?> pickActionTakenDate_web(
-      BuildContext context, int position) async {
-    DateTime? dateTime = controller.selectedActionTakenTime.value;
-
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-
-    if (newDate == null) return null;
-
-    return newDate;
-  }
-
-  Future<TimeOfDay?> pickActionTakenTime_web(
-      BuildContext context, int position) async {
-    DateTime dateTime = controller.selectedActionTakenTime.value;
-
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
-    }
-
-    return newTime;
-  }
-
-  ///
-  /// Incident and Reporting date Time
-  Widget _buildStartValidTillDateField_web(
-    BuildContext context,
-    int position,
-  ) {
-    return Column(//
-        children: [
-      // Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(right: 385),
-      //       child: CustomRichText(
-      //         title: position == 0 ? '$title1' : '$title2',
-      //       ),
-      //     )),
-      Dimens.boxHeight5,
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ), //BoxShadow
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: Responsive.isDesktop(context)
-                ? MediaQuery.of(context).size.width / 3.7
-                : MediaQuery.of(context).size.width / 1.0,
-            child: TextField(
-              onTap: () {
-                position == 0
-                    ? pickDateTime_web(context, 0)
-                    : pickDateTime_web(context, 1);
-                // : null;
-              },
-              controller: position == 0
-                  ? controller.startDateTimeCtrlr
-                  : controller.validTillTimeCtrlr,
-
-              // :null,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-              ),
-            ),
-          ),
-        ),
-      ),
-      Dimens.boxHeight20,
-    ]);
-  }
-
-//Start Date and valid Till
-  Future pickDateTime_web(BuildContext context, int position) async {
-    var dateTime = position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value;
-    final date = await pickDate_web(context, position);
-    if (date == null) {
-      return;
-    }
-
-    final time = await pickTime_web(context, position);
-    if (time == null) {
-      return;
-    }
-
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value = dateTime;
-    position == 0
-        ? controller.startDateTimeCtrlr
-        : controller.validTillTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: position == 0
-              ? controller.startDateTimeCtrlr.text.length
-              : controller.validTillTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-    controller.validTillTimeCtrlr.text =
-        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
-    controller.validTillTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .format(dateTime.add(Duration(hours: 8)));
-    controller.startDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
-  }
-
-  Future<DateTime?> pickDate_web(BuildContext context, int position) async {
-    DateTime? dateTime = position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value;
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-
-    if (newDate == null) return null;
-
-    return newDate;
-  }
-
-  Future<TimeOfDay?> pickTime_web(BuildContext context, int position) async {
-    DateTime dateTime = position == 0
-        ? controller.selectedBreakdownTime.value
-        : controller.selectedValidTillTime.value;
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
-    }
-
-    return newTime;
-  }
-
-  // Widget _buildIncidentReportDescriptionField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     // Align(
-  //     //   alignment: Alignment.centerLeft,
-  //     //   child: Padding(
-  //     //     padding: const EdgeInsets.only(left: 10),
-  //     //     child: RichText(
-  //     //       text: TextSpan(
-  //     //           text: 'Permit Description: ',
-  //     //           style: Styles.blackBold16,
-  //     //           children: [
-  //     //             TextSpan(
-  //     //               text: '*',
-  //     //               style: TextStyle(
-  //     //                 color: ColorValues.orangeColor,
-  //     //                 fontWeight: FontWeight.bold,
-  //     //               ),
-  //     //             ),
-  //     //           ]),
-  //     //     ),
-  //     //   ),
-  //     // ),
-  //     Dimens.boxHeight5,
-  //     Padding(
-  //       padding: const EdgeInsets.only(left: 1),
-  //       child: Container(
-  //         // width: 500,
-  //         decoration: BoxDecoration(
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.black26,
-  //               offset: const Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 5.0,
-  //               spreadRadius: 1.0,
-  //             ),
-  //             BoxShadow(
-  //               color: ColorValues.whiteColor,
-  //               offset: const Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ),
-  //           ],
-  //           color: ColorValues.whiteColor,
-  //           borderRadius: BorderRadius.circular(5),
-  //         ),
-  //         child: SizedBox(
-  //           child: TextField(
-  //             controller: controller.incidentreportDescriptionCtrlr,
-  //             keyboardType: TextInputType.multiline,
-  //             maxLines: 5,
-  //             autofocus: false,
-  //             decoration: InputDecoration(
-  //               fillColor: ColorValues.whiteColor,
-  //               filled: true,
-  //               contentPadding: Dimens.edgeInsets05_10,
-  //               border: InputBorder.none,
-  //               enabledBorder: InputBorder.none,
-  //               focusedBorder: InputBorder.none,
-  //               focusedErrorBorder: controller.isJobDescriptionInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : InputBorder.none,
-  //               errorBorder: controller.isJobDescriptionInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : null,
-  //               errorText: controller.isJobDescriptionInvalid.value
-  //                   ? "Required field"
-  //                   : null,
-  //             ),
-  //             onChanged: (value) {
-  //               if (value.trim().length > 3) {
-  //                 controller.isJobDescriptionInvalid.value = false;
-  //               } else {
-  //                 controller.isJobDescriptionInvalid.value = true;
-  //               }
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Dimens.boxHeight10,
-  //   ]);
-  // }
 
 //Insurance Remarks
   // Widget _buildInsuranceRemarkField_web(BuildContext context) {
