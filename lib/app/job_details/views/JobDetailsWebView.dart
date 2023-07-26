@@ -159,6 +159,7 @@ class JobDetailsWebView
                                           //         .toList()
                                           //         : []}",
                                           //     style: Styles.blue14),
+
                                           Text(
                                               "${controller.jobDetailsModel
                                                   .value
