@@ -1,4 +1,5 @@
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
@@ -92,7 +93,7 @@ class ModuleCleaningListPlan extends GetView<ModuleCleaningListPlanController> {
                             icon: Icons.add,
                             label: "Add New",
                             onPressed: () {
-                              //  Get.offNamed(Routes.addUser);
+                              Get.offNamed(Routes.moduleCleaningPlanning);
                             },
                             color: ColorValues.appGreenColor,
                           ),
