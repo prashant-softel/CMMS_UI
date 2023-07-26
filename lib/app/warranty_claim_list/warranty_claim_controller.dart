@@ -50,6 +50,12 @@ class WarrantyClaimController extends GetxController {
     externalEmails.add(ExternalEmails(email: email, name: name));
   }
 
+  ///Radio
+  RxString selectedSeverity = RxString('');
+   void setSelectedSeverity(String severity) {
+    selectedSeverity.value = severity;
+  }
+
   ///Supplier Action Part
   var supplierActions = <SupplierActions>[].obs;
   void updateSupplierActionText(
@@ -797,6 +803,7 @@ void search(String keyword) {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,
@@ -954,6 +961,7 @@ void search(String keyword) {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,

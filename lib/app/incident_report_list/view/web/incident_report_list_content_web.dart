@@ -91,16 +91,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                               SizedBox(
                                 width: 400,
                               ),
-                              // ActionButton(
-                              //   icon: Icons.calendar_month,
-                              //   label: 'December 3rd 2022',
-                              //   // onPress: () {
-                              //   //   // Get.to(() => AddInventory());
-                              //   //   // _buildStartDateField_mobile(context);
-                              //   // },
-                              //   color: Colors.green,
-                              //   onPressed: () {},
-                              // ),
+                            
                             ],
                           ),
                         ),
@@ -113,48 +104,7 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                             title: 'Incident Report List'.tr,
                             action: Row(
                               children: [
-                                // ActionButton(
-                                //   icon: Icons.all_inbox,
-                                //   label: 'All',
-                                //   onPressed: () {},
-                                //   color: Colors.blue,
-                                // ),
-                                // Dimens.boxWidth10,
-                                // ActionButton(
-                                //   icon: Icons.close,
-                                //   label: 'Closed',
-                                //   onPressed: () {
-                                //     // var file = "assets/files/Fixed Asset Imports.xlsx";
-                                //     // var bytes = File(file).readAsBytesSync();
-                                //     // var excel = Excel.decodeBytes(bytes);
-
-                                //     // for (var table in excel.tables.keys) {
-                                //     //   print(table); //sheet Name
-                                //     //   print(excel.tables[table]?.maxCols);
-                                //     //   print(excel.tables[table]?.maxRows);
-                                //     //   for (var row in excel.tables[table]!.rows) {
-                                //     //     print("QWERTY $row");
-                                //     //   }
-                                //     // }
-                                //   },
-                                //   color: Colors.green,
-                                // ),
-                                // CustomTextField(
-                                //   label: 'Select Date & Time:',
-                                //   suffixIcon: Icon(
-                                //     Icons.calendar_month,
-                                //   ),
-                                //   // textController:
-                                //   //     controller.categoryTextController,
-                                //   textController: controller
-                                //       .incidentReportListDateTimeCtrlrWeb,
-
-                                //   onTap: () {
-                                //     pickDateTime_web(context);
-                                //   },
-                                // ),
-
-                                ///Date & Time Range functionality
+                              
                                 Container(
                                   height: 30,
                                   child: CustomElevatedButton(
@@ -234,57 +184,13 @@ class IncidentReportListWeb extends GetView<IncidentReportListController> {
                                 )
                                 :Dimens.box0,
                                 Dimens.boxWidth10,
-                                // ActionButton(
-                                //   icon: Icons.close,
-                                //   lable: 'retireAsset'.tr,
-                                //   onPress: () async {
-                                //     // ByteData data = await rootBundle
-                                //     //     .load("assets/files/Fixed Asset Imports.xlsx");
-                                //     // var bytes = data.buffer
-                                //     //     .asUint8List(data.offsetInBytes, data.lengthInBytes);
-                                //     // var excel = Excel.decodeBytes(bytes);
-
-                                //     // for (var table in excel.tables.keys) {
-                                //     //   print(table); //sheet Name
-                                //     //   print(excel.tables[table]?.maxCols);
-                                //     //   print(excel.tables[table]?.maxRows);
-                                //     //   for (var row in excel.tables[table]!.rows) {
-                                //     //     print("QWERTY $row");
-                                //     //   }
-                                //     // }
-                                //   },
-                                //   color: Colors.red,
-                                // ),
+                               
                               ],
                             ),
                           ),
                         ),
 
-                        ///
-                        // Align(
-                        //   alignment: Alignment.centerLeft,
-                        //   child: Container(
-                        //     width: 400,
-                        //     child: TabBar(
-                        //       tabs: [
-                        //         CustomTabBar(
-                        //           label: 'listView'.tr,
-                        //           icon: Icons.menu,
-                        //         ),
-                        //         CustomTabBar(
-                        //           label: 'treeView'.tr,
-                        //           icon: Icons.account_tree_sharp,
-                        //         ),
-                        //         CustomTabBar(
-                        //           label: 'mapView'.tr,
-                        //           icon: Icons.location_on,
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-
-                        ///
+                      
                         SizedBox(
                           height: 20,
                         ),

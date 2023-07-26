@@ -5,6 +5,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 
@@ -285,8 +286,7 @@ class AddEscalationMatrixContentWeb
 
                                                   //                       ],
                                                   //                     )
-                                                                      (mapData[
-                                                                                  'key'] ==
+                                                                      (mapData['key'] ==
                                                                               "Duration (Days)")
                                                                           ? Padding(
                                                                               padding: const EdgeInsets.only(
@@ -305,7 +305,23 @@ class AddEscalationMatrixContentWeb
                                                                                 children: [
                                                                                   SizedBox(
                                                                                     width: MediaQuery.of(context).size.width / 5,
-                                                                                    child: _buildDurationDaysTextField_web(context)
+                                                                                    child: LoginCustomTextfield(
+                                                                          keyboardType:
+                                                                              TextInputType.number,
+                                                                          inputFormatters: <
+                                                                              TextInputFormatter>[
+                                                                            FilteringTextInputFormatter.digitsOnly
+                                                                          ],
+                                                                          maxLine:
+                                                                              1,
+                                                                          textController:
+                                                                              new TextEditingController(text: mapData["value"] ?? ''),
+                                                                          onChanged:
+                                                                              (txt) {
+                                                                            mapData["value"] =
+                                                                                txt;
+                                                                          },
+                                                                        )
                                                                                   ),
                                                                                   SizedBox(
                                                                                     height: 5,

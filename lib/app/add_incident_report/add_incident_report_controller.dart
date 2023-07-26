@@ -36,11 +36,13 @@ class AddIncidentReportController extends GetxController {
   ///Incident Report History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-  RxString isSelected = ''.obs;
-
-  void selectOption(String value) {
-    isSelected.value = value;
+   ///Radio
+  RxString selectedSeverity = RxString('');
+   void setSelectedSeverity(String severity) {
+    selectedSeverity.value = severity;
   }
+
+ 
 
   // void addRow(String rowData) {
   //   rowList.add(rowData);
@@ -137,18 +139,7 @@ class AddIncidentReportController extends GetxController {
   // var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
 
-  ///Text Editing Controller
-  // final warrantyClaimTitleTextController = TextEditingController();
-  // final warrantyClaimBriefDescTextController = TextEditingController();
-  // final immediateCorrectiveActionTextController = TextEditingController();
-  // final requestManufactureTextController = TextEditingController();
-  // final costOfReplacementTextController = TextEditingController();
-  // final orderReferenceNoTextController = TextEditingController();
-  // final affectedSerialNoTextController = TextEditingController();
-  // final manufacturerNameTextController = TextEditingController();
 
-  // final blockTextController = TextEditingController();
-  // final parentEquipmentTextController = TextEditingController();
 
   ///Incident Report List
   RxList<IncidentReportListModel?> incidentReportModelList =
@@ -419,8 +410,9 @@ class AddIncidentReportController extends GetxController {
           '${incidentReportDetailsModel.value?.damaged_cost ?? 0}';
       genLossAssetDamageTextCtrlr.text =
           '${incidentReportDetailsModel.value?.generation_loss ?? 0}';
-      isSelected.value = '${incidentReportDetailsModel.value?.severity ?? ''}';
+      selectedSeverity.value = '${incidentReportDetailsModel.value?.severity ?? ''}';
       selectedRiskTypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
+      selectedRiskTypeList.value = incidentReportDetailsModel.value?.risk_type_name ?? '';
     }
   }
 
@@ -912,7 +904,7 @@ class AddIncidentReportController extends GetxController {
               insurance: _insuranceAvailable,
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
-              severity: isSelected.value);
+              severity: selectedSeverity.value);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
       Map<String, dynamic>? responseCreateIncidentReport =
@@ -1013,7 +1005,7 @@ class AddIncidentReportController extends GetxController {
               is_insurance_applicable: true,
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
-              severity: isSelected.value);
+              severity: selectedSeverity.value);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
       Map<String, dynamic>? responseUpdateIncidentReport =

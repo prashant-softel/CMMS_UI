@@ -992,7 +992,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                             mapData["value"] =
                                                                                 txt;
                                                                           },
-                                                                        )),
+                                                                        )
+                                                                        ),
                                                                   )
                                                                 : Text(mapData[
                                                                         'key'] ??
