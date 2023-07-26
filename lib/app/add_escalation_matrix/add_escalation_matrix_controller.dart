@@ -45,6 +45,8 @@ class AddEscalationMatrixController extends GetxController {
       TextEditingController();
   final TextEditingController supplierActionSrNumberTextFieldController =
       TextEditingController();
+
+  RxList<int> dayList = <int>[].obs;
  ///Checkbox
   ////
   // RxBool isCheckedRequire = false.obs;
@@ -557,6 +559,13 @@ Rx<List<List<Map<String, String>>>> rowItem =
       // externalEmails.forEach((e) {
       //   external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
       // });
+      rowItem.value.forEach((element) { 
+        Escalation days = Escalation(
+          days: int.tryParse(element[0]["value"] ?? '0'),
+        );
+      });
+
+      
 
       late List<Status_escalation> status_escalation = [];
 

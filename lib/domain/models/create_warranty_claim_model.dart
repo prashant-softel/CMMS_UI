@@ -23,6 +23,7 @@ class CreateWarrantyClaimModel {
   String? warrantyClaimTitle;
   String? warrantyDescription;
   String? correctiveActionByBuyer;
+  String? severity;
   int? approverId;
   String? failureTime;
   List<int?>? additionalEmailEmployees;
@@ -41,6 +42,7 @@ class CreateWarrantyClaimModel {
     this.affectedSrNo,
     this.costOfReplacement,
     this.currencyId,
+    this.severity,
     this.requestToSupplier,
     this.warrantyStartAt,
     this.warrantyEndAt,
@@ -66,6 +68,7 @@ class CreateWarrantyClaimModel {
         affectedSrNo: json['affectedSrNo'],
         costOfReplacement: json['costOfReplacement'],
         currencyId: json['currencyId'],
+        severity: json['severity'],
         requestToSupplier: json['requestToSupplier'],
         warrantyStartAt: json['warrantyStartAt'],
         warrantyEndAt: json['warrantyEndAt'],
@@ -96,6 +99,7 @@ class CreateWarrantyClaimModel {
         "affectedPart": affectedPart,
         "orderReference": orderReference,
         "affectedSrNo": affectedSrNo,
+        "severity": severity,
         "costOfReplacement": costOfReplacement,
         "currencyId": currencyId,
         "requestToSupplier": requestToSupplier,

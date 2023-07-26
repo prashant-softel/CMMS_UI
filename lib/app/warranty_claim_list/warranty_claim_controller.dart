@@ -46,6 +46,12 @@ class WarrantyClaimController extends GetxController {
     externalEmails.add(ExternalEmails(email: email, name: name));
   }
 
+  ///Radio
+  RxString selectedSeverity = RxString('');
+   void setSelectedSeverity(String severity) {
+    selectedSeverity.value = severity;
+  }
+
   ///Supplier Action Part
   var supplierActions = <SupplierActions>[].obs;
   void updateSupplierActionText(
@@ -783,6 +789,7 @@ class WarrantyClaimController extends GetxController {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,
@@ -942,6 +949,7 @@ class WarrantyClaimController extends GetxController {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,
