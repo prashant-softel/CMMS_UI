@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<IncidentReportListModel> incidentReportListModelFromJson(String str) =>
     List<IncidentReportListModel>.from(
         json.decode(str).map((x) => IncidentReportListModel.fromJson(x)));
@@ -24,7 +26,6 @@ class IncidentReportListModel {
     this.reported_by_name,
     this.created_at,
     this.status,
-
   });
 
   int? id;
@@ -33,34 +34,27 @@ class IncidentReportListModel {
   String? block_name;
   int? risk_level;
   String? approved_by;
-  DateTime? approved_at;
-  DateTime? reported_at;
+  String? approved_at;
+  String? reported_at;
   String? reported_by_name;
   DateTime? created_at;
   String? status;
 
-
-
-  factory IncidentReportListModel.fromJson(Map<String, dynamic> json) => IncidentReportListModel(
+  factory IncidentReportListModel.fromJson(Map<String, dynamic> json) =>
+      IncidentReportListModel(
         id: json["id"],
         description: json["description"],
         equipment_name: json["equipment_name"],
         block_name: json["block_name"],
         risk_level: json["risk_level"],
         approved_by: json["approved_by"],
-        approved_at: json['approved_at'] == null
-          ? null
-          : DateTime.parse(json['approved_at'] as String),
-        reported_at: json['reported_at'] == null
-        ? null
-        : DateTime.parse(json['reported_at'] as String),
+        approved_at: Utility.getFormatedyearMonthDay(json['approved_at']),
+        reported_at: Utility.getFormatedyearMonthDay(json['reported_at']),
         reported_by_name: json["reported_by_name"] ?? null,
         created_at: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
+            ? null
+            : DateTime.parse(json['created_at'] as String),
         status: json["status"],
-        
-        
       );
 
   Map<String, dynamic> toJson() => {
@@ -70,11 +64,9 @@ class IncidentReportListModel {
         "block_name": block_name,
         "risk_level": risk_level,
         "approved_by": approved_by,
-        "approved_at": approved_at?.toIso8601String(),
+        "approved_at": approved_at,
         "reported_by_name": reported_by_name,
         "created_at": created_at?.toIso8601String(),
         "status": status,
-
-
       };
 }
