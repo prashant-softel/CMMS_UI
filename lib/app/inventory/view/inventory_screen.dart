@@ -147,6 +147,9 @@ class InventoryScreen extends GetView<InventoryController> {
                             tittle: "Warranty Certificates",
                             ontap: () {
                               // controller.pmSchedule();
+                              Get.toNamed(
+                                Routes.warrantyCertificate,
+                              );
                             }),
                         _inventoryList(
                           tittle: "Warranty Claims",
@@ -195,7 +198,9 @@ class InventoryScreen extends GetView<InventoryController> {
                         _inventoryList(
                             tittle: "Calibration Certificates",
                             ontap: () {
-                              // controller.pmTask();
+                              Get.toNamed(
+                                Routes.calibrationCertificate,
+                              );
                             }),
                         _inventoryList(
                             tittle: "Calibration List",

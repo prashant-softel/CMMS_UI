@@ -178,7 +178,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: MediaQuery.of(context).size.height * 0.040,
       margin: Dimens.edgeInsets16,
       constraints: BoxConstraints(
         maxWidth: width ?? 400,
@@ -279,7 +279,8 @@ class CustomTextFieldForStock extends StatelessWidget {
                 maxLines: maxLine,
                 decoration: InputDecoration(
                   suffixIcon: Icon(Icons.date_range),
-                  contentPadding: Dimens.edgeInsets16_0_16_0,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
                   filled: true,
                   fillColor: readOnly == true
                       ? Color.fromARGB(255, 206, 205, 205)

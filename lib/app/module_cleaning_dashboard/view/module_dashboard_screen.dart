@@ -93,9 +93,9 @@ class ModuleCleaningDashboardScreen
                         _moduleCleaningList(
                             tittle: "Execution",
                             ontap: () {
-                              // Get.toNamed(
-                              //   Routes.preventive_checkPoint,
-                              // );
+                              Get.toNamed(
+                                Routes.moduleCleaningListExecution,
+                              );
                             }),
                       ],
                     )

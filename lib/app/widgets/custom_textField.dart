@@ -42,7 +42,7 @@ class LoginCustomTextfield extends GetView {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35,
+      height: MediaQuery.of(context).size.height * 0.040,
       width: width,
       child: TextFormField(
         readOnly: readOnly,

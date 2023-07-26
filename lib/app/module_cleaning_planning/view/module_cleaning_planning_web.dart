@@ -2,22 +2,19 @@ import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/create%20_schedule_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/custom_elevated_button.dart';
 
 class ModuleCleaningPlanning extends StatefulWidget {
   ModuleCleaningPlanning({
@@ -70,7 +67,7 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                       child: Text(" / MODULE CLEANING",
                           style: Styles.greyMediumLight12),
                     ),
-                    Text(" / MODULE CLEANING PLANNING",
+                    Text(" / Add Module Cleaning Plan",
                         style: Styles.greyMediumLight12)
                   ],
                 ),
@@ -99,7 +96,7 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Module Cleaning Planning",
+                                      "Add Module Cleaning Plan",
                                       style: Styles.blackBold16,
                                     ),
                                     // ActionButton(
@@ -165,43 +162,51 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                           children: [
                                             Dimens.boxWidth10,
                                             CustomRichText(
-                                                title: 'Reoccurance Cycle: '),
+                                                title: 'Frequency : '),
                                             Dimens.boxWidth10,
                                             SizedBox(
-                                              child: DropdownWebStock(
+                                              child: DropdownWebWidget(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
                                                     5,
-                                                onValueChanged: (p0, p1) {},
+                                                controller: controller,
+                                                dropdownList:
+                                                    controller.frequencyList,
+                                                isValueSelected: controller
+                                                    .isSelectedfrequency.value,
+                                                selectedValue: controller
+                                                    .selectedfrequency.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxHeight10,
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Start Date: '),
-                                            Dimens.boxWidth10,
-                                            CustomTextFieldForStock(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  5.1,
-                                              numberTextField: true,
-                                              onTap: () {
-                                                controller.openStartDatePicker =
-                                                    !controller
-                                                        .openStartDatePicker;
-                                                controller.update(
-                                                    ['module_cleanning']);
-                                              },
-                                              textController:
-                                                  controller.startDateTc,
-                                            ),
-                                          ],
-                                        ),
+                                        // Dimens.boxHeight10,
+                                        // Row(
+                                        //   children: [
+                                        //     CustomRichText(
+                                        //         title: 'Start Date: '),
+                                        //     Dimens.boxWidth10,
+                                        //     CustomTextFieldForStock(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width /
+                                        //           5.1,
+                                        //       numberTextField: true,
+                                        //       onTap: () {
+                                        //         controller.openStartDatePicker =
+                                        //             !controller
+                                        //                 .openStartDatePicker;
+                                        //         controller.update(
+                                        //             ['module_cleanning']);
+                                        //       },
+                                        //       textController:
+                                        //           controller.startDateTc,
+                                        //     ),
+                                        //   ],
+                                        // ),
 
                                         Dimens.boxHeight10,
                                       ],
@@ -220,13 +225,23 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                                     title: 'Created by:'),
                                                 Dimens.boxWidth10,
                                                 SizedBox(
-                                                  child: DropdownWebStock(
+                                                  child: DropdownWebWidget(
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
                                                             5,
-                                                    onValueChanged: (p0, p1) {},
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .frequencyList,
+                                                    isValueSelected: controller
+                                                        .isSelectedfrequency
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedfrequency
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
@@ -239,15 +254,15 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                           children: [
                                             Dimens.boxWidth10,
                                             CustomRichText(
-                                                title: 'Reoccurance Times: '),
+                                                title:
+                                                    'Estimated Duration\n                       In Day'),
                                             Dimens.boxWidth10,
                                             SizedBox(
-                                              child: DropdownWebStock(
+                                              child: LoginCustomTextfield(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
                                                     5,
-                                                onValueChanged: (p0, p1) {},
                                               ),
                                             ),
                                           ],
@@ -394,27 +409,27 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                           ),
                         ),
                       ),
-                      if (controller.openStartDatePicker)
-                        Positioned(
-                          left: 230,
-                          top: 300,
-                          child: DatePickerWidget(
-                            minDate: DateTime(DateTime.now().year),
-                            maxDate: DateTime(DateTime.now().year, 13,
-                                0), // last date of this year
-                            controller: DateRangePickerController(),
-                            selectionChanges: (startDate) {
-                              print(
-                                  'startDate valu ${startDate.value.toString()}');
-                              controller.startDateTc.text =
-                                  DateFormat('yyyy-MM-dd')
-                                      .format(startDate.value);
-                              controller.openStartDatePicker =
-                                  !controller.openStartDatePicker;
-                              controller.update(['module_cleanning']);
-                            },
-                          ),
-                        ),
+                      // if (controller.openStartDatePicker)
+                      //   Positioned(
+                      //     left: 230,
+                      //     top: 300,
+                      //     child: DatePickerWidget(
+                      //       minDate: DateTime(DateTime.now().year),
+                      //       maxDate: DateTime(DateTime.now().year, 13,
+                      //           0), // last date of this year
+                      //       controller: DateRangePickerController(),
+                      //       selectionChanges: (startDate) {
+                      //         print(
+                      //             'startDate valu ${startDate.value.toString()}');
+                      //         controller.startDateTc.text =
+                      //             DateFormat('yyyy-MM-dd')
+                      //                 .format(startDate.value);
+                      //         controller.openStartDatePicker =
+                      //             !controller.openStartDatePicker;
+                      //         controller.update(['module_cleanning']);
+                      //       },
+                      //     ),
+                      //   ),
                     ],
                   ),
                 ),

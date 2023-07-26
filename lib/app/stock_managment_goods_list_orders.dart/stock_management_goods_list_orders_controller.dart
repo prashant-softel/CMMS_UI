@@ -26,6 +26,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
   GoodsOrdersListModel? goodsOrdersListModel;
   RxList<String> goodsOrdersListTableColumns = <String>[].obs;
+  bool openFromDateToStartDatePicker = false;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,

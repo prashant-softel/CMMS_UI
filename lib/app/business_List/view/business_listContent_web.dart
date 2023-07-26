@@ -164,6 +164,7 @@ class BusinessListContentWeb
                                                       .width *
                                                       .2) -
                                                       35,
+                                                  height: MediaQuery.of(context).size.height * 0.040,
                                                   child: DropdownWidget(
                                                     controller: controller,
                                                     dropdownList: controller
@@ -519,6 +520,8 @@ class BusinessListContentWeb
                                               Expanded(child: CustomRichText(title: 'Country: ')),
                                               Expanded(
                                                 child: Container(
+                                                  height: MediaQuery.of(context).size.height * 0.040,
+
                                                   width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -549,6 +552,8 @@ class BusinessListContentWeb
                                               Expanded(child: CustomRichText(title: 'State: ')),
                                               Expanded(
                                                 child: Container(
+                                                  height: MediaQuery.of(context).size.height * 0.040,
+
                                                   width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -583,6 +588,7 @@ class BusinessListContentWeb
                                                       .width *
                                                       .2) -
                                                       35,
+                                                  height: MediaQuery.of(context).size.height * 0.040,
                                                   child: DropdownWidget(
                                                     controller: controller,
                                                     dropdownList: controller

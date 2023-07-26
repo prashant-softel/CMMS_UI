@@ -97,14 +97,14 @@ class HomeDrawer extends GetView {
                           Get.offNamed(Routes.escalationMatrixListWeb);
                         },
                       ),
-                      
-                      MenuItem(
-                        title: "Calibration",
-                        icon: "assets/files/preventive.png",
-                        press: () {
-                          Get.offNamed(Routes.calibrationList);
-                        },
-                      ),
+
+                      // MenuItem(
+                      //   title: "Calibration",
+                      //   icon: "assets/files/preventive.png",
+                      //   press: () {
+                      //     Get.offNamed(Routes.calibrationList);
+                      //   },
+                      // ),
                       MenuItem(
                         title: "Incident Report",
                         icon: "assets/files/reportins.png",
@@ -123,7 +123,7 @@ class HomeDrawer extends GetView {
                         title: "Settings",
                         icon: "assets/files/setting.png",
                         press: () {
-                          Get.offNamed(Routes.userList);
+                          Get.offNamed(Routes.setting);
                         },
                       ),
                       MenuItem(
