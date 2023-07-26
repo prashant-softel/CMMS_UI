@@ -23,6 +23,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
   int facilityId = 0;
   RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
   RxList<PmTaskListModel?> filteredData = <PmTaskListModel>[].obs;
+  bool openFromDateToStartDatePicker = false;
 
   PmTaskListModel? pmTaskListModel;
   RxList<String> pmTaskListTableColumns = <String>[].obs;

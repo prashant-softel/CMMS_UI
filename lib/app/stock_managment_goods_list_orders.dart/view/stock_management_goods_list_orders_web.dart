@@ -438,7 +438,7 @@ class _StockManagementGoodsOrdersWebState
                       ),
                       if (controller.openFromDateToStartDatePicker)
                         Positioned(
-                          right: 200,
+                          right: 150,
                           top: 85,
                           child: DatePickerWidget(
                             selectionMode: DateRangePickerSelectionMode.range,
@@ -467,7 +467,13 @@ class _StockManagementGoodsOrdersWebState
                                   : controller.toDate.value = pickUpDate;
 
                               controller.getPmTaskListByDate();
+                              controller.openFromDateToStartDatePicker =
+                                  !controller.openFromDateToStartDatePicker;
                               controller.update(['stock_Mangement_Date']);
+
+                              // Get.toNamed(
+                              //   Routes.stockManagementGoodsOrdersScreen,
+                              // );
                             },
                           ),
                         ),
