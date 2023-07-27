@@ -71,7 +71,7 @@ class SafetyQuestionsListContentWeb
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 25),
-                          height: Get.height / 1.0,
+                          height: Get.height / 0.20,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -105,6 +105,7 @@ class SafetyQuestionsListContentWeb
                                         Padding(
                                           padding: const EdgeInsets.only(left: 15),
                                           child: SizedBox(
+                                            height: MediaQuery.of(context).size.height * 0.040,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -216,6 +217,7 @@ class SafetyQuestionsListContentWeb
                                         Padding(
                                           padding: const EdgeInsets.only(left: 15),
                                           child: SizedBox(
+                                            height: MediaQuery.of(context).size.height * 0.040,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /

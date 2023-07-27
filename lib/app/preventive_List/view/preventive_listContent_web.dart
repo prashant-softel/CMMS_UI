@@ -75,7 +75,8 @@ class PreventiveChecklistListContentWeb
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.5,
+                          height: Get.height / 1.34
+                    ,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -186,6 +187,7 @@ class PreventiveChecklistListContentWeb
                                                             .width *
                                                         .2) -
                                                     35,
+                                                height: MediaQuery.of(context).size.height * 0.040,
                                                 child: DropdownWidget(
                                                   controller: controller,
                                                   dropdownList: controller
@@ -216,6 +218,7 @@ class PreventiveChecklistListContentWeb
                                             ),
                                             Expanded(
                                               child: Container(
+                                                height: MediaQuery.of(context).size.height * 0.040,
                                                 width: (MediaQuery.of(context)
                                                             .size
                                                             .width *

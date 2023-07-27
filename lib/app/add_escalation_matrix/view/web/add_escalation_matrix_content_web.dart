@@ -1,4 +1,6 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
+import 'dart:convert';
+
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
@@ -134,8 +136,8 @@ class AddEscalationMatrixContentWeb
                                                                 .width /
                                                             5,
                                                     child: DropdownWebWidget(
-                                                      dropdownList: controller
-                                                          .moduleList,
+                                                      dropdownList:
+                                                          controller.moduleList,
                                                       isValueSelected: controller
                                                           .isModuleListSelected
                                                           .value,
@@ -172,17 +174,18 @@ class AddEscalationMatrixContentWeb
                                                 ],
                                               ),
                                               Dimens.boxHeight50,
-                              
+
                                               ///Escalation Matrix Roles
                                               Obx(
-                                                ()=> Wrap(
-                                                  children: 
-                                                    [Container(
+                                                () => Wrap(
+                                                  children: [
+                                                    Container(
                                                       height: 350,
-                                                      width: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          1.5,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.5,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                           color: ColorValues
@@ -195,17 +198,21 @@ class AddEscalationMatrixContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
                                                       child: Column(
                                                         children: [
                                                           Padding(
-                                                            padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal: 20,
-                                                                vertical: 5),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        20,
+                                                                    vertical:
+                                                                        5),
                                                             child: Row(
                                                               children: [
                                                                 Text(
@@ -214,23 +221,31 @@ class AddEscalationMatrixContentWeb
                                                                 GestureDetector(
                                                                     onTap: () {
                                                                       controller
-                                                                         .addRowItem();
-                                                                      
-                                                                      // print('TypeId:${controller.durationDaysTextCtrlr}');
-                                                                     
+                                                                          .addRowItem();
+
+                                                                      print(
+                                                                          'TypeId:${controller.durationDaysTextCtrlr}');
                                                                     },
-                                                                    child: Icon(Icons
-                                                                        .exposure_plus_1)),
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .exposure_plus_1)),
                                                               ],
                                                             ),
                                                           ),
-                                                          // Column(
-                                                          //     children: []..addAll(
-                                                          //           controller.rowItem.value.map((e) {
-                                                          //         return Text(jsonEncode(e));
-                                                          //       }))),
-                                                          // Text(jsonEncode(
-                                                          //     controller.dropdownMapperData)),
+                                                          Column(
+                                                              children: []
+                                                                ..addAll(
+                                                                    controller
+                                                                        .rowItem
+                                                                        .value
+                                                                        .map(
+                                                                            (e) {
+                                                                  return Text(
+                                                                      jsonEncode(
+                                                                          e));
+                                                                }))),
+                                                          Text(jsonEncode(controller
+                                                              .dropdownMapperData)),
                                                           Container(
                                                             height: 300,
                                                             child:
@@ -245,140 +260,63 @@ class AddEscalationMatrixContentWeb
                                                                       Get.width *
                                                                           0.35,
                                                                   height:
-                                                                      Get.height / 2,
+                                                                      Get.height /
+                                                                          2,
                                                                 );
                                                               }).toList(),
                                                               rows: controller
                                                                   .rowItem.value
-                                                                  .map((record) {
+                                                                  .map(
+                                                                      (record) {
                                                                 return TableViewRow(
                                                                   height: 200,
-                                                                  cells: record
-                                                                      .map((mapData) {
+                                                                  cells: record.map(
+                                                                      (mapData) {
                                                                     return TableViewCell(
-                                                                      child:
-                                                  //                      Column(
-                                                  //                       children: [
-                                                  //                          SizedBox(
-                                                  //     width:
-                                                  //         MediaQuery.of(context)
-                                                  //                 .size
-                                                  //                 .width /
-                                                  //             3,
-                                                  //     child: CustomTextField(
-                                                  //       textController: controller
-                                                  //           .supplierActionSrNumberTextFieldController,
-                                                  //       label:
-                                                  //           '  Serial Number',
-                                                  //     )),
-                                                  // SizedBox(
-                                                  //     width:
-                                                  //         MediaQuery.of(context)
-                                                  //                 .size
-                                                  //                 .width /
-                                                  //             3,
-                                                  //     child: CustomTextField(
-                                                  //       textController: controller
-                                                  //           .supplierActionTextFieldController,
-                                                  //       label:
-                                                  //           'Supplier Action',
-                                                  //     )),
-
-                                                  //                       ],
-                                                  //                     )
-                                                                      (mapData['key'] ==
+                                                                      child: (mapData['key'] ==
                                                                               "Duration (Days)")
                                                                           ? Padding(
-                                                                              padding: const EdgeInsets.only(
-                                                                                  left:
-                                                                                      20,
-                                                                                  right:
-                                                                                      20,
-                                                                                  top:
-                                                                                      10),
-                                                                              child:
-                                                                                  Column(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.center,
-                                                                                crossAxisAlignment:
-                                                                                    CrossAxisAlignment.center,
+                                                                              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
                                                                                 children: [
                                                                                   SizedBox(
-                                                                                    width: MediaQuery.of(context).size.width / 5,
-                                                                                    child: LoginCustomTextfield(
-                                                                          keyboardType:
-                                                                              TextInputType.number,
-                                                                          inputFormatters: <
-                                                                              TextInputFormatter>[
-                                                                            FilteringTextInputFormatter.digitsOnly
-                                                                          ],
-                                                                          maxLine:
-                                                                              1,
-                                                                          textController:
-                                                                              new TextEditingController(text: mapData["value"] ?? ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
-                                                                                print('TextFileds:${mapData["value"] ?? ''}');
-                                                                          },
-                                                                        )
-                                                                                  ),
+                                                                                      width: MediaQuery.of(context).size.width / 5,
+                                                                                      child: LoginCustomTextfield(
+                                                                                        keyboardType: TextInputType.number,
+                                                                                        inputFormatters: <TextInputFormatter>[
+                                                                                          FilteringTextInputFormatter.digitsOnly
+                                                                                        ],
+                                                                                        maxLine: 1,
+                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                        onChanged: (txt) {
+                                                                                          mapData["value"] = txt;
+                                                                                        },
+                                                                                      )),
                                                                                   SizedBox(
                                                                                     height: 5,
                                                                                   ),
                                                                                 ],
                                                                               ),
                                                                             )
-                                                                          : (mapData['key'] ==
-                                                                                  "Escalation Roles and Levels")
+                                                                          : (mapData['key'] == "Escalation Roles and Levels")
                                                                               ? SizedBox(
                                                                                   width: MediaQuery.of(context).size.width / 5,
-                                                                                  child:
-                                                                                      DropdownWebWidget(
-                                                                                    dropdownList: controller.roleList,
+                                                                                  child: DropdownWebWidget(
+                                                                                    dropdownList: controller.roleList.value,
                                                                                     isValueSelected: controller.isSelectedRole.value,
-                                                                                    selectedValue: controller.selectedRole.value,
-                                                                                    onValueChanged: controller.onValueChanged,
+                                                                                    selectedValue: mapData["value"],
+                                                                                    onValueChanged: (list, selectedValue) {
+                                                                                      print({
+                                                                                        selectedValue: selectedValue
+                                                                                      });
+                                                                                      mapData["value"] = selectedValue;
+                                                                                      controller.dropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                                    },
                                                                                   ),
                                                                                 )
-                                                                              : Text(mapData['key'] ??
-                                                                                  ''),
-                                                                      // (mapData['key'] == "Order") || (mapData['key'] == "Cost")
-                                                                      //     ? Padding(
-                                                                      //         padding: const EdgeInsets.all(8.0),
-                                                                      //         child: Container(
-                                                                      //             width: (Get.width * .4),
-                                                                      //             // padding: EdgeInsets.all(value),
-                                                                      //             decoration: BoxDecoration(
-                                                                      //               boxShadow: [
-                                                                      //                 BoxShadow(
-                                                                      //                   color: Colors.black26,
-                                                                      //                   offset: const Offset(
-                                                                      //                     5.0,
-                                                                      //                     5.0,
-                                                                      //                   ),
-                                                                      //                   blurRadius: 5.0,
-                                                                      //                   spreadRadius: 1.0,
-                                                                      //                 ),
-                                                                      //               ],
-                                                                      //               color: ColorValues.whiteColor,
-                                                                      //               borderRadius: BorderRadius.circular(5),
-                                                                      //             ),
-                                                                      //             child: LoginCustomTextfield(
-                                                                      //               keyboardType: TextInputType.number,
-                                                                      //               inputFormatters: <TextInputFormatter>[
-                                                                      //                 FilteringTextInputFormatter.digitsOnly
-                                                                      //               ],
-                                                                      //               maxLine: 1,
-                                                                      //               textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                      //               onChanged: (txt) {
-                                                                      //                 mapData["value"] = txt;
-                                                                      //               },
-                                                                      //             )),
-                                                                      //       )
-                                                                      //     : Text(mapData['key'] ?? ''),
-                                                                      
+                                                                              : Text(mapData['key'] ?? ''),
                                                                     );
                                                                   }).toList(),
                                                                 );
@@ -392,23 +330,33 @@ class AddEscalationMatrixContentWeb
                                                 ),
                                               ),
                                               Container(
-                                                    height: 28,
-                                                    child: CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appGreenColor,
-                                                      text: "Add Data",
-                                                      onPressed: () {
-                                                        
-                                                        controller.addStatusEscalationData(controller.selectedTypePermitId);
-                                                        controller.addEscalationData(int.tryParse('${controller.durationDaysTextCtrlr.text}'), controller.selectedRoleListId);
-                                                        // print('Controller:${controller.durationDaysTextCtrlr.text}');
-                                                        print('Controller:${controller.selectedTypePermitId}');
-                                                        // controller.durationDaysTextCtrlr.clear();
-                                                        controller.selectedRole.value = "";
-                                                      },
-                                                    ),
-                                                  ),
+                                                height: 28,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.appGreenColor,
+                                                  text: "Add Data",
+                                                  onPressed: () {
+                                                    controller
+                                                        .addStatusEscalationData(
+                                                            controller
+                                                                .selectedTypePermitId);
+                                                    controller.addEscalationData(
+                                                        int.tryParse(
+                                                            '${controller.durationDaysTextCtrlr.text}'),
+                                                        controller
+                                                            .selectedRoleListId);
+                                                    print(
+                                                        'Controller:${controller.durationDaysTextCtrlr.text}');
+                                                    print(
+                                                        'Controller:${controller.selectedTypePermitId}');
+                                                    controller
+                                                        .durationDaysTextCtrlr
+                                                        .clear();
+                                                    controller.selectedRole
+                                                        .value = "";
+                                                  },
+                                                ),
+                                              ),
 
                                               Row(
                                                 mainAxisAlignment:
@@ -439,11 +387,11 @@ class AddEscalationMatrixContentWeb
                                                               .appGreenColor,
                                                       text: "Submit",
                                                       onPressed: () {
-                                                        controller.createEscalationMatrix();
+                                                        controller
+                                                            .createEscalationMatrix();
                                                       },
                                                     ),
                                                   ),
-                                                  
 
                                                   //           varUserAccessModel.value.access_list!
                                                   // .where((e) => e.feature_id == 3 && e.edit == 1)
@@ -489,14 +437,12 @@ class AddEscalationMatrixContentWeb
         // ),
       );
 
-     
- ///Duration in Days
+  ///Duration in Days
   Widget _buildDurationDaysTextField_web(BuildContext context) {
     return Column(//
         children: [
-      
       Container(
-      height: MediaQuery.of(context).size.height * 0.050,
+        height: MediaQuery.of(context).size.height * 0.050,
         width: Responsive.isDesktop(context)
             ? MediaQuery.of(context).size.width / 1.44
             : MediaQuery.of(context).size.width / 1.1,
@@ -536,22 +482,20 @@ class AddEscalationMatrixContentWeb
               focusedBorder: InputBorder.none,
               suffixText: 'Days in Number',
               // label: Text('INR'),
-              focusedErrorBorder:
-                  controller.isDurationDaysTextInvalid.value
-                      ? OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(
-                            color: ColorValues.redColorDark,
-                          ),
-                        )
-                      : InputBorder.none,
+              focusedErrorBorder: controller.isDurationDaysTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
               errorBorder: controller.isDurationDaysTextInvalid.value
                   ? OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
                         color: ColorValues.redColorDark,
                       ),
-                      
                     )
                   : null,
               errorText: controller.isDurationDaysTextInvalid.value
@@ -569,502 +513,6 @@ class AddEscalationMatrixContentWeb
           ),
         ),
       ),
-      
     ]);
   }
-
-//Insurance Remarks
-  // Widget _buildInsuranceRemarkField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     // Align(
-  //     //   alignment: Alignment.centerLeft,
-  //     //   child: Padding(
-  //     //     padding: const EdgeInsets.only(left: 10),
-  //     //     child: RichText(
-  //     //       text: TextSpan(
-  //     //           text: 'Permit Description: ',
-  //     //           style: Styles.blackBold16,
-  //     //           children: [
-  //     //             TextSpan(
-  //     //               text: '*',
-  //     //               style: TextStyle(
-  //     //                 color: ColorValues.orangeColor,
-  //     //                 fontWeight: FontWeight.bold,
-  //     //               ),
-  //     //             ),
-  //     //           ]),
-  //     //     ),
-  //     //   ),
-  //     // ),
-  //     Dimens.boxHeight5,
-  //     Padding(
-  //       padding: const EdgeInsets.only(left: 1),
-  //       child: Container(
-  //         // width: 500,
-  //         decoration: BoxDecoration(
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.black26,
-  //               offset: const Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 5.0,
-  //               spreadRadius: 1.0,
-  //             ),
-  //             BoxShadow(
-  //               color: ColorValues.whiteColor,
-  //               offset: const Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ),
-  //           ],
-  //           color: ColorValues.whiteColor,
-  //           borderRadius: BorderRadius.circular(5),
-  //         ),
-  //         child: SizedBox(
-  //           child: TextField(
-  //             controller: controller.insuranceRemarkTextCtrlr,
-  //             keyboardType: TextInputType.multiline,
-  //             maxLines: 5,
-  //             autofocus: false,
-  //             decoration: InputDecoration(
-  //               fillColor: ColorValues.whiteColor,
-  //               filled: true,
-  //               contentPadding: Dimens.edgeInsets05_10,
-  //               border: InputBorder.none,
-  //               enabledBorder: InputBorder.none,
-  //               focusedBorder: InputBorder.none,
-  //               focusedErrorBorder:
-  //                   controller.isInsuranceRemarkTextInvalid.value
-  //                       ? OutlineInputBorder(
-  //                           borderRadius: BorderRadius.circular(5),
-  //                           borderSide: BorderSide(
-  //                             color: ColorValues.redColorDark,
-  //                           ),
-  //                         )
-  //                       : InputBorder.none,
-  //               errorBorder: controller.isInsuranceRemarkTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : null,
-  //               errorText: controller.isInsuranceRemarkTextInvalid.value
-  //                   ? "Required field"
-  //                   : null,
-  //             ),
-  //             onChanged: (value) {
-  //               if (value.trim().length > 3) {
-  //                 controller.isInsuranceRemarkTextInvalid.value = false;
-  //               } else {
-  //                 controller.isInsuranceRemarkTextInvalid.value = true;
-  //               }
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Dimens.boxHeight10,
-  //   ]);
-  // }
-
-  // Widget _buildIncidentReportTitleTextField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     // Align(
-  //     //   alignment: Alignment.centerLeft,
-  //     //   child: Padding(
-  //     //     padding: const EdgeInsets.only(left: 10),
-  //     //     child: RichText(
-  //     //       text:
-  //     //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-  //     //         TextSpan(
-  //     //           text: '*',
-  //     //           style: TextStyle(
-  //     //             color: ColorValues.orangeColor,
-  //     //             fontWeight: FontWeight.bold,
-  //     //           ),
-  //     //         ),
-  //     //       ]),
-  //     //     ),
-  //     //   ),
-  //     // ),
-  //     Dimens.boxHeight5,
-  //     Padding(
-  //       padding: const EdgeInsets.only(left: 10),
-  //       child: Container(
-  //         height: 45,
-  //         width: Responsive.isDesktop(context)
-  //             ? MediaQuery.of(context).size.width / 1.44
-  //             : MediaQuery.of(context).size.width / 1.1,
-  //         decoration: BoxDecoration(
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.black26,
-  //               offset: const Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 5.0,
-  //               spreadRadius: 1.0,
-  //             ),
-  //             BoxShadow(
-  //               color: ColorValues.whiteColor,
-  //               offset: const Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ),
-  //           ],
-  //           color: ColorValues.whiteColor,
-  //           borderRadius: BorderRadius.circular(5),
-  //         ),
-  //         child: SizedBox(
-  //           width: MediaQuery.of(context).size.width / 1.4,
-  //           child: TextField(
-  //             controller: controller.titleTextCtrlr,
-  //             keyboardType: TextInputType.multiline,
-  //             autofocus: false,
-  //             decoration: InputDecoration(
-  //               fillColor: ColorValues.whiteColor,
-  //               filled: true,
-  //               contentPadding: Dimens.edgeInsets05_10,
-  //               border: InputBorder.none,
-  //               enabledBorder: InputBorder.none,
-  //               focusedBorder: InputBorder.none,
-  //               focusedErrorBorder: controller.isTitleTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : InputBorder.none,
-  //               errorBorder: controller.isTitleTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : null,
-  //               errorText: controller.isTitleTextInvalid.value
-  //                   ? "Required field"
-  //                   : null,
-  //             ),
-  //             onChanged: (value) {
-  //               if (value.trim().length > 3) {
-  //                 controller.isTitleTextInvalid.value = false;
-  //               } else {
-  //                 controller.isTitleTextInvalid.value = true;
-  //               }
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Dimens.boxHeight10,
-  //   ]);
-  // }
-
-  // Widget _buildVictimNameTextField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     // Align(
-  //     //   alignment: Alignment.centerLeft,
-  //     //   child: Padding(
-  //     //     padding: const EdgeInsets.only(left: 10),
-  //     //     child: RichText(
-  //     //       text:
-  //     //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-  //     //         TextSpan(
-  //     //           text: '*',
-  //     //           style: TextStyle(
-  //     //             color: ColorValues.orangeColor,
-  //     //             fontWeight: FontWeight.bold,
-  //     //           ),
-  //     //         ),
-  //     //       ]),
-  //     //     ),
-  //     //   ),
-  //     // ),
-  //     Dimens.boxHeight5,
-  //     Padding(
-  //       padding: const EdgeInsets.only(left: 10),
-  //       child: Container(
-  //         height: 45,
-  //         width: Responsive.isDesktop(context)
-  //             ? MediaQuery.of(context).size.width / 1.44
-  //             : MediaQuery.of(context).size.width / 1.1,
-  //         decoration: BoxDecoration(
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.black26,
-  //               offset: const Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 5.0,
-  //               spreadRadius: 1.0,
-  //             ),
-  //             BoxShadow(
-  //               color: ColorValues.whiteColor,
-  //               offset: const Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ),
-  //           ],
-  //           color: ColorValues.whiteColor,
-  //           borderRadius: BorderRadius.circular(5),
-  //         ),
-  //         child: SizedBox(
-  //           width: MediaQuery.of(context).size.width / 1.4,
-  //           child: TextField(
-  //             controller: controller.victimNameTextCtrlr,
-  //             keyboardType: TextInputType.multiline,
-  //             autofocus: false,
-  //             decoration: InputDecoration(
-  //               fillColor: ColorValues.whiteColor,
-  //               filled: true,
-  //               contentPadding: Dimens.edgeInsets05_10,
-  //               border: InputBorder.none,
-  //               enabledBorder: InputBorder.none,
-  //               focusedBorder: InputBorder.none,
-  //               focusedErrorBorder: controller.isVictimNameTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : InputBorder.none,
-  //               errorBorder: controller.isVictimNameTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : null,
-  //               errorText: controller.isVictimNameTextInvalid.value
-  //                   ? "Required field"
-  //                   : null,
-  //             ),
-  //             onChanged: (value) {
-  //               if (value.trim().length > 3) {
-  //                 controller.isVictimNameTextInvalid.value = false;
-  //               } else {
-  //                 controller.isVictimNameTextInvalid.value = true;
-  //               }
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Dimens.boxHeight10,
-  //   ]);
-  // }
-
-  // ///Damaged Aseets cost
-  // Widget _buildDamagedAssetsCostTextField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     // Align(
-  //     //   alignment: Alignment.centerLeft,
-  //     //   child: Padding(
-  //     //     padding: const EdgeInsets.only(left: 10),
-  //     //     child: RichText(
-  //     //       text:
-  //     //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-  //     //         TextSpan(
-  //     //           text: '*',
-  //     //           style: TextStyle(
-  //     //             color: ColorValues.orangeColor,
-  //     //             fontWeight: FontWeight.bold,
-  //     //           ),
-  //     //         ),
-  //     //       ]),
-  //     //     ),
-  //     //   ),
-  //     // ),
-  //     Dimens.boxHeight5,
-  //     Padding(
-  //       padding: const EdgeInsets.only(left: 10),
-  //       child: Container(
-  //         height: 45,
-  //         width: Responsive.isDesktop(context)
-  //             ? MediaQuery.of(context).size.width / 1.44
-  //             : MediaQuery.of(context).size.width / 1.1,
-  //         decoration: BoxDecoration(
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.black26,
-  //               offset: const Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 5.0,
-  //               spreadRadius: 1.0,
-  //             ),
-  //             BoxShadow(
-  //               color: ColorValues.whiteColor,
-  //               offset: const Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ),
-  //           ],
-  //           color: ColorValues.whiteColor,
-  //           borderRadius: BorderRadius.circular(5),
-  //         ),
-  //         child: SizedBox(
-  //           width: MediaQuery.of(context).size.width / 1.4,
-  //           child: TextField(
-  //             controller: controller.damagedAssetCostTextCtrlr,
-  //             keyboardType: TextInputType.multiline,
-  //             autofocus: false,
-  //             decoration: InputDecoration(
-  //               fillColor: ColorValues.whiteColor,
-  //               filled: true,
-  //               contentPadding: Dimens.edgeInsets05_10,
-  //               border: InputBorder.none,
-  //               enabledBorder: InputBorder.none,
-  //               focusedBorder: InputBorder.none,
-  //               focusedErrorBorder:
-  //                   controller.isDamagedAssetCostTextInvalid.value
-  //                       ? OutlineInputBorder(
-  //                           borderRadius: BorderRadius.circular(5),
-  //                           borderSide: BorderSide(
-  //                             color: ColorValues.redColorDark,
-  //                           ),
-  //                         )
-  //                       : InputBorder.none,
-  //               errorBorder: controller.isDamagedAssetCostTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : null,
-  //               errorText: controller.isDamagedAssetCostTextInvalid.value
-  //                   ? "Required field"
-  //                   : null,
-  //             ),
-  //             onChanged: (value) {
-  //               if (value.trim().length > 3) {
-  //                 controller.isDamagedAssetCostTextInvalid.value = false;
-  //               } else {
-  //                 controller.isDamagedAssetCostTextInvalid.value = true;
-  //               }
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Dimens.boxHeight10,
-  //   ]);
-  // }
-
-  // ///Gen Loss Due To Asset Damage
-  // Widget _buildGenLossAssetDamageTextField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     // Align(
-  //     //   alignment: Alignment.centerLeft,
-  //     //   child: Padding(
-  //     //     padding: const EdgeInsets.only(left: 10),
-  //     //     child: RichText(
-  //     //       text:
-  //     //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-  //     //         TextSpan(
-  //     //           text: '*',
-  //     //           style: TextStyle(
-  //     //             color: ColorValues.orangeColor,
-  //     //             fontWeight: FontWeight.bold,
-  //     //           ),
-  //     //         ),
-  //     //       ]),
-  //     //     ),
-  //     //   ),
-  //     // ),
-  //     Dimens.boxHeight5,
-  //     Padding(
-  //       padding: const EdgeInsets.only(left: 10),
-  //       child: Container(
-  //         height: 45,
-  //         width: Responsive.isDesktop(context)
-  //             ? MediaQuery.of(context).size.width / 1.44
-  //             : MediaQuery.of(context).size.width / 1.1,
-  //         decoration: BoxDecoration(
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.black26,
-  //               offset: const Offset(
-  //                 5.0,
-  //                 5.0,
-  //               ),
-  //               blurRadius: 5.0,
-  //               spreadRadius: 1.0,
-  //             ),
-  //             BoxShadow(
-  //               color: ColorValues.whiteColor,
-  //               offset: const Offset(0.0, 0.0),
-  //               blurRadius: 0.0,
-  //               spreadRadius: 0.0,
-  //             ),
-  //           ],
-  //           color: ColorValues.whiteColor,
-  //           borderRadius: BorderRadius.circular(5),
-  //         ),
-  //         child: SizedBox(
-  //           width: MediaQuery.of(context).size.width / 1.4,
-  //           child: TextField(
-  //             controller: controller.genLossAssetDamageTextCtrlr,
-  //             keyboardType: TextInputType.multiline,
-  //             autofocus: false,
-  //             decoration: InputDecoration(
-  //               fillColor: ColorValues.whiteColor,
-  //               filled: true,
-  //               contentPadding: Dimens.edgeInsets05_10,
-  //               border: InputBorder.none,
-  //               enabledBorder: InputBorder.none,
-  //               focusedBorder: InputBorder.none,
-  //               focusedErrorBorder:
-  //                   controller.isGenLossAssetDamageTextInvalid.value
-  //                       ? OutlineInputBorder(
-  //                           borderRadius: BorderRadius.circular(5),
-  //                           borderSide: BorderSide(
-  //                             color: ColorValues.redColorDark,
-  //                           ),
-  //                         )
-  //                       : InputBorder.none,
-  //               errorBorder: controller.isGenLossAssetDamageTextInvalid.value
-  //                   ? OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                       borderSide: BorderSide(
-  //                         color: ColorValues.redColorDark,
-  //                       ),
-  //                     )
-  //                   : null,
-  //               errorText: controller.isGenLossAssetDamageTextInvalid.value
-  //                   ? "Required field"
-  //                   : null,
-  //             ),
-  //             onChanged: (value) {
-  //               if (value.trim().length > 3) {
-  //                 controller.isGenLossAssetDamageTextInvalid.value = false;
-  //               } else {
-  //                 controller.isGenLossAssetDamageTextInvalid.value = true;
-  //               }
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Dimens.boxHeight10,
-  //   ]);
-  // }
 }

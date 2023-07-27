@@ -107,11 +107,11 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           height: 5,
                                         ),
                                         SizedBox(
+                                          height: MediaQuery.of(context).size.height * 0.040,
                                           width: MediaQuery.of(context)
                                                   .size
-                                                  .width /
-                                              1.5,
-                                          
+                                                  .width /2,
+
                                           child: Obx(
                                             () => DropdownWidget(
                                               dropdownList:
@@ -127,9 +127,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
 
                                           // LoginCustomTextfield(),
                                         ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
+                                        SizedBox(height: 10,),
+
                                         Padding(
                                           padding: const EdgeInsets.only(left: 15),
                                           child: CustomRichText(title: 'Title '),
