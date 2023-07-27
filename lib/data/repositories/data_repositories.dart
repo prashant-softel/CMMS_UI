@@ -2455,5 +2455,39 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> issueMrs({
+    auth,
+    bool? isLoading,
+    issuetoJsonString,
+  }) async {
+    var response = await connectHelper.issueMrs(
+        auth: auth, isLoading: isLoading, issuetoJsonString: issuetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approveIssueMrs({
+    auth,
+    bool? isLoading,
+    issuemrsapprovetoJsonString,
+  }) async {
+    var response = await connectHelper.approveIssueMrs(
+        auth: auth,
+        isLoading: isLoading,
+        issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectIssueMrs({
+    auth,
+    bool? isLoading,
+    rejectIssuetoJsonString,
+  }) async {
+    var response = await connectHelper.rejectIssueMrs(
+        auth: auth,
+        isLoading: isLoading,
+        rejectIssuetoJsonString: rejectIssuetoJsonString);
+    return response;
+  }
+
 //end
 }

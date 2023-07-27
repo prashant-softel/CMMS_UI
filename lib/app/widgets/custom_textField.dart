@@ -42,7 +42,7 @@ class LoginCustomTextfield extends GetView {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35,
+      height: maxLine == 1 ? 35 : null,
       width: width,
       child: TextFormField(
         readOnly: readOnly,

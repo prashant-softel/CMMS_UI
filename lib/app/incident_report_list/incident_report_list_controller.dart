@@ -142,9 +142,9 @@ class IncidentReportListController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getuserAccessData();
+    // });
 
     super.onInit();
   }
@@ -162,16 +162,16 @@ class IncidentReportListController extends GetxController {
     }
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await incidentReportPresenter.getUserAccessList();
+  // Future<void> getuserAccessData() async {
+  //   final _userAccessList = await incidentReportPresenter.getUserAccessList();
 
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+  //   if (_userAccessList != null) {
+  //     final userAccessModelList = jsonDecode(_userAccessList);
+  //     var userAccess = AccessListModel.fromJson(userAccessModelList);
+  //     varUserAccessModel.value = userAccess;
+  //     varUserAccessModel.value.access_list = userAccess.access_list;
+  //   }
+  // }
 
   Future<void> incidentReportRejectButton({String? id}) async {
     String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
@@ -206,12 +206,12 @@ class IncidentReportListController extends GetxController {
 
     incidentReportList.value = filteredData
         .where((item) =>
-            item!.status!.toLowerCase().contains(keyword.toLowerCase()))
+            item!.description!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
 
-  void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+  Future<void> getIncidentReportList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
     incidentReportList.value = <IncidentReportListModel>[];
 
     final list = await incidentReportPresenter.getIncidentReportList(
@@ -219,8 +219,8 @@ class IncidentReportListController extends GetxController {
         start_date: "2020-01-01", //// startDate,
         end_date: "2023-12-31", ////  endDate,
         facility_id: facilityId);
-    print('incidentReportFacilityId$facilityId');
-    print('Incident Report List:$list');
+    // print('incidentReportFacilityId$facilityId');
+    // print('Incident Report List:$list');
     for (var incident_list in list) {
       incidentReportList.add(incident_list);
     }
@@ -228,7 +228,7 @@ class IncidentReportListController extends GetxController {
     if (list != null) {
       incidentReportList.value = list;
       filteredData.value = incidentReportList.value;
-      print('Filtered data:${filteredData.value}');
+      // print('Filtered data:${filteredData.value}');
       paginationIncidentReportController = PaginationController(
         rowCount: incidentReportList.length,
         rowsPerPage: 10,

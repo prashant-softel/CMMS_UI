@@ -561,7 +561,7 @@ class PreventiveCheckPointContentWeb
                                                                       .editColor,
                                                                   icon: Icons
                                                                       .edit,
-                                                                  label: 'Edit',
+                                                                  //  label: 'Edit',
                                                                   onPress: () {
                                                                     controller.selectedItem = controller
                                                                         .preventiveCheckpoint!
@@ -603,8 +603,8 @@ class PreventiveCheckPointContentWeb
                                                                       .deleteColor,
                                                                   icon: Icons
                                                                       .delete,
-                                                                  label:
-                                                                      'Delete',
+                                                                  ////  label:
+                                                                  //     'Delete',
                                                                   onPress: () {
                                                                     print(
                                                                         record[

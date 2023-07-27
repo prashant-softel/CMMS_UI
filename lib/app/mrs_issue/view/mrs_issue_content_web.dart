@@ -211,11 +211,11 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                   columns: [
                                     "Equipment Name",
                                     "Asset Type",
-                                    "Image",
+                                    //  "Image",
                                     "Available Qty.",
                                     "Requested Qty.",
                                     "Approved Qty.",
-                                    "issued Qyt."
+                                    "Issued Qyt."
                                   ].map((column) {
                                     return TableViewColumn(
                                       label: column,
@@ -232,7 +232,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                             TableViewCell(
                                                 child: Text(
                                                     "${cmmsItemsDetails.asset_type ?? ""}")),
-                                            TableViewCell(child: Text("${""}")),
+                                            // TableViewCell(child: Text("${""}")),
                                             TableViewCell(
                                                 child: Text(
                                                     "${cmmsItemsDetails.available_qty ?? ""}")),
@@ -308,6 +308,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       ),
                                       child: LoginCustomTextfield(
                                         maxLine: 5,
+                                        textController: controller.commentCtrlr,
                                       )),
                                 ],
                               ),
@@ -334,7 +335,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       backgroundColor: ColorValues.issueColor,
                                       text: 'Issue',
                                       onPressed: () {
-                                        // controller.rejectMrs();
+                                        controller.issueMrs();
                                       },
                                     ),
                                   ),

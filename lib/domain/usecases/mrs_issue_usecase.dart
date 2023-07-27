@@ -12,10 +12,10 @@ class MrsIssueUsecase {
         mrsId,
         isLoading,
       );
-  Future<bool> rejectMrs({
-    rejecttoJsonString,
+  Future<bool> issueMrs({
+    issuetoJsonString,
     bool? isLoading,
   }) async =>
-      await repository.rejectMrs(
-          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+      await repository.issueMrs(
+          issuetoJsonString: issuetoJsonString, isLoading: isLoading);
 }

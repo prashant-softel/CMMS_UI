@@ -1,15 +1,16 @@
-import 'package:cmms/app/mrs/view/mrs_list_content_web.dart';
-import 'package:cmms/app/return_mrs/return_mrs_controller.dart';
-import 'package:cmms/app/return_mrs/view/return_mrs_content_web.dart';
+import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_controller.dart';
+import 'package:cmms/app/issue_mrs_approve_reject/view/issue_mrs_approve_content_web.dart';
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class ReturnMrsListScreen extends GetView<ReturnMrsListController> {
-  ReturnMrsListScreen({super.key});
+class IssueMrsApproveScreen extends GetView<IssueMrsApproveController> {
+  IssueMrsApproveScreen({super.key});
+  final IssueMrsApproveController controller = Get.find();
 
   ///
   @override
@@ -23,14 +24,10 @@ class ReturnMrsListScreen extends GetView<ReturnMrsListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Mrs'),
+              title: Text('Preventive Check Point'),
               centerTitle: true,
               elevation: 0,
             ),
-      drawer: //
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
-              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -45,11 +42,12 @@ class ReturnMrsListScreen extends GetView<ReturnMrsListController> {
                     // if (Responsive.isMobile(context) ||
                     //     Responsive.isTablet(context))
                     //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
+                    //     child: MrsApproveContentMobile(),
                     //   ),
+
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: ReturnMrsListContentWeb(),
+                        child: IssueMrsApproveContentWeb(),
                       )
                   ],
                 ),

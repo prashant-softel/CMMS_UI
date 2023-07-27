@@ -12,12 +12,12 @@ class MrsIssuePresenter {
         mrsId: mrsId,
         isLoading: isLoading,
       );
-  Future<bool> rejectMrs({
-    rejecttoJsonString,
+  Future<bool> issueMrs({
+    issuetoJsonString,
     required bool isLoading,
   }) async {
-    return mrsIssueUsecase.rejectMrs(
-      rejecttoJsonString: rejecttoJsonString,
+    return mrsIssueUsecase.issueMrs(
+      issuetoJsonString: issuetoJsonString,
       isLoading: isLoading,
     );
   }

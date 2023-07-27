@@ -596,7 +596,7 @@ class PreventiveChecklistListContentWeb
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.editColor,
                                                                                 icon: Icons.edit,
-                                                                                label: 'Edit',
+                                                                                // label: 'Edit',
                                                                                 onPress: () {
                                                                                   controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
 
@@ -615,7 +615,7 @@ class PreventiveChecklistListContentWeb
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.deleteColor,
                                                                                 icon: Icons.delete,
-                                                                                label: 'Delete',
+                                                                                //  label: 'Delete',
                                                                                 onPress: () {
                                                                                   print(_preventiveCheckList[0]);
                                                                                   controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
