@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
 import '../models/facility_model.dart';
@@ -81,6 +82,14 @@ class AddIncidentReportUsecase {
     );
   }
 
+  Future<List<RiskTypeModel>> getRiskTypeList(
+      {required bool isLoading, required int? facility_id}) async {
+    return _repository.getRiskTypeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
   Future<List<EmployeeListModel>> getAssetRestorationActionTakenByList(
       {required bool isLoading, required int? facility_id}) async {
     return _repository.getEmployeeList(
@@ -146,6 +155,6 @@ class AddIncidentReportUsecase {
    Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await _repository.getFacilityList(true);
 
-  Future<String?> getUserAccessList() async =>
-      await _repository.getUserAccessData(LocalKeys.userAccess);
+  // Future<String?> getUserAccessList() async =>
+  //     await _repository.getUserAccessData(LocalKeys.userAccess);
 }

@@ -152,6 +152,20 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               );
                               //    controller.pmMapping();
                             }),
+                      ],
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 40,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5 ,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+
                         _priventiveList(
                             tittle: "PM Schedule",
                             ontap: () {

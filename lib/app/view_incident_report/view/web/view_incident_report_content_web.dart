@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -771,7 +772,8 @@ class ViewIncidentReportContentWeb
                                         CustomElevatedButton(
                                           backgroundColor: ColorValues.appRedColor,
                                           onPressed: () {
-                                            // controller.saveAsDraft();
+                                            Get.offAndToNamed(Routes.incidentReportListWeb);
+
                                           },
                                           text: 'Cancel',
                                         ),

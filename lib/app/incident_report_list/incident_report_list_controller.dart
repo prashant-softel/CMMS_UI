@@ -26,6 +26,8 @@ class IncidentReportListController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
+  bool openFromDateToStartDatePicker = false;
+
   final TextEditingController supplierActionTextFieldController =
       TextEditingController();
   final TextEditingController supplierActionSrNumberTextFieldController =
@@ -102,12 +104,7 @@ class IncidentReportListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  // PaginationController paginationBusinessListController = PaginationController(
-  //   rowCount: 0,
-  //   rowsPerPage: 10,
-  // );
 
-  //From and To date format
   Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
@@ -121,12 +118,6 @@ class IncidentReportListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
-  //   ///Incident Report Details
-  // Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel = ViewWarrantyClaimModel().obs;
-  // RxList<ViewWarrantyClaimModel?>? viewWarrantyClaimDetailsList = <ViewWarrantyClaimModel?>[].obs;
-
-  ///
-// int? wc_id = 0;
   @override
   void onInit() async {
     // wc_id = Get.arguments;
@@ -208,6 +199,7 @@ class IncidentReportListController extends GetxController {
         .where((item) =>
             item!.description!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
+    update(['incident_report_list']);
   }
 
   Future<void> getIncidentReportList(int facilityId, dynamic startDate,
@@ -216,8 +208,8 @@ class IncidentReportListController extends GetxController {
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading,
-        start_date: "2020-01-01", //// startDate,
-        end_date: "2023-12-31", ////  endDate,
+        start_date: startDate, //// startDate,
+        end_date: endDate, ////  endDate,
         facility_id: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
@@ -264,49 +256,6 @@ class IncidentReportListController extends GetxController {
         break;
     }
   }
-
-  // void checkForm() {
-
-  //   if (warrantyClaimTitleTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (warrantyClaimBriefDescTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Description Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (affectedSerialNoTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Affected Serial No Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (failureDateTimeCtrlrWebBuffer == null) {
-  //     Fluttertoast.showToast(
-  //         msg: 'Failure Date Time Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-
-  //   if (orderReferenceNoTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Order Reference No Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (costOfReplacementTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Cost of Replacement Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (immediateCorrectiveActionTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Corrective Action Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (requestManufactureTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-
-  // }
 
   void getIncidentReportListByDate() {
     getIncidentReportList(

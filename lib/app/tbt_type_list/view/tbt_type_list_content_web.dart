@@ -81,8 +81,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                             child: Column(
                               children: [
                                 // Text(
-                                //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                                Padding(
+                                //     '${varUserAccessModel.val  ue.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                                Container(
                                   padding: const EdgeInsets.only(
                                       left: 10.0, right: 10, top: 10),
                                   child: Column(
@@ -96,113 +96,146 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(title: 'Facility: '),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              margin: Dimens.edgeInsets5,
+                                              padding: const EdgeInsets.only(left: 15),
+                                              child: CustomRichText(title: 'Facility: '),),
+                                            SizedBox(
+                                              height: MediaQuery.of(context).size.height * 0.040,
+                                              width: (MediaQuery.of(context)
                                                   .size
-                                                  .width /
-                                              1.82,
-                                          child: DropdownWidget(
-                                            dropdownList:
+                                                  .width *
+                                                  .2) -
+                                                  30,
+                                              child: DropdownWidget(
+                                                dropdownList:
                                                 controller.facilityList,
-                                            isValueSelected: controller
-                                                .isFacilitySelected.value,
-                                            selectedValue: controller
-                                                .selectedFacility.value,
-                                            onValueChanged:
+                                                isValueSelected: controller
+                                                    .isFacilitySelected.value,
+                                                selectedValue: controller
+                                                    .selectedFacility.value,
+                                                onValueChanged:
                                                 controller.onValueChanged,
-                                          ),
+                                              ),
+                                            ),
+
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                              title: 'Job Type Title '),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15,right: 15),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .whiteColor,
-                                                    offset: const Offset(
-                                                        0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color:
+                                        SizedBox(height: 10,),
+
+                                        Row(
+                                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15),
+                                              child: CustomRichText(
+                                                  title: 'Job Type Title '),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.only(left: 15,right: 15),
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
                                                     ColorValues.whiteColor,
-                                                borderRadius:
+                                                    borderRadius:
                                                     BorderRadius.circular(
                                                         5),
-                                              ),
-                                              width: MediaQuery.of(context).size.width / 2,
-                                              child: LoginCustomTextfield(
-                                                  // textController: controller
-                                                  //     .durationCtrlr,
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      30,
+                                                  // width: MediaQuery.of(context).size.width / 1.5,/
+                                                  child: LoginCustomTextfield(
+                                                    // textController: controller
+                                                    //     .durationCtrlr,
                                                   )),
+                                            ),
+                                          ],
                                         ),
                                         
                                         
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(title: 'Description '),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15, right: 15),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .whiteColor,
-                                                    offset: const Offset(
-                                                        0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color:
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15),
+                                              child: CustomRichText(title: 'Description '),
+                                            ),
+                                            Container(
+                                                padding: const EdgeInsets.only(left: 15, right: 15),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
                                                     ColorValues.whiteColor,
-                                                borderRadius:
+                                                    borderRadius:
                                                     BorderRadius.circular(
                                                         5),
-                                              ),
-                                              width: MediaQuery.of(context).size.width / 2,
-                                              child: LoginCustomTextfield(
-                                                  // textController: controller
+                                                  ),
+                                                  // width: MediaQuery.of(context).size.width / 2,
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .2) -
+                                                      30,
+                                                  child: LoginCustomTextfield(
+                                                    // textController: controller
+                                                  ),
                                                   //     .durationCtrlr,
-                                                  )),
+                                                )),
+                                          ],
                                         ),
+
                                         SizedBox(
                                           height: 10,
                                         ),

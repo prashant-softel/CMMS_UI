@@ -1,12 +1,14 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
-import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +18,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
   NewWarrantyClaimWeb({super.key});
 
   bool valuefirst = false;
+   final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
+
 
   // final controller = Get.find<HomeController>();
   final WarrantyClaimController controller = Get.find();
@@ -157,39 +162,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                           .width /
                                                       4.2,
                                                   child:
-                                                      //     CustomMultiSelectDialogField(
-                                                      //   buttonText:
-                                                      //       'Select Equipment Categories',
-                                                      //   title: 'Equipment Categories',
-                                                      //   // initialValue: [],
-                                                      //   initialValue: (controller
-                                                      //           .selectedEquipmentCategoryIdList
-                                                      //           .isNotEmpty)
-                                                      //       ? controller
-                                                      //           .selectedEquipmentCategoryIdList
-                                                      //       : [],
-                                                      //   items: controller
-                                                      //       .equipmentCategoryList
-                                                      //       .map(
-                                                      //         (equipmentCategory) =>
-                                                      //             MultiSelectItem(
-                                                      //           equipmentCategory?.id,
-                                                      //           equipmentCategory
-                                                      //                   ?.name ??
-                                                      //               '',
-                                                      //         ),
-                                                      //       )
-                                                      //       .toList(),
-                                                      //   onConfirm:
-                                                      //       (selectedOptionsList) => {
-                                                      //     controller
-                                                      //         .equipmentCategoriesSelected(
-                                                      //             selectedOptionsList),
-                                                      //     print(
-                                                      //         'Equipment category list ${controller.selectedEquipmentCategoryIdList}')
-                                                      //   },
-                                                      //   // items: [],
-                                                      // ),
+                                                     
                                                       Obx(
                                                     () => DropdownWidget(
                                                       dropdownList: controller
@@ -370,6 +343,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                   left: 150),
                                                           child: Row(
                                                             children: [
+                                                              Dimens.boxHeight20,
                                                               CustomRichText(
                                                                   title:
                                                                       'Select Affected Part: '),
@@ -453,70 +427,11 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                               SizedBox(
                                                                 width: 100,
                                                               ),
-                                                              ActionButton(
-                                                                icon: Icons
-                                                                    .remove,
-                                                                label: 'Delete',
-                                                                // onPress:
-                                                                //     () async {},
-                                                                color:
-                                                                    Colors.red,
-                                                                onPressed:
-                                                                    () {},
-                                                              ),
+                                                             
                                                             ],
                                                           ),
                                                         ),
-                                                        // Padding(
-                                                        //   padding:
-                                                        //       const EdgeInsets
-                                                        //               .only(
-                                                        //           left: 150,
-                                                        //           top: 15),
-                                                        //   child: Row(
-                                                        //     children: [
-                                                        //       SizedBox(
-                                                        //         width: MediaQuery.of(
-                                                        //                     context)
-                                                        //                 .size
-                                                        //                 .width /
-                                                        //             3.8,
-                                                        //         child:
-                                                        //             CustomMultiSelectDialogField(
-                                                        //           buttonText:
-                                                        //               'Example_part',
-                                                        //           title: 'Parts',
-                                                        //           initialValue: [],
-                                                        //           onConfirm:
-                                                        //               (selectedOptionsList) =>
-                                                        //                   {},
-                                                        //           items: [],
-                                                        //         ),
-                                                        //       ),
-                                                        //       SizedBox(
-                                                        //         width: 30,
-                                                        //       ),
-                                                        //       ActionButton(
-                                                        //         icon:
-                                                        //             Icons.remove,
-                                                        //         label: 'Delete',
-                                                        //         // onPress:
-                                                        //         //     () async {},
-                                                        //         color: Colors.red,
-                                                        //         onPressed: () {},
-                                                        //       ),
-                                                        //       ActionButton(
-                                                        //         icon: Icons.add,
-                                                        //         label: 'Add',
-                                                        //         // onPress:
-                                                        //         //     () async {},
-                                                        //         color:
-                                                        //             Colors.blue,
-                                                        //         onPressed: () {},
-                                                        //       ),
-                                                        //     ],
-                                                        //   ),
-                                                        // ),
+                                                       
                                                       ],
                                                     ),
                                                   ],
@@ -552,78 +467,22 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                           children: [
                                             CustomTextField(
                                               label: 'Approximate Daily Loss:*',
-                                              // textController:
-                                              //     controller.categoryTextController,
+                                              
                                             ),
                                             SizedBox(
-                                              width: 50,
+                                              width: 40,
                                             ),
                                             CustomRichText(title: 'Severity: '),
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
+                                              // mainAxisAlignment:
+                                              //     MainAxisAlignment.spaceAround,
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Radio(
-                                                        value: 1,
-                                                        groupValue: 'null',
-                                                        onChanged: (value) {}),
-                                                    Text(
-                                                      'Critical',
-                                                      style: TextStyle(
-                                                          color: Colors.red),
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Radio(
-                                                        value: 1,
-                                                        groupValue: 'null',
-                                                        onChanged: (value) {}),
-                                                    Text(
-                                                      'High',
-                                                      style: TextStyle(
-                                                          color: Colors.orange),
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Radio(
-                                                        value: 1,
-                                                        groupValue: 'null',
-                                                        onChanged: (index) {}),
-                                                    Text(
-                                                      'Medium',
-                                                      style: TextStyle(
-                                                          color: Colors.yellow),
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Radio(
-                                                        value: 1,
-                                                        groupValue: 'null',
-                                                        onChanged: (index) {}),
-                                                    Text(
-                                                      'Low',
-                                                      style: TextStyle(
-                                                          color: Colors.green),
-                                                    )
-                                                  ],
-                                                ),
+                                                 buildRadioButton('Critical',Colors.red,context),
+                                                 buildRadioButton('High',Colors.orange,context),
+                                                 buildRadioButton('Medium',Colors.yellow,context),
+                                                 buildRadioButton('Low',Colors.green,context),
+
+                                              
                                               ],
                                             ),
                                           ],
@@ -940,7 +799,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  1.31,
+                                                  1.15,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Colors.grey)),
@@ -955,153 +814,32 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     child: Text(
                                                         'Equipment Images'),
                                                   ),
+                                                  Dimens.boxHeight30,
                                                   Row(
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 90,
-                                                                top: 30),
-                                                        child: CircleAvatar(
-                                                          radius: 70,
-                                                          child: Text(
-                                                            'Drop Files Here',
-                                                            style:
-                                                                Styles.white13,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 50,
-                                                      ),
+                                                     
                                                       ////
-                                                      Container(
-                                                        height: 100,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            2.5,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors.grey
-                                                                  .withOpacity(
-                                                                      .3)),
-                                                        ),
-                                                        constraints:
-                                                            BoxConstraints(
-                                                          maxWidth: 1100,
-                                                        ),
-                                                        child:
-                                                            SingleChildScrollView(
-                                                          child: Column(
-                                                            children: [
-                                                              CustomAppBar(
-                                                                title: '#'.tr,
-                                                                action: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    // Text('#'),
-
-                                                                    Text(
-                                                                        'Name'),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    Text(
-                                                                        'Upload Progress'),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    Text(
-                                                                        'Status'),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    Text(
-                                                                        'Description'),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    Text(
-                                                                        'Remove'),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Wrap(
+                                                       /// FILE UPLOAD WIDGET
+                                                          Container(
+                                                            height: Get.height * 0.2,
+                                                            width: Get.width / 1.3,
+                                                            child: Row(
+                                                                //
                                                                 children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      Text(
-                                                                          'Files list will appear heres'),
-                                                                    ],
+                                                                  Expanded(
+                                                                    flex: 2,
+                                                                    child:
+                                                                        FileUploadWidgetWithDropzone(),
                                                                   ),
-                                                                  // Row(
-                                                                  //   mainAxisAlignment:
-                                                                  //       MainAxisAlignment.spaceEvenly,
-                                                                  //   children: [
-                                                                  //     SizedBox(
-                                                                  //       width:
-                                                                  //           MediaQuery.of(context).size.width / 3.8,
-                                                                  //       child:
-                                                                  //           CustomMultiSelectDialogField(
-                                                                  //         initialValue: [],
-                                                                  //         // initialValue: (
-                                                                  //         //   controller
-                                                                  //         //         .selectedEquipmentCategoryIdList
-                                                                  //         //         .isNotEmpty)
-                                                                  //         //     ? controller
-                                                                  //         //         .selectedEquipmentCategoryIdList
-                                                                  //         //     : [],
-                                                                  //         // items: controller
-                                                                  //         //     .equipmentCategoryList
-                                                                  //         //     .map(
-                                                                  //         //       (equipmentCategory) =>
-                                                                  //         //           MultiSelectItem(
-                                                                  //         //         equipmentCategory?.id,
-                                                                  //         //         equipmentCategory?.name ??
-                                                                  //         //             '',
-                                                                  //         //       ),
-                                                                  //         //     )
-                                                                  //         //     .toList(),
-                                                                  //         onConfirm: (selectedOptionsList) => {
-                                                                  //           // controller
-                                                                  //           //     .equipmentCategoriesSelected(
-                                                                  //           //         selectedOptionsList),
-                                                                  //           // print(
-                                                                  //           //     'Equipment list ${controller.equipmentCategoryList}')
-                                                                  //         },
-                                                                  //         items: [],
-                                                                  //       ),
-                                                                  //     ),
-                                                                  //     ActionButton(
-                                                                  //       icon:
-                                                                  //           Icons.remove,
-                                                                  //       label:
-                                                                  //           'Delete',
-                                                                  //       // onPress:
-                                                                  //       //     () async {},
-                                                                  //       color:
-                                                                  //           Colors.red,
-                                                                  //       onPressed:
-                                                                  //           () {},
-                                                                  //     ),
-                                                                  //   ],
-                                                                  // )
-                                                                ],
-                                                              ),
-                                                            ],
+                                                                  Dimens.boxWidth10,
+                                                                  Expanded(
+                                                                      flex: 8,
+                                                                      child:
+                                                                          FileUploadDetailsWidgetWeb()),
+                                                                ]),
                                                           ),
-                                                        ),
-                                                      ),
+                                            
+                                                    
                                                     ],
                                                   ),
                                                 ],
@@ -1374,41 +1112,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       },
                                                     ),
                                                   ),
-                                                  // ActionButton(
-                                                  //   icon: Icons.add,
-                                                  //   label: 'Add',
-                                                  //   // onPress:
-                                                  //   //     () async {},
-                                                  //   color: Colors.blue,
-                                                  //   onPressed: () {
-                                                  //     controller
-                                                  //         .updateSupplierActionText(
-                                                  //       controller
-                                                  //           .supplierActionTextFieldController
-                                                  //           .text,
-                                                  //       controller
-                                                  //           .supplierActionDateTimeCtrlrWeb
-                                                  //           .text,
-                                                  //       controller
-                                                  //           .supplierActionSrNumberTextFieldController
-                                                  //           .text,
-
-                                                  //       // controller.isCheckedRequire
-                                                  //       //     .value
-                                                  //     );
-                                                  //     controller
-                                                  //         .supplierActionSrNumberTextFieldController
-                                                  //         .clear();
-                                                  //     controller
-                                                  //         .supplierActionTextFieldController
-                                                  //         .clear();
-                                                  //     controller
-                                                  //         .supplierActionDateTimeCtrlrWeb
-                                                  //         .clear();
-                                                  //     // controller.isCheckedRequire
-                                                  //     //     .value = false;
-                                                  //   },
-                                                  // ),
+                                                
                                                   ElevatedButton(
                                                     child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
                                                     onPressed: () {
@@ -1459,7 +1163,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                   Container(
                                     height: 250,
                                     width: MediaQuery.of(context).size.width /
-                                        1.31,
+                                        1.15,
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.grey)),
                                     child: Column(
@@ -1471,134 +1175,30 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                               left: 20, top: 15),
                                           child: Text('Attachments'),
                                         ),
+                                        Dimens.boxHeight30,
                                         Row(
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 90, top: 30),
-                                              child: CircleAvatar(
-                                                radius: 70,
-                                                child: Text(
-                                                  'Drop Files Here',
-                                                  style: Styles.white13,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 50,
-                                            ),
-                                            ////
-                                            Container(
-                                              height: 100,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.grey
-                                                        .withOpacity(.3)),
-                                              ),
-                                              constraints: BoxConstraints(
-                                                maxWidth: 1100,
-                                              ),
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  children: [
-                                                    CustomAppBar(
-                                                      title: '#'.tr,
-                                                      action: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          // Text('#'),
+                                           
+                                            /// FILE UPLOAD WIDGET
+                                                          Container(
+                                                            height: Get.height * 0.2,
+                                                            width: Get.width / 1.3,
+                                                            child: Row(
+                                                                //
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 2,
+                                                                    child:
+                                                                        FileUploadWidgetWithDropzone(),
+                                                                  ),
+                                                                  Dimens.boxWidth10,
+                                                                  Expanded(
+                                                                      flex: 8,
+                                                                      child:
+                                                                          FileUploadDetailsWidgetWeb()),
+                                                                ]),
+                                                          ),
 
-                                                          Text('Name'),
-                                                          Dimens.boxWidth20,
-                                                          Text(
-                                                              'Upload Progress'),
-                                                          Dimens.boxWidth20,
-                                                          Text(
-                                                              'Document Category'),
-                                                          Dimens.boxWidth20,
-                                                          Text('Size'),
-                                                          Dimens.boxWidth20,
-                                                          Text('Remove'),
-                                                          Dimens.boxWidth20,
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Dimens.boxHeight10,
-                                                    Wrap(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                                'Files list will appear heres'),
-                                                          ],
-                                                        ),
-                                                        // Row(
-                                                        //   mainAxisAlignment:
-                                                        //       MainAxisAlignment.spaceEvenly,
-                                                        //   children: [
-                                                        //     SizedBox(
-                                                        //       width:
-                                                        //           MediaQuery.of(context).size.width / 3.8,
-                                                        //       child:
-                                                        //           CustomMultiSelectDialogField(
-                                                        //         initialValue: [],
-                                                        //         // initialValue: (
-                                                        //         //   controller
-                                                        //         //         .selectedEquipmentCategoryIdList
-                                                        //         //         .isNotEmpty)
-                                                        //         //     ? controller
-                                                        //         //         .selectedEquipmentCategoryIdList
-                                                        //         //     : [],
-                                                        //         // items: controller
-                                                        //         //     .equipmentCategoryList
-                                                        //         //     .map(
-                                                        //         //       (equipmentCategory) =>
-                                                        //         //           MultiSelectItem(
-                                                        //         //         equipmentCategory?.id,
-                                                        //         //         equipmentCategory?.name ??
-                                                        //         //             '',
-                                                        //         //       ),
-                                                        //         //     )
-                                                        //         //     .toList(),
-                                                        //         onConfirm: (selectedOptionsList) => {
-                                                        //           // controller
-                                                        //           //     .equipmentCategoriesSelected(
-                                                        //           //         selectedOptionsList),
-                                                        //           // print(
-                                                        //           //     'Equipment list ${controller.equipmentCategoryList}')
-                                                        //         },
-                                                        //         items: [],
-                                                        //       ),
-                                                        //     ),
-                                                        //     ActionButton(
-                                                        //       icon:
-                                                        //           Icons.remove,
-                                                        //       label:
-                                                        //           'Delete',
-                                                        //       // onPress:
-                                                        //       //     () async {},
-                                                        //       color:
-                                                        //           Colors.red,
-                                                        //       onPressed:
-                                                        //           () {},
-                                                        //     ),
-                                                        //   ],
-                                                        // )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
                                           ],
                                         ),
                                       ],
@@ -1664,105 +1264,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                 ],
                               )
 
-                              // Wrap(
-                              //   children: [
-                              //     Row(
-                              //       mainAxisSize: MainAxisSize.min,
-                              //       children: [
-                              //         CustomTextField(
-                              //           label: 'Calibration remainder In: ',
-                              //           width: 300,
-                              //         ),
-                              //         Container(
-                              //           width: 100,
-                              //           child: TextField(
-                              //             decoration: InputDecoration(
-                              //               contentPadding:
-                              //                   Dimens.edgeInsets16_0_16_0,
-                              //               focusedBorder: OutlineInputBorder(
-                              //                 borderSide: BorderSide(width: .2),
-                              //                 borderRadius:
-                              //                     BorderRadius.circular(2),
-                              //               ),
-                              //               enabledBorder: OutlineInputBorder(
-                              //                 borderSide: BorderSide(width: .2),
-                              //                 borderRadius:
-                              //                     BorderRadius.circular(2),
-                              //               ),
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //     Container(
-                              //       margin: Dimens.edgeInsets16,
-                              //       child: Row(
-                              //         mainAxisSize: MainAxisSize.min,
-                              //         children: [
-                              //           Text('Calibration cirtificate'),
-                              //           Dimens.boxWidth10,
-                              //           ActionButton(
-                              //             label: 'Upload cirtification file',
-                              //             onPressed: () {},
-                              //             icon: Icons.file_upload_outlined,
-                              //             color: Colors.blue,
-                              //           )
-                              //         ],
-                              //       ),
-                              //     )
-                              //   ],
-                              // ),
-                              // Container(
-                              //   margin: Dimens.edgeInsets16,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       width: 1,
-                              //       color: Colors.grey.withOpacity(.3),
-                              //     ),
-                              //   ),
-                              //   child: DefaultTabController(
-                              //     length: 3,
-                              //     child: Column(
-                              //       children: [
-                              //         Container(
-                              //           color: Colors.grey.withOpacity(.2),
-                              //           child: TabBar(
-                              //             tabs: [
-                              //               Container(
-                              //                 height: 40,
-                              //                 child: Center(
-                              //                   child: Text('Warranties'),
-                              //                 ),
-                              //               ),
-                              //               Container(
-                              //                 height: 40,
-                              //                 child: Center(
-                              //                   child: Text('Purchasing'),
-                              //                 ),
-                              //               ),
-                              //               Container(
-                              //                 height: 40,
-                              //                 child: Center(
-                              //                   child: Text('Files'),
-                              //                 ),
-                              //               ),
-                              //             ],
-                              //           ),
-                              //         ),
-                              //         Container(
-                              //           height: 400,
-                              //           child: TabBarView(
-                              //             children: [
-                              //               WarrantyTab(),
-                              //               ManufacturarTab(),
-                              //               Files(),
-                              //             ],
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),
@@ -2152,13 +1653,13 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
             },
           ),
         ),
-        GestureDetector(
-          onTap: () {},
-          child: Icon(
-            Icons.delete,
-            color: Colors.red,
-          ),
-        )
+        // GestureDetector(
+        //   onTap: () {},
+        //   child: Icon(
+        //     Icons.delete,
+        //     color: Colors.red,
+        //   ),
+        // )
         // ActionButton(
         //   icon: Icons.delete_outline,
         //   label: 'Delete',
@@ -2170,4 +1671,25 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
       ],
     );
   }
+
+  Widget buildRadioButton(String severity, Color color,BuildContext context) {
+    return Obx(() {
+      return Container(
+        height: 35,
+        width: MediaQuery.of(context).size.width / 10,
+        child: RadioListTile(
+          dense: true,
+          title: Text(severity, style: TextStyle(color: color),),
+          value: severity,
+          groupValue: controller.selectedSeverity.value,
+          onChanged: (value) {
+            controller.setSelectedSeverity(value as String);
+            print('DAta:${controller.selectedSeverity.value}');
+          },
+        ),
+      );
+    }
+    );
+  }
+
 }

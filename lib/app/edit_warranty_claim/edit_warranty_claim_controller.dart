@@ -239,9 +239,9 @@ class EditWarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getuserAccessData();
+    // });
 
     if (wc_id != null) {
       Future.delayed(Duration(seconds: 1), () {
@@ -390,17 +390,17 @@ class EditWarrantyClaimController extends GetxController {
     update(['employee_list']);
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList =
-        await editWarrantyClaimPresenter.getUserAccessList();
+  // Future<void> getuserAccessData() async {
+  //   final _userAccessList =
+  //       await editWarrantyClaimPresenter.getUserAccessList();
 
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+  //   if (_userAccessList != null) {
+  //     final userAccessModelList = jsonDecode(_userAccessList);
+  //     var userAccess = AccessListModel.fromJson(userAccessModelList);
+  //     varUserAccessModel.value = userAccess;
+  //     varUserAccessModel.value.access_list = userAccess.access_list;
+  //   }
+  // }
 
   void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
     selectedEquipmentCategoryIdList.value = <int>[];

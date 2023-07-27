@@ -29,25 +29,27 @@ class WarrantyClaimController extends GetxController {
   WarrantyClaimPresenter warrantyClaimPresenter;
 
   final HomeController homeController = Get.find();
-   var itemCount = 0.obs;
-
+  var itemCount = 0.obs;
 
   //Additional Email work
   var rowList = <String>[].obs;
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
- 
-
   void removeRow({required int index}) {
     supplierActions.removeAt(index);
-    
   }
 
   ///External Emails Part
   var externalEmails = <ExternalEmails>[].obs;
   void updateText(String name, String email) {
     externalEmails.add(ExternalEmails(email: email, name: name));
+  }
+
+  ///Radio
+  RxString selectedSeverity = RxString('');
+   void setSelectedSeverity(String severity) {
+    selectedSeverity.value = severity;
   }
 
   ///Supplier Action Part
@@ -74,7 +76,7 @@ class WarrantyClaimController extends GetxController {
   ////
   RxBool isCheckedRequire = false.obs;
   RxBool isCheckedDataRequire = false.obs;
-
+  bool openFromDateToStartDatePicker = false;
   void requireToggleCheckbox() {
     isCheckedRequire.value = !isCheckedRequire.value;
     isCheckedDataRequire.value = isCheckedRequire.value;
@@ -117,15 +119,13 @@ class WarrantyClaimController extends GetxController {
 
   Set<String> supplierNameSet = {};
 
-
-    WarrantyClaimModel? warrantyClaimListModel;
+  WarrantyClaimModel? warrantyClaimListModel;
   RxList<String> warrantyClaimListTableColumns = <String>[].obs;
 
 //Warranty Claim
   // var warrantyClaimList = <WarrantyClaimModel>[];
   RxList<WarrantyClaimModel?> filteredData = <WarrantyClaimModel>[].obs;
   RxList<WarrantyClaimModel?> warrantyClaimList = <WarrantyClaimModel>[].obs;
-
 
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -164,8 +164,8 @@ class WarrantyClaimController extends GetxController {
   RxList<int?> selectedSupplierNameIdList = <int>[].obs;
   Rx<bool> isBlockSelected = true.obs;
 
-   //From and To date format
-   Rx<DateTime> fromDate = DateTime.now().obs;
+  //From and To date format
+  Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
@@ -258,16 +258,17 @@ class WarrantyClaimController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getWarrantyClaimList(facilityId, formattedTodate, formattedFromdate, false);
+        getWarrantyClaimList(
+            facilityId, formattedTodate, formattedFromdate, false);
       });
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getuserAccessData();
+    // });
     Future.delayed(Duration(seconds: 1), () {
       getInventoryList();
     });
@@ -325,20 +326,19 @@ class WarrantyClaimController extends GetxController {
           '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
       requestManufactureTextController.text =
           inventoryDetailsModel.value?.supplierName ?? '';
-     
     }
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await warrantyClaimPresenter.getUserAccessList();
+  // Future<void> getuserAccessData() async {
+  //   final _userAccessList = await warrantyClaimPresenter.getUserAccessList();
 
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+  //   if (_userAccessList != null) {
+  //     final userAccessModelList = jsonDecode(_userAccessList);
+  //     var userAccess = AccessListModel.fromJson(userAccessModelList);
+  //     varUserAccessModel.value = userAccess;
+  //     varUserAccessModel.value.access_list = userAccess.access_list;
+  //   }
+  // }
 
   void employeesNameSelected(_selectedEmployeesNameIds) {
     selectedEmployeeNameIdList.value = <int>[];
@@ -352,8 +352,6 @@ class WarrantyClaimController extends GetxController {
     for (var _selectedCategoryId in _selectedaffectedPartIds) {
       selectedAffectedPartEquipmentIdList.add(_selectedCategoryId);
     }
-
-  
   }
 
   Future<void> getInventoryCategoryList({String? facilityId}) async {
@@ -401,8 +399,6 @@ class WarrantyClaimController extends GetxController {
     );
     update(['inventory_list']);
   }
-
- 
 
   void getBusinessList() async {
     supplierNameList.value = <BusinessListModel>[];
@@ -453,7 +449,7 @@ class WarrantyClaimController extends GetxController {
     for (var employee_list in _employeeList) {
       employeeList.add(employee_list);
     }
-    
+
     update(['employee_list']);
   }
 
@@ -468,38 +464,34 @@ class WarrantyClaimController extends GetxController {
     for (var employees_list in _employeesList) {
       employeesList.add(employees_list);
     }
-   
+
     update(['employee_list']);
   }
 
-
-void search(String keyword) {
+  void search(String keyword) {
     if (keyword.isEmpty) {
       warrantyClaimList.value = filteredData;
       return;
     }
 
     warrantyClaimList.value = filteredData
-        .where((item) =>
-            item!.warranty_claim_title!.toLowerCase().contains(keyword.toLowerCase()))
+        .where((item) => item!.warranty_claim_title!
+            .toLowerCase()
+            .contains(keyword.toLowerCase()))
         .toList();
   }
- 
-
- 
 
   void getWarrantyClaimList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
     // supplierNameList.value = <WarrantyClaimModel>[];
 
     final list = await warrantyClaimPresenter.getWarrantyClaimList(
-        isLoading: isLoading, 
-        categoryIds: categoryIds, 
-        facilityId: facilityId,
-        start_date: startDate,
-        end_date: endDate,
-
-        );
+      isLoading: isLoading,
+      categoryIds: categoryIds,
+      facilityId: facilityId,
+      start_date: startDate,
+      end_date: endDate,
+    );
     print('Supplier Name List:$supplierNameList');
     Set<String> supplierNameSet = {};
     for (var _supplierNameList in list) {
@@ -513,14 +505,14 @@ void search(String keyword) {
       rowCount: warrantyClaimList.length,
       rowsPerPage: 10,
     );
-     if (filteredData != null && filteredData.isNotEmpty) {
-        warrantyClaimListModel = filteredData[0];
-        var warrantyClaimListJson = warrantyClaimListModel?.toJson();
-        warrantyClaimListTableColumns.value = <String>[];
-        for (var key in warrantyClaimListJson?.keys.toList() ?? []) {
-          warrantyClaimListTableColumns.add(key);
-        }
+    if (filteredData != null && filteredData.isNotEmpty) {
+      warrantyClaimListModel = filteredData[0];
+      var warrantyClaimListJson = warrantyClaimListModel?.toJson();
+      warrantyClaimListTableColumns.value = <String>[];
+      for (var key in warrantyClaimListJson?.keys.toList() ?? []) {
+        warrantyClaimListTableColumns.add(key);
       }
+    }
     update(['warranty_claim_list']);
   }
 
@@ -797,6 +789,7 @@ void search(String keyword) {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,
@@ -808,7 +801,9 @@ void search(String keyword) {
               additionalEmailEmployees: selectedEmployeeNameIdList,
               externalEmails: external_emails_list,
               supplierActions: supplier_action_list,
-              status: 1 ///additional data to create WC as 'Submit for Release'
+              status: 1
+
+              ///additional data to create WC as 'Submit for Release'
 
               );
 
@@ -954,6 +949,7 @@ void search(String keyword) {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,
@@ -994,7 +990,7 @@ void search(String keyword) {
     print('EditArgument$wc_id');
   }
 
-   void getWarrantyClaimtListByDate() {
+  void getWarrantyClaimtListByDate() {
     getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate, false);
   }
 }

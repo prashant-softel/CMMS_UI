@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -18,16 +21,19 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     this.stockManagementAddGoodsOrdersPresenter,
   );
   StockManagementAddGoodsOrdersPresenter stockManagementAddGoodsOrdersPresenter;
-  final HomeController homecontroller = Get.find();
+
+  final HomeController homeController = Get.find();
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<String> selectedFacility = ''.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  StreamSubscription<int>? facilityIdStreamSubscription;
   Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
+  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
 
@@ -36,6 +42,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
   int? id = 0;
+  int facilityId = 0;
 
   //drop down list of assets
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -87,6 +94,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   void onInit() async {
     id = Get.arguments;
     print('AddStock:$id');
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        getFacilityList();
+      });
+    });
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });
@@ -103,6 +116,20 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     });
 
     super.onInit();
+  }
+
+  Future<void> getFacilityList() async {
+    final _facilityList =
+        await stockManagementAddGoodsOrdersPresenter.getFacilityList();
+    //print('Facility25:$_facilityList');
+    if (_facilityList != null) {
+      for (var facility in _facilityList) {
+        facilityList.add(facility);
+      }
+
+      selectedFacility.value = facilityList[0]?.name ?? '';
+      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
   }
 
   Future<void> getPurchaseDetailsById({required int id}) async {

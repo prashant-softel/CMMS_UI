@@ -193,6 +193,19 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getRiskTypeList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getRiskTypeList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
   Future<ResponseModel> getEmployeesList({
     int? facility_id,
     required bool isLoading,
@@ -451,6 +464,18 @@ class DataRepository extends DomainRepository {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+    );
+  }
+
+  Future<ResponseModel> getModuleCleaningListPlan({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getModuleCleaningListPlan(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
     );
   }
 
@@ -990,6 +1015,19 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+
+ Future<ResponseModel> createEscalationMatrix({
+    required String auth,
+    createEscalationMatrix,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createEscalationMatrix(
+        auth: auth,
+        createEscalationMatrix: createEscalationMatrix,
+        isLoading: isLoading ?? false,
+      );
+
+
   Future<ResponseModel> createGoodsOrder({
     required String auth,
     createGo,
@@ -1253,6 +1291,15 @@ class DataRepository extends DomainRepository {
     int? facility_id,
   }) async =>
       await connectHelper.getTypePermitList(
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
+  
+
+  Future<ResponseModel> getModulesList({
+    String? auth,
+    bool? isLoading,
+    int? facility_id,
+  }) async =>
+      await connectHelper.getModulesList(
           auth: auth, isLoading: isLoading, facility_id: facility_id);
 
   Future<ResponseModel> getUserAccessList({
@@ -2443,6 +2490,42 @@ class DataRepository extends DomainRepository {
         editMrsJsonString: editMrsJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getInsuranceStatus({
+    // int? job_type_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInsuranceStatus(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
+  Future<ResponseModel> getCalibrationCertificate({
+    required String auth,
+    int? facilityId,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCalibrationAssets(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getWarrantyCertificate({
+    required String auth,
+    int? type,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWarrantyCertificate(
+        auth: auth,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> saveRoleNotification({
     auth,
     bool? isLoading,

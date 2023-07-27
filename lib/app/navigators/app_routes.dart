@@ -116,9 +116,13 @@ abstract class Routes {
   static const roleNotification = _Paths.roleNotification;
   static const setting = _Paths.setting;
   static const moduleCleaningListPlan = _Paths.moduleCleaningListPlan;
+  static const insuranceStatus = _Paths.insuranceStatus;
+  static const calibrationCertificate = _Paths.calibrationCertificate;
+  static const warrantyCertificate = _Paths.warrantyCertificate;
   static const moduleCleaningListExecution = _Paths.moduleCleaningListExecution;
   static const returnMrsList = _Paths.returnMrsList;
   static const issueMrsApprove = _Paths.issueMrsApprove;
+
 }
 
 abstract class _Paths {
@@ -227,9 +231,14 @@ abstract class _Paths {
   static const roleNotification = '/role-notification';
   static const setting = '/setting';
   static const moduleCleaningListPlan = '/module-cleaning-list-plan';
+
+  static const insuranceStatus = '/insuranceStatus';
+  static const calibrationCertificate = '/calibrationCertificate';
+  static const warrantyCertificate = '/warrantyCertificate';
   static const moduleCleaningListExecution = '/module-cleaning-list-execution';
   static const returnMrsList = '/return-mrs';
   static const issueMrsApprove = '/issue-mrs-approve-reject';
+
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

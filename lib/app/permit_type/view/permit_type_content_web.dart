@@ -123,8 +123,10 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Facility: '),
+                                            Text(
+                                              "Facility: ",
+                                              style: Styles.blackBold16,
+                                            ),
                                             SizedBox(
                                               width: 64,
                                             ),
@@ -135,6 +137,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                     .width *
                                                     .2) -
                                                     30,
+                                                height: MediaQuery.of(context).size.height * 0.040,
                                                 child: DropdownWidget(
                                                   controller: controller,
                                                   dropdownList:
@@ -273,7 +276,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+
                                     Container(
+                                        height: 40,
                                         width: (Get.width * .07),
                                         child: CustomElevatedButton(
                                             backgroundColor:

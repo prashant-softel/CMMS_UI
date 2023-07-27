@@ -2,9 +2,11 @@ import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +134,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   // margin: Dimens.edgeInsets5,
                                                                   dropdownList:
                                                                       controller
@@ -219,101 +221,14 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                     'Incident Severity: '),
                                                               Dimens.boxWidth10,
                                                                 SizedBox(
-                                                                  child: Row(
+                                                                  child: Column(
                                                                   children: [
+                                                                        buildRadioButton('Critical',Colors.red,Colors.white,context),
+                                                                        buildRadioButton('High',Colors.orange,Colors.white,context),
+                                                                        buildRadioButton('Medium',Colors.yellow,Colors.white,context),
+                                                                        buildRadioButton('Low',Colors.green,Colors.white,context),
                                                                    
-                                                                    Radio(
-                                                                        value: false,
-                                                                        groupValue:
-                                                                            controller
-                                                                                .isSelected
-                                                                                .value,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          controller
-                                                                              .selectOption(
-                                                                                  'Critical');
-                                                                          print(
-                                                                              'Radio Critical: ${controller.isSelected.value}');
-                                                                        }),
-                                                                    Container(
-                                                                      color: ColorValues.appRedColor,
-                                                                      child: Text(
-                                                                        'Critical',
-                                                                        style: TextStyle(
-                                                                            color: Colors
-                                                                                .white),
-                                                                      ),
-                                                                    ),
-                                                                    Radio(
-                                                                        value: true,
-                                                                        groupValue:
-                                                                            controller
-                                                                                .isSelected
-                                                                                .value,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          controller
-                                                                              .selectOption(
-                                                                                  'High');
-                                                                          print(
-                                                                              'Radio High: ${controller.isSelected.value}');
-                                                                        }),
-                                                                    Container(
-                                                                      color: ColorValues.orangeColor,
-                                                                      child: Text(
-                                                                        'High',
-                                                                        style: TextStyle(
-                                                                            color: Colors
-                                                                                .white),
-                                                                      ),
-                                                                    ),
-                                                                    Radio(
-                                                                        value: true,
-                                                                        groupValue:
-                                                                            controller
-                                                                                .isSelected
-                                                                                .value,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          controller
-                                                                              .selectOption(
-                                                                                  'Medium');
-                                                                          print(
-                                                                              'Radio Medium: ${controller.isSelected.value}');
-                                                                        }),
-                                                                    Container(
-                                                                      color: ColorValues.appYellowColor,
-                                                                      child: Text(
-                                                                        'Medium',
-                                                                        style: TextStyle(
-                                                                            color: Colors
-                                                                                .white),
-                                                                      ),
-                                                                    ),
-                                                                    Radio(
-                                                                        value: true,
-                                                                        groupValue:
-                                                                            controller
-                                                                                .isSelected
-                                                                                .value,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          controller
-                                                                              .selectOption(
-                                                                                  'Low');
-                                                                          print(
-                                                                              'Radio Low: ${controller.isSelected.value}');
-                                                                        }),
-                                                                    Container(
-                                                                      color: ColorValues.appGreenColor,
-                                                                      child: Text(
-                                                                        'Low',
-                                                                        style: TextStyle(
-                                                                            color: Colors
-                                                                                .white),
-                                                                      ),
-                                                                    )
+                                                                    
                                                                   ],
                                                                                          ),
                                                                 ),
@@ -334,7 +249,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .victimNameList,
                                                                   isValueSelected:
@@ -371,7 +286,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .incidentInvestigationDoneByList,
                                                                   isValueSelected:
@@ -405,16 +320,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
-                                                                      .typePermitList,
+                                                                      .riskTypeList,
                                                                   isValueSelected:
                                                                       controller
-                                                                          .isTypePermitSelected
+                                                                          .isRiskTypeListSelected
                                                                           .value,
                                                                   selectedValue:
                                                                       controller
-                                                                          .selectedTypePermit
+                                                                          .selectedRiskTypeList
                                                                           .value,
                                                                   onValueChanged:
                                                                       controller
@@ -570,7 +485,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .assetRestorationActionTakenByList,
                                                                   isValueSelected:
@@ -690,7 +605,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () => DropdownWidget(
+                                                                () => DropdownWebWidget(
                                                                   dropdownList: controller
                                                                       .eqipmentNameList,
                                                                   isValueSelected:
@@ -729,7 +644,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ),
                                                             ],
                                                           ),
-                                                          Dimens.boxHeight255,
+                                                          Dimens.boxHeight370,
                                                           Row(
                                                             children: [
                                                                CustomRichText(
@@ -764,7 +679,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .width /
                                                                     5,
                                                             child: Obx(
-                                                              () => DropdownWidget(
+                                                              () => DropdownWebWidget(
                                                                 dropdownList: controller
                                                                     .incidentInvestigationVerificationDoneByList,
                                                                 isValueSelected:
@@ -966,7 +881,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .width /
                                                               5,
                                                           child: Obx(
-                                                            () => DropdownWidget(
+                                                            () => DropdownWebWidget(
                                                               dropdownList: controller
                                                                   .typePermitList,
                                                               isValueSelected:
@@ -1139,7 +1054,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 CustomElevatedButton(
                                                   backgroundColor: ColorValues.appRedColor,
                                                   onPressed: () {
-                                                    // controller.saveAsDraft();
+                                                    Get.offAndToNamed(Routes.incidentReportListWeb);
                                                   },
                                                   text: 'Cancel',
                                                 ),
@@ -1403,25 +1318,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   ) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.topLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(right: 385),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
-      //           style: Styles.blackBold16, children: []),
-      //     ),
-      //   ),
-      // ),
-      // Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(right: 385),
-      //       child: CustomRichText(
-      //         title: position == 0 ? '$title1' : '$title2',
-      //       ),
-      //     )),
+    
       Dimens.boxHeight5,
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
@@ -1963,6 +1860,33 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
       ),
       
     ]);
+  }
+
+  ///Radio Widget
+   Widget buildRadioButton(String severity, Color color, Color color2,
+   BuildContext context) {
+    return Obx(() {
+      return Container(
+        height: 35,
+        width: MediaQuery.of(context).size.width / 5,
+        child: RadioListTile(
+          dense: true,
+          title: Container(
+            color: color,
+            child: Padding(
+              padding: const EdgeInsets.only(left:10),
+              child: Text(severity, style: TextStyle(color: color2),),
+            )),
+          value: severity,
+          groupValue: controller.selectedSeverity.value,
+          onChanged: (value) {
+            controller.setSelectedSeverity(value as String);
+            print('Incident Severity:${controller.selectedSeverity.value}');
+          },
+        ),
+      );
+    }
+    );
   }
 
   Widget _buildIncidentReportTitleTextField_web(BuildContext context) {

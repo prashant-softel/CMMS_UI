@@ -36,11 +36,13 @@ import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
@@ -69,12 +71,14 @@ import '../models/access_level_model.dart';
 import '../models/asset_master_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
+import '../models/calibration_certificate_model.dart';
 import '../models/city_model.dart';
 import '../models/competency_model.dart';
 import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
 import '../models/frequency_model.dart';
 import '../models/get_mrs_list_model.dart';
+import '../models/insurance_status_model.dart';
 import '../models/inventory_status_list_model.dart';
 import '../models/inventory_type_list_model.dart';
 import '../models/job_card_details_model.dart';
@@ -88,6 +92,7 @@ import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/user_list_model.dart';
+import '../models/warranty_certificate_model.dart';
 import '../models/warranty_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
@@ -487,6 +492,48 @@ class Repository {
     }
   }
 
+  //Create Escalation Matrix
+  Future<Map<String, dynamic>> createEscalationMatrix(
+    createEscalationMatrix,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createEscalationMatrix(
+        auth: auth,
+        createEscalationMatrix: createEscalationMatrix,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Escalation Matrix Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {}
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createEscalationMatrix');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
     createGo,
@@ -776,6 +823,44 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getModuleCleaningListPlan(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getModuleCleaningListPlan: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonModuleCleaningListPlan = jsonDecode(res.data);
+        // print(res.data);
+        final List<ModuleCleaningListPlanModel> _moduleCleaningListPlan =
+            jsonModuleCleaningListPlan
+                .map<ModuleCleaningListPlanModel>((m) =>
+                    ModuleCleaningListPlanModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _moduleCleaningListPlan;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getModuleCleaningListPlan');
         return [];
       }
     } catch (error) {
@@ -1218,6 +1303,35 @@ class Repository {
       if (!res.hasError) {
         var employeeList = employeeListModelFromJson(res.data);
         return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  ///Risk Type List
+  Future<List<RiskTypeModel>> getRiskTypeList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getRiskTypeList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Risk Type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var riskTypeList = riskTypeModelFromJson(res.data);
+        return riskTypeList;
       }
       return [];
     } catch (error) {
@@ -2099,6 +2213,32 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getTypePermitList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+
+      return [];
+    }
+  }
+
+  Future<List<ModuleListModel?>?> getModulesList(
+      bool? isLoading, int? facility_id) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getModulesList(
+          auth: auth, isLoading: isLoading, facility_id: facility_id);
+
+      if (!res.hasError) {
+        final jsonModuleListModels = jsonDecode(res.data);
+        final List<ModuleListModel> _typePermitModelList = jsonModuleListModels
+            .map<ModuleListModel>(
+                (m) => ModuleListModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _typePermitModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getModulesList');
         return null;
       }
     } catch (error) {
@@ -5819,6 +5959,101 @@ class Repository {
     }
   }
 
+  Future<List<InsuranceStatusModel>> getInsuranceStatus({
+    // required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInsuranceStatus(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = InsuranceStatusModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<CalibrationCertificateModel?>?> getCalibrationCertificate(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCalibrationCertificate(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonCalibrationCertificate = jsonDecode(res.data);
+        // print(res.data);
+        final List<CalibrationCertificateModel> _CalibrationListModelList =
+            jsonCalibrationCertificate
+                .map<CalibrationCertificateModel>((m) =>
+                    CalibrationCertificateModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _CalibrationListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getCalibrationCertificate');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<WarrantyCertificateModel?>?> getWarrantyCertificate(
+    int? type,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWarrantyCertificate(
+        auth: auth,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonWarrantyCertificate = jsonDecode(res.data);
+        // print(res.data);
+        final List<WarrantyCertificateModel> _warrantyModel =
+            jsonWarrantyCertificate
+                .map<WarrantyCertificateModel>((m) =>
+                    WarrantyCertificateModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _warrantyModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getWarrantyCertificate');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<bool> saveRoleNotification(
       {bool? isLoading, saveRoleNotificationJsonString}) async {
     try {
@@ -5911,7 +6146,6 @@ class Repository {
       return false;
     }
   }
+  //end
+  //end
 }
-//end
-//end
-

@@ -15,7 +15,7 @@ class InventoryScreen extends GetView<InventoryController> {
   Widget build(BuildContext context) {
     var size = Get;
 
-    final double itemHeight = (size.height - kToolbarHeight - 50) / 10;
+    final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
 
     final double itemWidth = size.width / 2;
@@ -81,7 +81,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 25,
+                      crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -135,7 +135,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 25,
+                      crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -147,6 +147,9 @@ class InventoryScreen extends GetView<InventoryController> {
                             tittle: "Warranty Certificates",
                             ontap: () {
                               // controller.pmSchedule();
+                              Get.toNamed(
+                                Routes.warrantyCertificate,
+                              );
                             }),
                         _inventoryList(
                           tittle: "Warranty Claims",
@@ -185,7 +188,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 25,
+                      crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -195,7 +198,9 @@ class InventoryScreen extends GetView<InventoryController> {
                         _inventoryList(
                             tittle: "Calibration Certificates",
                             ontap: () {
-                              // controller.pmTask();
+                              Get.toNamed(
+                                Routes.calibrationCertificate,
+                              );
                             }),
                         _inventoryList(
                             tittle: "Calibration List",
@@ -258,7 +263,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 25,
+                      crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)

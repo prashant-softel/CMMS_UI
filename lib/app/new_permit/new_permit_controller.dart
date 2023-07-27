@@ -579,7 +579,7 @@ class NewPermitController extends GetxController {
     final _permitIssuerList = await permitPresenter.getPermitIssuerList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     for (var permit_issuer_list in _permitIssuerList) {
       permitIssuerList.add(permit_issuer_list);
@@ -597,7 +597,7 @@ class NewPermitController extends GetxController {
     final _permitApproverList = await permitPresenter.getPermitApproverList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     for (var permit_approver_list in _permitApproverList) {
       permitApproverList.add(permit_approver_list);
@@ -615,7 +615,7 @@ class NewPermitController extends GetxController {
     final _jobTypeList = await permitPresenter.getJobTypePermitList(
       isLoading: true,
       // categoryIds: cPategoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     for (var jobType_list in _jobTypeList) {
       jobTypeList.add(jobType_list);

@@ -77,7 +77,7 @@ class ModuleListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                          '${moduleModel?.moduleName}'
+                                          '${moduleModel?.name}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
@@ -100,7 +100,7 @@ class ModuleListContentMobile
                                     Expanded(
                                       child: Text(
                                         moduleModel
-                                                ?.moduleName ??
+                                                ?.name ??
                                             '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
