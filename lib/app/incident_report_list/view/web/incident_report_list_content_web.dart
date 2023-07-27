@@ -25,7 +25,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<IncidentReportListController>(
-        id: 'stock_Mangement_Date',
+        id: 'Incident Report List',
         builder: (controller) {
           return Scaffold(
             body: Stack(
