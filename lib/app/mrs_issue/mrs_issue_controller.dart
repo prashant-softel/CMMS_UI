@@ -40,15 +40,24 @@ class MrsIssueController extends GetxController {
     // print({"mrsdetailss", mrsDetailsModel});
   }
 
-  rejectMrs() async {
+  issueMrs() async {
     {
       String _comment = commentCtrlr.text.trim();
 
-      CommentModel commentModel = CommentModel(id: mrsId, comment: _comment);
-
-      var rejecttoJsonString = commentModel.toJson();
-      final response = await mrsIssuePresenter.rejectMrs(
-        rejecttoJsonString: rejecttoJsonString,
+      var issuetoJsonString = {
+        "ID": mrsId,
+        "issue_comment": _comment,
+        "cmmrsItems": [
+          {
+            "id": 298,
+            "issued_qty": 10
+            // "issue_remarks":"test item wise issue remark"
+          }
+        ]
+      };
+      // commentModel.toJson();
+      final response = await mrsIssuePresenter.issueMrs(
+        issuetoJsonString: issuetoJsonString,
         isLoading: true,
       );
       if (response == true) {

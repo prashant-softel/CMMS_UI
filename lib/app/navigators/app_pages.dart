@@ -28,6 +28,7 @@ import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.da
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
+import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
@@ -143,6 +144,7 @@ import '../inventory_category_list/view/inventory_category_list.dart';
 import '../inventory_list/views/inventory_list_screen.dart';
 import '../inventory_status_list/inventory_status_list_binding.dart';
 import '../inventory_status_list/view/inventory_status_list.dart';
+import '../issue_mrs_approve_reject/view/issue_mrs_approve_screen.dart';
 import '../job_card_details/job_card_details_binding.dart';
 import '../job_card_details/views/job_card_details_screen.dart';
 import '../job_card_list/views/job_card_list_screen.dart';
@@ -171,6 +173,8 @@ import '../preventive_maintenance_execution_view/preventive_maintenance_executio
 import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
+import '../return_mrs/return_mrs_binding.dart';
+import '../return_mrs/view/return_mrs_screen.dart';
 import '../role_List/role_list_binding.dart';
 import '../role_notification/role_notification_binding.dart';
 import '../setting_dashboard/setting_dashboard_binding.dart';
@@ -730,6 +734,16 @@ class AppPages {
       name: _Paths.moduleCleaningListExecution,
       page: ModuleCleaningListExecutionScreen.new,
       binding: ModuleCleaningListExecutionBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.returnMrsList,
+      page: ReturnMrsListScreen.new,
+      binding: ReturnMrsListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.issueMrsApprove,
+      page: IssueMrsApproveScreen.new,
+      binding: IssueMrsApproveBinding(),
     ),
   ];
 }

@@ -133,8 +133,7 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "MRS Return",
                             ontap: () {
-                              // Get.offNamed(
-                              //     Routes.updateGoodsOrdersDetailsScreen);
+                              Get.offNamed(Routes.returnMrsList);
                             }),
                         _stockManagementList(
                           tittle: "S2S Material Taransfer",
@@ -192,7 +191,7 @@ class StockManagementDashboardScreen
   }
 
   _stockManagementList({required String tittle, Function()? ontap}) {
-    return  MouseRegion(
+    return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: ontap,

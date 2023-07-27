@@ -492,7 +492,6 @@ class Repository {
     }
   }
 
-
   //Create Escalation Matrix
   Future<Map<String, dynamic>> createEscalationMatrix(
     createEscalationMatrix,
@@ -1312,9 +1311,8 @@ class Repository {
     }
   }
 
-
   ///Risk Type List
-   Future<List<RiskTypeModel>> getRiskTypeList({
+  Future<List<RiskTypeModel>> getRiskTypeList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,
@@ -1341,7 +1339,6 @@ class Repository {
       return [];
     }
   }
-
 
   ///Employees List
   Future<List<EmployeeListModel2>> getEmployeesList({
@@ -2225,7 +2222,7 @@ class Repository {
     }
   }
 
-   Future<List<ModuleListModel?>?> getModulesList(
+  Future<List<ModuleListModel?>?> getModulesList(
       bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5986,11 +5983,12 @@ class Repository {
       return [];
     }
   }
+
   Future<List<CalibrationCertificateModel?>?> getCalibrationCertificate(
-      int? type,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getCalibrationCertificate(
@@ -6004,10 +6002,11 @@ class Repository {
         final jsonCalibrationCertificate = jsonDecode(res.data);
         // print(res.data);
         final List<CalibrationCertificateModel> _CalibrationListModelList =
-        jsonCalibrationCertificate
-            .map<CalibrationCertificateModel>((m) =>
-            CalibrationCertificateModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+            jsonCalibrationCertificate
+                .map<CalibrationCertificateModel>((m) =>
+                    CalibrationCertificateModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
 
         return _CalibrationListModelList;
       } else {
@@ -6020,10 +6019,11 @@ class Repository {
       return [];
     }
   }
+
   Future<List<WarrantyCertificateModel?>?> getWarrantyCertificate(
-      int? type,
-      bool? isLoading,
-      ) async {
+    int? type,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getWarrantyCertificate(
@@ -6036,10 +6036,11 @@ class Repository {
         final jsonWarrantyCertificate = jsonDecode(res.data);
         // print(res.data);
         final List<WarrantyCertificateModel> _warrantyModel =
-        jsonWarrantyCertificate
-            .map<WarrantyCertificateModel>((m) =>
-            WarrantyCertificateModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+            jsonWarrantyCertificate
+                .map<WarrantyCertificateModel>((m) =>
+                    WarrantyCertificateModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
 
         return _warrantyModel;
       } else {
@@ -6074,8 +6075,77 @@ class Repository {
       return false;
     }
   }
+
+  Future<bool> issueMrs({bool? isLoading, issuetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.issueMrs(
+          auth: auth,
+          isLoading: isLoading,
+          issuetoJsonString: issuetoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> approveIssueMrs(
+      {bool? isLoading, issuemrsapprovetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveIssueMrs(
+          auth: auth,
+          isLoading: isLoading,
+          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectIssueMrs(
+      {bool? isLoading, rejectIssuetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectIssueMrs(
+          auth: auth,
+          isLoading: isLoading,
+          rejectIssuetoJsonString: rejectIssuetoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
   //end
   //end
 }
-
-

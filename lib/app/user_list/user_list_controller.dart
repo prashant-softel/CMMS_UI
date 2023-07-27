@@ -36,6 +36,7 @@ class UserListController extends GetxController {
         .where((item) =>
             item!.user_name!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
+    update(['user_list']);
   }
 
   @override
@@ -72,5 +73,6 @@ class UserListController extends GetxController {
         }
       }
     }
+    update(['user_list']);
   }
 }

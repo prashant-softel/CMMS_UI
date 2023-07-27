@@ -25,7 +25,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<IncidentReportListController>(
-        id: 'Incident Report List',
+        id: 'stock_Mangement_Date',
         builder: (controller) {
           return Scaffold(
             body: Stack(
@@ -81,11 +81,10 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                         SizedBox(
                                           width: 400,
                                         ),
-
-                            ],
-                          ),
-                        ),
-                        Dimens.boxHeight20,
+                                      ],
+                                    ),
+                                  ),
+                                  Dimens.boxHeight20,
 
                                   ///
                                   SizedBox(
@@ -141,7 +140,6 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                       ),
                                     ),
                                   ),
-
 
                                   SizedBox(
                                     height: 20,
@@ -240,9 +238,9 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                       Expanded(
                                                         child:
                                                             ScrollableTableView(
-                                                          paginationController:
-                                                              controller
-                                                                  .paginationIncidentReportController,
+                                                          // paginationController:
+                                                          //     controller
+                                                          //         .paginationIncidentReportController,
                                                           columns: [
                                                             'Id',
                                                             'Description',

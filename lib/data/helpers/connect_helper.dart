@@ -4007,4 +4007,61 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> issueMrs({
+    required String auth,
+    bool? isLoading,
+    required issuetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/CreateMRSIssue',
+      Request.post,
+      issuetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveIssueMrs({
+    required String auth,
+    bool? isLoading,
+    required issuemrsapprovetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/ApproveMRSIssue',
+      Request.post,
+      issuemrsapprovetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectIssueMrs({
+    required String auth,
+    bool? isLoading,
+    required rejectIssuetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/RejectMRSIssue',
+      Request.post,
+      rejectIssuetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

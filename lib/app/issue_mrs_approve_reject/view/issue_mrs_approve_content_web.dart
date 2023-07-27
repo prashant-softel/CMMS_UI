@@ -1,5 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/mrs_approve/mrs_approve_controller.dart';
+import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class MrsApproveContentWeb extends GetView<MrsApproveController> {
-  MrsApproveContentWeb({Key? key}) : super(key: key);
-  final MrsApproveController controller = Get.find();
+class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
+  IssueMrsApproveContentWeb({Key? key}) : super(key: key);
+  final IssueMrsApproveController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / MATERIAL REQUISITION  APPROVAL AND REJECT",
+                  Text(" /ISSUE MATERIAL REQUISITION  APPROVAL AND REJECT",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -70,7 +70,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                         child: Row(
                           children: [
                             Text(
-                              "Material Requisition Approval And Reject ",
+                              "Issue Material Requisition Approval And Reject ",
                               style: Styles.blackBold16,
                             ),
                             Spacer(),
@@ -211,9 +211,10 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                 columns: [
                                   "Equipment Name",
                                   "Asset Type",
-                                  "Image",
+                                  // "Image",
                                   "Available Qyt.",
-                                  "Requested Qty.",
+                                  "Requested Qty.", "Approved Qty.",
+                                  "Issued Qyt."
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
@@ -232,9 +233,11 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                       return [
                                         '${equipmentModelListDetails.asset_name}',
                                         '${equipmentModelListDetails.asset_type}',
-                                        "", //'${equipmentModelListDetails.file_path}',
+                                        //'${equipmentModelListDetails.file_path}',
                                         '${equipmentModelListDetails.available_qty}',
                                         '${equipmentModelListDetails.requested_qty}',
+                                        '${equipmentModelListDetails.approved_date}',
+                                        '${equipmentModelListDetails.issued_qty}',
                                       ];
                                     },
                                   ),
@@ -310,7 +313,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                 backgroundColor: ColorValues.approveColor,
                                 text: 'Approve',
                                 onPressed: () {
-                                  controller.approveMrs();
+                                  controller.approveIssueMrs();
                                 },
                               ),
                             ),
@@ -323,7 +326,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                 backgroundColor: ColorValues.rejectColor,
                                 text: 'Reject',
                                 onPressed: () {
-                                  controller.rejectMrs();
+                                  controller.rejectIssueMrs();
                                 },
                               ),
                             ),
