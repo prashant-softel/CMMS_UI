@@ -280,7 +280,7 @@ class CustomTextFieldForStock extends StatelessWidget {
                 decoration: InputDecoration(
                   suffixIcon: Icon(Icons.date_range),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
                   filled: true,
                   fillColor: readOnly == true
                       ? Color.fromARGB(255, 206, 205, 205)

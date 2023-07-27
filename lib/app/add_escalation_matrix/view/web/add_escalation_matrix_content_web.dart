@@ -216,7 +216,7 @@ class AddEscalationMatrixContentWeb
                                                                       controller
                                                                          .addRowItem();
                                                                       
-                                                                      print('TypeId:${controller.durationDaysTextCtrlr}');
+                                                                      // print('TypeId:${controller.durationDaysTextCtrlr}');
                                                                      
                                                                     },
                                                                     child: Icon(Icons
@@ -320,6 +320,7 @@ class AddEscalationMatrixContentWeb
                                                                               (txt) {
                                                                             mapData["value"] =
                                                                                 txt;
+                                                                                print('TextFileds:${mapData["value"] ?? ''}');
                                                                           },
                                                                         )
                                                                                   ),
@@ -377,6 +378,7 @@ class AddEscalationMatrixContentWeb
                                                                       //             )),
                                                                       //       )
                                                                       //     : Text(mapData['key'] ?? ''),
+                                                                      
                                                                     );
                                                                   }).toList(),
                                                                 );
@@ -400,9 +402,9 @@ class AddEscalationMatrixContentWeb
                                                         
                                                         controller.addStatusEscalationData(controller.selectedTypePermitId);
                                                         controller.addEscalationData(int.tryParse('${controller.durationDaysTextCtrlr.text}'), controller.selectedRoleListId);
-                                                        print('Controller:${controller.durationDaysTextCtrlr.text}');
+                                                        // print('Controller:${controller.durationDaysTextCtrlr.text}');
                                                         print('Controller:${controller.selectedTypePermitId}');
-                                                        controller.durationDaysTextCtrlr.clear();
+                                                        // controller.durationDaysTextCtrlr.clear();
                                                         controller.selectedRole.value = "";
                                                       },
                                                     ),

@@ -25,7 +25,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<IncidentReportListController>(
-        id: 'Incident Report List',
+        id: 'stock_Mangement_Date',
         builder: (controller) {
           return Scaffold(
             body: Stack(
@@ -81,11 +81,10 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                         SizedBox(
                                           width: 400,
                                         ),
-
-                            ],
-                          ),
-                        ),
-                        Dimens.boxHeight20,
+                                      ],
+                                    ),
+                                  ),
+                                  Dimens.boxHeight20,
 
                                   ///
                                   SizedBox(
@@ -142,7 +141,31 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                     ),
                                   ),
 
+                                  ///
+                                  // Align(
+                                  //   alignment: Alignment.centerLeft,
+                                  //   child: Container(
+                                  //     width: 400,
+                                  //     child: TabBar(
+                                  //       tabs: [
+                                  //         CustomTabBar(
+                                  //           label: 'listView'.tr,
+                                  //           icon: Icons.menu,
+                                  //         ),
+                                  //         CustomTabBar(
+                                  //           label: 'treeView'.tr,
+                                  //           icon: Icons.account_tree_sharp,
+                                  //         ),
+                                  //         CustomTabBar(
+                                  //           label: 'mapView'.tr,
+                                  //           icon: Icons.location_on,
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
 
+                                  ///
                                   SizedBox(
                                     height: 20,
                                   ),
