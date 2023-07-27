@@ -141,31 +141,6 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                     ),
                                   ),
 
-                                  ///
-                                  // Align(
-                                  //   alignment: Alignment.centerLeft,
-                                  //   child: Container(
-                                  //     width: 400,
-                                  //     child: TabBar(
-                                  //       tabs: [
-                                  //         CustomTabBar(
-                                  //           label: 'listView'.tr,
-                                  //           icon: Icons.menu,
-                                  //         ),
-                                  //         CustomTabBar(
-                                  //           label: 'treeView'.tr,
-                                  //           icon: Icons.account_tree_sharp,
-                                  //         ),
-                                  //         CustomTabBar(
-                                  //           label: 'mapView'.tr,
-                                  //           icon: Icons.location_on,
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // ),
-
-                                  ///
                                   SizedBox(
                                     height: 20,
                                   ),
@@ -263,9 +238,9 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                       Expanded(
                                                         child:
                                                             ScrollableTableView(
-                                                          paginationController:
-                                                              controller
-                                                                  .paginationIncidentReportController,
+                                                          // paginationController:
+                                                          //     controller
+                                                          //         .paginationIncidentReportController,
                                                           columns: [
                                                             'Id',
                                                             'Description',

@@ -255,7 +255,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                 columns: [
                                   "Equipment Name",
                                   "Asset Type",
-                                  "Image",
+                                  // "Image",
                                   "Requested Qty.",
                                   "Approved Qty.",
                                   "issued Qyt."
@@ -277,7 +277,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                       return [
                                         '${equipmentModelListDetails.asset_name}',
                                         '${equipmentModelListDetails.asset_type}',
-                                        "", //'${equipmentModelListDetails.file_path}',
+                                        //'${equipmentModelListDetails.file_path}',
                                         '${equipmentModelListDetails.requested_qty}',
                                         '${equipmentModelListDetails.available_qty}',
                                         '${equipmentModelListDetails.issued_qty}',
