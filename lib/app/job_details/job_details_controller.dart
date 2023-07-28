@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/job_details_model.dart';
+import '../../domain/models/job_model.dart';
 import '../../domain/models/new_permit_list_model.dart';
 import '../home/home_presenter.dart';
 import '../job_card_details/views/widgets/permit_list_table_dialog.dart';
@@ -28,6 +29,7 @@ class JobDetailsController extends GetxController {
   /// Job Details
   RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  Rx<JobModel?> statusJobmodel = JobModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
   PaginationController schedulePaginationController = PaginationController(
     rowCount: 0,
@@ -159,6 +161,7 @@ class JobDetailsController extends GetxController {
         facilityId: facilityId, selfView: false, isLoading: false);
     if (_permitList != null) {
       permitList?.value = <NewPermitModel>[];
+
       permitList?.value = _permitList;
     }
     //return _permitList;
