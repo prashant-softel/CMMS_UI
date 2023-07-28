@@ -656,7 +656,7 @@ class ConnectHelper {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123'
+      ptwStatus == '121'
           ? 'Permit/PermitApprove'
           : 'Permit/PermitExtendApprove',
       Request.put,

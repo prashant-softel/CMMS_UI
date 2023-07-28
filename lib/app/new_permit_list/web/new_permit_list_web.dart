@@ -7,6 +7,7 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_dialog.dart';
@@ -119,39 +120,15 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                       CustomAppBar(
                         title: 'Permit List',
                         action: Row(children: [
-                          // ActionButton(
-                          //   icon: Icons.download,
-                          //   label: 'BM Report',
-                          //   onPressed: () {},
-                          //   color: Color.fromARGB(255, 220, 176, 45),
-                          // ),
-                          // Dimens.boxWidth10,
-                          // ActionButton(
-                          //   icon: Icons.upload,
-                          //   label: 'Pending Permits',
-                          //   onPressed: () {},
-                          //   color: Color.fromARGB(255, 130, 183, 146),
-                          // ),
-                          // Dimens.boxWidth10,
-                          // ActionButton(
-                          //   icon: Icons.add,
-                          //   label: 'Created By Me'.tr,
-                          //   onPressed: () {},
-                          //   color: Color.fromARGB(255, 73, 142, 143),
-                          // ),
-                          // Dimens.boxWidth10,
-                          // ActionButton(
-                          //   icon: Icons.close,
-                          //   label: 'Assigned To Me'.tr,
-                          //   onPressed: () async {},
-                          //   color: Colors.green,
-                          // ),
                           Dimens.boxWidth10,
-                          ActionButton(
-                            icon: Icons.add,
-                            label: 'Column Visibility'.tr,
-                            onPressed: () {},
-                            color: Colors.blue,
+                          Container(
+                            height: 35,
+                            margin: EdgeInsets.only(left: 10),
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.appLightBlueColor,
+                              onPressed: () {},
+                              text: 'columnVisibility'.tr,
+                            ),
                           ),
                           Dimens.boxWidth10,
 
@@ -175,9 +152,10 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Container(
                               width: 200,
-                              height: 40,
+                              height: 35,
                               margin: Dimens.edgeInsets0_0_16_0,
                               child: TextField(
+                                onChanged: (value) => controller.search(value),
                                 decoration: InputDecoration(
                                   enabledBorder: const OutlineInputBorder(
                                     borderSide: const BorderSide(
@@ -238,7 +216,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                   ),
                                 ].map((record) {
                                   return TableViewRow(
-                                    height: 60,
+                                    height: 70,
                                     cells: record.map((value) {
                                       return TableViewCell(
                                         child: Text(value),
@@ -254,8 +232,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                 child: Column(children: [
                                   Expanded(
                                     child: ScrollableTableView(
-                                      paginationController: controller
-                                          .newPermitPaginationController,
+                                      // paginationController: controller
+                                      //     .newPermitPaginationController,
                                       columns: [
                                         'permitId',
                                         'description',
@@ -303,24 +281,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 "current_status"
                                                                             ? "Status"
                                                                             : ""
-
-                                                                                //             : column ==
-                                                                                //                     "breakdownTime"
-                                                                                //                 ? "Breakdown Time"
-                                                                                //                 : column ==
-                                                                                //                         "breakdownType"
-                                                                                //                     ? "Breakdown Type"
-                                                                                //                     : column ==
-                                                                                //                             "permitId"
-                                                                                //                         ? "Permit ID"
-                                                                                //                         : column ==
-                                                                                //                                 "assignedToName"
-                                                                                //                             ? "Assigned To"
-                                                                                //
-                                                                                // : column == "Actions"
-                                                                                "Actions"
-                                            // : "",
-                                            );
+                                                                                "Actions");
                                       }).toList(),
                                       rows: [
                                         ...List.generate(
@@ -363,7 +324,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                       permitId: int.tryParse(
                                                           _newPermitList[0]))
                                                 },
-                                            height: 70,
+                                            height: 80,
                                             cells: _newPermitList.map((value) {
                                               var index;
 
@@ -372,63 +333,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                 child: (value == 'Actions')
                                                     ? Wrap(
                                                         children: [
-                                                          // Align(
-                                                          //   alignment: Alignment
-                                                          //       .centerRight,
-                                                          //   child: Container(
-                                                          //     padding: Dimens
-                                                          //         .edgeInsets8_2_8_2,
-                                                          //     decoration:
-                                                          //         BoxDecoration(
-                                                          //       color: controller
-                                                          //                   .newPermitList!
-                                                          //                   .firstWhere(
-                                                          //                     (e) => "${e?.permitId}" == _newPermitList[0],
-                                                          //                     orElse: () => NewPermitModel(permitId: 000),
-                                                          //                   )
-                                                          //                   ?.ptwStatus ==
-                                                          //               121
-                                                          //           ?Colors
-                                                          //               .green
-                                                          //           :ColorValues
-                                                          //               .appRedColor,
-                                                          //       // : calibrationListListDetails
-                                                          //       //             ?.statusID ==
-                                                          //       //         211
-                                                          //       //     ? ColorValues
-                                                          //       //         .appYellowColor
-                                                          //       //     : calibrationListListDetails
-                                                          //       //                 ?.statusID ==
-                                                          //       //             214
-                                                          //       //         ? ColorValues
-                                                          //       //             .appGreenColor
-                                                          //       //         : calibrationListListDetails?.statusID ==
-                                                          //       //                 213
-                                                          //       //             ? ColorValues
-                                                          //       //                 .appYellowColor
-                                                          //       //             : calibrationListListDetails?.statusID ==
-                                                          //       //                     217
-                                                          //       //                 ? ColorValues.appGreenColor
-                                                          //       //                 : ColorValues.appDarkBlueColor,
-                                                          //       borderRadius:
-                                                          //           BorderRadius
-                                                          //               .circular(
-                                                          //                   4),
-                                                          //     ),
-                                                          //     child: Text(
-                                                          //       '${controller.newPermitList?.firstWhere((b) => '${b?.ptwStatus}'== '121' , orElse: null)?.current_status_short
-                                                          //          }',
-                                                          //       // '',
-                                                          //       style: Styles
-                                                          //           .white10
-                                                          //           .copyWith(
-                                                          //         color: Colors
-                                                          //             .white,
-                                                          //       ),
-                                                          //     ),
-                                                          //   ),
-                                                          // ),
-
                                                           ////////////
                                                           varUserAccessModel
                                                                       .value
@@ -441,10 +345,10 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
-                                                                  color: ColorValues.appDarkBlueColor,
+                                                                  color: ColorValues
+                                                                      .appDarkBlueColor,
                                                                   icon: Icons
                                                                       .visibility,
-                                                                  label: 'View',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -452,68 +356,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                   },
                                                                 )
                                                               : Container(),
-
-                                                          // varUserAccessModel
-                                                          //                 .value
-                                                          //                 .access_list!
-                                                          //                 .where((e) =>
-                                                          //                     e.feature_id == 3 &&
-                                                          //                     e.issue ==
-                                                          //                         1)
-                                                          //                 .length >
-                                                          //             0 &&
-                                                          //         controller
-                                                          //                 .newPermitList!
-                                                          //                 .firstWhere(
-                                                          //                   (e) =>
-                                                          //                       "${e?.permitId}" ==
-                                                          //                       _newPermitList[0],
-                                                          //                   orElse: () =>
-                                                          //                       NewPermitModel(permitId: 000),
-                                                          //                 )
-                                                          //                 ?.ptwStatus ==
-                                                          //             121
-                                                          //         ||
-                                                          //         controller
-                                                          //                 .newPermitList!
-                                                          //                 .firstWhere(
-                                                          //                   (e) =>
-                                                          //                       "${e?.permitId}" ==
-                                                          //                       _newPermitList[0],
-                                                          //                   orElse: () =>
-                                                          //                       NewPermitModel(permitId: 000),
-                                                          //                 )
-                                                          //                 ?.ptwStatus ==
-                                                          //             122
-                                                          //         ||
-                                                          //         controller
-                                                          //                 .newPermitList!
-                                                          //                 .firstWhere(
-                                                          //                   (e) =>
-                                                          //                       "${e?.permitId}" ==
-                                                          //                       _newPermitList[0],
-                                                          //                   orElse: () =>
-                                                          //                       NewPermitModel(permitId: 000),
-                                                          //                 )
-                                                          //                 ?.ptwStatus ==
-                                                          //             124
-                                                          //     ? TableActionButton(
-                                                          //         color: Colors
-                                                          //             .green,
-                                                          //         icon: Icons
-                                                          //             .check,
-                                                          //         label:
-                                                          //             'Issue',
-                                                          //         onPress: () {
-                                                          //           // Get.dialog(PermitIssueDialog(
-                                                          //           //     permitId:
-                                                          //           //         _newPermitList[0]));
-                                                          //           controller.viewNewPermitList(
-                                                          //               permitId:
-                                                          //                   int.tryParse(_newPermitList[0]));
-                                                          //         },
-                                                          //       )
-                                                          //     : Container(),
 
                                                           varUserAccessModel
                                                                           .value
@@ -540,8 +382,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appGreenColor,
                                                                   icon:
                                                                       Icons.add,
-                                                                  label:
-                                                                      'Approve',
                                                                   onPress: () {
                                                                     // Get.dialog(PermitApprovedDialog(
                                                                     //     permitId:
@@ -588,9 +428,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                           /// Condition For delete ends here
 
                                                           TableActionButton(
-                                                            color: ColorValues.appRedColor,
+                                                            color: ColorValues
+                                                                .appRedColor,
                                                             icon: Icons.close,
-                                                            label: 'Close',
                                                             onPress: () {
                                                               Get.dialog(PermitCloseDialog(
                                                                   permitId:
@@ -634,8 +474,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appDarkBlueColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
-                                                                  label:
-                                                                      'Extend',
                                                                   onPress: () {
                                                                     Get.dialog(PermitExtendDialog(
                                                                         permitId:
@@ -670,8 +508,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appGreenColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
-                                                                  label:
-                                                                      'Extend Approve',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -705,11 +541,10 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                           ?.ptwStatus ==
                                                                       133
                                                               ? TableActionButton(
-                                                                  color: ColorValues.appRedColor,
+                                                                  color: ColorValues
+                                                                      .appRedColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
-                                                                  label:
-                                                                      'Extend Cancel',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -747,8 +582,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
-                                                                  label:
-                                                                      'Cancel',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -761,7 +594,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                 )
                                                               : Container(),
 
-                                                          ////Permit Cancel By Approver
+                                                          ////Permit Cancel By Approver / Cancel Permit Request
                                                           varUserAccessModel
                                                                           .value
                                                                           .access_list!
@@ -787,8 +620,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
-                                                                  label:
-                                                                      'Cancel',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -803,8 +634,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
-                                                                  label:
-                                                                      'Cancel Request',
                                                                   onPress: () {
                                                                     /// permitCancelRequest() this method will use here
                                                                     //  controller.viewNewPermitList(
@@ -845,8 +674,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
-                                                                  label:
-                                                                      'Reject',
                                                                   onPress: () {
                                                                     // Get.dialog(PermitRejectDialog(
                                                                     //     permitId:
@@ -880,11 +707,10 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                           ?.ptwStatus ==
                                                                       124
                                                               ? TableActionButton(
-                                                                  color: ColorValues.appYellowColor,
+                                                                  color: ColorValues
+                                                                      .appYellowColor,
                                                                   icon: Icons
                                                                       .edit,
-                                                                  label:
-                                                                      'Edit PTW',
                                                                   onPress: () {
                                                                     controller.editNewPermit(
                                                                         permitId:

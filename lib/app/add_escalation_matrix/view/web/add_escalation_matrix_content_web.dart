@@ -223,8 +223,7 @@ class AddEscalationMatrixContentWeb
                                                                       controller
                                                                           .addRowItem();
 
-                                                                      print(
-                                                                          'TypeId:${controller.durationDaysTextCtrlr}');
+                                                                    
                                                                     },
                                                                     child: Icon(
                                                                         Icons
@@ -232,20 +231,20 @@ class AddEscalationMatrixContentWeb
                                                               ],
                                                             ),
                                                           ),
-                                                          Column(
-                                                              children: []
-                                                                ..addAll(
-                                                                    controller
-                                                                        .rowItem
-                                                                        .value
-                                                                        .map(
-                                                                            (e) {
-                                                                  return Text(
-                                                                      jsonEncode(
-                                                                          e));
-                                                                }))),
-                                                          Text(jsonEncode(controller
-                                                              .dropdownMapperData)),
+                                                          // Column(
+                                                          //     children: []
+                                                          //       ..addAll(
+                                                          //           controller
+                                                          //               .rowItem
+                                                          //               .value
+                                                          //               .map(
+                                                          //                   (e) {
+                                                          //         return Text(
+                                                          //             jsonEncode(
+                                                          //                 e));
+                                                          //       }))),
+                                                          // Text(jsonEncode(controller
+                                                          //     .dropdownMapperData)),
                                                           Container(
                                                             height: 300,
                                                             child:
@@ -304,13 +303,13 @@ class AddEscalationMatrixContentWeb
                                                                               ? SizedBox(
                                                                                   width: MediaQuery.of(context).size.width / 5,
                                                                                   child: DropdownWebWidget(
-                                                                                    dropdownList: controller.roleList.value,
+                                                                                    dropdownList: controller.roleList,
                                                                                     isValueSelected: controller.isSelectedRole.value,
                                                                                     selectedValue: mapData["value"],
                                                                                     onValueChanged: (list, selectedValue) {
-                                                                                      print({
+                                                                                      print("dropdownData:${{
                                                                                         selectedValue: selectedValue
-                                                                                      });
+                                                                                      }}");
                                                                                       mapData["value"] = selectedValue;
                                                                                       controller.dropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
                                                                                     },
@@ -329,34 +328,34 @@ class AddEscalationMatrixContentWeb
                                                   ],
                                                 ),
                                               ),
-                                              Container(
-                                                height: 28,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.appGreenColor,
-                                                  text: "Add Data",
-                                                  onPressed: () {
-                                                    controller
-                                                        .addStatusEscalationData(
-                                                            controller
-                                                                .selectedTypePermitId);
-                                                    controller.addEscalationData(
-                                                        int.tryParse(
-                                                            '${controller.durationDaysTextCtrlr.text}'),
-                                                        controller
-                                                            .selectedRoleListId);
-                                                    print(
-                                                        'Controller:${controller.durationDaysTextCtrlr.text}');
-                                                    print(
-                                                        'Controller:${controller.selectedTypePermitId}');
-                                                    controller
-                                                        .durationDaysTextCtrlr
-                                                        .clear();
-                                                    controller.selectedRole
-                                                        .value = "";
-                                                  },
-                                                ),
-                                              ),
+                                              // Container(
+                                              //   height: 28,
+                                              //   child: CustomElevatedButton(
+                                              //     backgroundColor:
+                                              //         ColorValues.appGreenColor,
+                                              //     text: "Add Data",
+                                              //     onPressed: () {
+                                              //       controller
+                                              //           .addStatusEscalationData(
+                                              //               controller
+                                              //                   .selectedTypePermitId);
+                                              //       controller.addEscalationData(
+                                              //           int.tryParse(
+                                              //               '${controller.durationDaysTextCtrlr.text}'),
+                                              //           controller
+                                              //               .selectedRoleListId);
+                                              //       print(
+                                              //           'Controller:${controller.durationDaysTextCtrlr.text}');
+                                              //       print(
+                                              //           'Controller:${controller.selectedTypePermitId}');
+                                              //       controller
+                                              //           .durationDaysTextCtrlr
+                                              //           .clear();
+                                              //       controller.selectedRole
+                                              //           .value = "";
+                                              //     },
+                                              //   ),
+                                              // ),
 
                                               Row(
                                                 mainAxisAlignment:
@@ -437,82 +436,5 @@ class AddEscalationMatrixContentWeb
         // ),
       );
 
-  ///Duration in Days
-  Widget _buildDurationDaysTextField_web(BuildContext context) {
-    return Column(//
-        children: [
-      Container(
-        height: MediaQuery.of(context).size.height * 0.050,
-        width: Responsive.isDesktop(context)
-            ? MediaQuery.of(context).size.width / 1.44
-            : MediaQuery.of(context).size.width / 1.1,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.4,
-          child: TextField(
-            controller: controller.durationDaysTextCtrlr,
-            keyboardType: TextInputType.number,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: Dimens.edgeInsets05_10,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              suffixText: 'Days in Number',
-              // label: Text('INR'),
-              focusedErrorBorder: controller.isDurationDaysTextInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : InputBorder.none,
-              errorBorder: controller.isDurationDaysTextInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : null,
-              errorText: controller.isDurationDaysTextInvalid.value
-                  ? "Required field"
-                  : null,
-            ),
-            onChanged: (value) {
-              print('value Days${value.length}');
-              if (value.trim().length > 0) {
-                controller.isDurationDaysTextInvalid.value = false;
-              } else {
-                controller.isDurationDaysTextInvalid.value = true;
-              }
-            },
-          ),
-        ),
-      ),
-    ]);
-  }
+  
 }

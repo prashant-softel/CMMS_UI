@@ -42,7 +42,7 @@ class ViewEscalationMatrixContentWeb
                 key: controller.printKey,
                 child: Center(
                   child: Container(
-                    margin: Dimens.edgeInsets16,
+                    // margin: Dimens.edgeInsets16,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(

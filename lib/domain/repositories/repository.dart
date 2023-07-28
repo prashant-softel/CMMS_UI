@@ -1709,6 +1709,7 @@ class Repository {
     }
   }
 
+  
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
     String? categoryIds,
