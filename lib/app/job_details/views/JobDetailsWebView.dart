@@ -20,7 +20,6 @@ class JobDetailsWebView
   Widget build(BuildContext context) {
     return buildDocument(context: context);
   }
-
   Widget buildDocument({required BuildContext context}) {
     return Obx(
           () => Column(
@@ -83,10 +82,40 @@ class JobDetailsWebView
                         padding: const EdgeInsets.all(10.0),
                         // child: Row(
                         //   children: [
-                           child : Text(
-                              "JOB DETAIL SCREEN ",
-                              style: Styles.blue700,
-                            ),
+                           child : Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Text(
+                                  "JOB DETAIL SCREEN ",
+                                  style: Styles.blue700,
+                                ),
+                               Container(
+                                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                                 margin: EdgeInsets.only(top: 5),
+                                 decoration: BoxDecoration(
+                                   color: JobStatusData.getStatusColor("${
+                                       JobStatusData
+                                           .getStatusStringFromInt(controller
+                                           .jobDetailsModel
+                                           .value
+                                           ?.status)
+                                   }"),
+                                   borderRadius: BorderRadius.circular(5),
+                                 ),
+                                 child: Text(
+                                   "${
+                                 JobStatusData
+                                     .getStatusStringFromInt(controller
+                                     .jobDetailsModel
+                                     .value
+                                     ?.status)
+                                   }",
+                                   style: TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             ],
+                           ),
+
                         //     Spacer(),
                         //     Container(
                         //       height: 30,
@@ -130,6 +159,14 @@ class JobDetailsWebView
                                           ),
                                           Text(
                                             "Equipment Name ",
+                                            style: Styles.black14,
+                                          ),
+                                          Text(
+                                            "Work Type ",
+                                            style: Styles.black14,
+                                          ),
+                                          Text(
+                                            "Tools Required ",
                                             style: Styles.black14,
                                           ),
                                         ],
@@ -187,6 +224,34 @@ class JobDetailsWebView
                                                   : []}"
                                           }"
                                           ),
+                                          Text("${
+                                              "${controller.jobDetailsModel
+                                                  .value?.workTypeList !=
+                                                  null
+                                                  ? controller.jobDetailsModel.value
+                                                  ?.workTypeList
+                                                  ?.map<String>((item) => item
+                                                  .workTypeName
+                                                  .toString())
+                                                  .toList()
+                                                  : []}"
+                                          }"
+                                          ),
+                                          Text(
+                                              " ${controller.jobDetailsModel.value?.lstToolsRequired ?? ""}",
+                                              style: Styles.blue14),
+                                          // Text("${
+                                          //     "${controller.jobDetailsModel
+                                          //         .value?.lstToolsRequired !=
+                                          //         null
+                                          //         ? controller.jobDetailsModel.value
+                                          //         ?.lstToolsRequired
+                                          //         ?.map<String>((item) => item
+                                          //         .toolsName.toString())
+                                          //         .toList()
+                                          //         : []}"
+                                          // }"
+                                          // ),
                                         ],
                                       ),
                                       Spacer(),
@@ -202,10 +267,10 @@ class JobDetailsWebView
                                             "Assigned To ",
                                             style: Styles.black14,
                                           ),
-                                          Text(
-                                            "Status",
-                                            style: Styles.black14,
-                                          ),
+                                          // Text(
+                                          //   "Status",
+                                          //   style: Styles.black14,
+                                          // ),
                                           Text(
                                             "BreakDown Time ",
                                             style: Styles.black14,
@@ -233,15 +298,15 @@ class JobDetailsWebView
                                           //     ''
                                           //     : ''}",
                                           //     style: Styles.blue14),
-                                          Text(
-                                            "${
-                                                JobStatusData
-                                                    .getStatusStringFromInt(controller
-                                                    .jobDetailsModel
-                                                    .value
-                                                    ?.status)
-                                            }"
-                                          ),
+                                          // Text(
+                                          //   "${
+                                          //       JobStatusData
+                                          //           .getStatusStringFromInt(controller
+                                          //           .jobDetailsModel
+                                          //           .value
+                                          //           ?.status)
+                                          //   }"
+                                          // ),
                                           Text(
                                               " ${controller.jobDetailsModel.value?.breakdownTime ?? ""}",
                                               style: Styles.blue14),
