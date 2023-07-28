@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 
 import '../../domain/models/add_user_model.dart';
@@ -1015,8 +1016,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
- Future<ResponseModel> createEscalationMatrix({
+  Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
     bool? isLoading,
@@ -1026,7 +1026,6 @@ class DataRepository extends DomainRepository {
         createEscalationMatrix: createEscalationMatrix,
         isLoading: isLoading ?? false,
       );
-
 
   Future<ResponseModel> createGoodsOrder({
     required String auth,
@@ -1292,7 +1291,6 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.getTypePermitList(
           auth: auth, isLoading: isLoading, facility_id: facility_id);
-  
 
   Future<ResponseModel> getModulesList({
     String? auth,
@@ -1766,6 +1764,20 @@ class DataRepository extends DomainRepository {
       required String fileName,
       required bool isLoading}) async {
     return await connectHelper.uploadImge(
+      auth: auth,
+      fileBytes: fileBytes,
+      fileName: fileName,
+      isLoading: true,
+    );
+    // return true;
+  }
+
+  Future<AddInventoryRequestModel> uploadImgeInventory(
+      {required String auth,
+      Uint8List? fileBytes,
+      required String fileName,
+      required bool isLoading}) async {
+    return await connectHelper.uploadImgeInventory(
       auth: auth,
       fileBytes: fileBytes,
       fileName: fileName,

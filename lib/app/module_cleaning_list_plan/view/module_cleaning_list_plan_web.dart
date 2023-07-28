@@ -161,148 +161,298 @@ class ModuleCleaningListPlan extends GetView<ModuleCleaningListPlanController> {
                         ),
                       ],
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        for (var entry
+                            in controller.columnVisibility.value.entries)
+                          Row(
+                            children: [
+                              ValueListenableBuilder(
+                                valueListenable: controller.columnVisibility,
+                                builder: (context, value, child) {
+                                  return Checkbox(
+                                    value: value[entry.key],
+                                    onChanged: (newValue) {
+                                      controller.setColumnVisibility(
+                                          entry.key, newValue!);
+                                    },
+                                  );
+                                },
+                              ),
+                              Text(entry.key),
+                            ],
+                          ),
+                      ],
+                    ),
                     SizedBox(
                       height: 20,
                     ),
-                    controller.moduleCleaningListPlan!.isEmpty
-                        ? Expanded(
-                            child: ScrollableTableView(
-                              columns: [
-                                "Plan Id",
-                                "Plan Title",
-                                "No of days",
-                                "Created By",
-                                "Frequency",
-                                "Status",
-                                "Action",
-                              ].map((column) {
-                                return TableViewColumn(
-                                  label: column,
-                                  minWidth: Get.width * 0.1,
-                                );
-                              }).toList(),
-                              rows: [
-                                ...List.generate(
-                                  controller.moduleCleaningListPlan?.length ??
-                                      0,
-                                  (index) {
-                                    return ['', '', '', '', '', '', ''];
-                                  },
-                                ),
-                              ].map((record) {
-                                return TableViewRow(
-                                  height: 60,
-                                  cells: record.map((value) {
-                                    return TableViewCell(
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                );
-                              }).toList(),
-                            ),
-                          )
+                    controller.moduleCleaningListPlan.isEmpty
+                        ? Dimens.box0
                         : Expanded(
-                            child: Container(
-                              margin: Dimens.edgeInsets15,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorValues.appBlueBackgroundColor,
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: ScrollableTableView(
-                                paginationController:
-                                    controller.paginationController,
-                                columns: [
-                                  "Plan Id",
-                                  "Plan Title",
-                                  "No of days",
-                                  "Created By",
-                                  "Frequency",
-                                  "Status",
-                                  "Action",
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.1,
-                                  );
-                                }).toList(),
-                                rows: [
-                                  ...List.generate(
-                                    controller.moduleCleaningListPlan!.length,
-                                    (index) {
-                                      return [
-                                        '${controller.moduleCleaningListPlan![index]?.planId}',
-                                        '${controller.moduleCleaningListPlan![index]?.title}',
-                                        '${controller.moduleCleaningListPlan![index]?.noOfCleaningDays}',
-                                        '${controller.moduleCleaningListPlan![index]?.createdBy}',
-                                        '${controller.moduleCleaningListPlan![index]?.frequency}',
-                                        '${controller.moduleCleaningListPlan![index]?.status}',
-                                        'Action',
-                                      ];
-                                    },
-                                  ),
-                                ].map((record) {
-                                  // print('recoerdfjb:$record');
-                                  return TableViewRow(
-                                    height: 60,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: value == "Action"
-                                            ? Wrap(children: [
-                                                TableActionButton(
-                                                  color: ColorValues.viewColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  // label: 'view',
+                            child: ValueListenableBuilder(
+                              valueListenable: controller.columnVisibility,
+                              builder: (context, value, child) {
+                                return DataTable(columns: [
+                                  for (var entry in value.entries)
+                                    if (entry.value)
+                                      DataColumn(label: Text(entry.key)),
+                                  DataColumn(label: Text('Action')),
+                                ], rows: [
+                                  for (var index = 0;
+                                      index < controller.filteredData.length;
+                                      index++)
+                                    DataRow(cells: [
+                                      for (var entry in value.entries)
+                                        if (entry.value)
+                                          DataCell(entry.key == "Plan Id"
+                                              ? Column(
+                                                  children: [
+                                                    Text(controller
+                                                            .filteredData[index]
+                                                            .columnByName(
+                                                                entry.key) ??
+                                                        ''),
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.centerRight,
+                                                      child: Container(
+                                                        padding: Dimens
+                                                            .edgeInsets8_2_8_2,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: ColorValues
+                                                              .addNewColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                        ),
+                                                        child: Text(
+                                                          controller
+                                                                  .filteredData[
+                                                                      index]
+                                                                  .status_short ??
+                                                              '',
+                                                          style: Styles.white10
+                                                              .copyWith(
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Text(controller
+                                                      .filteredData[index]
+                                                      .columnByName(
+                                                          entry.key) ??
+                                                  '')),
+                                      DataCell(
+                                        Wrap(children: [
+                                          TableActionButton(
+                                            color: ColorValues.viewColor,
+                                            icon: Icons.remove_red_eye_outlined,
+                                            // label: 'view',
 
-                                                  onPress: () {
-                                                    // controller
-                                                    //     .viewAddGoodsOrdersDetails(
-                                                    //         id: int.tryParse(
-                                                    //             '${record[0]}'));
-                                                    // Get.toNamed(Routes.viewGoodsOrders);
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  onPress: () {
-                                                    // controller
-                                                    //     .showAddGoodsOrdersDetails(
-                                                    //         id: int.tryParse(
-                                                    //             '${record[0]}'));
-                                                  },
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                ),
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.deleteColor,
-                                                  icon: Icons.delete,
-                                                  // label: 'Delete',
-                                                  onPress: () {
-                                                    // controller.isDeleteDialog(
-                                                    //     id: record[0],
-                                                    //     generatedBy: record[1]);
-                                                  },
-                                                ),
-                                              ])
-                                            : Text(value),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
-                              ),
+                                            onPress: () {
+                                              // controller
+                                              //     .viewAddGoodsOrdersDetails(
+                                              //         id: int.tryParse(
+                                              //             '${record[0]}'));
+                                              // Get.toNamed(Routes.viewGoodsOrders);
+                                            },
+                                          ),
+                                          TableActionButton(
+                                            onPress: () {
+                                              // controller
+                                              //     .showAddGoodsOrdersDetails(
+                                              //         id: int.tryParse(
+                                              //             '${record[0]}'));
+                                            },
+                                            color: ColorValues.editColor,
+                                            icon: Icons.edit,
+                                          ),
+                                          TableActionButton(
+                                            color: ColorValues.deleteColor,
+                                            icon: Icons.delete,
+                                            // label: 'Delete',
+                                            onPress: () {
+                                              // controller.isDeleteDialog(
+                                              //     id: record[0],
+                                              //     generatedBy: record[1]);
+                                            },
+                                          ),
+                                        ]),
+                                      )
+                                    ]),
+                                ]);
+                              },
                             ),
                           ),
+
+                    // controller.moduleCleaningListPlan!.isEmpty
+                    //     ? Expanded(
+                    //         child: ScrollableTableView(
+                    //           columns: [
+                    //             "Plan Id",
+                    //             "Plan Title",
+                    //             "No of days",
+                    //             "Created By",
+                    //             "Frequency",
+                    //             "Status",
+                    //             "Action",
+                    //           ].map((column) {
+                    //             return TableViewColumn(
+                    //               label: column,
+                    //               minWidth: Get.width * 0.1,
+                    //             );
+                    //           }).toList(),
+                    //           rows: [
+                    //             ...List.generate(
+                    //               controller.moduleCleaningListPlan?.length ??
+                    //                   0,
+                    //               (index) {
+                    //                 return ['', '', '', '', '', '', ''];
+                    //               },
+                    //             ),
+                    //           ].map((record) {
+                    //             return TableViewRow(
+                    //               height: 60,
+                    //               cells: record.map((value) {
+                    //                 return TableViewCell(
+                    //                   child: Text(value),
+                    //                 );
+                    //               }).toList(),
+                    //             );
+                    //           }).toList(),
+                    //         ),
+                    //       )
+                    //     : Expanded(
+                    //         child: Container(
+                    //           margin: Dimens.edgeInsets15,
+                    //           decoration: BoxDecoration(
+                    //             border: Border.all(
+                    //               color:
+                    //                   ColorValues.lightGreyColorWithOpacity35,
+                    //               width: 1,
+                    //             ),
+                    //             boxShadow: [
+                    //               BoxShadow(
+                    //                 color: ColorValues.appBlueBackgroundColor,
+                    //                 spreadRadius: 2,
+                    //                 blurRadius: 5,
+                    //                 offset: Offset(0, 2),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //           child: ScrollableTableView(
+                    //               paginationController:
+                    //                   controller.paginationController,
+                    //               columns: [
+                    //                 "Plan Id",
+                    //                 "Plan Title",
+                    //                 "No of days",
+                    //                 "Created By",
+                    //                 "Frequency",
+                    //                 "Action",
+                    //               ].map((column) {
+                    //                 return TableViewColumn(
+                    //                   label: column,
+                    //                   minWidth: Get.width * 0.12,
+                    //                 );
+                    //               }).toList(),
+                    //               rows: controller.moduleCleaningListPlan!
+                    //                   .map((moduleleaningDetails) =>
+                    //                       TableViewRow(height: 60, cells: [
+                    //                         TableViewCell(
+                    //                             child: Column(
+                    //                           children: [
+                    //                             Text(
+                    //                               '${moduleleaningDetails?.planId}',
+                    //                             ),
+                    //                             Dimens.boxHeight10,
+                    //                             Align(
+                    //                               alignment:
+                    //                                   Alignment.centerRight,
+                    //                               child: Container(
+                    //                                 padding: Dimens
+                    //                                     .edgeInsets8_2_8_2,
+                    //                                 decoration: BoxDecoration(
+                    //                                   color: ColorValues
+                    //                                       .addNewColor,
+                    //                                   borderRadius:
+                    //                                       BorderRadius.circular(
+                    //                                           4),
+                    //                                 ),
+                    //                                 child: Text(
+                    //                                   '${moduleleaningDetails?.status_short}',
+                    //                                   style: Styles.white10
+                    //                                       .copyWith(
+                    //                                     color: Colors.white,
+                    //                                   ),
+                    //                                 ),
+                    //                               ),
+                    //                             ),
+                    //                           ],
+                    //                         )),
+                    //                         TableViewCell(
+                    //                             child: Text(
+                    //                           '${moduleleaningDetails?.title}',
+                    //                         )),
+                    //                         TableViewCell(
+                    //                             child: Text(
+                    //                           '${moduleleaningDetails?.noOfCleaningDays}',
+                    //                         )),
+                    //                         TableViewCell(
+                    //                             child: Text(
+                    //                                 '${moduleleaningDetails?.createdBy}')),
+                    //                         TableViewCell(
+                    //                             child: Text(
+                    //                           '${moduleleaningDetails?.frequency}',
+                    //                         )),
+                    //                         TableViewCell(
+                    //                             child: Wrap(children: [
+                    //                           TableActionButton(
+                    //                             color: ColorValues.viewColor,
+                    //                             icon: Icons
+                    //                                 .remove_red_eye_outlined,
+                    //                             // label: 'view',
+
+                    //                             onPress: () {
+                    //                               // controller
+                    //                               //     .viewAddGoodsOrdersDetails(
+                    //                               //         id: int.tryParse(
+                    //                               //             '${record[0]}'));
+                    //                               // Get.toNamed(Routes.viewGoodsOrders);
+                    //                             },
+                    //                           ),
+                    //                           TableActionButton(
+                    //                             onPress: () {
+                    //                               // controller
+                    //                               //     .showAddGoodsOrdersDetails(
+                    //                               //         id: int.tryParse(
+                    //                               //             '${record[0]}'));
+                    //                             },
+                    //                             color: ColorValues.editColor,
+                    //                             icon: Icons.edit,
+                    //                           ),
+                    //                           TableActionButton(
+                    //                             color: ColorValues.deleteColor,
+                    //                             icon: Icons.delete,
+                    //                             // label: 'Delete',
+                    //                             onPress: () {
+                    //                               // controller.isDeleteDialog(
+                    //                               //     id: record[0],
+                    //                               //     generatedBy: record[1]);
+                    //                             },
+                    //                           ),
+                    //                         ]))
+                    //                       ]))
+                    //                   .toList()),
+                    //         ),
+                    //       ),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: ValueListenableBuilder(

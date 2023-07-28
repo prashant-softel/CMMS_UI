@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_detail_model.dart';
@@ -491,7 +492,6 @@ class Repository {
       return Map();
     }
   }
-
 
   //Create Escalation Matrix
   Future<Map<String, dynamic>> createEscalationMatrix(
@@ -1312,9 +1312,8 @@ class Repository {
     }
   }
 
-
   ///Risk Type List
-   Future<List<RiskTypeModel>> getRiskTypeList({
+  Future<List<RiskTypeModel>> getRiskTypeList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,
@@ -1341,7 +1340,6 @@ class Repository {
       return [];
     }
   }
-
 
   ///Employees List
   Future<List<EmployeeListModel2>> getEmployeesList({
@@ -2225,7 +2223,7 @@ class Repository {
     }
   }
 
-   Future<List<ModuleListModel?>?> getModulesList(
+  Future<List<ModuleListModel?>?> getModulesList(
       bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -4447,6 +4445,31 @@ class Repository {
     }
   }
 
+  Future<AddInventoryRequestModel?> uploadImgeInventory(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.uploadImgeInventory(
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        isLoading: isLoading,
+      );
+      if (res != null) {
+        print("file upload");
+        return res;
+      } //
+      else {
+        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   ///
   Future<List<WarrantyUsageTermListModel?>?> getWarrantyUsageTermList(
     bool? isLoading,
@@ -5986,11 +6009,12 @@ class Repository {
       return [];
     }
   }
+
   Future<List<CalibrationCertificateModel?>?> getCalibrationCertificate(
-      int? type,
-      int? facilityId,
-      bool? isLoading,
-      ) async {
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getCalibrationCertificate(
@@ -6004,10 +6028,11 @@ class Repository {
         final jsonCalibrationCertificate = jsonDecode(res.data);
         // print(res.data);
         final List<CalibrationCertificateModel> _CalibrationListModelList =
-        jsonCalibrationCertificate
-            .map<CalibrationCertificateModel>((m) =>
-            CalibrationCertificateModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+            jsonCalibrationCertificate
+                .map<CalibrationCertificateModel>((m) =>
+                    CalibrationCertificateModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
 
         return _CalibrationListModelList;
       } else {
@@ -6020,10 +6045,11 @@ class Repository {
       return [];
     }
   }
+
   Future<List<WarrantyCertificateModel?>?> getWarrantyCertificate(
-      int? type,
-      bool? isLoading,
-      ) async {
+    int? type,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getWarrantyCertificate(
@@ -6036,10 +6062,11 @@ class Repository {
         final jsonWarrantyCertificate = jsonDecode(res.data);
         // print(res.data);
         final List<WarrantyCertificateModel> _warrantyModel =
-        jsonWarrantyCertificate
-            .map<WarrantyCertificateModel>((m) =>
-            WarrantyCertificateModel.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+            jsonWarrantyCertificate
+                .map<WarrantyCertificateModel>((m) =>
+                    WarrantyCertificateModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
 
         return _warrantyModel;
       } else {
@@ -6077,5 +6104,3 @@ class Repository {
   //end
   //end
 }
-
-

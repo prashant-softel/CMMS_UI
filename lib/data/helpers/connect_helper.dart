@@ -24,6 +24,7 @@ import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:http/http.dart' as http;
@@ -269,13 +270,9 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   ///Risk Type List
-   Future<ResponseModel> getRiskTypeList(
-      {required bool isLoading, 
-      required String auth, 
-      int? facility_id
-      }) async {
+  Future<ResponseModel> getRiskTypeList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetRiskTypeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -287,7 +284,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getEmployeePermitList(
       {required bool isLoading, required String auth, int? facility_id}) async {
@@ -1106,7 +1102,6 @@ class ConnectHelper {
     return response;
   }
 
-
   Future<ResponseModel> getModulesList(
       {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
@@ -1127,7 +1122,6 @@ class ConnectHelper {
 
     return response;
   }
-
 
   Future<ResponseModel> getBlocksList({
     String? auth,
@@ -1566,7 +1560,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create Escalation matrix
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
@@ -1599,7 +1592,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   //Create WarraGoods order
 
@@ -2809,6 +2801,34 @@ class ConnectHelper {
     print('photo_id${addUserModel.photo_id}');
 
     return addUserModel;
+  }
+
+  Future<AddInventoryRequestModel> uploadImgeInventory({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    bool? isLoading,
+  }) async {
+    final request = http.MultipartRequest('POST',
+        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    request.files.add(
+        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+    request.headers.addAll({'Authorization': 'Bearer $auth'});
+
+    // Send the request and wait for the response
+    final response = await request.send();
+    var respStr = await response.stream.bytesToString();
+    var jsonResponse = json.decode(respStr);
+
+    // Check if the upload was successful
+    // if (response.statusCode == 200) {
+    AddInventoryRequestModel addInventoryRequestModel =
+        AddInventoryRequestModel(
+      categoryId: int.parse(jsonResponse["categoryId"][0].toString()),
+    );
+    print('photo_id${addInventoryRequestModel.categoryId}');
+
+    return addInventoryRequestModel;
   }
 
   ///

@@ -95,6 +95,7 @@ class AddEscalationMatrixController extends GetxController {
   Rx<String> selectedTypePermit = ''.obs;
   Rx<String> selectedTypeOfPermit = ''.obs;
   int selectedTypePermitId = 0;
+
   Rx<bool> isTypePermit = true.obs;
   Rx<String> selectedStartDate = ''.obs;
   Rx<bool> isStartdate = true.obs;
@@ -401,46 +402,6 @@ class AddEscalationMatrixController extends GetxController {
     }
     print('Add Escalation Matrix   data: $escalationMatrixJsonString');
   }
-
-  // void createEscalationMatrix() async {
-  //   {
-  //     List<Escalation> days = [];
-  //     rowItem.value.forEach((element) {
-  //       Escalation day = Escalation(
-  //         role_id: dropdownMapperData[element[1]["value"]]?.role_id,
-  //         days: int.tryParse(element[0]["value"] ?? '0'),
-  //       );
-  //       days.add(day);
-  //     });
-
-  //     late List<Status_escalation> status_escalation = [];
-
-  //     status_Escalation.forEach((e) {
-  //       status_escalation.add(
-  //           Status_escalation(status_id: e.status_id, escalation: e.escalation
-  //               // is_required: e.is_required
-  //               ));
-  //     });
-
-  //     CreateEscalationMatrixModel createEscalationMatrixModel =
-  //         CreateEscalationMatrixModel();
-
-  //     var escalationMatrixJsonString = [
-  //       {
-  //         "module_id": selectedModuleListId,
-  //         "status_escalation": status_escalation
-  //       }
-  //     ];
-  //     Map<String, dynamic>? responseCreateEscalationMatrix =
-  //         await viewIncidentReportPresenter.createEscalationMatrix(
-  //       createEscalationMatrix: escalationMatrixJsonString,
-  //       isLoading: true,
-  //     );
-
-  //     if (responseCreateEscalationMatrix == null) {}
-  //     print('Create Escalation Matrix data: $escalationMatrixJsonString');
-  //   }
-  // }
 
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
