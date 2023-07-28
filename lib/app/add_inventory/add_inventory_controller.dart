@@ -16,8 +16,10 @@ import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -31,7 +33,13 @@ class AddInventoryController extends GetxController {
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   final HomeController homeController = Get.find();
+  var selectedImagePath = ''.obs;
+  var selectedImageSize = ''.obs;
+  RxString imageName = "".obs;
   bool openLastCalibrationDatePicker = false;
+  var selectedImageBytes = Rx<Uint8List>(Uint8List(0));
+  var photoId;
+  double thumbnailSize = Get.height * 0.25;
 
   var lastCalibrationDateTc = TextEditingController();
   var calibrationRemainderInTc = TextEditingController();
@@ -208,9 +216,9 @@ class AddInventoryController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryList();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getInventoryList();
+    // });
     Future.delayed(Duration(seconds: 1), () {
       getFrequencyList();
     });
@@ -396,24 +404,24 @@ class AddInventoryController extends GetxController {
     return true;
   }
 
-  void getInventoryList() async {
-    eqipmentNameList.value = <InventoryModel>[];
-    final _inventoryList = await addInventoryPresenter.getInventoryList(
-      isLoading: true,
-      categoryIds: categoryIds,
-      facilityId: facilityId,
-    );
-    //  print('equipment Name List:$inventoryNameList');
-    for (var inventory_list in _inventoryList) {
-      eqipmentNameList.add(inventory_list);
-    }
-    inventoryList = _inventoryList;
-    paginationController = PaginationController(
-      rowCount: eqipmentNameList.length,
-      rowsPerPage: 10,
-    );
-    update(['inventory_list']);
-  }
+  // void getInventoryList() async {
+  //   eqipmentNameList.value = <InventoryModel>[];
+  //   final _inventoryList = await addInventoryPresenter.getInventoryList(
+  //     isLoading: true,
+  //     categoryIds: categoryIds,
+  //     facilityId: facilityId,
+  //   );
+  //   //  print('equipment Name List:$inventoryNameList');
+  //   for (var inventory_list in _inventoryList) {
+  //     eqipmentNameList.add(inventory_list);
+  //   }
+  //   inventoryList = _inventoryList;
+  //   paginationController = PaginationController(
+  //     rowCount: eqipmentNameList.length,
+  //     rowsPerPage: 10,
+  //   );
+  //   update(['inventory_list']);
+  // }
 
   //
   Future<void> getFrequencyList() async {
@@ -457,12 +465,6 @@ class AddInventoryController extends GetxController {
 
 // /add inventory
   Future<bool> AddInventory() async {
-    // if (addInventoryCtrlr.text.trim() == '' ||
-    //     selectedEquipmentId == 0 ||
-    //     selectedfrequencyId == 0) {
-    //   Fluttertoast.showToast(
-    //       msg: "Please enter required field", fontSize: 16.0);
-    // } else {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
@@ -611,16 +613,16 @@ class AddInventoryController extends GetxController {
     }
   }
 
-  Future<void> getTypePermitList() async {
-    final _permitTypeList =
-        await addInventoryPresenter.getTypePermitList(facility_id: facilityId);
+  // Future<void> getTypePermitList() async {
+  //   final _permitTypeList =
+  //       await addInventoryPresenter.getTypePermitList(facility_id: facilityId);
 
-    if (_permitTypeList != null) {
-      for (var permitType in _permitTypeList) {
-        typePermitList.add(permitType);
-      }
-    }
-  }
+  //   if (_permitTypeList != null) {
+  //     for (var permitType in _permitTypeList) {
+  //       typePermitList.add(permitType);
+  //     }
+  //   }
+  // }
 
   Future<void> getBlocksList(int _facilityId) async {
     blocksList.value = <BlockModel>[];
@@ -633,6 +635,28 @@ class AddInventoryController extends GetxController {
       }
       update(["blockList"]);
     }
+  }
+
+  getImage(ImageSource imageSource) async {
+    final pickedFile = await ImagePicker().pickImage(source: imageSource);
+    if (pickedFile != null) {
+      selectedImagePath.value = pickedFile.path;
+      imageName.value = pickedFile.name;
+      selectedImageBytes.value = await pickedFile.readAsBytes();
+
+      uploadImgeInventory(
+        fileBytes: selectedImageBytes.value,
+      );
+    }
+  }
+
+  Future<void> uploadImgeInventory({Uint8List? fileBytes}) async {
+    AddInventoryRequestModel? addInventoryRequestModel =
+        await addInventoryPresenter.uploadImgeInventory(
+            fileBytes, imageName.value, true);
+    // photoId = addInventoryRequestModel?.photoid;
+    print({"photooo", photoId});
+    // return true;
   }
 
   Future<void> getFacilityList() async {

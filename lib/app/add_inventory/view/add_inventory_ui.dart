@@ -14,6 +14,7 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -94,11 +95,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     onTap: () {
                                       Get.back();
                                     },
-                                    child: Text(" / INVENTORY",
+                                    child: Text(" / Assets",
                                         style: Styles.greyMediumLight12),
                                   ),
                                   Text(
-                                    "/ ADD INVENTORY",
+                                    "/ ADD Assets",
                                     style: Styles.greyLight14,
                                   ),
                                   Spacer(),
@@ -114,7 +115,99 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                AddPhoto(),
+                                SizedBox(
+                                  height: 210,
+                                  child: Stack(
+                                    children: [
+                                      controller.selectedImagePath.value
+                                              .isNotEmpty
+                                          ? GestureDetector(
+                                              onTap: () => controller.getImage(
+                                                  ImageSource.gallery),
+                                              child: Container(
+                                                height:
+                                                    controller.thumbnailSize,
+                                                width: controller.thumbnailSize,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  child: Image.memory(
+                                                    controller
+                                                        .selectedImageBytes
+                                                        .value,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : Container(
+                                              height: controller.thumbnailSize,
+                                              width: controller.thumbnailSize,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 195, 192, 192),
+                                                border: Border.all(
+                                                  color: ColorValues
+                                                      .appLightGreyColor,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.image,
+                                                    size: 70,
+                                                    color: Color.fromARGB(
+                                                        255, 215, 192, 141),
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Text("Upload Photo",
+                                                      style: Styles
+                                                          .greyMediumLight12)
+                                                ],
+                                              ),
+                                            ),
+                                      Positioned(
+                                        top: 150,
+                                        left: 100,
+                                        right: 0,
+                                        child: Center(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              controller.getImage(
+                                                  ImageSource.gallery);
+                                            },
+                                            child: Container(
+                                              height: 45,
+                                              width: 45,
+                                              decoration: BoxDecoration(
+                                                color: ColorValues
+                                                    .appDarkBlueColor,
+                                                border: Border.all(
+                                                  color: ColorValues
+                                                      .appDarkBlueColor,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.add,
+                                                  size: 40,
+                                                  color: ColorValues.whiteColor,
+                                                ), //Circ
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
@@ -211,36 +304,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        CustomRichText(
-                                          title: "Asset Description",
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                            color: Color(0xFE50000),
-                                            width: 0.5,
-                                          )),
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.040,
-                                          margin: Dimens.edgeInsets5,
-                                          constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            minWidth: 100,
-                                          ),
-                                          child: LoginCustomTextfield(
-                                            textController: controller
-                                                .assesDiscriptionCtrlr,
-                                          ),
-                                        ),
-                                      ],
-                                    )
                                   ],
                                 ),
                                 Spacer(),
@@ -328,6 +391,36 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         ),
                                       ],
                                     ),
+                                    Row(
+                                      children: [
+                                        CustomRichText(
+                                          title: "Asset Description",
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                            color: Color(0xFE50000),
+                                            width: 0.5,
+                                          )),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.040,
+                                          margin: Dimens.edgeInsets5,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5,
+                                            minWidth: 100,
+                                          ),
+                                          child: LoginCustomTextfield(
+                                            textController: controller
+                                                .assesDiscriptionCtrlr,
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 ),
                                 SizedBox(

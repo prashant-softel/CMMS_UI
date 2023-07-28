@@ -52,8 +52,9 @@ class CalibrationListModel {
           asset_name: json['asset_name'] ?? '',
           frequency_id: json['frequency_id'] ?? 0,
           frequency_name: json['frequency_name'] ?? '',
-          next_calibration_due_date: Utility.getFormatedyearMonthDay(
-              json['next_calibration_due_date']),
+          next_calibration_due_date: //Utility.getFormatedyearMonthDay(
+              json['next_calibration_due_date'] ?? "",
+          //),
           asset_serial: json['asset_serial'] ?? '',
           calibration_status: json['calibration_status'] ?? '',
           category_name: json['category_name'] ?? '',
@@ -61,7 +62,10 @@ class CalibrationListModel {
           received_date: json['received_date'] ?? '',
           responsible_person: json['responsible_person'] ?? '',
           last_calibration_date:
-              Utility.getFormatedyearMonthDay(json['last_calibration_date']));
+              //  Utility.getFormatedyearMonthDay(
+              json['last_calibration_date'] ?? ""
+          // )
+          );
 
   Map<String, dynamic> toJson() => {
         "asset_health_status": asset_health_status,

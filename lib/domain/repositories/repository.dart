@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_detail_model.dart';
@@ -4425,6 +4426,31 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.uploadImge(
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        isLoading: isLoading,
+      );
+      if (res != null) {
+        print("file upload");
+        return res;
+      } //
+      else {
+        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<AddInventoryRequestModel?> uploadImgeInventory(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.uploadImgeInventory(
         auth: auth,
         fileBytes: fileBytes,
         fileName: fileName,

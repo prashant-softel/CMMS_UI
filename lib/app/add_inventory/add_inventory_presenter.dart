@@ -1,5 +1,6 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -10,6 +11,7 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/usecases/add_inventory_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_status_list_model.dart';
@@ -33,6 +35,13 @@ class AddInventoryPresenter {
       id: id,
       isLoading: isLoading ?? false,
     );
+  }
+
+  Future<AddInventoryRequestModel?> uploadImgeInventory(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await addInventoryUsecase.uploadImgeInventory(
+        fileBytes, fileName, isLoading);
+    // return true;
   }
 
   ///

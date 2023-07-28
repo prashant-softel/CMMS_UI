@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
+
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -14,23 +16,24 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/facility_model.dart';
 
 class AddInventoryUsecase {
-  final Repository _repository;
+  final Repository repository;
 
-  AddInventoryUsecase(this._repository);
+  AddInventoryUsecase(this.repository);
 
   Future<void> generateToken() async {
-    return await _repository.generateToken();
+    return await repository.generateToken();
   }
 
   Future<AddInventoryDetailsModel?> getAddInventoryDetail({
     bool? isLoading,
     required int id,
   }) async =>
-      await _repository.getAddInventoryDetail(
+      await repository.getAddInventoryDetail(
         id: id,
         isLoading: isLoading ?? false,
       );
@@ -41,7 +44,7 @@ class AddInventoryUsecase {
     int? blockId,
     required String categoryIds,
   }) async {
-    return _repository.getInventoryList(
+    return repository.getInventoryList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
@@ -49,12 +52,22 @@ class AddInventoryUsecase {
     );
   }
 
+  Future<AddInventoryRequestModel?> uploadImgeInventory(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await repository.uploadImgeInventory(
+      fileBytes,
+      fileName,
+      isLoading,
+    );
+    //  return true;
+  }
+
 // getmanufacturerList
   Future<List<ManufacturerModel>> getmanufacturerList({
     required bool isLoading,
     required int? BusinessType,
   }) async {
-    return _repository.getmanufacturerList(
+    return repository.getmanufacturerList(
       isLoading: isLoading,
       BusinessType: BusinessType,
     );
@@ -65,7 +78,7 @@ class AddInventoryUsecase {
     required bool isLoading,
     required int? BusinessType,
   }) async {
-    return _repository.getSupplierList(
+    return repository.getSupplierList(
       isLoading: isLoading,
       BusinessType: BusinessType,
     );
@@ -76,7 +89,7 @@ class AddInventoryUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await _repository.getBlocksList(
+      await repository.getBlocksList(
         auth,
         facilityId,
         isLoading,
@@ -85,34 +98,29 @@ class AddInventoryUsecase {
     required bool isLoading,
     required int facilityId,
   }) async {
-    return _repository.getInventoryStatusList(facilityId, isLoading);
+    return repository.getInventoryStatusList(facilityId, isLoading);
   }
 
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
   }) async =>
-      await _repository.getFrequencyList(
+      await repository.getFrequencyList(
         isLoading,
       );
   Future<List<InventoryTypeListModel?>?> getInventoryTypeList({
     required bool isLoading,
     required int facilityId,
   }) async {
-    return _repository.getInventoryTypeList(facilityId, isLoading);
+    return repository.getInventoryTypeList(facilityId, isLoading);
   }
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await _repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
+          bool? isLoading, int? facility_id) async =>
+      await repository.getTypePermitList(isLoading, facility_id);
 
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
       {required bool isLoading, required int? permit_type_id}) async {
-    return _repository.getSafetyMeasureList(
+    return repository.getSafetyMeasureList(
       isLoading: isLoading,
       permit_type_id: permit_type_id,
     );
@@ -122,7 +130,7 @@ class AddInventoryUsecase {
     required bool isLoading,
     required int? businessType,
   }) async {
-    return _repository.getBusinessList(
+    return repository.getBusinessList(
       isLoading: isLoading,
       businessType: businessType,
     );
@@ -130,7 +138,7 @@ class AddInventoryUsecase {
 
   Future<List<CurrencyListModel>> getUnitCurrencyList(
       {required bool isLoading, required int? facilityId}) async {
-    return _repository.getUnitCurrencyList(
+    return repository.getUnitCurrencyList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
@@ -138,7 +146,7 @@ class AddInventoryUsecase {
 
   Future<List<EmployeeListModel>> getEmployeeList(
       {required bool isLoading, required int? facility_id}) async {
-    return _repository.getEmployeeList(
+    return repository.getEmployeeList(
       isLoading: isLoading,
       facility_id: facility_id,
     );
@@ -149,7 +157,7 @@ class AddInventoryUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await _repository.getInventoryCategoryList(
+      await repository.getInventoryCategoryList(
         auth,
         facilityId,
         isLoading,
@@ -158,7 +166,7 @@ class AddInventoryUsecase {
   Future<List<WarrantyTypeModel?>?> getWarrantyTypeList({
     bool? isLoading,
   }) async =>
-      await _repository.getWarrantyTypeList(
+      await repository.getWarrantyTypeList(
         isLoading,
       );
 
@@ -166,7 +174,7 @@ class AddInventoryUsecase {
   Future<List<WarrantyUsageTermListModel?>?> getWarrantyUsageTermList({
     bool? isLoading,
   }) async =>
-      await _repository.getWarrantyUsageTermList(
+      await repository.getWarrantyUsageTermList(
         isLoading,
       );
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
@@ -174,10 +182,10 @@ class AddInventoryUsecase {
     required int? facilityId,
     int? blockId,
     required String categoryIds,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
-    return _repository.getWarrantyClaimList(
+    return repository.getWarrantyClaimList(
       isLoading: isLoading,
       facilityId: facilityId,
       blockId: blockId,
@@ -191,7 +199,7 @@ class AddInventoryUsecase {
     required bool isLoading,
     required String facilityId,
   }) async {
-    return _repository.getBlockList(
+    return repository.getBlockList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
@@ -201,26 +209,26 @@ class AddInventoryUsecase {
     required bool isLoading,
     required String facilityId,
   }) async {
-    return _repository.getEquipmentList(
+    return repository.getEquipmentList(
       isLoading: isLoading,
       facilityId: facilityId,
     );
   }
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
-      await _repository.getFacilityList(true);
+      await repository.getFacilityList(true);
   Future<String?> getUserAccessList() async =>
-      await _repository.getUserAccessData(LocalKeys.userAccess);
+      await repository.getUserAccessData(LocalKeys.userAccess);
   Future<bool> AddInventory({
     addInventoryJsonString,
     bool? isLoading,
   }) async =>
-      await _repository.AddInventory(
+      await repository.AddInventory(
           isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
   Future<bool> updateInventory({
     addInventoryJsonString,
     bool? isLoading,
   }) async =>
-      await _repository.updateInventory(
+      await repository.updateInventory(
           isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
 }
