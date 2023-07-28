@@ -281,7 +281,6 @@ class JobDataSource extends DataTableSource {
         DataCell(
           Text(
             '${jobDetails?.id ?? ''}',
-
           ),
         ),
         DataCell(

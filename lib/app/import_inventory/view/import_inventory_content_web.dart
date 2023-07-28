@@ -93,7 +93,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "Import Inventory file",
+                        "Import Assets file",
                         style: Styles.blackBold16,
                       ),
                     ),
@@ -222,7 +222,9 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appRedColor,
                               text: "Close",
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.back();
+                              },
                             ),
                           ),
                         ],

@@ -1,3 +1,5 @@
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
@@ -12,6 +14,7 @@ import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/blood_model.dart';
@@ -23,6 +26,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../domain/models/user_detail_model.dart';
 import '../navigators/app_pages.dart';
+import '../theme/color_values.dart';
+import '../widgets/custom_multiselect_dialog_field.dart';
 
 class AddUserController extends GetxController {
   AddUserController(
@@ -84,6 +89,8 @@ class AddUserController extends GetxController {
   var zipcodeCtrlr = TextEditingController();
   var passwordCtrlr = TextEditingController();
   var joingdateCtrlr = TextEditingController();
+  bool openDobDatePicker = false;
+  bool openDoJDatePicker = false;
   int userId = 0;
   double thumbnailSize = Get.height * 0.25;
   RxList<String?> selectedfacilityDataList = <String>[].obs;
@@ -101,10 +108,18 @@ class AddUserController extends GetxController {
   ///
   void onInit() async {
     userId = Get.arguments;
-    await getBloodList();
-    await getCountryList();
-    await getRoleList();
-    await getFacilityList();
+    Future.delayed(Duration(seconds: 1), () {
+      getBloodList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getCountryList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getRoleList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getFacilityList();
+    });
     if (userId != null) {
       await getUserDetails(userId: userId, isloading: true);
     }
@@ -285,6 +300,7 @@ class AddUserController extends GetxController {
         bloodList.add(_bloodList);
       }
     }
+    update(['_bloodList']);
   }
 
   Future<void> getStateList(int selectedCountryId) async {
@@ -592,5 +608,99 @@ class AddUserController extends GetxController {
       isLoading: true,
     );
     return true;
+  }
+
+  AddfacilityListAlertBox() {
+    return StatefulBuilder(builder: ((context, setState) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        ),
+        insetPadding: Dimens.edgeInsets10_0_10_0,
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          'Select facility Name',
+          textAlign: TextAlign.center,
+          // style: TextStyle(color: Colors.green),
+        ),
+        content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+
+          return Obx(
+            () => Container(
+              padding: Dimens.edgeInsets05_0_5_0,
+              height: 300, // double.infinity,
+              width: 300,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Divider(
+                      color: ColorValues.greyLightColour,
+                      thickness: 1,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.5,
+                      child: CustomMultiSelectDialogField(
+                        buttonText: 'Add Facility',
+                        title: 'Select Facility',
+                        initialValue: (selectedFacilityNameList.isNotEmpty)
+                            ? selectedfacilityNameIdList
+                            : [],
+                        items: facilityNameList
+                            .map(
+                              (facilityName) => MultiSelectItem(
+                                facilityName?.id,
+                                facilityName?.name ?? '',
+                              ),
+                            )
+                            .toList(),
+                        onConfirm: (selectedOptionsList) => {
+                          facilityNameSelected(selectedOptionsList),
+                        },
+                      ),
+                    )
+                  ]),
+            ),
+          );
+        }),
+        actions: [
+          Center(
+            child: Container(
+                height: 45,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.navyBlueColor,
+                  text: "Ok",
+                  onPressed: () {
+                    Get.back();
+                  },
+                )),
+          ),
+        ],
+      );
+    }));
+  }
+
+  Widget rowItem(int? defaultValue, {required Function(bool) onCheck}) {
+    return Checkbox(
+        value: defaultValue == 1 ? true : false,
+        checkColor: Colors.white,
+        activeColor: ColorValues.blackColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(2.0),
+        ),
+        side: MaterialStateBorderSide.resolveWith(
+          (states) => BorderSide(
+            width: 1.0,
+            color: ColorValues.blackColor,
+          ),
+        ),
+        onChanged: (val) {
+          isChecked.value = val!;
+          onCheck(val);
+        });
   }
 }
