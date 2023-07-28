@@ -269,13 +269,9 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   ///Risk Type List
-   Future<ResponseModel> getRiskTypeList(
-      {required bool isLoading, 
-      required String auth, 
-      int? facility_id
-      }) async {
+  Future<ResponseModel> getRiskTypeList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetRiskTypeList?facility_id=$facility_id',
       Request.getMultiparts,
@@ -287,7 +283,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getEmployeePermitList(
       {required bool isLoading, required String auth, int? facility_id}) async {
@@ -660,7 +655,7 @@ class ConnectHelper {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123'
+      ptwStatus == '121'
           ? 'Permit/PermitApprove'
           : 'Permit/PermitExtendApprove',
       Request.put,
@@ -1106,7 +1101,6 @@ class ConnectHelper {
     return response;
   }
 
-
   Future<ResponseModel> getModulesList(
       {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
@@ -1127,7 +1121,6 @@ class ConnectHelper {
 
     return response;
   }
-
 
   Future<ResponseModel> getBlocksList({
     String? auth,
@@ -1566,7 +1559,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create Escalation matrix
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
@@ -1599,7 +1591,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   //Create WarraGoods order
 

@@ -20,26 +20,19 @@ class EscalationMatrixListController extends GetxController {
 
   final HomeController homeController = Get.find();
 
-  //Additional Email work
-  var rowList = <String>[].obs;
-  var rowList2 = <String>[].obs;
-  var rowList3 = <String>[].obs;
+ 
 
 
 
-//   ///Escalation Matrix List Date Time For Web
-  var escalationMatrixListDateTimeCtrlrWeb = TextEditingController();
-  var escalationMatrixListDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedEscalationMatrixListDateTimeWeb = DateTime.now().obs;
 
 
 // //Escalation Matrix List
   var incidentReportList = <IncidentReportListModel>[];
 
 
-// ///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList =
-      <IncidentReportListModel>[].obs;
+// ///Escalation Matrix List
+  // RxList<EscalationMatrixListModel?> escalationMatrixList =
+  //     <EscalationMatrixListModel>[].obs;
 
 
 
@@ -66,9 +59,6 @@ class EscalationMatrixListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
-  //   ///Incident Report Details
-  // Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel = ViewWarrantyClaimModel().obs;
-  // RxList<ViewWarrantyClaimModel?>? viewWarrantyClaimDetailsList = <ViewWarrantyClaimModel?>[].obs;
 
   ///
 // int? wc_id = 0;
@@ -79,16 +69,14 @@ class EscalationMatrixListController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getIncidentReportList(facilityId, "2020-01-01", "2023-12-31", false);
+        // getEscalationMatrixList(false);
       });
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
+    
 
     super.onInit();
   }
@@ -106,41 +94,29 @@ class EscalationMatrixListController extends GetxController {
     }
   }
 
-  Future<void> getuserAccessData() async {
-    final _userAccessList = await escalationMatrixPresenter.getUserAccessList();
-
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
-    }
-  }
+ 
 
   
-  void getIncidentReportList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
-    incidentReportModelList.value = <IncidentReportListModel>[];
+  // Future<void> getEscalationMatrixList( 
+  //     bool isLoading) async {
+  //   escalationMatrixList.value = <EscalationMatrixListModel>[];
 
-    final list = await escalationMatrixPresenter.getIncidentReportList(
-        isLoading: isLoading,
-        start_date: "2020-01-01",
-
-        ///startDate,
-        end_date: "2023-12-31", ////endDate,
-        facility_id: facilityId);
-    print('incidentReportFacilityId$facilityId');
-    print('Incident Report List:$list');
-    for (var incident_list in list) {
-      incidentReportModelList.add(incident_list);
-    }
-    incidentReportList = list;
-    paginationEscalationMatrixController = PaginationController(
-      rowCount: incidentReportList.length,
-      rowsPerPage: 10,
-    );
-    update(['incident_report_list']);
-  }
+  //   final list = await escalationMatrixPresenter.getEscalationMatrixList(
+  //       isLoading: isLoading,
+  //       module: "JOB"
+  //       );
+  
+  //   print('Escalation Matrix List:$list');
+  //   for (var escalation_list in list) {
+  //     escalationMatrixList.add(escalation_list);
+  //   }
+  //   escalationMatrixList = list;
+  //   paginationEscalationMatrixController = PaginationController(
+  //     rowCount: escalationMatrixList.length,
+  //     rowsPerPage: 10,
+  //   );
+  //   update(['incident_report_list']);
+  // }
 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');

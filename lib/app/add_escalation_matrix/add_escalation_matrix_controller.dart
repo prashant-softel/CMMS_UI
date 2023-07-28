@@ -31,41 +31,32 @@ import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
 
 class AddEscalationMatrixController extends GetxController {
-  AddEscalationMatrixController(this.viewIncidentReportPresenter);
-  AddEscalationMatrixPresenter viewIncidentReportPresenter;
+  AddEscalationMatrixController(this.addEscalationPresenter);
+  AddEscalationMatrixPresenter addEscalationPresenter;
 
   final HomeController homeController = Get.find();
 
-  //Additional Email work
-  var rowList = <String>[].obs;
-  var rowList2 = <String>[].obs;
-  var rowList3 = <String>[].obs;
-
-  final TextEditingController supplierActionTextFieldController =
-      TextEditingController();
-  final TextEditingController supplierActionSrNumberTextFieldController =
-      TextEditingController();
-
+ 
   RxList<int> dayList = <int>[].obs;
 
-  var status_Escalation = <Status_escalation>[].obs;
-  void addStatusEscalationData(
-    int status_id,
-  ) {
-    status_Escalation.value = [];
-    status_Escalation
-        .add(Status_escalation(status_id: status_id, escalation: escalationa));
-  }
+  // var status_Escalation = <Status_escalation>[].obs;
+  // void addStatusEscalationData(
+  //   int status_id,
+  // ) {
+  //   status_Escalation.value = [];
+  //   status_Escalation
+  //       .add(Status_escalation(status_id: status_id, escalation: escalationa));
+  // }
 
-  var escalationa = <Escalation>[].obs;
-  void addEscalationData(
-    int? days,
-    int? role_id,
-  ) {
-    escalationa.add(Escalation(
-        days: int.tryParse('${durationDaysTextCtrlr.text}'),
-        role_id: selectedRoleListId));
-  }
+  // var escalationa = <Escalation>[].obs;
+  // void addEscalationData(
+  //   int? days,
+  //   int? role_id,
+  // ) {
+  //   escalationa.add(Escalation(
+  //       days: int.tryParse('${durationDaysTextCtrlr.text}'),
+  //       role_id: selectedRoleListId));
+  // }
 
   ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
@@ -73,7 +64,7 @@ class AddEscalationMatrixController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   List<Escalation> days = [];
-  Map<String, Escalation> dropdownMapperData = {};
+  Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
 
   void addRowItem() {
@@ -100,58 +91,8 @@ class AddEscalationMatrixController extends GetxController {
   Rx<bool> isStartdate = true.obs;
   Rx<bool> isEnddate = true.obs;
 
-  final TextEditingController serialNoTextFieldController =
-      TextEditingController();
-  final TextEditingController nameTextFieldController = TextEditingController();
-  final TextEditingController emailTextFieldController =
-      TextEditingController();
-
-  ///Incident Date Time For Web
-  var incidentDateTimeCtrlrWeb = TextEditingController();
-  var incidentReportListDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedIncidentReportListDateTimeWeb = DateTime.now().obs;
-
-  ///Action Taken Date & Time
-  var actionTakenDateTimeCtrlrWeb = TextEditingController();
-
-  ///Reporting Date & Time
-  var reportingDateTimeCtrlrWeb = TextEditingController();
-
-//Incident Report List
-  var incidentReportList = <IncidentReportListModel>[];
-
-  ///Incident Report Details
-  Rx<IncidentReportDetailsModel?> incidentReportDetailsModel =
-      IncidentReportDetailsModel().obs;
-  RxList<IncidentReportDetailsModel?>? incidentReportDetailsList =
-      <IncidentReportDetailsModel?>[].obs;
-
-  var inventoryList = <InventoryModel>[];
-  var blockList = <BlockModel>[];
-  var equipmentList = <EquipmentModel>[];
-
-  ///Text Editing Controller
-  final warrantyClaimTitleTextController = TextEditingController();
-  final warrantyClaimBriefDescTextController = TextEditingController();
-  final immediateCorrectiveActionTextController = TextEditingController();
-  final requestManufactureTextController = TextEditingController();
-  final costOfReplacementTextController = TextEditingController();
-  final orderReferenceNoTextController = TextEditingController();
-  final affectedSerialNoTextController = TextEditingController();
-  final manufacturerNameTextController = TextEditingController();
-
-  final blockTextController = TextEditingController();
-  final parentEquipmentTextController = TextEditingController();
-
-  ///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList =
-      <IncidentReportListModel>[].obs;
-
-  var selectedBlock = BlockModel();
-  var selectedEquipment = EquipmentModel();
-  //int facilityId = 45;
-  String categoryIds = '';
-  Rx<bool> isFormInvalid = false.obs;
+ 
+   Rx<bool> isFormInvalid = false.obs;
 
   Rx<String> selectedFacility = ''.obs;
   String username = '';
@@ -162,11 +103,7 @@ class AddEscalationMatrixController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationIncidentReportController =
-      PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
+ 
 
   ///Plant Name
   RxList<FacilityModel?> facilityPlantList = <FacilityModel>[].obs;
@@ -179,36 +116,15 @@ class AddEscalationMatrixController extends GetxController {
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
 
-  var startDateTimeCtrlr = TextEditingController();
-  var validTillTimeCtrlr = TextEditingController();
-  var validTillTimeCtrlrBuffer;
-  var startDateTimeCtrlrBuffer;
-
-  var incidentreportDescriptionCtrlr = TextEditingController();
-  var titleTextCtrlr = TextEditingController();
-
-  Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
-  Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
-  Rx<bool> isJobDescriptionInvalid = false.obs;
-  Rx<bool> isTitleTextInvalid = false.obs;
-
-  Rx<bool> isVictimNameTextInvalid = false.obs;
-  var victimNameTextCtrlr = TextEditingController();
-
+  
   ///duration in days
-  Rx<bool> isDurationDaysTextInvalid = false.obs;
-  var durationDaysTextCtrlr = TextEditingController();
+  // Rx<bool> isDurationDaysTextInvalid = false.obs;
+  // var durationDaysTextCtrlr = TextEditingController();
 
   RxList<RoleModel?> roleList = <RoleModel>[].obs;
   Rx<String> selectedRole = ''.obs;
   Rx<bool> isSelectedRole = true.obs;
   int? selectedRoleListId = 0;
-
-  ///For Switch case
-  RxBool switchValue = false.obs;
-  RxBool switchValue2 = false.obs;
-  RxBool switchValue3 = false.obs;
-  RxBool switchValue4 = false.obs;
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -231,9 +147,6 @@ class AddEscalationMatrixController extends GetxController {
     });
 
     Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
-    Future.delayed(Duration(seconds: 1), () {
       getTypePermitList();
     });
     Future.delayed(Duration(seconds: 1), () {
@@ -248,7 +161,7 @@ class AddEscalationMatrixController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await viewIncidentReportPresenter.getFacilityList();
+    final _facilityList = await addEscalationPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -261,7 +174,7 @@ class AddEscalationMatrixController extends GetxController {
   }
 
   Future<void> getRoleList() async {
-    final list = await viewIncidentReportPresenter.getRoleList();
+    final list = await addEscalationPresenter.getRoleList();
 
     if (list != null) {
       for (var _roleList in list) {
@@ -272,7 +185,7 @@ class AddEscalationMatrixController extends GetxController {
 
   Future<void> getTypePermitList() async {
     final _permitTypeList =
-        await viewIncidentReportPresenter.getTypePermitList(facility_id: 45);
+        await addEscalationPresenter.getTypePermitList(facility_id: 45);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -285,23 +198,11 @@ class AddEscalationMatrixController extends GetxController {
 
   Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
     moduleList.value = <ModuleListModel>[];
-    final _moduleList = await viewIncidentReportPresenter.getModuleList(
+    final _moduleList = await addEscalationPresenter.getModuleList(
         facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_moduleList != null) {
       moduleList.value = _moduleList;
-    }
-  }
-
-  Future<void> getuserAccessData() async {
-    final _userAccessList =
-        await viewIncidentReportPresenter.getUserAccessList();
-
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
     }
   }
 
@@ -377,20 +278,28 @@ class AddEscalationMatrixController extends GetxController {
     List<Escalation> days = [];
     rowItem.value.forEach((element) {
       Escalation day = Escalation(
-        role_id: dropdownMapperData[element[1]["value"]]?.role_id,
         days: int.tryParse(element[0]["value"] ?? '0'),
+        role_id: dropdownMapperData[element[1]["value"]]?.id,
       );
       days.add(day);
     });
+
+    print('Days:${days}');
+
+    late List<Status_escalation> state_escalation_list = [];
+
+    state_escalation_list
+        .add(Status_escalation(status_id: 102, escalation: days));
+
     CreateEscalationMatrixModel createEscalationMatrixModel =
         CreateEscalationMatrixModel(
       module_id: selectedModuleListId,
-      // status_escalation: ,
+      status_escalation: state_escalation_list,
     );
 
-    var escalationMatrixJsonString = createEscalationMatrixModel.toJson();
+    var escalationMatrixJsonString = [createEscalationMatrixModel.toJson()];
     Map<String, dynamic>? responseCreateEscalationMatrixModel =
-        await viewIncidentReportPresenter.createEscalationMatrix(
+        await addEscalationPresenter.createEscalationMatrix(
       createEscalationMatrix: escalationMatrixJsonString,
       isLoading: true,
     );
@@ -402,46 +311,7 @@ class AddEscalationMatrixController extends GetxController {
     print('Add Escalation Matrix   data: $escalationMatrixJsonString');
   }
 
-  // void createEscalationMatrix() async {
-  //   {
-  //     List<Escalation> days = [];
-  //     rowItem.value.forEach((element) {
-  //       Escalation day = Escalation(
-  //         role_id: dropdownMapperData[element[1]["value"]]?.role_id,
-  //         days: int.tryParse(element[0]["value"] ?? '0'),
-  //       );
-  //       days.add(day);
-  //     });
-
-  //     late List<Status_escalation> status_escalation = [];
-
-  //     status_Escalation.forEach((e) {
-  //       status_escalation.add(
-  //           Status_escalation(status_id: e.status_id, escalation: e.escalation
-  //               // is_required: e.is_required
-  //               ));
-  //     });
-
-  //     CreateEscalationMatrixModel createEscalationMatrixModel =
-  //         CreateEscalationMatrixModel();
-
-  //     var escalationMatrixJsonString = [
-  //       {
-  //         "module_id": selectedModuleListId,
-  //         "status_escalation": status_escalation
-  //       }
-  //     ];
-  //     Map<String, dynamic>? responseCreateEscalationMatrix =
-  //         await viewIncidentReportPresenter.createEscalationMatrix(
-  //       createEscalationMatrix: escalationMatrixJsonString,
-  //       isLoading: true,
-  //     );
-
-  //     if (responseCreateEscalationMatrix == null) {}
-  //     print('Create Escalation Matrix data: $escalationMatrixJsonString');
-  //   }
-  // }
-
+  
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
