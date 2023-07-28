@@ -31,95 +31,50 @@ import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
 
 class AddEscalationMatrixController extends GetxController {
-  AddEscalationMatrixController(this.viewIncidentReportPresenter);
-  AddEscalationMatrixPresenter viewIncidentReportPresenter;
+  AddEscalationMatrixController(this.addEscalationPresenter);
+  AddEscalationMatrixPresenter addEscalationPresenter;
 
   final HomeController homeController = Get.find();
 
-  //Additional Email work
-  var rowList = <String>[].obs;
-  var rowList2 = <String>[].obs;
-  var rowList3 = <String>[].obs;
-
-  final TextEditingController supplierActionTextFieldController =
-      TextEditingController();
-  final TextEditingController supplierActionSrNumberTextFieldController =
-      TextEditingController();
 
   RxList<int> dayList = <int>[].obs;
- ///Checkbox
-  ////
-  // RxBool isCheckedRequire = false.obs;
-  // RxBool isCheckedDataRequire = false.obs;
 
-  // void requireToggleCheckbox() {
-  //   isCheckedRequire.value = !isCheckedRequire.value;
-  //   isCheckedDataRequire.value = isCheckedRequire.value;
-  //   print('Checkbox value ${isCheckedRequire.value}');
-  //   print(
-  //       'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
-  //   // Toggle the checkbox state
+  // var status_Escalation = <Status_escalation>[].obs;
+  // void addStatusEscalationData(
+  //   int status_id,
+  // ) {
+  //   status_Escalation.value = [];
+  //   status_Escalation
+  //       .add(Status_escalation(status_id: status_id, escalation: escalationa));
   // }
 
-  ///Status Escalation Part
-  var status_Escalation = <Status_escalation>[].obs;
-  void addStatusEscalationData(
-    int status_id,
-  ) {
-    status_Escalation.value = [];
-    status_Escalation.add(Status_escalation(
-      status_id: status_id,
-      escalation: escalationa
-    ));
-  }
-
-  var escalationa = <Escalation>[].obs;
-  void addEscalationData(
-    int? days,
-    int? role_id,
-    
-  ) {
-    escalationa.add(Escalation(
-      days: int.tryParse('${durationDaysTextCtrlr.text}'),
-      role_id: selectedRoleListId
-    ));
-  }
-
+  // var escalationa = <Escalation>[].obs;
+  // void addEscalationData(
+  //   int? days,
+  //   int? role_id,
+  // ) {
+  //   escalationa.add(Escalation(
+  //       days: int.tryParse('${durationDaysTextCtrlr.text}'),
+  //       role_id: selectedRoleListId));
+  // }
 
   ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
-
-
-Rx<List<List<Map<String, String>>>> rowItem =
+  Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-      Map<String, GetAssetDataModel> dropdownMapperData = {};
+  List<Escalation> days = [];
+  Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
-  
-      void addRowItem() {
+
+  void addRowItem() {
     rowItem.value.add([
-      {"key": "Duration (Days)", "value": 'Please Select'},
+      {"key": "Duration (Days)", "value": ''},
       {'key': "Escalation Roles and Levels", "value": 'Please Select'},
-     
     ]);
   }
 
-  ///Checkbox
-  ////
-  // RxBool isCheckedRequire = false.obs;
-  // RxBool isCheckedDataRequire = false.obs;
-
-  // void requireToggleCheckbox() {
-  //   isCheckedRequire.value = !isCheckedRequire.value;
-  //   isCheckedDataRequire.value = isCheckedRequire.value;
-  //   print('Checkbox value ${isCheckedRequire.value}');
-  //   print(
-  //       'Checkbox Data value ${isCheckedDataRequire.value}'); // Toggle the checkbox state
-  //   // Toggle the checkbox state
-  // }
-  ///Module List
-  
-   RxList<ModuleListModel?> moduleList = <ModuleListModel>[].obs;
+  RxList<ModuleListModel?> moduleList = <ModuleListModel>[].obs;
   Rx<bool> isModuleListSelected = true.obs;
   Rx<String> selectedModuleList = ''.obs;
   int? selectedModuleListId = 0;
@@ -131,68 +86,14 @@ Rx<List<List<Map<String, String>>>> rowItem =
   Rx<String> selectedTypePermit = ''.obs;
   Rx<String> selectedTypeOfPermit = ''.obs;
   int selectedTypePermitId = 0;
+
   Rx<bool> isTypePermit = true.obs;
   Rx<String> selectedStartDate = ''.obs;
   Rx<bool> isStartdate = true.obs;
   Rx<bool> isEnddate = true.obs;
 
-  final TextEditingController serialNoTextFieldController =
-      TextEditingController();
-  final TextEditingController nameTextFieldController = TextEditingController();
-  final TextEditingController emailTextFieldController =
-      TextEditingController();
 
-  //   ///Failure Date Time For Web
-  // var failureDateTimeCtrlrWeb = TextEditingController();
-  // var failureDateTimeCtrlrWebBuffer;
-  // Rx<DateTime> selectedFailureDateTimeWeb = DateTime.now().obs;
-
-  ///Incident Date Time For Web
-  var incidentDateTimeCtrlrWeb = TextEditingController();
-  var incidentReportListDateTimeCtrlrWebBuffer;
-  Rx<DateTime> selectedIncidentReportListDateTimeWeb = DateTime.now().obs;
-
-  ///Action Taken Date & Time
-  var actionTakenDateTimeCtrlrWeb = TextEditingController();
-
-  ///Reporting Date & Time
-  var reportingDateTimeCtrlrWeb = TextEditingController();
-
-//Incident Report List
-  var incidentReportList = <IncidentReportListModel>[];
-
-  ///Incident Report Details
-  Rx<IncidentReportDetailsModel?> incidentReportDetailsModel =
-      IncidentReportDetailsModel().obs;
-  RxList<IncidentReportDetailsModel?>? incidentReportDetailsList =
-      <IncidentReportDetailsModel?>[].obs;
-
-  var inventoryList = <InventoryModel>[];
-  var blockList = <BlockModel>[];
-  var equipmentList = <EquipmentModel>[];
-
-  ///Text Editing Controller
-  final warrantyClaimTitleTextController = TextEditingController();
-  final warrantyClaimBriefDescTextController = TextEditingController();
-  final immediateCorrectiveActionTextController = TextEditingController();
-  final requestManufactureTextController = TextEditingController();
-  final costOfReplacementTextController = TextEditingController();
-  final orderReferenceNoTextController = TextEditingController();
-  final affectedSerialNoTextController = TextEditingController();
-  final manufacturerNameTextController = TextEditingController();
-
-  final blockTextController = TextEditingController();
-  final parentEquipmentTextController = TextEditingController();
-
-  ///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList =
-      <IncidentReportListModel>[].obs;
-
-  var selectedBlock = BlockModel();
-  var selectedEquipment = EquipmentModel();
-  //int facilityId = 45;
-  String categoryIds = '';
-  Rx<bool> isFormInvalid = false.obs;
+   Rx<bool> isFormInvalid = false.obs;
 
   Rx<String> selectedFacility = ''.obs;
   String username = '';
@@ -203,11 +104,7 @@ Rx<List<List<Map<String, String>>>> rowItem =
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationIncidentReportController =
-      PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
+
 
   ///Plant Name
   RxList<FacilityModel?> facilityPlantList = <FacilityModel>[].obs;
@@ -220,51 +117,16 @@ Rx<List<List<Map<String, String>>>> rowItem =
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
 
-  var startDateTimeCtrlr = TextEditingController();
-  var validTillTimeCtrlr = TextEditingController();
-  var validTillTimeCtrlrBuffer;
-  var startDateTimeCtrlrBuffer;
-
-  var incidentreportDescriptionCtrlr = TextEditingController();
-  var titleTextCtrlr = TextEditingController();
-
-  Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
-  Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
-  Rx<bool> isJobDescriptionInvalid = false.obs;
-  Rx<bool> isTitleTextInvalid = false.obs;
-
-  Rx<bool> isVictimNameTextInvalid = false.obs;
-  var victimNameTextCtrlr = TextEditingController();
 
   ///duration in days
-  Rx<bool> isDurationDaysTextInvalid = false.obs;
-  var durationDaysTextCtrlr = TextEditingController();
+  // Rx<bool> isDurationDaysTextInvalid = false.obs;
+  // var durationDaysTextCtrlr = TextEditingController();
 
-  // ///Gen Loss Due To Asset Loss
-  // Rx<bool> isGenLossAssetDamageTextInvalid = false.obs;
-  // var genLossAssetDamageTextCtrlr = TextEditingController();
-
-  // ///Gen Loss Due To Asset Loss
-  // Rx<bool> isInsuranceRemarkTextInvalid = false.obs;
-  // var insuranceRemarkTextCtrlr = TextEditingController();
-
-
- RxList<RoleModel?> roleList = <RoleModel>[].obs;
+  RxList<RoleModel?> roleList = <RoleModel>[].obs;
   Rx<String> selectedRole = ''.obs;
   Rx<bool> isSelectedRole = true.obs;
   int? selectedRoleListId = 0;
-  
 
-  ///For Switch case
-  RxBool switchValue = false.obs;
-  RxBool switchValue2 = false.obs;
-  RxBool switchValue3 = false.obs;
-  RxBool switchValue4 = false.obs;
-
-  // PaginationController paginationBusinessListController = PaginationController(
-  //   rowCount: 0,
-  //   rowsPerPage: 10,
-  // );
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -286,9 +148,6 @@ Rx<List<List<Map<String, String>>>> rowItem =
     });
 
     Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
-    Future.delayed(Duration(seconds: 1), () {
       getTypePermitList();
     });
     Future.delayed(Duration(seconds: 1), () {
@@ -302,9 +161,8 @@ Rx<List<List<Map<String, String>>>> rowItem =
     super.onInit();
   }
 
- 
   Future<void> getFacilityList() async {
-    final _facilityList = await viewIncidentReportPresenter.getFacilityList();
+    final _facilityList = await addEscalationPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -317,7 +175,7 @@ Rx<List<List<Map<String, String>>>> rowItem =
   }
 
   Future<void> getRoleList() async {
-    final list = await viewIncidentReportPresenter.getRoleList();
+    final list = await addEscalationPresenter.getRoleList();
 
     if (list != null) {
       for (var _roleList in list) {
@@ -328,7 +186,7 @@ Rx<List<List<Map<String, String>>>> rowItem =
 
   Future<void> getTypePermitList() async {
     final _permitTypeList =
-        await viewIncidentReportPresenter.getTypePermitList(facility_id: 45);
+        await addEscalationPresenter.getTypePermitList(facility_id: 45);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -336,43 +194,16 @@ Rx<List<List<Map<String, String>>>> rowItem =
       }
       // selectedTypePermit.value = typePermitList[0]?.name ?? '';
     }
+    addRowItem();
   }
 
-  Future<void> getModuleList(
-      int facilityId, int type, bool isLoading)
-  async {
+  Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
     moduleList.value = <ModuleListModel>[];
-    final _moduleList =
-        await viewIncidentReportPresenter.getModuleList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+    final _moduleList = await addEscalationPresenter.getModuleList(
+        facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_moduleList != null) {
       moduleList.value = _moduleList;
-      // paginationController = PaginationController(
-      //   rowCount: moduleList?.length ?? 0,
-      //   rowsPerPage: 10,
-      // );
-
-      // if (moduleList != null && moduleList!.isNotEmpty) {
-      //   moduleListModel = moduleList![0];
-      //   var preventiveCheckListJson = moduleListModel?.toJson();
-      //   moduleListTableColumns.value = <String>[];
-      //   for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-      //     moduleListTableColumns.add(key);
-      //   }
-      // }
-    }
-  }
-
-  Future<void> getuserAccessData() async {
-    final _userAccessList =
-        await viewIncidentReportPresenter.getUserAccessList();
-
-    if (_userAccessList != null) {
-      final userAccessModelList = jsonDecode(_userAccessList);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      varUserAccessModel.value = userAccess;
-      varUserAccessModel.value.access_list = userAccess.access_list;
     }
   }
 
@@ -386,31 +217,26 @@ Rx<List<List<Map<String, String>>>> rowItem =
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
-        case RxList<ModuleListModel>:
+      case RxList<ModuleListModel>:
         {
           int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
           selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
           print('Module List Id: $selectedModuleListId');
-
-          
         }
         break;
-        case RxList<RoleModel>:
+      case RxList<RoleModel>:
         {
           int roleModelListIndex = roleList.indexWhere((x) => x?.name == value);
           selectedRoleListId = roleList[roleModelListIndex]?.id ?? 0;
           print('Role List Id: $selectedRoleListId');
-
-          
         }
         break;
-         case RxList<TypePermitModel>:
+      case RxList<TypePermitModel>:
         {
-          int prmitTypeIndex = typePermitList.indexWhere((x) => x?.name == value);
+          int prmitTypeIndex =
+              typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[prmitTypeIndex]?.id ?? 0;
           print('Type Permit Id: $selectedTypePermitId');
-
-          
         }
         break;
 
@@ -449,247 +275,82 @@ Rx<List<List<Map<String, String>>>> rowItem =
     }
   }
 
-  //   void checkForm() {
-  //   if (selectedBlock.value == '') {
-  //     isBlockSelected.value = false;
-  //   }
-  //   if (selectedEquipmentName.value == '') {
-  //     isEquipmentNameSelected.value = false;
-  //   }
-  //   if (startDateTimeCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Incident Date & Time Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (reportingDateTimeCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Reporting Date & Time Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (selectedVictimNameList.value == '') {
-  //     isVictimNameListSelected.value = false;
-  //   }
-  //   if (actionTakenDateTimeCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Action Taken By Date & Time Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (selectedAssetRestorationActionTakenByList.value == '') {
-  //     isAssetRestorationActionTakenByListSelected.value = false;
-  //   }
-  //   if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
-  //     isincidentInvestigationVerificationDoneByListSelected.value = false;
-  //   }
-  //   if (damagedAssetCostTextCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Damaged cost Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (genLossAssetDamageTextCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Generation Loss Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (titleTextCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (incidentreportDescriptionCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Incident Description Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (insuranceAvailableTextCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Insurance Available Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (insuranceRemarkTextCtrlr.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   // if (immediateCorrectiveActionTextController.text == '') {
-  //   //   Fluttertoast.showToast(
-  //   //       msg: 'Corrective Action Field cannot be empty',
-  //   //       timeInSecForIosWeb: 5);
-  //   // }
-  //   // if (requestManufactureTextController.text == '') {
-  //   //   Fluttertoast.showToast(
-  //   //       msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-  //   // }
-  //   if (isBlockSelected.value == false ||
-  //       isEquipmentNameSelected.value == false ||
-  //       isVictimNameListSelected.value == false ||
-  //       isAssetRestorationActionTakenByListSelected.value == false ||
-  //       isincidentInvestigationDoneByListSelected.value == false ||
-  //       isincidentInvestigationVerificationDoneByListSelected.value == false) {
-  //     isFormInvalid.value = true;
-  //   } else {
-  //     isFormInvalid.value = false;
+  void createEscalationMatrix() async {
+    List<Escalation> days = [];
+    rowItem.value.forEach((element) {
+      Escalation day = Escalation(
+        days: int.tryParse(element[0]["value"] ?? '0'),
+        role_id: dropdownMapperData[element[1]["value"]]?.id,
+      );
+      days.add(day);
+    });
+
+    print('Days:${days}');
+
+    late List<Status_escalation> state_escalation_list = [];
+
+    state_escalation_list
+        .add(Status_escalation(status_id: 102, escalation: days));
+
+    CreateEscalationMatrixModel createEscalationMatrixModel =
+        CreateEscalationMatrixModel(
+      module_id: selectedModuleListId,
+      status_escalation: state_escalation_list,
+    );
+
+    var escalationMatrixJsonString = [createEscalationMatrixModel.toJson()];
+    Map<String, dynamic>? responseCreateEscalationMatrixModel =
+        await addEscalationPresenter.createEscalationMatrix(
+      createEscalationMatrix: escalationMatrixJsonString,
+      isLoading: true,
+    );
+
+    if (responseCreateEscalationMatrixModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    print('Add Escalation Matrix   data: $escalationMatrixJsonString');
+  }
+
+  // void createEscalationMatrix() async {
+  //   {
+  //     List<Escalation> days = [];
+  //     rowItem.value.forEach((element) {
+  //       Escalation day = Escalation(
+  //         role_id: dropdownMapperData[element[1]["value"]]?.role_id,
+  //         days: int.tryParse(element[0]["value"] ?? '0'),
+  //       );
+  //       days.add(day);
+  //     });
+
+  //     late List<Status_escalation> status_escalation = [];
+
+  //     status_Escalation.forEach((e) {
+  //       status_escalation.add(
+  //           Status_escalation(status_id: e.status_id, escalation: e.escalation
+  //               // is_required: e.is_required
+  //               ));
+  //     });
+
+  //     CreateEscalationMatrixModel createEscalationMatrixModel =
+  //         CreateEscalationMatrixModel();
+
+  //     var escalationMatrixJsonString = [
+  //       {
+  //         "module_id": selectedModuleListId,
+  //         "status_escalation": status_escalation
+  //       }
+  //     ];
+  //     Map<String, dynamic>? responseCreateEscalationMatrix =
+  //         await viewIncidentReportPresenter.createEscalationMatrix(
+  //       createEscalationMatrix: escalationMatrixJsonString,
+  //       isLoading: true,
+  //     );
+
+  //     if (responseCreateEscalationMatrix == null) {}
+  //     print('Create Escalation Matrix data: $escalationMatrixJsonString');
   //   }
   // }
-
-  ///Create Escalation Matrix
-  void createEscalationMatrix() async {
-    {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
-      String _days = htmlEscape.convert(durationDaysTextCtrlr.text.trim());
-      // String _incidentDescription =
-      //     htmlEscape.convert(incidentreportDescriptionCtrlr.text.trim());
-      // String _insuranceRemark =
-      //     htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
-      // String _insuranceAvailable =
-      //     htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
-      // // String _costOfReplacement =
-      // //     htmlEscape.convert(costOfReplacementTextController.text.trim());
-      // String _orderReferenceNo =
-      //     htmlEscape.convert(orderReferenceNoTextController.text.trim());
-      // String _affectedSerialNo =
-      //     htmlEscape.convert(affectedSerialNoTextController.text.trim());
-
-      // int costOfReplacement =
-      //     int.parse(costOfReplacementTextController.text.trim());
-
-      // int? sopFileId = createSOPModel2.sop_fileId;
-      // // int? jsaFileId = data.jsa_fileId;
-      // print('SOPFileId:$sopFileId');
-      // late List<ExternalEmails> external_emails_list = [];
-
-      // externalEmails.forEach((e) {
-      //   external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
-      // });
-      rowItem.value.forEach((element) { 
-        Escalation days = Escalation(
-          days: int.tryParse(element[0]["value"] ?? '0'),
-        );
-      });
-
-      
-
-      late List<Status_escalation> status_escalation = [];
-
-      status_Escalation.forEach((e) {
-        status_escalation.add(Status_escalation(
-          status_id: e.status_id,
-          escalation: e.escalation
-          // is_required: e.is_required
-        ));
-      });
-
-      CreateEscalationMatrixModel createEscalationMatrixModel =
-          CreateEscalationMatrixModel(
-            
-        // module_id: 2,
-        // status_escalation: [
-            
-        //         status_id: 101,
-        //         escalation: [
-        //             {
-        //                 "days": 1,
-        //                 "role_id": 6
-        //             },
-        //             {
-        //                 "days": 2,
-        //                 "role_id": 5
-        //             },
-        //             {
-        //                 "days": 3,
-        //                 "role_id": 4
-        //             },
-        //             {
-        //                 "days": 4,
-        //                 "role_id": 3
-        //             },
-        //             {
-        //                 "days": 5,
-        //                 "role_id": 2
-        //             },
-        //             {
-        //                 "days": 6,
-        //                 "role_id": 1
-        //             }
-        //         ]
-        //     ,
-        //     {
-        //         status_id: 102,
-        //         escalation: [
-        //             {
-        //                 "days": 1,
-        //                 "role_id": 7
-        //             },
-        //             {
-        //                 "days": 5,
-        //                 "role_id": 4
-        //             },
-        //             {
-        //                 "days": 10,
-        //                 "role_id": 1
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         status_id: 103,
-        //         escalation: [
-        //             {
-        //                 "days": 1,
-        //                 "role_id": 7
-        //             },
-        //             {
-        //                 "days": 2,
-        //                 "role_id": 6
-        //             },
-        //             {
-        //                 "days": 4,
-        //                 "role_id": 5
-        //             },
-        //             {
-        //                 "days": 12,
-        //                 "role_id": 2
-        //             },
-        //             {
-        //                 "days": 15,
-        //                 "role_id": 1
-        //             }
-        //         ]
-        //     }
-        // ]
-        
-             
-          );
-          
-          
-             
-      var escalationMatrixJsonString = [
-      {
-        "module_id": selectedModuleListId,
-        "status_escalation": status_escalation
-        //  [
-        //   {
-        //     "status_id": 101,
-        //     "escalation": [
-        //       {
-        //         "days": int.tryParse('${_days}'),
-        //         "role_id": selectedRoleListId
-        //       }
-        //     ]
-        //   }
-        // ]
-        
-    }];
-      Map<String, dynamic>? responseCreateEscalationMatrix =
-          await viewIncidentReportPresenter.createEscalationMatrix(
-        createEscalationMatrix: escalationMatrixJsonString,
-        isLoading: true,
-      );
-
-      if (responseCreateEscalationMatrix == null) {
-        //  CreateNewPermitDialog();
-        // showAlertDialog();
-      }
-      print('Create Escalation Matrix data: $escalationMatrixJsonString');
-    }
-  }
 
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);

@@ -47,9 +47,9 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                   onTap: () {
                     Get.back();
                   },
-                  child: Text(" / INVENTORY", style: Styles.greyMediumLight12),
+                  child: Text(" / Assets", style: Styles.greyMediumLight12),
                 ),
-                Text(" / INVENTORY LIST", style: Styles.greyMediumLight12),
+                Text(" / Assets LIST", style: Styles.greyMediumLight12),
                 Spacer(),
                 ActionButton(
                   icon: Icons.download,
@@ -254,7 +254,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                         children: [
                                                                           TableActionButton(
                                                                             color:
-                                                                                ColorValues.appGreenColor,
+                                                                                ColorValues.viewColor,
                                                                             icon:
                                                                                 Icons.visibility,
                                                                             // label:
@@ -430,7 +430,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                         children: [
                                                                           TableActionButton(
                                                                             color:
-                                                                                ColorValues.appGreenColor,
+                                                                                ColorValues.viewColor,
                                                                             icon:
                                                                                 Icons.visibility,
                                                                             // label:
@@ -445,7 +445,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
 
                                                                           TableActionButton(
                                                                             color:
-                                                                                ColorValues.appLightBlueColor,
+                                                                                ColorValues.editColor,
                                                                             icon:
                                                                                 Icons.edit,
                                                                             // label:
@@ -460,7 +460,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
 
                                                                           TableActionButton(
                                                                             color:
-                                                                                ColorValues.appRedColor,
+                                                                                ColorValues.deleteColor,
                                                                             icon:
                                                                                 Icons.delete,
                                                                             // label:

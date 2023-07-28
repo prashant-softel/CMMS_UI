@@ -24,6 +24,7 @@ import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:http/http.dart' as http;
@@ -655,7 +656,7 @@ class ConnectHelper {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123'
+      ptwStatus == '121'
           ? 'Permit/PermitApprove'
           : 'Permit/PermitExtendApprove',
       Request.put,
@@ -2800,6 +2801,34 @@ class ConnectHelper {
     print('photo_id${addUserModel.photo_id}');
 
     return addUserModel;
+  }
+
+  Future<AddInventoryRequestModel> uploadImgeInventory({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    bool? isLoading,
+  }) async {
+    final request = http.MultipartRequest('POST',
+        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    request.files.add(
+        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+    request.headers.addAll({'Authorization': 'Bearer $auth'});
+
+    // Send the request and wait for the response
+    final response = await request.send();
+    var respStr = await response.stream.bytesToString();
+    var jsonResponse = json.decode(respStr);
+
+    // Check if the upload was successful
+    // if (response.statusCode == 200) {
+    AddInventoryRequestModel addInventoryRequestModel =
+        AddInventoryRequestModel(
+      categoryId: int.parse(jsonResponse["categoryId"][0].toString()),
+    );
+    print('photo_id${addInventoryRequestModel.categoryId}');
+
+    return addInventoryRequestModel;
   }
 
   ///

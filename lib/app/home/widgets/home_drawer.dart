@@ -77,7 +77,7 @@ class HomeDrawer extends GetView {
                         },
                       ),
                       MenuItem(
-                        title: "Inventory",
+                        title: "Assets",
                         icon: "assets/files/warranty.png",
                         press: () {
                           Get.offNamed(Routes.inventory);

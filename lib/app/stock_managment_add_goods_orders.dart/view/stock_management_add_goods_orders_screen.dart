@@ -23,7 +23,7 @@ class StockManagementAddGoodsOrdersScreen
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Mrs'),
+              title: Text('GOODS ORDER '),
               centerTitle: true,
               elevation: 0,
             ),

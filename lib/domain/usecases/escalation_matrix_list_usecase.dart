@@ -13,23 +13,24 @@ class EscalationMatrixListUsecase {
   }
 
  
-  Future<List<IncidentReportListModel>> getIncidentReportList({
-    required bool isLoading,
-    required int? facility_id,
-    String? start_date,
-    required String end_date,
-  }) async {
-    return _repository.getIncidentReportList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      start_date: start_date,
-      end_date: end_date,
-    );
-  }
+  // Future<List<IncidentReportListModel>> getIncidentReportList({
+  //   required bool isLoading,
+  //   required int? facility_id,
+  //   String? start_date,
+  //   required String end_date,
+  // }) async {
+  //   return _repository.getIncidentReportList(
+  //     isLoading: isLoading,
+  //     facility_id: facility_id,
+  //     start_date: start_date,
+  //     end_date: end_date,
+  //   );
+  // }
 
+   
   
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
-  Future<String?> getUserAccessList() async =>
-      await _repository.getUserAccessData(LocalKeys.userAccess);
+
+ 
 }

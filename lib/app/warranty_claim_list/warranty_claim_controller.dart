@@ -48,7 +48,7 @@ class WarrantyClaimController extends GetxController {
 
   ///Radio
   RxString selectedSeverity = RxString('');
-   void setSelectedSeverity(String severity) {
+  void setSelectedSeverity(String severity) {
     selectedSeverity.value = severity;
   }
 
@@ -479,10 +479,11 @@ class WarrantyClaimController extends GetxController {
             .toLowerCase()
             .contains(keyword.toLowerCase()))
         .toList();
+    update(['warranty_claim_list']);
   }
 
-  void getWarrantyClaimList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+  Future<void> getWarrantyClaimList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
     // supplierNameList.value = <WarrantyClaimModel>[];
 
     final list = await warrantyClaimPresenter.getWarrantyClaimList(

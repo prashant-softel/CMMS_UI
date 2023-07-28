@@ -211,9 +211,9 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                       Expanded(
                                                         child:
                                                             ScrollableTableView(
-                                                          paginationController:
-                                                              controller
-                                                                  .paginationWarrantyController,
+                                                          // paginationController:
+                                                          //     controller
+                                                          //         .paginationWarrantyController,
                                                           columns: [
                                                             'WC Id',
                                                             'Date of Claim',

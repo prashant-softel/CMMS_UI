@@ -36,11 +36,11 @@ class DropdownWebWidget extends StatelessWidget {
     return //
 
         Obx(
-      () => Container(
-        height: MediaQuery.of(context).size.height * 0.040,
-        width: width,
-        margin: margin,
-        decoration: BoxDecoration(
+          ()=> Container(
+              height: MediaQuery.of(context).size.height * 0.040,
+              width: width,
+              margin: margin,
+              decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
@@ -60,9 +60,9 @@ class DropdownWebWidget extends StatelessWidget {
           ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
-        ),
-        child: //
-
+              ),
+              child: //
+        
             DropdownSearch<String>(
           autoValidateMode: AutovalidateMode.always,
           validator: (String? item) {
@@ -115,9 +115,9 @@ class DropdownWebWidget extends StatelessWidget {
             onValueChanged(dropdownList, selectedValue);
           },
           selectedItem: selectedValue,
-        ),
-      ),
-    );
+              ),
+            ),
+        );
   }
 }
   //  popupProps: PopupProps.menu(menuProps: MenuProps()),
