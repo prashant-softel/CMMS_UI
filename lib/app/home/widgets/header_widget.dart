@@ -116,42 +116,56 @@ class HeaderWidget extends GetView<HomeController> {
                                   content: Column(
                                       // mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.person,
-                                              color: Color(0xffD2D0D0),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text("Profile",
-                                                style: TextStyle(
-                                                  color: Color(0xffD2D0D0),
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w600,
-                                                )),
-                                          ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.toNamed(Routes.profile,
+                                                arguments: varUserAccessModel
+                                                    .value.user_id);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.person,
+                                                color: Color(0xffD2D0D0),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text("Profile",
+                                                  style: TextStyle(
+                                                    color: Color(0xffD2D0D0),
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600,
+                                                  )),
+                                            ],
+                                          ),
                                         ),
                                         Divider(
                                           color: Color(0xffD2D0D0),
                                         ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.settings,
-                                              color: Color(0xffD2D0D0),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text("Settings",
-                                                style: TextStyle(
-                                                  color: Color(0xffD2D0D0),
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w600,
-                                                )),
-                                          ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.toNamed(
+                                              Routes.setting,
+                                            );
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.settings,
+                                                color: Color(0xffD2D0D0),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text("Settings",
+                                                  style: TextStyle(
+                                                    color: Color(0xffD2D0D0),
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600,
+                                                  )),
+                                            ],
+                                          ),
                                         ),
                                         Divider(
                                           color: Color(0xffD2D0D0),

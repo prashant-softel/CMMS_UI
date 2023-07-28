@@ -322,8 +322,10 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                     height: 35,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.cancelColor,
-                                      text: "Concel",
-                                      onPressed: () {},
+                                      text: "cancel",
+                                      onPressed: () {
+                                        Get.back();
+                                      },
                                     ),
                                   ),
                                   SizedBox(

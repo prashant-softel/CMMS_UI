@@ -296,17 +296,17 @@ class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 35,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.cancelColor,
-                                text: "Concel",
-                                onPressed: () {},
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
+                            // Container(
+                            //   height: 35,
+                            //   child: CustomElevatedButton(
+                            //     backgroundColor: ColorValues.cancelColor,
+                            //     text: "Cancel",
+                            //     onPressed: () {},
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   width: 20,
+                            // ),
                             Container(
                               height: 35,
                               child: CustomElevatedButton(

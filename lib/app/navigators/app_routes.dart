@@ -122,7 +122,8 @@ abstract class Routes {
   static const moduleCleaningListExecution = _Paths.moduleCleaningListExecution;
   static const returnMrsList = _Paths.returnMrsList;
   static const issueMrsApprove = _Paths.issueMrsApprove;
-
+  static const profile = _Paths.profile;
+  static const changePassword = _Paths.changePassword;
 }
 
 abstract class _Paths {
@@ -238,7 +239,8 @@ abstract class _Paths {
   static const moduleCleaningListExecution = '/module-cleaning-list-execution';
   static const returnMrsList = '/return-mrs';
   static const issueMrsApprove = '/issue-mrs-approve-reject';
-
+  static const profile = '/profile';
+  static const changePassword = '/changePassword';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

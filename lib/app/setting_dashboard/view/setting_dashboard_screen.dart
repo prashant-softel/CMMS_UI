@@ -1,9 +1,11 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/setting_dashboard/setting_dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
+import '../../navigators/app_pages.dart';
 
 class SettingDashboardScreen extends GetView<SettingDashboardController> {
   SettingDashboardScreen({super.key});
@@ -130,42 +132,16 @@ class SettingDashboardScreen extends GetView<SettingDashboardController> {
                         _settingList(
                             tittle: "Change Password",
                             ontap: () {
-                              //  controller.createChecklist();
+                              Get.toNamed(Routes.changePassword);
                             }),
                         //  if (Responsive.isDesktop(context))
                         _settingList(
                             tittle: "Profile",
                             ontap: () {
-                              // Get.toNamed(
-                              //   Routes.preventive_checkPoint,
-                              // );
+                              Get.toNamed(Routes.profile,
+                                  arguments: varUserAccessModel.value.user_id);
                               // controller.checkPoint();
-                            }),
-                        // _priventiveList(
-                        //     tittle: "CheckList Mapping",
-                        //     ontap: () {
-                        //       // Get.toNamed(
-                        //       //   Routes.preventiveMaintenanceMapping,
-                        //       // );
-                        //       //    controller.pmMapping();
-                        //     }),
-                        // _priventiveList(
-                        //     tittle: "PM Schedule",
-                        //     ontap: () {
-                        //       //  controller.pmSchedule();
-                        //     }),
-                        // _priventiveList(
-                        //     tittle: "PM Tasks",
-                        //     ontap: () {
-                        //       //  controller.pmTask();
-                        //     }),
-                        // _priventiveList(tittle: "PM Report"),
-                        // _priventiveList(
-                        //     tittle: "PM Execution",
-                        //     ontap: () {
-                        //       //  controller.pmExecution();
-                        //     }),
-                        // _priventiveList(tittle: "Maintenance Report"),
+                            })
                       ],
                     )
                   ]),

@@ -74,7 +74,7 @@ class PreventiveCheckPointContentWeb
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.8,
+                          height: Get.height / 1.9,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -127,7 +127,7 @@ class PreventiveCheckPointContentWeb
                                             ),
                                             Expanded(
                                               child: Container(
-                                                height: 45,
+                                                height: 35,
                                                 width: (MediaQuery.of(context)
                                                             .size
                                                             .width *
