@@ -29,13 +29,13 @@ class InventoryScreen extends GetView<InventoryController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-        title: HeaderWidget(),
-        elevation: 0,
-      ),
+              title: HeaderWidget(),
+              elevation: 0,
+            ),
       drawer: //
-      (Responsive.isMobile(context) || Responsive.isTablet(context))
-          ? HomeDrawer() //ResponsiveSideMenu()
-          : null,
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
       body: Container(
         width: Get.width,
         height: Get.height,
@@ -44,8 +44,8 @@ class InventoryScreen extends GetView<InventoryController> {
             (Responsive.isMobile(context) || Responsive.isTablet(context))
                 ? Dimens.box0
                 :
-            //
-            HomeDrawer(),
+                //
+                HomeDrawer(),
             Expanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +56,7 @@ class InventoryScreen extends GetView<InventoryController> {
                         child: Row(
                           children: [
                             Text(
-                              "Inventory",
+                              "Assets",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
@@ -65,13 +65,13 @@ class InventoryScreen extends GetView<InventoryController> {
                             ),
                             SizedBox(
                                 width:
-                                10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                             Expanded(
                               child: Divider(
                                 color: Colors
                                     .grey, // Customize the color of the line if needed
                                 height:
-                                1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                               ),
                             ),
                           ],
@@ -89,7 +89,7 @@ class InventoryScreen extends GetView<InventoryController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _inventoryList(
-                            tittle: "Inventory List",
+                            tittle: "Assets List",
                             ontap: () {
                               Get.toNamed(
                                 Routes.inventoryList,
@@ -97,14 +97,14 @@ class InventoryScreen extends GetView<InventoryController> {
                               //  controller.createChecklist();
                             }),
                         _inventoryList(
-                            tittle: "Add Inventory",
+                            tittle: "Add Assets",
                             ontap: () {
                               Get.toNamed(
                                 Routes.addInventoryScreen,
                               );
                             }),
                         _inventoryList(
-                            tittle: "Import Inventory",
+                            tittle: "Import Assets",
                             ontap: () {
                               Get.toNamed(Routes.importInventory, arguments: 1);
                             }),
@@ -142,7 +142,6 @@ class InventoryScreen extends GetView<InventoryController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-
                         _inventoryList(
                             tittle: "Warranty Certificates",
                             ontap: () {
@@ -232,7 +231,6 @@ class InventoryScreen extends GetView<InventoryController> {
                         //     }),
                       ],
                     ),
-
                     Container(
                       margin: EdgeInsets.only(left: 20),
                       child: Row(
@@ -247,13 +245,13 @@ class InventoryScreen extends GetView<InventoryController> {
                           ),
                           SizedBox(
                               width:
-                              10), // Add some space between the text and the line
+                                  10), // Add some space between the text and the line
                           Expanded(
                             child: Divider(
                               color: Colors
                                   .grey, // Customize the color of the line if needed
                               height:
-                              1, // Adjust the height of the line if needed
+                                  1, // Adjust the height of the line if needed
                             ),
                           ),
                         ],
@@ -271,21 +269,21 @@ class InventoryScreen extends GetView<InventoryController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _inventoryList(
-                            tittle: "Inventory Category",
+                            tittle: "Assets Category",
                             ontap: () {
                               Get.toNamed(
                                 Routes.inventoryCategory,
                               );
                             }),
                         _inventoryList(
-                            tittle: "Inventory Type",
+                            tittle: "Assets Type",
                             ontap: () {
                               Get.toNamed(
                                 Routes.inventoryTypeListScreen,
                               );
                             }),
                         _inventoryList(
-                            tittle: "Inventory Status",
+                            tittle: "Assets Status",
                             ontap: () {
                               controller.inventoryStatusScreen();
                             }),
@@ -322,10 +320,8 @@ class InventoryScreen extends GetView<InventoryController> {
                       fontSize: 16,
                       fontWeight: FontWeight.w700),
 
-
                   textAlign: TextAlign.center, // Updated
                 ),
-
               ),
             ],
           ),

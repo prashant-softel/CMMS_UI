@@ -156,6 +156,22 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               Dimens.boxHeight10,
                             ],
                           ),
+                          Container(
+                            margin: Dimens.edgeInsets5,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Warranty certificate'),
+                                Dimens.boxWidth10,
+                                ActionButton(
+                                  label: 'Upload certification file',
+                                  onPressed: () {},
+                                  icon: Icons.file_upload_outlined,
+                                  color: ColorValues.appLightBlueColor,
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ],

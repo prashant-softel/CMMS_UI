@@ -1,19 +1,14 @@
-import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 
@@ -957,7 +952,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                       right: 20,
                                                                     ),
                                                                     child: Container(
-                                                                        width: 80,
+                                                                        width: (Get.width * .4),
                                                                         // padding: EdgeInsets.all(value),
                                                                         decoration: BoxDecoration(
                                                                           boxShadow: [
@@ -992,8 +987,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                             mapData["value"] =
                                                                                 txt;
                                                                           },
-                                                                        )
-                                                                        ),
+                                                                        )),
                                                                   )
                                                                 : Text(mapData[
                                                                         'key'] ??
