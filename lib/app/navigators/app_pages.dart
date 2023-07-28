@@ -78,6 +78,8 @@ import 'package:cmms/app/permit_type/permit_type_binding.dart';
 import 'package:cmms/app/permit_type/view/permit_type_screen.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_binding.dart';
 import 'package:cmms/app/safety_questions_list/safety_question_list_screen.dart';
+import 'package:cmms/app/user_profile/user_profile_binding.dart';
+import 'package:cmms/app/user_profile/view/user_profile_screen.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_binding.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/view/stock_management_view_add_goods_orders_screen.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_binding.dart';
@@ -99,6 +101,8 @@ import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
 import '../calibration_certificate/calibration_certificate_binding.dart';
 import '../calibration_certificate/view/calibration_certificate_screen.dart';
+import '../change_password/change_password_binding.dart';
+import '../change_password/view/change_password_screen.dart';
 import '../insurance_status/insurance_status_listContent_binding.dart';
 import '../insurance_status/view/insurance_status_listContent_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
@@ -715,7 +719,6 @@ class AppPages {
       binding: ModuleCleaningListPlanBinding(),
     ),
     GetPage<dynamic>(
-
       name: _Paths.insuranceStatus,
       page: InsuranceStatusScreen.new,
       binding: InsuranceStatusBinding(),
@@ -744,6 +747,16 @@ class AppPages {
       name: _Paths.issueMrsApprove,
       page: IssueMrsApproveScreen.new,
       binding: IssueMrsApproveBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.profile,
+      page: UserProfileScreen.new,
+      binding: UserProfileBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.changePassword,
+      page: ChangePasswordScreen.new,
+      binding: ChangePasswordBinding(),
     ),
   ];
 }

@@ -18,7 +18,7 @@ class ReturnMrsListContentWeb extends GetView<ReturnMrsListController> {
 
   ///
   var controller = Get.find<ReturnMrsListController>();
-  List<String> filterdata = ["SetUp", "Close", "cpmplete", "pending"];
+  // List<String> filterdata = ["SetUp", "Close", "cpmplete", "pending"];
   @override
   Widget build(BuildContext context) {
     return Obx(

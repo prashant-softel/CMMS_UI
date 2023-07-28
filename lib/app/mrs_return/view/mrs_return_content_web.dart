@@ -303,8 +303,10 @@ class MrsReturnContentWeb extends GetView<MrsReturnController> {
                                   height: 35,
                                   child: CustomElevatedButton(
                                     backgroundColor: ColorValues.appRedColor,
-                                    text: "Concel",
-                                    onPressed: () {},
+                                    text: "Cancel",
+                                    onPressed: () {
+                                      Get.back();
+                                    },
                                   ),
                                 ),
                                 SizedBox(

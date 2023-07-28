@@ -56,7 +56,7 @@ class CalibrationListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         getCalibrationList(facilityId, false);
       });
     });
