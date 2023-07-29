@@ -155,16 +155,15 @@ class JobDetailsController extends GetxController {
   }
 
   ///
-  Future<void> getPermitList() async {
+  Future<List<NewPermitModel?>?> getPermitList() async {
     facilityId = jobDetailsModel.value?.facilityId ?? 0;
     final _permitList = await jobDetailsPresenter.getPermitList(
         facilityId: facilityId, selfView: false, isLoading: false);
     if (_permitList != null) {
       permitList?.value = <NewPermitModel>[];
-
       permitList?.value = _permitList;
     }
-    //return _permitList;
+    return _permitList;
   }
 
   createNewPermit() {
