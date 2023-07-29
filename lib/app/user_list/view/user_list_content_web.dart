@@ -27,48 +27,48 @@ class _UserListContentWebState extends State<UserListContentWeb> {
         id: 'user_list',
         builder: (controller) {
           return Obx(
-            () => Column(
-              children: [
-                Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromARGB(255, 227, 224, 224),
-                      width: 1,
+            () => SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromARGB(255, 227, 224, 224),
+                        width: 1,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: ColorValues.greyLightColor,
+                        ),
+                        Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Text(" / SETTING",
+                              style: Styles.greyMediumLight12),
+                        ),
+                        Text(" / USER LIST", style: Styles.greyMediumLight12),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: ColorValues.greyLightColor,
-                      ),
-                      Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child:
-                            Text(" / SETTING", style: Styles.greyMediumLight12),
-                      ),
-                      Text(" / USER LIST", style: Styles.greyMediumLight12),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Container(
+                  Container(
                     width: Get.width * 7,
                     margin: EdgeInsets.only(left: 10, top: 30),
                     height: Get.height,
@@ -171,283 +171,287 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                           SizedBox(
                             height: 20,
                           ),
-                          Expanded(
-                            child: Container(
-                                width: Get.width,
-                                margin: Dimens.edgeInsets15,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: controller.userList.isEmpty
-                                    ? Expanded(
-                                        child: ScrollableTableView(
-                                          columns: [
-                                            "Profile",
-                                            "User Login ID",
-                                            "User Role",
-                                            "Contact Number",
-                                            "Created On",
-                                            "Updated On",
-                                            "Status",
-                                            "Action"
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.16,
-                                            );
-                                          }).toList(),
-                                          rows: [
-                                            ...List.generate(
-                                              controller.userList.length,
-                                              (index) {
-                                                return [
-                                                  "",
-                                                  '',
-                                                  '',
-                                                  '',
-                                                  '',
-                                                  '',
-                                                  '',
-                                                  ''
-                                                ];
-                                              },
-                                            ),
-                                          ].map((record) {
-                                            return TableViewRow(
-                                              height: 60,
-                                              cells: record.map((value) {
-                                                return TableViewCell(
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      )
-                                    : ScrollableTableView(
-                                        // paginationController:
-                                        //     controller.paginationController,
-                                        columns: [
-                                          "Profile",
-                                          "User Login ID",
-                                          "User Role",
-                                          "Contact Number",
-                                          "Created On",
-                                          "Updated On",
-                                          "Status",
-                                          "Action"
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            minWidth: Get.width * 0.095,
-                                            label: column,
+                          controller.userList.isEmpty
+                              ? Expanded(
+                                  child: ScrollableTableView(
+                                    columns: [
+                                      "Profile",
+                                      "User Login ID",
+                                      "User Role",
+                                      "Contact Number",
+                                      "Created On",
+                                      "Updated On",
+                                      "Status",
+                                      "Action"
+                                    ].map((column) {
+                                      return TableViewColumn(
+                                        label: column,
+                                        minWidth: Get.width * 0.16,
+                                      );
+                                    }).toList(),
+                                    rows: [
+                                      ...List.generate(
+                                        controller.userList.length,
+                                        (index) {
+                                          return [
+                                            "",
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            ''
+                                          ];
+                                        },
+                                      ),
+                                    ].map((record) {
+                                      return TableViewRow(
+                                        height: 60,
+                                        cells: record.map((value) {
+                                          return TableViewCell(
+                                            child: Text(value),
                                           );
                                         }).toList(),
-                                        rows: //
-                                            [
-                                          ...List.generate(
-                                            controller.userList.length,
-                                            (index) {
-                                              var userListModelListDetails =
-                                                  controller.userList[index];
-                                              return [
-                                                'Profile_Img', //  '${userListModelListDetails?.photoPath}',
-                                                '${userListModelListDetails?.user_name}',
-                                                '${userListModelListDetails?.role_name}',
-                                                '${userListModelListDetails?.contact_no}',
-                                                "2023-03-26",
-                                                "2023-05-26",
-                                                '${userListModelListDetails?.status}',
-                                                "Action"
-                                              ];
+                                      );
+                                    }).toList(),
+                                  ),
+                                )
+                              : Expanded(
+                                  child: Container(
+                                    margin: Dimens.edgeInsets15,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: ScrollableTableView(
+                                      // paginationController:
+                                      //     controller.paginationController,
+                                      columns: [
+                                        "Profile",
+                                        "User Login ID",
+                                        "User Role",
+                                        "Contact Number",
+                                        "Created On",
+                                        "Updated On",
+                                        "Status",
+                                        "Action"
+                                      ].map((column) {
+                                        return TableViewColumn(
+                                          minWidth: Get.width * 0.095,
+                                          label: column,
+                                        );
+                                      }).toList(),
+                                      rows: //
+                                          [
+                                        ...List.generate(
+                                          controller.userList.length,
+                                          (index) {
+                                            var userListModelListDetails =
+                                                controller.userList[index];
+                                            return [
+                                              'Profile_Img', //  '${userListModelListDetails?.photoPath}',
+                                              '${userListModelListDetails?.user_name}',
+                                              '${userListModelListDetails?.role_name}',
+                                              '${userListModelListDetails?.contact_no}',
+                                              "2023-03-26",
+                                              "2023-05-26",
+                                              '${userListModelListDetails?.status}',
+                                              "Action"
+                                            ];
+                                          },
+                                        ),
+                                      ].map((_userList) {
+                                        return TableViewRow(
+                                            onTap: () {
+                                              controller.selectedItem = controller
+                                                  .userList
+                                                  .firstWhere((element) =>
+                                                      "${element?.user_name}" ==
+                                                      _userList[1]);
+                                              int userId =
+                                                  controller.selectedItem?.id ??
+                                                      0;
+                                              if (userId != 0) {
+                                                Get.toNamed(
+                                                    Routes.viewUserDetail,
+                                                    arguments: userId);
+                                              }
                                             },
-                                          ),
-                                        ].map((_userList) {
-                                          return TableViewRow(
-                                              onTap: () {
-                                                controller.selectedItem = controller
-                                                    .userList
-                                                    .firstWhere((element) =>
-                                                        "${element?.user_name}" ==
-                                                        _userList[1]);
-                                                int userId = controller
-                                                        .selectedItem?.id ??
-                                                    0;
-                                                if (userId != 0) {
-                                                  Get.toNamed(
-                                                      Routes.viewUserDetail,
-                                                      arguments: userId);
-                                                }
-                                              },
-                                              height: 60,
-                                              cells: _userList.map((value) {
-                                                return TableViewCell(
-                                                    child: (value ==
-                                                            "Profile_Img")
-                                                        ? controller.userList
-                                                                    .firstWhere(
-                                                                      (e) =>
-                                                                          "${e?.photoPath}" ==
-                                                                          _userList[
-                                                                              0],
-                                                                      orElse: () =>
-                                                                          UserListModel(
-                                                                              id: 000),
-                                                                    )
-                                                                    ?.photoPath !=
-                                                                null
-                                                            ? Container(
-                                                                height: 45,
-                                                                width: 45,
-                                                                decoration:
-                                                                    BoxDecoration(
+                                            height: 60,
+                                            cells: _userList.map((value) {
+                                              return TableViewCell(
+                                                  child: (value ==
+                                                          "Profile_Img")
+                                                      ? controller.userList
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        "${e?.photoPath}" ==
+                                                                        _userList[
+                                                                            0],
+                                                                    orElse: () =>
+                                                                        UserListModel(
+                                                                            id: 000),
+                                                                  )
+                                                                  ?.photoPath !=
+                                                              null
+                                                          ? Container(
+                                                              height: 45,
+                                                              width: 45,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        171,
+                                                                        38,
+                                                                        38),
+                                                                border:
+                                                                    Border.all(
                                                                   color: Color
                                                                       .fromARGB(
                                                                           255,
-                                                                          171,
-                                                                          38,
-                                                                          38),
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            134,
-                                                                            78,
-                                                                            78),
+                                                                          134,
+                                                                          78,
+                                                                          78),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100),
+                                                              ),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {},
+                                                                child: Center(
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 25,
+                                                                    color: ColorValues
+                                                                        .appBlueBackgroundColor,
                                                                   ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              100),
-                                                                ),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {},
-                                                                  child: Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 25,
-                                                                      color: ColorValues
-                                                                          .appBlueBackgroundColor,
-                                                                    ),
-                                                                  ), //Circ
-                                                                ),
-                                                              )
-                                                            : Container(
-                                                                height: 45,
-                                                                width: 45,
-                                                                decoration:
-                                                                    BoxDecoration(
+                                                                ), //Circ
+                                                              ),
+                                                            )
+                                                          : Container(
+                                                              height: 45,
+                                                              width: 45,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: ColorValues
+                                                                    .appDarkGreyColor,
+                                                                border:
+                                                                    Border.all(
                                                                   color: ColorValues
                                                                       .appDarkGreyColor,
-                                                                  border: Border
-                                                                      .all(
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100),
+                                                              ),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {},
+                                                                child: Center(
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 25,
                                                                     color: ColorValues
-                                                                        .appDarkGreyColor,
+                                                                        .appBlueBackgroundColor,
                                                                   ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              100),
-                                                                ),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {},
-                                                                  child: Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 25,
-                                                                      color: ColorValues
-                                                                          .appBlueBackgroundColor,
-                                                                    ),
-                                                                  ), //Circ
-                                                                ),
+                                                                ), //Circ
+                                                              ),
+                                                            )
+                                                      : (value == "Action")
+                                                          ? Wrap(children: [
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .viewColor,
+                                                                icon: Icons
+                                                                    .remove_red_eye_outlined,
+                                                                // label: 'view',
+                                                                onPress: () {
+                                                                  controller.selectedItem = controller
+                                                                      .filteredData
+                                                                      .firstWhere((element) =>
+                                                                          "${element?.user_name}" ==
+                                                                          _userList[
+                                                                              1]);
+                                                                  int userId =
+                                                                      controller
+                                                                              .selectedItem
+                                                                              ?.id ??
+                                                                          0;
+                                                                  if (userId !=
+                                                                      0) {
+                                                                    Get.toNamed(
+                                                                        Routes
+                                                                            .viewUserDetail,
+                                                                        arguments:
+                                                                            userId);
+                                                                  }
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .editColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                //  label: 'Edit',
+                                                                onPress: () {
+                                                                  controller.selectedItem = controller
+                                                                      .filteredData
+                                                                      .firstWhere((element) =>
+                                                                          "${element?.user_name}" ==
+                                                                          _userList[
+                                                                              1]);
+                                                                  int userId =
+                                                                      controller
+                                                                              .selectedItem
+                                                                              ?.id ??
+                                                                          0;
+                                                                  if (userId !=
+                                                                      0) {
+                                                                    Get.toNamed(
+                                                                        Routes
+                                                                            .addUser,
+                                                                        arguments:
+                                                                            userId);
+                                                                  }
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .deleteColor,
+                                                                icon: Icons
+                                                                    .delete,
+                                                                // label: 'Delete',
+                                                                onPress: () {},
                                                               )
-                                                        : (value == "Action")
-                                                            ? Wrap(children: [
-                                                                TableActionButton(
-                                                                  color: ColorValues
-                                                                      .viewColor,
-                                                                  icon: Icons
-                                                                      .remove_red_eye_outlined,
-                                                                  // label: 'view',
-                                                                  onPress: () {
-                                                                    controller.selectedItem = controller
-                                                                        .filteredData
-                                                                        .firstWhere((element) =>
-                                                                            "${element?.user_name}" ==
-                                                                            _userList[1]);
-                                                                    int userId =
-                                                                        controller.selectedItem?.id ??
-                                                                            0;
-                                                                    if (userId !=
-                                                                        0) {
-                                                                      Get.toNamed(
-                                                                          Routes
-                                                                              .viewUserDetail,
-                                                                          arguments:
-                                                                              userId);
-                                                                    }
-                                                                  },
-                                                                ),
-                                                                TableActionButton(
-                                                                  color: ColorValues
-                                                                      .editColor,
-                                                                  icon: Icons
-                                                                      .edit,
-                                                                  //  label: 'Edit',
-                                                                  onPress: () {
-                                                                    controller.selectedItem = controller
-                                                                        .filteredData
-                                                                        .firstWhere((element) =>
-                                                                            "${element?.user_name}" ==
-                                                                            _userList[1]);
-                                                                    int userId =
-                                                                        controller.selectedItem?.id ??
-                                                                            0;
-                                                                    if (userId !=
-                                                                        0) {
-                                                                      Get.toNamed(
-                                                                          Routes
-                                                                              .addUser,
-                                                                          arguments:
-                                                                              userId);
-                                                                    }
-                                                                  },
-                                                                ),
-                                                                TableActionButton(
-                                                                  color: ColorValues
-                                                                      .deleteColor,
-                                                                  icon: Icons
-                                                                      .delete,
-                                                                  // label: 'Delete',
-                                                                  onPress:
-                                                                      () {},
-                                                                )
-                                                              ])
-                                                            : Expanded(
-                                                                child: Text(
-                                                                  value,
-                                                                ),
-                                                              ));
-                                              }).toList());
-                                        }).toList(),
-                                      )),
-                          ),
+                                                            ])
+                                                          : Text(
+                                                              value,
+                                                            ));
+                                            }).toList());
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: ValueListenableBuilder(
@@ -511,8 +515,8 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         });
