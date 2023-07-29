@@ -855,6 +855,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                   onValueChanged:
                                                                       (list,
                                                                           selectedValue) {
+                                                                    print(
+                                                                        'paifcghb:${controller.assetList}');
                                                                     print({
                                                                       selectedValue:
                                                                           selectedValue
