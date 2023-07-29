@@ -7,6 +7,8 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 
+import '../../domain/models/paiyed_model.dart';
+
 class StockManagementAddGoodsOrdersPresenter {
   StockManagementAddGoodsOrdersPresenter(
       this.stockManagementAddGoodsOrdersUsecase);
@@ -16,6 +18,16 @@ class StockManagementAddGoodsOrdersPresenter {
     required int? facilityId,
   }) async {
     return stockManagementAddGoodsOrdersUsecase.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<PaiedModel>> updatePaidBy({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return stockManagementAddGoodsOrdersUsecase.updatePaidBy(
       isLoading: isLoading,
       facilityId: facilityId,
     );

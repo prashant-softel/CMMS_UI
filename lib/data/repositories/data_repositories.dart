@@ -180,6 +180,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> updatePaidBy({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.updatePaidBy(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   @override
   Future<ResponseModel> getEmployeeList({
     int? facility_id,
