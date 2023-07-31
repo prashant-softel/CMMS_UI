@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/createSPVModel.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 class SPVListController extends GetxController {
   SPVListController(
     this.sPVListPresenter,
@@ -122,9 +122,8 @@ class SPVListController extends GetxController {
 
   Future<bool> createSPVlist() async {
     if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-      // Fluttertoast.showToast(
-      //     msg: "Please enter required field", fontSize: 16.0);
-      print("Fields are blank, please enter dat ato create");
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _title = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();

@@ -941,7 +941,7 @@ class BusinessListContentWeb
                                   ),
                                 ].map((_businessList) {
                                   return TableViewRow(
-                                      height: 60,
+                                      height: 45,
                                       cells: _businessList
                                           .map((value) {
                                         return TableViewCell(

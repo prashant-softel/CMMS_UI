@@ -5,7 +5,7 @@ import 'package:cmms/app/block_type_list/block_type_list_presenter.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:flutter/cupertino.dart';
-
+import'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -143,8 +143,8 @@ class BlockTypeListController extends GetxController {
     if (titleCtrlr.text.trim() == '' ||
         descriptionCtrlr.text.trim() == '' ||
         selectedFacilityId == 0) {
-      // Fluttertoast.showToast(
-      //     msg: "Please enter required field", fontSize: 16.0);
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
       print("Fields are blank, please enter dat ato create");
     } else {
       String _title = titleCtrlr.text.trim();

@@ -122,7 +122,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'Name:'),
+                                            Expanded(child: CustomRichText(title: 'Name:')),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -173,8 +173,10 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Description:'),
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description:'),
+                                            ),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -432,7 +434,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                               ),
                                             ].map((_competencyList) {
                                               return TableViewRow(
-                                                  height: 60,
+                                                  height: 45,
                                                   cells: _competencyList
                                                       .map((value) {
                                                     return TableViewCell(
