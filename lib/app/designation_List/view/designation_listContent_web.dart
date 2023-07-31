@@ -58,6 +58,13 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                     onTap: () {
                       Get.back();
                     },
+                    child: Text(" / MASTER",
+                        style: Styles.greyMediumLight12),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
                     child: Text(" / DESIGNATION LIST",
                         style: Styles.greyMediumLight12),
                   ),
@@ -127,8 +134,10 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Designation Name: '),
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Designation Name: '),
+                                            ),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -179,9 +188,11 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title:
-                                                    'Designation Description: '),
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title:
+                                                      'Designation Description: '),
+                                            ),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -386,7 +397,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 60,
+                                                // height: 60,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
                                                     child: Text(value),
@@ -432,7 +443,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                               ),
                                             ].map((_designationList) {
                                               return TableViewRow(
-                                                  height: 60,
+                                                  height: 45,
                                                   cells: _designationList
                                                       .map((value) {
                                                     return TableViewCell(

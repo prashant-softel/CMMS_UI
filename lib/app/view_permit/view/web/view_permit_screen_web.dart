@@ -312,6 +312,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           ),
                                                           Text(
                                                             '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                             style: TextStyle(
                                                                 color: Color
                                                                     .fromARGB(
@@ -405,15 +408,21 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         92,
                                                                         163)),
                                                           ),
-                                                          Text(
-                                                            '${controller.viewPermitDetailsModel.value?.description}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
+                                                          SizedBox(
+                                                            width: 150,
+                                                            child: Text(
+                                                              '${controller.viewPermitDetailsModel.value?.description}',
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              style: TextStyle(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -2088,14 +2097,20 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 //                   163)),
                                                                 //     ),
                                                                 //   ),
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.description}',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163)),
+                                                                SizedBox(
+                                                                  width: 150,
+                                                                  child: Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.description}',
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163)),
+                                                                  ),
                                                                 ),
                                                                 controller.permitId !=
                                                                         null
@@ -2225,6 +2240,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               children: [
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.siteName}',
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .clip,
                                                                   style: TextStyle(
                                                                       color: Color.fromARGB(
                                                                           255,
@@ -3717,7 +3735,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               ///Approve Button
               varUserAccessModel.value.access_list!
                                   .where((e) =>
-                                      e.feature_id == 3 && e.approve == 0)
+                                      e.feature_id == 3 && e.approve == 1)
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==

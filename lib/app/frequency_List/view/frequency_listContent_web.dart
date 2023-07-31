@@ -57,7 +57,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE FREQUENCY NUMBER",
+                  Text(" / FREQUENCY NUMBER",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -119,59 +119,6 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                               ],
                                             ),
                                           ),
-                                        ),
-                                        Row(
-                                          // mainAxisAlignment:
-                                          //     MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                                child: CustomRichText(
-                                                    title: 'ID:')),
-                                            // SizedBox(
-                                            //   width: 70,
-                                            // ),
-                                            Expanded(
-                                              child: Container(
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .checklistNumberCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
                                         ),
                                         Row(
                                           // mainAxisAlignment:
@@ -283,62 +230,6 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Row(
-                                          // mainAxisAlignment:
-                                          //     MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Status: ",
-                                                style: Styles.black16,
-                                              ),
-                                            ),
-                                            // SizedBox(
-                                            //   width: 15,
-                                            // ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
                                       ]),
                                 ),
                                 Row(
@@ -358,37 +249,37 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                     Container(
                                       height: 40,
                                       width: (Get.width * .2) - 70,
-                                      // child: controller.selectedItem == null
-                                      // ? CustomElevatedButton(
-                                      //     backgroundColor: ColorValues
-                                      //         .appDarkBlueColor,
-                                      //     onPressed: () {
-                                      //       controller
-                                      //           .createChecklistNumber()
-                                      //           .then((value) {
-                                      //         print("value,$value");
-                                      //         if (value == true)
-                                      //           controller
-                                      //               .issuccessCreatechecklist();
-                                      //       });
-                                      //     },
-                                      //     text: 'Create CheckList')
-                                      // : CustomElevatedButton(
-                                      //     backgroundColor: ColorValues
-                                      //         .appDarkBlueColor,
-                                      //     onPressed: () {
-                                      //       controller
-                                      //           .updateChecklistNumber(
-                                      //               controller
-                                      //                   .selectedItem?.id)
-                                      //           .then((value) {
-                                      //         print("value,$value");
-                                      //         if (value == true)
-                                      //           controller
-                                      //               .issuccessCreatechecklist();
-                                      //       });
-                                      //     },
-                                      //     text: 'Update')
+                                      child: controller.selectedItem == null
+                                      ? CustomElevatedButton(
+                                          backgroundColor: ColorValues
+                                              .appDarkBlueColor,
+                                          onPressed: () {
+                                            controller
+                                                .createChecklistNumber()
+                                                .then((value) {
+                                              print("value,$value");
+                                              if (value == true)
+                                                controller
+                                                    .issuccessCreatechecklist();
+                                            });
+                                          },
+                                          text: 'Create CheckList')
+                                      : CustomElevatedButton(
+                                          backgroundColor: ColorValues
+                                              .appDarkBlueColor,
+                                          onPressed: () {
+                                            // controller
+                                            //     .updateChecklistNumber(
+                                            //         controller
+                                            //             .selectedItem?.id)
+                                            //     .then((value) {
+                                            //   print("value,$value");
+                                            //   if (value == true)
+                                            //     controller
+                                            //         .issuccessCreatechecklist();
+                                            // });
+                                          },
+                                          text: 'Update')
                                     ),
                                   ],
                                 ),

@@ -101,7 +101,7 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                                                 ?.map((item) {
                                               return DropdownMenuItem(
                                                 child: Text(
-                                                    item?.permitTypeName ?? ''),
+                                                    item?.description ?? ''),
                                                 value: item,
                                               );
                                             }).toList(),

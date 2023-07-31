@@ -40,6 +40,7 @@ import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
+import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
@@ -1253,6 +1254,35 @@ class Repository {
     }
   }
 
+  Future<List<PaiedModel?>?> updatePaidBy({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.updatePaidBy(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Paid List Data: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<PaiedModel> _paid = jsonFacilityModels
+            .map<PaiedModel>(
+                (m) => PaiedModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _paid;
+      }
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<InventoryDetailModel?>?> getInventoryDetailList(
     String auth,
     int? id,
@@ -1709,7 +1739,6 @@ class Repository {
     }
   }
 
-  
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
     String? categoryIds,

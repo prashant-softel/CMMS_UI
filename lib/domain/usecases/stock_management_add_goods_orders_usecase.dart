@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/paiyed_model.dart';
 
 class StockManagementAddGoodsOrdersUsecase {
   final Repository _repository;
@@ -14,6 +15,14 @@ class StockManagementAddGoodsOrdersUsecase {
   Future<List<CurrencyListModel>> getUnitCurrencyList(
       {required bool isLoading, required int? facilityId}) async {
     return _repository.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<PaiedModel?>?> updatePaidBy(
+      {required bool isLoading, required int? facilityId}) async {
+    return _repository.updatePaidBy(
       isLoading: isLoading,
       facilityId: facilityId,
     );

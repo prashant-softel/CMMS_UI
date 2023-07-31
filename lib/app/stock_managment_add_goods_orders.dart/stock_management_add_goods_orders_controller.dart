@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -46,6 +47,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   //drop down list of assets
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<PaiedModel?> paid = <PaiedModel>[].obs;
+
   var paidByDropdownList = 'Select Gender'.obs;
 
   Rx<bool> isAssetSelected = true.obs;
@@ -82,12 +85,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   bool openChallanDatePicker = false;
   bool openPODatePicker = false;
   bool openReceivedPicker = false;
-  var paid = <PaiedModel>[
-    PaiedModel(name: "Please Select", id: 0),
-    PaiedModel(name: 'Operator', id: 1),
-    PaiedModel(name: 'Owner', id: 2),
-  ];
-  var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
+  // var paid = <PaiedModel>[
+  //   PaiedModel(name: "Please Select", id: 0),
+  //   PaiedModel(name: 'Operator', id: 1),
+  //   PaiedModel(name: 'Owner', id: 2),
+  // ];
+  // var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
 
   ///
   @override
@@ -103,11 +106,16 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });
+
+    Future.delayed(Duration(seconds: 1), () {
+      updatePaidBy();
+    });
     Future.delayed(Duration(seconds: 1), () {
       getBusinessList(4);
     });
     Future.delayed(Duration(seconds: 1), () {
       getAssetList(facilityId);
+
       if (id != null) {
         Future.delayed(Duration(seconds: 1), () {
           getPurchaseDetailsById(id: id!);
@@ -209,9 +217,25 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     addRowItem();
   }
 
-  void updatePaidBy(String value) {
-    paidByDropdownList.value = value;
+  Future<void> updatePaidBy() async {
+    paid.value = <PaiedModel>[];
+    final _paid = await stockManagementAddGoodsOrdersPresenter.updatePaidBy(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('paid by List:$_paid');
+    if (_paid != null) {
+      for (var paid_by in _paid) {
+        paid.add(paid_by);
+      }
+
+      update(['paid']);
+    }
   }
+
+  // void updatePaidBy(String value) {
+  //   paidByDropdownList.value = value;
+  // }
 
   void toggleAdditionalColumn() {
     showAdditionalColumn.toggle();
@@ -247,10 +271,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
         }
         break;
-      case RxList<BusinessTypeModel>:
+      case RxList<PaiedModel>:
         {
-          int equipmentIndex = paid.indexWhere((x) => x.name == value);
-          paidId = paid[equipmentIndex].id;
+          int paidIndex = paid.indexWhere((x) => x!.name == value);
+          paidId = paid[paidIndex]!.id ?? 0;
         }
         break;
     }

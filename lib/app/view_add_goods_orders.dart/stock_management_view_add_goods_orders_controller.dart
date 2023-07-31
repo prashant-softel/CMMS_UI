@@ -30,6 +30,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   int get facilityId => _facilityId.value;
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
+  RxList<PaiedModel?> paid = <PaiedModel>[].obs;
 
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
@@ -75,12 +76,12 @@ class ViewAddGoodsOrdersController extends GetxController {
   bool openChallanDatePicker = false;
   bool openPODatePicker = false;
   bool openReceivedPicker = false;
-  var paid = <PaiedModel>[
-    PaiedModel(name: "Please Select", id: 0),
-    PaiedModel(name: 'Operator', id: 1),
-    PaiedModel(name: 'Owner', id: 2),
-  ];
-  var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
+  // var paid = <PaiedModel>[
+  //   PaiedModel(name: "Please Select", id: 0),
+  //   PaiedModel(name: 'Operator', id: 1),
+  //   PaiedModel(name: 'Owner', id: 2),
+  // ];
+  // var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
 
   ///
   @override
@@ -220,10 +221,10 @@ class ViewAddGoodsOrdersController extends GetxController {
           selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
         }
         break;
-      case RxList<BusinessTypeModel>:
+      case RxList<PaiedModel>:
         {
-          int equipmentIndex = paid.indexWhere((x) => x.name == value);
-          paidId = paid[equipmentIndex].id;
+          int paidIndex = paid.indexWhere((x) => x!.name == value);
+          paidId = paid[paidIndex]!.id ?? 0;
         }
         break;
     }
