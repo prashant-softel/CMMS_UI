@@ -515,7 +515,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Check List",
+                                      "Module List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -678,7 +678,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               ),
                                             ].map((_moduleList) {
                                               return TableViewRow(
-                                                  height: 60,
+                                                  height: 45,
                                                   cells:
                                                       _moduleList.map((value) {
                                                     return TableViewCell(

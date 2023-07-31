@@ -494,8 +494,8 @@ class FacilityTypeListController extends GetxController {
         selectedOperator == ''|| selectedCity == '' ||
     selectedCountry == '' || selectedState == '' || selectedSpv==''
     ) {
-      // Fluttertoast.showToast(
-      //     msg: "Please enter required field", fontSize: 16.0);
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
       print("Fields are blank, please enter dat ato create");
     } else {
       String _title = titleCtrlr.text.trim();

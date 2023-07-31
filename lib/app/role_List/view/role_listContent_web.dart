@@ -83,7 +83,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.85,
+                          height: Get.height / 2.25,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -141,6 +141,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                             ),
                                             Expanded(
                                               child: Container(
+                                                margin : Dimens.edgeInsets5,
                                                   width: (MediaQuery.of(context)
                                                               .size
                                                               .width *
@@ -380,7 +381,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                               ),
                                             ].map((_moduleList) {
                                               return TableViewRow(
-                                                  height: 60,
+                                                  height: 45,
                                                   cells:
                                                       _moduleList.map((value) {
                                                     return TableViewCell(

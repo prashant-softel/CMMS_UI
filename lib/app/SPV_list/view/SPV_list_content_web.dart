@@ -456,7 +456,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                         ),
                                       ].map((_permitTypeList) {
                                         return TableViewRow(
-                                            height: 60,
+                                            height: 45,
                                             cells: _permitTypeList.map((value) {
                                               return TableViewCell(
                                                   child: (value == 'Checkbox')

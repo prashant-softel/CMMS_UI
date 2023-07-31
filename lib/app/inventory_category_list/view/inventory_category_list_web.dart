@@ -125,7 +125,7 @@ class InventoryCategoryListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'RiskType: '),
+                                            Expanded(child: CustomRichText(title: 'Name: ')),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -176,8 +176,10 @@ class InventoryCategoryListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Description: '),
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description: '),
+                                            ),
                                             SizedBox(
                                               width: 70,
                                             ),

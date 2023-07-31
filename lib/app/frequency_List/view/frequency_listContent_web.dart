@@ -73,7 +73,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.5,
+                          height: Get.height / 2.25,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -263,7 +263,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                     .issuccessCreatechecklist();
                                             });
                                           },
-                                          text: 'Create CheckList')
+                                          text: 'Create Frequency List')
                                       : CustomElevatedButton(
                                           backgroundColor: ColorValues
                                               .appDarkBlueColor,
@@ -442,7 +442,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                               ),
                                             ].map((_preventiveCheckList) {
                                               return TableViewRow(
-                                                  height: 60,
+                                                  height: 45,
                                                   cells: _preventiveCheckList
                                                       .map((value) {
                                                     return TableViewCell(

@@ -101,7 +101,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                        CustomRichText(title: 'Title '),
+                                        Expanded(child: CustomRichText(title: 'Title ')),
                                             Expanded(
                                               child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -151,8 +151,10 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Facility Type '),
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Facility'),
+                                            ),
                                             Expanded(
                                               child: Container(
                                                 height: MediaQuery.of(context).size.height * 0.040,
@@ -223,7 +225,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             //   "Description ",
                                             //   style: Styles.blackBold16,
                                             // ),
-                                        CustomRichText(title: 'Description '),
+                                        Expanded(child: CustomRichText(title: 'Description ')),
 
                                             Expanded(
                                               child: Container(
@@ -295,6 +297,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
+                                        height: 40,
                                         width: (Get.width * .1),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -554,7 +557,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         ),
                                       ].map((_permitTypeList) {
                                         return TableViewRow(
-                                            height: 60,
+                                            height: 45,
                                             cells: _permitTypeList.map((value) {
                                               return TableViewCell(
                                                   child: (value == 'Checkbox')
