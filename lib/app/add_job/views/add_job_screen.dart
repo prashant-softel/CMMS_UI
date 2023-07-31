@@ -29,41 +29,52 @@ class AddJobScreen extends GetView<AddJobController> {
               centerTitle: true,
               elevation: 0,
             ),
-      body:
-          //
-          Row(children: [
-        (Responsive.isMobile(context) || Responsive.isTablet(context))
-            ? Dimens.box0
-            : HomeDrawer(),
-
-        /// CARD
-
-        Expanded(
-          child: Container(
-            child: Card(
-              color: ColorValues.appLightGreyColor,
-              elevation: 20,
-              shadowColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                  padding: Dimens.edgeInsets10,
-                  child: (() {
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context)) {
-                      return AddJobContentMobile();
-                    } //
-                    else if (Responsive.isDesktop(context)) {
-                      return AddJobContentWeb();
-                    }
-                  }())
-                  //
+      body: Row(
+        children: [
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? Dimens.box0
+              : HomeDrawer(),
+          Expanded(
+            child: Column(
+              children: [
+                if (Responsive.isMobile(context) ||
+                    Responsive.isTablet(context))
+                  Expanded(
+                    child: AddJobContentMobile(),
                   ),
+                if (Responsive.isDesktop(context)) AddJobContentWeb()
+              ],
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
+
+      //     //
+      //     Row(children: [
+      //   (Responsive.isMobile(context) || Responsive.isTablet(context))
+      //       ? Dimens.box0
+      //       : HomeDrawer(),
+
+      //   /// CARD
+
+      //   Expanded(
+      //     child: Container(
+      //       child: Padding(
+      //           padding: Dimens.edgeInsets10,
+      //           child: (() {
+      //             if (Responsive.isMobile(context) ||
+      //                 Responsive.isTablet(context)) {
+      //               return AddJobContentMobile();
+      //             } //
+      //             else if (Responsive.isDesktop(context)) {
+      //               return AddJobContentWeb();
+      //             }
+      //           }())
+      //           //
+      //           ),
+      //     ),
+      //   ),
+      // ]),
     );
 
     ///build ends

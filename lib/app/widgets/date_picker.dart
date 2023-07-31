@@ -16,6 +16,7 @@ class DatePickerWidget extends StatelessWidget {
     this.selectionMode = DateRangePickerSelectionMode.single,
     this.monthCellStyle,
     this.onSubmit,
+    this.showActionButtons = true,
   });
 
   final Function(DateRangePickerSelectionChangedArgs)? selectionChanges;
@@ -27,6 +28,7 @@ class DatePickerWidget extends StatelessWidget {
   final PickerDateRange? initialSelectedRange;
   final DateRangePickerSelectionMode selectionMode;
   final dynamic monthCellStyle;
+  final bool showActionButtons;
   dynamic Function(Object?)? onSubmit;
 
   @override
@@ -55,7 +57,7 @@ class DatePickerWidget extends StatelessWidget {
           maxDate: maxDate,
           minDate: minDate,
           initialSelectedRange: initialSelectedRange,
-          showActionButtons: true,
+          showActionButtons: showActionButtons,
           onSubmit: onSubmit,
           onCancel: () {
             Get.back();

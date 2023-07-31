@@ -35,6 +35,7 @@ class AddJobController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   Rx<bool> isFacilitySelected = true.obs;
   int selectedFacilityId = 0;
+  bool openbreaketimeDatePicker = false;
   //
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
@@ -176,7 +177,7 @@ class AddJobController extends GetxController {
     toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
     update(['toolsRequiredToWorkTypeList']);
   }
- 
+
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList =
@@ -414,6 +415,7 @@ class AddJobController extends GetxController {
     );
     getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);
   }
+
   void toolsRequiredSelected(_selectedToolsRequired) {
     selectedtoolsRequiredToWorkTypeIdList.value = <int>[];
     for (var _selectedCategory in _selectedToolsRequired) {
@@ -441,7 +443,8 @@ class AddJobController extends GetxController {
     }
     print(selectedWorkTypeIdList);
     // var worktypeid = selectedWorkTypeIdList.join(', ').toString();
-    var worktypeid = selectedWorkTypeIdList.map((id)=>id.toString()).join(',');
+    var worktypeid =
+        selectedWorkTypeIdList.map((id) => id.toString()).join(',');
     getToolsRequiredToWorkTypeList(worktypeid);
   }
 
@@ -469,4 +472,68 @@ class AddJobController extends GetxController {
   }
 
   ///
+  Future pickDateTime(BuildContext context) async {
+    var dateTime = selectedBreakdownTime.value;
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedBreakdownTime.value = dateTime;
+    breakdownTimeCtrlr
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: breakdownTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedBreakdownTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime.now(),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedBreakdownTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
 }
