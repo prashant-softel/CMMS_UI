@@ -119,7 +119,7 @@ class _StockManagementGoodsOrdersWebState
                                                 ['stock_Mangement_Date']);
                                           },
                                           hintText:
-                                              '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                              '${controller.formattedFromdate} - ${controller.formattedTodate}',
                                         ),
                                       ],
                                     ),

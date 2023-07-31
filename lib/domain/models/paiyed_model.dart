@@ -8,7 +8,7 @@ String paidByToJson(List<PaiedModel> data) =>
 
 class PaiedModel {
   int? id;
-  String? paid_by;
+  String? name;
   int? status;
   String? created_at;
   int? created_by;
@@ -19,7 +19,7 @@ class PaiedModel {
 
   PaiedModel({
     this.id,
-    this.paid_by,
+    this.name,
     this.status,
     this.created_at,
     this.created_by,
@@ -31,7 +31,7 @@ class PaiedModel {
 
   PaiedModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    paid_by = json['paid_by'];
+    name = json['paid_by'];
     status = json['status'];
     created_at = json['created_at'];
     created_by = json['created_by'];
@@ -43,7 +43,7 @@ class PaiedModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "paid_by": paid_by,
+        "paid_by": name,
         "status": status,
         "created_at": created_at,
         "created_by": created_by,

@@ -23,7 +23,7 @@ class StockManagementAddGoodsOrdersPresenter {
     );
   }
 
-  Future<List<PaiedModel>> updatePaidBy({
+  Future<List<PaiedModel?>?> updatePaidBy({
     required bool isLoading,
     required int? facilityId,
   }) async {

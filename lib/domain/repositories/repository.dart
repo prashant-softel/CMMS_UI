@@ -1254,7 +1254,7 @@ class Repository {
     }
   }
 
-  Future<List<PaiedModel>> updatePaidBy({
+  Future<List<PaiedModel?>?> updatePaidBy({
     required int? facilityId,
     required bool isLoading,
   }) async {
@@ -1270,10 +1270,13 @@ class Repository {
       print('Paid List Data: ${res.data}');
 
       if (!res.hasError) {
-        var paid = paidByFromJson(res.data);
-        return paid;
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<PaiedModel> _paid = jsonFacilityModels
+            .map<PaiedModel>(
+                (m) => PaiedModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _paid;
       }
-      return [];
     } catch (error) {
       log(error.toString());
       return [];
