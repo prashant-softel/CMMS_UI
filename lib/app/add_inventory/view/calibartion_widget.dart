@@ -2,7 +2,7 @@ import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
+
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -133,7 +133,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                 Column(
                                   children: [
                                     CustomTextField(
-                                      numberTextField: true,
+                                      // numberTextField: true,
                                       onTap: () {
                                         controller
                                                 .openLastCalibrationDatePicker =
@@ -176,12 +176,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
             ),
             if (controller.openLastCalibrationDatePicker)
               Positioned(
-                right: 70,
-                top: 60,
+                right: 150,
+                top: 94,
                 child: DatePickerWidget(
-                  minDate: DateTime(DateTime.now().year),
-                  maxDate: DateTime(
-                      DateTime.now().year, 13, 0), // last date of this year
+                  minDate: DateTime(DateTime.now().year - 2),
                   controller: DateRangePickerController(),
                   selectionChanges: (p0) {
                     print('po valu ${p0.value.toString()}');

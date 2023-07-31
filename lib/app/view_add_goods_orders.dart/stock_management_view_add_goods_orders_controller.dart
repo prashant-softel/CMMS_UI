@@ -223,7 +223,7 @@ class ViewAddGoodsOrdersController extends GetxController {
         break;
       case RxList<PaiedModel>:
         {
-          int paidIndex = paid.indexWhere((x) => x!.paid_by == value);
+          int paidIndex = paid.indexWhere((x) => x!.name == value);
           paidId = paid[paidIndex]!.id ?? 0;
         }
         break;

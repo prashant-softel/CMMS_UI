@@ -22,8 +22,12 @@ class StockManagementGoodsOrdersController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(toDate.value);
+
   GoodsOrdersListModel? goodsOrdersListModel;
   RxList<String> goodsOrdersListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;
@@ -40,7 +44,7 @@ class StockManagementGoodsOrdersController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getGoodsOrdersList(
-            facilityId, formattedTodate, formattedFromdate, false);
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
     });
     super.onInit();
@@ -90,7 +94,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getGoodsOrdersList(facilityId, formattedFromdate, formattedTodate, false);
+    getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
   void isDeleteDialog({String? id, String? generatedBy}) {

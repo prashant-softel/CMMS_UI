@@ -20,7 +20,7 @@ class StockManagementAddGoodsOrdersUsecase {
     );
   }
 
-  Future<List<PaiedModel>> updatePaidBy(
+  Future<List<PaiedModel?>?> updatePaidBy(
       {required bool isLoading, required int? facilityId}) async {
     return _repository.updatePaidBy(
       isLoading: isLoading,

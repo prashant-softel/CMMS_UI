@@ -911,10 +911,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                 child:
                                                                     DropdownWebStock(
                                                                   width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      6,
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                                   dropdownList:
                                                                       controller
                                                                           .paid,
@@ -924,6 +923,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                   onValueChanged:
                                                                       (list,
                                                                           selectedValue) {
+                                                                    print(
+                                                                        'paifcghb:${controller.paid}');
                                                                     print({
                                                                       selectedValue:
                                                                           selectedValue
@@ -936,8 +937,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                                             selectedValue,
                                                                         orElse:
                                                                             null);
-                                                                    // mapData["value"] =
-                                                                    //     selectedValue;
                                                                   },
                                                                 ),
                                                               )
