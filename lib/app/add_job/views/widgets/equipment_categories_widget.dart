@@ -89,10 +89,11 @@ class EquipmentCategoriesWidget extends StatelessWidget {
                   ),
                 )
                 .toList(),
-            onConfirm: (selectedOptionsList) =>
-                {controller.equipmentCategoriesSelected(selectedOptionsList),
-                  controller.isEquipmentCategorySelected.value = selectedOptionsList.isNotEmpty,
-                },
+            onConfirm: (selectedOptionsList) => {
+              controller.equipmentCategoriesSelected(selectedOptionsList),
+              controller.isEquipmentCategorySelected.value =
+                  selectedOptionsList.isNotEmpty,
+            },
             chipDisplay: MultiSelectChipDisplay(),
           ),
         ),

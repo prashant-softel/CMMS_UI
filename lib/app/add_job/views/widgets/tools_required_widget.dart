@@ -20,84 +20,85 @@ class ToolsRequiredWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => //
-      Column(//
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: RichText(
-                text: TextSpan(
-                    text: 'Tools Required For Work Type: ',
-                    style: Styles.blackBold16,
-                    children: [
-                      // TextSpan(
-                      //   text: '*',
-                      //   style: TextStyle(
-                      //     color: ColorValues.orangeColor,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
-                    ]),
+      () => //
+          Column(//
+              children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: RichText(
+            text: TextSpan(
+                text: 'Tools Required For Work Type: ',
+                style: Styles.blackBold16,
+                children: [
+                  // TextSpan(
+                  //   text: '*',
+                  //   style: TextStyle(
+                  //     color: ColorValues.orangeColor,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
+                ]),
+          ),
+        ),
+        Dimens.boxHeight5,
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
               ),
-            ),
-            Dimens.boxHeight5,
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    offset: const Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 5.0,
-                    spreadRadius: 1.0,
-                  ),
-                  BoxShadow(
-                    color: ColorValues.whiteColor,
-                    offset: const Offset(0.0, 0.0),
-                    blurRadius: 0.0,
-                    spreadRadius: 0.0,
-                  ),
-                ],
+              BoxShadow(
                 color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(5),
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
               ),
-              child: MultiSelectDialogField(
-                searchable: true,
-                // validator: (selectedItems) {
-                //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                //     return "Required field";
-                //   } else {
-                //     return null;
-                //   }
-                // },
-                autovalidateMode: AutovalidateMode.always,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color:
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: MultiSelectDialogField(
+            searchable: true,
+            // validator: (selectedItems) {
+            //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
+            //     return "Required field";
+            //   } else {
+            //     return null;
+            //   }
+            // },
+            autovalidateMode: AutovalidateMode.always,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color:
                     // con troller.isToolRequiredToWorkTypeSelected.value == false
                     //     ? Colors.red
                     //     :
-                        Colors.transparent,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(5),
-                ), 
-                buttonIcon: Icon(Icons.arrow_drop_down),
-                items: controller.toolsRequiredToWorkTypeList
-                    .map((e) => MultiSelectItem(e, e?.linkedToolName ?? ''))
-                    .toList(),
-
-                onConfirm: (selectedOptionsList) =>
-                {controller.toolsRequiredSelected(selectedOptionsList),
-                  controller.isToolRequiredToWorkTypeSelected.value = selectedOptionsList.isNotEmpty,
-                },
-                chipDisplay: MultiSelectChipDisplay(),
+                    Colors.transparent,
+                width: 1.0,
               ),
+              borderRadius: BorderRadius.circular(5),
             ),
-            Dimens.boxHeight20,
-          ]),
+            buttonIcon: Icon(Icons.arrow_drop_down),
+            items: controller.toolsRequiredToWorkTypeList
+                .map((e) => MultiSelectItem(e, e?.linkedToolName ?? ''))
+                .toList(),
+
+            onConfirm: (selectedOptionsList) => {
+              controller.toolsRequiredSelected(selectedOptionsList),
+              controller.isToolRequiredToWorkTypeSelected.value =
+                  selectedOptionsList.isNotEmpty,
+            },
+            chipDisplay: MultiSelectChipDisplay(),
+          ),
+        ),
+        Dimens.boxHeight20,
+      ]),
     );
   }
 }
