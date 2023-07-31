@@ -97,7 +97,7 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
-                            "Role Access ",
+                            "Role Notification ",
                             style: Styles.blackBold16,
                           ),
                         ),

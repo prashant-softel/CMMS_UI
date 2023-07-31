@@ -384,64 +384,70 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                 ),
                                 Dimens.boxWidth10,
                                 CustomSwitchTroggle(
-                                    value: controller.isToggleOn.value,
-                                    onChanged: (value) {
-                                      controller.toggle();
-                                    }),
+                                  value: controller.calibrationDetailModel.value
+                                              ?.is_damaged ==
+                                          0
+                                      ? false
+                                      : true,
+                                  // onChanged: (value) {
+                                  // //  controller.toggle();
+                                  // }
+                                ),
                               ],
                             ),
                             Dimens.boxHeight60,
-                            Row(
-                              children: [
-                                Text(
-                                  "Remarks:",
-                                  style: Styles.blackBold15,
-                                ),
-                                Dimens.boxWidth10,
-                                Container(
-                                  width: (Get.width * .5),
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      ),
-                                      BoxShadow(
-                                        color: ColorValues.whiteColor,
-                                        offset: const Offset(0.0, 0.0),
-                                        blurRadius: 0.0,
-                                        spreadRadius: 0.0,
-                                      ),
-                                    ],
-                                    color: ColorValues.whiteColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.1,
-                                    child: TextField(
-                                      keyboardType: TextInputType.multiline,
-                                      enabled: false,
-                                      maxLines: 5,
-                                      autofocus: false,
-                                      decoration: InputDecoration(
-                                        fillColor: ColorValues.whiteColor,
-                                        filled: true,
-                                        contentPadding: Dimens.edgeInsets05_10,
-                                        border: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       "Remarks:",
+                            //       style: Styles.blackBold15,
+                            //     ),
+                            //     Dimens.boxWidth10,
+                            //     Container(
+                            //       width: (Get.width * .5),
+                            //       decoration: BoxDecoration(
+                            //         boxShadow: [
+                            //           BoxShadow(
+                            //             color: Colors.black26,
+                            //             offset: const Offset(
+                            //               5.0,
+                            //               5.0,
+                            //             ),
+                            //             blurRadius: 5.0,
+                            //             spreadRadius: 1.0,
+                            //           ),
+                            //           BoxShadow(
+                            //             color: ColorValues.whiteColor,
+                            //             offset: const Offset(0.0, 0.0),
+                            //             blurRadius: 0.0,
+                            //             spreadRadius: 0.0,
+                            //           ),
+                            //         ],
+                            //         color: ColorValues.whiteColor,
+                            //         borderRadius: BorderRadius.circular(5),
+                            //       ),
+                            //       child: SizedBox(
+                            //         width:
+                            //             MediaQuery.of(context).size.width / 1.1,
+                            //         child: TextField(
+                            //           keyboardType: TextInputType.multiline,
+                            //           enabled: false,
+                            //           maxLines: 5,
+                            //           autofocus: false,
+                            //           decoration: InputDecoration(
+                            //             fillColor: ColorValues.whiteColor,
+                            //             filled: true,
+                            //             contentPadding: Dimens.edgeInsets05_10,
+                            //             border: InputBorder.none,
+                            //             enabledBorder: InputBorder.none,
+                            //             focusedBorder: InputBorder.none,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+
                             Dimens.boxHeight60,
                             Container(
                               margin: EdgeInsets.only(bottom: 40, top: 40),
@@ -468,17 +474,17 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       onPressed: () {},
                                     ),
                                   ),
-                                  Dimens.boxWidth20,
-                                  Container(
-                                    height: 35,
-                                    //width: (Get.width * .2) - 90,
-                                    child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appGreenColor,
-                                      text: "Submit",
-                                      onPressed: () {},
-                                    ),
-                                  ),
+                                  // Dimens.boxWidth20,
+                                  // Container(
+                                  //   height: 35,
+                                  //   //width: (Get.width * .2) - 90,
+                                  //   child: CustomElevatedButton(
+                                  //     backgroundColor:
+                                  //         ColorValues.appGreenColor,
+                                  //     text: "Submit",
+                                  //     onPressed: () {},
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             )

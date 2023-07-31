@@ -47,6 +47,7 @@ class CalibrationViewController extends GetxController {
 //calibrationId = 5326;
     final _calibrationDetails = await calibrationViewPresenter
         .getCalibrationView(calibrationId: calibrationId, isloading: isloading);
+    print({"vasddf", _calibrationDetails});
     if (_calibrationDetails != null) {
       calibrationDetailModel.value = _calibrationDetails;
     }

@@ -17,6 +17,7 @@ class ReturnMrsListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<MrsListModel?>? mrsList = <MrsListModel?>[].obs;
+  bool openFromDateToStartDatePicker = false;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
