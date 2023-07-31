@@ -161,7 +161,7 @@ abstract class _Paths {
   static const calibrationList = '/calibration-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
-  static const newWarrantyClaimList = '/new-warranty-claim-list';
+  static const newWarrantyClaimList = '/new-warranty-claim';
   static const calibrationDetail = '/calibration-detail';
   static const pmSchedule = '/pm-schedule-screen';
   static const pmTask = '/pm-task-screen';

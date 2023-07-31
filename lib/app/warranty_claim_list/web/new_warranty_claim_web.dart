@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
@@ -164,7 +165,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   child:
                                                      
                                                       Obx(
-                                                    () => DropdownWidget(
+                                                    () => DropdownWebWidget(
                                                       dropdownList: controller
                                                           .equipmentCategoryList,
                                                       isValueSelected: controller
@@ -193,7 +194,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                           .width /
                                                       4.2,
                                                   child: Obx(
-                                                    () => DropdownWidget(
+                                                    () => DropdownWebWidget(
                                                       dropdownList: controller
                                                           .eqipmentNameList,
                                                       isValueSelected: controller
@@ -210,96 +211,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   // LoginCustomTextfield(),
                                                 ),
 
-                                                // SizedBox(
-
-                                                //   width: MediaQuery.of(context)
-                                                //           .size
-                                                //           .width /
-                                                //       3.8,
-                                                //   child:
-                                                //       CustomMultiSelectDialogField(
-                                                //         buttonText: 'Select Equipment Name',
-                                                //         title: 'Equipment Name',
-                                                //     // initialValue: [],
-                                                //     initialValue: (
-                                                //       controller
-                                                //             .selectedEquipmentCategoryIdList
-                                                //             .isNotEmpty)
-                                                //         ? controller
-                                                //             .selectedEquipmentCategoryIdList
-                                                //         : [],
-                                                //     items: controller
-                                                //         .equipmentCategoryList
-                                                //         .map(
-                                                //           (equipmentCategory) =>
-                                                //               MultiSelectItem(
-                                                //             equipmentCategory?.id,
-                                                //             equipmentCategory?.name ??
-                                                //                 '',
-                                                //           ),
-                                                //         )
-                                                //         .toList(),
-                                                //     onConfirm:
-                                                //         (selectedOptionsList) => {
-                                                //       controller
-                                                //           .equipmentCategoriesSelected(
-                                                //               selectedOptionsList),
-                                                //       print(
-                                                //           'Equipment list ${controller.equipmentCategoryList}')
-                                                //     },
-                                                //     // items: [],
-                                                //   ),
-                                                // ),
-
-                                                // SizedBox(
-                                                //      width: MediaQuery.of(context).size.width / 3.8,
-                                                //   child: CustomTextField(
-                                                //   suffixIcon: Icon(Icons.arrow_drop_down),
-                                                //   label: 'Equipment Name *',
-                                                //   textController:
-                                                //       controller.parentEquipmentTextController,
-                                                //   onTap: () {
-                                                //     controller.getEquipmentList(facilityId: '45');
-                                                //     Get.defaultDialog(
-                                                //       title: 'Equipment Name',
-                                                //       content: GetBuilder<HomeController>(
-                                                //         id: 'equipment_list',
-                                                //         builder: (_controller) {
-                                                //           if (controller.equipmentList.isEmpty) {
-                                                //             return CircularProgressIndicator
-                                                //                 .adaptive();
-                                                //           }
-                                                //           return Container(
-                                                //             height: Get.height * .4,
-                                                //             decoration: BoxDecoration(
-                                                //               borderRadius:
-                                                //                   BorderRadius.circular(8),
-                                                //             ),
-                                                //             child: SingleChildScrollView(
-                                                //               child: Column(
-                                                //                 children: [
-                                                //                   ...List.generate(
-                                                //                     controller.equipmentList.length,
-                                                //                     (index) => ListTile(
-                                                //                       onTap: () {
-                                                //                         _controller.onSelectEquipment(
-                                                //                             _controller.equipmentList[index]);
-                                                //                         Get.back();
-                                                //                       },
-                                                //                       title: Text(
-                                                //                           '${_controller.equipmentList[index].name}'),
-                                                //                     ),
-                                                //                   ).toList(),
-                                                //                 ],
-                                                //               ),
-                                                //             ),
-                                                //           );
-                                                //         },
-                                                //       ),
-                                                //     );
-                                                //   },
-                                                //                             ),
-                                                // ),
+                                              
                                               ],
                                             ),
                                           ],
@@ -358,7 +270,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                     4.2,
                                                                 child:
                                                                     //               Obx(
-                                                                    //   () => DropdownWidget(
+                                                                    //   () => DropdownWebWidget(
                                                                     //     dropdownList: controller
                                                                     //         .equipmentCategoryList,
                                                                     //     isValueSelected: controller
@@ -373,7 +285,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                     // ),
                                                                     Obx(
                                                                   () =>
-                                                                      DropdownWidget(
+                                                                      DropdownWebWidget(
                                                                     dropdownList:
                                                                         controller
                                                                             .affectedPartEqipmentNameList,
@@ -899,7 +811,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       .width /
                                                   6.3,
                                               child: Obx(
-                                                () => DropdownWidget(
+                                                () => DropdownWebWidget(
                                                   dropdownList: controller
                                                       .unitCurrencyList,
                                                   isValueSelected: controller
@@ -1222,7 +1134,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                       width: MediaQuery.of(context).size.width /
                                           4.2,
                                       child: Obx(
-                                        () => DropdownWidget(
+                                        () => DropdownWebWidget(
                                           dropdownList: controller.employeeList,
                                           isValueSelected: controller
                                               .isemployeeListSelected.value,

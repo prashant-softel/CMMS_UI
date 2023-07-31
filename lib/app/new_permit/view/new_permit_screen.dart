@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
@@ -82,7 +83,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                             child: Row(
                               children: [
                                 //  Text('Select Plantss:'),
-                                // DropdownWidget(
+                                // DropdownWebWidget(
                                 //   // controller: controller,
                                 //   dropdownList: controller.facilityList,
                                 //   isValueSelected: controller.isFacilitySelected.value,
@@ -100,7 +101,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                         elevation: 1,
                                         child: Padding(
                                           padding: const EdgeInsets.all(1.0),
-                                          child: DropdownWidget(
+                                          child: DropdownWebWidget(
                                             dropdownList:
                                                 controller.facilityList,
                                             isValueSelected: controller
@@ -199,7 +200,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .width /
                                                               1.6,
                                                       child: Obx(
-                                                        () => DropdownWidget(
+                                                        () => DropdownWebWidget(
                                                           dropdownList:
                                                               controller
                                                                   .blockList,
@@ -241,7 +242,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             1.6,
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
                                                       dropdownList: controller
                                                           .typePermitList,
                                                       isValueSelected: controller
@@ -1150,7 +1151,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.jobTypeList,
                                                                             isValueSelected:
@@ -1184,7 +1185,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.sopPermitList,
                                                                             isValueSelected:
@@ -1273,7 +1274,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.permitIssuerList,
                                                                             isValueSelected:
@@ -1330,7 +1331,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.permitApproverList,
                                                                             isValueSelected:
@@ -1569,7 +1570,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             3.75,
 
                                                     child: Obx(
-                                                      () => DropdownWidget(
+                                                      () => DropdownWebWidget(
                                                         dropdownList: controller
                                                             .blockList,
                                                         isValueSelected:
@@ -1698,7 +1699,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     // SizedBox(
                                                     //   width: MediaQuery.of(context).size.width / 3.5,
                                                     //   child: Obx(
-                                                    //     ()=> DropdownWidget(
+                                                    //     ()=> DropdownWebWidget(
                                                     //       dropdownList:controller.blockList,
                                                     //       isValueSelected: controller.isBlockSelected.value,
                                                     //       selectedValue: controller.selectedBlock.value,
@@ -1721,7 +1722,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .width /
                                                               3.75,
                                                       child: Obx(
-                                                        () => DropdownWidget(
+                                                        () => DropdownWebWidget(
                                                           dropdownList: controller
                                                               .typePermitList,
                                                           isValueSelected:
@@ -1799,7 +1800,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     width: 90,
                                                     child: CustomRichText(
                                                         title:
-                                                            'Work Permit Reference Number: '),
+                                                            'Work Permit Ref. No.: '),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -1822,7 +1823,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           title:
                                                               'Work Description: ')),
                                                   SizedBox(
-                                                    width: 5,
+                                                    width: 8,
                                                   ),
                                                   _buildPermitDescriptionField_web(
                                                       context),
@@ -2973,7 +2974,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.jobTypeList,
                                                                             isValueSelected:
@@ -3000,7 +3001,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.sopPermitList,
                                                                             isValueSelected:
@@ -3075,7 +3076,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.permitIssuerList,
                                                                             isValueSelected:
@@ -3117,7 +3118,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
                                                                             dropdownList:
                                                                                 controller.permitApproverList,
                                                                             isValueSelected:
@@ -3776,7 +3777,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-          height: 35,
+        height: MediaQuery.of(context).size.height*0.050,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -3963,11 +3964,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //     ),
       //   ),
       // ),
-      Dimens.boxHeight5,
+      
       Padding(
         padding: const EdgeInsets.only(left: 1),
         child: Container(
-          width: MediaQuery.of(context).size.width / 1.45,
+          width: MediaQuery.of(context).size.width / 1.46,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -4059,13 +4060,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //     ),
       //   ),
       // ),
-      Dimens.boxHeight5,
+      
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-          height: 60,
+          height: MediaQuery.of(context).size.height*0.050,
           width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 1.44
+              ? MediaQuery.of(context).size.width / 1.46
               : MediaQuery.of(context).size.width / 1.1,
           decoration: BoxDecoration(
             boxShadow: [
@@ -4132,7 +4133,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           ),
         ),
       ),
-      Dimens.boxHeight10,
+      
     ]);
   }
 
@@ -4157,13 +4158,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //     ),
       //   ),
       // ),
-      Dimens.boxHeight5,
+      
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-          height: 60,
+          height: MediaQuery.of(context).size.height*0.050,
           width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 1.44
+              ? MediaQuery.of(context).size.width / 1.46
               : MediaQuery.of(context).size.width / 1.1,
           decoration: BoxDecoration(
             boxShadow: [
