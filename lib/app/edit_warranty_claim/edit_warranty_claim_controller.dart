@@ -31,6 +31,13 @@ class EditWarrantyClaimController extends GetxController {
 
   final HomeController homeController = Get.find();
 
+
+   ///Radio
+  RxString selectedSeverity = RxString('');
+  void setSelectedSeverity(String severity) {
+    selectedSeverity.value = severity;
+  }
+
   ///Supplier Action Part
   var supplierActions = <SupplierActions>[].obs;
   void updateSupplierActionText(
