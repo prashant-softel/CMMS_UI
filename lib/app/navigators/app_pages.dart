@@ -99,6 +99,8 @@ import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
+import '../approve_return_mrs/approve_return_mrs_binding.dart';
+import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../calibration_certificate/calibration_certificate_binding.dart';
 import '../calibration_certificate/view/calibration_certificate_screen.dart';
 import '../change_password/change_password_binding.dart';
@@ -193,6 +195,8 @@ import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
 import '../view_incident_report/view_incident_report_binding.dart';
 import '../view_incident_report/view_incident_report_screen.dart';
+import '../view_return_mrs/view/view_return_mrs_screen.dart';
+import '../view_return_mrs/view_return_mrs_binding.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
@@ -757,6 +761,16 @@ class AppPages {
       name: _Paths.changePassword,
       page: ChangePasswordScreen.new,
       binding: ChangePasswordBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.returnMrsView,
+      page: MrsReturnViewScreen.new,
+      binding: MrsReturnViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.approverReturnMrs,
+      page: ApproveReturnMrsScreen.new,
+      binding: ApproveReturnMrsBinding(),
     ),
   ];
 }

@@ -14,81 +14,92 @@ class CalibrationDetailModel {
   dynamic? approvedBy;
   dynamic? rejectedBy;
   String? startedAt;
-  String? statusShort;
-  String? statusLong;
-  String? requestedAt;
-  int? requestedBy;
-  String? completedAt;
+  dynamic? statusShort;
+  dynamic? statusLong;
+  dynamic? requestedAt;
+  dynamic? requestedBy;
+  dynamic? completedAt;
   dynamic? completedBy;
-  String? closedAt;
+  dynamic? closedAt;
   dynamic? closedBy;
   int? assetId;
-  String? assetName;
+  dynamic? assetName;
   dynamic? assetSerial;
-  String? categoryName;
+  dynamic? categoryName;
   int? statusId;
   dynamic? calibrationStatus;
-  String? lastCalibrationDate;
-  String? nextCalibrationDueDate;
+  dynamic? lastCalibrationDate;
+  dynamic? nextCalibrationDueDate;
   int? frequencyId;
-  String? frequencyName;
+  dynamic? frequencyName;
   dynamic? vendorName;
   dynamic? responsiblePerson;
-  String? receivedDate;
+  dynamic? receivedDate;
   dynamic? assetHealthStatus;
-
-  CalibrationDetailModel({
-    this.calibrationId,
-    this.requestApprovedBy,
-    this.requestRejectedBy,
-    this.requestApprovedAt,
-    this.requestRejectedAt,
-    this.approvedBy,
-    this.rejectedBy,
-    this.startedAt,
-    this.statusShort,
-    this.statusLong,
-    this.requestedAt,
-    this.requestedBy,
-    this.completedAt,
-    this.completedBy,
-    this.closedAt,
-    this.closedBy,
-    this.assetId,
-    this.assetName,
-    this.assetSerial,
-    this.categoryName,
-    this.statusId,
-    this.calibrationStatus,
-    this.lastCalibrationDate,
-    this.nextCalibrationDueDate,
-    this.frequencyId,
-    this.frequencyName,
-    this.vendorName,
-    this.responsiblePerson,
-    this.receivedDate,
-    this.assetHealthStatus,
-  });
+  int? is_damaged;
+  CalibrationDetailModel(
+      {this.calibrationId,
+      this.requestApprovedBy,
+      this.requestRejectedBy,
+      this.requestApprovedAt,
+      this.requestRejectedAt,
+      this.approvedBy,
+      this.rejectedBy,
+      this.startedAt,
+      this.statusShort,
+      this.statusLong,
+      this.requestedAt,
+      this.requestedBy,
+      this.completedAt,
+      this.completedBy,
+      this.closedAt,
+      this.closedBy,
+      this.assetId,
+      this.assetName,
+      this.assetSerial,
+      this.categoryName,
+      this.statusId,
+      this.calibrationStatus,
+      this.lastCalibrationDate,
+      this.nextCalibrationDueDate,
+      this.frequencyId,
+      this.frequencyName,
+      this.vendorName,
+      this.responsiblePerson,
+      this.receivedDate,
+      this.assetHealthStatus,
+      this.is_damaged});
 
   factory CalibrationDetailModel.fromJson(Map<String, dynamic> json) {
     return CalibrationDetailModel(
       calibrationId: json['calibration_id'],
+      is_damaged: json['is_damaged'] ?? 0,
       requestApprovedBy: json['request_approved_by'],
       requestRejectedBy: json['request_rejected_by'],
-      requestApprovedAt:
-          Utility.getFormatedyearMonthDay(json['request_approved_at']),
-      requestRejectedAt:
-          Utility.getFormatedyearMonthDay(json['request_rejected_at']),
+      requestApprovedAt: json['request_approved_at'] == null
+          ? ""
+          : Utility.getFormatedyearMonthDay(json['request_approved_at']),
+      requestRejectedAt: json['request_rejected_at'],
+      //     ? ""
+      //     : Utility.getFormatedyearMonthDay(json['request_rejected_at']),
       approvedBy: json['approved_by'],
       rejectedBy: json['rejected_by'],
-      startedAt: Utility.getFormatedyearMonthDay(json['started_at']),
+      startedAt: json['started_at'],
+      //     ? ""
+      //     : Utility.getFormatedyearMonthDay(json['started_at']),
       statusShort: json['status_short'],
       statusLong: json['status_long'],
-      requestedAt: Utility.getFormatedyearMonthDay(json['requested_at']),
+      requestedAt: json['requested_at'],
+      // ? ""
+      // : Utility.getFormatedyearMonthDay(json['requested_at']),
       requestedBy: json['requested_by'],
-      completedAt: Utility.getFormatedyearMonthDay(json['completed_at']),
+      completedAt: json['completed_at'],
+      //     ? ""
+      //     : Utility.getFormatedyearMonthDay(json['completed_at']),
       completedBy: json['completed_by'],
-      closedAt: Utility.getFormatedyearMonthDay(json['closed_at']),
+      closedAt: json['closed_at'],
+      //     ? ""
+      //     : Utility.getFormatedyearMonthDay(json['closed_at']),
       closedBy: json['closed_by'],
       assetId: json['asset_id'],
       assetName: json['asset_name'],

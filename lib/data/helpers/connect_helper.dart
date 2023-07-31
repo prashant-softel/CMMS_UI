@@ -2180,7 +2180,7 @@ class ConnectHelper {
     int? facilityId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/GetCalibrationList?facility_id=46',
+      'Calibration/GetCalibrationList?facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? true,
