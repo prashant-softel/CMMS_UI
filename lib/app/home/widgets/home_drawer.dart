@@ -13,7 +13,7 @@ class HomeDrawer extends GetView<HomeController> {
     return
         //
         Obx(() => Drawer(
-              width: controller.isExpanded.value ? 300 : 50,
+              width: controller.isExpanded.value ? 300 : 60,
 
               // Get.width * 0.19
               // : 50, // Get.width * 0.35,
@@ -53,7 +53,7 @@ class HomeDrawer extends GetView<HomeController> {
                                       onExit: (_) {
                                         controller.toggleExpansion();
                                       },
-                                      child: ListView(
+                                      child: Column(
                                           //
                                           //shrinkWrap: true,
                                           children: [
@@ -254,25 +254,38 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListTile(
-          onTap: press,
-          horizontalTitleGap: 0.0,
-          leading: Image.asset(
-            icon,
-            height: 15,
-            color: Color(0xffD2D0D0),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Container(
+          child: Column(
+        children: [
+          Dimens.boxHeight15,
+          GestureDetector(
+            onTap: press,
+            child: Row(
+              children: [
+                Image.asset(
+                  icon,
+                  height: 15,
+                  color: Color(0xffD2D0D0),
+                ),
+                Dimens.boxWidth15,
+                isexpand!
+                    ? Text(
+                        title ?? "",
+                        style: TextStyle(
+                          color: Color(0xffD2D0D0),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    : Dimens.box0
+              ],
+            ),
           ),
-          title: isexpand!
-              ? Text(
-                  title ?? "",
-                  style: TextStyle(
-                    color: Color(0xffD2D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              : Container()),
+          Dimens.boxHeight10
+        ],
+      )),
     );
   }
 }
