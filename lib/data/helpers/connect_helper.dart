@@ -526,6 +526,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+  ///Module Cleaning Task List
+   Future<ResponseModel> getMCTaskList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+   
+  }) async {
+    // var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    // var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCTaskList?facility_id=$facility_id', 
+          // startDateParam +
+          // endDateParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getBlockList({
     required bool isLoading,
     required String facilityId,

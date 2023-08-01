@@ -301,65 +301,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                               id: int.tryParse('${record[0]}'));
                                                                         },
                                                                         child:
-                                                                            // value.runtimeType
-                                                                            //             .toString() ==
-                                                                            //         'AssetName'
-                                                                            //     ? Builder(builder: (context) {
-                                                                            //         final val =
-                                                                            //             value as AssetName;
-                                                                            //         return Column(
-                                                                            //           children: [
-                                                                            //             Align(
-                                                                            //               alignment: Alignment
-                                                                            //                   .centerLeft,
-                                                                            //               child: Padding(
-                                                                            //                 padding: Dimens
-                                                                            //                     .edgeInsets8,
-                                                                            //                 child: Text(
-                                                                            //                     '${val.name}'),
-                                                                            //               ),
-                                                                            //             ),
-                                                                            //             Spacer(),
-                                                                            //             Align(
-                                                                            //               alignment: Alignment
-                                                                            //                   .centerRight,
-                                                                            //               child: Container(
-                                                                            //                 padding: Dimens
-                                                                            //                     .edgeInsets8_2_8_2,
-                                                                            //                 decoration:
-                                                                            //                     BoxDecoration(
-                                                                            //                   // color: val.requirementStatus ==
-                                                                            //                   //         1
-                                                                            //                   //     ? Colors.red
-                                                                            //                   //     : Colors
-                                                                            //                   //         .green,
-                                                                            //                   borderRadius:
-                                                                            //                       BorderRadius
-                                                                            //                           .circular(
-                                                                            //                               4),
-                                                                            //                 ),
-                                                                            //                 child: Text(
-                                                                            //                   // val.name == 1
-                                                                            //                   //     ? 'requirementRejected'
-                                                                            //                   //         .tr
-                                                                            //                   //     : 'requirementAccepted'
-                                                                            //                   //         .tr,
-                                                                            //                   // style: Styles
-                                                                            //                   //     .white10
-                                                                            //                   //     .copyWith(
-                                                                            //                   //   color: Colors
-                                                                            //                   //       .white,
-                                                                            //                   // ),
-                                                                            //                   '',
-
-                                                                            //                 ),
-                                                                            //               ),
-                                                                            //             ),
-                                                                            //             Dimens.boxHeight10,
-                                                                            //           ],
-                                                                            //         );
-                                                                            //       })
-                                                                            //     :
+                                                                          
                                                                             value == 'Actions'
                                                                                 ? Wrap(
                                                                                     children: [

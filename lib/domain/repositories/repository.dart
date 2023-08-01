@@ -36,6 +36,7 @@ import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
+import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
@@ -1738,6 +1739,39 @@ class Repository {
       return [];
     }
   }
+
+
+  
+  ///Module Cleaning Task List
+  Future<List<MCTaskListModel>> getMCTaskList({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getMCTaskList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('MCTaskList: ${res.data}');
+
+      if (!res.hasError) {
+        var mcTaskList = mcTaskListModelFromJson(res.data);
+        return mcTaskList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getMCTaskList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
 
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
