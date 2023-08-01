@@ -13,7 +13,7 @@ class HomeDrawer extends GetView<HomeController> {
     return
         //
         Obx(() => Drawer(
-              width: controller.isExpanded.value ? 300 : 60,
+              width: controller.isExpanded.value ? 250 : 50,
 
               // Get.width * 0.19
               // : 50, // Get.width * 0.35,
@@ -266,7 +266,7 @@ class MenuItem extends StatelessWidget {
               children: [
                 Image.asset(
                   icon,
-                  height: 15,
+                  height: 13,
                   color: Color(0xffD2D0D0),
                 ),
                 Dimens.boxWidth15,
@@ -275,7 +275,7 @@ class MenuItem extends StatelessWidget {
                         title ?? "",
                         style: TextStyle(
                           color: Color(0xffD2D0D0),
-                          fontSize: 15,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
                       )
