@@ -47,9 +47,9 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                   onTap: () {
                     Get.back();
                   },
-                  child: Text(" / Assets", style: Styles.greyMediumLight12),
+                  child: Text(" / ASSETS", style: Styles.greyMediumLight12),
                 ),
-                Text(" / Assets LIST", style: Styles.greyMediumLight12),
+                Text(" / ASSETS LIST", style: Styles.greyMediumLight12),
                 Spacer(),
                 ActionButton(
                   icon: Icons.download,
@@ -61,7 +61,9 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                 ActionButton(
                   icon: Icons.upload,
                   label: 'importAsset'.tr,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.importInventory, arguments: 1);
+                  },
                   color: ColorValues.appDarkBlueColor,
                 ),
                 Dimens.boxWidth10,
