@@ -41,6 +41,7 @@ class EditJobController extends GetxController {
   Rx<String> selectedFacilityName = ''.obs;
   Rx<bool> isFacilitySelected = true.obs;
   int selectedFacilityId = 0;
+  int workTypeIds = 0;
 
   //
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
@@ -105,6 +106,7 @@ class EditJobController extends GetxController {
   HtmlEscape htmlEscape = HtmlEscape();
 
   StreamSubscription<int>? facilityIdStreamSubscription;
+  String lststrWorkTypeIds = "";
 
   ///
   @override
@@ -128,6 +130,7 @@ class EditJobController extends GetxController {
         );
         await getWorkTypeList();
         await getAssignedToList();
+        //  await getToolsRequiredToWorkTypeList(workTypeIds.toString());
       });
     } catch (e) {
       print(e);
@@ -229,6 +232,8 @@ class EditJobController extends GetxController {
       isLoading: true,
       workTypeIds: workTypeIds,
     );
+    print('paifcghb:${list}');
+
     toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
     update(['toolsRequiredToWorkTypeList']);
   }
@@ -466,6 +471,7 @@ class EditJobController extends GetxController {
     }
   }
 
+  bool openbreaketimeDatePicker = false;
   void onDropdownValueChanged(list, value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
@@ -518,6 +524,17 @@ class EditJobController extends GetxController {
     }
     getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
     getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList);
+  }
+
+  void toolsRequiredSelected(_selectedtoolsRequiredToWorkTypeId) {
+    selectedtoolsRequiredToWorkTypeIdList.value = <int>[];
+    for (var _selectedtoolsRequiredToWorkType
+        in _selectedtoolsRequiredToWorkTypeId) {
+      selectedtoolsRequiredToWorkTypeIdList
+          .add(_selectedtoolsRequiredToWorkType);
+    }
+    // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
+    // getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList);
   }
 
   void workAreasSelected(_selectedWorkAreaIdsList) {
