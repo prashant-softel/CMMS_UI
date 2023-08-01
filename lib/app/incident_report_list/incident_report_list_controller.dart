@@ -28,16 +28,7 @@ class IncidentReportListController extends GetxController {
 
   bool openFromDateToStartDatePicker = false;
 
-  final TextEditingController supplierActionTextFieldController =
-      TextEditingController();
-  final TextEditingController supplierActionSrNumberTextFieldController =
-      TextEditingController();
-
-  final TextEditingController serialNoTextFieldController =
-      TextEditingController();
-  final TextEditingController nameTextFieldController = TextEditingController();
-  final TextEditingController emailTextFieldController =
-      TextEditingController();
+  
 
   ///Failure Date Time For Web
   var failureDateTimeCtrlrWeb = TextEditingController();
