@@ -66,7 +66,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                         child: Text(" / BREAKDOWN MAINTENANCE",
                             style: Styles.greyMediumLight12),
                       ),
-                      Text(" / ADD NEW JOB", style: Styles.greyMediumLight12)
+                      Text(" / REASSIGN JOB", style: Styles.greyMediumLight12)
                     ],
                   ),
                 ),
@@ -89,7 +89,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                   children: [
                                     Spacer(),
                                     Text(
-                                      "Add NEW JOB",
+                                      "REASSIGN JOB",
                                       style: Styles.blackBold16,
                                     ),
                                     // ActionButton(
