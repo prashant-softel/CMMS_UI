@@ -69,7 +69,7 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
-                                              title: "Inventory",
+                                              title: "Assets",
                                               icon: "assets/files/warranty.png",
                                               press: () {
                                                 Get.offNamed(Routes.inventory);
@@ -125,7 +125,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon:
                                                   "assets/files/maintenance.png",
                                               press: () {
-                                                Get.offNamed(Routes.home);
+                                                Get.offNamed(Routes
+                                                    .moduleCleaningDashboard);
                                               },
                                             ),
                                             MenuItem(
