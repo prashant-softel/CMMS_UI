@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import '../../../domain/models/get_return_mrs_list.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -74,190 +75,189 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                   ),
                 ),
                 Stack(children: [
-                  Flexible(
-                    child: Container(
-                      width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 30),
-                      height: Get.height,
-                      child: Card(
-                        color: Color.fromARGB(255, 245, 248, 250),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Return Material Requsition Slip",
-                                    style: Styles.blackBold16,
-                                  ),
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                      CustomRichText(title: 'Date Range'),
-                                      Dimens.boxWidth10,
-                                      CustomTextFieldForStock(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        numberTextField: true,
-                                        onTap: () {
-                                          controller
-                                                  .openFromDateToStartDatePicker =
-                                              !controller
-                                                  .openFromDateToStartDatePicker;
-                                          controller
-                                              .update(['stock_Mangement_Date']);
-                                        },
-                                        hintText:
-                                            '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
-                                      ),
-                                    ],
-                                  ),
-                                  Dimens.boxWidth15,
-                                  ActionButton(
-                                    icon: Icons.add,
-                                    label: "Add New",
-                                    onPressed: () {
-                                      Get.toNamed(Routes.createMrs);
-                                    },
-                                    color: ColorValues.addNewColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
-                            Row(
+                  Container(
+                    width: Get.width * 7,
+                    margin: EdgeInsets.only(left: 10, top: 30),
+                    height: Get.height,
+                    child: Card(
+                      color: Color.fromARGB(255, 245, 248, 250),
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Copy'),
-                                ),
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Excel'),
-                                ),
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'PDF'),
-                                ),
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () {},
-                                    text: 'columnVisibility'.tr,
-                                  ),
+                                Text(
+                                  "Return Material Requsition Slip",
+                                  style: Styles.blackBold16,
                                 ),
                                 Spacer(),
-                                Container(
-                                  width: 200,
-                                  height: 35,
-                                  margin: Dimens.edgeInsets0_0_16_0,
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.grey, width: 0.0),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.grey, width: 0.0),
-                                      ),
-                                      contentPadding: Dimens.edgeInsets10_0_0_0,
-                                      hintText: 'search'.tr,
-                                      hintStyle: Styles.grey12,
-                                    ),
-                                  ),
+                                // Row(
+                                //   children: [
+                                //     CustomRichText(title: 'Date Range'),
+                                //     Dimens.boxWidth10,
+                                //     CustomTextFieldForStock(
+                                //       width:
+                                //           MediaQuery.of(context).size.width / 5,
+                                //       numberTextField: true,
+                                //       onTap: () {
+                                //         controller
+                                //                 .openFromDateToStartDatePicker =
+                                //             !controller
+                                //                 .openFromDateToStartDatePicker;
+                                //         controller
+                                //             .update(['stock_Mangement_Date']);
+                                //       },
+                                //       hintText:
+                                //           '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                //     ),
+                                //   ],
+                                // ),
+                                // Dimens.boxWidth15,
+                                ActionButton(
+                                  icon: Icons.add,
+                                  label: "Add New",
+                                  onPressed: () {
+                                    Get.toNamed(Routes.mrsReturnScreen);
+                                  },
+                                  color: ColorValues.addNewColor,
                                 ),
                               ],
                             ),
-                            Expanded(
-                              child: Container(
-                                margin: Dimens.edgeInsets15,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
+                          ),
+                          Divider(
+                            color: ColorValues.greyLightColour,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                height: 35,
+                                margin: EdgeInsets.only(left: 10),
+                                child: CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () {},
+                                    text: 'Copy'),
+                              ),
+                              Container(
+                                height: 35,
+                                margin: EdgeInsets.only(left: 10),
+                                child: CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () {},
+                                    text: 'Excel'),
+                              ),
+                              Container(
+                                height: 35,
+                                margin: EdgeInsets.only(left: 10),
+                                child: CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () {},
+                                    text: 'PDF'),
+                              ),
+                              Container(
+                                height: 35,
+                                margin: EdgeInsets.only(left: 10),
+                                child: CustomElevatedButton(
+                                  backgroundColor:
+                                      ColorValues.appLightBlueColor,
+                                  onPressed: () {},
+                                  text: 'columnVisibility'.tr,
                                 ),
-                                child: controller.mrsList!.isEmpty
-                                    ? Expanded(
-                                        child: ScrollableTableView(
-                                          columns: [
-                                            "MRS ID",
-                                            "MRS Details",
-                                            "Order Date",
-                                            "Activity",
-                                            "Where Used",
-                                            "Action",
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.16,
-                                            );
-                                          }).toList(),
-                                          rows: [
-                                            ...List.generate(
-                                              controller.mrsList!.length,
-                                              (index) {
-                                                return [
-                                                  "",
-                                                  '',
-                                                  '',
-                                                  '',
-                                                  '',
-                                                  '',
-                                                ];
-                                              },
-                                            ),
-                                          ].map((record) {
-                                            return TableViewRow(
-                                              height: 80,
-                                              cells: record.map((value) {
-                                                return TableViewCell(
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            );
-                                          }).toList(),
+                              ),
+                              Spacer(),
+                              Container(
+                                width: 200,
+                                height: 35,
+                                margin: Dimens.edgeInsets0_0_16_0,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    contentPadding: Dimens.edgeInsets10_0_0_0,
+                                    hintText: 'search'.tr,
+                                    hintStyle: Styles.grey12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          controller.mrsList!.isEmpty
+                              ? Expanded(
+                                  child: ScrollableTableView(
+                                    columns: [
+                                      "MRS ID",
+                                      "MRS Details",
+                                      "Order Date",
+                                      "Activity",
+                                      "Where Used",
+                                      "Action",
+                                    ].map((column) {
+                                      return TableViewColumn(
+                                        label: column,
+                                        minWidth: Get.width * 0.16,
+                                      );
+                                    }).toList(),
+                                    rows: [
+                                      ...List.generate(
+                                        controller.mrsList!.length,
+                                        (index) {
+                                          return [
+                                            "",
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                          ];
+                                        },
+                                      ),
+                                    ].map((record) {
+                                      return TableViewRow(
+                                        height: 80,
+                                        cells: record.map((value) {
+                                          return TableViewCell(
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+                                  ),
+                                )
+                              : Expanded(
+                                  child: Container(
+                                    margin: Dimens.edgeInsets15,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
                                         ),
-                                      )
-                                    : ScrollableTableView(
+                                      ],
+                                    ),
+                                    child: ScrollableTableView(
                                         paginationController:
                                             controller.paginationController,
                                         columns: [
@@ -297,7 +297,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                             .mrsList!
                                                                             .firstWhere(
                                                                               (e) => e?.id == mrsListDetails!.id,
-                                                                              orElse: () => MrsListModel(id: 00),
+                                                                              orElse: () => ReturnMrsListModel(id: 00),
                                                                             )
                                                                             ?.status ==
                                                                         322
@@ -307,7 +307,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                                 .mrsList!
                                                                                 .firstWhere(
                                                                                   (e) => e?.id == mrsListDetails!.id,
-                                                                                  orElse: () => MrsListModel(id: 00),
+                                                                                  orElse: () => ReturnMrsListModel(id: 00),
                                                                                 )
                                                                                 ?.status ==
                                                                             321
@@ -316,7 +316,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                         : controller.mrsList!
                                                                                     .firstWhere(
                                                                                       (e) => e?.id == mrsListDetails!.id,
-                                                                                      orElse: () => MrsListModel(id: 00),
+                                                                                      orElse: () => ReturnMrsListModel(id: 00),
                                                                                     )
                                                                                     ?.status ==
                                                                                 323
@@ -324,7 +324,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                             : controller.mrsList!
                                                                                         .firstWhere(
                                                                                           (e) => e?.id == mrsListDetails!.id,
-                                                                                          orElse: () => MrsListModel(id: 00),
+                                                                                          orElse: () => ReturnMrsListModel(id: 00),
                                                                                         )
                                                                                         ?.status ==
                                                                                     324
@@ -332,7 +332,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                                 : controller.mrsList!
                                                                                             .firstWhere(
                                                                                               (e) => e?.id == mrsListDetails!.id,
-                                                                                              orElse: () => MrsListModel(id: 00),
+                                                                                              orElse: () => ReturnMrsListModel(id: 00),
                                                                                             )
                                                                                             ?.status ==
                                                                                         326
@@ -340,7 +340,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                                     : controller.mrsList!
                                                                                                 .firstWhere(
                                                                                                   (e) => e?.id == mrsListDetails!.id,
-                                                                                                  orElse: () => MrsListModel(id: 00),
+                                                                                                  orElse: () => ReturnMrsListModel(id: 00),
                                                                                                 )
                                                                                                 ?.status ==
                                                                                             325
@@ -577,121 +577,112 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                       ]))
                                                     ]))
                                             .toList()),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: ValueListenableBuilder(
-                                  valueListenable:
-                                      controller.paginationController,
-                                  builder: (context, value, child) {
-                                    return Row(children: [
-                                      Text(
-                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                      Row(children: [
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
+                                  ),
+                                ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: ValueListenableBuilder(
+                                valueListenable:
+                                    controller.paginationController,
+                                builder: (context, value, child) {
+                                  return Row(children: [
+                                    Text(
+                                        "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                    Row(children: [
+                                      IconButton(
+                                        onPressed: controller
+                                                    .paginationController
+                                                    .currentPage <=
+                                                1
+                                            ? null
+                                            : () {
+                                                controller.paginationController
+                                                    .previous();
+                                              },
+                                        iconSize: 20,
+                                        splashRadius: 20,
+                                        icon: Icon(
+                                          Icons.arrow_back_ios_new_rounded,
+                                          color: controller.paginationController
                                                       .currentPage <=
                                                   1
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .previous();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
+                                              ? Colors.black26
+                                              : Theme.of(context).primaryColor,
                                         ),
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
+                                      ),
+                                      IconButton(
+                                        onPressed: controller
+                                                    .paginationController
+                                                    .currentPage >=
+                                                controller.paginationController
+                                                    .pageCount
+                                            ? null
+                                            : () {
+                                                controller.paginationController
+                                                    .next();
+                                              },
+                                        iconSize: 20,
+                                        splashRadius: 20,
+                                        icon: Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          color: controller.paginationController
                                                       .currentPage >=
                                                   controller
                                                       .paginationController
                                                       .pageCount
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .next();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
+                                              ? Colors.black26
+                                              : Theme.of(context).primaryColor,
                                         ),
-                                      ]),
-                                    ]);
-                                  }),
-                            ),
-                          ],
-                        ),
+                                      ),
+                                    ]),
+                                  ]);
+                                }),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  if (controller.openFromDateToStartDatePicker)
-                    Positioned(
-                      right: 150,
-                      top: 85,
-                      child: DatePickerWidget(
-                        selectionMode: DateRangePickerSelectionMode.range,
-                        monthCellStyle: DateRangePickerMonthCellStyle(
-                          todayCellDecoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ColorValues.appDarkBlueColor),
-                        ), // last date of this year
-                        // controller: DateRangePickerController(),
-                        initialSelectedRange: PickerDateRange(
-                          controller.fromDate.value,
-                          controller.toDate.value,
-                        ),
+                  // if (controller.openFromDateToStartDatePicker)
+                  //   Positioned(
+                  //     right: 150,
+                  //     top: 85,
+                  //     child: DatePickerWidget(
+                  //       selectionMode: DateRangePickerSelectionMode.range,
+                  //       monthCellStyle: DateRangePickerMonthCellStyle(
+                  //         todayCellDecoration: BoxDecoration(
+                  //             shape: BoxShape.circle,
+                  //             color: ColorValues.appDarkBlueColor),
+                  //       ), // last date of this year
+                  //       // controller: DateRangePickerController(),
+                  //       initialSelectedRange: PickerDateRange(
+                  //         controller.fromDate.value,
+                  //         controller.toDate.value,
+                  //       ),
 
-                        onSubmit: (value) {
-                          print('po valu ${value.toString()}');
-                          PickerDateRange? data = value as PickerDateRange;
+                  //       onSubmit: (value) {
+                  //         print('po valu ${value.toString()}');
+                  //         PickerDateRange? data = value as PickerDateRange;
 
-                          var pickUpDate =
-                              DateTime.parse(data.startDate.toString());
-                          controller.fromDate.value = pickUpDate;
-                          var dropDate =
-                              DateTime.parse(data.endDate.toString());
-                          dropDate != null
-                              ? controller.toDate.value = dropDate
-                              : controller.toDate.value = pickUpDate;
+                  //         var pickUpDate =
+                  //             DateTime.parse(data.startDate.toString());
+                  //         controller.fromDate.value = pickUpDate;
+                  //         var dropDate =
+                  //             DateTime.parse(data.endDate.toString());
+                  //         dropDate != null
+                  //             ? controller.toDate.value = dropDate
+                  //             : controller.toDate.value = pickUpDate;
 
-                          controller.getMrsListByDate();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
-                          controller.update(['stock_Mangement_Date']);
+                  //         controller.getMrsListByDate();
+                  //         controller.openFromDateToStartDatePicker =
+                  //             !controller.openFromDateToStartDatePicker;
+                  //         controller.update(['stock_Mangement_Date']);
 
-                          // Get.toNamed(
-                          //   Routes.stockManagementGoodsOrdersScreen,
-                          // );
-                        },
-                      ),
-                    ),
+                  //         // Get.toNamed(
+                  //         //   Routes.stockManagementGoodsOrdersScreen,
+                  //         // );
+                  //       },
+                  //     ),
+                  //   ),
                 ]),
               ])));
         });

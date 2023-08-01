@@ -2596,5 +2596,15 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getReturnMrsList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          int? userId}) async =>
+      await connectHelper.getReturnMrsList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          userId: userId);
 //end
 }
