@@ -49,10 +49,10 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / INVENTORY",
-                              style: Styles.greyMediumLight12),
+                          child:
+                              Text(" / ASSET", style: Styles.greyMediumLight12),
                         ),
-                        Text(" / IMPORT INVENTORY",
+                        Text(" / IMPORT ASSET",
                             style: Styles.greyMediumLight12),
                       ],
                     )
