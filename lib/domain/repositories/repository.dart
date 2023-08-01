@@ -26,6 +26,7 @@ import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/get_return_mrs_list.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -6234,6 +6235,39 @@ class Repository {
     } catch (error) {
       log(error.toString());
       return false;
+    }
+  }
+
+  Future<List<ReturnMrsListModel?>?> getReturnMrsList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+      final res = await _dataRepository.getReturnMrsList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          userId: userId);
+
+      if (!res.hasError) {
+        final jsonReturnMrsListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<ReturnMrsListModel> _ReturnMrsListModelList =
+            jsonReturnMrsListModelModels
+                .map<ReturnMrsListModel>((m) =>
+                    ReturnMrsListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _ReturnMrsListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getMrsList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
   //end

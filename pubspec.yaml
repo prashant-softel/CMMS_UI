@@ -112,7 +112,8 @@ dependencies:
   easy_sidemenu: ^0.4.1+1
   flutter_dropzone: ^3.0.5
   http_parser: ^4.0.2
-  data_table_2: ^2.4.1
+  # data_table_2: ^2.4.1
+  # data_table_2: ^2.5.6
   rxdart: ^0.27.7
   filesize: ^2.0.1
   synchronized: ^3.0.1
@@ -120,6 +121,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^19.1.55-beta
   html_unescape: ^2.0.0
   pdf: ^3.8.4
+  data_table_2: ^2.4.2
 
 
 dev_dependencies:

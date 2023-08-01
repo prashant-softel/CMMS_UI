@@ -4124,4 +4124,24 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getReturnMrsList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      int? userId}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=$userId',
+      //  'MRS/getMRSList?facility_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
 }

@@ -69,7 +69,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                         child: Row(
                           children: [
                             Text(
-                              "Material Requisition Slip View ",
+                              "Return Material Requisition Slip View ",
                               style: Styles.blackBold16,
                             ),
                             Spacer(),
@@ -121,12 +121,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                 ),
                                 Dimens.boxHeight10,
                                 Text(
-                                  'Approved By: ',
-                                  style: Styles.black17,
-                                ),
-                                Dimens.boxHeight10,
-                                Text(
-                                  'Issued By: ',
+                                  'Return Approved By: ',
                                   style: Styles.black17,
                                 ),
                               ],
@@ -144,12 +139,6 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                 Text(
                                     controller
                                             .mrsDetailsModel.value?.activity ??
-                                        "",
-                                    style: Styles.blue17),
-                                Dimens.boxHeight10,
-                                Text(
-                                    controller.mrsDetailsModel.value
-                                            ?.approver_name ??
                                         "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
@@ -178,11 +167,6 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                   'Approved Date Time: ',
                                   style: Styles.black17,
                                 ),
-                                Dimens.boxHeight10,
-                                Text(
-                                  'Issued Date time: ',
-                                  style: Styles.black17,
-                                ),
                               ],
                             ),
                             Dimens.boxWidth20,
@@ -197,12 +181,6 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(controller.whereUsedType,
-                                    style: Styles.blue17),
-                                Dimens.boxHeight10,
-                                Text(
-                                    controller.mrsDetailsModel.value
-                                            ?.approval_date ??
-                                        "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
@@ -253,10 +231,9 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                 columns: [
                                   "Equipment Name",
                                   "Asset Type",
-                                  // "Image",
-                                  "Requested Qty.",
-                                  "Approved Qty.",
-                                  "issued Qyt."
+                                  "Serial Number",
+                                  "Available Qyt.",
+                                  "Return Qty.",
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
@@ -297,90 +274,91 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                           ],
                         ),
                       ),
-                      Container(
-                        height: 300,
-                        margin: Dimens.edgeInsets20,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorValues.lightGreyColorWithOpacity35,
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorValues.appBlueBackgroundColor,
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "MRS History",
-                                    style: Styles.blue700,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
-                            Expanded(
-                              child: ScrollableTableView(
-                                columns: [
-                                  "Time Stamp",
-                                  "Posted By",
-                                  "Comment",
-                                  "Location",
-                                  "Status",
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.15,
-                                  );
-                                }).toList(),
-                                rows: [
-                                  [
-                                    "2023-09-08",
-                                    "Sujit Kumar",
-                                    "Check Approval",
-                                    "--",
-                                    "Approve",
-                                  ],
-                                  [
-                                    "2023-09-08",
-                                    "Sujit Kumar",
-                                    "Check Approval",
-                                    "--",
-                                    "Approve",
-                                  ],
-                                  [
-                                    "2023-09-08",
-                                    "Sujit Kumar",
-                                    "Check Approval",
-                                    "--",
-                                    "Approve",
-                                  ],
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 90,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   height: 300,
+                      //   margin: Dimens.edgeInsets20,
+                      //   decoration: BoxDecoration(
+                      //     border: Border.all(
+                      //       color: ColorValues.lightGreyColorWithOpacity35,
+                      //       width: 1,
+                      //     ),
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: ColorValues.appBlueBackgroundColor,
+                      //         spreadRadius: 2,
+                      //         blurRadius: 5,
+                      //         offset: Offset(0, 2),
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   child: Column(
+                      //     children: [
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(10.0),
+                      //         child: Row(
+                      //           children: [
+                      //             Text(
+                      //               "MRS History",
+                      //               style: Styles.blue700,
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //       Divider(
+                      //         color: ColorValues.greyLightColour,
+                      //       ),
+                      //       Expanded(
+                      //         child: ScrollableTableView(
+                      //           columns: [
+                      //             "Time Stamp",
+                      //             "Posted By",
+                      //             "Comment",
+                      //             "Location",
+                      //             "Status",
+                      //           ].map((column) {
+                      //             return TableViewColumn(
+                      //               label: column,
+                      //               minWidth: Get.width * 0.15,
+                      //             );
+                      //           }).toList(),
+                      //           rows: [
+                      //             [
+                      //               "2023-09-08",
+                      //               "Sujit Kumar",
+                      //               "Check Approval",
+                      //               "--",
+                      //               "Approve",
+                      //             ],
+                      //             [
+                      //               "2023-09-08",
+                      //               "Sujit Kumar",
+                      //               "Check Approval",
+                      //               "--",
+                      //               "Approve",
+                      //             ],
+                      //             [
+                      //               "2023-09-08",
+                      //               "Sujit Kumar",
+                      //               "Check Approval",
+                      //               "--",
+                      //               "Approve",
+                      //             ],
+                      //           ].map((record) {
+                      //             return TableViewRow(
+                      //               height: 90,
+                      //               cells: record.map((value) {
+                      //                 return TableViewCell(
+                      //                   child: Text(value),
+                      //                 );
+                      //               }).toList(),
+                      //             );
+                      //           }).toList(),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+
                       Dimens.boxHeight25,
                       Container(
                         margin: EdgeInsets.only(bottom: 30, top: 20),
