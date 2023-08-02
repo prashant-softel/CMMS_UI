@@ -1,21 +1,22 @@
-import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
-import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_web.dart';
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
-import '../../utils/responsive.dart';
 
-class ModuleCleaningListExecutionScreen
-    extends GetView<ModuleCleaningListExecutionController> {
-  ModuleCleaningListExecutionScreen({super.key});
+import 'view/web/add_module_cleaning_execution_content_web.dart';
 
-  ///
+
+class AddModuleCleaningExecutionScreen extends GetView<AddModuleCleaningExecutionController> {
+  AddModuleCleaningExecutionScreen({Key? key});
+  // final HomeController controller = Get.find();
+  
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) //
+  {
+    return //
+        Scaffold(
+           appBar: Responsive.isDesktop(context)
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
@@ -27,7 +28,8 @@ class ModuleCleaningListExecutionScreen
               centerTitle: true,
               elevation: 0,
             ),
-      body: Container(
+      body:      
+          Container(
           width: Get.width,
           height: Get.height,
           child: Row(
@@ -40,7 +42,7 @@ class ModuleCleaningListExecutionScreen
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: ModuleCleaningListExecution(),
+                        child: AddModuleCleaningExecutionContentWeb(),
                       )
                   ],
                 ),
@@ -48,5 +50,7 @@ class ModuleCleaningListExecutionScreen
             ],
           )),
     );
+
+    ///
   }
 }
