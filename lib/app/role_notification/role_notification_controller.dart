@@ -92,7 +92,7 @@ class RoleNotificationController extends GetxController {
     notificationList.forEach((e) {
       notification_list.add(SaveRoleNotificationList(
         notification_id: e?.notification_id.value ?? 0,
-        flag: e?.user_flag.value ?? 0,
+        flag: e?.default_flag.value ?? 0,
         can_change: e?.can_change.value ?? 0,
       ));
     });
