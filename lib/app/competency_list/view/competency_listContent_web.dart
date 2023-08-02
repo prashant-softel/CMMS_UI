@@ -56,7 +56,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                     },
                     child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE COMPETENCY", style: Styles.greyMediumLight12)
+                  Text(" / COMPETENCY LIST", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -303,7 +303,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Competency",
+                                      "Competency List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),
@@ -452,13 +452,14 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                          alignment: WrapAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -481,7 +482,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:
