@@ -885,7 +885,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                           TableActionButton(
                                                                                                             color: Colors.red,
                                                                                                             icon: Icons.delete_outline,
-                                                                                                            label: 'Delete',
+                                                                                                            message: 'Delete',
                                                                                                             onPress: () {
                                                                                                               // controller.showNewPermitListDetails(
                                                                                                               //     controller.permitId.value);
@@ -1239,7 +1239,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                               TableActionButton(
                                                                                                                 color: Colors.red,
                                                                                                                 icon: Icons.delete_outline,
-                                                                                                                label: 'Delete',
+                                                                                                                message: 'Delete',
                                                                                                                 onPress: () {
                                                                                                                   // controller.showNewPermitListDetails(
                                                                                                                   //     controller.permitId.value);
@@ -1504,7 +1504,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                               TableActionButton(
                                                                                                                 color: Colors.red,
                                                                                                                 icon: Icons.delete_outline,
-                                                                                                                label: 'Delete',
+                                                                                                                message: 'Delete',
                                                                                                                 onPress: () {
                                                                                                                   // controller.showNewPermitListDetails(
                                                                                                                   //     controller.permitId.value);

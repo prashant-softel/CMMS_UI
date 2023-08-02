@@ -625,7 +625,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                           TableActionButton(
                                                                                                             color: Colors.red,
                                                                                                             icon: Icons.delete_outline,
-                                                                                                            label: 'Delete',
+                                                                                                            message: 'Delete',
                                                                                                             onPress: () {
                                                                                                               // controller.showNewPermitListDetails(
                                                                                                               //     controller.permitId.value);
@@ -986,7 +986,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                             TableActionButton(
                                                                                               color: Colors.red,
                                                                                               icon: Icons.delete_outline,
-                                                                                              label: 'Remove',
+                                                                                              message: 'Remove',
                                                                                               onPress: () {
                                                                                                 // controller.showNewPermitListDetails(
                                                                                                 //     controller.permitId.value);
@@ -2099,7 +2099,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                 TableActionButton(
                                                                                                                   color: Colors.red,
                                                                                                                   icon: Icons.delete_outline,
-                                                                                                                  label: 'Remove',
+                                                                                                                  message: 'Remove',
                                                                                                                   onPress: () {
                                                                                                                     // controller.showNewPermitListDetails(
                                                                                                                     //     controller.permitId.value);
@@ -2216,7 +2216,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                 TableActionButton(
                                                                                                                   color: Colors.red,
                                                                                                                   icon: Icons.delete_outline,
-                                                                                                                  label: 'Remove',
+                                                                                                                  message: 'Remove',
                                                                                                                   onPress: () {
                                                                                                                     // controller.showNewPermitListDetails(
                                                                                                                     //     controller.permitId.value);
@@ -2568,7 +2568,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                 TableActionButton(
                                                                                                                   color: Colors.red,
                                                                                                                   icon: Icons.delete_outline,
-                                                                                                                  label: 'Remove',
+                                                                                                                  message: 'Remove',
                                                                                                                   onPress: () {
                                                                                                                     // controller.showNewPermitListDetails(
                                                                                                                     //     controller.permitId.value);
@@ -2816,7 +2816,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                               TableActionButton(
                                                                                                                 color: Colors.red,
                                                                                                                 icon: Icons.delete_outline,
-                                                                                                                label: 'Remove',
+                                                                                                                message: 'Remove',
                                                                                                                 onPress: () {
                                                                                                                   // controller.showNewPermitListDetails(
                                                                                                                   //     controller.permitId.value);
@@ -3777,7 +3777,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-        height: MediaQuery.of(context).size.height*0.050,
+          height: MediaQuery.of(context).size.height * 0.050,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -3964,7 +3964,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //     ),
       //   ),
       // ),
-      
+
       Padding(
         padding: const EdgeInsets.only(left: 1),
         child: Container(
@@ -4060,11 +4060,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //     ),
       //   ),
       // ),
-      
+
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-          height: MediaQuery.of(context).size.height*0.050,
+          height: MediaQuery.of(context).size.height * 0.050,
           width: Responsive.isDesktop(context)
               ? MediaQuery.of(context).size.width / 1.46
               : MediaQuery.of(context).size.width / 1.1,
@@ -4133,7 +4133,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
           ),
         ),
       ),
-      
     ]);
   }
 
@@ -4158,11 +4157,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //     ),
       //   ),
       // ),
-      
+
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-          height: MediaQuery.of(context).size.height*0.050,
+          height: MediaQuery.of(context).size.height * 0.050,
           width: Responsive.isDesktop(context)
               ? MediaQuery.of(context).size.width / 1.46
               : MediaQuery.of(context).size.width / 1.1,

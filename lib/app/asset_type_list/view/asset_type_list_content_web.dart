@@ -457,7 +457,7 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                                                                     .appLightBlueColor,
                                                                 icon:
                                                                     Icons.edit,
-                                                                label: 'Edit',
+                                                                message: 'Edit',
                                                                 onPress: () {},
                                                               ),
                                                               // : Container(),
@@ -470,7 +470,8 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                                                                     .appRedColor,
                                                                 icon: Icons
                                                                     .delete,
-                                                                label: 'Delete',
+                                                                message:
+                                                                    'Delete',
                                                                 onPress: () {},
                                                               )
                                                               // : Container()

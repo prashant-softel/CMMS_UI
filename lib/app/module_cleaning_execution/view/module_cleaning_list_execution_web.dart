@@ -276,6 +276,7 @@ class ModuleCleaningListExecution
                                                         .appDarkBlueColor,
                                                     icon: Icons
                                                         .remove_red_eye_outlined,
+                                                    message: 'View',
                                                     onPress: () {
                                                       //   Get.toNamed(Routes
                                                       // .calibrationViewScreen);
@@ -285,6 +286,7 @@ class ModuleCleaningListExecution
                                                     color: ColorValues
                                                         .appYellowColor,
                                                     icon: Icons.edit,
+                                                    message: 'Edit',
                                                     onPress: () {
                                                       // controller
                                                       //     .editIncidentReport(

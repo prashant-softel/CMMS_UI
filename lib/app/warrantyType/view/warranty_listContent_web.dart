@@ -402,7 +402,7 @@ class WarrantyListContentWeb extends GetView<WarrantyListController> {
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -441,7 +441,7 @@ class WarrantyListContentWeb extends GetView<WarrantyListController> {
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

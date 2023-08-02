@@ -700,7 +700,7 @@ class CountryListContentWeb extends GetView<CountryListController> {
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -740,7 +740,7 @@ class CountryListContentWeb extends GetView<CountryListController> {
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {
@@ -755,7 +755,7 @@ class CountryListContentWeb extends GetView<CountryListController> {
                                                                               ColorValues.facebookButtonColor,
                                                                           icon:
                                                                               Icons.navigation_sharp,
-                                                                          label:
+                                                                          message:
                                                                               'Go To States',
                                                                           onPress:
                                                                               () {

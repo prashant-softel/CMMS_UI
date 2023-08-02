@@ -348,8 +348,10 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 ? TableActionButton(
                                                     color: ColorValues
                                                         .lightGreenColor,
-                                                    label:
+                                                    message:
                                                         'Request Calibration',
+                                                    icon: Icons
+                                                        .compass_calibration,
                                                     onPress: () {
                                                       requestCalibration(
                                                         equipmentName:
@@ -382,7 +384,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         ColorValues.viewColor,
                                                     icon: Icons
                                                         .remove_red_eye_outlined,
-                                                    label: 'View',
+                                                    message: 'View',
                                                     onPress: () {
                                                       int calibrationId =
                                                           calibrationListListDetails
@@ -402,7 +404,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                             //   color: ColorValues
                                             //       .appDarkBlueColor,
                                             //   icon: Icons.add,
-                                            //   label:
+                                            //   message:
                                             //       'Add Calibration Detail',
                                             //   onPress: () {
                                             //     Get.toNamed(Routes
@@ -413,7 +415,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                             //   color: ColorValues
                                             //       .appDarkBlueColor,
                                             //   icon: Icons.check,
-                                            //   label: 'Approve',
+                                            //   message: 'Approve',
                                             //   onPress: () {},
                                             // ),
 
@@ -433,7 +435,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     color:
                                                         ColorValues.rejectColor,
                                                     icon: Icons.close,
-                                                    label: 'Reject',
+                                                    message: 'Reject',
                                                     onPress: () {
                                                       controller.isCommentCalibrationDialog(
                                                           calibrationName:
@@ -459,7 +461,9 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                 ? TableActionButton(
                                                     color:
                                                         ColorValues.startColor,
-                                                    label: 'Start Calibration',
+                                                    message:
+                                                        'Start Calibration',
+                                                    icon: Icons.alarm,
                                                     onPress: () {
                                                       controller
                                                           .isStartCalibrationDialog(
@@ -488,7 +492,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     color:
                                                         ColorValues.deleteColor,
                                                     icon: Icons.delete,
-                                                    label: 'Delete',
+                                                    message: 'Delete',
                                                     onPress: () {},
                                                   ),
                                             controller.calibrationList!
@@ -507,7 +511,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     color: ColorValues
                                                         .approveColor,
                                                     icon: Icons.check,
-                                                    label: 'Approve',
+                                                    message: 'Approve',
                                                     onPress: () {
                                                       controller.isCommentCalibrationDialog(
                                                           calibrationName:
@@ -534,7 +538,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     color: ColorValues
                                                         .completeColor,
                                                     icon: Icons.done,
-                                                    label: 'Complete',
+                                                    message: 'Complete',
                                                     onPress: () {
                                                       controller
                                                           .isCompleteCalibrationDialog(
@@ -562,7 +566,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     color: ColorValues
                                                         .completeColor,
                                                     icon: Icons.done,
-                                                    label: 'Close',
+                                                    message: 'Close',
                                                     onPress: () {
                                                       controller.isCommentCalibrationDialog(
                                                           calibrationName:
@@ -589,7 +593,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                     color: ColorValues
                                                         .approveColor,
                                                     icon: Icons.check,
-                                                    label: 'Approve',
+                                                    message: 'Approve',
                                                     onPress: () {
                                                       controller.isCommentCalibrationDialog(
                                                           calibrationName:

@@ -98,47 +98,55 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
                                               margin: Dimens.edgeInsets5,
-                                              padding: const EdgeInsets.only(left: 15),
-                                              child: CustomRichText(title: 'Facility: '),),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15),
+                                              child: CustomRichText(
+                                                  title: 'Facility: '),
+                                            ),
                                             SizedBox(
-                                              height: MediaQuery.of(context).size.height * 0.040,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.040,
                                               width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  .2) -
+                                                          .size
+                                                          .width *
+                                                      .2) -
                                                   30,
                                               child: DropdownWidget(
                                                 dropdownList:
-                                                controller.facilityList,
+                                                    controller.facilityList,
                                                 isValueSelected: controller
                                                     .isFacilitySelected.value,
                                                 selectedValue: controller
                                                     .selectedFacility.value,
                                                 onValueChanged:
-                                                controller.onValueChanged,
+                                                    controller.onValueChanged,
                                               ),
                                             ),
-
                                           ],
                                         ),
-                                        SizedBox(height: 10,),
-
+                                        SizedBox(
+                                          height: 10,
+                                        ),
                                         Row(
                                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 15),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15),
                                               child: CustomRichText(
                                                   title: 'Job Type Title '),
                                             ),
                                             Container(
-                                              padding: const EdgeInsets.only(left: 15,right: 15),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15, right: 15),
                                               child: Container(
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -161,40 +169,40 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   // width: MediaQuery.of(context).size.width / 1.5,/
                                                   child: LoginCustomTextfield(
-                                                    // textController: controller
-                                                    //     .durationCtrlr,
-                                                  )),
+                                                      // textController: controller
+                                                      //     .durationCtrlr,
+                                                      )),
                                             ),
                                           ],
                                         ),
-                                        
-                                        
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 15),
-                                              child: CustomRichText(title: 'Description '),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15),
+                                              child: CustomRichText(
+                                                  title: 'Description '),
                                             ),
                                             Container(
-                                                padding: const EdgeInsets.only(left: 15, right: 15),
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, right: 15),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -217,32 +225,32 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   // width: MediaQuery.of(context).size.width / 2,
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   child: LoginCustomTextfield(
-                                                    // textController: controller
-                                                  ),
+                                                      // textController: controller
+                                                      ),
                                                   //     .durationCtrlr,
                                                 )),
                                           ],
                                         ),
-
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 15),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15),
                                               child: CustomRichText(
                                                   title: 'Require SOP/JSA: '),
                                             ),
@@ -417,86 +425,96 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             }).toList(),
                                           ),
                                         )
-                                      :
-                                  Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .jobTypeListPaginationController,
-                                      columns: [
-                                        "Sr.No.",
-                                        "Title",
-                                        "Description",
-                                        "Facility",
-                                        "Require\nSOP/JSA",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.jobTypeList.length,
-                                          (index) {
-                                            var jobTypeListDetails =
-                                                controller.jobTypeList[index];
-                                            return [
-                                              '${jobTypeListDetails.id}',
-                                              '${jobTypeListDetails.name}',
-                                              'No Data Found',
-                                              'Hero Future Solar Plant 100MW',
-                                              'Checkbox',
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .jobTypeListPaginationController,
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "Description",
+                                              "Facility",
+                                              "Require\nSOP/JSA",
                                               "Action"
-                                            ];
-                                          },
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.12,
+                                                label: column,
+                                              );
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller.jobTypeList.length,
+                                                (index) {
+                                                  var jobTypeListDetails =
+                                                      controller
+                                                          .jobTypeList[index];
+                                                  return [
+                                                    '${jobTypeListDetails.id}',
+                                                    '${jobTypeListDetails.name}',
+                                                    'No Data Found',
+                                                    'Hero Future Solar Plant 100MW',
+                                                    'Checkbox',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_permitTypeList) {
+                                              return TableViewRow(
+                                                  height: 60,
+                                                  cells: _permitTypeList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value ==
+                                                                'Checkbox')
+                                                            ? Checkbox(
+                                                                value: controller
+                                                                    .isChecked
+                                                                    .value,
+                                                                onChanged:
+                                                                    (val) {})
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appLightBlueColor,
+                                                                          icon:
+                                                                              Icons.edit,
+                                                                          message:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {},
+                                                                        ),
+                                                                        // : Container(),
+                                                                        // :Container(),
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          message:
+                                                                              'Delete',
+                                                                          onPress:
+                                                                              () {},
+                                                                        )
+                                                                        // : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
                                         ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 60,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'Checkbox')
-                                                      ? Checkbox(
-                                                          value: controller
-                                                              .isChecked.value,
-                                                          onChanged: (val) {})
-                                                      : (value == "Action")
-                                                          ? Wrap(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                label: 'Edit',
-                                                                onPress: () {},
-                                                              ),
-                                                              // : Container(),
-                                                              // :Container(),
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appRedColor,
-                                                                icon: Icons
-                                                                    .delete,
-                                                                label: 'Delete',
-                                                                onPress: () {},
-                                                              )
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

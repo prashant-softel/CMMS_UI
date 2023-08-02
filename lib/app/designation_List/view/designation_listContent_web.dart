@@ -58,8 +58,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / MASTER",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -468,7 +467,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -490,7 +489,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

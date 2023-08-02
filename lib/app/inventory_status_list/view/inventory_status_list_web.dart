@@ -493,7 +493,7 @@ class InventoryStatusListContentWeb
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -520,7 +520,7 @@ class InventoryStatusListContentWeb
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

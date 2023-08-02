@@ -272,7 +272,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
-                                                       SizedBox(
+                                                      SizedBox(
                                                         height: 5,
                                                       ),
                                                       Text(
@@ -305,10 +305,11 @@ class ViewIncidentReportContentWeb
                                                         width: 150,
                                                         child: Text(
                                                           '${controller.incidentReportDetailsModel.value?.description}',
-                                                          overflow: TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
+                                                              color: Color
+                                                                  .fromARGB(
                                                                       255,
                                                                       5,
                                                                       92,
@@ -427,8 +428,8 @@ class ViewIncidentReportContentWeb
                                                         child: Text(
                                                           '${controller.incidentReportDetailsModel.value?.insurance_remark}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
+                                                              color: Color
+                                                                  .fromARGB(
                                                                       255,
                                                                       5,
                                                                       92,
@@ -618,7 +619,7 @@ class ViewIncidentReportContentWeb
                                                                 .appDarkBlueColor,
                                                             icon: Icons
                                                                 .visibility,
-                                                            label: 'RCA',
+                                                            message: 'RCA',
                                                             onPress: () {
                                                               // controller.viewIncidentReport(
                                                               //     id: int.tryParse(
@@ -741,7 +742,6 @@ class ViewIncidentReportContentWeb
                                                   ],
                                                 ),
                                               ),
-                                            
                                             ],
                                           ),
                                         );
@@ -770,10 +770,11 @@ class ViewIncidentReportContentWeb
                                           width: 15,
                                         ),
                                         CustomElevatedButton(
-                                          backgroundColor: ColorValues.appRedColor,
+                                          backgroundColor:
+                                              ColorValues.appRedColor,
                                           onPressed: () {
-                                            Get.offAndToNamed(Routes.incidentReportListWeb);
-
+                                            Get.offAndToNamed(
+                                                Routes.incidentReportListWeb);
                                           },
                                           text: 'Cancel',
                                         ),
@@ -785,14 +786,20 @@ class ViewIncidentReportContentWeb
                                         // .length > 0
                                         // &&
                                         controller.incidentReportDetailsModel
-                                                    .value?.id !=
-                                                null
-                                          &&
-                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.edit == 1).length > 0
-
+                                                        .value?.id !=
+                                                    null &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                34 &&
+                                                            e.edit == 1)
+                                                        .length >
+                                                    0
                                             ? CustomElevatedButton(
                                                 icon: Icons.edit,
-                                                backgroundColor: ColorValues.appYellowColor,
+                                                backgroundColor:
+                                                    ColorValues.appYellowColor,
                                                 onPressed: () {
                                                   // controller.saveAsDraft();
                                                   controller.editIncidentReport(
@@ -804,46 +811,65 @@ class ViewIncidentReportContentWeb
                                                 text: 'Edit',
                                               )
                                             : Container(),
-                                            SizedBox(
+                                        SizedBox(
                                           width: 20,
                                         ),
 
-                                          ////Approve Button
-                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 0).length > 0
-                                          && controller.incidentReportDetailsModel.value?.status == 181
-                                          ?CustomElevatedButton(
+                                        ////Approve Button
+                                        varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                34 &&
+                                                            e.approve == 0)
+                                                        .length >
+                                                    0 &&
+                                                controller
+                                                        .incidentReportDetailsModel
+                                                        .value
+                                                        ?.status ==
+                                                    181
+                                            ? CustomElevatedButton(
                                                 icon: Icons.add,
-                                                backgroundColor: ColorValues.appGreenColor,
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
                                                 onPressed: () {
                                                   // controller.saveAsDraft();
-                                                  controller.incidentReportApproveButton();
-                                                  
+                                                  controller
+                                                      .incidentReportApproveButton();
                                                 },
                                                 text: 'Approve',
                                               )
-                                              : Container(),
-                                          SizedBox(
+                                            : Container(),
+                                        SizedBox(
                                           width: 20,
                                         ),
-                                            
-                                          ////Reject Button
-                                           varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.delete == 1).length > 0
-                                          && controller.incidentReportDetailsModel.value?.status == 181
-                                          ?CustomElevatedButton(
+
+                                        ////Reject Button
+                                        varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                34 &&
+                                                            e.delete == 1)
+                                                        .length >
+                                                    0 &&
+                                                controller
+                                                        .incidentReportDetailsModel
+                                                        .value
+                                                        ?.status ==
+                                                    181
+                                            ? CustomElevatedButton(
                                                 icon: Icons.close,
-                                                backgroundColor: ColorValues.appRedColor,
+                                                backgroundColor:
+                                                    ColorValues.appRedColor,
                                                 onPressed: () {
                                                   // controller.saveAsDraft();
-                                                  Get.dialog(IncidentReportRejectDialog(id: '${controller
-                                                          .incidentReportDetailsModel
-                                                          .value
-                                                          ?.id}'));
-                                                  
+                                                  Get.dialog(
+                                                      IncidentReportRejectDialog(
+                                                          id: '${controller.incidentReportDetailsModel.value?.id}'));
                                                 },
                                                 text: 'Reject',
                                               )
-                                              : Container(),
-
+                                            : Container(),
                                       ],
                                     ),
                                   )

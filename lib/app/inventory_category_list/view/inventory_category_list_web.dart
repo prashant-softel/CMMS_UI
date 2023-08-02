@@ -125,7 +125,9 @@ class InventoryCategoryListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Expanded(child: CustomRichText(title: 'Name: ')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Name: ')),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -495,7 +497,7 @@ class InventoryCategoryListContentWeb
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -522,7 +524,7 @@ class InventoryCategoryListContentWeb
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

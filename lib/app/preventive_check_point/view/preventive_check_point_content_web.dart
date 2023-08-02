@@ -68,7 +68,7 @@ class PreventiveCheckPointContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 6 && e.add == 0)
+                              .where((e) => e.feature_id == 6 && e.add == 1)
                               .length >
                           0
                       ? Container(
@@ -370,7 +370,7 @@ class PreventiveCheckPointContentWeb
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 6 && e.view == 0)
+                              .where((e) => e.feature_id == 6 && e.view == 1)
                               .length >
                           0
                       ? Expanded(
@@ -553,7 +553,7 @@ class PreventiveCheckPointContentWeb
                                                                           e.feature_id ==
                                                                               6 &&
                                                                           e.edit ==
-                                                                              0)
+                                                                              1)
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
@@ -561,7 +561,8 @@ class PreventiveCheckPointContentWeb
                                                                       .editColor,
                                                                   icon: Icons
                                                                       .edit,
-                                                                  //  label: 'Edit',
+                                                                  message:
+                                                                      'Edit',
                                                                   onPress: () {
                                                                     controller.selectedItem = controller
                                                                         .preventiveCheckpoint!
@@ -595,7 +596,7 @@ class PreventiveCheckPointContentWeb
                                                                           e.feature_id ==
                                                                               6 &&
                                                                           e.delete ==
-                                                                              0)
+                                                                              1)
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
@@ -603,8 +604,8 @@ class PreventiveCheckPointContentWeb
                                                                       .deleteColor,
                                                                   icon: Icons
                                                                       .delete,
-                                                                  ////  label:
-                                                                  //     'Delete',
+                                                                  message:
+                                                                      'Delete',
                                                                   onPress: () {
                                                                     print(
                                                                         record[

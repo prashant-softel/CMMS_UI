@@ -349,6 +349,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appDarkBlueColor,
                                                                   icon: Icons
                                                                       .visibility,
+                                                                  message:
+                                                                      'View',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -383,6 +385,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appGreenColor,
                                                                   icon:
                                                                       Icons.add,
+                                                                  message:
+                                                                      'Add',
                                                                   onPress: () {
                                                                     // Get.dialog(PermitApprovedDialog(
                                                                     //     permitId:
@@ -432,6 +436,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             color: ColorValues
                                                                 .appRedColor,
                                                             icon: Icons.close,
+                                                            message: 'Close',
                                                             onPress: () {
                                                               Get.dialog(PermitCloseDialog(
                                                                   permitId:
@@ -440,7 +445,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                             },
                                                           ),
 
-                                                         ///Permit Edit button 
+                                                          ///Permit Edit button
                                                           varUserAccessModel
                                                                           .value
                                                                           .access_list!
@@ -466,6 +471,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appYellowColor,
                                                                   icon: Icons
                                                                       .edit,
+                                                                  message:
+                                                                      'Edit',
                                                                   onPress: () {
                                                                     controller.editNewPermit(
                                                                         permitId:
@@ -475,7 +482,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                   },
                                                                 )
                                                               : Container(),
-
 
                                                           ////Permit Extend
                                                           controller
@@ -512,6 +518,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appDarkBlueColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
+                                                                  message:
+                                                                      'Extend',
                                                                   onPress: () {
                                                                     Get.dialog(PermitExtendDialog(
                                                                         permitId:
@@ -546,6 +554,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appGreenColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
+                                                                  message:
+                                                                      'Approve',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -583,6 +593,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .expand_outlined,
+                                                                  message:
+                                                                      'Close',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -620,6 +632,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
+                                                                  message:
+                                                                      'Cancel',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -658,6 +672,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
+                                                                  message:
+                                                                      'Close',
                                                                   onPress: () {
                                                                     controller.viewNewPermitList(
                                                                         permitId:
@@ -672,6 +688,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
+                                                                  message:
+                                                                      'Close',
                                                                   onPress: () {
                                                                     /// permitCancelRequest() this method will use here
                                                                     //  controller.viewNewPermitList(
@@ -712,6 +730,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                       .appRedColor,
                                                                   icon: Icons
                                                                       .close,
+                                                                  message:
+                                                                      'close',
                                                                   onPress: () {
                                                                     // Get.dialog(PermitRejectDialog(
                                                                     //     permitId:
@@ -724,8 +744,6 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                 )
                                                               : Container(),
 
-
-                                                  
                                                           // TableActionButton(
                                                           //   color: Colors.green,
                                                           //   icon: Icons.visibility,

@@ -57,8 +57,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / FREQUENCY NUMBER",
-                      style: Styles.greyMediumLight12)
+                  Text(" / FREQUENCY NUMBER", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -247,40 +246,39 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                       width: 10,
                                     ),
                                     Container(
-                                      height: 40,
-                                      width: (Get.width * .2) - 70,
-                                      child: controller.selectedItem == null
-                                      ? CustomElevatedButton(
-                                          backgroundColor: ColorValues
-                                              .appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .createChecklistNumber()
-                                                .then((value) {
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Create Frequency List')
-                                      : CustomElevatedButton(
-                                          backgroundColor: ColorValues
-                                              .appDarkBlueColor,
-                                          onPressed: () {
-                                            // controller
-                                            //     .updateChecklistNumber(
-                                            //         controller
-                                            //             .selectedItem?.id)
-                                            //     .then((value) {
-                                            //   print("value,$value");
-                                            //   if (value == true)
-                                            //     controller
-                                            //         .issuccessCreatechecklist();
-                                            // });
-                                          },
-                                          text: 'Update')
-                                    ),
+                                        height: 40,
+                                        width: (Get.width * .2) - 70,
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .createChecklistNumber()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Create Frequency List')
+                                            : CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  // controller
+                                                  //     .updateChecklistNumber(
+                                                  //         controller
+                                                  //             .selectedItem?.id)
+                                                  //     .then((value) {
+                                                  //   print("value,$value");
+                                                  //   if (value == true)
+                                                  //     controller
+                                                  //         .issuccessCreatechecklist();
+                                                  // });
+                                                },
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -464,7 +462,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
-                                                                                label: 'Edit',
+                                                                                message: 'Edit',
                                                                                 onPress: () {
                                                                                   controller.selectedItem = controller.frequencyList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
 
@@ -483,7 +481,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,
                                                                                 icon: Icons.delete,
-                                                                                label: 'Delete',
+                                                                                message: 'Delete',
                                                                                 onPress: () {
                                                                                   print(_preventiveCheckList[0]);
                                                                                   // controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);

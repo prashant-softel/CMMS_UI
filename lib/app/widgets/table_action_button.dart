@@ -7,6 +7,7 @@ class TableActionButton extends StatelessWidget {
     this.label,
     this.onPress,
     this.icon,
+    this.message,
     required this.color,
   }) : super(key: key);
 
@@ -14,6 +15,7 @@ class TableActionButton extends StatelessWidget {
   final Function()? onPress;
   final IconData? icon;
   final Color color;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,21 @@ class TableActionButton extends StatelessWidget {
           child: Row(
             children: [
               icon != null
-                  ? Icon(icon, color: Colors.white, size: 14)
+                  ? Tooltip(
+                      //height: 10,
+                      message: message, //'Text',
+                      showDuration: const Duration(seconds: 1),
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                      ),
+                      textStyle: Styles.white12.copyWith(
+                        color: Colors.white,
+                      ),
+                      // preferBelow: true,
+                      verticalOffset: 0.01,
+                      child: Icon(icon, color: Colors.white, size: 14))
                   : SizedBox.shrink(),
               icon != null ? Dimens.boxWidth2 : SizedBox.shrink(),
               Text(
