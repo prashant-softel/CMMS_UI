@@ -491,6 +491,13 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToCompetencyScreen();
                                     });
                               }))),
+                               OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Escalation Matrix",
+                                    onTap: () {
+                                      controller.goToEscalationMatrixScreen();
+                                    });
+                              }))),
                             ],
                           ),
 
