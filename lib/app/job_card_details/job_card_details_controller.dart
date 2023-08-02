@@ -464,6 +464,15 @@ class JobCardDetailsController extends GetxController {
     Get.toNamed(Routes.jobCardList);
   }
 
+  void goToJobCardScreen() {
+    Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId.value});
+  }
+
+  goToAddJobScreen() {
+    Get.back();
+    Get.toNamed(Routes.jobDetails);
+  }
+
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {
     ///
     // Create a new index for this row based on the current number of rows

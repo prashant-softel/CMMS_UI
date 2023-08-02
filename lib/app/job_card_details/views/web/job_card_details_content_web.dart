@@ -116,7 +116,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                       Container(
                           margin: Dimens.edgeInsets20,
                           constraints: BoxConstraints(
-                            maxHeight: 500,
+                            maxHeight: 100,
                             minHeight: 100,
                           ),
                           child: //
@@ -129,38 +129,40 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                       Dimens.box0,
 
                   /// DESCRIPTION OF WORK DONE
-                  Row(children: [
-                    Text('Description of work done: '),
-                    Expanded(
-                      child: TextField(
-                        controller: controller.descriptionOfWorkDoneCtrlr,
-                        enabled: controller.isJobCardStarted.value,
-                        decoration: InputDecoration(
-                          disabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorValues.appLightGreyColor,
-                              width: 1.0,
+                  (controller.isJobCardStarted == false)
+                      ? Container()
+                      : Row(children: [
+                          Text('Description of work done: '),
+                          Expanded(
+                            child: TextField(
+                              controller: controller.descriptionOfWorkDoneCtrlr,
+                              enabled: controller.isJobCardStarted.value,
+                              decoration: InputDecoration(
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorValues.appLightGreyColor,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorValues.appLightBlueColor,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorValues.appLightBlueColor,
+                                    width: 1.0,
+                                  ),
+                                ),
+                              ),
+                              keyboardType: TextInputType.multiline,
+                              minLines: 5,
+                              maxLines: null,
                             ),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorValues.appLightBlueColor,
-                              width: 1.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorValues.appLightBlueColor,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
-                        keyboardType: TextInputType.multiline,
-                        minLines: 5,
-                        maxLines: null,
-                      ),
-                    ),
-                  ]),
+                        ]),
                   Dimens.boxHeight20,
 
                   /// START JOB CARD BUTTON
