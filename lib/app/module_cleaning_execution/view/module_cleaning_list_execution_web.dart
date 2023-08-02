@@ -1,4 +1,5 @@
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
@@ -160,6 +161,16 @@ class ModuleCleaningListExecution
                             ),
                           ),
                         ),
+                         Dimens.boxWidth10,
+                              ActionButton(
+                                icon: Icons.add,
+                                label: 'Add MC Execution',
+                                onPressed: () {
+                                  Get.toNamed(
+                                      Routes.addModuleCleaningExecutionContentWeb);
+                                },
+                                color: ColorValues.appGreenColor,
+                              ),
                       ],
                     ),
                     SizedBox(

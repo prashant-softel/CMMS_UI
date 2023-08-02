@@ -1,46 +1,30 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
-import 'dart:convert';
 
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.dart';
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/controllers/file_upload_controller.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class AddEscalationMatrixContentWeb
-    extends GetView<AddEscalationMatrixController> {
-  AddEscalationMatrixContentWeb({super.key});
-
-
-
-
+class AddModuleCleaningExecutionContentWeb
+    extends GetView<AddModuleCleaningExecutionController> {
+  AddModuleCleaningExecutionContentWeb({super.key});
 
   // final homeController = Get.find<HomeController>();
-  final AddEscalationMatrixController controller = Get.find();
+  final AddModuleCleaningExecutionController controller = Get.find();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: HeaderWidget(),
-          elevation: 0,
-          toolbarHeight: 100,
-          automaticallyImplyLeading: false,
-        ),
-        body: Row(
+  Widget build(BuildContext context) {
+      return Row(
           children: [
-            Responsive.isMobile(context) || Responsive.isTablet(context)
-                ? Dimens.box0
-                : HomeDrawer(),
+           
             Expanded(
               child: Center(
                 child: Container(
@@ -88,10 +72,10 @@ class AddEscalationMatrixContentWeb
                                 onTap: () {
                                   Get.back();
                                 },
-                                child: Text(" / Escalation Matrix List",
+                                child: Text(" / Module Cleaning Execution List",
                                     style: Styles.greyMediumLight12),
                               ),
-                              Text(" / Create Escalation Matrix",
+                              Text(" / Create Module Cleaning Execution",
                                   style: Styles.greyMediumLight12)
                             ],
                           ),
@@ -106,16 +90,15 @@ class AddEscalationMatrixContentWeb
                             color: Colors.lightBlue.shade50,
                             child: Wrap(
                               children: [
-                                GetBuilder<AddEscalationMatrixController>(
-                                    id: 'escalation-matrix',
+                                GetBuilder<AddModuleCleaningExecutionController>(
+                                    id: 'module-cleaning-execution',
                                     builder: (controller) {
                                       return Obx(
                                         () => Column(
                                           children: [
                                             CustomAppBar(
                                               title:
-                                                  'Create Escalation Matrix'
-                                                      .tr,
+                                                  'Create Module Cleaning Execution'.tr,
                                             ),
                                             Dimens.boxHeight20,
                                             Row(
@@ -148,25 +131,25 @@ class AddEscalationMatrixContentWeb
                                                 CustomRichText(
                                                     title: 'Status'),
                                                 Dimens.boxWidth5,
-                                                SizedBox(
-                                                  width:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          5,
-                                                  child: DropdownWebWidget(
-                                                    dropdownList: controller
-                                                        .typePermitList,
-                                                    isValueSelected: controller
-                                                        .isTypePermitSelected
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedTypePermit
-                                                        .value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                ),
+                                                // SizedBox(
+                                                //   width:
+                                                //       MediaQuery.of(context)
+                                                //               .size
+                                                //               .width /
+                                                //           5,
+                                                //   child: DropdownWebWidget(
+                                                //     dropdownList: controller
+                                                //         .typePermitList,
+                                                //     isValueSelected: controller
+                                                //         .isTypePermitSelected
+                                                //         .value,
+                                                //     selectedValue: controller
+                                                //         .selectedTypePermit
+                                                //         .value,
+                                                //     onValueChanged: controller
+                                                //         .onValueChanged,
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                             Dimens.boxHeight50,
@@ -298,18 +281,18 @@ class AddEscalationMatrixContentWeb
                                                                         : (mapData['key'] == "Escalation Roles and Levels")
                                                                             ? SizedBox(
                                                                                 width: MediaQuery.of(context).size.width / 5,
-                                                                                child: DropdownWebWidget(
-                                                                                  dropdownList: controller.roleList,
-                                                                                  isValueSelected: controller.isSelectedRole.value,
-                                                                                  selectedValue: mapData["value"],
-                                                                                  onValueChanged: (list, selectedValue) {
-                                                                                    print("dropdownData:${{
-                                                                                      selectedValue: selectedValue
-                                                                                    }}");
-                                                                                    mapData["value"] = selectedValue;
-                                                                                    controller.dropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                                  },
-                                                                                ),
+                                                                                // child: DropdownWebWidget(
+                                                                                //   dropdownList: controller.roleList,
+                                                                                //   isValueSelected: controller.isSelectedRole.value,
+                                                                                //   selectedValue: mapData["value"],
+                                                                                //   onValueChanged: (list, selectedValue) {
+                                                                                //     print("dropdownData:${{
+                                                                                //       selectedValue: selectedValue
+                                                                                //     }}");
+                                                                                //     mapData["value"] = selectedValue;
+                                                                                //     controller.dropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                                //   },
+                                                                                // ),
                                                                               )
                                                                             : Text(mapData['key'] ?? ''),
                                                                   );
@@ -382,8 +365,8 @@ class AddEscalationMatrixContentWeb
                                                             .appGreenColor,
                                                     text: "Submit",
                                                     onPressed: () {
-                                                      controller
-                                                          .createEscalationMatrix();
+                                                      // controller
+                                                      //     .createEscalationMatrix();
                                                     },
                                                   ),
                                                 ),
@@ -426,10 +409,9 @@ class AddEscalationMatrixContentWeb
               ),
             ),
           ],
-        ),
-
-        // ),
-      );
+        );
 
   
+  }
+       
 }
