@@ -31,8 +31,15 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Duration (Days)", "value": ''},
-      {'key': "Escalation Roles and Levels", "value": 'Please Select'},
+      {"key": "Days", "value": ''},
+      {"key": "Scheduled Module", "value": ''},
+      {"key": "Cleaned", "value": ''},
+      {"key": "Abandoned", "value": ''},
+      {"key": "Pending", "value": ''},
+      {"key": "Type", "value": ''},
+      {"key": "Water Used", "value": ''},
+      {"key": "Remark", "value": ''},
+      {'key': "Actions", "value": ''},
     ]);
   }
 

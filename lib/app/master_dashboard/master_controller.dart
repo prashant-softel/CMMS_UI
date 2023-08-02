@@ -211,6 +211,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToEscalationMatrixScreen() async {
+    Get.toNamed(
+      Routes.escalationMatrixListWeb,
+    );
+  }
+
   Future<void> goToIncidentRiskType() async {
     Get.toNamed(
       Routes.incidentRiskType,
