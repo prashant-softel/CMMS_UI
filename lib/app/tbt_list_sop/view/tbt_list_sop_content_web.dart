@@ -100,17 +100,23 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           height: 10,
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(title: 'TBT Type: '),
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                              title: 'TBT Type: '),
                                         ),
                                         SizedBox(
                                           height: 5,
                                         ),
                                         SizedBox(
-                                          height: MediaQuery.of(context).size.height * 0.040,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.040,
                                           width: MediaQuery.of(context)
                                                   .size
-                                                  .width /2,
+                                                  .width /
+                                              2,
 
                                           child: Obx(
                                             () => DropdownWidget(
@@ -127,14 +133,19 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
 
                                           // LoginCustomTextfield(),
                                         ),
-                                        SizedBox(height: 10,),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
 
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(title: 'Title '),
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child:
+                                              CustomRichText(title: 'Title '),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
                                           child: Container(
                                               decoration: BoxDecoration(
                                                 boxShadow: [
@@ -148,21 +159,22 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues
-                                                        .whiteColor,
-                                                    offset: const Offset(
-                                                        0.0, 0.0),
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
                                                     spreadRadius: 0.0,
                                                   ),
                                                 ],
-                                                color:
-                                                    ColorValues.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                    BorderRadius.circular(5),
                                               ),
-                                              width: MediaQuery.of(context).size.width / 2,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2,
                                               child: LoginCustomTextfield(
                                                 textController: controller
                                                     .titleTextFieldCtrlr,
@@ -195,11 +207,14 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         //   height: 10,
                                         // ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(title: 'Description '),
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                              title: 'Description '),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
                                           child: Container(
                                               decoration: BoxDecoration(
                                                 boxShadow: [
@@ -213,21 +228,22 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues
-                                                        .whiteColor,
-                                                    offset: const Offset(
-                                                        0.0, 0.0),
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
                                                     spreadRadius: 0.0,
                                                   ),
                                                 ],
-                                                color:
-                                                    ColorValues.whiteColor,
+                                                color: ColorValues.whiteColor,
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                    BorderRadius.circular(5),
                                               ),
-                                              width: MediaQuery.of(context).size.width / 2,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2,
                                               child: LoginCustomTextfield(
                                                 textController: controller
                                                     .descriptionTextFieldCtrlr,
@@ -237,7 +253,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           height: 10,
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15),
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
                                           child: CustomRichText(
                                             title: 'View JSA File ',
                                           ),
@@ -246,128 +263,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           height: 5,
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 15,right: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 45,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                  7.1,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(
-                                                              255, 236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Align(
-                                                    alignment: Alignment.topLeft,
-                                                    child: Text(
-                                                      controller.fileName.value ==
-                                                              ""
-                                                          ? 'File Name'
-                                                          : controller
-                                                              .fileName.value,
-                                                      maxLines: 3,
-                                                      textAlign: TextAlign.center,
-                                                      style: Styles.greyLight14,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Dimens.boxWidth5,
-                                              Container(
-                                                height: 35,
-                                                width: 77,
-                                                child: CustomElevatedButton(  
-                                                  backgroundColor: ColorValues
-                                                      .appDarkBlueColor,
-                                                  text: "Browse",
-                                                  // style: TextStyle(fontSize: 8),
-                                                  size: 12,
-                                                  onPressed: () async {
-                                                    final result =
-                                                        await FilePicker.platform
-                                                            .pickFiles();
-                                                    if (result != null) {
-                                                      // for (var file in result.files) {
-                                                      controller.fileName.value =
-                                                          result
-                                                              .files.single.name;
-                                                      controller.fileBytes =
-                                                          result
-                                                              .files.single.bytes;
-                                                      //controller.filePath.value = file.;
-                                                      print({
-                                                        "filepathes",
-                                                        controller.fileName.value
-                                                      });
-                                                      // }
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              Dimens.boxWidth5,
-                                              Container(
-                                                height: 35,
-                                                width: 77,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.greenColor,
-                                                  text: 'Upload',
-                                                  size: 12,
-                                                  onPressed: () {
-                                                    controller
-                                                        .browseFiles(
-                                                            fileBytes: controller
-                                                                .fileBytes,
-                                                            position: 0)
-                                                        .then((value) {
-                                                      controller
-                                                          .isSuccessDialog();
-                                        
-                                                      //   // Fluttertoast.showToast(
-                                                      //   //     msg: "file upload  Successfully",
-                                                      //   //     fontSize: 16.0);
-                                                    });
-                                                    //  controller.savePmMapping();
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                            title: 'View SOP File ',
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -386,8 +283,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Color.fromARGB(
-                                                              255, 236, 234, 234)
+                                                      color: Color.fromARGB(255,
+                                                              236, 234, 234)
                                                           .withOpacity(0.5),
                                                       spreadRadius: 2,
                                                       blurRadius: 5,
@@ -399,7 +296,138 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Align(
-                                                    alignment: Alignment.topLeft,
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      controller.fileName
+                                                                  .value ==
+                                                              ""
+                                                          ? 'File Name'
+                                                          : controller
+                                                              .fileName.value,
+                                                      maxLines: 3,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: Styles.greyLight14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                height: 35,
+                                                width: 77,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  text: "Browse",
+                                                  // style: TextStyle(fontSize: 8),
+                                                  size: 12,
+                                                  onPressed: () async {
+                                                    final result =
+                                                        await FilePicker
+                                                            .platform
+                                                            .pickFiles();
+                                                    if (result != null) {
+                                                      // for (var file in result.files) {
+                                                      controller
+                                                              .fileName.value =
+                                                          result.files.single
+                                                              .name;
+                                                      controller.fileBytes =
+                                                          result.files.single
+                                                              .bytes;
+                                                      //controller.filePath.value = file.;
+                                                      print({
+                                                        "filepathes",
+                                                        controller
+                                                            .fileName.value
+                                                      });
+                                                      // }
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                height: 35,
+                                                width: 77,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.greenColor,
+                                                  text: 'Upload',
+                                                  size: 12,
+                                                  onPressed: () {
+                                                    controller
+                                                        .browseFiles(
+                                                            fileBytes:
+                                                                controller
+                                                                    .fileBytes,
+                                                            position: 0)
+                                                        .then((value) {
+                                                      controller
+                                                          .isSuccessDialog();
+
+                                                      //   // Fluttertoast.showToast(
+                                                      //   //     msg: "file upload  Successfully",
+                                                      //   //     fontSize: 16.0);
+                                                    });
+                                                    //  controller.savePmMapping();
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(
+                                            title: 'View SOP File ',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 45,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    7.1,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromARGB(255,
+                                                              236, 234, 234)
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
                                                     child: Text(
                                                       controller.fileName2
                                                                   .value ==
@@ -408,7 +436,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                           : controller
                                                               .fileName2.value,
                                                       maxLines: 3,
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: Styles.greyLight14,
                                                     ),
                                                   ),
@@ -425,16 +454,18 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                   size: 12,
                                                   onPressed: () async {
                                                     final result =
-                                                        await FilePicker.platform
+                                                        await FilePicker
+                                                            .platform
                                                             .pickFiles();
                                                     if (result != null) {
                                                       // for (var file in result.files) {
-                                                      controller.fileName2.value =
-                                                          result
-                                                              .files.single.name;
+                                                      controller
+                                                              .fileName2.value =
+                                                          result.files.single
+                                                              .name;
                                                       controller.fileBytes2 =
-                                                          result
-                                                              .files.single.bytes;
+                                                          result.files.single
+                                                              .bytes;
                                                       //controller.filePath.value = file.;
                                                       //  print({"filepathes", fileBytes});
                                                       // }
@@ -454,13 +485,14 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                   onPressed: () {
                                                     controller
                                                         .browseFiles(
-                                                            fileBytes: controller
-                                                                .fileBytes2,
+                                                            fileBytes:
+                                                                controller
+                                                                    .fileBytes2,
                                                             position: 1)
                                                         .then((value) {
                                                       controller
                                                           .isSuccessDialog2();
-                                        
+
                                                       //   // Fluttertoast.showToast(
                                                       //   //     msg: "file upload  Successfully",
                                                       //   //     fontSize: 16.0);
@@ -694,7 +726,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {},
@@ -709,7 +741,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {},

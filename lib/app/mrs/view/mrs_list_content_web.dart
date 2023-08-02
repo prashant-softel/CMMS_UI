@@ -382,8 +382,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                       .viewColor,
                                                                   icon: Icons
                                                                       .remove_red_eye_outlined,
-                                                                  // message:
-                                                                  //     "View",
+                                                                  message:
+                                                                      "View",
                                                                   onPress: () {
                                                                     int mrsId =
                                                                         mrsListDetails?.id ??
@@ -403,7 +403,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                       .editColor,
                                                                   icon: Icons
                                                                       .edit,
-                                                                  //// label: 'edit',
+                                                                  message:
+                                                                      'edit',
                                                                   onPress: () {
                                                                     int mrsId =
                                                                         mrsListDetails?.id ??
@@ -437,7 +438,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             .approveColor,
                                                                         icon: Icons
                                                                             .check,
-                                                                        // label: 'Approve',
+                                                                        message:
+                                                                            'Approve',
                                                                         onPress:
                                                                             () {
                                                                           int mrsId =
@@ -462,7 +464,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             .issueColor,
                                                                         icon: Icons
                                                                             .report,
-                                                                        //label: 'issue',
+                                                                        message:
+                                                                            'issue',
                                                                         onPress:
                                                                             () {
                                                                           int mrsId =
@@ -494,7 +497,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             .rejectColor,
                                                                         icon: Icons
                                                                             .close,
-                                                                        // label: 'Reject',
+                                                                        message:
+                                                                            'Reject',
                                                                         onPress:
                                                                             () {
                                                                           int mrsId =
@@ -519,7 +523,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             .approveColor,
                                                                         icon: Icons
                                                                             .approval,
-                                                                        //label: 'issue',
+                                                                        message:
+                                                                            'issue',
                                                                         onPress:
                                                                             () {
                                                                           int mrsId =
@@ -544,7 +549,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             .rejectColor,
                                                                         icon: Icons
                                                                             .close_fullscreen,
-                                                                        //label: 'issue',
+                                                                        message:
+                                                                            'issue',
                                                                         onPress:
                                                                             () {
                                                                           int mrsId =

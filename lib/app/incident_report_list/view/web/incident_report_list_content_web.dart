@@ -300,96 +300,99 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                           controller.viewIncidentReport(
                                                                               id: int.tryParse('${record[0]}'));
                                                                         },
-                                                                        child:
-                                                                          
-                                                                            value == 'Actions'
-                                                                                ? Wrap(
-                                                                                    children: [
-                                                                                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.view == 1).length > 0
-                                                                                            ? TableActionButton(
-                                                                                                color: ColorValues.appDarkBlueColor,
-                                                                                                icon: Icons.visibility,
-                                                                                                onPress: () {
-                                                                                                  controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
-                                                                                                  // print('record:${int.tryParse('${record[0]}')}');
-                                                                                                },
-                                                                                              )
-                                                                                            : Container(),
-                                                                                        //),
-                                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.edit == 1).length > 0
-                                                                                            ? TableActionButton(
-                                                                                                color: ColorValues.appYellowColor,
-                                                                                                icon: Icons.edit,
-                                                                                                onPress: () {
-                                                                                                  controller.editIncidentReport(id: int.tryParse('${record[0]}'));
-                                                                                                  print('edit record:${int.tryParse('${record[0]}')}');
-                                                                                                },
-                                                                                              )
-                                                                                            : Container()
+                                                                        child: value ==
+                                                                                'Actions'
+                                                                            ? Wrap(
+                                                                                children: [
+                                                                                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.view == 1).length > 0
+                                                                                        ? TableActionButton(
+                                                                                            color: ColorValues.appDarkBlueColor,
+                                                                                            icon: Icons.visibility,
+                                                                                            message: 'View',
+                                                                                            onPress: () {
+                                                                                              controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                              // print('record:${int.tryParse('${record[0]}')}');
+                                                                                            },
+                                                                                          )
+                                                                                        : Container(),
+                                                                                    //),
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.edit == 1).length > 0
+                                                                                        ? TableActionButton(
+                                                                                            color: ColorValues.appYellowColor,
+                                                                                            icon: Icons.edit,
+                                                                                            message: 'Delete',
+                                                                                            onPress: () {
+                                                                                              controller.editIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                              print('edit record:${int.tryParse('${record[0]}')}');
+                                                                                            },
+                                                                                          )
+                                                                                        : Container()
 
-                                                                                        //),
+                                                                                    //),
 
-                                                                                        // TableActionButton(
-                                                                                        //   color: Colors.red,
-                                                                                        //   icon:
-                                                                                        //       Icons.delete,
-                                                                                        //   label: 'Delete',
-                                                                                        //   onPress: () {},
-                                                                                        // ),
-                                                                                        //),
-                                                                                      ]),
-                                                                                      varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 0).length > 0 && record[8] == "Submitted"
-                                                                                          ? Padding(
-                                                                                              padding: const EdgeInsets.only(left: 15, top: 5),
-                                                                                              child: TableActionButton(
-                                                                                                color: ColorValues.appGreenColor,
-                                                                                                icon: Icons.add,
-                                                                                                onPress: () {
-                                                                                                  // Get.dialog(PermitApprovedDialog(
-                                                                                                  //     permitId:
-                                                                                                  //         _newPermitList[0]));
-                                                                                                  // controller.incidentReportApproveButton(incidentId: record[0]);
-                                                                                                  controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
-                                                                                                },
-                                                                                              ),
-                                                                                            )
-                                                                                          : Container(),
+                                                                                    // TableActionButton(
+                                                                                    //   color: Colors.red,
+                                                                                    //   icon:
+                                                                                    //       Icons.delete,
+                                                                                    //   label: 'Delete',
+                                                                                    //   onPress: () {},
+                                                                                    // ),
+                                                                                    //),
+                                                                                  ]),
+                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 0).length > 0 && record[8] == "Submitted"
+                                                                                      ? Padding(
+                                                                                          padding: const EdgeInsets.only(left: 15, top: 5),
+                                                                                          child: TableActionButton(
+                                                                                            color: ColorValues.appGreenColor,
+                                                                                            icon: Icons.add,
+                                                                                            message: 'Add',
+                                                                                            onPress: () {
+                                                                                              // Get.dialog(PermitApprovedDialog(
+                                                                                              //     permitId:
+                                                                                              //         _newPermitList[0]));
+                                                                                              // controller.incidentReportApproveButton(incidentId: record[0]);
+                                                                                              controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                            },
+                                                                                          ),
+                                                                                        )
+                                                                                      : Container(),
 
-                                                                                      ///Reject Button
-                                                                                      varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.delete == 1).length > 0 && record[8] == "Submitted"
-                                                                                          ? Padding(
-                                                                                              padding: const EdgeInsets.only(top: 5),
-                                                                                              child: TableActionButton(
-                                                                                                color: ColorValues.appRedColor,
-                                                                                                icon: Icons.close,
-                                                                                                onPress: () {
-                                                                                                  // Get.dialog(IncidentReportRejectDialog(id: record[0]));
-                                                                                                  controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
-                                                                                                },
-                                                                                              ),
-                                                                                            )
-                                                                                          : Container(),
+                                                                                  ///Reject Button
+                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.delete == 1).length > 0 && record[8] == "Submitted"
+                                                                                      ? Padding(
+                                                                                          padding: const EdgeInsets.only(top: 5),
+                                                                                          child: TableActionButton(
+                                                                                            color: ColorValues.appRedColor,
+                                                                                            icon: Icons.close,
+                                                                                            message: 'Close',
+                                                                                            onPress: () {
+                                                                                              // Get.dialog(IncidentReportRejectDialog(id: record[0]));
+                                                                                              controller.viewIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                                            },
+                                                                                          ),
+                                                                                        )
+                                                                                      : Container(),
 
-                                                                                      // TableActionButton(
-                                                                                      //   color: Colors.green,
-                                                                                      //   icon: Icons
-                                                                                      //       .visibility,
-                                                                                      //   label:
-                                                                                      //       'Approve Request',
-                                                                                      //   onPress: () {},
-                                                                                      // ),
-                                                                                      // TableActionButton(
-                                                                                      //   color: Colors.red,
-                                                                                      //   icon: Icons
-                                                                                      //       .visibility,
-                                                                                      //   label:
-                                                                                      //       'Reject Request',
-                                                                                      //   onPress: () {},
-                                                                                      // ),
-                                                                                    ],
-                                                                                  )
-                                                                                : Text(value.toString()),
+                                                                                  // TableActionButton(
+                                                                                  //   color: Colors.green,
+                                                                                  //   icon: Icons
+                                                                                  //       .visibility,
+                                                                                  //   label:
+                                                                                  //       'Approve Request',
+                                                                                  //   onPress: () {},
+                                                                                  // ),
+                                                                                  // TableActionButton(
+                                                                                  //   color: Colors.red,
+                                                                                  //   icon: Icons
+                                                                                  //       .visibility,
+                                                                                  //   label:
+                                                                                  //       'Reject Request',
+                                                                                  //   onPress: () {},
+                                                                                  // ),
+                                                                                ],
+                                                                              )
+                                                                            : Text(value.toString()),
                                                                       ),
                                                                     );
                                                                   },

@@ -15,7 +15,8 @@ import '../../widgets/dropdown.dart';
 import '../calibration_certificate_controller.dart';
 // import '../preventive_list_controller.dart';
 
-class CalibrationCertificateWeb extends GetView<CalibrationCertificateController> {
+class CalibrationCertificateWeb
+    extends GetView<CalibrationCertificateController> {
   CalibrationCertificateWeb({Key? key}) : super(key: key);
   final CalibrationCertificateController controller = Get.find();
 
@@ -58,14 +59,15 @@ class CalibrationCertificateWeb extends GetView<CalibrationCertificateController
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / INVENTORY", style: Styles.greyMediumLight12),
+                    child:
+                        Text(" / INVENTORY", style: Styles.greyMediumLight12),
                   ),
                   GestureDetector(
                     onTap: () {
                       Get.back();
                     },
-                    child:
-                        Text(" / CALIBRATION CERTIFICATE LIST", style: Styles.greyMediumLight12),
+                    child: Text(" / CALIBRATION CERTIFICATE LIST",
+                        style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
@@ -470,7 +472,8 @@ class CalibrationCertificateWeb extends GetView<CalibrationCertificateController
                                                   //         .issuccessCreatemodulelist();
                                                   // });
                                                 },
-                                                text: 'Create Calibration Certificate List')
+                                                text:
+                                                    'Create Calibration Certificate List')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -727,51 +730,51 @@ class CalibrationCertificateWeb extends GetView<CalibrationCertificateController
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
-                                                                          //   controller.selectedItem = controller.moduleList!.firstWhere((element) =>
-                                                                          //       "${element?.id}" ==
-                                                                          //       _moduleList[0]);
-                                                                          //
-                                                                          //   controller.modulelistNumberCtrlr.text =
-                                                                          //       controller.selectedItem?.moduleName ?? '';
-                                                                          //   controller.featureCtrlr.text =
-                                                                          //       controller.selectedItem?.featureName ?? '';
-                                                                          //   controller.isToggleOn.value = controller.selectedItem?.add == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //   controller.isToggle1On.value = controller.selectedItem?.edit == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //   controller.isToggle2On.value = controller.selectedItem?.delete == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //   controller.isToggle3On.value = controller.selectedItem?.view == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //   controller.isToggle4On.value = controller.selectedItem?.approve == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //   controller.isToggle5On.value = controller.selectedItem?.issue == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //   controller.isToggle6On.value = controller.selectedItem?.selfView == 1
-                                                                          //       ? true
-                                                                          //       : false;
-                                                                          //
-                                                                          //   // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
-                                                                          //   // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";
-                                                                          //   // // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                          //   // // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                          //   // controller.selectedEquipmentId = controller.selectedItem?.add ?? 0;
-                                                                          //   // controller.selectedfrequencyId = controller.selectedItem?.edit ?? 0;
-                                                                          //   // controller.selectedfrequencyId = controller.selectedItem?.delete ?? 0;
-                                                                          //   // controller.selectedfrequencyId = controller.selectedItem?.view ?? 0;
-                                                                          //   // controller.selectedfrequencyId = controller.selectedItem?.approve ?? 0;
-                                                                          //   // controller.selectedfrequencyId = controller.selectedItem?.issue ?? 0;
-                                                                          //   // controller.selectedfrequencyId = controller.selectedItem?.selfView ?? 0;
+                                                                            //   controller.selectedItem = controller.moduleList!.firstWhere((element) =>
+                                                                            //       "${element?.id}" ==
+                                                                            //       _moduleList[0]);
+                                                                            //
+                                                                            //   controller.modulelistNumberCtrlr.text =
+                                                                            //       controller.selectedItem?.moduleName ?? '';
+                                                                            //   controller.featureCtrlr.text =
+                                                                            //       controller.selectedItem?.featureName ?? '';
+                                                                            //   controller.isToggleOn.value = controller.selectedItem?.add == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //   controller.isToggle1On.value = controller.selectedItem?.edit == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //   controller.isToggle2On.value = controller.selectedItem?.delete == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //   controller.isToggle3On.value = controller.selectedItem?.view == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //   controller.isToggle4On.value = controller.selectedItem?.approve == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //   controller.isToggle5On.value = controller.selectedItem?.issue == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //   controller.isToggle6On.value = controller.selectedItem?.selfView == 1
+                                                                            //       ? true
+                                                                            //       : false;
+                                                                            //
+                                                                            //   // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
+                                                                            //   // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";
+                                                                            //   // // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
+                                                                            //   // // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                            //   // controller.selectedEquipmentId = controller.selectedItem?.add ?? 0;
+                                                                            //   // controller.selectedfrequencyId = controller.selectedItem?.edit ?? 0;
+                                                                            //   // controller.selectedfrequencyId = controller.selectedItem?.delete ?? 0;
+                                                                            //   // controller.selectedfrequencyId = controller.selectedItem?.view ?? 0;
+                                                                            //   // controller.selectedfrequencyId = controller.selectedItem?.approve ?? 0;
+                                                                            //   // controller.selectedfrequencyId = controller.selectedItem?.issue ?? 0;
+                                                                            //   // controller.selectedfrequencyId = controller.selectedItem?.selfView ?? 0;
                                                                           },
                                                                         ),
                                                                         //     : Container(),
@@ -783,14 +786,14 @@ class CalibrationCertificateWeb extends GetView<CalibrationCertificateController
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {
-                                                                          //   print(_moduleList[0]);
-                                                                          //   controller.isDeleteDialog(
-                                                                          //       module_id: _moduleList[0],
-                                                                          //       module: _moduleList[1]);
+                                                                            //   print(_moduleList[0]);
+                                                                            //   controller.isDeleteDialog(
+                                                                            //       module_id: _moduleList[0],
+                                                                            //       module: _moduleList[1]);
                                                                           },
                                                                         )
                                                                         // : Container()

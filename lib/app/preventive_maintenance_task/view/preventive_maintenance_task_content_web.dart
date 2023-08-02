@@ -306,7 +306,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 .viewColor,
                                                             icon: Icons
                                                                 .remove_red_eye_outlined,
-                                                            label: 'View',
+                                                            message: 'View',
                                                             onPress: () {
                                                               controller.selectedItem = controller
                                                                   .pmTaskList
@@ -335,7 +335,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                             color: ColorValues
                                                                 .deleteColor,
                                                             icon: Icons.delete,
-                                                            label: 'Delete',
+                                                            message: 'Delete',
                                                             onPress: () {},
                                                           ),
                                                           // TableActionButton(
@@ -343,7 +343,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                           //       .appLightBlueColor,
                                                           //   icon: Icons
                                                           //       .access_time_filled_outlined,
-                                                          //   label: 'History',
+                                                          //   message: 'History',
                                                           //   onPress: () {},
                                                           // ),
                                                           TableActionButton(
@@ -351,7 +351,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 .executeColor,
                                                             icon: Icons
                                                                 .remove_red_eye_outlined,
-                                                            label: 'Execute',
+                                                            message: 'Execute',
                                                             onPress: () {
                                                               controller.selectedItem = controller
                                                                   .pmTaskList
@@ -380,7 +380,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 .linktopermitColor,
                                                             icon: Icons
                                                                 .link_sharp,
-                                                            label:
+                                                            message:
                                                                 'Link To Permit',
                                                             onPress: () {},
                                                           ),
@@ -389,7 +389,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 .pendingColor,
                                                             icon: Icons
                                                                 .numbers_outlined,
-                                                            label:
+                                                            message:
                                                                 'PM Pending Jobs',
                                                             onPress: () {},
                                                           ),

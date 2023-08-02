@@ -132,7 +132,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               CustomRichText(title: 'Title '),
                                               Expanded(
                                                 child: Container(
-                                                  margin: Dimens.edgeInsets5,
+                                                    margin: Dimens.edgeInsets5,
                                                     decoration: BoxDecoration(
                                                       boxShadow: [
                                                         BoxShadow(
@@ -184,7 +184,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
-                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -217,8 +220,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: Container(
-
-
                                                     width:
                                                         (MediaQuery.of(context)
                                                                 .size
@@ -252,9 +253,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   title: 'Operator '),
                                               Expanded(
                                                 child: Container(
-                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   margin: Dimens.edgeInsets5,
-
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -287,7 +290,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: Container(
-                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
                                                     width:
                                                         (MediaQuery.of(context)
                                                                 .size
@@ -329,7 +336,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
-
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -362,7 +368,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: Container(
-                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
                                                     width:
                                                         (MediaQuery.of(context)
                                                                 .size
@@ -403,7 +413,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
-
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -441,7 +450,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
                                                     child: DropdownWidget(
                                                       controller: controller,
                                                       dropdownList:
@@ -477,7 +490,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,
-
                                                     decoration: BoxDecoration(
                                                       boxShadow: [
                                                         BoxShadow(
@@ -529,8 +541,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
-                                                  height: MediaQuery.of(context).size.height * 0.040,
-
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -563,27 +577,30 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: Container(
-                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
                                                     width:
                                                         (MediaQuery.of(context)
                                                                 .size
                                                                 .width *
                                                             .3),
                                                     child: DropdownWidget(
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .countryList,
-                                                      isValueSelected:
-                                                          controller
-                                                              .isSelectedCountryType
-                                                              .value,
-                                                      selectedValue: controller
-                                                          .selectedCountry
-                                                          .value,
-                                                      onValueChanged:
-                                                        controller
-                                                            .onValueChanged
-                                                    ),
+                                                        controller: controller,
+                                                        dropdownList: controller
+                                                            .countryList,
+                                                        isValueSelected: controller
+                                                            .isSelectedCountryType
+                                                            .value,
+                                                        selectedValue:
+                                                            controller
+                                                                .selectedCountry
+                                                                .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged),
                                                   ),
                                                 ),
                                               ),
@@ -591,7 +608,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
-                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -624,26 +644,30 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: Container(
-                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
                                                     width:
                                                         (MediaQuery.of(context)
                                                                 .size
                                                                 .width *
                                                             .3),
                                                     child: DropdownWidget(
-                                                      controller: controller,
-                                                      dropdownList:
-                                                          controller.stateList,
-                                                      isValueSelected:
-                                                          controller
-                                                              .isSelectedStateType
-                                                              .value,
-                                                      selectedValue: controller
-                                                          .selectedState.value,
-                                                      onValueChanged :
-                                                        controller
-                                                            .onValueChanged
-                                                    ),
+                                                        controller: controller,
+                                                        dropdownList: controller
+                                                            .stateList,
+                                                        isValueSelected: controller
+                                                            .isSelectedStateType
+                                                            .value,
+                                                        selectedValue:
+                                                            controller
+                                                                .selectedState
+                                                                .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged),
                                                   ),
                                                 ),
                                               ),
@@ -660,7 +684,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
-                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -693,28 +720,34 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .2) -
                                                       45,
                                                   child: Container(
-                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
                                                     width:
                                                         (MediaQuery.of(context)
                                                                 .size
                                                                 .width *
                                                             .3),
                                                     child: DropdownWidget(
-                                                      controller: controller,
-                                                      dropdownList:
-                                                          controller.cityList,
-                                                      isValueSelected:
-                                                          controller.isSelectedCityType
-                                                              .value,
-                                                      selectedValue: controller
-                                                          .selectedCity.value,
-                                                      // onValueChanged:
-                                                      //     controller.onValueChanged(46, 46),
-                                                      onValueChanged:
-                                                        controller
-                                                            .onValueChanged
-                                                      // },
-                                                    ),
+                                                        controller: controller,
+                                                        dropdownList:
+                                                            controller.cityList,
+                                                        isValueSelected: controller
+                                                            .isSelectedCityType
+                                                            .value,
+                                                        selectedValue:
+                                                            controller
+                                                                .selectedCity
+                                                                .value,
+                                                        // onValueChanged:
+                                                        //     controller.onValueChanged(46, 46),
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged
+                                                        // },
+                                                        ),
                                                   ),
                                                 ),
                                               ),
@@ -864,35 +897,36 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           // print("$controller.selectedItem");
                                           child: controller.selectedItem == null
                                               ? CustomElevatedButton(
-                                              backgroundColor: ColorValues
-                                                  .appDarkBlueColor,
-                                              onPressed: () {
-                                                controller
-                                                    .createFacilityType()
-                                                    .then((value) {
-                                                  print("value,$value");
-                                                  if (value == true)
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  onPressed: () {
                                                     controller
-                                                        .issuccessCreatechecklist();
-                                                });
-                                              },
-                                              text: 'Create BusinessType ')
+                                                        .createFacilityType()
+                                                        .then((value) {
+                                                      print("value,$value");
+                                                      if (value == true)
+                                                        controller
+                                                            .issuccessCreatechecklist();
+                                                    });
+                                                  },
+                                                  text: 'Create BusinessType ')
                                               : CustomElevatedButton(
-                                              backgroundColor: ColorValues
-                                                  .appDarkBlueColor,
-                                              onPressed: () {
-                                                controller
-                                                    .updateFacilityList(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  onPressed: () {
                                                     controller
-                                                        .selectedFacilityId?.id)
-                                                    .then((value) {
-                                                  print("value,$value");
-                                                  if (value == true)
-                                                    controller
-                                                        .issuccessCreatechecklist();
-                                                });
-                                              },
-                                              text: 'Update')),
+                                                        .updateFacilityList(
+                                                            controller
+                                                                .selectedFacilityId
+                                                                ?.id)
+                                                        .then((value) {
+                                                      print("value,$value");
+                                                      if (value == true)
+                                                        controller
+                                                            .issuccessCreatechecklist();
+                                                    });
+                                                  },
+                                                  text: 'Update')),
                                     ],
                                   ),
                                 ],
@@ -981,17 +1015,23 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         height: 40,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
-                                          onChanged: (value) => controller.search(value),
+                                          onChanged: (value) =>
+                                              controller.search(value),
                                           decoration: InputDecoration(
-                                            enabledBorder: const OutlineInputBorder(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            focusedBorder: const OutlineInputBorder(
+                                            focusedBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            contentPadding:
+                                                Dimens.edgeInsets10_0_0_0,
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
@@ -1053,141 +1093,140 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             }).toList(),
                                           ),
                                         )
-                                      :
-                                  Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .facilityTypeListPaginationController,
-                                      columns: [
-                                        "Sr.No.",
-                                        "Title",
-                                        "Address",
-                                        "City",
-                                        "State",
-                                        "Country",
-                                        "Pin",
-                                        // "Blocks",
-                                        "Action"
-                                      ].map((column) {
-                                        if (column == "Action") {
-                                          return TableViewColumn(
-                                            minWidth: Get.width * 0.20, // Adjust the width as needed
-                                            label: column,
-                                          );
-                                        } else {
-                                          return TableViewColumn(
-                                            minWidth: Get.width * 0.13,
-                                            label: column,
-                                          );
-                                        }
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.facilityTypeList.length,
-                                          (index) {
-                                            var facilityTypeListDetails =
-                                                controller
-                                                    .facilityTypeList[index];
-                                            return [
-                                              '${facilityTypeListDetails.id}',
-                                              '${facilityTypeListDetails.name}',
-                                              '${facilityTypeListDetails.address}',
-                                              '${facilityTypeListDetails.city}',
-                                              '${facilityTypeListDetails.state}',
-                                              '${facilityTypeListDetails.country}',
-                                              '${facilityTypeListDetails.pin}',
-                                              // '${facilityTypeListDetails.blocks}',
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .facilityTypeListPaginationController,
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "Address",
+                                              "City",
+                                              "State",
+                                              "Country",
+                                              "Pin",
+                                              // "Blocks",
                                               "Action"
-                                            ];
-                                          },
+                                            ].map((column) {
+                                              if (column == "Action") {
+                                                return TableViewColumn(
+                                                  minWidth: Get.width *
+                                                      0.20, // Adjust the width as needed
+                                                  label: column,
+                                                );
+                                              } else {
+                                                return TableViewColumn(
+                                                  minWidth: Get.width * 0.13,
+                                                  label: column,
+                                                );
+                                              }
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller
+                                                    .facilityTypeList.length,
+                                                (index) {
+                                                  var facilityTypeListDetails =
+                                                      controller
+                                                              .facilityTypeList[
+                                                          index];
+                                                  return [
+                                                    '${facilityTypeListDetails.id}',
+                                                    '${facilityTypeListDetails.name}',
+                                                    '${facilityTypeListDetails.address}',
+                                                    '${facilityTypeListDetails.city}',
+                                                    '${facilityTypeListDetails.state}',
+                                                    '${facilityTypeListDetails.country}',
+                                                    '${facilityTypeListDetails.pin}',
+                                                    // '${facilityTypeListDetails.blocks}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_permitTypeList) {
+                                              return TableViewRow(
+                                                  height: 45,
+                                                  cells: _permitTypeList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value ==
+                                                                'Checkbox')
+                                                            ? Checkbox(
+                                                                value: controller
+                                                                    .isChecked
+                                                                    .value,
+                                                                onChanged:
+                                                                    (val) {})
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        Container(
+                                                                          padding:
+                                                                              EdgeInsets.only(bottom: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            children: [
+                                                                              Container(
+                                                                                padding: EdgeInsets.only(bottom: 10),
+                                                                                child: Row(children: [
+                                                                                  TableActionButton(
+                                                                                    color: ColorValues.appLightBlueColor,
+                                                                                    icon: Icons.visibility,
+                                                                                    message: 'View Blocks',
+                                                                                    onPress: () {},
+                                                                                  ),
+                                                                                  TableActionButton(
+                                                                                    color: ColorValues.appLightBlueColor,
+                                                                                    icon: Icons.edit,
+                                                                                    message: 'Edit',
+                                                                                    onPress: () {
+                                                                                      print(_permitTypeList[0]);
+                                                                                      controller.selectedItem = controller.facilityTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                      controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                      controller.addressCtrlr.text = controller.selectedItem?.address ?? '';
+                                                                                      controller.zipcodeCtrlr.text = "${controller.selectedItem?.pin}";
+                                                                                      // controller.descriptionCtrlr.text = "${controller.selectedFacilityId?.description}";
+
+                                                                                      controller.selectedCountry.value = controller.selectedItem?.country ?? "";
+                                                                                      controller.selectedState.value = controller.selectedItem?.state ?? "";
+                                                                                      controller.selectedCity.value = controller.selectedItem?.city ?? "";
+
+                                                                                      // controller.selectedOwner.value = controller.selectedFacilityId?.owner ?? "";
+                                                                                      // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                                                                                      // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                                                                                      // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                                                                                      // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                                                                                    },
+                                                                                  ),
+                                                                                  TableActionButton(
+                                                                                    color: ColorValues.appRedColor,
+                                                                                    icon: Icons.delete,
+                                                                                    message: 'Delete',
+                                                                                    onPress: () {
+                                                                                      // controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                      controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                                    },
+                                                                                  ),
+                                                                                ]),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                        // : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
                                         ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 45,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'Checkbox')
-                                                      ? Checkbox(
-                                                          value: controller
-                                                              .isChecked.value,
-                                                          onChanged: (val) {})
-                                                      : (value == "Action")
-                                                          ? Wrap(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              Container(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            10),
-                                                                child: Column(
-                                                                  children: [
-                                                                    Container(
-                                                                      padding: EdgeInsets.only(
-                                                                          bottom:
-                                                                              10),
-                                                                      child: Row(
-                                                                          children: [
-                                                                            TableActionButton(
-                                                                              color: ColorValues
-                                                                                  .appLightBlueColor,
-                                                                              icon: Icons
-                                                                                  .visibility,
-                                                                              label:
-                                                                              'View Blocks',
-                                                                              onPress:
-                                                                                  () {},
-                                                                            ),
-                                                                            TableActionButton(
-                                                                              color: ColorValues.appLightBlueColor,
-                                                                              icon: Icons.edit,
-                                                                              label: 'Edit',
-                                                                              onPress: () {
-                                                                                print(_permitTypeList[0]);
-                                                                                controller.selectedItem = controller.facilityTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
-
-                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                controller.addressCtrlr.text = controller.selectedItem?.address ?? '';
-                                                                                controller.zipcodeCtrlr.text = "${controller.selectedItem?.pin}";
-                                                                                // controller.descriptionCtrlr.text = "${controller.selectedFacilityId?.description}";
-
-                                                                                controller.selectedCountry.value = controller.selectedItem?.country ?? "";
-                                                                                controller.selectedState.value = controller.selectedItem?.state ?? "";
-                                                                                controller.selectedCity.value = controller.selectedItem?.city ?? "";
-
-                                                                                // controller.selectedOwner.value = controller.selectedFacilityId?.owner ?? "";
-                                                                                // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
-                                                                              },
-                                                                            ),
-                                                                            TableActionButton(
-                                                                              color: ColorValues.appRedColor,
-                                                                              icon: Icons.delete,
-                                                                              label: 'Delete',
-                                                                              onPress: () {
-                                                                                // controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
-                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
-                                                                              },
-
-                                                                            ),
-                                                                          ]),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

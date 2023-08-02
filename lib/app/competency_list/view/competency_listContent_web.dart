@@ -122,7 +122,9 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Expanded(child: CustomRichText(title: 'Name:')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Name:')),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -459,7 +461,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -482,7 +484,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

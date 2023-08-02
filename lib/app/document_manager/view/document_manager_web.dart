@@ -322,7 +322,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                                 .appDarkBlueColor,
                                                             icon: Icons
                                                                 .remove_red_eye_outlined,
-                                                            // label: 'view',
+                                                            message: 'view',
                                                             onPress: () {
                                                               controller.selectedItem = controller
                                                                   .userList!
@@ -348,7 +348,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                                 .appYellowColor,
                                                             icon:
                                                                 Icons.download,
-                                                            //  label: 'Edit',
+                                                            message: 'Edit',
                                                             onPress: () {
                                                               controller.selectedItem = controller
                                                                   .userList!
@@ -373,7 +373,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                             color: ColorValues
                                                                 .appGreenColor,
                                                             icon: Icons.check,
-                                                            //  label: 'Edit',
+                                                            message: 'Edit',
                                                             onPress: () {
                                                               controller.selectedItem = controller
                                                                   .userList!
@@ -398,7 +398,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                             color: ColorValues
                                                                 .appRedColor,
                                                             icon: Icons.close,
-                                                            //  label: 'Edit',
+                                                            message: 'Edit',
                                                             onPress: () {
                                                               controller.selectedItem = controller
                                                                   .userList!
@@ -423,7 +423,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                             color: ColorValues
                                                                 .skyBlueColor,
                                                             icon: Icons.send,
-                                                            // label: 'Delete',
+                                                            message: 'Delete',
                                                             onPress: () {},
                                                           )
                                                         ])

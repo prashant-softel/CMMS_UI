@@ -179,7 +179,7 @@ class PermitListTableDialog extends GetView<JobDetailsController> {
                                                 color:
                                                     ColorValues.appPurpleColor,
                                                 icon: Icons.add,
-                                                label: 'Job Card',
+                                                message: 'Job Card',
                                                 onPress: () {
                                                   controller
                                                       .goToJobCardScreen();

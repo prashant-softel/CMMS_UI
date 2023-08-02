@@ -18,15 +18,14 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EscalationMatrixListController>(
-      id: "escalator_matrix_list",
-      builder: (controller){
-        return  Column(
-            children: [    
+        id: "escalator_matrix_list",
+        builder: (controller) {
+          return Column(
+            children: [
               Expanded(
                 child: Container(
                     color: ColorValues.lightBlueishColor,
-                    child: Column(
-                      children: [
+                    child: Column(children: [
                       Container(
                         height: 45,
                         decoration: BoxDecoration(
@@ -81,7 +80,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                         ),
                       ),
                       Dimens.boxHeight20,
-           
+
                       ///
                       SizedBox(
                         height: 60,
@@ -89,8 +88,6 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                           title: 'Escalation Matrix List'.tr,
                           action: Row(
                             children: [
-                           
-                               
                               Dimens.boxWidth10,
                               ActionButton(
                                 icon: Icons.add,
@@ -102,15 +99,11 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                 color: ColorValues.appGreenColor,
                               ),
                               Dimens.boxWidth10,
-                              
-                             
-                            
                             ],
                           ),
                         ),
                       ),
-           
-                     
+
                       SizedBox(
                         height: 20,
                       ),
@@ -177,9 +170,9 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                           ),
                         ],
                       ),
-           
+
                       ///
-           
+
                       Expanded(
                         child: Container(
                           child: GetBuilder<EscalationMatrixListController>(
@@ -188,7 +181,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                 return //
                                     Column(children: [
                                   ///
-           
+
                                   Expanded(
                                     child: ScrollableTableView(
                                       // paginationController: controller
@@ -209,7 +202,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                         //       .incidentReportList.length,
                                         //   (index) => [
                                         //     // AssetName(
-           
+
                                         //     //    '${controller.warrantyClaimList[index].wc_id}',
                                         //     //   // 'dummy data',
                                         //     //   1,
@@ -248,85 +241,90 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                                       //     id: int.tryParse(
                                                       //         '${record[0]}'));
                                                     },
-                                                    child:
-                                                      
-                                                        value == 'Actions'
-                                                            ? Wrap(
-                                                                children: [
-                                                                  Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        TableActionButton(
-                                                                          color: ColorValues
-                                                                              .appDarkBlueColor,
-                                                                          icon: Icons
-                                                                              .visibility,
-                                                                          onPress:
-                                                                              () {
-                                                                            controller.viewEscalationMatrix(id: 0);
-                                                                            // print('record:${int.tryParse('${record[0]}')}');
-                                                                          },
-                                                                        ),
-                                                                        //),
-           
-                                                                        TableActionButton(
-                                                                          color: ColorValues
-                                                                              .appYellowColor,
-                                                                          icon: Icons
-                                                                              .edit,
-                                                                          onPress:
-                                                                              () {
-                                                                            // controller.editIncidentReport(id: int.tryParse('${record[0]}'));
-                                                                            // print('edit record:${int.tryParse('${record[0]}')}');
-                                                                          },
-                                                                        ),
-           
-                                                                        TableActionButton(
-                                                                          color: Colors
-                                                                              .red,
-                                                                          icon: Icons
-                                                                              .delete,
-                                                                          onPress:
-                                                                              () {
-                                                                            // Get.dialog(IncidentReportRejectDialog(id: record[0]));
-                                                                            // controller.viewNewPermitList(permitId: int.tryParse(_newPermitList[0]));
-                                                                          },
-                                                                        ),
-           
-                                                                        //),
-           
-                                                                        // TableActionButton(
-                                                                        //   color: Colors.red,
-                                                                        //   icon:
-                                                                        //       Icons.delete,
-                                                                        //   label: 'Delete',
-                                                                        //   onPress: () {},
-                                                                        // ),
-                                                                        //),
-                                                                      ]),
-           
-                                                                  // TableActionButton(
-                                                                  //   color: Colors.green,
-                                                                  //   icon: Icons
-                                                                  //       .visibility,
-                                                                  //   label:
-                                                                  //       'Approve Request',
-                                                                  //   onPress: () {},
-                                                                  // ),
-                                                                  // TableActionButton(
-                                                                  //   color: Colors.red,
-                                                                  //   icon: Icons
-                                                                  //       .visibility,
-                                                                  //   label:
-                                                                  //       'Reject Request',
-                                                                  //   onPress: () {},
-                                                                  // ),
-                                                                ],
-                                                              )
-                                                            : Text(
-                                                                value.toString()),
+                                                    child: value == 'Actions'
+                                                        ? Wrap(
+                                                            children: [
+                                                              Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appDarkBlueColor,
+                                                                      icon: Icons
+                                                                          .visibility,
+                                                                      message:
+                                                                          'View',
+                                                                      onPress:
+                                                                          () {
+                                                                        controller.viewEscalationMatrix(
+                                                                            id: 0);
+                                                                        // print('record:${int.tryParse('${record[0]}')}');
+                                                                      },
+                                                                    ),
+                                                                    //),
+
+                                                                    TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appYellowColor,
+                                                                      icon: Icons
+                                                                          .edit,
+                                                                      message:
+                                                                          'Edit',
+                                                                      onPress:
+                                                                          () {
+                                                                        // controller.editIncidentReport(id: int.tryParse('${record[0]}'));
+                                                                        // print('edit record:${int.tryParse('${record[0]}')}');
+                                                                      },
+                                                                    ),
+
+                                                                    TableActionButton(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      icon: Icons
+                                                                          .delete,
+                                                                      message:
+                                                                          'Delete',
+                                                                      onPress:
+                                                                          () {
+                                                                        // Get.dialog(IncidentReportRejectDialog(id: record[0]));
+                                                                        // controller.viewNewPermitList(permitId: int.tryParse(_newPermitList[0]));
+                                                                      },
+                                                                    ),
+
+                                                                    //),
+
+                                                                    // TableActionButton(
+                                                                    //   color: Colors.red,
+                                                                    //   icon:
+                                                                    //       Icons.delete,
+                                                                    //   label: 'Delete',
+                                                                    //   onPress: () {},
+                                                                    // ),
+                                                                    //),
+                                                                  ]),
+
+                                                              // TableActionButton(
+                                                              //   color: Colors.green,
+                                                              //   icon: Icons
+                                                              //       .visibility,
+                                                              //   label:
+                                                              //       'Approve Request',
+                                                              //   onPress: () {},
+                                                              // ),
+                                                              // TableActionButton(
+                                                              //   color: Colors.red,
+                                                              //   icon: Icons
+                                                              //       .visibility,
+                                                              //   label:
+                                                              //       'Reject Request',
+                                                              //   onPress: () {},
+                                                              // ),
+                                                            ],
+                                                          )
+                                                        : Text(
+                                                            value.toString()),
                                                   ),
                                                 );
                                               },
@@ -336,7 +334,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                       ).toList(),
                                     ),
                                   ),
-           
+
                                   // paginated
                                   Center(
                                     child: Padding(
@@ -413,10 +411,10 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                           }),
                                     ),
                                   ),
-           
+
                                   ///
                                 ]);
-           
+
                                 //);
                               }),
                         ),
@@ -425,11 +423,6 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
               ),
             ],
           );
-    
-    });
-   
+        });
   }
-
-  
 }
-

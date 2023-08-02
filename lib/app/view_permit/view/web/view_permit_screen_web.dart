@@ -607,7 +607,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                                         TableActionButton(
                                                                                                           color: Colors.red,
                                                                                                           icon: Icons.delete_outline,
-                                                                                                          label: 'Remove',
+                                                                                                          message: 'Remove',
                                                                                                           onPress: () {
                                                                                                             // controller.showNewPermitListDetails(
                                                                                                             //     controller.permitId.value);
@@ -826,7 +826,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                                         TableActionButton(
                                                                                                           color: Colors.blue,
                                                                                                           icon: Icons.delete_outline,
-                                                                                                          label: 'Compete',
+                                                                                                          message: 'Compete',
                                                                                                           onPress: () {
                                                                                                             // controller.showNewPermitListDetails(
                                                                                                             //     controller.permitId.value);
@@ -2449,7 +2449,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                                         TableActionButton(
                                                                                                           color: Colors.red,
                                                                                                           icon: Icons.delete_outline,
-                                                                                                          label: 'Remove',
+                                                                                                          message: 'Remove',
                                                                                                           onPress: () {
                                                                                                             // controller.showNewPermitListDetails(
                                                                                                             //     controller.permitId.value);
@@ -2670,7 +2670,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                                         TableActionButton(
                                                                                                           color: Colors.blue,
                                                                                                           icon: Icons.delete_outline,
-                                                                                                          label: 'Competency',
+                                                                                                          message: 'Competency',
                                                                                                           onPress: () {
                                                                                                             // controller.showNewPermitListDetails(
                                                                                                             //     controller.permitId.value);

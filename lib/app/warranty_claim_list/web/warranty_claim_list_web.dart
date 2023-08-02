@@ -344,6 +344,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                                         TableActionButton(
                                                                                           color: ColorValues.appDarkBlueColor,
                                                                                           icon: Icons.visibility,
+                                                                                          message: 'View',
                                                                                           onPress: () {
                                                                                             controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
                                                                                             print('record:${int.tryParse('${record[0]}')}');
@@ -354,6 +355,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                                         TableActionButton(
                                                                                           color: ColorValues.appYellowColor,
                                                                                           icon: Icons.edit,
+                                                                                          message: 'Edit',
                                                                                           onPress: () {
                                                                                             controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
                                                                                             print('edit record:${int.tryParse('${record[0]}')}');

@@ -384,7 +384,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     .viewColor,
                                                                 icon: Icons
                                                                     .remove_red_eye_outlined,
-                                                                // label: 'view',
+                                                                message: 'view',
                                                                 onPress: () {
                                                                   controller.selectedItem = controller
                                                                       .filteredData
@@ -412,7 +412,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     .editColor,
                                                                 icon:
                                                                     Icons.edit,
-                                                                //  label: 'Edit',
+                                                                message: 'Edit',
                                                                 onPress: () {
                                                                   controller.selectedItem = controller
                                                                       .filteredData
@@ -440,7 +440,8 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     .deleteColor,
                                                                 icon: Icons
                                                                     .delete,
-                                                                // label: 'Delete',
+                                                                message:
+                                                                    'Delete',
                                                                 onPress: () {},
                                                               )
                                                             ])

@@ -101,11 +101,12 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                        Expanded(child: CustomRichText(title: 'Title ')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Title ')),
                                             Expanded(
                                               child: Container(
                                                   margin: Dimens.edgeInsets5,
-
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -157,9 +158,11 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             ),
                                             Expanded(
                                               child: Container(
-                                                height: MediaQuery.of(context).size.height * 0.040,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
                                                 margin: Dimens.edgeInsets5,
-
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
@@ -190,7 +193,10 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                         .2) -
                                                     45,
                                                 child: Container(
-                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   width: (MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -225,11 +231,16 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             //   "Description ",
                                             //   style: Styles.blackBold16,
                                             // ),
-                                        Expanded(child: CustomRichText(title: 'Description ')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Description ')),
 
                                             Expanded(
                                               child: Container(
-                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   margin: Dimens.edgeInsets5,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -308,42 +319,42 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                       width: 10,
                                     ),
                                     Container(
-                                        height: 40,
-                                        width: (Get.width * .2) - 70,
-                                        child:
-                                      // controller.selectedItem == null
-                                        //     ?
-                                        CustomElevatedButton(
-                                            backgroundColor: ColorValues
-                                                .appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createBlockList()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
-                                                  controller
-                                                      .issuccessCreateBlock();
-                                              });
-                                            },
-                                            text: 'Create Block List'),
-                                            // : CustomElevatedButton(
-                                            // backgroundColor: ColorValues
-                                            //     .appDarkBlueColor,
-                                            // onPressed: () {
-                                            //   controller
-                                            //       .updateBusinessType(
-                                            //       controller
-                                            //           .selectedItem?.id)
-                                            //       .then((value) {
-                                            //     print("value,$value");
-                                            //     if (value == true)
-                                            //       controller
-                                            //           .issuccessCreatechecklist();
-                                            //   });
-                                            // },
-                                            // text: 'Update')
-                                      ),
+                                      height: 40,
+                                      width: (Get.width * .2) - 70,
+                                      child:
+                                          // controller.selectedItem == null
+                                          //     ?
+                                          CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              onPressed: () {
+                                                controller
+                                                    .createBlockList()
+                                                    .then((value) {
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreateBlock();
+                                                });
+                                              },
+                                              text: 'Create Block List'),
+                                      // : CustomElevatedButton(
+                                      // backgroundColor: ColorValues
+                                      //     .appDarkBlueColor,
+                                      // onPressed: () {
+                                      //   controller
+                                      //       .updateBusinessType(
+                                      //       controller
+                                      //           .selectedItem?.id)
+                                      //       .then((value) {
+                                      //     print("value,$value");
+                                      //     if (value == true)
+                                      //       controller
+                                      //           .issuccessCreatechecklist();
+                                      //   });
+                                      // },
+                                      // text: 'Update')
+                                    ),
                                   ],
                                 ),
                               ],
@@ -373,7 +384,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-
                                       // Spacer(),
                                       // Text(
                                       //   "Facility Type:",
@@ -466,7 +476,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                               "Sr.No.",
                                               "Title",
                                               "SPV",
-                                                  "Address",
+                                              "Address",
                                               "City",
                                               "State",
                                               "Country",
@@ -491,7 +501,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                     '',
                                                     '',
                                                     '',
-
                                                     '',
                                                     '',
                                                     '',
@@ -513,115 +522,114 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             }).toList(),
                                           ),
                                         )
-                                      :
-                                  Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .blockTypeListPaginationController,
-                                      columns: [
-                                        "Sr.No.",
-                                        "Title",
-                                        "SPV",
-                                        "Address",
-
-                                        "City",
-                                        "State",
-                                        "Country",
-                                        "Pin",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.blockTypeList.length,
-                                          (index) {
-                                            var facilityTypeListDetails =
-                                                controller.blockTypeList[index];
-                                            return [
-                                              '${facilityTypeListDetails.id}',
-                                              '${facilityTypeListDetails.name}',
-                                              '${facilityTypeListDetails.spv}',
-                                              '${facilityTypeListDetails.address}',
-                                              '${facilityTypeListDetails.city}',
-                                              '${facilityTypeListDetails.state}',
-                                              '${facilityTypeListDetails.country}',
-                                              '${facilityTypeListDetails.pin}',
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .blockTypeListPaginationController,
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              "SPV",
+                                              "Address",
+                                              "City",
+                                              "State",
+                                              "Country",
+                                              "Pin",
                                               "Action"
-                                            ];
-                                          },
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.12,
+                                                label: column,
+                                              );
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller.blockTypeList.length,
+                                                (index) {
+                                                  var facilityTypeListDetails =
+                                                      controller
+                                                          .blockTypeList[index];
+                                                  return [
+                                                    '${facilityTypeListDetails.id}',
+                                                    '${facilityTypeListDetails.name}',
+                                                    '${facilityTypeListDetails.spv}',
+                                                    '${facilityTypeListDetails.address}',
+                                                    '${facilityTypeListDetails.city}',
+                                                    '${facilityTypeListDetails.state}',
+                                                    '${facilityTypeListDetails.country}',
+                                                    '${facilityTypeListDetails.pin}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_permitTypeList) {
+                                              return TableViewRow(
+                                                  height: 45,
+                                                  cells: _permitTypeList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value ==
+                                                                'Checkbox')
+                                                            ? Checkbox(
+                                                                value: controller
+                                                                    .isChecked
+                                                                    .value,
+                                                                onChanged:
+                                                                    (val) {})
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        Container(
+                                                                          padding:
+                                                                              EdgeInsets.only(bottom: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            children: [
+                                                                              Container(
+                                                                                padding: EdgeInsets.only(bottom: 10),
+                                                                                child: Row(children: [
+                                                                                  TableActionButton(
+                                                                                    color: ColorValues.appLightBlueColor,
+                                                                                    icon: Icons.edit,
+                                                                                    message: 'Edit',
+                                                                                    onPress: () {
+                                                                                      controller.selectedItem = controller.blockTypeList!.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                      // controller.selectedfacility.value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?. )!;
+                                                                                      // print(controller.selectedBusinessType.value);
+                                                                                      // controller.
+                                                                                      // selectedfacilityId :
+                                                                                      // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);
+                                                                                      controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                      // controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
+                                                                                    },
+                                                                                  ),
+                                                                                  TableActionButton(
+                                                                                    color: ColorValues.appRedColor,
+                                                                                    icon: Icons.delete,
+                                                                                    message: 'Delete',
+                                                                                    onPress: () {
+                                                                                      controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                                    },
+                                                                                  ),
+                                                                                ]),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                        // : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
                                         ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 45,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'Checkbox')
-                                                      ? Checkbox(
-                                                          value: controller
-                                                              .isChecked.value,
-                                                          onChanged: (val) {})
-                                                      : (value == "Action")
-                                                          ? Wrap(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              Container(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            10),
-                                                                child: Column(
-                                                                  children: [
-                                                                    Container(
-                                                                      padding: EdgeInsets.only(
-                                                                          bottom:
-                                                                              10),
-                                                                      child: Row(
-                                                                          children: [
-                                                                            TableActionButton(
-                                                                              color: ColorValues.appLightBlueColor,
-                                                                              icon: Icons.edit,
-                                                                              label: 'Edit',
-                                                                              onPress: () {
-                                                                                controller.selectedItem = controller.blockTypeList!.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
-                                                                                // controller.selectedfacility.value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?. )!;
-                                                                                // print(controller.selectedBusinessType.value);
-                                                                                // controller.
-                                                                                // selectedfacilityId :
-                                                                                // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);
-                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                // controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
-
-
-                                                                              },
-                                                                            ),
-                                                                            TableActionButton(
-                                                                              color: ColorValues.appRedColor,
-                                                                              icon: Icons.delete,
-                                                                              label: 'Delete',
-                                                                              onPress: () {
-                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
-                                                                              },
-                                                                            ),
-                                                                          ]),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

@@ -316,8 +316,7 @@ class _StockManagementGoodsOrdersWebState
                                                                 .viewColor,
                                                             icon: Icons
                                                                 .remove_red_eye_outlined,
-                                                            // label: 'view',
-
+                                                            message: 'view',
                                                             onPress: () {
                                                               controller.viewAddGoodsOrdersDetails(
                                                                   id: int.tryParse(
@@ -335,12 +334,13 @@ class _StockManagementGoodsOrdersWebState
                                                             color: ColorValues
                                                                 .editColor,
                                                             icon: Icons.edit,
+                                                            message: 'Edit',
                                                           ),
                                                           TableActionButton(
                                                             color: ColorValues
                                                                 .deleteColor,
                                                             icon: Icons.delete,
-                                                            // label: 'Delete',
+                                                            message: 'Delete',
                                                             onPress: () {
                                                               controller.isDeleteDialog(
                                                                   id: record[0],

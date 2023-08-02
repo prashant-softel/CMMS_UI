@@ -333,7 +333,7 @@ class JobDataSource extends DataTableSource {
                                   child: TableActionButton(
                                     color: ColorValues.viewColor,
                                     icon: Icons.visibility,
-                                    // label: 'View',
+                                    message: 'View',
                                     onPress: () {
                                       controller.goToJobDetailsScreen(
                                         int.tryParse('${jobDetails?.id}'),
@@ -348,7 +348,7 @@ class JobDataSource extends DataTableSource {
                                     child: TableActionButton(
                                       color: ColorValues.addNewColor,
                                       icon: Icons.add,
-                                      // label: 'Job Card',
+                                      message: 'Job Card',
                                       onPress: () {
                                         controller.goToJobCardScreen(
                                           int.tryParse('${jobDetails?.id}'),
@@ -365,7 +365,7 @@ class JobDataSource extends DataTableSource {
                                     child: TableActionButton(
                                       color: ColorValues.linktopermitColor,
                                       icon: Icons.link,
-                                      // label: 'Link Permit',
+                                      message: 'Link Permit',
                                       onPress: () {
                                         controller.goToJobDetailsScreen(
                                             int.tryParse('${jobDetails?.id}'));
@@ -375,7 +375,7 @@ class JobDataSource extends DataTableSource {
                                   TableActionButton(
                                     color: ColorValues.appYellowColor,
                                     icon: Icons.assignment_ind,
-                                    // label: 'Re-Assign',
+                                    message: 'Re-Assign',
                                     onPress: () {
                                       controller.goToEditJobScreen(
                                           int.tryParse('${jobDetails?.id}'));
@@ -388,7 +388,7 @@ class JobDataSource extends DataTableSource {
                                   TableActionButton(
                                 color: ColorValues.appYellowColor,
                                 icon: Icons.assignment,
-                                // label: 'Assign',
+                                message: 'Assign',
                                 onPress: () {
                                   controller.goToEditJobScreen(
                                       int.tryParse('${jobDetails?.id}'));

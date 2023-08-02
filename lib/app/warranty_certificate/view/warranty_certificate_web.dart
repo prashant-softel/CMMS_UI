@@ -63,8 +63,8 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                     onTap: () {
                       Get.back();
                     },
-                    child:
-                        Text(" / WARRANTY CERTIFICATE LIST", style: Styles.greyMediumLight12),
+                    child: Text(" / WARRANTY CERTIFICATE LIST",
+                        style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
@@ -266,7 +266,8 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                                                   //         .issuccessCreatemodulelist();
                                                   // });
                                                 },
-                                                text: 'Create WarrantyCertificate List')
+                                                text:
+                                                    'Create WarrantyCertificate List')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -399,7 +400,8 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.warrantyList?.length ??
+                                                controller
+                                                        .warrantyList?.length ??
                                                     0,
                                                 (index) {
                                                   return [
@@ -471,7 +473,8 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller.warrantyList?.length ??
+                                                controller
+                                                        .warrantyList?.length ??
                                                     0,
                                                 (index) {
                                                   var moduleListDetails =
@@ -484,7 +487,7 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                                                     '${moduleListDetails?.asset_name}',
                                                     // '${moduleListDetails?.menuImage}',
                                                     '${moduleListDetails?.warrantyTypeId}',
-                                                    '${moduleListDetails?.warranty_provider }',
+                                                    '${moduleListDetails?.warranty_provider}',
                                                     '${moduleListDetails?.categoryName}',
                                                     '${moduleListDetails?.warranty_description}',
                                                     '${moduleListDetails?.warrantyTypeName}',
@@ -528,7 +531,7 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                                                                               ColorValues.appLightBlueColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -584,7 +587,7 @@ class WarrantyCertificateWeb extends GetView<WarrantyCertificateController> {
                                                                               ColorValues.appRedColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

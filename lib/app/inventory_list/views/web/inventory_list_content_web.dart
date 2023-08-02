@@ -259,8 +259,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.viewColor,
                                                                             icon:
                                                                                 Icons.visibility,
-                                                                            // label:
-                                                                            //     'View',
+                                                                            message:
+                                                                                'View',
                                                                             onPress:
                                                                                 () {
                                                                               controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
@@ -274,8 +274,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.appLightBlueColor,
                                                                             icon:
                                                                                 Icons.edit,
-                                                                            // label:
-                                                                            //     'Edit',
+                                                                            message:
+                                                                                'Edit',
                                                                             onPress:
                                                                                 () {
                                                                               controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
@@ -289,8 +289,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.appRedColor,
                                                                             icon:
                                                                                 Icons.delete,
-                                                                            // label:
-                                                                            //     'Delete',
+                                                                            message:
+                                                                                'Delete',
                                                                             onPress:
                                                                                 () {},
                                                                           ),
@@ -301,8 +301,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                     //       .appGreenColor,
                                                                     //   icon: Icons
                                                                     //       .visibility,
-                                                                    //   label:
-                                                                    //       'Approve Request',
+                                                                    //  message:
+                                                                    ////       'Approve Request',
                                                                     //   onPress: () {},
                                                                     // ),
                                                                     // TableActionButton(
@@ -310,7 +310,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                     //       .appRedColor,
                                                                     //   icon: Icons
                                                                     //       .visibility,
-                                                                    //   label:
+                                                                    //  message:
                                                                     //       'Reject Request',
                                                                     //   onPress: () {},
                                                                     // ),
@@ -435,8 +435,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.viewColor,
                                                                             icon:
                                                                                 Icons.visibility,
-                                                                            // label:
-                                                                            //     'View',
+                                                                            message:
+                                                                                'View',
                                                                             onPress:
                                                                                 () {
                                                                               controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
@@ -450,8 +450,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.editColor,
                                                                             icon:
                                                                                 Icons.edit,
-                                                                            // label:
-                                                                            //     'Edit',
+                                                                            message:
+                                                                                'Edit',
                                                                             onPress:
                                                                                 () {
                                                                               controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
@@ -465,8 +465,8 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                                 ColorValues.deleteColor,
                                                                             icon:
                                                                                 Icons.delete,
-                                                                            // label:
-                                                                            //     'Delete',
+                                                                            message:
+                                                                                'Delete',
                                                                             onPress:
                                                                                 () {},
                                                                           ),
@@ -477,7 +477,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                     //       .appGreenColor,
                                                                     //   icon: Icons
                                                                     //       .visibility,
-                                                                    //   label:
+                                                                    //  message:
                                                                     //       'Approve Request',
                                                                     //   onPress: () {},
                                                                     // ),
@@ -486,7 +486,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                                     //       .appRedColor,
                                                                     //   icon: Icons
                                                                     //       .visibility,
-                                                                    //   label:
+                                                                    //  message:
                                                                     //       'Reject Request',
                                                                     //   onPress: () {},
                                                                     // ),

@@ -494,7 +494,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
-                                                                                label: 'Edit',
+                                                                                message: 'Edit',
                                                                                 onPress: () {
                                                                                   controller.selectedItem = controller.inventoryTypeList!.firstWhere((element) => "${element?.id}" == _inventoryTypeList[0]);
 
@@ -513,7 +513,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,
                                                                                 icon: Icons.delete,
-                                                                                label: 'Delete',
+                                                                                message: 'Delete',
                                                                                 onPress: () {
                                                                                   // print(_inventoryTypeList[0]);
                                                                                   controller.isDeleteDialog(checklist_id: _inventoryTypeList[0], checklist: _inventoryTypeList[1]);

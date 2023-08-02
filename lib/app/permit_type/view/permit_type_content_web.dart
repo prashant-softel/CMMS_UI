@@ -1,4 +1,4 @@
-  import 'package:clipboard/clipboard.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
@@ -104,7 +104,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               children: [
                                                 Text(
                                                   controller.selectedItem ==
-                                                      null
+                                                          null
                                                       ? "Permit Type added Successfully in the List."
                                                       : "Permit Type updated Successfully in the List.",
                                                   style: TextStyle(
@@ -121,7 +121,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               "Facility: ",
@@ -133,24 +133,24 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             Expanded(
                                               child: Container(
                                                 width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    .2) -
+                                                            .size
+                                                            .width *
+                                                        .2) -
                                                     30,
-                                                height: MediaQuery.of(context).size.height * 0.040,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
                                                 child: DropdownWidget(
                                                   controller: controller,
                                                   dropdownList:
-                                                  controller.facilityList,
+                                                      controller.facilityList,
                                                   isValueSelected: controller
-                                                      .isFacilitySelected
-                                                      .value,
+                                                      .isFacilitySelected.value,
                                                   selectedValue: controller
                                                       .selectedFacility.value,
                                                   onValueChanged:
-
-
-                                                  controller.onValueChanged,
+                                                      controller.onValueChanged,
                                                 ),
                                               ),
                                             ),
@@ -161,7 +161,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               "Title: ",
@@ -193,19 +193,19 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       30,
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .titleCtrlr,
+                                                    textController:
+                                                        controller.titleCtrlr,
                                                   )),
                                             ),
                                           ],
@@ -215,7 +215,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               "Description ",
@@ -247,15 +247,15 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
                                                     textController: controller
@@ -267,7 +267,6 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         SizedBox(
                                           height: 20,
                                         ),
-
                                         SizedBox(
                                           height: 20,
                                         ),
@@ -276,7 +275,6 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-
                                     Container(
                                         height: 40,
                                         width: (Get.width * .07),
@@ -290,39 +288,37 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                     ),
                                     Container(
                                         height: 40,
-                                        child:
-                                        controller.selectedItem == null ?
-                                        CustomElevatedButton(
-                                            backgroundColor: ColorValues
-                                                .appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createPermitType()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Create CheckList')
+                                                      .createPermitType()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Create CheckList')
                                             : CustomElevatedButton(
-                                            backgroundColor: ColorValues
-                                                .appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .updatePermitType(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .selectedItem?.id)
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
-                                                  controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Update')
-                                    ),
+                                                      .updatePermitType(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -367,8 +363,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
-                                                      .typePermitList
-                                              [0]
+                                                      .typePermitList[0]
                                                       .toString())
                                                   .then((value) {
                                                 print("copy data");
@@ -425,8 +420,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.typePermitList
-                                                        .length ,
+                                                controller
+                                                    .typePermitList.length,
                                                 (index) {
                                                   return [
                                                     '',
@@ -450,94 +445,105 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             }).toList(),
                                           ),
                                         )
-                                      :
-                                  Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .permitTypePaginationController,
-                                      columns: [
-                                        "Sr.No.",
-                                        "Title",
-                                        // "Description",
-                                        // "Facility",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.typePermitList.length,
-                                          (index) {
-                                            var typePermitListDetails =
-                                                controller
-                                                    .typePermitList[index];
-                                            return [
-                                              '${typePermitListDetails?.id}',
-                                              //'${typePermitListDetails?.status ?? ''}',
-                                              '${typePermitListDetails?.name}',
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .permitTypePaginationController,
+                                            columns: [
+                                              "Sr.No.",
+                                              "Title",
+                                              // "Description",
+                                              // "Facility",
                                               "Action"
-                                            ];
-
-                                          },
-                                        ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 60,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'No')
-                                                  ? CustomSwitchTroggle(
-                                                value: value ==
-                                                    'No'
-                                                    ? true
-                                                    : false,
-                                                onChanged:
-                                                    (value) {},
-                                              ) :
-                                                      (value == "Action")
-                                                          ? Row(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                label: 'Edit',
-                                                                onPress: () {
-                                                                  controller.selectedItem = controller.typePermitList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
-
-                                                                  controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                  controller.selectedFacility.value = controller.onFetchNameFromId(controller.selectedItem?.id)!;
-                                                                  print("$controller.selectedFacility.value");
-
-                                                                },
-                                                              ),
-
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appRedColor,
-                                                                icon: Icons
-                                                                    .delete,
-                                                                label: 'Delete',
-                                                                onPress: () {
-                                                                  controller.isDeleteDialog(checklist_id: _permitTypeList[0], checklist: _permitTypeList[1]);
-                                                                },
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.12,
+                                                label: column,
+                                              );
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller
+                                                    .typePermitList.length,
+                                                (index) {
+                                                  var typePermitListDetails =
+                                                      controller.typePermitList[
+                                                          index];
+                                                  return [
+                                                    '${typePermitListDetails?.id}',
+                                                    //'${typePermitListDetails?.status ?? ''}',
+                                                    '${typePermitListDetails?.name}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_permitTypeList) {
+                                              return TableViewRow(
+                                                  height: 60,
+                                                  cells: _permitTypeList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value == 'No')
+                                                            ? CustomSwitchTroggle(
+                                                                value: value ==
+                                                                        'No'
+                                                                    ? true
+                                                                    : false,
+                                                                onChanged:
+                                                                    (value) {},
                                                               )
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Row(
+                                                                    children: [
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appLightBlueColor,
+                                                                          icon:
+                                                                              Icons.edit,
+                                                                          message:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.typePermitList.firstWhere((element) =>
+                                                                                "${element?.id}" ==
+                                                                                _permitTypeList[0]);
+
+                                                                            controller.titleCtrlr.text =
+                                                                                controller.selectedItem?.name ?? '';
+                                                                            controller.selectedFacility.value =
+                                                                                controller.onFetchNameFromId(controller.selectedItem?.id)!;
+                                                                            print("$controller.selectedFacility.value");
+                                                                          },
+                                                                        ),
+
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          message:
+                                                                              'Delete',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.isDeleteDialog(
+                                                                                checklist_id: _permitTypeList[0],
+                                                                                checklist: _permitTypeList[1]);
+                                                                          },
+                                                                        )
+                                                                        // : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
+                                        ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

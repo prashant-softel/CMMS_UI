@@ -56,12 +56,13 @@ class SPVListContentWeb extends GetView<SPVListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Text(" / SPV LIST ", style: Styles.greyMediumLight12),
-              ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child:
+                        Text(" / SPV LIST ", style: Styles.greyMediumLight12),
+                  ),
                 ],
               ),
             ),
@@ -108,7 +109,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                               children: [
                                                 Text(
                                                   controller.selectedItem ==
-                                                      null
+                                                          null
                                                       ? "Facility added Successfully in the List."
                                                       : "Facility updated Successfully in the List.",
                                                   style: TextStyle(
@@ -123,7 +124,6 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             ),
                                           ),
                                         ),
-
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -133,7 +133,9 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             //   style: Styles.blackBold16,
                                             // ),
 
-                                            Expanded(child: CustomRichText(title: 'Title ')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Title ')),
                                             Expanded(
                                               child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -170,21 +172,22 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                       45,
                                                   child: LoginCustomTextfield(
                                                     ishint: 'Enter Title',
-                                                    textController: controller
-                                                        .titleCtrlr,
+                                                    textController:
+                                                        controller.titleCtrlr,
                                                   )),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-
-                                            Expanded(child: CustomRichText(title: 'Description ')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Description ')),
                                             Expanded(
                                               child: Container(
-                                                  margin:Dimens.edgeInsets5,
+                                                  margin: Dimens.edgeInsets5,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -206,15 +209,15 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                    ColorValues.whiteColor,
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
+                                                              .size
+                                                              .width *
+                                                          .2) -
                                                       45,
                                                   child: LoginCustomTextfield(
                                                     ishint: 'Enter Description',
@@ -246,39 +249,36 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                     Container(
                                         width: (Get.width * .2) - 50,
                                         height: 40,
-                                        child:
-                                        controller.selectedItem == null
+                                        child: controller.selectedItem == null
                                             ? CustomElevatedButton(
-                                            backgroundColor: ColorValues
-                                                .appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createSPVlist()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Create SPV ')
+                                                      .createSPVlist()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Create SPV ')
                                             : CustomElevatedButton(
-                                            backgroundColor: ColorValues
-                                                .appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .updateSPV(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
                                                   controller
-                                                      .selectedItem?.id)
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
-                                                  controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Update')
-                                      ),
+                                                      .updateSPV(controller
+                                                          .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -366,17 +366,23 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                         height: 40,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
-                                          onChanged: (value) => controller.search(value),
+                                          onChanged: (value) =>
+                                              controller.search(value),
                                           decoration: InputDecoration(
-                                            enabledBorder: const OutlineInputBorder(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            focusedBorder: const OutlineInputBorder(
+                                            focusedBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            contentPadding:
+                                                Dimens.edgeInsets10_0_0_0,
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
@@ -403,15 +409,9 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller.SPVList.length ??
-                                                    0,
+                                                controller.SPVList.length ?? 0,
                                                 (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    ''
-                                                  ];
+                                                  return ['', '', '', ''];
                                                 },
                                               ),
                                             ].map((record) {
@@ -426,105 +426,102 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             }).toList(),
                                           ),
                                         )
-                                      :
-                                  Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .SPVListPaginationController,
-                                      columns: [
-                                        "Id ", "Name","Description","Action"]
-                                          .map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.SPVList.length,
-                                          (index) {
-                                            var SPVListDetails =
-                                                controller.SPVList[index];
-                                            return [
-                                              '${SPVListDetails.id}',
-                                              '${SPVListDetails.name}',
-                                              '${SPVListDetails.description}',
+                                      : Expanded(
+                                          child: ScrollableTableView(
+                                            paginationController: controller
+                                                .SPVListPaginationController,
+                                            columns: [
+                                              "Id ",
+                                              "Name",
+                                              "Description",
                                               "Action"
-                                            ];
-                                          },
+                                            ].map((column) {
+                                              return TableViewColumn(
+                                                minWidth: Get.width * 0.12,
+                                                label: column,
+                                              );
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller.SPVList.length,
+                                                (index) {
+                                                  var SPVListDetails =
+                                                      controller.SPVList[index];
+                                                  return [
+                                                    '${SPVListDetails.id}',
+                                                    '${SPVListDetails.name}',
+                                                    '${SPVListDetails.description}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_permitTypeList) {
+                                              return TableViewRow(
+                                                  height: 45,
+                                                  cells: _permitTypeList
+                                                      .map((value) {
+                                                    return TableViewCell(
+                                                        child: (value ==
+                                                                'Checkbox')
+                                                            ? Checkbox(
+                                                                value: controller
+                                                                    .isChecked
+                                                                    .value,
+                                                                onChanged:
+                                                                    (val) {})
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                        //         0
+                                                                        //     ?
+                                                                        Container(
+                                                                          padding:
+                                                                              EdgeInsets.only(bottom: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            children: [
+                                                                              Row(children: [
+                                                                                TableActionButton(
+                                                                                  color: ColorValues.appLightBlueColor,
+                                                                                  icon: Icons.edit,
+                                                                                  message: 'Edit',
+                                                                                  onPress: () {
+                                                                                    controller.selectedItem = controller.SPVList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                    controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                    controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
+                                                                                  },
+                                                                                ),
+                                                                                TableActionButton(
+                                                                                  color: ColorValues.appRedColor,
+                                                                                  icon: Icons.delete,
+                                                                                  message: 'Delete',
+                                                                                  onPress: () {
+                                                                                    controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                                  },
+                                                                                ),
+                                                                              ]),
+                                                                              // Container(
+                                                                              //   padding: EdgeInsets.only(
+                                                                              //       bottom:
+                                                                              //           10),
+                                                                              //   child:
+                                                                              // ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                        // : Container()
+                                                                      ])
+                                                                : Text(
+                                                                    value,
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          ),
                                         ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 45,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'Checkbox')
-                                                      ? Checkbox(
-                                                          value: controller
-                                                              .isChecked.value,
-                                                          onChanged: (val) {})
-                                                      : (value == "Action")
-                                                          ? Wrap(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              Container(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            10),
-                                                                child: Column(
-                                                                  children: [
-                                                                    Row(
-                                                                        children: [
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.appLightBlueColor,
-                                                                            icon:
-                                                                                Icons.edit,
-                                                                            label:
-                                                                                'Edit',
-                                                                            onPress:
-                                                                                () {
-                                                                                  controller.selectedItem = controller.SPVList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
-
-                                                                                  controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                  controller.descriptionCtrlr.text = controller.selectedItem?.description  ?? '';
-                                                                                },
-                                                                          ),
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.appRedColor,
-                                                                            icon:
-                                                                                Icons.delete,
-                                                                            label:
-                                                                                'Delete',
-                                                                            onPress:
-                                                                                () {
-                                                                                  controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
-
-                                                                                },
-                                                                          ),
-                                                                        ]),
-                                                                    // Container(
-                                                                    //   padding: EdgeInsets.only(
-                                                                    //       bottom:
-                                                                    //           10),
-                                                                    //   child:
-                                                                    // ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

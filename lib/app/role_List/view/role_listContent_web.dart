@@ -141,7 +141,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                             ),
                                             Expanded(
                                               child: Container(
-                                                margin : Dimens.edgeInsets5,
+                                                  margin: Dimens.edgeInsets5,
                                                   width: (MediaQuery.of(context)
                                                               .size
                                                               .width *
@@ -406,7 +406,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                                                               ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
-                                                                          label:
+                                                                          message:
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
@@ -426,7 +426,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                                                               ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
-                                                                          label:
+                                                                          message:
                                                                               'Delete',
                                                                           onPress:
                                                                               () {

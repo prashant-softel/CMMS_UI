@@ -13,8 +13,7 @@ import '../../widgets/dropdown.dart';
 import '../business_type_list_controller.dart';
 // import '../preventive_list_controller.dart';
 
-class BusinessTypeListContentWeb
-    extends GetView<BusinessTypeListController> {
+class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
   BusinessTypeListContentWeb({Key? key}) : super(key: key);
   final BusinessTypeListController controller = Get.find();
 
@@ -57,11 +56,9 @@ class BusinessTypeListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / MASTERS",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / BUSINESS TYPE",
-                      style: Styles.greyMediumLight12)
+                  Text(" / BUSINESS TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -127,7 +124,62 @@ class BusinessTypeListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Expanded(child: CustomRichText(title: 'Name :')),
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Name :')),
+                                            SizedBox(
+                                              width: 70,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      30,
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: LoginCustomTextfield(
+                                                    textController:
+                                                        controller.nameCtrlr,
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Description :')),
                                             SizedBox(
                                               width: 70,
                                             ),
@@ -166,57 +218,6 @@ class BusinessTypeListContentWeb
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
-                                                        .nameCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(child: CustomRichText(title: 'Description :')),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      .2) -
-                                                      30,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                    ColorValues.whiteColor,
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        5),
-                                                  ),
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
                                                         .descriptionCtrlr,
                                                   )),
                                             ),
@@ -225,7 +226,6 @@ class BusinessTypeListContentWeb
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        
                                       ]),
                                 ),
                                 Row(
@@ -363,17 +363,23 @@ class BusinessTypeListContentWeb
                                         height: 40,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
-                                          onChanged: (value) => controller.search(value),
+                                          onChanged: (value) =>
+                                              controller.search(value),
                                           decoration: InputDecoration(
-                                            enabledBorder: const OutlineInputBorder(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            focusedBorder: const OutlineInputBorder(
+                                            focusedBorder:
+                                                const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
-                                            contentPadding: Dimens.edgeInsets10_0_0_0,
+                                            contentPadding:
+                                                Dimens.edgeInsets10_0_0_0,
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
@@ -488,13 +494,12 @@ class BusinessTypeListContentWeb
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appLightBlueColor,
                                                                                 icon: Icons.edit,
-                                                                                label: 'Edit',
+                                                                                message: 'Edit',
                                                                                 onPress: () {
                                                                                   controller.selectedItem = controller.filteredData!.firstWhere((element) => "${element?.id}" == _businessTypeList[0]);
 
                                                                                   controller.nameCtrlr.text = controller.selectedItem?.name ?? '';
                                                                                   controller.descriptionCtrlr.text = "${controller.selectedItem?.description}";
-                                                                                 
                                                                                 },
                                                                               )
                                                                             : Container(),
@@ -503,7 +508,7 @@ class BusinessTypeListContentWeb
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.appRedColor,
                                                                                 icon: Icons.delete,
-                                                                                label: 'Delete',
+                                                                                message: 'Delete',
                                                                                 onPress: () {
                                                                                   print(_businessTypeList[0]);
                                                                                   controller.isDeleteDialog(businesstype_id: _businessTypeList[0], businesstype: _businessTypeList[1]);
