@@ -58,7 +58,7 @@ class HistoryTableWidgetWeb extends StatelessWidget {
           DataCell(Text(historyList?[index]?.createdAt.toString() ?? '')),
           DataCell(Text(historyList?[index]?.createdByName.toString() ?? '')),
           DataCell(Text(historyList?[index]?.comment.toString() ?? '')),
-          DataCell(Text(historyList?[index]?.status.toString() ?? '')),
+          DataCell(Text(historyList?[index]?.status_name.toString() ?? '')),
         ]),
       ),
     );

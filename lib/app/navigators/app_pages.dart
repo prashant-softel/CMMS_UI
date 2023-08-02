@@ -6,6 +6,8 @@ import 'package:cmms/app/add_incident_report/add_incident_report_binding.dart';
 import 'package:cmms/app/add_incident_report/add_incident_report_screen.dart';
 import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
 import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_binding.dart';
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_screen.dart';
 
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
@@ -706,6 +708,11 @@ class AppPages {
       name: _Paths.moduleCleaningPlanning,
       page: ModuleCleaningPlanningScreen.new,
       binding: ModuleCleaningPlanningBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addModuleCleaningExecutionContentWeb,
+      page: AddModuleCleaningExecutionScreen.new,
+      binding: AddModuleCleaningExecutionBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.roleNotification,
