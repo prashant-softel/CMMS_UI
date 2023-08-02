@@ -108,16 +108,7 @@ class HomeDrawer extends GetView<HomeController> {
                                                 Get.offNamed(Routes.preventive);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Stock Management",
-                                              icon: "assets/files/maint.png",
-                                              press: () {
-                                                Get.offNamed(Routes
-                                                    .stockManagementDashboardScreen);
-                                              },
-                                            ),
+
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -153,14 +144,24 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
-                                              title: "Calibration",
-                                              icon:
-                                                  "assets/files/preventive.png",
+                                              title: "Stock Management",
+                                              icon: "assets/files/maint.png",
                                               press: () {
-                                                Get.offNamed(
-                                                    Routes.calibrationList);
+                                                Get.offNamed(Routes
+                                                    .stockManagementDashboardScreen);
                                               },
                                             ),
+                                            // MenuItem(
+                                            //   isexpand:
+                                            //       controller.isExpanded.value,
+                                            //   title: "Calibration",
+                                            //   icon:
+                                            //       "assets/files/preventive.png",
+                                            //   press: () {
+                                            //     Get.offNamed(
+                                            //         Routes.calibrationList);
+                                            //   },
+                                            // ),
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
