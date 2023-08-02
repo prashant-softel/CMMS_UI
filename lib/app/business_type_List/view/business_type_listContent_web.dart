@@ -488,11 +488,13 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                                    alignment: WrapAlignment.center,
                                                                     children: [
+
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
-                                                                                color: ColorValues.appLightBlueColor,
+                                                                                color: ColorValues.editColor,
                                                                                 icon: Icons.edit,
                                                                                 message: 'Edit',
                                                                                 onPress: () {
@@ -506,7 +508,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
-                                                                                color: ColorValues.appRedColor,
+                                                                                color: ColorValues.deleteColor,
                                                                                 icon: Icons.delete,
                                                                                 message: 'Delete',
                                                                                 onPress: () {

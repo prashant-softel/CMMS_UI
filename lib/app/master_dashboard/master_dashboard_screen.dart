@@ -358,18 +358,19 @@ class MastersDashboard extends GetView<MastersController> {
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Business List",
-                                    onTap: () {
-                                      controller.goToBusinessList();
-                                    });
-                              }))),
+
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Business Type List",
                                     onTap: () {
                                       controller.goToBusinessTypeList();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Business List",
+                                    onTap: () {
+                                      controller.goToBusinessList();
                                     });
                               }))),
                             ],

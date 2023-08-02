@@ -909,7 +909,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             .issuccessCreatechecklist();
                                                     });
                                                   },
-                                                  text: 'Create BusinessType ')
+                                                  text: 'Create Facility ')
                                               : CustomElevatedButton(
                                                   backgroundColor: ColorValues
                                                       .appDarkBlueColor,
@@ -1161,8 +1161,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                                      alignment: WrapAlignment.center, // Align buttons to the center
                                                                     children: [
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+
+                                                                      // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
                                                                         Container(
@@ -1173,7 +1175,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                             children: [
                                                                               Container(
                                                                                 padding: EdgeInsets.only(bottom: 10),
-                                                                                child: Row(children: [
+                                                                                child: Row(
+                                                                                    mainAxisAlignment:
+                                                                                    MainAxisAlignment.center,
+                                                                                    children: [
                                                                                   TableActionButton(
                                                                                     color: ColorValues.appLightBlueColor,
                                                                                     icon: Icons.visibility,
@@ -1181,7 +1186,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                                     onPress: () {},
                                                                                   ),
                                                                                   TableActionButton(
-                                                                                    color: ColorValues.appLightBlueColor,
+                                                                                    color: ColorValues.editColor,
                                                                                     icon: Icons.edit,
                                                                                     message: 'Edit',
                                                                                     onPress: () {
@@ -1205,7 +1210,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                                     },
                                                                                   ),
                                                                                   TableActionButton(
-                                                                                    color: ColorValues.appRedColor,
+                                                                                    color: ColorValues.deleteColor,
                                                                                     icon: Icons.delete,
                                                                                     message: 'Delete',
                                                                                     onPress: () {
@@ -1220,9 +1225,12 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                         ),
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                                : Align(
+                                                          // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(value),
+                                                        ),
+                                                    );
                                                   }).toList());
                                             }).toList(),
                                           ),

@@ -458,13 +458,15 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Row(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //     0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -486,7 +488,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:
@@ -501,9 +503,11 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                                         )
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                                : Align(
+                                                          // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(value),
+                                                        ),);
                                                   }).toList());
                                             }).toList(),
                                           ),
