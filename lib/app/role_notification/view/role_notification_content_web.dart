@@ -182,9 +182,9 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                     ? ScrollableTableView(
                                         columns: [
                                           "Notifications",
-                                          // "Default Value",
+                                          "Default Value",
                                           "Can Override",
-                                          "User Preference",
+                                          // "User Preference",
                                         ].map((column) {
                                           return TableViewColumn(
                                             label: column,
@@ -203,23 +203,23 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                                                       "${getnotificationListDetails?.feature_name}"
                                                                       " "
                                                                       "${getnotificationListDetails?.notification_name.value}")),
-                                                              // TableViewCell(
-                                                              //   child: Obx(() {
-                                                              //     return _rowItem(
-                                                              //         getnotificationListDetails
-                                                              //             ?.default_flag
-                                                              //             .value,
-                                                              //         onCheck:
-                                                              //             (val) {
-                                                              //       getnotificationListDetails
-                                                              //           ?.default_flag
-                                                              //           .value = val ==
-                                                              //               true
-                                                              //           ? 1
-                                                              //           : 0;
-                                                              //     });
-                                                              //   }),
-                                                              // ),
+                                                              TableViewCell(
+                                                                child: Obx(() {
+                                                                  return _rowItem(
+                                                                      getnotificationListDetails
+                                                                          ?.default_flag
+                                                                          .value,
+                                                                      onCheck:
+                                                                          (val) {
+                                                                    getnotificationListDetails
+                                                                        ?.default_flag
+                                                                        .value = val ==
+                                                                            true
+                                                                        ? 1
+                                                                        : 0;
+                                                                  });
+                                                                }),
+                                                              ),
                                                               TableViewCell(
                                                                 child: Obx(() {
                                                                   return _rowItem(
@@ -237,24 +237,6 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                                                   });
                                                                 }),
                                                               ),
-
-                                                              TableViewCell(
-                                                                  child:
-                                                                      Obx(() {
-                                                                return _rowItem(
-                                                                    getnotificationListDetails
-                                                                        ?.user_flag
-                                                                        .value,
-                                                                    onCheck:
-                                                                        (val) {
-                                                                  getnotificationListDetails
-                                                                      ?.user_flag
-                                                                      .value = val ==
-                                                                          true
-                                                                      ? 1
-                                                                      : 0;
-                                                                });
-                                                              })),
                                                             ]))
                                                 .toList()
                                             : [],

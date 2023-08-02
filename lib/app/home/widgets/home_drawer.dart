@@ -66,15 +66,7 @@ class HomeDrawer extends GetView<HomeController> {
                                                 Get.offNamed(Routes.home);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Assets",
-                                              icon: "assets/files/warranty.png",
-                                              press: () {
-                                                Get.offNamed(Routes.inventory);
-                                              },
-                                            ),
+
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -133,6 +125,15 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
+                                              title: "Assets",
+                                              icon: "assets/files/warranty.png",
+                                              press: () {
+                                                Get.offNamed(Routes.inventory);
+                                              },
+                                            ),
+                                            MenuItem(
+                                              isexpand:
+                                                  controller.isExpanded.value,
                                               title: "Incident Report",
                                               icon:
                                                   "assets/files/reportins.png",
@@ -178,7 +179,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Settings",
                                               icon: "assets/files/setting.png",
                                               press: () {
-                                                Get.offNamed(Routes.userList);
+                                                Get.offNamed(Routes.setting);
                                               },
                                             ),
                                             MenuItem(

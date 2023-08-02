@@ -61,7 +61,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / SETTING",
+                          child: Text(" / MASTER",
                               style: Styles.greyMediumLight12),
                         ),
                         Text(" / USER LIST", style: Styles.greyMediumLight12),
