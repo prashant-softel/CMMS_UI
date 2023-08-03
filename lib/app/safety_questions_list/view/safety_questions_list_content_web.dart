@@ -338,7 +338,7 @@ class SafetyQuestionsListContentWeb
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      Container(height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -353,7 +353,7 @@ class SafetyQuestionsListContentWeb
                                             },
                                             text: 'Copy'),
                                       ),
-                                      Container(
+                                      Container(height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -361,7 +361,7 @@ class SafetyQuestionsListContentWeb
                                             onPressed: () {},
                                             text: 'Excel'),
                                       ),
-                                      Container(
+                                      Container(height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -370,6 +370,7 @@ class SafetyQuestionsListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -485,7 +486,7 @@ class SafetyQuestionsListContentWeb
                                                               //     ?
                                                               TableActionButton(
                                                                 color: ColorValues
-                                                                    .appLightBlueColor,
+                                                                    .editColor,
                                                                 icon:
                                                                     Icons.edit,
                                                                 label: 'Edit',
@@ -498,7 +499,7 @@ class SafetyQuestionsListContentWeb
                                                               //     ?
                                                               TableActionButton(
                                                                 color: ColorValues
-                                                                    .appRedColor,
+                                                                    .deleteColor,
                                                                 icon: Icons
                                                                     .delete,
                                                                 label: 'Delete',

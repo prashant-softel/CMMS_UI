@@ -585,6 +585,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   Row(
                                     children: [
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -600,6 +601,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -608,6 +610,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -616,6 +619,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -717,13 +721,14 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                                  alignment: WrapAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -738,7 +743,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:

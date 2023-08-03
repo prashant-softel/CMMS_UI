@@ -824,7 +824,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           .issuccessCreatebusinesslist();
                                                   });
                                                 },
-                                                text: 'Create Business List')
+                                                text: 'Create Business')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
