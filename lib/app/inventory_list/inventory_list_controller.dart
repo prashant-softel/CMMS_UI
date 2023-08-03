@@ -14,8 +14,12 @@ class InventoryListController extends GetxController {
   //block
   int facilityId = 0;
   StreamSubscription<int>? facilityIdStreamSubscription;
-  var inventoryList = <InventoryModel>[];
+  RxList<InventoryModel?> inventoryList = <InventoryModel?>[].obs;
+  RxList<InventoryModel?> filteredData = <InventoryModel?>[].obs;
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+
+  InventoryModel? inventoryModelList;
+  RxList<String> inventoryListTableColumns = <String>[].obs;
 
   //Edit
   /// Edit WarrantyClaim Details
@@ -39,22 +43,46 @@ class InventoryListController extends GetxController {
     super.onInit();
   }
 
-  void getInventoryList(int facilityId) async {
-    eqipmentNameList.value = <InventoryModel>[];
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      inventoryList.value = filteredData;
+      return;
+    }
+
+    inventoryList.value = filteredData
+        .where(
+            (item) => item!.name!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+    update(['inventory_list']);
+  }
+
+  Future<void> getInventoryList(int facilityId) async {
+    // eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await inventoryListPresenter.inventoryList(
       isLoading: true,
       facilityId: facilityId,
     );
     for (var inventory_list in _inventoryList) {
-      eqipmentNameList.add(inventory_list);
+      inventoryList.add(inventory_list);
     }
-    inventoryList = _inventoryList;
-    // print('equipment Name List:$inventoryList');
+    if (_inventoryList != null) {
+      inventoryList.value = _inventoryList;
+      filteredData.value = inventoryList;
+      // print('equipment Name List:$inventoryList');
 
-    paginationController = PaginationController(
-      rowCount: eqipmentNameList.length,
-      rowsPerPage: 10,
-    );
+      paginationController = PaginationController(
+        rowCount: inventoryList.length,
+        rowsPerPage: 10,
+      );
+      if (filteredData != null && filteredData.isNotEmpty) {
+        inventoryModelList = filteredData[0];
+        var inventoryListJson = inventoryModelList?.toJson();
+        inventoryListTableColumns.value = <String>[];
+        for (var key in inventoryListJson?.keys.toList() ?? []) {
+          inventoryListTableColumns.add(key);
+        }
+      }
+    }
     update(['inventory_list']);
   }
 
