@@ -107,6 +107,9 @@ class BlockTypeListController extends GetxController {
         facilityTypeList.add(facilityType_list);
       }
     }
+    selectedfacility.value = facilityTypeList[0].name!;
+    selectedFacilityId = facilityTypeList[0].id! ;
+    getBlockTypeList(selectedFacilityId);
   }
 
   Future<void> getBlocks(dynamic selected) async {
@@ -114,7 +117,7 @@ class BlockTypeListController extends GetxController {
     print(selected);
   }
 
-  Future<void> getBlockTypeList() async {
+  Future<void> getBlockTypeList( selectedFacilityId) async {
     blockTypeList.value = <BlockTypeListModel>[];
     final _blockTypePermitList = await blockTypeListPresenter.getBlockTypeList(
       isLoading: true,
@@ -182,7 +185,8 @@ class BlockTypeListController extends GetxController {
     print("index received is : $indexId & facility id  : $facilityIds");
     print(selectedfacility);
     selectedFacilityId = facilityIds;
-    getBlockTypeList();
+
+    getBlockTypeList(selectedFacilityId);
   }
 
   Future<bool> updateBlock(int? businessId) async {
@@ -255,7 +259,7 @@ class BlockTypeListController extends GetxController {
                 onPressed: () {
                   deleteBusiness(business_id).then((value) {
                     Get.back();
-                    getBlockTypeList();
+                    getBlockTypeList(selectedFacilityId);
                     // getBusinessList(selectedBusinessTypeId, true);
                   });
                 },
@@ -289,8 +293,9 @@ class BlockTypeListController extends GetxController {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
     // manpowerCtrlr.text = '';
-    selectedfacility.value = '';
-    selectedFacilityId = 0;
+    // selectedfacility.value = '';
+    // selectedFacilityId = 0;
+
     selectedItem = null;
 
     // selectedequipment.value = '';
@@ -298,7 +303,7 @@ class BlockTypeListController extends GetxController {
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
       // get(facilityId, type, true);
-      getBlockTypeList();
+      getBlockTypeList(selectedFacilityId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
