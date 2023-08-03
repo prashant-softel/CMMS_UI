@@ -135,7 +135,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                           children: [
                                             Expanded(
                                               child: CustomRichText(
-                                                  title: 'Designation Name: '),
+                                                  title: 'Name: '),
                                             ),
                                             SizedBox(
                                               width: 70,
@@ -190,7 +190,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                             Expanded(
                                               child: CustomRichText(
                                                   title:
-                                                      'Designation Description: '),
+                                                      'Description: '),
                                             ),
                                             SizedBox(
                                               width: 70,
