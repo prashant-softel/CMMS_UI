@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cmms/app/pm_mapping/pm_mapping_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/pm_mapping_list_model.dart';

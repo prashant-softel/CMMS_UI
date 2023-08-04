@@ -370,7 +370,7 @@ class PreventiveCheckPointContentWeb
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 6 && e.view == 1)
+                              .where((e) => e.feature_id == 6 && e.add == 1)
                               .length >
                           0
                       ? Expanded(

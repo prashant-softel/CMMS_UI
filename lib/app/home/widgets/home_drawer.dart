@@ -54,6 +54,9 @@ class HomeDrawer extends GetView<HomeController> {
                                         controller.toggleExpansion();
                                       },
                                       child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          // mainAxisAlignment : MainAxisAlignment.start,
                                           //
                                           //shrinkWrap: true,
                                           children: [
@@ -261,11 +264,14 @@ class MenuItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10),
       child: Container(
           child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        //  mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Dimens.boxHeight15,
           GestureDetector(
             onTap: press,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
                   icon,

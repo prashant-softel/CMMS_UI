@@ -239,7 +239,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                             children: [
                               Container(
                                 height: 500,
-                                child: controller.filteredData!.isEmpty
+                                child: controller.filteredData.isEmpty
                                     ? ScrollableTableView(
                                         columns: [
                                           "Asset Id",
@@ -253,7 +253,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         }).toList(),
                                         rows: [].map((record) {
                                           return TableViewRow(
-                                            height: 60,
+                                            height: 40,
                                             cells: record.map((value) {
                                               return TableViewCell(
                                                 child: Text(value),
@@ -443,18 +443,18 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                         },
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appDarkBlueColor,
-                                        text: "View History",
-                                        onPressed: () {},
-                                      ),
-                                    ),
+                                    // SizedBox(
+                                    //   width: 20,
+                                    // ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   child: CustomElevatedButton(
+                                    //     backgroundColor:
+                                    //         ColorValues.appDarkBlueColor,
+                                    //     text: "View History",
+                                    //     onPressed: () {},
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               )
