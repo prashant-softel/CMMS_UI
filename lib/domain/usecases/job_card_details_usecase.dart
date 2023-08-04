@@ -32,6 +32,16 @@ class JobCardDetailsUsecase {
         jobId,
         isLoading,
       );
+  Future<Map<String, dynamic>?> startJobCard({
+    String? auth,
+    int? jcCard,
+    bool? isLoading,
+  }) async =>
+      await repository.startJobCard(
+        auth,
+        jcCard,
+        isLoading,
+      );
 
   ///
   Future<List<JobCardDetailsModel?>?> getJobCardDetails({

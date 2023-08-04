@@ -136,7 +136,7 @@ class StockManagementDashboardScreen
                               Get.offNamed(Routes.returnMrsList);
                             }),
                         _stockManagementList(
-                          tittle: "S2S Material Taransfer",
+                          tittle: "S2S Material Transfer",
                           // ontap: () {
                           //   controller.pmTask();
                           // }

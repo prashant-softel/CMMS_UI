@@ -35,6 +35,7 @@ class JobDetailsController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
   /// Permit
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;
@@ -56,6 +57,7 @@ class JobDetailsController extends GetxController {
   int userId = 36;
   var breakdownTime;
   var facilityId = 0;
+  Rx<int> jobCardId = 0.obs;
 
   ///
   @override
@@ -108,9 +110,38 @@ class JobDetailsController extends GetxController {
       } else {
         jobId.value = int.tryParse(_jobId) ?? 0;
       }
-      await _flutterSecureStorage.delete(key: "jobId");
+      // await _flutterSecureStorage.delete(key: "jobId");
     } catch (e) {
       Utility.showDialog(e.toString() + 'setJobId');
+    }
+  }
+
+  // startStopJobCard() {
+  //   isJobCardStarted.value = !isJobCardStarted.value;
+  // }
+
+  Future<void> createJobCard() async {
+    //   await startStopJobCard();
+
+    ///
+    // if (isJobCardStarted.value == true) {
+    Map<String, dynamic>? responseMapJobCardStarted =
+        await jobDetailsPresenter.createJobCard(
+      jobId: jobId.value,
+      isLoading: false,
+    );
+
+    if (responseMapJobCardStarted != null &&
+        responseMapJobCardStarted.length > 0) {
+      final _jobCardId = responseMapJobCardStarted["id"][0];
+      jobCardId.value = _jobCardId;
+      final _flutterSecureStorage = const FlutterSecureStorage();
+
+      await _flutterSecureStorage.delete(key: "jobId");
+
+      Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId.value});
+
+      //  }
     }
   }
 
@@ -174,7 +205,7 @@ class JobDetailsController extends GetxController {
   }
 
   void goToJobCardScreen() {
-    Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId.value});
+    createJobCard();
   }
 
   void goToJobDetailsScreen() {
@@ -194,7 +225,7 @@ class JobDetailsController extends GetxController {
           PermitStatusData.getStatusStringFromInt(newPermitModel.ptwStatus);
       // Set the values of the permitValues list based on the selected permit
       permitValues[0] = newPermitModel.permitSiteNo.toString();
-      permitValues[1] = newPermitModel.permitId.toString() ?? '';
+      permitValues[1] = newPermitModel.permitId.toString();
       permitValues[2] = newPermitModel.permitTypeName ?? '';
       permitValues[3] = newPermitModel.requestByName ?? '';
       permitValues[4] = _status;

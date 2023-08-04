@@ -55,6 +55,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   Row(//
                       children: [
                     Text('Plant Details', style: Styles.blackBold16),
+                    Spacer(),
+                    Text('Job Card Id:', style: Styles.blackBold16),
+                    Text('${controller.jobCardId.value}',
+                        style: Styles.blackBold16),
                   ]),
                   TransposedTable(controller.plantDetails),
                   Dimens.boxHeight20,
@@ -109,14 +113,12 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   CustomDivider(),
 
                   ///HISTORY
-                  (controller.isJobCardStarted.value == true &&
-                          controller.historyList != null &&
+                  (controller.historyList != null &&
                           controller.historyList!.isNotEmpty)
-                      ? //
-                      Container(
+                      ? Container(
                           margin: Dimens.edgeInsets20,
                           constraints: BoxConstraints(
-                            maxHeight: 100,
+                            maxHeight: 200,
                             minHeight: 100,
                           ),
                           child: //
@@ -124,7 +126,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             historyList: controller.historyList,
                           ),
                         )
-                      //)
+                      //  )
                       : //
                       Dimens.box0,
 
@@ -166,17 +168,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   Dimens.boxHeight20,
 
                   /// START JOB CARD BUTTON
-                  (controller.isJobCardStarted == false)
+                  // (controller.isJobCardStarted == false)
+                  controller.jobCardDetailsModel.value?.currentStatus == 152
                       ? //
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center, //
                           children: [
                               CustomElevatedButton(
                                 text: 'Start Job Card',
-                                onPressed: () => controller.createJobCard(),
-                                backgroundColor: ColorValues.appGreenColor,
-                              ),
-                              Dimens.boxWidth10,
+                                onPressed: () => controller
+                                    .startJobCard(controller.jobCardId.value),
+                                backgroundColor: ColorValues.addNewColor,
+                              )
                               // CustomElevatedButton(
                               //   text: 'Update',
                               //   onPressed: () => controller.updateJobCard(),

@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
@@ -508,8 +509,8 @@ class ConnectHelper {
     String? start_date,
     required String end_date,
   }) async {
-    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+    var startDateParam = (start_date != null) ? 'start_date=$end_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$start_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -527,20 +528,19 @@ class ConnectHelper {
   }
 
   ///Module Cleaning Task List
-   Future<ResponseModel> getMCTaskList({
+  Future<ResponseModel> getMCTaskList({
     required bool isLoading,
     required String auth,
     int? facility_id,
-   
   }) async {
     // var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     // var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskList?facility_id=$facility_id', 
-          // startDateParam +
-          // endDateParam,
+      'MC/GetMCTaskList?facility_id=$facility_id',
+      // startDateParam +
+      // endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -550,7 +550,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getBlockList({
     required bool isLoading,
@@ -631,7 +630,7 @@ class ConnectHelper {
     required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'GO/GetGOList?facility_id=$facility_id&fromDate=$start_date&toDate=$end_date',
+      'GO/GetGOList?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -1428,6 +1427,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> startJobCard({
+    String? auth,
+    int? jcCard,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/StartJC?jc_id=$jcCard',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> uploadFiles({
     required String auth,
     fileUploadModel,
@@ -2088,6 +2105,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(JobCardUpdatedDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+    ));
     return responseModel;
   }
 
@@ -3613,7 +3636,7 @@ class ConnectHelper {
       dynamic endDate,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/getMRSList?facility_ID=$facilityId&emp_id=$userId&fromDate=$startDate&toDate=$endDate',
+      'MRS/getMRSList?facility_ID=$facilityId&emp_id=$userId&fromDate=$endDate&toDate=$startDate',
       //  'MRS/getMRSList?facility_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
       Request.get,
       null,

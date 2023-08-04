@@ -157,7 +157,7 @@ class EditJobController extends GetxController {
     } else {
       jobID.value = int.tryParse(_jobId) ?? 0;
     }
-    await _flutterSecureStorage.delete(key: "jobId");
+    // await _flutterSecureStorage.delete(key: "jobId");
   }
 
   Future<void> getJobDetails(int _jobId) async {
@@ -575,6 +575,8 @@ class EditJobController extends GetxController {
 
   ///
   goToAddJobScreen() {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    _flutterSecureStorage.delete(key: "jobId");
     Get.offAndToNamed(Routes.addJob);
   }
 
@@ -584,6 +586,8 @@ class EditJobController extends GetxController {
   }
 
   goToJobListScreen() {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    _flutterSecureStorage.delete(key: "jobId");
     Get.offAllNamed(Routes.jobList);
   }
 

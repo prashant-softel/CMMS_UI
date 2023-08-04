@@ -12,26 +12,30 @@ String jobCardDetailsModelToJson(List<JobCardDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class JobCardDetailsModel {
-  JobCardDetailsModel({
-    this.plantName,
-    this.assetCategoryName,
-    this.jcApprovedByName,
-    this.updatedByName,
-    this.id,
-    this.currentEmpId,
-    this.currentStatus,
-    this.jcClosedByName,
-    this.jcRejectedByName,
-    this.description,
-    this.jobId,
-    this.ptwId,
-    this.lstCmjcJobDetailList,
-    this.lstPermitDetailList,
-    this.lstCmjcIsolatedDetailList,
-    this.lstCmjcLotoDetailList,
-    this.lstCmjcEmpList,
-    this.fileList,
-  });
+  JobCardDetailsModel(
+      {this.plantName,
+      this.assetCategoryName,
+      this.jcApprovedByName,
+      this.updatedByName,
+      this.id,
+      this.title,
+      this.currentEmpId,
+      this.currentStatus,
+      this.jcClosedByName,
+      this.jcRejectedByName,
+      this.description,
+      this.jobId,
+      this.ptwId,
+      this.lstCmjcJobDetailList,
+      this.lstPermitDetailList,
+      this.lstCmjcIsolatedDetailList,
+      this.lstCmjcLotoDetailList,
+      this.lstCmjcEmpList,
+      this.fileList,
+      this.status,
+      this.status_long,
+      this.status_short,
+      this.created_by});
 
   String? plantName;
   String? assetCategoryName;
@@ -45,13 +49,17 @@ class JobCardDetailsModel {
   String? description;
   int? jobId;
   int? ptwId;
+  String? title;
+  String? created_by;
   List<LstCmjcJobDetailList>? lstCmjcJobDetailList;
   List<LstPermitDetailList>? lstPermitDetailList;
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
   List<dynamic>? lstCmjcLotoDetailList;
   List<dynamic>? lstCmjcEmpList;
   List<dynamic>? fileList;
-
+  int? status;
+  String? status_short;
+  String? status_long;
   factory JobCardDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobCardDetailsModel(
         plantName: json["plant_name"],
@@ -66,6 +74,11 @@ class JobCardDetailsModel {
         description: json["description"],
         jobId: json["jobid"],
         ptwId: json["ptwId"],
+        title: json["title"],
+        status: json["status"],
+        status_long: json["status_long"],
+        status_short: json["status_short"],
+        created_by: json["created_by"],
         lstCmjcJobDetailList: List<LstCmjcJobDetailList>.from(
             json["lstCMJCJobDetailList"]
                 .map((x) => LstCmjcJobDetailList.fromJson(x))),
@@ -95,6 +108,11 @@ class JobCardDetailsModel {
         "description": description,
         "jobid": jobId,
         "ptwId": ptwId,
+        "title": title,
+        "status": status,
+        "status_long": status_long,
+        "status_short": status_short,
+        "created_by": created_by,
         "lstCMJCJobDetailList": List<dynamic>.from(
             lstCmjcJobDetailList?.map((x) => x.toJson()) ?? []),
         "lstPermitDetailList": List<dynamic>.from(

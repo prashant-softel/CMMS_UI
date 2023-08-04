@@ -237,8 +237,8 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                       ],
                                     ),
                                     child: ScrollableTableView(
-                                      // paginationController:
-                                      //     controller.paginationController,
+                                      paginationController:
+                                          controller.paginationController,
                                       columns: [
                                         "Profile",
                                         "User Login ID",
